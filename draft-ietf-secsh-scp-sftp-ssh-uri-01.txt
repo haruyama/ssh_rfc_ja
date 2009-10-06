@@ -1,0 +1,511 @@
+
+   Network Working Group                                                 
+   Internet Draft                                           S. Suehring 
+   Document: draft-ietf-secsh-scp-sftp-ssh-uri-        Sentry Insurance 
+   01.txt                                                    J. Salowey 
+                                                          Cisco Systems 
+   Expires: April 2004                                     October 2003 
+
+
+# 訳者 春山征吾 haruyama@unixuser.org
+    
+    
+                          SCP/SFTP/SSH URI Format 
+                 draft-ietf-secsh-scp-sftp-ssh-uri-01.txt 
+    
+Status of this Memo 
+    
+   This document is an Internet-Draft and is subject to all provisions 
+   of Section 10 of RFC2026. 
+    
+   Internet-Drafts are working documents of the Internet Engineering 
+   Task Force (IETF), its areas, and its working groups.  Note that 
+   other groups may also distribute working documents as Internet-
+   Drafts. 
+    
+   Internet-Drafts are draft documents valid for a maximum of six months 
+   and may be updated, replaced, or obsoleted by other documents at any 
+   time.  It is inappropriate to use Internet-Drafts as reference 
+   material or to cite them other than as "work in progress." 
+    
+   The list of current Internet-Drafts can be accessed at 
+   http://www.ietf.org/1id-abstracts.html 
+    
+   The list of Internet-Draft Shadow Directories can be accessed at 
+   http://www.ietf.org/shadow.html 
+    
+   This Internet Draft will expire on February 8, 2004. 
+    
+    
+Copyright Notice 
+    
+   Copyright (C) The Internet Society (2003).  All Rights Reserved. 
+    
+    
+Abstract 
+
+概要
+    
+   This document describes the Uniform Resource Identifiers used to 
+   locate resources for the SCP, SFTP, and SSH protocols.  The document 
+   describes the generic syntax involved in URI definitions as well as 
+   specific definitions for each protocol.  These specific definitions 
+   may include user credentials such as username and password and also 
+   may include other parameters such as fingerprint.  In addition, 
+   security considerations and examples are also provided within this 
+   document. 
+
+   この文書では, SCP, SFTP, SSH プロトコルの資源の位置を示すのに
+   使われる URI について記述する. この文書は, URI 定義に関係する
+   一般的なシンタックスと同様にそれぞれのプロトコルに特有な定義についても
+   記述する. これらの特有な定義は, ユーザ名やパスワードといった
+   ユーザの証明を含むこともあるし, 指紋のような他のパラメータを
+   含むこともある. 加えて, この文書でセキュリティに関する考察と
+   いくつかの例を提供している.
+ 
+ 
+Suehring & Salowey       Expires - April 2004                 [Page 1] 
+                        SCP/SFTP/SSH URI Format           October 2003 
+ 
+ 
+    
+Table of Contents 
+ 
+   1. General Syntax.................................................2 
+      1.1 SSH URI....................................................2 
+      1.2 SCP and SFTP URI...........................................2 
+   2. Parameters.....................................................3 
+      2.1 SSH connection parameters..................................3 
+      2.2 SFTP Parameters............................................4 
+   3. Examples.......................................................4 
+   4. Security Considerations........................................4 
+   Normative References..............................................5 
+   Non-Normative References..........................................6 
+   Author Information................................................6 
+ 
+1.   General Syntax 
+
+1.   一般的なシンタックス
+    
+   The URI for each protocol shall consist of the scheme and the scheme 
+   specific portion separated by a colon ":", as discussed in RFC 2396 
+   [1].  This specification shall adopt the definitions "port", "host", 
+   "scheme", "userinfo", and "authority" from RFC 2396. 
+
+   それぞれのプロトコルのURIは, RFC 2396 [1] で議論されているように
+   コロン ":" で分けられた方式と方式特有の部分から成る. 
+   この仕様では, RFC 2396 から "port", "host", "scheme", "userinfo"
+   "authority" の定義を採用する.
+    
+1.1     SSH URI 
+
+   The SSH scheme shall consist of the protocol acronym followed by a 
+   colon ":" and a double slash "//" in accordance with RFC 2718. 
+
+   SSH 方式は RFC 2718 に従いプロトコルの頭文字とそれに続く
+   コロン ":" と 2つのスラッシュ "//" から成る.
+    
+   The first component of the scheme specific portion MAY include 
+   credentials (userinfo) consisting of a username and optionally also 
+   including a password.  Including the password in the URL is NOT 
+   RECOMMENDED.  The username and password components are separated by a 
+   single colon ":". 
+   
+   方式固有の部分の最初の構成要素は ユーザ名から成る証明(ユーザ情報)
+   でもよい. この証明は任意にパスワードを含んでもよい. URLに
+   パスワードを含めることは推奨されない. ユーザ名とパスワードの部分は
+   1つのコロン ":"で区切られる.
+    
+   Following the userinfo, if present, the at-sign "@" shall precede the 
+   authority section of the URI.  Optionally, the authority section MAY 
+   also include the port preceded by a colon ":". If the port is not 
+   included, the default port is assumed.  Following the port additional 
+   parameters may be specified.  These parameters are defined in the 
+   connection parameters section. 
+
+   ユーザ情報が存在するなら, それに続いて アットマーク "@" が
+   URI の authority 部の前に入る. 状況に応じて, authority 部は
+   コロンが先に付く port を含んでもよい. port が含まれない場合
+   デフォルトのポートが仮定される. port に続いて追加のパラメータが
+   指定されるかもしれない. これらのパラメータは コネクションパラメータの
+   セクションで定義される.
+    
+      ssh_URI = "ssh://" [ userinfo "@" ] host [ ":" port ] 
+         [;conn-parameter=value] 
+    
+1.2     SCP and SFTP URI 
+    
+   For SCP and SFTP, the scheme portion (scp: or sftp:) is followed by a 
+   double slash "//". 
+    
+   SCPやSFTPでは, scheme部 (scp: or sftp:) に 2つの "//" が続く.
+ 
+ 
+Suehring & Salowey       Expires - April 2004                 [Page 2] 
+                        SCP/SFTP/SSH URI Format           October 2003 
+ 
+ 
+   Both SCP and SFTP URLs are terminated by a single slash "/" followed 
+   by the path information to the requested resource. 
+   
+   SCPとSFTPのURLは両方とも, 要求される資源へのパスの情報に続く 
+   1つのスラッシュ "/" によって終端される.     
+
+   The first component of the scheme specific portion MAY include 
+   credentials (userinfo) consisting of a username and optionally also 
+   including a password.  Including the password in the URL is NOT 
+   RECOMMENDED.  The username and password components are separated by a 
+   single colon ":". 
+
+   方式固有の部分の最初の構成要素は ユーザ名から成る証明(ユーザ情報)
+   でもよい. この証明は任意にパスワードを含んでもよい. URLに
+   パスワードを含めることは推奨されない. ユーザ名とパスワードの部分は
+   1つのコロン ":"で区切られる.
+    
+   Following the userinfo, if present, the at-sign "@" shall precede the 
+   authority section of the URL.  Optionally, the authority section MAY 
+   also include the port preceded by a colon ":".  If the port is not 
+   included, the default port is assumed.  Following the port additional 
+   parameters may be specified.  These parameters are defined in the 
+   connection parameters section. 
+
+   ユーザ情報が存在するなら, それに続いて アットマーク "@" が
+   URI の authority 部の前に入る. 状況に応じて, authority 部は
+   コロンが先に付く port を含んでもよい. port が含まれない場合
+   デフォルトのポートが仮定される. port に続いて追加のパラメータが
+   指定されるかもしれない. これらのパラメータは コネクションパラメータの
+   セクションで定義される.
+
+      scp_URI = "scp://" [ userinfo "@" ] host [ ":" port ]  
+         [ ; parameter = value ] [ abs_path ] 
+    
+   Following the port additional parameters may be specified.  These 
+   parameters are defined in the connection parameters section.  
+   Following the path additional sftp specific parameters may be 
+   specified. 
+
+#   port に続いて追加のパラメータが指定されるかもしれない. 
+#   これらのパラメータは コネクションパラメータのセクションで定義される.   
+
+    path に続いて sftp 特有のパラメータが定義されるかもしれない.
+    
+      sftp_URI = "sftp://" [ userinfo "@" ] host [ ":" port ] 
+         [;conn-parameter=value] [ abs_path ] [;sftp-parameter=value] 
+    
+   The URIs for SFTP and SCP are hierarcical URIs where each component  
+   of the abs_path consists of path elements separated by a '/'. This is 
+   the same format as used in the FTP URL described in section 2.2.2 of 
+   [5]. 
+
+   abs_path のそれぞれの構成要素が '/' で区切られる
+   path 要素から成る場合, SFTPとSCPのURIは階層的なURIだ.
+   [5]のセクション2.2.2で記述されているFTPのURIで使われているものと
+   これは同じフォーマットだ.
+    
+    
+    
+2.   Parameters 
+
+2.   パラメータ
+    
+2.1     SSH connection parameters 
+
+2.1.    SSH コネクションパラメータ
+    
+   The following parameters are associated with an SSH connection and 
+   are applicable to SSH, SFTP and SCP.  All parameters are optional and 
+   MUST NOT overwrite configured defaults.  Individual parameters are 
+   separated by a comma (","). 
+
+   次のパラメータが SSHの接続に関連し, SSH, SFTP, SCPに適用できる.
+   すべてのパラメータは選択でき, 設定されたデフォルトを上書きすることを
+   してはならない. それぞれのパラメータは コンマ (",") で区切られる.
+    
+   fingerprint 
+
+   The fingerprint parameter contains the fingerprint of the host key 
+   for the host specified in the URL.  The fingerprint is encoded as 
+   host-key-alg:fingerprint.  Host-key-alg is host public key algorithm 
+   defined [4] and the fingerprint format is defined in [2]. 
+
+   fingerprint パラメータは  URLで指定されたホストのホスト鍵の指紋を
+   含む. 指紋は host-key-alg:fingerprint でエンコードされる.
+   ここで host-key-alg は [4] で定義された ホスト公開鍵アルゴリズムで
+   fingerprintのフォーマットは [2]で定義されている.
+    
+ 
+ 
+Suehring & Salowey       Expires - April 2004                 [Page 3] 
+                        SCP/SFTP/SSH URI Format           October 2003 
+ 
+ 
+   This parameter MUST NOT overwrite a key that is already configured 
+   for the host.  The fingerprint MAY be used to validate the 
+   authenticity of the host key if the URL was obtained from an 
+   authenticated source with its integrity protected.  If this parameter 
+   is not included then the validity of the host key is validated using 
+   another method.  See Security Considerations section for additional 
+   considerations.  There MUST be only one fingerprint parameter per 
+   host-key-alg for a given URL. 
+
+   このパラメータはホストのすでに設定された鍵を上書きしてはならない.
+   URLが完全性が保護された信頼できるソースから得られたものなら, 
+   fingerprint は ホスト鍵の正当性を検証するのに使われてもよい.
+   このパラメータが含まれていなければ, ホスト鍵の正当性は,
+   別の方法で検証される. 「セキュリティに関する考察」セクションに
+   さらなる考察があるので参照のこと. 与えられたURLの 1つの host-key-alg
+   ごとに ただ1つだけの指紋が許される.
+    
+2.2     SFTP Parameters 
+
+2.2     SFTP のパラメータ
+    
+   The SFTP parameters determine how to handle the file transfer 
+   character translation. 
+
+   SFTP のパラメータは ファイル転送でのモジ変換をどう取り扱うかを決定する.
+    
+   newline 
+    
+   The newline parameter determines how the server translates new line 
+   indicators.  The possible choices are usually "\r" or "\n" or "\r\n".  
+   The default is "\r\n". 
+
+   newline パラメータはサーバが改行の表示をどう変換するかを決定する.
+   可能な選択として普通 "\r", "\n", "\r\n" がある.
+   デフォルトは "\r\n" だ.
+    
+   typecode 
+    
+   The typecode identifies the type of file which determines how it will 
+   be treated. Possible values are "i" for binary files, "a" for text 
+   files, and "d" for directory listings. 
+
+   typecode はそれがどのように取り扱われるかを決めるファイルの種類
+   を指定する. 可能な値に バイナリファイルのための "i", 
+   テキストファイルのための "a" ディレクトリリスティングのための "d" がある.
+   
+    
+3.   Examples 
+
+3.   例
+    
+   The following section shows basic examples of URLs for each protocol.  
+   This section should not be considered to include all possible 
+   combinations of URLs for each protocol. 
+
+   以下のセクションで それぞれのプロトコルのURLの基本的な例を示す.
+   このセクションは それぞれのプロトコルのURLの可能なすべての
+   組合せと含むことを考慮されてはいない.
+    
+         ssh://user@host 
+    
+         ssh://user@host:2222 
+    
+         ssh://joeuser@example.com;fingerprint=ssh-dss:c1:b1:30:29:d7:b8 
+             :de:6c:97:77:10:d7:46:41:63:87 
+    
+         scp://user:password@host/file.txt 
+    
+         sftp://user@host/dir/path/file.txt  
+    
+         sftp://joeuser@example.com:2222;fingerprint=ssh-dss:c1:b1:30 
+             :29:d7:b8:de:6c:97:77:10:d7:46:41:63:87, 
+    
+    
+4.   Security Considerations 
+    
+4.   セキュリティに関する考察 
+ 
+Suehring & Salowey       Expires - April 2004                 [Page 4] 
+                        SCP/SFTP/SSH URI Format           October 2003 
+ 
+ 
+   In general, URIs themselves have no security considerations.  
+   However, since the password for each scheme can optionally be 
+   included within the URL it should be noted that doing so poses a 
+   security risk.  Since URLs are usually sent in the clear with no 
+   encryption or other security, any password or other credentials 
+   (userinfo) included could be seen by a potential attacker. 
+
+   一般に, URIそのものには, なにもセキュリティに関する考察はない.
+   しかし, それぞれの方式でパスワードを任意で
+   URLに含めることができるので, そうすることがセキュリティの危険を
+   もたらすことは注記されなければならない. URLは通常
+   なんの暗号化も他のセキュリティもなく 平文で送られるので
+   含まれるどのパスワードも他の情報 (userinfo) も
+   潜在的な攻撃者に見られうる.
+
+   Care must also be taken in handling fingerprints associated with URLs 
+   because URLs transmitted or stored without protection may be modified 
+   by an attacker.  In general an implementation cannot determine the 
+   source of a URL so a fingerprint received in a URL should have no 
+   more trust associated with it than a raw public key received in the 
+   SSH protocol itself.  If a locally configured key exists for the 
+   server already it MUST NOT be automatically overwritten with 
+   information from the URL. If the host is unknown then the 
+   implementation should treat the fingerprint received with the same 
+   caution that it does with any unknown public key.  The client MAY 
+   offer the fingerprint and URL for external validation before allowing 
+   a connection based on this information. If the client chooses to make 
+   a connection based on the URL information and it finds that the 
+   public key in the URL and the public key offered by the server do not 
+   match then it SHOULD provide a warning and provide a means to abort 
+   the connection.  Sections 3.1 and 8.2.4 of [3] provide a good 
+   discussion of handling public keys received in the SSH protocol. 
+
+   URLに関連する指紋の取扱いにも注意しなければならない.
+   なぜなら, 保護なしで転送ないし保存されるURLは攻撃者によって
+   変更されるかもしれないから. 一般に, 実装は URLのソースを
+   決定できないので, URLで受け取られた指紋は, 関連する信頼において
+   SSHプロトコル自身で受けとられた生の公開鍵以上のものはない.
+   すでに, サーバにローカルに設定された鍵が存在するなら,
+   それをURLの情報で自動的に上書きしてはならない. ホストがわからないなら,
+   実装は わからない公開鍵についてするものと同様の注意を
+   受け取った指紋に行なわなけばならない. クアイアントは,
+   この情報に基づく接続を受け入れる前に指紋とURLに別の検証を申し入れてもよい.
+   クライアントが, URLの情報に基づく接続をすることを選択し
+   URLの公開鍵とサーバから提供された公開鍵が一致しないことを
+   見つけたなら, 警告を提供し接続を中止する手段を提供する必要がある.
+   [3] の セクション 3.1 と 8.2.4 は SSHプロトコルで受け取った
+   公開鍵の取扱いについてよい議論を提供している.
+   
+    
+Normative References 
+    
+   [1] Berners-Lee, T., Fielding, R., Masinter, L., "Uniform Resource 
+      Identifiers (URI): Generic Syntax", RFC 2396, August 1998. 
+    
+   [2] Markus Friedl, "SSH Fingerprint Format", 
+   http://www.ietf.org/internet-drafts/draft-ietf-secsh-fingerprint-
+   01.txt, work in progress 
+    
+   [3] Ylonen, T., "SSH Protocol Architecture", 
+   http://www.ietf.org/internet-drafts/draft-ietf-secsh-architecture-
+   14.txt, work in progreess 
+    
+   [4] Ylonen, T., "SSH Transport Layer Protocol", 
+   http://www.ietf.org/internet-drafts/draft-ietf-secsh-transport-
+   16.txt, work in progress 
+    
+   [5] Hoffman, P., Definitions of Early URI Schemes", 
+   http://www.ietf.org/internet-drafts/draft-hoffman-rfc1738bis-00.txt, 
+    work in progress 
+    
+    
+    
+
+ 
+ 
+Suehring & Salowey       Expires - April 2004                 [Page 5] 
+                        SCP/SFTP/SSH URI Format           October 2003 
+ 
+ 
+Non-Normative References 
+    
+   Masinter, L., et. al., "Guidelines for new URL Schemes", RFC 2718, 
+   November 1999. 
+    
+   Mealling, M., Denenberg, R., "Report from the Joint W3C/IETF URI 
+   Planning Interest Group: Uniform Resource Identifiers (URIs), URLs,  
+   and Uniform Resource Names (URNs): Clarifications and 
+   Recommendations", RFC 3305, August 2002. 
+    
+    
+Author Information 
+    
+   Steve Suehring 
+   Sentry Insurance 
+   1800 North Point Dr, G2/61-17 
+   Stevens Point, WI 54481 
+   suehring@braingia.com 
+    
+   Joseph Salowey 
+   Cisco Systems 
+   2901 Third Avenue 
+   Seattle, WA 98121 
+   E-mail: jsalowey@cisco.com 
+    
+Intellectual Property Statement 
+    
+   The IETF takes no position regarding the validity or scope of any 
+   intellectual property or other rights that might be claimed to 
+   pertain to the implementation or use of the technology described in 
+   this document or the extent to which any license under such rights 
+   might or might not be available; neither does it represent that it 
+   has made any effort to identify any such rights. Information on the 
+   IETF's procedures with respect to rights in standards-track and 
+   standards-related documentation can be found in BCP-11. Copies of 
+   claims of rights made available for publication and any assurances of 
+   licenses to be made available, or the result of an attempt made to 
+   obtain a general license or permission for the use of such 
+   proprietary rights by implementors or users of this specification can 
+   be obtained from the IETF Secretariat. 
+    
+   The IETF invites any interested party to bring to its attention any 
+   copyrights, patents or patent applications, or other proprietary 
+   rights which may cover technology that may be required to practice 
+   this standard. Please address the information to the IETF Executive 
+   Director. 
+    
+    
+Full Copyright Statement 
+ 
+ 
+Suehring & Salowey       Expires - April 2004                 [Page 6] 
+                        SCP/SFTP/SSH URI Format           October 2003 
+ 
+ 
+    
+   Copyright (C) The Internet Society (2003). All Rights Reserved. 
+    
+   This document and translations of it may be copied and furnished to 
+   others, and derivative works that comment on or otherwise explain it 
+   or assist in its implementation may be prepared, copied, published 
+   and distributed, in whole or in part, without restriction of any 
+   kind, provided that the above copyright notice and this paragraph are 
+   included on all such copies and derivative works. However, this 
+   document itself may not be modified in any way, such as by removing 
+   the copyright notice or references to the Internet Society or other 
+   Internet organizations, except as needed for the purpose of 
+   developing Internet standards in which case the procedures for 
+   copyrights defined in the Internet Standards process must be 
+   followed, or as required to translate it into languages other than 
+   English. 
+    
+   The limited permissions granted above are perpetual and will not be 
+   revoked by the Internet Society or its successors or assignees. 
+    
+   This document and the information contained herein is provided on an 
+   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING 
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING 
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION 
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF 
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. 
+    
+Acknowledgement 
+    
+   Funding for the RFC Editor function is currently provided by the  
+   Internet Society. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+Suehring & Salowey       Expires - April 2004                 [Page 7] 
+

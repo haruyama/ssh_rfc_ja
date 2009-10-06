@@ -1,0 +1,2542 @@
+
+
+
+Secure Shell Working Group                                  J. Hutzelman
+Internet-Draft                                                       CMU
+Expires: March 12, 2004                                       J. Salowey
+                                                           Cisco Systems
+                                                            J. Galbraith
+                                             Van Dyke Technologies, Inc.
+                                                                V. Welch
+                                                         U Chicago / ANL
+                                                      September 12, 2003
+
+
+# 訳者 春山征吾 haruyama@unixuser.org
+
+  GSSAPI Authentication and Key Exchange for the Secure Shell Protocol
+                      draft-ietf-secsh-gsskeyex-07
+
+Status of this Memo
+
+   This document is an Internet-Draft and is in full conformance with
+   all provisions of Section 10 of RFC2026.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF), its areas, and its working groups. Note that other
+   groups may also distribute working documents as Internet-Drafts.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time. It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   The list of current Internet-Drafts can be accessed at http://
+   www.ietf.org/ietf/1id-abstracts.txt.
+
+   The list of Internet-Draft Shadow Directories can be accessed at
+   http://www.ietf.org/shadow.html.
+
+   This Internet-Draft will expire on March 12, 2004.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2003). All Rights Reserved.
+
+Abstract
+
+概要
+
+   The Secure Shell protocol (SSH) is a protocol for secure remote login
+   and other secure network services over an insecure network.
+
+   Secure Shell プロトコル (SSH) は 安全でないネットワーク越しの
+   安全なリモートログインとその他の安全なネットワークサービスのための
+   プロトコルだ.
+
+   The Generic Security Service Application Program Interface (GSS-API)
+   [2] provides security services to callers in a mechanism-independent
+   fashion.
+
+   Generic Security Service Application Program Interface (GSS-API) [2]
+   は メカニズム独立な方式でのセキュリティサービスの呼び出しを提供する.
+   
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                 [Page 1]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+   This memo describes methods for using the GSS-API for authentication
+   and key exchange in SSH. It defines an SSH user authentication method
+   which uses a specified GSSAPI mechanism to authenticate a user, and a
+   family of SSH key exchange methods which use GSSAPI to authenticate
+   the Diffie-Hellman exchange described in [8].
+
+   このメモは SSH で認証と鍵交換のために GSS-API を使うための方法を
+   記述している. ユーザを認証するために指定の GSSAPI メカニズムを
+   使う SSH ユーザ認証法と, [8] で記述されている Diffie-Hellman
+   交換を認証するために GSSAPI を使う SSH 鍵交換法の
+   ファミリーをこのメモで定義する.
+
+   This memo also defines a new host public key algorithm which can be
+   used when no operations are needed using a host's public key, and a
+   new user authentication method which allows an authorization name to
+   be used in conjunction with any authentication which has already
+   occurred as a side-effect of GSSAPI-based key exchange.
+
+   このメモは, ホストの公開鍵を使う操作の必要なしに
+   使われることができる 新しいホスト公開鍵アルゴリズムと,
+   GSSAPI ベースの鍵交換の副次効果として現われるどんな認証とも連動して
+   使われることを許可名 (authorization name)
+   に許す新しいユーザ認証法を定義する.(...)
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in [5].
+
+   この文書に出てくる
+   "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT", "MAY" といった
+   キーワードは [RFC2119] に記述されているように解釈される.
+
+
+Table of Contents
+
+   1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  4
+   1.1 SSH terminology  . . . . . . . . . . . . . . . . . . . . . . .  4
+   2.  GSSAPI Authenticated Diffie-Hellman Key Exchange . . . . . . .  5
+   2.1 Generic GSSAPI Key Exchange  . . . . . . . . . . . . . . . . .  5
+   2.2 gss-group1-sha1-*  . . . . . . . . . . . . . . . . . . . . . . 10
+   2.3 Other GSSAPI key exchange methods  . . . . . . . . . . . . . . 11
+   3.  GSSAPI User Authentication . . . . . . . . . . . . . . . . . . 12
+   3.1 GSSAPI Authentication Overview . . . . . . . . . . . . . . . . 12
+   3.2 Initiating GSSAPI authentication . . . . . . . . . . . . . . . 12
+   3.3 Initial server response  . . . . . . . . . . . . . . . . . . . 13
+   3.4 GSSAPI session . . . . . . . . . . . . . . . . . . . . . . . . 13
+   3.5 Binding Encryption Keys  . . . . . . . . . . . . . . . . . . . 14
+   3.6 Client acknowledgement . . . . . . . . . . . . . . . . . . . . 15
+   3.7 Completion . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+   3.8 Error Status . . . . . . . . . . . . . . . . . . . . . . . . . 16
+   3.9 Error Token  . . . . . . . . . . . . . . . . . . . . . . . . . 17
+   4.  Authentication using GSSAPI Key Exchange . . . . . . . . . . . 18
+   5.  Null Host Key Algorithm  . . . . . . . . . . . . . . . . . . . 20
+   6.  Summary of Message Numbers . . . . . . . . . . . . . . . . . . 21
+   7.  GSSAPI Considerations  . . . . . . . . . . . . . . . . . . . . 22
+   7.1 Naming Conventions . . . . . . . . . . . . . . . . . . . . . . 22
+   7.2 Channel Bindings . . . . . . . . . . . . . . . . . . . . . . . 22
+   7.3 SPNEGO . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+   8.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 24
+   9.  Security Considerations  . . . . . . . . . . . . . . . . . . . 25
+   10. Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . 26
+   11. Changes the last version . . . . . . . . . . . . . . . . . . . 27
+       Normative References . . . . . . . . . . . . . . . . . . . . . 28
+       Normative References . . . . . . . . . . . . . . . . . . . . . 29
+       Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . 29
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                 [Page 2]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+       Intellectual Property and Copyright Statements . . . . . . . . 31
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                 [Page 3]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+1. Introduction
+
+1. イントロダクション
+
+   This document describes the methods used to perform key exchange and
+   user authentication in the Secure Shell protocol using the GSSAPI.
+   To do this, it defines a family of key exchange methods, two user
+   authentication methods, and a new host key algorithm. These
+   definitions allow any GSSAPI mechanism to be used with the Secure
+   Shell protocol.
+
+   この文書は GSSAPI を使って Secure Shell プロトコルでの
+   鍵交換とユーザ認証を実行するのに使われる方法を記述する.
+   このために, 鍵交換法のファミリーと 2 つのユーザ認証法
+   新しいホスト鍵アルゴリズムを定義する.これらの定義は
+   あらゆる GSSAPI メカニズムに Secure Shell プロトコルと共に使われる
+   ことを許す.
+
+   This document should be read only after reading the documents
+   describing the SSH protocol architecture [6], transport layer
+   protocol [8], and user authentication protocol [9].  This document
+   freely uses terminology and notation from the architecture document
+   without reference or further explanation.
+
+   この文書は SSH protocol architecture [6], transport layer protocol [8]
+   user authentication protocol [9] を記述する文書を読んだあとにのみ
+   読まれるべきだ. この文書はアーキテクチャ文書からの用語や表記を
+   参照やさらなる説明なしで自由に使う.
+
+
+1.1 SSH terminology
+
+1.1 SSH の用語
+
+   The data types used in the packets are defined in the SSH
+   architecture document [6].  It is particularly important to note the
+   definition of string allows binary content.
+
+   パケットで使われるデータ型は SSH architecture 文書 [6] で定義されている.
+   バイナリの内容を許す文字列の定義の記述が特に重要だ. 
+
+   The SSH_MSG_USERAUTH_REQUEST packet refers to a service; this service
+   name is an SSH service name, and has no relationship to GSSAPI
+   service names.  Currently, the only defined service name is
+   "ssh-connection", which refers to the SSH connection protocol [7].
+
+   SSH_MSG_USERAUTH_REQUEST パケットは サービスへの参照をする.
+   このパケットのサービス名は SSH のサービス名で, 
+   GSSAPI のサービス名とは何ら関係がない. 今のところ,
+   唯一定義されているサービス名は "ssh-connection" で,
+   これは SSH connection protocol [7] を参照する.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                 [Page 4]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+2. GSSAPI Authenticated Diffie-Hellman Key Exchange
+
+2. GSSAPI で認証された Diffie-Hellman 鍵交換
+
+   This section defines a class of key exchange methods which combine
+   the Diffie-Hellman key exchange from section 6 of [8] with mutual
+   authentication using GSSAPI.
+
+   このセクションでは, GSSAPI を使う相互認証と
+   [8] (トランスポート層文書) のセクション 6 の Diffie-Hellman
+   鍵交換を組みあわせた鍵交換の方法のクラスを定義する.
+
+   Since the GSSAPI key exchange methods described in this section do
+   not require the use of public key signature or encryption algorithms,
+   they MAY be used with any host key algorithm, including the "null"
+   algorithm described in Section 5.
+
+   このセクションで記述される GSSAPI 鍵交換法は, 公開鍵の署名ないし暗号化
+   アルゴリズムを使う必要がないので, セクション 5 で記述される
+   "null" アルゴリズムを含む 任意のホスト鍵アルゴリズムともに
+   使ってもよい.
+
+2.1 Generic GSSAPI Key Exchange
+
+2.1 一般 GSSAPI 鍵交換
+
+   The following symbols are used in this description:
+
+   この記述で以下のシンボルが使われる.
+
+   o  C is the client, and S is the server
+
+      C はクライアント. S はサーバ.
+
+   o  p is a large safe prime, g is a generator for a subgroup of GF (p),
+      and q is the order of the subgroup
+
+      p は大きく安全な素数. g は GF (p) の部分群のための生成器.
+      q は 部分群の位数.
+
+   o  V_S is S's version string, and V_C is C's version string
+
+      V_S は S のバージョン文字列. V_C は C のバージョン文字列.
+
+   o  I_C is C's KEXINIT message, and I_S is S's KEXINIT message
+
+      I_C は C の KEXINIT メッセージ. I_S は S の KEXINIT メッセージ.
+
+   1.  C generates a random number x (1 < x < q) and computes e = g^x
+       mod p.
+
+   1.  C は (1< x < q) な 乱数 x を生成し, e= g^x mod p を計算する.
+
+   2.  C calls GSS_Init_sec_context, using the most recent reply token
+       received from S during this exchange, if any.  For this call, the
+       client MUST set the mutual_req_flag to "true" to request that
+       mutual authentication be performed.  It also MUST set the
+       integ_req_flag to "true" to request that per-message integrity
+       protection be supported for this context.  In addition, the
+       deleg_req_flag MAY be set to "true" to request access delegation,
+       if requested by the user. Since the key exchange process
+       authenticates only the host, the setting of the anon_req_flag is
+       immaterial to this process.  If the client does not support the
+       "gssapi-keyex" user authentication method described in Section 4,
+       or does not intend to use that method in conjunction with the
+       GSSAPI context established during key exchange, then the
+       anon_req_flag SHOULD be set to "true". Otherwise, this flag MAY
+       be set to true if the client wishes to hide its identity. Since
+       the key exchange process will involve the exchange of only a
+       single token once the context has been established, it is not
+       necessary that the GSSAPI context support detection of replayed
+       or out-of-sequence tokens.  Thus, the setting of the
+       replay_det_req_flag and sequence_req_flag are not needed for this
+       process.  These flags SHOULD be set to "false".
+
+       C は GSS_Init_sec_context を呼ぶ. もし有れば, この交換の間に
+       S から受けとるもっとも最近の reply token を利用する.
+       この呼び出しで, クライアントは 交互認証が行なわれることを
+       要求するために mutual_req_flag を "true" に設定しなければならない.
+       また, この context でメッセージ単位での完全性保護がサポートされる
+       ことを要求するために integ_req_flag を "true" に設定しなければ
+       ならない. 加えて, ユーザから求められたらアクセスの委任を要求するために
+       deleg_req_flag を "true"としてもよい. 鍵交換プロセスはホストのみを
+       認証するので, anon_req_flag の設定は このプロセスでは関係がない.
+       クライアントが, セクション 4 で記述する "gssapi-keyex" ユーザ認証法を
+       サポートしていない, もしくは, 鍵交換の間に確立された
+       GSSAPI context とともに この方法を使うことを意図しないなら,
+       anon_req_flag は "true" に設定される必要がある.
+       さもなければ, クアイアントがそのアイデンティティを隠したいと望むなら
+       このフラグが true と設定されてもよい. 鍵交換プロセスは,
+       context が確立された時に一度 単一のトークンのみの交換を行なうので
+       GSSAPI context が リプレイされたないしシーケンス外のトークンの
+       検出をサポートする必要はない. それゆえ, replay_det_req_flag と
+       sequence_req_flag は このプロセスには必要ない. これらのフラグは
+       "false" に設定する必要がある.
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                 [Page 5]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+       *  If the resulting major_status code is GSS_S_COMPLETE and the
+          mutual_state flag is not true, then mutual authentication has
+          not been established, and the key exchange MUST fail.
+
+	  結果の major_status コードが  GSS_S_COMPLETE で
+	  mutual_state フラグが true でないなら, 相互認証は確立されず,
+	  鍵交換は失敗しなければならない.
+
+       *  If the resulting major_status code is GSS_S_COMPLETE and the
+          integ_avail flag is not true, then per-message integrity
+          protection is not available, and the key exchange MUST fail.
+
+	  結果の major_status コードが  GSS_S_COMPLETE で
+	  integ_avail フラグが true でないなら, メッセージ単位の
+	  完全性保護は利用されていないので, 鍵交換は
+	  失敗しなければならない.
+
+       *  If the resulting major_status code is GSS_S_COMPLETE and both
+          the mutual_state and integ_avail flags are true, the resulting
+          output token is sent to S.
+
+	  結果の major_status コードが  GSS_S_COMPLETE で
+	  mutual_state と integ_avail フラグが共に true なら,
+	  結果の出力トークン が S に送られる.
+
+       *  If the resulting major_status code is GSS_S_CONTINUE_NEEDED,
+          the the output_token is sent to S, which will reply with a new
+          token to be provided to GSS_Init_sec_context.
+
+	  結果の major_status コードが  GSS_S_CONTINUE_NEEDED の場合
+	  結果の出力トークン が S に送られる. S は GSS_Init_sec_context
+	  で提供される 新しいトークンを返答する.
+
+       *  The client MUST also include "e" with the first message it
+          sends to the server during this process; if the server
+          receives more than one "e" or none at all, the key exchange
+          fails.
+
+	  クライアントは, さらに, このプロセスでサーバに送られる最初の
+	  メッセージに "e" を含めなければならない.
+	  サーバが 1 つ以上の"e" を受けとったりまったく受けとらなかったら
+	  鍵交換は失敗する.
+
+       *  It is an error if the call does not produce a token of
+          non-zero length to be sent to the server.  In this case, the
+          key exchange MUST fail.
+
+	  この呼出しがサーバに送られる 0 でない長さのトークンを生成しなかったら
+	  エラーだ. この場合, 鍵交換は失敗しなければならない.
+
+   3.  S calls GSS_Accept_sec_context, using the token received from C.
+
+   3.  S は, C から受けとったトークンを使って GSS_Accept_sec_context を呼び出す.
+
+       *  If the resulting major_status code is GSS_S_COMPLETE and the
+          mutual_state flag is not true, then mutual authentication has
+          not been established, and the key exchange MUST fail.
+
+	  結果の major_status コードが  GSS_S_COMPLETE で
+	  mutual_state フラグが true でないなら, 相互認証は確立されず,
+	  鍵交換は失敗しなければならない.
+
+       *  If the resulting major_status code is GSS_S_COMPLETE and the
+          integ_avail flag is not true, then per-message integrity
+          protection is not available, and the key exchange MUST fail.
+
+	  結果の major_status コードが  GSS_S_COMPLETE で
+	  integ_avail フラグが true でないなら, メッセージ単位の
+	  完全性保護は利用されていないので, 鍵交換は
+	  失敗しなければならない.
+
+       *  If the resulting major_status code is GSS_S_COMPLETE and both
+          the mutual_state and integ_avail flags are true, then the
+          security context has been established, and processing
+          continues with step 4.
+
+	  結果の major_status コードが  GSS_S_COMPLETE で
+	  mutual_state と integ_avail フラグが共に true なら,
+	  security context が確立した. そして プロセスはステップ 4 へ
+	  進む.
+
+       *  If the resulting major_status code is GSS_S_CONTINUE_NEEDED,
+          then the output token is sent to C, and processing continues
+          with step 2.
+
+	  結果の major_status コードが  GSS_S_CONTINUE_NEEDED の場合
+	  結果の出力トークン が C に送られ, プロレスは
+	  ステップ 2 を続ける.
+	  
+
+       *  If the resulting major_status code is GSS_S_COMPLETE, but a
+          non-zero-length reply token is returned, then that token is
+          sent to the client.
+
+	  結果の major_status コードが  GSS_S_COMPLETE だが
+	  0 でない長さの reply token が返らなければ,
+	  その token は クライアントに送られる.
+
+
+Hutzelman, et al.        Expires March 12, 2004                 [Page 6]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+   4.  S generates a random number y (0 < y < q) and computes f = g^y
+       mod p.  It computes K = e ^ y mod p, and H = hash (V_C || V_S ||
+       I_C || I_S || K_S || e || f || K).  It then calls GSS_GetMIC to
+       obtain a GSSAPI message integrity code for H.  S then sends f and
+       the MIC to C.
+
+   4.  S は 乱数 y (0< y < q) を生成し, f = g^y mod p を計算する.
+       そして K = e ^ y mod p を計算し, H = hash (V_C || V_S ||
+       I_C || I_S || K_S || e || f || K) を計算する.
+       さらに, H のための GSSAPI メッセージ完全性コードを得るために
+        GSS_GetMIC を呼ぶ. そして S は C に f と MIC を送る.
+
+   5.  This step is performed only if the server's final call to
+       GSS_Accept_sec_context produced a non-zero-length final reply
+       token to be sent to the client _and_ no previous call by the
+       client to GSS_Init_sec_context has resulted in a major_status of
+       GSS_S_COMPLETE.  Under these conditions, the client makes an
+       additional call to GSS_Init_sec_context to process the final
+       reply token.  This call is made exactly as described above.
+       However, if the resulting major_status is anything other than
+       GSS_S_COMPLETE, or a non-zero-length token is returned, it is an
+       error and the key exchange MUST fail.
+
+   5.  サーバの最後の GSS_Accept_sec_context の呼び出しが クライアントに
+       送られる長さ 0 でない最後の reply token を生成して _かつ_
+       クライアントによる GSS_Init_sec_context のそれまでの呼び出しで
+       GSS_S_COMPLETE major_status に成っていない場合にのみ
+       このステップは行なわれる. この条件で, クライアントは
+       最後の reply token を処理するため GSS_Init_sec_context を
+       さらに呼びだす. この呼び出しは, 先に記述した通りに行なわれる.
+       しかし, 結果の major_status が GSS_S_COMPLETE ではなかったり
+       長さ 0 でない token が返されたなら, これはエラーで 鍵交換は
+       失敗しなければならない.
+
+   6.  C computes K = f^x mod p, and H = hash (V_C || V_S || I_C || I_S
+       || K_S || e || f || K).  It then calls GSS_VerifyMIC to verify
+       that the MIC sent by S matches H.  If the MIC is not successfully
+       verified, the key exchange MUST fail.
+
+   6.  C は  K = f^x mod p と H = hash (V_C || V_S || I_C || I_S
+       || K_S || e || f || K) を計算する. そして S から送られた
+       MIC が H とマッチするか検証するため GSS_VerifyMIC を呼ぶ.
+       MIC の検証に失敗したなら, 鍵交換は失敗しなければならない.    
+
+   Either side MUST NOT send or accept e or f values that are not in the
+   range [1, p-1].  If this condition is violated, the key exchange
+   fails.
+
+   どちらの側も [1,p-1] の範囲にない e や f の値を送ったり受けとったりしては
+   ならない. この条件が破壊されると, 鍵交換は失敗する.
+
+   If any call to GSS_Init_sec_context or GSS_Accept_sec_context returns
+   a major_status other than GSS_S_COMPLETE or GSS_S_CONTINUE_NEEDED, or
+   any other GSSAPI call returns a major_status other than
+   GSS_S_COMPLETE, the key exchange fails.  In this case, several
+   mechanisms are available for communicating error information to the
+   peer before terminating the connection as required by [8]:
+
+   GSS_Init_sec_context と GSS_Accept_sec_context のどの呼び出しにおいても
+   GSS_S_COMPLETE か GSS_S_CONTINUE_NEEDED 以外の
+   major_status を返したり, 他の GSSAPI の呼び出しが GSS_S_COMPLETE
+   以外の major_status を返したなら, 鍵交換は失敗する. この場合,
+   [8] によって必要とされる 接続の終了の前に, peer に
+   エラー情報を伝達するために いくつかのメカニズムが利用できる.
+
+   o  If the key exchange fails due to any GSSAPI error on the server
+      (including errors returned by GSS_Accept_sec_context), the server
+      MAY send a message informing the client of the details of the
+      error. In this case, if an error token is also sent (see below),
+      then this message MUST be sent before the error token.
+      
+      鍵交換が  (GSS_Accept_sec_context によって返されるエラーも含めて
+      サーバの GSS エラーのために失敗したなら, サーバは エラーの詳細を
+      クライアントに知らせるメッセージを送ってもよい. この場合,
+      error token も送られるなら (後述) このメッセージは
+      error token より前に送られなければならない.
+
+   o  If the key exchange fails due to a GSSAPI error returned from the
+      server's call to GSS_Accept_sec_context, and an "error token" is
+      also returned, then the server SHOULD send the error token to the
+      client to allow completion of the GSS security exchange.
+
+      鍵交換が サーバの GSS_Accept_sec_context の呼び出しによって
+      返された GSSAPI エラーのために失敗し, "error token" も
+      返されたなら, GSS セキュリティ交換の完了を
+      許すため error token をクライアントにサーバは送る必要がある.
+
+   o  If the key exchange fails due to a GSSAPI error returned from the
+      client's call to GSS_Init_sec_context, and an "error token" is
+      also returned, then the client SHOULD send the error token to the
+      server to allow completion of the GSS security exchange.
+
+      鍵交換が クライアントの GSS_Init_sec_context の呼び出しから
+      返される GSSAPI エラーのために失敗し, "error token" も返された
+      なら, GSS セキュリティ交換の完了を
+      許すため error token をサーバにクライアントは送る必要がある.
+
+
+Hutzelman, et al.        Expires March 12, 2004                 [Page 7]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+   As noted in Section 9, it may be desirable under site security policy
+   to obscure information about the precise nature of the error; thus,
+   it is RECOMMENDED that implementations provide a method to suppress
+   these messages as a matter of policy.
+
+   セクション 9 で述べるように. エラーの正確な性質についての情報は
+   サイトのセキュリティポリシーに基づいておおいかくすことが望ましいだろう.
+   つまり, 実装は, ポリシーに基づいてこれらのメッセージを抑える方法を
+   提供することが推奨される.
+
+   This is implemented with the following messages.  The hash algorithm
+   for computing the exchange hash is defined by the method name, and is
+   called HASH.  The group used for Diffie-Hellman key exchange and the
+   underlying GSSAPI mechanism are also defined by the method name.
+
+   以下のメッセージが実装される. 交換ハッシュを計算するためのハッシュ
+   アルゴリズムは メソッドの名前で定義されて, HASH と呼ばれる.
+   Diffie-Hellman 鍵交換で使われる群とその基となる GSSAPI メカニズムも
+   メソッドの名前で定義される.
+   
+
+   After the client's first call to GSS_Init_sec_context, it sends the
+   following:
+
+   クライアントは, GSS_Init_sec_context の最初の呼び出しのあと,
+   次を送る.
+   
+
+           byte      SSH_MSG_KEXGSS_INIT
+           string    output_token (from GSS_Init_sec_context)
+           mpint     e
+
+   Upon receiving the SSH_MSG_KEXGSS_INIT message, the server MAY send
+   the following message, prior to any other messages, to inform the
+   client of its host key.
+
+   SSH_MSG_KEXGSS_INIT メッセージを受けとったとき, サーバは自分のホスト鍵を
+   クライアントに伝えるために以下のメッセージを他のメッセージより
+   先に送ってもよい.
+
+           byte      SSH_MSG_KEXGSS_HOSTKEY
+           string    server public host key and certificates (K_S)
+
+   Since this key exchange method does not require the host key to be
+   used for any encryption operations, this message is OPTIONAL.  If the
+   "null" host key algorithm described in Section 5 is used, this
+   message MUST NOT be sent.  If this message is sent, the server public
+   host key (s) and/or certificate (s) in this message are encoded as a
+   single string, in the format specified by the public key type in use
+   (see [8], section 4.6).
+
+   どの暗号操作に対して使われるホスト鍵でも鍵交換法は必要としないので,
+   このメッセージは選択できる. Section 5 で記述する "null" ホスト鍵
+   アルゴリズムを利用する場合, このメッセージは送ってはならない.
+   このメッセージが送られる時, このメッセージのサーバの公開鍵
+   や/もしくは 証明書は 利用する公開鍵の種類で決定されるフォーマットの
+   単一の文字列として符号化される ([8] のセクション 4.6 を参照).
+
+   Each time the server's call to GSS_Accept_sec_context returns a
+   major_status code of GSS_S_CONTINUE_NEEDED, it sends the following
+   reply to the client:
+
+   サーバの GSS_Accept_sec_context の呼び出しが GSS_S_CONTINUE_NEEDED
+   major_status コードを返すたびに, クライアントに次の返答を送る.
+
+           byte      SSH_MSG_KEXGSS_CONTINUE
+           string    output_token (from GSS_Accept_sec_context)
+
+   If the client receives this message after a call to
+   GSS_Init_sec_context has returned a major_status code of
+   GSS_S_COMPLETE, a protocol error has occurred and the key exchange
+   MUST fail.
+
+   GSS_Init_sec_context の呼び出しが GSS_S_COMPLETE major_status コードを
+   返したあとでクライアントがこのメッセージを受けとったなら,
+   プロトコルエラーが起っており, 鍵交換は失敗しなければならない.
+
+   Each time the client receives the message described above, it makes
+   another call to GSS_Init_sec_context.  It then sends the following:
+
+   クライアントが上記のメッセージを受信するたびに, GSS_Init_sec_context
+   をクライアントはもう一度呼ぶ. そして次を送る.
+
+           byte      SSH_MSG_KEXGSS_CONTINUE
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                 [Page 8]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+           string    output_token (from GSS_Init_sec_context)
+
+   The server and client continue to trade these two messages as long as
+   the server's calls to GSS_Accept_sec_context result in major_status
+   codes of GSS_S_CONTINUE_NEEDED.  When a call results in a
+   major_status code of GSS_S_COMPLETE, it sends one of two final
+   messages.
+
+   サーバとクライアントは
+   サーバの GSS_Accept_sec_context の呼び出しが GSS_S_CONTINUE_NEEDED
+   major_status コードである限りこれらの 2 つのメッセージを交換し続ける.
+   この呼び出しが GSS_S_COMPLETE major_status コードになったなら,
+   サーバは 2 つの 最終メッセージのうちどちらかを送る.
+
+   If the server's final call to GSS_Accept_sec_context (resulting in a
+   major_status code of GSS_S_COMPLETE) returns a non-zero-length token
+   to be sent to the client, it sends the following:
+
+   (GSS_S_COMPLETE major_status コードになる) サーバの最後の
+   GSS_Accept_sec_context の呼び出しが クライアントに送られる
+   0 でない長さの token を返したなら, サーバは次を送る.
+
+           byte      SSH_MSG_KEXGSS_COMPLETE
+           mpint     f
+           string    per_msg_token (MIC of H)
+           boolean   TRUE
+           string    output_token (from GSS_Accept_sec_context)
+
+   If the client receives this message after a call to
+   GSS_Init_sec_context has returned a major_status code of
+   GSS_S_COMPLETE, a protocol error has occurred and the key exchange
+   MUST fail.
+
+   GSS_Init_sec_context の呼び出しが GSS_S_COMPLETE major_status コードを
+   返したあとでクライアントがこのメッセージを受けとったなら,
+   プロトコルエラーが起っており, 鍵交換は失敗しなければならない.
+
+   If the server's final call to GSS_Accept_sec_context (resulting in a
+   major_status code of GSS_S_COMPLETE) returns a zero-length token or
+   no token at all, it sends the following:
+
+   (GSS_S_COMPLETE major_status コードになる) サーバの最後の
+   GSS_Accept_sec_context の呼び出しが クライアントに送られる
+   長さ 0 の token を返したり, token をまったく返さなかったなら, サーバは次を送る.
+
+           byte      SSH_MSG_KEXGSS_COMPLETE
+           mpint     f
+           string    per_msg_token (MIC of H)
+           boolean   FALSE
+
+   If the client receives this message when no call to
+   GSS_Init_sec_context has yet resulted in a major_status code of
+   GSS_S_COMPLETE, a protocol error has occurred and the key exchange
+   MUST fail.
+
+   GSS_Init_sec_context の呼び出しが GSS_S_COMPLETE major_status コードを
+   返したあとでクライアントがこのメッセージを受けとったなら,
+   プロトコルエラーが起っており, 鍵交換は失敗しなければならない.
+
+    If either the client's call to GSS_Init_sec_context or the server's
+   call to GSS_Accept_sec_context returns an error status and produces
+   an output token (called an "error token"), then the following SHOULD
+   be sent to convey the error information to the peer:
+
+   クアイアントの GSS_Init_sec_context の呼び出しか,
+   サーバの GSS_Accept_sec_context の呼び出しが エラー status を返し
+   ("error token"と呼ばれる) output token を生成したなら,
+   相手にエラー情報を伝えるために 次が送られる必要がある.
+
+           byte      SSH_MSG_KEXGSS_CONTINUE
+           string    error_token
+
+   If a server sends both this message and an SSH_MSG_KEXGSS_ERROR
+   message, the SSH_MSG_KEXGSS_ERROR message MUST be sent first, to
+   allow clients to record and/or display the error information before
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                 [Page 9]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+   processing the error token.  This is important because a client
+   processing an error token will likely disconnect without reading any
+   further messages.
+
+   サーバがこのメッセージと SSH_MSG_KEXGSS_ERROR メッセージを両方送るのなら
+   error token を処理する前にエラー情報をクライアントに記録 かつ/もしくは
+   表示させるために SSH_MSG_KEXGSS_ERROR メッセージが
+   最初に送られなければならない.
+
+   In the event of a GSSAPI error on the server, the server MAY send the
+   following message before terminating the connection:
+
+   サーバで GSSAPI エラーが起きた場合には, サーバは接続を終了する前に
+   次のメッセージを送ってもよい.
+
+           byte      SSH_MSG_KEXGSS_ERROR
+           uint32    major_status
+           uint32    minor_status
+           string    message
+           string    language tag
+
+   The message text MUST be encoded in the UTF-8 encoding described in
+   [10].  Language tags are those described in [11].  Note that the
+   message text may contain multiple lines separated by carriage
+   return-line feed (CRLF) sequences.  Application developers should
+   take this into account when displaying these messages.
+
+   message テキストは [10] に記述される UTF-8 エンコーディングで
+   符号化されなければならない. Language tag は [11] に記述されているものだ.
+   message は carriage return-line feed (CRLF) シーケンスで
+   区切られる 複数の行を含むかもしれないことに注意. アプリケーションの
+   開発者はこれらのメッセージを表示する際にこれを考慮すべきである.
+
+   The hash H is computed as the HASH hash of the concatenation of the
+   following:
+
+   ハッシュ H は 次の連結の HASH のハッシュとして計算される.
+
+           string    V_C, the client's version string (CR and NL excluded)
+           string    V_S, the server's version string (CR and NL excluded)
+           string    I_C, the payload of the client's SSH_MSG_KEXINIT
+           string    I_S, the payload of the server's SSH_MSG_KEXINIT
+           string    K_S, the host key
+           mpint     e, exchange value sent by the client
+           mpint     f, exchange value sent by the server
+           mpint     K, the shared secret
+
+   This value is called the exchange hash, and it is used to
+   authenticate the key exchange.  The exchange hash SHOULD be kept
+   secret.  If no SSH_MSG_KEXGSS_HOSTKEY message has been sent by the
+   server or received by the client, then the empty string is used in
+   place of K_S when computing the exchange hash.
+
+   この値は交換ハッシュと呼ばれ, 鍵交換を認証するのに使われる.
+   交換ハッシュは 秘密にしておく必要がある. SSH_MSG_KEXGSS_HOSTKEY
+   メッセージがサーバから送られていなかったり, クライアントによって受けとら
+   れていなかったなら, 交換ハッシュを計算する際 K_S の場所に 空文字列が
+   使われる.
+
+   The GSS_GetMIC call MUST be applied over H, not the original data.
+
+   GSS_GetMIC は オリジナルのデータに対してではなく H に対して
+   適用されなければならない.
+
+2.2 gss-group1-sha1-*
+
+2.2 gss-group1-sha1-*
+
+   Each of these methods specifies GSSAPI authenticated Diffie-Hellman
+   key exchange as described in Section 2.1 with SHA-1 as HASH, and the
+   group defined in section 6.1 of [8].  The method name for each method
+   is the concatenation of the string "gss-group1-sha1-" with the Base64
+   encoding of the MD5 hash [3] of the ASN.1 DER encoding [1] of the
+   underlying GSSAPI mechanism's OID.  Base64 encoding is described in
+   section 6.8 of [4].
+
+   これらの方法のそれぞれは, セクション 2.1 で記述された HASH として
+   SHA-1 と [8] のセクション 6.1 で定義される群を用いる
+   GSSAPI で認証された Diffie-Hellman 鍵交換を定める. それぞれの方法の
+   方法名は, "gss-group1-sha1-"文字列と, 基礎となる GSSAPI メカニズムの OID の 
+   ASN.1 DER エンコーディング [1] の MD5 ハッシュ [3] の Base64 エンコーディング
+   の連結だ. Base64 エンコーディングは [4] の Section 6.8 に記述されている.
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 10]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+   Each and every such key exchange method is implicitly registered by
+   this specification.  The IESG is considered to be the owner of all
+   such key exchange methods; this does NOT imply that the IESG is
+   considered to be the owner of the underlying GSSAPI mechanism.
+
+   1 つ 1 つの鍵交換方法は, この仕様によって暗黙に登録される.
+   IESG は このような鍵交換法のすべてのオーナーだと考えられている.
+   これは,  IESG が 基礎となる GSSAPI mechanism のオーナーであると
+   考えられることを意味しない.
+
+2.3 Other GSSAPI key exchange methods
+
+2.3 他の GSSAPI 鍵交換法
+
+   Key exchange method names starting with "gss-" are reserved for key
+   exchange methods which conform to this document; in particular, for
+   those methods which use the GSSAPI authenticated Diffie-Hellman key
+   exchange algorithm described in Section 2.1, including any future
+   methods which use different groups and/or hash functions.  The intent
+   is that the names for any such future methods methods be defined in a
+   similar manner to that used in Section 2.2.
+
+   "gss-"で始まる鍵交換法の名前は, この文書に従う鍵交換法のために
+   予約されている. 特に, 異なる群 かつ/ないし ハッシュ関数を利用する
+   将来の方法を含む セクション 2.1 で記述した GSSAPI で認証された
+   Diffie-Hellman 鍵交換アルゴリズムを使う方法のために.
+   どんな将来の方法の名前もセクション 2.2 で使われたのと同じ方法で定義される
+   のがこの意図だ.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 11]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+3. GSSAPI User Authentication
+
+3. GSSAPI ユーザ認証
+
+   This section describes a general-purpose user authentication method
+   based on [2].  It is intended to be run over the SSH user
+   authentication protocol [9].
+
+   このセクションでは, [2] をベースにした 汎用ユーザ認証法を記述する.
+   これは SSH ユーザ認証プロトコル [9] の上で動かされることを意図している.
+
+   The authentication method name for this protocol is
+   "gssapi-with-mic".
+
+   このプロトコルの認証法の名前は "gssapi-with-mic" だ.
+
+3.1 GSSAPI Authentication Overview
+
+3.1 GSSAPI 認証の概要
+
+   GSSAPI authentication must maintain a context.  Authentication begins
+   when the client sends a SSH_MSG_USERAUTH_REQUEST, which specifies the
+   mechanism OIDs the client supports.
+
+   GSSAPI 認証は context を維持する. クライアントのサポートするメカニズム
+   の OID を指定した SSH_MSG_USERAUTH_REQUEST をクライアントが送ることで
+   認証が始まる.
+
+   If the server supports any of the requested mechanism OIDs, the
+   server sends a SSH_MSG_USERAUTH_GSSAPI_RESPONSE message containing
+   the mechanism OID.
+
+   要求されたメカニズムの OID のどれかをサーバがサポートしていたなら,
+   サーバは メカニズムの OID を含む SSH_MSG_USERAUTH_GSSAPI_RESPONSE
+   メッセージを送る.
+
+   After the client receives SSH_MSG_USERAUTH_GSSAPI_RESPONSE, the
+   client and server exchange SSH_MSG_USERAUTH_GSSAPI_TOKEN packets
+   until the authentication mechanism either succeeds or fails.
+   
+   クライアントが SSH_MSG_USERAUTH_GSSAPI_RESPONSE を受けとったら
+   認証メカニズムが成功するか失敗するまで
+   クライアントとサーバは SSH_MSG_USERAUTH_GSSAPI_TOKEN パケットを
+   交換する.
+
+   If at any time during the exchange, the client sends a new
+   SSH_MSG_USERAUTH_REQUEST packet, the GSSAPI context is completely
+   discarded and destroyed, and any further GSSAPI authentication MUST
+   restart from the beginning.
+
+   この交換の間にクライアントが新しい SSH_MSG_USERAUTH_REQUEST
+   を送ったなら, GSSAPI context を完全に捨てられ破壊されて,
+   さらなる GSSAPI 認証は最初から再スタートしなければならない.
+   
+
+3.2 Initiating GSSAPI authentication
+
+3.2 GSSAPI 認証の開始
+
+   The GSSAPI authentication method is initiated when the client sends a
+   SSH_MSG_USERAUTH_REQUEST:
+
+   クライアントが SSH_MSG_USERAUTH_REQUEST を送ることで
+   GSSAPI 認証法が開始される.
+
+           byte      SSH_MSG_USERAUTH_REQUEST
+           string    user name (in ISO-10646 UTF-8 encoding)
+           string    service name (in US-ASCII)
+           string    "gssapi-with-mic" (US-ASCII method name)
+           uint32    n, the number of mechanism OIDs client supports
+           string[n] mechanism OIDs
+
+   Mechanism OIDs are encoded according to the ASN.1 distinguished
+   encoding rules (DER), as described in [1] and in section 3.1 of [2].
+   The mechanism OIDs MUST be listed in order of preference, and the
+   server must choose the first mechanism OID on the list that it
+   supports.
+
+   Mechanism OID は [1] と [2] のセクション 3.2 で記述されているように
+   ASN.1 distinguished encoding rules (DER) に従って符号化される.
+   Mechanism OID は 好みの順に列挙されなければならない. また
+   サーバは リストの中で自身がサポートする最初のメカニズムを
+   選択しなければならない.
+
+   The client SHOULD send GSSAPI mechanism OID's only for mechanisms
+   which are of the same priority, compared to non-GSSAPI authentication
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 12]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+   methods.  Otherwise, authentication methods may be executed out of
+   order.  Thus, the client could first send a SSH_MSG_USERAUTH_REQUEST
+   for one GSSAPI mechanism, then try public key authentication, and
+   then try another GSSAPI mechanism.
+
+   クライアントは GSSAPI でない認証と比較して同じ優先度のメカニズムに対して
+   GSSAPI mechanism OID 1 つずつ送る必要がある. さもなければ, 
+   認証法は順序がばらばらに実行されるかもしれない. 
+   クライアントは最初に 1 つの GSSAPI メカニズムに対して
+   SSH_MSG_USERAUTH_REQUEST を送って, 次に公開鍵認証を試み,
+   さらに別の GSSAPI メカニズムを試してもよい.
+
+   If the server does not support any of the specified OIDs, the server
+   MUST fail the request by sending a SSH_MSG_USERAUTH_FAILURE packet.
+
+   サーバが 指定された OID のどれもサポートしていないなら,
+   サーバは SSH_MSG_USERAUTH_FAILURE パケットを送って リクエストを
+   失敗させなければならない.
+
+   The user name may be an empty string if it can be deduced from the
+   results of the GSSAPI authentication.  If the user name is not empty,
+   and the requested user does not exist, the server MAY disconnect, or
+   MAY send a bogus list of acceptable authentications but never accept
+   any.  This makes it possible for the server to avoid disclosing
+   information about which accounts exist.  In any case, if the user
+   does not exist, the authentication request MUST NOT be accepted.
+
+   GSSAPI 認証の結果から ユーザ名が演繹可能な場合, ユーザ名は
+   空文字列かもしれない. ユーザ名が空でなく, 要求されたユーザが
+   存在しないなら, サーバは 切断してもよいし, 実際には
+   どれも受け入られることはない偽の受け可能認証リストを送ってもよい.
+   これは, アカウントが存在するかどうかについての情報を
+   公開するのを避けることをサーバに可能にする. どうあれ,
+   ユーザが存在しないなら, 認証の要求は受け入れてはならない.
+
+   The client MAY at any time continue with a new
+   SSH_MSG_USERAUTH_REQUEST message, in which case the server MUST
+   abandon the previous authentication attempt and continue with the new
+   one.
+
+   クライアントは いつでも 新しい SSH_MSG_USERAUTH_REQUEST を続けてもよい.
+   この場, サーバは前の認証の試行を破棄し新しいもの続けなければならない.
+
+3.3 Initial server response
+
+3.3 最初のサーバレスポンス
+
+   The server responds to the SSH_MSG_USERAUTH_REQUEST with either a
+   SSH_MSG_USERAUTH_FAILURE if none of the mechanisms are supported, or
+   with SSH_MSG_USERAUTH_GSSAPI_RESPONSE as follows:
+
+   サーバは, SSH_MSG_USERAUTH_REQUEST に対して
+   1 つもメカニズムをサポートしていない場合の SSH_MSG_USERAUTH_FAILURE か
+   以下の SSH_MSG_USERAUTH_GSSAPI_RESPONSE を返す.
+
+           byte        SSH_MSG_USERAUTH_GSSAPI_RESPONSE
+           string      selected mechanism OID
+
+   The mechanism OID must be one of the OIDs sent by the client in the
+   SSH_MSG_USERAUTH_REQUEST packet.
+
+   mechanism OID は SSH_MSG_USERAUTH_REQUEST パケットでクライアントから
+   送られてきた OID のうちの 1 つでなければならない.
+
+3.4 GSSAPI session
+
+3.4 GSSAPI セッション
+
+   Once the mechanism OID has been selected, the client will then
+   initiate an exchange of one or more pairs of
+   SSH_MSG_USERAUTH_GSSAPI_TOKEN packets.  These packets contain the
+   tokens produced from the 'GSS_Init_sec_context ()' and
+   'GSS_Accept_sec_context ()' calls.  The actual number of packets
+   exchanged is determined by the underlying GSSAPI mechanism.
+
+   mechanism OID が選択されたら, クライアントは 1 つ以上の
+   SSH_MSG_USERAUTH_GSSAPI_TOKEN パケットのペアの交換を始める.
+   これらのパケットは 'GSS_Init_sec_context ()' と
+   'GSS_Accept_sec_context ()' の呼び出しによって生成された
+   token を含む. 交換されるパケットの実際の数は,
+   基礎とする GSSAPI メカニズムによって決定される.
+
+           byte        SSH_MSG_USERAUTH_GSSAPI_TOKEN
+           string      data returned from either GSS_Init_sec_context ()
+                       or GSS_Accept_sec_context ()
+
+   If an error occurs during this exchange on server side, the server
+   can terminate the method by sending a SSH_MSG_USERAUTH_FAILURE
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 13]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+   packet.  If an error occurs on client side, the client can terminate
+   the method by sending a new SSH_MSG_USERAUTH_REQUEST packet.
+
+   交換の間にサーバ側でエラーが発生したら, サーバは SSH_MSG_USERAUTH_FAILURE
+   パケットを送って認証法を終了できる. クライアント側でエラーが発生したら,
+   新しい SSH_MSG_USERAUTH_REQUEST パケットを送ることで
+   認証法を終了できる.
+
+   When calling GSS_Init_sec_context (), the client MUST set the the
+   integ_req_flag to "true" to request that per-message integrity
+   protection be supported for this context.  In addition, the
+   deleg_req_flag MAY be set to "true" to request access delegation, if
+   requested by the user.
+
+   GSS_Init_sec_context を呼ぶ際, クライアントは この context で
+   メッセージ単位の完全性保護をサポートすることを要求するために
+   integ_req_flag を "true"に設定しなければならない. 加えて,
+   ユーザから求められたら アクセスの委譲を要求するため
+   deleg_req_flag を "true" に設定してもよい.
+
+   Since the user authentication process by its nature authenticates
+   only the client, the setting of the mutual_req_flag is not needed for
+   this process.  This flag SHOULD be set to "false".
+
+   ユーザ認証プロセスはその性質からクライアントのみを認証するので,
+   mutual_req_flag の設定はこのプロセスでは必要ない.
+   このフラグは "false"に設定される必要がある.
+
+   Since the user authentication process will involve the exchange of
+   only a single token once the context has been established, it is not
+   necessary that the context support detection of replayed or
+   out-of-sequence tokens.  Thus, the setting of the replay_det_req_flag
+   and sequence_req_flag are not needed for this process.  These flags
+   SHOULD be set to "false".
+
+   ユーザ認証プロセスは, context が確立されるたびに単一の token のみの
+   交換を引き起こすので, context は  リプレイされた ないし シーケンス外の
+   token の検出をサポートする必要はない. それゆえ, replay_det_req_flag
+   と sequence_req_flag の設定はこのプロセスには必要ない. これらのフラグは
+   "false"に設定される必要がある.
+
+   Additional SSH_MSG_USERAUTH_GSSAPI_TOKEN messages are sent if and
+   only if the calls to the GSSAPI routines produce send tokens of
+   non-zero length.
+
+   GSSAPI ルーチンの呼び出しが 長さ 0 でない send token を生成した場合にだけ
+   追加の SSH_MSG_USERAUTH_GSSAPI_TOKEN メッセージが送られる.
+
+   Any major status code other than GSS_S_COMPLETE or
+   GSS_S_CONTINUE_NEEDED SHOULD be a failure.
+
+   GSS_S_COMPLETE と GSS_S_CONTINUE_NEEDED 以外の どんな major_status コードも
+   失敗とする必要がある.
+
+3.5 Binding Encryption Keys
+
+3.5 暗号鍵の束縛
+
+   In some cases, it is possible to obtain improved security by allowing
+   access only if the client sends a valid message integrity code (MIC)
+   binding the GSSAPI context to the keys used for encryption and
+   integrity protection of the SSH session.  With this extra level of
+   protection, a "man-in-the-middle" attacker who has convinced a client
+   of his authenticity cannot then relay user authentication messages
+   between the real client and server, thus gaining access to the real
+   server.  This additional protection is available when the negotiated
+   GSSAPI context supports per-message integrity protection, as
+   indicated by the setting of the integ_avail flag on successful return
+   from GSS_Init_sec_context () or GSS_Accept_sec_context ().
+
+   場合によっては, SSH のセッションの暗号化と完全性保護
+   に使われる鍵を GSSAPI の context と結び付ける
+   正当なメッセージ完全性コード (MIC) をクライアントが送る場合にのみ
+   アクセスを許すことで, より一層のセキュリティを得られる.
+   この追加の保護のレベルで, 本物のクライアントだと確信させた
+   "man-in-the-middle" 攻撃者が 本物のクライアントとサーバの間の
+   ユーザ認証メッセージを中継することができなくなる. それゆえ, 
+   本物のサーバへのアクセスが得られる. 
+   GSS_Init_sec_context () か GSS_Accept_sec_context () から成功が返った
+   integ_avail フラグの設定によって示される
+   交渉された (negotiated) GSSAPI context が メッセージ単位
+   での完全性保護をサポートするなら
+   この追加の保護は利用できる.
+
+   When the client's call to GSS_Init_sec_context () returns
+   GSS_S_COMPLETE with the integ_avail flag set, the client MUST
+   conclude the user authentication exchange by sending the following
+   message:
+
+   クラアイントの GSS_Init_sec_context () が integ_avail フラグをセットした
+   GSS_S_COMPLETE を返すなら, クライアントは, 次のメッセージを送ることで
+   ユーザ認証の交換を成立させなければならない.
+
+           byte      SSH_MSG_USERAUTH_GSSAPI_MIC
+           string    MIC
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 14]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+   This message MUST be sent only if GSS_Init_sec_context () returned
+   GSS_S_COMPLETE.  If a token is also returned then the
+   SSH_MSG_USERAUTH_GSSAPI_TOKEN message MUST be sent before this one.
+
+   このメッセージは, GSS_Init_sec_context oga GSS_S_COMPLETE を返した
+   場合のにも 送られなければならない. token も返されたなら,
+   SSH_MSG_USERAUTH_GSSAPI_TOKEN メッセージがこの前に送られなければ
+   ならない.
+
+   The contents of the MIC field are obtained by calling GSS_GetMIC over
+   the following, using the GSSAPI context which was just established:
+
+   MIC フィールドの中身はちょうど確立された GSSAPI context を使って,
+   次に対する GSS_GetMIC の呼び出しによって得られる.
+
+
+           string    session identifier
+           byte      SSH_MSG_USERAUTH_REQUEST
+           string    user name
+           string    service
+           string    "gssapi-with-mic"
+
+   If this message is received by the server before the GSSAPI context
+   is fully established, the server MUST fail the authentication.
+
+   GSSAPI context が完全に確立される前にサーバによってこのメッセージが
+   受け取られたなら, サーバは 認証を失敗させなければならない.
+
+   If this message is received by the server when the negotiated GSSAPI
+   context does not support per-message integrity protection, the server
+   MUST fail the authentication.
+
+   交渉された GSSAPI context が メッセージ単位での完全性保護をサポート
+   していない場合に サーバによってこのメッセージが
+   受け取られたなら, サーバは 認証を失敗させなければならない.
+
+3.6 Client acknowledgement
+
+3.5 クライアントの承認
+
+   Some servers may wish to permit user authentication to proceed even
+   when the negotitated GSSAPI context does not support per-message
+   integrity protection.  In such cases, it is possible for the server
+   to successfully complete the GSSAPI method, while the client's last
+   call to GSS_Init_sec_context fails.  If the server simply assumed
+   success on the part of the client and completed the authentication
+   service, it is possible that the client would fail to complete the
+   authentication method, but not be able to retry other methods because
+   the server had already moved on.  To protect against this, a final
+   message is sent by the client to indicate it has completed
+   authentication.
+
+   交渉された GSSAPI context がメッセージ単位の完全性保護をサポートして
+   いない場合でさえ ユーザ認証を進めることを許可したいと
+   望むサーバもあるだろう. このような場合, クライアントの最後の
+   GSS_Init_sec_context の呼び出しが失敗していても,
+   サーバは GSSAPI の方法を成功裏に完了することができる. 
+   サーバが単にクライアントの部分の成功と認証サービスの完了を
+   仮定するなら, クライアントは 認証法の完了を失敗させることができるが,
+   サーバはすでに (次の段階に) 移っているので, 別の方法を
+   再試行することができない. これを防ぐため, クラアイントが認証を
+   終えたことを示すため クライアントから最後のメッセージが送られる.
+
+   When the client's call to GSS_Init_sec_context () returns
+   GSS_S_COMPLETE with the integ_avail flag not set, the client MUST
+   conclude the user authentication exchange by sending the following
+   message:
+
+   クライアントの GSS_Init_sec_context () の呼出しが integ_avail
+   flag が 設定されていない GSS_S_COMPLETE を返す場合,
+   クライアントは次のメッセージを送ることでユーザ認証の交換を
+   成立させなければならない.
+
+           byte      SSH_MSG_USERAUTH_GSSAPI_EXCHANGE_COMPLETE
+
+   This message MUST be sent only if GSS_Init_sec_context () returned
+   GSS_S_COMPLETE.  If a token is also returned then the
+   SSH_MSG_USERAUTH_GSSAPI_TOKEN message MUST be sent before this one.
+
+   このメッセージは, GSS_Init_sec_context () が GSS_S_COMPLETE を返した
+   場合にのみ送られなければならない. token も返された場合は,
+   この前に SSH_MSG_USERAUTH_GSSAPI_TOKEN メッセージが送られなければ
+   ならない
+
+   If this message is received by the server before the GSSAPI context
+   is fully established, the server MUST fail the authentication.
+
+   GSSAPI context が完全に確立される前にサーバによってこのメッセージが
+   受け取られたなら, サーバは 認証を失敗させなければならない.
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 15]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+   If this message is received by the server when the negotiated GSSAPI
+   context supports per-message integrity protection, the server MUST
+   fail the authentication.
+
+   交渉された GSSAPI context が メッセージ単位での完全性保護をサポートしている
+   場合にサーバによってこのメッセージが
+   受け取られたなら, サーバは 認証を失敗させなければならない.
+
+   It is a site policy descision for the server whether or not to permit
+   authentication using GSSAPI mechanisms and/or contexts which do not
+   support per-message integrity protection.  The server MAY fail the
+   otherwise valid gssapi-with-mic authentication if per-message
+   integrity protection is not supported.
+
+   GSSAPI メカニズムを使った認証を許すかどうか かつ/もしくは
+   メッセージ単位の完全性保護をサポートしない context を許すかどうかは
+   サーバの サイトポリシーの決定による. サーバは,
+   メッセージ単位の完全性保護をサポートしない場合, 
+   正当な gssapi-with-mic 認証を失敗にしてもよい.
+
+3.7 Completion
+
+3.7 完了
+
+   As with all SSH authentication methods, successful completion is
+   indicated by a SSH_MSG_USERAUTH_SUCCESS if no other authentication is
+   required, or a SSH_MSG_USERAUTH_FAILURE with the partial success flag
+   set if the server requires further authentication.  This packet
+   should be sent immediately following receipt of the the
+   SSH_MSG_USERAUTH_GSSAPI_EXCHANGE_COMPLETE packet.
+
+   すべての SSH 認証法のように, 成功の完了は, さらなる認証が必要でない場合は,
+   SSH_MSG_USERAUTH_SUCCESS で,
+   サーバがさらなる認証を必要とする場合は,
+   partial success フラグが設定された SSH_MSG_USERAUTH_SUCCESS
+   によって 示される. このパケットは SSH_MSG_USERAUTH_GSSAPI_EXCHANGE_COMPLETE
+   パケットを受信した次にすぐに送られるべきである.
+
+
+3.8 Error Status
+
+3.8 エラー状態
+
+   In the event a GSSAPI error occurs on the server during context
+   establishment, the server MAY send the following message to inform
+   the client of the details of the error before sending a
+   SSH_MSG_USERAUTH_FAILURE message:
+   
+   context を確立すう際に サーバで GSSAPI エラーが起きた場合,
+   サーバは SSH_MSG_USERAUTH_FAILURE メッセージを送る前に
+   エラーの詳細をクライアントに知らせるために次のメッセージを
+   送ってもよい:
+
+           byte      SSH_MSG_USERAUTH_GSSAPI_ERROR
+           uint32    major_status
+           uint32    minor_status
+           string    message
+           string    language tag
+
+   The message text MUST be encoded in the UTF-8 encoding described in
+   [10].  Language tags are those described in [11].  Note that the
+   message text may contain multiple lines separated by carriage
+   return-line feed (CRLF) sequences. Application developers should take
+   this into account when displaying these messages.
+
+   message テキストは [10] に記述される UTF-8 エンコーディングで
+   符号化されなければならない. Language tag は [11] に記述されているものだ.
+   message は carriage return-line feed (CRLF) シーケンスで
+   区切られる 複数の行を含むかもしれないことに注意. アプリケーションの
+   開発者はこれらのメッセージを表示する際にこれを考慮すべきである.
+
+   Clients receiving this message MAY log the error details and/or
+   report them to the user.  Any server sending this message MUST ignore
+   any SSH_MSG_UNIMPLEMENTED sent by the client in response.
+
+   このメッセージを受け取ったクライアントは エラーの詳細を記録する
+   かつ/もしくは ユーザに詳細を伝えるか してもよい. このメッセージを
+   送るサーバは クライアントから返答として送られてくる どの
+   SSH_MSG_UNIMPLEMENTED も無視しなければならない.
+   
+
+
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 16]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+3.9 Error Token
+
+3.9 エラートークン
+
+   In the event that, during context establishment, a client's call to
+   GSS_Init_sec_context or a server's call to GSS_Accept_sec_context
+   returns a token along with an error status, the resulting "error
+   token" SHOULD be sent to the peer using the following message:
+
+   context の確立中に クライアントの GSS_Init_sec_context の呼び出し
+   ないし サーバの GSS_Accept_sec_context の呼び出しが エラー状態と
+   共に token を返したら, 結果の "error token" は 次のメッセージを
+   使って相手に送られる必要がある.
+
+           byte        SSH_MSG_USERAUTH_GSSAPI_ERRTOK
+           string      error token
+
+   This message implies that the authentication is about to fail, and is
+   defined to allow the error token to be communicated without losing
+   synchronization.
+
+   このメッセージは認証が失敗したところであることを意味する.
+   また, このメッセージは 
+   error token が同期を失なうことなしに通信されるために
+   定義される.
+
+   When a server sends this message, it MUST be followed by a
+   SSH_MSG_USERAUTH_FAILURE message, which is to be interpreted as
+   applying to the same authentication request.  A client receiving this
+   message SHOULD wait for the following SSH_MSG_USERAUTH_FAILURE
+   message before beginning another authentication attempt.
+
+   サーバがこのメッセージを送る時は, 同一の認証要求への適用として
+   解釈される, SSH_MSG_USERAUTH_FAILURE メッセージがこのメッセージに
+   続けられなければならない. このメッセージを受けとったクライアントは
+   次の SSH_MSG_USERAUTH_FAILURE メッセージを
+   さらなる認証の試行を始める前に待つ必要がある.
+
+   When a client sends this message, it MUST be followed by a new
+   authentication request or by terminating the connection.  A server
+   receiving this message MUST NOT send a SSH_MSG_USERAUTH_FAILURE in
+   reply, since such a message might otherwise be interpreted by a
+   client as a response to the following authentication sequence.
+
+   クライアントがこのメッセージを送る時は, 新しい認証要求か接続の終了
+   がこのメッセージに続けられなければならない. このメッセージを受けとった
+   サーバは, 返答に SSH_MSG_USERAUTH_FAILURE を送ってはならない.
+   このメッセージは, クライアントによって次の認証シーケンスへの応答
+   として解釈されるかもしれないから.
+
+   Any server sending this message MUST ignore any SSH_MSG_UNIMPLEMENTED
+   sent by the client in response.  If a server sends both this message
+   and an SSH_MSG_USERAUTH_GSSAPI_ERROR message, the
+   SSH_MSG_USERAUTH_GSSAPI_ERROR message MUST be sent first, to allow
+   the client to store and/or display the error status before processing
+   the error token.
+
+   このメッセージを送るどんなサーバも, クライアントによって送られる応答の
+   SSH_MSG_UNIMPLEMENTED を無視しなければならない. サーバが
+   このメッセージと SSH_MSG_USERAUTH_GSSAPI_ERROR の両方を送るとき,
+   SSH_MSG_USERAUTH_GSSAPI_ERROR が最初に送られなければならない.
+   error token を処理する前にエラーの状態を保存 かつ/ないし 表示することを
+   クライアントに許すためだ.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 17]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+4. Authentication using GSSAPI Key Exchange
+
+4. GSSAPI 鍵交換を用いた認証
+
+   This section describes a user authentication method building on the
+   framework described in [9].  This method performs user authentication
+   by making use of an existing GSSAPI context established during key
+   exchange.
+
+   このセクションでは, [9] で記述されたフレームワークを基にした
+   ユーザ認証法を記述する. この方法は, 鍵交換で確立したすでに存在する
+   GSSAPI context を使ってユーザ認証を行なう.
+
+   The authentication method name for this protocol is "gssapi-keyex".
+
+   このプロトコルの認証法の名前は "gssapi-keyex" だ.
+
+   This method may be used only if the initial key exchange was
+   performed using a GSSAPI-based key exchange method defined in
+   accordance with Section 2.  The GSSAPI context used with this method
+   is always that established during an initial GSSAPI-based key
+   exchange.  Any context established during key exchange for the
+   purpose of rekeying MUST NOT be used with this method.
+
+   セクション 2 に基づいて定義された GSSAPI ベースの鍵交換法を使って
+   最初の鍵交換が行なわれた場合にのみ, この方法は, 使われる.
+   この方法で使われる GSSAPI context は いつも 最初の GSSAPI ベースの
+   鍵交換で 確立したものだ. 鍵の再生成のための鍵交換で確立した
+   どんな context も この方法で使われてはならない.
+
+   The server SHOULD include this user authentication method in the list
+   of methods that can continue (in a SSH_MSG_USERAUTH_FAILURE) if the
+   initial key exchange was performed using a GSSAPI-based key exchange
+   method and provides information about the user's identity which is
+   useful to the server.  It MUST NOT include this method if the initial
+   key exchange was not performed using a GSSAPI-based key exchange
+   method defined in accordance with Section 2.
+
+   GSSAPI ベースの鍵交換を用いて最初の鍵交換が行なわれて, その鍵交換が,
+   サーバに対して利用できるユーザの identity についての情報を
+   提供する場合に, サーバは (SSH_MSG_USERAUTH_FAILURE で)
+   続けることのできる方法のリストに このユーザ認証法を含める必要がある.
+   セクション 2 に基づいて定義された GSSAPI ベースの鍵交換法を使って
+   最初の鍵交換が行なわれていないなら, サーバはこの方法を含めてはならない.
+
+   The client SHOULD attempt to use this method if it is advertised by
+   the server, initial key exchange was performed using a GSSAPI-based
+   key exchange method, and this method has already been tried.  The
+   client SHOULD NOT try this method more than once per session.  It
+   MUST NOT try this method if initial key exchange was not performed
+   using a GSSAPI-based key exchange method defined in accordance with
+   Section 2.
+
+   クライアントは, この方法がサーバから告知されていて, 最初の鍵交換が
+   GSSAPI ベースの鍵交換法を使って行なわれていて, この方法がすでに
+   試されていた場合に (?), この方法を使おうと試す必要がある.
+   クライアントは セッションごとに 1 度より多くこの方法を使わないほうがよい.
+   セクション 2 に基づいて定義された 
+   GSSAPI ベースの鍵交換法を使って最初の鍵交換が行なわれていないなら,
+   クライアントはこの方法を 試してはならない.
+
+   If a server receives a request for this method when initial key
+   exchange was not performed using a GSSAPI-based key exchange method
+   defined in accordance with Section 2, it MUST return
+   SSH_MSG_USERAUTH_FAILURE.
+
+   セクション 2 に基づいて定義された 
+   GSSAPI ベースの鍵交換法を使って最初の鍵交換が行なわれていないのに
+   サーバがこの方法に対する要求を受けとったら, サーバは
+   SSH_MSG_USERAUTH_FAILURE を返さなければならない.
+
+   This method is defined as a single message:
+
+   この方法は単一のメッセージとして定義される.
+
+           byte        SSH_MSG_USERAUTH_REQUEST
+           string      user name
+           string      service
+           string      "gssapi-keyex"
+           string      MIC
+
+   The contents of the MIC field are obtained by calling GSS_GetMIC over
+   the following, using the GSSAPI context which was established during
+   initial key exchange:
+
+   MIC フィールドの中身は, 最初の鍵交換で確立された GSSAPI context
+  を使った次に対する GSS_GetMIC の呼び出しで得られる.
+   
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 18]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+           string      session identifier
+           byte        SSH_MSG_USERAUTH_REQUEST
+           string      user name
+           string      service
+           string      "gssapi-keyex"
+
+   Upon receiving this message when initial key exchange was performed
+   using a GSSAPI-based key exchange method, the server uses
+   GSS_VerifyMIC () to verify that the MIC received is valid.  If the MIC
+   is not valid, the user authentication fails, and the server MUST
+   return SSH_MSG_USERAUTH_FAILURE.
+
+   GSSAPI ベースの鍵交換法を使って最初の鍵交換が行なわれた場合に
+   このメッセージを受け取ったなら, サーバは
+   GSS_VerifyMIC を使って 受け取った MIC が正当か検査する.
+   MIC が正当でなければ, ユーザ認証は失敗し,
+   サーバは SSH_MSG_USERAUTH_FAILURE を返さなければならない.
+
+   If the MIC is valid and the server is satisfied as to the user's
+   credentials, it MAY return either SSH_MSG_USERAUTH_SUCCESS, or
+   SSH_MSG_USERAUTH_FAILURE with the partial success flag set, depending
+   on whether additional authentications are needed.
+
+   MIC が正当で, サーバが ユーザの証明書について 満足したなら, 
+   追加の認証が必要かどうかに依存して,
+   SSH_MSG_USERAUTH_SUCCESS か partial success フラグが設定された
+   SSH_MSG_USERAUTH_FAILURE を返してもよい.
+   
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 19]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+5. Null Host Key Algorithm
+
+5. ヌルホスト鍵アルゴリズム
+
+   The "null" host key algorithm has no associated host key material,
+   and provides neither signature nor encryption algorithms.  Thus, it
+   can be used only with key exchange methods that do not require any
+   public-key operations and do not require the use of host public key
+   material.  The key exchange methods described in section 1 of this
+   document are examples of such methods.
+
+   "null" ホスト鍵アルゴリズムは, 関連するホスト鍵の実体を持たず,
+   署名や暗号化のアルゴリズムも提供しない. それゆえ, 
+   どんな 公開鍵操作も必要とせずホスト公開鍵の実体を使う必要もない
+   鍵交換法と共にのみ使われることができる. この文書の
+   セクション 1 で記述した 鍵交換法は, このような方法の例だ.
+
+   This algorithm is used when, as a matter of configuration, the host
+   does not have or does not wish to use a public key.  For example, it
+   can be used when the administrator has decided as a matter of policy
+   to require that all key exchanges be authenticated using Kerberos
+   [12], and thus the only permitted key exchange method is the
+   GSSAPI-authenticated Diffie-Hellman exchange described above, with
+   Kerberos V5 as the underlying GSSAPI mechanism.  In such a
+   configuration, the server implementation supports the "ssh-dss" key
+   algorithm (as required by [8]), but could be prohibited by
+   configuration from using it.  In this situation, the server needs
+   some key exchange algorithm to advertise; the "null" algorithm fills
+   this purpose.
+
+   設定として, ホストが公開鍵を持たなかったり,公開鍵を使うことを
+   望まない場合, このアルゴリズムが使われる. 例えば,
+   管理者が, ポリシーとして,  Kerberos [12] を用いてすべての
+   鍵交換を認証することを必要とすると決定し,許される鍵交換法が
+   基礎となる GSSAPI メカニズムとして Kerberos V5 用いる
+   上記の GSSAPI で認証された Diffie-Hellman 交換の場合に使われることが
+   できる. このような設定で, サーバの実装は ([8] で必要とされる) "ssh-dss"
+   鍵アルゴリズムをサポートするが, これを利用することを設定で
+   禁止することができる. この状況で, サーバは, 何か通知する
+   鍵交換アルゴリズムが必要だ: "null" アルゴリズムはこの目的を満たす.
+
+   Note that the use of the "null" algorithm in this way means that the
+   server will not be able to interoperate with clients which do not
+   support this algorithm.  This is not a significant problem, since in
+   the configuration described, it will also be unable to interoperate
+   with implementations that do not support the GSSAPI-authenticated key
+   exchange and Kerberos.
+
+   このような "null" アルゴリズムの使用は, このアルゴリズムをサポートしない
+   クライアントとの間でサーバが相互運用できなくなることを意味することに
+   注意. これは重大な問題ではない. 記述された設定では,
+   GSSAPI で認証された鍵交換と Kerberos をサポートしない実装と
+   相互運用することもできないから.
+
+   Any implementation supporting at least one key exchange method which
+   conforms to section 1 of this document MUST also support the "null"
+   host key algorithm.  Servers MUST NOT advertise the "null" host key
+   algorithm unless it is the only algorithm advertised.
+
+   この文書のセクション 1 に従う鍵交換法を少なくとも 1 つサポートする
+   どんな実装も "null" ホスト鍵アルゴリズムをサポートしなければならない.
+   サーバは, 通知するアルゴリズムが 唯一 "null" アルゴリズムでない場合に
+   "null" ホスト鍵アルゴリズムを通知してはならない.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 20]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+6. Summary of Message Numbers
+
+6. メッセージ番号のまとめ.
+
+   The following message numbers have been defined for use with
+   GSSAPI-based key exchange methods:
+
+   次のメッセージ番号が, GSSAPI ベースの鍵交換法で使われるために
+   定義されている.
+
+          #define SSH_MSG_KEXGSS_INIT                       30
+          #define SSH_MSG_KEXGSS_CONTINUE                   31
+          #define SSH_MSG_KEXGSS_COMPLETE                   32
+          #define SSH_MSG_KEXGSS_HOSTKEY                    33
+          #define SSH_MSG_KEXGSS_ERROR                      34
+
+   The numbers 30-49 are specific to key exchange and may be redefined
+   by other kex methods.
+
+   番号 30-49 は 鍵交換に特有で, 別の鍵交換法で再定義されうる.
+
+   The following message numbers have been defined for use with the
+   'gssapi' user authentication method:
+
+   次のメッセージ番号が, 'gssapi' ユーザ認証法で使われるために
+   定義されている.
+
+          #define SSH_MSG_USERAUTH_GSSAPI_RESPONSE          60
+          #define SSH_MSG_USERAUTH_GSSAPI_TOKEN             61
+          #define SSH_MSG_USERAUTH_GSSAPI_EXCHANGE_COMPLETE 63
+          #define SSH_MSG_USERAUTH_GSSAPI_ERROR             64
+          #define SSH_MSG_USERAUTH_GSSAPI_ERRTOK            65
+          #define SSH_MSG_USERAUTH_GSSAPI_MIC               66
+
+   The numbers 60-79 are specific to user authentication and may be
+   redefined by other user auth methods.  Note that in the method
+   described in this document, message number 62 is unused.
+
+   番号 60-79 は ユーザ認証法で特有で, 別のユーザ認証法で再定義されうる.
+   この文書で記述した方法では, メッセージ番号 62 が 未使用であることに注意.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 21]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+7. GSSAPI Considerations
+
+7. GSSAPI に関する考察
+
+7.1 Naming Conventions
+
+7.1 命名規則
+
+   In order to establish a GSSAPI security context, the SSH client needs
+   to determine the appropriate targ_name to use in identifying the
+   server when calling GSS_Init_sec_context.  For this purpose, the
+   GSSAPI mechanism-independent name form for host-based services is
+   used, as described in section 4.1 of [2].
+
+   GSSAPI セキュリティ context を確立するために, 
+   GSS_Init_sec_context を呼ぶ際 SSH クライアントは
+   サーバを同定するのに使う適当な targ_name を決定する必要がある.
+   この目的のため, [2] のセクション 4.1 に記述されている
+   ホストベースのサービスのための
+   GSSAPI のメカニズムに非依存な名前の形式が使われる.
+
+   In particular, the targ_name to pass to GSS_Init_sec_context is
+   obtained by calling GSS_Import_name with an input_name_type of
+   GSS_C_NT_HOSTBASED_SERVICE, and an input_name_string consisting of
+   the string "host@" concatenated with the hostname of the SSH server.
+
+   具体的には, GSS_Init_sec_context に渡される targ_name は, 
+   input_name_type を GSS_C_NT_HOSTBASED_SERVICE にし,
+   input_name_string を "host@"という文字列に SSH サーバの
+   ホスト名を連結したものを使う GSS_Import_name を呼ぶことで,
+   得られる.
+   
+7.2 Channel Bindings
+
+7.2 チャンネルの束縛
+
+   This document recommends that channel bindings SHOULD NOT be
+   specified in the calls during context establishment.  This document
+   does not specify any standard data to be used as channel bindings and
+   the use of network addresses as channel bindings may break SSH in
+   environments where it is most useful.
+
+   この文書は context の確立中の関数の呼び出しで チャンネルの束縛は
+   指定されないほうがよいことを勧める. この文書は, チャンネルの束縛として
+   使われるどんな標準のデータも指定しない. また, チャンネルの束縛として
+   ネットワークアドレスを使うことは, それが非常に有用な環境において
+   SSH を壊すかもしれない.
+   
+
+7.3 SPNEGO
+
+   The use of the Simple and Protected GSS-API Negotiation Mechanism
+   [14] in conjunction with the authentication and key exchange methods
+   described in this document is both unnecessary and undesirable.  As a
+   result, mechanisms conforming to this document MUST NOT use SPNEGO as
+   the underlying GSSAPI mechanism.
+
+   この文書で記述された認証と鍵交換と同時に
+   単純で保護された GSS-API 交渉メカニズム (SPNEGO) [14] を使用することは,
+   不必要でかつ望ましくないことである. この結果として, この文書に従う
+   メカニズムは 基礎となる GSSAPI のメカニズムとして SPNEGO を使っては
+   ならない.
+
+#http://www.csci.yamanashi.ac.jp/~kohi/RFC2478JA.html
+
+   Since SSH performs its own negotiation of authentication and key
+   exchange methods, the negotiation capability of SPNEGO alone does not
+   provide any added benefit.  In fact, as described below, it has the
+   potential to result in the use of a weaker method than desired.
+
+   SSH プラットフォームは 自身で認証と鍵交換の方法を交渉を行なうので,
+   SPNEGO の交渉の能力自身は, どんな追加の利益も提供しない.
+   実際, 以下で記述されるように, 望んだものより弱い方法を使用する結果になる
+   可能性がある.
+
+   Normally, SPNEGO provides the added benefit of protecting the GSSAPI
+   mechanism negotiation.  It does this by having the server compute a
+   MIC of the list of mechanisms proposed by the client, and then
+   checking that value at the client.  In the case of key exchange, this
+   protection is not needed because the key exchange methods described
+   here already perform an equivalent operation; namely, they generate a
+   MIC of the SSH exchange hash, which is a hash of several items
+   including the lists of key exchange mechanisms supported by both
+   sides.  In the case of user authentication, the protection is not
+   needed because the negotiation occurs over a secure channel, and the
+   host's identity has already been proved to the user.
+
+   通常, SPNEGO は GSSAPI メカニズムの交渉を保護する追加の利益を
+   提供する. これは, サーバがクライアントから提案されたメカニズムのリストの
+   MIC を計算して, クライアントがその値を検査することで, 行われる.
+   鍵交換の場合, この保護は必要ない. ここで記述された鍵交換の方法は
+   すでに同等の操作を行なうから. すなわち, ここで記述された鍵交換の方法は,
+   両方の側でサポートされる鍵交換メカニズムのリストを含むいくつかの項目の
+   ハッシュとして, SSH 交換ハッシュの MIC を生成する. ユーザ認証の場合は,
+   保護は必要ない. 交渉は安全なチャンネルの上で起こり, ホストの同一性は
+   ユーザに対してすでに証明されているから.
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 22]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+   The use of SPNEGO combined with GSSAPI mechanisms used without SPNEGO
+   can lead to interoperability problems.  For example, a client which
+   supports key exchange using the Kerberos V5 GSSAPI mechanism [13]
+   only underneath SPNEGO will not interoperate with a server which
+   supports key exchange only using the Kerberos V5 GSSAPI mechanism
+   directly.  As a result, allowing GSSAPI mechanisms to be used both
+   with and without SPNEGO is undesirable.
+
+   SPNEGO なしで使われる GSSAPI メカニズムと 組合せて SPNEGO を使うことは
+   相互運用性の問題を引き起こすかもしれない. 例えば, 
+   基礎に SPNEGO のみがある Kerberos V5 GSSAPI メカニズム [13] を
+   使った鍵交換をサポートしたクライアントは, 直接
+   Kerberos V5 GSSAPI メカニズムのみを使う鍵交換をサポートする
+   サーバと相互運用できないだろう. 結果として, SPNEGO ありでもなしでも
+   GSSAPI メカニズムが使われることを許すことが望ましくない.
+
+   If a client's policy is to first prefer GSSAPI-based key exchange
+   method X, then non-GSSAPI method Y, then GSSAPI-based method Z, and
+   if a server supports mechanisms Y and Z but not X, then an attempt to
+   use SPNEGO to negotiate a GSSAPI mechanism might result in the use of
+   method Z when method Y would have been preferable.  As a result, the
+   use of SPNEGO could result in the subversion of the negotiation
+   algorithm for key exchange methods as described in section 5.1 of [8]
+   and/or the negotiation algorithm for user authentication methods as
+   described in [9].
+
+   クライアントのポリシーが, 最初に GSSAPI ベースの鍵交換法 X を試し
+   次に GSSAPI ベースでない方法 Y を, そして GSSAPI ベースの方法 Z を
+   試すという場合で, サーバが メカニズム Y と Z はサポートするが X はしない場合,
+   GSSAPI メカニズムを交渉するのに SPNEGO を用いようと試みることは,
+   方法 Y のほうがより好まれるのに, 方法 Z が使われるという結果になるだろう.
+   結果として, SPNEGO の使用は [8] のセクション 5.1 で記述された
+   鍵交換法の交渉アルゴリズム や/もしくは [9] で記述されたユーザ認証法
+   のための交渉アルゴリズムの破壊となるかもしれない.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 23]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+8. IANA Considerations
+
+8. IANA に関する考察
+
+   Consistent with section 7 of [6], the IANA is directed to make the
+   following registrations:
+
+   [7] の セクション 7 と一致して, IANA は 次の登録をするように指示される.
+
+      The family of SSH key exchange method names beginning with
+      "gss-group1-sha1-" and not containing the at-sign ('@'), to name
+      the key exchange methods defined in Section 2.2.
+
+      セクション 2.2 で定義された 鍵交換法に命名するための
+      "gss-group1-sha1-" で始まりアットマーク ('@') を含まない
+      SSH 鍵交換法名のファミリー.
+
+
+      All other SSH key exchange method names beginning with "gss-" and
+      not containing the at-sign ('@'), to be reserved for future key
+      exchange methods defined in conformance with this document, as
+      noted in Section 2.3.
+
+      セクション 2.3 で注意されたように, この文書に従って定義される
+      将来の鍵交換法に対して予約された,
+      "gss-"で始まり アットマーク ('@') を含まない 上記以外の SSH
+      鍵交換法名.
+
+      The SSH host public key algorithm name "null", to name the NULL
+      host key algorithm defined in Section 5.
+	   
+      セクション 5 で定義された NULL ホスト鍵アルゴリズムを命名する
+      SSH ホスト公開鍵アルゴリズム名 "null"
+
+      The SSH user authentication method name "gssapi-with-mic", to name
+      the GSSAPI user authentication method defined in Section 3.
+
+      セクション 3 で定義された GSSAPI ユーザ認証法を命名する
+      SSH ユーザ認証法名 "gssapi-with-mic".
+
+      The SSH user authentication method name "gssapi-keyex", to name
+      the GSSAPI user authentication method defined in Section 4.
+
+      セクション 4 で定義された ユーザ認証法を命名する
+      SSH ユーザ認証法名 "gssapi-keyex".
+
+      The SSH user authentication method name "gssapi" is to be
+      reserved, in order to avoid conflicts with implementations
+      supporting an earlier version of this specification.
+
+      この仕様の過去のバージョンをサポートする実装との衝突を防ぐため,
+      SSH ユーザ認証法名 "gssapi" は予約されている.
+
+      The SSH user authentication method name "external-keyx" is to be
+      reserved, in order to avoid conflicts with implementations
+      supporting an earlier version of this specification.
+
+      この仕様の過去のバージョンをサポートする実装との衝突を防ぐため,
+      SSH ユーザ認証法名 "external-keyx" は予約されている.
+
+   This document creates no new registries.
+
+   この文書は新しいレジストリは作らない.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 24]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+9. Security Considerations
+
+9. セキュリティに関する考察
+
+   This document describes authentication and key-exchange protocols. As
+   such, security considerations are discussed throughout.
+
+   この文素は 認証と鍵交換プロトコルを記述している. それゆえ,
+   セキュリティに関する考察は全体にわたって議論されている.
+
+   This protocol depends on the SSH protocol itself, the GSSAPI, any
+   underlying GSSAPI mechanisms which are used, and any protocols on
+   which such mechanisms might depend.  Each of these components plays a
+   part in the security of the resulting connection, and each will have
+   its own security considerations.
+
+   このプロトコルは, SSH プロトコル自体, GSSAPI, 利用される基礎となる GSSAPI
+   メカニズム, それらのメカニズムが依存するすべてのプロトコル,
+   に依存する. これらの構成要素のそれぞれが, 結果の接続のセキュリティに
+   対して役割を演じ, それぞれがそれぞれのセキュリティに関する考察を持つ.
+
+   The key exchange method described in section 1 of this document
+   depends on the underlying GSSAPI mechanism to provide both mutual
+   authentication and per-message integrity services.  If either of
+   these features is not supported by a particular GSSAPI mechanism, or
+   by a particular implementation of a GSSAPI mechanism, then the key
+   exchange is not secure and MUST fail.
+
+   この文書でのセクション 1 で記述された 鍵交換法は, 相互の認証と
+   メッセージ単位での完全性サービスを提供する基礎となる GSSAPI メカニズム
+   に依存する. これらの特徴のどちらかが 特定の GSSAPI メカニズムや
+   特定の GSSAPI メカニズムの実装でサポートされていなかったら,
+   鍵交換は安全ではなく, 失敗しなければならない.
+
+   In order for the "external-keyx" user authentication method to be
+   used, it MUST have access to user authentication information obtained
+   as a side-effect of the key exchange.  If this information is
+   unavailable, the authentication MUST fail.
+
+   "gssapi-keyex" ("external-keyx") ユーザ認証法を使うには, 
+   鍵公開の副次効果として得られるユーザ認証情報にアクセスしなければならない.
+   この情報が利用できないなら, この認証は失敗しなければならない.
+
+   Revealing information about the reason for an authentication failure
+   may be considered by some sites to be an unacceptable security risk
+   for a production environment.  However, having that information
+   available can be invaluable for debugging purposes.  Thus, it is
+   RECOMMENDED that implementations provide a means for controlling, as
+   a matter of policy, whether to send SSH_MSG_USERAUTH_GSSAPI_ERROR,
+   SSH_MSG_USERAUTH_GSSAPI_ERRTOK, and SSH_MSG_KEXGSS_ERROR messages,
+   and SSH_MSG_KEXGEE_CONTINUE messages containing a GSSAPI error token.
+
+   認証の失敗の理由についての情報を明かすことは, いくつかのサイトでは
+   実稼働環境に対する受け入れられないセキュリティの危険とみなされる
+   かもしれない. しかしながら, これらの情報を利用可能にすることは
+   デバッグ目的のためには非常に重要だ. それゆえ, 
+   実装は, ポリシーの問題として, GSSAPI エラートークンを含む
+   SSH_MSG_USERAUTH_GSSAPI_ERROR, SSH_MSG_USERAUTH_GSSAPI_ERRTOK, 
+   SSH_MSG_KEXGSS_ERROR,  SSH_MSG_KEXGEE_CONTINUE メッセージを
+   送るかどうかを制御するのための方法を提供することが推奨される.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 25]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+10. Acknowledgements
+
+   The authors would like to thank the following individuals for their
+   invaluable assistance and contributions to this document:
+
+   o  Sam Hartman
+
+   o  Love Hornquist-Astrand
+
+   o  Joel N. Weber II
+
+   o  Simon Wilkinson
+
+   o  Nicolas Williams
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 26]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+11. Changes the last version
+
+   This section lists important changes since the previous version of
+   this internet-draft.  This section should be removed at the time of
+   publication of this document as an RFC.
+
+   o  Changed "gssapi" to "gssapi-with-mic", and added the description
+      and semantics of the SSH_MSG_USERAUTH_GSSAPI_MIC message.
+
+   o  Added information in user auth describing when integrity should be
+      requested.
+
+   o  Removed the definition of the "external-keyx" user authentication
+      method, and replaced it with the definition of the more secure
+      "gssapi-keyex" method.
+
+   o  Added information in both key exchange and user auth describing
+      why replay and out-of-sequence detection are not needed.
+
+   o  Improved the description in user auth of when it is OK to list
+      more than one mechanism OID in the same request,
+
+   o  Added the table of contents.
+
+   o  Split normative and informative references.
+
+   o  Added nemo and lha to the acknowledgements section.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 27]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+Normative References
+
+   [1]   ISO/IEC, "ASN.1 Encoding Rules: Specification of Basic Encoding
+         Rules (BER), Canonical Encoding Rules (CER) and Distinguished
+         Encoding Rules (DER)", ITU-T Recommendation X.690 (1997), ISO/
+         IEC 8825-1:1998, November 1998.
+
+   [2]   Linn, J., "Generic Security Service Application Program
+         Interface Version 2, Update 1", RFC 2743, January 2000.
+
+   [3]   Rivest, R., "The MD5 Message-Digest Algorithm", RFC 1321, April
+         1992.
+
+   [4]   Freed, N. and N. Borenstein, "Multipurpose Internet Mail
+         Extensions (MIME) Part One: Format of Internet Message Bodies",
+         RFC 2045, November 1996.
+
+   [5]   Bradner, S., "Key words for use in RFCs to Indicate Requirement
+         Levels", RFC 2119, BCP 14, March 1997.
+
+   [6]   Ylonen, T., Kivinen, T., Saarinen, M., Rinne, T. and S.
+         Lehtinen, "SSH Protocol Architecture",
+         draft-ietf-secsh-architecture-11.txt (work in progress),
+         November 2001.
+
+   [7]   Ylonen, T., Kivinen, T., Saarinen, M., Rinne, T. and S.
+         Lehtinen, "SSH Connection Protocol",
+         draft-ietf-secsh-connect-14.txt (work in progress), November
+         2001.
+
+   [8]   Ylonen, T., Kivinen, T., Saarinen, M., Rinne, T. and S.
+         Lehtinen, "SSH Transport Layer Protocol",
+         draft-ietf-secsh-transport-11.txt (work in progress), November
+         2001.
+
+   [9]   Ylonen, T., Kivinen, T., Saarinen, M., Rinne, T. and S.
+         Lehtinen, "SSH Authentication Protocol",
+         draft-ietf-secsh-userauth-13.txt (work in progress), November
+         2001.
+
+   [10]  Yergeau, F., "UTF-8, a transformation format of ISO 10646", RFC
+         2279, January 1998.
+
+   [11]  Alvestrand, H., "Tags for the Identification of Languages", RFC
+         1766, March 1995.
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 28]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+Normative References
+
+   [12]  Kohl, J. and C. Neuman, "The Kerberos Network Authentication
+         Service (V5)", RFC 1510, September 1993.
+
+   [13]  Linn, J., "The Kerberos Version 5 GSS-API Mechanism", RFC 1964,
+         June 1996.
+
+   [14]  Baize, E. and D. Pinkas, "The Simple and Protected GSS-API
+         Negotiation Mechanism", RFC 2478, December 1998.
+
+
+Authors' Addresses
+
+   Jeffrey Hutzelman
+   Carnegie Mellon University
+   5000 Forbes Ave
+   Pittsburgh, PA  15213
+   US
+
+   Phone: +1 412 268 7225
+   EMail: jhutz+@cmu.edu
+   URI:   http://www.cs.cmu.edu/~jhutz/
+
+
+   Joseph Salowey
+   Cisco Systems
+   2901 Third Avenue
+   Seattle, WA  98121
+   US
+
+   Phone: +1 206 256 3380
+   EMail: jsalowey@cisco.com
+
+
+   Joseph Galbraith
+   Van Dyke Technologies, Inc.
+   4848 Tramway Ridge Dr. NE
+   Suite 101
+   Albuquerque, NM  87111
+   US
+
+   EMail: galb@vandyke.com
+
+
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 29]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+   Von Welch
+   University of Chicago & Argonne National Laboratory
+   Distributed Systems Laboratory
+   701 E. Washington
+   Urbana, IL  61801
+   US
+
+   EMail: welch@mcs.anl.gov
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 30]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+Intellectual Property Statement
+
+   The IETF takes no position regarding the validity or scope of any
+   intellectual property or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; neither does it represent that it
+   has made any effort to identify any such rights. Information on the
+   IETF's procedures with respect to rights in standards-track and
+   standards-related documentation can be found in BCP-11. Copies of
+   claims of rights made available for publication and any assurances of
+   licenses to be made available, or the result of an attempt made to
+   obtain a general license or permission for the use of such
+   proprietary rights by implementors or users of this specification can
+   be obtained from the IETF Secretariat.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights which may cover technology that may be required to practice
+   this standard. Please address the information to the IETF Executive
+   Director.
+
+
+Full Copyright Statement
+
+   Copyright (C) The Internet Society (2003). All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works. However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assignees.
+
+   This document and the information contained herein is provided on an
+   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 31]
+
+Internet-Draft             SSH GSSAPI Methods             September 2003
+
+
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+
+Acknowledgment
+
+   Funding for the RFC Editor function is currently provided by the
+   Internet Society.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hutzelman, et al.        Expires March 12, 2004                [Page 32]
+
+

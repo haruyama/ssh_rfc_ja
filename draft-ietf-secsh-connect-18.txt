@@ -1,0 +1,1747 @@
+Network Working Group                                          T. Ylonen
+Internet-Draft                          SSH Communications Security Corp
+Expires: March 31, 2004                           D. Moffat, Editor, Ed.
+                                                   Sun Microsystems, Inc
+                                                                Oct 2003
+
+# 訳者 春山征吾 haruyama@unixuser.org
+# 謝辞: 
+# 倉品さんからタイプミスの修正をいただきました. ありがとうございます.
+
+                        SSH Connection Protocol
+                    draft-ietf-secsh-connect-18.txt
+
+Status of this Memo
+
+   This document is an Internet-Draft and is in full conformance with
+   all provisions of Section 10 of RFC2026.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF), its areas, and its working groups. Note that other
+   groups may also distribute working documents as Internet-Drafts.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time. It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   The list of current Internet-Drafts can be accessed at http://
+   www.ietf.org/ietf/1id-abstracts.txt.
+
+   The list of Internet-Draft Shadow Directories can be accessed at
+   http://www.ietf.org/shadow.html.
+
+   This Internet-Draft will expire on March 31, 2004.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2003). All Rights Reserved.
+
+Abstract
+
+概要	
+
+   SSH is a protocol for secure remote login and other secure network
+   services over an insecure network.
+
+   SSH は, 安全ではないネットワーク越しの, 安全なリモートログイン及び他の
+   安全なネットワークサービスのためのプロトコルだ.
+
+   This document describes the SSH Connection Protocol. It provides
+   interactive login sessions, remote execution of commands, forwarded
+   TCP/IP connections, and forwarded X11 connections. All of these
+   channels are multiplexed into a single encrypted tunnel.
+
+   この文書は SSH コネクションプロトコルについて記述する.
+   このプロトコルはインタラクティブなログインセッション,
+   コマンドの遠隔実行, TCP/IP コネクションと X11 コネクションの転送を
+   提供する. これらのすべてのチャンネルは一つの暗号化されたトンネルに
+   多重化されている.
+
+   The SSH Connection Protocol has been designed to run on top of the
+   SSH transport layer and user authentication protocols.
+
+   SSH コネクションプロトコルは SSH トランスポート層プロコトルとユーザ認証
+   プロトコルの上で動くよう設計されている.
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004               [Page 1]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+Table of Contents
+
+   1.    Contributors . . . . . . . . . . . . . . . . . . . . . . . .  3
+   2.    Introduction . . . . . . . . . . . . . . . . . . . . . . . .  3
+   3.    Conventions Used in This Document  . . . . . . . . . . . . .  3
+   4.    Global Requests  . . . . . . . . . . . . . . . . . . . . . .  3
+   5.    Channel Mechanism  . . . . . . . . . . . . . . . . . . . . .  4
+   5.1   Opening a Channel  . . . . . . . . . . . . . . . . . . . . .  4
+   5.2   Data Transfer  . . . . . . . . . . . . . . . . . . . . . . .  5
+   5.3   Closing a Channel  . . . . . . . . . . . . . . . . . . . . .  6
+   5.4   Channel-Specific Requests  . . . . . . . . . . . . . . . . .  7
+   6.    Interactive Sessions . . . . . . . . . . . . . . . . . . . .  8
+   6.1   Opening a Session  . . . . . . . . . . . . . . . . . . . . .  8
+   6.2   Requesting a Pseudo-Terminal . . . . . . . . . . . . . . . .  8
+   6.3   X11 Forwarding . . . . . . . . . . . . . . . . . . . . . . .  9
+   6.3.1 Requesting X11 Forwarding  . . . . . . . . . . . . . . . . .  9
+   6.3.2 X11 Channels . . . . . . . . . . . . . . . . . . . . . . . . 10
+   6.4   Environment Variable Passing . . . . . . . . . . . . . . . . 10
+   6.5   Starting a Shell or a Command  . . . . . . . . . . . . . . . 10
+   6.6   Session Data Transfer  . . . . . . . . . . . . . . . . . . . 11
+   6.7   Window Dimension Change Message  . . . . . . . . . . . . . . 12
+   6.8   Local Flow Control . . . . . . . . . . . . . . . . . . . . . 12
+   6.9   Signals  . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+   6.10  Returning Exit Status  . . . . . . . . . . . . . . . . . . . 13
+   7.    TCP/IP Port Forwarding . . . . . . . . . . . . . . . . . . . 14
+   7.1   Requesting Port Forwarding . . . . . . . . . . . . . . . . . 14
+   7.2   TCP/IP Forwarding Channels . . . . . . . . . . . . . . . . . 15
+   8.    Encoding of Terminal Modes . . . . . . . . . . . . . . . . . 16
+   9.    Summary of Message Numbers . . . . . . . . . . . . . . . . . 18
+   10.   Security Considerations  . . . . . . . . . . . . . . . . . . 18
+   11.   iana cONSiderations  . . . . . . . . . . . . . . . . . . . . 19
+   12.   Intellectual Property  . . . . . . . . . . . . . . . . . . . 19
+         Normative References . . . . . . . . . . . . . . . . . . . . 19
+         Informative References . . . . . . . . . . . . . . . . . . . 20
+         Authors' Addresses . . . . . . . . . . . . . . . . . . . . . 20
+         Intellectual Property and Copyright Statements . . . . . . . 21
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004               [Page 2]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+1. Contributors
+
+1. 寄稿家たち.
+
+   The major original contributors of this document were: Tatu Ylonen,
+   Tero Kivinen, Timo J. Rinne, Sami Lehtinen (all of SSH Communications
+   Security Corp), and Markku-Juhani O. Saarinen (University of
+   Jyvaskyla)
+
+   この文書の主要でもともとの寄稿家は以下の通りである:
+   Tatu Ylonen, Tero Kivinen, Timo J. Rinne, Sami Lehtinen
+   (以上すべて SSH Communications Security Corp 社),
+   Markku-Juhani O. Saarinen (University of Jyvaskyla).
+
+   The document editor is: Darren.Moffat@Sun.COM.  Comments on this
+   internet draft should be sent to the IETF SECSH working group,
+   details at: http://ietf.org/html.charters/secsh-charter.html
+
+   文書の編者は: Darren.Moffat@Sun.COM だ. このインターネットドラフトに
+   対するコメントは, IETF SECSH ワーキンググループに送ってほしい.
+   ワーキンググループの詳細は
+   http://ietf.org/html.charters/secsh-charter.html にある.
+
+2. Introduction
+
+2. イントロダクション
+
+   The SSH Connection Protocol has been designed to run on top of the
+   SSH transport layer and user authentication protocols. It provides
+   interactive login sessions, remote execution of commands, forwarded
+   TCP/IP connections, and forwarded X11 connections. The service name
+   for this protocol is "ssh-connection".
+
+   SSH コネクションプロトコルは, SSH トランスポート層プロトコルと
+   ユーザ認証プロトコルの上で動くように設計されている. これは
+   インタラクティブなログインセッションやコマンドの遠隔実行,
+   TCP/IP 接続の転送や X11 接続の転送を提供する. (ユーザ認証が済んだあとでの)
+   このプロトコルのサービス名は 'ssh-connection'だ.
+
+   This document should be read only after reading the SSH architecture
+   document [SSH-ARCH]. This document freely uses terminology and
+   notation from the architecture document without reference or further
+   explanation.
+
+   この文書は, SSH アーキテクチャ文書 [SSH-ARCH] を読んだあとで
+   読むべきだ. この文書はアーキテクチャ文書からの用語や表記を
+   参照やさらなる説明なしで自由に使う.
+
+3. Conventions Used in This Document
+
+3. この文書で使う約束事
+
+   The keywords "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
+   and "MAY" that appear in this document are to be interpreted as
+   described in [RFC2119].
+
+   この文書に出てくる
+   "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT", "MAY" といった
+   キーワードは [RFC2119] に記述されているように解釈される.
+
+   The used data types and terminology are specified in the architecture
+   document [SSH-ARCH].
+
+   使用されるデータのタイプや用語はアーキテクチャのドキュメント
+   [SSH-ARCH] で定義されている.
+
+   The architecture document also discusses the algorithm naming
+   conventions that MUST be used with the SSH protocols.
+
+   アーキテクチャのドキュメントでは, SSHプロトコルと共に使わなければならない
+   アルゴリズムの命名規則についても議論している.
+
+4. Global Requests
+
+4. グローバルな要求
+
+   There are several kinds of requests that affect the state of the
+   remote end "globally", independent of any channels.  An example is a
+   request to start TCP/IP forwarding for a specific port.  All such
+   requests use the following format.
+
+   他のどんなチャンネルに対しても独立なリモート側の"グローバル"な状態
+   に作用するいくつかの種類の要求がある. たとえば,
+   特定のポートに対する TCP/IP 転送を開始する要求だ. これらのリクエスト
+   はすべて, 次のフォーマットを使う.
+
+     byte      SSH_MSG_GLOBAL_REQUEST
+     string    request name (restricted to US-ASCII)
+     boolean   want reply
+     ... request-specific data follows
+
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004               [Page 3]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+   Request names follow the DNS extensibility naming convention outlined
+   in [SSH-ARCH].
+
+   request name は [SSH-ARCH] で記述された DNS 拡張名前付け慣例に従う.
+
+   The recipient will respond to this message with
+   SSH_MSG_REQUEST_SUCCESS or SSH_MSG_REQUEST_FAILURE if `want reply' is
+   TRUE.
+
+   'want reply' が TRUE であれば, 受取手は, SSH_MSG_REQUEST_SUCCESS か
+   SSH_MSG_REQUEST_FAILURE でこのメッセージに応答する.
+
+
+     byte      SSH_MSG_REQUEST_SUCCESS
+     .....     response specific data
+
+   Usually the response specific data is non-existent.
+
+   通常, response specific data (返答特有のデータ) は存在しない.
+
+   If the recipient does not recognize or support the request, it simply
+   responds with SSH_MSG_REQUEST_FAILURE.
+
+   受取手が要求を理解しない ないし サポートしないなら, 単に
+   SSH_MSG_REQUEST_FAILURE で返答する.
+
+     byte      SSH_MSG_REQUEST_FAILURE
+
+
+5. Channel Mechanism
+
+5. チャンネルメカニズム
+
+   All terminal sessions, forwarded connections, etc. are channels.
+   Either side may open a channel.  Multiple channels are multiplexed
+   into a single connection.
+
+   すべての端末のセッション・転送された接続などはチャンネルだ.
+   どちらかの側がチャンネルを開く. 複数のチャンネルは
+   一つの接続に多重化される.
+
+   Channels are identified by numbers at each end.  The number referring
+   to a channel may be different on each side.  Requests to open a
+   channel contain the sender's channel number.  Any other
+   channel-related messages contain the recipient's channel number for
+   the channel.
+
+   チャンネルはそれぞれの側で番号により識別される. チャンネルを
+   指す数字は, それぞれの側で異なってもよい. チャンネルを開く
+   要求は, 送り手のチャンネル番号を含む. 他のどんなチャンネルに
+   関連したメッセージも, そのチャンネルに対する受取手のチャンネル
+   番号を含む.
+
+   Channels are flow-controlled.  No data may be sent to a channel until
+   a message is received to indicate that window space is available.
+
+   チャンネルはフローを制御されている.
+   ウィンドウスペースが有効であることを示すメッセージが受け取られる
+   までは, チャンネルに対してどんなデータも送られないかもしれない.
+
+5.1 Opening a Channel
+
+5.1 チャンネルの開始
+
+   When either side wishes to open a new channel, it allocates a local
+   number for the channel.  It then sends the following message to the
+   other side, and includes the local channel number and initial window
+   size in the message.
+
+   どちらの側もチャンネルを開こうと望む際には, そのチャンネルにローカル
+   な数字を割当てる. そして ローカルなチャンネル番号と最初のwindowサイズを
+   含む次のメッセージをもう一方に送る.
+
+
+     byte      SSH_MSG_CHANNEL_OPEN
+     string    channel type (restricted to US-ASCII)
+     uint32    sender channel
+     uint32    initial window size
+     uint32    maximum packet size
+     ... channel type specific data follows
+
+   The channel type is a name as described in the SSH architecture
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004               [Page 4]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+   document, with similar extension mechanisms. `sender channel' is a
+   local identifier for the channel used by the sender of this message.
+   `initial window size' specifies how many bytes of channel data can be
+   sent to the sender of this message without adjusting the window.
+   `Maximum packet size' specifies the maximum size of an individual
+   data packet that can be sent to the sender (for example, one might
+   want to use smaller packets for interactive connections to get better
+   interactive response on slow links).
+
+   channel type は SSH アーキテクチャドキュメントに
+   同様の拡張メカニズムで記述されている名前だ. `sender channel'は
+   このメッセージの送り手が使うチャンネルのローカルな識別子だ.
+   `initial window size'は, ウィンドウの調節なしにこのメッセージの
+   送り手に対して送ることのできるチャンネルデータのバイト数を
+   明示する. `Maximum packet size' は 送り手に送ることのできる
+   個々のデータパケットの最大サイズを明示する (たとえば, 遅い接続の上で
+   よりよりインタラクティブな返答を得るためにインタラクティブな接続に
+   対してより小さいパケットを使うように望むことがあるかもしれない).
+
+   The remote side then decides whether it can open the channel, and
+   responds with either
+
+   そして, リモート側はチャンネルを開けるかどうか判断し, 以下のどちらか
+   を返す.
+
+     byte      SSH_MSG_CHANNEL_OPEN_CONFIRMATION
+     uint32    recipient channel
+     uint32    sender channel
+     uint32    initial window size
+     uint32    maximum packet size
+     ... channel type specific data follows
+
+   where `recipient channel' is the channel number given in the original
+   open request, and `sender channel' is the channel number allocated by
+   the other side, or
+
+   recipient channel は 元々の開始リクエストで与えられたチャンネル番号
+   で, `sender channel' は もう一方の側で割当てられたチャンネル番号だ.
+
+     byte      SSH_MSG_CHANNEL_OPEN_FAILURE
+     uint32    recipient channel
+     uint32    reason code
+     string    additional textual information (ISO-10646 UTF-8 [RFC2279])
+     string    language tag (as defined in [RFC3066])
+
+   If the recipient of the SSH_MSG_CHANNEL_OPEN message does not support
+   the specified channel type, it simply responds with
+   SSH_MSG_CHANNEL_OPEN_FAILURE. The client MAY show the additional
+   information to the user. If this is done, the client software should
+   take the precautions discussed in [SSH-ARCH].
+
+   SSH_MSG_CHANNEL_OPEN メッセージの受取手が指定されたチャンネルタイプを
+   サポートしていないなら, SSH_MSG_CHANNEL_OPEN_FAILURE を単に返す.
+   クライアントはユーザにさらなる情報を示してもよい. そうするなら,
+   クライアントソフトウェア
+   は [SSH-ARCH] で議論されている警戒をする必要がある.
+
+   The following reason codes are defined:
+
+   以下の reason code が定義されている.
+
+     #define SSH_OPEN_ADMINISTRATIVELY_PROHIBITED    1
+     #define SSH_OPEN_CONNECT_FAILED                 2
+     #define SSH_OPEN_UNKNOWN_CHANNEL_TYPE           3
+     #define SSH_OPEN_RESOURCE_SHORTAGE              4
+
+
+5.2 Data Transfer
+
+5.2 データ転送
+
+   The window size specifies how many bytes the other party can send
+   before it must wait for the window to be adjusted.  Both parties use
+   the following message to adjust the window.
+
+   window size は, もう一方の側が window が調節されるよりも前に
+   送ることのできるバイト数を指定する. 両方の側で,
+   windowを調節するために次のメッセージを使う.
+
+Ylonen & Moffat, Editor    Expires March 31, 2004               [Page 5]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+     byte      SSH_MSG_CHANNEL_WINDOW_ADJUST
+     uint32    recipient channel
+     uint32    bytes to add
+
+   After receiving this message, the recipient MAY send the given number
+   of bytes more than it was previously allowed to send; the window size
+   is incremented.
+
+   このメッセージを受け取ったら, 受取手は, いままで送ることを許していた
+   バイト数よりも与えられたバイト数多く送ってもよい; window size は増加する.
+
+   Data transfer is done with messages of the following type.
+
+   データ転送は次のタイプのメッセージによって行なわれる.
+
+     byte      SSH_MSG_CHANNEL_DATA
+     uint32    recipient channel
+     string    data
+
+   The maximum amount of data allowed is the current window size.  The
+   window size is decremented by the amount of data sent. Both parties
+   MAY ignore all extra data sent after the allowed window is empty.
+
+   許されるデータの最大量は現在の window size だ. windows size は
+   送ったデータ量によって減少する. 両方の側で, 許される window 
+   がなくなったあとに送られる余分なデータはすべて無視してもよい.
+
+   Additionally, some channels can transfer several types of data.  An
+   example of this is stderr data from interactive sessions. Such data
+   can be passed with SSH_MSG_CHANNEL_EXTENDED_DATA messages, where a
+   separate integer specifies the type of the data.  The available types
+   and their interpretation depend on the type of the channel.
+
+   加えて, いくつかのチャンネルでは, 複数の種類のデータを送ってよい.
+   この例として, インタラクティブセッションから出る stderr がある.
+   このようなデータは 別々の整数でデータの種類を指定した
+   SSH_MSG_CHANNEL_EXTENDED_DATA メッセージ
+   とともに送られることができる. 利用できる種類と
+   それらの解釈はチャンネルの種類に依存する.
+
+     byte      SSH_MSG_CHANNEL_EXTENDED_DATA
+     uint32    recipient_channel
+     uint32    data_type_code
+     string    data
+
+   Data sent with these messages consumes the same window as ordinary
+   data.
+
+   これらのメッセージと共に送られるデータは, 普通のデータのように
+   同じ window を使う.
+
+   Currently, only the following type is defined.
+
+   現在, 以下の唯一のタイプのみが定義されている.
+
+   #define SSH_EXTENDED_DATA_STDERR                1
+
+
+5.3 Closing a Channel
+
+5.3 チャンネルの終了
+
+   When a party will no longer send more data to a channel, it SHOULD
+   send SSH_MSG_CHANNEL_EOF.
+
+   どちらかの側がもはやチャンネルに対してさらなるデータを送らないなら,
+   SSH_MSG_CHANNEL_EOF を送る必要がある.
+
+     byte      SSH_MSG_CHANNEL_EOF
+     uint32    recipient_channel
+
+   No explicit response is sent to this message; however, the
+   application may send EOF to whatever is at the other end of the
+   channel.  Note that the channel remains open after this message, and
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004               [Page 6]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+   more data may still be sent in the other direction.  This message
+   does not consume window space and can be sent even if no window space
+   is available.
+
+   このメッセージに対する明示的な返答は送られない. しかし,
+   アプリケーションは, チャンネルのもう一方の側にあるもののすべてに
+   EOF を送るかもしれない. チャンネルはこのメッセージのあとも
+   開いた状態で残っていて, 別の方向にさらなるデータがまだ送られるかも
+   しれないことに注意. このメッセージは window space を消費せず,
+   window space が利用できなくても送ることができる.
+
+   When either party wishes to terminate the channel, it sends
+   SSH_MSG_CHANNEL_CLOSE.  Upon receiving this message, a party MUST
+   send back a SSH_MSG_CHANNEL_CLOSE unless it has already sent this
+   message for the channel.  The channel is considered closed for a
+   party when it has both sent and received SSH_MSG_CHANNEL_CLOSE, and
+   the party may then reuse the channel number.  A party MAY send
+   SSH_MSG_CHANNEL_CLOSE without having sent or received
+   SSH_MSG_CHANNEL_EOF.
+
+   どちらかの側がチャンネルを終了させようと思った時には,
+   SSH_MSG_CHANNEL_CLOSE を送る. このメッセージを受け取ったなら
+   SSH_MSG_CHANNEL_CLOSE を送り返さなければならない (このチャンネルに
+   対してこのメッセージをすでに送っていないのならば).
+   SSH_MSG_CHANNEL_CLOSE が送られ受け取ったなら, そのチャンネルは
+   閉鎖したとみなされ, チャンネル番号を再利用してもよい.
+   SSH_MSG_CHANNEL_EOF を送ったり受け取ったりすることなしに
+   SSH_MSG_CHANNEL_CLOSE を送ってもよい.
+
+     byte      SSH_MSG_CHANNEL_CLOSE
+     uint32    recipient_channel
+
+   This message does not consume window space and can be sent even if no
+   window space is available.
+
+   このメッセージは window space を消費せず,
+   window space が利用できなくても送ることができる.
+
+   It is recommended that any data sent before this message is delivered
+   to the actual destination, if possible.
+
+   このメッセージを送る前に送られたどんなデータも, 可能ならば
+   正しい目的地に届けられることが推奨される.
+
+
+5.4 Channel-Specific Requests
+
+5.4 チャンネル固有の要求
+
+   Many channel types have extensions that are specific to that
+   particular channel type.  An example is requesting a pty (pseudo
+   terminal) for an interactive session.
+
+   多くの種類のチャンネルで, その特定の種類のチャンネルに特有な
+   拡張を持つ. 例えば, インタラクティブなセッションで pty (仮装端末)
+   を要求するように.
+
+   All channel-specific requests use the following format.
+
+   すべてのチャンネル特有の要求は以下のフォーマットを使う.
+
+     byte      SSH_MSG_CHANNEL_REQUEST
+     uint32    recipient channel
+     string    request type (restricted to US-ASCII)
+     boolean   want reply
+     ... type-specific data
+
+   If want reply is FALSE, no response will be sent to the request.
+   Otherwise, the recipient responds with either SSH_MSG_CHANNEL_SUCCESS
+   or SSH_MSG_CHANNEL_FAILURE, or request-specific continuation
+   messages. If the request is not recognized or is not supported for
+   the channel, SSH_MSG_CHANNEL_FAILURE is returned.
+
+   want reply が FALSE なら, 要求に対して返答は送られない.
+   さもなければ, 受取手は SSH_MSG_CHANNEL_SUCCESS か 
+   SSH_MSG_CHANNEL_FAILURE のどちらかか, 要求に特有な
+   継続メッセージを返す. 要求が理解されなかったりチャンネルに対して
+   サポートされていなければ, SSH_MSG_CHANNEL_FAILURE が返される.
+
+   This message does not consume window space and can be sent even if no
+   window space is available. Request types are local to each channel
+   type.
+
+   このメッセージは window space を消費せず,
+   window space が利用できなくても送ることができる. 要求の種類は
+   それぞれのチャンネルごとにローカルだ.
+
+   The client is allowed to send further messages without waiting for
+   the response to the request.
+
+   クライアントは, リクエストに対する返答を待たずにさらなる
+   メッセージを送ることができる.
+
+Ylonen & Moffat, Editor    Expires March 31, 2004               [Page 7]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+   request type names follow the DNS extensibility naming convention
+   outlined in [SSH-ARCH]
+
+   request type の名前は  [SSH-ARCH] で記述された DNS 拡張命名規則に従う.
+
+     byte      SSH_MSG_CHANNEL_SUCCESS
+     uint32    recipient_channel
+
+
+     byte      SSH_MSG_CHANNEL_FAILURE
+     uint32    recipient_channel
+
+   These messages do not consume window space and can be sent even if no
+   window space is available.
+
+   これらのメッセージは window space を消費せず,
+   window space が利用できなくても送ることができる.
+
+6. Interactive Sessions
+
+6. インタラクティブ セッション
+
+   A session is a remote execution of a program.  The program may be a
+   shell, an application, a system command, or some built-in subsystem.
+   It may or may not have a tty, and may or may not involve X11
+   forwarding. Multiple sessions can be active simultaneously.
+
+   セッションはプログラムを遠隔実行する. このプログラムは
+   おそらくシェル, アプリケーション, システムコマンドないし
+   なんらかの組込みサブシステムだろう. それが tty を持つかもしれないし
+   持たないかもしれない, また X11 転送を伴なうかもしれないし伴なわない
+   かもしれない. 複数のセッションを同時に有効にできる.
+
+6.1 Opening a Session
+
+6.1 セッションの開始
+
+   A session is started by sending the following message.
+
+   セッションは次のメッセージを送ることで始められる.
+
+     byte      SSH_MSG_CHANNEL_OPEN
+     string    "session"
+     uint32    sender channel
+     uint32    initial window size
+     uint32    maximum packet size
+
+   Client implementations SHOULD reject any session channel open
+   requests to make it more difficult for a corrupt server to attack the
+   client.
+
+   クライアントの実装は, 改ざんされたサーバがクライアント攻撃するのを
+   より難しくするためにどんなセッション開始要求も拒否する必要がある.
+
+6.2 Requesting a Pseudo-Terminal
+
+6.2 仮想端末の要求
+
+   A pseudo-terminal can be allocated for the session by sending the
+   following message.
+
+   仮想端末は, 次のメッセージを送ることでセッションに
+   割当てることができる.
+
+     byte      SSH_MSG_CHANNEL_REQUEST
+     uint32    recipient_channel
+     string    "pty-req"
+     boolean   want_reply
+     string    TERM environment variable value (e.g., vt100)
+     uint32    terminal width, characters (e.g., 80)
+     uint32    terminal height, rows (e.g., 24)
+     uint32    terminal width, pixels (e.g., 640)
+     uint32    terminal height, pixels (e.g., 480)
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004               [Page 8]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+     string    encoded terminal modes
+
+   The encoding of terminal modes is described in Section Encoding of
+   Terminal Modes (Section 8). Zero dimension parameters MUST be
+   ignored. The character/row dimensions override the pixel dimensions
+   (when nonzero). Pixel dimensions refer to the drawable area of the
+   window.
+
+   端末モードのエンコーディングについては, 端末モードのエンコーディング
+   セクション (セクション 8) で記述されている. ゼロ次元のパラメータは
+   無視されなければならない. 文字/列 の次元は, (ゼロでない) pixel の次元
+   を上書きする. pixel の次元は window の描画領域に適用する.
+
+   The dimension parameters are only informational.
+
+   次元のパラメータは通知のためだけにある.
+
+   The client SHOULD ignore pty requests.
+
+   クライアントは仮想端末の要求を無視する必要がある.
+
+6.3 X11 Forwarding
+
+6.3 X11 転送
+
+6.3.1 Requesting X11 Forwarding
+
+6.3.1 X11 転送の要求
+
+   X11 forwarding may be requested for a session by sending
+
+   X11 転送は, セッションに対して以下を送ることで要求される.
+
+     byte      SSH_MSG_CHANNEL_REQUEST
+     uint32    recipient channel
+     string    "x11-req"
+     boolean   want reply
+     boolean   single connection
+     string    x11 authentication protocol
+     string    x11 authentication cookie
+     uint32    x11 screen number
+
+   It is recommended that the authentication cookie that is sent be a
+   fake, random cookie, and that the cookie is checked and replaced by
+   the real cookie when a connection request is received.
+
+   認証クッキーを送る際に偽のランダムなクッキーにし,
+   接続要求が受け入れられたらそのクッキーを検査し本物のクッキーに
+   置換することが推奨される.
+
+   X11 connection forwarding should stop when the session channel is
+   closed; however, already opened forwardings should not be
+   automatically closed when the session channel is closed.
+
+   セッションのチャンネルが閉じられたら, X11 接続転送を止める必要がある.
+   しかし, すでに開かれた転送は, セッションのチャンネルが閉じられても
+   自動的に閉じる必要はない.
+
+   If `single connection' is TRUE, only a single connection should be
+   forwarded.  No more connections will be forwarded after the first, or
+   after the session channel has been closed.
+
+   single connections が TRUE なら, ただ一つの接続だけが転送される
+   必要がある. 最初のもののあとないしセッションチャンネルが閉じられた
+   あとには, さらなる接続は転送されない.
+
+   The "x11 authentication protocol" is the name of the X11
+   authentication method used, e.g. "MIT-MAGIC-COOKIE-1".
+
+   x11 authentication protocol は 使われる X11 認証法の名前だ.
+   例えば, "MIT-MAGIC-COOKIE-1".
+
+   The x11 authentication cookie MUST be hexadecimal encoded.
+
+   X11 認証クッキーは 16 進エンコードされていなければならない.
+
+   X Protocol is documented in [SCHEIFLER].
+
+   X プロトコルは [SCHEIFLER] に記述されている.
+
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004               [Page 9]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+6.3.2 X11 Channels
+
+6.3.2 X11 チャンネル
+
+   X11 channels are opened with a channel open request.  The resulting
+   channels are independent of the session, and closing the session
+   channel does not close the forwarded X11 channels.
+
+   X11 チャンネルはチャンネル開始リクエストによって開かれる.
+   この結果できるチャンネルはセッションとは独立で,
+   セッションチャンネルが閉じても転送された X11 チャンネルは閉じられない.
+
+     byte      SSH_MSG_CHANNEL_OPEN
+     string    "x11"
+     uint32    sender channel
+     uint32    initial window size
+     uint32    maximum packet size
+     string    originator address (e.g. "192.168.7.38")
+     uint32    originator port
+
+   The recipient should respond with SSH_MSG_CHANNEL_OPEN_CONFIRMATION
+   or SSH_MSG_CHANNEL_OPEN_FAILURE.
+
+   受取手は SSH_MSG_CHANNEL_OPEN_CONFIRMATION ないし 
+   SSH_MSG_CHANNEL_OPEN_FAILURE	を返す必要がある.
+
+   Implementations MUST reject any X11 channel open requests if they
+   have not requested X11 forwarding.
+
+   もし X11 転送を要求していない場合は, 実装はどんな X11 チャンネル
+   開始リクエストも拒否しなければならない.
+
+6.4 Environment Variable Passing
+
+6.4 環境変数の伝達
+
+   Environment variables may be passed to the shell/command to be
+   started later. Uncontrolled setting of environment variables in a
+   privileged process can be a security hazard.  It is recommended that
+   implementations either maintain a list of allowable variable names or
+   only set environment variables after the server process has dropped
+   sufficient privileges.
+
+   後で始められる shell やコマンドに環境変数を渡すことができるかもしれない.
+   特権プロセス内で環境変数を自由に設定することは, セキュリティの危険と
+   なりうる. 実装が, 許される変数名のリストを保持するか, サーバプロセスが
+   十分な特権に落ちたあとでのみ環境変数を設定できることが推奨される.
+   
+     byte      SSH_MSG_CHANNEL_REQUEST
+     uint32    recipient channel
+     string    "env"
+     boolean   want reply
+     string    variable name
+     string    variable value
+
+
+6.5 Starting a Shell or a Command
+
+6.5 シェルないしコマンドの開始
+
+   Once the session has been set up, a program is started at the remote
+   end. The program can be a shell, an application program or a
+   subsystem with a host-independent name.  Only one of these requests
+   can succeed per channel.
+
+   セッションが確立されたら一回, プログラムはリモート側で
+   開始される. このプログラムはシェルかもしれないし, アプリケーション
+   プログラムやホストに独立な名前を持つサブシステムかもしれない.
+   これらの要求のなかでチャンネルごとに一つだけが, 成功することが
+   ある.
+
+     byte      SSH_MSG_CHANNEL_REQUEST
+     uint32    recipient channel
+     string    "shell"
+     boolean   want reply
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 10]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+   This message will request the user's default shell (typically defined
+   in /etc/passwd in UNIX systems) to be started at the other end.
+
+   このメッセージは, もう一方の側でユーザのデフォルトのシェル
+   (典型的には UNIX システムで /etc/passwd の中で定義されている) が
+   開始されるよう要求する.
+
+     byte      SSH_MSG_CHANNEL_REQUEST
+     uint32    recipient channel
+     string    "exec"
+     boolean   want reply
+     string    command
+
+   This message will request the server to start the execution of the
+   given command. The command string may contain a path. Normal
+   precautions MUST be taken to prevent the execution of unauthorized
+   commands.
+
+   このメッセージはサーバに与えられたコマンドを開始するよう
+   要求する. コマンド文字列はパスを含んでもよい.
+   通常, 権限のないコマンドの実行をしないように警戒しなければならない.
+
+     byte      SSH_MSG_CHANNEL_REQUEST
+     uint32    recipient channel
+     string    "subsystem"
+     boolean   want reply
+     string    subsystem name
+
+   This last form executes a predefined subsystem.  It is expected that
+   these will include a general file transfer mechanism, and possibly
+   other features.  Implementations may also allow configuring more such
+   mechanisms. As the user's shell is usually used to execute the
+   subsystem, it is advisable for the subsystem protocol to have a
+   "magic cookie" at the beginning of the protocol transaction to
+   distinguish it from arbitrary output generated by shell
+   initialization scripts etc. This spurious output from the shell may
+   be filtered out either at the server or at the client.
+
+   この最後の形式はすでに定義されているサブシステムを実行する.
+   これらは, 一般的なファイル転送メカニズムをもしかしたら別の特徴を
+   含むことが期待される. 実装も, このようなメカニズムをさらに設定する
+   ことを許してよい. ユーザのシェルが通常サブシステムを実行するのに
+   使われるので, サブシステムのプロトコルが, プロトコルの処理の開始時に,
+   シェルの初期化スクリプトなどで生成される任意の出力と区別する
+   "magic cookie"を持つのは賢明なことだ.
+
+   The server SHOULD not halt the execution of the protocol stack when
+   starting a shell or a program. All input and output from these SHOULD
+   be redirected to the channel or to the encrypted tunnel.
+
+   It is RECOMMENDED to request and check the reply for these messages.
+   The client SHOULD ignore these messages.
+
+   Subsystem names follow the DNS extensibility naming convention
+   outlined in [SSH-ARCH].
+
+6.6 Session Data Transfer
+
+6.6 セッションデータ転送
+
+   Data transfer for a session is done using SSH_MSG_CHANNEL_DATA and
+   SSH_MSG_CHANNEL_EXTENDED_DATA packets and the window mechanism.  The
+   extended data type SSH_EXTENDED_DATA_STDERR has been defined for
+   stderr data.
+
+   セッションのためのデータ転送は, SSH_MSG_CHANNEL_DATA と
+   SSH_MSG_CHANNEL_EXTENDED_DATA パケットと window メカニズム
+   を利用して行なわれる. 拡張されたデータタイプ
+   SSH_EXTENDED_DATA_STDERR は 標準エラーのために定義されている.
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 11]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+6.7 Window Dimension Change Message
+
+6.7 ウィンドウの次元(サイズ)変更メッセージ
+
+   When the window (terminal) size changes on the client side, it MAY
+   send a message to the other side to inform it of the new dimensions.
+
+   クライアント側でウィンドウ (端末) のサイズが変更されたら,
+   新しい次元(サイズ)をもう一方の側に伝えるためにメッセージを送ってもよい.
+
+     byte      SSH_MSG_CHANNEL_REQUEST
+     uint32    recipient_channel
+     string    "window-change"
+     boolean   FALSE
+     uint32    terminal width, columns
+     uint32    terminal height, rows
+     uint32    terminal width, pixels
+     uint32    terminal height, pixels
+
+    No response SHOULD be sent to this message.
+
+    このメッセージに対して返答を送る必要はない.
+
+6.8 Local Flow Control
+
+6.8 ローカルなフロー制御
+
+   On many systems, it is possible to determine if a pseudo-terminal is
+   using control-S/control-Q flow control.  When flow control is
+   allowed, it is often desirable to do the flow control at the client
+   end to speed up responses to user requests.  This is facilitated by
+   the following notification.  Initially, the server is responsible for
+   flow control. (Here, again, client means the side originating the
+   session, and server means the other side.)
+
+   多くのシステムでは, 仮想端末が control-S/control-Q フロー制御を
+   使うかどうか決めることができる. フロー制御が許されるのなら,
+   ユーザの要求に対して返答を速くするためにクライアンント側での
+   フロー制御することが多くの場合望ましい. これは, 以下の告知によって
+   促進される. 最初は, サーバはフロー制御に責任を持つ.
+   (ここで, 繰り返すが, クライアントというのはセッションを
+   始めたほうの側で, サーバというのはもう一方の側だ)
+
+   The message below is used by the server to inform the client when it
+   can or cannot perform flow control (control-S/control-Q processing).
+   If `client can do' is TRUE, the client is allowed to do flow control
+   using control-S and control-Q.  The client MAY ignore this message.
+
+   以下のメッセージは, サーバがクライアントにフロー制御
+   ( control-S/control-Q による) を行なえるか行なえないかを
+   知らせるのに使われる. `client can do' が TRUE なら, クアイアントは
+   control-S と  control-Q によるフロー制御を行なうことができる.
+   クライアントはこのメッセージを無視してもよい.
+
+     byte      SSH_MSG_CHANNEL_REQUEST
+     uint32    recipient channel
+     string    "xon-xoff"
+     boolean   FALSE
+     boolean   client can do
+
+   No response is sent to this message.
+
+   このメッセージに対して返答は送られない.
+
+6.9 Signals
+
+6.9 シグナル
+
+   A signal can be delivered to the remote process/service using the
+   following message.  Some systems may not implement signals, in which
+   case they SHOULD ignore this message.
+
+   以下のメッセージを使って, リモートのプロセスやサービスにシグナルが
+   伝達されるかもしれない.
+   システムによってはシグナルを実装されておらず, そのような
+   場合はシステムはこのメッセージを無視する.
+
+     byte      SSH_MSG_CHANNEL_REQUEST
+     uint32    recipient channel
+     string    "signal"
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 12]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+     boolean   FALSE
+     string    signal name without the "SIG" prefix.
+
+   Signal names will be encoded as discussed in the "exit-signal"
+   SSH_MSG_CHANNEL_REQUEST.
+
+   シグナルの名前は "exit-signal" の SSH_MSG_CHANNEL_REQUEST で議論
+   されるようにエンコードされる. (訳注: 次のサブセクション)
+
+6.10 Returning Exit Status
+
+6.10 終了ステータスの返却
+
+   When the command running at the other end terminates, the following
+   message can be sent to return the exit status of the command.
+   Returning the status is RECOMMENDED.  No acknowledgment is sent for
+   this message.  The channel needs to be closed with
+   SSH_MSG_CHANNEL_CLOSE after this message.
+
+   もう一方の側で動いていたコマンドが終了すると, 次のメッセージ
+   がコマンドの終了ステータスを返却するために送られるかもしれない.
+   ステータスを返すことは推奨されている. このメッセージに対して
+   返答はされない. チャンネルは, このメッセージのあとで,
+   SSH_MSG_CHANNEL_CLOSE によって閉じられる必要がある.
+
+   The client MAY ignore these messages.
+
+   クライアントはこれらのメッセージを無視してもよい.
+
+     byte      SSH_MSG_CHANNEL_REQUEST
+     uint32    recipient_channel
+     string    "exit-status"
+     boolean   FALSE
+     uint32    exit_status
+
+   The remote command may also terminate violently due to a signal.
+   Such a condition can be indicated by the following message. A zero
+   exit_status usually means that the command terminated successfully.
+
+   リモートのコマンドは, シグナルによって手荒に終了してもよい.
+   このような状況は, 以下のメッセージによって通知されるかもしえない.
+   ゼロの exit_status は 通常コマンドが首尾よく終了したことを意味する.
+
+     byte      SSH_MSG_CHANNEL_REQUEST
+     uint32    recipient channel
+     string    "exit-signal"
+     boolean   FALSE
+     string    signal name without the "SIG" prefix.
+     boolean   core dumped
+     string    error message (ISO-10646 UTF-8)
+     string    language tag (as defined in [RFC3066])
+
+   The signal name is one of the following (these are from [POSIX])
+
+   シグナルの名前は以下のどれかだ (これらは [POSIX] から).
+
+     ABRT
+     ALRM
+     FPE
+     HUP
+     ILL
+     INT
+     KILL
+     PIPE
+     QUIT
+     SEGV
+     TERM
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 13]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+     USR1
+     USR2
+
+   Additional signal names MAY be sent in the format "sig-name@xyz",
+   where `sig-name' and `xyz' may be anything a particular implementor
+   wants (except the `@' sign). However, it is suggested that if a
+   `configure' script is used, the non-standard signal names it finds be
+   encoded as "SIG@xyz.config.guess", where `SIG' is the signal name
+   without the "SIG" prefix, and `xyz' be the host type, as determined
+   by `config.guess'.
+
+   追加のシグナルの名前は "sig-name@xyz" 形式で送られてもよい.
+   ここで `sig-name' と `xyz' は特定の実装者が望む何かだ ( `@' 記号を
+   除く). しかし, `configure'スクリプトが使われたなら,
+   発見された標準でないシグナルの名前は, "SIG@xyz.config.guess" のように
+   エンコードされる. ここで SIG は SIG prefix を除いたシグナルの名前で
+   `config,guess'によって決定された xyz はホストの種類だ.
+
+   The `error message' contains an additional explanation of the error
+   message. The message may consist of multiple lines. The client
+   software MAY display this message to the user. If this is done, the
+   client software should take the precautions discussed in [SSH-ARCH].
+
+   `error message`は エラーメッセージによる追加の説明を含んでいる.
+   このメッセージは複数行から成ってもよい.
+   クライアントソフトウェアはこのメッセージをユーザに表示してもよい.
+   もしするなら,  クライアントソフトウェア
+   は [SSH-ARCH] で議論されている警戒をする必要がある.
+
+7. TCP/IP Port Forwarding
+
+7. TCP/IP ポート転送
+
+7.1 Requesting Port Forwarding
+
+7.1 ポート転送の要求
+
+   A party need not explicitly request forwardings from its own end to
+   the other direction.  However, if it wishes that connections to a
+   port on the other side be forwarded to the local side, it must
+   explicitly request this.
+
+   どちらの側も自分の側からもう一方への転送を
+   明示的に要求する必要はない.
+   しかし, もしもう一方の側のポートへの接続をローカルな側に
+   転送させようと望むなら, 明示的にこれを要求しなければならない.
+
+     byte      SSH_MSG_GLOBAL_REQUEST
+     string    "tcpip-forward"
+     boolean   want reply
+     string    address to bind (e.g. "0.0.0.0")
+     uint32    port number to bind
+
+   `Address to bind' and `port number to bind' specify the IP address
+   and port to which the socket to be listened is bound.  The address
+   should be "0.0.0.0" if connections are allowed from anywhere. (Note
+   that the client can still filter connections based on information
+   passed in the open request.)
+
+   `Address to bind'と `port number to bind'には
+   listen されるソケットが束縛されている IP アドレスと port が示される.
+   どこからの接続も許すのなら, address は "0.0.0.0"である必要がある.
+   (クライアントは開始要求で与えられる情報をもとにさらに接続を制限
+   できることに注意)
+
+   Implementations should only allow forwarding privileged ports if the
+   user has been authenticated as a privileged user.
+
+   実装は, ユーザが特権ユーザとしての認証をされている場合だけ,
+   特権ポートの転送を許す必要がある.
+
+   Client implementations SHOULD reject these messages; they are
+   normally only sent by the client.
+
+   クライアントの実装は, これらのメッセージを拒否する必要がある.
+   これらは通常クライアントからのみ送られる.
+
+   If a client passes 0 as port number to bind and has want reply TRUE
+   then the server allocates the next available unprivileged port number
+   and replies with the following message, otherwise there is no
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 14]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+   response specific data.
+
+   クライアントが port number to bind として 0 を送り want reply を TRUE
+   としているなら. サーバは次に利用できる非特権ポート番号を割当て,
+   以下のメッセージを返す, さもなければ具体的なデータを返さない.
+
+     byte     SSH_MSG_GLOBAL_REQUEST_SUCCESS
+     uint32   port that was bound on the server
+
+   A port forwarding can be cancelled with the following message.  Note
+   that channel open requests may be received until a reply to this
+   message is received.
+
+   ポート転送は以下のメッセージでキャンセルされるかもしれない.
+   このメッセージへの返答が受け取られるまでに
+   チャンネル開始リクエストが受け取られるかもしれないことに注意.
+
+     byte      SSH_MSG_GLOBAL_REQUEST
+     string    "cancel-tcpip-forward"
+     boolean   want reply
+     string    address_to_bind (e.g. "127.0.0.1")
+     uint32    port number to bind
+
+   Client implementations SHOULD reject these messages; they are
+   normally only sent by the client.
+
+   クライアントの実装はこれらのメッセージを拒否しなければならない.
+   通常これらはクライアントからのみ送られる.
+
+7.2 TCP/IP Forwarding Channels
+
+7.2 TCP/IP 転送チャンネル
+
+   When a connection comes to a port for which remote forwarding has
+   been requested, a channel is opened to forward the port to the other
+   side.
+
+   リモート転送が要求されたポートへ接続が来ると, もう一方の側へポートを
+   転送するためチャンネルが開かれる.
+
+     byte      SSH_MSG_CHANNEL_OPEN
+     string    "forwarded-tcpip"
+     uint32    sender channel
+     uint32    initial window size
+     uint32    maximum packet size
+     string    address that was connected
+     uint32    port that was connected
+     string    originator IP address
+     uint32    originator port
+
+   Implementations MUST reject these messages unless they have
+   previously requested a remote TCP/IP port forwarding with the given
+   port number.
+
+   与えられたポート番号を使ったリモート TCP/IP ポート転送が先に
+   要求されていなければ, 実装はこれらのメッセージを拒否しなけば
+   ならない.
+
+   When a connection comes to a locally forwarded TCP/IP port, the
+   following packet is sent to the other side.  Note that these messages
+   MAY be sent also for ports for which no forwarding has been
+   explicitly requested.  The receiving side must decide whether to
+   allow the forwarding.
+
+   ローカルに転送された TCP/IP ポートに接続が来たら, 以下のパケットが
+   もう一方の側に送られる. これらのメッセージは, 転送が明示的に要求されて
+   ないポートに対しても送られてもよいことに注意. 受け取った側は
+   転送を受け入れるか決定しかければならない.
+
+     byte      SSH_MSG_CHANNEL_OPEN
+     string    "direct-tcpip"
+     uint32    sender channel
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 15]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+     uint32    initial window size
+     uint32    maximum packet size
+     string    host to connect
+     uint32    port to connect
+     string    originator IP address
+     uint32    originator port
+
+   `Host to connect' and `port to connect' specify the TCP/IP host and
+   port where the recipient should connect the channel. `Host to
+   connect' may be either a domain name or a numeric IP address.
+
+   `Host to connect' と `port to connect' は 受取手がチャンネルに
+   接続するべき TCP/IP ホストとポートを指定する. `Host to connect'
+   はドメイン名でも数字の IP アドレスでもよい.
+
+   `Originator IP address' is the numeric IP address of the machine
+   where the connection request comes from, and `originator port' is the
+   port on the originator host from where the connection came from.
+
+   `Originator IP address' は 接続要求を送っているマシンの
+   数字の IP アドレスで, `originator port'は接続をしている 
+   originator ホストのポートだ.
+
+   Forwarded TCP/IP channels are independent of any sessions, and
+   closing a session channel does not in any way imply that forwarded
+   connections should be closed.
+
+   転送された TCP/IP チャンネルは他のセッションとは独立で,
+   セッションチャンネルが閉じられることは, 転送された
+   チャンネルが閉じられるべきであることを決して意味しない.
+
+   Client implementations SHOULD reject direct TCP/IP open requests for
+   security reasons.
+
+   クライアントの実装は, セキュリティ上の理由から 直接の
+   TCP/IP 開始要求を拒否する必要がある.
+
+8. Encoding of Terminal Modes
+
+8. 端末モードのエンコーディング
+
+   Terminal modes (as passed in a pty request) are encoded into a byte
+   stream.  It is intended that the coding be portable across different
+   environments.
+
+   端末モード (仮想端末要求で送られる) は byte ストリームにエンコード
+   される. コーディングが異なる環境で移植可能となるようにするためだ.
+
+   The tty mode description is a stream of bytes.  The stream consists
+   of opcode-argument pairs.  It is terminated by opcode TTY_OP_END (0).
+   Opcodes 1 to 159 have a single uint32 argument. Opcodes 160 to 255
+   are not yet defined, and cause parsing to stop (they should only be
+   used after any other data).
+
+   tty (端末) モードは byte のストリームで記述される. ストリームは
+   opcode-argument のペアから成る. opcode TTY_OP_END (0) で 閉じられる.
+   opcode 1 から 159 は 一つの uint32 引数を持つ. opcode 160 から 255 は
+   まだ定義されておらず, パースと停止させる ( これらはその他のデータ
+   のあとでのみ使われる).
+
+   The client SHOULD put in the stream any modes it knows about, and the
+   server MAY ignore any modes it does not know about.  This allows some
+   degree of machine-independence, at least between systems that use a
+   POSIX-like tty interface.  The protocol can support other systems as
+   well, but the client may need to fill reasonable values for a number
+   of parameters so the server pty gets set to a reasonable mode (the
+   server leaves all unspecified mode bits in their default values, and
+   only some combinations make sense).
+
+   クライアントは, 知っているモードをストリームに入れる
+   必要があり, サーバは知らないモードを無視してもよい.
+   ある程度マシンに独立であってよい, 少なくとも POSIX-like な tty
+   インタフェイスを使うシステム間では. プロトコルは
+   別のシステムも同様にサポートできるが, クライアントは
+   パラメータの数に対して合理的な値を入れる必要があり, そうすれば
+   サーバの pty は合理的なモードの集合を手に入れるだろう (
+   サーバは, すべての未定義のモード bit をデフォルトの値のままにしてよく,
+   それらの組合せのみが意味を成す).
+
+   The following opcodes have been defined.  The naming of opcodes
+   mostly follows the POSIX terminal mode flags.
+
+   以下の opcode が定義されている. opcode の名前付けは
+   主として POSIX 端末コードフラグに従った.
+
+   0   TTY_OP_END     Indicates end of options.
+   1   VINTR          Interrupt character; 255 if none.  Similarly for the
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 16]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+                      other characters. Not all of these characters are
+                      supported on all systems.
+   2   VQUIT          The quit character (sends SIGQUIT signal on POSIX
+                      systems).
+   3   VERASE         Erase the character to left of the cursor.
+   4   VKILL          Kill the current input line.
+   5   VEOF           End-of-file character (sends EOF from the terminal).
+   6   VEOL           End-of-line character in addition to carriage return
+                      and/or linefeed.
+   7   VEOL2          Additional end-of-line character.
+   8   VSTART         Continues paused output (normally control-Q).
+   9   VSTOP          Pauses output (normally control-S).
+   10  VSUSP          Suspends the current program.
+   11  VDSUSP         Another suspend character.
+   12  VREPRINT       Reprints the current input line.
+   13  VWERASE        Erases a word left of cursor.
+   14  VLNEXT         Enter the next character typed literally, even if it
+                      is a special character
+   15  VFLUSH         Character to flush output.
+   16  VSWTCH         Switch to a different shell layer.
+   17  VSTATUS        Prints system status line (load, command, pid etc).
+   18  VDISCARD       Toggles the flushing of terminal output.
+   30  IGNPAR         The ignore parity flag.  The parameter SHOULD be 0 if
+                      this flag is FALSE set, and 1 if it is TRUE.
+   31  PARMRK         Mark parity and framing errors.
+   32  INPCK          Enable checking of parity errors.
+   33  ISTRIP         Strip 8th bit off characters.
+   34  INLCR          Map NL into CR on input.
+   35  IGNCR          Ignore CR on input.
+   36  ICRNL          Map CR to NL on input.
+   37  IUCLC          Translate uppercase characters to lowercase.
+   38  IXON           Enable output flow control.
+   39  IXANY          Any char will restart after stop.
+   40  IXOFF          Enable input flow control.
+   41  IMAXBEL        Ring bell on input queue full.
+   50  ISIG           Enable signals INTR, QUIT, [D]SUSP.
+   51  ICANON         Canonicalize input lines.
+   52  XCASE          Enable input and output of uppercase characters by
+                      preceding their lowercase equivalents with `\'.
+   53  ECHO           Enable echoing.
+   54  ECHOE          Visually erase chars.
+   55  ECHOK          Kill character discards current line.
+   56  ECHONL         Echo NL even if ECHO is off.
+   57  NOFLSH         Don't flush after interrupt.
+   58  TOSTOP         Stop background jobs from output.
+   59  IEXTEN         Enable extensions.
+   60  ECHOCTL        Echo control characters as ^(Char).
+   61  ECHOKE         Visual erase for line kill.
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 17]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+   62  PENDIN         Retype pending input.
+   70  OPOST          Enable output processing.
+   71  OLCUC          Convert lowercase to uppercase.
+   72  ONLCR          Map NL to CR-NL.
+   73  OCRNL          Translate carriage return to newline (output).
+   74  ONOCR          Translate newline to carriage return-newline
+                      (output).
+   75  ONLRET         Newline performs a carriage return (output).
+   90  CS7            7 bit mode.
+   91  CS8            8 bit mode.
+   92  PARENB         Parity enable.
+   93  PARODD         Odd parity, else even.
+
+   128 TTY_OP_ISPEED  Specifies the input baud rate in bits per second.
+   129 TTY_OP_OSPEED  Specifies the output baud rate in bits per second.
+
+
+   0   TTY_OP_END     オプションの最後を示す
+   1   VINTR          中断文字: ない場合は 255 (以下の他の文字も同様)
+		      これらの文字のすべてがすべてのシステムでサポート
+		      されるわけではない.
+   2   VQUIT          終了文字 (SIGQUIT シグナルを POSIX システムに送る)
+   3   VERASE         カーソルの左の文字を消す
+   4   VKILL          現在の入力行を消す
+   5   VEOF           ファイル終了文字 (ターミナルから EOF を送る).
+   6   VEOL           キャリッジリターンと/もしくはラインフィードに
+		      加える行終了文字
+   7   VEOL2          追加の行終了文字
+   8   VSTART         中断された出力を続ける (普通 control-Q).
+   9   VSTOP          出力を中断する (普通 control-S).
+   10  VSUSP          現在のプログラムを中断する
+   11  VDSUSP         もう一つの中断文字
+   12  VREPRINT       現在の入力行を再表示する
+   13  VWERASE        カーソルの左の単語を消す
+   14  VLNEXT         特別な文字だったとしても, タイプされた通りに
+		      次の文字を入力する.
+   15  VFLUSH         出力をフラッシュする文字
+   16  VSWTCH         別のシェル層にスイッチする
+   17  VSTATUS        システムステータス行を表示する
+		      (負荷, command, pid など).
+   18  VDISCARD       端末出力のフラッシュのトグル
+   30  IGNPAR         無視パリティフラグ. この flag が FALSE ならパラメータは
+		      0 である必要があり, TRUE なら 1 である必要がある.
+   31  PARMRK         パリティとフレーム誤りのマーク
+   32  INPCK          パリティエラーのチェックを有効にする
+   33  ISTRIP         文字の 8 番目の bit をストリップする
+   34  INLCR          入力で NL を CR にマップする
+   35  IGNCR          入力での CR を無視する
+   36  ICRNL          入力で CR を NL にマップする
+   37  IUCLC          大文字を小文字に翻訳する
+   38  IXON           出力フロー制御を有効にする
+   39  IXANY          終了後はどんな文字でも再スタートする
+   40  IXOFF          入力フロー制御を有効にする
+   41  IMAXBEL        入力キューが一杯の際ベルを鳴らす
+   50  ISIG           INTR, QUIT, [D]SUSP シグナルを有効にする.
+   51  ICANON         入力行を正規化する
+   52  XCASE	      大文字の入力と出力を小文字の前に`\'を付けることで
+		      可能にする.
+   53  ECHO           エコーを有効にする
+   54  ECHOE          目に見えるように文字を消す
+   55  ECHOK          Kill charactor が現在の行を捨てる
+   56  ECHONL         ECHO が off でも NF はエコーする
+   57  NOFLSH         中断のあとフラッシュしない
+   58  TOSTOP         端末に出力するバックグラウンドジョブを止める
+   59  IEXTEN         拡張を有効にする
+   60  ECHOCTL        コントロール文字を^(Char) のようにエコーする
+   61  ECHOKE         行消去で見えるように消す
+   62  PENDIN         中断した入力を再入力する
+   70  OPOST          出力の加工を有効にする
+   71  OLCUC          小文字を大文字に変換する
+   72  ONLCR          NL を CR-NL にマップする
+   73  OCRNL          (出力で) キャリッジリターンをニューラインに翻訳する
+   74  ONOCR          (出力で) ニューラインを
+		      キャリッジリターン-ニューラインに翻訳する
+   75  ONLRET         (出力で) ニューラインがキャリッジリターンを実行する
+   90  CS7            7 bit モード
+   91  CS8            8 bit モード
+   92  PARENB         パリティを有効にすうる.
+   93  PARODD         奇パリティないしは偶パリティ
+
+   128 TTY_OP_ISPEED  bit/杪での 入力ボーレイトを定義する
+   129 TTY_OP_OSPEED  bit/杪での 出力ボーレイトを定義する
+
+
+9. Summary of Message Numbers
+
+9. メッセージ番号のまとめ
+
+     #define SSH_MSG_GLOBAL_REQUEST                  80
+     #define SSH_MSG_REQUEST_SUCCESS                 81
+     #define SSH_MSG_REQUEST_FAILURE                 82
+     #define SSH_MSG_CHANNEL_OPEN                    90
+     #define SSH_MSG_CHANNEL_OPEN_CONFIRMATION       91
+     #define SSH_MSG_CHANNEL_OPEN_FAILURE            92
+     #define SSH_MSG_CHANNEL_WINDOW_ADJUST           93
+     #define SSH_MSG_CHANNEL_DATA                    94
+     #define SSH_MSG_CHANNEL_EXTENDED_DATA           95
+     #define SSH_MSG_CHANNEL_EOF                     96
+     #define SSH_MSG_CHANNEL_CLOSE                   97
+     #define SSH_MSG_CHANNEL_REQUEST                 98
+     #define SSH_MSG_CHANNEL_SUCCESS                 99
+     #define SSH_MSG_CHANNEL_FAILURE                 100
+
+
+10. Security Considerations
+
+10. セキュリティに関する考慮
+
+   This protocol is assumed to run on top of a secure, authenticated
+   transport.  User authentication and protection against network-level
+   attacks are assumed to be provided by the underlying protocols.
+
+   このプロトコルは安全に認証されたトランスポートの上ので動くことが
+   仮定されている. ユーザ認証やネットワークレベルの攻撃に対する
+   保護は, 下にあるプロトコルが提供すると仮定している.
+
+   It is RECOMMENDED that implementations disable all the potentially
+   dangerous features (e.g. agent forwarding, X11 forwarding, and TCP/IP
+   forwarding) if the host key has changed.
+
+   実装は, ホスト鍵がかわった場合には,
+   すべての潜在的に危険な特徴 (たとえば, エージェントの転送,
+   X11 の転送,TCP/IP の転送) を無効にすることが推奨される.
+
+   Full security considerations for this protocol are provided in
+   Section 8 of [SSH-ARCH]
+
+   このプロトコルに対する完全なセキュリティの考察は [SSH-ARCH]の
+   セクション 8 で提供されている.
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 18]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+11. iana cONSiderations
+
+   This document is part of a set, the IANA considerations for the SSH
+   protocol as defined in [SSH-ARCH], [SSH-TRANS], [SSH-USERAUTH],
+   [SSH-CONNECT] are detailed in [SSH-NUMBERS].
+
+12. Intellectual Property
+
+   The IETF takes no position regarding the validity or scope of any
+   intellectual property or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; neither does it represent that it
+   has made any effort to identify any such rights. Information on the
+   IETF's procedures with respect to rights in standards-track and
+   standards-related documentation can be found in BCP-11. Copies of
+   claims of rights made available for publication and any assurances of
+   licenses to be made available, or the result of an attempt made to
+   obtain a general license or permission for the use of such
+   proprietary rights by implementers or users of this specification can
+   be obtained from the IETF Secretariat.
+
+   The IETF has been notified of intellectual property rights claimed in
+   regard to some or all of the specification contained in this
+   document. For more information consult the online list of claimed
+   rights.
+
+Normative References
+
+   [SSH-ARCH]
+              Ylonen, T., "SSH Protocol Architecture", I-D
+              draft-ietf-architecture-15.txt, Oct 2003.
+
+   [SSH-TRANS]
+              Ylonen, T., "SSH Transport Layer Protocol", I-D
+              draft-ietf-transport-17.txt, Oct 2003.
+
+   [SSH-USERAUTH]
+              Ylonen, T., "SSH Authentication Protocol", I-D
+              draft-ietf-userauth-18.txt, Oct 2003.
+
+   [SSH-CONNECT]
+              Ylonen, T., "SSH Connection Protocol", I-D
+              draft-ietf-connect-18.txt, Oct 2003.
+
+   [SSH-NUMBERS]
+              Lehtinen, S. and D. Moffat, "SSH Protocol Assigned
+              Numbers", I-D draft-ietf-secsh-assignednumbers-05.txt, Oct
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 19]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+              2003.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+Informative References
+
+   [RFC3066]  Alvestrand, H., "Tags for the Identification of
+              Languages", BCP 47, RFC 3066, January 2001.
+
+   [RFC1884]  Hinden, R. and S. Deering, "IP Version 6 Addressing
+              Architecture", RFC 1884, December 1995.
+
+   [RFC2279]  Yergeau, F., "UTF-8, a transformation format of ISO
+              10646", RFC 2279, January 1998.
+
+   [SCHEIFLER]
+              Scheifler, R., "X Window System : The Complete Reference
+              to Xlib, X Protocol, Icccm, Xlfd, 3rd edition.", Digital
+              Press ISBN 1555580882, Feburary 1992.
+
+   [POSIX]    ISO/IEC, 9945-1., "Information technology -- Portable
+              Operating System Interface  (POSIX)-Part 1: System
+              Application Program Interface (API) C Language", ANSI/IEE
+              Std 1003.1, July 1996.
+
+
+Authors' Addresses
+
+   Tatu Ylonen
+   SSH Communications Security Corp
+   Fredrikinkatu 42
+   HELSINKI  FIN-00100
+   Finland
+
+   EMail: ylo@ssh.com
+
+
+   Darren J. Moffat (editor)
+   Sun Microsystems, Inc
+   17 Network Circle
+   Menlo Park  CA 94025
+   USA
+
+   EMail: Darren.Moffat@Sun.COM
+
+
+
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 20]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+Intellectual Property Statement
+
+   The IETF takes no position regarding the validity or scope of any
+   intellectual property or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; neither does it represent that it
+   has made any effort to identify any such rights. Information on the
+   IETF's procedures with respect to rights in standards-track and
+   standards-related documentation can be found in BCP-11. Copies of
+   claims of rights made available for publication and any assurances of
+   licenses to be made available, or the result of an attempt made to
+   obtain a general license or permission for the use of such
+   proprietary rights by implementors or users of this specification can
+   be obtained from the IETF Secretariat.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights which may cover technology that may be required to practice
+   this standard. Please address the information to the IETF Executive
+   Director.
+
+   The IETF has been notified of intellectual property rights claimed in
+   regard to some or all of the specification contained in this
+   document. For more information consult the online list of claimed
+   rights.
+
+
+Full Copyright Statement
+
+   Copyright (C) The Internet Society (2003). All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works. However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assignees.
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 21]
+
+Internet-Draft          SSH Connection Protocol                 Oct 2003
+
+
+   This document and the information contained herein is provided on an
+   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+
+Acknowledgment
+
+   Funding for the RFC Editor function is currently provided by the
+   Internet Society.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 22]

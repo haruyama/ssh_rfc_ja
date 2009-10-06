@@ -1,0 +1,2560 @@
+Network Working Group                                          T. Ylonen
+Internet-Draft                          SSH Communications Security Corp
+Expires: March 31, 2004                                   D. Moffat, Ed.
+                                                   Sun Microsystems, Inc
+                                                                Oct 2003
+
+# 訳者 春山征吾 haruyama@unixuser.org
+
+                       SSH Protocol Architecture
+                  draft-ietf-secsh-architecture-15.txt
+
+Status of this Memo
+
+   This document is an Internet-Draft and is in full conformance with
+   all provisions of Section 10 of RFC2026.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF), its areas, and its working groups. Note that other
+   groups may also distribute working documents as Internet-Drafts.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time. It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   The list of current Internet-Drafts can be accessed at http://
+   www.ietf.org/ietf/1id-abstracts.txt.
+
+   The list of Internet-Draft Shadow Directories can be accessed at
+   http://www.ietf.org/shadow.html.
+
+   This Internet-Draft will expire on March 31, 2004.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2003). All Rights Reserved.
+
+Abstract
+
+概要
+
+   SSH is a protocol for secure remote login and other secure network
+   services over an insecure network. This document describes the
+   architecture of the SSH protocol, as well as the notation and
+   terminology used in SSH protocol documents. It also discusses the SSH
+   algorithm naming system that allows local extensions. The SSH
+   protocol consists of three major components: The Transport Layer
+   Protocol provides server authentication, confidentiality, and
+   integrity with perfect forward secrecy. The User Authentication
+   Protocol authenticates the client to the server. The Connection
+   Protocol multiplexes the encrypted tunnel into several logical
+   channels. Details of these protocols are described in separate
+
+
+   SSH は, 安全ではないネットワーク越しの, 安全なリモートログイン及び他の
+   安全なネットワークサービスのためのプロトコルだ. この文書は
+   SSH プロトコルのアーキテクチャ/構成 や SSH プロトコルについての文書で
+   使われる表記法や用語について記述する. また, ローカルな拡張を
+   許す SSH のアルゴリズム命名システムについても議論する 
+   SSH プロコルは 3 つの主な構成要素から成る: トランスポート層のプロトコルは
+   サーバの認証と秘密性, 完全に転送が秘密に保たれたままでの完全性を提供する.
+   ユーザ認証プロトコルはクライアントをサーバに対して認証する.
+   コネクションプロトコルは暗号トンネルをいくつかの論理チャンネルに
+   多重化する. これらのプロトコルの詳細は別々の文書に記述される.
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                 [Page 1]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   documents.
+
+Table of Contents
+
+   1.    Contributors . . . . . . . . . . . . . . . . . . . . . . . .  3
+   2.    Introduction . . . . . . . . . . . . . . . . . . . . . . . .  3
+   3.    Specification of Requirements  . . . . . . . . . . . . . . .  3
+   4.    Architecture . . . . . . . . . . . . . . . . . . . . . . . .  3
+   4.1   Host Keys  . . . . . . . . . . . . . . . . . . . . . . . . .  4
+   4.2   Extensibility  . . . . . . . . . . . . . . . . . . . . . . .  5
+   4.3   Policy Issues  . . . . . . . . . . . . . . . . . . . . . . .  5
+   4.4   Security Properties  . . . . . . . . . . . . . . . . . . . .  6
+   4.5   Packet Size and Overhead . . . . . . . . . . . . . . . . . .  6
+   4.6   Localization and Character Set Support . . . . . . . . . . .  7
+   5.    Data Type Representations Used in the SSH Protocols  . . . .  8
+   6.    Algorithm Naming . . . . . . . . . . . . . . . . . . . . . . 10
+   7.    Message Numbers  . . . . . . . . . . . . . . . . . . . . . . 11
+   8.    IANA Considerations  . . . . . . . . . . . . . . . . . . . . 11
+   9.    Security Considerations  . . . . . . . . . . . . . . . . . . 12
+   9.1   Pseudo-Random Number Generation  . . . . . . . . . . . . . . 12
+   9.2   Transport  . . . . . . . . . . . . . . . . . . . . . . . . . 13
+   9.2.1 Confidentiality  . . . . . . . . . . . . . . . . . . . . . . 13
+   9.2.2 Data Integrity . . . . . . . . . . . . . . . . . . . . . . . 16
+   9.2.3 Replay . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+   9.2.4 Man-in-the-middle  . . . . . . . . . . . . . . . . . . . . . 17
+   9.2.5 Denial-of-service  . . . . . . . . . . . . . . . . . . . . . 19
+   9.2.6 Covert Channels  . . . . . . . . . . . . . . . . . . . . . . 19
+   9.2.7 Forward Secrecy  . . . . . . . . . . . . . . . . . . . . . . 20
+   9.3   Authentication Protocol  . . . . . . . . . . . . . . . . . . 20
+   9.3.1 Weak Transport . . . . . . . . . . . . . . . . . . . . . . . 21
+   9.3.2 Debug messages . . . . . . . . . . . . . . . . . . . . . . . 21
+   9.3.3 Local security policy  . . . . . . . . . . . . . . . . . . . 21
+   9.3.4 Public key authentication  . . . . . . . . . . . . . . . . . 22
+   9.3.5 Password authentication  . . . . . . . . . . . . . . . . . . 22
+   9.3.6 Host based authentication  . . . . . . . . . . . . . . . . . 23
+   9.4   Connection protocol  . . . . . . . . . . . . . . . . . . . . 23
+   9.4.1 End point security . . . . . . . . . . . . . . . . . . . . . 23
+   9.4.2 Proxy forwarding . . . . . . . . . . . . . . . . . . . . . . 23
+   9.4.3 X11 forwarding . . . . . . . . . . . . . . . . . . . . . . . 24
+         Normative References . . . . . . . . . . . . . . . . . . . . 24
+         Informative References . . . . . . . . . . . . . . . . . . . 25
+         Authors' Addresses . . . . . . . . . . . . . . . . . . . . . 27
+         Intellectual Property and Copyright Statements . . . . . . . 28
+
+
+
+
+
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                 [Page 2]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+1. Contributors
+
+   The major original contributors of this document were: Tatu Ylonen,
+   Tero Kivinen, Timo J. Rinne, Sami Lehtinen (all of SSH Communications
+   Security Corp), and Markku-Juhani O. Saarinen (University of
+   Jyvaskyla)
+
+   この文書の主要でもともとの寄稿家は以下の通りである:
+   Tatu Ylonen, Tero Kivinen, Timo J. Rinne, Sami Lehtinen
+   (以上すべて SSH Communications Security Corp 社),
+   Markku-Juhani O. Saarinen (University of Jyvaskyla).
+
+   The document editor is: Darren.Moffat@Sun.COM.  Comments on this
+   internet draft should be sent to the IETF SECSH working group,
+   details at: http://ietf.org/html.charters/secsh-charter.html
+
+   文書の編者は: Darren.Moffat@Sun.COM だ. このインターネットドラフトに
+   対するコメントは, IETF SECSH ワーキンググループに送ってほしい.
+   ワーキンググループの詳細は
+   http://ietf.org/html.charters/secsh-charter.html にある.
+
+
+2. Introduction
+
+2. イントロダクション
+
+   SSH is a protocol for secure remote login and other secure network
+   services over an insecure network.  It consists of three major
+   components:
+
+
+   SSH は, 安全ではないネットワーク越しの, 安全なリモートログイン及び他の
+   安全なネットワークサービスのためのプロトコルで, 3 つの主な構成要素から
+   成る:
+
+   o  The Transport Layer Protocol [SSH-TRANS] provides server
+      authentication, confidentiality, and integrity. It may optionally
+      also provide compression. The transport layer will typically be
+      run over a TCP/IP connection, but might also be used on top of any
+      other reliable data stream.
+
+   o  トランスポート層プロトコル [SSH-TRANS] は サーバ認証,
+      秘密性, 完全性を提供する. 圧縮も提供してもよい. トランスポート層
+      は典型的には TCP/IP 接続の上で動くが, 別の信頼できるデータストリーム
+      上で使ってもよい.
+
+   o  The User Authentication Protocol [SSH-USERAUTH] authenticates the
+      client-side user to the server. It runs over the transport layer
+      protocol.
+
+   o  ユーザ認証プロトコル [SSH-USERAUTH] はクライアント側のユーザを
+      サーバに対して認証する. これはトランスポート層プロトコルの上で
+      動く.
+
+   o  The Connection Protocol [SSH-CONNECT] multiplexes the encrypted
+      tunnel into several logical channels. It runs over the user
+      authentication protocol.
+
+   o  コネクションプロトコル [SSH-CONNECT] は暗号化されたトンネルを
+      いくつかの論理チャンネルに多重化する. これはユーザ認証プロトコル
+      の上で動く.
+
+
+   The client sends a service request once a secure transport layer
+   connection has been established. A second service request is sent
+   after user authentication is complete. This allows new protocols to
+   be defined and coexist with the protocols listed above.
+
+   クライアントは, 安全なトランスポート層の接続が確立されたら一度
+   サービス要求を送る. ユーザ認証が終わったら, 2 番目のサービス要求が
+   送られる. これにより, 新しいプロトコルを定義し上に挙げられたプロトコルと
+   共存することが可能になっている.
+
+   The connection protocol provides channels that can be used for a wide
+   range of purposes. Standard methods are provided for setting up
+   secure interactive shell sessions and for forwarding ("tunneling")
+   arbitrary TCP/IP ports and X11 connections.
+
+   コネクションプロトコルは広い用途のために使うことができるチャンネル
+   を提供する. 安全なインタラクティブなシェルセッションや
+   任意の TCP/IP ポートや X11 接続の転送 ("トンネリング") 
+   のための標準的な方法が提供されている.
+
+3. Specification of Requirements
+
+   All documents related to the SSH protocols shall use the keywords
+   "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+   "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" to describe
+   requirements.  They are to be interpreted as described in [RFC2119].
+
+4. Architecture
+
+4. アーキテクチャ
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                 [Page 3]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+4.1 Host Keys
+
+4.1 Host Keys
+
+   Each server host SHOULD have a host key.  Hosts MAY have multiple
+   host keys using multiple different algorithms.  Multiple hosts MAY
+   share the same host key. If a host has keys at all, it MUST have at
+   least one key using each REQUIRED public key algorithm (DSS
+   [FIPS-186]).
+
+   サーバホストはそれぞれホスト鍵を持つ必要がある. ホストは
+   複数の別のアルゴリズムを使った複数のホスト鍵を持ってもよい.
+   複数のホストが同じホスト鍵を共有してもよい. ホストが複数の鍵を持つ
+   なら, すくなくともその一つは要求されている公開鍵アルゴリズム 
+   (DSS [FIPS-186]) を使った鍵でなければならない.
+
+
+   The server host key is used during key exchange to verify that the
+   client is really talking to the correct server. For this to be
+   possible, the client must have a priori knowledge of the server's
+   public host key.
+
+   サーバホスト鍵は鍵交換の間にクライアントが正しいサーバと本当に
+   話しているかを検証するのに使われる. これを可能にするために,
+   クライアントはサーバの公開ホスト鍵をア プリオリに知っていなければ
+   ならない.
+
+   Two different trust models can be used:
+
+   2 つの異なる信用のモデルが使われている:
+
+   o  The client has a local database that associates each host name (as
+      typed by the user) with the corresponding public host key.  This
+      method requires no centrally administered infrastructure, and no
+      third-party coordination.  The downside is that the database of
+      name-to-key associations may become burdensome to maintain.
+
+   o  クライアントは, (ユーザが入力した) それぞれのホスト名に関連する
+      ホスト名と対応する公開ホスト鍵が関連付いたローカルなデータベース
+      を持つ. この方法は中心的な管理インフラストラクチャを必要としない
+      し, 第三者の調整を必要としない. この方法の弱点は, 名前-対-鍵の
+      関連のデータベースが維持するのがやっかいになるかもしれない
+      という点だ.
+
+   o  The host name-to-key association is certified by some trusted
+      certification authority.  The client only knows the CA root key,
+      and can verify the validity of all host keys certified by accepted
+      CAs.
+
+   o  ホストの名前-対-鍵の関連が, なんらかの信用された認証局 (CA) で認証
+      されている. クライアントは CA のルート鍵のみを知っていて,
+      受けいれた CA によって認証されたすべてのホスト鍵
+      の正当性を検証できる.
+
+      The second alternative eases the maintenance problem, since
+      ideally only a single CA key needs to be securely stored on the
+      client.  On the other hand, each host key must be appropriately
+      certified by a central authority before authorization is possible.
+      Also, a lot of trust is placed on the central infrastructure.
+
+      理想的にはただ一つの CA の鍵をクライアントが安全に保持すればいいので,
+      2 つ目の選択肢は維持の問題を軽減する. 一方, それぞれのホスト鍵は
+      認証が可能になる前に中央 (認証) 局で適切に認証されなければならない.
+      また, 信用の多くの部分が中央インフラストラクチャに置かれる.
+
+   The protocol provides the option that the server name - host key
+   association is not checked when connecting to the host for the first
+   time. This allows communication without prior communication of host
+   keys or certification. The connection still provides protection
+   against passive listening; however, it becomes vulnerable to active
+   man-in-the-middle attacks. Implementations SHOULD NOT normally allow
+   such connections by default, as they pose a potential security
+   problem. However, as there is no widely deployed key infrastructure
+   available on the Internet yet, this option makes the protocol much
+   more usable during the transition time until such an infrastructure
+   emerges, while still providing a much higher level of security than
+   that offered by older solutions (e.g. telnet [RFC-854] and rlogin
+   [RFC-1282]).
+
+   プロトコルは 最初のホストに接続しにいく際に
+   サーバの名前 - ホスト鍵の関係を検査しない選択肢を提供する.
+   これにより, ホスト鍵や証明書を先に通信する前に通信することが
+   できる. こうしても, 接続は受動的な傍受に対する保護を提供する.
+   が, 能動的な man-in-the-middle 攻撃に対しては弱点となる.
+   実装は, 普通はこのような接続をデフォルトとして許さないほうがよい.
+   このような接続は潜在的なセキュリティの問題だから. しかし
+   まだ インターネット上に広く展開された鍵インフラストラクチャが
+   まだ利用できず, 古い解決法 (たとえば telnet [RFC-854] や rlogin[RFC-1282]) 
+   が提供するものよりも高いセキュリティを提供するので,	    
+   インフラストラクチャが出てくるまでの過渡期においては,
+   この選択肢はこのプロトコルをより使いやすくしている.
+
+   Implementations SHOULD try to make the best effort to check host
+   keys.  An example of a possible strategy is to only accept a host key
+   without checking the first time a host is connected, save the key in
+   a local database, and compare against that key on all future
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                 [Page 4]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   connections to that host.
+
+   実装は, ホスト鍵を検査する最大限の努力を試る必要がある.
+   可能な戦略の例として, 最初にホストに接続した時にのみ
+   検査なしでホスト鍵を受け入れ, ローカルなデータベースに鍵を保存し,
+   そのホストに対するその後のすべての接続の際に鍵を比較する,
+   というものがある.
+
+   Implementations MAY provide additional methods for verifying the
+   correctness of host keys, e.g. a hexadecimal fingerprint derived from
+   the SHA-1 hash of the public key. Such fingerprints can easily be
+   verified by using telephone or other external communication channels.
+
+   実装はホスト鍵が正しいことを検証する別の方法, たとえば, 公開鍵の
+   SHA-1 ハッシュからの 16 進フィンガープリント, を提供してもよい.
+   このようなフィンガープリントなら電話や別の外部の通信チャンネル
+   を使って容易に検証できる.
+
+
+   All implementations SHOULD provide an option to not accept host keys
+   that cannot be verified.
+
+   すべての実装は, 検証することができなかったホスト鍵を受け付けない
+   選択肢を提供する必要がある.
+
+   We believe that ease of use is critical to end-user acceptance of
+   security solutions, and no improvement in security is gained if the
+   new solutions are not used.  Thus, providing the option not to check
+   the server host key is believed to improve the overall security of
+   the Internet, even though it reduces the security of the protocol in
+   configurations where it is allowed.
+
+   我々は, 使用が容易であることはセキュリティの解決をエンドユーザに
+   受け入れてもらうために重要で, 新しい解決も使われなければ
+   なんのセキュリティ上の改善にならない, と思っている.
+   それゆえに, サーバホスト鍵をチェックしない選択肢を提供することは
+   インターネットの全体的なセキュリティを改善すると思われる.
+   たとえ, それを許す設定がプロトコルのセキュリティを損なうとしてもだ.
+
+4.2 Extensibility
+
+4.2 拡張性
+
+   We believe that the protocol will evolve over time, and some
+   organizations will want to use their own encryption, authentication
+   and/or key exchange methods.  Central registration of all extensions
+   is cumbersome, especially for experimental or classified features.
+   On the other hand, having no central registration leads to conflicts
+   in method identifiers, making interoperability difficult.
+
+   我々は, プロトコルがそのうち進化し, いくつかの組織が
+   彼ら自身の暗号, 認証, 鍵交換の方法を使いたくなると思っている.
+   すべての拡張を中央で登録することは, 実験的ないし機密扱いの特徴
+   でなれば, やっかいなことだ. 一方, 中央での登録がなければ,
+   メソッド識別子に衝突をもたらし, 相互運用性が欠けるようになる.
+
+   We have chosen to identify algorithms, methods, formats, and
+   extension protocols with textual names that are of a specific format.
+   DNS names are used to create local namespaces where experimental or
+   classified extensions can be defined without fear of conflicts with
+   other implementations.
+
+   我々は, 特定のフォーマットに従ったテキストの名前を持つ,
+   アルゴリズム, メソッド, フォーマット, 拡張プロトコルを
+   確認することを選択した.
+   DNS 名をローカルな名前空間を作るのに使うことで,
+   実験的ないし機密扱いの拡張を, 別の実装と衝突することを恐れ
+   ることなしに定義できる.
+
+   One design goal has been to keep the base protocol as simple as
+   possible, and to require as few algorithms as possible.  However, all
+   implementations MUST support a minimal set of algorithms to ensure
+   interoperability (this does not imply that the local policy on all
+   hosts would necessary allow these algorithms).  The mandatory
+   algorithms are specified in the relevant protocol documents.
+
+   設計の目標の一つは, 基本のプロトコルを可能な限り単純にしたままにし,
+   可能な限り少ないアルゴリズムのみを必要とすることだ. しかし
+   すべての実装は, 相互運用性を保証する最小のアルゴリズムの集合を
+   サポートしなければならない (これは, すべてのホストのローカルなポリシーで
+   これらのアルゴリズムを受け入れなければならないということ
+   を意味していない). 必須のアリゴリズムは, 関連するプロトコルの文書で
+   定められる.
+
+   Additional algorithms, methods, formats, and extension protocols can
+   be defined in separate drafts.  See Section Algorithm Naming (Section
+   6) for more information.
+
+   追加のアルゴリズム, メソッド, フォーマット, 拡張プロトコルは
+   別のドラフトで定義されうる. アルゴリズム命名のセクション
+   (セクション 6) にさらなる情報がある.
+
+4.3 Policy Issues
+
+4.3 ポリシーの問題
+
+   The protocol allows full negotiation of encryption, integrity, key
+   exchange, compression, and public key algorithms and formats.
+   Encryption, integrity, public key, and compression algorithms can be
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                 [Page 5]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   different for each direction.
+
+   プロトコルは, 暗号, 完全性, 鍵交換, 圧縮,
+   公開鍵アルゴリズムとフォーマットについて完全なネゴシエーションを許している.
+   暗号, 完全性, 公開鍵, 圧縮アルゴリズムは
+   方向によって異なってもよい.
+
+   The following policy issues SHOULD be addressed in the configuration
+   mechanisms of each implementation:
+   次のポリシーの問題は, それぞれの実装の設定の手順中で処理される必要が
+   ある:
+
+   o  Encryption, integrity, and compression algorithms, separately for
+      each direction.  The policy MUST specify which is the preferred
+      algorithm (e.g. the first algorithm listed in each category).
+
+   o   方向に対して独立な暗号, 完全性, 圧縮アルゴリズム. ポリシーは
+       優先するアルゴリズムがなにかを定義しなければならない.
+       (たとえば, それぞれのカテゴリーで最初にリストされるアルゴリズム)
+
+   o  Public key algorithms and key exchange method to be used for host
+      authentication.  The existence of trusted host keys for different
+      public key algorithms also affects this choice.
+
+   o  ホスト認証に使われる公開鍵アルゴリズムと鍵交換の方法.
+      別々の公開鍵アルゴリズムによる信用されたホスト鍵があってもよいこと
+      もこの選択に影響する.
+
+   o  The authentication methods that are to be required by the server
+      for each user.  The server's policy MAY require multiple
+      authentication for some or all users.  The required algorithms MAY
+      depend on the location where the user is trying to log in from.
+
+   o  それぞれのユーザに対してサーバによって必要とされる認証の方法.
+      サーバのポリシーはユーザの一部ないし全部に対して複数の認証を
+      必要としてもよい. 要求するアルゴリズムは, ユーザがどこから
+      ログインしようとしているかに依存してもよい.
+
+   o  The operations that the user is allowed to perform using the
+      connection protocol.  Some issues are related to security; for
+      example, the policy SHOULD NOT allow the server to start sessions
+      or run commands on the client machine, and MUST NOT allow
+      connections to the authentication agent unless forwarding such
+      connections has been requested.  Other issues, such as which TCP/
+      IP ports can be forwarded and by whom, are clearly issues of local
+      policy. Many of these issues may involve traversing or bypassing
+      firewalls, and are interrelated with the local security policy.
+
+      コネクションプロトコルを使ってユーザが実行することができる操作. 
+      セキュリティと関連したいくつかの問題がある.
+      たとえば, ポリシーは, サーバにクライアントのマシン上で
+      セッションを始めたりコマンドを走らせたりさせないほうがよいし,
+      その接続の転送が要求されていないのに, 認証エージェントへの接続
+      を許してはならない. 別の問題は, ローカルなポリシーに関することだ.
+      これらの問題の多くは, ファイアウォールを横切ったり迂回することに
+      関連していて, ローカルなセキュリティポリシーと相互に関係がある.
+
+4.4 Security Properties
+
+4.4 セキュリティの特徴
+
+   The primary goal of the SSH protocol is improved security on the
+   Internet.  It attempts to do this in a way that is easy to deploy,
+   even at the cost of absolute security.
+
+   SSH プロトコルの第一の目標はインターネット上のセキュリティを改善すること
+   だ. 完全なセキュリティを犠牲にしてさえも,
+   配備が楽な方法で, この目標を実行しようとしている.
+
+   o  All encryption, integrity, and public key algorithms used are
+      well-known, well-established algorithms.
+
+   o  すべての使用される暗号, 完全性, 公開鍵アルゴリズムは
+      よく知られ, よく確立したアルゴリズムだ.
+
+   o  All algorithms are used with cryptographically sound key sizes
+      that are believed to provide protection against even the strongest
+      cryptanalytic attacks for decades.
+
+   o  すべてのアルゴリズムは, もっとも強い暗号解析攻撃に対してさえも
+      数十年間保護を提供すると思われる 暗号的に安全な鍵のサイズ
+      で使われる
+
+   o  All algorithms are negotiated, and in case some algorithm is
+      broken, it is easy to switch to some other algorithm without
+      modifying the base protocol.
+
+   o  すべてのアルゴリズムは取り決められ, いくつかのアルゴリズムが破られた
+      場合でも, 基本のプロトコルを変更することなしに別のいくつかの
+      アルゴリズムに切り替えることが容易だ.
+
+   Specific concessions were made to make wide-spread fast deployment
+   easier.  The particular case where this comes up is verifying that
+   the server host key really belongs to the desired host; the protocol
+   allows the verification to be left out (but this is NOT RECOMMENDED).
+   This is believed to significantly improve usability in the short
+   term, until widespread Internet public key infrastructures emerge.
+
+   明確な譲歩は, 広く速い配備を容易にする. 特に取りあげる
+   場合として, サーバホスト鍵が本当に望むホストに属しているかを
+   検証することがある. プロトコルはこの検証を省いてもよい. (がこれは
+   推奨されない) これは, インターネットの公開鍵インフラストラクチャが
+   普及するまでの間, 短い期間はユーザヴィリティを非常に改善すると
+   思われる.
+   
+
+4.5 Packet Size and Overhead
+
+4.5 パケットのサイズとオーバヘッド
+
+   Some readers will worry about the increase in packet size due to new
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                 [Page 6]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   headers, padding, and MAC.  The minimum packet size is in the order
+   of 28 bytes (depending on negotiated algorithms).  The increase is
+   negligible for large packets, but very significant for one-byte
+   packets (telnet-type sessions).  There are, however, several factors
+   that make this a non-issue in almost all cases:
+
+   新しいヘッダ, パディング, MAC によってパケットのサイズが増大する
+   ことを心配する読者がいるかもしれない. 最小のパケットサイズは
+   28byte のオーダだ (取り決められたアルゴリズムに依存する).
+   サイズの増大は大きなパケットでは無視できるが, 1 バイトのパケット
+   (telnet の類いのセッション) では非常に重大だ. しかし
+   いくつかの特徴によってほとんどの場合ではこの増大が問題では
+   なくなっている:
+
+   o  The minimum size of a TCP/IP header is 32 bytes.  Thus, the
+      increase is actually from 33 to 51 bytes (roughly).
+
+   o  TCP/IP のヘッダの最小サイズは 32byte だ. それゆえ
+      増大は実際には 33byte から 51byte となる (ラフには).
+
+   o  The minimum size of the data field of an Ethernet packet is 46
+      bytes [RFC-894]. Thus, the increase is no more than 5 bytes. When
+      Ethernet headers are considered, the increase is less than 10
+      percent.
+
+   o  Ethernet パケットのデータフィールドの最小サイズは 
+      46byte だ [RFC-894]. それゆえ, 増大は 5byte より大きくない.
+      Ethernet のヘッダまで考慮すると, 増大は 10%以下となる.
+
+   o  The total fraction of telnet-type data in the Internet is
+      negligible, even with increased packet sizes.
+
+   o  Internet での telnet タイプのデータの破片の合計は
+      パケットサイズが増えてさえも, 無視できる程度のものだ.
+
+   The only environment where the packet size increase is likely to have
+   a significant effect is PPP [RFC-1134] over slow modem lines (PPP
+   compresses the TCP/IP headers, emphasizing the increase in packet
+   size). However, with modern modems, the time needed to transfer is in
+   the order of 2 milliseconds, which is a lot faster than people can
+   type.
+
+   パケットサイズの増大が重大な影響を持つかもしれない唯一の環境は
+   遅いモデム回線上での PPP [RFC-1134] だ (PPP は TCP/IP のヘッダ
+   を圧縮し, それはパケットサイズの増大をさらに増す). しかし
+   最近のモデムなら, 転送に必要な時間は 2 ミリ杪のオーダで, これは人々が
+   タイプするのよりもずっと速い.
+
+   There are also issues related to the maximum packet size.  To
+   minimize delays in screen updates, one does not want excessively
+   large packets for interactive sessions.  The maximum packet size is
+   negotiated separately for each channel.
+
+   最大パケットサイズに関連する問題もある. スクリーンの更新を
+   最少の遅れですませるために, インタラクティブなセッションでは
+   非常に大きなパケットは望まれない. 最大パケットサイズは
+   それぞれのチャンネルで独立に取り決められる.
+
+4.6 Localization and Character Set Support
+
+4.6 ローカル化と文字セットのサポート
+
+   For the most part, the SSH protocols do not directly pass text that
+   would be displayed to the user. However, there are some places where
+   such data might be passed. When applicable, the character set for the
+   data MUST be explicitly specified. In most places, ISO 10646 with
+   UTF-8 encoding is used [RFC-2279]. When applicable, a field is also
+   provided for a language tag [RFC-3066].
+
+   多くの場合, SSH プロトコルはユーザに向けて表示されるテキストを
+   直接には流さない. しかし, そのようなデータが流れるかもしれない場合
+   がある. 適用できる場合は, データのための文字セットを
+   明記しなければならない. 多くの場合 UTF-8 エンコーディングとともに
+   ISO 10646 が使われる [RFC-2279]. 適用できる場合は, 言語タグ [RFC-3066]
+   のためにフィールドも提供されている.
+
+   One big issue is the character set of the interactive session.  There
+   is no clear solution, as different applications may display data in
+   different formats.  Different types of terminal emulation may also be
+   employed in the client, and the character set to be used is
+   effectively determined by the terminal emulation.  Thus, no place is
+   provided for directly specifying the character set or encoding for
+   terminal session data.  However, the terminal emulation type (e.g.
+   "vt100") is transmitted to the remote site, and it implicitly
+   specifies the character set and encoding.  Applications typically use
+   the terminal type to determine what character set they use, or the
+   character set is determined using some external means.  The terminal
+   emulation may also allow configuring the default character set.  In
+   any case, the character set for the terminal session is considered
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                 [Page 7]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   primarily a client local issue.
+
+   インタラクティブセッションでの文字セットは大きな問題だ. 明確な
+   解答はなく, 異なるアプリケーションは異なるフォーマットで
+   データを表示するかもしれない. 異なる種類の端末エミュレーションも
+   クライアントで使われているかもしれないし, そして使われている
+   文字セットは, 端末エミュレーションによって事実上決定される.
+   すなわち, 端末のセッションのデータのための文字セットやエンコーディング
+   を直接特定するためのものは提供されていない. しかし, 端末
+   エミュレーションの種類 (たとえば "vt100") はリモートサイトに
+   転送され, これは文字セットとエンコーディングを暗黙のうちに特定する.
+   アプリケーションは, 典型的には, どのキャラクターセットを使うかを
+   決定するのに端末の種類を使うか, 文字セットは別の外部の手段で
+   決定される. 端末エミュレーションはデフォルトの文字セットを設定
+   すつことを許している場合もある. どんな場合でも, 端末セッションでの
+   文字セットは主としてクライアントのローカルな問題と考えられる.
+
+   Internal names used to identify algorithms or protocols are normally
+   never displayed to users, and must be in US-ASCII.
+
+   アルゴリズムないしプロトコルを見分けるのに使われる内部的な名前は
+   普通決してユーザには示されないし, US-ASCII でなければならない.
+
+   The client and server user names are inherently constrained by what
+   the server is prepared to accept.  They might, however, occasionally
+   be displayed in logs, reports, etc.  They MUST be encoded using ISO
+   10646 UTF-8, but other encodings may be required in some cases.  It
+   is up to the server to decide how to map user names to accepted user
+   names.  Straight bit-wise binary comparison is RECOMMENDED.
+
+   クライアントとサーバのユーザ名は本質的にサーバが受け入れる準備がある
+   ものに制限される. これらは, しかし, 時おり, ログやレポートなどのなかで
+   表示されることがある. これらは ISO 10646 UTF-8 を使ってエンコード
+   されなければならないが, 別のエンコードが必要な場合もある.
+   ユーザ名を認められたユーザ名にどのようなマップするかを
+   決めるのはサーバ次第だ. ストレートなビットワイズパリティ比較が
+   推奨される.
+
+   For localization purposes, the protocol attempts to minimize the
+   number of textual messages transmitted.  When present, such messages
+   typically relate to errors, debugging information, or some externally
+   configured data.  For data that is normally displayed, it SHOULD be
+   possible to fetch a localized message instead of the transmitted
+   message by using a numerical code. The remaining messages SHOULD be
+   configurable.
+
+   ローカル化のために, プロトコルは転送されるテキストメッセージの数を
+   最小にしようとしている. 現在, このようなメッセージは典型的には
+   エラーやデバッグ情報やいくつかの外部で設定されたデータに
+   関係している. 転送メッセージの代わりに数字のコードを使って
+   ローカル化されたメッセージを取ってこれるようにする必要がある.
+   残りのメッセージは設定可能である必要がある.
+
+5. Data Type Representations Used in the SSH Protocols
+
+
+5. SSH プロトコル中で使われるデータタイプの表現
+
+
+   byte
+
+      A byte represents an arbitrary 8-bit value (octet) [RFC-1700].
+      Fixed length data is sometimes represented as an array of bytes,
+      written byte[n], where n is the number of bytes in the array.
+
+      byte は 任意の 8bit の値 (octet) [RFC-1700] を表す.
+      固定長のデータはバイト列は, byte[n], n は列中のバイトの数.
+      と表されることもある.
+
+   boolean
+
+      A boolean value is stored as a single byte.  The value 0
+      represents FALSE, and the value 1 represents TRUE. All non-zero
+      values MUST be interpreted as TRUE; however, applications MUST NOT
+      store values other than 0 and 1.
+
+      boolean の値は単一の byte として格納される. 値 0 は FALSE を表し,
+      値 1 は TRUE を表す. すべての 0 でない値は TRUE として解釈され
+      なければならない. しかし, アプリケーションは 0 か 1 以外の
+      値を格納してはならない.
+
+   uint32
+
+      Represents a 32-bit unsigned integer.  Stored as four bytes in the
+      order of decreasing significance (network byte order). For
+      example, the value 699921578 (0x29b7f4aa) is stored as 29 b7 f4
+      aa.
+
+      32-bit の符号無し整数を表す. 上位ビットから下位ビットの順に
+      4 つの byte に格納される ( network byte order). たとえば,
+      699921578 (0x29b7f4aa) は 29 b7 f4 aa と格納される.
+
+   uint64
+
+      Represents a 64-bit unsigned integer.  Stored as eight bytes in
+      the order of decreasing significance (network byte order).
+
+      64-bit の符号無し整数を表す. 上位ビットから下位ビットの順に
+      8 つの byte に格納される ( network byte order).
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                 [Page 8]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   string
+
+      Arbitrary length binary string.  Strings are allowed to contain
+      arbitrary binary data, including null characters and 8-bit
+      characters. They are stored as a uint32 containing its length
+      (number of bytes that follow) and zero (= empty string) or more
+      bytes that are the value of the string.  Terminating null
+      characters are not used.
+
+      任意の長さの 2 進 string . string は null 文字や 8-bit 文字を含む
+      任意の 2 進データを含むことができる. これは, uint32 にその長さ
+      (後に続くバイトの数) を格納し, 続けてゼロ (空文字列) ないし
+      string の値である byte を格納する. null 文字による終端は
+      使われない.
+
+      Strings are also used to store text.  In that case, US-ASCII is
+      used for internal names, and ISO-10646 UTF-8 for text that might
+      be displayed to the user. The terminating null character SHOULD
+      NOT normally be stored in the string.
+
+      string はテキストを格納するのにも使われる. この場合 US-ASCII が
+      内部の名前に使われ, ISO-10646 UTF-8 が ユーザに対して表示されうる
+      テキストに対して使われる. null 文字による終端は string に格納するのに
+      普通しないほうがよい.
+
+      For example, the US-ASCII string "testing" is represented as 00 00
+      00 07 t e s t i n g. The UTF8 mapping does not alter the encoding
+      of US-ASCII characters.
+
+      例えば US-ASCII 文字列 "testing" は 00 00 00 07 t e s t i n g
+      と表わされる. UTF8 マッピングは US-ASCII 文字のエンコーディング
+      を変えない.
+
+   mpint
+
+      Represents multiple precision integers in two's complement format,
+      stored as a string, 8 bits per byte, MSB first. Negative numbers
+      have the value 1 as the most significant bit of the first byte of
+      the data partition. If the most significant bit would be set for a
+      positive number, the number MUST be preceded by a zero byte.
+      Unnecessary leading bytes with the value 0 or 255 MUST NOT be
+      included.  The value zero MUST be stored as a string with zero
+      bytes of data.
+
+      2 つの部分からなるフォーマットで, 正確な整数を表す.
+      数は, byte ごとに 8bit, MSB が最初で string の様に格納される.
+      負の数はデータの区切りの最初の byte の最上位 bit に 値 1 を持つ.
+      もし最上位 bit が正の数に対してセットされるのなら, その数は
+      ゼロ byte を先に入れなければならない (以下の例で 0x80 ).
+      必要のない 0 か 255 の先導する byte は含んではならない. 値 ゼロ
+      は 0 byte のデータを持つ文字列として格納されなれなければならない.
+
+      By convention, a number that is used in modular computations in
+      Z_n SHOULD be represented in the range 0 <= x < n.
+
+      慣例により, Z_n の合同計算に使われる数は 0 <= x < n の範囲で
+      表される必要がある.
+
+       Examples:
+       value (hex)        representation (hex)
+       ---------------------------------------------------------------
+       0                  00 00 00 00
+       9a378f9b2e332a7    00 00 00 08 09 a3 78 f9 b2 e3 32 a7
+       80                 00 00 00 02 00 80
+       -1234              00 00 00 02 ed cc
+       -deadbeef          00 00 00 05 ff 21 52 41 11
+
+
+
+   name-list
+
+      A string containing a comma separated list of names. A name list
+      is represented as a uint32 containing its length (number of bytes
+      that follow) followed by a comma-separated list of zero or more
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                 [Page 9]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+      names. A name MUST be non-zero length, and it MUST NOT contain a
+      comma (','). Context may impose additional restrictions on the
+      names; for example, the names in a list may have to be valid
+      algorithm identifier (see Algorithm Naming below), or [RFC-3066]
+      language tags. The order of the names in a list may or may not be
+      significant, also depending on the context where the list is is
+      used. Terminating NUL characters are not used, neither for the
+      individual names, nor for the list as a whole.
+
+      名前のコンマ区切りリストを含む文字列. name-list は
+      その長さ (続くもののバイト数) を表す uint32 とそれに続く
+      ゼロか名前のコンマ区切リストで表される. 名前は 長さがゼロで
+      あってはならず, コンマ (',') を含んではならない.
+      環境によっては名前にさらに別の制限を加えるかもしれない. 例えば,
+      リスト中の名前は正当なアルゴリズム識別子であったり
+      (以下のアルゴリズムの名前付けを見よ),
+      [RFC-3066] の言語タグでなければならないかもしれない.
+      リスト内の名前の順序は, リストが使われる状況に依存して
+      重要であったりなかったりするだろう. NUL 文字での終端は
+      個々の名前に対してもリスト全体に対しても, 使われない.
+
+       Examples:
+       value              representation (hex)
+       ---------------------------------------
+       (), the empty list 00 00 00 00
+       ("zlib")           00 00 00 04 7a 6c 69 62
+       ("zlib", "none")   00 00 00 09 7a 6c 69 62 2c 6e 6f 6e 65
+
+
+
+
+6. Algorithm Naming
+
+6. アルゴリズムの命名
+
+   The SSH protocols refer to particular hash, encryption, integrity,
+   compression, and key exchange algorithms or protocols by names.
+   There are some standard algorithms that all implementations MUST
+   support. There are also algorithms that are defined in the protocol
+   specification but are OPTIONAL.  Furthermore, it is expected that
+   some organizations will want to use their own algorithms.
+
+   SSH プロトコルは, 特殊はハッシュや暗号, 完全性, 圧縮,
+   鍵交換のアルゴリズムやプロトコルを名前で参照する. すべての実装が
+   サポートしなければならない標準アルゴリズムがある. プロトコルの
+   仕様に定義されているが選択できるアルゴリズムもある. さらに
+   なんらかの組織が彼ら自身のアルゴリズムの使用を望むことも予期されている.
+
+   In this protocol, all algorithm identifiers MUST be printable
+   US-ASCII non-empty strings no longer than 64 characters. Names MUST
+   be case-sensitive.
+
+   このプロトコルでは, すべてのアルゴリズム識別子は, 印刷可能な
+   US-ASCII の空でなく 64 文字を超えない文字列でなければならない.
+   名前は  大文字小文字を区別しなければならない.
+
+   There are two formats for algorithm names:
+   アルゴリズムの名前には 2 つのフォーマットがある:
+   o  Names that do not contain an at-sign (@) are reserved to be
+      assigned by IETF consensus (RFCs).  Examples include `3des-cbc',
+      `sha-1', `hmac-sha1', and `zlib' (the quotes are not part of the
+      name).  Names of this format MUST NOT be used without first
+      registering them.  Registered names MUST NOT contain an at-sign
+      (@) or a comma (,).
+
+   o  アットマーク (@) を含まない名前は IETF の合意 (RFC) で割当てるために
+      予約されている. 例には `3des-cbc', `sha-1', `hmac-sha1', `zlib' 
+      が含まれる (クォート (') は名前の部分ではない). 
+      このフォーマットの名前は最初にそれらを登録することなしに
+      使ってはならない. 登録された名前は アットマーク (@) や
+      コンマ (,) を含んではならない.
+
+   o  Anyone can define additional algorithms by using names in the
+      format name@domainname, e.g. "ourcipher-cbc@example.com". The
+      format of the part preceding the at sign is not specified; it MUST
+      consist of US-ASCII characters except at-sign and comma. The part
+      following the at-sign MUST be a valid fully qualified internet
+      domain name [RFC-1034] controlled by the person or organization
+      defining the name. It is up to each domain how it manages its
+      local namespace.
+
+   o  誰でも, name@domainname フォーマットの, たとえば,
+      "ourcipher-cbc@ssh.com" といった名前を使って追加のアルゴリズム
+      を定義できる. @の前の部分のフォーマットは決まっていない.
+      アットマーク と コンマを除く US-ASCII 文字で構成されてなければ
+      ならない. @の後に続く部分は, 名前を定義する個人ないし組織
+      で管理されている正当な完全修飾インターネットドメイン名 [RFC-1034]
+      でなければならない. ローカルな名前空間をどう管理するかは
+      それぞれのドメイン次第だ.
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 10]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+7. Message Numbers
+
+7. メッセージ番号
+
+   SSH packets have message numbers in the range 1 to 255. These numbers
+   have been allocated as follows:
+
+   SSH のパケットは 1 から 255 の範囲のメッセージ番号を持つ. これらの番号は
+   以下のように配置されている:
+
+     Transport layer protocol:
+
+     トランスポート層プロトコル:
+
+       1 to 19    Transport layer generic (e.g. disconnect, ignore, debug,
+                  etc.)
+       20 to 29   Algorithm negotiation
+       30 to 49   Key exchange method specific (numbers can be reused for
+                  different authentication methods)
+
+       1 to 19    トランスポート層特有 (すなわち, 切断, 無視, デバッグなど)
+       20 to 29   アルゴリズムのネゴシエーション
+       30 to 49   鍵交換法特有 (別の認証法で数を再利用してもいい)
+
+     User authentication protocol:
+
+     ユーザ認証プロトコル:
+
+       50 to 59   User authentication generic
+       60 to 79   User authentication method specific (numbers can be
+                  reused for different authentication methods)
+
+       50 to 59   ユーザ認証特有
+       60 to 79   ユーザ認証法特有 (別の認証法で数を再利用してもいい)
+
+     Connection protocol:
+
+     コネクションプロトコル:
+
+       80 to 89   Connection protocol generic
+       90 to 127  Channel related messages
+
+       80 to 89   コネクションプロトコル特有
+       90 to 127  メッセージに関連するチャンネル
+
+     Reserved for client protocols:
+
+     クライアントプロトコルのための予約:
+
+       128 to 191 Reserved
+
+       128 to 191 予約
+
+     Local extensions:
+
+     ローカルな拡張:
+
+       192 to 255 Local extensions
+
+       192 to 255 ローカルな拡張
+
+8. IANA Considerations
+
+8. IANA に関する考察
+
+   The initial state of the IANA registry is detailed in [SSH-NUMBERS].
+
+   IANA の登録の初期状態については [SSH-NUMBERS] に詳述されている.
+
+   Allocation of the following types of names in the SSH protocols is
+   assigned by IETF consensus:
+   SSH プロトコル中の以下の種類の名前は IETF の合意によって
+   割当てられる.
+
+   o  SSH encryption algorithm names,
+   o  SSH MAC algorithm names,
+   o  SSH public key algorithm names (public key algorithm also implies
+      encoding and signature/encryption capability),
+   o  SSH key exchange method names, and
+   o  SSH protocol (service) names.
+
+   o  SSH 暗号アルゴリズムの名前
+   o  SSH MAC アルゴリズムの名前
+   o  SSH 公開鍵アルゴリズムの名前 (公開鍵アルゴリズムはエンコーディングと
+      署名/暗号化の能力も暗示する)
+   o  SSH 鍵交換法の名前
+   o  SSH プロトコル (サービス) の名前
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 11]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   These names MUST be printable US-ASCII strings, and MUST NOT contain
+   the characters at-sign ('@'), comma (','), or whitespace or control
+   characters (ASCII codes 32 or less).  Names are case-sensitive, and
+   MUST NOT be longer than 64 characters.
+
+   これらの名前は印刷可能は US-ASCII 文字列でなければならず,
+   アットマーク ('@') やコンマ (',') やホワイトスペースや制御
+   文字 (ASCII コードで 32 以下) を含んではならない. 名前は大文字小文字を
+   区別し, 64 文字を超えてはならない.
+
+   Names with the at-sign ('@') in them are allocated by the owner of
+   DNS name after the at-sign (hierarchical allocation in [RFC-2343]),
+   otherwise the same restrictions as above.
+
+   これらのうちアットマーク ('@') を含む名前は アットマークのあとの
+   DNS 名 ([RFC-2343] での階層的な割り当て) の所有者によって割り当てられる.
+   その他の点では上と同じ制限がある.
+
+   Each category of names listed above has a separate namespace.
+   However, using the same name in multiple categories SHOULD be avoided
+   to minimize confusion.
+
+   上に挙げたリストの名前のカテゴリーそれぞれは, 別々の名前空間を持つ.
+   しかし, 複数のカテゴリーで同じ名前を持つことは, 混乱を最小限に
+   するために回避される必要がある.
+
+   Message numbers (see Section Message Numbers (Section 7)) in the
+   range of 0..191 are allocated via IETF consensus; message numbers in
+   the 192..255 range (the "Local extensions" set) are reserved for
+   private use.
+
+   メッセージ番号 (メッセージ番号のセクション (セクション 7) を参照) の
+   0 から 191 の範囲は IETF の合意によって割り当てられる必要がある.
+   192 から 255 の範囲のメッセージ番号 ( "ローカル拡張" 集合) は
+   プライベートな使用のために予約されている.
+
+9. Security Considerations
+
+9. セキュリティに関する考慮
+
+   In order to make the entire body of Security Considerations more
+   accessible, Security Considerations for the transport,
+   authentication, and connection documents have been gathered here.
+
+   セキュリティに関する考察の全体によりアクセスしやすくするため,
+   トランスポート, 認証, コネクション 文書の考察をここにまとめた.
+
+   The transport protocol [1] provides a confidential channel over an
+   insecure network.  It performs server host authentication, key
+   exchange, encryption, and integrity protection.  It also derives a
+   unique session id that may be used by higher-level protocols.
+
+   トランスポートプロトコル [1] は, 安全でないネットワーク上での
+   秘密のチャンネルを提供する. このプロトコルは サーバホスト認証,
+   鍵交換, 暗号化, 完全性の保護を行なう.
+   より高次のプロトコルで用いることのできるユニークな session id
+   も導出する.
+
+   The authentication protocol [2] provides a suite of mechanisms which
+   can be used to authenticate the client user to the server.
+   Individual mechanisms specified in the in authentication protocol use
+   the session id provided by the transport protocol and/or depend on
+   the security and integrity guarantees of the transport protocol.
+
+   認証プロトコル [2] は クライアントユーザをサーバに認証するために
+   使われるメカニズムの一式を提供する. 認証プロトコル中で定められた
+   個々のメカニズムは トランスポートプロトコルによって提供される
+   session id を使用する. また/もしくは トランスポートプロトコル
+   のセキュリティと完全性保証に依存する.
+
+   The connection protocol [3] specifies a mechanism to multiplex
+   multiple streams [channels] of data over the confidential and
+   authenticated transport. It also specifies channels for accessing an
+   interactive shell, for 'proxy-forwarding' various external protocols
+   over the secure transport (including arbitrary TCP/IP protocols), and
+   for accessing secure 'subsystems' on the server host.
+
+   コネクションプロトコル [3] は 秘密の認証されたトランスポート上で
+   複数のデータストリーム [チャンネル] を多重化するメカニズムを定める.
+   これは, インタラクティブなシャルにアクセスするため,
+   安全なトランスポート上でいろいろな外部プロトコル
+   (任意の TCP/IP プロトコルを含む)
+   の 'proxy-forwarding'のため, サーバホストの安全なサブシステムにアクセスする
+   ためのチャンネルも定めている.
+
+9.1 Pseudo-Random Number Generation
+
+9.1 擬似乱数生成
+
+   This protocol binds each session key to the session by including
+   random, session specific data in the hash used to produce session
+   keys.  Special care should be taken to ensure that all of the random
+   numbers are of good quality.  If the random data here (e.g., DH
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 12]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   parameters) are pseudo-random then the pseudo-random number generator
+   should be cryptographically secure (i.e., its next output not easily
+   guessed even when knowing all previous outputs) and, furthermore,
+   proper entropy needs to be added to the pseudo-random number
+   generator.  RFC 1750 [1750] offers suggestions for sources of random
+   numbers and entropy.  Implementors should note the importance of
+   entropy and the well-meant, anecdotal warning about the difficulty in
+   properly implementing pseudo-random number generating functions.
+   
+   このプロトコルは, セッションキーを生成するために使われるハッシュに
+   ランダムなセッション特有のデータを含むセッションとセッションキー
+   を結びつける. すべてのランダムナンバーが良い品質であることを
+   保証するために特別な配慮をする必要がある. ここで (DH パラメータのような)
+   ランダムデータが擬似ランダムなら, 擬似乱数生成器は
+   暗号学的に安全である必要がある. (すなわち, これまでのすべての出力が
+   知られてもその次の出力が容易に推測されない) さらに,
+   擬似乱数生成器に十分なエントロピーが追加される必要がある.
+   RFC 1750 [1750] は乱数のソースとエントリピーについての示唆を提供している.
+   実装者は, エントロピーの重要性と, 擬似乱数生成関数の適切に実装する
+   困難さについての 好意の, 事例の警告に注意する必要がある.
+
+   The amount of entropy available to a given client or server may
+   sometimes be less than what is required.  In this case one must
+   either resort to pseudo-random number generation regardless of
+   insufficient entropy or refuse to run the protocol.  The latter is
+   preferable.
+
+   特定のクライアントないしサーバが利用できるエントロピーの量は
+   ときに必要なものよりも少ない. この場合,不十分なエントロピーにも
+   かかわらず擬似乱数生成を強行するか, プロトコルの実行を拒否するか
+   しなければならない. 後者が好ましい.
+
+9.2 Transport
+
+9.2 トランスポート
+
+9.2.1 Confidentiality
+
+9.2.1 秘密性
+
+   It is beyond the scope of this document and the Secure Shell Working
+   Group to analyze or recommend specific ciphers other than the ones
+   which have been established and accepted within the industry.  At the
+   time of this writing, ciphers commonly in use include 3DES, ARCFOUR,
+   twofish, serpent and blowfish.  AES has been accepted by The
+   published as a US Federal Information Processing Standards [FIPS-197]
+   and the cryptographic community as being acceptable for this purpose
+   as well has accepted AES.  As always, implementors and users should
+   check current literature to ensure that no recent vulnerabilities
+   have been found in ciphers used within products.  Implementors should
+   also check to see which ciphers are considered to be relatively
+   stronger than others and should recommend their use to users over
+   relatively weaker ciphers.  It would be considered good form for an
+   implementation to politely and unobtrusively notify a user that a
+   stronger cipher is available and should be used when a weaker one is
+   actively chosen.
+
+   業界で確立され受け入れられている暗号を分析したり,特定の暗号を
+   推奨したりすることは, この文書と Secure Shell Working Group の
+   扱う範囲を超えている. 執筆時では, 共通して使われている暗号に
+   3DES, ARCFOUR, twofish, serpent, blowfish がある.
+   AES は, アメリカ連邦情報処理標準 [FIPS-197] として出版されたことにより
+   受けいれられてきて, 同様にこの目的のために受けいれうる暗号学のコミュニティも
+   AES を受けいれた. 例のごとく, 実装者とユーザは, 製品内部で使われる
+   暗号に 最近の脆弱性がないことを保証するため 最新の文献を
+   チェックする必要がある. 実装者は, どの暗号が他のものより相対的に強いと
+   考えられているかチェックする必要もあり, 相対的に弱い暗号ではなく
+   強いものを使うようにユーザに推奨する必要がある.
+   より強い暗号が利用でき, より弱い暗号が能動的に選ばれた場合
+   より強いものをつかうべきであることを
+   上品におしつけがましくなくユーザに知らせる
+   ことが実装にとってよいことだと考えられる. 
+
+   The "none" cipher is provided for debugging and SHOULD NOT be used
+   except for that purpose.  It's cryptographic properties are
+   sufficiently described in RFC 2410, which will show that its use does
+   not meet the intent of this protocol.
+
+   "none" 暗号はデバッグのために提供されており, この目的以外では
+   使用しないほうがいい. この暗号学的な性質は RFC 2410 十分に記述されて
+   おり, このプロトコルの目的が使用することにないことを示している.
+
+   The relative merits of these and other ciphers may also be found in
+   current literature.  Two references that may provide information on
+   the subject are [SCHNEIER] and [KAUFMAN,PERLMAN,SPECINER].  Both of
+   these describe the CBC mode of operation of certain ciphers and the
+   weakness of this scheme.  Essentially, this mode is theoretically
+   vulnerable to chosen cipher-text attacks because of the high
+   predictability of the start of packet sequence.  However, this attack
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 13]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   is still deemed difficult and not considered fully practicable
+   especially if relatively longer block sizes are used.
+
+   これらとその他の暗号の相対的な利点については, 最新の文献で
+   見つけられるかもしれない. この主題についての情報を提供している 2 つの
+   参考文献は [SCHNEIER] と [KAUFMAN,PERLMAN,SPECINER] だ.
+   これらのどちらも, 特定の暗号の CBC モードの操作についてと
+   この方式の弱点について記述している. 重要なのは, このモードは
+   理論的に 選択暗号文攻撃に対して脆弱であることだ,  
+   パケットのシーケンスの銭湯を高い確率で予測できるので.   
+   しかし, この攻撃は, 難しいとみなされていて, 割合に長いブロックサイズを
+   使った場合でも十分に実用可能だとみなされていない.
+
+   Additionally, another CBC mode attack may be mitigated through the
+   insertion of packets containing SSH_MSG_IGNORE.  Without this
+   technique, a specific attack may be successful.  For this attack
+   (commonly known as the Rogaway attack
+   [ROGAWAY],[DAI],[BELLARE,KOHNO,NAMPREMPRE]) to work, the attacker
+   would need to know the IV of the next block that is going to be
+   encrypted.  In CBC mode that is the output of the encryption of the
+   previous block. If the attacker does not have any way to see the
+   packet yet (i.e it is in the internal buffers of the ssh
+   implementation or even in the kernel) then this attack will not work.
+   If the last packet has been sent out to the network (i.e the attacker
+   has access to it) then he can use the attack.
+
+   加えて, 別の CBC モードへの攻撃は, SSH_MSG_IGNORE を含むパケットを
+   挿入することで軽減される. このテクニックなしでは, 特定の攻撃は
+   成功するかもしれない. この攻撃 ( Rogaway 攻撃として一般に知られている
+   [ROGAWAY],[DAI],[BELLARE,KOHNO,NAMPREMPRE]) が上手くいくためには,
+   攻撃者は暗号化される次のブロックの初期化ベクトル (IV) を知る必要がある
+   だろう. CBC モードでは, これは前のブロックの暗号化された出力である.
+   攻撃者が (すなわち, ssh の実装やカーネルの中の内部バッファにある)
+   このパケットを見る方法を持っていないなら, この攻撃は上手くいない.
+   もし最後のパケットがネットワークに送られる (すなわち攻撃者が
+   それにアクセスする) と, 攻撃者は攻撃することができる.
+
+   In the optimal case an implementor would need to add an extra packet
+   only if the packet has been sent out onto the network and there are
+   no other packets waiting for transmission. Implementors may wish to
+   check to see if there are any unsent packets awaiting transmission,
+   but unfortunately it is not normally easy to obtain this information
+   from the kernel or buffers.  If there are not, then a packet
+   containing SSH_MSG_IGNORE SHOULD be sent.  If a new packet is added
+   to the stream every time the attacker knows the IV that is supposed
+   to be used for the next packet, then the attacker will not be able to
+   guess the correct IV, thus the attack will never be successfull.
+
+   最良の場合は, パケットがネットワークに送られる場合にのみ
+   余分なパケットを追加する必要があり, 転送を待つその他のパケットはない.
+   実装者は, 送られてなく転送を待っているパケットがあるかどうか
+   チェックしたいと思うかもしれないが, 不幸にもカーネルやバッファから
+   この情報を得ることは通常容易ではない. それがないなら,
+   SSH_MSG_IGNORE を含むパケットを送る必要がある. 
+   攻撃者は次のパケットに使われるはずである IV を知る場合に
+   いつも新しいパケットがストリームに追加されているなら, 
+   攻撃者は正しい IV を推測することができず, 攻撃が成功することはないだろう.
+
+
+   As an example, consider the following case:
+   
+   例として, 以下の場合を考える:
+
+
+         Client                                                  Server
+         ------                                                  ------
+         TCP (seq=x, len=500)		->
+   	 contains Record 1
+
+                             [500 ms passes, no ACK]
+
+   	TCP (seq=x, len=1000)		->
+   	 contains Records 1,2
+
+                                                                   ACK
+
+
+   1.  The Nagle algorithm + TCP retransmits mean that the two records
+       get coalesced into a single TCP segment
+
+   1.  Nagle アルゴリズムと TCP の再送は 2 つのレコードを一つの TCP セグメントに
+       合体させる.
+
+   2.  Record 2 is *not* at the beginning of the TCP segment and never
+       will be, since it gets ACKed.
+
+       Record 2 は ACK を受けとったので
+       TCP セグメントの始まりでは*なく*, 始まりになることもない.
+       
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 14]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   3.  Yet, the attack is possible because Record 1 has already been
+       seen.
+
+   3.  だが, Record 1 はすでに見られているので攻撃は可能だ.
+
+   As this example indicates, it's totally unsafe to use the existence
+   of unflushed data in the TCP buffers proper as a guide to whether you
+   need an empty packet, since when you do the second write (), the
+   buffers will contain the un-ACKed Record 1.
+
+   この例が示すように, TCP バッファにあるフラッシュされていない
+   データの存在を使うことは完全に安全でなく, 
+   空のパケットを必要かどうかのガイトとして適切だ.
+   2 回目の write () をする時以降, 
+   buffer は ACK されていない Record 1 を含んでいる.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 15]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   On the other hand, it's perfectly safe to have the following
+   situation:
+
+   一方, 次の状況は完全に安全だ.
+
+         Client                                                  Server
+         ------                                                  ------
+         TCP (seq=x, len=500)           ->
+            contains SSH_MSG_IGNORE
+
+         TCP (seq=y, len=500)           ->
+            contains Data
+
+      Provided that the IV for second SSH Record is fixed after the data for
+      the Data packet is determined -i.e. you do:
+           read from user
+           encrypt null packet
+           encrypt data packet
+
+      Data パケットのデータが決定されたあとで
+      2 番目の SSH Recode のために IV が決まるという条件なら - すなわち
+      ユーザから読んで, null パケットを暗号化して, データパケットを
+      暗号化するなら.
+
+9.2.2 Data Integrity
+
+9.2.2 データの完全性
+
+   This protocol does allow the Data Integrity mechanism to be disabled.
+   Implementors SHOULD be wary of exposing this feature for any purpose
+   other than debugging.  Users and administrators SHOULD be explicitly
+   warned anytime the "none" MAC is enabled.
+   
+   このプロトコルはデータの完全性のメカニズムを無効にすることを許している.
+   実装者は, デバッグ以外の目的にこの特徴をあらわにすることに用心深い
+   必要がある. ユーザと管理者は "none" MAC が有効になったらいつでも
+   明確に警告される必要がある.
+
+   So long as the "none" MAC is not used, this protocol provides data
+   integrity.
+
+   "none" MAC が使われない限り, このプロトコルはデータの完全性を
+   提供する.
+
+   Because MACs use a 32 bit sequence number, they might start to leak
+   information after 2**32 packets have been sent.  However, following
+   the rekeying recommendations should prevent this attack.  The
+   transport protocol [1] recommends rekeying after one gigabyte of
+   data, and the smallest possible packet is 16 bytes. Therefore,
+   rekeying SHOULD happen after 2**28 packets at the very most.
+
+   MAC は 32 bit のシーケンス番号を利用するので,
+   2**32 個のパケットが送られたあとで MAC は情報をリークしはじめるだろう.
+   しかし, 次の rekeying (再鍵生成) の推奨がこの攻撃を防ぐはずである.
+   transport protocol[i] は 1GB のデータを送ったあとで rekeying することと
+   可能な最小のパケットを 16 バイトにすることを推奨している.
+   それゆえ, rekeying は 多くて 2**28 パケットのあとで
+   起きる必要がある.
+
+9.2.3 Replay
+
+9.2.3 リプレイ
+
+   The use of a MAC other than 'none' provides integrity and
+   authentication.  In addition, the transport protocol provides a
+   unique session identifier (bound in part to pseudo-random data that
+   is part of the algorithm and key exchange process) that can be used
+   by higher level protocols to bind data to a given session and prevent
+   replay of data from prior sessions. For example, the authentication
+   protocol uses this to prevent replay of signatures from previous
+   sessions.  Because public key authentication exchanges are
+   cryptographically bound to the session (i.e., to the initial key
+   exchange) they cannot be successfully replayed in other sessions.
+
+
+   'none'以外の MAC の使用で, 完全性と認証が提供される. 加えて
+   トランスポートプロトコルは より高位のプロトコルで
+   データと与えられたセッションを結びつけ, より前のセッションからのデータの
+   リプレイを防ぐための (部分的にアルゴリズムと鍵交換課程の一部である
+   擬似ランダムデータと結びついている) ユニークなセッション識別子
+   を提供する. 公開鍵認証交換が暗号学的にセッションと (すなわち
+   最初の鍵交換と) 結びついているので, 別のセッションで
+   交換のリプレイが成功することはない.
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 16]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   Note that the session ID can be made public without harming the
+   security of the protocol.
+
+   session ID は, プロトコルのセキュリティを侵害することなしに公開できうる
+   ことに注意.
+   
+   If two session happen to have the same session ID [hash of key
+   exchanges] then packets from one can be replayed against the other.
+   It must be stressed that the chances of such an occurrence are,
+   needless to say, minimal when using modern cryptographic methods.
+   This is all the more so true when specifying larger hash function
+   outputs and DH parameters.
+
+   もし 2 つのセッションが偶然同じセッション ID[鍵交換のハッシュ」を持って
+   しまったら, 一方からのパケットをもう一方に対してリプレイされることができる.
+   ここで強調しておくが, このようなことが起こる可能性は,
+   いうまでもなく, 現代の暗号法を使っていればわずかである.
+   より大きなハッシュ関数の出力や DH パラメータを定める際も
+   これはますます真である.
+
+   Replay detection using monotonically increasing sequence numbers as
+   input to the MAC, or HMAC in some cases, is described in [RFC2085] />
+   [RFC2246], [RFC2743], [RFC1964], [RFC2025], and [RFC1510].  The
+   underlying construct is discussed in [RFC2104].  Essentially a
+   different sequence number in each packet ensures that at least this
+   one input to the MAC function will be unique and will provide a
+   nonrecurring MAC output that is not predictable to an attacker.  If
+   the session stays active long enough, however, this sequence number
+   will wrap.  This event may provide an attacker an opportunity to
+   replay a previously recorded packet with an identical sequence number
+   but only if the peers have not rekeyed since the transmission of the
+   first packet with that sequence number.  If the peers have rekeyed,
+   then the replay will be detected as the MAC check will fail.  For
+   this reason, it must be emphasized that peers MUST rekey before a
+   wrap of the sequence numbers.  Naturally, if an attacker does attempt
+   to replay a captured packet before the peers have rekeyed, then the
+   receiver of the duplicate packet will not be able to validate the MAC
+   and it will be discarded.  The reason that the MAC will fail is
+   because the receiver will formulate a MAC based upon the packet
+   contents, the shared secret, and the expected sequence number.  Since
+   the replayed packet will not be using that expected sequence number
+   (the sequence number of the replayed packet will have already been
+   passed by the receiver) then the calculated MAC will not match the
+   MAC received with the packet.
+
+   単調に増加するシーケンス番号を MAC やある場合は HMAC への入力として
+   を使ったリプレイ検出は [RFC2085] 
+   [RFC2246], [RFC2743], [RFC1964], [RFC2025], [RFC1510] に記述されている.
+   基礎をなす構成は [RFC2104] に記述されている. 重要なのは
+   それぞれのパケットの異なるシーケンス番号が 
+   すくなくとも MAC 関数への入力がユニークで, 攻撃者に推測され得ない
+   再び生成されない MAC の出力を提供することを保証することだ. しかし, 
+   セッションが長い間ずっとアクティブのままだと, このシーケンス番号は
+   折り返す. このイベントは 攻撃者に 前に記録した同一のセッション番号を持つ
+   パケットをリプレイする機会を与える. しかし, シーケンス番号を持つ
+   最初の (前の) パケットの転送から rekey されていない場合だけだ.
+   もし rekey しているなら, このリプレイは MAC のチェックが失敗することで
+   検出される. このため, シーケンス番号が折り返す前に, rekey しなければならない
+   ことを強調しておく. 当然ながら, 攻撃者が rekey した前にキャプチャしたパケットで
+   リプレイを試みようとする場合, 複製されたパケットの受取手
+   は MAC を確認できず, そのパケットを捨てるだろう. MAC が失敗する
+   理由は, 受取手はパケットの内容と共有の秘密, 期待されるシーケンス番号
+   に基づく MAC を組織しているからだ. リプレイされたパケットは
+   期待されたシーケンス番号を持たないので (リプレイされたパケットの
+   シーケンス番号は受け取り手によってすでに処理されている) ので,
+   計算された MAC はパケットと共に受けとった MAC と一致しないことになる.
+
+
+9.2.4 Man-in-the-middle
+
+9.2.4 中間者
+
+   This protocol makes no assumptions nor provisions for an
+   infrastructure or means for distributing the public keys of hosts. It
+   is expected that this protocol will sometimes be used without first
+   verifying the association between the server host key and the server
+   host name.  Such usage is vulnerable to man-in-the-middle attacks.
+   This section describes this and encourages administrators and users
+   to understand the importance of verifying this association before any
+   session is initiated.
+
+   このプロトコルはホストの公開鍵の配布のインフラストラクチャや方法に
+   仮定や条件を置かない. このプロトコルは時にはサーバホスト鍵を
+   サーバホスト名との関係を最初に検証することなしに用いられる.
+   この使い方は 中間者攻撃に対して脆弱だ. この節では, このことを記述し,
+   どんなセッションを開始する際もこの関係を検証することの重要性を
+   管理者とユーザが理解することを勧める.
+   
+
+   There are three cases of man-in-the-middle attacks to consider.  The
+   first is where an attacker places a device between the client and the
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 17]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   server before the session is initiated.  In this case, the attack
+   device is trying to mimic the legitimate server and will offer its
+   public key to the client when the client initiates a session.  If it
+   were to offer the public key of the server, then it would not be able
+   to decrypt or sign the transmissions between the legitimate server
+   and the client unless it also had access to the private-key of the
+   host.  The attack device will also, simultaneously to this, initiate
+   a session to the legitimate server masquerading itself as the client.
+   If the public key of the server had been securely distributed to the
+   client prior to that session initiation, the key offered to the
+   client by the attack device will not match the key stored on the
+   client.  In that case, the user SHOULD be given a warning that the
+   offered host key does not match the host key cached on the client.
+   As described in Section 3.1 of [ARCH], the user may be free to accept
+   the new key and continue the session.  It is RECOMMENDED that the
+   warning provide sufficient information to the user of the client
+   device so they may make an informed decision.  If the user chooses to
+   continue the session with the stored public-key of the server (not
+   the public-key offered at the start of the session), then the session
+   specific data between the attacker and server will be different
+   between the client-to-attacker session and the attacker-to-server
+   sessions due to the randomness discussed above.  From this, the
+   attacker will not be able to make this attack work since the attacker
+   will not be able to correctly sign packets containing this session
+   specific data from the server since he does not have the private key
+   of that server.
+
+   考える中間者攻撃の場合は 3 つある. 1 つめは, セッションが始まる前に
+   クライアントとサーバの間に攻撃者がデバイスを置くものだ.
+   この場合, 攻撃者のデバイスは 本物のサーバをまねようとし,
+   クライアントがセッションを開始する際にクライアントにその公開鍵を
+   提示する. サーバの公開鍵を提示するということは,  そのホストの
+   秘密鍵へのアクセスすることがなければ, 本物のサーバとクライアントの
+   通信の復号や署名をすることができない. 攻撃デバイスは, これと同時に
+   自身がクライアントのように装って本物のサーバとのセッションをも開始する.
+   もしサーバの公開鍵がセッションの開始より前にクライアントに
+   安全に配布されていたら, 攻撃デバイスによってクライアントに提示された
+   鍵は, クライアントが保存している鍵と一致しないだろう.
+   この場合, ユーザは提示されたホスト鍵がクライアントにキャッシュされた
+   ホスト鍵と一致しないという警告を与えられる必要がある.
+   [ARCH] の セクション 3.1 で記述されるように, ユーザは 新しい鍵を
+   受けいれセッションを続ける自由があるかもしれない.
+   警告はクラアントデバイスのユーザに十分な情報を提供することが
+   推奨される. そうすればユーザは情報に基く決定ができる.
+   もしユーザがサーバの保存された公開鍵 (セッションの開始時に提示された
+   公開鍵でなく) でセッションを続けることを選択したら, 攻撃者と
+   (訳注: クライアントとの間違い?) サーバの間の
+   セッション特有のデータはクライアント-攻撃者セッションと
+   攻撃者-サーバセッションとで, 先に議論んしたランダムネスのために,
+   異なることになる. ここから, 攻撃者はサーバの秘密鍵を持っていないので
+   サーバからのセッション固有データを含むパケットに正しく署名できないので,
+   攻撃者は攻撃を成功させることができないだろう.
+
+   The second case that should be considered is similar to the first
+   case in that it also happens at the time of connection but this case
+   points out the need for the secure distribution of server public
+   keys.  If the server public keys are not securely distributed then
+   the client cannot know if it is talking to the intended server.  An
+   attacker may use social engineering techniques to pass off server
+   keys to unsuspecting users and may then place a man-in-the-middle
+   attack device between the legitimate server and the clients.  If this
+   is allowed to happen then the clients will form client-to-attacker
+   sessions and the attacker will form attacker-to-server sessions and
+   will be able to monitor and manipulate all of the traffic between the
+   clients and the legitimate servers.  Server administrators are
+   encouraged to make host key fingerprints available for checking by
+   some means whose security does not rely on the integrity of the
+   actual host keys.  Possible mechanisms are discussed in Section 3.1
+   of [SSH-ARCH] and may also include secured Web pages, physical pieces
+   of paper, etc. Implementors SHOULD provide recommendations on how
+   best to do this with their implementation.  Because the protocol is
+   extensible, future extensions to the protocol may provide better
+   mechanisms for dealing with the need to know the server's host key
+   before connecting.  For example, making the host key fingerprint
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 18]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   available through a secure DNS lookup, or using kerberos over gssapi
+   during key exchange to authenticate the server are possibilities.
+
+   考えるべき第 2 の場合は, コネクションのときに起きるという点で
+   最初の場合と似ているが, この場合はサーバ公開鍵の安全な配布が必要
+   だということを指摘する.サーバ公開鍵が安全に配布されていないと,
+   クライアントは意図したサーバとやりとりしているのかどうか
+   知ることができない. 攻撃者はソーシャルエンジニアリングの
+   テクニックを使って怪しまないユーザに (偽の) サーバの鍵をつかませ,
+   そして本物のサーバとクライアントとの間に中間者攻撃デバイスを置くだろう.
+   これが起ってしまうと, クライアント クライアント-攻撃者 セッションを
+   作り, 攻撃者は 攻撃者-サーバセッションを作ってクライアントと本物の
+   サーバの間にトラフィックのすべてをモニタし操作することができる.
+   サーバの管理者は, 本物のホスト鍵の完全性に依存しないいくつかの方法に
+   よって検査するためにホスト鍵の指紋を利用できるようにしておくことが
+   推奨される.可能なメカニズムは [SSH-ARCH] の セクション 3.1 で
+   議論されているし, 安全なウェブページ, 本物の紙片なども含まれる.
+   実装者は 彼らの実装でこれがどの方法が一番うまくいくかの推奨を
+   提供する必要がある. プロトコルは拡張可能なので, プロトコルの
+   将来の拡張は, 接続前にサーバのホスト鍵を知る必要を扱うより良い
+   メカニズムを提供するかもしれない. 例えば,  安全な DNS lookup
+   を通してホスト鍵の指紋を利用できるようにする, とか, 
+   サーバを認証する鍵交換の間に kerberos over gssapi を使うなど
+   が可能性としてある.
+
+   In the third man-in-the-middle case, attackers may attempt to
+   manipulate packets in transit between peers after the session has
+   been established.  As described in the Replay part of this section, a
+   successful attack of this nature is very improbable.  As in the
+   Replay section, this reasoning does assume that the MAC is secure and
+   that it is infeasible to construct inputs to a MAC algorithm to give
+   a known output.  This is discussed in much greater detail in Section
+   6 of RFC 2104.  If the MAC algorithm has a vulnerability or is weak
+   enough, then the attacker may be able to specify certain inputs to
+   yield a known MAC.  With that they may be able to alter the contents
+   of a packet in transit.  Alternatively the attacker may be able to
+   exploit the algorithm vulnerability or weakness to find the shared
+   secret by reviewing the MACs from captured packets.  In either of
+   those cases, an attacker could construct a packet or packets that
+   could be inserted into an SSH stream.  To prevent that, implementors
+   are encouraged to utilize commonly accepted MAC algorithms and
+   administrators are encouraged to watch current literature and
+   discussions of cryptography to ensure that they are not using a MAC
+   algorithm that has a recently found vulnerability or weakness.
+
+   3 番目の中間者の場合では, セッションが確立したあとでクライアント-サーバ間
+   の通信のパケットを操作しようと攻撃者が試みる. このセクションの
+   Replay のパートで記述したように, この種の攻撃が成功することは
+   とても起りそうにない. Replay のセクションのように,
+   この理由は, MAC が安全で, MAC のアルゴリズムへの入力を作って
+   既知の出力を作ることがありそうもないことを仮定している. これは
+   RFC 2104 のセクション 6 で より詳細に議論されている.
+   もし MAC のアルゴリズムに脆弱性があるか, 十分弱い場合, 
+   攻撃者は特定の入力を指定して既知の MAC を生成することが可能になる.
+   これによって, 攻撃者は 転送されるパケットの内容を変更すること
+   が可能になる. さらに, 攻撃者はアルゴリズムの脆弱性や弱点を利用して
+   キャプチャしたパケットから MAC をレビューして共有シークレットを
+   見付けることができるだろう. こうした場合, SSH ストリームに
+   挿入されることができるパケットを攻撃者が作ることができる.
+   これを防ぐためには, 一般に受け入れられた MAC アルゴリズムを
+   利用することが実装者に推奨される. また, 最近脆弱性や弱点が見付かった
+   MAC アルゴリズムを利用しないように保証するため, 暗号学の
+   最近の文献と議論に注意することが管理者に推奨される.
+
+   In summary, the use of this protocol without a reliable association
+   of the binding between a host and its host keys is inherently
+   insecure and is NOT RECOMMENDED.  It may however be necessary in
+   non-security critical environments, and will still provide protection
+   against passive attacks.  Implementors of protocols and applications
+   running on top of this protocol should keep this possibility in mind.
+
+   まとめとして, ホストとそのホスト鍵の結び付きの信頼される関連なしに
+   このプロトコルを使うことは本質的に安全ではなく, 推奨されない.
+   しかしながら, セキュリティが重大でない環境では必要であろうし,
+   受動的な攻撃に対してはまだ保護を提供する. プロトコルと, この
+   プロトコルの上で動くアプリケーションを実装するものは, 
+   この可能性を心に止めておく必要がある.
+
+9.2.5 Denial-of-service
+
+   This protocol is designed to be used over a reliable transport.  If
+   transmission errors or message manipulation occur, the connection is
+   closed.  The connection SHOULD be re-established if this occurs.
+   Denial of service attacks of this type ("wire cutter") are almost
+   impossible to avoid.
+
+   このプロトコルは 信頼がおけるトランスポート上で使われるように
+   設計されている. 転送のエラーやメッセージのごまかしがおこったなら,
+   接続は閉じられる. これが起こった場合 接続は再度構築する必要がある.
+   この主のサービス不能攻撃 ("wire cutter" 回線の切断者) を防ぐことは
+   ほぼ無理だ.
+
+   In addition, this protocol is vulnerable to Denial of Service attacks
+   because an attacker can force the server to go through the CPU and
+   memory intensive tasks of connection setup and key exchange without
+   authenticating.  Implementors SHOULD provide features that make this
+   more difficult.  For example, only allowing connections from a subset
+   of IPs known to have valid users.
+
+   加えて, 接続のセットアップや認証なしの鍵交換で
+   CPU やメモリを激しく使うタスクの実行を攻撃者がサーバにさせることができるので,
+   このプロトコルは, サービウ不能攻撃に対して脆弱だ.
+   実装者はこれをより難しくする特徴を実装するべきだ.
+   例えば, 有効なユーザを持つと知られているサブセットからの接続のみを
+   許す, など.
+
+9.2.6 Covert Channels
+
+9.2.6 秘密のチャンネル
+
+   The protocol was not designed to eliminate covert channels.  For
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 19]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   example, the padding, SSH_MSG_IGNORE messages, and several other
+   places in the protocol can be used to pass covert information, and
+   the recipient has no reliable way to verify whether such information
+   is being sent.
+
+   プロトコルは隠れたチャンネルを除去するようには設計されていない.
+   例えば, パディング, SSH_MSG_IGNORE メッセージ, プロトコルの
+   いくつかの場所は 秘密の情報を送るのに使うことができるが,
+   受取手にはこれらの情報が送られたかどうか検証する信頼がおける方法は
+   ない.
+                                                                                
+9.2.7 Forward Secrecy
+
+9.2.7 転送の秘密
+
+   It should be noted that the Diffie-Hellman key exchanges may provide
+   perfect forward secrecy (PFS).  PFS is essentially defined as the
+   cryptographic property of a key-establishment protocol in which the
+   compromise of a session key or long-term private key after a given
+   session does not cause the compromise of any earlier session. [ANSI
+   T1.523-2001]  SSHv2 sessions resulting from a key exchange using
+   diffie-hellman-group1-sha1 are secure even if private keying/
+   authentication material is later revealed, but not if the session
+   keys are revealed. So, given this definition of PFS, SSHv2 does have
+   PFS.  It is hoped that all other key exchange mechanisms proposed and
+   used in the future will also provide PFS.  This property is not
+   commuted to any of the applications or protocols using SSH as a
+   transport however.  The transport layer of SSH provides
+   confidentiality for password authentication and other methods that
+   rely on secret data.
+
+   まず Diffie-Hellman 鍵交換は PFS (完全転送秘密, perfect forward secrecy)
+   を提供しうることを注意しておく. 本質的には,
+   与えられたセッションの後でのセッション鍵や長い間の秘密鍵の暴露が
+   より以前のセッションの暴露を引き起こさないという
+   鍵確率のプロトコルの暗号学的性質
+   として PFS は定義される. [ANSI T1.523-2001] diffie-hellman-group1-sha1
+   を使って鍵交換をした SSHv2 のセッションは , 秘密の 鍵/認証 の材料が
+   あとであらわになってさえ, 安全だ. しかし, セッション鍵があらわになったら
+   安全でない. それゆえ 上記の PFS の定義から, SSHv2 は PFS を持たない.
+   将来には提案され使われるすべての鍵交換メカニズムは PFS も提供することが
+   望まれる. しかし, この性質は, トランスポートとして SSH を使う
+   どんなアプリケーションやプロトコルも変化させない.
+   SSH のトランスポート層は, パスワード認証や秘密のデータに依存する他の
+   メソッドのために 秘密性を提供している.
+
+   Of course, if the DH private parameters for the client and server are
+   revealed then the session key is revealed, but these items can be
+   thrown away after the key exchange completes.  It's worth pointing
+   out that these items should not be allowed to end up on swap space
+   and that they should be erased from memory as soon as the key
+   exchange completes.
+
+   もちろん, クライアントとサーバの DH 秘密パラメータが
+   あらわになれば, セッション鍵もあらわになる. が, これらのものは
+   鍵交換が終われば捨てさることができる. これらを swap 空間に
+   起くことを許さないようにする必要があり, 鍵交換が終わったらただちに
+   メモリから消去する必要がある, ということは指摘に値する.
+
+9.3 Authentication Protocol
+
+9.3 認証プロトコル
+
+   The purpose of this protocol is to perform client user
+   authentication. It assumes that this run over a secure transport
+   layer protocol, which has already authenticated the server machine,
+   established an encrypted communications channel, and computed a
+   unique session identifier for this session.
+
+   このプロトコルの目的は クライアントのユーザ認証を実行することだ.
+   これは, すでにサーバマシンが認証され, 暗号化された通信チャンネルが
+   確立し, このセッションにおけるユニークなセッション識別子が
+   計算されている安全なトランスポート層プロトコル上で
+   走ることが仮定されている.
+
+   Several authentication methods with different security
+   characteristics are allowed.  It is up to the server's local policy
+   to decide which methods (or combinations of methods) it is willing to
+   accept for each user.  Authentication is no stronger than the weakest
+   combination allowed.
+
+   異なるセキュリティの特徴を持ついくつかの認証法が許されている.
+   それぞれのユーザに対して受け入れうる方法 (ないし方法の組合せ)
+   を決定するのはサーバのローカルなポリシーに依る. 認証は,
+   許されるもっとも弱い組合せよりも強くない.
+
+   The server may go into a "sleep" period after repeated unsuccessful
+   authentication attempts to make key search more difficult for
+   attackers.  Care should be taken so that this doesn't become a
+   self-denial of service vector.
+
+   サーバは, 繰り返される成功しない認証のあとで鍵の探索を難しくするために
+   "sleep" 期 / 冬眠状態 に入ってもよい. サービスベクタの自己拒否に
+   ならないように注意する必要がある.
+                                                                                
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 20]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+9.3.1 Weak Transport
+
+9.3.1 弱いトランスポート
+
+   If the transport layer does not provide confidentiality,
+   authentication methods that rely on secret data SHOULD be disabled.
+   If it does not provide strong integrity protection, requests to
+   change authentication data (e.g. a password change) SHOULD be
+   disabled to prevent an attacker from  modifying the ciphertext
+   without being noticed, or rendering the new authentication data
+   unusable (denial of service).
+
+   もしトランスポート層が暗号化を提供していないなら, 秘密の情報に頼る
+   認証法は無効にする必要がある. 強い完全性の保護が提供されていないなら,
+   認証データの変更 (例えば パスワードの変更) の要求は,
+   攻撃者が 断わりなしに暗号文を変更して新しい認証データを使えなく
+   する (DOS,サービス拒否) ことを避けるために無効にする必要がある.
+
+   The assumption as stated above that the Authentication Protocol only
+   run over a secure transport that has previously authenticated the
+   server is very important to note.  People deploying SSH are reminded
+   of the consequences of man-in-the-middle attacks if the client does
+   not have a very strong a priori association of the server with the
+   host key of that server.  Specifically for the case of the
+   Authentication Protocol the client may form a session to a
+   man-in-the-middle attack device and divulge user credentials such as
+   their username and password.  Even in the cases of authentication
+   where no user credentials are divulged, an attacker may still gain
+   information they shouldn't have by capturing key-strokes in much the
+   same way that a honeypot works.
+
+   認証プロトコルはサーバを認証した安全なトランスポートの上のみで働く
+   という上ので述べた仮定は, 非常に重要である. 
+   サーバのホスト鍵とサーバの非常に強いアプリオリな関係を
+   クライアントが持っていなければ, 中間者攻撃の
+   結果が SSH を配置する人々の頭をよぎる.
+   特に, 認証プロトコルの場合, クライアントは中間者攻撃デバイスと
+   セッションを作って, ユーザ名やパスワードといったユーザの秘密情報を
+   漏らしてしまうかもしれない. ユーザの秘密情報を漏らさない
+   認証の場合でさえ, 
+   ハニーポッドの動作と同様に, キーストロークをキャプチャすることで
+   攻撃者は, 彼らが知るはずのない情報を得ることができる.
+   (they...)
+
+9.3.2 Debug messages
+
+9.3.2 デバッグメッセージ
+
+   Special care should be taken when designing debug messages.  These
+   messages may reveal surprising amounts of information about the host
+   if not properly designed.  Debug messages can be disabled (during
+   user authentication phase) if high security is required.
+   Administrators of host machines should make all attempts to
+   compartmentalize all event notification messages and protect them
+   from unwarranted observation.  Developers should be aware of the
+   sensitive nature of some of the normal event messages and debug
+   messages and may want to provide guidance to administrators on ways
+   to keep this information away from unauthorized people.  Developers
+   should consider minimizing the amount of sensitive information
+   obtainable by users during the authentication phase in accordance
+   with the local policies.  For this reason, it is RECOMMENDED that
+   debug messages be initially disabled at the time of deployment and
+   require an active decision by an administrator to allow them to be
+   enabled.  It is also RECOMMENDED that a message expressing this
+   concern be presented to the administrator of a system when the action
+   is taken to enable debugging messages.
+
+   デバッグメッセージの設計には特別な配慮が必要となる. これらの
+   メッセージは, 適切に設計されていないホストについての驚くべき量の
+   情報をさらしてしまうかもしれない. デバッグメッセージは,
+   高いセキュリティが必要となるなら, (ユーザ認証の段階の間は)
+   無効にできるようにする. ホストマシンの管理者は, 
+   イベントを通知するメッセージのすべてを区切って
+   不当な観察からそれらを守るようにする必要がある.
+   開発者は, 通常のイベントメッセージとデバッグメッセージのいくつかの
+   デリケートな特徴について知る必要があり, 権限のない人々から
+   この情報を遠さげておく方法について管理者に手引きを提供したいと
+   思うだろう. 開発者は, ロカールポリシーに従って認証の段階の愛大に
+   ユーザによって得ることのできるデリケートなデータの量を最小にする
+   ことを考える必要がある. この理由から, 配置される場合
+   最初はデバッグメッセージが無効になっていて, 管理者の
+   能動的な決定で有効にすることを許すようにする必要があることが
+   推奨される. さらに, デバッグメッセージを有効にする行動が取られた際に
+   この懸念を表明するメッセージが,システムの管理者に示されることが
+   推奨される.
+   
+
+9.3.3 Local security policy
+
+9.3.3 ローカルのセキュリティポリシー
+
+   Implementer MUST ensure that the credentials provided validate the
+   professed user and also MUST ensure that the local policy of the
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 21]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   server permits the user the access requested.  In particular, because
+   of the flexible nature of the SSH connection protocol, it may not be
+   possible to determine the local security policy, if any, that should
+   apply at the time of authentication because the kind of service being
+   requested is not clear at that instant. For example, local policy
+   might allow a user to access files on the server, but not start an
+   interactive shell. However, during the authentication protocol, it is
+   not known whether the user will be accessing files or attempting to
+   use an interactive shell, or even both.  In any event, where local
+   security policy for the server host exists, it MUST be applied and
+   enforced correctly.
+
+   実装者は, 提供された情報が申し立てられたユーザを
+   確認することを保証しなければならないし, 
+   サーバのローカルポリシーが要求されたアクセスをユーザに
+   許すことを保証しなければならない. 特に, SSH コネクション プロトコルの
+   柔軟な特徴のため, もしするとしたら, これは認証の時に適用する
+   必要がある.そのときに要求されたサービスの種類はあきらかでないからだ.
+   例えば,  ローカルポリシーはサーバのファイルにアクセスすることを
+   ユーザに許して, インタラクティブなシェルを開始するのを許さないかも
+   しれない. しかし, 認証プロトコルの間は, ユーザがファイルにアクセス
+   しようとしているのか, インタラクティブなシェルを使おうとしているのか
+   それともその両方かは, わからない. いずれにせよ, サーバホストの
+   ローカルなセキュリティポリシーが存在するとき, それは, 適用され
+   正しく施行されなければならない.
+
+
+   Implementors are encouraged to provide a default local policy and
+   make its parameters known to administrators and users.  At the
+   discretion of the implementors, this default policy may be along the
+   lines of 'anything goes' where there are no restrictions placed upon
+   users, or it may be along the lines of 'excessively restrictive' in
+   which case the administrators will have to actively make changes to
+   this policy to meet their needs.  Alternatively, it may be some
+   attempt at providing something practical and immediately useful to
+   the administrators of the system so they don't have to put in much
+   effort to get SSH working.  Whatever choice is made MUST be applied
+   and enforced as required above.
+
+   実装者は, デフォルトのローカルポリシーを提供して管理者とユーザに
+   そのパラメータを知らせるようにすることが奨励される.
+   実装者の決定で, そのデフォルトのポリシーは ユーザに課せられる
+   制限がなにもない 'anything goes' という線に沿ったものになるかもしれないし,
+   管理者が, 必要に応じてポリシーを能動的に変える必要がある
+   'excessively restrictive' という線に沿ったものとなるかもしれない.
+   代わりに, システムの管理者が SSH を動かすのに大きな努力をする必要がない
+   ような, 実用的ですぐに使えるようなものを提供しようとする
+   かもしれない. どうポリシーの選択がなされても, そのポリシーは先に述べたように
+   適用され施行されければならない.
+
+9.3.4 Public key authentication
+
+9.3.4 公開鍵認証
+
+   The use of public-key authentication assumes that the client host has
+   not been compromised.  It also assumes that the private-key of the
+   server host has not been compromised.
+
+   公開鍵認証の使用では, クライアントのホストがクラックされていないことが
+   仮定される. 同様に, サーバホストの秘密鍵もクラックされていないことが
+   仮定される.
+
+   This risk can be mitigated by the use of passphrases on private keys;
+   however, this is not an enforceable policy.  The use of smartcards,
+   or other technology to make passphrases an enforceable policy is
+   suggested.
+
+   この危険は, 秘密鍵のパスフレーズの使用によって緩和できるが,
+   しかしこれは強制できるポリシーではない. 
+   パスフレーズを強制するスマートカードや他の技術の利用が提案される.
+
+   The server could require both password and public-key authentication,
+   however, this requires the client to expose its password to the
+   server (see section on password authentication below.)
+
+   サーバはパスワード認証と公開鍵認証の両方を要求できる.
+   しかし, これはクライアントがサーバにパスワードをさらす必要がある.
+   (パスワードの認証のセクションを参考)
+
+9.3.5 Password authentication
+
+9.3.5 パスワード認証
+
+   The password mechanism as specified in the authentication protocol
+   assumes that the server has not been compromised.  If the server has
+   been compromised, using password authentication will reveal a valid
+   username / password combination to the attacker, which may lead to
+   further compromises.
+
+   認証プロトコルで定められたパスワード認証のメカニズムは,
+   サーバがクラックされてないことを仮定している.
+   サーバがクラックされていると, パスワード認証の使用で
+   攻撃者に有効なユーザ名とパスワードを明かしてしまう.
+   これは, さらなるクラックに繋がるかもしれない.
+
+   This vulnerability can be mitigated by using an alternative form of
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 22]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   authentication.  For example, public-key authentication makes no
+   assumptions about security on the server.
+
+   この弱点は, その他の認証法を使うことで緩和できる. 例えば,
+   公開鍵認証では サーバのセキュリティについての仮定はない.
+
+9.3.6 Host based authentication
+
+9.3.6 ホストベース認証
+
+   Host based authentication assumes that the client has not been
+   compromised.  There are no mitigating strategies, other than to use
+   host based authentication in combination with another authentication
+   method.
+
+   ホストベース認証は クライアントがクラックされていないことを仮定している.
+   他の認証と組み合わせてホストベース認証を使う以外,
+   危険を緩和させる戦略はない. 
+
+9.4 Connection protocol
+
+9.4 コネクションプロトコル
+
+9.4.1 End point security
+
+9.4.1 末端のセキュリティ
+
+   End point security is assumed by the connection protocol.  If the
+   server has been compromised, any terminal sessions, port forwarding,
+   or systems accessed on the host are compromised.  There are no
+   mitigating factors for this.
+
+   末端のセキュリティは コネクションプロトコルによって引き受けられている.
+   サーバがクラックされていると, すべてのターミナルセッション,
+   ポート転送, ホストでアクセスされるシステムのすべてが クラックされる.
+   これを緩和する因子はない.
+
+   If the client end point has been compromised, and the server fails to
+   stop the attacker at the authentication protocol, all services
+   exposed (either as subsystems or through forwarding) will be
+   vulnerable to attack.  Implementors SHOULD provide mechanisms for
+   administrators to control which services are exposed to limit the
+   vulnerability of other services.
+
+   クライアントの末端がクラックされると, 認証プロトコルで攻撃者を
+   サーバが止めるのに失敗し, (サブシステムや転送を通して)
+   さらされているすべてのサービスが攻撃に無防備になる. 実装者は, 
+   他のサービスの弱点を制限するため, サービスをさらすかどうか
+   制御するためのメカニスムを管理者に提供する必要がある.
+
+   These controls might include controlling which machines and ports can
+   be target in 'port-forwarding' operations, which users are allowed to
+   use interactive shell facilities, or which users are allowed to use
+   exposed subsystems.
+
+   これらの制御は, マシンやポートが 'port-forwarding' 操作の対象と
+   なりうるか, や, どのユーザが インタラクティブなシェル機能の利用
+   を許されているか, どのユーザがさらされているサブシステムの利用
+   を許されているか, を含むだろう.
+
+9.4.2 Proxy forwarding
+
+9.4.2 プロキシ転送
+
+   The SSH connection protocol allows for proxy forwarding of other
+   protocols such as SNMP, POP3, and HTTP.  This may be a concern for
+   network administrators who wish to control the access of certain
+   applications by users located outside of their physical location.
+   Essentially, the forwarding of these protocols may violate site
+   specific security policies as they may be undetectably tunneled
+   through a firewall.  Implementors SHOULD provide an administrative
+   mechanism to control the proxy forwarding functionality so that site
+   specific security policies may be upheld.
+
+   SSHコネクションプロトコルは , SNMP, POP3, HTTPといった
+   他のサービスのプロキシ転送を許している. その物理的な位置が外ににある
+   特定のアプリケーションのユーザによるアクセスをコントロール
+   したいと望んでいるネットワーク管理者にとって, これは懸念となるかも
+   しれない. 原則的に, これらのプロトコルの転送は, 
+   ファイアウォールの中を検知できないようにトンネルされるので
+   サイト固有のセキュリティポリシーを破壊するかもしれない.
+   実装者は, サイト固有のセキュリティポリシーを維持できるように
+   プロキシ転送機能を制御する管理メカニズムを提供する必要がある.
+
+   In addition, a reverse proxy forwarding functionality is available,
+   which again can be used to bypass firewall controls.
+
+   加えて, 逆方向のプロキシ転送機能が有効で, これも ファイアウォールの制御を
+   バイパスするのに使われうる.
+
+   As indicated above, end-point security is assumed during proxy
+   forwarding operations.  Failure of end-point security will compromise
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 23]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   all data passed over proxy forwarding.
+
+   先に指摘したように, プロキシ転送操作でも, 末端のセキュリティは仮定されている.
+   末端のセキュリティが破綻していると, プロキシ転送越しに送られる
+   すべてのデータは危うくなる.
+
+9.4.3 X11 forwarding
+
+9.4.3 X11 転送
+
+   Another form of proxy forwarding provided by the ssh connection
+   protocol is the forwarding of the X11 protocol.  If end-point
+   security has been compromised, X11 forwarding may allow attacks
+   against the X11 server.  Users and administrators should, as a matter
+   of course, use appropriate X11 security mechanisms to prevent
+   unauthorized use of the X11 server.  Implementors, administrators and
+   users who wish to further explore the security mechanisms of X11 are
+   invited to read [SCHEIFLER] and analyze previously reported problems
+   with the interactions between SSH forwarding and X11 in CERT
+   vulnerabilities VU#363181 and VU#118892 [CERT].
+
+   sshコネクションプロトコルによって提供される 別の形のプロキシ転送が
+   X11プロトコルの転送だ. 末端のセキュリティがクラックされていると,
+   X11転送は X11サーバに対する攻撃を許すだろう. ユーザと管理者は,
+   当然ながら, X11サーバの権限のない利用を防ぐ適当なX11セキュリティ
+   メカニズムを利用する必要がある. X11 のセキュリティメカニズムを
+   より深く掘り下げたいと望む実装者と管理者, ユーザには
+   [SCHEIFLER]を読み 先に
+   CERT vulnerabilities VU#363181 and VU#118892 [CERT]
+   で報告された SSH転送とX11の間の相互作用の問題を分析することが
+   勧められる.
+   
+
+   X11 display forwarding with SSH, by itself, is not sufficient to
+   correct well known problems with X11 security [VENEMA].  However, X11
+   display forwarding in SSHv2 (or other, secure protocols), combined
+   with actual and pseudo-displays which accept connections only over
+   local IPC mechanisms authorized by permissions or ACLs, does correct
+   many X11 security problems as long as the "none" MAC is not used.  It
+   is RECOMMENDED that X11 display implementations default to allowing
+   display opens only over local IPC.  It is RECOMMENDED that SSHv2
+   server implementations that support X11 forwarding default to
+   allowing display opens only over local IPC.  On single-user systems
+   it might be reasonable to default to allowing local display opens
+   over TCP/IP.
+
+   SSHによる X11ディスプレイ転送は, それ自体では, 良く知られた X11 セキュリティ
+   の問題 [VENEMA] を正すのに十分ではない. しかし, SSHv2 (や他の安全な
+   プロトコル)でのX11ディスプレイ転送は, パーミッションやACLで許可される
+   ローカルなIPCメカニズム越しのみでの接続を許す実際ないし仮想のディスプレイ
+   と組み合わせて, 多くのX11セキュリティ問題を修正できる ("none" MAC
+   を使わない限り). X11ディスプレイの実装は, デフォルトで
+   ローカルのIPC越しでのディスプレイのオープンのみを許すように
+   することが推奨される. SSHv2のサーバの実装は, ローカルの
+   IPC越しでのディスプレイのオープンのみを許すように X11の転送を
+   サポートすることが推奨される. シングルユーザのシステムにおいては,
+   TCP/IP越しにローカルのディスプレイをオープンすることが許されることが
+   デフォルトなのが合理的かもしれない.
+   
+
+   Implementors of the X11 forwarding protocol SHOULD implement the
+   magic cookie access checking spoofing mechanism as described in
+   [ssh-connect] as an additional mechanism to prevent unauthorized use
+   of the proxy.
+
+   X11転送プロトコルの実装には, プロキシの権限のない使用を防ぐ
+   追加のメカニズムとして [ssh-connect]で記述されている
+   magic cookie access checking spoofing mechanism
+   (訳注: 認証クッキーを送る際に
+   偽のランダムなクッキーにし, 接続要求が受け入れられたら
+   そのクッキーを検査し本物のクッキーに置換すること)
+   を実装することが必要である.
+
+Normative References
+
+   [SSH-ARCH]
+              Ylonen, T., "SSH Protocol Architecture", I-D
+              draft-ietf-architecture-15.txt, Oct 2003.
+
+   [SSH-TRANS]
+              Ylonen, T., "SSH Transport Layer Protocol", I-D
+              draft-ietf-transport-17.txt, Oct 2003.
+
+   [SSH-USERAUTH]
+              Ylonen, T., "SSH Authentication Protocol", I-D
+              draft-ietf-userauth-18.txt, Oct 2003.
+
+   [SSH-CONNECT]
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 24]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+              Ylonen, T., "SSH Connection Protocol", I-D
+              draft-ietf-connect-18.txt, Oct 2003.
+
+   [SSH-NUMBERS]
+              Lehtinen, S. and D. Moffat, "SSH Protocol Assigned
+              Numbers", I-D draft-ietf-secsh-assignednumbers-05.txt, Oct
+              2003.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+Informative References
+
+   [FIPS-186]
+              Federal Information Processing Standards Publication,
+              "FIPS PUB 186, Digital Signature Standard", May 1994.
+
+   [FIPS-197]
+              National Institue of Standards and Technology, "FIPS 197,
+              Specification for the Advanced Encryption Standard",
+              November 2001.
+
+   [ANSI T1.523-2001]
+              American National Standards Insitute, Inc., "Telecom
+              Glossary 2000", February 2001.
+
+   [SCHEIFLER]
+              Scheifler, R., "X Window System : The Complete Reference
+              to Xlib, X Protocol, Icccm, Xlfd, 3rd edition.", Digital
+              Press ISBN 1555580882, Feburary 1992.
+
+   [RFC0854]  Postel, J. and J. Reynolds, "Telnet Protocol
+              Specification", STD 8, RFC 854, May 1983.
+
+   [RFC0894]  Hornig, C., "Standard for the transmission of IP datagrams
+              over Ethernet networks", STD 41, RFC 894, April 1984.
+
+   [RFC1034]  Mockapetris, P., "Domain names - concepts and facilities",
+              STD 13, RFC 1034, November 1987.
+
+   [RFC1134]  Perkins, D., "Point-to-Point Protocol: A proposal for
+              multi-protocol transmission of datagrams over
+              Point-to-Point links", RFC 1134, November 1989.
+
+   [RFC1282]  Kantor, B., "BSD Rlogin", RFC 1282, December 1991.
+
+   [RFC1510]  Kohl, J. and B. Neuman, "The Kerberos Network
+              Authentication Service (V5)", RFC 1510, September 1993.
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 25]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   [RFC1700]  Reynolds, J. and J. Postel, "Assigned Numbers", RFC 1700,
+              October 1994.
+
+   [RFC1750]  Eastlake, D., Crocker, S. and J. Schiller, "Randomness
+              Recommendations for Security", RFC 1750, December 1994.
+
+   [RFC3066]  Alvestrand, H., "Tags for the Identification of
+              Languages", BCP 47, RFC 3066, January 2001.
+
+   [RFC1964]  Linn, J., "The Kerberos Version 5 GSS-API Mechanism", RFC
+              1964, June 1996.
+
+   [RFC2025]  Adams, C., "The Simple Public-Key GSS-API Mechanism
+              (SPKM)", RFC 2025, October 1996.
+
+   [RFC2085]  Oehler, M. and R. Glenn, "HMAC-MD5 IP Authentication with
+              Replay Prevention", RFC 2085, February 1997.
+
+   [RFC2104]  Krawczyk, H., Bellare, M. and R. Canetti, "HMAC:
+              Keyed-Hashing for Message Authentication", RFC 2104,
+              February 1997.
+
+   [RFC2246]  Dierks, T., Allen, C., Treese, W., Karlton, P., Freier, A.
+              and P. Kocher, "The TLS Protocol Version 1.0", RFC 2246,
+              January 1999.
+
+   [RFC2279]  Yergeau, F., "UTF-8, a transformation format of ISO
+              10646", RFC 2279, January 1998.
+
+   [RFC2410]  Glenn, R. and S. Kent, "The NULL Encryption Algorithm and
+              Its Use With IPsec", RFC 2410, November 1998.
+
+   [RFC2434]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
+              IANA Considerations Section in RFCs", BCP 26, RFC 2434,
+              October 1998.
+
+   [RFC2743]  Linn, J., "Generic Security Service Application Program
+              Interface Version 2, Update 1", RFC 2743, January 2000.
+
+   [SCHNEIER]
+              Schneier, B., "Applied Cryptography Second Edition:
+              protocols algorithms and source in code in C", 1996.
+
+   [KAUFMAN,PERLMAN,SPECINER]
+              Kaufman, C., Perlman, R. and M. Speciner, "Network
+              Security: PRIVATE Communication in a PUBLIC World", 1995.
+
+   [CERT]     CERT Coordination Center, The., "http://www.cert.org/nav/
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 26]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+              index_red.html".
+
+   [VENEMA]   Venema, W., "Murphy's Law and Computer Security",
+              Proceedings of 6th USENIX Security Symposium, San Jose CA
+              http://www.usenix.org/publications/library/proceedings/
+              sec96/venema.html, July 1996.
+
+   [ROGAWAY]  Rogaway, P., "Problems with Proposed IP Cryptography",
+              Unpublished paper http://www.cs.ucdavis.edu/~rogaway/
+              papers/draft-rogaway-ipsec-comments-00.txt, 1996.
+
+   [DAI]      Dai, W., "An attack against SSH2 protocol", Email to the
+              SECSH Working Group ietf-ssh@netbsd.org ftp://
+              ftp.ietf.org/ietf-mail-archive/secsh/2002-02.mail, Feb
+              2002.
+
+   [BELLARE,KOHNO,NAMPREMPRE]
+              Bellaire, M., Kohno, T. and C. Namprempre, "Authenticated
+              Encryption in SSH: Fixing the SSH Binary Packet Protocol",
+              , Sept 2002.
+
+
+Authors' Addresses
+
+   Tatu Ylonen
+   SSH Communications Security Corp
+   Fredrikinkatu 42
+   HELSINKI  FIN-00100
+   Finland
+
+   EMail: ylo@ssh.com
+
+
+   Darren J. Moffat (editor)
+   Sun Microsystems, Inc
+   17 Network Circle
+   Menlo Park  CA 94025
+   USA
+
+   EMail: Darren.Moffat@Sun.COM
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 27]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+Intellectual Property Statement
+
+   The IETF takes no position regarding the validity or scope of any
+   intellectual property or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; neither does it represent that it
+   has made any effort to identify any such rights. Information on the
+   IETF's procedures with respect to rights in standards-track and
+   standards-related documentation can be found in BCP-11. Copies of
+   claims of rights made available for publication and any assurances of
+   licenses to be made available, or the result of an attempt made to
+   obtain a general license or permission for the use of such
+   proprietary rights by implementors or users of this specification can
+   be obtained from the IETF Secretariat.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights which may cover technology that may be required to practice
+   this standard. Please address the information to the IETF Executive
+   Director.
+
+   The IETF has been notified of intellectual property rights claimed in
+   regard to some or all of the specification contained in this
+   document. For more information consult the online list of claimed
+   rights.
+
+
+Full Copyright Statement
+
+   Copyright (C) The Internet Society (2003). All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works. However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assignees.
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 28]
+
+Internet-Draft         SSH Protocol Architecture                Oct 2003
+
+
+   This document and the information contained herein is provided on an
+   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+
+Acknowledgment
+
+   Funding for the RFC Editor function is currently provided by the
+   Internet Society.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Moffat          Expires March 31, 2004                [Page 29]

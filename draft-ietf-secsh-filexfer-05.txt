@@ -1,0 +1,3988 @@
+
+
+
+Secure Shell Working Group                                  J. Galbraith
+Internet-Draft                                          VanDyke Software
+Expires: July 1, 2004                                          T. Ylonen
+                                                             S. Lehtinen
+                                        SSH Communications Security Corp
+                                                            January 2004
+
+
+                       SSH File Transfer Protocol
+                    draft-ietf-secsh-filexfer-05.txt
+
+		       SSH ファイル転送プロトコル
+
+# 訳者 春山征吾 haruyama@unixuser.org
+
+Status of this Memo
+
+   This document is an Internet-Draft and is in full conformance with
+   all provisions of Section 10 of RFC2026.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF), its areas, and its working groups. Note that other
+   groups may also distribute working documents as Internet-Drafts.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time. It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   The list of current Internet-Drafts can be accessed at http://
+   www.ietf.org/ietf/1id-abstracts.txt.
+
+   The list of Internet-Draft Shadow Directories can be accessed at
+   http://www.ietf.org/shadow.html.
+
+   This Internet-Draft will expire on July 1, 2004.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2004). All Rights Reserved.
+
+Abstract
+
+概要
+
+   The SSH File Transfer Protocol provides secure file transfer
+   functionality over any reliable data stream.  It is the standard file
+   transfer protocol for use with the SSH2 protocol.  This document
+   describes the file transfer protocol and its interface to the SSH2
+   protocol suite.
+
+   SSH ファイル転送プロトコルは安全なファイル転送機能をどんな
+   信頼できるデータストリーム上であっても提供する.
+   これは SSH2 プロトコルとともに使われる標準のファイル転送
+   プロトコルだ. この文書では, このファイル転送プロトコルと
+   その SSH2 プロトコルへのインタフェイスを記述する.
+
+  
+
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                  [Page 1]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+Table of Contents
+
+   1.     Introduction . . . . . . . . . . . . . . . . . . . . . . .   4
+   2.     Use with the SSH Connection Protocol . . . . . . . . . . .   5
+   2.1    The Use of 'stderr' in the server  . . . . . . . . . . . .   5
+   3.     General Packet Format  . . . . . . . . . . . . . . . . . .   6
+   3.1    Packet Types . . . . . . . . . . . . . . . . . . . . . . .   6
+   4.     Protocol Initialization  . . . . . . . . . . . . . . . . .   8
+   4.1    Client Initialization  . . . . . . . . . . . . . . . . . .   8
+   4.2    Server Initialization  . . . . . . . . . . . . . . . . . .   8
+   4.3    Determining Server Newline Convention  . . . . . . . . . .   9
+   4.4    Supported Features . . . . . . . . . . . . . . . . . . . .   9
+   5.     File Attributes  . . . . . . . . . . . . . . . . . . . . .  12
+   5.1    valid-attribute-flags  . . . . . . . . . . . . . . . . . .  12
+   5.2    Type . . . . . . . . . . . . . . . . . . . . . . . . . . .  13
+   5.3    Size . . . . . . . . . . . . . . . . . . . . . . . . . . .  13
+   5.4    Owner and Group  . . . . . . . . . . . . . . . . . . . . .  14
+   5.5    Permissions  . . . . . . . . . . . . . . . . . . . . . . .  14
+   5.6    Times  . . . . . . . . . . . . . . . . . . . . . . . . . .  15
+   5.7    ACL  . . . . . . . . . . . . . . . . . . . . . . . . . . .  15
+   5.8    attrib-bits  . . . . . . . . . . . . . . . . . . . . . . .  17
+   5.9    Extended Attributes  . . . . . . . . . . . . . . . . . . .  19
+   6.     Requests From the Client to the Server . . . . . . . . . .  20
+   6.1    Request Synchronization and Reordering . . . . . . . . . .  20
+   6.2    File Names . . . . . . . . . . . . . . . . . . . . . . . .  20
+   6.3    Opening and Closing Files and Directories  . . . . . . . .  21
+   6.3.1  Opening a File . . . . . . . . . . . . . . . . . . . . . .  21
+   6.3.2  Opening a Directory  . . . . . . . . . . . . . . . . . . .  25
+   6.3.3  Closing Handles  . . . . . . . . . . . . . . . . . . . . .  26
+   6.4    Reading and Writing  . . . . . . . . . . . . . . . . . . .  26
+   6.4.1  Reading Files  . . . . . . . . . . . . . . . . . . . . . .  26
+   6.4.2  Reading Directories  . . . . . . . . . . . . . . . . . . .  27
+   6.4.3  Writing Files  . . . . . . . . . . . . . . . . . . . . . .  27
+   6.5    Removing and Renaming Files  . . . . . . . . . . . . . . .  28
+   6.6    Creating and Deleting Directories  . . . . . . . . . . . .  29
+   6.7    Retrieving File Attributes . . . . . . . . . . . . . . . .  30
+   6.8    Setting File Attributes  . . . . . . . . . . . . . . . . .  30
+   6.9    Dealing with Symbolic Links  . . . . . . . . . . . . . . .  31
+   6.10   Canonicalizing the Server-Side Path Name . . . . . . . . .  32
+   6.10.1 Best Practice for Dealing with Paths . . . . . . . . . . .  32
+   7.     Responses from the Server to the Client  . . . . . . . . .  34
+   8.     Extensions . . . . . . . . . . . . . . . . . . . . . . . .  39
+   8.1    Checking File Contents . . . . . . . . . . . . . . . . . .  40
+   9.     Security Considerations  . . . . . . . . . . . . . . . . .  42
+   10.    Changes from Previous Protocol Versions  . . . . . . . . .  43
+   10.1   Changes Between Versions 5 and 4 . . . . . . . . . . . . .  43
+   10.2   Changes Between Versions 4 and 3 . . . . . . . . . . . . .  44
+   10.3   Changes Between Versions 3 and 2 . . . . . . . . . . . . .  44
+
+
+
+Galbraith, et al.         Expires July 1, 2004                  [Page 2]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   10.4   Changes Between Versions 2 and 1 . . . . . . . . . . . . .  45
+   10.5   Changes Between Versions 1 and 0 . . . . . . . . . . . . .  45
+   11.    Trademark Issues . . . . . . . . . . . . . . . . . . . . .  46
+          Normative References . . . . . . . . . . . . . . . . . . .  47
+          Informative References . . . . . . . . . . . . . . . . . .  48
+          Authors' Addresses . . . . . . . . . . . . . . . . . . . .  48
+          Intellectual Property and Copyright Statements . . . . . .  49
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                  [Page 3]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+1. Introduction
+
+1. イントロダクション
+
+   This protocol provides secure file transfer (and more generally file
+   system access.) It is designed so that it could be used to implement
+   a secure remote file system service, as well as a secure file
+   transfer service.
+
+   このプロトコルは 安全なファイル転送 (とより一般的なファイルシステム
+   アクセス) を提供する. 安全なリモートファイルシステムサービスト
+   安全なファイル転送サービスを実装するために使われるように設計
+   されている.
+
+   This protocol assumes that it runs over a secure channel, such as a
+   channel in the SSH2 protocol [3]. and that the server has already
+   authenticated the client, and that the identity of the client user is
+   available to the protocol.
+
+   このプロトコルは SSH2 プロトコル [3] のチャンネルのような
+   安全なチャンネルの上で動くことと,
+   サーバはすでにクライアントを認証していること, クライアントユーザの
+   同一性はプロトコルに対して利用可能であることを仮定している.
+
+   In general, this protocol follows a simple request-response model.
+   Each request and response contains a sequence number and multiple
+   requests may be pending simultaneously.  There are a relatively large
+   number of different request messages, but a small number of possible
+   response messages.  Each request has one or more response messages
+   that may be returned in result (e.g., a read either returns data or
+   reports error status).
+
+   一般的に, このプロトコルは単純な要求-応答モデルに従っている.
+   それぞれの要求と応答はシーケンス番号を持ち, 同時に複数の要求を
+   未解決にしておいてもよい. 相対的に, (いろいろな) 要求メッセージは
+   たくさんあるが, 可能な応答のメッセージは少ない. それぞれの
+   要求は, 結果を返すかもしれない一つないしそれ以上の応答メッセージ
+   を得る (たとえば, 読み込みは結果を返すかエラーの状態を報告する).
+
+   The packet format descriptions in this specification follow the
+   notation presented in the secsh architecture draft. [3]
+
+   この仕様でのパケットフォーマットの記述は, secsh アーキテクチャ
+   ドラフト [3] で示されている表記法に従っている.
+
+   Even though this protocol is described in the context of the SSH2
+   protocol, this protocol is general and independent of the rest of the
+   SSH2 protocol suite.  It could be used in a number of different
+   applications, such as secure file transfer over TLS RFC 2246 [6] and
+   transfer of management information in VPN applications.
+
+   このプロトコルは SSH2 プロトコルの文脈のなかで記述されているが,
+   このプロトコルは一般的で 残りの SSH2 プロトコル一式からは独立だ.
+   多数のいろいろなアプリケーションのなかで使うことができる.
+   たとえば, TLS RFC 2246[1] 上での安全なファイル転送や
+   VPN アプリケーションでの管理情報の転送などだ.
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                  [Page 4]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+2. Use with the SSH Connection Protocol
+
+3. SSH コネクションプロトコルとの使用
+
+   When used with the SSH2 Protocol suite, this protocol is intended to
+   be used from the SSH Connection Protocol [5] as a subsystem, as
+   described in section ''Starting a Shell or a Command''. The subsystem
+   name used with this protocol is "sftp".
+
+   SSH2 プロトコル一式とともに使う場合, このプロトコルは
+   SSH コネクションプロトコル [5] から ``Starting a Shell or a Command''
+   セクションで記述されている  subsystem として使われる
+   ことが意図されている. このプロトコルに使われる subsystem 名は
+   "sftp"だ.
+
+
+2.1 The Use of 'stderr' in the server
+
+2.1 サーバでの 'stderr' の使用
+
+   This protocol uses stdout and stdin to transmit binary protocol data.
+   The "session" channel SSH Connection Protocol [5], which is used by
+   the subsystem, also supports the use of stderr.
+
+   このプロトコルは stdout (標準出力) と stdin (標準入力) を バイナリ
+   プロトコルデータの転送に使う. SSH コネクションプロトコル [5] の
+   "session" チャンネル は , サブシステムとして使われて,
+   stderr (標準エラー出力) の使用もサポートしている.
+
+   Data sent on stderr by the server SHOULD be considered free format
+   debug or supplemental error information, and MAY be displayed to the
+   user.
+
+   サーバから stderr で送られるデータは, 自由な形式の debug ないし
+   補助のエラー情報だと見なされる必要があり, ユーザに対して
+   表示されてもよい.
+
+   For example, during initialization, there is no client request
+   active, so errors or warning information cannot be sent to the client
+   as part of the SFTP protocol at this early stage.  However, the
+   errors or warnings MAY be sent as stderr text.
+
+   例えば, 初期化の間に,  クライアントのリクエストがアクティブではなく,
+   この早い段階では SFTP プロトコルの部分ではクライアントに対して
+   エラーないし警告情報がを送ることができないとする. けれども,
+   エラーないし警告は stderr テキストとして送られてもよい.
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                  [Page 5]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+3. General Packet Format
+
+3. 一般のパケットフォーマット
+
+   All packets transmitted over the secure connection are of the
+   following format:
+
+   安全な接続の上で転送されるすべてのパケットは次の形式のものだ.
+
+       uint32           length
+       byte             type
+       byte[length - 1] data payload
+
+   That is, they are data preceded by 32-bit length and 8-bit type
+   fields.  The 'length' is the length of the data area, and does not
+   include the 'length' field itself.  The format and interpretation of
+   the data area depends on the packet type.
+   
+   すなわち, 32-bit の length と 8-bit の type フィールドに data が続く.
+   'length' は data エリアの 長さで, 'length' フィールド自身の長さを
+   含まない. data エリアの形式と解釈は, パケットの種類に依存する.
+
+   All packet descriptions specify the packet type and the data that
+   goes into the data field.  Thus, they should be prefixed by the
+   'length' fields.
+
+   すべてのパケットの詳細は, パケットの type と data フィールドに
+   入っているデータを指定する. すなわち, これらには
+   'length' フィールド前に付く必要がある.
+
+   This document defines one data type in addition to those defined in
+   secsh architecture draft. [3]
+
+   この文書は secsh アーキテクチャドラフト [3] に定義されているデータ型に
+   加えて 1 つのデータ型を定義する.
+
+   int64
+      Represents a 64-bit signed integer.  Stored as eight bytes in the
+      order of decreasing significance (network byte order).
+
+      64-bit 符号付き整数を表す. 大きさが減少する順 (ネットワーク
+      バイトオーダー, ビッグエンディアン) に 8 バイトとして格納される.
+      
+   The maximum size of a packet is in practice determined by the client
+   (the maximum size of read or write requests that it sends, plus a few
+   bytes of packet overhead).  All servers SHOULD support packets of at
+   least 34000 bytes (where the packet size refers to the full length,
+   including the header above).  This should allow for reads and writes
+   of at most 32768 bytes.
+
+   パケットの最大の大きさは, 実際には, クライアントによって
+   決められる (クライアントが送るリクエストの読み書きの最大のサイズに
+   パケットのオーバヘッドのいくらかのバイトを足したもの) すべてのサーバは,
+   少なくとも 34000 バイトのパケットをサポートする必要がある
+   (ここでパケットのサイズは 先のヘッダを含めた全体の長さのことだ).
+   サーバは, 多くて 32768 バイトの読み書きについて許すべきだ.
+
+   There is no limit on the number of outstanding (non-acknowledged)
+   requests that the client may send to the server.  In practice this is
+   limited by the buffering available on the data stream and the queuing
+   performed by the server.  If the server's queues are full, it should
+   not read any more data from the stream, and flow control will prevent
+   the client from sending more requests.  Note, however, that while
+   there is no restriction on the protocol level, the client's API may
+   provide a limit in order to prevent infinite queuing of outgoing
+   requests at the client.
+
+   クライアントがサーバに送る 未解決の ( 認知されていない) リクエストの数
+   に制限はない, データストリームのバッファの容量とサーバが実行する
+   キューイングによって制限される. サーバのキューが一杯になったら,
+   そのストリームからデータをもう読まないほうがよい. フロー制御は
+   クライアントがそれ以上のリクエストを送るのを防ぐだろう.
+   しかし, プロトコルレベルでの制限はないが, クライアントの API は
+   クライアントの未解決のリクエストの無限のキューイングを防ぐために
+   制限を提供するかもしれないことに注意.
+
+3.1 Packet Types
+
+3.1 パケットの種類
+
+   The following values are defined for packet types.
+
+   次の値がパケットの種類として定義されている.
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                  [Page 6]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+       #define SSH_FXP_INIT                1
+       #define SSH_FXP_VERSION             2
+       #define SSH_FXP_OPEN                3
+       #define SSH_FXP_CLOSE               4
+       #define SSH_FXP_READ                5
+       #define SSH_FXP_WRITE               6
+       #define SSH_FXP_LSTAT               7
+       #define SSH_FXP_FSTAT               8
+       #define SSH_FXP_SETSTAT             9
+       #define SSH_FXP_FSETSTAT           10
+       #define SSH_FXP_OPENDIR            11
+       #define SSH_FXP_READDIR            12
+       #define SSH_FXP_REMOVE             13
+       #define SSH_FXP_MKDIR              14
+       #define SSH_FXP_RMDIR              15
+       #define SSH_FXP_REALPATH           16
+       #define SSH_FXP_STAT               17
+       #define SSH_FXP_RENAME             18
+       #define SSH_FXP_READLINK           19
+       #define SSH_FXP_SYMLINK            20
+
+       #define SSH_FXP_STATUS            101
+       #define SSH_FXP_HANDLE            102
+       #define SSH_FXP_DATA              103
+       #define SSH_FXP_NAME              104
+       #define SSH_FXP_ATTRS             105
+
+       #define SSH_FXP_EXTENDED          200
+       #define SSH_FXP_EXTENDED_REPLY    201
+
+       RESERVED_FOR_EXTENSIONS           210-255
+
+   Additional packet types should only be defined if the protocol
+   version number (see Section ''Protocol Initialization'') is
+   incremented, and their use MUST be negotiated using the version
+   number.  However, the SSH_FXP_EXTENDED and SSH_FXP_EXTENDED_REPLY
+   packets can be used to implement extensions, which can be vendor
+   specific.  See Section ''Extensions'' for more details.
+
+   追加のパケットの種類は, プロトコルのバージョン番号
+   ( ''Protocol Initialization''  セクション  を参照) が
+   増えた場合にのみ定義される.
+   そして, これらの使用は, そのバージョン番号を使って交渉されなければ
+   ならない. しかし , SSH_FXP_EXTENDED と SSH_FXP_EXTENDED_REPLY
+   パケットは, ベンダ特有の実装の拡張に使われることができる.
+   より詳しくは ''Extensions'' セクションを参照
+   
+   
+
+
+
+
+
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                  [Page 7]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+4. Protocol Initialization
+
+4. プロトコルの初期化
+
+   When the file transfer protocol starts, the client first sends a
+   SSH_FXP_INIT (including its version number) packet to the server. The
+   server responds with a SSH_FXP_VERSION packet, supplying the lowest
+   of its own and the client's version number.  Both parties should from
+   then on adhere to particular version of the protocol.
+
+   ファイル転送プロトコルを開始する際, クライアントはまず
+   (そのバージョン番号を含む) SSH_FXP_INIT パケットをサーバに送る.
+   サーバは, 自身とクライアントのバージョン番号のより小さいほうを提供する
+   SSH_FXP_VERSION パケットで返答する. ここから,クライアントもサーバも
+   このプロトコルのバージョンを実行する必要がある.
+
+   The version number of the protocol specified in this document is 5.
+   The version number should be incremented for each incompatible
+   revision of this protocol.
+
+   この文書で指定されるプロトコルのバージョン番号は 5 だ.
+   バージョン番号は, このプロトコルの互換性のない改訂のたびに
+   増やされるべきである.
+
+4.1 Client Initialization
+
+4.1 クライアントの初期化
+
+   The SSH_FXP_INIT packet (from client to server) has the following
+   data:
+
+   (クライアントからサーバに送られる) SSH_FXP_INIT パケットは
+   次のデータを持つ.
+   
+       uint32 version
+
+   Version 3 of this protocol allowed clients to include extensions in
+   the SSH_FXP_INIT packet; however, this can cause interoperability
+   problems with version 1 and version 2 servers because the client must
+   send this packet before knowing the servers version.
+
+   このプロトコルのバージョン 3 は, クライアントが
+   SSH_FXP_INIT パケットに拡張を持つことを許す. しかし,
+   これは, バージョン 1 ないし 2 のサーバとの相互運用の問題を起す.
+   クライアントは サーバのバージョンを知る前にこのパケットを送るから.
+
+   In this version of the protocol, clients MUST use the
+   SSH_FXP_EXTENDED packet to send extensions to the server after
+   version exchange has completed.  Clients MUST NOT include extensions
+   in the version packet. This will prevent interoperability problems
+   with older servers
+
+   このプロトコルのバージョンでは, クライアントは,バージョンの交換が
+   完了した後で SSH_FXP_EXTENDED パケットを使って拡張をサーバに
+   送らなければならない. クライアントは version パケットに拡張を
+   含めてはならない. これは, より古いサーバとの間の相互運用の問題を
+   防ぐためだ.
+   
+4.2 Server Initialization
+
+4.2 サーバの初期化
+
+   The SSH_FXP_VERSION packet (from server to client) has the following
+   data:
+
+   (サーバからクライアントに送られる) SSH_FXP_VERSION パケットは
+   次のデーガを持つ.
+
+       uint32 version
+       <extension data>
+
+   'version' is the lower of the protocol version supported by the
+   server and the version number received from the client.
+
+   'version' は サーバのサポートするプロトコルバージョンと
+   クライアントから受け取られたバージョン番号のより小さいほうだ.
+
+   The extension data may be empty, or may be a sequence of
+
+   extension data は空かもしれないし, 次のペアのシーケンスかもしれない.
+
+       string extension_name
+       string extension_data
+
+   pairs (both strings MUST always be present if one is, but the
+   'extension_data' string may be of zero length).  If present, these
+
+
+
+Galbraith, et al.         Expires July 1, 2004                  [Page 8]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   strings indicate extensions to the baseline protocol.  The
+   'extension_name' field (s) identify the name of the extension.  The
+   name should be of the form "name@domain", where the domain is the DNS
+   domain name of the organization defining the extension.  Additional
+   names that are not of this format may be defined later by the IETF.
+   Implementations MUST silently ignore any extensions whose name they
+   do not recognize.
+
+   (どちらの文字列も一方があれば常になくてはならないが, 'extension_data'
+   文字列は 0 の長さかもしれない)  もしあるなら, これらの文字列は,
+   基礎のプロトコルへの拡張を示す. 'extension_name' フィールドは,
+   拡張の名前を同定する. 名前は, "name@domain"という形式でなければならない.
+   ここで domain は 拡張を定義する組織の DNS ドメイン名だ. このフォーマットでない
+   追加の名前は IETF によって後で定義されるかもしれない. 実装は,
+   理解できないどの拡張も静かに無視しなければならない.
+
+4.3 Determining Server Newline Convention
+
+4.3 サーバの改行方式の決定
+
+   In order to correctly process text files in a cross platform
+   compatible way, newline sequences must be converted between client
+   and server conventions.
+
+   クロスプラットフォームで互換性のある方式で テキストファイルを
+   正しく処理するために, 改行シーケンスは クライアントとサーバの
+   方式の間で変換されなければならない.
+
+   The SSH_FXF_TEXT file open flag (Section 6.3.1) makes it possible to
+   request that the server translate a file to a 'canonical' wire
+   format.  This format uses \r\n as the line separator.
+
+   SSH_FXF_TEXT file open フラグ (セクション 6.3.1) は,
+   サーバがファイルを 'canonical'(正規化された)
+    wire フォーマットに変換することを
+   可能にする. このフォーマットでは 行の区切に  \r\n が使われる.
+
+   Servers for systems using multiple newline characters (for example,
+   Mac OS X or VMS) or systems using counted records, MUST translate to
+   the canonical form.
+
+   複数の改行文字を使うシステム (例えば Mac OS X や VMS) や カウントされる
+   レコードを使うシステムのサーバは, 正規化された形式に変換しなければならない.
+
+   However, to ease the burden of implementation on servers that use a
+   single, simple separator sequence, the following extension allows the
+   canonical format to be changed.
+
+   しかし,単一の単純な区切シーケンスを使うサーバの実装の重荷を軽減するために,
+   次の拡張は正規化された形式が変換されることを許す.
+
+       string "newline"
+       string new-canonical-separator (usually "\r" or "\n" or "\r\n")
+
+   All clients MUST support this extension.
+
+   すべてのクライアントはこの拡張をサポートしなけばならない.
+
+   When processing text files, clients SHOULD NOT translate any
+   character or sequence that is not an exact match of the server's
+   newline separator.
+
+   テキストファイルを処理する際, クライアントは
+   サーバの改行区切りと正確にマッチしない どんな文字やシーケンスも
+   変換しないほうがよい.
+
+   In particular, if the newline sequence being used is the canonical
+   "\r\n" sequence, a lone "\r" or a lone "\n" SHOULD be written through
+   without change.
+
+   特に, 使われる改行シーケンスが 正規化された "\r\n" シーケンスなら,
+   単一の "\r" や "\n" は 変更されない必要がある.
+
+4.4 Supported Features
+
+4.4 サポートされる特徴
+
+   The sftp protocol has grown to be very rich, and now supports a
+   number of features that may not be available on all servers.
+
+   sftp プロトコルは非常にリッチに成長してしまって,
+   いまや すべてのサーバでは利用できないと思われるたくさんの特徴を
+   サポートしている.
+
+   When a server receives a request for a feature it cannot support, it
+   MUST return a SSH_FX_OP_UNSUPPORTED status code, unless otherwise
+   specified.  In order to facilitate clients being able to use the
+   maximum available feature set, and yet not be overly burdened by
+
+
+
+Galbraith, et al.         Expires July 1, 2004                  [Page 9]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   dealing with SSH_FX_OP_UNSUPPORTED status codes, the following
+   extension is introduced.
+
+   サーバがサポートしていない特徴に対するリクエストを受け取ったなら,
+   他に特に規定がなければ,  SSH_FX_OP_UNSUPPORTED status code 
+   を返さなければならない. クライアントが最大の利用可能な
+   特徴のセットを使うことを可能にすることを容易にするために,
+   また SSH_FX_OP_UNSUPPORTED status code を扱うことが
+   非常な重荷とならないために, 次の拡張が導入されている.
+
+       string "supported"
+   	string supported-structure
+           uint32 supported-attribute-mask
+           uint32 supported-attribute-bits
+           uint32 supported-open-flags
+           uint32 supported-access-mask
+           uint32 max-read-size
+           string extension-names[0..n]
+
+   supported-attribute-mask
+      This mask MAY by applied to the 'File Attributes'
+      valid-attribute-flags field (Section 5.1) to ensure that no
+      unsupported attributes are present during a operation which writes
+      attributes.
+
+      このマスクは, 'File attributes' の valid-attribute-flags フィールド
+      (セクション 5.1) が 属性への書き込みの操作の際に
+      サポートされていない特徴が存在しないこと保証するのに適用されてもよい.
+
+   supported-attribute-bits
+      This mask MAY by applied to the 'File Attributes' attrib-bits
+      field (Section 5.8) to ensure that no unsupported attrib-bits are
+      present during a operation which writes attributes.
+
+      このマスクは, 'File attributes' の attrib-bits フィールド
+      (セクション 5.8) が 属性への書き込みの操作の際に
+      サポートされていない特徴が存在しないこと保証するのに適用されてもよい.
+      
+   supported-open-flags
+      The supported-open-flags mask MAY be applied to the SSH_FXP_OPEN
+      (Section 6.3.1) flags field.
+
+      supported-open-flags マスクは , SSH_FXP_OPEN
+      (セクション 6.3.1)  フラグフィールドに対して適用されてもよい.
+      
+   supported-access-mask
+      The supported-access-mask mask MAY be applied to the SSH_FXP_OPEN
+      (Section 6.3.1) desired-access field or the ace-mask field of an
+      ACL.
+
+      supported-access-mask マスクは , SSH_FXP_OPEN 
+      (セクション 6.3.1) desired-access フィールドか ACL の
+      ace-mask フィールド に対して適用されてもよい.
+
+   max-read-size
+      This is the maximum read size that the server gaurantees to
+      complete.  For example, certain embedded server implementations
+      only complete the first 4K of a read, even if there is additional
+      data to be read from the file.
+
+      これは, サーバが完了することを保証する最大の読み込みサイズだ.
+      例えば, ある組み込みサーバ実装は, 読み込んだ最初の 4K のみを
+      処理する. ファイルから読み込まれる追加のデータがあったとしても.
+
+      If the server specifies a non-zero value, it MUST return at least
+      the max-read-size number of bytes for any read requesting
+      max-read-size bytes.  Failure to return max-read-size bytes in
+      such a case indicates either EOF or another error condition
+      occurred.
+      
+      サーバが 0 でない値を指定するなら, サーバは
+      どんな max-read-size バイトを要求する読み込みに対しても
+      少なくとも max-read-size バイト数を返さなければならない.
+      この時に max-read-size バイトを返すのに失敗することは,
+      EOF か 別のエラーの状況が起ったことを示す.(?)
+
+   extension names
+      The extension names may be empty (contains zero strings), or it
+      may contain any named extensions that the server wishes to
+      advertise.
+
+      extension names は (0 文字列からなる) 空かもしれないし 
+      サーバが告知することを望むどんな命名された拡張を含むかもれない.
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 10]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+      The client must be able to differentiate between attribute
+      extensions (Section 5.9) and extended requests (Section 8) by the
+      extension name.
+
+      クライアントは, attribute extensions (セクション 5.9) と
+      extension name による 拡張されたリクエスト (セクション 8) とを
+      区別できなければならない.
+
+   Naturally, if a given attribute field, attribute mask bit, open flag,
+   or extension is required for correct operation, the client MUST
+   either not allow the bit to be masked off, or MUST fail the operation
+   gracefully without sending the request to the server.
+
+   当然ながら, 与えらえた attribute フィールド や attribute mask bit
+   open flag, や extension が正しい操作に対して要求されたら,
+   クライアントは, bit を off にマスクさせることを許さないか, 
+   リクエストをサーバに送ることなく潔く操作を失敗させなければならい.
+
+   The client MAY send requests that are not supported by the server;
+   however, it is not normally expected to be productive to do so.  The
+   client SHOULD apply the mask even to attrib structures received from
+   the server.  The server MAY include attributes or attrib-bits that
+   are not included in the mask.  Such attributes or attrib-bits are
+   effectively read-only.
+
+
+   クライアンントは, サーバがサポートしていないリクエストを
+   送ってもよい. しかし, 普通はそうすることが有効だとは期待はされない.
+   クライアントは, サーバから受けとられた attrib 構造にも
+   mask を適用する必要がある. サーバは マスクに含まれない
+   attributes や attrib-bits を含めてもよい. それらの attributes や
+   attrib-bits は 事実上読み込み専用だ.
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 11]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+5. File Attributes
+
+5. ファイルの属性
+
+   A new compound data type is defined for encoding file attributes. The
+   same encoding is used both when returning file attributes from the
+   server and when sending file attributes to the server.
+
+   ファイルの属性をエンコードするために 新しい複合データが定義される.
+   サーバからファイルの属性が返される場合も, サーバへファイルの属性が
+   送られる場合も同じエンコーディングだ.
+
+       uint32   valid-attribute-flags
+       byte     type                 always present
+       uint64   size                 present only if flag SIZE
+       string   owner                present only if flag OWNERGROUP
+       string   group                present only if flag OWNERGROUP
+       uint32   permissions          present only if flag PERMISSIONS
+       int64    atime                present only if flag ACCESSTIME
+       uint32   atime_nseconds       present only if flag SUBSECOND_TIMES
+       int64    createtime           present only if flag CREATETIME
+       uint32   createtime_nseconds  present only if flag SUBSECOND_TIMES
+       int64    mtime                present only if flag MODIFYTIME
+       uint32   mtime_nseconds       present only if flag SUBSECOND_TIMES
+       string   acl                  present only if flag ACL
+       uint32   attrib-bits          present only if flag BITS
+       uint32   extended_count       present only if flag EXTENDED
+       string   extended_type
+       string   extended_data
+       ...      more extended data (extended_type - extended_data pairs),
+                so that number of pairs equals extended_count
+
+
+5.1 valid-attribute-flags
+
+   The 'valid-attribute-flags' specifies which of the fields are
+   present. Those fields for which the corresponding flag is not set are
+   not present (not included in the packet).
+
+   valid-attribute-flags は どのフィールドが存在しているかを指定する.
+   対応するフラグがセットされていない場合, そのフィールドは存在しない
+   (パケットに含まれない).
+
+   The server generally includes all attributes it knows about; however,
+   it may exclude attributes that are overly expensive to retrieve
+   unless the client explicitly requests them.
+
+   一般にサーバは, 知っているすべての属性を含む. しかし, 
+   クライアントが明示的に要求していない属性は,
+   それらを取得するのが非常に負荷がかかる場合には, 除外してもよい.
+
+   When writing attributes, the server SHOULD NOT modify attributes that
+   are not present in the structure.  However, if necessary, the server
+   MAY use a default value for an absent attribute.
+
+   属性を書き込む場合, サーバは, この構造にない属性を変更しないほうがよい.
+   しかし, 必要があれば, サーバは, 指定のない属性にデフォルトの値を
+   使ってもよい.
+
+   New fields can only be added by incrementing the protocol version
+   number (or by using the extension mechanism described below).
+
+   新しいフィールドは, プロトコルの番号が増えた場合
+   (もしくは, 後で記述する拡張メカニズムを使った場合) にだけ追加される
+
+
+   The following values are defined:
+
+   次の値が定義されている.
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 12]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+       #define SSH_FILEXFER_ATTR_SIZE              0x00000001
+       #define SSH_FILEXFER_ATTR_PERMISSIONS       0x00000004
+       #define SSH_FILEXFER_ATTR_ACCESSTIME        0x00000008
+       #define SSH_FILEXFER_ATTR_CREATETIME        0x00000010
+       #define SSH_FILEXFER_ATTR_MODIFYTIME        0x00000020
+       #define SSH_FILEXFER_ATTR_ACL               0x00000040
+       #define SSH_FILEXFER_ATTR_OWNERGROUP        0x00000080
+       #define SSH_FILEXFER_ATTR_SUBSECOND_TIMES   0x00000100
+       #define SSH_FILEXFER_ATTR_BITS              0x00000200
+       #define SSH_FILEXFER_ATTR_EXTENDED          0x80000000
+
+   0x00000002 was used in a previous version of this protocol.  It is
+   now a reserved value and MUST NOT appear in the mask.  Some future
+   version of this protocol may reuse this value.
+
+   0x00000002 は このプロトコルの前のバージョンで使われた.
+   これは予約された値であり. マスクに現れてはならない. 
+   このプロトコルの将来のバージョンでは, いつかこの値が使われるかもしれない.
+
+5.2 Type
+
+   The type field is always present.  The following types are defined:
+
+   type フィールドは常に存在する. 次の type が定義されている.
+
+       #define SSH_FILEXFER_TYPE_REGULAR          1
+       #define SSH_FILEXFER_TYPE_DIRECTORY        2
+       #define SSH_FILEXFER_TYPE_SYMLINK          3
+       #define SSH_FILEXFER_TYPE_SPECIAL          4
+       #define SSH_FILEXFER_TYPE_UNKNOWN          5
+       #define SSH_FILEXFER_TYPE_SOCKET           6
+       #define SSH_FILEXFER_TYPE_CHAR_DEVICE      7
+       #define SSH_FILEXFER_TYPE_BLOCK_DEVICE     8
+       #define SSH_FILEXFER_TYPE_FIFO             9
+
+   On a POSIX system, these values would be derived from the mode field
+   of the stat structure.  SPECIAL should be used for files that are of
+   a known type which cannot be expressed in the protocol.  UNKNOWN
+   should be used if the type is not known.
+
+   POSIX では, これらの値は stat 構造体の mode フィールドから
+   導出できるだろう. SPECIAL はこのプロトコルで表現することができない
+   既知の種類のファイルに使われるべきだ. UNKNOWN は 
+   種類がわからない場合に使われるべきだ.
+
+5.3 Size
+
+   The 'size' field specifies the size of the file on disk, in bytes. If
+   it is present during file creation, it SHOULD be considered a hint as
+   to the file's eventual size.
+   
+   'size' フィールドは ディスク上のファイルサイズを バイト単位で
+   指定する. ファイルの作成の際に存在したら, ファイルの作成結果のサイズ
+   に対するヒントとしてみなされる必要がある.
+
+   If this field is present during a setstat operation, the file MUST be
+   extended or truncated to the specified size.  Clients SHOULD
+   therefore be careful specifying size during a setstat operation.
+
+   setstat 操作の際にこのフィールドが存在したら, ファイルは
+   指定されたサイズに 拡張ないし切り捨てられなければならない.
+   それゆえ, setstat 操作の際に サイズを指定することに
+   クライアントは慎重である必要がある.
+
+   Files opened with the SSH_FXF_TEXT flag may have a size that is
+   greater or less than the value of the size field.
+
+   SSH_FXF_TEXT	フラグ付きで開かれたファイルは, size フィールドの値よりも
+   サイズが大きかったり小さかったりするかもしれない.
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 13]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+5.4 Owner and Group
+
+   The 'owner' and 'group' fields are represented as UTF-8 strings; this
+   is the form used by NFS v4.  See NFS version 4 Protocol [1]. The
+   following text is selected quotations from section 5.6.
+
+   'owner' と 'group' は UTF-8 文字列として表される. これは
+   NFS v4 で使われる形式だ. NFS version 4 プロトコル [1] を参照.
+   次のテキストは, セクション 5.6 からの引用だ.
+
+   To avoid a representation that is tied to a particular underlying
+   implementation at the client or server, the use of UTF-8 strings has
+   been chosen. The string should be of the form user@dns_domain". This
+   will allow for a client and server that do not use the same local
+   representation the ability to translate to a common syntax that can
+   be interpreted by both. In the case where there is no translation
+   available to the client or server, the attribute value must be
+   constructed without the "@".  Therefore, the absence of the @ from
+   the owner or owner_group attribute signifies that no translation was
+   available and the receiver of the attribute should not place any
+   special meaning with the attribute value.  Even though the attribute
+   value cannot be translated, it may still be useful. In the case of a
+   client, the attribute string may be used for local display of
+   ownership.
+
+   クライアントかサーバの特定の (OS などの) 下の部分の実装に縛られた表現
+   を避けるために, UTF-8 文字列の使用が選択された. この文字列は,
+   "user@dns_domain" という形式でなければならない. これにより,
+   同じローカルな表現を使わないクライアントとサーバが
+   どちらによっても解釈できる共通のシンタックスへの翻訳の能力を持つ事を
+   可能にする. クライアントかサーバが 翻訳できない場合は, 
+   属性の値は, "@" なしで 構築されなければならない. それゆえ,
+   ownwer や owner_group 属性で @ がない場合は, 
+   変換は利用できず, 属性の受け取り手は 属性の値になにか特別な意味を
+   認めてはならないということを意味する. 属性の値が翻訳できない場合でも
+   これはまだ役に立つ. クライアントの場合, 属性の文字列は,
+   所有権のローカルな (ユーザへの) 表示に使われなければならないだろう.
+   
+   user@localhost represents a user in the context of the server.
+
+   user@localhost は サーバの中のユーザを表す.
+
+   If either the owner or group field is zero length, the field should
+   be considered absent, and no change should be made to that specific
+   field.
+
+   owner ないし group フィールドが 0 の長さの場合,
+   このフィールドは 空だと解釈されるべきで, このフィールドを変更しては
+   ならない.
+   
+
+5.5 Permissions
+
+   The 'permissions' field contains a bit mask specifying file
+   permissions.  These permissions correspond to the st_mode field of
+   the stat structure defined by POSIX [2].
+   
+   'permissions' フィールドは ファイルパーミッションを指定する
+   ビットマスクを含む. これらのパーミッションは POSIX で定義された
+   stat 構造体の st_mode フィールドに対応する [2]. 
+
+   This protocol uses the following values for the symbols declared in
+   the posix standard.
+
+   このプロトコルは posix 標準で宣言されたシンボルに対して
+   次の値を用いる.
+
+       #define S_IRUSR  0000400 (octal)
+       #define S_IWUSR  0000200
+       #define S_IXUSR  0000100
+       #define S_IRGRP  0000040
+       #define S_IWGRP  0000020
+       #define S_IXGRP  0000010
+       #define S_IROTH  0000004
+       #define S_IWOTH  0000002
+       #define S_IXOTH  0000001
+       #define S_ISUID  0004000
+       #define S_ISGID  0002000
+       #define S_ISVTX  0001000
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 14]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   Implementations MUST NOT send bits that are not defined.
+
+   実装は 定義されていない bit を送ってはならない.
+
+5.6 Times
+
+   The 'atime', 'createtime', and 'mtime' contain the accesses,
+   creation, and modification times of the files, respectively.   They
+   are represented as seconds from Jan 1, 1970 in UTC.
+
+   'atime', 'createtime', 'mtime' は それぞれ ファイルの
+   アクセス, 作成, 変更時間を含む. これらは,
+   UTC での 1970 年 1 月 1 日からの秒数で表現される.
+
+   A negative value indicates number of seconds before Jan 1, 1970. In
+   both cases, if the SSH_FILEXFER_ATTR_SUBSECOND_TIMES flag is set, the
+   nseconds field is to be added to the seconds field for the final time
+   representation.  For example, if the time to be represented is
+   one-half second before 0 hour January 1, 1970, the seconds field
+   would have a value of negative one (-1) and the nseconds fields would
+   have a value of one-half second (500000000).  Values greater than
+   999,999,999 for nseconds are considered invalid.
+
+   負の値は, 1970 年 1 月 1 日より前の秒数を示す. どちらの場合も,
+   SSH_FILEXFER_ATTR_SUBSECOND_TIMES フラグがセットされていたら,
+   nseconds フィールドが 最終的な時間表現として
+   seconds フィールドへ追加される. 例えば, 1970 年 1 月 1 日 0 時よりも 0.5 秒前の
+   時間を表現する場合, seconds フィールドは マイナス 1 (-1) の値で
+   nseconds フィールドは 0.5 秒 (500000000)) の値となる. 
+   999,999,999 よりも大きい nseconds の値は 無効と見なされる.
+
+5.7 ACL
+
+   The 'ACL' field contains an ACL similar to that defined in section
+   5.9 of NFS version 4 Protocol [1].
+
+   'ACL' は NFS	version 4 プロトコル [1] のセクション 5.9 で定義されたものと似た
+   ACL を含む.
+
+       uint32   ace-count
+
+       repeated ace-count time:
+       uint32   ace-type
+       uint32   ace-flag
+       uint32   ace-mask
+       string   who [UTF-8]
+
+   ace-type is one of the following four values (taken from NFS Version
+   4 Protocol [1]:
+
+   ace-type は (NFS Version 4 プロトコル [1] から取られた) 次の 4 つの値のうちの 1 つだ.
+
+       #define ACE4_ACCESS_ALLOWED_ACE_TYPE 0x00000000;
+       #define ACE4_ACCESS_DENIED_ACE_TYPE  0x00000001;
+       #define ACE4_SYSTEM_AUDIT_ACE_TYPE   0x00000002;
+       #define ACE4_SYSTEM_ALARM_ACE_TYPE   0x00000003;
+
+   ace-flag is a combination of the following flag values.  See NFS
+   Version 4 Protocol [1] section 5.9.2:
+
+   ace-flag は, 次のフラグの値の組み合わせだ.
+   NFS Version 4 プロトコル [1] のセクション 5.9.2 を参照.
+
+       #define ACE4_FILE_INHERIT_ACE           0x00000001;
+       #define ACE4_DIRECTORY_INHERIT_ACE      0x00000002;
+       #define ACE4_NO_PROPAGATE_INHERIT_ACE   0x00000004;
+       #define ACE4_INHERIT_ONLY_ACE           0x00000008;
+       #define ACE4_SUCCESSFUL_ACCESS_ACE_FLAG 0x00000010;
+       #define ACE4_FAILED_ACCESS_ACE_FLAG     0x00000020;
+       #define ACE4_IDENTIFIER_GROUP           0x00000040;
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 15]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   ace-mask is any combination of the following flags (taken from NFS
+   Version 4 Protocol [1] section 5.9.3:
+
+   ace-mask は (NFS Version 4 プロトコル [1] の セクション 5.9.3 から取られた)
+   次のフラグの任意の組み合わせだ.
+
+       #define ACE4_READ_DATA         0x00000001;
+       #define ACE4_LIST_DIRECTORY    0x00000001;
+       #define ACE4_WRITE_DATA        0x00000002;
+       #define ACE4_ADD_FILE          0x00000002;
+       #define ACE4_APPEND_DATA       0x00000004;
+       #define ACE4_ADD_SUBDIRECTORY  0x00000004;
+       #define ACE4_READ_NAMED_ATTRS  0x00000008;
+       #define ACE4_WRITE_NAMED_ATTRS 0x00000010;
+       #define ACE4_EXECUTE           0x00000020;
+       #define ACE4_DELETE_CHILD      0x00000040;
+       #define ACE4_READ_ATTRIBUTES   0x00000080;
+       #define ACE4_WRITE_ATTRIBUTES  0x00000100;
+       #define ACE4_DELETE            0x00010000;
+       #define ACE4_READ_ACL          0x00020000;
+       #define ACE4_WRITE_ACL         0x00040000;
+       #define ACE4_WRITE_OWNER       0x00080000;
+       #define ACE4_SYNCHRONIZE       0x00100000;
+
+   who is a UTF-8 string of the form described in 'Owner and Group'
+   (Section 5.4)
+
+   who は 'Owner and Group' (セクション 5.4) で記述された形式の
+   UTF-8 文字列だ.
+
+   Also, as per '5.9.4 ACE who' [1] there are several identifiers that
+   need to be understood universally.  Some of these identifiers cannot
+   be understood when an client access the server, but have meaning when
+   a local process accesses the file.  The ability to display and modify
+   these permissions is permitted over SFTP.
+
+   '5.9.4 ACE who' [1] のように, 一般的に理解される必要があるいくつかの
+   識別子がある. これらの識別子のいくつかは, 
+   クライアントがサーバにアクセスする際は理解されないが
+   ローカルプロセスがファイルにアクセスする際は意味を持つ.
+   これらのパーミッションの表示と許可の能力は, 
+   SFTP 越しに許可される.
+
+      OWNER         The owner of the file.
+
+		    ファイルの所有者
+
+      GROUP         The group associated with the file.
+
+		    ファイルに関連付いたグループ
+
+      EVERYONE      The world.
+
+		    世界全体.
+
+      INTERACTIVE   Accessed from an interactive terminal.
+		    
+		    インタラクティブなシェルからアクセスされる.
+
+      NETWORK       Accessed via the network.
+
+		    ネットワークからアクセスされる.
+
+      DIALUP        Accessed as a dialup user to the server.
+
+		    サーバに対するダイアルアップユーザからアクセスされる.
+
+      BATCH         Accessed from a batch job.
+
+		    バッチジョブからアクセスされる.
+
+      ANONYMOUS     Accessed without any authentication.
+
+		    なんら認証なしでアクセスされる.
+
+      AUTHENTICATED Any authenticated user (opposite of ANONYMOUS).
+
+		    (ANONYMOUS とは逆に) すべての認証されたユーザ
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 16]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+      SERVICE       Access from a system service.
+
+		    システムのサービスからアクセスされる.
+
+   To avoid conflict, these special identifiers are distinguish by an
+   appended "@".  For example: ANONYMOUS@.
+
+   衝突を避けるため, これらの特別な識別子は "@" を付加されることで
+   区別される.  例えば ANONYMOUS@.
+
+5.8 attrib-bits
+
+   These bits reflect various attributes of the file or directory on the
+   server.
+
+   これらのビットは, サーバ上のファイルやディレクトリの
+   様々な属性を反映する.
+
+   The following attrib-bits are defined:
+   
+   次の attrib-bits が定義されている.
+
+       #define SSH_FILEXFER_ATTR_FLAGS_READONLY         0x00000001
+       #define SSH_FILEXFER_ATTR_FLAGS_SYSTEM           0x00000002
+       #define SSH_FILEXFER_ATTR_FLAGS_HIDDEN           0x00000004
+       #define SSH_FILEXFER_ATTR_FLAGS_CASE_INSENSITIVE 0x00000008
+       #define SSH_FILEXFER_ATTR_FLAGS_ARCHIVE          0x00000010
+       #define SSH_FILEXFER_ATTR_FLAGS_ENCRYPTED        0x00000020
+       #define SSH_FILEXFER_ATTR_FLAGS_COMPRESSED       0x00000040
+       #define SSH_FILEXFER_ATTR_FLAGS_SPARSE           0x00000080
+       #define SSH_FILEXFER_ATTR_FLAGS_APPEND_ONLY      0x00000100
+       #define SSH_FILEXFER_ATTR_FLAGS_IMMUTABLE        0x00000200
+       #define SSH_FILEXFER_ATTR_FLAGS_SYNC             0x00000400
+
+   SSH_FILEXFER_ATTR_FLAGS_READONLY
+      Advisory, read-only bit.  This bit is not part of the access
+      control information on the file, but is rather an advisory field
+      indicating that the file should not be written.
+      
+      助言的な, read-only ビット. このビットは ファイルのアクセス制御情報
+      の一部ではなく, このファイルは書き込まれるべきでないという
+      助言的なフィールドである.
+
+   SSH_FILEXFER_ATTR_FLAGS_SYSTEM
+      The file is part of operating system.
+      
+      ファイルは オペレーティングシステムの一部だ.
+
+   SSH_FILEXFER_ATTR_FLAGS_HIDDEN
+      File SHOULD NOT be shown to user unless specifically requested.
+      For example, most UNIX systems SHOULD set this bit if the filename
+      begins with a 'period'.  This bit may be read-only (Section 4.4).
+      Most UNIX systems will not allow this to be changed.
+
+      ファイルは 特別に要求されなければ, ユーザに示されないほうがよい.
+      例えば, 多くの UNIX システムでは, ファイルネームが 'period (.)' から
+      始まるファイルに対してこのビットが設定される必要がある. このビットは
+      read-only (セクション 4.4) だろう. 多くの UNIX システムは
+      このビットに対する変更を許可しない.
+
+   SSH_FILEXFER_ATTR_FLAGS_CASE_INSENSITIVE
+      This attribute can only apply to directories.  This attribute is
+      always read-only, and cannot be modified.  This attribute means
+      that files and directory names in this directory should be
+      compared without regard to case.
+
+      この属性は, ディレクトリに対してのみ適用できる.
+      この 属性はつねに read-only で 変更されることはできない. 
+      この属性は, ディレクトリの中の ファイルやディレクトリが
+      大文字小文字を無視して比較されるべきであることを意味する.
+
+      It is recommended that where possible, the server's filesystem be
+      allowed to do comparisons.  For example, if a client wished to
+      prompt a user before overwriting a file, it should not compare the
+      new name with the previously retrieved list of names in the
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 17]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+      directory.  Rather, it should first try to create the new file by
+      specifying SSH_FXF_CREATE_NEW flag. Then, if this fails and
+      returns SSH_FX_FILE_ALREADY_EXISTS, it should prompt the user and
+      then retry the create specifying SSH_FXF_CREATE_TRUNCATE.
+
+      サーバのファイルシステムで比較が許される場合に, 可能ならば, 
+      こうすることが推奨される. 例えば, クライアントが
+      ファイルの上書きをする前にユーザに入力を促すことを
+      望むなら, クライアントは新しい名前とディレクトリ中の
+      すでに取得した名前のリストとの比較をするべきでない.
+      むしろ, クライアントは SSH_FXF_CREATE_NEW フラグを指定して
+      新しいファイルを作ろうとまず試みるべきだ.
+      そして これが失敗し, SSH_FX_FILE_ALREADY_EXISTS が返されたなら.
+      クライアントは, ユーザに入力を促し,そして,
+      SSH_FXF_CREATE_TRUNCATE を指定した作成を再試行するべきである.
+
+      Unless otherwise specified, filenames are assumed to be case
+      sensitive.
+
+      他に特に規定がなければ,  ファイルネームは
+      大文字と小文字を区別すると仮定される.
+
+   SSH_FILEXFER_ATTR_FLAGS_ARCHIVE
+      The file should be included in backup / archive operations.
+
+      ファイルは バックアップ / アーカイブ 操作に含まれるべきである.
+
+   SSH_FILEXFER_ATTR_FLAGS_ENCRYPTED
+      The file is encrypted.
+
+      ファイルは暗号化されている.
+
+   SSH_FILEXFER_ATTR_FLAGS_COMPRESSED
+      The file is compressed.
+
+      ファイルは圧縮されている.
+
+   SSH_FILEXFER_ATTR_FLAGS_SPARSE
+      The file is a sparse file; this means that file blocks that have
+      not been explicitly written are not stored on disk. For example,
+      if a client writes a buffer at 10 M from the beginning of the
+      file, the blocks between the previous EOF marker and the 10 M
+      offset would not consume physical disk space.
+
+      このファイルは sparse (まばら) ファイルだ; これは, 
+      明示的に書き込まれていないファイルブロックが
+      ディスク上に保存されていないことを意味する.
+      例えば, クライアントがファイルの最初から 10 M のバッファを
+      書いたら, 前の EOF マーカーと 10M のオフセットの愛大の
+      ブロックは 物理的なディスクスペースを消費しないだろう.
+
+      Some server may store all files as sparse files, in which case
+      this bit will be unconditionally set.  Other servers may not have
+      a mechanism for determining if the file is sparse, and so the file
+      MAY be stored sparse even if this flag is not set.
+
+      いくつかのサーバは すべてのファイルを sparse なファイルとして保存する.
+      この場合, この bit は,条件に依らず設定される. その他のサーバでは
+      ファイルを sparse とするか決定するメカニズムを持っていないかもしれない.
+      そしてファイルは このフラグが設定されていなくても sparse に
+      保存されるかもしれない.
+      
+
+   SSH_FILEXFER_ATTR_FLAGS_APPEND_ONLY
+      The file can only be opened for writing in append mode.
+
+      ファイルは書き込む場合追加モードでのみ開くことができる.
+
+   SSH_FILEXFER_ATTR_FLAGS_IMMUTABLE
+      The file cannot be deleted or renamed, no hard link can be created
+      to this file and no data can be written to the file.
+
+      ファイルは消されたり名前を変えたりできない.
+      このファイルに対するハードリンクが作成されることもできないし
+      ファイルに対してなにかのデータが書き込まれることもできない.
+      
+      This bit implies a stronger level of protection than
+      SSH_FILEXFER_ATTR_FLAGS_READONLY, the file permission mask or
+      ACLs.  Typically even the superuser cannot write to immutable
+      files, and only the superuser can set or remove the bit.
+
+      このビットは SSH_FILEXFER_ATTR_FLAGS_READONLY や
+      ファイルパーミッションマスク, ACL よりも強い
+      保護のレベルを意味する. 典型的な, スーパユーザでさえ
+      immutable (不変の) ファイルに書き込むことはできないし,
+      スーパユーザのみが このビットを設定し消去することができる.
+
+   SSH_FILEXFER_ATTR_FLAGS_SYNC
+      When the file is modified, the changes are written synchronously
+      to the disk.
+
+
+      ファイルが変更される時, 変更は ディスクに同期して書かれる.
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 18]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+5.9 Extended Attributes
+
+   The SSH_FILEXFER_ATTR_EXTENDED flag provides a general extension
+   mechanism for the attrib structure.  If the flag is specified, then
+   the 'extended_count' field is present.  It specifies the number of
+   extended_type-extended_data pairs that follow.  Each of these pairs
+   specifies an extended attribute.  For each of the attributes, the
+   extended_type field should be a string of the format "name@domain",
+   where "domain" is a valid, registered domain name and "name"
+   identifies the method.  The IETF may later standardize certain names
+   that deviate from this format (e.g., that do not contain the "@"
+   sign).  The interpretation of 'extended_data' depends on the type.
+   Implementations SHOULD ignore extended data fields that they do not
+   understand.
+
+   SSH_FILEXFER_ATTR_EXTENDED フラグは attrib 構造への
+   一般的な拡張を提供する. このフラグが指定されると,
+   'extended_count' フィールドが存在する. これは,
+   その後に続く extended_type-extended_data ペアの数を指定する.
+   これらのペアそれぞれで 拡張される属性を指定する. 属性のそれぞれに
+   ついて, extended_data フィールドは "namae@domain" の景気の
+   文字列であるべきだ. ここで "domain"は有効で登録されたドメイン名で
+   "name"は方法を指定する. IETF は (例えば, "@" サインを含まない)
+   このフォーマットから逸脱する名前を後で標準化するかもしれない.
+   'extended_data' の解釈は その種類に依存する. 実装は
+   理解できない 拡張されたデータフィールドを無視する必要がある.
+
+   Additional fields can be added to the attributes by either defining
+   additional bits to the flags field to indicate their presence, or by
+   defining extended attributes for them.  The extended attributes
+   mechanism is recommended for most purposes; additional flags bits
+   should only be defined by an IETF standards action that also
+   increments the protocol version number.  The use of such new fields
+   MUST be negotiated by the version number in the protocol exchange.
+   It is a protocol error if a packet with unsupported protocol bits is
+   received.
+
+   追加のフィールドは, そのフィールドの存在を示すためにフラグのフィールドへの
+   追加のビットを定義することか, 追加のフィールドのための
+   拡張された属性を定義することで属性に追加される.
+   属性を追加するメカニズムは, 大抵の目的のために推奨される.
+   フラグのビットを追加することは,  プロトコルバージョン番号が
+   増した時に IETF の標準化の作業によってのみ定義されるべきだ.
+   そのような新しいフィールドの使用は, プロトコル交換での
+   バージョン番号によって交渉されなければならない. サポートされていない
+   プロトコルのビットを持つパケットが受け取られたなら,
+   プロトコルエラーだ.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 19]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+6. Requests From the Client to the Server
+
+6. クライアントからサーバへのリクエスト
+
+   Requests from the client to the server represent the various file
+   system operations.  Each request begins with an 'request-id' field,
+   which is a 32-bit identifier identifying the request (selected by the
+   client).  The same identifier will be returned in the response to the
+   request.  One possible implementation is a monotonically increasing
+   request sequence number (modulo 2^32).
+
+   クライアントからサーバへのリクエストは様々なファイルシステム操作を
+   表す. それぞれのリクエストは, (クライアントによって選ばれた)
+   リクエストを識別する 32-bit の識別子である request-id フィールドで始まる.
+   同じ識別子が, リクエストへのレスポンスの中で返される. 1 つの可能な
+   実装として, 単調に増加するリクエストシーケンス番号 (2^32 の法) がある.
+
+6.1 Request Synchronization and Reordering
+
+6.1 リクエストの同期と並べ換え
+
+   The protocol and implementations MUST process requests relating to
+   the same file in the order in which they are received.  In other
+   words, if an application submits multiple requests to the server, the
+   results in the responses will be the same as if it had sent the
+   requests one at a time and waited for the response in each case.  For
+   example, the server may process non-overlapping read/write requests
+   to the same file in parallel, but overlapping reads and writes cannot
+   be reordered or parallelized.  However, there are no ordering
+   restrictions on the server for processing requests from two different
+   file transfer connections. The server may interleave and parallelize
+   them at will.
+
+   プロトコルと実装は, 同じファイルに関するリクエストを受け取った順に
+   処理しなければならない. いいかえれば, アプリケーションが
+   サーバに複数のリクエストを送信しても, レスポンス中の結果は, 
+   一度に 1 つのリクエストを送ってその都度レスポンスを待った場合と
+   同じ様になる. 例えば, サーバは, 同じファイルに対する
+   重複のない 読み込み/書き出し リクエストを並行に処理してもよいが,
+   重複する 読み込み や 書き出し は並べ変えたり並列化できない.
+   しかし, サーバにとって,
+   2 つの異なるファイル転送接続からのリクエストの処理については
+   順序の制限はない. サーバは, 任意にそれらを交互配置したり
+   並列化するかもしれない.
+   
+   There are no restrictions on the order in which responses to
+   outstanding requests are delivered to the client, except that the
+   server must ensure fairness in the sense that processing of no
+   request will be indefinitely delayed even if the client is sending
+   other requests so that there are multiple outstanding requests all
+   the time.
+
+   クライアントに伝達される未解決のリクエストに対するレスポンスの
+   順序に制限はない. しかし, クライアントが, 複数の未解決のリクエストがあるのに
+   別のリクエクストを送ったとしても, リクエストの処理が
+   永久には遅らされることがないという意味での公平さを保証しなければならない
+   場合を除く.
+
+
+6.2 File Names
+
+6.2 ファイル名
+
+   This protocol represents file names as strings.  File names are
+   assumed to use the slash ('/') character as a directory separator.
+
+   このプロトコルは ファイル名を文字列として表現する. ファイル名では
+   ディレクトリの区切りとして スラッシュ ('/') 文字を使うことを
+   仮定する.
+
+   File names starting with a slash are "absolute", and are relative to
+   the root of the file system.  Names starting with any other character
+   are relative to the user's default directory (home directory).  Note
+   that identifying the user is assumed to take place outside of this
+   protocol.
+
+   スラッシュから始まるファイル名は, "絶対" で. ファイルシステムのルートからの
+   相対である. その他の別の文字で始まるファイル名は ユーザの
+   デフォルトディレクトリ (ホームディレクトリ) からの相対である. ユーザの
+   識別は, このプロトコルの外部で起っていると仮定されていることに注意.
+
+   Servers SHOULD interpret a path name component ".." as referring to
+   the parent directory, and "." as referring to the current directory.
+   If the server implementation limits access to certain parts of the
+   file system, it must be extra careful in parsing file names when
+   enforcing such restrictions.  There have been numerous reported
+   security bugs where a ".." in a path name has allowed access outside
+   the intended area.
+
+   サーバは, 親ディレクトリに対する参照として パス名要素 ".." を解釈し
+   カレントディレクトリに対する参照として "." を解釈する必要がある.
+   サーバの実装が, ファイルシステムの特定の部分へのアクセスを制限して
+   これらの制限を強制する場合, フィイル名のパースは
+   非常に注意しなければならない. パス名中の ".." が
+   意図したエリアの外側へのアクセスを許したことによる 数多くの
+   セキュリティに関するバグが報告されてきた.
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 20]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   An empty path name is valid, and it refers to the user's default
+   directory (usually the user's home directory).
+
+   空のパス名も有効で. これは ユーザのデフォルトのディレクトリを示す
+   (通常ユーザのホームディレトリ). 
+
+   Otherwise, no syntax is defined for file names by this specification.
+   Clients should not make any other assumptions; however, they can
+   splice path name components returned by SSH_FXP_READDIR together
+   using a slash ('/') as the separator, and that will work as expected.
+
+   しかし, この仕様ではフィイル名のために シンタックスは定義しない.
+   クライアントは, どんな仮定もするべきではない. しかし,
+   クライアントは, 
+   SSH_FXP_READDIR とともに返されたパス名要素をスラッシュ ('/') を区切として
+   使って繋ぎ合せてよいし, これは期待通りに動くだろう.
+
+   In order to comply with IETF Policy on Character Sets and Languages
+   [7], all filenames MUST be encoded in UTF-8. The shortest valid UTF-8
+   encoding of the UNICODE data MUST be used. The server is responsible
+   for converting the UNICODE data to whatever canonical form it
+   requires.
+
+   文字セットと言語についての IETF のポリシー [7] に従うため,
+   ファイル名は UTF-8 でエンコードされなければならない. 
+   UNICODE データの中で 最も短い有効な UTF-8 エンコーディング
+   が使われるべきだ. サーバは UNICODE データ を 必要なすべての
+   正規化された形式に変換することに責任を持つ.
+
+   For example, if the server requires that precomposed characters
+   always be used, the server MUST NOT assume the filename as sent by
+   the client has this attribute, but must do this normalization itself.
+
+   例えば, サーバは 合成済みの文字をいつも使うことを要求する場合,
+   サーバは, この属性を持つクライアントによって送られたファイル名に
+   仮定をしてはならない. この正規化自身を行なわなければならない.
+
+   It is understood that the lack of well-defined semantics for file
+   names may cause interoperability problems between clients and servers
+   using radically different operating systems.  However, this approach
+   is known to work acceptably with most systems, and alternative
+   approaches that e.g. treat file names as sequences of structured
+   components are quite complicated.
+
+   ファイル名に対する良く定義されたセマンティックスの欠如によって
+   根本的に異なるオペレーティングシステムを使うクライアントとサーバ間で
+   相互運用の問題が起きていることは理解されている. しかし,
+   このアプローチは, 多くのシステムで満足に動くが知られているし,
+   ファイル名を構造化された要素のシーケンスとして扱うような
+   別のアプローチは 非常に複雑だ.
+
+6.3 Opening and Closing Files and Directories
+
+6.3 ファイルとディレクトリのオープンとクローズ
+
+   Many operations in the protocol operate on open files.  The
+   SSH_FXP_OPEN and SSH_FXP_OPENDIR requests return a handle (which is
+   an opaque, variable-length string) which may be used to access the
+   file or directory later.  The client MUST NOT send requests the
+   server with bogus or closed handles.  However, the server MUST
+   perform adequate checks on the handle in order to avoid security
+   risks due to fabricated handles.
+
+   このプロトコルでの多くの操作で ファイルのオープンの操作をする.
+   SSH_FXP_OPEN と SSH_FXP_OPENDIR は 後でファイルないしディレクトリへ
+   アクセスするために使われる (空でない 可変長の文字列) の
+   ハンドルを返す. クライアントは,  偽のないし閉じられたハンドルで
+   サーバにリクエストを送ってはならない. しかし, サーバは
+   でっちあげられたハンドルによるセキュリティの危険を避けるため
+   ハンドルに適切な検査を実行しなければならない.
+
+   This design allows either stateful and stateless server
+   implementation, as well as an implementation which caches state
+   between requests but may also flush it.  The contents of the file
+   handle string are entirely up to the server and its design.  The
+   client should not modify or attempt to interpret the file handle
+   strings.
+
+   この設計は, リクエスト間で状態をキャッシュしフラッシュもする実装と同様に,
+   ステートフルなサーバの実装もステートレスなサーバの実装も許す. 
+   ファイルハンドル文字列の内容は, サーバとその設計に完全に依存する.
+   クライアントは, ファイルハンドル文字列を変更したり解釈しようとしたり
+   するべきではない.
+   
+   The file handle strings MUST NOT be longer than 256 bytes.
+
+   ファイルハンドル文字列は 256 バイトより長くてはならない.
+
+6.3.1 Opening a File
+
+6.3.1 ファイルのオープン
+
+   Files are opened and created using the SSH_FXP_OPEN message:
+
+   ファイルは SSH_FXP_OPEN メッセージを用いてオープンされ作られる.
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 21]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+       byte   SSH_FXP_OPEN
+       uint32 request-id
+       string filename [UTF-8]
+       uint32 desired-access
+       uint32 flags
+       ATTRS  attrs
+
+   The response to this message will be either SSH_FXP_HANDLE (if the
+   operation is successful) or SSH_FXP_STATUS (if the operation fails).
+
+   このメッセージに対するレスポンスは SSH_FXP_HANDLE (操作が成功なら)
+   か SSH_FXP_STATUS (操作が失敗なら) だ.
+
+   The 'request-id' field is the request identifier as for all requests.
+
+   'request-id' フィールドは すべてのリクエストに関するリクエスト
+   識別子だ. 
+
+   The 'filename' field specifies the file name.  See Section ''File
+   Names'' for more information.
+
+   'filename' フィールドは ファイル名を定める. さらなる情報は
+   ''File Names'' セクションを参照せよ.
+   
+   The 'desired-access' field is a bitmask containing a combination of
+   values from the ace-mask flags from section 5.7.
+
+   'desired-access' フィールドは セクション 5.7 の ace-mask フラグからの
+   値の組合せと含むビットマスクだ.
+
+
+   The 'flags' field controls various aspects of the operation,
+   including whether or not the file is created and the kind of locking
+   desired.
+
+   'flags' フィールドは, 操作の様々な面を制御する. ファイルが作られるか
+   どうかや 望ましいロックの種類は何かなどを含む.
+
+   The following 'flags' are defined:
+
+   次の 'flags' が定義されている.
+
+       SSH_FXF_ACCESS_DISPOSITION        = 0x00000007
+           SSH_FXF_CREATE_NEW            = 0x00000000
+           SSH_FXF_CREATE_TRUNCATE       = 0x00000001
+           SSH_FXF_OPEN_EXISTING         = 0x00000002
+           SSH_FXF_OPEN_OR_CREATE        = 0x00000003
+           SSH_FXF_TRUNCATE_EXISTING     = 0x00000004
+       SSH_FXF_ACCESS_APPEND_DATA        = 0x00000008
+       SSH_FXF_ACCESS_APPEND_DATA_ATOMIC = 0x00000010
+       SSH_FXF_ACCESS_TEXT_MODE          = 0x00000020
+       SSH_FXF_ACCESS_READ_LOCK          = 0x00000040
+       SSH_FXF_ACCESS_WRITE_LOCK         = 0x00000080
+       SSH_FXF_ACCESS_DELETE_LOCK        = 0x00000100
+
+   SSH_FXF_ACCESS_DISPOSITION
+      Disposition is a 3 bit field that controls how the file is opened.
+      The server MUST support these bits.  Any one of the following
+      enumeration is allowed:
+
+      Disposition は 3bit のフィールドで, ファイルがどのように開かれるかを
+      制御する. サーバは これらのビットをサポートしなければならない.	
+      次の列挙にどれかが許される.
+
+      SSH_FXF_CREATE_NEW
+         A new file is created; if the file already exists, the server
+         MUST return status SSH_FX_FILE_ALREADY_EXISTS.
+
+
+	 新しいファイルが作られる; もしファイルがすでに存在するなら
+	 サーバは SSH_FX_FILE_ALREADY_EXISTS ステータスを返さなければ
+	 ならない.
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 22]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+      SSH_FXF_CREATE_TRUNCATE
+         A new file is create; if the file already exists, it is
+         truncated.
+
+	 新しいファイルが作られる; もしファイルがあったなら,
+	 切り捨てられる.
+
+      SSH_FXF_OPEN_EXISTING
+         An existing file is opened.  If the file does not exist, the
+         server MUST return SSH_FX_NO_SUCH_FILE. If a directory in the
+         path does not exist, the server SHOULD return
+         SSH_FX_NO_SUCH_PATH.  It is also acceptable if the server
+         returns SSH_FX_NO_SUCH_FILE in this case.
+
+	 すでにあるファイルが開かれる. ファイルが存在しなかったら,
+	 サーバは SSH_FX_NO_SUCH_FILE を返さなければならない.
+	 パスのディレクトリが存在しないなら, サーバは
+	 SSH_FX_NO_SUCH_PATH を返す必要がある. 
+	 この場合でも SSH_FX_NO_SUCH_FILE をサーバが返すのも
+	 受け入れられる.
+
+      SSH_FXF_OPEN_OR_CREATE
+         If the file exists, it is opened.  If the file does not exist,
+         it is created.
+
+	 ファイルが存在したら, それが開かれる. 存在しなかったら
+	 作られる.
+
+      SSH_FXF_TRUNCATE_EXISTING
+         An existing file is opened and truncated.  If the file does not
+         exist, the server MUST return the same error codes as defined
+         for SSH_FXF_OPEN_EXISTING.
+
+	 存在するファイルは開かれ切り捨てられる. ファイルが存在しないなら,
+	 サーバは SSH_FXF_OPEN_EXISTING で定義されたのと
+	 同じエラーコードを返す必要がある.
+
+   SSH_FXF_ACCESS_APPEND_DATA
+      Data is always written at the end of the file.  The offset field
+      of the SSH_FXP_WRITE requests are ignored.
+
+      データは常にファイルの末尾に書かれる. SSH_FXP_WRITE リクエストの
+      offset フィールドは無視される.
+
+      Data is not required to be appended atomically.  This means that
+      if multiple writers attempt to append data simultaneously, data
+      from the first may be lost.  However, data MAY be appended
+      atomically.
+
+      データは アトミックに追加される必要はない. これは, 
+      複数の書き手が同時にファイルを追加しようとした場合,
+      最初のものからのデータは失なわれるかもしれないということだ.
+      しかし, データはアトミックに追加されてもよい.
+
+   SSH_FXF_ACCESS_APPEND_DATA_ATOMIC
+      Data is always written at the end of the file.  The offset field
+      of the SSH_FXP_WRITE requests are ignored.
+
+      データは常にファイルの末尾に書かれる. SSH_FXP_WRITE リクエストの
+      offset フィールドは無視される.
+
+      Date MUST be written atomically so that there is no chance that
+      multiple appenders can collide and result in data being lost.
+
+#     Date は Data の間違い
+
+      データはアトミックに書かれなければならない.
+      複数の追加者が衝突してデータが失なわれることになる機会がないように.
+
+      If both append flags are specified, the server SHOULD use atomic
+      append if it is available, but SHOULD use non-atomic appends
+      otherwise.  The server SHOULD NOT fail the request in this case.
+
+      どちらの append フラグが指定された場合にも, サーバは
+      可能ならば アトミックな追記を使う必要がある.
+      そうでないなら アトミックでない追記を使う必要がある.
+      この場合に, サーバはリクエストを失敗させないほうがよい.
+
+   SSH_FXF_TEXT
+      Indicates that the server should treat the file as text and
+      convert it to the canonical newline convention in use. (See
+      Determining Server Newline Convention. (Section 4.3)
+
+      サーバがファイルをテキストとして扱うべきで, ファイルを
+      正規化された改行方式を使用するように変換されるべきだ.
+      (サーバの改行方式の決定 (セクション 4.3) を参照)
+
+      When a file is opened with the FXF_TEXT flag, the offset field in
+      both the read and write function are ignored.
+
+      ファイルが FXF_TEXT フラグで開かれた場合は, 読み書きの関数での
+      offset フィールドは無視される.
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 23]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+      Servers MUST correctly process multiple, parallel reads and writes
+      correctly in this mode.  Naturally, it is permissible for them to
+      do this by serializing the requests.
+
+      サーバは, このモードで 複数の並行の読み込みと書き込みを
+      正しく処理しなければならない. 当然, 読み書きのために
+      リクエストをシリアライズして処理することは許される.
+
+      Clients SHOULD use the SSH_FXF_ACCESS_APPEND_DATA flag to append
+      data to a text file rather then using write with a calculated
+      offset.
+
+      クライアントは, 計算されたオフセット付きの書き込みを用いるよりも,
+      テキストファイルにデータを
+      追記するのに SSH_FXF_ACCESS_APPEND_DATA フラグを使う必要がある.
+
+      To support seeks on text files the following SSH_FXP_EXTENDED
+      packet is defined.
+
+      テキストファイルのシークをサポートするため,
+      次の SSH_FXP_EXTENDED パケットが定義されている.
+
+           string "text-seek"
+           string file-handle
+           uint64 line-number
+
+      line-number is the index of the line number to seek to, where byte
+      0 in the file is line number 0, and the byte directly following
+      the first newline sequence in the file is line number 1 and so on.
+
+      line-number は シークする 行番号のインデックスで, 
+      ファイルでの byte 0 が 行番号 0 で, ファイルの
+      最初の改行シーケンスにすぐに続く byte が 行番号 1,
+      以下同様である.
+
+      The response to a "text-seek" request is an SSH_FXP_STATUS
+      message.
+
+      "text-seek" リクエストへのレスポンスは SSH_FXP_STATUS メッセージだ.
+
+      An attempt to seek past the end-of-file should result in a
+      SSH_FX_EOF status.
+
+      end-of-file を超えたシークの試みは, SSH_FX_EOF ステータスに
+      なるべきだ.
+
+      Servers SHOULD support at least one "text-seek" in order to
+      support resume.  However, a client MUST be prepared to receive
+      SSH_FX_OP_UNSUPPORTED when attempting a "text-seek" operation.
+      The client can then try a fall-back strategy, if it has one.
+
+      サーバは レジュームをサポートするために 少なくとも 1 つの
+      "text-seek" をサポートする必要がある. しかし,
+      クライアントは "text-seek" 操作の試行の際に
+      SSH_FX_OP_UNSUPPORTED を受け取る準備がされていなければならない.
+      この時, クライアントは (それがあるなら) フォールバックの戦略を試みる
+      ことができる.
+
+      Clients MUST be prepared to handle SSH_FX_OP_UNSUPPORTED returned
+      for read or write operations that are not sequential.
+
+      クライアントは , シーケンシャルでない 読み込みや書き込み操作によって
+      返される SSH_FX_OP_UNSUPPORTED を処理する準備がされていなければならない.
+
+   SSH_FXF_ACCESS_READ_LOCK
+      The file should be opened with a read lock.  The server MUST
+      gaurantee that the client will be the exclusive reader of the file
+      until the client closes the handle. If there is a conflicting lock
+      the server MUST return SSH_FX_LOCK_CONFlICT.  If the server cannot
+      make the locking gaurantee, it MUST return SSH_FX_OP_UNSUPPORTED.
+
+# guarantee ね
+
+      ファイルは 読み込みロック付きで開かれるべきである.
+      サーバは, そのクライアントがハンドルを閉じるまで
+      クライアントがファイルの独占的な読み手であることを保証しなければならない.
+      ロックが衝突したなら, サーバは SSH_FX_LOCK_CONFlICT を返さなければ
+      ならない. サーバが ロックの保証をできない場合,
+      SSH_FX_OP_UNSUPPORTED を返さなければならない.
+
+   SSH_FXF_ACCESS_WRITE_LOCK
+      The file should be opened with a write lock.  The server MUST
+      gaurantee that the client will be the exclusive writer of the file
+      until the client closes the handle.
+      
+      ファイルは 書き込みロック付きで開かれるべきである.
+      サーバは, そのクライアントがハンドルを閉じるまで
+      クライアントがファイルの独占的な書き手であることを保証しなければならない.
+
+   SSH_FXF_ACCESS_DELETE_LOCK
+      The file should be opened with a delete lock.  The server MUST
+      gaurantee that the file will not be deleted until the client
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 24]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+      closes the handle.
+
+      ファイルは 削除ロック付きで開かれるべきである.
+      サーバは, そのクライアントがハンドルを閉じるまで
+      ファイルが削除されないことを保証しなければならない.
+
+
+   The 'attrs' field specifies the initial attributes for the file.
+   Default values MUST be supplied by the server for those attributes
+   that are not specified.  See Section ''File Attributes'' for more
+   information.
+
+   'attrs' フィールドは, ファイルの初期属性を指定する.
+   指定されていない属性についてデフォルト値はサーバによって
+   提供されなければらならい. さらなる情報は ''File Attributes'' セクション
+   を参照.
+
+   The following table is provided to assist in mapping posix semantics
+   to equivalent SFTP file open parameters:
+
+   次のテーブルは, posix のセマンティックスを同等の SFTP ファイルオープン
+   パラメータにマップするのを助けるために提供されている.
+
+   O_RDONLY
+      desired-access = READ_DATA|READ_ATTRIBUTES
+
+   O_WRONLY
+      desired-access = WRITE_DATA|WRITE_ATTRIBUTES
+
+   O_RDWR
+      desired-access =
+      READ_DATA|READ_ATTRIBUTES|WRITE_DATA|WRITE_ATTRIBUTES
+
+   O_APPEND
+      desired-access = WRITE_DATA|WRITE_ATTRIBUTES|APPEND_DATA
+      flags          = SSH_FXF_ACCESS_APPEND_DATA and or
+      SSH_FXF_ACCESS_APPEND_DATA_ATOMIC
+
+   O_CREAT
+      flags = SSH_FXF_OPEN_OR_CREATE
+
+   O_TRUNC
+      flags = SSH_FXF_TRUNCATE_EXISTING
+
+   O_TRUNC|O_CREATE
+      flags = SSH_FXF_CREATE_TRUNCATE
+
+
+6.3.2 Opening a Directory
+
+6.3.2 ディレクトリのオープン
+
+   To enumerate a directory, the client first obtains a handle and then
+   issues directory read requests.  When enumeration is complete, the
+   handle MUST be closed.
+
+   ディレクトリを列挙するために, クライアントはまず
+   ハンドルを得て, 次にディレクトリを読むリクエストを発行する.
+   列挙が完了したら, ハンドルは閉じられなければならない.
+
+       byte   SSH_FXP_OPENDIR
+       uint32 request-id
+       string path [UTF-8]
+
+   'request-id' is the request identifier.
+
+   'request-id' はリクエスト識別子だ.
+
+   'path' is the path name of the directory to be listed (without any
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 25]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   trailing slash). See Section 'File Names' for more information on
+   file names.
+
+   'path' は (後に続くスラッシュなしの) 列挙されるディレクトリのパス名だ.
+   ファイル名についてのさらなる情報は 'File Names' セクションを参照.
+   
+   The response to this message will be either SSH_FXP_HANDLE (if the
+   operation is successful) or SSH_FXP_STATUS (if the operation fails).
+
+   このメッセージに対するレスポンスは SSH_FXP_HANDLE (操作が成功なら)
+   か SSH_FXP_STATUS (操作が失敗なら) だ.
+
+6.3.3 Closing Handles
+
+6.3.3 ハンドルのクローズ
+
+   A handle is closed using the following request.
+
+   次のリクエストでハンドルはクローズされる.
+
+       byte   SSH_FXP_CLOSE
+       uint32 request-id
+       string handle
+
+   'request-id' is the request identifier, and 'handle' is a handle
+   previously returned in the response to SSH_FXP_OPEN or
+   SSH_FXP_OPENDIR. The handle becomes invalid immediately after this
+   request has been sent.
+
+   `request-id' はリクエスト識別子で, 'handle' は SSH_FXP_OPEN か
+   SSH_FXP_OPENDIR のレスポンスで先に返されたハンドルだ.
+   ハンドルはこのリクエストが送られた後直ちに無効とされる.
+
+   The response to this request will be a SSH_FXP_STATUS message.  Note
+   that on some server platforms even a close can fail.  For example, if
+   the server operating system caches writes, and an error occurs while
+   flushing cached writes, the close operation may fail.
+   
+   このリクエストに対するレスポンスは SSH_FXP_STATUS メッセージだ.
+   いくつかのサーバプラットフォームでは, クローズすら失敗する
+   ことがあるのに注意. 例えば, サーバのオペレーティングシステムが
+   書き込みをキャッシュして, キャッシュされた書き込みをフラッシュする際に
+   エラーが起きたなら, クローズの操作は失敗するかもしれない.
+
+6.4 Reading and Writing
+
+6.4 読み込みと書き込み
+
+6.4.1 Reading Files
+
+6.4.1 ファイルの読み込み
+
+   The following request can be used to read file data:
+
+   次のリクエストが ファイルのデータを読むのに使われる:
+
+       byte   SSH_FXP_READ
+       uint32 request-id
+       string handle
+       uint64 offset
+       uint32 length
+
+   where 'request-id' is the request identifier, 'handle' is an open
+   file handle returned by SSH_FXP_OPEN, 'offset' is the offset (in
+   bytes) relative to the beginning of the file from where to start
+   reading, and 'length' is the maximum number of bytes to read.
+
+   'request-id' はリクエスト識別子, 'handle' は SSH_FXP_OPEN で
+   返された オープンファイルハンドル, 'offset' は読み始める位置の
+   ファイルの先頭からの (バイトでの) オフセットで, 'length' は
+   読み込む最大のバイト数だ.
+
+   In response to this request, the server will read as many bytes as it
+   can from the file (up to 'length'), and return them in a SSH_FXP_DATA
+   message.  If an error occurs or EOF is encountered before reading any
+   data, the server will respond with SSH_FXP_STATUS.
+
+   このリクエストに対するレスポンスで, サーバは ('length' までの)
+   ファイルから読み込める限りのバイトを読み, SSH_FXP_DATA メッセージで
+   それを返す. エラーが起きたり, データを読む前に EOF があったりしたら,
+   サーバは SSH_FXP_STATUS で返答する.
+
+   For normal disk files, it is normally guaranteed that this will read
+   the specified number of bytes, or up to end of file.  However, if the
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 26]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   read length is very long, the server may truncate it if it doesn't
+   support packets of that length. See General Packet Format (Section
+   3).
+
+   通常のディスクのファイルでは, これは指定されたバイト数か, ファイルの最後
+   まで読むことが通常保証される. しかし. 読む長さが非常に長い場合は,
+   サーバはその長さのパケットをサポートしない場合切り捨てるかもしれない.
+   一般のパケットフォーマット (セクション 3) を参照.
+
+6.4.2 Reading Directories
+
+6.4.2 ディレクトリの読み込み
+
+   In order to retrieve a directory listing, the client issues one or
+   more SSH_FXP_READDIR requests.  In order to obtain a complete
+   directory listing, the client MUST issue repeated SSH_FXP_READDIR
+   requests until the server responds with an SSH_FXP_STATUS message.
+
+   ディレクトリリスティングを取得するために, クライアントは,
+   1 つ以上の SSH_FXP_READDIR リクエストを発行する. 完全な
+   ディレクトリリスティングを得るためには, クライアントは
+   サーバ が SSH_FXP_STATUS メッセージを返すまで
+   SSH_FXP_READDIR リクエストを繰り返し発行しなければならない.
+
+       byte   SSH_FXP_READDIR
+       uint32 request-id
+       string handle
+
+   where 'request-id' is the request identifier, and 'handle' is a
+   handle returned by SSH_FXP_OPENDIR.  (It is a protocol error to
+   attempt to use an ordinary file handle returned by SSH_FXP_OPEN.)
+
+   `request-id' はリクエスト識別子で, 'handle' は
+   SSH_FXP_OPENDIR のレスポンスで返されたハンドルだ.
+   (SSH_FXP_OPEN で返された通常のファイルハンドルの使用を試みることは
+   プロトコルエラーである)
+
+   The server responds to this request with either a SSH_FXP_NAME or a
+   SSH_FXP_STATUS message.  One or more names may be returned at a time.
+   Full status information is returned for each name in order to speed
+   up typical directory listings.
+
+   サーバは SSH_FXP_NAME か SSH_FXP_STATUS メッセージのどちらかで
+   このリクエストに応答する. 1 つ以上の名前が 一度に返されるだろう.
+   典型的なディレクトリリスティングの速度向上のために
+   それぞれの名前に対して完全なステータス情報が返される.
+
+   If there are no more names available to be read, the server MUST
+   respond with a SSH_FXP_STATUS message with error code of SSH_FX_EOF.
+
+   読まれることができる名前が無くなったら サーバ は エラーコードに
+   SSH_FX_EOF を付けた SSH_FXP_STATUS メッセージを返さなければならない.
+
+6.4.3 Writing Files
+
+6.4.3 ファイルの書き込み
+
+   Writing to a file is achieved using the following message:
+
+   ファイルへの書き込みは 次のメッセージを使って達成される:
+
+       byte   SSH_FXP_WRITE
+       uint32 request-id
+       string handle
+       uint64 offset
+       string data
+
+   where 'request-id' is a request identifier, 'handle' is a file handle
+   returned by SSH_FXP_OPEN, 'offset' is the offset (in bytes) from the
+   beginning of the file where to start writing, and 'data' is the data
+   to be written.
+
+   `request-id' はリクエスト識別子で, 'handle' は SSH_FXP_OPEN か
+   レスポンスで返されたハンドル, 'offset' は書き込み始める位置の
+   ファイルの先頭からの (バイトでの) オフセットで, 'data' は
+   書かれるデータだ.
+
+   The write will extend the file if writing beyond the end of the file.
+   It is legal to write to an offset that extends beyond the end of the
+   file; the semantics are to write zeroes from the end of the file to
+   the specified offset and then the data.  On most operating systems,
+   such writes do not allocate disk space but instead create a sparse
+   file.
+
+   ファイルの末尾を超える書き込みは, ファイルを伸長する.
+   ファイルの末尾を超えたオフセットへの書き込みは
+   正当だ; ファイルの末尾から指定されたオフセットまで ゼロを書き
+   次にデータを書く,というセマンティクスだ. 多くのオペレーティングシステムで
+   このような書き込みはディスクのスペースを割当てず, かわりに
+   まばらな (sparse) なファイルを作成する.
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 27]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   The server responds to a write request with a SSH_FXP_STATUS message.
+
+   サーバは SSH_FXP_STATUS メッセージで書き込みリクエストに応答する.
+
+6.5 Removing and Renaming Files
+
+6.5 ファイルの削除と改名
+
+   The following request can be used to remove a file:
+
+   次のリクエストがファイルを削除するのに使われる.
+
+       byte   SSH_FXP_REMOVE
+       uint32 request-id
+       string filename [UTF-8]
+
+   where 'request-id' is the request identifier and 'filename' is the
+   name of the file to be removed.  See Section ''File Names'' for more
+   information. This request cannot be used to remove directories.
+
+   'request-id' は リクエスト識別子で 'filename' は 消されるファイル名だ.
+   さらなる情報は ''File Names'' セクションを参照.
+   このリクレストは ディレクトリを削除するのには使えない.
+
+   The server will respond to this request with a SSH_FXP_STATUS
+   message.
+
+   サーバは SSH_FXP_STATUS メッセージでこのリクエストに応答する.
+
+   Files (and directories) can be renamed using the SSH_FXP_RENAME
+   message.
+
+   ファイルと (ディレクトリ) は SSH_FXP_RENAME メッセージを使って
+   改名される.
+
+       byte   SSH_FXP_RENAME
+       uint32 request-id
+       string oldpath [UTF-8]
+       string newpath [UTF-8]
+       uint32 flags
+
+   where 'request-id' is the request identifier, 'oldpath' is the name
+   of an existing file or directory, and 'newpath' is the new name for
+   the file or directory.
+
+   'request-id' はリクエスト識別子, 'oldpath' は 存在するファイルか
+   ディレクトリの名前, 'newpath' は ファイルかディレクトリの新しい名前だ.
+
+   'flags' is 0 or a combination of:
+
+   'flags' は 0 か 次の組み合わせだ.
+
+       SSH_FXP_RENAME_OVERWRITE  0x00000001
+       SSH_FXP_RENAME_ATOMIC     0x00000002
+       SSH_FXP_RENAME_NATIVE     0x00000004
+
+   If flags does not include SSH_FXP_RENAME_OVERWRITE, and there already
+   exists a file with the name specified by newpath, the server MUST
+   respond with SSH_FX_FILE_ALREADY_EXISTS.
+
+   フラグが SSH_FX_FILE_ALREADY_EXISTS を含んでなく,
+   newpath で指定された名前のフィアルがすでに存在したら
+   サーバは SSH_FX_FILE_ALREADY_EXISTS を返さなければならない.
+
+   If flags includes SSH_FXP_RENAME_ATOMIC, and the destination file
+   already exists, it is replaced in an atomic fashion.  I.e., there is
+   no observable instant in time where the name does not refer to either
+   the old or the new file.  SSH_FXP_RENAME_ATOMIC implies
+   SSH_FXP_RENAME_OVERWRITE.
+
+   フラグが SSH_FXP_RENAME_ATOMIC を含んでいて, 目的のファイルが
+   すでに存在したら, アトミックな方式で置き換えられる.
+   すなわち, 名前は古いファイルも新しいファイルも参照しない
+   時間が観測できない. SSH_FXP_RENAME_ATOMIC は SSH_FXP_RENAME_OVERWRITE
+   を含んでいる.   
+
+   If flags includes SSH_FXP_RENAME_ATOMIC and the server cannot replace
+   the destination in an atomic fashion, then the server MUST respond
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 28]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   with SSH_FX_OP_UNSUPPORTED.
+
+   フラグが SSH_FXP_RENAME_ATOMIC を含んでいて, サーバは
+   アトミックな方式で 目的のファイルを置き換えられないなら,
+   サーバは SSH_FX_OP_UNSUPPORTED を返さなければならない.
+
+   Because some servers cannot provide atomic rename, clients should
+   only specify atomic rename if correct operation requires it.  If
+   SSH_FXP_RENAME_OVERWRITE is specified, the server MAY perform an
+   atomic rename even if it is not requested.
+
+   サーバには アトミックな改名を提供できないものもあるから,
+   クライアントは, 正しい操作が改名に必要な場合にのみ
+   アトミックな改名を指定するべきだ. SSH_FXP_RENAME_OVERWRITE
+   が指定されたら, サーバは 要求されてなくても アトミックな
+   改名を実行してもよい.
+
+   If flags includes SSH_FXP_RENAME_NATIVE, the server is free to do the
+   rename operation in whatever fashion it deems appropriate.  Other
+   flag values are considered hints as to desired behavior, but not
+   requirements.
+
+   フラグが SSH_FXP_RENAME_NATIVE を含むなら, サーバは
+   適当だとみなすどんな方式でも 改名の操作をする自由がある.
+   他のフラグの値は 望まれる動作へのヒントと考えられるが
+   必要ではない.
+
+   The server will respond to this request with a SSH_FXP_STATUS
+   message.
+
+   サーバは SSH_FXP_STATUS メッセージでリクエストに応答する.
+
+6.6 Creating and Deleting Directories
+
+6.6 ディレクトリの作成と削除
+
+   New directories can be created using the SSH_FXP_MKDIR request.  It
+   has the following format:
+
+   新しいディレクトリは SSH_FXP_MKDIR リクエストを使って作られる.
+   これは次の形式だ.
+
+       byte   SSH_FXP_MKDIR
+       uint32 request-id
+       string path [UTF-8]
+       ATTRS  attrs
+
+   where 'request-id' is the request identifier.
+
+   'request-id' はリクエスト識別子だ.
+
+   'path' specifies the directory to be created. See Section ''File
+   Names'' for more information on file names.
+
+   'path' は作られるディレクトリを指定する.
+   ファイル名についてのさらなる情報は ''File Names'' セクションを参照.
+   
+   'attrs' specifies the attributes that should be applied to it upon
+   creation.  Attributes are discussed in more detail in Section ''File
+   Attributes''.
+
+   'attrs' は 作成にあたって適用されるべき属性を指定する.
+   属性の詳細は ''File Attributes'' セクションで議論されている.
+
+   The server will respond to this request with a SSH_FXP_STATUS
+   message.  If a file or directory with the specified path already
+   exists, an error will be returned.
+
+   サーバは このリクエストに SSH_FXP_STATUS メッセージで応答する.
+   すでに 指定されたパスにファイルかディレクトリが存在するなら
+   エラーが返される.
+
+   Directories can be removed using the SSH_FXP_RMDIR request, which has
+   the following format:
+
+   ディレクトリは SSH_FXP_RMDIR リクエストを使って削除される.
+   これは次の形式だ.
+
+       byte   SSH_FXP_RMDIR
+       uint32 request-id
+       string path [UTF-8]
+
+   where 'request-id' is the request identifier, and 'path' specifies
+   the directory to be removed.  See Section ''File Names'' for more
+   information on file names.
+
+   'request-id' はリクエスト識別子だ. 'path' は削除されるディレクトリを指定する.
+   ファイル名についてのさらなる情報は ''File Names'' セクションを参照.
+ 
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 29]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   The server responds to this request with a SSH_FXP_STATUS message.
+
+   サーバは SSH_FXP_STATUS メッセージでこのリクエストに応答する.
+
+6.7 Retrieving File Attributes
+
+6.7 ファイルの属性の所得.
+
+   Very often, file attributes are automatically returned by
+   SSH_FXP_READDIR.  However, sometimes there is need to specifically
+   retrieve the attributes for a named file.  This can be done using the
+   SSH_FXP_STAT, SSH_FXP_LSTAT and SSH_FXP_FSTAT requests.
+
+   たいてい, ファイルの属性は SSH_FXP_READDIR によって
+   自動的に返される. しかし, ときには指定したファイルの属性を
+   特別に取得する必要もある. これは SSH_FXP_STAT, SSH_FXP_LSTAT,
+   SSH_FXP_FSTAT リクエストを使って行なわれる.
+
+   SSH_FXP_STAT and SSH_FXP_LSTAT only differ in that SSH_FXP_STAT
+   follows symbolic links on the server, whereas SSH_FXP_LSTAT does not
+   follow symbolic links.  Both have the same format:
+
+   SSH_FXP_STAT と SSH_FXP_LSTAT は以下の点だけ異なる. SSH_FXP_STAT は
+   サーバのシンボリックリンクをたどる. 一方. SSH_FXP_LSTAT は
+   シンボリックをたどらない. 両者は同じ形式を持つ.
+
+       byte   SSH_FXP_STAT or SSH_FXP_LSTAT
+       uint32 request-id
+       string path [UTF-8]
+       uint32 flags
+
+   where 'request-id' is the request identifier, and 'path' specifies
+   the file system object for which status is to be returned.  The
+   server responds to this request with either SSH_FXP_ATTRS or
+   SSH_FXP_STATUS.
+
+   'request-id' は リクエスト識別子で. 'path' は
+   ステータスが返されるファイルシステムオブジェクトを指定する.
+   サーバは SSH_FXP_ATTRS か SSH_FXP_STATUS のどちらかで
+   このリクエストに応答する.
+
+   The flags field specify the attribute flags in which the client has
+   particular interest.  This is a hint to the server.  For example,
+   because retrieving owner / group and acl information can be an
+   expensive operation under some operating systems, the server may
+   choose not to retrieve this information unless the client expresses a
+   specific interest in it.
+
+   flags フィールドは クライアントが特別の興味を持つ属性フラグを指定する.
+   これはサーバへのヒントだ. 例えば, いくつかのオペレーティングシステムでは
+   所有者 / グループの情報や acl の情報を取得することは重い処理なので,
+   サーバは, クライアントがこれについての特別の興味を表明していなければ
+   この情報を取得しないことを選択するだろう.
+
+   The client has no guarantee the server will provide all the fields
+   that it has expressed an interest in.
+
+   クライアントは興味を表明したフィールドすべてにサーバが情報を提供するかを
+   保証しない.
+
+   SSH_FXP_FSTAT differs from the others in that it returns status
+   information for an open file (identified by the file handle).
+
+   SSH_FXP_FSTAT は (ファイルハンドルで識別される)
+   開かれたファイルについてのステータス情報を
+   返すことでその他のものとは異なる. 
+
+       byte   SSH_FXP_FSTAT
+       uint32 request-id
+       string handle
+       uint32 flags
+
+   where 'request-id' is the request identifier and 'handle' is a file
+   handle returned by SSH_FXP_OPEN.  The server responds to this request
+   with SSH_FXP_ATTRS or SSH_FXP_STATUS.
+
+   'request-id' は リクエスト識別子で 'handle' は SSH_FXP_OPEN で返された
+   ファイルハンドルだ サーバは SSH_FXP_ATTRS か SSH_FXP_OPEN で
+   このリクエストに応答する.
+
+6.8 Setting File Attributes
+
+6.8 ファイル属性の設定
+
+   File attributes may be modified using the SSH_FXP_SETSTAT and
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 30]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   SSH_FXP_FSETSTAT requests.
+
+   ファイルの属性は SSH_FXP_SETSTAT か SSH_FXP_FSETSTAT リクエストを使って
+   変更される.
+
+       byte   SSH_FXP_SETSTAT
+       uint32 request-id
+       string path [UTF-8]
+       ATTRS  attrs
+
+
+       byte   SSH_FXP_FSETSTAT
+       uint32 request-id
+       string handle
+       ATTRS  attrs
+
+   request-id
+      The request identifier to be returned as part of the response.
+
+      返答の一部として返される リクエスト識別子
+
+   path
+      The file system object (e.g. file or directory) whose attributes
+      are to be modified.  If this object does not exist, or the user
+      does not have sufficient access to write the attributes, the
+      request MUST fail.
+
+      変更される属性を持つ ファイルシステムのオブジェクト (例えば
+      ファイルやディレクトリ) このオブジェクトが存在しないか
+      ユーザがその属性を記述する十分なアクセス権がなければ
+      リクエストは失敗しなければならない.
+
+   handle
+      The handle is a handle previously returned from a SSH_FXP_OPEN
+      request which identifies the file whose attributes are to be
+      modified.  If the handle was not opened with sufficient access to
+      write the requested attributes, the request MUST fail.
+
+      変更する属性を持つファイルを識別する SSH_FXP_OPEN リクエストから
+      先に返されたハンドル. 要求された属性を書く十分な権限を持って
+      ハンドルが開かれなかったら, リクエストは失敗しなければならない.
+
+   attrs
+      Specifies the modified attributes to be applied. Attributes are
+      discussed in more detail in Section ''File Attributes''.
+
+      適用される変更された属性を指定する. ''File Attributes'' セクションで
+      属性についてはより詳しく議論されている.
+
+   The server will respond with a SSH_FXP_STATUS message.
+
+   サーバは SSH_FXP_STATUS メッセージで応答する.
+
+   Because some systems must use separate system calls to set various
+   attributes, it is possible that a failure response will be returned,
+   but yet some of the attributes may be have been successfully
+   modified. If possible, servers SHOULD avoid this situation; however,
+   client MUST be aware that this is possible.
+
+   様々な属性を設定するために別々のシステムコールを呼ぶ必要がある
+   システムがあるので, 失敗のレスポンスが返されても, その属性のうち
+   いくつかの変更が成功しているかもしれない. 可能ならば,
+   サーバはこの状態を避ける必要がある; しかし, クライアント
+   この状況が起りるうることを意識しなければならない.
+
+6.9 Dealing with Symbolic Links
+
+6.9 シンボリックリンクの扱い.
+
+   The SSH_FXP_READLINK request reads the target of a symbolic link.
+
+   SSH_FXP_READLINK リクエストは シンボリックリンクのターゲットを読む.
+
+       byte   SSH_FXP_READLINK
+       uint32 request-id
+       string path [UTF-8]
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 31]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   where 'request-id' is the request identifier and 'path' specifies the
+   path name of the symlink to be read.
+
+   'request-id' はリクエスト識別子で, 'path' は 読まれるシンボリックリンクの
+   パス名を指定する.
+
+   The server will respond with a SSH_FXP_NAME packet containing only
+   one name and a dummy attributes value. The name in the returned
+   packet contains the target of the link. If an error occurs, the
+   server MAY respond with SSH_FXP_STATUS.
+
+   サーバは 1 つの name とダミーの属性値のみを含む SSH_FXP_NAME 
+   パケットを返す.  返却されるパケットの name は リンクのターゲットだ.
+   エラーが起きたら, サーバは SSH_FXP_STATUS を返すかもしれない.
+
+   The SSH_FXP_SYMLINK request creates a symbolic link on the server.
+
+   SSH_FXP_SYMLINK リクエストは サーバにシンボリックリンクを作る.
+
+       byte   SSH_FXP_SYMLINK
+       uint32 request-id
+       string linkpath   [UTF-8]
+       string targetpath [UTF-8]
+
+   where 'request-id' is the request identifier, 'linkpath' specifies
+   the path name of the symlink to be created and 'targetpath' specifies
+   the target of the symlink. The server shall respond with a
+   SSH_FXP_STATUS.
+
+   'request-id' は リクエスト識別子で, 'linkpath' は
+   作られるシンボリックリンクのパス名, 'targetpath' は
+   シンボリックリンクのターゲットだ. サーバは 
+   SSH_FXP_STATUS で応答する.
+
+6.10 Canonicalizing the Server-Side Path Name
+
+6.10 サーバ側パス名の正規化
+
+   The SSH_FXP_REALPATH request can be used to have the server
+   canonicalize any given path name to an absolute path.  This is useful
+   for converting path names containing ".." components or relative
+   pathnames without a leading slash into absolute paths.  The format of
+   the request is as follows:
+
+   SSH_FXP_REALPATH リクエストは, サーバが与えられたパス名を絶対パスに
+   するのに使われる. これは, ".." 要素の入ったパス名や
+   最初にスラッシュがない相対パスを絶対パスに変換するのに有用だ.
+   リクエストのフォーマットは次の通り.
+
+       byte   SSH_FXP_REALPATH
+       uint32 request-id
+       string path [UTF-8]
+
+   where 'request-id' is the request identifier and 'path' specifies the
+   path name to be canonicalized.  The server will respond with a
+   SSH_FXP_NAME packet containing the name in canonical form and a dummy
+   attributes value. If an error occurs, the server may also respond
+   with SSH_FXP_STATUS.
+
+   'request-id' はリクエスト識別子で 'path' は正規化されるパス
+   を示す. サーバは 正規化形式の name と ダミーの属性値を返す.
+   SSH_FXP_NAME パケット エラーが起ると サーバは
+   SSH_FXP_STATUS も返すだろう.
+
+   The server SHOULD fail the request if the path is not present on the
+   server.
+
+   パスーがサーバに存在しなければ, サーバは リクエストを失敗する必要がある.
+
+6.10.1 Best Practice for Dealing with Paths
+
+6.10.1 パスを扱う最も良い方法
+
+   The client SHOULD treat the results of SSH_FXP_REALPATH as a
+   canonical absolute path, even if the path does not appear to be
+   absolute.  A client that use REALPATH (".") and treats the result as
+   absolute, even if there is no leading slash, will continue to
+   function correctly, even when talking to a Windows NT or VMS style
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 32]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   system, where absolute paths may not begin with a slash.
+
+   クライアントは, SSH_FXP_REALPATH の結果を 正規化された絶対パスとして
+   扱う必要がある. たとえパスが絶対のものと見えなくても. 
+   REALPATH (".") を使い最初のスラッシュがなくても
+   絶対パスとして扱うクライアントは,
+   絶対パスが スラッシュから始まらない Windows NT や VMS のスタイルのシステム
+   とやりとりする場合でも, 正しく操作を続けるだろう.
+
+
+   For example, if the client wishes to change directory up, and the
+   server has returned "c:/x/y/z" from REALPATH, the client SHOULD use
+   "c:/x/y/z/..".
+
+   例えば, クライアントは上のディレクトリに行こうとする場合,
+   サーバが REALPATH から "c:/x/y/z" を返したら, クライアントは
+   "c:/x/y/z/.." を使う必要がある.
+
+   As a second example, if the client wishes to open the file "x.txt" in
+   the current directory, and server has returned "dka100:/x/y/z" as the
+   canonical path of the directory, the client SHOULD open "dka100:/x/y/
+   z/x.txt"
+
+   2 つ目の例として, クライアントがカレントディレクトリの "x.txt" という
+   ファイルを開こうとする場合に, サーバが ディレクトリの正規化パスとして
+   "dka100:/x/y/z" を返したら, クライアントは "dka100:/x/y/z/x.txt" を
+   開く必要がある.
+   
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 33]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+7. Responses from the Server to the Client
+
+7. サーバからクライアントへのレスポンス
+
+   The server responds to the client using one of a few response
+   packets. All requests can return a SSH_FXP_STATUS response upon
+   failure.  When the operation is successful, and no data needs to be
+   returned, the SSH_FXP_STATUS response with SSH_FX_OK status is
+   appropriate.
+
+   サーバはいくつかのレスポンスパケットの 1 つを使ってクライアントに
+   応答する. すべてのリクエストは失敗時に SSH_FXP_STATUS レスポンス
+   が返る可能性がある. 操作が成功して, データが返される必要がなければ,
+   SSH_FX_OK ステータス付きの SSH_FXP_STATUS が適当だ.
+
+   Exactly one response will be returned for each request.  Each
+   response packet contains a request identifier which can be used to
+   match each response with the corresponding request.  Note that it is
+   legal to have several requests outstanding simultaneously, and the
+   server is allowed to send responses to them in a different order from
+   the order in which the requests were sent (the result of their
+   execution, however, is guaranteed to be as if they had been processed
+   one at a time in the order in which the requests were sent).
+
+   正確に 1 つのレスポンスがそれぞれのリクエストに対して返される.
+   それぞれのレスポンスパケットは, それぞれの対応するリクエストの
+   レスポンスにマッチするために使われるリクエスト識別子を含む.
+   複数の未処理のリクエストがあることは正当で, サーバは リクエストが
+   送られた順序とは異なる順序でレスポンスを送ってもよいことに注意.
+   ( しかし , これら実行結果は, リクエストが送られたのと同じ順序で
+   1 つずつ処理されたようであることを保証する)
+
+   Response packets are of the same general format as request packets.
+   Each response packet begins with the request identifier.
+
+   レスポンスオアケットは リクエストパケットのように同じ一般フォーマット
+   を持つ. それぞれのレスポンスパケットは リクエスト識別子から始まる.
+
+   The format of the data portion of the SSH_FXP_STATUS response is as
+   follows:
+
+   SSH_FXP_STATUS のデータ部分のフォーマットは次のとおり:
+
+   	byte   SSH_FXP_STATUS
+   	uint32 request-id
+   	uint32 error/status code
+   	string error message (ISO-10646 UTF-8 [RFC-2279])
+   	string language tag (as defined in [RFC-1766])
+   	<error-specific data>
+
+   request-id
+      The 'request-id' specified by the client in the request the server
+      is responding to.
+
+      サーバが返答するリクエストのクライアントから指定された 'request-id'
+
+   error/status code
+      Machine readable status code indicating the result of the request.
+      Error code values are defined below.  The value SSH_FX_OK
+      indicates success, and all other values indicate failure.
+
+      リクエストの結果を示す 機械が読めるステータスコード. エラーコードの
+      値は 後で定義される. 値 SSH_FX_OK は成功を示し.
+      残りはすべて失敗をしめす.
+
+   error message
+      Human readable description of the error.  'language tag' specifies
+      the language the error is in.
+      
+      エラーの人間が読める記述. 'language tag' は エラーの言語を指定する.
+
+
+   <error-specific data>
+      The error-specific data may be empty, or may contain additional
+      information about the error.  For error codes that send
+      error-specific data, the format of the data is defined below.
+
+      error-specific data は空かもしれないし, エラーについての追加の
+      情報を含むかもしれない. error-specific data 送る error code
+      について データの形式は後で定義される.
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 34]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   Error codes:
+
+   	#define SSH_FX_OK                            0
+   	#define SSH_FX_EOF                           1
+   	#define SSH_FX_NO_SUCH_FILE                  2
+   	#define SSH_FX_PERMISSION_DENIED             3
+   	#define SSH_FX_FAILURE                       4
+   	#define SSH_FX_BAD_MESSAGE                   5
+   	#define SSH_FX_NO_CONNECTION                 6
+   	#define SSH_FX_CONNECTION_LOST               7
+   	#define SSH_FX_OP_UNSUPPORTED                8
+   	#define SSH_FX_INVALID_HANDLE                9
+   	#define SSH_FX_NO_SUCH_PATH                  10
+   	#define SSH_FX_FILE_ALREADY_EXISTS           11
+   	#define SSH_FX_WRITE_PROTECT                 12
+   	#define SSH_FX_NO_MEDIA                      13
+   	#define SSH_FX_NO_SPACE_ON_FILESYSTEM        14
+   	#define SSH_FX_QUOTA_EXCEEDED                15
+   	#define SSH_FX_UNKNOWN_PRINCIPLE             16
+       #define SSH_FX_LOCK_CONFlICT                 17
+
+   SSH_FX_OK
+      Indicates successful completion of the operation.
+      
+      操作が成功して完了したことを示す.
+
+   SSH_FX_EOF
+      An attempt to read past the end-of-file was made; or, there are no
+      more directory entries to return.
+
+      end-of-file を超えた読み込みが行なわれようとした; ないし,
+      返すディレクトリエントリがもうない.
+
+   SSH_FX_NO_SUCH_FILE
+      A reference was made to a file which does not exist.
+
+      存在しないファイルへの参照が作られようとした.
+
+   SSH_FX_PERMISSION_DENIED
+      The user does not have sufficient permissions to perform the
+      operation.
+
+      ユーザは操作を実行するのに十分な権限がない.
+
+   SSH_FX_FAILURE
+      An error occured, but no specific error code exists to describe
+      the failure.
+
+      エラーが起きたが, この失敗を記述する特有の error code が
+      存在しない.
+
+      This error message SHOULD always have meaningful text in the the
+      'error message' field.
+
+      このエラーメッセージは常に 'error message' フィールドに
+      意味のあるテキストを持たなければならない.
+
+   SSH_FX_BAD_MESSAGE
+      A badly formatted packet or other SFTP protocol incompatibility
+      was detected.
+      
+      おかしなフォーマットのパケットないし別の非互換の SFTP プロトコル
+      を検出した.
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 35]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   SSH_FX_NO_CONNECTION
+      There is no connection to the server.  This error can only be
+      generated locally, and MUST NOT be return by a server.
+
+      サーバへの接続がない. このエラーは, ローカルにのみ生成されて
+      サーバから返されてはならない.
+
+   SSH_FX_CONNECTION_LOST
+      The connection to the server was lost.  This error can only be
+      generated locally, and MUST NOT be return by a server.
+
+      サーバからの接続が失なわれた.このエラーは, ローカルにのみ生成されて
+      サーバから返されてはならない.
+
+   SSH_FX_OP_UNSUPPORTED
+      An attempted operation could not be completed by the server
+      because the server does not support the operation.
+
+      行なおうとした操作は,サーバがその操作をサポートしていないために
+      サーバによって完了できなかった.
+
+      This error MAY be generated locally by the client if e.g. the
+      version number exchange indicates that a required feature is not
+      supported by the server, or it may be returned by the server if
+      the server does not implement an operation).
+
+      このエラーはクライアントによってローカルに生成されるかもしれない.
+      例えば, バージョン番号交換が, 要求された特徴がサーバによって
+      サポートされていないことを示した場合に. 
+      もしくは サーバが操作を実装していない場合にこれは返される.
+
+   SSH_FX_INVALID_HANDLE
+      The handle value was invalid.
+
+      ハンドルの値が有効でない.
+
+   SSH_FX_NO_SUCH_PATH
+      The file path does not exist or is invalid.
+
+      ファイルパスが存在しないか無効だ.
+
+   SSH_FX_FILE_ALREADY_EXISTS
+      The file already exists.
+
+      ファイルはすでに存在する.
+
+   SSH_FX_WRITE_PROTECT
+      The file is on read-only media, or the media is write protected.
+
+      ファイルは読み込みのみのメディア上にあるか,
+      メディアが書き込み保護されている.
+
+   SSH_FX_NO_MEDIA
+      The requested operation cannot be completed because there is no
+      media available in the drive.
+
+      ドライブに利用できるメディアがないので, 要求された操作は
+      完了できない.
+
+   SSH_FX_NO_SPACE_ON_FILESYSTEM
+      The requested operation cannot be completed because there is no
+      free space on the filesystem.
+
+      ファイルシステムの空き領域がないので, 要求された操作は
+      完了できない.
+
+
+   SSH_FX_QUOTA_EXCEEDED
+      The operation cannot be completed because the it would exceed the
+      users storage quota.
+      
+      ユーザのストレージクオータを超えてしまうので, 要求された操作は
+      完了できない.
+
+
+   SSH_FX_UNKNOWN_PRINCIPLE
+      A principle referenced by the request (either the 'owner',
+      'group', or 'who' field of an ACL), was unknown.  The error
+      specific data contains the problematic names.  The format is one
+      or more:
+
+      リクエストで参照された principle ('owner' や 'group' や
+      ACL の 'who' フィールド) は未知だ. error specific data は
+      問題のある名前を含む. このフォーマットは 1 つかそれ以上の
+      
+
+           string unknown-name
+
+	   
+      だ.
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 36]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+      Each string contains the name of a principle that was unknown.
+
+      それぞれの文字列は 未知の principle の名前を含む.
+
+   SSH_FX_LOCK_CONFlICT
+      The file could not be opened because it is locked by another
+      process.
+
+      別のプロセスによってロックされているのでファイルが開けない.
+
+   The SSH_FXP_HANDLE response has the following format:
+
+   SSH_FXP_HANDLE レスポンスは次のフォーマットを持つ.
+
+       byte   SSH_FXP_HANDLE
+       uint32 request-id
+       string handle
+
+   where 'request-id' is the request identifier, and 'handle' is an
+   arbitrary string that identifies an open file or directory on the
+   server.  The handle is opaque to the client; the client MUST NOT
+   attempt to interpret or modify it in any way.  The length of the
+   handle string MUST NOT exceed 256 data bytes.
+
+   'request-id' はリクエスト識別子で, 'handle' は
+   サーバで開いたファイルないしディレクトリを識別する任意の文字列だ.
+   handle はクライアントに対して不可解だ. クライアントは
+   どのようにも, これを解釈したり変更したりしようとしてはならない.
+   handle 文字列の長さは 256 バイトを超えてはならない.
+
+   The SSH_FXP_DATA response has the following format:
+
+   SSH_FXP_DATA レスポンスは次のフォーマットを持つ.
+
+       byte   SSH_FXP_DATA
+       uint32 request-id
+       string data
+
+   where 'request-id' is the request identifier, and 'data' is an
+   arbitrary byte string containing the requested data.  The data string
+   may be at most the number of bytes requested in a SSH_FXP_READ
+   request, but may also be shorter if end of file is reached or if the
+   read is from something other than a regular file.
+
+   'request-id' はリクエスト識別子で, 'data' は要求されたデータを含む
+   任意の byte 文字列だ. data 文字列は, 多くても SSH_FXP_READ リクエストで
+   要求されたバイト数で, ファイルの最後に着いた場合や一般のファイルではない
+   なにかから読み出した場合はそれより短いかもしれない.
+
+   The SSH_FXP_NAME response has the following format:
+
+   SSH_FXP_NAME レスポンスは次のフォーマットを持つ.
+
+       byte   SSH_FXP_NAME
+       uint32 request-id
+       uint32 count
+       repeats count times:
+           string     filename [UTF-8]
+           ATTRS      attrs
+
+   where 'request-id' is the request identifier, 'count' is the number
+   of names returned in this response, and the remaining fields repeat
+   'count' times. In the repeated part, 'filename' is a file name being
+   returned (for SSH_FXP_READDIR, it will be a relative name within the
+   directory, without any path components; for SSH_FXP_REALPATH it will
+   be an absolute path name), and 'attrs' is the attributes of the file
+   as described in Section ''File Attributes''.
+
+   'request-id' はリクエスト識別子で, 'count' はこのレスポンスで
+   返す name の数, そして残りのフィールドは 'count' 回繰り返される.
+   この繰り返される部分で, 'filename' は 返されるフィアル名で (SSH_FXP_READDIR
+   では,  これは, パス部分を含まないディレクトリに含まれる相対名だ. 
+   SSH_FXP_REALPATH では, 絶対パス名だ).で 'attrs' は ''File Attributes''
+   セクションで記述されたようなファイルの属性だ.
+
+   The SSH_FXP_ATTRS response has the following format:
+
+   SSH_FXP_ATTRS レスポンスは次のフォーマットを持つ.
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 37]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+       byte   SSH_FXP_ATTRS
+       uint32 request-id
+       ATTRS  attrs
+
+   where 'request-id' is the request identifier, and 'attrs' is the
+   returned file attributes as described in Section ''File Attributes''.
+
+   'request-id' はリクエスト識別子で, 'attrs' は
+   ''File Attributes'' セクションで
+   記述されたように要求されたファイルの属性が返される..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 38]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+8. Extensions
+
+8. 拡張
+
+   The SSH_FXP_EXTENDED request provides a generic extension mechanism
+   for adding additional commands.
+
+   SSH_FXP_EXTENDED リクエストは さらないコマンドを追加する
+   一般的な拡張メカニズムを提供する.
+
+       byte   SSH_FXP_EXTENDED
+       uint32 request-id
+       string extended-request
+       ... any request-specific data ...
+
+   request-id
+      Identifier to be returned from the server with the response.
+
+      サーバからのレスポンスとして返される識別子.
+
+   extended-request
+      A string naming the extension.  Vendor-specific extensions have
+      use the "name@domain" syntax, where domain is an internet domain
+      name of the vendor defining the request.
+      
+      拡張の名前の文字列. ベンダ特有の拡張は "name@domain" シンタックスを
+      使う. ここで domain は リクエストを定義するベンダのインターネット
+      ドメイン名だ.
+
+      The IETF may also define extensions to the protocol.  These
+      extension names will not have an '@' in them.
+
+      IETF もプロトコルの拡張を定義する. この拡張の名前は
+      '@" を含まない.
+
+   request-specific data
+      The rest of the request is defined by the extension, and servers
+      should only attempt to interpret it if they recognize the
+      'extended-request' name.
+
+      リクエストの残りの部分は拡張によって定義される. サーバは
+      'extended-request'名を理解できるもののみ
+      これを解釈しようとするべきだ.
+
+   The server may respond to such requests using any of the response
+   packets defined in Section ''Responses from the Server to the
+   Client''. Additionally, the server may also respond with a
+   SSH_FXP_EXTENDED_REPLY packet, as defined below.  If the server does
+   not recognize the 'extended-request' name, then the server MUST
+   respond with SSH_FXP_STATUS with error/status set to
+   SSH_FX_OP_UNSUPPORTED.
+
+   サーバは, これらのリクエストに対して, ''Responses from the Server to the
+   Client'' で定義されたレスポンスパケットのどれかを使って返答する.
+   さらに, サーバは, 後で定義する SSH_FXP_EXTENDED_REPLY パケットで
+   返答してもよい. サーバが 'extended-request' 名を理解できなかったら,
+   サーバは SSH_FX_OP_UNSUPPORTED を error/status にセットした SSH_FXP_STATUS
+   を返さなければならない.
+
+   The SSH_FXP_EXTENDED_REPLY packet can be used to carry arbitrary
+   extension-specific data from the server to the client.  It is of the
+   following format:
+
+   SSH_FXP_EXTENDED_REPLY パケットは サーバからクライアントへ
+   任意の 拡張特有のデータを運ぶのに使われる. これは次のフォーマットだ.
+
+       byte   SSH_FXP_EXTENDED_REPLY
+       uint32 request-id
+       ... any request-specific data ...
+
+   There is a range of packet types reserved for use by extensions. In
+   order to avoid collision, extensions that that use additional packet
+   types should determine those numbers dynamically.
+
+   これが 拡張で使われるために予約されているパケットの種類の範囲だ.
+   衝突を避けるため, 追加のパケットの種類を使う拡張は
+   それらの番号を動的に決定するべきだ.
+
+   The suggested way of doing this is have an extension request from the
+   client to the server that enables the extension; the extension
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 39]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   response from the server to the client would specify the actual type
+   values to use, in additional to any other data.
+
+   これを行なうための推奨されている方法は, 拡張が有効なサーバへの
+   クライアントからの拡張リクエストを持つことだ;
+   サーバからクライアントへの拡張レスポンスは,その他のデータに加えて
+    使われる実際の種類の値
+   を指定する.
+
+   Extension authors should be mindful of the limited range of packet
+   types available (there are only 45 values available) and avoid
+   requiring a new packet type where possible.
+
+   拡張の著者は, パケットの種類の範囲が制限されている (45 の値のみが利用できる)
+   ことを心がけ, 可能なら新しいパケットの種類を要求することを避けるべきだ.
+
+8.1 Checking File Contents
+
+8.1 ファイルの内容の検査
+
+   This extension allows a client to easily check if a file (or portion
+   thereof) that it already has matches what is on the server.
+
+   この拡張で, クライアントはすでに持っているファイル (やその一部) が
+   サーバにあるものと一致するかどうかの簡単なチェックを行なえる.
+
+       byte   SSH_FXP_EXTENDED
+       uint32 request-id
+       string "md5-hash" / "md5-hash-handle"
+       string filename / file-handle
+       uint64 start-offset
+       uint64 length
+       string quick-check-hash
+
+   filename
+      Used if "md5-hash" is specified; indicates the name of the file to
+      use.
+
+      "md5-hash" が指定された場合に使う. 使うファイルの名前を示す.
+
+   file-handle
+      Used if "md5-hash-handle" is specified; specifies a file handle to
+      read the data from.  The handle MUST be a file handle, and
+      ACE4_READ_DATA MUST have been included in the desired-access when
+      the fail was opened.
+
+      "md5-hash-handle" が指定された場合に使う. データを読むファイル
+      ハンドルを指定する. ハンドルは ファイルハンドルでなければならない.
+      ファイルが開かれる際に目的のアクセスに ACE4_READ_DATA が
+      含まれている.
+
+   start-offset
+      The starting offset of the data to hash.
+
+      ハッシュするデータの始まりのオフセット
+
+   length
+      The length of data to include in the hash.  If both start-offset
+      and length are zero, the entire file should be included.
+
+      ハッシュに入れるデータの長さ. start-offset と length が 0 なら
+      ファイル全体が入れられる.
+
+   quick-check-hash
+      The hash over the first 2048 bytes of the data range as the client
+      knows it, or the entire range, if it is less than 2048 bytes.
+      This allows the server to quickly check if it is worth the
+      resources to hash a big file.
+
+      クライアントが知っている データの範囲の最初の 2048 バイトか
+      2048 バイトより小さければ 全体の範囲のハッシュ. 
+      これにより, 大きなファイルのハッシュをするだけの資源の価値があるかを
+      サーバが簡単に検査できる.
+
+      If this is a zero length string, the client does not have the
+      data, and is requesting the hash for reasons other than comparing
+      with a local file.  The server MAY return SSH_FX_OP_UNSUPPORTED in
+      this case.
+
+      これが 長さ 0 の文字列なら, クライアントはデータを持っておらず, 
+      ローカルファイルとの比較以外の理由でハッシュ要求している.
+      サーバは この場合 SSH_FX_OP_UNSUPPORTED を返してもよい.
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 40]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   The response is either a SSH_FXP_STATUS packet, indicating an error,
+   or the following extended reply packet:
+
+   返答は エラーを示す SSH_FXP_STATUS パケットか, 次の拡張返答パケットだ.
+
+       byte   SSH_FXP_EXTENDED_REPLY
+       uint32 request-id
+       string "md5-hash"
+       string hash
+
+   If 'hash' is zero length, then the 'quick-check-hash' did not match,
+   and no hash operation was preformed.  Otherwise, 'hash' contains the
+   hash of the entire data range (including the first 2048 bytes that
+   were included in the 'quick-check-hash'.)
+   
+   'hash' が 長さ 0 なら, 'quick-check-hash' が一致せず, ハッシュの操作は
+   実行されなかった. それ以外なら, 'hash' は
+   ('quick-check-hash' で含まれた 最初の 2048 バイトを含んだ)
+   全体のデータの範囲のハッシュを含む.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 41]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+9. Security Considerations
+
+9. セキュリティに関する考察.
+
+   It is assumed that both ends of the connection have been
+   authenticated and that the connection has privacy and integrity
+   features.  Such security issues are left to the underlying transport
+   protocol, except to note that if this is not the case, an attacker
+   could manipulate files on the server at will and thus wholly
+   compromise the server.
+
+   このプロトコルは,
+   接続の両端が認証されて接続は秘密性と完全性の特徴を持つことを
+   仮定している. これらのセキュリティの問題は,
+   基礎となるトランスポートプロトコルに委ねられている.
+   仮定が成りたたない場合, 
+   攻撃者は思いのままにサーバのファイルを操作し,完全にサーバを
+   クラックすることができるだろうことに注意.
+
+   This protocol provides file system access to arbitrary files on the
+   server (only constrained by the server implementation).  It is the
+   responsibility of the server implementation to enforce any access
+   controls that may be required to limit the access allowed for any
+   particular user (the user being authenticated externally to this
+   protocol, typically using the SSH User Authentication Protocol [8].
+
+   このプロトコルは, サーバへの任意のファイルへアクセスできる
+   ファイルシステムを提供する (サーバの実装によってのみ制限される).
+   サーバの実装の責任で, 特定のユーザに対してアクセスを制限するために
+   必要であるアクセス制御を施行する (ユーザはこのプロトコルの外部で,典型的には
+   SSH ユーザ認証プロトコルを用いて, 認証される.).
+
+   Extreme care must be used when interpreting file handle strings. In
+   particular, care must be taken that a file handle string is valid in
+   the context of a given SFTP session.  For example, the sftp server
+   daemon may have files which it has opened for its own purposes, and
+   the client must not be able to access these files by specifying an
+   arbitrary file handle string.
+
+   ファイルハンドル文字列の解釈には非常な注意がされなければならない. 特に,
+   与えられた SFTP セッションの中でファイルハンドル文字列が有効な場合に
+   注意が払われなければらない. 例えば, sftp サーバデーモンが
+   自身の目的のために開いているサーバを持っているなら,
+   任意のファイルハンドル文字列を指定することでクライアントに
+   それらのファイルへのアクセスをできないようにしなければらない.
+
+   The permission field of the attrib structure (Section 5.5) may
+   include the SUID, SGID, and SVTX (sticky) bits. Clients should use
+   extreme caution when setting these bits on either remote or local
+   files.  (I.e., just because a file was SUID on the remote system does
+   not necessarily imply that it should be SUID on the local system.)
+
+   attrib 構造体の permission フィールド (Section 5.5) は SUID, SGID,
+   SVTX (sticky) ビットを持つ. クラアイントは, リモートないし
+   ローカルなファイルにこれらのビットを設定するとき 特別の注意を
+   する必要がある.(すなわち, リモートシステムで ファイルが SUID を
+   持っていることは, ローカルシステムで SUID されるべきであることを
+   必ずしも意味しない.
+   
+   Filesystems often contain entries for objects that are not files at
+   all, but are rather devices.  For example, it may be possible to
+   access serial ports, tape devices, or named pipes using this
+   protocol. Servers should exercise caution when granting access to
+   such resources. In addition to the dangers inherent in allowing
+   access to such a device, some devices may be 'slow', and could cause
+   denial of service by causing the server to block for a long period of
+   time while I/O is performed to such a device.
+
+   ファイルシステムは ファイルではない, デバイスのオブジェクトの
+   ためのエントリをしばしば含む. 例えば, 
+   シリアルポートやテーブデバイスやこのプロトコルで使われる
+   名前付きパイプへのアクセスが可能である. サーバは,
+   これらの資源に対するアクセスを認めるとき, 警告をするべきだ.
+   このようなデバイスへのアクセスを許すこと自体の危険に加えて
+   デバイスには '遅い' ものがあり, このようなデバイスへの
+   I/O を許す場合 長い時間のブロックがサーバに引き起されて
+   サービス拒否を招くかもしれない.
+
+   Servers should take care that file-system quotas are respected for
+   users. In addition, implementations should be aware that attacks may
+   be possible, or facilitated, by filling a filesystem.  For example,
+   filling the filesystem where event logging and auditing occurs may,
+   at best, cause the system to crash, or at worst, allow the attacker
+   to take untraceable actions in the future.
+
+   サーバは, ユーザに対するファイルシステム クオータに注意する
+   必要がある. 加えて, 実装は,ファイルシステムを一杯にすることで
+   攻撃が可能であったり容易であるかもしれないことに注意する必要がある.
+   例えば, イベントロギングと監査が起きることで,
+   ファイルシステムを一杯にすることは, 良くても システムのクラッシュを
+   起し, 悪ければ, 将来 トレースすることができない行動を
+   攻撃者に許してしまう.
+
+   Servers should take care that filenames are in their appropriate
+   canonical form, and to insure that filenames not in canonical form
+   cannot be used to bypass access checks or controls.
+
+   サーバはファイル名が適切な正規化された景気であることに注意し,
+   正規化されていない形式のファイル名が アクセスチェックや制御を
+   すりぬけるのに使われないことを保証する必要がある.
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 42]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+10. Changes from Previous Protocol Versions
+
+   The SSH File Transfer Protocol has changed over time, before its
+   standardization.  The following is a description of the incompatible
+   changes between different versions.
+
+10.1 Changes Between Versions 5 and 4
+
+   Many of the changes between version 5 and version 4 are to better
+   support the changes in version 4, and to better specify error
+   conditions.
+
+   o  Add "supported" extension to communicate features supported.
+
+   o  Clarify error handling when client requests unsupported feature.
+      (For example, attempts to write an unsupported attribute.)
+
+   o  Add attrib-bits field to the attribute structure, which specifies
+      a number of boolean attributes related to files and directories,
+      including advisory read-only and case-sensitivity bits.
+
+   o  Clarify the actual bit values to be used for the permissions field
+      (since posix doesn't define values) and correct the value of
+      ATTR_PERMISSIONS flag.
+
+   o  Some reordering of sections to attempt to get a better grouping of
+      related functionality.
+
+   o  Open request explicitly specifies the access desired for the file.
+
+   o  Add support for explicitly requesting file locking.
+
+   o  Add support for better control of the rename operation.
+
+   o  Add SSH_FX_NO_SPACE_ON_FILESYSTEM, SSH_FX_QUOTA_EXCEEDED, and
+      SSH_FX_UNKNOWN_PRINCIPLE error codes.
+
+   o  Add support for error specific data.  This is used by a new
+      SSH_FX_UNKNOWN_PRINCIPLE error to communicate which principles are
+      unknown.
+
+   o  Add support for retrieving md5-hash of file contents.
+
+   o  Update security section.
+
+
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 43]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+10.2 Changes Between Versions 4 and 3
+
+   Many of the changes between version 4 and version 3 are to the
+   attribute structure to make it more flexible for non-unix platforms.
+
+   o  Clarify the use of stderr by the server.
+
+   o  Clarify handling of very large read requests by the server.
+
+   o  Make all filenames UTF-8.
+
+   o  Added 'newline' extension.
+
+   o  Made time fields 64 bit, and optionally have nanosecond
+      resolution.
+
+   o  Made file attribute owner and group strings so they can actually
+      be used on disparate systems.
+
+   o  Added createtime field, and added separate flags for atime,
+      createtime, and mtime so they can be set separately.
+
+   o  Split the file type out of the permissions field and into its own
+      field (which is always present.)
+
+   o  Added acl attribute.
+
+   o  Added SSH_FXF_TEXT file open flag.
+
+   o  Added flags field to the get stat commands so that the client can
+      specifically request information the server might not normally
+      included for performance reasons.
+
+   o  Removed the long filename from the names structure-- it can now be
+      built from information available in the attrs structure.
+
+   o  Added reserved range of packet numbers for extensions.
+
+   o  Added several additional error codes.
+
+
+10.3 Changes Between Versions 3 and 2
+
+   o  The SSH_FXP_READLINK and SSH_FXP_SYMLINK messages were added.
+
+   o  The SSH_FXP_EXTENDED and SSH_FXP_EXTENDED_REPLY messages were
+      added.
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 44]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   o  The SSH_FXP_STATUS message was changed to include fields 'error
+      message' and 'language tag'.
+
+
+10.4 Changes Between Versions 2 and 1
+
+   o  The SSH_FXP_RENAME message was added.
+
+
+10.5 Changes Between Versions 1 and 0
+
+   o  Implementation changes, no actual protocol changes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 45]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+11. Trademark Issues
+
+   "ssh" is a registered trademark of SSH Communications Security Corp
+   in the United States and/or other countries.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 46]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+Normative References
+
+   [1]  Shepler, S., Callaghan, B., Robinson, D., Thurlow, R., Beame,
+        C., Eisler, M. and D. Noveck, "NFS version 4 Protocol", RFC
+        3010, December 2000.
+
+   [2]  Institute of Electrical and Electronics Engineers, "Information
+        Technology - Portable Operating System Interface (POSIX) - Part
+        1: System Application Program Interface (API) [C Language]",
+        IEEE Standard 1003.2, 1996.
+
+   [3]  Rinne, T., Ylonen, T., Kivinen, T., Saarinen, M. and S.
+        Lehtinen, "SSH Protocol Architecture",
+        draft-ietf-secsh-architecture-13 (work in progress), September
+        2002.
+
+   [4]  Rinne, T., Ylonen, T., Kivinen, T., Saarinen, M. and S.
+        Lehtinen, "SSH Protocol Transport Protocol",
+        draft-ietf-secsh-transport-15 (work in progress), September
+        2002.
+
+   [5]  Rinne, T., Ylonen, T., Kivinen, T., Saarinen, M. and S.
+        Lehtinen, "SSH Connection Protocol", draft-ietf-secsh-connect-16
+        (work in progress), September 2002.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 47]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+Informative References
+
+   [6]  Dierks, T., Allen, C., Treese, W., Karlton, P., Freier, A. and
+        P. Kocher, "The TLS Protocol Version 1.0", RFC 2246, January
+        1999.
+
+   [7]  Alvestrand, H., "IETF Policy on Character Sets and Languages",
+        BCP 18, RFC 2277, January 1998.
+
+   [8]  Rinne, T., Ylonen, T., Kivinen, T., Saarinen, M. and S.
+        Lehtinen, "SSH Authentication Protocol",
+        draft-ietf-secsh-userauth-16 (work in progress), September 2002.
+
+
+Authors' Addresses
+
+   Joseph Galbraith
+   VanDyke Software
+   4848 Tramway Ridge Blvd
+   Suite 101
+   Albuquerque, NM  87111
+   US
+
+   Phone: +1 505 332 5700
+   EMail: galb-list@vandyke.com
+
+
+   Tatu Ylonen
+   SSH Communications Security Corp
+   Fredrikinkatu 42
+   HELSINKI  FIN-00100
+   Finland
+
+   EMail: ylo@ssh.com
+
+
+   Sami Lehtinen
+   SSH Communications Security Corp
+   Fredrikinkatu 42
+   HELSINKI  FIN-00100
+   Finland
+
+   EMail: sjl@ssh.com
+
+
+
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 48]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+Intellectual Property Statement
+
+   The IETF takes no position regarding the validity or scope of any
+   intellectual property or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; neither does it represent that it
+   has made any effort to identify any such rights. Information on the
+   IETF's procedures with respect to rights in standards-track and
+   standards-related documentation can be found in BCP-11. Copies of
+   claims of rights made available for publication and any assurances of
+   licenses to be made available, or the result of an attempt made to
+   obtain a general license or permission for the use of such
+   proprietary rights by implementors or users of this specification can
+   be obtained from the IETF Secretariat.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights which may cover technology that may be required to practice
+   this standard. Please address the information to the IETF Executive
+   Director.
+
+
+Full Copyright Statement
+
+   Copyright (C) The Internet Society (2004). All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works. However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assignees.
+
+   This document and the information contained herein is provided on an
+   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 49]
+
+Internet-Draft         SSH File Transfer Protocol           January 2004
+
+
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+
+Acknowledgment
+
+   Funding for the RFC Editor function is currently provided by the
+   Internet Society.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith, et al.         Expires July 1, 2004                 [Page 50]
+
+

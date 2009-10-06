@@ -1,0 +1,1105 @@
+
+
+Network Working Group                                        Tatu Ylonen
+INTERNET-DRAFT                                             Timo J. Rinne
+draft-ietf-secsh-agent-02.txt                              Sami Lehtinen
+Expires: July 30, 2004                       SSH Communications Security
+                                                        30 January, 2004
+
+
+
+               Secure Shell Authentication Agent Protocol
+	       
+	       SSH 認証エージェントプロトコル
+
+
+# 訳者 春山征吾 haruyama@unixuser.org
+
+Status of This Memo
+
+This document is an Internet-Draft and is in full conformance
+with all provisions of Section 10 of RFC2026.
+
+Internet-Drafts are working documents of the Internet Engineering
+Task Force (IETF), its areas, and its working groups.  Note that
+other groups may also distribute working documents as
+Internet-Drafts.
+
+Internet-Drafts are draft documents valid for a maximum of six
+months and may be updated, replaced, or obsoleted by other
+documents at any time.  It is inappropriate to use Internet-
+Drafts as reference material or to cite them other than as
+"work in progress."
+
+The list of current Internet-Drafts can be accessed at
+http://www.ietf.org/ietf/1id-abstracts.txt
+
+The list of Internet-Draft Shadow Directories can be accessed at
+http://www.ietf.org/shadow.html.
+
+Abstract
+
+概要
+
+This document describes the Secure Shell authentication agent protocol
+(i.e., the protocol used between a client requesting authentication and
+the authentication agent).  This protocol usually runs in a machine-spe-
+cific local channel or over a forwarded authentication channel.  It is
+assumed that the channel is trusted, so no protection for the communica-
+tions channel is provided by this protocol.
+
+この文書は SSH 認証エージェントプロトコル (すなわちクライアントの認証の要求と
+認証エージェント間のプロトコル) を記述する. このプロトコルは通常
+機器に特有のローカルなチャンネルか, 転送された認証チャンネルの上で働く.
+チャンネルが信頼できることをこのプロトコルは仮定しており, このプロトコルでは
+伝達チャンネルに対する保護は提供されない.
+
+
+
+
+
+
+
+
+
+
+
+
+Tatu Ylonen, Timo J. Rinne and Sami Lehtinen                    [page 1]
+
+INTERNET-DRAFT                                          30 January, 2004
+ 
+Table of Contents
+
+1.  Authentication Agent Protocol   . . . . . . . . . . . . . . . . .  2
+  1.1.  Packet Format   . . . . . . . . . . . . . . . . . . . . . . .  3
+  1.2.  Forwarding Notices  . . . . . . . . . . . . . . . . . . . . .  3
+  1.3.  Requesting Version Number   . . . . . . . . . . . . . . . . .  4
+  1.4.  Adding Keys to the Agent  . . . . . . . . . . . . . . . . . .  4
+    1.4.1.  Key types   . . . . . . . . . . . . . . . . . . . . . . .  5
+    1.4.2.  Forwarding constraints  . . . . . . . . . . . . . . . . .  5
+  1.5.  Deleting Keys from the Agent  . . . . . . . . . . . . . . . .  7
+  1.6.  Deleting specific key from the Agent  . . . . . . . . . . . .  7
+  1.7.  Listing the Keys that the Agent Can Use   . . . . . . . . . .  7
+2.  Performing Private Key Operations   . . . . . . . . . . . . . . .  7
+  2.1.  Signing   . . . . . . . . . . . . . . . . . . . . . . . . . .  8
+  2.2.  Decrypting  . . . . . . . . . . . . . . . . . . . . . . . . .  8
+  2.3.  Secure Shell Challenge-Response Authentication  . . . . . . .  8
+3.  Administrative Messages   . . . . . . . . . . . . . . . . . . . .  9
+  3.1.  Locking and unlocking the agent   . . . . . . . . . . . . . .  9
+  3.2.  Miscellaneous Agent Commands  . . . . . . . . . . . . . . . .  9
+4.  Agent Forwarding With Secure Shell  . . . . . . . . . . . . . . . 10
+  4.1.  Requesting Agent Forwarding   . . . . . . . . . . . . . . . . 10
+  4.2.  Agent Forwarding Channels   . . . . . . . . . . . . . . . . . 10
+5.  Vendor-Specific Extensions  . . . . . . . . . . . . . . . . . . . 10
+6.  Security Considerations   . . . . . . . . . . . . . . . . . . . . 11
+7.  Intellectual Property   . . . . . . . . . . . . . . . . . . . . . 12
+8.  Additional Information  . . . . . . . . . . . . . . . . . . . . . 12
+9.  Changes from previous versions  . . . . . . . . . . . . . . . . . 12
+  9.1.  Changes between versions 3 and 2  . . . . . . . . . . . . . . 12
+10.  References   . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+11.  Address of Authors   . . . . . . . . . . . . . . . . . . . . . . 13
+
+
+
+1.  Authentication Agent Protocol
+
+1.  認証エージェントプロトコル
+
+The authentication agent is a piece of software that runs in a user's
+local workstation, laptop, or other trusted device.  It is used to
+implement single sign-on.  It holds the user's private keys in its own
+storage, and can perform requested operations using the private key.  It
+allows the keys to be kept on a smartcard or other special hardware that
+can perform cryptographic operations.
+
+認証エージェントは ユーザのローカルなワークステーション, ラップトップ
+その他の信頼されたデバイスの上で動くソフトウェアだ. シングルサインオン
+を実現するために使われる. これは, 自身のストレージにユーザの秘密鍵を持ち
+この秘密鍵を用いる要求された操作を行うことができる. これは, 鍵を, 
+スマートカードや暗号の操作を行なえる他の特別なハードウェアに
+置いておくことができる.						    
+
+The authentication agent protocol is used to communicate between the
+authentication agent and clients wanting to authenticate something or
+wanting to perform private key operations.
+
+認証エージェントプロトコルは, 認証エージェントと, なにかを認証したい
+ないし秘密鍵の操作を行ないたいクライアントとの間で使われる.
+
+The actual communication between the client and the agent happens using
+a machine-dependent trusted communications channel.  This channel would
+typically be a local socket, named pipe, or some kind of secure
+messaging system that works inside the local machine.
+
+クライアントとエージェントの実際の通信は, マシンに依存する信頼された
+通信チャンネルを使って行なわれる. このチャンネルは, 典型的には
+ローカルなソケットだったり, 名前付きパイプだったり, もしくは
+ローカルなマシン内部で働くなんらかの安全なメッセージングシステム
+だったりする.
+
+The protocol works by the client sending requests to the agent, and the
+agent responding to these requests.
+
+このプロトコルは, クライアントがエージェントにリクエストを投げ,エージェントが
+それらのリクエストに返答することで働く.		  
+
+
+Tatu Ylonen, Timo J. Rinne and Sami Lehtinen                    [page 2]
+
+INTERNET-DRAFT                                          30 January, 2004
+ 
+1.1.  Packet Format
+
+1.1   パケットのフォーマット
+
+All messages passed to/from the authentication agent have the following
+format:
+
+認証エージェントとの間でやりとりされるすべてのメッセージは次の
+フォーマットを持つ.
+
+  uint32           length
+  byte             type
+  data[length -1]  data payload
+
+The following packet types are currently defined:
+
+次のパケットタイプが現在定義されている.
+
+   /* Messages sent by the client. */
+   #define SSH_AGENT_REQUEST_VERSION                        1
+   #define SSH_AGENT_ADD_KEY                              202
+   #define SSH_AGENT_DELETE_ALL_KEYS                      203
+   #define SSH_AGENT_LIST_KEYS                            204
+   #define SSH_AGENT_PRIVATE_KEY_OP                       205
+   #define SSH_AGENT_FORWARDING_NOTICE                    206
+   #define SSH_AGENT_DELETE_KEY                           207
+   #define SSH_AGENT_LOCK                                 208
+   #define SSH_AGENT_UNLOCK                               209
+   #define SSH_AGENT_PING                                 212
+   #define SSH_AGENT_RANDOM                               213
+
+   #define SSH_AGENT_EXTENSION                            301
+
+   /* Messages sent by the agent. */
+   #define SSH_AGENT_SUCCESS                              101
+   #define SSH_AGENT_FAILURE                              102
+   #define SSH_AGENT_VERSION_RESPONSE                     103
+   #define SSH_AGENT_KEY_LIST                             104
+   #define SSH_AGENT_OPERATION_COMPLETE                   105
+   #define SSH_AGENT_RANDOM_DATA                          106
+   #define SSH_AGENT_ALIVE                                150
+
+1.2.  Forwarding Notices
+
+1.2   転送の告知
+
+If the agent connection is forwarded through intermediate hosts (using
+the SSH Connection Protocol agent forwarding feature (described in
+Section ``Agent Forwarding With Secure Shell'' of this document), or
+some other means), each intermediate node (Secure Shell client) should
+insert the following message into the agent channel before forwarding
+any other messages.  The real agent will then receive these messages in
+sequence the nearest node first, and can determine whether the
+connection is from a local machine and if not, can log the path where
+the connection came from.  These messages must be wrapped in the
+appropriate header.
+
+(SSH コネクションプロトコルの (``Agent Forwarding With Secure Shell''
+セクションで記述されている) エージェント転送の特徴を用いて, ないし
+(なにか別の手段で) ) エージェントの接続が 中間ホストを介して転送されている場合
+中間のノード (の SSH のクライアント) それぞれが その他のメッセージを転送する
+より前に エージェントチャンネルに次のメッセージを挿入するべきである.
+実際のエージェントは,一番近いノードから順にこれらのメッセージを受けとることで,
+接続がローカルのマシンからかそれでないかを判断し,
+接続がやってきたパスを記録することができる. これらのメッセージは
+適切なヘッダの中に包まれていなければならない.
+
+  byte      SSH_AGENT_FORWARDING_NOTICE
+  string    remote host name  (as typed by the user, preferably)
+  string    remote host ip
+  uint32    remote host port
+
+
+
+Tatu Ylonen, Timo J. Rinne and Sami Lehtinen                    [page 3]
+
+INTERNET-DRAFT                                          30 January, 2004
+ 
+1.3.  Requesting Version Number
+
+1.3   バージョン番号の要求
+
+When the client opens a connection, it must send the following message
+to the server.  This must be the first message sent.  The real agent
+will receive this after zero or more forwarding notice messages.
+
+クライアントが接続を開く際, 次のメッセージをサーバに
+送らなければならない. これは 送られる最初のメッセージでなくてはならない.
+実際のエージェントは, これを, 0 個以上の転送の告知メッセージの後で
+これを受けとる.
+
+  byte      SSH_AGENT_REQUEST_VERSION
+  string    version string of the application sending the request
+            (optional)
+
+If the agent follows this protocol, it will respond with
+
+エージェントがこのプロトコルに従うなら, 次で返答する.
+
+  byte      SSH_AGENT_VERSION_RESPONSE
+  uint32    version number, 3 for this protocol
+  <extension data>
+
+If the version number request is ever sent to the Secure Shell 1.x
+agent, it will interpret it as a request to list identities.  It will
+then respond with a message whose first byte is 2.  This can be used to
+determine the version of the agent if compatibility with Secure Shell
+1.x is desired.
+
+バージョン番号要求が, SSH 1.x エージェントへ送られたのなら,
+エージェントは, identitiy をリストする要求としてこれを解釈するだろう.
+そして, エージェントは, 最初のバイトが 2 であるメッセージで返答するだろう.
+SSH 1.x との互換性を望むなら, これを使って, エージェントのバージョンを決定
+することができる.
+
+#it will interpret it ってマテ
+
+If the version string query arrives without trailing string identifying
+the client software version, it can be translated list identities
+request sent by Secure Shell 1.x and handled accordingly.  If agent
+software does not support the agent protocol of Secure Shell 1.x, it MAY
+also interpret this query as valid SSH_AGENT_REQUEST_VERSION packet.
+
+version string  クエリが クライアントのソフトウェアのバージョンを特定する
+文字列を付けずに届いたなら,  SSH 1.x から送られた identity を列挙する要求
+と解釈されそのように処理されるかもしれない. エージェントソフトウェアが
+SSH 1.x エージェントプロトコルをサポートしないなら, このクエリを
+正しい SSH_AGENT_REQUEST_VERSION パケットとして解釈してもよい.
+					    
+The extension data in the SSH_AGENT_VERSION_RESPONSE may be empty, or
+may be a sequence of
+
+SSH_AGENT_VERSION_RESPONSE の拡張データは空か, 次のペアのシーケンスだ.
+
+  string extension_name
+  string extension_data
+
+pairs (both strings MUST always be present if one is, but the `exten-
+sion_data' string may be of zero length).  If present, these strings
+indicate extensions to the baseline protocol.  The `extension_name'
+field (s) identify the name of the extension.  The name should be of the
+form "name@domain", where the domain is the DNS domain name of the orga-
+nization defining the extension.  Additional names that are not of this
+format may be defined later by the IETF.  Implementations MUST silently
+ignore any extensions whose name they do not recognize.
+
+(文字列は共に, 片方があれば常に存在する. しかし, `extension_data' は
+0 の長さの文字列かもしれない) もし存在するなら, これらの文字列は
+基本のプロトコルへの拡張を指示する. `extension_name' フィールドは
+確証の名前を同定する. 名前は, "name@domain" という形式である必要があある.
+ここで, domain は 拡張を定義した組織の DNS ドメイン名だ. このフォーマット
+でない追加の名前は, あとで IETF によって定義されるかもしれない.
+実装は, 理解できない名前の拡張を静かに無視しなければならない.
+
+1.4.  Adding Keys to the Agent
+
+1.4.  エージェントへの鍵の追加
+
+The client can add a new private key to the agent with the following
+message. Using this message over the net has security implications, and
+the implementation SHOULD warn the user before decryption or sending the
+private key. (XXX how does ssh-add detect this condition?)
+
+クライアントは次のメッセージでエージェントに新しい秘密鍵を追加することが
+できる. ネット越しでのこのメッセージの使用は セキュリティがあることを
+仮定している. そして 実装は, 秘密鍵の復号や送信の前にユーザに警告する
+必要がある. (XXX ssh-add はどうやってこの条件を検出するの?)
+
+  byte      SSH_AGENT_ADD_KEY
+  string    private key encoding
+  string    private key blob
+
+
+Tatu Ylonen, Timo J. Rinne and Sami Lehtinen                    [page 4]
+
+INTERNET-DRAFT                                          30 January, 2004
+ 
+  string    public key encoding
+  string    public key and/or certificates for it
+  string    description of the key
+  ... 0, 1 or several constraints follow
+
+1.4.1.  Key types
+
+1.4.1   鍵の種類
+
+Key blobs are preceeded by the encoding field, which defines how the
+blob should be interpreted. Defined values for public key encoding are
+"ssh-dss" and "ssh-rsa". Additional key types may be defined as
+specified in [SECSH-ARCH], under Section IANA Considerations (Section
+8).
+
+鍵の blob は, blob がどのように解釈されるべきか定義する,  encoding 
+フィールドに続けられる.  公開鍵エンコーディングで定義されている値は
+"ssh-dss" と "ssh-rsa" だ. 追加の鍵の種類が,  {SECSH-ARCH] の
+IANA Considerations セクション (セクション 8) に従って
+指定されるように 定義されてもよい.
+
+"ssh-dss" and "ssh-rsa" public key format encodings are defined in
+[SECSH-TRANS].
+
+"ssh-dss" と "ssh-rsa" 公開鍵フォーマットエンコーディングは 
+[SECSH-TRANS] で定義されている.
+
+The "ssh-dss" private key format has the following specific encoding:
+
+"ssh-dss" 公開鍵フォーマットは 次の特有のエンコーディングを持つ.
+
+  string    "ssh-dss"
+  mpint     p
+  mpint     q
+  mpint     g
+  mpint     y
+  mpint     x
+
+The "ssh-rsa" private key format has the following specific encoding:
+
+"ssh-rsa" 公開鍵フォーマットは 次の特有のエンコーディングを持つ.
+
+  string    "ssh-rsa"
+  mpint     e
+  mpint     d
+  mpint     n
+  mpint     u
+  mpint     p
+  mpint     q
+
+XXX Additional key-types (for private keys), for example "ssh-rsa-
+encrypted"?
+
+XXX 追加の (秘密鍵のための) 鍵の種類. 例えば "ssh-rsa-encrypted" ?
+
+1.4.2.  Forwarding constraints
+
+1.4.2   転送の制約 (constraint)
+
+All constraints are pairs of following format:
+
+すべての制約が次のフォーマットのペアで与えられる.
+
+  byte      SSH_AGENT_CONSTRAINT_*
+  variable  argument for the constraint
+
+The type of the argument is dependent on the constraint type.  Following
+constraint types are currently defined:
+
+この argument の種類は 制約の種類に依存する. 次の制約の種類が
+現在定義されている.   
+
+   /* Constraints 50-99 have a uint32 argument */
+
+   /* Constraints 50-99 は uint32 の argument をもつ*/
+
+   /* Argument is uint32 defining key expiration time-out in
+      seconds. After this timeout expires, the key can't be used.
+      0 == no timeout */
+
+         
+
+Tatu Ylonen, Timo J. Rinne and Sami Lehtinen                    [page 5]
+
+INTERNET-DRAFT                                          30 January, 2004
+ 
+   #define SSH_AGENT_CONSTRAINT_TIMEOUT                 50
+
+   /* Argument は 秒で指定される 鍵の期限切れタイムアウトを定義する
+      uint32 だ. このタイムアウトが経過すると 鍵は使えなくなる.
+      0 == タイムアウトなし */
+
+   /* Argument is uint32 defining the number of operations that can
+      be performed with this key.  0xffffffff == no limit */
+   #define SSH_AGENT_CONSTRAINT_USE_LIMIT               51
+
+   /* Argument は この鍵を使って行なえる操作の数を定義する uint32 だ.
+      0xffffffff == 制限なし */
+
+   /* Argument is uint32 defining the number of forwarding steps that
+      this key can be forwarded.  0xffffffff == no limit */
+   #define SSH_AGENT_CONSTRAINT_FORWARDING_STEPS        52
+
+   /* Argument は この鍵を転送することができる 転送ステップの数を定義する
+      uint32 だ. 0xffffffff == 制限なし  */
+
+   /* Constraints 100-149 have a string argument */
+
+   /* Constraints 100-149 は string の argument を持つ */
+
+   /* Argument is string defining the allowed forwarding steps for
+      this key. XXX define this. */
+   #define SSH_AGENT_CONSTRAINT_FORWARDING_PATH        100
+
+   /* Argument は この鍵の許される転送パスを定義する string だ
+      XXX これを定義. */
+
+   /* Constraints 150-199 have a boolean argument */
+
+   /* Constraints 150-199 は  boolean の argument を持つ*/
+
+   /* Argument is a boolean telling whether the key can be used
+      in Secure Shell 1.x compatibility operations. */
+
+   #define SSH_AGENT_CONSTRAINT_SSH1_COMPAT            150
+
+   /* Argument は SSH 1.x に互換する操作が鍵に使われるかどうかを
+      指定する boolean だ */
+
+   /* Argument is a boolean telling whether operations performed
+      with this key should  be confirmed interactively by the user
+      or not. */
+   #define SSH_AGENT_CONSTRAINT_NEED_USER_VERIFICATION 151
+
+   /* Argument は この鍵を使った操作はユーザにインタラクティブに確認される
+      べきかどうかを指定する boolean だ */
+
+Message can contain zero, one or multiple constraints.
+
+Message は 0, 1, そして複数の constraint を持つことができる.
+
+If the operation is successful, the agent will respond with the
+following message.
+
+操作が成功したら, エージェントは次のメッセージを返答する.
+
+   byte      SSH_AGENT_SUCCESS
+
+If the operation fails for some reason, the following message will be
+returned instead.
+
+なんらかの理由で 操作が失敗したら, かわりに次のメッセージが送られる.
+
+   byte      SSH_AGENT_FAILURE
+   uint32    error code
+   string    additional textual information (ISO-10646 UTF-8
+             [RFC-2279])
+   string    language tag (as defined in [RFC-1766])
+
+The last two fields are optional; they don't need to be present in
+SSH_AGENT_FAILURE message. However, both MUST be provided if they are to
+be used. If client is version 2, the agent SHOULD NOT use these fields.
+
+最後の 2 つのフィールドは 選択できる. SSH_AGENT_FAILURE に必要なものではない.
+しかし , これらが使われる際には, 両方が提供されなければならない.
+クライアントが バージョン 2 なら エージェントは これらのフィールドを
+使わないほうがいい.
+
+The error code is one of the following:
+
+error code は 次のうちの 1 つだ.
+
+   #define SSH_AGENT_ERROR_TIMEOUT               1
+   #define SSH_AGENT_ERROR_KEY_NOT_FOUND         2
+   #define SSH_AGENT_ERROR_DECRYPT_FAILED        3
+
+
+Tatu Ylonen, Timo J. Rinne and Sami Lehtinen                    [page 6]
+
+INTERNET-DRAFT                                          30 January, 2004
+ 
+   #define SSH_AGENT_ERROR_SIZE_ERROR            4
+   #define SSH_AGENT_ERROR_KEY_NOT_SUITABLE      5
+   #define SSH_AGENT_ERROR_DENIED                6
+   #define SSH_AGENT_ERROR_FAILURE               7
+   #define SSH_AGENT_ERROR_UNSUPPORTED_OP        8
+
+1.5.  Deleting Keys from the Agent
+
+1.5   エージェントからのすべての鍵の削除
+
+All keys that are in possession of the agent can be deleted with the
+following message.  (The client is allowed to ignore this for some keys
+if desired.)
+
+エージェントに保持されているすべての鍵を次のメッセージで削除することができる.
+(もし望むなら, いくつかの鍵に対してはこれを無視することをクライアントに
+許してもよい)
+
+   byte      SSH_AGENT_DELETE_ALL_KEYS
+
+The agent responds with either SSH_AGENT_SUCCESS or SSH_AGENT_FAILURE.
+
+エージェントは SSH_AGENT_SUCCESS か SSH_AGENT_FAILURE をもって返答する.
+
+1.6.  Deleting specific key from the Agent
+
+1.6   エージェントからの特定の鍵の削除
+
+The client can delete a specific key with given public key with
+following message.
+
+クライアントは次のメッセージで与えられた公開鍵を持つ特定の鍵を削除できる.
+
+   byte      SSH_AGENT_DELETE_KEY
+   string    public key and/or certificates for it
+   string    description of the key
+
+The agent responds with either SSH_AGENT_SUCCESS or SSH_AGENT_FAILURE.
+
+エージェントは SSH_AGENT_SUCCESS か SSH_AGENT_FAILURE をもって返答する.
+
+1.7.  Listing the Keys that the Agent Can Use
+
+1.7   エージェントが利用できる鍵の列挙
+
+The following message requests a list of all keys that the agent can
+use.
+
+次のメッセージは, エージェントが利用できるすべての鍵のリストを要求する.
+
+   byte      SSH_AGENT_LIST_KEYS
+
+The agent will respond with the following message.
+
+エージェントは次のメッセージで返答する.
+
+   byte      SSH_AGENT_KEY_LIST
+   uint32    number_of_keys
+   repeats number_of_keys times:
+    string    public key blob or certificates
+    string    description
+
+2.  Performing Private Key Operations
+
+2.  秘密鍵操作の実行
+
+The real purpose of the agent is to perform private key operations.
+Such operations are performed with the following message.
+
+エージェントの本来の目的は, 秘密鍵の操作を実行することだ. 
+これらの操作は次のメッセージで実行される.
+
+   byte      SSH_AGENT_PRIVATE_KEY_OP
+   string    operation name
+   string    key or certificates, as returned in SSH_AGENT_KEY_LIST
+   ... operation-specific data follows
+
+The operation to be performed is identified by a name (string).  Custom
+
+
+Tatu Ylonen, Timo J. Rinne and Sami Lehtinen                    [page 7]
+
+INTERNET-DRAFT                                          30 January, 2004
+ 
+operations can be added by suffixing the operation name by the fully
+qualified domain name of the person/organization adding the new
+operation.
+
+実行される操作は, name (string) で同定される. 
+新しい操作を足す個人や組織の FQDN を operation name の末尾に付けることで
+あつらえた操作を追加できる.
+
+When the operation is complete, the agent will respond with either
+SSH_AGENT_FAILURE or with the following message if the operation is
+successful:
+
+操作が完了したとき, エージェントは SSH_AGENT_FAILURE を返すか,
+操作が成功した場合は 次のメッセージを返す.
+
+
+   byte      SSH_AGENT_OPERATION_COMPLETE
+   string    resulting data
+
+If an operation is attempted that is not supported by the agent, the
+agent will respond with SSH_AGENT_FAILURE with error code set to
+SSH_AGENT_ERROR_UNSUPPORTED_OP.
+
+試されようとした操作がエージェントによってサポートされていない場合,
+エージェントは SSH_AGENT_ERROR_UNSUPPORTED_OP を エラーコードに設定した
+SSH_AGENT_FAILURE を返す.
+
+The standard operations are defined below.
+
+標準の操作は以下に定義されている.
+
+2.1.  Signing
+
+2.1   署名
+
+The agent can be used to create a digital signature using a key held by
+the agent.  The operation name is "sign", and data in is a hash
+(suitable for the key) that is to be signed.  This normally performs the
+raw private key operation, without hashing data first.  The resulting
+data will be a binary representation of the output of the private key
+operation.  The exact details of the operations to be performed depend
+on the key being used.
+
+エージェントは, 持っている鍵を使って 電子署名を作るのに使うことができる.
+この operation name は "sign" で, 入力 data は 署名されるための (鍵に適した)
+ハッシュ値だ. これは通常, 最初にデータをハッシュすることはせずに
+生の秘密鍵操作を実行する. resulting data は 秘密鍵操作の出力の
+2 進表現だ. 行なわれる操作の正確な詳細は, 使われる鍵に依存する.
+
+The operation-specific data has the following format:
+
+この操作に特有のデータは次のフォーマットを持つ.
+
+   string    data to be signed
+
+Alternatively, it is possible to give the actual data to be signed to
+the agent.  This is done using the operation "hash-and-sign".  This is
+otherwise equal, but performs key-dependent hashing before signing.
+
+もう 1 つの方法として, エージェントに署名される実際のデータを与えることもできる.
+操作 "hash-and-sign" を用いて行なわれる. これは 署名の前に鍵に依存した
+ハッシュが実行されることを除けば, 等しい.
+
+If the requested operation is not legal for the key, SSH_AGENT_FAILURE
+will be returned with error code set to
+SSH_AGENT_ERROR_KEY_NOT_SUITABLE.
+
+要求された操作が鍵に対して正当でないなら, SSH_AGENT_ERROR_KEY_NOT_SUITABLE
+が error code に設定された SSH_AGENT_FAILURE が返される.
+
+2.2.  Decrypting
+
+2.2   復号
+
+The agent can be used to decrypt a public key encrypted message with the
+operation "decrypt".  This takes in raw public-key encrypted data, and
+returns the resulting decrypted data.
+
+エージェントは, 操作 "decrypt" で 公開鍵で暗号化されたメッセージを
+復号するために使われることができる. これは, 生の公開鍵で暗号化されたデータを
+取り, 結果の復号されたデータを返す.
+
+This may also fail.  If the requested operation is not legal for the
+key, error code is set to SSH_AGENT_ERROR_KEY_NOT_SUITABLE.
+
+これは失敗するかもしれない, 要求された操作が鍵に対して正当でないなら,
+SSH_AGENT_ERROR_KEY_NOT_SUITABLE
+が error code に設定された SSH_AGENT_FAILURE が返される.
+
+The operation-specific data has the following format:
+
+この操作に特有のデータは次のフォーマットを持つ.
+
+   string    data to be decrypted
+
+
+
+
+Tatu Ylonen, Timo J. Rinne and Sami Lehtinen                    [page 8]
+
+INTERNET-DRAFT                                          30 January, 2004
+ 
+2.3.  Secure Shell Challenge-Response Authentication
+
+2.3   Secure Shell チャレンジ-レスポンス 認証
+
+Performs Secure Shell challenge-response authentication.  This operation
+has the name "ssh1-challenge-response".
+
+Secure Shell  チャレンジ-レスポンス 認証を実行する. この操作は
+"ssh1-challenge-response" という名前を持つ.
+
+This operation works by first decrypting the challenge, then computing
+MD5 of the concatenation of the decrypted challenge and the session id
+(in this order), and returns the resulting 16 byte hash.  The operation-
+specific data is in the following format:
+
+この操作は まず チャレンジを復号し, そして 復号されたチャレンジとセッション id
+を (この順) で連結したものの MD5 を計算し, 結果の 16byte ハッシュを返す.
+この操作に特有のデータは次のフォーマットだ.
+
+   string    challenge encrypted using the public key
+   string    session id
+
+Normally, the length of the challenge before encryption will be 32 bytes
+and the length of the session id 16 bytes.  The length of the encrypted
+challenge depends on the key and algorithm used.
+
+通常, 暗号化前のチャレンジの長さは 32 byte で, セッション id の長さは
+16 byte だ. 暗号化されたチャレンジの長さは利用される鍵とアルゴリズムに依存する.
+
+3.  Administrative Messages
+
+3. 管理のためのメッセージ
+
+There are also a number of messages that are only used to administer the
+agent.  These might e.g. be used by a user interface for the agent.  The
+agent should only allow these messages from local connection (i.e., if
+no forwarding notice messages were received before the version number
+request).
+
+エージェントの管理のためだけに使われるメッセージもいくつかある.
+すなわち, これらは, エージェントのユーザインタフェイスとして使われる.
+エージェントはこれらのメッセージをローカルな接続からのみ許す必要がある.
+(すなわち, バージョン番号リクエストの前に 転送告知メッセージを受けとっていない
+場合)
+
+3.1.  Locking and unlocking the agent
+
+3.1   エージェントのロックとアンロック
+
+The agent can be temporarily locked by message:
+
+エージェントは次のメッセージで一時的にロックされる.
+
+   byte      SSH_AGENT_LOCK
+   string    locking password
+
+The agent responds with either SSH_AGENT_SUCCESS or SSH_AGENT_FAILURE.
+Particularily SSH_AGENT_FAILURE is sent, if agent is already locked.
+After this message, agent responds to all commands with
+SSH_AGENT_FAILURE until it receives a following command.
+
+エージェントは SSH_AGENT_SUCCESS か SSH_AGENT_FAILURE を返す.
+特に SSH_AGENT_FAILURE が送られる場合, エージェントはすでにロックされている.
+このメッセージのあと, エージェントは, 次のメッセージを受けとるまで,
+すべてのコマンドに対して SSH_AGENT_FAILURE を返す.
+
+   byte      SSH_AGENT_UNLOCK
+   string    locking password
+
+The agent responds with either SSH_AGENT_SUCCESS or SSH_AGENT_FAILURE.
+Particularily SSH_AGENT_FAILURE is sent, if agent is not locked or if
+the submitted password does not match with one given with SSH_AGENT_LOCK
+message.
+
+エージェントは SSH_AGENT_SUCCESS か SSH_AGENT_FAILURE を返す.
+SSH_AGENT_FAILURE が送られるのは, エージェントがロックされていないか,
+送られてきたパスワードが SSH_AGENT_LOCK メッセージで 与えられたものと
+一致しないかの場合だ.
+
+3.2.  Miscellaneous Agent Commands
+
+3.2   さまざまなエージェントのコマンド
+
+   byte      SSH_AGENT_PING
+   ... arbitrary padding data
+
+Any agent or client receiving this message, should respond with
+
+すべてのエージェントないしクライアントはこのメッセージを受けとたら
+次のメッセージを返す必要がある.
+
+   byte      SSH_AGENT_ALIVE
+
+
+Tatu Ylonen, Timo J. Rinne and Sami Lehtinen                    [page 9]
+
+INTERNET-DRAFT                                          30 January, 2004
+ 
+   ... padding data from the SSH_AGENT_PING request
+
+where the padding data is identical to the data sent with
+SSH_AGENT_PING.
+
+padding data は  SSH_AGENT_PING で送られた data と同一.
+
+   byte      SSH_AGENT_RANDOM
+   uint32    the length of the requested random buffer
+
+Client can request random data from the agent by this message.  Agent
+responds either with SSH_AGENT_RANDOM_DATA or SSH_AGENT_FAILURE message.
+
+クライアントはこのメッセージでエージェントからのランダムなデータを
+要求できる. エージェントは SSH_AGENT_RANDOM_DATA か SSH_AGENT_FAILURE
+メッセージで応答する.
+
+   byte      SSH_AGENT_RANDOM_DATA
+   string    random data
+
+This message is a successful response to SSH_AGENT_RANDOM message.
+Message contains the random string of requested length.
+
+このメッセージは, SSH_AGENT_RANDOM メッセージへの成功の返答だ.
+メッセージは 要求された長さのランダムな string を含む.
+
+4.  Agent Forwarding With Secure Shell
+
+4.  Secure Shell の エージェント転送
+
+The agent connection is typically forwarded over a Secure Shell
+connection. This requires small additions to the SSH Connection Protocol
+[SSH-CONN].
+
+エージェントの接続は, Secure Shell 接続越しに転送される. 
+これは SSH コネクションプロトコル [SSH-CONN] の少しの追加を必要とする.
+
+4.1.  Requesting Agent Forwarding
+
+4.1   エージェント転送の要求
+
+Agent forwarding may be requested for a session by sending
+
+エージェントの転送は 次のメッセージを送ることでセッションに対して要求される.
+
+  byte      SSH_MSG_CHANNEL_REQUEST
+  uint32    recipient channel
+  string    "auth-agent-req"
+  boolean   want reply
+
+This will, on success, create an agent listener to the remote end.
+
+成功すると, リモート側にエージェントのリスナが作られる.
+
+4.2.  Agent Forwarding Channels
+
+4.2   エージェント転送チャンネル
+
+When a connection comes to the forwarded agent listener, a channel is
+opened to forward the connection to the other side.
+
+転送されたエージェントへの接続が行なわれると, 別の側への接続を転送する
+ためのチャンネルが開かれる.
+
+  byte      SSH_MSG_CHANNEL_OPEN
+  string    "auth-agent"
+  uint32    sender channel
+  uint32    initial window size
+  uint32    maximum packet size
+
+Implementations MUST reject these messages unless they have previously
+requested agent forwarding.
+
+実装は, 先にエージェント転送を要求されていない場合に, これらのメッセージを
+拒否しなければならない.
+
+Forwarded agent channels are independent of any sessions, and closing a
+session channel does not in any way imply that forwarded connections
+should be closed.
+
+転送されたエージェントチャンネルはどのセッションからも独立で,
+セッションチャンネルが閉じられても, この転送された接続が閉じられなければ
+ならないということを決して意味しない.
+
+
+Tatu Ylonen, Timo J. Rinne and Sami Lehtinen                   [page 10]
+
+INTERNET-DRAFT                                          30 January, 2004
+ 
+5.  Vendor-Specific Extensions
+
+5.  ベンダ特有の拡張
+
+The SSH_AGENT_EXTENSION request provides a generic extension mechanism
+for adding vendor-specific commands.  The request has the following
+format:
+  byte       SSH_AGENT_EXTENSION
+  string     extension_id
+  ... extension-specific data follows ...
+
+SSH_AGENT_EXTENSION リクエストは ベンダ特有のコマンドを追加するための
+一般的な拡張メカニズムを提供する. このリクエストは次のフォーマットを持つ.
+
+`extension_id' is a string of the format "name@domain", where domain is
+an internet domain name of the vendor defining the request.  The rest of
+the request is completely vendor-specific, and servers should only
+attempt to interpret it if they recognize the `extension_id' name.
+
+`extension_id' は "name@domain" 形式の文字列だ. ここで domain は
+リクエストを定義するベンダのインターネットドメイン名だ. リクエストの
+残りの部分は完全に ベンダー特有で, サーバは, `extension_id' 名が
+理解できる場合にだけ, これを解釈しようとする必要がある.
+
+These messages can be sent to either direction. However, the agent MUST
+send these messages only as responses to the client's requests. As an
+implementation note, the agent should use the standard responses if at
+all possible.
+
+これらのメッセージはどちらの方向にも送られる. しかし, エージェントは
+クライアントのリクエストに対する返答としてのみこれらのメッセージを 
+送らなければならない. 実装上の注意として, エージェントは
+可能な限り標準の応答を使う必要がある.
+
+If the agent sees an extension message it doesn't understand, it should
+respond with SSH_AGENT_FAILURE with error
+SSH_AGENT_ERROR_UNSUPPORTED_OP.
+
+エージェントが 理解できない拡張メッセージを受けとったら,
+SSH_AGENT_ERROR_UNSUPPORTED_OP を error として持つ SSH_AGENT_FAILURE
+を返す必要がある.
+
+6.  Security Considerations
+
+6.  セキュリティに関する考察
+
+The authentication agent is used to control security-sensitive
+operations, and is used to implement single sign-on.
+
+認証エージェントは, セキュリティに敏感な操作を制御するためと
+シングルサインオンを実現されるために使われる.
+
+Anyone with access to the authentication agent can perform private key
+operations with the agent.  This is a power equivalent to possession of
+the private key as long as the connection to the key is maintained.  It
+is not possible to retrieve the key from the agent.
+
+認証エージェントにアクセスするすべての人は, エージェントを使った
+秘密鍵操作を実行できる. 鍵への接続が維持される限り秘密鍵を所有するのと
+同等の力を持つ. エージェントから鍵を得ることは不可能だ.
+
+It is recommended that agent implementations allow and perform some form
+of logging and access control.  This access control may utilize
+information about the path through which the connection was received (as
+collected with SSH_AGENT_FORWARDING_NOTICE messages; however, the path
+is reliable only up to and including the first unreliable machine.).
+Implementations should also allow restricting the operations that can be
+performed with keys - e.g., limiting them to challenge-response only.
+
+エージェントの実装は, ログの記録とアクセス制御のいくつかの形式を許し
+実行することが推奨される. このアクセス制御は, 経由して接続が受けとられる
+パスについての情報を利用するだろう.
+(SSH_AGENT_FORWARDING_NOTICE メッセージを集めることで; しかし
+パスは 最初の信頼できないマシンを含むものまでだけ信頼できる (?)).
+実装は, 鍵を使って実行される操作を制限することを許すべきである.
+例えば, チャレンジ-レスポンスのみに操作を制限するなど.
+
+One should note that a local superuser will be able to obtain access to
+agents running on the local machine.  This cannot be prevented; in most
+operating systems, a user with sufficient privileges will be able to
+read the keys from the physical memory.
+
+ローカルのスーパユーザは, ローカルなマシン上で走るエージェントへのアクセスを
+得ることができることに注意. これは防ぐことができない. 多くの OS では.
+十分な特権を持つユーザは, 物理メモリから鍵を読み出すことができる.
+
+The authentication agent should not be run or forwarded to machine whose
+integrity is not trusted, as security on such machines might be
+compromised and might allow an attacker to obtain unauthorized access to
+the agent.
+
+認証エージェントは, 完全性が信頼できないマシンで走らされたり転送されたり
+するべきではない. それらのマシンのセキュリティは脅かされて
+エージェントへの正当でないアクセスを攻撃者が得ることを許してしまうだろう.
+
+Adding a key with SSH_AGENT_ADD_KEY over the net (especially over the
+Internet) is generally not recommended, because at present the private
+
+
+Tatu Ylonen, Timo J. Rinne and Sami Lehtinen                   [page 11]
+
+INTERNET-DRAFT                                          30 January, 2004
+ 
+key has to be moved unencrypted. Implementations SHOULD warn the user of
+the implications. Even moving the key in encrypted form could be
+considered unwise.
+
+ネット越しに (特に Internet 越しに) SSH_AGENT_ADD_KEY で 鍵を追加することは
+は一般的に勧められない. 現在公開鍵は暗号化されずに移動されるからだ.
+実装は, この意味についてユーザに警告する必要がある. 暗号化された形式で
+鍵を移動することも, 賢くないと考えられる.
+
+7.  Intellectual Property
+
+The IETF takes no position regarding the validity or scope of any
+intellectual property or other rights that might be claimed to pertain
+to the implementation or use of the technology described in this
+document or the extent to which any license under such rights might or
+might not be available; neither does it represent that it has made any
+effort to identify any such rights.  Information on the IETF's
+procedures with respect to rights in standards-track and standards-
+related documentation can be found in BCP-11.  Copies of claims of
+rights made available for publication and any assurances of licenses to
+be made available, or the result of an attempt made to obtain a general
+license or permission for the use of such proprietary rights by
+implementers or users of this specification can be obtained from the
+IETF Secretariat.
+
+The IETF has been notified of intellectual property rights claimed in
+regard to some or all of the specification contained in this document.
+For more information consult the online list of claimed rights.
+
+8.  Additional Information
+
+The current document editor is: Sami Lehtinen <sjl@ssh.com>.  Comments
+on this Internet-Draft should be sent to the IETF SECSH working group,
+details at: http://ietf.org/html.charters/secsh-charter.html
+
+9.  Changes from previous versions
+
+9.1.  Changes between versions 3 and 2
+
+o  Added error message and language tag to SSH_AGENT_FAILURE.
+
+o  Added SSH_AGENT_EXTENSION.
+
+o  Added extension data to SSH_AGENT_VERSION_RESPONSE.
+
+o  Defined SSH_AGENT_ADD_KEY message better (previous version was
+   underspecified).
+
+10.  References
+
+Normative:
+
+[SECSH-CONNECT] Ylonen, T., et al: "Secure Shell Connection Protocol",
+Internet-Draft, draft-ietf-secsh-connect-16.txt
+
+[SECSH-TRANS] Ylonen, T., et al: "Secure Shell Transport Layer
+Protocol", Internet-Draft, draft-ietf-secsh-transport-10.txt
+
+
+
+Tatu Ylonen, Timo J. Rinne and Sami Lehtinen                   [page 12]
+
+INTERNET-DRAFT                                          30 January, 2004
+ 
+[RFC-2279] Yergeau, F: "UTF-8, a transformation format of ISO 10646",
+January 1998.
+
+[RFC-1766] Alvestrand, H: "Tags for the Identification of Languages",
+March 1995.
+
+Informative:
+
+11.  Address of Authors
+
+   Tatu Ylonen
+    SSH Communications Security Corp
+    Fredrikinkatu 42
+    FIN-00100 HELSINKI
+    Finland
+    E-mail: ylo@ssh.com
+
+   Timo J. Rinne
+    SSH Communications Security Corp
+    Fredrikinkatu 42
+    FIN-00100 HELSINKI
+    Finland
+    E-mail: tri@ssh.com
+
+   Sami Lehtinen
+    SSH Communications Security Corp
+    Fredrikinkatu 42
+    FIN-00100 HELSINKI
+    Finland
+    E-mail: sjl@ssh.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tatu Ylonen, Timo J. Rinne and Sami Lehtinen                   [page 13]
+

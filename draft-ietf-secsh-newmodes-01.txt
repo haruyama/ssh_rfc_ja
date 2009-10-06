@@ -1,0 +1,921 @@
+
+
+
+
+
+
+Network Working Group                                         M. Bellare
+Internet-Draft                                                  T. Kohno
+Expires: April 10, 2004                                     UC San Diego
+                                                           C. Namprempre
+                                                    Thammasat University
+                                                        October 10, 2003
+
+
+# 訳者 春山征吾 haruyama@unixuser.org
+
+
+                  SSH Transport Layer Encryption Modes
+
+                    draft-ietf-secsh-newmodes-01.txt
+
+
+Status of this Memo
+
+   This document is an Internet-Draft and is in full conformance with
+   all provisions of Section 10 of RFC2026.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF), its areas, and its working groups.  Note that
+   other groups may also distribute working documents as Internet-
+   Drafts.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   The list of current Internet-Drafts can be accessed at
+   http://www.ietf.org/ietf/1id-abstracts.txt.
+
+   The list of Internet-Draft Shadow Directories can be accessed at
+   http://www.ietf.org/shadow.html.
+
+   This Internet-Draft will expire on April 10, 2004.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2003).  All Rights Reserved.
+
+Abstract
+
+概要
+
+   Researchers have recently discovered that the authenticated
+   encryption portion of the current SSH Transport Protocol is
+   vulnerable to several attacks.
+
+   現在の SSH トランスポ-トプロトコルの認証が済んだあとの暗号化の部分が
+   がいくつかの攻撃に対して脆弱であることを最近研究者たちが発見した.
+
+   This document describes new symmetric encryption methods for the SSH
+   Transport Protocol and gives specific recommendations on how
+
+
+
+Bellare, Kohno, and Namprempre                                  [Page 1]
+
+Internet Draft                                             October, 2003
+
+
+   frequently SSH implementations should rekey.
+
+   この文書は, SSH トランスポ-トプロトコルのために 新しい対称暗号法を
+   記述し, どのくらい頻繁に SSH の実装が鍵を再交換すべきかの明確な
+   推奨を与える.
+
+   Bellare, Kohno, and Namprempre [ACM CCS 2002] prove that if an SSH
+   application implements the modifications described in this document,
+   then the symmetric cryptographic portion of that application will
+   provably resist chosen-plaintext, chosen-ciphertext, reaction-based
+   privacy and integrity/authenticity attacks.
+
+   Bellare, Kohno, and Namprempre [ACM CCS 2002] は, 
+   SSH のアプリケ-ションがこの文章で記述されている変更を実装すれば,
+   そのアプリケ-ションの対称暗号部分は, 選択平文, 選択暗号文,
+   反応ベ-スの秘密性と完全性/正真性攻撃に耐えることを証明している.
+
+Table of Contents
+
+   1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  2
+   2.  Conventions Used in This Document  . . . . . . . . . . . . . .  2
+   3.  Rekeying . . . . . . . . . . . . . . . . . . . . . . . . . . .  3
+   3.1 First Rekeying Recommendation  . . . . . . . . . . . . . . . .  3
+   3.2 Second Rekeying Recommendation . . . . . . . . . . . . . . . .  3
+   4.  Encryption Modes . . . . . . . . . . . . . . . . . . . . . . .  4
+   5.  Security Considerations  . . . . . . . . . . . . . . . . . . .  6
+   5.1 Rekeying Considerations  . . . . . . . . . . . . . . . . . . .  7
+   5.2 Encryption Method Considerations . . . . . . . . . . . . . . .  8
+       Normative References . . . . . . . . . . . . . . . . . . . . .  9
+       Non-Normative References . . . . . . . . . . . . . . . . . . .  9
+       Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . 10
+       Full Copyright Statement . . . . . . . . . . . . . . . . . . . 10
+
+1. Introduction
+
+1. イントロダクション
+
+   The symmetric portion of the SSH Transport Protocol was designed to
+   provide both privacy and integrity of encapsulated data.  Researchers
+   ([DAI,BKN]) have, however, recently identified several security
+   problems with the symmetric portion of the SSH Transport Protocol as
+   described in [SSH-TRANS].  For example, the encryption mode specified
+   in [SSH-TRANS] is vulnerable to a chosen-plaintext privacy attack.
+   Additionally, if not rekeyed frequently enough, the SSH Transport
+   Protocol may leak information about payload data.  This latter
+   property is true regardless of what encryption mode is used.
+
+   SSH トランスポ-トプロトコルの対称部分は, 
+   カプセル化されたデ-タの秘密性と完全性を提供するために
+   設計された. しかし, 研究者たち ([DAI,BKN]) は, [SSH-TRANS] に記述されている
+   SSH トランスポ-トプロトコルの対称部分のいくつかのセキュリティの問題を
+   最近確認した. 例えば, [SSH-TRANS] で定義された暗号モ-ドは, 
+   選択平文秘密性攻撃に脆弱だ. 加えて, 十分頻繁に鍵の再交換がされなければ, 
+   SSH トランスポ-トプロトコルは payload のデ-タについての情報を
+   漏らしてしまうだろう. この後者の性質は, どの暗号モ-ドが使われるかに依らず
+   真だ.
+
+   In [BKN] Bellare, Kohno, and Namprempre show how to modify the
+   symmetric portion of the SSH Transport Protocol so that it provably
+   preserves privacy and integrity against chosen-plaintext, chosen-
+   ciphertext, and reaction attacks.  This document instantiates the
+   recommendations described in [BKN].
+
+   [BKN] で, Bellare, Kohno と Namprempre は 選択平文, 選択暗号文,
+   反応攻撃に対する秘密性と完全性を証明付きで維持する
+   ために SSH トランスポ-トプロトコルの対称部分をどう変更するかを示した.
+   この文書で, [BKN] で記述されている推奨を具体例を挙げて説明している.
+
+2. Conventions Used in This Document
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in [RFC2119].
+
+
+
+
+Bellare, Kohno, and Namprempre                                  [Page 2]
+
+Internet Draft                                             October, 2003
+
+
+   The used data types and terminology are specified in the architecture
+   document [SSH-ARCH].
+
+   The SSH Transport Protocol is specified in the transport document
+   [SSH-TRANS].
+
+3. Rekeying
+
+3. 鍵の再交換
+
+   Section 7 of [SSH-TRANS] suggests that SSH implementations rekey
+   after every gigabyte of transmitted data.  [SSH-TRANS] does not,
+   however, discuss all the problems that could arise if an SSH
+   implementation does not rekey frequently enough.  This section serves
+   to strengthen the suggestion in [SSH-TRANS] by giving firm upper
+   bounds on the tolerable number of encryptions between rekeying
+   operations.  In Section 5 we discuss the motivation for these
+   rekeying recommendations in more detail.
+
+   [SSH-TRANS] のセクション 7 は, SSH の実装が 転送デ-タが 1 ギガバイトに
+   達っするごとに鍵を再交換するように示唆している. しかし,
+   [SSH-TRANS] は, SSH の実装が十分頻繁に鍵の再交換をしなかった場合に
+   起りうる問題のすべてを議論していない. このセクションは, 
+   鍵を再交換する操作の間に暗号化することが耐えられる確かな
+   上限を与えることで, [SSH-TRANS] での示唆を強化するためにある.
+   セクション 5 では, より詳しくこれらの鍵の再交換についての推奨の
+   動機について議論する.
+
+   This section makes two recommendations.  Informally, the first
+   recommendation is intended to protects against possible information
+   leakage through the MAC tag and the second recommendation is intended
+   to protect against possible information leakage through the block
+   cipher.  Note that, depending on the block length of the underlying
+   block cipher and the length of the encrypted packets, the first
+   recommendation may supersede the second recommendation, or visa-
+   versa.
+
+   このセクションでは 2 つの推奨を示す. 形式張らずに言えば, 1 つめの推奨は
+   MAC タグを通じて起りうる情報の漏れに対する保護を意図しており,
+   2 つめの推奨は, ブロック暗号を通じて起りうる情報の漏れに対する保護を
+   意図している. 基となるブロック暗号のブロックの長さと暗号化される
+   パケットの長さに依って, 
+   1 つめの推奨が 2 つめの推奨に上書きするかもしれないし, 
+   逆もまたありえることに注意.
+
+3.1 First Rekeying Recommendation
+
+3.1 鍵の再交換についての 1 つめの推奨
+
+   Because of possible information leakage through the MAC tag, SSH
+   implementations SHOULD rekey at least once every 2**32 outgoing
+   packets.  More explicitly, after a key exchange an SSH implementation
+   SHOULD NOT send more than 2**32 packets before rekeying again.
+
+   MAC タグを通じて情報が漏れることがあるため, SSH の実装は
+   2**32 個のパケットを送るまで少なくとも 1 度, 鍵の再交換をする必要がある.
+   より明示的には, 鍵の交換のあと, SSH の実装は, 鍵を再び交換する前に
+   2**32 個よりも多いパケットを送ってはならない.
+
+   SSH implementations SHOULD also attempt to rekey before receiving
+   more than 2**32 packets since the last rekey operation.  The
+   preferred way to do this is to rekey after receiving more than 2**31
+   packets since the last rekey operation.
+
+   SSH の実装は, 最後の鍵の再交換操作から 2**32 個以上のパケットを受けとる
+   よりも前に鍵を再交換しようとする必要もある. これを行なう
+   好ましい方法は, 最後の鍵の再交換操作から 2**31 個以上のパケットを
+   受けとった後で鍵の再交換を行なうことだ.
+
+3.2 Second Rekeying Recommendation
+
+3.2 鍵の再交換についての 2 つめの推奨
+
+   Because of a birthday property of block ciphers and some modes of
+   operation, implementations must be careful not to encrypt too many
+   blocks with the same encryption key.
+
+   ブロック暗号の誕生日攻撃に対する性質といくつかの操作のモ-ドのために
+   実装は, 同じ暗号鍵で多すぎるブロックを暗号化しないように注意しなければ
+   ならない.
+
+   Let L be the block length (in bits) of an SSH encryption method's
+   block cipher (e.g., 128 for AES).  If L is at least 128 then, after
+   rekeying, an SSH implementation SHOULD NOT encrypt more than 2**(L/4)
+   blocks before rekeying again.  If L is at least 128, then SSH
+
+
+
+Bellare, Kohno, and Namprempre                                  [Page 3]
+
+Internet Draft                                             October, 2003
+
+
+   implementations should also attempt to force a rekey before receiving
+   more than 2**(L/4) blocks.  If L is less than 128 (which is the case
+   for older ciphers such as 3DES, Blowfish, CAST-128, and IDEA), then,
+   although it may be too expensive to rekey every 2**(L/4) blocks, it
+   is still advisable for SSH implementations to follow the original
+   recommendation in [SSH-TRANS]: rekey at least once every gigabyte of
+   transmitted data.
+
+   L を SSH 暗号化法でのブロック暗号の (bit での) ブロック長とする (例えば
+   AES で 128). L が 少なくとも 128 なら,  鍵の再交換のあとで, SSH の実装は
+   次に鍵の再交換をする前に 2**(L/4) よりも多いブロックを暗号化してはならない.
+   L が少なくとも 128 なら, SSH の実装は, 2**(L/4) ブロックより多く受けとる前に
+   鍵の再交換を強要しようともしなければならない. L が 128 よりも小さいなら
+   (3DES, Blowfish, CAST-128, IDEA のようなより古い暗号の場合), 
+   2**(L/4) ブロックごとの鍵の再交換はとても労力がいるので,
+   [SSH-TRANS] での元々の推奨に従うことが, SSH の実装にとってまだ
+   当を得ている. すなわち, 1 ギガバイトのデ-タ転送ごとに少なくとも
+   一度鍵の再交換を行なう.
+
+   Note that if L is less than or equal to 128, then the recommendation
+   in this subsection supersedes the recommendation in Section 3.1.  If
+   an SSH implementation uses a block cipher with a larger block size
+   (e.g., Rijndael with 256-bit blocks), then the recommendations in the
+   above paragraph may supersede the recommendations in this paragraph
+   (depending on the lengths of the packets).
+
+   L が 128 よりも小さいか等しい場合, このサブセクションでの推奨は,
+   セクション 3.1 での推奨を上書きする. SSH の実装がより大きいブロック
+   のブロック暗号を使うなら (例えば, 256 ビットのブロックを持つ Rijndael)
+   上の段落の推奨 (3.1) は, このパラグラフの推奨 (3.2) を上書きするだろう
+   (パケットの長さに依存するが).
+
+4. Encryption Modes
+
+4. 暗号モ-ド
+
+   This document describes new encryption methods for use with the SSH
+   Transport Protocol.  These encryption methods are in addition to the
+   encryption methods described in Section 4.3 of [SSH-TRANS].
+
+   この文書では, SSH トランスポ-トプロトコルと共に使うために
+   新しい暗号モ-ドを記述する. これらの暗号モ-ドは
+   [SSH-TRANS] の セクション 4.3 に記述されている 暗号法に
+   追加される.
+
+   Recall from [SSH-TRANS] that the encryption methods in each direction
+   of an SSH connection MUST run independently of each other and that,
+   when encryption is in effect, the packet length, padding length,
+   payload, and padding fields of each packet MUST be encrypted with the
+   chosen method.  Further recall that the total length of the
+   concatenation of the packet length, padding length, payload, and
+   padding MUST be a multiple of the cipher's block size when the
+   cipher's block size is greater than or equal to 8 bytes (which is the
+   case for all of the following methods).
+
+   [SSH-TRANS] に以下のようにあったのを思い出せ.
+   SSH の接続の方向それぞれの暗号法は, 御互いに独立でなければならないし,
+   暗号化が効果を持つ時には, パケットの長さ パディングの長さ,
+   ペイロ-ド, それぞれのパケットの padding フィ-ルドは
+   選択された方法で暗号化されなければならない.
+   さらに,以下のことも思い出せ.
+   パケットの長さとパディングの長さ, ペイロ-ド, パディングを
+   連結した全体の長さは, 暗号のブロックサイズが 8 バイト以上の場合
+   (以下の方法はすべてこの場合だが)
+   暗号のブロックサイズの倍数でなければならない.
+
+   This document describes the following new methods:
+
+   この文書では以下の新しい方法を記述する.
+
+     aes128-ctr       RECOMMENDED       AES (Rijndael) in SDCTR mode,
+                                        with 128-bit key
+     aes192-ctr       RECOMMENDED       AES with 192-bit key
+     aes256-ctr       RECOMMENDED       AES with 256-bit key
+     3des-ctr         RECOMMENDED       Three-key 3DES in SDCTR mode
+     blowfish-ctr     OPTIONAL          Blowfish in SDCTR mode
+     twofish128-ctr   OPTIONAL          Twofish in SDCTR mode,
+                                        with 128-bit key
+     twofish192-ctr   OPTIONAL          Twofish with 192-bit key
+     twofish256-ctr   OPTIONAL          Twofish with 256-bit key
+     serpent128-ctr   OPTIONAL          Serpent in SDCTR mode, with
+                                        with 128-bit key
+     serpent192-ctr   OPTIONAL          Serpent with 192-bit key
+     serpent256-ctr   OPTIONAL          Serpent with 256-bit key
+     idea-ctr         OPTIONAL          IDEA in SDCTR mode
+
+
+
+Bellare, Kohno, and Namprempre                                  [Page 4]
+
+Internet Draft                                             October, 2003
+
+
+     cast128-ctr      OPTIONAL          CAST-128 in SDCTR mode
+
+   The label <cipher>-ctr means that the block cipher <cipher> is to be
+   used in "stateful-decryption counter" (SDCTR) mode.  Let L be the
+   block length of <cipher> in bits.  In stateful-decryption counter
+   mode both the sender and the receiver maintain an internal L-bit
+   counter X.  The initial value of X should be the initial IV (as
+   computed in Section 5.2 of [SSH-TRANS]) interpreted as an L-bit
+   unsigned integer in network-byte-order.  If X=(2**L)-1, then
+   "increment X" has the traditional semantics of "set X to 0."  We use
+   the notation <X> to mean "convert X to an L-bit string in network-
+   byte-order."  Naturally, implementations may differ in how the
+   internal value X is stored.  For example, implementations may store X
+   as multiple unsigned 32-bit counters.
+
+   <cipher>-ctr というラベルは, ブロック暗号 <cipher>が
+   "stateful-decryption counter" (SDCTR) モ-ドで使用されるということを
+   意味する. L を <cipher> のビットでのブロック長とする.
+   stateful-decryption counter モ-ドでは, 送り手も受取手も
+   内部の L-bit のカウンタ X を保持する. X の初期値は 
+   ネットワ-クバイトオ-ダ-での L-bit の符号無し整数として解釈される
+   初期 IV ([SSH-TRANS] の セクション 5.2 で計算される) でなければならない.
+   X = (2**L)-1 なら, "increment X" は "set X to 0" という 
+   伝統的な動作だ. ここで <X> という記法を, 「 X を ネットワ-クバイトオ-ダ-
+   での L-bit の文字列に変換」という意味で使う. 当然だが,
+   実装では, どの様に内部の値として X を格納するかが異なってもいい.
+   例えば, X を 複数の 符号無し 32-bit カウンタとして格納してもよい.
+
+
+   To encrypt a packet P=P1||P2||...||Pn (where P1, P2, ..., Pn are each
+   blocks of length L), the encryptor first encrypts <X> with <cipher>
+   to obtain a block B1.  The block B1 is then XORed with P1 to generate
+   the ciphertext block C1.  The counter X is then incremented and the
+   process is repeated for each subsequent block in order to generate
+   the entire ciphertext C=C1||C2||...||Cn corresponding to the packet
+   P.  Note that the counter X is not included in the ciphertext.  Also
+   note that the keystream can be pre-computed and that encryption is
+   parallelizable.
+
+   パケット P=P1||P2||...||Pn (ここで P1, P2, ... , Pn は それぞれブロック長 L)
+   を暗号化するため, まず, <X>を <cipher>で暗号化してブロック B1 を得る.
+   ブロック B1 は P1 と XOR されて, 暗号文ブロック C1 が生成される.
+   カウンタ X は インクリメントされ, このプロセスが それぞれの次のブロック
+   に対して繰り返される. そして パケット P に対応して
+   全暗号文  C=C1||C2||...||Cn が生成される. カウンタ X は 暗号文に
+   含まれないことに注意. また, 鍵ストリ-ムは, 先に計算しておくことができ,
+   暗号化は並列化できることにも注意.
+
+   To decrypt a ciphertext C=C1||C2||...||Cn, the decryptor (who also
+   maintains its own copy of X), first encrypts its copy of <X> with
+   <cipher> to generate a block B1 and then XORs B1 to C1 to get P1.
+   The decryptor then increments its copy of the counter X and repeats
+   the above process for each block to obtain the plaintext packet
+   P=P1||P2||...||Pn.  As before, the keystream can be pre-computed and
+   decryption is parallelizable.
+
+   暗号文 C=C1||C2||...||Cn を 復号するには, (自身で X のコピ-を
+   維持している) 復号者はまずその<X>のコピ-を <cipher>で暗号化し
+   ブロック B1 を生成し, そして B1 と C1 を XOR して P1 を得る.
+   カウンタ X のコピ-をインクリメントして, 上記のプロセスを
+   それぞれのブロックに対して繰り返し, 平文パケット P=P1||P2||...||Pn
+   を得る. 先と同様に, 鍵ストリ-ムは, 先に計算しておくことができ,
+   復号は並列化できる.
+
+   The "aes128-ctr" method uses AES (the Advanced Encryption Standard,
+   formerly Rijndael) with 128-bit keys [AES].  The block size is 16
+   bytes.
+
+   "aes128-ctr" は AES (Advanced Encryption Standard, 以前の Rijndael)
+   を 128-bit の鍵で使う. ブロックサイズは 16 バイトだ.
+
+   The "aes192-ctr" method uses AES with 192-bit keys.
+
+   "aes192-ctr" は AES を 192-bit の鍵で使う.
+
+   The "aes256-ctr" method uses AES with 256-bit keys.
+
+   "aes256-ctr" は AES を 256-bit の鍵で使う.
+
+   The "3des-ctr" method uses three-key triple-DES (encrypt-decrypt-
+   encrypt), where the first 8 bytes of the key are used for the first
+   encryption, the next 8 bytes for the decryption, and the following 8
+   bytes for the final encryption.  This requires 24 bytes of key data
+   (of which 168 bits are actually used).  The block size is 8 bytes.
+   This algorithm is defined in [SCHNEIER].
+
+   "3des-ctr" は 3 つの鍵の triple-DES (暗号化-復号-暗号化)
+   で, 鍵の最初の 8 バイトは 最初の暗号化に, 次の 8 バイトは復号に
+   次の 8 バイトが最後の暗号化に使われる. これは 鍵デ-タとして
+   24 バイト (そのうち 168bit が実際に使われる) 必要とする.
+   ブロックサイズは 8 バイトだ. このアルゴリズムは [SCHNEIER] で定義されている.
+
+
+Bellare, Kohno, and Namprempre                                  [Page 5]
+
+Internet Draft                                             October, 2003
+
+
+   The "blowfish-ctr" method uses Blowfish with 256 bit keys [SCHNEIER].
+   The block size is 8 bytes.
+
+   "blowfish-ctr" は Blowfish を 256 ビットの鍵で使う [SCHNEIER]. 
+   ブロックサイズは 8 バイトだ. 
+
+   The "twofish128-ctr" method uses Twofish with 128-bit keys [TWOFISH].
+   The block size is 16 bytes.
+
+   "twofish128-ctr" は TWOFISH を 128 ビットの鍵で使う [TWOFISH]. 
+   ブロックサイズは 16 バイトだ. 
+
+   The "twofish192-ctr" method uses Twofish with 192-bit keys.
+
+   "twofish192-ctr" は TWOFISH を 192 ビットの鍵で使う.
+
+   The "twofish256-ctr" method uses Twofish with 256-bit keys.
+
+   "twofish256-ctr" は TWOFISH を 256 ビットの鍵で使う.
+
+   The "serpent128-ctr" method uses the Serpent block cipher [SERPENT]
+   with 128-bit keys.  The block size is 16 bytes.
+
+   "serpent128-ctr" は Serpent ブロック暗号 [SERPENT] を 128 ビットの鍵で
+   使う. ブロックサイズは 16 バイトだ.
+
+   The "serpent192-ctr" method uses Serpent with 192-bit keys.
+
+   "serpent192-ctr" は Serpent を 192 ビットの鍵で使う.
+
+   The "serpent256-ctr" method uses Serpent with 256-bit keys.
+
+   "serpent256-ctr" は Serpent を 256 ビットの鍵で使う.
+
+   The "idea-ctr" method uses the IDEA cipher [SCHNEIER].  IDEA is
+   patented by Ascom AG.  The block size is 8 bytes.
+
+   "idea-ctr" は IDEA 暗号 [SCHNEIER] を使う. IDEA は
+   Ascom AG の特許だ. ブロックサイズは 8 バイトだ.
+
+   The "cast128-ctr" method uses the CAST-128 cipher [RFC2144].  The
+   block size is 8 bytes.
+   
+   "cast128-ctr" は CAST-128 暗号 [RFC2144] を使う.
+   ブロックサイズは 8 バイトだ.
+
+5. Security Considerations
+
+5. セキュリティに関する考察.
+
+   This document describes additional encryption methods and
+   recommendations for the SSH Transport Protocol [SSH-TRANS].  [BKN]
+   prove that if an SSH application incorporates the methods and
+   recommendations described in this document, then the symmetric
+   cryptographic portion of that application will resist a large class
+   of privacy and integrity attacks.
+
+   この文書は SSH トランスポ-トプロトコル [SSH-TRANS] に対する
+   追加の暗号法と推奨を記述している. SSH のアプリケ-ションが
+   この文書で記述された方法と推奨を組み込めば, アプリケ-ションの
+   対称暗号部分は, 多数の秘密性と完全性への攻撃に耐えるということを
+   [BKN] は証明した.
+
+   This section is designed to help implementors understand the
+   security-related motivations for, as well as possible consequences of
+   deviating from, the methods and recommendations described in this
+   document.  Additional motivation and discussion, as well as proofs of
+   security, appear in the research paper [BKN].
+
+   このセクションは, この文書で記述された方法と推奨から得られうる結果と
+   方法と推奨のセキュリティに関連する動機を実装者が理解する手助けすることが
+   目的だ. さらなる動機と議論, セキュリティの証明は, 論文 [BKN] 
+   にある.
+
+   Please note that the notion of "prove" in the context of [BKN] is
+   that of practice-oriented reductionist security: if an attacker is
+   able to break the symmetric portion of the SSH Transport Protocol
+   using a certain type of attack (e.g., a chosen-ciphertext attack),
+   then the attacker will also be able to break one of the transport
+   protocol's underlying components (e.g., the underlying block cipher
+   or MAC).  If we make the reasonable assumption that the underlying
+   components (such as AES and HMAC-SHA1) are secure, then the attacker
+   against the symmetric portion of the SSH protocol cannot be very
+   successful (since otherwise there would be a contradiction).  Please
+
+
+
+Bellare, Kohno, and Namprempre                                  [Page 6]
+
+Internet Draft                                             October, 2003
+
+
+   see [BKN] for details.  In particular, attacks are not impossible;
+   just extremely improbable (unless the building blocks, like AES, are
+   insecure).
+   
+   [BKN] の文脈でに "prove" の概念は, 実際指向の還元主義者のセキュリティの
+   概念であることに注意: (この文書にある方法や推奨を組み込んでも)
+   攻撃者が特定の種類の攻撃 (例えば選択暗号文攻撃)
+   を使って SSH トランスポ-トプロトコルの対称部分を破ることができるなら
+   攻撃者は トランスポ-トプロトコルの基礎の部分 (例えば, 基となる	
+   ブロック暗号や MAC) の 1 つを破ることができる. (AES や HMAC-SHA1 のような)
+   基礎の部分は安全であるという合理的な仮定をすると, 
+   SSH トランスポ-トプロトコルの対称部分に対する攻撃はあまりうまくはいかない
+   (さもなければ矛盾である. 詳細は [BKN] を参照のこと. 具体的には,
+   攻撃は不可能ではないが非常にありそうにない (AES のような作りあげている
+   部分が安全でない限り).
+
+   Note also that cryptography often plays only a small (but critical)
+   role in an application's overall security.  In the case of the SSH
+   Transport Protocol, even though an application might implement the
+   symmetric portion of the SSH protocol exactly as described in this
+   document, the application may still be vulnerable to non-protocol-
+   based attacks (as an egregious example, an application might save
+   cryptographic keys in cleartext to an unprotected file).
+   Consequently, even though the methods described herein come with
+   proofs of security, developers must still execute caution when
+   developing applications that implement these methods.
+
+   さらに, 暗号学はしばしばアプリケ-ション全体のセキュリティの中で
+   小さな (しかし重要な) 役割しかしないことにも注意. SSH トランスポ-トプロトコル
+   の場合,  この文書で記述したように正確に SSH プロトコルの対称部分を
+   アプリケ-ションが実装してさえ, アプリケ-ション
+   なお プロトコルベ-スでない攻撃 (ひどい例として, アプリケ-ションは
+   暗号鍵を平文や保護されてないファイルに保存するかもしれない)
+   に対して脆弱かもしれない. 結果として, ここで記述した方法は
+   セキュリティの証明が付いてくるけれども, 開発者は, これらの方法を
+   搭載するアプリケ-ションを開発する際に, なお注意しなければならない.
+   
+
+5.1 Rekeying Considerations
+
+5.1 鍵の再交換についての考察
+
+   Section 3 of this document makes two rekeying recommendations: (1)
+   rekey at least once every 2**32 packets and (2) rekey after a certain
+   number of encrypted blocks (e.g., 2**(L/4) blocks if the block
+   cipher's block length L is at least 128 bits).  The motivations for
+   recommendations (1) and (2) are different, and we consider each
+   recommendation in turn.  Briefly, (1) is designed to protect against
+   information leakage through the SSH protocol's underlying MAC and (2)
+   is designed to protect against information leakage through the SSH
+   protocol's underlying encryption scheme.  Please note that, depending
+   on the encryption method's block length L and the number of blocks
+   encrypted per packet, recommendation (1) may supersede recommendation
+   (2) or visa-versa.
+
+   この文書のセクション 3 では 2 つの鍵の再交換についての推奨を行なった:
+   (1) 2**32 個のパケットごとにすくなくとも 1 度 再交換 と 
+   (2) 暗号化されたブロックの特定の数
+   (たとえば, ブロック暗号のブロック長 L が 少なくとも 128 bit なら
+   2**(L/4) ブロック) の後での再交換 だ.
+   推奨 (1) と (2) の動機は異なるので, 我々はそれぞれの推奨を順に考察する.
+   簡単に言えば, (1) は, SSH プロトコルの基礎となる MAC を通じた
+   情報のリ-クに対する保護のためのもので, (2) は
+   SSH プロトコルの基礎となる暗号方式を通じた情報のリ-クに対する保護の
+   ためのものだ. 暗号法のブロック長 と パケットに対する暗号化されたブロックの
+   数に依存して, 推奨 (1) は 推奨 (2) を上書きするかもしれないし, 逆もありえる.
+
+   Recommendation (1) states that SSH implementations should rekey at
+   least once every 2**32 packets.  As [BKN] show, if more than 2**32
+   packets are encrypted and MACed by the SSH Transport Protocol between
+   rekeyings, then the SSH Transport Protocol's underlying MAC may begin
+   to leak information about the protocol's payload data.  In more
+   detail, an adversary looks for a collision between the MACs
+   associated to two packets that were MACed with the same 32-bit
+   sequence number (see Section 4.4 of [SSH-TRANS]); if a collision is
+   found, then the payload data associated with those two ciphertexts is
+   probably identical.  Note that this problem occurs regardless of how
+   secure the underlying encryption method is.  Implementors who decide
+   not to rekey at least once every 2**32 packets should understand this
+   issue.
+
+   推奨 (1) は SSH の実装は 2**32 個のパケットごとにすくなくとも 1 度 鍵を再交換
+   するべきだと述べている. [BKN}が示すように, 再交換の間に 
+   SSH トランスポ-トプロトコルによって 2**32 パケット以上
+   暗号化され MAC を計算されると, SSH トランスポ-トプロトコル の基礎となる
+   MAC は, プロトコルの payload のデ-タについての情報を漏らし始めてしまう.
+   さらに詳しくは述べると, 同じ 32-bit シ-ケンス番号
+    ([SSH-TRANS] のセクション 4.4 参照)
+   で MAC を計算された   2 つのパケットの MAC の間の衝突を攻撃者が探す.
+   衝突が見つかると, これらの 2 つの暗号文の payload のデ-タは
+   おそらく同一である. この問題は 基礎となる暗号法がどれくらい安全かに
+   依らずに起こることに注意. 2**32 個のパケットごとにすくなくとも 1 度 鍵を再交換
+   しない決定する実装者は,  この問題について理解する必要がある.
+   
+
+   Note that compressing payload data before encrypting and MACing will
+   not significantly reduce the risk of information leakage through the
+   underlying MAC.  Similarly, the use of random (and unpredictable to
+   an adversary) padding will not prevent information leakage through
+
+
+
+Bellare, Kohno, and Namprempre                                  [Page 7]
+
+Internet Draft                                             October, 2003
+
+
+   the underlying MAC [BKN].
+
+   暗号化と MAC の前に payload のデ-タを圧縮することは, 基礎となる MAC
+   からの情報のリ-クの危険を有意に減少しないことに注意.
+   同様に, ランダム (で攻撃者から推測できない) パディングを使うことも
+   基礎となる MAC からの情報のリ-クを妨げない [BKN].
+
+   One alternative to recommendation (1) would be to make the SSH
+   Transport Protocol's sequence number more than 32 bits long.  This
+   document does not suggest increasing the length of the sequence
+   number because doing so could hinder interoperability with older
+   version of the SSH protocol.  Another alternative to recommendation
+   (1) would be to switch from basic HMAC to a privacy-preserving
+   randomized MAC, such as a MAC that has its own internal counter
+   (because of the 32-bit counter already present in the protocol, such
+   a counter would only need to be incremented once every 2**32
+   packets).
+
+   推奨 (1) の 1 つの代案に, SSH トランスポ-トプロトコルのシ-ケンス番号を
+   32bit 長よりも長くすることがある. この文書はシ-ケンス番号の長さを
+   増やすことは示唆しない. SSH プロトコルのより古いバ-ジョンとの
+   相互運用性を妨げることになるから.  推奨 (1) の別の代案に
+   簡単な HMAC を MAC が自身の内部カウンタを持つような
+   秘密性を保護するランダム化された MAC
+   に変更するというものがある
+   (32-bit のカウンタはすでにプロトコルにあるので, このカウンタは
+   2*32 個のパケットごとに 1 回増加する必要だけがあるだろう).
+   
+
+   Recommendation (2) states that SSH implementations should rekey
+   before encrypting more than 2**(L/4) blocks with the same key
+   (assuming L is at least 128).  This recommendation is designed to
+   minimize the risk of birthday attacks against the encryption method's
+   underlying block cipher.  For example, there is a theoretical privacy
+   attack against stateful-decryption counter mode if an adversary is
+   allowed to encrypt approximately 2**(L/2) messages with the same key.
+   It is because of these birthday attacks that implementors are highly
+   encouraged to use secure block ciphers with large block lengths.
+
+   推奨 (2) は SSH の実装は (L がすくなくとも 128 だとして) 同じ鍵で 
+   2**(L/4) 個以上のブロックを暗号化する前に鍵を再生成するべきだと述べている.
+   この推奨は, 暗号法の基礎となるブロック暗号に対する誕生日攻撃の危険を
+   最小化するためである. 例えば, 同じ鍵を使ってだいたい 2**(L/2) のメッセ-ジを
+   暗号化すると, 理論的には stateful-decryption counter モ-ドに対する
+   秘密性攻撃を攻撃者に許す. これらの誕生日攻撃のため,
+   実装者は大きなブロック長を持つ安全なブロック暗号を使うことが強く
+   奨励される.
+
+5.2 Encryption Method Considerations
+
+5.2 暗号法に関する考察
+
+   Researchers have recently shown that the original CBC-based
+   encryption methods in [SSH-TRANS] are vulnerable to chosen-plaintext
+   privacy attacks [DAI,BKN].  The new stateful-decryption counter mode
+   encryption methods described in Section 4 of this document were
+   designed to be secure replacements to the original encryption methods
+   described in [SSH-TRANS].
+
+   研究者は, [SSH-TRANS] の元々の CBC-ベ-スの暗号法が
+   選択平文秘密性攻撃に対して脆弱であることを示した [DAI, BKN].
+   この文書のセクション 4 で記述されている新しい stateful-decryption
+   counter モ-ド 暗号法は, [SSH-TRANS] で記述されている元々の
+   暗号法の安全な代替として設計された.
+
+   Many people shy away from counter mode-based encryption schemes
+   because, when used incorrectly (such as when the keystream is allowed
+   to repeat), counter mode can be very insecure.  Fortunately, the
+   common concerns with counter mode do not apply to SSH because of the
+   rekeying recommendations and because of the additional protection
+   provided by the transport protocol's MAC.  This discussion is
+   formalized with proofs of security in [BKN].
+
+   (鍵ストリ-ムに繰り返しを許すような) 不正確に使われる counter モ-ド
+   は非常に危険となりうるので,
+   多くの人々が counter モ-ドベ-スの暗号方式に尻込みする.
+   鍵の再交換の推奨と トランスポ-トプロトコルの MAC によって提供される
+   追加の保護によって,幸運にも, counter モ-ドに対する共通の懸念は,
+   SSH には適用されない. この議論は, [BKN] の セキュリティの証明で	
+   公式化されている.
+
+
+   As an additional note, when one of the stateful-decryption counter
+   mode encryption methods (Section 4) is used, then the padding
+   included in an SSH packet (Section 4 of [SSH-TRANS]) need not be (but
+   can still be) random.  This eliminates the need to generate
+   cryptographically-secure pseudorandom bytes for each packet.
+   
+   追加の注意として, stateful-decryption counter モ-ド暗号法の 1 つを
+   使われる場合, SSH パケットに含まれるパディング ([SSH-TRANS] のセクション 4)
+   は, ランダムである必要がない (が ランダムのままでもよい).
+   これは, それぞれのパケットに対する暗号学的に安全な擬似ランダムバイトの生成
+   の必要を解消する.
+
+   One property of counter mode encryption is that it does not require
+   messages to be padded to a multiple of the block cipher's block
+
+
+
+Bellare, Kohno, and Namprempre                                  [Page 8]
+
+Internet Draft                                             October, 2003
+
+
+   length.  Although not padding messages can reduce the protocol's
+   network consumption, this document requires padding to be a multiple
+   of the block cipher's block length in order to (1) not alter the
+   packet description in [SSH-TRANS] and (2) not leak precise
+   information about the length of the packet's payload data.  (Although
+   there may be some networks savings for padding to only 8-bytes even
+   if the block cipher uses 16-byte blocks, because of (1) we do not
+   make that recommendation here.)
+
+   counter モ-ド暗号化の特性の 1 つが, ブロック暗号のブロック長の倍数に
+   メッセ-ジをパディングする必要がないことだ. パディングしないメッセ-ジは
+   プロトコルのネットワ-ク消費を減少するが, この文書では, ブロック暗号の
+   ブロック長の倍数へのパディングを要求する. (1) [SSH-TRANS] での
+   パケットの記述を変更しないため, (2) パケットの payload のデ-タの
+   長さについての正確な情報を漏らさないため, だ. (16-byte ブロックの
+   ブロック暗号を使っても, パディングのためのネットワ-クの節約は
+   たった, 8-byte になりうるだけで, (1) より, ここで その推奨はしない. )
+
+   In addition to stateful-decryption counter mode, [BKN] describe other
+   provably-secure encryption methods for use with the SSH Transport
+   Protocol.  The stateful-decryption counter mode methods in Section 4
+   are, however, the preferred alternatives to the insecure methods in
+   [SSH-TRANS] because stateful-decryption counter mode is the most
+   efficient (both in terms of network consumption and in terms of the
+   number of required cryptographic operations per packet).
+
+   stateful-decryption counter モ-ドに加えて, [BKN] は
+   SSH トランスポ-トプロトコルと共に使うための別の
+   おそらく安全な暗号法を記述している. しかし セクション 4 で記述した
+   stateful-decryption counter モ-ドの方法は, [SSH-TRANS] の
+   安全でない方法の好ましい代替である.
+   stateful-decryption counter モ-ドはもっとも効率的だからだ.
+   (ネットワ-ク消費の点でも,パケットごとに必要な暗号の操作の数の点でも)
+
+Normative References
+
+   [AES]           Daemon, J. and Rijmen, V., "AES Proposal: Rijndael",
+                   NIST AES Proposal, 1998.
+
+   [RFC2144]       Adams, C., "The CAST-128 Encryption Algorithm", RFC
+                   2144, May 1997.
+
+   [SCHNEIER]      Schneier, B., "Applied Cryptography Second Edition:
+                   Protocols algorithms and source in code in C", Wiley,
+                   1996.
+
+   [SERPENT]       Anderson, R., Biham, E., and Knudsen, L.  "Serpent: A
+                   proposal for the Advanced Encryption Standard", NIST
+                   AES Proposal, 1998.
+
+   [SSH-ARCH]      Ylonen, T., et. al., "SSH Protocol Architecture",
+                   I-D draft-ietf-architecture-12.txt, January 2002.
+
+   [SSH-TRANS]     Ylonen, T., et. al., "SSH Transport Layer Protocol",
+                   I-D draft-ietf-transport-14.txt, March 2002.
+
+   [TWOFISH]       Schneier, B., et. al., "The Twofish Encryptions
+                   Algorithm: A 128-bit block cipher, 1st Edition",
+                   Wiley, 1999.
+
+Non-Normative References
+
+   [BKN]           Bellare, M., Kohno, T., and Namprempre, C.,
+                   "Authenticated Encryption in SSH: Provably Fixing the
+                   SSH Binary Packet Protocol", Ninth ACM Conference on
+
+
+
+Bellare, Kohno, and Namprempre                                  [Page 9]
+
+Internet Draft                                             October, 2003
+
+
+                   Computer and Communications Security, 2002.
+
+   [BN]            Bellare, M. and Namprempre, C., "Authenticated
+                   Encryption: Relations among notions and analysis of
+                   the generic composition paradigm", Asiacrypt 2000.
+
+   [DAI]           Dai, W., "An Attack Against SSH2 Protocol", Email to
+                   the ietf-ssh@netbsd.org email list, 2002.
+
+   [KRAWCZYK]      Krawczyk, H., "The Order of Encryption and
+                   Authentication for Protecting Communications (Or: How
+                   secure is SSL?)", Crypto 2001.
+
+Authors' Addresses:
+
+   Mihir Bellare
+   Department of Computer Science and Engineering
+   University of California at San Diego
+   9500 Gilman Drive, MC 0114
+   La Jolla, CA 92093-0114
+
+   Phone: +1 858-822-2977
+   EMail: mihir@cs.ucsd.edu
+
+   Tadayoshi Kohno
+   Department of Computer Science and Engineering
+   University of California at San Diego
+   9500 Gilman Drive, MC 0114
+   La Jolla, CA 92093-0114
+
+   Phone: +1 858-822-2977
+   EMail: tkohno@cs.ucsd.edu
+
+   Chanathip Namprempre
+   Thammasat University
+   Faculty of Engineering
+   Electrical Engineering Department
+   Rangsit Campus, Klong Luang
+   Pathumthani, Thailand 12121
+
+   EMail: meaw@alum.mit.edu
+
+Full Copyright Statement
+
+   Copyright (C) The Internet Society (2003).  All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+
+
+
+Bellare, Kohno, and Namprempre                                 [Page 10]
+
+Internet Draft                                             October, 2003
+
+
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works.  However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assigns.
+
+   This document and the information contained herein is provided on an
+   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+Acknowledgments
+
+   Mihir Bellare and Chanathip Namprempre were supported by NSF Grant
+   CCR-0098123, NSF Grant ANR-0129617 and an IBM Faculty Partnership
+   Development Award.  Tadayoshi Kohno was supported by a National
+   Defense Science and Engineering Fellowship.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bellare, Kohno, and Namprempre                                 [Page 11]
+

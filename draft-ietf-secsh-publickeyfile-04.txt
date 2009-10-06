@@ -1,0 +1,752 @@
+
+
+
+Secure Shell Working Group                                  J. Galbraith
+Internet-Draft                                          VanDyke Software
+Expires: January 30, 2004                                      R. Thayer
+                                                     The Tillerman Group
+                                                          August 1, 2003
+
+# 訳者 春山征吾 haruyama@unixuser.org
+
+                       SSH Public Key File Format
+                 draft-ietf-secsh-publickeyfile-04.txt
+
+Status of this Memo
+
+   This document is an Internet-Draft and is in full conformance with
+   all provisions of Section 10 of RFC2026.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF), its areas, and its working groups. Note that other
+   groups may also distribute working documents as Internet-Drafts.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time. It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   The list of current Internet-Drafts can be accessed at http://
+   www.ietf.org/ietf/1id-abstracts.txt.
+
+   The list of Internet-Draft Shadow Directories can be accessed at
+   http://www.ietf.org/shadow.html.
+
+   This Internet-Draft will expire on January 30, 2004.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2003). All Rights Reserved.
+
+Abstract
+
+概要
+
+   This document formally documents the existing public key file format
+   in use for exchanging public keys between different SSH
+   implementations.
+
+   この文書は、異なる SSH 実装間での公開鍵の交換に使われる
+   現在の公開鍵ファイルフォーマットを正式に提供している。
+
+
+
+
+
+
+
+Galbraith & Thayer      Expires January 30, 2004                [Page 1]
+
+Internet-Draft         SSH Public Key File Format            August 2003
+
+
+Table of Contents
+
+   1.    Conventions used in this document  . . . . . . . . . . . . .  3
+   2.    Introduction . . . . . . . . . . . . . . . . . . . . . . . .  4
+   3.    Key File Format  . . . . . . . . . . . . . . . . . . . . . .  5
+   3.1   Line termination Characters  . . . . . . . . . . . . . . . .  5
+   3.2   Begin and end markers  . . . . . . . . . . . . . . . . . . .  5
+   3.3   Key File Header  . . . . . . . . . . . . . . . . . . . . . .  5
+   3.3.1 Subject Header . . . . . . . . . . . . . . . . . . . . . . .  6
+   3.3.2 Comment Header . . . . . . . . . . . . . . . . . . . . . . .  6
+   3.4   Public Key File Body . . . . . . . . . . . . . . . . . . . .  6
+   3.5   Examples . . . . . . . . . . . . . . . . . . . . . . . . . .  7
+   4.    Security Considerations  . . . . . . . . . . . . . . . . . .  8
+         Normative References . . . . . . . . . . . . . . . . . . . .  9
+         Authors' Addresses . . . . . . . . . . . . . . . . . . . . .  9
+         Intellectual Property and Copyright Statements . . . . . . . 10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith & Thayer      Expires January 30, 2004                [Page 2]
+
+Internet-Draft         SSH Public Key File Format            August 2003
+
+
+1. Conventions used in this document
+
+1. この文書で使う約束事
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in [4].
+
+  この文書に出てくる
+   "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT", "MAY" といった
+   キーワードは [4] に記述されているように解釈される.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith & Thayer      Expires January 30, 2004                [Page 3]
+
+Internet-Draft         SSH Public Key File Format            August 2003
+
+
+2. Introduction
+
+2. イントロダクション
+
+   In order to use public key authentication, public keys must be
+   exchanged between client and server.  This document formally
+   describes the existing public key file format, with few exceptions.
+
+   公開鍵認証を仕様するためには、公開鍵がクライアントとサーバの間で
+   交換されなければならない。この文書は、
+   現在の公開鍵ファイルフォーマットを
+   ほとんど例外なく、正式に記述している。
+
+   Where this document departs from current practice, it also suggests a
+   mechanism for backwards compatibility.
+
+   この文書が現在の慣習から外れている場合の,
+   後方互換性のためのメカニズムについても示唆している。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith & Thayer      Expires January 30, 2004                [Page 4]
+
+Internet-Draft         SSH Public Key File Format            August 2003
+
+
+3. Key File Format
+
+3. 鍵ファイルのフォーマット
+
+   SSH implementations must share public key files between the client
+   and the server in order to interoperate.
+
+   SSHの実装は、相互運用のためにクライアントとサーバの間で
+   公開鍵ファイルを共有しなければならない。
+
+   A key file is a text file, containing a sequence of lines. Each line
+   in the file MUST NOT be longer than 72 bytes.
+
+   鍵ファイルはテキストファイルで、複数行から成る。ファイルの
+   それぞれの行は、72バイトよりも長くなってはならない。
+
+3.1 Line termination Characters
+
+3.1 行終端文字
+
+   In order to achieve the goal of being able to exchange public key
+   files between servers, implementations are REQUIRED to read files
+   using any of the common line termination sequence, <CR>, <LF> or
+   <CR><LF>.
+
+   サーバ間で公開鍵ファイルを交換できるようにする目標を達成するため、
+   実装は、
+   共通の行終端シークエンス,<CR>ないし <LF>,<CR><LF>
+   のどれが使われていても、ファイルを読めることが要求されている。
+
+   Implementations may generate files using which ever line termination
+   convention is most convenient
+
+   実装はもっとも便利な行終端コンヴェンションを使ってファイルを生成
+   してよい。
+
+3.2 Begin and end markers
+
+3.2 開始・終了のマーカー
+
+   The first line of a conforming key file MUST be a begin marker, which
+   is the literal text:
+
+  この文書に従う鍵ファイルの最初の行は、開始のマーカーでなければ
+  ならない。これは以下のとおりのテキストだ。
+
+
+   ---- BEGIN SSH2 PUBLIC KEY ----
+
+   The last line of a conforming key file MUST be a end marker, which is
+   the literal text:
+
+
+   この文書に従う鍵ファイルの最後の行は、終了のマーカーでなければ
+   ならず、これは以下のとおりのテキストだ。
+
+   ---- END SSH2 PUBLIC KEY ----
+
+3.3 Key File Header
+
+3.3 鍵ファイルのヘッダ
+
+   The key file header section consists of multiple RFC822 - style
+   header fields.  Each field is a line of the following format:
+
+   鍵ファイルのヘッダセクションは 複数のRFC822スタイルのヘッダフィールド
+   から成る。それぞれのフィールドは次のフォーマットの行だ。
+
+   Header-tag ':' ' ' Header-value
+
+   The Header-tag MUST NOT be more than 64 bytes.  The Header-value MUST
+   NOT be more than 1024 bytes.  Each line in the header MUST NOT be
+   more than 72 bytes.
+
+   Header-tag は 64バイト以上であってはならない。 Header-valueは
+   1024バイト以上であってはならない。ヘッダのそれぞれの行は
+   72バイトよりも長くなってはならない。
+
+   A line is continued if the last character in the line is a '\'.  If
+   the last character of a line is a '\', then the logical contents of
+   the line is formed by removing the '\' and appending the contents of
+   the next line.
+
+
+   行の最後の文字が '\' の場合行は連続している。
+   行の最後の文字が '\' の場合、
+   行の論理的な内容は、 '\' を除いて次の行の内容を足したものになる。
+
+
+   The Header-tag MUST be US-ASCII.  The Header-value MUST be encoded in
+   UTF-8. [2]
+
+   Header-tagはUS-ASCIIでなければならない。 Header-valueは
+   UTF-8 [2] でエンコードされてなければならない。
+
+Galbraith & Thayer      Expires January 30, 2004                [Page 5]
+
+Internet-Draft         SSH Public Key File Format            August 2003
+
+
+   A line that is not a continuation line that has no ':' in it is
+   assumed to be the first line of the base 64 encoded body (Section 8)
+#  (Section 8)は元の文書のミス
+
+   ':'を含まない連続する行でない行は、Base 64エンコードされたbody
+   (セクション3.4)の最初の行だと推測される。
+
+   Compliant implementations MUST ignore unrecognized header fields.
+   Implementations SHOULD preserve unrecognized header fields when
+   manipulating the key file.
+
+   (この文書に)準拠する実装は、認識されないヘッダフィールドを無視しなければ
+   ならない。実装は、鍵ファイルを操作する際、認識されないヘッダフィールド
+   を保存する必要がある。
+
+   Existing implementations may not correctly handle unrecognized
+   fields. During a transition period, implementations SHOULD generate
+   key file headers that contain only a Subject field followed by a
+   Comment field.
+
+   現存する実装は、認識されないフィールドを正しく扱うことができない
+   だろう。過渡期においては、実装は, Commentフィールドが後続する
+   Subjectフィールドのみを含む鍵ファイルのヘッダを生成する
+   必要がある。
+   
+
+3.3.1 Subject Header
+
+3.3.1 Subject ヘッダ
+
+   This field currently is used to store the login-name that the key was
+   generated under.  For example:
+
+   このフィールドは、現在、鍵ファイルを生成したログイン名を保存するのに
+   使われる。例えば、
+
+   Subject: user
+
+3.3.2 Comment Header
+
+3.3.2 Comment ヘッダ
+
+   Contain a user specified comment which will be displayed when using
+   the key.
+
+   鍵を使う際に表示されるユーザ特有のコメントが含まれる。
+
+   It is suggested that this field default to user@hostname for the user
+   and machine used to generate the key.  For example:
+
+   このフィールドの初期値は、鍵を生成するのに使われた
+   ユーザとマシンから、user@hostname となることが示唆される。例えば、
+
+   Comment: user@mycompany.com
+
+   Currently, common practice is to quote the Header-value of the
+   Comment, and some existing implementations fail if these quotes are
+   omitted.
+
+   現在、共通の習慣として、 
+   CommentのHeader-valueを引用符で囲むことになっているが、
+   これ省略される場合、いくつかの現存する実装は失敗する。
+
+   Compliant implementations MUST function correctly if the quotes are
+   omitted.
+
+   準処する実装は、引用符が省略された場合も正確に処理しなければ
+   ならない。
+
+   During an interim period implementations MAY include the quotes. If
+   the first and last characters of the Header-value are matching
+   quotes, implementations SHOULD remove them before using the value.
+
+
+   しばらくの間は、実装はこの引用符を含んでもよい。 このHeader-valueの
+   最初と最後の文字が引用符と合致する場合、
+   実装は、この値を使う前にこれらを除く必要がある。
+
+
+3.4 Public Key File Body
+
+3.4 公開鍵ファイルのBody
+
+   The body of a public key file consists of the public key blob as
+   described in the SSH transport draft [1], section 4.6, "Public Key
+   Algorithms", encoded in base 64 as specified in RFC-2045, section
+   6.8, "Base64 Content-Transfer-Encoding". [5]
+
+
+
+   公開鍵ファイルの body は [1] の セクション 4.6 
+   "Public Key Algorithms" 記述された公開鍵のブロブから成る。
+   これは、[5] の section 6.8 "Base64 Content-Transfer-Encoding".
+   で定義された base 64 でエンコードされる。
+
+
+   As with all other lines, each line in the body MUST NOT be longer
+
+
+
+Galbraith & Thayer      Expires January 30, 2004                [Page 6]
+
+Internet-Draft         SSH Public Key File Format            August 2003
+
+
+   than 72 characters.
+
+   他の行と同じように、bodyのそれぞれの行は72文字を越えてはならない。
+
+3.5 Examples
+
+3.5 例
+
+   The following are some example public key files that are compliant:
+
+   以下は、準拠している公開鍵ファイルの例だ。
+
+   	---- BEGIN SSH2 PUBLIC KEY ----
+   	Comment: "1024-bit RSA, converted from OpenSSH by galb@test1"
+   	AAAAB3NzaC1yc2EAAAABIwAAAIEA1on8gxCGJJWSRT4uOrR13mUaUk0hRf4RzxSZ1zRbYY
+   	Fw8pfGesIFoEuVth4HKyF8k1y4mRUnYHP1XNMNMJl1JcEArC2asV8sHf6zSPVffozZ5TT4
+   	SfsUu/iKy9lUcCfXzwre4WWZSXXcPff+EHtWshahu3WzBdnGxm5Xoi89zcE=
+   	---- END SSH2 PUBLIC KEY ----
+
+
+   	---- BEGIN SSH2 PUBLIC KEY ----
+   	Comment: DSA Public Key for use with MyIsp
+   	AAAAB3NzaC1kc3MAAACBAPY8ZOHY2yFSJA6XYC9HRwNHxaehvx5wOJ0rzZdzoSOXxbETW6
+   	ToHv8D1UJ/z+zHo9Fiko5XybZnDIaBDHtblQ+Yp7StxyltHnXF1YLfKD1G4T6JYrdHYI14
+   	Om1eg9e4NnCRleaqoZPF3UGfZia6bXrGTQf3gJq2e7Yisk/gF+1VAAAAFQDb8D5cvwHWTZ
+   	DPfX0D2s9Rd7NBvQAAAIEAlN92+Bb7D4KLYk3IwRbXblwXdkPggA4pfdtW9vGfJ0/RHd+N
+   	jB4eo1D+0dix6tXwYGN7PKS5R/FXPNwxHPapcj9uL1Jn2AWQ2dsknf+i/FAAvioUPkmdMc
+   	0zuWoSOEsSNhVDtX3WdvVcGcBq9cetzrtOKWOocJmJ80qadxTRHtUAAACBAN7CY+KKv1gH
+   	pRzFwdQm7HK9bb1LAo2KwaoXnadFgeptNBQeSXG1vO+JsvphVMBJc9HSn24VYtYtsMu74q
+   	XviYjziVucWKjjKEb11juqnF0GDlB3VVmxHLmxnAz643WK42Z7dLM5sY29ouezv4Xz2PuM
+   	ch5VGPP+CDqzCM4loWgV
+   	---- END SSH2 PUBLIC KEY ----
+
+
+   	---- BEGIN SSH2 PUBLIC KEY ----
+   	Subject: galb
+   	Comment: 1024-bit rsa, created by galb@shimi Mon Jan 15 08:31:24 2001
+   	AAAAB3NzaC1yc2EAAAABJQAAAIEAiPWx6WM4lhHNedGfBpPJNPpZ7yKu+dnn1SJejgt459
+   	6k6YjzGGphH2TUxwKzxcKDKKezwkpfnxPkSMkuEspGRt/aZZ9wa++Oi7Qkr8prgHc4soW6
+   	NUlfDzpvZK2H5E7eQaSeP3SAwGmQKUFHCddNaP0L+hM7zhFNzjFvpaMgJw0=
+   	---- END SSH2 PUBLIC KEY ----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith & Thayer      Expires January 30, 2004                [Page 7]
+
+Internet-Draft         SSH Public Key File Format            August 2003
+
+
+4. Security Considerations
+
+4. セキュリティに関する考察
+
+   The file format described by this document provides no mechanism to
+   verify the integrity or otherwise detect tampering with the data
+   stored in such files. Given the potential of an adversarial tampering
+   with this data, system-specific measures (e.g. Access Control Lists,
+   UNIX permissions, other Discretionary and/or Mandatory Access
+   Controls) SHOULD be used to protect these files. Also, if the
+   contents of these files are transferred it SHOULD be done over a
+   trusted channel.
+
+   この文書で記述されたファイルフォーマットは, 完全性を検証したり
+   さもなければこれらのファイルを保存するデータの改竄を検知したり
+   するメカニズムを提供しない. このデータの攻撃者による改竄の
+   可能性があるとすれば, システムに特有の方法(例えば アクセスコントロールリスト,
+   UNIXのパーミッション, 他の任意の かつ/もしくは 強制のアクセスコントロール
+   が, これらのファイルを保護するために使われる必要がある. さらに,
+   これらのファイルの内容が転送される場合, 信頼されているチャンネル
+   の上で行なわれる必要がある.
+
+   The header data allowed by this file format could contain an
+   unlimited range of information. While in many environments the
+   information conveyed by this header data may be considered innocuous
+   public information, it may constitute a channel through which
+   information about a user, a key or its use may be disclosed
+   intentionally or otherwise (e.g "Comment: Mary E. Jones, 123 Main St,
+   Home Phone:..."). The presence and use of this header data SHOULD be
+   reviewed by sites that deploy this file format.
+
+   このファイルフォーマットで許されているヘッダのデータが含む
+   情報の範囲は無制限になりうる. 多くの環境でこのヘッダのデータで
+   運ばれる情報は, 無害な公開された情報だと考えられるが, この情報は
+   ユーザや鍵についての情報を運ぶチャンネルを構成するかもしれないし,
+   この情報の利用は, 意図的にもしくはそうではなく公開されるかもしれない
+   (例えば"Comment: Mary E. Jones, 123 Main St, Home Phone:...").
+   これらのヘッダのデータの配置と使用について, このファイルフォーマットを
+   配置するサイトはよく吟味する必要がある.
+   
+   
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith & Thayer      Expires January 30, 2004                [Page 8]
+
+Internet-Draft         SSH Public Key File Format            August 2003
+
+
+Normative References
+
+   [1]  Rinne, T., Ylonen, T., Kivinen, T., Saarinen, M. and S.
+        Lehtinen, "SSH Protocol Transport Protocol", September 2002.
+
+   [2]  Yergeau, F., "UTF-8, a Transformation Format of Unicode and ISO
+        10646", October 1996.
+
+   [3]  Bradner, S., "The Internet Standards Process -- Revision 3",
+        October 1996.
+
+   [4]  Bradner, S., "Key words for use in RFCs to Indicate Requirement
+        Levels", March 1997.
+
+   [5]  Freed and Borenstein, "Multipurpose Internet Mail Extensions
+        (MIME) Part One: Format of Internet Message Bodies", November
+        1996.
+
+
+Authors' Addresses
+
+   Joseph Galbraith
+   VanDyke Software
+   4848 Tramway Ridge Blvd
+   Suite 101
+   Albuquerque, NM  87111
+   US
+
+   Phone: +1 505 332 5700
+   EMail: galb-list@vandyke.com
+
+
+   Rodney Thayer
+   The Tillerman Group
+   370 Altair Way, PMB 321
+   Sunnyvale, CA  94086
+
+   Phone: +1 408 757 9693
+   EMail: rodney@tillerman.to
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith & Thayer      Expires January 30, 2004                [Page 9]
+
+Internet-Draft         SSH Public Key File Format            August 2003
+
+
+Intellectual Property Statement
+
+   The IETF takes no position regarding the validity or scope of any
+   intellectual property or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; neither does it represent that it
+   has made any effort to identify any such rights. Information on the
+   IETF's procedures with respect to rights in standards-track and
+   standards-related documentation can be found in BCP-11. Copies of
+   claims of rights made available for publication and any assurances of
+   licenses to be made available, or the result of an attempt made to
+   obtain a general license or permission for the use of such
+   proprietary rights by implementors or users of this specification can
+   be obtained from the IETF Secretariat.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights which may cover technology that may be required to practice
+   this standard. Please address the information to the IETF Executive
+   Director.
+
+
+Full Copyright Statement
+
+   Copyright (C) The Internet Society (2003). All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works. However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assignees.
+
+   This document and the information contained herein is provided on an
+   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+
+
+
+Galbraith & Thayer      Expires January 30, 2004               [Page 10]
+
+Internet-Draft         SSH Public Key File Format            August 2003
+
+
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+
+Acknowledgment
+
+   Funding for the RFC Editor function is currently provided by the
+   Internet Society.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Galbraith & Thayer      Expires January 30, 2004               [Page 11]
+
+
