@@ -7,7 +7,7 @@ Expires: January 30, 2004                                      R. Thayer
                                                      The Tillerman Group
                                                           August 1, 2003
 
-# Ìõ¼Ô ½Õ»³À¬¸ã haruyama@unixuser.org
+# è¨³è€… æ˜¥å±±å¾å¾ haruyama@unixuser.org
 
                        SSH Public Key File Format
                  draft-ietf-secsh-publickeyfile-04.txt
@@ -40,14 +40,14 @@ Copyright Notice
 
 Abstract
 
-³µÍ×
+æ¦‚è¦
 
    This document formally documents the existing public key file format
    in use for exchanging public keys between different SSH
    implementations.
 
-   ¤³¤ÎÊ¸½ñ¤Ï¡¢°Û¤Ê¤ë SSH ¼ÂÁõ´Ö¤Ç¤Î¸ø³«¸°¤Î¸ò´¹¤Ë»È¤ï¤ì¤ë
-   ¸½ºß¤Î¸ø³«¸°¥Õ¥¡¥¤¥ë¥Õ¥©¡¼¥Ş¥Ã¥È¤òÀµ¼°¤ËÄó¶¡¤·¤Æ¤¤¤ë¡£
+   ã“ã®æ–‡æ›¸ã¯ã€ç•°ãªã‚‹ SSH å®Ÿè£…é–“ã§ã®å…¬é–‹éµã®äº¤æ›ã«ä½¿ã‚ã‚Œã‚‹
+   ç¾åœ¨ã®å…¬é–‹éµãƒ•ã‚¡ã‚¤ãƒ«ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’æ­£å¼ã«æä¾›ã—ã¦ã„ã‚‹ã€‚
 
 
 
@@ -118,15 +118,15 @@ Internet-Draft         SSH Public Key File Format            August 2003
 
 1. Conventions used in this document
 
-1. ¤³¤ÎÊ¸½ñ¤Ç»È¤¦ÌóÂ«»ö
+1. ã“ã®æ–‡æ›¸ã§ä½¿ã†ç´„æŸäº‹
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in [4].
 
-  ¤³¤ÎÊ¸½ñ¤Ë½Ğ¤Æ¤¯¤ë
-   "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT", "MAY" ¤È¤¤¤Ã¤¿
-   ¥­¡¼¥ï¡¼¥É¤Ï [4] ¤Ëµ­½Ò¤µ¤ì¤Æ¤¤¤ë¤è¤¦¤Ë²ò¼á¤µ¤ì¤ë.
+  ã“ã®æ–‡æ›¸ã«å‡ºã¦ãã‚‹
+   "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT", "MAY" ã¨ã„ã£ãŸ
+   ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã¯ [4] ã«è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹ã‚ˆã†ã«è§£é‡ˆã•ã‚Œã‚‹.
 
 
 
@@ -179,22 +179,22 @@ Internet-Draft         SSH Public Key File Format            August 2003
 
 2. Introduction
 
-2. ¥¤¥ó¥È¥í¥À¥¯¥·¥ç¥ó
+2. ã‚¤ãƒ³ãƒˆãƒ­ãƒ€ã‚¯ã‚·ãƒ§ãƒ³
 
    In order to use public key authentication, public keys must be
    exchanged between client and server.  This document formally
    describes the existing public key file format, with few exceptions.
 
-   ¸ø³«¸°Ç§¾Ú¤ò»ÅÍÍ¤¹¤ë¤¿¤á¤Ë¤Ï¡¢¸ø³«¸°¤¬¥¯¥é¥¤¥¢¥ó¥È¤È¥µ¡¼¥Ğ¤Î´Ö¤Ç
-   ¸ò´¹¤µ¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤¡£¤³¤ÎÊ¸½ñ¤Ï¡¢
-   ¸½ºß¤Î¸ø³«¸°¥Õ¥¡¥¤¥ë¥Õ¥©¡¼¥Ş¥Ã¥È¤ò
-   ¤Û¤È¤ó¤ÉÎã³°¤Ê¤¯¡¢Àµ¼°¤Ëµ­½Ò¤·¤Æ¤¤¤ë¡£
+   å…¬é–‹éµèªè¨¼ã‚’ä»•æ§˜ã™ã‚‹ãŸã‚ã«ã¯ã€å…¬é–‹éµãŒã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¨ã‚µãƒ¼ãƒã®é–“ã§
+   äº¤æ›ã•ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„ã€‚ã“ã®æ–‡æ›¸ã¯ã€
+   ç¾åœ¨ã®å…¬é–‹éµãƒ•ã‚¡ã‚¤ãƒ«ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’
+   ã»ã¨ã‚“ã©ä¾‹å¤–ãªãã€æ­£å¼ã«è¨˜è¿°ã—ã¦ã„ã‚‹ã€‚
 
    Where this document departs from current practice, it also suggests a
    mechanism for backwards compatibility.
 
-   ¤³¤ÎÊ¸½ñ¤¬¸½ºß¤Î´·½¬¤«¤é³°¤ì¤Æ¤¤¤ë¾ì¹ç¤Î,
-   ¸åÊı¸ß´¹À­¤Î¤¿¤á¤Î¥á¥«¥Ë¥º¥à¤Ë¤Ä¤¤¤Æ¤â¼¨º¶¤·¤Æ¤¤¤ë¡£
+   ã“ã®æ–‡æ›¸ãŒç¾åœ¨ã®æ…£ç¿’ã‹ã‚‰å¤–ã‚Œã¦ã„ã‚‹å ´åˆã®,
+   å¾Œæ–¹äº’æ›æ€§ã®ãŸã‚ã®ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã«ã¤ã„ã¦ã‚‚ç¤ºå”†ã—ã¦ã„ã‚‹ã€‚
 
 
 
@@ -243,49 +243,49 @@ Internet-Draft         SSH Public Key File Format            August 2003
 
 3. Key File Format
 
-3. ¸°¥Õ¥¡¥¤¥ë¤Î¥Õ¥©¡¼¥Ş¥Ã¥È
+3. éµãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
 
    SSH implementations must share public key files between the client
    and the server in order to interoperate.
 
-   SSH¤Î¼ÂÁõ¤Ï¡¢Áê¸ß±¿ÍÑ¤Î¤¿¤á¤Ë¥¯¥é¥¤¥¢¥ó¥È¤È¥µ¡¼¥Ğ¤Î´Ö¤Ç
-   ¸ø³«¸°¥Õ¥¡¥¤¥ë¤ò¶¦Í­¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤¡£
+   SSHã®å®Ÿè£…ã¯ã€ç›¸äº’é‹ç”¨ã®ãŸã‚ã«ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¨ã‚µãƒ¼ãƒã®é–“ã§
+   å…¬é–‹éµãƒ•ã‚¡ã‚¤ãƒ«ã‚’å…±æœ‰ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„ã€‚
 
    A key file is a text file, containing a sequence of lines. Each line
    in the file MUST NOT be longer than 72 bytes.
 
-   ¸°¥Õ¥¡¥¤¥ë¤Ï¥Æ¥­¥¹¥È¥Õ¥¡¥¤¥ë¤Ç¡¢Ê£¿ô¹Ô¤«¤éÀ®¤ë¡£¥Õ¥¡¥¤¥ë¤Î
-   ¤½¤ì¤¾¤ì¤Î¹Ô¤Ï¡¢72¥Ğ¥¤¥È¤è¤ê¤âÄ¹¤¯¤Ê¤Ã¤Æ¤Ï¤Ê¤é¤Ê¤¤¡£
+   éµãƒ•ã‚¡ã‚¤ãƒ«ã¯ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã§ã€è¤‡æ•°è¡Œã‹ã‚‰æˆã‚‹ã€‚ãƒ•ã‚¡ã‚¤ãƒ«ã®
+   ãã‚Œãã‚Œã®è¡Œã¯ã€72ãƒã‚¤ãƒˆã‚ˆã‚Šã‚‚é•·ããªã£ã¦ã¯ãªã‚‰ãªã„ã€‚
 
 3.1 Line termination Characters
 
-3.1 ¹Ô½ªÃ¼Ê¸»ú
+3.1 è¡Œçµ‚ç«¯æ–‡å­—
 
    In order to achieve the goal of being able to exchange public key
    files between servers, implementations are REQUIRED to read files
    using any of the common line termination sequence, <CR>, <LF> or
    <CR><LF>.
 
-   ¥µ¡¼¥Ğ´Ö¤Ç¸ø³«¸°¥Õ¥¡¥¤¥ë¤ò¸ò´¹¤Ç¤­¤ë¤è¤¦¤Ë¤¹¤ëÌÜÉ¸¤òÃ£À®¤¹¤ë¤¿¤á¡¢
-   ¼ÂÁõ¤Ï¡¢
-   ¶¦ÄÌ¤Î¹Ô½ªÃ¼¥·¡¼¥¯¥¨¥ó¥¹,<CR>¤Ê¤¤¤· <LF>,<CR><LF>
-   ¤Î¤É¤ì¤¬»È¤ï¤ì¤Æ¤¤¤Æ¤â¡¢¥Õ¥¡¥¤¥ë¤òÆÉ¤á¤ë¤³¤È¤¬Í×µá¤µ¤ì¤Æ¤¤¤ë¡£
+   ã‚µãƒ¼ãƒé–“ã§å…¬é–‹éµãƒ•ã‚¡ã‚¤ãƒ«ã‚’äº¤æ›ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹ç›®æ¨™ã‚’é”æˆã™ã‚‹ãŸã‚ã€
+   å®Ÿè£…ã¯ã€
+   å…±é€šã®è¡Œçµ‚ç«¯ã‚·ãƒ¼ã‚¯ã‚¨ãƒ³ã‚¹,<CR>ãªã„ã— <LF>,<CR><LF>
+   ã®ã©ã‚ŒãŒä½¿ã‚ã‚Œã¦ã„ã¦ã‚‚ã€ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã‚ã‚‹ã“ã¨ãŒè¦æ±‚ã•ã‚Œã¦ã„ã‚‹ã€‚
 
    Implementations may generate files using which ever line termination
    convention is most convenient
 
-   ¼ÂÁõ¤Ï¤â¤Ã¤È¤âÊØÍø¤Ê¹Ô½ªÃ¼¥³¥ó¥ô¥§¥ó¥·¥ç¥ó¤ò»È¤Ã¤Æ¥Õ¥¡¥¤¥ë¤òÀ¸À®
-   ¤·¤Æ¤è¤¤¡£
+   å®Ÿè£…ã¯ã‚‚ã£ã¨ã‚‚ä¾¿åˆ©ãªè¡Œçµ‚ç«¯ã‚³ãƒ³ãƒ´ã‚§ãƒ³ã‚·ãƒ§ãƒ³ã‚’ä½¿ã£ã¦ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç”Ÿæˆ
+   ã—ã¦ã‚ˆã„ã€‚
 
 3.2 Begin and end markers
 
-3.2 ³«»Ï¡¦½ªÎ»¤Î¥Ş¡¼¥«¡¼
+3.2 é–‹å§‹ãƒ»çµ‚äº†ã®ãƒãƒ¼ã‚«ãƒ¼
 
    The first line of a conforming key file MUST be a begin marker, which
    is the literal text:
 
-  ¤³¤ÎÊ¸½ñ¤Ë½¾¤¦¸°¥Õ¥¡¥¤¥ë¤ÎºÇ½é¤Î¹Ô¤Ï¡¢³«»Ï¤Î¥Ş¡¼¥«¡¼¤Ç¤Ê¤±¤ì¤Ğ
-  ¤Ê¤é¤Ê¤¤¡£¤³¤ì¤Ï°Ê²¼¤Î¤È¤ª¤ê¤Î¥Æ¥­¥¹¥È¤À¡£
+  ã“ã®æ–‡æ›¸ã«å¾“ã†éµãƒ•ã‚¡ã‚¤ãƒ«ã®æœ€åˆã®è¡Œã¯ã€é–‹å§‹ã®ãƒãƒ¼ã‚«ãƒ¼ã§ãªã‘ã‚Œã°
+  ãªã‚‰ãªã„ã€‚ã“ã‚Œã¯ä»¥ä¸‹ã®ã¨ãŠã‚Šã®ãƒ†ã‚­ã‚¹ãƒˆã ã€‚
 
 
    ---- BEGIN SSH2 PUBLIC KEY ----
@@ -294,20 +294,20 @@ Internet-Draft         SSH Public Key File Format            August 2003
    the literal text:
 
 
-   ¤³¤ÎÊ¸½ñ¤Ë½¾¤¦¸°¥Õ¥¡¥¤¥ë¤ÎºÇ¸å¤Î¹Ô¤Ï¡¢½ªÎ»¤Î¥Ş¡¼¥«¡¼¤Ç¤Ê¤±¤ì¤Ğ
-   ¤Ê¤é¤º¡¢¤³¤ì¤Ï°Ê²¼¤Î¤È¤ª¤ê¤Î¥Æ¥­¥¹¥È¤À¡£
+   ã“ã®æ–‡æ›¸ã«å¾“ã†éµãƒ•ã‚¡ã‚¤ãƒ«ã®æœ€å¾Œã®è¡Œã¯ã€çµ‚äº†ã®ãƒãƒ¼ã‚«ãƒ¼ã§ãªã‘ã‚Œã°
+   ãªã‚‰ãšã€ã“ã‚Œã¯ä»¥ä¸‹ã®ã¨ãŠã‚Šã®ãƒ†ã‚­ã‚¹ãƒˆã ã€‚
 
    ---- END SSH2 PUBLIC KEY ----
 
 3.3 Key File Header
 
-3.3 ¸°¥Õ¥¡¥¤¥ë¤Î¥Ø¥Ã¥À
+3.3 éµãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ˜ãƒƒãƒ€
 
    The key file header section consists of multiple RFC822 - style
    header fields.  Each field is a line of the following format:
 
-   ¸°¥Õ¥¡¥¤¥ë¤Î¥Ø¥Ã¥À¥»¥¯¥·¥ç¥ó¤Ï Ê£¿ô¤ÎRFC822¥¹¥¿¥¤¥ë¤Î¥Ø¥Ã¥À¥Õ¥£¡¼¥ë¥É
-   ¤«¤éÀ®¤ë¡£¤½¤ì¤¾¤ì¤Î¥Õ¥£¡¼¥ë¥É¤Ï¼¡¤Î¥Õ¥©¡¼¥Ş¥Ã¥È¤Î¹Ô¤À¡£
+   éµãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ˜ãƒƒãƒ€ã‚»ã‚¯ã‚·ãƒ§ãƒ³ã¯ è¤‡æ•°ã®RFC822ã‚¹ã‚¿ã‚¤ãƒ«ã®ãƒ˜ãƒƒãƒ€ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
+   ã‹ã‚‰æˆã‚‹ã€‚ãã‚Œãã‚Œã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¯æ¬¡ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®è¡Œã ã€‚
 
    Header-tag ':' ' ' Header-value
 
@@ -315,9 +315,9 @@ Internet-Draft         SSH Public Key File Format            August 2003
    NOT be more than 1024 bytes.  Each line in the header MUST NOT be
    more than 72 bytes.
 
-   Header-tag ¤Ï 64¥Ğ¥¤¥È°Ê¾å¤Ç¤¢¤Ã¤Æ¤Ï¤Ê¤é¤Ê¤¤¡£ Header-value¤Ï
-   1024¥Ğ¥¤¥È°Ê¾å¤Ç¤¢¤Ã¤Æ¤Ï¤Ê¤é¤Ê¤¤¡£¥Ø¥Ã¥À¤Î¤½¤ì¤¾¤ì¤Î¹Ô¤Ï
-   72¥Ğ¥¤¥È¤è¤ê¤âÄ¹¤¯¤Ê¤Ã¤Æ¤Ï¤Ê¤é¤Ê¤¤¡£
+   Header-tag ã¯ 64ãƒã‚¤ãƒˆä»¥ä¸Šã§ã‚ã£ã¦ã¯ãªã‚‰ãªã„ã€‚ Header-valueã¯
+   1024ãƒã‚¤ãƒˆä»¥ä¸Šã§ã‚ã£ã¦ã¯ãªã‚‰ãªã„ã€‚ãƒ˜ãƒƒãƒ€ã®ãã‚Œãã‚Œã®è¡Œã¯
+   72ãƒã‚¤ãƒˆã‚ˆã‚Šã‚‚é•·ããªã£ã¦ã¯ãªã‚‰ãªã„ã€‚
 
    A line is continued if the last character in the line is a '\'.  If
    the last character of a line is a '\', then the logical contents of
@@ -325,16 +325,16 @@ Internet-Draft         SSH Public Key File Format            August 2003
    the next line.
 
 
-   ¹Ô¤ÎºÇ¸å¤ÎÊ¸»ú¤¬ '\' ¤Î¾ì¹ç¹Ô¤ÏÏ¢Â³¤·¤Æ¤¤¤ë¡£
-   ¹Ô¤ÎºÇ¸å¤ÎÊ¸»ú¤¬ '\' ¤Î¾ì¹ç¡¢
-   ¹Ô¤ÎÏÀÍıÅª¤ÊÆâÍÆ¤Ï¡¢ '\' ¤ò½ü¤¤¤Æ¼¡¤Î¹Ô¤ÎÆâÍÆ¤òÂ­¤·¤¿¤â¤Î¤Ë¤Ê¤ë¡£
+   è¡Œã®æœ€å¾Œã®æ–‡å­—ãŒ '\' ã®å ´åˆè¡Œã¯é€£ç¶šã—ã¦ã„ã‚‹ã€‚
+   è¡Œã®æœ€å¾Œã®æ–‡å­—ãŒ '\' ã®å ´åˆã€
+   è¡Œã®è«–ç†çš„ãªå†…å®¹ã¯ã€ '\' ã‚’é™¤ã„ã¦æ¬¡ã®è¡Œã®å†…å®¹ã‚’è¶³ã—ãŸã‚‚ã®ã«ãªã‚‹ã€‚
 
 
    The Header-tag MUST be US-ASCII.  The Header-value MUST be encoded in
    UTF-8. [2]
 
-   Header-tag¤ÏUS-ASCII¤Ç¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤¡£ Header-value¤Ï
-   UTF-8 [2] ¤Ç¥¨¥ó¥³¡¼¥É¤µ¤ì¤Æ¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤¡£
+   Header-tagã¯US-ASCIIã§ãªã‘ã‚Œã°ãªã‚‰ãªã„ã€‚ Header-valueã¯
+   UTF-8 [2] ã§ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã•ã‚Œã¦ãªã‘ã‚Œã°ãªã‚‰ãªã„ã€‚
 
 Galbraith & Thayer      Expires January 30, 2004                [Page 5]
 
@@ -343,56 +343,56 @@ Internet-Draft         SSH Public Key File Format            August 2003
 
    A line that is not a continuation line that has no ':' in it is
    assumed to be the first line of the base 64 encoded body (Section 8)
-#  (Section 8)¤Ï¸µ¤ÎÊ¸½ñ¤Î¥ß¥¹
+#  (Section 8)ã¯å…ƒã®æ–‡æ›¸ã®ãƒŸã‚¹
 
-   ':'¤ò´Ş¤Ş¤Ê¤¤Ï¢Â³¤¹¤ë¹Ô¤Ç¤Ê¤¤¹Ô¤Ï¡¢Base 64¥¨¥ó¥³¡¼¥É¤µ¤ì¤¿body
-   (¥»¥¯¥·¥ç¥ó3.4)¤ÎºÇ½é¤Î¹Ô¤À¤È¿äÂ¬¤µ¤ì¤ë¡£
+   ':'ã‚’å«ã¾ãªã„é€£ç¶šã™ã‚‹è¡Œã§ãªã„è¡Œã¯ã€Base 64ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã•ã‚ŒãŸbody
+   (ã‚»ã‚¯ã‚·ãƒ§ãƒ³3.4)ã®æœ€åˆã®è¡Œã ã¨æ¨æ¸¬ã•ã‚Œã‚‹ã€‚
 
    Compliant implementations MUST ignore unrecognized header fields.
    Implementations SHOULD preserve unrecognized header fields when
    manipulating the key file.
 
-   (¤³¤ÎÊ¸½ñ¤Ë)½àµò¤¹¤ë¼ÂÁõ¤Ï¡¢Ç§¼±¤µ¤ì¤Ê¤¤¥Ø¥Ã¥À¥Õ¥£¡¼¥ë¥É¤òÌµ»ë¤·¤Ê¤±¤ì¤Ğ
-   ¤Ê¤é¤Ê¤¤¡£¼ÂÁõ¤Ï¡¢¸°¥Õ¥¡¥¤¥ë¤òÁàºî¤¹¤ëºİ¡¢Ç§¼±¤µ¤ì¤Ê¤¤¥Ø¥Ã¥À¥Õ¥£¡¼¥ë¥É
-   ¤òÊİÂ¸¤¹¤ëÉ¬Í×¤¬¤¢¤ë¡£
+   (ã“ã®æ–‡æ›¸ã«)æº–æ‹ ã™ã‚‹å®Ÿè£…ã¯ã€èªè­˜ã•ã‚Œãªã„ãƒ˜ãƒƒãƒ€ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’ç„¡è¦–ã—ãªã‘ã‚Œã°
+   ãªã‚‰ãªã„ã€‚å®Ÿè£…ã¯ã€éµãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ“ä½œã™ã‚‹éš›ã€èªè­˜ã•ã‚Œãªã„ãƒ˜ãƒƒãƒ€ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
+   ã‚’ä¿å­˜ã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã€‚
 
    Existing implementations may not correctly handle unrecognized
    fields. During a transition period, implementations SHOULD generate
    key file headers that contain only a Subject field followed by a
    Comment field.
 
-   ¸½Â¸¤¹¤ë¼ÂÁõ¤Ï¡¢Ç§¼±¤µ¤ì¤Ê¤¤¥Õ¥£¡¼¥ë¥É¤òÀµ¤·¤¯°·¤¦¤³¤È¤¬¤Ç¤­¤Ê¤¤
-   ¤À¤í¤¦¡£²áÅÏ´ü¤Ë¤ª¤¤¤Æ¤Ï¡¢¼ÂÁõ¤Ï, Comment¥Õ¥£¡¼¥ë¥É¤¬¸åÂ³¤¹¤ë
-   Subject¥Õ¥£¡¼¥ë¥É¤Î¤ß¤ò´Ş¤à¸°¥Õ¥¡¥¤¥ë¤Î¥Ø¥Ã¥À¤òÀ¸À®¤¹¤ë
-   É¬Í×¤¬¤¢¤ë¡£
+   ç¾å­˜ã™ã‚‹å®Ÿè£…ã¯ã€èªè­˜ã•ã‚Œãªã„ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’æ­£ã—ãæ‰±ã†ã“ã¨ãŒã§ããªã„
+   ã ã‚ã†ã€‚éæ¸¡æœŸã«ãŠã„ã¦ã¯ã€å®Ÿè£…ã¯, Commentãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãŒå¾Œç¶šã™ã‚‹
+   Subjectãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®ã¿ã‚’å«ã‚€éµãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ˜ãƒƒãƒ€ã‚’ç”Ÿæˆã™ã‚‹
+   å¿…è¦ãŒã‚ã‚‹ã€‚
    
 
 3.3.1 Subject Header
 
-3.3.1 Subject ¥Ø¥Ã¥À
+3.3.1 Subject ãƒ˜ãƒƒãƒ€
 
    This field currently is used to store the login-name that the key was
    generated under.  For example:
 
-   ¤³¤Î¥Õ¥£¡¼¥ë¥É¤Ï¡¢¸½ºß¡¢¸°¥Õ¥¡¥¤¥ë¤òÀ¸À®¤·¤¿¥í¥°¥¤¥óÌ¾¤òÊİÂ¸¤¹¤ë¤Î¤Ë
-   »È¤ï¤ì¤ë¡£Îã¤¨¤Ğ¡¢
+   ã“ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¯ã€ç¾åœ¨ã€éµãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç”Ÿæˆã—ãŸãƒ­ã‚°ã‚¤ãƒ³åã‚’ä¿å­˜ã™ã‚‹ã®ã«
+   ä½¿ã‚ã‚Œã‚‹ã€‚ä¾‹ãˆã°ã€
 
    Subject: user
 
 3.3.2 Comment Header
 
-3.3.2 Comment ¥Ø¥Ã¥À
+3.3.2 Comment ãƒ˜ãƒƒãƒ€
 
    Contain a user specified comment which will be displayed when using
    the key.
 
-   ¸°¤ò»È¤¦ºİ¤ËÉ½¼¨¤µ¤ì¤ë¥æ¡¼¥¶ÆÃÍ­¤Î¥³¥á¥ó¥È¤¬´Ş¤Ş¤ì¤ë¡£
+   éµã‚’ä½¿ã†éš›ã«è¡¨ç¤ºã•ã‚Œã‚‹ãƒ¦ãƒ¼ã‚¶ç‰¹æœ‰ã®ã‚³ãƒ¡ãƒ³ãƒˆãŒå«ã¾ã‚Œã‚‹ã€‚
 
    It is suggested that this field default to user@hostname for the user
    and machine used to generate the key.  For example:
 
-   ¤³¤Î¥Õ¥£¡¼¥ë¥É¤Î½é´üÃÍ¤Ï¡¢¸°¤òÀ¸À®¤¹¤ë¤Î¤Ë»È¤ï¤ì¤¿
-   ¥æ¡¼¥¶¤È¥Ş¥·¥ó¤«¤é¡¢user@hostname ¤È¤Ê¤ë¤³¤È¤¬¼¨º¶¤µ¤ì¤ë¡£Îã¤¨¤Ğ¡¢
+   ã“ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®åˆæœŸå€¤ã¯ã€éµã‚’ç”Ÿæˆã™ã‚‹ã®ã«ä½¿ã‚ã‚ŒãŸ
+   ãƒ¦ãƒ¼ã‚¶ã¨ãƒã‚·ãƒ³ã‹ã‚‰ã€user@hostname ã¨ãªã‚‹ã“ã¨ãŒç¤ºå”†ã•ã‚Œã‚‹ã€‚ä¾‹ãˆã°ã€
 
    Comment: user@mycompany.com
 
@@ -400,29 +400,29 @@ Internet-Draft         SSH Public Key File Format            August 2003
    Comment, and some existing implementations fail if these quotes are
    omitted.
 
-   ¸½ºß¡¢¶¦ÄÌ¤Î½¬´·¤È¤·¤Æ¡¢ 
-   Comment¤ÎHeader-value¤ò°úÍÑÉä¤Ç°Ï¤à¤³¤È¤Ë¤Ê¤Ã¤Æ¤¤¤ë¤¬¡¢
-   ¤³¤ì¾ÊÎ¬¤µ¤ì¤ë¾ì¹ç¡¢¤¤¤¯¤Ä¤«¤Î¸½Â¸¤¹¤ë¼ÂÁõ¤Ï¼ºÇÔ¤¹¤ë¡£
+   ç¾åœ¨ã€å…±é€šã®ç¿’æ…£ã¨ã—ã¦ã€ 
+   Commentã®Header-valueã‚’å¼•ç”¨ç¬¦ã§å›²ã‚€ã“ã¨ã«ãªã£ã¦ã„ã‚‹ãŒã€
+   ã“ã‚Œçœç•¥ã•ã‚Œã‚‹å ´åˆã€ã„ãã¤ã‹ã®ç¾å­˜ã™ã‚‹å®Ÿè£…ã¯å¤±æ•—ã™ã‚‹ã€‚
 
    Compliant implementations MUST function correctly if the quotes are
    omitted.
 
-   ½à½è¤¹¤ë¼ÂÁõ¤Ï¡¢°úÍÑÉä¤¬¾ÊÎ¬¤µ¤ì¤¿¾ì¹ç¤âÀµ³Î¤Ë½èÍı¤·¤Ê¤±¤ì¤Ğ
-   ¤Ê¤é¤Ê¤¤¡£
+   æº–å‡¦ã™ã‚‹å®Ÿè£…ã¯ã€å¼•ç”¨ç¬¦ãŒçœç•¥ã•ã‚ŒãŸå ´åˆã‚‚æ­£ç¢ºã«å‡¦ç†ã—ãªã‘ã‚Œã°
+   ãªã‚‰ãªã„ã€‚
 
    During an interim period implementations MAY include the quotes. If
    the first and last characters of the Header-value are matching
    quotes, implementations SHOULD remove them before using the value.
 
 
-   ¤·¤Ğ¤é¤¯¤Î´Ö¤Ï¡¢¼ÂÁõ¤Ï¤³¤Î°úÍÑÉä¤ò´Ş¤ó¤Ç¤â¤è¤¤¡£ ¤³¤ÎHeader-value¤Î
-   ºÇ½é¤ÈºÇ¸å¤ÎÊ¸»ú¤¬°úÍÑÉä¤È¹çÃ×¤¹¤ë¾ì¹ç¡¢
-   ¼ÂÁõ¤Ï¡¢¤³¤ÎÃÍ¤ò»È¤¦Á°¤Ë¤³¤ì¤é¤ò½ü¤¯É¬Í×¤¬¤¢¤ë¡£
+   ã—ã°ã‚‰ãã®é–“ã¯ã€å®Ÿè£…ã¯ã“ã®å¼•ç”¨ç¬¦ã‚’å«ã‚“ã§ã‚‚ã‚ˆã„ã€‚ ã“ã®Header-valueã®
+   æœ€åˆã¨æœ€å¾Œã®æ–‡å­—ãŒå¼•ç”¨ç¬¦ã¨åˆè‡´ã™ã‚‹å ´åˆã€
+   å®Ÿè£…ã¯ã€ã“ã®å€¤ã‚’ä½¿ã†å‰ã«ã“ã‚Œã‚‰ã‚’é™¤ãå¿…è¦ãŒã‚ã‚‹ã€‚
 
 
 3.4 Public Key File Body
 
-3.4 ¸ø³«¸°¥Õ¥¡¥¤¥ë¤ÎBody
+3.4 å…¬é–‹éµãƒ•ã‚¡ã‚¤ãƒ«ã®Body
 
    The body of a public key file consists of the public key blob as
    described in the SSH transport draft [1], section 4.6, "Public Key
@@ -431,10 +431,10 @@ Internet-Draft         SSH Public Key File Format            August 2003
 
 
 
-   ¸ø³«¸°¥Õ¥¡¥¤¥ë¤Î body ¤Ï [1] ¤Î ¥»¥¯¥·¥ç¥ó 4.6 
-   "Public Key Algorithms" µ­½Ò¤µ¤ì¤¿¸ø³«¸°¤Î¥Ö¥í¥Ö¤«¤éÀ®¤ë¡£
-   ¤³¤ì¤Ï¡¢[5] ¤Î section 6.8 "Base64 Content-Transfer-Encoding".
-   ¤ÇÄêµÁ¤µ¤ì¤¿ base 64 ¤Ç¥¨¥ó¥³¡¼¥É¤µ¤ì¤ë¡£
+   å…¬é–‹éµãƒ•ã‚¡ã‚¤ãƒ«ã® body ã¯ [1] ã® ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 4.6 
+   "Public Key Algorithms" è¨˜è¿°ã•ã‚ŒãŸå…¬é–‹éµã®ãƒ–ãƒ­ãƒ–ã‹ã‚‰æˆã‚‹ã€‚
+   ã“ã‚Œã¯ã€[5] ã® section 6.8 "Base64 Content-Transfer-Encoding".
+   ã§å®šç¾©ã•ã‚ŒãŸ base 64 ã§ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã•ã‚Œã‚‹ã€‚
 
 
    As with all other lines, each line in the body MUST NOT be longer
@@ -448,15 +448,15 @@ Internet-Draft         SSH Public Key File Format            August 2003
 
    than 72 characters.
 
-   Â¾¤Î¹Ô¤ÈÆ±¤¸¤è¤¦¤Ë¡¢body¤Î¤½¤ì¤¾¤ì¤Î¹Ô¤Ï72Ê¸»ú¤ò±Û¤¨¤Æ¤Ï¤Ê¤é¤Ê¤¤¡£
+   ä»–ã®è¡Œã¨åŒã˜ã‚ˆã†ã«ã€bodyã®ãã‚Œãã‚Œã®è¡Œã¯72æ–‡å­—ã‚’è¶Šãˆã¦ã¯ãªã‚‰ãªã„ã€‚
 
 3.5 Examples
 
-3.5 Îã
+3.5 ä¾‹
 
    The following are some example public key files that are compliant:
 
-   °Ê²¼¤Ï¡¢½àµò¤·¤Æ¤¤¤ë¸ø³«¸°¥Õ¥¡¥¤¥ë¤ÎÎã¤À¡£
+   ä»¥ä¸‹ã¯ã€æº–æ‹ ã—ã¦ã„ã‚‹å…¬é–‹éµãƒ•ã‚¡ã‚¤ãƒ«ã®ä¾‹ã ã€‚
 
    	---- BEGIN SSH2 PUBLIC KEY ----
    	Comment: "1024-bit RSA, converted from OpenSSH by galb@test1"
@@ -510,7 +510,7 @@ Internet-Draft         SSH Public Key File Format            August 2003
 
 4. Security Considerations
 
-4. ¥»¥­¥å¥ê¥Æ¥£¤Ë´Ø¤¹¤ë¹Í»¡
+4. ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã«é–¢ã™ã‚‹è€ƒå¯Ÿ
 
    The file format described by this document provides no mechanism to
    verify the integrity or otherwise detect tampering with the data
@@ -521,14 +521,14 @@ Internet-Draft         SSH Public Key File Format            August 2003
    contents of these files are transferred it SHOULD be done over a
    trusted channel.
 
-   ¤³¤ÎÊ¸½ñ¤Çµ­½Ò¤µ¤ì¤¿¥Õ¥¡¥¤¥ë¥Õ¥©¡¼¥Ş¥Ã¥È¤Ï, ´°Á´À­¤ò¸¡¾Ú¤·¤¿¤ê
-   ¤µ¤â¤Ê¤±¤ì¤Ğ¤³¤ì¤é¤Î¥Õ¥¡¥¤¥ë¤òÊİÂ¸¤¹¤ë¥Ç¡¼¥¿¤Î²şãâ¤ò¸¡ÃÎ¤·¤¿¤ê
-   ¤¹¤ë¥á¥«¥Ë¥º¥à¤òÄó¶¡¤·¤Ê¤¤. ¤³¤Î¥Ç¡¼¥¿¤Î¹¶·â¼Ô¤Ë¤è¤ë²şãâ¤Î
-   ²ÄÇ½À­¤¬¤¢¤ë¤È¤¹¤ì¤Ğ, ¥·¥¹¥Æ¥à¤ËÆÃÍ­¤ÎÊıË¡(Îã¤¨¤Ğ ¥¢¥¯¥»¥¹¥³¥ó¥È¥í¡¼¥ë¥ê¥¹¥È,
-   UNIX¤Î¥Ñ¡¼¥ß¥Ã¥·¥ç¥ó, Â¾¤ÎÇ¤°Õ¤Î ¤«¤Ä/¤â¤·¤¯¤Ï ¶¯À©¤Î¥¢¥¯¥»¥¹¥³¥ó¥È¥í¡¼¥ë
-   ¤¬, ¤³¤ì¤é¤Î¥Õ¥¡¥¤¥ë¤òÊİ¸î¤¹¤ë¤¿¤á¤Ë»È¤ï¤ì¤ëÉ¬Í×¤¬¤¢¤ë. ¤µ¤é¤Ë,
-   ¤³¤ì¤é¤Î¥Õ¥¡¥¤¥ë¤ÎÆâÍÆ¤¬Å¾Á÷¤µ¤ì¤ë¾ì¹ç, ¿®Íê¤µ¤ì¤Æ¤¤¤ë¥Á¥ã¥ó¥Í¥ë
-   ¤Î¾å¤Ç¹Ô¤Ê¤ï¤ì¤ëÉ¬Í×¤¬¤¢¤ë.
+   ã“ã®æ–‡æ›¸ã§è¨˜è¿°ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã¯, å®Œå…¨æ€§ã‚’æ¤œè¨¼ã—ãŸã‚Š
+   ã•ã‚‚ãªã‘ã‚Œã°ã“ã‚Œã‚‰ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¿å­˜ã™ã‚‹ãƒ‡ãƒ¼ã‚¿ã®æ”¹ç«„ã‚’æ¤œçŸ¥ã—ãŸã‚Š
+   ã™ã‚‹ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚’æä¾›ã—ãªã„. ã“ã®ãƒ‡ãƒ¼ã‚¿ã®æ”»æ’ƒè€…ã«ã‚ˆã‚‹æ”¹ç«„ã®
+   å¯èƒ½æ€§ãŒã‚ã‚‹ã¨ã™ã‚Œã°, ã‚·ã‚¹ãƒ†ãƒ ã«ç‰¹æœ‰ã®æ–¹æ³•(ä¾‹ãˆã° ã‚¢ã‚¯ã‚»ã‚¹ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãƒªã‚¹ãƒˆ,
+   UNIXã®ãƒ‘ãƒ¼ãƒŸãƒƒã‚·ãƒ§ãƒ³, ä»–ã®ä»»æ„ã® ã‹ã¤/ã‚‚ã—ãã¯ å¼·åˆ¶ã®ã‚¢ã‚¯ã‚»ã‚¹ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
+   ãŒ, ã“ã‚Œã‚‰ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä¿è­·ã™ã‚‹ãŸã‚ã«ä½¿ã‚ã‚Œã‚‹å¿…è¦ãŒã‚ã‚‹. ã•ã‚‰ã«,
+   ã“ã‚Œã‚‰ã®ãƒ•ã‚¡ã‚¤ãƒ«ã®å†…å®¹ãŒè»¢é€ã•ã‚Œã‚‹å ´åˆ, ä¿¡é ¼ã•ã‚Œã¦ã„ã‚‹ãƒãƒ£ãƒ³ãƒãƒ«
+   ã®ä¸Šã§è¡Œãªã‚ã‚Œã‚‹å¿…è¦ãŒã‚ã‚‹.
 
    The header data allowed by this file format could contain an
    unlimited range of information. While in many environments the
@@ -539,14 +539,14 @@ Internet-Draft         SSH Public Key File Format            August 2003
    Home Phone:..."). The presence and use of this header data SHOULD be
    reviewed by sites that deploy this file format.
 
-   ¤³¤Î¥Õ¥¡¥¤¥ë¥Õ¥©¡¼¥Ş¥Ã¥È¤Çµö¤µ¤ì¤Æ¤¤¤ë¥Ø¥Ã¥À¤Î¥Ç¡¼¥¿¤¬´Ş¤à
-   ¾ğÊó¤ÎÈÏ°Ï¤ÏÌµÀ©¸Â¤Ë¤Ê¤ê¤¦¤ë. Â¿¤¯¤Î´Ä¶­¤Ç¤³¤Î¥Ø¥Ã¥À¤Î¥Ç¡¼¥¿¤Ç
-   ±¿¤Ğ¤ì¤ë¾ğÊó¤Ï, Ìµ³²¤Ê¸ø³«¤µ¤ì¤¿¾ğÊó¤À¤È¹Í¤¨¤é¤ì¤ë¤¬, ¤³¤Î¾ğÊó¤Ï
-   ¥æ¡¼¥¶¤ä¸°¤Ë¤Ä¤¤¤Æ¤Î¾ğÊó¤ò±¿¤Ö¥Á¥ã¥ó¥Í¥ë¤ò¹½À®¤¹¤ë¤«¤â¤·¤ì¤Ê¤¤¤·,
-   ¤³¤Î¾ğÊó¤ÎÍøÍÑ¤Ï, °Õ¿ŞÅª¤Ë¤â¤·¤¯¤Ï¤½¤¦¤Ç¤Ï¤Ê¤¯¸ø³«¤µ¤ì¤ë¤«¤â¤·¤ì¤Ê¤¤
-   (Îã¤¨¤Ğ"Comment: Mary E. Jones, 123 Main St, Home Phone:...").
-   ¤³¤ì¤é¤Î¥Ø¥Ã¥À¤Î¥Ç¡¼¥¿¤ÎÇÛÃÖ¤È»ÈÍÑ¤Ë¤Ä¤¤¤Æ, ¤³¤Î¥Õ¥¡¥¤¥ë¥Õ¥©¡¼¥Ş¥Ã¥È¤ò
-   ÇÛÃÖ¤¹¤ë¥µ¥¤¥È¤Ï¤è¤¯¶ãÌ£¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
+   ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã§è¨±ã•ã‚Œã¦ã„ã‚‹ãƒ˜ãƒƒãƒ€ã®ãƒ‡ãƒ¼ã‚¿ãŒå«ã‚€
+   æƒ…å ±ã®ç¯„å›²ã¯ç„¡åˆ¶é™ã«ãªã‚Šã†ã‚‹. å¤šãã®ç’°å¢ƒã§ã“ã®ãƒ˜ãƒƒãƒ€ã®ãƒ‡ãƒ¼ã‚¿ã§
+   é‹ã°ã‚Œã‚‹æƒ…å ±ã¯, ç„¡å®³ãªå…¬é–‹ã•ã‚ŒãŸæƒ…å ±ã ã¨è€ƒãˆã‚‰ã‚Œã‚‹ãŒ, ã“ã®æƒ…å ±ã¯
+   ãƒ¦ãƒ¼ã‚¶ã‚„éµã«ã¤ã„ã¦ã®æƒ…å ±ã‚’é‹ã¶ãƒãƒ£ãƒ³ãƒãƒ«ã‚’æ§‹æˆã™ã‚‹ã‹ã‚‚ã—ã‚Œãªã„ã—,
+   ã“ã®æƒ…å ±ã®åˆ©ç”¨ã¯, æ„å›³çš„ã«ã‚‚ã—ãã¯ãã†ã§ã¯ãªãå…¬é–‹ã•ã‚Œã‚‹ã‹ã‚‚ã—ã‚Œãªã„
+   (ä¾‹ãˆã°"Comment: Mary E. Jones, 123 Main St, Home Phone:...").
+   ã“ã‚Œã‚‰ã®ãƒ˜ãƒƒãƒ€ã®ãƒ‡ãƒ¼ã‚¿ã®é…ç½®ã¨ä½¿ç”¨ã«ã¤ã„ã¦, ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’
+   é…ç½®ã™ã‚‹ã‚µã‚¤ãƒˆã¯ã‚ˆãåŸå‘³ã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
    
    
    

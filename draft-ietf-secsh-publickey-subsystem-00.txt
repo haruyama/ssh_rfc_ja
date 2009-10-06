@@ -7,7 +7,7 @@ Expires: March 15, 2004                                       B. McClure
                                                           Silicon Circus
                                                       September 15, 2003
 
-# Ìõ¼Ô ½Õ»³À¬¸ã haruyama@unixuser.org
+# è¨³è€… æ˜¥å±±å¾å¾ haruyama@unixuser.org
 
                    Secure Shell Public-Key Subsystem
               draft-ietf-secsh-publickey-subsystem-00.txt
@@ -40,7 +40,7 @@ Copyright Notice
 
 Abstract
 
-³µÍ×
+æ¦‚è¦
 
    SECSH defines an authentication mechanism that is based on public
    keys, but does not define any mechanism for key distribution. No
@@ -49,11 +49,11 @@ Abstract
    public keys in an implementation-independent fashion, allowing client
    software to take on the burden of this configuration.
 
-   SECSH¤Ï¸ø³«¸°¤Ë´ğ¤Å¤¯Ç§¾Ú¥á¥«¥Ë¥º¥à¤òÄêµÁ¤·¤Æ¤¤¤ë¤¬, ¸°ÇÛÉÛ¤Ë¤Ä¤¤¤Æ¤Ï
-   ¤É¤ó¤Ê¥á¥«¥Ë¥º¥à¤âÄêµÁ¤·¤Æ¤¤¤Ê¤¤. ¸½ºß¤Î¼ÂÁõ¤Ë¤Ï ¶¦ÄÌ¤Î¸°ÇÛÉÛ
-   ¥½¥ê¥å¡¼¥·¥ç¥ó¤ÏÂ¸ºß¤·¤Ê¤¤. ¤³¤ÎÊ¸½ñ¤Ï, 
-   ¥¯¥é¥¤¥¢¥ó¥È¥½¥Õ¥È¥¦¥§¥¢¤Ë¸ø³«¸°¤ÎÀßÄê¤ÎÀÕÇ¤¤òÍ¿¤¨¤Æ
-   ¼ÂÁõÈó°ÍÂ¸¤ÎÊıË¡¤Ç¤³¤ÎÀßÄê¤¹¤ë¤¿¤á¤Ë»È¤ï¤ì¤ë¥×¥í¥È¥³¥ë¤òµ­½Ò¤¹¤ë.
+   SECSHã¯å…¬é–‹éµã«åŸºã¥ãèªè¨¼ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚’å®šç¾©ã—ã¦ã„ã‚‹ãŒ, éµé…å¸ƒã«ã¤ã„ã¦ã¯
+   ã©ã‚“ãªãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚‚å®šç¾©ã—ã¦ã„ãªã„. ç¾åœ¨ã®å®Ÿè£…ã«ã¯ å…±é€šã®éµé…å¸ƒ
+   ã‚½ãƒªãƒ¥ãƒ¼ã‚·ãƒ§ãƒ³ã¯å­˜åœ¨ã—ãªã„. ã“ã®æ–‡æ›¸ã¯, 
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã«å…¬é–‹éµã®è¨­å®šã®è²¬ä»»ã‚’ä¸ãˆã¦
+   å®Ÿè£…éä¾å­˜ã®æ–¹æ³•ã§ã“ã®è¨­å®šã™ã‚‹ãŸã‚ã«ä½¿ã‚ã‚Œã‚‹ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã‚’è¨˜è¿°ã™ã‚‹.
 
 
    This protocol is intended to be used from the Secure Shell Connection
@@ -69,27 +69,27 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    Shell or a Command''. The subsystem name used with this protocol is
    "publickey".
 
-   ¤³¤Î¥×¥í¥È¥³¥ë¤Ï,  Secure Shell Connection Protocol [4] ¤Î
-   ``Starting a Shell or a Command'' ¥»¥¯¥·¥ç¥ó¤Çµ­½Ò¤µ¤ì¤Æ¤¤¤ë¤è¤¦¤Ë
-   ¥µ¥Ö¥·¥¹¥Æ¥à¤È¤·¤Æ Secure Shell Connection Protocol ¤«¤é
-   »È¤ï¤ì¤ë¤³¤È¤ò°Õ¿Ş¤·¤Æ¤¤¤ë. ¤³¤Î¥×¥í¥È¥³¥ë¤È¶¦¤Ë»È¤ï¤ì¤ë
-   ¤³¤Î¥µ¥Ö¥·¥¹¥Æ¥à¤ÎÌ¾Á°¤Ï "publickey" ¤À.
+   ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¯,  Secure Shell Connection Protocol [4] ã®
+   ``Starting a Shell or a Command'' ã‚»ã‚¯ã‚·ãƒ§ãƒ³ã§è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹ã‚ˆã†ã«
+   ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã¨ã—ã¦ Secure Shell Connection Protocol ã‹ã‚‰
+   ä½¿ã‚ã‚Œã‚‹ã“ã¨ã‚’æ„å›³ã—ã¦ã„ã‚‹. ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¨å…±ã«ä½¿ã‚ã‚Œã‚‹
+   ã“ã®ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã®åå‰ã¯ "publickey" ã .
    
    The public-key subsystem provides a server-independent mechanism for
    clients to add public keys, remove public keys, and list the current
    public keys known by the server. Rights to manage public keys are
    specific and limited to the authenticated user.
 
-   public-key ¥µ¥Ö¥·¥¹¥Æ¥à¤Ï, ¥¯¥é¥¤¥¢¥ó¥È¤¬¸ø³«¸°¤òÄÉ²Ã¤¹¤ëºï½ü¤·
-   ¥µ¡¼¥Ğ¤¬¸½ºßÃÎ¤Ã¤Æ¤¤¤ë¸ø³«¸°¤Î¥ê¥¹¥È¥¢¥Ã¥×¤¹¤ë,
-   ¥µ¡¼¥Ğ¤Ë°ÍÂ¸¤·¤Ê¤¤µ¡¹½¤òÄó¶¡¤¹¤ë. ¸ø³«¸°¤ò´ÉÍı¤¹¤ë¸¢¸Â¤Ï,
-   Ç§¾Ú¤µ¤ì¤¿¥æ¡¼¥¶¤Ë¸ÂÄê¤µ¤ì¤ë.
+   public-key ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã¯, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒå…¬é–‹éµã‚’è¿½åŠ ã™ã‚‹å‰Šé™¤ã—
+   ã‚µãƒ¼ãƒãŒç¾åœ¨çŸ¥ã£ã¦ã„ã‚‹å…¬é–‹éµã®ãƒªã‚¹ãƒˆã‚¢ãƒƒãƒ—ã™ã‚‹,
+   ã‚µãƒ¼ãƒã«ä¾å­˜ã—ãªã„æ©Ÿæ§‹ã‚’æä¾›ã™ã‚‹. å…¬é–‹éµã‚’ç®¡ç†ã™ã‚‹æ¨©é™ã¯,
+   èªè¨¼ã•ã‚ŒãŸãƒ¦ãƒ¼ã‚¶ã«é™å®šã•ã‚Œã‚‹.
 
    A public key may also be associated with various restrictions,
    including a mandatory command or subsystem.
 
-   ¸ø³«¸°¤Ï É¬¿Ü¤Î¥³¥Ş¥ó¥É¤ä¥µ¥Ö¥·¥¹¥Æ¥à¤Ë´Ş¤Ş¤ì¤ë, ÍÍ¡¹¤ÊÀ©¸Â
-   ¤È¤â´ØÏ¢¤¹¤ë.
+   å…¬é–‹éµã¯ å¿…é ˆã®ã‚³ãƒãƒ³ãƒ‰ã‚„ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã«å«ã¾ã‚Œã‚‹, æ§˜ã€…ãªåˆ¶é™
+   ã¨ã‚‚é–¢é€£ã™ã‚‹.
 
 Table of Contents
 
@@ -138,7 +138,7 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
 
 1. Introduction
 
-1. ¥¤¥ó¥È¥í¥À¥¯¥·¥ç¥ó
+1. ã‚¤ãƒ³ãƒˆãƒ­ãƒ€ã‚¯ã‚·ãƒ§ãƒ³
 
    SECSH is a protocol for secure remote login and other secure network
    services over an insecure network. SECSH defines an authentication
@@ -148,12 +148,12 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    server.  However, to date no two implementations use the same
    mechanism to configure a public key for use.
 
-   SECSH ¤Ï °ÂÁ´¤Ç¤Ê¤¤¥Í¥Ã¥È¥ï¡¼¥¯±Û¤·¤Î°ÂÁ´¤Ê¥ê¥â¡¼¥È¥í¥°¥¤¥ó¤äÂ¾¤Î
-   °ÂÁ´¤Ê¥Í¥Ã¥È¥ï¡¼¥¯¥µ¡¼¥Ó¥¹¤Î¤¿¤á¤Î¥×¥í¥È¥³¥ë¤À. SECSH ¤Ï
-   SECSH¤Ï¸ø³«¸°¤Ë´ğ¤Å¤¯Ç§¾Ú¥á¥«¥Ë¥º¥à¤òÄêµÁ¤·¤Æ¤¤¤ë¤¬, ¸°ÇÛÉÛ¤Ë¤Ä¤¤¤Æ¤Ï
-   ¤É¤ó¤Ê¥á¥«¥Ë¥º¥à¤âÄêµÁ¤·¤Æ¤¤¤Ê¤¤. °ìÈÌ¤Ë¹Ô¤Ê¤ï¤ì¤Æ¤¤¤ë¤Î¤Ï,
-   °ìÅÙ¥Ñ¥¹¥ï¡¼¥ÉÇ§¾Ú¤ò¹Ô¤Ê¤¤, ¥µ¡¼¥Ğ¤Ë¸ø³«¸°¤òÅ¾Á÷¤¹¤ë¤³¤È¤À.
-   ¤·¤«¤·, ¸½ºß¤Ş¤Ç, ¸ø³«¸°¤òÀßÄê¤¹¤ë¤¿¤á¤Ë¶¦ÄÌ¤Î¥á¥«¥Ë¥º¥à¤ò»È¤¦¼ÂÁõ¤Ï¤Ê¤¤.
+   SECSH ã¯ å®‰å…¨ã§ãªã„ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯è¶Šã—ã®å®‰å…¨ãªãƒªãƒ¢ãƒ¼ãƒˆãƒ­ã‚°ã‚¤ãƒ³ã‚„ä»–ã®
+   å®‰å…¨ãªãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚µãƒ¼ãƒ“ã‚¹ã®ãŸã‚ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã . SECSH ã¯
+   SECSHã¯å…¬é–‹éµã«åŸºã¥ãèªè¨¼ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚’å®šç¾©ã—ã¦ã„ã‚‹ãŒ, éµé…å¸ƒã«ã¤ã„ã¦ã¯
+   ã©ã‚“ãªãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚‚å®šç¾©ã—ã¦ã„ãªã„. ä¸€èˆ¬ã«è¡Œãªã‚ã‚Œã¦ã„ã‚‹ã®ã¯,
+   ä¸€åº¦ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰èªè¨¼ã‚’è¡Œãªã„, ã‚µãƒ¼ãƒã«å…¬é–‹éµã‚’è»¢é€ã™ã‚‹ã“ã¨ã .
+   ã—ã‹ã—, ç¾åœ¨ã¾ã§, å…¬é–‹éµã‚’è¨­å®šã™ã‚‹ãŸã‚ã«å…±é€šã®ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚’ä½¿ã†å®Ÿè£…ã¯ãªã„.
  
 
    This document describes a subsystem that can be used to configure
@@ -162,37 +162,37 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    The public-key subsystem protocol is designed for extreme simplicity
    in implementation. It is not intended as a PKIX replacement.
 
-   ¤³¤ÎÊ¸½ñ¤Ï, ¼ÂÁõÈó°ÍÂ¸¤ÎÊıË¡¤Ç¸ø³«¸°¤òÀßÄê¤¹¤ë¤¿¤á¤Ë»È¤ï¤ì¤ë
-   ¥µ¥Ö¥·¥¹¥Æ¥à¤òÄêµÁ¤¹¤ë. ¤³¤Î¥¢¥×¥í¡¼¥Á¤Ï, ¤³¤ÎÀßÄê¤ÎÀÕÇ¤¤ò
-   ¥¯¥é¥¤¥¢¥ó¥È¥½¥Õ¥È¥¦¥§¥¢¤Ë°Ñ¤Í¤ë. public-key ¥µ¥Ö¥·¥¹¥Æ¥à¤Ï
-   ¼ÂÁõ¤¬Èó¾ï¤ËÃ±½ã¤Ë¤Ê¤ë¤è¤¦Àß·×¤µ¤ì¤Æ¤¤¤ë. PKIX ¤òÃÖ´¹¤·¤è¤¦¤È
-   ¤¹¤ë¤â¤Î¤Ç¤Ï¤Ê¤¤.
+   ã“ã®æ–‡æ›¸ã¯, å®Ÿè£…éä¾å­˜ã®æ–¹æ³•ã§å…¬é–‹éµã‚’è¨­å®šã™ã‚‹ãŸã‚ã«ä½¿ã‚ã‚Œã‚‹
+   ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã‚’å®šç¾©ã™ã‚‹. ã“ã®ã‚¢ãƒ—ãƒ­ãƒ¼ãƒã¯, ã“ã®è¨­å®šã®è²¬ä»»ã‚’
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã«å§”ã­ã‚‹. public-key ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã¯
+   å®Ÿè£…ãŒéå¸¸ã«å˜ç´”ã«ãªã‚‹ã‚ˆã†è¨­è¨ˆã•ã‚Œã¦ã„ã‚‹. PKIX ã‚’ç½®æ›ã—ã‚ˆã†ã¨
+   ã™ã‚‹ã‚‚ã®ã§ã¯ãªã„.
 
    The Secure Shell Public-Key subsystem has been designed to run on top
    of the SECSH transport layer [2] and user authentication	protocols
    [3]. It provides a simple mechanism for the client to manage public
    keys on the server.
 
-   Secure Shell Public-Key subsystem¤Ï, SECSH ¥È¥é¥ó¥¹¥İ¡¼¥ÈÁØ¤È
-   ¥æ¡¼¥¶Ç§¾Ú¥×¥í¥È¥³¥ë¤Î¾å¤ÇÆ°¤¯¤¿¤á¤ËÀß·×¤µ¤ì¤Æ¤¤¤ë. 
-   ¥µ¡¼¥Ğ¾å¤Î¸ø³«¸°¤ò´ÉÍı¤¹¤ë¥¯¥é¥¤¥¢¥ó¥È¤Î¤¿¤á¤ÎÃ±½ã¤Ê¥á¥«¥Ë¥º¥à¤ò
-   Äó¶¡¤¹¤ë.
+   Secure Shell Public-Key subsystemã¯, SECSH ãƒˆãƒ©ãƒ³ã‚¹ãƒãƒ¼ãƒˆå±¤ã¨
+   ãƒ¦ãƒ¼ã‚¶èªè¨¼ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ä¸Šã§å‹•ããŸã‚ã«è¨­è¨ˆã•ã‚Œã¦ã„ã‚‹. 
+   ã‚µãƒ¼ãƒä¸Šã®å…¬é–‹éµã‚’ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®ãŸã‚ã®å˜ç´”ãªãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚’
+   æä¾›ã™ã‚‹.
 
    This document should be read only after reading the SECSH
    architecture [1] and SECSH connection [4] documents.
 
-   ¤³¤ÎÊ¸½ñ¤Ï SECSH architecture [1] ¤È SECSH connection [4] Ê¸½ñ¤ò
-   ÆÉ¤ó¤À¤¢¤È¤Ç¤Î¤ßÆÉ¤Ş¤ì¤ë¤Ù¤­¤À.
+   ã“ã®æ–‡æ›¸ã¯ SECSH architecture [1] ã¨ SECSH connection [4] æ–‡æ›¸ã‚’
+   èª­ã‚“ã ã‚ã¨ã§ã®ã¿èª­ã¾ã‚Œã‚‹ã¹ãã .
 
    This protocol requires that the user be able to authenticate in some
    fashion before it can be used. If password authentication is used,
    servers SHOULD provide a configuration option to disable the use of
    password authentication after the first public key is added.
 
-   ¤³¤Î¥×¥í¥È¥³¥ë¤Ï, ¤³¤ì¤ò»È¤¦Á°¤Ë, ¤Ê¤ó¤é¤«¤ÎÊıË¡¤Ç¥æ¡¼¥¶¤òÇ§¾Ú¤Ç¤­¤ë
-   ¤³¤È¤¬É¬Í×¤È¤Ê¤ë. ¥Ñ¥¹¥ï¡¼¥ÉÇ§¾Ú¤¬»È¤ï¤ì¤ë¤Ê¤é,
-   ¥µ¡¼¥Ğ¤ÏºÇ½é¤Î¸°¤¬ÄÉ²Ã¤µ¤ì¤¿¸å¤Ç¥Ñ¥¹¥ï¡¼¥ÉÇ§¾Ú¤Î»ÈÍÑ¤òÌµ¸ú¤Ë¤¹¤ë
-   ÀßÄê¤ÎÁªÂò»è¤òÄó¶¡¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
+   ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¯, ã“ã‚Œã‚’ä½¿ã†å‰ã«, ãªã‚“ã‚‰ã‹ã®æ–¹æ³•ã§ãƒ¦ãƒ¼ã‚¶ã‚’èªè¨¼ã§ãã‚‹
+   ã“ã¨ãŒå¿…è¦ã¨ãªã‚‹. ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰èªè¨¼ãŒä½¿ã‚ã‚Œã‚‹ãªã‚‰,
+   ã‚µãƒ¼ãƒã¯æœ€åˆã®éµãŒè¿½åŠ ã•ã‚ŒãŸå¾Œã§ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰èªè¨¼ã®ä½¿ç”¨ã‚’ç„¡åŠ¹ã«ã™ã‚‹
+   è¨­å®šã®é¸æŠè‚¢ã‚’æä¾›ã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
 
 
 
@@ -221,59 +221,59 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
 
 2. Public-Key Subsystem Overview
 
-2. Public-Key ¥µ¥Ö¥·¥¹¥Æ¥à¤Î³µÍ×
+2. Public-Key ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã®æ¦‚è¦
 
    The public-key subsystem provides a server-independent mechanism for
    clients to add public keys, remove public keys, and list the current
    public keys known by the server.  The subsystem name is "publickey".
 
-   public-key ¥µ¥Ö¥·¥¹¥Æ¥à¤Ï, ¥¯¥é¥¤¥¢¥ó¥È¤¬¸ø³«¸°¤òÄÉ²Ã¤¹¤ëºï½ü¤·
-   ¥µ¡¼¥Ğ¤¬¸½ºßÃÎ¤Ã¤Æ¤¤¤ë¸ø³«¸°¤Î¥ê¥¹¥È¤ò¥ê¥¹¥È¥¢¥Ã¥×¤¹¤ë,
-   ¥µ¡¼¥Ğ¤Ë°ÍÂ¸¤·¤Ê¤¤µ¡¹½¤òÄó¶¡¤¹¤ë.  ¥µ¥Ö¥·¥¹¥Æ¥à¤ÎÌ¾Á°¤Ï
-   "publickey" ¤À.
+   public-key ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã¯, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒå…¬é–‹éµã‚’è¿½åŠ ã™ã‚‹å‰Šé™¤ã—
+   ã‚µãƒ¼ãƒãŒç¾åœ¨çŸ¥ã£ã¦ã„ã‚‹å…¬é–‹éµã®ãƒªã‚¹ãƒˆã‚’ãƒªã‚¹ãƒˆã‚¢ãƒƒãƒ—ã™ã‚‹,
+   ã‚µãƒ¼ãƒã«ä¾å­˜ã—ãªã„æ©Ÿæ§‹ã‚’æä¾›ã™ã‚‹.  ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã®åå‰ã¯
+   "publickey" ã .
 
    The public keys added, removed, and listed using this protocol are
    specific and limited to those of the authenticated user.
 
-   ¤³¤Î¥×¥í¥È¥³¥ë¤Ç»È¤ï¤ì¤ë ÄÉ²Ã¤µ¤ìºï½ü¤µ¤ì¥ê¥¹¥È¥¢¥Ã¥×¤µ¤ì¤ë
-   ¸ø³«¸°¤Ï, Ç§¾Ú¤µ¤ì¤¿¥æ¡¼¥¶¤Î¤â¤Î¤ËÀ©¸Â¤µ¤ì¤ë.
+   ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã§ä½¿ã‚ã‚Œã‚‹ è¿½åŠ ã•ã‚Œå‰Šé™¤ã•ã‚Œãƒªã‚¹ãƒˆã‚¢ãƒƒãƒ—ã•ã‚Œã‚‹
+   å…¬é–‹éµã¯, èªè¨¼ã•ã‚ŒãŸãƒ¦ãƒ¼ã‚¶ã®ã‚‚ã®ã«åˆ¶é™ã•ã‚Œã‚‹.
    
    The operations to add, remove and list the authenticated user's
    public keys are performed as request packets sent to the server. The
    server sends response packets that indicate success or failure as
    well as provide specific response data.
 
-   Ç§¾Ú¤µ¤ì¤¿¥æ¡¼¥¶¤Î¸ø³«¸°¤ÎÄÉ²Ã, ºï½ü, ¥ê¥¹¥È¤ÎÁàºî¤Ï
-   ¥µ¡¼¥Ğ¤ËÁ÷¤é¤ì¤ë¥ê¥¯¥¨¥¹¥È¥Ñ¥±¥Ã¥È¤Ë¤è¤Ã¤Æ¼Â¹Ô¤µ¤ì¤ë. ¥µ¡¼¥Ğ¤Ï 
-   À®¸ù¼ºÇÔ¤ò¼¨¤·¸ÇÍ­¤Î¥ì¥¹¥İ¥ó¥¹¥Ç¡¼¥¿¤òÄó¶¡¤¹¤ë ¥ì¥¹¥İ¥ó¥¹¥Ñ¥±¥Ã¥È¤ò
-   Á÷¿®¤¹¤ë.
+   èªè¨¼ã•ã‚ŒãŸãƒ¦ãƒ¼ã‚¶ã®å…¬é–‹éµã®è¿½åŠ , å‰Šé™¤, ãƒªã‚¹ãƒˆã®æ“ä½œã¯
+   ã‚µãƒ¼ãƒã«é€ã‚‰ã‚Œã‚‹ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒ‘ã‚±ãƒƒãƒˆã«ã‚ˆã£ã¦å®Ÿè¡Œã•ã‚Œã‚‹. ã‚µãƒ¼ãƒã¯ 
+   æˆåŠŸå¤±æ•—ã‚’ç¤ºã—å›ºæœ‰ã®ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒ‡ãƒ¼ã‚¿ã‚’æä¾›ã™ã‚‹ ãƒ¬ã‚¹ãƒãƒ³ã‚¹ãƒ‘ã‚±ãƒƒãƒˆã‚’
+   é€ä¿¡ã™ã‚‹.
 
    The format of public-key blobs are detailed in the SSH Transport
    Protocol document [2].
    
-   public-key blob ¤Î¥Õ¥©¡¼¥Ş¥Ã¥È¤Ï SSH Transport Protocol Ê¸½ñ [2] ¤Ë
-   ¾Ü½Ò¤µ¤ì¤Æ¤¤¤ë.
+   public-key blob ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã¯ SSH Transport Protocol æ–‡æ›¸ [2] ã«
+   è©³è¿°ã•ã‚Œã¦ã„ã‚‹.
 
 2.1 Opening the Public-Key Subsystem
 
-2.1 Public-Key ¥µ¥Ö¥·¥¹¥Æ¥à¤Î³«»Ï
+2.1 Public-Key ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã®é–‹å§‹
 
    The public-key subsystem is opened when the clients sends a
    SSH_MSG_CHANNEL_REQUEST over an existing session.
 
-   public-key ¥µ¥Ö¥·¥¹¥Æ¥à¤Ï, ¥¯¥é¥¤¥¢¥ó¥È¤¬¤¹¤Ç¤Ë¤¢¤ë¥»¥Ã¥·¥ç¥ó±Û¤·¤Ë
-   SSH_MSG_CHANNEL_REQUEST ¤òÁ÷¤ë¤³¤È¤Ç³«»Ï¤µ¤ì¤ë.
+   public-key ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã¯, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒã™ã§ã«ã‚ã‚‹ã‚»ãƒƒã‚·ãƒ§ãƒ³è¶Šã—ã«
+   SSH_MSG_CHANNEL_REQUEST ã‚’é€ã‚‹ã“ã¨ã§é–‹å§‹ã•ã‚Œã‚‹.
 
    The details of how a session is opened are described in the SSH
    Connection Protocol document [4] in the section "Opening a Session".
 
-   ¤É¤Î¤è¤¦¤Ë¥»¥Ã¥·¥ç¥ó¤ò³«»Ï¤¹¤ë¤«¤Î¾ÜºÙ¤Ï,
-   SSH Connection Protocol document [4] ¤Î "Opening a Session" 
-   ¥»¥¯¥·¥ç¥ó¤Ëµ­½Ò¤µ¤ì¤Æ¤¤¤ë.
+   ã©ã®ã‚ˆã†ã«ã‚»ãƒƒã‚·ãƒ§ãƒ³ã‚’é–‹å§‹ã™ã‚‹ã‹ã®è©³ç´°ã¯,
+   SSH Connection Protocol document [4] ã® "Opening a Session" 
+   ã‚»ã‚¯ã‚·ãƒ§ãƒ³ã«è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹.
 
    To open the public-key subsystem, the client sends:
 
-   public-key ¥µ¥Ö¥·¥¹¥Æ¥à¤ò³«»Ï¤¹¤ë¤Ë¤Ï, ¥¯¥é¥¤¥¢¥ó¥È¤Ï¼¡¤Î¤â¤Î¤òÁ÷¤ë.
+   public-key ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã‚’é–‹å§‹ã™ã‚‹ã«ã¯, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯æ¬¡ã®ã‚‚ã®ã‚’é€ã‚‹.
 
    	byte      SSH_MSG_CHANNEL_REQUEST
    	uint32    recipient channel
@@ -284,30 +284,30 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    Client implementations SHOULD reject this request; it is normally
    only sent by the client.
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤Î¼ÂÁõ¤Ï¤³¤Î¥ê¥¯¥¨¥¹¥È¤òµñÈİ¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
-   ¤³¤ì¤ÏÄÌ¾ï¥¯¥é¥¤¥¢¥ó¥È¤«¤é¤Î¤ßÁ÷¤é¤ì¤ë.
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®å®Ÿè£…ã¯ã“ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’æ‹’å¦ã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
+   ã“ã‚Œã¯é€šå¸¸ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ã®ã¿é€ã‚‰ã‚Œã‚‹.
 
    If want reply is TRUE, the server MUST respond with
    SSH_MSG_CHANNEL_SUCCESS if the public-key subsystem was successfully
    started or SSH_MSG_CHANNEL_FAILURE if the server failed to start or
    does not support the public-key subsystem.
 
-   want reply ¤¬ TRUE ¤Ê¤é, ¥µ¡¼¥Ğ¤Ï,
-   public-key ¥µ¥Ö¥·¥¹¥Æ¥àÀ®¸ùÎ¢¤Ë»Ï¤á¤é¤ì¤¿¤Ê¤é SSH_MSG_CHANNEL_SUCCESS
-   public-key ¥µ¥Ö¥·¥¹¥Æ¥à¤Î³«»Ï¤Ë¼ºÇÔ¤·¤¿¤ê ¤³¤Î¥µ¥Ö¥·¥¹¥Æ¥à¤ò¥µ¥İ¡¼¥È
-   ¤·¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï SSH_MSG_CHANNEL_FAILURE ¤òÊÖ¤µ¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   want reply ãŒ TRUE ãªã‚‰, ã‚µãƒ¼ãƒã¯,
+   public-key ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ æˆåŠŸè£ã«å§‹ã‚ã‚‰ã‚ŒãŸãªã‚‰ SSH_MSG_CHANNEL_SUCCESS
+   public-key ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã®é–‹å§‹ã«å¤±æ•—ã—ãŸã‚Š ã“ã®ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã‚’ã‚µãƒãƒ¼ãƒˆ
+   ã—ã¦ã„ãªã„å ´åˆã¯ SSH_MSG_CHANNEL_FAILURE ã‚’è¿”ã•ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    The server SHOULD respond with SSH_MSG_CHANNEL_FAILURE if the user
    authenticated with a restricted public key that does not allow access
    to the publickey subsystem.
 
-   ¥æ¡¼¥¶¤¬publickey ¥µ¥Ö¥·¥¹¥Æ¥à¤Ø¤Î¥¢¥¯¥»¥¹¤òµö¤µ¤ì¤Æ¤¤¤Ê¤¤ À©¸Â¤µ¤ì¤¿¸ø³«¸°
-   ¤ÇÇ§¾Ú¤µ¤ì¤¿¾ì¹ç, ¥µ¡¼¥Ğ¤Ï SSH_MSG_CHANNEL_FAILURE ¤òÊÖ¤¹É¬Í×¤¬¤¢¤ë.
+   ãƒ¦ãƒ¼ã‚¶ãŒpublickey ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ã‚’è¨±ã•ã‚Œã¦ã„ãªã„ åˆ¶é™ã•ã‚ŒãŸå…¬é–‹éµ
+   ã§èªè¨¼ã•ã‚ŒãŸå ´åˆ, ã‚µãƒ¼ãƒã¯ SSH_MSG_CHANNEL_FAILURE ã‚’è¿”ã™å¿…è¦ãŒã‚ã‚‹.
 
    It is RECOMMENDED that clients request and check the reply for this
    request.
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤Ï¤³¤Î¥ê¥¯¥¨¥¹¥È¤ËÂĞ¤¹¤ëÊÖÅú¤òÍ×µá¤·¸¡ºº¤¹¤ë¤³¤È¤¬¿ä¾©¤µ¤ì¤ë.
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯ã“ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆã«å¯¾ã™ã‚‹è¿”ç­”ã‚’è¦æ±‚ã—æ¤œæŸ»ã™ã‚‹ã“ã¨ãŒæ¨å¥¨ã•ã‚Œã‚‹.
 
 
 
@@ -318,11 +318,11 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
 
 2.2 Requests
 
-2.2 ¥ê¥¯¥¨¥¹¥È
+2.2 ãƒªã‚¯ã‚¨ã‚¹ãƒˆ
 
    All public-key subsystem requests are sent in the following form:
 
-   ¤¹¤Ù¤Æ¤Î public-key ¥µ¥Ö¥·¥¹¥Æ¥à¤Î¥ê¥¯¥¨¥¹¥È¤Ï ¼¡¤Î·Á¼°¤ÇÁ÷¤é¤ì¤ë.
+   ã™ã¹ã¦ã® public-key ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆã¯ æ¬¡ã®å½¢å¼ã§é€ã‚‰ã‚Œã‚‹.
 
    	uint32    length
    	string    request-name
@@ -333,22 +333,22 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    client MUST receive acknowledgement of each request prior to sending
    a new request.
 
-   length ¥Õ¥£¡¼¥ë¥É¤Ï request-name ¥Õ¥£¡¼¥ë¥É¤È request-specific ¥Ç¡¼¥¿¤Î
-   Ä¹¤µ¤òµ­½Ò¤¹¤ë. length ¥Õ¥£¡¼¥ë¥É¼«¿È¤Ï´Ş¤Ş¤Ê¤¤
+   length ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¯ request-name ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¨ request-specific ãƒ‡ãƒ¼ã‚¿ã®
+   é•·ã•ã‚’è¨˜è¿°ã™ã‚‹. length ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰è‡ªèº«ã¯å«ã¾ãªã„
 
    All requests described in Section 3 are a description of the
    'request-name' and 'data' portion of the packet.
 
-   Section 3¤Ç ¤¹¤Ù¤Æ¤Î¥ê¥¯¥¨¥¹¥È¤Ë¤Ä¤¤¤Æ
-   ¤³¤Î¥Ñ¥±¥Ã¥È¤Î 'request-name' ¤È 'data' ÉôÊ¬¤òµ­½Ò¤¹¤ë.
+   Section 3ã§ ã™ã¹ã¦ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆã«ã¤ã„ã¦
+   ã“ã®ãƒ‘ã‚±ãƒƒãƒˆã® 'request-name' ã¨ 'data' éƒ¨åˆ†ã‚’è¨˜è¿°ã™ã‚‹.
 
 2.3 Responses
 
-2.3 ¥ì¥¹¥İ¥ó¥¹
+2.3 ãƒ¬ã‚¹ãƒãƒ³ã‚¹
 
    All public-key subsystem responses are sent in the following form:
 
-   ¤¹¤Ù¤Æ¤Î public-key ¥µ¥Ö¥·¥¹¥Æ¥à¤Î¥ê¥¹¥İ¥ó¥¹¤Ï ¼¡¤Î·Á¼°¤ÇÁ÷¤é¤ì¤ë.
+   ã™ã¹ã¦ã® public-key ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã®ãƒªã‚¹ãƒãƒ³ã‚¹ã¯ æ¬¡ã®å½¢å¼ã§é€ã‚‰ã‚Œã‚‹.
 
    	uint32    length
    	string    response-name
@@ -357,15 +357,15 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
 
 2.3.1 The Status Response
 
-2.3.1 ¥¹¥Æ¡¼¥¿¥¹ ¥ì¥¹¥İ¥ó¥¹
+2.3.1 ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ ãƒ¬ã‚¹ãƒãƒ³ã‚¹
 
    A request is acknowledged by sending a status packet. If there is
    data in response to the request, the status packet is sent after all
    data has been sent.
 
-   status ¥Ñ¥±¥Ã¥È¤òÁ÷¤ë¤³¤È¤Ç ¥ê¥¯¥¨¥¹¥È¤¬Ç§¤á¤é¤ì¤ë.
-   ¥ê¥¯¥¨¥¹¥È¤Ø¤Î¥ì¥¹¥İ¥ó¥¹¤Î¥Ç¡¼¥¿¤¬¤¢¤ë¤Ê¤é, status ¥Ñ¥±¥Ã¥È¤Ï
-   ¤¹¤Ù¤Æ¤Î¥Ç¡¼¥¿¤¬Á÷¤é¤ì¤Æ¤«¤éÁ÷¤é¤ì¤ë.
+   status ãƒ‘ã‚±ãƒƒãƒˆã‚’é€ã‚‹ã“ã¨ã§ ãƒªã‚¯ã‚¨ã‚¹ãƒˆãŒèªã‚ã‚‰ã‚Œã‚‹.
+   ãƒªã‚¯ã‚¨ã‚¹ãƒˆã¸ã®ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã®ãƒ‡ãƒ¼ã‚¿ãŒã‚ã‚‹ãªã‚‰, status ãƒ‘ã‚±ãƒƒãƒˆã¯
+   ã™ã¹ã¦ã®ãƒ‡ãƒ¼ã‚¿ãŒé€ã‚‰ã‚Œã¦ã‹ã‚‰é€ã‚‰ã‚Œã‚‹.
    
 
    	string    "status"
@@ -376,18 +376,18 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    A status message MUST be sent for any unrecognized packets and the
    request SHOULD NOT close the subsystem.
 
-   ¥¹¥Æ¡¼¥¿¥¹¥á¥Ã¥»¡¼¥¸¤Ï ¤É¤ó¤ÊÇ§¼±¤Ç¤­¤Ê¤¤¥Ñ¥±¥Ã¥È¤ËÂĞ¤·¤Æ¤â
-   Á÷¤é¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤¤·, ¥ê¥¯¥¨¥¹¥È¤Ï ¥µ¥Ö¥·¥¹¥Æ¥à¤ò½ªÎ»¤·¤Ê¤Û¤¦¤¬¤è¤¤.
+   ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯ ã©ã‚“ãªèªè­˜ã§ããªã„ãƒ‘ã‚±ãƒƒãƒˆã«å¯¾ã—ã¦ã‚‚
+   é€ã‚‰ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„ã—, ãƒªã‚¯ã‚¨ã‚¹ãƒˆã¯ ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã‚’çµ‚äº†ã—ãªã»ã†ãŒã‚ˆã„.
 
 2.3.1.1 Status Codes
 
-2.3.1.1 ¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É
+2.3.1.1 ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰
 
    The status code gives the status in a more machine-readable format
    (suitable for localization), and can have the following values:
 
-   ¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤Ï, ¤è¤ê¥Ş¥·¥ó¤¬²ÄÆÉ¤Ê (localization ¤ËÅ¬¤·¤¿) 
-   ·Á¼°¤Ç¥¹¥Æ¡¼¥¿¥¹¤òÍ¿¤¨¤ë. ¼¡¤ÎÃÍ¤ò»ı¤Á¤¦¤ë:
+   ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚³ãƒ¼ãƒ‰ã¯, ã‚ˆã‚Šãƒã‚·ãƒ³ãŒå¯èª­ãª (localization ã«é©ã—ãŸ) 
+   å½¢å¼ã§ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’ä¸ãˆã‚‹. æ¬¡ã®å€¤ã‚’æŒã¡ã†ã‚‹:
 
    	SSH_PUBLICKEY_SUCCESS                      0
    	SSH_PUBLICKEY_ACCESS_DENIED                1
@@ -459,30 +459,30 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
 
 3. Public-Key Subsystem Operations
 
-3. Public-Key ¥µ¥Ö¥·¥¹¥Æ¥à¤ÎÁàºî
+3. Public-Key ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã®æ“ä½œ
 
    The public-key subsystem currently defines four operations: add,
    remove, list, and command.
    
-   public-key ¥µ¥Ö¥·¥¹¥Æ¥à¤Ï ¸½ºß4¤Ä¤ÎÁàºî¤òÄêµÁ¤·¤Æ¤¤¤ë:
+   public-key ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã¯ ç¾åœ¨4ã¤ã®æ“ä½œã‚’å®šç¾©ã—ã¦ã„ã‚‹:
    add, remove, list , command.
 
 3.1 Version Packet
 
-3.1 Version ¥Ñ¥±¥Ã¥È
+3.1 Version ãƒ‘ã‚±ãƒƒãƒˆ
 
    Both sides MUST start by sending a version packet that indicates the
    version of the protocol they are using.
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤â¥µ¡¼¥Ğ¤â ÍøÍÑ¤·¤Æ¤¤¤ë¥×¥í¥È¥³¥ë¤Î¥Ğ¡¼¥¸¥ç¥ó¤ò
-   ¼¨¤¹ version ¥Ñ¥±¥Ã¥È¤ò¤Ş¤ººÇ½é¤ËÁ÷¤é¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‚‚ã‚µãƒ¼ãƒã‚‚ åˆ©ç”¨ã—ã¦ã„ã‚‹ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’
+   ç¤ºã™ version ãƒ‘ã‚±ãƒƒãƒˆã‚’ã¾ãšæœ€åˆã«é€ã‚‰ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    	string "version"
    	uint32 protocol-version-number
 
    The version of the protocol described by this document is version 2.
 
-   ¤³¤ÎÊ¸½ñ¤Çµ­½Ò¤µ¤ì¤ë¥×¥í¥È¥³¥ë¤Î¥Ğ¡¼¥¸¥ç¥ó¤Ï version 2 ¤À.
+   ã“ã®æ–‡æ›¸ã§è¨˜è¿°ã•ã‚Œã‚‹ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã¯ version 2 ã .
 
    Both sides send the highest version that they implement. The lower of
    the version numbers is the version of the protocol to use.  If either
@@ -491,24 +491,24 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    message.  Before closing the subsystem, a status message with the
    status SSH_PUBLICKEY_VERSION_NOT_SUPPORTED SHOULD be sent.
 
-   ¤É¤Á¤é¤ÎÂ¦¤â¼ÂÁõ¤·¤Æ¤ëºÇ¹â¤Î¥Ğ¡¼¥¸¥ç¥ó¤òÁ÷¤ë. ¥Ğ¡¼¥¸¥ç¥óÈÖ¹æ¤¬¾®¤µ¤¤¤Û¤¦¤¬
-   ÍøÍÑ¤µ¤ì¤ë¥×¥í¥È¥³¥ë¤Î¥Ğ¡¼¥¸¥ç¥ó¤È¤Ê¤ë. ¾®¤µ¤¤ÈÖ¹æ¤Î¥Ğ¡¼¥¸¥ç¥ó¤ò
-   °ìÊı¤¬¥µ¥İ¡¼¥È¤·¤Æ¤¤¤Ê¤¤¤Ê¤é, subsystem ¤ò½ª¤¨,
-   SSH_MSG_CHANNEL_CLOSE ¥á¥Ã¥»¡¼¥¸¤òÁ÷¤ë¤³¤È¤Ç¤â¤¦°ìÊı¤ËÄÌÃÎ¤·¤Ê¤±¤ì¤Ğ
-   ¤Ê¤é¤Ê¤¤. subsystem ¤ò½ª¤¨¤ëÁ°¤Ë, SSH_PUBLICKEY_VERSION_NOT_SUPPORTED
-   ¥¹¥Æ¡¼¥¿¥¹¤ò»ı¤Ä status ¥á¥Ã¥»¡¼¥¸¤¬Á÷¤é¤ì¤ëÉ¬Í×¤¬¤¢¤ë.
+   ã©ã¡ã‚‰ã®å´ã‚‚å®Ÿè£…ã—ã¦ã‚‹æœ€é«˜ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’é€ã‚‹. ãƒãƒ¼ã‚¸ãƒ§ãƒ³ç•ªå·ãŒå°ã•ã„ã»ã†ãŒ
+   åˆ©ç”¨ã•ã‚Œã‚‹ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã¨ãªã‚‹. å°ã•ã„ç•ªå·ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’
+   ä¸€æ–¹ãŒã‚µãƒãƒ¼ãƒˆã—ã¦ã„ãªã„ãªã‚‰, subsystem ã‚’çµ‚ãˆ,
+   SSH_MSG_CHANNEL_CLOSE ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ã‚‹ã“ã¨ã§ã‚‚ã†ä¸€æ–¹ã«é€šçŸ¥ã—ãªã‘ã‚Œã°
+   ãªã‚‰ãªã„. subsystem ã‚’çµ‚ãˆã‚‹å‰ã«, SSH_PUBLICKEY_VERSION_NOT_SUPPORTED
+   ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’æŒã¤ status ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒé€ã‚‰ã‚Œã‚‹å¿…è¦ãŒã‚ã‚‹.
 
    Both sides MUST wait to receive this version before continuing.
 
-   ¤É¤Á¤é¤ÎÂ¦¤â, Â³¹Ô¤¹¤ëÁ°¤Ë¤³¤Î version ¤Î¼õ¼è¤òÂÔ¤¿¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   ã©ã¡ã‚‰ã®å´ã‚‚, ç¶šè¡Œã™ã‚‹å‰ã«ã“ã® version ã®å—å–ã‚’å¾…ãŸãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
 3.2 Adding a public key
 
-3.2 ¸ø³«¸°¤ÎÄÉ²Ã
+3.2 å…¬é–‹éµã®è¿½åŠ 
 
    If the client wishes to add a public key, the client sends:
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤¬¸ø³«¸°¤òÄÉ²Ã¤·¤è¤¦¤È¤¹¤ë¾ì¹ç, ¥¯¥é¥¤¥¢¥ó¥È¤Ï¼¡¤Î¤â¤Î¤òÁ÷¤ë:
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒå…¬é–‹éµã‚’è¿½åŠ ã—ã‚ˆã†ã¨ã™ã‚‹å ´åˆ, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯æ¬¡ã®ã‚‚ã®ã‚’é€ã‚‹:
 
    	string    "add"
    	string    public-key algorithm name
@@ -530,14 +530,14 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    cannot be overwritten, the server MUST return
    SSH_PUBLICKEY_ACCESS_DENIED
 
-   ¤³¤Î¸ø³«¸°¤ò¼¡¤Î¸ø³«¸°Ç§¾Ú¤Ç»È¤ï¤ì¤ë¤³¤È¤¬¤Ç¤­¤ë¤è¤¦¤Ê
-   Å¬ÀÚ¤Ê¾ì½ê¤Ë¥æ¡¼¥¶¤Î¤¿¤á¤Ë¸ø³«¸°¤ò¥µ¡¼¥Ğ¤ÏÊİÂ¸¤·¤è¤¦¤È¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
-   overwrite ¥Õ¥£¡¼¥ë¥É¤¬ false ¤Ç »ØÄê¤µ¤ì¤¿¸°¤¬¤¹¤Ç¤ËÂ¸ºß¤¹¤ë¤Ê¤é,
-   ¥µ¡¼¥Ğ¤Ï SSH_PUBLICKEY_KEY_ALREADY_PRESENT ¤òÊÖ¤µ¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
-   ¥µ¡¼¥Ğ¤¬¤³¤ì¤òÊÖ¤·¤¿¤é, ¥¯¥é¥¤¥¢¥ó¥È¤Ï¸°¤ò¾å½ñ¤­¤¹¤ë¤«¤É¤¦¤«
-   ¥æ¡¼¥¶¤ËÁªÂò»è¤òÄó¶¡¤¹¤ëÉ¬Í×¤¬¤¢¤ë. overwrite ¥Õ¥£¡¼¥ë¥É¤¬
-   true ¤Ç»ØÄê¤µ¤ì¤¿¤«¤®¤¬¤¹¤Ç¤ËÂ¸ºß¤¹¤ë¤¬¾å½ñ¤­ÉÔ²ÄÇ½¤Ç¤¢¤Ã¤¿¤é,
-   ¥µ¡¼¥Ğ¤Ï SSH_PUBLICKEY_ACCESS_DENIED ¤òÊÖ¤µ¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   ã“ã®å…¬é–‹éµã‚’æ¬¡ã®å…¬é–‹éµèªè¨¼ã§ä½¿ã‚ã‚Œã‚‹ã“ã¨ãŒã§ãã‚‹ã‚ˆã†ãª
+   é©åˆ‡ãªå ´æ‰€ã«ãƒ¦ãƒ¼ã‚¶ã®ãŸã‚ã«å…¬é–‹éµã‚’ã‚µãƒ¼ãƒã¯ä¿å­˜ã—ã‚ˆã†ã¨ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
+   overwrite ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãŒ false ã§ æŒ‡å®šã•ã‚ŒãŸéµãŒã™ã§ã«å­˜åœ¨ã™ã‚‹ãªã‚‰,
+   ã‚µãƒ¼ãƒã¯ SSH_PUBLICKEY_KEY_ALREADY_PRESENT ã‚’è¿”ã•ãªã‘ã‚Œã°ãªã‚‰ãªã„.
+   ã‚µãƒ¼ãƒãŒã“ã‚Œã‚’è¿”ã—ãŸã‚‰, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯éµã‚’ä¸Šæ›¸ãã™ã‚‹ã‹ã©ã†ã‹
+   ãƒ¦ãƒ¼ã‚¶ã«é¸æŠè‚¢ã‚’æä¾›ã™ã‚‹å¿…è¦ãŒã‚ã‚‹. overwrite ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãŒ
+   true ã§æŒ‡å®šã•ã‚ŒãŸã‹ããŒã™ã§ã«å­˜åœ¨ã™ã‚‹ãŒä¸Šæ›¸ãä¸å¯èƒ½ã§ã‚ã£ãŸã‚‰,
+   ã‚µãƒ¼ãƒã¯ SSH_PUBLICKEY_ACCESS_DENIED ã‚’è¿”ã•ãªã‘ã‚Œã°ãªã‚‰ãªã„.
    
 
 
@@ -553,15 +553,15 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    attribute, storage of the attribute is not sufficient, but requires
    that the server understand and implement the intent of the attribute.
 
-   Â°À­¤ÎÌ¾Á°¤Ï ¼¡¤Î¤è¤¦¤Ê[1]¤Î¥¢¥ë¥´¥ê¥º¥à¤ÎÌ¾Á°¤Ç³äÅö¤Æ¤é¤ì¤ë¤Î¤ÈÆ±¤¸ÂÎ·Ï¤Ç
-   ÄêµÁ¤µ¤ì¤ë. ¥µ¡¼¥Ğ¤¬ mandatory ¤¬ true ¤ÎÂ°À­¤ò¼ÂÁõ¤·¤Æ¤¤¤Ê¤¤¤Ê¤é, 
-   ÄÉ²Ã¤ò¼ºÇÔ¤Ë¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤. mandatory ¤¬ true ¤Ç¤¢¤ëÂ°À­¤Ë¤ª¤¤¤Æ¤Ï
-   Â°À­¤¬ÊİÂ¸¤µ¤ì¤ë¤À¤±¤Ç¤Ï½½Ê¬¤Ç¤Ï¤Ê¤¯,
-   ¥µ¡¼¥Ğ¤¬Â°À­¤Î°Õ¿Ş¤òÍı²ò¤·¼ÂÁõ¤¹¤ë¤³¤È¤òÉ¬Í×¤È¤¹¤ë.
+   å±æ€§ã®åå‰ã¯ æ¬¡ã®ã‚ˆã†ãª[1]ã®ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã®åå‰ã§å‰²å½“ã¦ã‚‰ã‚Œã‚‹ã®ã¨åŒã˜ä½“ç³»ã§
+   å®šç¾©ã•ã‚Œã‚‹. ã‚µãƒ¼ãƒãŒ mandatory ãŒ true ã®å±æ€§ã‚’å®Ÿè£…ã—ã¦ã„ãªã„ãªã‚‰, 
+   è¿½åŠ ã‚’å¤±æ•—ã«ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„. mandatory ãŒ true ã§ã‚ã‚‹å±æ€§ã«ãŠã„ã¦ã¯
+   å±æ€§ãŒä¿å­˜ã•ã‚Œã‚‹ã ã‘ã§ã¯ååˆ†ã§ã¯ãªã,
+   ã‚µãƒ¼ãƒãŒå±æ€§ã®æ„å›³ã‚’ç†è§£ã—å®Ÿè£…ã™ã‚‹ã“ã¨ã‚’å¿…è¦ã¨ã™ã‚‹.
 
    The following attributes are currently defined:
 
-   ¼¡¤ÎÂ°À­¤¬¸½ºßÄêµÁ¤µ¤ì¤Æ¤¤¤ë.
+   æ¬¡ã®å±æ€§ãŒç¾åœ¨å®šç¾©ã•ã‚Œã¦ã„ã‚‹.
 
    "comment"
 
@@ -572,20 +572,20 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    content of the comment field in any way.  The comment attribute must
    be specified in UTF-8 format [6].
 
-   comment Â°À­¤ÎÃÍ¤Ï, ¸ø³«¸°¤Ë¤Ä¤¤¤Æ¤Î¥æ¡¼¥¶¤¬»ØÄê¤·¤¿¥Æ¥­¥¹¥È¤¬
-   ´Ş¤Ş¤ì¤ë. ¥µ¡¼¥Ğ¤Ï ¤³¤ÎÃÍ¤òÊİÂ¸¤¹¤ë¤¢¤é¤æ¤ëÅØÎÏ¤¹¤ëÉ¬Í×¤¬¤¢¤ê,
-   °Ê¸å¤Î¤É¤Î¥ê¥¹¥ÈÁàºî¤Ç¤â¸°¤È¤È¤â¤ËÊÖ¤¹É¬Í×¤¬¤¢¤ë.
-   ¥µ¡¼¥Ğ¤Ï comment ¥Õ¥£¡¼¥ë¥É¤ÎÃæ¿È¤ò¤É¤Î¤è¤¦¤ÊÊıË¡¤Ç¤â
-   ²ò¼á¤·¤¿¤ê±Æ¶Á¤òÍ¿¤¨¤¿¤ê¤·¤Æ¤Ï¤Ê¤é¤Ê¤¤.
-   comment Â°À­¤Ï UTF-8 ¥Õ¥©¡¼¥Ş¥Ã¥È [6] ¤Ç»ØÄê¤µ¤ì¤ë.
+   comment å±æ€§ã®å€¤ã¯, å…¬é–‹éµã«ã¤ã„ã¦ã®ãƒ¦ãƒ¼ã‚¶ãŒæŒ‡å®šã—ãŸãƒ†ã‚­ã‚¹ãƒˆãŒ
+   å«ã¾ã‚Œã‚‹. ã‚µãƒ¼ãƒã¯ ã“ã®å€¤ã‚’ä¿å­˜ã™ã‚‹ã‚ã‚‰ã‚†ã‚‹åŠªåŠ›ã™ã‚‹å¿…è¦ãŒã‚ã‚Š,
+   ä»¥å¾Œã®ã©ã®ãƒªã‚¹ãƒˆæ“ä½œã§ã‚‚éµã¨ã¨ã‚‚ã«è¿”ã™å¿…è¦ãŒã‚ã‚‹.
+   ã‚µãƒ¼ãƒã¯ comment ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®ä¸­èº«ã‚’ã©ã®ã‚ˆã†ãªæ–¹æ³•ã§ã‚‚
+   è§£é‡ˆã—ãŸã‚Šå½±éŸ¿ã‚’ä¸ãˆãŸã‚Šã—ã¦ã¯ãªã‚‰ãªã„.
+   comment å±æ€§ã¯ UTF-8 ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ [6] ã§æŒ‡å®šã•ã‚Œã‚‹.
 				     
 
    The comment field is useful so the user can identify the key without
    resorting to comparing its fingerprint.  This attribute SHOULD NOT be
    mandatory.
 
-   ¥æ¡¼¥¶¤¬¤½¤Î»ØÌæ¤ÎÈæ³Ó¤ËÍê¤é¤º¤Ë¥æ¡¼¥¶¤¬¸°¤òÆ±Äê¤¹¤ë¤Î¤Ë
-   comment ¥Õ¥£¡¼¥ë¥É¤ÏÌòÎ©¤Ä. ¤³¤ÎÂ°À­¤Ï mandatory ¤È¤·¤Ê¤¤¤Û¤¦¤¬¤è¤¤.
+   ãƒ¦ãƒ¼ã‚¶ãŒãã®æŒ‡ç´‹ã®æ¯”è¼ƒã«é ¼ã‚‰ãšã«ãƒ¦ãƒ¼ã‚¶ãŒéµã‚’åŒå®šã™ã‚‹ã®ã«
+   comment ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¯å½¹ç«‹ã¤. ã“ã®å±æ€§ã¯ mandatory ã¨ã—ãªã„ã»ã†ãŒã‚ˆã„.
 
    "comment-language"
 
@@ -596,12 +596,12 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    server SHOULD attempt to store each comment, together with that
    comment's lanuage attribute.  This attribute SHOULD NOT be mandatory.
 
-   ¤³¤ÎÂ°À­¤¬»ØÄê¤µ¤ì¤¿¤é, ¤¹¤°¤Ë¼¡¤Ë "comment" Â°À­¤¬Â³¤¯É¬Í×¤¬¤¢¤ë.
-   ¤³¤ÎÂ°À­¤Ï "comment"Â°À­¤Î¸À¸ì¤ò»ØÄê¤¹¤ë [5]. ¥¯¥é¥¤¥¢¥ó¥È¤Ï
-   ¤³¤ì¤é¤Î comment ¤½¤ì¤¾¤ì¤ËÂĞ¤·¤Æ°Û¤Ê¤ë¸À¸ì¤ò¤µ¤é¤Ë»ØÄê¤¹¤ë¤Ê¤é
-   1¤Ä¤è¤êÂ¿¤¤ comment ¤ò»ØÄê¤·¤Æ¤â¤è¤¤. ¥µ¡¼¥Ğ¤Ï, ¤³¤Î comment ¤Î
-   ¸À¸ìÂ°À­¤È¶¦¤Ë¤½¤ì¤¾¤ì¤Î¥³¥á¥ó¥È¤òÊİÂ¸¤·¤è¤¦¤È¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
-   ¤³¤ÎÂ°À­¤Ï mandatory ¤È¤·¤Ê¤¤¤Û¤¦¤¬¤è¤¤.
+   ã“ã®å±æ€§ãŒæŒ‡å®šã•ã‚ŒãŸã‚‰, ã™ãã«æ¬¡ã« "comment" å±æ€§ãŒç¶šãå¿…è¦ãŒã‚ã‚‹.
+   ã“ã®å±æ€§ã¯ "comment"å±æ€§ã®è¨€èªã‚’æŒ‡å®šã™ã‚‹ [5]. ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯
+   ã“ã‚Œã‚‰ã® comment ãã‚Œãã‚Œã«å¯¾ã—ã¦ç•°ãªã‚‹è¨€èªã‚’ã•ã‚‰ã«æŒ‡å®šã™ã‚‹ãªã‚‰
+   1ã¤ã‚ˆã‚Šå¤šã„ comment ã‚’æŒ‡å®šã—ã¦ã‚‚ã‚ˆã„. ã‚µãƒ¼ãƒã¯, ã“ã® comment ã®
+   è¨€èªå±æ€§ã¨å…±ã«ãã‚Œãã‚Œã®ã‚³ãƒ¡ãƒ³ãƒˆã‚’ä¿å­˜ã—ã‚ˆã†ã¨ã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
+   ã“ã®å±æ€§ã¯ mandatory ã¨ã—ãªã„ã»ã†ãŒã‚ˆã„.
 
    "command-override"
 
@@ -615,15 +615,15 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    permitted (as long as they satisfy other security or authorisation
    checks the server may perform).  This attribute SHOULD be mandatory.
 
-   "command-override" ¤Ï ¤³¤Î¸°¤¬»È¤ï¤ì¤ë¾ì¹ç¤Ë¼Â¹Ô¤µ¤ì¤ë¥³¥Ş¥ó¥É¤ò
-   »ØÄê¤¹¤ë. ¥¯¥é¥¤¥¢¥ó¥È¤«¤é "exec" ¤Ê¤¤¤· "shell" ¥ê¥¯¥¨¥¹¥È¤ò
-   ¼õ¤±¼è¤Ã¤¿¤Ê¤é, ¥ê¥¯¥¨¥¹¥È¤Î·ë²Ì¤È¤·¤Æ¼Â¹Ô¤µ¤ì¤ë¤Ï¤º¤Î
-   ¥³¥Ş¥ó¥É¤ä¥·¥§¥ë¤ÎÂå¤ê¤Ë¤³¤Î¥³¥Ş¥ó¥É¤¬¥µ¡¼¥Ğ¤Ë¤è¤Ã¤Æ
-   ¼Â¹Ô¤µ¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤. ¥³¥Ş¥ó¥ÉÊ¸»úÎó¤¬¶õ¤Ê¤é,
-   "exec"¤È"shell" ¥ê¥¯¥¨¥¹¥È¤ÏµñÈİ¤µ¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
-   "command-override" Â°À­¤¬»ØÄê¤µ¤ì¤Ê¤±¤ì¤Ğ, ¤¹¤Ù¤Æ¤Î "exec" ¤È "shell"
-   ¥ê¥¯¥¨¥¹¥È¤Ïµö²Ä¤µ¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤(¥µ¡¼¥Ğ¤¬¼Â¹Ô¤¹¤ëÂ¾¤Î¥»¥­¥å¥ê¥Æ¥£¤È
-   Ç§¾Ú¤Î¥Á¥§¥Ã¥¯¤òËş¤¿¤¹¸Â¤ê). ¤³¤ÎÂ°À­¤Ï mandatory ¤È¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
+   "command-override" ã¯ ã“ã®éµãŒä½¿ã‚ã‚Œã‚‹å ´åˆã«å®Ÿè¡Œã•ã‚Œã‚‹ã‚³ãƒãƒ³ãƒ‰ã‚’
+   æŒ‡å®šã™ã‚‹. ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ "exec" ãªã„ã— "shell" ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’
+   å—ã‘å–ã£ãŸãªã‚‰, ãƒªã‚¯ã‚¨ã‚¹ãƒˆã®çµæœã¨ã—ã¦å®Ÿè¡Œã•ã‚Œã‚‹ã¯ãšã®
+   ã‚³ãƒãƒ³ãƒ‰ã‚„ã‚·ã‚§ãƒ«ã®ä»£ã‚Šã«ã“ã®ã‚³ãƒãƒ³ãƒ‰ãŒã‚µãƒ¼ãƒã«ã‚ˆã£ã¦
+   å®Ÿè¡Œã•ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„. ã‚³ãƒãƒ³ãƒ‰æ–‡å­—åˆ—ãŒç©ºãªã‚‰,
+   "exec"ã¨"shell" ãƒªã‚¯ã‚¨ã‚¹ãƒˆã¯æ‹’å¦ã•ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„.
+   "command-override" å±æ€§ãŒæŒ‡å®šã•ã‚Œãªã‘ã‚Œã°, ã™ã¹ã¦ã® "exec" ã¨ "shell"
+   ãƒªã‚¯ã‚¨ã‚¹ãƒˆã¯è¨±å¯ã•ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„(ã‚µãƒ¼ãƒãŒå®Ÿè¡Œã™ã‚‹ä»–ã®ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã¨
+   èªè¨¼ã®ãƒã‚§ãƒƒã‚¯ã‚’æº€ãŸã™é™ã‚Š). ã“ã®å±æ€§ã¯ mandatory ã¨ã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
    
 
    "subsystem"
@@ -633,10 +633,10 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    This attribute SHOULD be mandatory.  If the value is empty, no
    subsystems may be started.
 
-   "subsystem" ¤Ï¤³¤Î¸°¤¬»È¤ï¤ì¤ëºİ¤Ë( "subsystem" ¥ê¥¯¥¨¥¹¥È¤ò»È¤Ã¤Æ) 
-   ³«»Ï¤µ¤ì¤ë¥µ¥Ö¥·¥¹¥Æ¥à¤Î¥«¥ó¥Ş¶èÀÚ¤ê¥ê¥¹¥È¤ò»ØÄê¤¹¤ë.
-   ¤³¤ÎÂ°À­¤Ï mandatory ¤È¤¹¤ëÉ¬Í×¤¬¤¢¤ë. ¤³¤ÎÃÍ¤¬¶õ¤Ê¤é
-   ¥µ¥Ö¥·¥¹¥Æ¥à¤Ï³«»Ï¤µ¤ì¤Ê¤¤.
+   "subsystem" ã¯ã“ã®éµãŒä½¿ã‚ã‚Œã‚‹éš›ã«( "subsystem" ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’ä½¿ã£ã¦) 
+   é–‹å§‹ã•ã‚Œã‚‹ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã®ã‚«ãƒ³ãƒåŒºåˆ‡ã‚Šãƒªã‚¹ãƒˆã‚’æŒ‡å®šã™ã‚‹.
+   ã“ã®å±æ€§ã¯ mandatory ã¨ã™ã‚‹å¿…è¦ãŒã‚ã‚‹. ã“ã®å€¤ãŒç©ºãªã‚‰
+   ã‚µãƒ–ã‚·ã‚¹ãƒ†ãƒ ã¯é–‹å§‹ã•ã‚Œãªã„.
 
 
 Galbraith, et al.        Expires March 15, 2004                 [Page 8]
@@ -650,9 +650,9 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    key is in use.  The attribute-value field SHOULD be empty for this
    attribute. This attribute SHOULD be mandatory.
 
-   "x11" ¤Ï ¤³¤Î¸°¤¬»È¤ï¤ì¤ëºİ¤Ë X11 Å¾Á÷¤ò¹Ô¤Ê¤ï¤Ê¤¤¤³¤È¤ò»ØÄê¤¹¤ë.
-   attribute-value ¥Õ¥£¡¼¥ë¥É¤Ï¤³¤ÎÂ°À­¤Ç¤Ï¶õ¤Ç¤¢¤ëÉ¬Í×¤¬¤¢¤ë.
-   ¤³¤ÎÂ°À­¤Ï mandatory ¤È¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
+   "x11" ã¯ ã“ã®éµãŒä½¿ã‚ã‚Œã‚‹éš›ã« X11 è»¢é€ã‚’è¡Œãªã‚ãªã„ã“ã¨ã‚’æŒ‡å®šã™ã‚‹.
+   attribute-value ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¯ã“ã®å±æ€§ã§ã¯ç©ºã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚‹.
+   ã“ã®å±æ€§ã¯ mandatory ã¨ã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
 
    "shell"
 
@@ -660,10 +660,10 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    denied when this key is in use.  The attribute-value field SHOULD be
    empty for this attribute.  This attribute SHOULD be mandatory.
 
-   "shell" ¤Ï ¤³¤Î¸°¤¬»È¤ï¤ì¤ëºİ¤Ë ¥»¥Ã¥·¥ç¥ó¥Á¥ã¥ó¥Í¥ë ¤Î "shell" 
-   ¥ê¥¯¥¨¥¹¥È¤¬µñÈİ¤µ¤ì¤Ù¤­¤Ç¤¢¤ë¤³¤È¤ò»ØÄê¤¹¤ë. 
-   attribute-value ¥Õ¥£¡¼¥ë¥É¤Ï¤³¤ÎÂ°À­¤Ç¤Ï¶õ¤Ç¤¢¤ëÉ¬Í×¤¬¤¢¤ë.
-   ¤³¤ÎÂ°À­¤Ï mandatory ¤È¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
+   "shell" ã¯ ã“ã®éµãŒä½¿ã‚ã‚Œã‚‹éš›ã« ã‚»ãƒƒã‚·ãƒ§ãƒ³ãƒãƒ£ãƒ³ãƒãƒ« ã® "shell" 
+   ãƒªã‚¯ã‚¨ã‚¹ãƒˆãŒæ‹’å¦ã•ã‚Œã¹ãã§ã‚ã‚‹ã“ã¨ã‚’æŒ‡å®šã™ã‚‹. 
+   attribute-value ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¯ã“ã®å±æ€§ã§ã¯ç©ºã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚‹.
+   ã“ã®å±æ€§ã¯ mandatory ã¨ã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
 
    "exec"
 
@@ -671,10 +671,10 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    denied when this key is in use.  The attribute-value field SHOULD be
    empty for this attribute.  This attribute SHOULD be mandatory.
 
-   "exec" ¤Ï ¤³¤Î¸°¤¬»È¤ï¤ì¤ëºİ¤Ë ¥»¥Ã¥·¥ç¥ó¥Á¥ã¥ó¥Í¥ë ¤Î "exec" 
-   ¥ê¥¯¥¨¥¹¥È¤¬µñÈİ¤µ¤ì¤Ù¤­¤Ç¤¢¤ë¤³¤È¤ò»ØÄê¤¹¤ë. 
-   attribute-value ¥Õ¥£¡¼¥ë¥É¤Ï¤³¤ÎÂ°À­¤Ç¤Ï¶õ¤Ç¤¢¤ëÉ¬Í×¤¬¤¢¤ë.
-   ¤³¤ÎÂ°À­¤Ï mandatory ¤È¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
+   "exec" ã¯ ã“ã®éµãŒä½¿ã‚ã‚Œã‚‹éš›ã« ã‚»ãƒƒã‚·ãƒ§ãƒ³ãƒãƒ£ãƒ³ãƒãƒ« ã® "exec" 
+   ãƒªã‚¯ã‚¨ã‚¹ãƒˆãŒæ‹’å¦ã•ã‚Œã¹ãã§ã‚ã‚‹ã“ã¨ã‚’æŒ‡å®šã™ã‚‹. 
+   attribute-value ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¯ã“ã®å±æ€§ã§ã¯ç©ºã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚‹.
+   ã“ã®å±æ€§ã¯ mandatory ã¨ã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
 
 
    "agent"
@@ -684,10 +684,10 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    SHOULD be empty for this attribute.  This attribute SHOULD be
    mandatory.
 
-   "agent" ¤Ï ¤³¤Î¸°¤¬»È¤ï¤ì¤ëºİ¤Ë ¥»¥Ã¥·¥ç¥ó¥Á¥ã¥ó¥Í¥ë ¤Î "auth-agent-req" 
-   ¥ê¥¯¥¨¥¹¥È¤¬µñÈİ¤µ¤ì¤Ù¤­¤Ç¤¢¤ë¤³¤È¤ò»ØÄê¤¹¤ë. 
-   attribute-value ¥Õ¥£¡¼¥ë¥É¤Ï¤³¤ÎÂ°À­¤Ç¤Ï¶õ¤Ç¤¢¤ëÉ¬Í×¤¬¤¢¤ë.
-   ¤³¤ÎÂ°À­¤Ï mandatory ¤È¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
+   "agent" ã¯ ã“ã®éµãŒä½¿ã‚ã‚Œã‚‹éš›ã« ã‚»ãƒƒã‚·ãƒ§ãƒ³ãƒãƒ£ãƒ³ãƒãƒ« ã® "auth-agent-req" 
+   ãƒªã‚¯ã‚¨ã‚¹ãƒˆãŒæ‹’å¦ã•ã‚Œã¹ãã§ã‚ã‚‹ã“ã¨ã‚’æŒ‡å®šã™ã‚‹. 
+   attribute-value ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¯ã“ã®å±æ€§ã§ã¯ç©ºã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚‹.
+   ã“ã®å±æ€§ã¯ mandatory ã¨ã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
 
    "env"
 
@@ -695,10 +695,10 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    when this key is in use.  The attribute-value field SHOULD be empty
    for this attribute.  This attribute SHOULD be mandatory.
 
-   "env" ¤Ï ¤³¤Î¸°¤¬»È¤ï¤ì¤ëºİ¤Ë ¥»¥Ã¥·¥ç¥ó¥Á¥ã¥ó¥Í¥ë ¤Î "env" 
-   ¥ê¥¯¥¨¥¹¥È¤¬µñÈİ¤µ¤ì¤Ù¤­¤Ç¤¢¤ë¤³¤È¤ò»ØÄê¤¹¤ë. 
-   attribute-value ¥Õ¥£¡¼¥ë¥É¤Ï¤³¤ÎÂ°À­¤Ç¤Ï¶õ¤Ç¤¢¤ëÉ¬Í×¤¬¤¢¤ë.
-   ¤³¤ÎÂ°À­¤Ï mandatory ¤È¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
+   "env" ã¯ ã“ã®éµãŒä½¿ã‚ã‚Œã‚‹éš›ã« ã‚»ãƒƒã‚·ãƒ§ãƒ³ãƒãƒ£ãƒ³ãƒãƒ« ã® "env" 
+   ãƒªã‚¯ã‚¨ã‚¹ãƒˆãŒæ‹’å¦ã•ã‚Œã¹ãã§ã‚ã‚‹ã“ã¨ã‚’æŒ‡å®šã™ã‚‹. 
+   attribute-value ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¯ã“ã®å±æ€§ã§ã¯ç©ºã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚‹.
+   ã“ã®å±æ€§ã¯ mandatory ã¨ã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
 
 
    "from"
@@ -708,10 +708,10 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    authorisation purposes, the authorisation attempt MUST be denied.
    The server SHOULD make a log entry regarding this.
 
-   "from" ¤Ï, ¸°¤¬»È¤ï¤ì¤ë¤«¤â¤·¤ì¤Ê¤¤¥Û¥¹¥È¤Î¥«¥ó¥Ş¶èÀÚ¤ê¥ê¥¹¥È¤ò
-   »ØÄê¤¹¤ë. ¤³¤Î¥ê¥¹¥È¤Ë¤Ê¤¤¥Û¥¹¥È¤¬Ç§¾Ú¤ÎÌÜÅª¤Ç¤³¤Î¸°¤ò»È¤ª¤¦¤È
-   ¤·¤¿ºİ¤Ï, Ç§¾Ú¤Î»î¤ß¤ÏµñÈİ¤µ¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤. ¥µ¡¼¥Ğ¤Ï
-   ¤³¤ì¤Ë´Ø¤¹¤ë¥í¥°¤Î¥¨¥ó¥È¥ê¤òºî¤ëÉ¬Í×¤¬¤¢¤ë.
+   "from" ã¯, éµãŒä½¿ã‚ã‚Œã‚‹ã‹ã‚‚ã—ã‚Œãªã„ãƒ›ã‚¹ãƒˆã®ã‚«ãƒ³ãƒåŒºåˆ‡ã‚Šãƒªã‚¹ãƒˆã‚’
+   æŒ‡å®šã™ã‚‹. ã“ã®ãƒªã‚¹ãƒˆã«ãªã„ãƒ›ã‚¹ãƒˆãŒèªè¨¼ã®ç›®çš„ã§ã“ã®éµã‚’ä½¿ãŠã†ã¨
+   ã—ãŸéš›ã¯, èªè¨¼ã®è©¦ã¿ã¯æ‹’å¦ã•ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„. ã‚µãƒ¼ãƒã¯
+   ã“ã‚Œã«é–¢ã™ã‚‹ãƒ­ã‚°ã®ã‚¨ãƒ³ãƒˆãƒªã‚’ä½œã‚‹å¿…è¦ãŒã‚ã‚‹.
 
 
    "port-forward"
@@ -722,10 +722,10 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    attribute is empty, all "direct-tcpip" requests should be refused
    when using this key. This attribute SHOULD be mandatory.
 
-   "port-forward" ¤Ï,  ¤³¤ÎÂ°À­¤ÎÃÍ¤È¤·¤ÆÍ¿¤¨¤é¤ì¤¿¥³¥ó¥Ş¶èÀÚ¤ê¥ê¥¹¥È¤Ç
-   »ØÄê¤µ¤ì¤¿¥Û¥¹¥È¤ò½ü¤¤¤Æ "direct-tcpip" ¥ê¥¯¥¨¥¹¥È¤ò¼õ¤±¤¤¤ì¤Ê¤¤¤³¤È¤ò
-   »ØÄê¤¹¤ë. ¤³¤ÎÂ°À­¤¬¶õ¤Ê¤é, ¤³¤Î¸°¤Î»ÈÍÑ»ş¤Î¤¹¤Ù¤Æ¤Î "direct-tcpip" 
-   ¥ê¥¯¥¨¥¹¥È¤¬µñÈİ¤µ¤ì¤ëÉ¬Í×¤¬¤¢¤ë. ¤³¤ÎÂ°À­¤Ï mandatory ¤È¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
+   "port-forward" ã¯,  ã“ã®å±æ€§ã®å€¤ã¨ã—ã¦ä¸ãˆã‚‰ã‚ŒãŸã‚³ãƒ³ãƒåŒºåˆ‡ã‚Šãƒªã‚¹ãƒˆã§
+   æŒ‡å®šã•ã‚ŒãŸãƒ›ã‚¹ãƒˆã‚’é™¤ã„ã¦ "direct-tcpip" ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’å—ã‘ã„ã‚Œãªã„ã“ã¨ã‚’
+   æŒ‡å®šã™ã‚‹. ã“ã®å±æ€§ãŒç©ºãªã‚‰, ã“ã®éµã®ä½¿ç”¨æ™‚ã®ã™ã¹ã¦ã® "direct-tcpip" 
+   ãƒªã‚¯ã‚¨ã‚¹ãƒˆãŒæ‹’å¦ã•ã‚Œã‚‹å¿…è¦ãŒã‚ã‚‹. ã“ã®å±æ€§ã¯ mandatory ã¨ã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
    
 
    "reverse-forward"
@@ -744,25 +744,25 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    attribute is empty, all "tcpip-forward" requests should be refused
    when using this key.  This attribute SHOULD be mandatory.
 
-   "reverse-forward" ¤Ï, ¤³¤ÎÂ°À­¤ÎÃÍ¤È¤·¤ÆÍ¿¤¨¤é¤ì¤¿¥³¥ó¥Ş¶èÀÚ¤ê¥ê¥¹¥È¤Ç
-   »ØÄê¤µ¤ì¤¿¥Û¥¹¥È¤ò½ü¤¤¤Æ "tcpip-forward" ¥ê¥¯¥¨¥¹¥È¤ò¼õ¤±¤¤¤ì¤Ê¤¤¤³¤È¤ò
-   »ØÄê¤¹¤ë. ¤³¤ÎÂ°À­¤¬¶õ¤Ê¤é, ¤³¤Î¸°¤Î»ÈÍÑ»ş¤Î¤¹¤Ù¤Æ¤Î "tcpip-forward" 
-   ¥ê¥¯¥¨¥¹¥È¤¬µñÈİ¤µ¤ì¤ëÉ¬Í×¤¬¤¢¤ë. ¤³¤ÎÂ°À­¤Ï mandatory ¤È¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
+   "reverse-forward" ã¯, ã“ã®å±æ€§ã®å€¤ã¨ã—ã¦ä¸ãˆã‚‰ã‚ŒãŸã‚³ãƒ³ãƒåŒºåˆ‡ã‚Šãƒªã‚¹ãƒˆã§
+   æŒ‡å®šã•ã‚ŒãŸãƒ›ã‚¹ãƒˆã‚’é™¤ã„ã¦ "tcpip-forward" ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’å—ã‘ã„ã‚Œãªã„ã“ã¨ã‚’
+   æŒ‡å®šã™ã‚‹. ã“ã®å±æ€§ãŒç©ºãªã‚‰, ã“ã®éµã®ä½¿ç”¨æ™‚ã®ã™ã¹ã¦ã® "tcpip-forward" 
+   ãƒªã‚¯ã‚¨ã‚¹ãƒˆãŒæ‹’å¦ã•ã‚Œã‚‹å¿…è¦ãŒã‚ã‚‹. ã“ã®å±æ€§ã¯ mandatory ã¨ã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
     
    In addition to the attributes specified by the client, the server MAY
    provide a method for administrators to compulsorily enforce certain
    attributes.
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤Ë¤è¤Ã¤Æ»ØÄê¤µ¤ì¤ëÂ°À­¤Ë²Ã¤¨¤Æ,¥µ¡¼¥Ğ¤Ï
-   ´ÉÍı¼Ô¤ËÆÃÄê¤ÎÂ°À­¤ò¶¯Í×¤¹¤ëÊıË¡¤òÄó¶¡¤·¤Æ¤â¤è¤¤.
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«ã‚ˆã£ã¦æŒ‡å®šã•ã‚Œã‚‹å±æ€§ã«åŠ ãˆã¦,ã‚µãƒ¼ãƒã¯
+   ç®¡ç†è€…ã«ç‰¹å®šã®å±æ€§ã‚’å¼·è¦ã™ã‚‹æ–¹æ³•ã‚’æä¾›ã—ã¦ã‚‚ã‚ˆã„.
 
 3.3 Removing a public key
 
-3.3 ¸ø³«¸°¤Îºï½ü
+3.3 å…¬é–‹éµã®å‰Šé™¤
 
    If the client wishes to remove a public key, the client sends:
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤¬¸ø³«¸°¤òºï½ü¤·¤¿¤¤¤ÈË¾¤à¾ì¹ç, ¥¯¥é¥¤¥¢¥ó¥È¤Ï¼¡¤ÎÊª¤òÁ÷¤ë:
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒå…¬é–‹éµã‚’å‰Šé™¤ã—ãŸã„ã¨æœ›ã‚€å ´åˆ, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯æ¬¡ã®ç‰©ã‚’é€ã‚‹:
 
    	string    "remove"
    	string    public-key algorithm name
@@ -772,24 +772,24 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    the appropriate location, so that the public key cannot be used for
    subsequent authentications.
 
-   ¥µ¡¼¥Ğ¤Ï, ¤½¤Î¸å¤ÎÇ§¾Ú¤Ç¤³¤Î¸ø³«¸°¤¬»È¤¨¤Ê¤¤¤è¤¦¤Ë
-   Å¬Åö¤Ê¾ì½ê¤«¤é¥æ¡¼¥¶¤Î¸ø³«¸°¤òºï½ü¤·¤è¤¦¤È»î¤ß¤Ê¤±¤ì¤Ğ
-   ¤Ê¤é¤Ê¤¤.
+   ã‚µãƒ¼ãƒã¯, ãã®å¾Œã®èªè¨¼ã§ã“ã®å…¬é–‹éµãŒä½¿ãˆãªã„ã‚ˆã†ã«
+   é©å½“ãªå ´æ‰€ã‹ã‚‰ãƒ¦ãƒ¼ã‚¶ã®å…¬é–‹éµã‚’å‰Šé™¤ã—ã‚ˆã†ã¨è©¦ã¿ãªã‘ã‚Œã°
+   ãªã‚‰ãªã„.
 
 3.4 Listing public keys
 
-3.4 ¸ø³«¸°¤Î¥ê¥¹¥È¥¢¥Ã¥×
+3.4 å…¬é–‹éµã®ãƒªã‚¹ãƒˆã‚¢ãƒƒãƒ—
 
    If the client wishes to list the known public keys, the client sends:
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤¬ÃÎ¤é¤ì¤Æ¤¤¤ë¸ø³«¸°¤ò¥ê¥¹¥È¥¢¥Ã¥×¤·¤è¤¦¤ÈË¾¤à¾ì¹ç, 
-    ¥¯¥é¥¤¥¢¥ó¥È¤Ï¼¡¤ÎÊª¤òÁ÷¤ë:
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒçŸ¥ã‚‰ã‚Œã¦ã„ã‚‹å…¬é–‹éµã‚’ãƒªã‚¹ãƒˆã‚¢ãƒƒãƒ—ã—ã‚ˆã†ã¨æœ›ã‚€å ´åˆ, 
+    ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯æ¬¡ã®ç‰©ã‚’é€ã‚‹:
 
    	string    "list"
 
    The server will respond with zero or more of the following responses:
 
-   ¥µ¡¼¥Ğ¤Ï ¥¼¥í¤«¼¡¤Î¥ì¥¹¥İ¥ó¥¹¤ò1¤Ä°Ê¾åÁ÷¤ë.
+   ã‚µãƒ¼ãƒã¯ ã‚¼ãƒ­ã‹æ¬¡ã®ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã‚’1ã¤ä»¥ä¸Šé€ã‚‹.
 
    	string    "publickey"
    	string    public-key algorithm name
@@ -802,22 +802,22 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    Following the last "publickey" response, a status packet MUST be
    sent.
 
-   ºÇ¸å¤Î "publickey" ¥ì¥¹¥İ¥ó¥¹¤ËÂ³¤¤¤Æ, status ¥Ñ¥±¥Ã¥È¤¬
-   Á÷¤é¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   æœ€å¾Œã® "publickey" ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã«ç¶šã„ã¦, status ãƒ‘ã‚±ãƒƒãƒˆãŒ
+   é€ã‚‰ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    An implementation MAY choose not to support this request.
 
-   ¼ÂÁõ¤Ï¤³¤Î¥ê¥¯¥¨¥¹¥È¤ò¥µ¥İ¡¼¥È¤·¤Ê¤¤¤³¤È¤òÁªÂò¤·¤Æ¤â¤è¤¤.
+   å®Ÿè£…ã¯ã“ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’ã‚µãƒãƒ¼ãƒˆã—ãªã„ã“ã¨ã‚’é¸æŠã—ã¦ã‚‚ã‚ˆã„.
 
 3.5 Listing server capabilities
 
-3.5. ¥µ¡¼¥Ğ¤Îµ¡Ç½¤Î¥ê¥¹¥È¥¢¥Ã¥×
+3.5. ã‚µãƒ¼ãƒã®æ©Ÿèƒ½ã®ãƒªã‚¹ãƒˆã‚¢ãƒƒãƒ—
 
    If the client wishes to know which key attributes the server
    supports, it sends:
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤¬¥µ¡¼¥Ğ¤¬¥µ¥İ¡¼¥È¤¹¤ë¸°Â°À­¤òÃÎ¤í¤¦¤È¤¹¤ë¾ì¹ç,
-   ¤³¤ì¤òÁ÷¤ë:
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒã‚µãƒ¼ãƒãŒã‚µãƒãƒ¼ãƒˆã™ã‚‹éµå±æ€§ã‚’çŸ¥ã‚ã†ã¨ã™ã‚‹å ´åˆ,
+   ã“ã‚Œã‚’é€ã‚‹:
 
 
 
@@ -830,7 +830,7 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
 
    The server will respond with zero or more of the following responses:
 
-   ¥µ¡¼¥Ğ¤Ï ¥¼¥í¤«¼¡¤Î¥ì¥¹¥İ¥ó¥¹¤ò1¤Ä°Ê¾åÁ÷¤ë.
+   ã‚µãƒ¼ãƒã¯ ã‚¼ãƒ­ã‹æ¬¡ã®ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã‚’1ã¤ä»¥ä¸Šé€ã‚‹.
 
    	string    "attribute"
    	string    attribute name
@@ -843,21 +843,21 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    administrative settings of this nature, it MUST return false in the
    compulsory field.
 
-   "compulsory" ¥Õ¥£¡¼¥ë¥É¤Ï, ¥µ¡¼¥Ğ¾å¤Î´ÉÍı¤ÎÀßÄê¤Î¤¿¤á¤Ë,
-   ¤¢¤é¤æ¤ëÄÉ²Ã¤µ¤ì¤ë¸°¤Ë(Â°À­¤¬¥¯¥é¥¤¥¢¥ó¥È¤Ë¤è¤Ã¤Æ»ØÄê¤µ¤ì¤ë¤«¤É¤¦¤«¤Ë
-   ´Ø¤ï¤é¤º)¶¯À©Åª¤Ë¤³¤ÎÂ°À­¤¬Å¬ÍÑ¤µ¤ì¤ë¤«¤É¤¦¤«¤ò¼¨¤¹.
-   ¥µ¡¼¥Ğ¤¬¤³¤Î¼ê¤Î´ÉÍı¤ÎÀßÄê¤ò¥µ¥İ¡¼¥È¤·¤Ê¤¤¤Ê¤é, compulsory ¥Õ¥£¡¼¥ë¥É¤Ë
-   false ¤òÊÖ¤µ¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   "compulsory" ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¯, ã‚µãƒ¼ãƒä¸Šã®ç®¡ç†ã®è¨­å®šã®ãŸã‚ã«,
+   ã‚ã‚‰ã‚†ã‚‹è¿½åŠ ã•ã‚Œã‚‹éµã«(å±æ€§ãŒã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«ã‚ˆã£ã¦æŒ‡å®šã•ã‚Œã‚‹ã‹ã©ã†ã‹ã«
+   é–¢ã‚ã‚‰ãš)å¼·åˆ¶çš„ã«ã“ã®å±æ€§ãŒé©ç”¨ã•ã‚Œã‚‹ã‹ã©ã†ã‹ã‚’ç¤ºã™.
+   ã‚µãƒ¼ãƒãŒã“ã®æ‰‹ã®ç®¡ç†ã®è¨­å®šã‚’ã‚µãƒãƒ¼ãƒˆã—ãªã„ãªã‚‰, compulsory ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«
+   false ã‚’è¿”ã•ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    Following the last "attribute" response, a status packet MUST be
    sent.
 
-   ºÇ¸å¤Î "attribute" ¥ì¥¹¥İ¥ó¥¹¤ËÂ³¤¤¤Æ, status ¥Ñ¥±¥Ã¥È¤¬
-   Á÷¤é¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   æœ€å¾Œã® "attribute" ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã«ç¶šã„ã¦, status ãƒ‘ã‚±ãƒƒãƒˆãŒ
+   é€ã‚‰ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    An implementation MAY choose not to support this request.
 
-   ¼ÂÁõ¤Ï¤³¤Î¥ê¥¯¥¨¥¹¥È¤ò¥µ¥İ¡¼¥È¤·¤Ê¤¤¤³¤È¤òÁªÂò¤·¤Æ¤â¤è¤¤.
+   å®Ÿè£…ã¯ã“ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’ã‚µãƒãƒ¼ãƒˆã—ãªã„ã“ã¨ã‚’é¸æŠã—ã¦ã‚‚ã‚ˆã„.
 
 
 
@@ -897,17 +897,17 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
 
 4. Security Considerations
 
-4. ¥»¥­¥å¥ê¥Æ¥£¤Ë´Ø¤¹¤ë¹Í»¡
+4. ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã«é–¢ã™ã‚‹è€ƒå¯Ÿ
 
    This protocol assumes that it is run over a secure channel and that
    the endpoints of the channel have been authenticated.  Thus, this
    protocol assumes that it is externally protected from network-level
    attacks.
 
-   ¤³¤Î¥×¥í¥È¥³¥ë¤Ï, °ÂÁ´¤Ê¥Á¥ã¥ó¥Í¥ë¤Î¾å¤ÇÆ°¤¯¤³¤È¤È
-   ¥Á¥ã¥ó¥Í¥ë¤Î¥¨¥ó¥É¥İ¥¤¥ó¥ÈÆ±»Î¤¬Ç§¾Ú¤µ¤ì¤Æ¤¤¤ë¤³¤È¤ò²¾Äê¤¹¤ë
-   ¤½¤ì¤æ¤¨, ¤³¤Î¥×¥í¥È¥³¥ë¤Ï, ¥Í¥Ã¥È¥ï¡¼¥¯¥ì¥Ù¥ë¤Î¹¶·â¤«¤é
-   ³°Éô¤«¤éÊİ¸î¤µ¤ì¤Æ¤¤¤ë¤³¤È¤ò²¾Äê¤¹¤ë.
+   ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¯, å®‰å…¨ãªãƒãƒ£ãƒ³ãƒãƒ«ã®ä¸Šã§å‹•ãã“ã¨ã¨
+   ãƒãƒ£ãƒ³ãƒãƒ«ã®ã‚¨ãƒ³ãƒ‰ãƒã‚¤ãƒ³ãƒˆåŒå£«ãŒèªè¨¼ã•ã‚Œã¦ã„ã‚‹ã“ã¨ã‚’ä»®å®šã™ã‚‹
+   ãã‚Œã‚†ãˆ, ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¯, ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ãƒ¬ãƒ™ãƒ«ã®æ”»æ’ƒã‹ã‚‰
+   å¤–éƒ¨ã‹ã‚‰ä¿è­·ã•ã‚Œã¦ã„ã‚‹ã“ã¨ã‚’ä»®å®šã™ã‚‹.
 
    This protocol provides a mechanism that allows client authentication
    data to be uploaded and manipulated. It is the responsibility of the
@@ -921,16 +921,16 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    care that when doing this, clients are not able to override presets
    from the server's administrator.
 
-   ¤³¤Î¥×¥í¥È¥³¥ë¤Ï, ¥¯¥é¥¤¥¢¥ó¥ÈÇ§¾Ú¤Î¥Ç¡¼¥¿¤¬¥¢¥Ã¥×¥í¡¼¥É¤µ¤ìÁàºî¤µ¤ì¤ë
-   ¤³¤È¤òµö¤¹¥á¥«¥Ë¥º¥à¤òÄó¶¡¤¹¤ë. (¤³¤Î¥×¥í¥È¥³¥ë¤ËÂĞ¤·¤Æ³°Éô¤Ç,
-   Åµ·¿Åª¤Ë¤Ï SSH ¥æ¡¼¥¶Ç§¾Ú¥×¥í¥È¥³¥ë [3]¤ò»È¤Ã¤Æ, Ç§¾Ú¤µ¤ì¤ë)
-   ¤É¤ó¤Ê¥æ¡¼¥¶¤ËÂĞ¤·¤Æ¤âµö¤µ¤ì¤Æ¤¤¤ë¥¢¥¯¥»¥¹¤òÀ©¸Â¤¹¤ë¤³¤È¤¬É¬Í×¤È¤µ¤ì¤ë
-   ¥¢¥¯¥»¥¹À©¸æ¤ò¼Â»Ü¤¹¤ë¤³¤È¤¬¥µ¡¼¥Ğ¼ÂÁõ¤ÎÀÕÇ¤¤Ç¤¢¤ë.
-   ¤È¤ê¤ï¤±, ¤³¤Î¥×¥í¥È¥³¥ë¤Ç¥µ¡¼¥Ğ¾å¤Î¤¹¤Ç¤ËÂ¸ºß¤¹¤ë¸°¤ò
-   ¿·¤·¤¤¸°¤ËÂĞ¤·¤Æ¤¹¤Ç¤Ë¤¢¤Ã¤¿¤â¤Î¤è¤ê¾¯¤Ê¤¤À©¸Â¤ò»ØÄê¤·¤Æ
-   ¥æ¡¼¥¶¤¬¾å½ñ¤­¤¹¤ë¤³¤È¤¬²ÄÇ½¤À. ¥µ¡¼¥Ğ¤Ï, ¤³¤ì¤¬¹Ô¤ï¤ì¤Æ¤â¥¯¥é¥¤¥¢¥ó¥È¤Ï
-   ¥µ¡¼¥Ğ¤Î´ÉÍı¼Ô¤«¤é¥×¥ê¥»¥Ã¥È¤µ¤ì¤¿Â°À­¤ò¾å½ñ¤­¤Ç¤­¤Ê¤¤¤è¤¦¤Ë¤¹¤ë¤è¤¦¤Ë
-   ÇÛÎ¸¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
+   ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¯, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆèªè¨¼ã®ãƒ‡ãƒ¼ã‚¿ãŒã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã•ã‚Œæ“ä½œã•ã‚Œã‚‹
+   ã“ã¨ã‚’è¨±ã™ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚’æä¾›ã™ã‚‹. (ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã«å¯¾ã—ã¦å¤–éƒ¨ã§,
+   å…¸å‹çš„ã«ã¯ SSH ãƒ¦ãƒ¼ã‚¶èªè¨¼ãƒ—ãƒ­ãƒˆã‚³ãƒ« [3]ã‚’ä½¿ã£ã¦, èªè¨¼ã•ã‚Œã‚‹)
+   ã©ã‚“ãªãƒ¦ãƒ¼ã‚¶ã«å¯¾ã—ã¦ã‚‚è¨±ã•ã‚Œã¦ã„ã‚‹ã‚¢ã‚¯ã‚»ã‚¹ã‚’åˆ¶é™ã™ã‚‹ã“ã¨ãŒå¿…è¦ã¨ã•ã‚Œã‚‹
+   ã‚¢ã‚¯ã‚»ã‚¹åˆ¶å¾¡ã‚’å®Ÿæ–½ã™ã‚‹ã“ã¨ãŒã‚µãƒ¼ãƒå®Ÿè£…ã®è²¬ä»»ã§ã‚ã‚‹.
+   ã¨ã‚Šã‚ã‘, ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã§ã‚µãƒ¼ãƒä¸Šã®ã™ã§ã«å­˜åœ¨ã™ã‚‹éµã‚’
+   æ–°ã—ã„éµã«å¯¾ã—ã¦ã™ã§ã«ã‚ã£ãŸã‚‚ã®ã‚ˆã‚Šå°‘ãªã„åˆ¶é™ã‚’æŒ‡å®šã—ã¦
+   ãƒ¦ãƒ¼ã‚¶ãŒä¸Šæ›¸ãã™ã‚‹ã“ã¨ãŒå¯èƒ½ã . ã‚µãƒ¼ãƒã¯, ã“ã‚ŒãŒè¡Œã‚ã‚Œã¦ã‚‚ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯
+   ã‚µãƒ¼ãƒã®ç®¡ç†è€…ã‹ã‚‰ãƒ—ãƒªã‚»ãƒƒãƒˆã•ã‚ŒãŸå±æ€§ã‚’ä¸Šæ›¸ãã§ããªã„ã‚ˆã†ã«ã™ã‚‹ã‚ˆã†ã«
+   é…æ…®ã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
  
    This protocol requires the client to assume that the server will
    correctly implement and observe attributes applied to keys.
@@ -938,12 +938,12 @@ Internet-Draft     Secure Shell Public-Key Subsystem      September 2003
    keys for access they were not intended to have, or to apply fewer
    restrictions than were intended.
 
-   ¤³¤Î¥×¥í¥È¥³¥ë¤Ï, ¥µ¡¼¥Ğ¤¬¸°¤ËÅ¬ÍÑ¤µ¤ì¤ëÂ°À­¤ò
-   Àµ¤·¤¯¼ÂÁõ¤·´Ñ»¡¤¹¤ë¤³¤È¤ò¥¯¥é¥¤¥¢¥ó¥È¤¬²¾Äê¤¹¤ë¤³¤È¤òÉ¬Í×¤È¤¹¤ë.
-   ¥µ¡¼¥Ğ¤Ç¤Î¼ÂÁõ¤Î¥¨¥é¡¼¤Ï, ¥¯¥é¥¤¥¢¥ó¥È¤Ë
-   °Õ¿Ş¤µ¤ì¤Æ¤¤¤Ê¤«¤Ã¤¿¥¢¥¯¥»¥¹¤Ç¸°¤òÇ§¾Ú¤·¤¿¤ê,
-   °Õ¿Ş¤µ¤ì¤¿¤â¤Î¤è¤ê¤â¾¯¤Ê¤¤À©¸Â¤òÅ¬ÍÑ¤¹¤ë¤³¤È¤ò
-   °ú¤­µ¯¤³¤¹²ÄÇ½À­¤¬¤¢¤ë.
+   ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¯, ã‚µãƒ¼ãƒãŒéµã«é©ç”¨ã•ã‚Œã‚‹å±æ€§ã‚’
+   æ­£ã—ãå®Ÿè£…ã—è¦³å¯Ÿã™ã‚‹ã“ã¨ã‚’ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒä»®å®šã™ã‚‹ã“ã¨ã‚’å¿…è¦ã¨ã™ã‚‹.
+   ã‚µãƒ¼ãƒã§ã®å®Ÿè£…ã®ã‚¨ãƒ©ãƒ¼ã¯, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«
+   æ„å›³ã•ã‚Œã¦ã„ãªã‹ã£ãŸã‚¢ã‚¯ã‚»ã‚¹ã§éµã‚’èªè¨¼ã—ãŸã‚Š,
+   æ„å›³ã•ã‚ŒãŸã‚‚ã®ã‚ˆã‚Šã‚‚å°‘ãªã„åˆ¶é™ã‚’é©ç”¨ã™ã‚‹ã“ã¨ã‚’
+   å¼•ãèµ·ã“ã™å¯èƒ½æ€§ãŒã‚ã‚‹.
 
 
 

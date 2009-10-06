@@ -6,8 +6,8 @@ Expires: February 17, 2004                                    P. Remaker
                                                       Cisco Systems, Inc
                                                          August 19, 2003
 
-# ���� �ջ����� haruyama@unixuser.org
-# �Ѹ줬�󤤤�
+# 訳者 春山征吾 haruyama@unixuser.org
+# 英語が酷いよ
 
                     Session Channel Break Extension
                      draft-ietf-secsh-break-01.txt
@@ -117,7 +117,7 @@ Internet-Draft      Session Channel Break Extension          August 2003
 
 1. Introduction
 
-1. ����ȥ����������
+1. イントロダクション
 
    The SSH session channel provides a mechanism for the client-user to
    interactively enter commands and receive output from a remote host
@@ -125,11 +125,11 @@ Internet-Draft      Session Channel Break Extension          August 2003
    features.  SSH is increasingly being used to replace telnet for
    terminal access applications.
 
-   SSH ���å��������ͥ�� ���饤�����-�桼���� 
-   SSH �ȥ�󥹥ݡ��Ȥ���̩���ȴ���������ħ�����Ѥ��ʤ���
-   ���󥿥饯�ƥ��֤˥��ޥ�ɤ����Ϥ������⡼�ȥۥ��Ȥ���ν��Ϥ�����Ȥ�
-   �ᥫ�˥�����󶡤���. SSH �� �����ߥʥ륢���������ץꥱ�������Ȥ���
-   telnet ���֤������Ƥޤ��ޤ����Ѥ���Ƥ���.
+   SSH セッションチャンネルは クライアント-ユーザが 
+   SSH トランスポートの秘密性と完全性の特徴を利用しながら
+   インタラクティブにコマンドを入力したりリモートホストからの出力を受けとる
+   メカニズムを提供する. SSH は ターミナルアクセスアプリケーションとして
+   telnet を置き換えてますます利用されている.
 
    A common application of the telnet protocol is the "Console Server"
    [2] whereby a telnet NVT can be connected to a physical RS-232/V.24
@@ -140,25 +140,25 @@ Internet-Draft      Session Channel Break Extension          August 2003
    asynchronous serial port and generally expect the attached terminal
    to be capable of send a BREAK signal.
 
-   telnet �ץ��ȥ���ζ��̥��ץꥱ��������
-   telnet NVT ��ʪ��Ū�� RS-232/V.24 ��Ʊ���ݡ��Ȥ���³������
-   telnet NVT �򤽤Υݡ��Ȥ˥�������˷�ӤĤ��������ߥʥ�Τ褦��
-   �ߤ�, ����ʪ��Ū�ʥݡ��Ȥ�ͥåȥ��Ū�˻����ǽ�ʥǥХ����Ȥ���
-   �ߤ��� "Console Server"[2] ������. ¿���Υ᥸�㡼�ʷ׻�������٥����
-   ��Ʊ���Υ��ꥢ��ݡ��Ȥ��̤������٥�δ�����ǽ���󶡤��Ƥ���
-   ����Ū�˷�ӤĤ��������ߥʥ�� BREAK �����ʥ�����뤳�Ȥ���ǽ�Ǥ����
-   ���Ԥ��Ƥ���.
+   telnet プロトコルの共通アプリケーションに
+   telnet NVT を物理的な RS-232/V.24 非同期ポートに接続させて
+   telnet NVT をそのポートにローカルに結びつけたターミナルのように
+   みせ, その物理的なポートをネットワーク的に指定可能なデバイスとして
+   みせる "Console Server"[2] がある. 多数のメジャーな計算機機器ベンダが
+   非同期のシリアルポートを通した高レベルの管理機能を提供しており
+   一般的に結びつけたターミナルに BREAK シグナルを送ることが可能であると
+   期待している.
    
    A BREAK signal is defined as the TxD signal being held in a SPACE
    ("0") state for a time greater than a whole character time.  In
    practice, a BREAK signal is typically 250 to 500 ms in length.
 
-   BREAK �����ʥ�Ȥ� ���ΤΥ���饯�����֤���Ĺ������ SPACE ("0")
-   ���֤��ݻ������� TxD �����ʥ�Ȥ����������Ƥ���. �ºݤˤ�
-   BREAK �����ʥ��ŵ��Ū��Ĺ���ˤ��� 250 ���� 500 ms �Ǥ���.
+   BREAK シグナルとは 全体のキャラクタ時間よりも長い時間 SPACE ("0")
+   状態を保持させる TxD シグナルとして定義されている. 実際には
+   BREAK シグナルは典型的に長さにして 250 から 500 ms である.
 
 ###http://www.linux.or.jp/JM/html/LDP_man-pages/man3/termios.3.html
-tcsendbreak () ��ü������Ʊ���Υ��ꥢ��ǡ���ž�����Ѥ��Ƥ������, Ϣ³���� 0 �Υӥå�������ֳ֤�ž������. duration �� 0 �ξ���, 0 �ΥӥåȤ� 0.25 �ðʾ�, 0.5 �ðʲ��δֳ֤�ž������. duration �� 0 �Ǥʤ�����, 0 �ΥӥåȤ������¸�λ��ֳִ֤�����.
+tcsendbreak () は端末が非同期のシリアルデータ転送を用いている場合に, 連続した 0 のビット列を一定間隔で転送する. duration が 0 の場合は, 0 のビットを 0.25 秒以上, 0.5 秒以下の間隔で転送する. duration が 0 でない場合は, 0 のビットを実装依存の時間間隔で送る.
 ###
 
 
@@ -170,22 +170,22 @@ tcsendbreak () ��ü������Ʊ���Υ��ꥢ��ǡ���ž�����Ѥ��Ƥ������, Ϣ³���� 0 
    adminisrative functions available on an asynchronous serial console
    port.
 
-   telnet �ץ��ȥ����,
-   RFC0854 �����Τ褦��������Ƥ���,"¿���Υ����ƥ�Ǹ��ߥ�������ʰ�̣��
-   Ϳ�����Ƥ��� USASCII ���åȤγ��ˤ��륷���ʥ�",
-   "BREAK" �����ʥ��������ʤ������Ƥ���. ���󥽡��륵���Х٥����
-   TELNET BREAK �����ʥ��ʪ��Ū�� BREAK �����ʥ���Ȳ�᤹��.
-   ʪ��Ū�� BREAK �����ʥ����Ʊ���Υ��ꥢ�륳�󥽡���ݡ��Ȥ�
-   ������ǽ�Τ��٤Ƥ��ϰϤ�ͭ���ˤ���
-   ����������������Ȥ��Ǥ���.
+   telnet プロトコルは,
+   RFC0854 が次のように定義している,"多くのシステムで現在ローカルな意味を
+   与えられている USASCII セットの外にあるシグナル",
+   "BREAK" シグナルを送る手段を備えている. コンソールサーバベンダは
+   TELNET BREAK シグナルを物理的な BREAK シグナルだと解釈する.
+   物理的な BREAK シグナルは非同期のシリアルコンソールポートで
+   管理機能のすべての範囲を有効にする
+   アクセスを許すことができる.
 
 
    The lack of a similar facility in the SSH session channel has forced
    users to continue the use of telnet for the "Console Server"
    function.
 
-   SSH ���å��������ͥ��Ʊ�ͤʵ�ǽ����ǡ���Ƥ��뤳�Ȥ�,
-   "Console Server" ��ǽ�Τ���˥桼���� telnet ����Ѥ��뤳�Ȥ򶯤��Ƥ���.
+   SSH セッションチャンネルで同様な機能が欠如していることは,
+   "Console Server" 機能のためにユーザに telnet を使用することを強いている.
 
 
 
@@ -210,13 +210,13 @@ Internet-Draft      Session Channel Break Extension          August 2003
 
 2. The Break Request
 
-2. Break �׵�
+2. Break 要求
 
    The following following channel specific request can be sent to
    request that the remote host perform a BREAK operation.
 
-   ���Υ����ͥ���ͭ�Υꥯ�����Ȥ� ��⡼�ȥۥ��Ȥ� BREAK ����
-   �¹Ԥ���Τ�������.
+   次のチャンネル特有のリクエストは リモートホストで BREAK 操作を
+   実行するのに送られる.
 
 
            byte               SSH_MSG_CHANNEL_REQUEST
@@ -230,10 +230,10 @@ Internet-Draft      Session Channel Break Extension          August 2003
    default BREAK signal length of the chipset or underlying chipset
    driver SHOULD be sent.
    
-   BREAK length �����Υꥯ�����Ȥ�����Ȥ륢�ץꥱ��������
-   ���椵��ʤ����, BREAK length �ѥ�᡼����̵�뤵���ɬ�פ�����
-   ���åץ��åȤ䲼�ˤ�����åץ��åȥɥ饤�ФΥǥե���Ȥ�
-   BREAK signal length ��������ɬ�פ�����.
+   BREAK length がこのリクエストを受けとるアプリケーションで
+   制御されない場合, BREAK length パラメータは無視される必要があり
+   チップセットや下にあるチップセットドライバのデフォルトの
+   BREAK signal length が送られる必要がある.
 
    If the application receiving this request can control the
    BREAK-length, the following suggestions are made regarding BREAK
@@ -250,19 +250,19 @@ Internet-Draft      Session Channel Break Extension          August 2003
    default BREAK signal length of the chipset or underlying chipset
    driver.
 
-   ���Υꥯ�����Ȥ�����Ȥä����ץꥱ������� BREAK-length ������Ǥ���ʤ�
-   BREAK ��¸³���֤˴ؤ���ʲ��μ��������Ω��. 3000mx ����
-   �礭�� BREAK ��¸³�����׵������Ȥä���, 3000ms �� BREAK ���¹Ԥ����
-   ɬ�פ�����. ����� ����Ū�Ǥʤ�Ĺ�� BREAK �׵᤬ BREAK ��¹Ԥ���֤�
-   49.7 ���֥ݡ��Ȥ������Բ�ǽ�ˤ�����Τ��ɤ������.
-   ���Ĺ�� BREAK ��ɬ�פȤ��륢�ץꥱ�������Ϥ����׵��̵�뤹�뤳�Ȥ�
-   ����Ǥ�褤. 500ms ����û���� BREAK ��¸³���֤��׵ᤵ�줿�ʤ�, 
-   500ms �� BREAK ��������٤��Ǥ���.
-   ¿���ΥǥХ����� BREAK ��Ĺ������ǧ�����Ƥ��뤫���. ���ץꥱ�������
-   ���û���� BREAK ��ɬ�פȤ��Ƥ�����, ���μ�����̵�뤵��������.
-   BREAK-length �ѥ�᡼���� 0 �ʤ� BREAK �� 500ms �ʤ���
-   ���åץ��åȤ䲼�ˤ�����åץ��åȥɥ饤�ФΥǥե���Ȥ�
-   BREAK signal length ��������ɬ�פ�����.
+   このリクエストを受けとったアプリケーションが BREAK-length を制御できるなら
+   BREAK の存続時間に関する以下の示唆が役に立つ. 3000mx よりも
+   大きい BREAK の存続時間要求を受けとったら, 3000ms の BREAK が実行される
+   必要がある. これは 合理的でない長い BREAK 要求が BREAK を実行する間に
+   49.7 日間ポートを利用不可能にさせるのを防ぐためだ.
+   より長い BREAK を必要とするアプリケーションはこの要求を無視することを
+   選んでもよい. 500ms よりも短かい BREAK の存続期間が要求されたなら, 
+   500ms の BREAK が送られるべきである.
+   多くのデバイスが BREAK の長さだと認識しているからだ. アプリケーションが
+   より短かい BREAK を必要としている場合, この示唆は無視されるだろう.
+   BREAK-length パラメータが 0 なら BREAK は 500ms ないし
+   チップセットや下にあるチップセットドライバのデフォルトの
+   BREAK signal length が送られる必要がある.
 
 
    If the SSH connection does not terminate on a physical serial port,
@@ -272,11 +272,11 @@ Internet-Draft      Session Channel Break Extension          August 2003
    other out-of-band facility to get the attention of a system it
    manages.
 
-   SSH ����³��ʪ��Ū�ʥ��ꥢ��ݡ��Ȥǽ�λ����ʤ����,
-   BREAK �λؼ��� ����/����ߤΥ����ʥ�Ǥ��� BREAK �ΰ���Ū�ʻ��Ѥ�
-   ̷�⤷�ʤ���������Υޥʡ��ǽ��������ɬ�פ�����.�㤨��
-   �����ӥ��ץ����å���, ���줬�������륷���ƥ�����դ򤹤뤿���
-   ¾���̤��Ӱ賰��������Ȥ���ǽ��������.
+   SSH の接続が物理的なシリアルポートで終了されない場合,
+   BREAK の指示は 注意/割込みのシグナルである BREAK の一般的な使用と
+   矛盾しない実装定義のマナーで処理される必要がある.例えば
+   サービスプロセッサは, それが管理するシステムの注意をするために
+   他の別の帯域外の設備を使う可能性がある.
 
    In a case where an SSH connection cascades to another connection, the
    BREAK SHOULD be passed along the cascaded connection.  For example, a
@@ -284,11 +284,11 @@ Internet-Draft      Session Channel Break Extension          August 2003
    BREAK and an SSH client initited from a telnet connection SHOULD pass
    a BREAK indication from the telnet connection.
 
-   SSH ����³��¾����³�ȥ��������ɤ��Ƥ�����, BREAK ��
-   ���������ɤ��줿��³���̤�ɬ�פ�����. �㤨��,
-   SSH �����뤫��� telnet ���å����� SSH ������ BREAK �򱿤֤٤���,
-   telnet ��³����Ϥ��줿 SSH ���饤����Ȥ� telnet ��³�����
-   BREAK �ؼ����̤��٤��Ǥ���.
+   SSH の接続が他の接続とカスケードしている場合, BREAK は
+   カスケードされた接続を通す必要がある. 例えば,
+   SSH シェルからの telnet セッションは SSH 起源の BREAK を運ぶべきで,
+   telnet 接続から始められた SSH クライアントは telnet 接続からの
+   BREAK 指示を通すべきである.
 
    If the want_reply boolean is set, the server MUST reply using
    SSH_MSG_CHANNEL_SUCCESS or SSH_MSG_CHANNEL_FAILURE [5] messages.  If
@@ -306,12 +306,12 @@ Internet-Draft      Session Channel Break Extension          August 2003
 
    This operation SHOULD be supported by any general purpose SSH client.
 
-   want_reply �֡��ꥢ�󤬥��åȤ���Ƥ�����, �����Ф�
-   SSH_MSG_CHANNEL_SUCCESS or SSH_MSG_CHANNEL_FAILURE [5] ��å�������
-   �Ȥä���������ɬ�פ�����.�ɤ�ʼ���� BREAK �Ǥ�¹Ԥ��줿�ʤ�
-   SSH_MSG_CHANNEL_SUCCESS MUST �������ʤ���Фʤ�ʤ�.
-   BREAK ���¹Ԥ���ʤ��ä���, SSH_MSG_CHANNEL_FAILURE �������ʤ����
-   �ʤ�ʤ�
+   want_reply ブーリアンがセットされている場合, サーバは
+   SSH_MSG_CHANNEL_SUCCESS or SSH_MSG_CHANNEL_FAILURE [5] メッセージを
+   使って返答する必要がある.どんな種類の BREAK でも実行されたなら
+   SSH_MSG_CHANNEL_SUCCESS MUST が送られなければならない.
+   BREAK が実行されなかったら, SSH_MSG_CHANNEL_FAILURE が送られなければ
+   ならない
 
 
 
@@ -365,7 +365,7 @@ Internet-Draft      Session Channel Break Extension          August 2003
 
 3. Security Considerations
 
-3. �������ƥ��˴ؤ���ͻ�
+3. セキュリティに関する考察
 
    Many computer systems treat serial consoles as local and secured, and
    interpret a BREAK signal as an instruction to halt execution of the
@@ -376,24 +376,24 @@ Internet-Draft      Session Channel Break Extension          August 2003
    facility MAY be imlemented configurable or a per port or per server
    basis.
 
-   ¿���η׻��������ƥ�ϥ��ꥢ�륳�󥽡�����������ǰ����ʤ�ΤȤ���
-   ����, OS �μ¹Ԥ�ߤ�� �ʤ��� �ø������
-   ����⡼�ɤ�����̿��Ȥ��� BREAK �����ʥ���᤹��.
-   ���Τ���, BREAK ��ͭ���ʥݡ��Ȥؤ� SSH �Υ��������Ϥ��Τ褦�ʵ�ǽ��
-   �¹Ԥ���Ŭ�����ø�����ĥ桼�������¤���Ƥ��뤳�Ȥ��ݾڤ���
-   ���̤���θ��ʧ���ʤ���Фʤ�ʤ�. �����������,
-   BREAK ��ǽ�Υ��ݡ��Ȥ�, �����ǽ�� �ʤ��� �ݡ���ñ�̤ʤ���������ñ�̤�
-   �������Ƥ�褤.
+   多くの計算機システムはシリアルコンソールをローカルで安全なものとして
+   扱い, OS の実行を止める ないし 特権を持つ
+   設定モードへ入る命令として BREAK シグナルを解釈する.
+   このため, BREAK が有効なポートへの SSH のアクセスはそのような機能を
+   実行する適当な特権を持つユーザに制限されていることを保証する
+   特別な配慮が払われなければならない. いいかえれば,
+   BREAK 機能のサポートは, 設定可能に ないし ポート単位ないしサーバ単位で
+   実装してもよい.
 
    Implementations that literally intepret the BREAK length parameter
    without imposing the suggested BREAK  time limit may cause a denial
    of service to or unexpected results from attached devices receiving
    the very long BREAK signal.
 
-   �������줿 BREAK ���֤����¤�ݤ����Ȥʤ� BREAK length �ѥ�᡼��
-   �򤽤Τޤ޲�᤹������� ����Ĺ�� BREAK �����ʥ������Ȥä�
-   ��ӤĤ���줿�ǥХ����Υ����ӥ����ݤ�ǥХ�������δ��Ԥ���ʤ�	
-   ��̤�������������⤷��ʤ�.
+   示唆された BREAK 時間の制限を課すことなく BREAK length パラメータ
+   をそのまま解釈する実装は 非常に長い BREAK シグナルを受けとった
+   結びつけられたデバイスのサービス拒否やデバイスからの期待されない	
+   結果を引き起こすかもしれない.
    
 
 

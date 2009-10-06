@@ -4,8 +4,8 @@ Expires: March 5, 2004                                        W. Griffin
                                                                   SPARTA
                                                        September 5, 2003
 
-# ���� �ջ����� haruyama@unixuser.org
-# ��ƣ���� shudo@shudo.net ���� �������ʤɤ�ĺ���ޤ���.
+# 訳者 春山征吾 haruyama@unixuser.org
+# 首藤さん shudo@shudo.net から ご示唆などを頂きました.
 
            Using DNS to Securely Publish SSH Key Fingerprints
                       draft-ietf-secsh-dns-05.txt
@@ -38,15 +38,15 @@ Copyright Notice
 
 Abstract
 
-����
+概要
 
    This document describes a method to verify SSH host keys using
    DNSSEC. The document defines a new DNS resource record that contains
    a standard SSH key fingerprint.
 
-   ����ʸ���, DNSSEC �����Ѥ��� SSH �ۥ��ȸ��򸡾ڤ�����ˡ�ˤĤ���
-   ���Ҥ��Ƥ���. ����ʸ��� ɸ�� SSH �� �����ޤ� ������ DNS �Υ꥽-���쥳-��
-   ���������.
+   この文書は, DNSSEC を利用して SSH ホスト鍵を検証する方法について
+   記述している. この文書は 標準 SSH 鍵 指紋を含む 新しい DNS のリソ-スレコ-ド
+   を定義する.
 
 
 
@@ -120,17 +120,17 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
 
 1. Introduction
 
-1. ����ȥ����������
+1. イントロダクション
 
    The SSH [6] protocol provides secure remote login and other secure
    network services over an insecure network.  The security of the
    connection relies on the server authenticating itself to the client
    as well as the user authenticating itself to the server.
 
-   SSH [6] �ץ��ȥ����, �����ǤϤʤ��ͥåȥ�-���ۤ���
-   �����ʥ��-�ȥ��������¾��¾�ΰ����ʥͥåȥ�-����-�ӥ����󶡤���.
-   ��³�Υ������ƥ���, ��-�Ф��Ф����-����ǧ�ڤ�Ʊ�ͤ�
-   ���饤����Ȥ��Ф��륵-�Ф�ǧ�ڤ˰�¸���Ƥ���.
+   SSH [6] プロトコルは, 安全ではないネットワ-ク越しに
+   安全なリモ-トログインや他の他の安全なネットワ-クサ-ビスを提供する.
+   接続のセキュリティは, サ-バに対するユ-ザの認証と同様に
+   クライアントに対するサ-バの認証に依存している.
 
    If a connection is established to a server whose public key is not
    already known to the client, a fingerprint of the key is presented to
@@ -140,48 +140,48 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
    security-conscious users verify the fingerprint out-of-band before
    accepting the key, many users blindly accept the presented key.
 
-   ���������ޤ����饤����Ȥ��Τ��Ƥ��ʤ���-�Ф��Ф���
-   ��³����Ω������, ���λ��椬���ڤΤ����-�����󼨤����.
-   ���椬�������ȥ�-����Ƚ�Ǥ��������������, ���ϥ�-�������¸����
-   ���θ�Τ��٤Ƥ���³�θ��ڤΰ٤˻Ȥ���.�����Ф�����
-   �������ƥ��ռ��ι⤤��-���ϸ���������������
-   �Ӱ賰�� (������³�ʳ���) ����򸡾ڤ��뤱���, ¿���Υ�-�����󼨤��줿����
-   ����Ū�˼��������.
+   公開鍵がまだクライアントに知られていないサ-バに対して
+   接続が確立されると, 鍵の指紋が検証のためユ-ザに提示される.
+   指紋が正しいとユ-ザが判断し鍵を受け入れると, 鍵はロ-カルに保存され
+   その後のすべての接続の検証の為に使われる.いくばくかに
+   セキュリティ意識の高いユ-ザは鍵を受け入れる前に
+   帯域外で (その接続以外で) 指紋を検証するけれど, 多くのユ-ザは提示された鍵を
+   盲目的に受けいれる.
 
    The method described here can provide out-of-band verification by
    looking up a fingerprint of the server public key in the DNS [1][2]
    and using DNSSEC [5] to verify the lookup.
 
-   �����ǵ��Ҥ�����ˡ��, DNS [1][2] ��Ȥäƥ�-�Фθ������λ����Ĵ����,
-   ����Ĵ���� DNSSEC[5] ��ȤäƸ��ڤ��뤳�Ȥ��Ӱ賰�θ��ڤ��󶡤���.
+   ここで記述する方法は, DNS [1][2] を使ってサ-バの公開鍵の指紋を調査し,
+   その調査を DNSSEC[5] を使って検証することで帯域外の検証を提供する.
 
    In order to distribute the fingerprint using DNS, this document
    defines a new DNS resource record, "SSHFP", to carry the fingerprint.
 
-   DNS ��Ȥäƻ�������ۤ��뤿���, ����ʸ��Ͽ����� DNS �꥽-���쥳-��
-   "SSHFP" �� ����򱿤֤�����������.
+   DNS を使って指紋を配布するために, この文書は新しい DNS リソ-スレコ-ド
+   "SSHFP" を 指紋を運ぶために定義する.
 
    Basic understanding of the DNS system [1][2] and the DNS security
    extensions [5] is assumed by this document.
 
-   DNS �����ƥ� [1][2] �� DNS �������ƥ���ĥ�ˤĤ��Ƥδ���Ū�������
-   ����ʸ��Ǥϲ��ꤵ���.
+   DNS システム [1][2] と DNS セキュリティ拡張についての基本的な理解を
+   この文書では仮定される.
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in RFC 2119 [3].
 
-   ����ʸ��˽ФƤ���
-   "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT", "MAY" �Ȥ��ä�
-   ��-��-�ɤ� [RFC2119] �˵��Ҥ���Ƥ���褦�˲�ᤵ���.
+   この文書に出てくる
+   "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT", "MAY" といった
+   キ-ワ-ドは [RFC2119] に記述されているように解釈される.
 
 2. SSH Host Key Verification
 
-2. SSH �ۥ��ȸ�����
+2. SSH ホスト鍵検証
 
 2.1 Method
 
-2.1 ��ˡ
+2.1 方法
 
    Upon connection to a SSH server, the SSH client MAY look up the SSHFP
    resource record (s) for the host it is connecting to.  If the
@@ -190,15 +190,15 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
    record (s) returned from DNS, the client MAY accept the identity of
    the server.
 
-   SSH ��-�ФȤ���³��, SSH ���饤����Ȥ� ��³���褦�Ȥ��Ƥ���ۥ��Ȥ�
-   SSHFP �꥽-���쥳-�ɤ�Ĵ�٤Ƥ�褤. SSH ��-�Ф���������줿
-   ���Υ��르�ꥺ��Ȼ��椬 DNS �����֤äƤ��� SSHFP �꥽-���쥳-�ɤ�	
-   1 �Ĥȥ��르�ꥺ��Ȼ��椬���פ���ʤ�, ���饤����Ȥ�
-   ��-�Ф�Ʊ�������������Ƥ�褤.
+   SSH サ-バとの接続で, SSH クライアントは 接続しようとしているホストの
+   SSHFP リソ-スレコ-ドを調べてもよい. SSH サ-バから受け取られた
+   鍵のアルゴリズムと指紋が DNS から返ってきた SSHFP リソ-スレコ-ドの	
+   1 つとアルゴリズムと指紋が一致するなら, クライアントは
+   サ-バの同一性を受け入れてもよい.
 
 2.2 Implementation Notes
 
-2.2 �����������
+2.2 実装上の注意
 
    Client implementors SHOULD provide a configurable policy used to
    select the order of methods used to verify a host key. This document
@@ -219,15 +219,15 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
    prioritized. This will allow administrators to determine how much
    trust they want to place in the different methods.
 
-   ���饤����Ȥμ����Ԥϥۥ��ȸ��򸡺����뤿��˻Ȥ�����ˡ��
-   ��������򤹤뤿��˻Ȥ��������ǽ�ʥݥꥷ-���󶡤���ɬ�פ�����.
-   ����ʸ��� 1 �Ĥ���ˡ���������. DNS �λ��楹�ȥ�-��.
-   SSH ��-���ƥ����� [6] ���������Ƥ��̤���ˡ�Ǥ�,
-   ������¸������-����ե����뷲����Ӥ˻Ȥ�. �����������������
-   ¾����ˡ��, LDAP ���̤Υ�-����-���˻�����Ǽ���뤳�Ȥ�����.
-   �����ǽ�ʥݥꥷ-��, �ɤ���ˡ��Ȥ���������, �ɤ����������
-   ��ˡ��ͥ�褵���٤���������Ԥ����ꤹ�뤳�Ȥ����������.
-   �ۤʤ���ˡ�򤽤줾��ɤ줯�餤���Ѥ��뤫����ꤹ�뤳�Ȥ����������.
+   クライアントの実装者はホスト鍵を検査するために使われる方法の
+   順序を選択するために使われる設定可能なポリシ-を提供する必要がある.
+   この文書は 1 つの方法を定義する. DNS の指紋ストレ-ジ.
+   SSH ア-キテクチャ [6] で定義されてる別の方法では,
+   鍵を保存したロ-カルファイル群を比較に使う. 将来定義されるだろう
+   他の方法は, LDAP や別のデ-タベ-スに指紋を格納することだろう.
+   設定可能なポリシ-は, どの方法を使いたいかと, どういう順序で
+   方法が優先されるべきかを管理者が決定することを許すだろう.
+   異なる方法をそれぞれどれくらい信用するかを決定することも許すだろう.
 
    One specific scenario for having a configurable policy is where
    clients do not use fully qualified host names to connect to servers.
@@ -237,78 +237,78 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
    a DNS search path into the local resolver and forcing the client to
    connect to a different host.
 
-   �����ǽ�ʥݥꥷ-����ľ��� 1 �Ĥθ�ͭ�Υ��ʥꥪ��, 
-   ���饤����Ȥ���-�Фؤ���³�� FQDN ��Ȥ�ʤ���礬����.
-   ���Υ��ʥꥪ�Ǥ�, �����Ԥ�, DNS �����֤äƤ������ˤ�äƸ���
-   ���ڤ������˥�-����ʥ�-����-�����Ф��ƥۥ��ȸ��򸡾ڤ���
-   ɬ�פ�����. �����, ����Ԥ� DNS �����ѥ����-����Υ쥾��Ф�
-   ��������ǰۤʤ�ۥ��Ȥ˥��饤����Ȥ���³������Τ�
-   �ɤ��Τ�����������.
+   設定可能なポリシ-を持つ場合の 1 つの固有のシナリオに, 
+   クライアントがサ-バへの接続に FQDN を使わない場合がある.
+   このシナリオでは, 実装者は, DNS から返ってくる指紋によって鍵を
+   検証する前にロ-カルなデ-タベ-スに対してホスト鍵を検証する
+   必要がある. これは, 攻撃者が DNS 検索パスをロ-カルのレゾルバに
+   差し挟んで異なるホストにクライアントを接続させるのを
+   防ぐのを助けるだろう.
 
 2.3 Fingerprint Matching
 
-2.3 ����Υޥå���
+2.3 指紋のマッチング
 
    The public key and the SSHFP resource record are matched together by
    comparing algorithm number and fingerprint.
 
-   �������� SSHFP �꥽-���쥳-�ɤ� ���르�ꥺ����ֹ�Ȼ������Ӥˤ�ä�
-   �ߤ��˥ޥå�����.
+   公開鍵と SSHFP リソ-スレコ-ドは アルゴリズムの番号と指紋の比較によって
+   互いにマッチする.
 
       The public key algorithm and the SSHFP algorithm number MUST
       match.
 
-      ���������르����� SSHFP �Υ��르�ꥺ���ֹ�ϰ��פ��ʤ�Фʤ�ʤ�.
+      公開鍵アルゴズムと SSHFP のアルゴリズム番号は一致しなればならない.
 
       A message digest of the public key, using the message digest
       algorithm specified in the SSHFP fingerprint type, MUST match the
       SSHFP fingerprint.
 
-      SSHFP ���楿���פ�������줿��å�-�������������ȥ��르�ꥺ���Ȥä�
-      �������Υ�å�-�������������Ȥ� SSHFP �λ���Ȱ��פ��ʤ���Фʤ�ʤ�.
+      SSHFP 指紋タイプで定義されたメッセ-ジダイジェストアルゴリズムを使った
+      公開鍵のメッセ-ジダイジェストは SSHFP の指紋と一致しなければならない.
 			       
 2.4 Authentication
 
-2.4 ǧ��
+2.4 認証
 
    A public key verified using this method MUST NOT be trusted if the
    SSHFP resource record (RR) used for verification was not
    authenticated by a trusted SIG RR.
 
-   ������ˡ���Ѥ��Ƹ��ڤ��줿��������, ���θ��ڤ��Ѥ���줿 SSHFP
-   �꥽-���쥳-�� (RR) �� ���ꤵ�줿 SIG RR �ˤ�ä�ǧ�ڤ���Ƥ��ʤ�
-   �ʤ� ���Ѥ��ƤϤʤ�ʤ�.
+   この方法を用いて検証された公開鍵は, この検証で用いられた SSHFP
+   リソ-スレコ-ド (RR) が 信頼された SIG RR によって認証されていない
+   なら 信用してはならない.
 
    Clients that do validate the DNSSEC signatures themselves SHOULD use
    standard DNSSEC validation procedures.
 
-   DNSSEC ��̾���Τ�ΤǸ��ڤ�Ԥʤ����饤����Ȥ�, 
-   ɸ�� DNSSEC ���ڼ���Ȥ�ɬ�פ�����.
+   DNSSEC 署名そのもので検証を行なうクライアントは, 
+   標準 DNSSEC 検証手順を使う必要がある.
 
    Clients that do not validate the DNSSEC signatures themselves MUST
    use a secure transport, e.g. TSIG [9], SIG (0) [10] or IPsec [8],
    between themselves and the entity performing the signature
    validation.
 
-   DNSSEC ��̾���Τ�ΤǸ��ڤ�Ԥʤ�ʤ����饤����Ȥ�,
-   ��̾�Ƚ�̾�θ��ڤ�Ԥʤ�����ƥ��ƥ��δ֤�
-   �����ʥȥ�󥹥�-��, �㤨�� TSIG [9], SIG (0) [10], IPSec [8], ��
-   �Ȥ�ʤ���Фʤ�ʤ�.
+   DNSSEC 署名そのもので検証を行なわないクライアントは,
+   署名と署名の検証を行なうエンティティの間で
+   安全なトランスポ-ト, 例えば TSIG [9], SIG (0) [10], IPSec [8], を
+   使わなければならない.
 
 3. The SSHFP Resource Record
 
-3. SSHFP �꥽-���쥳-��
+3. SSHFP リソ-スレコ-ド
 
    The SSHFP resource record (RR) is used to store a fingerprint of a
    SSH public host key that is associated with a Domain Name System
    (DNS) name.
 
-   SSHFP �꥽-���쥳-�� (RR) �� DNS ̾�˴�Ϣ�դ��� SSH �����ۥ��ȸ���
-   ������ߤ���Τ˻Ȥ���.
+   SSHFP リソ-スレコ-ド (RR) は DNS 名に関連付いた SSH 公開ホスト鍵の
+   指紋を蓄えるのに使われる.
 
    The RR type code for the SSHFP RR is TBA.
 
-   SSHFP �� RR �����ץ�-�ɤ�̤���.
+   SSHFP の RR タイプコ-ドは未定だ.
    
 
 
@@ -320,13 +320,13 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
 
 3.1 The SSHFP RDATA Format
 
-3.1 SSHFP RDATA �ե�-�ޥå�
+3.1 SSHFP RDATA フォ-マット
 
    The RDATA for a SSHFP RR consists of an algorithm number, fingerprint
    type and the fingerprint of the public host key.
 
-   SSHFP RR �� RDATA �� ���르�ꥺ���ֹ�, ����μ���, �����ۥ��ȸ���
-   ���椫������.
+   SSHFP RR の RDATA は アルゴリズム番号, 指紋の種類, 公開ホスト鍵の
+   指紋から成る.
 
          1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3
          0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -341,13 +341,13 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
 
 3.1.1 Algorithm Number Specification
 
-3.1.1 ���르�ꥺ���ֹ����
+3.1.1 アルゴリズム番号仕様
 
    This algorithm number octet describes the algorithm of the public
    key.  The following values are assigned:
 
-   ���Υ��르�ꥺ���ֹ楪���ƥåȤϸ������Υ��르�ꥺ��򵭽Ҥ���.
-   �ʲ����ͤ������Ƥ��Ƥ���:
+   このアルゴリズム番号オクテットは公開鍵のアルゴリズムを記述する.
+   以下の値が割当てられている:
 
           Value    Algorithm name
           -----    --------------
@@ -357,19 +357,19 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
 
    Reserving other types requires IETF consensus [4].
 
-   ����¾�Υ����פ�ͽ��� IETF �ι�� [4] ��ɬ�פ�.
+   その他のタイプの予約は IETF の合意 [4] が必要だ.
 
 3.1.2 Fingerprint Type Specification
 
-3.1.2 ����μ��� ����
+3.1.2 指紋の種類 仕様
 
    The fingerprint type octet describes the message-digest algorithm
    used to calculate the fingerprint of the public key.  The following
    values are assigned:
    
-   ����μ��४���ƥåȤ�, �������λ����׻�����Τ˻Ȥ���
-   ��å�-�������������ȥ��르�ꥺ��򵭽Ҥ���.
-   �ʲ����ͤ������Ƥ��Ƥ���:   
+   指紋の種類オクテットは, 公開鍵の指紋を計算するのに使われる
+   メッセ-ジダイジェストアルゴリズムを記述する.
+   以下の値が割当てられている:   
 
           Value    Fingerprint type
           -----    ----------------
@@ -378,18 +378,18 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
 
    Reserving other types requires IETF consensus [4].
 
-   ����¾�Υ����פ�ͽ��� IETF �ι�� [4] ��ɬ�פ�.
+   その他のタイプの予約は IETF の合意 [4] が必要だ.
 
    For interoperability reasons, as few fingerprint types as possible
    should be reserved.  The only reason to reserve additional types is
    to increase security.
 
-   ��߱��ѤΤ����, ��ǽ�ʸ¤�鷺���ʻ���μ��बͽ�󤵤��٤���.
-   �ɲäμ����ͽ�󤹤�ͣ�����ͳ�� �������ƥ����������Ȥ�.
+   相互運用のために, 可能な限りわずかな指紋の種類が予約されるべきだ.
+   追加の種類を予約する唯一の理由は セキュリティを増すことだ.
 
 3.1.3 Fingerprint
 
-3.1.3 ����
+3.1.3 指紋
 
 
 Schlyter & Griffin       Expires March 5, 2004                  [Page 5]
@@ -400,36 +400,36 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
    The fingerprint is calculated over the public key blob as described
    in [7].
 
-   ����� [7] �˵��Ҥ���Ƥ���褦�� �������֥��֤���׻������.
+   指紋は [7] に記述されているように 公開鍵ブロブから計算される.
 
    The message-digest algorithm is presumed to produce an opaque octet
    string output which is placed as-is in the RDATA fingerprint field.
 
-   ��å�-�������������ȥ��르�ꥺ���
-   RDATA ����ե�-��ɤˤ��Τޤ����֤Ǥ������Ǥʤ������ƥå�ʸ����
-   �ν��Ϥ���������Ȳ��ꤵ���.
+   メッセ-ジダイジェストアルゴリズムは
+   RDATA 指紋フィ-ルドにそのまま配置できる空白でないオクテット文字列
+   の出力を生成すると仮定される.
    
 3.2 Presentation Format of the SSHFP RR
 
-3.2 SSHFP RR ��ɽ������
+3.2 SSHFP RR の表示形式
 
    The RDATA of the presentation format of the SSHFP resource record
    consists of two numbers (algorithm and fingerprint type) followed by
    the fingerprint itself presented in hex, e.g:
 
-   SSHFP �꥽-���쥳-�ɤ�ɽ�������� RDATA ��, 2 �Ĥ��ֹ� (���르�ꥺ���
-   ����μ���) �� 16 �ʤ�ɽ�蘆�줿���椽�Τ�Τ�³����Τ���ʤ�.
-   �㤨��:
+   SSHFP リソ-スレコ-ドの表示形式の RDATA は, 2 つの番号 (アルゴリズムと
+   指紋の種類) に 16 進で表わされた指紋そのものが続くものからなる.
+   例えば:
 
          host.example.  SSHFP 2 1 123456789abcdef67890123456789abcdef67890
 
    The use of mnemonics instead of numbers is not allowed.
 
-   ����������˥�-��˥å���Ȥ����Ȥϵ�����ʤ�.         
+   数字の代わりにニ-モニックを使うことは許されない.         
 
 4. Security Considerations
 
-4. �������ƥ��˴ؤ���ͻ�
+4. セキュリティに関する考察
 
    Currently, the amount of trust a user can realistically place in a
    server key is proportional to the amount of attention paid to
@@ -438,11 +438,11 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
    the fingerprint with something learned through a secured channel, the
    connection is vulnerable to a man-in-the-middle attack.
 
-   ����, ��-������-�и��˸���Ū�ˤ���ͤ뿮����̤�,
-   �󼨤��줿���������ºݤ˥�-�Ф���̩���ȴ�Ϣ���Ƥ��뤫�򸡾ڤ���
-   ���Ȥ��Ф���ʧ�����դ��̤����㤹��.
-   �����ʥ����ͥ���̤���������ΤȤ��λ���򸡾ڤ��뤳�Ȥʤ���
-   ��-�������������������³����ּԹ�����Ф����ȼ�Ȥʤ�.
+   現在, ユ-ザがサ-バ鍵に現実的にゆだねる信頼の量は,
+   提示された公開鍵が実際にサ-バの秘密鍵と関連しているかを検証する
+   ことに対して払う注意の量と比例する.
+   安全なチャンネルを通じて得たものとその指紋を検証することなしに
+   ユ-ザが鍵を受けいれると接続は中間者攻撃に対して脆弱となる.
 
    The overall security of using SSHFP for SSH host key verification is
    dependent on the security policies of the SSH host administrator and
@@ -450,35 +450,35 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
    aspects of how verification is done in the SSH implementation, and in
    the client's diligence in accessing the DNS in a secure manner.
 
-   SSH �Υۥ��ȸ��θ��ڤ� SSHFP ��Ȥ����Ȥ����ΤΥ������ƥ���
-   SSH �ۥ��ȴ����Ԥ� (���椬���Ф��) DNS ��-������ԤΥ������ƥ�
-   �ݥꥷ-�� SSH �μ����Ԥ��ɤΤ褦�˸��ڤ�Ѥޤ��뤫�κ٤����Ȥ�����
-   DNS �˰����ʼ�ˡ����³���륯�饤����Ȥι��ޤ�κ٤����Ȥ�����
-   �˰�¸����. 
+   SSH のホスト鍵の検証に SSHFP を使うことの全体のセキュリティは
+   SSH ホスト管理者と (指紋が運ばれる) DNS ゾ-ン管理者のセキュリティ
+   ポリシ-と SSH の実装者がどのように検証を済ませるかの細かいところと
+   DNS に安全な手法で接続するクライアントの骨折りの細かいところに
+   に依存する. 
 
    One such aspect is in which order fingerprints are looked up (e.g.
    first checking local file and then SSHFP).  We note that in addition
    to protecting the first-time transfer of host keys, SSHFP can
    optionally be used for stronger host key protection.
 
-   ���Τ褦�� 1 �̤�, �ɤν�ǻ���򸡺����뤫�� (�㤨��, �ǽ�˥�-����ե�����
-   ��, ���� SSHFP). �ǽ�Υۥ��ȸ���ž�����ݸ�뤳�Ȥ˲ä���,
-   SSHFP �� ��궯���ۥ��ȸ����ݸ��Ǥ�դǻȤ��뤳�Ȥ��Ǥ���
-   ���Ȥ���������.
+   そのような 1 面が, どの順で指紋を検索するかだ (例えば, 最初にロ-カルファイル
+   を, 次に SSHFP). 最初のホスト鍵の転送を保護することに加えて,
+   SSHFP は より強いホスト鍵の保護に任意で使われることができる
+   ことを注記する.
 
       If SSHFP is checked first, new SSH host keys may be distributed by
       replacing the corresponding SSHFP in DNS.
 
-      �⤷ SSHFP ���ǽ�˸��������ʤ�, ������ SSH �ۥ��ȸ���
-      DNS ���б����� SSHFP ���֤������뤳�Ȥ����ۤ���뤫�⤷��ʤ�.
+      もし SSHFP が最初に検査されるなら, 新しい SSH ホスト鍵は
+      DNS の対応する SSHFP を置き換えることで配布されるかもしれない.
 
       If SSH host key verification can be configured to require SSHFP,
       SSH host key revocation can be implemented by removing the
       corresponding SSHFP from DNS.
       
-      SSH �ۥ��ȸ����ڤ� SSHFP ��ɬ�פȤ���褦�����ꤵ�줿�ʤ�,
-      SSH �ۥ��ȸ����ѻߤ� DNS ���б����� SSHFP �����뤳�Ȥ�
-      �¹Ԥ���������.
+      SSH ホスト鍵検証が SSHFP を必要とするように設定されたなら,
+      SSH ホスト鍵の廃止は DNS の対応する SSHFP を除去することで
+      実行されるだろう.
 
    As stated in Section 2.2, we recommend that SSH implementors provide
    a policy mechanism to control the order of methods used for host key
@@ -498,15 +498,15 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
    a DNS search path into the local resolver and forcing the client to
    connect to a different host.
 
-   ��������� 2.2 �ǽҤ٤��褦��, SSH �μ����Ԥ�
-   �ۥ��ȸ����ڤǻȤ�����ˡ�ν�������椹��ݥꥷ-�ᥫ�˥����
-   �󶡤��뤳�Ȥ�侩����. �����ǽ�ʥݥꥷ-����ľ��� 1 �Ĥθ�ͭ��
-   ���ʥꥪ��, ���饤����Ȥ���-�Ф˷Ҥ������ �����Ǥʤ��ۥ���̾��
-   �Ȥ���礬����. ���ξ��, SSH �μ����Ԥ� DNS �����֤����ˤ��
-   ���θ��ڤ������, ��-����ʥ�-����-�����Ф���ۥ��ȸ��θ��ڤ򤹤뤳��
-   ��侩����. �����, ����Ԥ� DNS �����ѥ����-����Υ쥾��Ф�
-   ��������ǰۤʤ�ۥ��Ȥ˥��饤����Ȥ���³������Τ�
-   �ɤ��Τ�����������.
+   セクション 2.2 で述べたように, SSH の実装者は
+   ホスト鍵検証で使われる方法の順序を制御するポリシ-メカニズムを
+   提供することを推奨する. 設定可能なポリシ-を持つ場合の 1 つの固有の
+   シナリオに, クライアントがサ-バに繋ぐために 正規でないホスト名を
+   使う場合がある. この場合, SSH の実装者は DNS から返る指紋による
+   鍵の検証より前に, ロ-カルなデ-タベ-スに対するホスト鍵の検証をすること
+   を推奨する. これは, 攻撃者が DNS 検索パスをロ-カルのレゾルバに
+   差し挟んで異なるホストにクライアントを接続させるのを
+   防ぐのを助けるだろう.
 
    A different approach to solve the DNS search path issue would be for
    clients to use a trusted DNS search path, i.e., one not acquired
@@ -515,13 +515,13 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
    from a trusted source, the entire client system would need to be
    configured with this trusted DNS search path.
 
-   DNS �����ѥ�������褹���̤Υ��ץ�-����, 
-   ���饤����Ȥ����ꤵ�줿 DNS �����ѥ�, ���ʤ��, DHCP ��¾��
-   ��ư����ᥫ�˥��������줿��ΤǤϤʤ��ѥ�, 
-   �����Ѥ��뤳�Ȥ�����. ���ߤ� DNS ���� API �ˤ�
-   �����ѥ������ꤵ�줿��-������Τ�Τ���Ƚ�Ǥ�����ˡ���ʤ��Τ�,
-   ���ΤΥ��饤����ȤΥ����ƥ�� ������ DNS �����ѥ���
-   ���ꤵ���ɬ�פ����������.
+   DNS 検索パス問題を解決する別のアプロ-チに, 
+   クライアントが信頼された DNS 検索パス, すなわち, DHCP や他の
+   自動設定メカニズムで得られたものではないパス, 
+   を利用することがある. 現在の DNS 検索 API には
+   検索パスが信頼されたソ-スからのものかを判断する方法がないので,
+   全体のクライアントのシステムに 安全な DNS 検索パスが
+   設定される必要があるだろう.
 
    Another dependency is on the implementation of DNSSEC itself.  As
    stated in Section 2.4, we mandate the use of secure methods for
@@ -529,11 +529,11 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
    is especially important if SSHFP is to be used as a basis for host
    key rollover and/or revocation, as described above.
 
-   ����� DNSSEC ���Ȥμ����˰�¸���Ƥ���. ��������� 2.4 �ǽҤ٤��褦��,
-   �桹��, �����Τ���ΰ�������ˡ�λ��Ѥ�
-   SSHFP RR �� ���ꤵ�줿 SIG RR �ˤ�ä�ǧ�ڤ���뤳�Ȥ�
-   ���Ǥ����. ��ǽҤ٤��褦�� SSHFP �� �ۥ��ȸ����ִ� ��/�⤷���� �ѻ�
-   �δ��äȤ��ƻȤ���ʤ�, ��������˽��פ�.
+   さらに DNSSEC 自身の実装に依存している. セクション 2.4 で述べたように,
+   我々は, 検索のための安全な方法の使用と
+   SSHFP RR は 信頼された SIG RR によって認証されることを
+   を委任する. 上で述べたように SSHFP が ホスト鍵の置換 と/もしくは 廃止
+   の基礎として使われるなら, これは非常に重要だ.
 
    Since DNSSEC only protects the integrity of the host key fingerprint
    after it is signed by the DNS zone administrator, the fingerprint
@@ -544,30 +544,30 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
    different from other key enrollment situations, e.g. a client sending
    a certificate request to a certificate authority for signing.
 
-   DNSSEC ��, DNS ��-������Ԥ���̾������ǥۥ��ȸ�����δ�������
-   �ݸ������ʤΤ�, ����� SSH �Υۥ��ȴ����Ԥ��� DNS ��-������Ԥ˴�����
-   ž������ʤ���Фʤ�ʤ�. �����, �����Դ֤Ǽ�ư�ǹԤʤ��Ƥ⤤����
-   SSH ��-�Фȥ�-�ॵ-�Фδ֤Ǥ� ������ DNS ưŪ���åץ�-�� [11]
-   ��ȤäƼ�ưŪ�˹Ԥʤ��Ƥ�褤. ������̤θ�����Ͽ����������
-   �ۤʤ뤳�ȤϤʤ� (�㤨��, 
-   ��̾�Τ����ǧ�ڶɤؾ�����Υꥯ�����Ȥ����륯�饤����ȤΤ褦��)
-   ���Ȥ��������Ƥ���.
+   DNSSEC は, DNS ゾ-ン管理者が署名した後でホスト鍵指紋の完全性を
+   保護するだけなので, 指紋は SSH のホスト管理者から DNS ゾ-ン管理者に完全に
+   転送されなければならない. これは, 管理者間で手動で行なわれてもいいし
+   SSH サ-バとネ-ムサ-バの間での 安全な DNS 動的アップデ-ト [11]
+   を使って自動的に行なわれてもよい. これは別の鍵が登録される状況と
+   異なることはない (例えば, 
+   署名のための認証局へ証明書のリクエストを送るクライアントのように)
+   ことを注記しておく.
 
 5. IANA Considerations
 
-5. IANA �˴ؤ���ͻ�
+5. IANA に関する考察
 
    IANA needs to allocate a RR type code for SSHFP from the standard RR
    type space (type 44 requested).
 
-   IANA �� ɸ�� RR �����׶��֤��� SSHFP �Τ���� RR �����ץ�-�ɤ�
-   �����Ƥ�ɬ�פ����� (������ 44 ���׵ᤵ��Ƥ���)
+   IANA は 標準 RR タイプ空間から SSHFP のための RR タイプコ-ドを
+   割当てる必要がある (タイプ 44 が要求されている)
 
    IANA needs to open a new registry for the SSHFP RR type for public
    key algorithms.  Defined types are:
 
-   IANA �ϸ��������르�ꥺ��Τ���� SSHFP RR �����פΤ���ο������쥸���ȥ��
-   ���ɬ�פ�����. ������줿�����פϰʲ����̤��:
+   IANA は公開鍵アルゴリズムのために SSHFP RR タイプのための新しいレジストリを
+   作る必要がある. 定義されたタイプは以下の通りだ:
 
          0 is reserved
          1 is RSA
@@ -575,21 +575,21 @@ Internet-Draft          DNS and SSH Fingerprints          September 2003
 
     Adding new reservations requires IETF consensus [4].
 
-    ������ͽ����ɲä���ˤ� IETF ��Ʊ�դ�ɬ�פ� [4]. 
+    新しい予約を追加するには IETF の同意が必要だ [4]. 
 
    IANA needs to open a new registry for the SSHFP RR type for
    fingerprint types.  Defined types are:
 
-   IANA �ϻ���μ���Τ���� SSHFP RR �����פΤ���ο������쥸���ȥ��
-   ���ɬ�פ�����. 
-   ������줿�����פϰʲ����̤��:
+   IANA は指紋の種類のために SSHFP RR タイプのための新しいレジストリを
+   作る必要がある. 
+   定義されたタイプは以下の通りだ:
 
          0 is reserved
          1 is SHA-1
 
     Adding new reservations requires IETF consensus [4].
 
-    ������ͽ����ɲä���ˤ� IETF ��Ʊ�դ�ɬ�פ� [4]. 
+    新しい予約を追加するには IETF の同意が必要だ [4]. 
 
 Schlyter & Griffin       Expires March 5, 2004                  [Page 7]
 

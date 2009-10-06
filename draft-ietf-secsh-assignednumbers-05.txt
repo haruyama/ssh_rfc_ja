@@ -4,7 +4,7 @@ Expires: March 31, 2004                                   D. Moffat, Ed.
                                                         Sun Microsystems
                                                                 Oct 2003
 
-# Ìõ¼Ô ½Õ»³À¬¸ã haruyama@unixuser.org
+# è¨³è€… æ˜¥å±±å¾å¾ haruyama@unixuser.org
 
                      SSH Protocol Assigned Numbers
                 draft-ietf-secsh-assignednumbers-05.txt
@@ -114,7 +114,7 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
 
 1. Introduction
 
-1. ¥¤¥ó¥È¥í¥À¥¯¥·¥ç¥ó
+1. ã‚¤ãƒ³ãƒˆãƒ­ãƒ€ã‚¯ã‚·ãƒ§ãƒ³
 
    This document does not define any new protocols.  It is intended only
    to create the initial state of the IANA databases for the SSH
@@ -123,12 +123,12 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
    number ranges not already defined in: [SSH-ARCH], [SSH-TRANS],
    [SSH-USERAUTH], [SSH-CONNECT]
 
-   ¤³¤Î¥É¥­¥å¥á¥ó¥È¤Ï²¿¤â¿·¤·¤¤¥×¥í¥È¥³¥ë¤òÄêµÁ¤·¤Ê¤¤. 
-   SSH¥×¥í¥È¥³¥ë¤Î¤¿¤á¤Î IANA¥Ç¡¼¥¿¥Ù¡¼¥¹¤Î½é´üÃÍ¤òºî¤ë¤¿¤á¤À¤±
-   ¤Î¤â¤Î¤À. °ì¤Ä¤Î*Îò»ËÅª¤Ê*,°ìÈÌ¤Ë»şÂåÃÙ¤ì¤È¤µ¤ì¤Æ¤¤¤ë ,¥¢¥ë¥´¥ê¥º¥à¤ò
-   ½ü¤¤¤Æ, ¤³¤ÎÊ¸½ñ¤Ï  [SSH-ARCH], [SSH-TRANS], [SSH-USERAUTH],
-   [SSH-CONNECT]¤ÇÄêµÁ¤µ¤ì¤Æ¤¤¤Ê¤¤¿·¤·¤¤¥×¥í¥È¥³¥ë¤â¿ô¤ÎÈÏ°Ï¤â
-   ÄêµÁ¤·¤Ê¤¤.
+   ã“ã®ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã¯ä½•ã‚‚æ–°ã—ã„ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã‚’å®šç¾©ã—ãªã„. 
+   SSHãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ãŸã‚ã® IANAãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã®åˆæœŸå€¤ã‚’ä½œã‚‹ãŸã‚ã ã‘
+   ã®ã‚‚ã®ã . ä¸€ã¤ã®*æ­´å²çš„ãª*,ä¸€èˆ¬ã«æ™‚ä»£é…ã‚Œã¨ã•ã‚Œã¦ã„ã‚‹ ,ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’
+   é™¤ã„ã¦, ã“ã®æ–‡æ›¸ã¯  [SSH-ARCH], [SSH-TRANS], [SSH-USERAUTH],
+   [SSH-CONNECT]ã§å®šç¾©ã•ã‚Œã¦ã„ãªã„æ–°ã—ã„ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã‚‚æ•°ã®ç¯„å›²ã‚‚
+   å®šç¾©ã—ãªã„.
 
 2. Conventions Used in This Document
 
@@ -144,57 +144,57 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
 
 3. IANA Considerations
 
-3. IANA ¤Î¤¿¤á¤Î¹Í»¡
+3. IANA ã®ãŸã‚ã®è€ƒå¯Ÿ
 
 3.1 Message Numbers
 
-3.1 ¥á¥Ã¥»¡¼¥¸¤Î¥Ê¥ó¥Ğ¡¼
+3.1 ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ãƒŠãƒ³ãƒãƒ¼
 
    The Message Number is an 8-bit value, which describes the payload of
    a packet.
 
-   ¥á¥Ã¥»¡¼¥¸¥Ê¥ó¥Ğ¡¼¤Ï8-bit¤ÎÃÍ¤Ç, ¥Ñ¥±¥Ã¥È¤Î¥Ú¥¤¥í¡¼¥É¤òµ­½Ò¤¹¤ë.
+   ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒŠãƒ³ãƒãƒ¼ã¯8-bitã®å€¤ã§, ãƒ‘ã‚±ãƒƒãƒˆã®ãƒšã‚¤ãƒ­ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹.
 
    Protocol packets have message numbers in the range 1 to 255.  These
    numbers have been allocated as follows in [SSH-ARCH]:
 
-   ¥×¥í¥È¥³¥ë¤Î¥Ñ¥±¥Ã¥È¤Ï 1¤«¤é255¤Ş¤Ç¤ÎÈÏ°Ï¤Î¥á¥Ã¥»¡¼¥¸¥Ê¥ó¥Ğ¡¼¤ò»ı¤Ä.
-   ¤³¤ì¤é¤Î¿ô¤Ï, ¼¡¤Ë¤è¤¦¤Ë[SSH-ARCH]¤Ç³äÅö¤Æ¤é¤ì¤Æ¤­¤¿.
+   ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ãƒ‘ã‚±ãƒƒãƒˆã¯ 1ã‹ã‚‰255ã¾ã§ã®ç¯„å›²ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒŠãƒ³ãƒãƒ¼ã‚’æŒã¤.
+   ã“ã‚Œã‚‰ã®æ•°ã¯, æ¬¡ã«ã‚ˆã†ã«[SSH-ARCH]ã§å‰²å½“ã¦ã‚‰ã‚Œã¦ããŸ.
 
      Transport layer protocol:
 
-     ¥È¥é¥ó¥¹¥İ¡¼¥ÈÁØ¥×¥í¥È¥³¥ë:
+     ãƒˆãƒ©ãƒ³ã‚¹ãƒãƒ¼ãƒˆå±¤ãƒ—ãƒ­ãƒˆã‚³ãƒ«:
 
        1 to 19    Transport layer generic (e.g. disconnect, ignore, debug, etc.)
        20 to 29   Algorithm negotiation
        30 to 49   Key exchange method specific (numbers can be reused for
                   different authentication methods)
 
-       1 to 19    ¥È¥é¥ó¥¹¥İ¡¼¥ÈÁØÆÃÍ­ (¤¹¤Ê¤ï¤Á, ÀÚÃÇ, Ìµ»ë, ¥Ç¥Ğ¥Ã¥°¤Ê¤É)
-       20 to 29   ¥¢¥ë¥´¥ê¥º¥à¤Î¥Í¥´¥·¥¨¡¼¥·¥ç¥ó
-       30 to 49   ¸°¸ò´¹Ë¡ÆÃÍ­(ÊÌ¤ÎÇ§¾ÚË¡¤Ç¿ô¤òºÆÍøÍÑ¤·¤Æ¤â¤¤¤¤)
+       1 to 19    ãƒˆãƒ©ãƒ³ã‚¹ãƒãƒ¼ãƒˆå±¤ç‰¹æœ‰ (ã™ãªã‚ã¡, åˆ‡æ–­, ç„¡è¦–, ãƒ‡ãƒãƒƒã‚°ãªã©)
+       20 to 29   ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã®ãƒã‚´ã‚·ã‚¨ãƒ¼ã‚·ãƒ§ãƒ³
+       30 to 49   éµäº¤æ›æ³•ç‰¹æœ‰(åˆ¥ã®èªè¨¼æ³•ã§æ•°ã‚’å†åˆ©ç”¨ã—ã¦ã‚‚ã„ã„)
 
      User authentication protocol:
 
-     ¥æ¡¼¥¶Ç§¾Ú¥×¥í¥È¥³¥ë:
+     ãƒ¦ãƒ¼ã‚¶èªè¨¼ãƒ—ãƒ­ãƒˆã‚³ãƒ«:
 
        50 to 59   User authentication generic
        60 to 79   User authentication method specific (numbers can be
                   reused for different authentication methods)
 
-       50 to 59   ¥æ¡¼¥¶Ç§¾ÚÆÃÍ­
-       60 to 79   ¥æ¡¼¥¶Ç§¾ÚË¡ÆÃÍ­ (ÊÌ¤ÎÇ§¾ÚË¡¤Ç¿ô¤òºÆÍøÍÑ¤·¤Æ¤â¤¤¤¤)
+       50 to 59   ãƒ¦ãƒ¼ã‚¶èªè¨¼ç‰¹æœ‰
+       60 to 79   ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•ç‰¹æœ‰ (åˆ¥ã®èªè¨¼æ³•ã§æ•°ã‚’å†åˆ©ç”¨ã—ã¦ã‚‚ã„ã„)
 		  
 
      Connection protocol:
 
-     ¥³¥Í¥¯¥·¥ç¥ó¥×¥í¥È¥³¥ë:
+     ã‚³ãƒã‚¯ã‚·ãƒ§ãƒ³ãƒ—ãƒ­ãƒˆã‚³ãƒ«:
 
        80 to 89   Connection protocol generic
        90 to 127  Channel related messages
 
-       80 to 89   ¥³¥Í¥¯¥·¥ç¥ó¥×¥í¥È¥³¥ëÆÃÍ­
-       90 to 127  ¥á¥Ã¥»¡¼¥¸¤Ë´ØÏ¢¤¹¤ë¥Á¥ã¥ó¥Í¥ë
+       80 to 89   ã‚³ãƒã‚¯ã‚·ãƒ§ãƒ³ãƒ—ãƒ­ãƒˆã‚³ãƒ«ç‰¹æœ‰
+       90 to 127  ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã«é–¢é€£ã™ã‚‹ãƒãƒ£ãƒ³ãƒãƒ«
 
 
 Lehtinen & Moffat        Expires March 31, 2004                 [Page 3]
@@ -204,19 +204,19 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
 
      Reserved for client protocols:
 
-     ¥¯¥é¥¤¥¢¥ó¥È¥×¥í¥È¥³¥ë¤Î¤¿¤á¤ÎÍ½Ìó:
+     ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ãŸã‚ã®äºˆç´„:
 
        128 to 191 Reserved
 
-       128 to 191 Í½Ìó
+       128 to 191 äºˆç´„
 
      Local extensions:
 
-     ¥í¡¼¥«¥ë¤Ê³ÈÄ¥:
+     ãƒ­ãƒ¼ã‚«ãƒ«ãªæ‹¡å¼µ:
 
        192 to 255 Local extensions
 
-       192 to 255 ¥í¡¼¥«¥ë¤Ê³ÈÄ¥
+       192 to 255 ãƒ­ãƒ¼ã‚«ãƒ«ãªæ‹¡å¼µ
 
    Requests for assignments of new message numbers must be accompanied
    by an RFC which describes the new packet type.  If the RFC is not on
@@ -224,11 +224,11 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
    RFC), it must be explicitly reviewed and approved by the IESG before
    the RFC is published and the message number is assigned.
 
-   ¿·¤·¤¤¥á¥Ã¥»¡¼¥¸¥Ê¥ó¥Ğ¡¼¤Î³ä¤êÅö¤Æ¤ÎÍ×µá¤Ï
-   ¿·¤·¤¤¥Ñ¥±¥Ã¥È¤Î¼ïÎà¤òµ­½Ò¤¹¤ëRFC¤òÈ¼¤ï¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
-   ¤½¤ÎRFC¤¬ É¸½à²½²İÄø¤Î¤â¤Î¤Ç¤Ê¤¤¤Ê¤é(¤¹¤Ê¤ï¤Á, informational ¤« ¼Â¸³Åª
-   RFC ¤Ê¤é), ¤½¤ÎRFC¤¬¸ø³«¤µ¤ì¥á¥Ã¥»¡¼¥¸¥Ê¥ó¥Ğ¡¼¤¬³ä¤êÅö¤Æ¤é¤ì¤ë¤è¤êÁ°¤Ë
-   IESG¤Ë¤è¤Ã¤ÆÌÀÇò¤Ë¥ì¥Ó¥å¡¼¤µ¤ì¾µÇ§¤µ¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   æ–°ã—ã„ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒŠãƒ³ãƒãƒ¼ã®å‰²ã‚Šå½“ã¦ã®è¦æ±‚ã¯
+   æ–°ã—ã„ãƒ‘ã‚±ãƒƒãƒˆã®ç¨®é¡ã‚’è¨˜è¿°ã™ã‚‹RFCã‚’ä¼´ã‚ãªã‘ã‚Œã°ãªã‚‰ãªã„.
+   ãã®RFCãŒ æ¨™æº–åŒ–èª²ç¨‹ã®ã‚‚ã®ã§ãªã„ãªã‚‰(ã™ãªã‚ã¡, informational ã‹ å®Ÿé¨“çš„
+   RFC ãªã‚‰), ãã®RFCãŒå…¬é–‹ã•ã‚Œãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒŠãƒ³ãƒãƒ¼ãŒå‰²ã‚Šå½“ã¦ã‚‰ã‚Œã‚‹ã‚ˆã‚Šå‰ã«
+   IESGã«ã‚ˆã£ã¦æ˜ç™½ã«ãƒ¬ãƒ“ãƒ¥ãƒ¼ã•ã‚Œæ‰¿èªã•ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    Message ID                            Value    Reference
    -----------                           -----    ---------
@@ -273,14 +273,14 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
 
 3.1.1 Disconnect Codes
 
-3.1.1 ÀÚÃÇ¥³¡¼¥É
+3.1.1 åˆ‡æ–­ã‚³ãƒ¼ãƒ‰
 
    The Disconnect code is an 8-bit value, which describes the disconnect
    reason. Requests for assignments of new disconnect codes must be
    accompanied by an RFC which describes the new disconnect reason code.
 
-   ÀÚÃÇ¥³¡¼¥É¤Ï8-bit¤ÎÃÍ¤Ç, ÀÚÃÇ¤ÎÍıÍ³¤òµ­½Ò¤¹¤ë.  ¿·¤·¤¤ÀÚÃÇ¥³¡¼¥É¤Î
-   ³ä¤êÅö¤Æ¤ÎÍ×µá¤Ï, ¿·¤·¤¤ÀÚÃÇÍıÍ³¥³¡¼¥É¤òµ­½Ò¤¹¤ëRFC¤òÈ¼¤ï¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   åˆ‡æ–­ã‚³ãƒ¼ãƒ‰ã¯8-bitã®å€¤ã§, åˆ‡æ–­ã®ç†ç”±ã‚’è¨˜è¿°ã™ã‚‹.  æ–°ã—ã„åˆ‡æ–­ã‚³ãƒ¼ãƒ‰ã®
+   å‰²ã‚Šå½“ã¦ã®è¦æ±‚ã¯, æ–°ã—ã„åˆ‡æ–­ç†ç”±ã‚³ãƒ¼ãƒ‰ã‚’è¨˜è¿°ã™ã‚‹RFCã‚’ä¼´ã‚ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    Disconnect code                                 Value  Reference
    ----------------                                -----  ---------
@@ -303,7 +303,7 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
 
 3.2 Service Names
 
-3.2 ¥µ¡¼¥Ó¥¹Ì¾.
+3.2 ã‚µãƒ¼ãƒ“ã‚¹å.
 
    The Service Name is used to describe a protocol layer.  These names
    MUST be printable US-ASCII strings, and MUST NOT contain the
@@ -311,11 +311,11 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
    characters (ASCII codes 32 or less).  Names are case-sensitive, and
    MUST NOT be longer than 64 characters.
 
-   ¥µ¡¼¥Ó¥¹Ì¾¤Ï¥×¥í¥È¥³¥ë¤Î¥ì¥¤¥ä¤òµ­½Ò¤¹¤ë¤Î¤Ë»È¤ï¤ì¤ë.
-   ¤³¤ì¤é¤ÎÌ¾Á°¤Ï °õºş²ÄÇ½¤Ê US-ASCII Ê¸»úÎó¤Ç¤Ê¤±¤ì¤Ğ¤Ê¤é¤º,
-   at-sign ('@'), comma (','), ¤ä whitespace ¤ä control
-   Ê¸»ú (ASCII codes ¤Ç 32 °Ê²¼) ¤ò´Ş¤ó¤Ç¤Ï¤Ê¤é¤Ê¤¤. Ì¾Á°¤Ï
-   ÂçÊ¸»ú¾®Ê¸»ú¤ò¶èÊÌ¤·, 64Ê¸»ú¤è¤ê¤âÄ¹¤¯¤Æ¤Ï¤Ê¤é¤Ê¤¤.
+   ã‚µãƒ¼ãƒ“ã‚¹åã¯ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ãƒ¬ã‚¤ãƒ¤ã‚’è¨˜è¿°ã™ã‚‹ã®ã«ä½¿ã‚ã‚Œã‚‹.
+   ã“ã‚Œã‚‰ã®åå‰ã¯ å°åˆ·å¯èƒ½ãª US-ASCII æ–‡å­—åˆ—ã§ãªã‘ã‚Œã°ãªã‚‰ãš,
+   at-sign ('@'), comma (','), ã‚„ whitespace ã‚„ control
+   æ–‡å­— (ASCII codes ã§ 32 ä»¥ä¸‹) ã‚’å«ã‚“ã§ã¯ãªã‚‰ãªã„. åå‰ã¯
+   å¤§æ–‡å­—å°æ–‡å­—ã‚’åŒºåˆ¥ã—, 64æ–‡å­—ã‚ˆã‚Šã‚‚é•·ãã¦ã¯ãªã‚‰ãªã„.
 
    Requests for assignments of new service names must be accompanied by
    an RFC which describes the interpretation for the service name. If
@@ -323,11 +323,11 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
    experimental RFC), it must be explicitly reviewed and approved by the
    IESG before the RFC is published and the service name is assigned.
 
-   ¿·¤·¤¤¥µ¡¼¥Ó¥¹Ì¾¤Î³ä¤êÅö¤Æ¤ÎÍ×µá¤Ï
-   ¿·¤·¤¤¥µ¡¼¥Ó¥¹Ì¾¤Î²ò¼á¤òµ­½Ò¤¹¤ëRFC¤òÈ¼¤ï¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
-   ¤½¤ÎRFC¤¬ É¸½à²½²İÄø¤Î¤â¤Î¤Ç¤Ê¤¤¤Ê¤é(¤¹¤Ê¤ï¤Á, informational ¤« ¼Â¸³Åª
-   RFC ¤Ê¤é), ¤½¤ÎRFC¤¬¸ø³«¤µ¤ì¥á¥Ã¥»¡¼¥¸¥Ê¥ó¥Ğ¡¼¤¬³ä¤êÅö¤Æ¤é¤ì¤ë¤è¤êÁ°¤Ë
-   IESG¤Ë¤è¤Ã¤ÆÌÀÇò¤Ë¥ì¥Ó¥å¡¼¤µ¤ì¾µÇ§¤µ¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   æ–°ã—ã„ã‚µãƒ¼ãƒ“ã‚¹åã®å‰²ã‚Šå½“ã¦ã®è¦æ±‚ã¯
+   æ–°ã—ã„ã‚µãƒ¼ãƒ“ã‚¹åã®è§£é‡ˆã‚’è¨˜è¿°ã™ã‚‹RFCã‚’ä¼´ã‚ãªã‘ã‚Œã°ãªã‚‰ãªã„.
+   ãã®RFCãŒ æ¨™æº–åŒ–èª²ç¨‹ã®ã‚‚ã®ã§ãªã„ãªã‚‰(ã™ãªã‚ã¡, informational ã‹ å®Ÿé¨“çš„
+   RFC ãªã‚‰), ãã®RFCãŒå…¬é–‹ã•ã‚Œãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒŠãƒ³ãƒãƒ¼ãŒå‰²ã‚Šå½“ã¦ã‚‰ã‚Œã‚‹ã‚ˆã‚Šå‰ã«
+   IESGã«ã‚ˆã£ã¦æ˜ç™½ã«ãƒ¬ãƒ“ãƒ¥ãƒ¼ã•ã‚Œæ‰¿èªã•ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
 
    Service name                  Reference
@@ -348,7 +348,7 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
 
 3.2.1 Authentication Method Names
 
-3.2.1 Ç§¾ÚË¡Ì¾
+3.2.1 èªè¨¼æ³•å
 
    The Authentication Method Name is used to describe an authentication
    method for the "ssh-userauth" service [SSH-USERAUTH]. These names
@@ -357,20 +357,20 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
    characters (ASCII codes 32 or less).  Names are case-sensitive, and
    MUST NOT be longer than 64 characters.
 
-   Ç§¾ÚË¡Ì¾¤Ï "ssh-userauth" ¥µ¡¼¥Ó¥¹ [SSH-USERAUTH]¤Î¤¿¤á¤Î
-   Ç§¾ÚË¡¤òµ­½Ò¤¿¤á¤ËÍÑ¤¤¤é¤ì¤ë. 
-   ¤³¤ì¤é¤ÎÌ¾Á°¤Ï °õºş²ÄÇ½¤Ê US-ASCII Ê¸»úÎó¤Ç¤Ê¤±¤ì¤Ğ¤Ê¤é¤º,
-   at-sign ('@'), comma (','), ¤ä whitespace ¤ä control
-   Ê¸»ú (ASCII codes ¤Ç 32 °Ê²¼) ¤ò´Ş¤ó¤Ç¤Ï¤Ê¤é¤Ê¤¤. Ì¾Á°¤Ï
-   ÂçÊ¸»ú¾®Ê¸»ú¤ò¶èÊÌ¤·, 64Ê¸»ú¤è¤ê¤âÄ¹¤¯¤Æ¤Ï¤Ê¤é¤Ê¤¤.
+   èªè¨¼æ³•åã¯ "ssh-userauth" ã‚µãƒ¼ãƒ“ã‚¹ [SSH-USERAUTH]ã®ãŸã‚ã®
+   èªè¨¼æ³•ã‚’è¨˜è¿°ãŸã‚ã«ç”¨ã„ã‚‰ã‚Œã‚‹. 
+   ã“ã‚Œã‚‰ã®åå‰ã¯ å°åˆ·å¯èƒ½ãª US-ASCII æ–‡å­—åˆ—ã§ãªã‘ã‚Œã°ãªã‚‰ãš,
+   at-sign ('@'), comma (','), ã‚„ whitespace ã‚„ control
+   æ–‡å­— (ASCII codes ã§ 32 ä»¥ä¸‹) ã‚’å«ã‚“ã§ã¯ãªã‚‰ãªã„. åå‰ã¯
+   å¤§æ–‡å­—å°æ–‡å­—ã‚’åŒºåˆ¥ã—, 64æ–‡å­—ã‚ˆã‚Šã‚‚é•·ãã¦ã¯ãªã‚‰ãªã„.
    
 
    Requests for assignments of new authentication method names must be
    accompanied by an RFC which describes the interpretation for the
    authentication method.
 
-   ¿·¤·¤¤Ç§¾ÚË¡Ì¾¤Î³ä¤êÅö¤Æ¤ÎÍ×µá¤Ï
-   ¿·¤·¤¤Ç§¾ÚÌ¾¤Î²ò¼á¤òµ­½Ò¤¹¤ëRFC¤òÈ¼¤ï¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   æ–°ã—ã„èªè¨¼æ³•åã®å‰²ã‚Šå½“ã¦ã®è¦æ±‚ã¯
+   æ–°ã—ã„èªè¨¼åã®è§£é‡ˆã‚’è¨˜è¿°ã™ã‚‹RFCã‚’ä¼´ã‚ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
 
    Method name                   Reference
@@ -383,28 +383,28 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
 
 3.2.2 Connection Protocol Assigned Names
 
-3.2.2 ¥³¥Í¥¯¥·¥ç¥ó¥×¥í¥È¥³¥ë³ä¤êÅö¤ÆÌ¾
+3.2.2 ã‚³ãƒã‚¯ã‚·ãƒ§ãƒ³ãƒ—ãƒ­ãƒˆã‚³ãƒ«å‰²ã‚Šå½“ã¦å
 
    The following request and type names MUST be printable US-ASCII
    strings, and MUST NOT contain the characters at-sign ('@'), comma
    (','), or whitespace or control characters (ASCII codes 32 or less).
    Names are case-sensitive, and MUST NOT be longer than 64 characters.
 
-   °Ê²¼¤ÎÍ×µáÌ¾¤È·¿Ì¾¤Ï °õºş²ÄÇ½¤Ê US-ASCII Ê¸»úÎó¤Ç¤Ê¤±¤ì¤Ğ¤Ê¤é¤º,
-   at-sign ('@'), comma (','), ¤ä whitespace ¤ä control
-   Ê¸»ú (ASCII codes ¤Ç 32 °Ê²¼) ¤ò´Ş¤ó¤Ç¤Ï¤Ê¤é¤Ê¤¤. Ì¾Á°¤Ï
-   ÂçÊ¸»ú¾®Ê¸»ú¤ò¶èÊÌ¤·, 64Ê¸»ú¤è¤ê¤âÄ¹¤¯¤Æ¤Ï¤Ê¤é¤Ê¤¤.
+   ä»¥ä¸‹ã®è¦æ±‚åã¨å‹åã¯ å°åˆ·å¯èƒ½ãª US-ASCII æ–‡å­—åˆ—ã§ãªã‘ã‚Œã°ãªã‚‰ãš,
+   at-sign ('@'), comma (','), ã‚„ whitespace ã‚„ control
+   æ–‡å­— (ASCII codes ã§ 32 ä»¥ä¸‹) ã‚’å«ã‚“ã§ã¯ãªã‚‰ãªã„. åå‰ã¯
+   å¤§æ–‡å­—å°æ–‡å­—ã‚’åŒºåˆ¥ã—, 64æ–‡å­—ã‚ˆã‚Šã‚‚é•·ãã¦ã¯ãªã‚‰ãªã„.
 
    Requests for assignments of new assigned names must be accompanied by
    an RFC which describes the interpretation for the type or request.
 
-   ¿·¤·¤¤³ä¤êÅö¤ÆÌ¾¤Î³ä¤êÅö¤Æ¤ÎÍ×µá¤Ï
-   ¤½¤Î·¿¤«Í×µá¤Î²ò¼á¤òµ­½Ò¤¹¤ëRFC¤òÈ¼¤ï¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   æ–°ã—ã„å‰²ã‚Šå½“ã¦åã®å‰²ã‚Šå½“ã¦ã®è¦æ±‚ã¯
+   ãã®å‹ã‹è¦æ±‚ã®è§£é‡ˆã‚’è¨˜è¿°ã™ã‚‹RFCã‚’ä¼´ã‚ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
 
 3.2.2.1 Connection Protocol Channel Types
 
-3.2.2.1 ¥³¥Í¥¯¥·¥ç¥ó¥×¥í¥È¥³¥ë¥Á¥ã¥ó¥Í¥ë·¿
+3.2.2.1 ã‚³ãƒã‚¯ã‚·ãƒ§ãƒ³ãƒ—ãƒ­ãƒˆã‚³ãƒ«ãƒãƒ£ãƒ³ãƒãƒ«å‹
 
    Channel type                  Reference
    ------------                  ---------
@@ -416,7 +416,7 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
 
 3.2.2.2 Connection Protocol Global Request Names
 
-3.2.2.2 ¥³¥Í¥¯¥·¥ç¥ó¥×¥í¥È¥³¥ë¥°¥í¡¼¥Ğ¥ëÍ×µáÌ¾
+3.2.2.2 ã‚³ãƒã‚¯ã‚·ãƒ§ãƒ³ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã‚°ãƒ­ãƒ¼ãƒãƒ«è¦æ±‚å
 
    Request type                  Reference
    ------------                  ---------
@@ -433,7 +433,7 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
 
 3.2.2.3 Connection Protocol Channel Request Names
 
-3.2.2.3 ¥³¥Í¥¯¥·¥ç¥ó¥×¥í¥È¥³¥ë¥Á¥ã¥ó¥Í¥ëÍ×µáÌ¾
+3.2.2.3 ã‚³ãƒã‚¯ã‚·ãƒ§ãƒ³ãƒ—ãƒ­ãƒˆã‚³ãƒ«ãƒãƒ£ãƒ³ãƒãƒ«è¦æ±‚å
 
    Request type                  Reference
    ------------                  ---------
@@ -452,7 +452,7 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
 
 3.3 Key Exchange Method Names
 
-3.3 ¸°¸ò´¹Ë¡Ì¾
+3.3 éµäº¤æ›æ³•å
 
    The Key Exchange Method Name describes a key-exchange method for the
    protocol [SSH-TRANS].  The names MUST be printable US-ASCII strings,
@@ -460,20 +460,20 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
    whitespace or control characters (ASCII codes 32 or less).  Names are
    case-sensitive, and MUST NOT be longer than 64 characters.
 
-   ¸°¸ò´¹Ë¡Ì¾¤Ï [SSH-TRANS]¥×¥í¥È¥³¥ë¤Î¤¿¤á¤Î¸°¸ò´¹Ë¡¤òµ­½Ò¤¹¤ë.
-   Ì¾Á°¤Ï °õºş²ÄÇ½¤Ê US-ASCII Ê¸»úÎó¤Ç¤Ê¤±¤ì¤Ğ¤Ê¤é¤º,
-   at-sign ('@'), comma (','), ¤ä whitespace ¤ä control
-   Ê¸»ú (ASCII codes ¤Ç 32 °Ê²¼) ¤ò´Ş¤ó¤Ç¤Ï¤Ê¤é¤Ê¤¤. Ì¾Á°¤Ï
-   ÂçÊ¸»ú¾®Ê¸»ú¤ò¶èÊÌ¤·, 64Ê¸»ú¤è¤ê¤âÄ¹¤¯¤Æ¤Ï¤Ê¤é¤Ê¤¤.
+   éµäº¤æ›æ³•åã¯ [SSH-TRANS]ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ãŸã‚ã®éµäº¤æ›æ³•ã‚’è¨˜è¿°ã™ã‚‹.
+   åå‰ã¯ å°åˆ·å¯èƒ½ãª US-ASCII æ–‡å­—åˆ—ã§ãªã‘ã‚Œã°ãªã‚‰ãš,
+   at-sign ('@'), comma (','), ã‚„ whitespace ã‚„ control
+   æ–‡å­— (ASCII codes ã§ 32 ä»¥ä¸‹) ã‚’å«ã‚“ã§ã¯ãªã‚‰ãªã„. åå‰ã¯
+   å¤§æ–‡å­—å°æ–‡å­—ã‚’åŒºåˆ¥ã—, 64æ–‡å­—ã‚ˆã‚Šã‚‚é•·ãã¦ã¯ãªã‚‰ãªã„.
    
 
    Requests for assignment of new key-exchange method names must be
    accompanied by a reference to a standards-track or Informational RFC
    which describes this method.
 
-   ¿·¤·¤¤¸°¸ò´¹Ë¡Ì¾¤Î³ä¤êÅö¤Æ¤ÎÍ×µá¤Ï
-   ¿·¤·¤¤Ç§¾ÚÌ¾¤Î²ò¼á¤òµ­½Ò¤¹¤ëÉ¸½à²½²İÄø¤Î¤Ê¤¤¤· Informational ¤Ê
-   RFC¤Ø¤Î»²¾È¤òÈ¼¤ï¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   æ–°ã—ã„éµäº¤æ›æ³•åã®å‰²ã‚Šå½“ã¦ã®è¦æ±‚ã¯
+   æ–°ã—ã„èªè¨¼åã®è§£é‡ˆã‚’è¨˜è¿°ã™ã‚‹æ¨™æº–åŒ–èª²ç¨‹ã®ãªã„ã— Informational ãª
+   RFCã¸ã®å‚ç…§ã‚’ä¼´ã‚ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
 
    Method name                   Reference
@@ -483,31 +483,31 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
 
 3.4 Assigned Algorithm Names
 
-3.4 ³ä¤êÅö¤Æ¤é¤ì¤¿¥¢¥ë¥´¥ê¥º¥àÌ¾
+3.4 å‰²ã‚Šå½“ã¦ã‚‰ã‚ŒãŸã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ å
 
    The following identifiers (names) MUST be printable US-ASCII strings,
    and MUST NOT contain the characters at-sign ('@'), comma (','), or
    whitespace or control characters (ASCII codes 32 or less).  Names are
    case-sensitive, and MUST NOT be longer than 64 characters.
 
-   °Ê²¼¤Î¼±ÊÌ»Ò(Ì¾Á°)¤Ï °õºş²ÄÇ½¤Ê US-ASCII Ê¸»úÎó¤Ç¤Ê¤±¤ì¤Ğ¤Ê¤é¤º,
-   at-sign ('@'), comma (','), ¤ä whitespace ¤ä control
-   Ê¸»ú (ASCII codes ¤Ç 32 °Ê²¼) ¤ò´Ş¤ó¤Ç¤Ï¤Ê¤é¤Ê¤¤. Ì¾Á°¤Ï
-   ÂçÊ¸»ú¾®Ê¸»ú¤ò¶èÊÌ¤·, 64Ê¸»ú¤è¤ê¤âÄ¹¤¯¤Æ¤Ï¤Ê¤é¤Ê¤¤.
+   ä»¥ä¸‹ã®è­˜åˆ¥å­(åå‰)ã¯ å°åˆ·å¯èƒ½ãª US-ASCII æ–‡å­—åˆ—ã§ãªã‘ã‚Œã°ãªã‚‰ãš,
+   at-sign ('@'), comma (','), ã‚„ whitespace ã‚„ control
+   æ–‡å­— (ASCII codes ã§ 32 ä»¥ä¸‹) ã‚’å«ã‚“ã§ã¯ãªã‚‰ãªã„. åå‰ã¯
+   å¤§æ–‡å­—å°æ–‡å­—ã‚’åŒºåˆ¥ã—, 64æ–‡å­—ã‚ˆã‚Šã‚‚é•·ãã¦ã¯ãªã‚‰ãªã„.
 
 
    Requests for assignment of new algorithm names must be accompanied by
    a reference to a standards-track or Informational RFC or a reference
    to published cryptographic literature which describes the algorithm.
 
-   ¿·¤·¤¤¥¢¥ë¥´¥ê¥º¥àÌ¾¤Î³ä¤êÅö¤Æ¤ÎÍ×µá¤Ï
-   ¿·¤·¤¤¥¢¥ë¥´¥ê¥º¥à¤òµ­½Ò¤¹¤ëÉ¸½à²½²İÄø¤Î¤Ê¤¤¤· Informational ¤Ê
-   RFC¤Ø¤Î»²¾È¤«¸ø³«¤µ¤ì¤¿°Å¹æ³Ø¤ÎÊ¸¸¥¤Ø¤Î»²¾È¤òÈ¼¤ï¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   æ–°ã—ã„ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ åã®å‰²ã‚Šå½“ã¦ã®è¦æ±‚ã¯
+   æ–°ã—ã„ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’è¨˜è¿°ã™ã‚‹æ¨™æº–åŒ–èª²ç¨‹ã®ãªã„ã— Informational ãª
+   RFCã¸ã®å‚ç…§ã‹å…¬é–‹ã•ã‚ŒãŸæš—å·å­¦ã®æ–‡çŒ®ã¸ã®å‚ç…§ã‚’ä¼´ã‚ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
 
 3.4.1 Encryption Algorithm Names
 
-3.4.1 °Å¹æ²½¥¢¥ë¥´¥ê¥º¥àÌ¾
+3.4.1 æš—å·åŒ–ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ å
 
    Cipher name                   Reference
 
@@ -540,7 +540,7 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
 
 3.4.2 MAC Algorithm Names
 
-3.4.2 MAC ¥¢¥ë¥´¥ê¥º¥àÌ¾
+3.4.2 MAC ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ å
 
    MAC name                      Reference
    ---------                     ---------
@@ -553,7 +553,7 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
 
 3.4.3 Public Key Algorithm Names
 
-3.4.3 ¸ø³«¸°¥¢¥ë¥´¥ê¥º¥àÌ¾
+3.4.3 å…¬é–‹éµã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ å
 
    Algorithm name                Reference
    ---------------               ---------
@@ -578,7 +578,7 @@ Internet-Draft       SSH Protocol Assigned Numbers              Oct 2003
 
 3.4.4 Compression Algorithm Names
 
-3.4.4 °µ½Ì¥¢¥ë¥´¥ê¥º¥àÌ¾
+3.4.4 åœ§ç¸®ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ å
 
    Algorithm name                Reference
    ---------------               ---------

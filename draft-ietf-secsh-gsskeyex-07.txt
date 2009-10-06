@@ -12,7 +12,7 @@ Expires: March 12, 2004                                       J. Salowey
                                                       September 12, 2003
 
 
-# Ìõ¼Ô ½Õ»³À¬¸ã haruyama@unixuser.org
+# è¨³è€… æ˜¥å±±å¾å¾ haruyama@unixuser.org
 
   GSSAPI Authentication and Key Exchange for the Secure Shell Protocol
                       draft-ietf-secsh-gsskeyex-07
@@ -45,21 +45,21 @@ Copyright Notice
 
 Abstract
 
-³µÍ×
+æ¦‚è¦
 
    The Secure Shell protocol (SSH) is a protocol for secure remote login
    and other secure network services over an insecure network.
 
-   Secure Shell ¥×¥í¥È¥³¥ë (SSH) ¤Ï °ÂÁ´¤Ç¤Ê¤¤¥Í¥Ã¥È¥ï¡¼¥¯±Û¤·¤Î
-   °ÂÁ´¤Ê¥ê¥â¡¼¥È¥í¥°¥¤¥ó¤È¤½¤ÎÂ¾¤Î°ÂÁ´¤Ê¥Í¥Ã¥È¥ï¡¼¥¯¥µ¡¼¥Ó¥¹¤Î¤¿¤á¤Î
-   ¥×¥í¥È¥³¥ë¤À.
+   Secure Shell ãƒ—ãƒ­ãƒˆã‚³ãƒ« (SSH) ã¯ å®‰å…¨ã§ãªã„ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯è¶Šã—ã®
+   å®‰å…¨ãªãƒªãƒ¢ãƒ¼ãƒˆãƒ­ã‚°ã‚¤ãƒ³ã¨ãã®ä»–ã®å®‰å…¨ãªãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚µãƒ¼ãƒ“ã‚¹ã®ãŸã‚ã®
+   ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã .
 
    The Generic Security Service Application Program Interface (GSS-API)
    [2] provides security services to callers in a mechanism-independent
    fashion.
 
    Generic Security Service Application Program Interface (GSS-API) [2]
-   ¤Ï ¥á¥«¥Ë¥º¥àÆÈÎ©¤ÊÊı¼°¤Ç¤Î¥»¥­¥å¥ê¥Æ¥£¥µ¡¼¥Ó¥¹¤Î¸Æ¤Ó½Ğ¤·¤òÄó¶¡¤¹¤ë.
+   ã¯ ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ç‹¬ç«‹ãªæ–¹å¼ã§ã®ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã‚µãƒ¼ãƒ“ã‚¹ã®å‘¼ã³å‡ºã—ã‚’æä¾›ã™ã‚‹.
    
 
 
@@ -76,11 +76,11 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    family of SSH key exchange methods which use GSSAPI to authenticate
    the Diffie-Hellman exchange described in [8].
 
-   ¤³¤Î¥á¥â¤Ï SSH ¤ÇÇ§¾Ú¤È¸°¸ò´¹¤Î¤¿¤á¤Ë GSS-API ¤ò»È¤¦¤¿¤á¤ÎÊıË¡¤ò
-   µ­½Ò¤·¤Æ¤¤¤ë. ¥æ¡¼¥¶¤òÇ§¾Ú¤¹¤ë¤¿¤á¤Ë»ØÄê¤Î GSSAPI ¥á¥«¥Ë¥º¥à¤ò
-   »È¤¦ SSH ¥æ¡¼¥¶Ç§¾ÚË¡¤È, [8] ¤Çµ­½Ò¤µ¤ì¤Æ¤¤¤ë Diffie-Hellman
-   ¸ò´¹¤òÇ§¾Ú¤¹¤ë¤¿¤á¤Ë GSSAPI ¤ò»È¤¦ SSH ¸°¸ò´¹Ë¡¤Î
-   ¥Õ¥¡¥ß¥ê¡¼¤ò¤³¤Î¥á¥â¤ÇÄêµÁ¤¹¤ë.
+   ã“ã®ãƒ¡ãƒ¢ã¯ SSH ã§èªè¨¼ã¨éµäº¤æ›ã®ãŸã‚ã« GSS-API ã‚’ä½¿ã†ãŸã‚ã®æ–¹æ³•ã‚’
+   è¨˜è¿°ã—ã¦ã„ã‚‹. ãƒ¦ãƒ¼ã‚¶ã‚’èªè¨¼ã™ã‚‹ãŸã‚ã«æŒ‡å®šã® GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚’
+   ä½¿ã† SSH ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•ã¨, [8] ã§è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹ Diffie-Hellman
+   äº¤æ›ã‚’èªè¨¼ã™ã‚‹ãŸã‚ã« GSSAPI ã‚’ä½¿ã† SSH éµäº¤æ›æ³•ã®
+   ãƒ•ã‚¡ãƒŸãƒªãƒ¼ã‚’ã“ã®ãƒ¡ãƒ¢ã§å®šç¾©ã™ã‚‹.
 
    This memo also defines a new host public key algorithm which can be
    used when no operations are needed using a host's public key, and a
@@ -88,19 +88,19 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    be used in conjunction with any authentication which has already
    occurred as a side-effect of GSSAPI-based key exchange.
 
-   ¤³¤Î¥á¥â¤Ï, ¥Û¥¹¥È¤Î¸ø³«¸°¤ò»È¤¦Áàºî¤ÎÉ¬Í×¤Ê¤·¤Ë
-   »È¤ï¤ì¤ë¤³¤È¤¬¤Ç¤­¤ë ¿·¤·¤¤¥Û¥¹¥È¸ø³«¸°¥¢¥ë¥´¥ê¥º¥à¤È,
-   GSSAPI ¥Ù¡¼¥¹¤Î¸°¸ò´¹¤ÎÉû¼¡¸ú²Ì¤È¤·¤Æ¸½¤ï¤ì¤ë¤É¤ó¤ÊÇ§¾Ú¤È¤âÏ¢Æ°¤·¤Æ
-   »È¤ï¤ì¤ë¤³¤È¤òµö²ÄÌ¾ (authorization name)
-   ¤Ëµö¤¹¿·¤·¤¤¥æ¡¼¥¶Ç§¾ÚË¡¤òÄêµÁ¤¹¤ë.(...)
+   ã“ã®ãƒ¡ãƒ¢ã¯, ãƒ›ã‚¹ãƒˆã®å…¬é–‹éµã‚’ä½¿ã†æ“ä½œã®å¿…è¦ãªã—ã«
+   ä½¿ã‚ã‚Œã‚‹ã“ã¨ãŒã§ãã‚‹ æ–°ã—ã„ãƒ›ã‚¹ãƒˆå…¬é–‹éµã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã¨,
+   GSSAPI ãƒ™ãƒ¼ã‚¹ã®éµäº¤æ›ã®å‰¯æ¬¡åŠ¹æœã¨ã—ã¦ç¾ã‚ã‚Œã‚‹ã©ã‚“ãªèªè¨¼ã¨ã‚‚é€£å‹•ã—ã¦
+   ä½¿ã‚ã‚Œã‚‹ã“ã¨ã‚’è¨±å¯å (authorization name)
+   ã«è¨±ã™æ–°ã—ã„ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•ã‚’å®šç¾©ã™ã‚‹.(...)
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in [5].
 
-   ¤³¤ÎÊ¸½ñ¤Ë½Ğ¤Æ¤¯¤ë
-   "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT", "MAY" ¤È¤¤¤Ã¤¿
-   ¥­¡¼¥ï¡¼¥É¤Ï [RFC2119] ¤Ëµ­½Ò¤µ¤ì¤Æ¤¤¤ë¤è¤¦¤Ë²ò¼á¤µ¤ì¤ë.
+   ã“ã®æ–‡æ›¸ã«å‡ºã¦ãã‚‹
+   "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT", "MAY" ã¨ã„ã£ãŸ
+   ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ã¯ [RFC2119] ã«è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹ã‚ˆã†ã«è§£é‡ˆã•ã‚Œã‚‹.
 
 
 Table of Contents
@@ -201,7 +201,7 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
 
 1. Introduction
 
-1. ¥¤¥ó¥È¥í¥À¥¯¥·¥ç¥ó
+1. ã‚¤ãƒ³ãƒˆãƒ­ãƒ€ã‚¯ã‚·ãƒ§ãƒ³
 
    This document describes the methods used to perform key exchange and
    user authentication in the Secure Shell protocol using the GSSAPI.
@@ -210,12 +210,12 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    definitions allow any GSSAPI mechanism to be used with the Secure
    Shell protocol.
 
-   ¤³¤ÎÊ¸½ñ¤Ï GSSAPI ¤ò»È¤Ã¤Æ Secure Shell ¥×¥í¥È¥³¥ë¤Ç¤Î
-   ¸°¸ò´¹¤È¥æ¡¼¥¶Ç§¾Ú¤ò¼Â¹Ô¤¹¤ë¤Î¤Ë»È¤ï¤ì¤ëÊıË¡¤òµ­½Ò¤¹¤ë.
-   ¤³¤Î¤¿¤á¤Ë, ¸°¸ò´¹Ë¡¤Î¥Õ¥¡¥ß¥ê¡¼¤È 2 ¤Ä¤Î¥æ¡¼¥¶Ç§¾ÚË¡
-   ¿·¤·¤¤¥Û¥¹¥È¸°¥¢¥ë¥´¥ê¥º¥à¤òÄêµÁ¤¹¤ë.¤³¤ì¤é¤ÎÄêµÁ¤Ï
-   ¤¢¤é¤æ¤ë GSSAPI ¥á¥«¥Ë¥º¥à¤Ë Secure Shell ¥×¥í¥È¥³¥ë¤È¶¦¤Ë»È¤ï¤ì¤ë
-   ¤³¤È¤òµö¤¹.
+   ã“ã®æ–‡æ›¸ã¯ GSSAPI ã‚’ä½¿ã£ã¦ Secure Shell ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã§ã®
+   éµäº¤æ›ã¨ãƒ¦ãƒ¼ã‚¶èªè¨¼ã‚’å®Ÿè¡Œã™ã‚‹ã®ã«ä½¿ã‚ã‚Œã‚‹æ–¹æ³•ã‚’è¨˜è¿°ã™ã‚‹.
+   ã“ã®ãŸã‚ã«, éµäº¤æ›æ³•ã®ãƒ•ã‚¡ãƒŸãƒªãƒ¼ã¨ 2 ã¤ã®ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•
+   æ–°ã—ã„ãƒ›ã‚¹ãƒˆéµã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’å®šç¾©ã™ã‚‹.ã“ã‚Œã‚‰ã®å®šç¾©ã¯
+   ã‚ã‚‰ã‚†ã‚‹ GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã« Secure Shell ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¨å…±ã«ä½¿ã‚ã‚Œã‚‹
+   ã“ã¨ã‚’è¨±ã™.
 
    This document should be read only after reading the documents
    describing the SSH protocol architecture [6], transport layer
@@ -223,33 +223,33 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    freely uses terminology and notation from the architecture document
    without reference or further explanation.
 
-   ¤³¤ÎÊ¸½ñ¤Ï SSH protocol architecture [6], transport layer protocol [8]
-   user authentication protocol [9] ¤òµ­½Ò¤¹¤ëÊ¸½ñ¤òÆÉ¤ó¤À¤¢¤È¤Ë¤Î¤ß
-   ÆÉ¤Ş¤ì¤ë¤Ù¤­¤À. ¤³¤ÎÊ¸½ñ¤Ï¥¢¡¼¥­¥Æ¥¯¥Á¥ãÊ¸½ñ¤«¤é¤ÎÍÑ¸ì¤äÉ½µ­¤ò
-   »²¾È¤ä¤µ¤é¤Ê¤ëÀâÌÀ¤Ê¤·¤Ç¼«Í³¤Ë»È¤¦.
+   ã“ã®æ–‡æ›¸ã¯ SSH protocol architecture [6], transport layer protocol [8]
+   user authentication protocol [9] ã‚’è¨˜è¿°ã™ã‚‹æ–‡æ›¸ã‚’èª­ã‚“ã ã‚ã¨ã«ã®ã¿
+   èª­ã¾ã‚Œã‚‹ã¹ãã . ã“ã®æ–‡æ›¸ã¯ã‚¢ãƒ¼ã‚­ãƒ†ã‚¯ãƒãƒ£æ–‡æ›¸ã‹ã‚‰ã®ç”¨èªã‚„è¡¨è¨˜ã‚’
+   å‚ç…§ã‚„ã•ã‚‰ãªã‚‹èª¬æ˜ãªã—ã§è‡ªç”±ã«ä½¿ã†.
 
 
 1.1 SSH terminology
 
-1.1 SSH ¤ÎÍÑ¸ì
+1.1 SSH ã®ç”¨èª
 
    The data types used in the packets are defined in the SSH
    architecture document [6].  It is particularly important to note the
    definition of string allows binary content.
 
-   ¥Ñ¥±¥Ã¥È¤Ç»È¤ï¤ì¤ë¥Ç¡¼¥¿·¿¤Ï SSH architecture Ê¸½ñ [6] ¤ÇÄêµÁ¤µ¤ì¤Æ¤¤¤ë.
-   ¥Ğ¥¤¥Ê¥ê¤ÎÆâÍÆ¤òµö¤¹Ê¸»úÎó¤ÎÄêµÁ¤Îµ­½Ò¤¬ÆÃ¤Ë½ÅÍ×¤À. 
+   ãƒ‘ã‚±ãƒƒãƒˆã§ä½¿ã‚ã‚Œã‚‹ãƒ‡ãƒ¼ã‚¿å‹ã¯ SSH architecture æ–‡æ›¸ [6] ã§å®šç¾©ã•ã‚Œã¦ã„ã‚‹.
+   ãƒã‚¤ãƒŠãƒªã®å†…å®¹ã‚’è¨±ã™æ–‡å­—åˆ—ã®å®šç¾©ã®è¨˜è¿°ãŒç‰¹ã«é‡è¦ã . 
 
    The SSH_MSG_USERAUTH_REQUEST packet refers to a service; this service
    name is an SSH service name, and has no relationship to GSSAPI
    service names.  Currently, the only defined service name is
    "ssh-connection", which refers to the SSH connection protocol [7].
 
-   SSH_MSG_USERAUTH_REQUEST ¥Ñ¥±¥Ã¥È¤Ï ¥µ¡¼¥Ó¥¹¤Ø¤Î»²¾È¤ò¤¹¤ë.
-   ¤³¤Î¥Ñ¥±¥Ã¥È¤Î¥µ¡¼¥Ó¥¹Ì¾¤Ï SSH ¤Î¥µ¡¼¥Ó¥¹Ì¾¤Ç, 
-   GSSAPI ¤Î¥µ¡¼¥Ó¥¹Ì¾¤È¤Ï²¿¤é´Ø·¸¤¬¤Ê¤¤. º£¤Î¤È¤³¤í,
-   Í£°ìÄêµÁ¤µ¤ì¤Æ¤¤¤ë¥µ¡¼¥Ó¥¹Ì¾¤Ï "ssh-connection" ¤Ç,
-   ¤³¤ì¤Ï SSH connection protocol [7] ¤ò»²¾È¤¹¤ë.
+   SSH_MSG_USERAUTH_REQUEST ãƒ‘ã‚±ãƒƒãƒˆã¯ ã‚µãƒ¼ãƒ“ã‚¹ã¸ã®å‚ç…§ã‚’ã™ã‚‹.
+   ã“ã®ãƒ‘ã‚±ãƒƒãƒˆã®ã‚µãƒ¼ãƒ“ã‚¹åã¯ SSH ã®ã‚µãƒ¼ãƒ“ã‚¹åã§, 
+   GSSAPI ã®ã‚µãƒ¼ãƒ“ã‚¹åã¨ã¯ä½•ã‚‰é–¢ä¿‚ãŒãªã„. ä»Šã®ã¨ã“ã‚,
+   å”¯ä¸€å®šç¾©ã•ã‚Œã¦ã„ã‚‹ã‚µãƒ¼ãƒ“ã‚¹åã¯ "ssh-connection" ã§,
+   ã“ã‚Œã¯ SSH connection protocol [7] ã‚’å‚ç…§ã™ã‚‹.
 
 
 
@@ -282,56 +282,56 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
 
 2. GSSAPI Authenticated Diffie-Hellman Key Exchange
 
-2. GSSAPI ¤ÇÇ§¾Ú¤µ¤ì¤¿ Diffie-Hellman ¸°¸ò´¹
+2. GSSAPI ã§èªè¨¼ã•ã‚ŒãŸ Diffie-Hellman éµäº¤æ›
 
    This section defines a class of key exchange methods which combine
    the Diffie-Hellman key exchange from section 6 of [8] with mutual
    authentication using GSSAPI.
 
-   ¤³¤Î¥»¥¯¥·¥ç¥ó¤Ç¤Ï, GSSAPI ¤ò»È¤¦Áê¸ßÇ§¾Ú¤È
-   [8] (¥È¥é¥ó¥¹¥İ¡¼¥ÈÁØÊ¸½ñ) ¤Î¥»¥¯¥·¥ç¥ó 6 ¤Î Diffie-Hellman
-   ¸°¸ò´¹¤òÁÈ¤ß¤¢¤ï¤»¤¿¸°¸ò´¹¤ÎÊıË¡¤Î¥¯¥é¥¹¤òÄêµÁ¤¹¤ë.
+   ã“ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³ã§ã¯, GSSAPI ã‚’ä½¿ã†ç›¸äº’èªè¨¼ã¨
+   [8] (ãƒˆãƒ©ãƒ³ã‚¹ãƒãƒ¼ãƒˆå±¤æ–‡æ›¸) ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 6 ã® Diffie-Hellman
+   éµäº¤æ›ã‚’çµ„ã¿ã‚ã‚ã›ãŸéµäº¤æ›ã®æ–¹æ³•ã®ã‚¯ãƒ©ã‚¹ã‚’å®šç¾©ã™ã‚‹.
 
    Since the GSSAPI key exchange methods described in this section do
    not require the use of public key signature or encryption algorithms,
    they MAY be used with any host key algorithm, including the "null"
    algorithm described in Section 5.
 
-   ¤³¤Î¥»¥¯¥·¥ç¥ó¤Çµ­½Ò¤µ¤ì¤ë GSSAPI ¸°¸ò´¹Ë¡¤Ï, ¸ø³«¸°¤Î½ğÌ¾¤Ê¤¤¤·°Å¹æ²½
-   ¥¢¥ë¥´¥ê¥º¥à¤ò»È¤¦É¬Í×¤¬¤Ê¤¤¤Î¤Ç, ¥»¥¯¥·¥ç¥ó 5 ¤Çµ­½Ò¤µ¤ì¤ë
-   "null" ¥¢¥ë¥´¥ê¥º¥à¤ò´Ş¤à Ç¤°Õ¤Î¥Û¥¹¥È¸°¥¢¥ë¥´¥ê¥º¥à¤È¤â¤Ë
-   »È¤Ã¤Æ¤â¤è¤¤.
+   ã“ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³ã§è¨˜è¿°ã•ã‚Œã‚‹ GSSAPI éµäº¤æ›æ³•ã¯, å…¬é–‹éµã®ç½²åãªã„ã—æš—å·åŒ–
+   ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’ä½¿ã†å¿…è¦ãŒãªã„ã®ã§, ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 5 ã§è¨˜è¿°ã•ã‚Œã‚‹
+   "null" ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’å«ã‚€ ä»»æ„ã®ãƒ›ã‚¹ãƒˆéµã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã¨ã‚‚ã«
+   ä½¿ã£ã¦ã‚‚ã‚ˆã„.
 
 2.1 Generic GSSAPI Key Exchange
 
-2.1 °ìÈÌ GSSAPI ¸°¸ò´¹
+2.1 ä¸€èˆ¬ GSSAPI éµäº¤æ›
 
    The following symbols are used in this description:
 
-   ¤³¤Îµ­½Ò¤Ç°Ê²¼¤Î¥·¥ó¥Ü¥ë¤¬»È¤ï¤ì¤ë.
+   ã“ã®è¨˜è¿°ã§ä»¥ä¸‹ã®ã‚·ãƒ³ãƒœãƒ«ãŒä½¿ã‚ã‚Œã‚‹.
 
    o  C is the client, and S is the server
 
-      C ¤Ï¥¯¥é¥¤¥¢¥ó¥È. S ¤Ï¥µ¡¼¥Ğ.
+      C ã¯ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆ. S ã¯ã‚µãƒ¼ãƒ.
 
    o  p is a large safe prime, g is a generator for a subgroup of GF (p),
       and q is the order of the subgroup
 
-      p ¤ÏÂç¤­¤¯°ÂÁ´¤ÊÁÇ¿ô. g ¤Ï GF (p) ¤ÎÉôÊ¬·²¤Î¤¿¤á¤ÎÀ¸À®´ï.
-      q ¤Ï ÉôÊ¬·²¤Î°Ì¿ô.
+      p ã¯å¤§ããå®‰å…¨ãªç´ æ•°. g ã¯ GF (p) ã®éƒ¨åˆ†ç¾¤ã®ãŸã‚ã®ç”Ÿæˆå™¨.
+      q ã¯ éƒ¨åˆ†ç¾¤ã®ä½æ•°.
 
    o  V_S is S's version string, and V_C is C's version string
 
-      V_S ¤Ï S ¤Î¥Ğ¡¼¥¸¥ç¥óÊ¸»úÎó. V_C ¤Ï C ¤Î¥Ğ¡¼¥¸¥ç¥óÊ¸»úÎó.
+      V_S ã¯ S ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³æ–‡å­—åˆ—. V_C ã¯ C ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³æ–‡å­—åˆ—.
 
    o  I_C is C's KEXINIT message, and I_S is S's KEXINIT message
 
-      I_C ¤Ï C ¤Î KEXINIT ¥á¥Ã¥»¡¼¥¸. I_S ¤Ï S ¤Î KEXINIT ¥á¥Ã¥»¡¼¥¸.
+      I_C ã¯ C ã® KEXINIT ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸. I_S ã¯ S ã® KEXINIT ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸.
 
    1.  C generates a random number x (1 < x < q) and computes e = g^x
        mod p.
 
-   1.  C ¤Ï (1< x < q) ¤Ê Íğ¿ô x ¤òÀ¸À®¤·, e= g^x mod p ¤ò·×»»¤¹¤ë.
+   1.  C ã¯ (1< x < q) ãª ä¹±æ•° x ã‚’ç”Ÿæˆã—, e= g^x mod p ã‚’è¨ˆç®—ã™ã‚‹.
 
    2.  C calls GSS_Init_sec_context, using the most recent reply token
        received from S during this exchange, if any.  For this call, the
@@ -355,26 +355,26 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
        replay_det_req_flag and sequence_req_flag are not needed for this
        process.  These flags SHOULD be set to "false".
 
-       C ¤Ï GSS_Init_sec_context ¤ò¸Æ¤Ö. ¤â¤·Í­¤ì¤Ğ, ¤³¤Î¸ò´¹¤Î´Ö¤Ë
-       S ¤«¤é¼õ¤±¤È¤ë¤â¤Ã¤È¤âºÇ¶á¤Î reply token ¤òÍøÍÑ¤¹¤ë.
-       ¤³¤Î¸Æ¤Ó½Ğ¤·¤Ç, ¥¯¥é¥¤¥¢¥ó¥È¤Ï ¸ò¸ßÇ§¾Ú¤¬¹Ô¤Ê¤ï¤ì¤ë¤³¤È¤ò
-       Í×µá¤¹¤ë¤¿¤á¤Ë mutual_req_flag ¤ò "true" ¤ËÀßÄê¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
-       ¤Ş¤¿, ¤³¤Î context ¤Ç¥á¥Ã¥»¡¼¥¸Ã±°Ì¤Ç¤Î´°Á´À­Êİ¸î¤¬¥µ¥İ¡¼¥È¤µ¤ì¤ë
-       ¤³¤È¤òÍ×µá¤¹¤ë¤¿¤á¤Ë integ_req_flag ¤ò "true" ¤ËÀßÄê¤·¤Ê¤±¤ì¤Ğ
-       ¤Ê¤é¤Ê¤¤. ²Ã¤¨¤Æ, ¥æ¡¼¥¶¤«¤éµá¤á¤é¤ì¤¿¤é¥¢¥¯¥»¥¹¤Î°ÑÇ¤¤òÍ×µá¤¹¤ë¤¿¤á¤Ë
-       deleg_req_flag ¤ò "true"¤È¤·¤Æ¤â¤è¤¤. ¸°¸ò´¹¥×¥í¥»¥¹¤Ï¥Û¥¹¥È¤Î¤ß¤ò
-       Ç§¾Ú¤¹¤ë¤Î¤Ç, anon_req_flag ¤ÎÀßÄê¤Ï ¤³¤Î¥×¥í¥»¥¹¤Ç¤Ï´Ø·¸¤¬¤Ê¤¤.
-       ¥¯¥é¥¤¥¢¥ó¥È¤¬, ¥»¥¯¥·¥ç¥ó 4 ¤Çµ­½Ò¤¹¤ë "gssapi-keyex" ¥æ¡¼¥¶Ç§¾ÚË¡¤ò
-       ¥µ¥İ¡¼¥È¤·¤Æ¤¤¤Ê¤¤, ¤â¤·¤¯¤Ï, ¸°¸ò´¹¤Î´Ö¤Ë³ÎÎ©¤µ¤ì¤¿
-       GSSAPI context ¤È¤È¤â¤Ë ¤³¤ÎÊıË¡¤ò»È¤¦¤³¤È¤ò°Õ¿Ş¤·¤Ê¤¤¤Ê¤é,
-       anon_req_flag ¤Ï "true" ¤ËÀßÄê¤µ¤ì¤ëÉ¬Í×¤¬¤¢¤ë.
-       ¤µ¤â¤Ê¤±¤ì¤Ğ, ¥¯¥¢¥¤¥¢¥ó¥È¤¬¤½¤Î¥¢¥¤¥Ç¥ó¥Æ¥£¥Æ¥£¤ò±£¤·¤¿¤¤¤ÈË¾¤à¤Ê¤é
-       ¤³¤Î¥Õ¥é¥°¤¬ true ¤ÈÀßÄê¤µ¤ì¤Æ¤â¤è¤¤. ¸°¸ò´¹¥×¥í¥»¥¹¤Ï,
-       context ¤¬³ÎÎ©¤µ¤ì¤¿»ş¤Ë°ìÅÙ Ã±°ì¤Î¥È¡¼¥¯¥ó¤Î¤ß¤Î¸ò´¹¤ò¹Ô¤Ê¤¦¤Î¤Ç
-       GSSAPI context ¤¬ ¥ê¥×¥ì¥¤¤µ¤ì¤¿¤Ê¤¤¤·¥·¡¼¥±¥ó¥¹³°¤Î¥È¡¼¥¯¥ó¤Î
-       ¸¡½Ğ¤ò¥µ¥İ¡¼¥È¤¹¤ëÉ¬Í×¤Ï¤Ê¤¤. ¤½¤ì¤æ¤¨, replay_det_req_flag ¤È
-       sequence_req_flag ¤Ï ¤³¤Î¥×¥í¥»¥¹¤Ë¤ÏÉ¬Í×¤Ê¤¤. ¤³¤ì¤é¤Î¥Õ¥é¥°¤Ï
-       "false" ¤ËÀßÄê¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
+       C ã¯ GSS_Init_sec_context ã‚’å‘¼ã¶. ã‚‚ã—æœ‰ã‚Œã°, ã“ã®äº¤æ›ã®é–“ã«
+       S ã‹ã‚‰å—ã‘ã¨ã‚‹ã‚‚ã£ã¨ã‚‚æœ€è¿‘ã® reply token ã‚’åˆ©ç”¨ã™ã‚‹.
+       ã“ã®å‘¼ã³å‡ºã—ã§, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯ äº¤äº’èªè¨¼ãŒè¡Œãªã‚ã‚Œã‚‹ã“ã¨ã‚’
+       è¦æ±‚ã™ã‚‹ãŸã‚ã« mutual_req_flag ã‚’ "true" ã«è¨­å®šã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
+       ã¾ãŸ, ã“ã® context ã§ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å˜ä½ã§ã®å®Œå…¨æ€§ä¿è­·ãŒã‚µãƒãƒ¼ãƒˆã•ã‚Œã‚‹
+       ã“ã¨ã‚’è¦æ±‚ã™ã‚‹ãŸã‚ã« integ_req_flag ã‚’ "true" ã«è¨­å®šã—ãªã‘ã‚Œã°
+       ãªã‚‰ãªã„. åŠ ãˆã¦, ãƒ¦ãƒ¼ã‚¶ã‹ã‚‰æ±‚ã‚ã‚‰ã‚ŒãŸã‚‰ã‚¢ã‚¯ã‚»ã‚¹ã®å§”ä»»ã‚’è¦æ±‚ã™ã‚‹ãŸã‚ã«
+       deleg_req_flag ã‚’ "true"ã¨ã—ã¦ã‚‚ã‚ˆã„. éµäº¤æ›ãƒ—ãƒ­ã‚»ã‚¹ã¯ãƒ›ã‚¹ãƒˆã®ã¿ã‚’
+       èªè¨¼ã™ã‚‹ã®ã§, anon_req_flag ã®è¨­å®šã¯ ã“ã®ãƒ—ãƒ­ã‚»ã‚¹ã§ã¯é–¢ä¿‚ãŒãªã„.
+       ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒ, ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 4 ã§è¨˜è¿°ã™ã‚‹ "gssapi-keyex" ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•ã‚’
+       ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ãªã„, ã‚‚ã—ãã¯, éµäº¤æ›ã®é–“ã«ç¢ºç«‹ã•ã‚ŒãŸ
+       GSSAPI context ã¨ã¨ã‚‚ã« ã“ã®æ–¹æ³•ã‚’ä½¿ã†ã“ã¨ã‚’æ„å›³ã—ãªã„ãªã‚‰,
+       anon_req_flag ã¯ "true" ã«è¨­å®šã•ã‚Œã‚‹å¿…è¦ãŒã‚ã‚‹.
+       ã•ã‚‚ãªã‘ã‚Œã°, ã‚¯ã‚¢ã‚¤ã‚¢ãƒ³ãƒˆãŒãã®ã‚¢ã‚¤ãƒ‡ãƒ³ãƒ†ã‚£ãƒ†ã‚£ã‚’éš ã—ãŸã„ã¨æœ›ã‚€ãªã‚‰
+       ã“ã®ãƒ•ãƒ©ã‚°ãŒ true ã¨è¨­å®šã•ã‚Œã¦ã‚‚ã‚ˆã„. éµäº¤æ›ãƒ—ãƒ­ã‚»ã‚¹ã¯,
+       context ãŒç¢ºç«‹ã•ã‚ŒãŸæ™‚ã«ä¸€åº¦ å˜ä¸€ã®ãƒˆãƒ¼ã‚¯ãƒ³ã®ã¿ã®äº¤æ›ã‚’è¡Œãªã†ã®ã§
+       GSSAPI context ãŒ ãƒªãƒ—ãƒ¬ã‚¤ã•ã‚ŒãŸãªã„ã—ã‚·ãƒ¼ã‚±ãƒ³ã‚¹å¤–ã®ãƒˆãƒ¼ã‚¯ãƒ³ã®
+       æ¤œå‡ºã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹å¿…è¦ã¯ãªã„. ãã‚Œã‚†ãˆ, replay_det_req_flag ã¨
+       sequence_req_flag ã¯ ã“ã®ãƒ—ãƒ­ã‚»ã‚¹ã«ã¯å¿…è¦ãªã„. ã“ã‚Œã‚‰ã®ãƒ•ãƒ©ã‚°ã¯
+       "false" ã«è¨­å®šã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
 
 
 
@@ -387,99 +387,99 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
           mutual_state flag is not true, then mutual authentication has
           not been established, and the key exchange MUST fail.
 
-	  ·ë²Ì¤Î major_status ¥³¡¼¥É¤¬  GSS_S_COMPLETE ¤Ç
-	  mutual_state ¥Õ¥é¥°¤¬ true ¤Ç¤Ê¤¤¤Ê¤é, Áê¸ßÇ§¾Ú¤Ï³ÎÎ©¤µ¤ì¤º,
-	  ¸°¸ò´¹¤Ï¼ºÇÔ¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+	  çµæœã® major_status ã‚³ãƒ¼ãƒ‰ãŒ  GSS_S_COMPLETE ã§
+	  mutual_state ãƒ•ãƒ©ã‚°ãŒ true ã§ãªã„ãªã‚‰, ç›¸äº’èªè¨¼ã¯ç¢ºç«‹ã•ã‚Œãš,
+	  éµäº¤æ›ã¯å¤±æ•—ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
        *  If the resulting major_status code is GSS_S_COMPLETE and the
           integ_avail flag is not true, then per-message integrity
           protection is not available, and the key exchange MUST fail.
 
-	  ·ë²Ì¤Î major_status ¥³¡¼¥É¤¬  GSS_S_COMPLETE ¤Ç
-	  integ_avail ¥Õ¥é¥°¤¬ true ¤Ç¤Ê¤¤¤Ê¤é, ¥á¥Ã¥»¡¼¥¸Ã±°Ì¤Î
-	  ´°Á´À­Êİ¸î¤ÏÍøÍÑ¤µ¤ì¤Æ¤¤¤Ê¤¤¤Î¤Ç, ¸°¸ò´¹¤Ï
-	  ¼ºÇÔ¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+	  çµæœã® major_status ã‚³ãƒ¼ãƒ‰ãŒ  GSS_S_COMPLETE ã§
+	  integ_avail ãƒ•ãƒ©ã‚°ãŒ true ã§ãªã„ãªã‚‰, ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å˜ä½ã®
+	  å®Œå…¨æ€§ä¿è­·ã¯åˆ©ç”¨ã•ã‚Œã¦ã„ãªã„ã®ã§, éµäº¤æ›ã¯
+	  å¤±æ•—ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
        *  If the resulting major_status code is GSS_S_COMPLETE and both
           the mutual_state and integ_avail flags are true, the resulting
           output token is sent to S.
 
-	  ·ë²Ì¤Î major_status ¥³¡¼¥É¤¬  GSS_S_COMPLETE ¤Ç
-	  mutual_state ¤È integ_avail ¥Õ¥é¥°¤¬¶¦¤Ë true ¤Ê¤é,
-	  ·ë²Ì¤Î½ĞÎÏ¥È¡¼¥¯¥ó ¤¬ S ¤ËÁ÷¤é¤ì¤ë.
+	  çµæœã® major_status ã‚³ãƒ¼ãƒ‰ãŒ  GSS_S_COMPLETE ã§
+	  mutual_state ã¨ integ_avail ãƒ•ãƒ©ã‚°ãŒå…±ã« true ãªã‚‰,
+	  çµæœã®å‡ºåŠ›ãƒˆãƒ¼ã‚¯ãƒ³ ãŒ S ã«é€ã‚‰ã‚Œã‚‹.
 
        *  If the resulting major_status code is GSS_S_CONTINUE_NEEDED,
           the the output_token is sent to S, which will reply with a new
           token to be provided to GSS_Init_sec_context.
 
-	  ·ë²Ì¤Î major_status ¥³¡¼¥É¤¬  GSS_S_CONTINUE_NEEDED ¤Î¾ì¹ç
-	  ·ë²Ì¤Î½ĞÎÏ¥È¡¼¥¯¥ó ¤¬ S ¤ËÁ÷¤é¤ì¤ë. S ¤Ï GSS_Init_sec_context
-	  ¤ÇÄó¶¡¤µ¤ì¤ë ¿·¤·¤¤¥È¡¼¥¯¥ó¤òÊÖÅú¤¹¤ë.
+	  çµæœã® major_status ã‚³ãƒ¼ãƒ‰ãŒ  GSS_S_CONTINUE_NEEDED ã®å ´åˆ
+	  çµæœã®å‡ºåŠ›ãƒˆãƒ¼ã‚¯ãƒ³ ãŒ S ã«é€ã‚‰ã‚Œã‚‹. S ã¯ GSS_Init_sec_context
+	  ã§æä¾›ã•ã‚Œã‚‹ æ–°ã—ã„ãƒˆãƒ¼ã‚¯ãƒ³ã‚’è¿”ç­”ã™ã‚‹.
 
        *  The client MUST also include "e" with the first message it
           sends to the server during this process; if the server
           receives more than one "e" or none at all, the key exchange
           fails.
 
-	  ¥¯¥é¥¤¥¢¥ó¥È¤Ï, ¤µ¤é¤Ë, ¤³¤Î¥×¥í¥»¥¹¤Ç¥µ¡¼¥Ğ¤ËÁ÷¤é¤ì¤ëºÇ½é¤Î
-	  ¥á¥Ã¥»¡¼¥¸¤Ë "e" ¤ò´Ş¤á¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
-	  ¥µ¡¼¥Ğ¤¬ 1 ¤Ä°Ê¾å¤Î"e" ¤ò¼õ¤±¤È¤Ã¤¿¤ê¤Ş¤Ã¤¿¤¯¼õ¤±¤È¤é¤Ê¤«¤Ã¤¿¤é
-	  ¸°¸ò´¹¤Ï¼ºÇÔ¤¹¤ë.
+	  ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯, ã•ã‚‰ã«, ã“ã®ãƒ—ãƒ­ã‚»ã‚¹ã§ã‚µãƒ¼ãƒã«é€ã‚‰ã‚Œã‚‹æœ€åˆã®
+	  ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã« "e" ã‚’å«ã‚ãªã‘ã‚Œã°ãªã‚‰ãªã„.
+	  ã‚µãƒ¼ãƒãŒ 1 ã¤ä»¥ä¸Šã®"e" ã‚’å—ã‘ã¨ã£ãŸã‚Šã¾ã£ãŸãå—ã‘ã¨ã‚‰ãªã‹ã£ãŸã‚‰
+	  éµäº¤æ›ã¯å¤±æ•—ã™ã‚‹.
 
        *  It is an error if the call does not produce a token of
           non-zero length to be sent to the server.  In this case, the
           key exchange MUST fail.
 
-	  ¤³¤Î¸Æ½Ğ¤·¤¬¥µ¡¼¥Ğ¤ËÁ÷¤é¤ì¤ë 0 ¤Ç¤Ê¤¤Ä¹¤µ¤Î¥È¡¼¥¯¥ó¤òÀ¸À®¤·¤Ê¤«¤Ã¤¿¤é
-	  ¥¨¥é¡¼¤À. ¤³¤Î¾ì¹ç, ¸°¸ò´¹¤Ï¼ºÇÔ¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+	  ã“ã®å‘¼å‡ºã—ãŒã‚µãƒ¼ãƒã«é€ã‚‰ã‚Œã‚‹ 0 ã§ãªã„é•·ã•ã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚’ç”Ÿæˆã—ãªã‹ã£ãŸã‚‰
+	  ã‚¨ãƒ©ãƒ¼ã . ã“ã®å ´åˆ, éµäº¤æ›ã¯å¤±æ•—ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    3.  S calls GSS_Accept_sec_context, using the token received from C.
 
-   3.  S ¤Ï, C ¤«¤é¼õ¤±¤È¤Ã¤¿¥È¡¼¥¯¥ó¤ò»È¤Ã¤Æ GSS_Accept_sec_context ¤ò¸Æ¤Ó½Ğ¤¹.
+   3.  S ã¯, C ã‹ã‚‰å—ã‘ã¨ã£ãŸãƒˆãƒ¼ã‚¯ãƒ³ã‚’ä½¿ã£ã¦ GSS_Accept_sec_context ã‚’å‘¼ã³å‡ºã™.
 
        *  If the resulting major_status code is GSS_S_COMPLETE and the
           mutual_state flag is not true, then mutual authentication has
           not been established, and the key exchange MUST fail.
 
-	  ·ë²Ì¤Î major_status ¥³¡¼¥É¤¬  GSS_S_COMPLETE ¤Ç
-	  mutual_state ¥Õ¥é¥°¤¬ true ¤Ç¤Ê¤¤¤Ê¤é, Áê¸ßÇ§¾Ú¤Ï³ÎÎ©¤µ¤ì¤º,
-	  ¸°¸ò´¹¤Ï¼ºÇÔ¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+	  çµæœã® major_status ã‚³ãƒ¼ãƒ‰ãŒ  GSS_S_COMPLETE ã§
+	  mutual_state ãƒ•ãƒ©ã‚°ãŒ true ã§ãªã„ãªã‚‰, ç›¸äº’èªè¨¼ã¯ç¢ºç«‹ã•ã‚Œãš,
+	  éµäº¤æ›ã¯å¤±æ•—ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
        *  If the resulting major_status code is GSS_S_COMPLETE and the
           integ_avail flag is not true, then per-message integrity
           protection is not available, and the key exchange MUST fail.
 
-	  ·ë²Ì¤Î major_status ¥³¡¼¥É¤¬  GSS_S_COMPLETE ¤Ç
-	  integ_avail ¥Õ¥é¥°¤¬ true ¤Ç¤Ê¤¤¤Ê¤é, ¥á¥Ã¥»¡¼¥¸Ã±°Ì¤Î
-	  ´°Á´À­Êİ¸î¤ÏÍøÍÑ¤µ¤ì¤Æ¤¤¤Ê¤¤¤Î¤Ç, ¸°¸ò´¹¤Ï
-	  ¼ºÇÔ¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+	  çµæœã® major_status ã‚³ãƒ¼ãƒ‰ãŒ  GSS_S_COMPLETE ã§
+	  integ_avail ãƒ•ãƒ©ã‚°ãŒ true ã§ãªã„ãªã‚‰, ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å˜ä½ã®
+	  å®Œå…¨æ€§ä¿è­·ã¯åˆ©ç”¨ã•ã‚Œã¦ã„ãªã„ã®ã§, éµäº¤æ›ã¯
+	  å¤±æ•—ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
        *  If the resulting major_status code is GSS_S_COMPLETE and both
           the mutual_state and integ_avail flags are true, then the
           security context has been established, and processing
           continues with step 4.
 
-	  ·ë²Ì¤Î major_status ¥³¡¼¥É¤¬  GSS_S_COMPLETE ¤Ç
-	  mutual_state ¤È integ_avail ¥Õ¥é¥°¤¬¶¦¤Ë true ¤Ê¤é,
-	  security context ¤¬³ÎÎ©¤·¤¿. ¤½¤·¤Æ ¥×¥í¥»¥¹¤Ï¥¹¥Æ¥Ã¥× 4 ¤Ø
-	  ¿Ê¤à.
+	  çµæœã® major_status ã‚³ãƒ¼ãƒ‰ãŒ  GSS_S_COMPLETE ã§
+	  mutual_state ã¨ integ_avail ãƒ•ãƒ©ã‚°ãŒå…±ã« true ãªã‚‰,
+	  security context ãŒç¢ºç«‹ã—ãŸ. ãã—ã¦ ãƒ—ãƒ­ã‚»ã‚¹ã¯ã‚¹ãƒ†ãƒƒãƒ— 4 ã¸
+	  é€²ã‚€.
 
        *  If the resulting major_status code is GSS_S_CONTINUE_NEEDED,
           then the output token is sent to C, and processing continues
           with step 2.
 
-	  ·ë²Ì¤Î major_status ¥³¡¼¥É¤¬  GSS_S_CONTINUE_NEEDED ¤Î¾ì¹ç
-	  ·ë²Ì¤Î½ĞÎÏ¥È¡¼¥¯¥ó ¤¬ C ¤ËÁ÷¤é¤ì, ¥×¥í¥ì¥¹¤Ï
-	  ¥¹¥Æ¥Ã¥× 2 ¤òÂ³¤±¤ë.
+	  çµæœã® major_status ã‚³ãƒ¼ãƒ‰ãŒ  GSS_S_CONTINUE_NEEDED ã®å ´åˆ
+	  çµæœã®å‡ºåŠ›ãƒˆãƒ¼ã‚¯ãƒ³ ãŒ C ã«é€ã‚‰ã‚Œ, ãƒ—ãƒ­ãƒ¬ã‚¹ã¯
+	  ã‚¹ãƒ†ãƒƒãƒ— 2 ã‚’ç¶šã‘ã‚‹.
 	  
 
        *  If the resulting major_status code is GSS_S_COMPLETE, but a
           non-zero-length reply token is returned, then that token is
           sent to the client.
 
-	  ·ë²Ì¤Î major_status ¥³¡¼¥É¤¬  GSS_S_COMPLETE ¤À¤¬
-	  0 ¤Ç¤Ê¤¤Ä¹¤µ¤Î reply token ¤¬ÊÖ¤é¤Ê¤±¤ì¤Ğ,
-	  ¤½¤Î token ¤Ï ¥¯¥é¥¤¥¢¥ó¥È¤ËÁ÷¤é¤ì¤ë.
+	  çµæœã® major_status ã‚³ãƒ¼ãƒ‰ãŒ  GSS_S_COMPLETE ã ãŒ
+	  0 ã§ãªã„é•·ã•ã® reply token ãŒè¿”ã‚‰ãªã‘ã‚Œã°,
+	  ãã® token ã¯ ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«é€ã‚‰ã‚Œã‚‹.
 
 
 Hutzelman, et al.        Expires March 12, 2004                 [Page 6]
@@ -493,11 +493,11 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
        obtain a GSSAPI message integrity code for H.  S then sends f and
        the MIC to C.
 
-   4.  S ¤Ï Íğ¿ô y (0< y < q) ¤òÀ¸À®¤·, f = g^y mod p ¤ò·×»»¤¹¤ë.
-       ¤½¤·¤Æ K = e ^ y mod p ¤ò·×»»¤·, H = hash (V_C || V_S ||
-       I_C || I_S || K_S || e || f || K) ¤ò·×»»¤¹¤ë.
-       ¤µ¤é¤Ë, H ¤Î¤¿¤á¤Î GSSAPI ¥á¥Ã¥»¡¼¥¸´°Á´À­¥³¡¼¥É¤òÆÀ¤ë¤¿¤á¤Ë
-        GSS_GetMIC ¤ò¸Æ¤Ö. ¤½¤·¤Æ S ¤Ï C ¤Ë f ¤È MIC ¤òÁ÷¤ë.
+   4.  S ã¯ ä¹±æ•° y (0< y < q) ã‚’ç”Ÿæˆã—, f = g^y mod p ã‚’è¨ˆç®—ã™ã‚‹.
+       ãã—ã¦ K = e ^ y mod p ã‚’è¨ˆç®—ã—, H = hash (V_C || V_S ||
+       I_C || I_S || K_S || e || f || K) ã‚’è¨ˆç®—ã™ã‚‹.
+       ã•ã‚‰ã«, H ã®ãŸã‚ã® GSSAPI ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å®Œå…¨æ€§ã‚³ãƒ¼ãƒ‰ã‚’å¾—ã‚‹ãŸã‚ã«
+        GSS_GetMIC ã‚’å‘¼ã¶. ãã—ã¦ S ã¯ C ã« f ã¨ MIC ã‚’é€ã‚‹.
 
    5.  This step is performed only if the server's final call to
        GSS_Accept_sec_context produced a non-zero-length final reply
@@ -510,33 +510,33 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
        GSS_S_COMPLETE, or a non-zero-length token is returned, it is an
        error and the key exchange MUST fail.
 
-   5.  ¥µ¡¼¥Ğ¤ÎºÇ¸å¤Î GSS_Accept_sec_context ¤Î¸Æ¤Ó½Ğ¤·¤¬ ¥¯¥é¥¤¥¢¥ó¥È¤Ë
-       Á÷¤é¤ì¤ëÄ¹¤µ 0 ¤Ç¤Ê¤¤ºÇ¸å¤Î reply token ¤òÀ¸À®¤·¤Æ _¤«¤Ä_
-       ¥¯¥é¥¤¥¢¥ó¥È¤Ë¤è¤ë GSS_Init_sec_context ¤Î¤½¤ì¤Ş¤Ç¤Î¸Æ¤Ó½Ğ¤·¤Ç
-       GSS_S_COMPLETE major_status ¤ËÀ®¤Ã¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ë¤Î¤ß
-       ¤³¤Î¥¹¥Æ¥Ã¥×¤Ï¹Ô¤Ê¤ï¤ì¤ë. ¤³¤Î¾ò·ï¤Ç, ¥¯¥é¥¤¥¢¥ó¥È¤Ï
-       ºÇ¸å¤Î reply token ¤ò½èÍı¤¹¤ë¤¿¤á GSS_Init_sec_context ¤ò
-       ¤µ¤é¤Ë¸Æ¤Ó¤À¤¹. ¤³¤Î¸Æ¤Ó½Ğ¤·¤Ï, Àè¤Ëµ­½Ò¤·¤¿ÄÌ¤ê¤Ë¹Ô¤Ê¤ï¤ì¤ë.
-       ¤·¤«¤·, ·ë²Ì¤Î major_status ¤¬ GSS_S_COMPLETE ¤Ç¤Ï¤Ê¤«¤Ã¤¿¤ê
-       Ä¹¤µ 0 ¤Ç¤Ê¤¤ token ¤¬ÊÖ¤µ¤ì¤¿¤Ê¤é, ¤³¤ì¤Ï¥¨¥é¡¼¤Ç ¸°¸ò´¹¤Ï
-       ¼ºÇÔ¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   5.  ã‚µãƒ¼ãƒã®æœ€å¾Œã® GSS_Accept_sec_context ã®å‘¼ã³å‡ºã—ãŒ ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«
+       é€ã‚‰ã‚Œã‚‹é•·ã• 0 ã§ãªã„æœ€å¾Œã® reply token ã‚’ç”Ÿæˆã—ã¦ _ã‹ã¤_
+       ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«ã‚ˆã‚‹ GSS_Init_sec_context ã®ãã‚Œã¾ã§ã®å‘¼ã³å‡ºã—ã§
+       GSS_S_COMPLETE major_status ã«æˆã£ã¦ã„ãªã„å ´åˆã«ã®ã¿
+       ã“ã®ã‚¹ãƒ†ãƒƒãƒ—ã¯è¡Œãªã‚ã‚Œã‚‹. ã“ã®æ¡ä»¶ã§, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯
+       æœ€å¾Œã® reply token ã‚’å‡¦ç†ã™ã‚‹ãŸã‚ GSS_Init_sec_context ã‚’
+       ã•ã‚‰ã«å‘¼ã³ã ã™. ã“ã®å‘¼ã³å‡ºã—ã¯, å…ˆã«è¨˜è¿°ã—ãŸé€šã‚Šã«è¡Œãªã‚ã‚Œã‚‹.
+       ã—ã‹ã—, çµæœã® major_status ãŒ GSS_S_COMPLETE ã§ã¯ãªã‹ã£ãŸã‚Š
+       é•·ã• 0 ã§ãªã„ token ãŒè¿”ã•ã‚ŒãŸãªã‚‰, ã“ã‚Œã¯ã‚¨ãƒ©ãƒ¼ã§ éµäº¤æ›ã¯
+       å¤±æ•—ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    6.  C computes K = f^x mod p, and H = hash (V_C || V_S || I_C || I_S
        || K_S || e || f || K).  It then calls GSS_VerifyMIC to verify
        that the MIC sent by S matches H.  If the MIC is not successfully
        verified, the key exchange MUST fail.
 
-   6.  C ¤Ï  K = f^x mod p ¤È H = hash (V_C || V_S || I_C || I_S
-       || K_S || e || f || K) ¤ò·×»»¤¹¤ë. ¤½¤·¤Æ S ¤«¤éÁ÷¤é¤ì¤¿
-       MIC ¤¬ H ¤È¥Ş¥Ã¥Á¤¹¤ë¤«¸¡¾Ú¤¹¤ë¤¿¤á GSS_VerifyMIC ¤ò¸Æ¤Ö.
-       MIC ¤Î¸¡¾Ú¤Ë¼ºÇÔ¤·¤¿¤Ê¤é, ¸°¸ò´¹¤Ï¼ºÇÔ¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.    
+   6.  C ã¯  K = f^x mod p ã¨ H = hash (V_C || V_S || I_C || I_S
+       || K_S || e || f || K) ã‚’è¨ˆç®—ã™ã‚‹. ãã—ã¦ S ã‹ã‚‰é€ã‚‰ã‚ŒãŸ
+       MIC ãŒ H ã¨ãƒãƒƒãƒã™ã‚‹ã‹æ¤œè¨¼ã™ã‚‹ãŸã‚ GSS_VerifyMIC ã‚’å‘¼ã¶.
+       MIC ã®æ¤œè¨¼ã«å¤±æ•—ã—ãŸãªã‚‰, éµäº¤æ›ã¯å¤±æ•—ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.    
 
    Either side MUST NOT send or accept e or f values that are not in the
    range [1, p-1].  If this condition is violated, the key exchange
    fails.
 
-   ¤É¤Á¤é¤ÎÂ¦¤â [1,p-1] ¤ÎÈÏ°Ï¤Ë¤Ê¤¤ e ¤ä f ¤ÎÃÍ¤òÁ÷¤Ã¤¿¤ê¼õ¤±¤È¤Ã¤¿¤ê¤·¤Æ¤Ï
-   ¤Ê¤é¤Ê¤¤. ¤³¤Î¾ò·ï¤¬ÇË²õ¤µ¤ì¤ë¤È, ¸°¸ò´¹¤Ï¼ºÇÔ¤¹¤ë.
+   ã©ã¡ã‚‰ã®å´ã‚‚ [1,p-1] ã®ç¯„å›²ã«ãªã„ e ã‚„ f ã®å€¤ã‚’é€ã£ãŸã‚Šå—ã‘ã¨ã£ãŸã‚Šã—ã¦ã¯
+   ãªã‚‰ãªã„. ã“ã®æ¡ä»¶ãŒç ´å£Šã•ã‚Œã‚‹ã¨, éµäº¤æ›ã¯å¤±æ•—ã™ã‚‹.
 
    If any call to GSS_Init_sec_context or GSS_Accept_sec_context returns
    a major_status other than GSS_S_COMPLETE or GSS_S_CONTINUE_NEEDED, or
@@ -545,12 +545,12 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    mechanisms are available for communicating error information to the
    peer before terminating the connection as required by [8]:
 
-   GSS_Init_sec_context ¤È GSS_Accept_sec_context ¤Î¤É¤Î¸Æ¤Ó½Ğ¤·¤Ë¤ª¤¤¤Æ¤â
-   GSS_S_COMPLETE ¤« GSS_S_CONTINUE_NEEDED °Ê³°¤Î
-   major_status ¤òÊÖ¤·¤¿¤ê, Â¾¤Î GSSAPI ¤Î¸Æ¤Ó½Ğ¤·¤¬ GSS_S_COMPLETE
-   °Ê³°¤Î major_status ¤òÊÖ¤·¤¿¤Ê¤é, ¸°¸ò´¹¤Ï¼ºÇÔ¤¹¤ë. ¤³¤Î¾ì¹ç,
-   [8] ¤Ë¤è¤Ã¤ÆÉ¬Í×¤È¤µ¤ì¤ë ÀÜÂ³¤Î½ªÎ»¤ÎÁ°¤Ë, peer ¤Ë
-   ¥¨¥é¡¼¾ğÊó¤òÅÁÃ£¤¹¤ë¤¿¤á¤Ë ¤¤¤¯¤Ä¤«¤Î¥á¥«¥Ë¥º¥à¤¬ÍøÍÑ¤Ç¤­¤ë.
+   GSS_Init_sec_context ã¨ GSS_Accept_sec_context ã®ã©ã®å‘¼ã³å‡ºã—ã«ãŠã„ã¦ã‚‚
+   GSS_S_COMPLETE ã‹ GSS_S_CONTINUE_NEEDED ä»¥å¤–ã®
+   major_status ã‚’è¿”ã—ãŸã‚Š, ä»–ã® GSSAPI ã®å‘¼ã³å‡ºã—ãŒ GSS_S_COMPLETE
+   ä»¥å¤–ã® major_status ã‚’è¿”ã—ãŸãªã‚‰, éµäº¤æ›ã¯å¤±æ•—ã™ã‚‹. ã“ã®å ´åˆ,
+   [8] ã«ã‚ˆã£ã¦å¿…è¦ã¨ã•ã‚Œã‚‹ æ¥ç¶šã®çµ‚äº†ã®å‰ã«, peer ã«
+   ã‚¨ãƒ©ãƒ¼æƒ…å ±ã‚’ä¼é”ã™ã‚‹ãŸã‚ã« ã„ãã¤ã‹ã®ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ãŒåˆ©ç”¨ã§ãã‚‹.
 
    o  If the key exchange fails due to any GSSAPI error on the server
       (including errors returned by GSS_Accept_sec_context), the server
@@ -558,31 +558,31 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
       error. In this case, if an error token is also sent (see below),
       then this message MUST be sent before the error token.
       
-      ¸°¸ò´¹¤¬  (GSS_Accept_sec_context ¤Ë¤è¤Ã¤ÆÊÖ¤µ¤ì¤ë¥¨¥é¡¼¤â´Ş¤á¤Æ
-      ¥µ¡¼¥Ğ¤Î GSS ¥¨¥é¡¼¤Î¤¿¤á¤Ë¼ºÇÔ¤·¤¿¤Ê¤é, ¥µ¡¼¥Ğ¤Ï ¥¨¥é¡¼¤Î¾ÜºÙ¤ò
-      ¥¯¥é¥¤¥¢¥ó¥È¤ËÃÎ¤é¤»¤ë¥á¥Ã¥»¡¼¥¸¤òÁ÷¤Ã¤Æ¤â¤è¤¤. ¤³¤Î¾ì¹ç,
-      error token ¤âÁ÷¤é¤ì¤ë¤Ê¤é (¸å½Ò) ¤³¤Î¥á¥Ã¥»¡¼¥¸¤Ï
-      error token ¤è¤êÁ°¤ËÁ÷¤é¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+      éµäº¤æ›ãŒ  (GSS_Accept_sec_context ã«ã‚ˆã£ã¦è¿”ã•ã‚Œã‚‹ã‚¨ãƒ©ãƒ¼ã‚‚å«ã‚ã¦
+      ã‚µãƒ¼ãƒã® GSS ã‚¨ãƒ©ãƒ¼ã®ãŸã‚ã«å¤±æ•—ã—ãŸãªã‚‰, ã‚µãƒ¼ãƒã¯ ã‚¨ãƒ©ãƒ¼ã®è©³ç´°ã‚’
+      ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«çŸ¥ã‚‰ã›ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ã£ã¦ã‚‚ã‚ˆã„. ã“ã®å ´åˆ,
+      error token ã‚‚é€ã‚‰ã‚Œã‚‹ãªã‚‰ (å¾Œè¿°) ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯
+      error token ã‚ˆã‚Šå‰ã«é€ã‚‰ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    o  If the key exchange fails due to a GSSAPI error returned from the
       server's call to GSS_Accept_sec_context, and an "error token" is
       also returned, then the server SHOULD send the error token to the
       client to allow completion of the GSS security exchange.
 
-      ¸°¸ò´¹¤¬ ¥µ¡¼¥Ğ¤Î GSS_Accept_sec_context ¤Î¸Æ¤Ó½Ğ¤·¤Ë¤è¤Ã¤Æ
-      ÊÖ¤µ¤ì¤¿ GSSAPI ¥¨¥é¡¼¤Î¤¿¤á¤Ë¼ºÇÔ¤·, "error token" ¤â
-      ÊÖ¤µ¤ì¤¿¤Ê¤é, GSS ¥»¥­¥å¥ê¥Æ¥£¸ò´¹¤Î´°Î»¤ò
-      µö¤¹¤¿¤á error token ¤ò¥¯¥é¥¤¥¢¥ó¥È¤Ë¥µ¡¼¥Ğ¤ÏÁ÷¤ëÉ¬Í×¤¬¤¢¤ë.
+      éµäº¤æ›ãŒ ã‚µãƒ¼ãƒã® GSS_Accept_sec_context ã®å‘¼ã³å‡ºã—ã«ã‚ˆã£ã¦
+      è¿”ã•ã‚ŒãŸ GSSAPI ã‚¨ãƒ©ãƒ¼ã®ãŸã‚ã«å¤±æ•—ã—, "error token" ã‚‚
+      è¿”ã•ã‚ŒãŸãªã‚‰, GSS ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£äº¤æ›ã®å®Œäº†ã‚’
+      è¨±ã™ãŸã‚ error token ã‚’ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«ã‚µãƒ¼ãƒã¯é€ã‚‹å¿…è¦ãŒã‚ã‚‹.
 
    o  If the key exchange fails due to a GSSAPI error returned from the
       client's call to GSS_Init_sec_context, and an "error token" is
       also returned, then the client SHOULD send the error token to the
       server to allow completion of the GSS security exchange.
 
-      ¸°¸ò´¹¤¬ ¥¯¥é¥¤¥¢¥ó¥È¤Î GSS_Init_sec_context ¤Î¸Æ¤Ó½Ğ¤·¤«¤é
-      ÊÖ¤µ¤ì¤ë GSSAPI ¥¨¥é¡¼¤Î¤¿¤á¤Ë¼ºÇÔ¤·, "error token" ¤âÊÖ¤µ¤ì¤¿
-      ¤Ê¤é, GSS ¥»¥­¥å¥ê¥Æ¥£¸ò´¹¤Î´°Î»¤ò
-      µö¤¹¤¿¤á error token ¤ò¥µ¡¼¥Ğ¤Ë¥¯¥é¥¤¥¢¥ó¥È¤ÏÁ÷¤ëÉ¬Í×¤¬¤¢¤ë.
+      éµäº¤æ›ãŒ ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã® GSS_Init_sec_context ã®å‘¼ã³å‡ºã—ã‹ã‚‰
+      è¿”ã•ã‚Œã‚‹ GSSAPI ã‚¨ãƒ©ãƒ¼ã®ãŸã‚ã«å¤±æ•—ã—, "error token" ã‚‚è¿”ã•ã‚ŒãŸ
+      ãªã‚‰, GSS ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£äº¤æ›ã®å®Œäº†ã‚’
+      è¨±ã™ãŸã‚ error token ã‚’ã‚µãƒ¼ãƒã«ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯é€ã‚‹å¿…è¦ãŒã‚ã‚‹.
 
 
 Hutzelman, et al.        Expires March 12, 2004                 [Page 7]
@@ -595,27 +595,27 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    it is RECOMMENDED that implementations provide a method to suppress
    these messages as a matter of policy.
 
-   ¥»¥¯¥·¥ç¥ó 9 ¤Ç½Ò¤Ù¤ë¤è¤¦¤Ë. ¥¨¥é¡¼¤ÎÀµ³Î¤ÊÀ­¼Á¤Ë¤Ä¤¤¤Æ¤Î¾ğÊó¤Ï
-   ¥µ¥¤¥È¤Î¥»¥­¥å¥ê¥Æ¥£¥İ¥ê¥·¡¼¤Ë´ğ¤Å¤¤¤Æ¤ª¤ª¤¤¤«¤¯¤¹¤³¤È¤¬Ë¾¤Ş¤·¤¤¤À¤í¤¦.
-   ¤Ä¤Ş¤ê, ¼ÂÁõ¤Ï, ¥İ¥ê¥·¡¼¤Ë´ğ¤Å¤¤¤Æ¤³¤ì¤é¤Î¥á¥Ã¥»¡¼¥¸¤òÍŞ¤¨¤ëÊıË¡¤ò
-   Äó¶¡¤¹¤ë¤³¤È¤¬¿ä¾©¤µ¤ì¤ë.
+   ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 9 ã§è¿°ã¹ã‚‹ã‚ˆã†ã«. ã‚¨ãƒ©ãƒ¼ã®æ­£ç¢ºãªæ€§è³ªã«ã¤ã„ã¦ã®æƒ…å ±ã¯
+   ã‚µã‚¤ãƒˆã®ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ãƒãƒªã‚·ãƒ¼ã«åŸºã¥ã„ã¦ãŠãŠã„ã‹ãã™ã“ã¨ãŒæœ›ã¾ã—ã„ã ã‚ã†.
+   ã¤ã¾ã‚Š, å®Ÿè£…ã¯, ãƒãƒªã‚·ãƒ¼ã«åŸºã¥ã„ã¦ã“ã‚Œã‚‰ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æŠ‘ãˆã‚‹æ–¹æ³•ã‚’
+   æä¾›ã™ã‚‹ã“ã¨ãŒæ¨å¥¨ã•ã‚Œã‚‹.
 
    This is implemented with the following messages.  The hash algorithm
    for computing the exchange hash is defined by the method name, and is
    called HASH.  The group used for Diffie-Hellman key exchange and the
    underlying GSSAPI mechanism are also defined by the method name.
 
-   °Ê²¼¤Î¥á¥Ã¥»¡¼¥¸¤¬¼ÂÁõ¤µ¤ì¤ë. ¸ò´¹¥Ï¥Ã¥·¥å¤ò·×»»¤¹¤ë¤¿¤á¤Î¥Ï¥Ã¥·¥å
-   ¥¢¥ë¥´¥ê¥º¥à¤Ï ¥á¥½¥Ã¥É¤ÎÌ¾Á°¤ÇÄêµÁ¤µ¤ì¤Æ, HASH ¤È¸Æ¤Ğ¤ì¤ë.
-   Diffie-Hellman ¸°¸ò´¹¤Ç»È¤ï¤ì¤ë·²¤È¤½¤Î´ğ¤È¤Ê¤ë GSSAPI ¥á¥«¥Ë¥º¥à¤â
-   ¥á¥½¥Ã¥É¤ÎÌ¾Á°¤ÇÄêµÁ¤µ¤ì¤ë.
+   ä»¥ä¸‹ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒå®Ÿè£…ã•ã‚Œã‚‹. äº¤æ›ãƒãƒƒã‚·ãƒ¥ã‚’è¨ˆç®—ã™ã‚‹ãŸã‚ã®ãƒãƒƒã‚·ãƒ¥
+   ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã¯ ãƒ¡ã‚½ãƒƒãƒ‰ã®åå‰ã§å®šç¾©ã•ã‚Œã¦, HASH ã¨å‘¼ã°ã‚Œã‚‹.
+   Diffie-Hellman éµäº¤æ›ã§ä½¿ã‚ã‚Œã‚‹ç¾¤ã¨ãã®åŸºã¨ãªã‚‹ GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚‚
+   ãƒ¡ã‚½ãƒƒãƒ‰ã®åå‰ã§å®šç¾©ã•ã‚Œã‚‹.
    
 
    After the client's first call to GSS_Init_sec_context, it sends the
    following:
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤Ï, GSS_Init_sec_context ¤ÎºÇ½é¤Î¸Æ¤Ó½Ğ¤·¤Î¤¢¤È,
-   ¼¡¤òÁ÷¤ë.
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯, GSS_Init_sec_context ã®æœ€åˆã®å‘¼ã³å‡ºã—ã®ã‚ã¨,
+   æ¬¡ã‚’é€ã‚‹.
    
 
            byte      SSH_MSG_KEXGSS_INIT
@@ -626,9 +626,9 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    the following message, prior to any other messages, to inform the
    client of its host key.
 
-   SSH_MSG_KEXGSS_INIT ¥á¥Ã¥»¡¼¥¸¤ò¼õ¤±¤È¤Ã¤¿¤È¤­, ¥µ¡¼¥Ğ¤Ï¼«Ê¬¤Î¥Û¥¹¥È¸°¤ò
-   ¥¯¥é¥¤¥¢¥ó¥È¤ËÅÁ¤¨¤ë¤¿¤á¤Ë°Ê²¼¤Î¥á¥Ã¥»¡¼¥¸¤òÂ¾¤Î¥á¥Ã¥»¡¼¥¸¤è¤ê
-   Àè¤ËÁ÷¤Ã¤Æ¤â¤è¤¤.
+   SSH_MSG_KEXGSS_INIT ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘ã¨ã£ãŸã¨ã, ã‚µãƒ¼ãƒã¯è‡ªåˆ†ã®ãƒ›ã‚¹ãƒˆéµã‚’
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«ä¼ãˆã‚‹ãŸã‚ã«ä»¥ä¸‹ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ä»–ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚ˆã‚Š
+   å…ˆã«é€ã£ã¦ã‚‚ã‚ˆã„.
 
            byte      SSH_MSG_KEXGSS_HOSTKEY
            string    server public host key and certificates (K_S)
@@ -641,19 +641,19 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    single string, in the format specified by the public key type in use
    (see [8], section 4.6).
 
-   ¤É¤Î°Å¹æÁàºî¤ËÂĞ¤·¤Æ»È¤ï¤ì¤ë¥Û¥¹¥È¸°¤Ç¤â¸°¸ò´¹Ë¡¤ÏÉ¬Í×¤È¤·¤Ê¤¤¤Î¤Ç,
-   ¤³¤Î¥á¥Ã¥»¡¼¥¸¤ÏÁªÂò¤Ç¤­¤ë. Section 5 ¤Çµ­½Ò¤¹¤ë "null" ¥Û¥¹¥È¸°
-   ¥¢¥ë¥´¥ê¥º¥à¤òÍøÍÑ¤¹¤ë¾ì¹ç, ¤³¤Î¥á¥Ã¥»¡¼¥¸¤ÏÁ÷¤Ã¤Æ¤Ï¤Ê¤é¤Ê¤¤.
-   ¤³¤Î¥á¥Ã¥»¡¼¥¸¤¬Á÷¤é¤ì¤ë»ş, ¤³¤Î¥á¥Ã¥»¡¼¥¸¤Î¥µ¡¼¥Ğ¤Î¸ø³«¸°
-   ¤ä/¤â¤·¤¯¤Ï ¾ÚÌÀ½ñ¤Ï ÍøÍÑ¤¹¤ë¸ø³«¸°¤Î¼ïÎà¤Ç·èÄê¤µ¤ì¤ë¥Õ¥©¡¼¥Ş¥Ã¥È¤Î
-   Ã±°ì¤ÎÊ¸»úÎó¤È¤·¤ÆÉä¹æ²½¤µ¤ì¤ë ([8] ¤Î¥»¥¯¥·¥ç¥ó 4.6 ¤ò»²¾È).
+   ã©ã®æš—å·æ“ä½œã«å¯¾ã—ã¦ä½¿ã‚ã‚Œã‚‹ãƒ›ã‚¹ãƒˆéµã§ã‚‚éµäº¤æ›æ³•ã¯å¿…è¦ã¨ã—ãªã„ã®ã§,
+   ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯é¸æŠã§ãã‚‹. Section 5 ã§è¨˜è¿°ã™ã‚‹ "null" ãƒ›ã‚¹ãƒˆéµ
+   ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’åˆ©ç”¨ã™ã‚‹å ´åˆ, ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯é€ã£ã¦ã¯ãªã‚‰ãªã„.
+   ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒé€ã‚‰ã‚Œã‚‹æ™‚, ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ã‚µãƒ¼ãƒã®å…¬é–‹éµ
+   ã‚„/ã‚‚ã—ãã¯ è¨¼æ˜æ›¸ã¯ åˆ©ç”¨ã™ã‚‹å…¬é–‹éµã®ç¨®é¡ã§æ±ºå®šã•ã‚Œã‚‹ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®
+   å˜ä¸€ã®æ–‡å­—åˆ—ã¨ã—ã¦ç¬¦å·åŒ–ã•ã‚Œã‚‹ ([8] ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 4.6 ã‚’å‚ç…§).
 
    Each time the server's call to GSS_Accept_sec_context returns a
    major_status code of GSS_S_CONTINUE_NEEDED, it sends the following
    reply to the client:
 
-   ¥µ¡¼¥Ğ¤Î GSS_Accept_sec_context ¤Î¸Æ¤Ó½Ğ¤·¤¬ GSS_S_CONTINUE_NEEDED
-   major_status ¥³¡¼¥É¤òÊÖ¤¹¤¿¤Ó¤Ë, ¥¯¥é¥¤¥¢¥ó¥È¤Ë¼¡¤ÎÊÖÅú¤òÁ÷¤ë.
+   ã‚µãƒ¼ãƒã® GSS_Accept_sec_context ã®å‘¼ã³å‡ºã—ãŒ GSS_S_CONTINUE_NEEDED
+   major_status ã‚³ãƒ¼ãƒ‰ã‚’è¿”ã™ãŸã³ã«, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«æ¬¡ã®è¿”ç­”ã‚’é€ã‚‹.
 
            byte      SSH_MSG_KEXGSS_CONTINUE
            string    output_token (from GSS_Accept_sec_context)
@@ -663,15 +663,15 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    GSS_S_COMPLETE, a protocol error has occurred and the key exchange
    MUST fail.
 
-   GSS_Init_sec_context ¤Î¸Æ¤Ó½Ğ¤·¤¬ GSS_S_COMPLETE major_status ¥³¡¼¥É¤ò
-   ÊÖ¤·¤¿¤¢¤È¤Ç¥¯¥é¥¤¥¢¥ó¥È¤¬¤³¤Î¥á¥Ã¥»¡¼¥¸¤ò¼õ¤±¤È¤Ã¤¿¤Ê¤é,
-   ¥×¥í¥È¥³¥ë¥¨¥é¡¼¤¬µ¯¤Ã¤Æ¤ª¤ê, ¸°¸ò´¹¤Ï¼ºÇÔ¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   GSS_Init_sec_context ã®å‘¼ã³å‡ºã—ãŒ GSS_S_COMPLETE major_status ã‚³ãƒ¼ãƒ‰ã‚’
+   è¿”ã—ãŸã‚ã¨ã§ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘ã¨ã£ãŸãªã‚‰,
+   ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã‚¨ãƒ©ãƒ¼ãŒèµ·ã£ã¦ãŠã‚Š, éµäº¤æ›ã¯å¤±æ•—ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    Each time the client receives the message described above, it makes
    another call to GSS_Init_sec_context.  It then sends the following:
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤¬¾åµ­¤Î¥á¥Ã¥»¡¼¥¸¤ò¼õ¿®¤¹¤ë¤¿¤Ó¤Ë, GSS_Init_sec_context
-   ¤ò¥¯¥é¥¤¥¢¥ó¥È¤Ï¤â¤¦°ìÅÙ¸Æ¤Ö. ¤½¤·¤Æ¼¡¤òÁ÷¤ë.
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒä¸Šè¨˜ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ä¿¡ã™ã‚‹ãŸã³ã«, GSS_Init_sec_context
+   ã‚’ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯ã‚‚ã†ä¸€åº¦å‘¼ã¶. ãã—ã¦æ¬¡ã‚’é€ã‚‹.
 
            byte      SSH_MSG_KEXGSS_CONTINUE
 
@@ -690,19 +690,19 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    major_status code of GSS_S_COMPLETE, it sends one of two final
    messages.
 
-   ¥µ¡¼¥Ğ¤È¥¯¥é¥¤¥¢¥ó¥È¤Ï
-   ¥µ¡¼¥Ğ¤Î GSS_Accept_sec_context ¤Î¸Æ¤Ó½Ğ¤·¤¬ GSS_S_CONTINUE_NEEDED
-   major_status ¥³¡¼¥É¤Ç¤¢¤ë¸Â¤ê¤³¤ì¤é¤Î 2 ¤Ä¤Î¥á¥Ã¥»¡¼¥¸¤ò¸ò´¹¤·Â³¤±¤ë.
-   ¤³¤Î¸Æ¤Ó½Ğ¤·¤¬ GSS_S_COMPLETE major_status ¥³¡¼¥É¤Ë¤Ê¤Ã¤¿¤Ê¤é,
-   ¥µ¡¼¥Ğ¤Ï 2 ¤Ä¤Î ºÇ½ª¥á¥Ã¥»¡¼¥¸¤Î¤¦¤Á¤É¤Á¤é¤«¤òÁ÷¤ë.
+   ã‚µãƒ¼ãƒã¨ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯
+   ã‚µãƒ¼ãƒã® GSS_Accept_sec_context ã®å‘¼ã³å‡ºã—ãŒ GSS_S_CONTINUE_NEEDED
+   major_status ã‚³ãƒ¼ãƒ‰ã§ã‚ã‚‹é™ã‚Šã“ã‚Œã‚‰ã® 2 ã¤ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’äº¤æ›ã—ç¶šã‘ã‚‹.
+   ã“ã®å‘¼ã³å‡ºã—ãŒ GSS_S_COMPLETE major_status ã‚³ãƒ¼ãƒ‰ã«ãªã£ãŸãªã‚‰,
+   ã‚µãƒ¼ãƒã¯ 2 ã¤ã® æœ€çµ‚ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ã†ã¡ã©ã¡ã‚‰ã‹ã‚’é€ã‚‹.
 
    If the server's final call to GSS_Accept_sec_context (resulting in a
    major_status code of GSS_S_COMPLETE) returns a non-zero-length token
    to be sent to the client, it sends the following:
 
-   (GSS_S_COMPLETE major_status ¥³¡¼¥É¤Ë¤Ê¤ë) ¥µ¡¼¥Ğ¤ÎºÇ¸å¤Î
-   GSS_Accept_sec_context ¤Î¸Æ¤Ó½Ğ¤·¤¬ ¥¯¥é¥¤¥¢¥ó¥È¤ËÁ÷¤é¤ì¤ë
-   0 ¤Ç¤Ê¤¤Ä¹¤µ¤Î token ¤òÊÖ¤·¤¿¤Ê¤é, ¥µ¡¼¥Ğ¤Ï¼¡¤òÁ÷¤ë.
+   (GSS_S_COMPLETE major_status ã‚³ãƒ¼ãƒ‰ã«ãªã‚‹) ã‚µãƒ¼ãƒã®æœ€å¾Œã®
+   GSS_Accept_sec_context ã®å‘¼ã³å‡ºã—ãŒ ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«é€ã‚‰ã‚Œã‚‹
+   0 ã§ãªã„é•·ã•ã® token ã‚’è¿”ã—ãŸãªã‚‰, ã‚µãƒ¼ãƒã¯æ¬¡ã‚’é€ã‚‹.
 
            byte      SSH_MSG_KEXGSS_COMPLETE
            mpint     f
@@ -715,17 +715,17 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    GSS_S_COMPLETE, a protocol error has occurred and the key exchange
    MUST fail.
 
-   GSS_Init_sec_context ¤Î¸Æ¤Ó½Ğ¤·¤¬ GSS_S_COMPLETE major_status ¥³¡¼¥É¤ò
-   ÊÖ¤·¤¿¤¢¤È¤Ç¥¯¥é¥¤¥¢¥ó¥È¤¬¤³¤Î¥á¥Ã¥»¡¼¥¸¤ò¼õ¤±¤È¤Ã¤¿¤Ê¤é,
-   ¥×¥í¥È¥³¥ë¥¨¥é¡¼¤¬µ¯¤Ã¤Æ¤ª¤ê, ¸°¸ò´¹¤Ï¼ºÇÔ¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   GSS_Init_sec_context ã®å‘¼ã³å‡ºã—ãŒ GSS_S_COMPLETE major_status ã‚³ãƒ¼ãƒ‰ã‚’
+   è¿”ã—ãŸã‚ã¨ã§ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘ã¨ã£ãŸãªã‚‰,
+   ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã‚¨ãƒ©ãƒ¼ãŒèµ·ã£ã¦ãŠã‚Š, éµäº¤æ›ã¯å¤±æ•—ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    If the server's final call to GSS_Accept_sec_context (resulting in a
    major_status code of GSS_S_COMPLETE) returns a zero-length token or
    no token at all, it sends the following:
 
-   (GSS_S_COMPLETE major_status ¥³¡¼¥É¤Ë¤Ê¤ë) ¥µ¡¼¥Ğ¤ÎºÇ¸å¤Î
-   GSS_Accept_sec_context ¤Î¸Æ¤Ó½Ğ¤·¤¬ ¥¯¥é¥¤¥¢¥ó¥È¤ËÁ÷¤é¤ì¤ë
-   Ä¹¤µ 0 ¤Î token ¤òÊÖ¤·¤¿¤ê, token ¤ò¤Ş¤Ã¤¿¤¯ÊÖ¤µ¤Ê¤«¤Ã¤¿¤Ê¤é, ¥µ¡¼¥Ğ¤Ï¼¡¤òÁ÷¤ë.
+   (GSS_S_COMPLETE major_status ã‚³ãƒ¼ãƒ‰ã«ãªã‚‹) ã‚µãƒ¼ãƒã®æœ€å¾Œã®
+   GSS_Accept_sec_context ã®å‘¼ã³å‡ºã—ãŒ ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«é€ã‚‰ã‚Œã‚‹
+   é•·ã• 0 ã® token ã‚’è¿”ã—ãŸã‚Š, token ã‚’ã¾ã£ãŸãè¿”ã•ãªã‹ã£ãŸãªã‚‰, ã‚µãƒ¼ãƒã¯æ¬¡ã‚’é€ã‚‹.
 
            byte      SSH_MSG_KEXGSS_COMPLETE
            mpint     f
@@ -737,19 +737,19 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    GSS_S_COMPLETE, a protocol error has occurred and the key exchange
    MUST fail.
 
-   GSS_Init_sec_context ¤Î¸Æ¤Ó½Ğ¤·¤¬ GSS_S_COMPLETE major_status ¥³¡¼¥É¤ò
-   ÊÖ¤·¤¿¤¢¤È¤Ç¥¯¥é¥¤¥¢¥ó¥È¤¬¤³¤Î¥á¥Ã¥»¡¼¥¸¤ò¼õ¤±¤È¤Ã¤¿¤Ê¤é,
-   ¥×¥í¥È¥³¥ë¥¨¥é¡¼¤¬µ¯¤Ã¤Æ¤ª¤ê, ¸°¸ò´¹¤Ï¼ºÇÔ¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   GSS_Init_sec_context ã®å‘¼ã³å‡ºã—ãŒ GSS_S_COMPLETE major_status ã‚³ãƒ¼ãƒ‰ã‚’
+   è¿”ã—ãŸã‚ã¨ã§ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘ã¨ã£ãŸãªã‚‰,
+   ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã‚¨ãƒ©ãƒ¼ãŒèµ·ã£ã¦ãŠã‚Š, éµäº¤æ›ã¯å¤±æ•—ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
     If either the client's call to GSS_Init_sec_context or the server's
    call to GSS_Accept_sec_context returns an error status and produces
    an output token (called an "error token"), then the following SHOULD
    be sent to convey the error information to the peer:
 
-   ¥¯¥¢¥¤¥¢¥ó¥È¤Î GSS_Init_sec_context ¤Î¸Æ¤Ó½Ğ¤·¤«,
-   ¥µ¡¼¥Ğ¤Î GSS_Accept_sec_context ¤Î¸Æ¤Ó½Ğ¤·¤¬ ¥¨¥é¡¼ status ¤òÊÖ¤·
-   ("error token"¤È¸Æ¤Ğ¤ì¤ë) output token ¤òÀ¸À®¤·¤¿¤Ê¤é,
-   Áê¼ê¤Ë¥¨¥é¡¼¾ğÊó¤òÅÁ¤¨¤ë¤¿¤á¤Ë ¼¡¤¬Á÷¤é¤ì¤ëÉ¬Í×¤¬¤¢¤ë.
+   ã‚¯ã‚¢ã‚¤ã‚¢ãƒ³ãƒˆã® GSS_Init_sec_context ã®å‘¼ã³å‡ºã—ã‹,
+   ã‚µãƒ¼ãƒã® GSS_Accept_sec_context ã®å‘¼ã³å‡ºã—ãŒ ã‚¨ãƒ©ãƒ¼ status ã‚’è¿”ã—
+   ("error token"ã¨å‘¼ã°ã‚Œã‚‹) output token ã‚’ç”Ÿæˆã—ãŸãªã‚‰,
+   ç›¸æ‰‹ã«ã‚¨ãƒ©ãƒ¼æƒ…å ±ã‚’ä¼ãˆã‚‹ãŸã‚ã« æ¬¡ãŒé€ã‚‰ã‚Œã‚‹å¿…è¦ãŒã‚ã‚‹.
 
            byte      SSH_MSG_KEXGSS_CONTINUE
            string    error_token
@@ -769,16 +769,16 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    processing an error token will likely disconnect without reading any
    further messages.
 
-   ¥µ¡¼¥Ğ¤¬¤³¤Î¥á¥Ã¥»¡¼¥¸¤È SSH_MSG_KEXGSS_ERROR ¥á¥Ã¥»¡¼¥¸¤òÎ¾ÊıÁ÷¤ë¤Î¤Ê¤é
-   error token ¤ò½èÍı¤¹¤ëÁ°¤Ë¥¨¥é¡¼¾ğÊó¤ò¥¯¥é¥¤¥¢¥ó¥È¤Ëµ­Ï¿ ¤«¤Ä/¤â¤·¤¯¤Ï
-   É½¼¨¤µ¤»¤ë¤¿¤á¤Ë SSH_MSG_KEXGSS_ERROR ¥á¥Ã¥»¡¼¥¸¤¬
-   ºÇ½é¤ËÁ÷¤é¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   ã‚µãƒ¼ãƒãŒã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¨ SSH_MSG_KEXGSS_ERROR ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ä¸¡æ–¹é€ã‚‹ã®ãªã‚‰
+   error token ã‚’å‡¦ç†ã™ã‚‹å‰ã«ã‚¨ãƒ©ãƒ¼æƒ…å ±ã‚’ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«è¨˜éŒ² ã‹ã¤/ã‚‚ã—ãã¯
+   è¡¨ç¤ºã•ã›ã‚‹ãŸã‚ã« SSH_MSG_KEXGSS_ERROR ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒ
+   æœ€åˆã«é€ã‚‰ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    In the event of a GSSAPI error on the server, the server MAY send the
    following message before terminating the connection:
 
-   ¥µ¡¼¥Ğ¤Ç GSSAPI ¥¨¥é¡¼¤¬µ¯¤­¤¿¾ì¹ç¤Ë¤Ï, ¥µ¡¼¥Ğ¤ÏÀÜÂ³¤ò½ªÎ»¤¹¤ëÁ°¤Ë
-   ¼¡¤Î¥á¥Ã¥»¡¼¥¸¤òÁ÷¤Ã¤Æ¤â¤è¤¤.
+   ã‚µãƒ¼ãƒã§ GSSAPI ã‚¨ãƒ©ãƒ¼ãŒèµ·ããŸå ´åˆã«ã¯, ã‚µãƒ¼ãƒã¯æ¥ç¶šã‚’çµ‚äº†ã™ã‚‹å‰ã«
+   æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ã£ã¦ã‚‚ã‚ˆã„.
 
            byte      SSH_MSG_KEXGSS_ERROR
            uint32    major_status
@@ -792,16 +792,16 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    return-line feed (CRLF) sequences.  Application developers should
    take this into account when displaying these messages.
 
-   message ¥Æ¥­¥¹¥È¤Ï [10] ¤Ëµ­½Ò¤µ¤ì¤ë UTF-8 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç
-   Éä¹æ²½¤µ¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤. Language tag ¤Ï [11] ¤Ëµ­½Ò¤µ¤ì¤Æ¤¤¤ë¤â¤Î¤À.
-   message ¤Ï carriage return-line feed (CRLF) ¥·¡¼¥±¥ó¥¹¤Ç
-   ¶èÀÚ¤é¤ì¤ë Ê£¿ô¤Î¹Ô¤ò´Ş¤à¤«¤â¤·¤ì¤Ê¤¤¤³¤È¤ËÃí°Õ. ¥¢¥×¥ê¥±¡¼¥·¥ç¥ó¤Î
-   ³«È¯¼Ô¤Ï¤³¤ì¤é¤Î¥á¥Ã¥»¡¼¥¸¤òÉ½¼¨¤¹¤ëºİ¤Ë¤³¤ì¤ò¹ÍÎ¸¤¹¤Ù¤­¤Ç¤¢¤ë.
+   message ãƒ†ã‚­ã‚¹ãƒˆã¯ [10] ã«è¨˜è¿°ã•ã‚Œã‚‹ UTF-8 ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã§
+   ç¬¦å·åŒ–ã•ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„. Language tag ã¯ [11] ã«è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹ã‚‚ã®ã .
+   message ã¯ carriage return-line feed (CRLF) ã‚·ãƒ¼ã‚±ãƒ³ã‚¹ã§
+   åŒºåˆ‡ã‚‰ã‚Œã‚‹ è¤‡æ•°ã®è¡Œã‚’å«ã‚€ã‹ã‚‚ã—ã‚Œãªã„ã“ã¨ã«æ³¨æ„. ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®
+   é–‹ç™ºè€…ã¯ã“ã‚Œã‚‰ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤ºã™ã‚‹éš›ã«ã“ã‚Œã‚’è€ƒæ…®ã™ã¹ãã§ã‚ã‚‹.
 
    The hash H is computed as the HASH hash of the concatenation of the
    following:
 
-   ¥Ï¥Ã¥·¥å H ¤Ï ¼¡¤ÎÏ¢·ë¤Î HASH ¤Î¥Ï¥Ã¥·¥å¤È¤·¤Æ·×»»¤µ¤ì¤ë.
+   ãƒãƒƒã‚·ãƒ¥ H ã¯ æ¬¡ã®é€£çµã® HASH ã®ãƒãƒƒã‚·ãƒ¥ã¨ã—ã¦è¨ˆç®—ã•ã‚Œã‚‹.
 
            string    V_C, the client's version string (CR and NL excluded)
            string    V_S, the server's version string (CR and NL excluded)
@@ -818,16 +818,16 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    server or received by the client, then the empty string is used in
    place of K_S when computing the exchange hash.
 
-   ¤³¤ÎÃÍ¤Ï¸ò´¹¥Ï¥Ã¥·¥å¤È¸Æ¤Ğ¤ì, ¸°¸ò´¹¤òÇ§¾Ú¤¹¤ë¤Î¤Ë»È¤ï¤ì¤ë.
-   ¸ò´¹¥Ï¥Ã¥·¥å¤Ï ÈëÌ©¤Ë¤·¤Æ¤ª¤¯É¬Í×¤¬¤¢¤ë. SSH_MSG_KEXGSS_HOSTKEY
-   ¥á¥Ã¥»¡¼¥¸¤¬¥µ¡¼¥Ğ¤«¤éÁ÷¤é¤ì¤Æ¤¤¤Ê¤«¤Ã¤¿¤ê, ¥¯¥é¥¤¥¢¥ó¥È¤Ë¤è¤Ã¤Æ¼õ¤±¤È¤é
-   ¤ì¤Æ¤¤¤Ê¤«¤Ã¤¿¤Ê¤é, ¸ò´¹¥Ï¥Ã¥·¥å¤ò·×»»¤¹¤ëºİ K_S ¤Î¾ì½ê¤Ë ¶õÊ¸»úÎó¤¬
-   »È¤ï¤ì¤ë.
+   ã“ã®å€¤ã¯äº¤æ›ãƒãƒƒã‚·ãƒ¥ã¨å‘¼ã°ã‚Œ, éµäº¤æ›ã‚’èªè¨¼ã™ã‚‹ã®ã«ä½¿ã‚ã‚Œã‚‹.
+   äº¤æ›ãƒãƒƒã‚·ãƒ¥ã¯ ç§˜å¯†ã«ã—ã¦ãŠãå¿…è¦ãŒã‚ã‚‹. SSH_MSG_KEXGSS_HOSTKEY
+   ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒã‚µãƒ¼ãƒã‹ã‚‰é€ã‚‰ã‚Œã¦ã„ãªã‹ã£ãŸã‚Š, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«ã‚ˆã£ã¦å—ã‘ã¨ã‚‰
+   ã‚Œã¦ã„ãªã‹ã£ãŸãªã‚‰, äº¤æ›ãƒãƒƒã‚·ãƒ¥ã‚’è¨ˆç®—ã™ã‚‹éš› K_S ã®å ´æ‰€ã« ç©ºæ–‡å­—åˆ—ãŒ
+   ä½¿ã‚ã‚Œã‚‹.
 
    The GSS_GetMIC call MUST be applied over H, not the original data.
 
-   GSS_GetMIC ¤Ï ¥ª¥ê¥¸¥Ê¥ë¤Î¥Ç¡¼¥¿¤ËÂĞ¤·¤Æ¤Ç¤Ï¤Ê¤¯ H ¤ËÂĞ¤·¤Æ
-   Å¬ÍÑ¤µ¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   GSS_GetMIC ã¯ ã‚ªãƒªã‚¸ãƒŠãƒ«ã®ãƒ‡ãƒ¼ã‚¿ã«å¯¾ã—ã¦ã§ã¯ãªã H ã«å¯¾ã—ã¦
+   é©ç”¨ã•ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
 2.2 gss-group1-sha1-*
 
@@ -841,12 +841,12 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    underlying GSSAPI mechanism's OID.  Base64 encoding is described in
    section 6.8 of [4].
 
-   ¤³¤ì¤é¤ÎÊıË¡¤Î¤½¤ì¤¾¤ì¤Ï, ¥»¥¯¥·¥ç¥ó 2.1 ¤Çµ­½Ò¤µ¤ì¤¿ HASH ¤È¤·¤Æ
-   SHA-1 ¤È [8] ¤Î¥»¥¯¥·¥ç¥ó 6.1 ¤ÇÄêµÁ¤µ¤ì¤ë·²¤òÍÑ¤¤¤ë
-   GSSAPI ¤ÇÇ§¾Ú¤µ¤ì¤¿ Diffie-Hellman ¸°¸ò´¹¤òÄê¤á¤ë. ¤½¤ì¤¾¤ì¤ÎÊıË¡¤Î
-   ÊıË¡Ì¾¤Ï, "gss-group1-sha1-"Ê¸»úÎó¤È, ´ğÁÃ¤È¤Ê¤ë GSSAPI ¥á¥«¥Ë¥º¥à¤Î OID ¤Î 
-   ASN.1 DER ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥° [1] ¤Î MD5 ¥Ï¥Ã¥·¥å [3] ¤Î Base64 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°
-   ¤ÎÏ¢·ë¤À. Base64 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ï [4] ¤Î Section 6.8 ¤Ëµ­½Ò¤µ¤ì¤Æ¤¤¤ë.
+   ã“ã‚Œã‚‰ã®æ–¹æ³•ã®ãã‚Œãã‚Œã¯, ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 2.1 ã§è¨˜è¿°ã•ã‚ŒãŸ HASH ã¨ã—ã¦
+   SHA-1 ã¨ [8] ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 6.1 ã§å®šç¾©ã•ã‚Œã‚‹ç¾¤ã‚’ç”¨ã„ã‚‹
+   GSSAPI ã§èªè¨¼ã•ã‚ŒãŸ Diffie-Hellman éµäº¤æ›ã‚’å®šã‚ã‚‹. ãã‚Œãã‚Œã®æ–¹æ³•ã®
+   æ–¹æ³•åã¯, "gss-group1-sha1-"æ–‡å­—åˆ—ã¨, åŸºç¤ã¨ãªã‚‹ GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã® OID ã® 
+   ASN.1 DER ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚° [1] ã® MD5 ãƒãƒƒã‚·ãƒ¥ [3] ã® Base64 ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°
+   ã®é€£çµã . Base64 ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã¯ [4] ã® Section 6.8 ã«è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹.
 
 
 Hutzelman, et al.        Expires March 12, 2004                [Page 10]
@@ -859,14 +859,14 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    such key exchange methods; this does NOT imply that the IESG is
    considered to be the owner of the underlying GSSAPI mechanism.
 
-   1 ¤Ä 1 ¤Ä¤Î¸°¸ò´¹ÊıË¡¤Ï, ¤³¤Î»ÅÍÍ¤Ë¤è¤Ã¤Æ°ÅÌÛ¤ËÅĞÏ¿¤µ¤ì¤ë.
-   IESG ¤Ï ¤³¤Î¤è¤¦¤Ê¸°¸ò´¹Ë¡¤Î¤¹¤Ù¤Æ¤Î¥ª¡¼¥Ê¡¼¤À¤È¹Í¤¨¤é¤ì¤Æ¤¤¤ë.
-   ¤³¤ì¤Ï,  IESG ¤¬ ´ğÁÃ¤È¤Ê¤ë GSSAPI mechanism ¤Î¥ª¡¼¥Ê¡¼¤Ç¤¢¤ë¤È
-   ¹Í¤¨¤é¤ì¤ë¤³¤È¤ò°ÕÌ£¤·¤Ê¤¤.
+   1 ã¤ 1 ã¤ã®éµäº¤æ›æ–¹æ³•ã¯, ã“ã®ä»•æ§˜ã«ã‚ˆã£ã¦æš—é»™ã«ç™»éŒ²ã•ã‚Œã‚‹.
+   IESG ã¯ ã“ã®ã‚ˆã†ãªéµäº¤æ›æ³•ã®ã™ã¹ã¦ã®ã‚ªãƒ¼ãƒŠãƒ¼ã ã¨è€ƒãˆã‚‰ã‚Œã¦ã„ã‚‹.
+   ã“ã‚Œã¯,  IESG ãŒ åŸºç¤ã¨ãªã‚‹ GSSAPI mechanism ã®ã‚ªãƒ¼ãƒŠãƒ¼ã§ã‚ã‚‹ã¨
+   è€ƒãˆã‚‰ã‚Œã‚‹ã“ã¨ã‚’æ„å‘³ã—ãªã„.
 
 2.3 Other GSSAPI key exchange methods
 
-2.3 Â¾¤Î GSSAPI ¸°¸ò´¹Ë¡
+2.3 ä»–ã® GSSAPI éµäº¤æ›æ³•
 
    Key exchange method names starting with "gss-" are reserved for key
    exchange methods which conform to this document; in particular, for
@@ -876,12 +876,12 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    is that the names for any such future methods methods be defined in a
    similar manner to that used in Section 2.2.
 
-   "gss-"¤Ç»Ï¤Ş¤ë¸°¸ò´¹Ë¡¤ÎÌ¾Á°¤Ï, ¤³¤ÎÊ¸½ñ¤Ë½¾¤¦¸°¸ò´¹Ë¡¤Î¤¿¤á¤Ë
-   Í½Ìó¤µ¤ì¤Æ¤¤¤ë. ÆÃ¤Ë, °Û¤Ê¤ë·² ¤«¤Ä/¤Ê¤¤¤· ¥Ï¥Ã¥·¥å´Ø¿ô¤òÍøÍÑ¤¹¤ë
-   ¾­Íè¤ÎÊıË¡¤ò´Ş¤à ¥»¥¯¥·¥ç¥ó 2.1 ¤Çµ­½Ò¤·¤¿ GSSAPI ¤ÇÇ§¾Ú¤µ¤ì¤¿
-   Diffie-Hellman ¸°¸ò´¹¥¢¥ë¥´¥ê¥º¥à¤ò»È¤¦ÊıË¡¤Î¤¿¤á¤Ë.
-   ¤É¤ó¤Ê¾­Íè¤ÎÊıË¡¤ÎÌ¾Á°¤â¥»¥¯¥·¥ç¥ó 2.2 ¤Ç»È¤ï¤ì¤¿¤Î¤ÈÆ±¤¸ÊıË¡¤ÇÄêµÁ¤µ¤ì¤ë
-   ¤Î¤¬¤³¤Î°Õ¿Ş¤À.
+   "gss-"ã§å§‹ã¾ã‚‹éµäº¤æ›æ³•ã®åå‰ã¯, ã“ã®æ–‡æ›¸ã«å¾“ã†éµäº¤æ›æ³•ã®ãŸã‚ã«
+   äºˆç´„ã•ã‚Œã¦ã„ã‚‹. ç‰¹ã«, ç•°ãªã‚‹ç¾¤ ã‹ã¤/ãªã„ã— ãƒãƒƒã‚·ãƒ¥é–¢æ•°ã‚’åˆ©ç”¨ã™ã‚‹
+   å°†æ¥ã®æ–¹æ³•ã‚’å«ã‚€ ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 2.1 ã§è¨˜è¿°ã—ãŸ GSSAPI ã§èªè¨¼ã•ã‚ŒãŸ
+   Diffie-Hellman éµäº¤æ›ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’ä½¿ã†æ–¹æ³•ã®ãŸã‚ã«.
+   ã©ã‚“ãªå°†æ¥ã®æ–¹æ³•ã®åå‰ã‚‚ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 2.2 ã§ä½¿ã‚ã‚ŒãŸã®ã¨åŒã˜æ–¹æ³•ã§å®šç¾©ã•ã‚Œã‚‹
+   ã®ãŒã“ã®æ„å›³ã .
 
 
 
@@ -926,68 +926,68 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
 
 3. GSSAPI User Authentication
 
-3. GSSAPI ¥æ¡¼¥¶Ç§¾Ú
+3. GSSAPI ãƒ¦ãƒ¼ã‚¶èªè¨¼
 
    This section describes a general-purpose user authentication method
    based on [2].  It is intended to be run over the SSH user
    authentication protocol [9].
 
-   ¤³¤Î¥»¥¯¥·¥ç¥ó¤Ç¤Ï, [2] ¤ò¥Ù¡¼¥¹¤Ë¤·¤¿ ÈÆÍÑ¥æ¡¼¥¶Ç§¾ÚË¡¤òµ­½Ò¤¹¤ë.
-   ¤³¤ì¤Ï SSH ¥æ¡¼¥¶Ç§¾Ú¥×¥í¥È¥³¥ë [9] ¤Î¾å¤ÇÆ°¤«¤µ¤ì¤ë¤³¤È¤ò°Õ¿Ş¤·¤Æ¤¤¤ë.
+   ã“ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³ã§ã¯, [2] ã‚’ãƒ™ãƒ¼ã‚¹ã«ã—ãŸ æ±ç”¨ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•ã‚’è¨˜è¿°ã™ã‚‹.
+   ã“ã‚Œã¯ SSH ãƒ¦ãƒ¼ã‚¶èªè¨¼ãƒ—ãƒ­ãƒˆã‚³ãƒ« [9] ã®ä¸Šã§å‹•ã‹ã•ã‚Œã‚‹ã“ã¨ã‚’æ„å›³ã—ã¦ã„ã‚‹.
 
    The authentication method name for this protocol is
    "gssapi-with-mic".
 
-   ¤³¤Î¥×¥í¥È¥³¥ë¤ÎÇ§¾ÚË¡¤ÎÌ¾Á°¤Ï "gssapi-with-mic" ¤À.
+   ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®èªè¨¼æ³•ã®åå‰ã¯ "gssapi-with-mic" ã .
 
 3.1 GSSAPI Authentication Overview
 
-3.1 GSSAPI Ç§¾Ú¤Î³µÍ×
+3.1 GSSAPI èªè¨¼ã®æ¦‚è¦
 
    GSSAPI authentication must maintain a context.  Authentication begins
    when the client sends a SSH_MSG_USERAUTH_REQUEST, which specifies the
    mechanism OIDs the client supports.
 
-   GSSAPI Ç§¾Ú¤Ï context ¤ò°İ»ı¤¹¤ë. ¥¯¥é¥¤¥¢¥ó¥È¤Î¥µ¥İ¡¼¥È¤¹¤ë¥á¥«¥Ë¥º¥à
-   ¤Î OID ¤ò»ØÄê¤·¤¿ SSH_MSG_USERAUTH_REQUEST ¤ò¥¯¥é¥¤¥¢¥ó¥È¤¬Á÷¤ë¤³¤È¤Ç
-   Ç§¾Ú¤¬»Ï¤Ş¤ë.
+   GSSAPI èªè¨¼ã¯ context ã‚’ç¶­æŒã™ã‚‹. ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®ã‚µãƒãƒ¼ãƒˆã™ã‚‹ãƒ¡ã‚«ãƒ‹ã‚ºãƒ 
+   ã® OID ã‚’æŒ‡å®šã—ãŸ SSH_MSG_USERAUTH_REQUEST ã‚’ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒé€ã‚‹ã“ã¨ã§
+   èªè¨¼ãŒå§‹ã¾ã‚‹.
 
    If the server supports any of the requested mechanism OIDs, the
    server sends a SSH_MSG_USERAUTH_GSSAPI_RESPONSE message containing
    the mechanism OID.
 
-   Í×µá¤µ¤ì¤¿¥á¥«¥Ë¥º¥à¤Î OID ¤Î¤É¤ì¤«¤ò¥µ¡¼¥Ğ¤¬¥µ¥İ¡¼¥È¤·¤Æ¤¤¤¿¤Ê¤é,
-   ¥µ¡¼¥Ğ¤Ï ¥á¥«¥Ë¥º¥à¤Î OID ¤ò´Ş¤à SSH_MSG_USERAUTH_GSSAPI_RESPONSE
-   ¥á¥Ã¥»¡¼¥¸¤òÁ÷¤ë.
+   è¦æ±‚ã•ã‚ŒãŸãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã® OID ã®ã©ã‚Œã‹ã‚’ã‚µãƒ¼ãƒãŒã‚µãƒãƒ¼ãƒˆã—ã¦ã„ãŸãªã‚‰,
+   ã‚µãƒ¼ãƒã¯ ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã® OID ã‚’å«ã‚€ SSH_MSG_USERAUTH_GSSAPI_RESPONSE
+   ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ã‚‹.
 
    After the client receives SSH_MSG_USERAUTH_GSSAPI_RESPONSE, the
    client and server exchange SSH_MSG_USERAUTH_GSSAPI_TOKEN packets
    until the authentication mechanism either succeeds or fails.
    
-   ¥¯¥é¥¤¥¢¥ó¥È¤¬ SSH_MSG_USERAUTH_GSSAPI_RESPONSE ¤ò¼õ¤±¤È¤Ã¤¿¤é
-   Ç§¾Ú¥á¥«¥Ë¥º¥à¤¬À®¸ù¤¹¤ë¤«¼ºÇÔ¤¹¤ë¤Ş¤Ç
-   ¥¯¥é¥¤¥¢¥ó¥È¤È¥µ¡¼¥Ğ¤Ï SSH_MSG_USERAUTH_GSSAPI_TOKEN ¥Ñ¥±¥Ã¥È¤ò
-   ¸ò´¹¤¹¤ë.
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒ SSH_MSG_USERAUTH_GSSAPI_RESPONSE ã‚’å—ã‘ã¨ã£ãŸã‚‰
+   èªè¨¼ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ãŒæˆåŠŸã™ã‚‹ã‹å¤±æ•—ã™ã‚‹ã¾ã§
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¨ã‚µãƒ¼ãƒã¯ SSH_MSG_USERAUTH_GSSAPI_TOKEN ãƒ‘ã‚±ãƒƒãƒˆã‚’
+   äº¤æ›ã™ã‚‹.
 
    If at any time during the exchange, the client sends a new
    SSH_MSG_USERAUTH_REQUEST packet, the GSSAPI context is completely
    discarded and destroyed, and any further GSSAPI authentication MUST
    restart from the beginning.
 
-   ¤³¤Î¸ò´¹¤Î´Ö¤Ë¥¯¥é¥¤¥¢¥ó¥È¤¬¿·¤·¤¤ SSH_MSG_USERAUTH_REQUEST
-   ¤òÁ÷¤Ã¤¿¤Ê¤é, GSSAPI context ¤ò´°Á´¤Ë¼Î¤Æ¤é¤ìÇË²õ¤µ¤ì¤Æ,
-   ¤µ¤é¤Ê¤ë GSSAPI Ç§¾Ú¤ÏºÇ½é¤«¤éºÆ¥¹¥¿¡¼¥È¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   ã“ã®äº¤æ›ã®é–“ã«ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒæ–°ã—ã„ SSH_MSG_USERAUTH_REQUEST
+   ã‚’é€ã£ãŸãªã‚‰, GSSAPI context ã‚’å®Œå…¨ã«æ¨ã¦ã‚‰ã‚Œç ´å£Šã•ã‚Œã¦,
+   ã•ã‚‰ãªã‚‹ GSSAPI èªè¨¼ã¯æœ€åˆã‹ã‚‰å†ã‚¹ã‚¿ãƒ¼ãƒˆã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
    
 
 3.2 Initiating GSSAPI authentication
 
-3.2 GSSAPI Ç§¾Ú¤Î³«»Ï
+3.2 GSSAPI èªè¨¼ã®é–‹å§‹
 
    The GSSAPI authentication method is initiated when the client sends a
    SSH_MSG_USERAUTH_REQUEST:
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤¬ SSH_MSG_USERAUTH_REQUEST ¤òÁ÷¤ë¤³¤È¤Ç
-   GSSAPI Ç§¾ÚË¡¤¬³«»Ï¤µ¤ì¤ë.
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒ SSH_MSG_USERAUTH_REQUEST ã‚’é€ã‚‹ã“ã¨ã§
+   GSSAPI èªè¨¼æ³•ãŒé–‹å§‹ã•ã‚Œã‚‹.
 
            byte      SSH_MSG_USERAUTH_REQUEST
            string    user name (in ISO-10646 UTF-8 encoding)
@@ -1002,11 +1002,11 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    server must choose the first mechanism OID on the list that it
    supports.
 
-   Mechanism OID ¤Ï [1] ¤È [2] ¤Î¥»¥¯¥·¥ç¥ó 3.2 ¤Çµ­½Ò¤µ¤ì¤Æ¤¤¤ë¤è¤¦¤Ë
-   ASN.1 distinguished encoding rules (DER) ¤Ë½¾¤Ã¤ÆÉä¹æ²½¤µ¤ì¤ë.
-   Mechanism OID ¤Ï ¹¥¤ß¤Î½ç¤ËÎóµó¤µ¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤. ¤Ş¤¿
-   ¥µ¡¼¥Ğ¤Ï ¥ê¥¹¥È¤ÎÃæ¤Ç¼«¿È¤¬¥µ¥İ¡¼¥È¤¹¤ëºÇ½é¤Î¥á¥«¥Ë¥º¥à¤ò
-   ÁªÂò¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   Mechanism OID ã¯ [1] ã¨ [2] ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 3.2 ã§è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹ã‚ˆã†ã«
+   ASN.1 distinguished encoding rules (DER) ã«å¾“ã£ã¦ç¬¦å·åŒ–ã•ã‚Œã‚‹.
+   Mechanism OID ã¯ å¥½ã¿ã®é †ã«åˆ—æŒ™ã•ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„. ã¾ãŸ
+   ã‚µãƒ¼ãƒã¯ ãƒªã‚¹ãƒˆã®ä¸­ã§è‡ªèº«ãŒã‚µãƒãƒ¼ãƒˆã™ã‚‹æœ€åˆã®ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚’
+   é¸æŠã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    The client SHOULD send GSSAPI mechanism OID's only for mechanisms
    which are of the same priority, compared to non-GSSAPI authentication
@@ -1023,19 +1023,19 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    for one GSSAPI mechanism, then try public key authentication, and
    then try another GSSAPI mechanism.
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤Ï GSSAPI ¤Ç¤Ê¤¤Ç§¾Ú¤ÈÈæ³Ó¤·¤ÆÆ±¤¸Í¥ÀèÅÙ¤Î¥á¥«¥Ë¥º¥à¤ËÂĞ¤·¤Æ
-   GSSAPI mechanism OID 1 ¤Ä¤º¤ÄÁ÷¤ëÉ¬Í×¤¬¤¢¤ë. ¤µ¤â¤Ê¤±¤ì¤Ğ, 
-   Ç§¾ÚË¡¤Ï½ç½ø¤¬¤Ğ¤é¤Ğ¤é¤Ë¼Â¹Ô¤µ¤ì¤ë¤«¤â¤·¤ì¤Ê¤¤. 
-   ¥¯¥é¥¤¥¢¥ó¥È¤ÏºÇ½é¤Ë 1 ¤Ä¤Î GSSAPI ¥á¥«¥Ë¥º¥à¤ËÂĞ¤·¤Æ
-   SSH_MSG_USERAUTH_REQUEST ¤òÁ÷¤Ã¤Æ, ¼¡¤Ë¸ø³«¸°Ç§¾Ú¤ò»î¤ß,
-   ¤µ¤é¤ËÊÌ¤Î GSSAPI ¥á¥«¥Ë¥º¥à¤ò»î¤·¤Æ¤â¤è¤¤.
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯ GSSAPI ã§ãªã„èªè¨¼ã¨æ¯”è¼ƒã—ã¦åŒã˜å„ªå…ˆåº¦ã®ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã«å¯¾ã—ã¦
+   GSSAPI mechanism OID 1 ã¤ãšã¤é€ã‚‹å¿…è¦ãŒã‚ã‚‹. ã•ã‚‚ãªã‘ã‚Œã°, 
+   èªè¨¼æ³•ã¯é †åºãŒã°ã‚‰ã°ã‚‰ã«å®Ÿè¡Œã•ã‚Œã‚‹ã‹ã‚‚ã—ã‚Œãªã„. 
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯æœ€åˆã« 1 ã¤ã® GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã«å¯¾ã—ã¦
+   SSH_MSG_USERAUTH_REQUEST ã‚’é€ã£ã¦, æ¬¡ã«å…¬é–‹éµèªè¨¼ã‚’è©¦ã¿,
+   ã•ã‚‰ã«åˆ¥ã® GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚’è©¦ã—ã¦ã‚‚ã‚ˆã„.
 
    If the server does not support any of the specified OIDs, the server
    MUST fail the request by sending a SSH_MSG_USERAUTH_FAILURE packet.
 
-   ¥µ¡¼¥Ğ¤¬ »ØÄê¤µ¤ì¤¿ OID ¤Î¤É¤ì¤â¥µ¥İ¡¼¥È¤·¤Æ¤¤¤Ê¤¤¤Ê¤é,
-   ¥µ¡¼¥Ğ¤Ï SSH_MSG_USERAUTH_FAILURE ¥Ñ¥±¥Ã¥È¤òÁ÷¤Ã¤Æ ¥ê¥¯¥¨¥¹¥È¤ò
-   ¼ºÇÔ¤µ¤»¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   ã‚µãƒ¼ãƒãŒ æŒ‡å®šã•ã‚ŒãŸ OID ã®ã©ã‚Œã‚‚ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ãªã„ãªã‚‰,
+   ã‚µãƒ¼ãƒã¯ SSH_MSG_USERAUTH_FAILURE ãƒ‘ã‚±ãƒƒãƒˆã‚’é€ã£ã¦ ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’
+   å¤±æ•—ã•ã›ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    The user name may be an empty string if it can be deduced from the
    results of the GSSAPI authentication.  If the user name is not empty,
@@ -1045,33 +1045,33 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    information about which accounts exist.  In any case, if the user
    does not exist, the authentication request MUST NOT be accepted.
 
-   GSSAPI Ç§¾Ú¤Î·ë²Ì¤«¤é ¥æ¡¼¥¶Ì¾¤¬±éåè²ÄÇ½¤Ê¾ì¹ç, ¥æ¡¼¥¶Ì¾¤Ï
-   ¶õÊ¸»úÎó¤«¤â¤·¤ì¤Ê¤¤. ¥æ¡¼¥¶Ì¾¤¬¶õ¤Ç¤Ê¤¯, Í×µá¤µ¤ì¤¿¥æ¡¼¥¶¤¬
-   Â¸ºß¤·¤Ê¤¤¤Ê¤é, ¥µ¡¼¥Ğ¤Ï ÀÚÃÇ¤·¤Æ¤â¤è¤¤¤·, ¼Âºİ¤Ë¤Ï
-   ¤É¤ì¤â¼õ¤±Æş¤é¤ì¤ë¤³¤È¤Ï¤Ê¤¤µ¶¤Î¼õ¤±²ÄÇ½Ç§¾Ú¥ê¥¹¥È¤òÁ÷¤Ã¤Æ¤â¤è¤¤.
-   ¤³¤ì¤Ï, ¥¢¥«¥¦¥ó¥È¤¬Â¸ºß¤¹¤ë¤«¤É¤¦¤«¤Ë¤Ä¤¤¤Æ¤Î¾ğÊó¤ò
-   ¸ø³«¤¹¤ë¤Î¤òÈò¤±¤ë¤³¤È¤ò¥µ¡¼¥Ğ¤Ë²ÄÇ½¤Ë¤¹¤ë. ¤É¤¦¤¢¤ì,
-   ¥æ¡¼¥¶¤¬Â¸ºß¤·¤Ê¤¤¤Ê¤é, Ç§¾Ú¤ÎÍ×µá¤Ï¼õ¤±Æş¤ì¤Æ¤Ï¤Ê¤é¤Ê¤¤.
+   GSSAPI èªè¨¼ã®çµæœã‹ã‚‰ ãƒ¦ãƒ¼ã‚¶åãŒæ¼”ç¹¹å¯èƒ½ãªå ´åˆ, ãƒ¦ãƒ¼ã‚¶åã¯
+   ç©ºæ–‡å­—åˆ—ã‹ã‚‚ã—ã‚Œãªã„. ãƒ¦ãƒ¼ã‚¶åãŒç©ºã§ãªã, è¦æ±‚ã•ã‚ŒãŸãƒ¦ãƒ¼ã‚¶ãŒ
+   å­˜åœ¨ã—ãªã„ãªã‚‰, ã‚µãƒ¼ãƒã¯ åˆ‡æ–­ã—ã¦ã‚‚ã‚ˆã„ã—, å®Ÿéš›ã«ã¯
+   ã©ã‚Œã‚‚å—ã‘å…¥ã‚‰ã‚Œã‚‹ã“ã¨ã¯ãªã„å½ã®å—ã‘å¯èƒ½èªè¨¼ãƒªã‚¹ãƒˆã‚’é€ã£ã¦ã‚‚ã‚ˆã„.
+   ã“ã‚Œã¯, ã‚¢ã‚«ã‚¦ãƒ³ãƒˆãŒå­˜åœ¨ã™ã‚‹ã‹ã©ã†ã‹ã«ã¤ã„ã¦ã®æƒ…å ±ã‚’
+   å…¬é–‹ã™ã‚‹ã®ã‚’é¿ã‘ã‚‹ã“ã¨ã‚’ã‚µãƒ¼ãƒã«å¯èƒ½ã«ã™ã‚‹. ã©ã†ã‚ã‚Œ,
+   ãƒ¦ãƒ¼ã‚¶ãŒå­˜åœ¨ã—ãªã„ãªã‚‰, èªè¨¼ã®è¦æ±‚ã¯å—ã‘å…¥ã‚Œã¦ã¯ãªã‚‰ãªã„.
 
    The client MAY at any time continue with a new
    SSH_MSG_USERAUTH_REQUEST message, in which case the server MUST
    abandon the previous authentication attempt and continue with the new
    one.
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤Ï ¤¤¤Ä¤Ç¤â ¿·¤·¤¤ SSH_MSG_USERAUTH_REQUEST ¤òÂ³¤±¤Æ¤â¤è¤¤.
-   ¤³¤Î¾ì, ¥µ¡¼¥Ğ¤ÏÁ°¤ÎÇ§¾Ú¤Î»î¹Ô¤òÇË´ş¤·¿·¤·¤¤¤â¤ÎÂ³¤±¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯ ã„ã¤ã§ã‚‚ æ–°ã—ã„ SSH_MSG_USERAUTH_REQUEST ã‚’ç¶šã‘ã¦ã‚‚ã‚ˆã„.
+   ã“ã®å ´, ã‚µãƒ¼ãƒã¯å‰ã®èªè¨¼ã®è©¦è¡Œã‚’ç ´æ£„ã—æ–°ã—ã„ã‚‚ã®ç¶šã‘ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
 3.3 Initial server response
 
-3.3 ºÇ½é¤Î¥µ¡¼¥Ğ¥ì¥¹¥İ¥ó¥¹
+3.3 æœ€åˆã®ã‚µãƒ¼ãƒãƒ¬ã‚¹ãƒãƒ³ã‚¹
 
    The server responds to the SSH_MSG_USERAUTH_REQUEST with either a
    SSH_MSG_USERAUTH_FAILURE if none of the mechanisms are supported, or
    with SSH_MSG_USERAUTH_GSSAPI_RESPONSE as follows:
 
-   ¥µ¡¼¥Ğ¤Ï, SSH_MSG_USERAUTH_REQUEST ¤ËÂĞ¤·¤Æ
-   1 ¤Ä¤â¥á¥«¥Ë¥º¥à¤ò¥µ¥İ¡¼¥È¤·¤Æ¤¤¤Ê¤¤¾ì¹ç¤Î SSH_MSG_USERAUTH_FAILURE ¤«
-   °Ê²¼¤Î SSH_MSG_USERAUTH_GSSAPI_RESPONSE ¤òÊÖ¤¹.
+   ã‚µãƒ¼ãƒã¯, SSH_MSG_USERAUTH_REQUEST ã«å¯¾ã—ã¦
+   1 ã¤ã‚‚ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ãªã„å ´åˆã® SSH_MSG_USERAUTH_FAILURE ã‹
+   ä»¥ä¸‹ã® SSH_MSG_USERAUTH_GSSAPI_RESPONSE ã‚’è¿”ã™.
 
            byte        SSH_MSG_USERAUTH_GSSAPI_RESPONSE
            string      selected mechanism OID
@@ -1079,12 +1079,12 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    The mechanism OID must be one of the OIDs sent by the client in the
    SSH_MSG_USERAUTH_REQUEST packet.
 
-   mechanism OID ¤Ï SSH_MSG_USERAUTH_REQUEST ¥Ñ¥±¥Ã¥È¤Ç¥¯¥é¥¤¥¢¥ó¥È¤«¤é
-   Á÷¤é¤ì¤Æ¤­¤¿ OID ¤Î¤¦¤Á¤Î 1 ¤Ä¤Ç¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   mechanism OID ã¯ SSH_MSG_USERAUTH_REQUEST ãƒ‘ã‚±ãƒƒãƒˆã§ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰
+   é€ã‚‰ã‚Œã¦ããŸ OID ã®ã†ã¡ã® 1 ã¤ã§ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
 3.4 GSSAPI session
 
-3.4 GSSAPI ¥»¥Ã¥·¥ç¥ó
+3.4 GSSAPI ã‚»ãƒƒã‚·ãƒ§ãƒ³
 
    Once the mechanism OID has been selected, the client will then
    initiate an exchange of one or more pairs of
@@ -1093,12 +1093,12 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    'GSS_Accept_sec_context ()' calls.  The actual number of packets
    exchanged is determined by the underlying GSSAPI mechanism.
 
-   mechanism OID ¤¬ÁªÂò¤µ¤ì¤¿¤é, ¥¯¥é¥¤¥¢¥ó¥È¤Ï 1 ¤Ä°Ê¾å¤Î
-   SSH_MSG_USERAUTH_GSSAPI_TOKEN ¥Ñ¥±¥Ã¥È¤Î¥Ú¥¢¤Î¸ò´¹¤ò»Ï¤á¤ë.
-   ¤³¤ì¤é¤Î¥Ñ¥±¥Ã¥È¤Ï 'GSS_Init_sec_context ()' ¤È
-   'GSS_Accept_sec_context ()' ¤Î¸Æ¤Ó½Ğ¤·¤Ë¤è¤Ã¤ÆÀ¸À®¤µ¤ì¤¿
-   token ¤ò´Ş¤à. ¸ò´¹¤µ¤ì¤ë¥Ñ¥±¥Ã¥È¤Î¼Âºİ¤Î¿ô¤Ï,
-   ´ğÁÃ¤È¤¹¤ë GSSAPI ¥á¥«¥Ë¥º¥à¤Ë¤è¤Ã¤Æ·èÄê¤µ¤ì¤ë.
+   mechanism OID ãŒé¸æŠã•ã‚ŒãŸã‚‰, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯ 1 ã¤ä»¥ä¸Šã®
+   SSH_MSG_USERAUTH_GSSAPI_TOKEN ãƒ‘ã‚±ãƒƒãƒˆã®ãƒšã‚¢ã®äº¤æ›ã‚’å§‹ã‚ã‚‹.
+   ã“ã‚Œã‚‰ã®ãƒ‘ã‚±ãƒƒãƒˆã¯ 'GSS_Init_sec_context ()' ã¨
+   'GSS_Accept_sec_context ()' ã®å‘¼ã³å‡ºã—ã«ã‚ˆã£ã¦ç”Ÿæˆã•ã‚ŒãŸ
+   token ã‚’å«ã‚€. äº¤æ›ã•ã‚Œã‚‹ãƒ‘ã‚±ãƒƒãƒˆã®å®Ÿéš›ã®æ•°ã¯,
+   åŸºç¤ã¨ã™ã‚‹ GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã«ã‚ˆã£ã¦æ±ºå®šã•ã‚Œã‚‹.
 
            byte        SSH_MSG_USERAUTH_GSSAPI_TOKEN
            string      data returned from either GSS_Init_sec_context ()
@@ -1117,10 +1117,10 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    packet.  If an error occurs on client side, the client can terminate
    the method by sending a new SSH_MSG_USERAUTH_REQUEST packet.
 
-   ¸ò´¹¤Î´Ö¤Ë¥µ¡¼¥ĞÂ¦¤Ç¥¨¥é¡¼¤¬È¯À¸¤·¤¿¤é, ¥µ¡¼¥Ğ¤Ï SSH_MSG_USERAUTH_FAILURE
-   ¥Ñ¥±¥Ã¥È¤òÁ÷¤Ã¤ÆÇ§¾ÚË¡¤ò½ªÎ»¤Ç¤­¤ë. ¥¯¥é¥¤¥¢¥ó¥ÈÂ¦¤Ç¥¨¥é¡¼¤¬È¯À¸¤·¤¿¤é,
-   ¿·¤·¤¤ SSH_MSG_USERAUTH_REQUEST ¥Ñ¥±¥Ã¥È¤òÁ÷¤ë¤³¤È¤Ç
-   Ç§¾ÚË¡¤ò½ªÎ»¤Ç¤­¤ë.
+   äº¤æ›ã®é–“ã«ã‚µãƒ¼ãƒå´ã§ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ãŸã‚‰, ã‚µãƒ¼ãƒã¯ SSH_MSG_USERAUTH_FAILURE
+   ãƒ‘ã‚±ãƒƒãƒˆã‚’é€ã£ã¦èªè¨¼æ³•ã‚’çµ‚äº†ã§ãã‚‹. ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆå´ã§ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ãŸã‚‰,
+   æ–°ã—ã„ SSH_MSG_USERAUTH_REQUEST ãƒ‘ã‚±ãƒƒãƒˆã‚’é€ã‚‹ã“ã¨ã§
+   èªè¨¼æ³•ã‚’çµ‚äº†ã§ãã‚‹.
 
    When calling GSS_Init_sec_context (), the client MUST set the the
    integ_req_flag to "true" to request that per-message integrity
@@ -1128,19 +1128,19 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    deleg_req_flag MAY be set to "true" to request access delegation, if
    requested by the user.
 
-   GSS_Init_sec_context ¤ò¸Æ¤Öºİ, ¥¯¥é¥¤¥¢¥ó¥È¤Ï ¤³¤Î context ¤Ç
-   ¥á¥Ã¥»¡¼¥¸Ã±°Ì¤Î´°Á´À­Êİ¸î¤ò¥µ¥İ¡¼¥È¤¹¤ë¤³¤È¤òÍ×µá¤¹¤ë¤¿¤á¤Ë
-   integ_req_flag ¤ò "true"¤ËÀßÄê¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤. ²Ã¤¨¤Æ,
-   ¥æ¡¼¥¶¤«¤éµá¤á¤é¤ì¤¿¤é ¥¢¥¯¥»¥¹¤Î°Ñ¾ù¤òÍ×µá¤¹¤ë¤¿¤á
-   deleg_req_flag ¤ò "true" ¤ËÀßÄê¤·¤Æ¤â¤è¤¤.
+   GSS_Init_sec_context ã‚’å‘¼ã¶éš›, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯ ã“ã® context ã§
+   ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å˜ä½ã®å®Œå…¨æ€§ä¿è­·ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹ã“ã¨ã‚’è¦æ±‚ã™ã‚‹ãŸã‚ã«
+   integ_req_flag ã‚’ "true"ã«è¨­å®šã—ãªã‘ã‚Œã°ãªã‚‰ãªã„. åŠ ãˆã¦,
+   ãƒ¦ãƒ¼ã‚¶ã‹ã‚‰æ±‚ã‚ã‚‰ã‚ŒãŸã‚‰ ã‚¢ã‚¯ã‚»ã‚¹ã®å§”è­²ã‚’è¦æ±‚ã™ã‚‹ãŸã‚
+   deleg_req_flag ã‚’ "true" ã«è¨­å®šã—ã¦ã‚‚ã‚ˆã„.
 
    Since the user authentication process by its nature authenticates
    only the client, the setting of the mutual_req_flag is not needed for
    this process.  This flag SHOULD be set to "false".
 
-   ¥æ¡¼¥¶Ç§¾Ú¥×¥í¥»¥¹¤Ï¤½¤ÎÀ­¼Á¤«¤é¥¯¥é¥¤¥¢¥ó¥È¤Î¤ß¤òÇ§¾Ú¤¹¤ë¤Î¤Ç,
-   mutual_req_flag ¤ÎÀßÄê¤Ï¤³¤Î¥×¥í¥»¥¹¤Ç¤ÏÉ¬Í×¤Ê¤¤.
-   ¤³¤Î¥Õ¥é¥°¤Ï "false"¤ËÀßÄê¤µ¤ì¤ëÉ¬Í×¤¬¤¢¤ë.
+   ãƒ¦ãƒ¼ã‚¶èªè¨¼ãƒ—ãƒ­ã‚»ã‚¹ã¯ãã®æ€§è³ªã‹ã‚‰ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®ã¿ã‚’èªè¨¼ã™ã‚‹ã®ã§,
+   mutual_req_flag ã®è¨­å®šã¯ã“ã®ãƒ—ãƒ­ã‚»ã‚¹ã§ã¯å¿…è¦ãªã„.
+   ã“ã®ãƒ•ãƒ©ã‚°ã¯ "false"ã«è¨­å®šã•ã‚Œã‚‹å¿…è¦ãŒã‚ã‚‹.
 
    Since the user authentication process will involve the exchange of
    only a single token once the context has been established, it is not
@@ -1149,28 +1149,28 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    and sequence_req_flag are not needed for this process.  These flags
    SHOULD be set to "false".
 
-   ¥æ¡¼¥¶Ç§¾Ú¥×¥í¥»¥¹¤Ï, context ¤¬³ÎÎ©¤µ¤ì¤ë¤¿¤Ó¤ËÃ±°ì¤Î token ¤Î¤ß¤Î
-   ¸ò´¹¤ò°ú¤­µ¯¤³¤¹¤Î¤Ç, context ¤Ï  ¥ê¥×¥ì¥¤¤µ¤ì¤¿ ¤Ê¤¤¤· ¥·¡¼¥±¥ó¥¹³°¤Î
-   token ¤Î¸¡½Ğ¤ò¥µ¥İ¡¼¥È¤¹¤ëÉ¬Í×¤Ï¤Ê¤¤. ¤½¤ì¤æ¤¨, replay_det_req_flag
-   ¤È sequence_req_flag ¤ÎÀßÄê¤Ï¤³¤Î¥×¥í¥»¥¹¤Ë¤ÏÉ¬Í×¤Ê¤¤. ¤³¤ì¤é¤Î¥Õ¥é¥°¤Ï
-   "false"¤ËÀßÄê¤µ¤ì¤ëÉ¬Í×¤¬¤¢¤ë.
+   ãƒ¦ãƒ¼ã‚¶èªè¨¼ãƒ—ãƒ­ã‚»ã‚¹ã¯, context ãŒç¢ºç«‹ã•ã‚Œã‚‹ãŸã³ã«å˜ä¸€ã® token ã®ã¿ã®
+   äº¤æ›ã‚’å¼•ãèµ·ã“ã™ã®ã§, context ã¯  ãƒªãƒ—ãƒ¬ã‚¤ã•ã‚ŒãŸ ãªã„ã— ã‚·ãƒ¼ã‚±ãƒ³ã‚¹å¤–ã®
+   token ã®æ¤œå‡ºã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹å¿…è¦ã¯ãªã„. ãã‚Œã‚†ãˆ, replay_det_req_flag
+   ã¨ sequence_req_flag ã®è¨­å®šã¯ã“ã®ãƒ—ãƒ­ã‚»ã‚¹ã«ã¯å¿…è¦ãªã„. ã“ã‚Œã‚‰ã®ãƒ•ãƒ©ã‚°ã¯
+   "false"ã«è¨­å®šã•ã‚Œã‚‹å¿…è¦ãŒã‚ã‚‹.
 
    Additional SSH_MSG_USERAUTH_GSSAPI_TOKEN messages are sent if and
    only if the calls to the GSSAPI routines produce send tokens of
    non-zero length.
 
-   GSSAPI ¥ë¡¼¥Á¥ó¤Î¸Æ¤Ó½Ğ¤·¤¬ Ä¹¤µ 0 ¤Ç¤Ê¤¤ send token ¤òÀ¸À®¤·¤¿¾ì¹ç¤Ë¤À¤±
-   ÄÉ²Ã¤Î SSH_MSG_USERAUTH_GSSAPI_TOKEN ¥á¥Ã¥»¡¼¥¸¤¬Á÷¤é¤ì¤ë.
+   GSSAPI ãƒ«ãƒ¼ãƒãƒ³ã®å‘¼ã³å‡ºã—ãŒ é•·ã• 0 ã§ãªã„ send token ã‚’ç”Ÿæˆã—ãŸå ´åˆã«ã ã‘
+   è¿½åŠ ã® SSH_MSG_USERAUTH_GSSAPI_TOKEN ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒé€ã‚‰ã‚Œã‚‹.
 
    Any major status code other than GSS_S_COMPLETE or
    GSS_S_CONTINUE_NEEDED SHOULD be a failure.
 
-   GSS_S_COMPLETE ¤È GSS_S_CONTINUE_NEEDED °Ê³°¤Î ¤É¤ó¤Ê major_status ¥³¡¼¥É¤â
-   ¼ºÇÔ¤È¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
+   GSS_S_COMPLETE ã¨ GSS_S_CONTINUE_NEEDED ä»¥å¤–ã® ã©ã‚“ãª major_status ã‚³ãƒ¼ãƒ‰ã‚‚
+   å¤±æ•—ã¨ã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
 
 3.5 Binding Encryption Keys
 
-3.5 °Å¹æ¸°¤ÎÂ«Çû
+3.5 æš—å·éµã®æŸç¸›
 
    In some cases, it is possible to obtain improved security by allowing
    access only if the client sends a valid message integrity code (MIC)
@@ -1184,28 +1184,28 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    indicated by the setting of the integ_avail flag on successful return
    from GSS_Init_sec_context () or GSS_Accept_sec_context ().
 
-   ¾ì¹ç¤Ë¤è¤Ã¤Æ¤Ï, SSH ¤Î¥»¥Ã¥·¥ç¥ó¤Î°Å¹æ²½¤È´°Á´À­Êİ¸î
-   ¤Ë»È¤ï¤ì¤ë¸°¤ò GSSAPI ¤Î context ¤È·ë¤ÓÉÕ¤±¤ë
-   ÀµÅö¤Ê¥á¥Ã¥»¡¼¥¸´°Á´À­¥³¡¼¥É (MIC) ¤ò¥¯¥é¥¤¥¢¥ó¥È¤¬Á÷¤ë¾ì¹ç¤Ë¤Î¤ß
-   ¥¢¥¯¥»¥¹¤òµö¤¹¤³¤È¤Ç, ¤è¤ê°ìÁØ¤Î¥»¥­¥å¥ê¥Æ¥£¤òÆÀ¤é¤ì¤ë.
-   ¤³¤ÎÄÉ²Ã¤ÎÊİ¸î¤Î¥ì¥Ù¥ë¤Ç, ËÜÊª¤Î¥¯¥é¥¤¥¢¥ó¥È¤À¤È³Î¿®¤µ¤»¤¿
-   "man-in-the-middle" ¹¶·â¼Ô¤¬ ËÜÊª¤Î¥¯¥é¥¤¥¢¥ó¥È¤È¥µ¡¼¥Ğ¤Î´Ö¤Î
-   ¥æ¡¼¥¶Ç§¾Ú¥á¥Ã¥»¡¼¥¸¤òÃæ·Ñ¤¹¤ë¤³¤È¤¬¤Ç¤­¤Ê¤¯¤Ê¤ë. ¤½¤ì¤æ¤¨, 
-   ËÜÊª¤Î¥µ¡¼¥Ğ¤Ø¤Î¥¢¥¯¥»¥¹¤¬ÆÀ¤é¤ì¤ë. 
-   GSS_Init_sec_context () ¤« GSS_Accept_sec_context () ¤«¤éÀ®¸ù¤¬ÊÖ¤Ã¤¿
-   integ_avail ¥Õ¥é¥°¤ÎÀßÄê¤Ë¤è¤Ã¤Æ¼¨¤µ¤ì¤ë
-   ¸ò¾Ä¤µ¤ì¤¿ (negotiated) GSSAPI context ¤¬ ¥á¥Ã¥»¡¼¥¸Ã±°Ì
-   ¤Ç¤Î´°Á´À­Êİ¸î¤ò¥µ¥İ¡¼¥È¤¹¤ë¤Ê¤é
-   ¤³¤ÎÄÉ²Ã¤ÎÊİ¸î¤ÏÍøÍÑ¤Ç¤­¤ë.
+   å ´åˆã«ã‚ˆã£ã¦ã¯, SSH ã®ã‚»ãƒƒã‚·ãƒ§ãƒ³ã®æš—å·åŒ–ã¨å®Œå…¨æ€§ä¿è­·
+   ã«ä½¿ã‚ã‚Œã‚‹éµã‚’ GSSAPI ã® context ã¨çµã³ä»˜ã‘ã‚‹
+   æ­£å½“ãªãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å®Œå…¨æ€§ã‚³ãƒ¼ãƒ‰ (MIC) ã‚’ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒé€ã‚‹å ´åˆã«ã®ã¿
+   ã‚¢ã‚¯ã‚»ã‚¹ã‚’è¨±ã™ã“ã¨ã§, ã‚ˆã‚Šä¸€å±¤ã®ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã‚’å¾—ã‚‰ã‚Œã‚‹.
+   ã“ã®è¿½åŠ ã®ä¿è­·ã®ãƒ¬ãƒ™ãƒ«ã§, æœ¬ç‰©ã®ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã ã¨ç¢ºä¿¡ã•ã›ãŸ
+   "man-in-the-middle" æ”»æ’ƒè€…ãŒ æœ¬ç‰©ã®ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¨ã‚µãƒ¼ãƒã®é–“ã®
+   ãƒ¦ãƒ¼ã‚¶èªè¨¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ä¸­ç¶™ã™ã‚‹ã“ã¨ãŒã§ããªããªã‚‹. ãã‚Œã‚†ãˆ, 
+   æœ¬ç‰©ã®ã‚µãƒ¼ãƒã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ãŒå¾—ã‚‰ã‚Œã‚‹. 
+   GSS_Init_sec_context () ã‹ GSS_Accept_sec_context () ã‹ã‚‰æˆåŠŸãŒè¿”ã£ãŸ
+   integ_avail ãƒ•ãƒ©ã‚°ã®è¨­å®šã«ã‚ˆã£ã¦ç¤ºã•ã‚Œã‚‹
+   äº¤æ¸‰ã•ã‚ŒãŸ (negotiated) GSSAPI context ãŒ ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å˜ä½
+   ã§ã®å®Œå…¨æ€§ä¿è­·ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹ãªã‚‰
+   ã“ã®è¿½åŠ ã®ä¿è­·ã¯åˆ©ç”¨ã§ãã‚‹.
 
    When the client's call to GSS_Init_sec_context () returns
    GSS_S_COMPLETE with the integ_avail flag set, the client MUST
    conclude the user authentication exchange by sending the following
    message:
 
-   ¥¯¥é¥¢¥¤¥ó¥È¤Î GSS_Init_sec_context () ¤¬ integ_avail ¥Õ¥é¥°¤ò¥»¥Ã¥È¤·¤¿
-   GSS_S_COMPLETE ¤òÊÖ¤¹¤Ê¤é, ¥¯¥é¥¤¥¢¥ó¥È¤Ï, ¼¡¤Î¥á¥Ã¥»¡¼¥¸¤òÁ÷¤ë¤³¤È¤Ç
-   ¥æ¡¼¥¶Ç§¾Ú¤Î¸ò´¹¤òÀ®Î©¤µ¤»¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   ã‚¯ãƒ©ã‚¢ã‚¤ãƒ³ãƒˆã® GSS_Init_sec_context () ãŒ integ_avail ãƒ•ãƒ©ã‚°ã‚’ã‚»ãƒƒãƒˆã—ãŸ
+   GSS_S_COMPLETE ã‚’è¿”ã™ãªã‚‰, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯, æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ã‚‹ã“ã¨ã§
+   ãƒ¦ãƒ¼ã‚¶èªè¨¼ã®äº¤æ›ã‚’æˆç«‹ã•ã›ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
            byte      SSH_MSG_USERAUTH_GSSAPI_MIC
            string    MIC
@@ -1221,16 +1221,16 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    GSS_S_COMPLETE.  If a token is also returned then the
    SSH_MSG_USERAUTH_GSSAPI_TOKEN message MUST be sent before this one.
 
-   ¤³¤Î¥á¥Ã¥»¡¼¥¸¤Ï, GSS_Init_sec_context oga GSS_S_COMPLETE ¤òÊÖ¤·¤¿
-   ¾ì¹ç¤Î¤Ë¤â Á÷¤é¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤. token ¤âÊÖ¤µ¤ì¤¿¤Ê¤é,
-   SSH_MSG_USERAUTH_GSSAPI_TOKEN ¥á¥Ã¥»¡¼¥¸¤¬¤³¤ÎÁ°¤ËÁ÷¤é¤ì¤Ê¤±¤ì¤Ğ
-   ¤Ê¤é¤Ê¤¤.
+   ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯, GSS_Init_sec_context oga GSS_S_COMPLETE ã‚’è¿”ã—ãŸ
+   å ´åˆã®ã«ã‚‚ é€ã‚‰ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„. token ã‚‚è¿”ã•ã‚ŒãŸãªã‚‰,
+   SSH_MSG_USERAUTH_GSSAPI_TOKEN ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒã“ã®å‰ã«é€ã‚‰ã‚Œãªã‘ã‚Œã°
+   ãªã‚‰ãªã„.
 
    The contents of the MIC field are obtained by calling GSS_GetMIC over
    the following, using the GSSAPI context which was just established:
 
-   MIC ¥Õ¥£¡¼¥ë¥É¤ÎÃæ¿È¤Ï¤Á¤ç¤¦¤É³ÎÎ©¤µ¤ì¤¿ GSSAPI context ¤ò»È¤Ã¤Æ,
-   ¼¡¤ËÂĞ¤¹¤ë GSS_GetMIC ¤Î¸Æ¤Ó½Ğ¤·¤Ë¤è¤Ã¤ÆÆÀ¤é¤ì¤ë.
+   MIC ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®ä¸­èº«ã¯ã¡ã‚‡ã†ã©ç¢ºç«‹ã•ã‚ŒãŸ GSSAPI context ã‚’ä½¿ã£ã¦,
+   æ¬¡ã«å¯¾ã™ã‚‹ GSS_GetMIC ã®å‘¼ã³å‡ºã—ã«ã‚ˆã£ã¦å¾—ã‚‰ã‚Œã‚‹.
 
 
            string    session identifier
@@ -1242,20 +1242,20 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    If this message is received by the server before the GSSAPI context
    is fully established, the server MUST fail the authentication.
 
-   GSSAPI context ¤¬´°Á´¤Ë³ÎÎ©¤µ¤ì¤ëÁ°¤Ë¥µ¡¼¥Ğ¤Ë¤è¤Ã¤Æ¤³¤Î¥á¥Ã¥»¡¼¥¸¤¬
-   ¼õ¤±¼è¤é¤ì¤¿¤Ê¤é, ¥µ¡¼¥Ğ¤Ï Ç§¾Ú¤ò¼ºÇÔ¤µ¤»¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   GSSAPI context ãŒå®Œå…¨ã«ç¢ºç«‹ã•ã‚Œã‚‹å‰ã«ã‚µãƒ¼ãƒã«ã‚ˆã£ã¦ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒ
+   å—ã‘å–ã‚‰ã‚ŒãŸãªã‚‰, ã‚µãƒ¼ãƒã¯ èªè¨¼ã‚’å¤±æ•—ã•ã›ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    If this message is received by the server when the negotiated GSSAPI
    context does not support per-message integrity protection, the server
    MUST fail the authentication.
 
-   ¸ò¾Ä¤µ¤ì¤¿ GSSAPI context ¤¬ ¥á¥Ã¥»¡¼¥¸Ã±°Ì¤Ç¤Î´°Á´À­Êİ¸î¤ò¥µ¥İ¡¼¥È
-   ¤·¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ë ¥µ¡¼¥Ğ¤Ë¤è¤Ã¤Æ¤³¤Î¥á¥Ã¥»¡¼¥¸¤¬
-   ¼õ¤±¼è¤é¤ì¤¿¤Ê¤é, ¥µ¡¼¥Ğ¤Ï Ç§¾Ú¤ò¼ºÇÔ¤µ¤»¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   äº¤æ¸‰ã•ã‚ŒãŸ GSSAPI context ãŒ ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å˜ä½ã§ã®å®Œå…¨æ€§ä¿è­·ã‚’ã‚µãƒãƒ¼ãƒˆ
+   ã—ã¦ã„ãªã„å ´åˆã« ã‚µãƒ¼ãƒã«ã‚ˆã£ã¦ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒ
+   å—ã‘å–ã‚‰ã‚ŒãŸãªã‚‰, ã‚µãƒ¼ãƒã¯ èªè¨¼ã‚’å¤±æ•—ã•ã›ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
 3.6 Client acknowledgement
 
-3.5 ¥¯¥é¥¤¥¢¥ó¥È¤Î¾µÇ§
+3.5 ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®æ‰¿èª
 
    Some servers may wish to permit user authentication to proceed even
    when the negotitated GSSAPI context does not support per-message
@@ -1269,26 +1269,26 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    message is sent by the client to indicate it has completed
    authentication.
 
-   ¸ò¾Ä¤µ¤ì¤¿ GSSAPI context ¤¬¥á¥Ã¥»¡¼¥¸Ã±°Ì¤Î´°Á´À­Êİ¸î¤ò¥µ¥İ¡¼¥È¤·¤Æ
-   ¤¤¤Ê¤¤¾ì¹ç¤Ç¤µ¤¨ ¥æ¡¼¥¶Ç§¾Ú¤ò¿Ê¤á¤ë¤³¤È¤òµö²Ä¤·¤¿¤¤¤È
-   Ë¾¤à¥µ¡¼¥Ğ¤â¤¢¤ë¤À¤í¤¦. ¤³¤Î¤è¤¦¤Ê¾ì¹ç, ¥¯¥é¥¤¥¢¥ó¥È¤ÎºÇ¸å¤Î
-   GSS_Init_sec_context ¤Î¸Æ¤Ó½Ğ¤·¤¬¼ºÇÔ¤·¤Æ¤¤¤Æ¤â,
-   ¥µ¡¼¥Ğ¤Ï GSSAPI ¤ÎÊıË¡¤òÀ®¸ùÎ¢¤Ë´°Î»¤¹¤ë¤³¤È¤¬¤Ç¤­¤ë. 
-   ¥µ¡¼¥Ğ¤¬Ã±¤Ë¥¯¥é¥¤¥¢¥ó¥È¤ÎÉôÊ¬¤ÎÀ®¸ù¤ÈÇ§¾Ú¥µ¡¼¥Ó¥¹¤Î´°Î»¤ò
-   ²¾Äê¤¹¤ë¤Ê¤é, ¥¯¥é¥¤¥¢¥ó¥È¤Ï Ç§¾ÚË¡¤Î´°Î»¤ò¼ºÇÔ¤µ¤»¤ë¤³¤È¤¬¤Ç¤­¤ë¤¬,
-   ¥µ¡¼¥Ğ¤Ï¤¹¤Ç¤Ë (¼¡¤ÎÃÊ³¬¤Ë) °Ü¤Ã¤Æ¤¤¤ë¤Î¤Ç, ÊÌ¤ÎÊıË¡¤ò
-   ºÆ»î¹Ô¤¹¤ë¤³¤È¤¬¤Ç¤­¤Ê¤¤. ¤³¤ì¤òËÉ¤°¤¿¤á, ¥¯¥é¥¢¥¤¥ó¥È¤¬Ç§¾Ú¤ò
-   ½ª¤¨¤¿¤³¤È¤ò¼¨¤¹¤¿¤á ¥¯¥é¥¤¥¢¥ó¥È¤«¤éºÇ¸å¤Î¥á¥Ã¥»¡¼¥¸¤¬Á÷¤é¤ì¤ë.
+   äº¤æ¸‰ã•ã‚ŒãŸ GSSAPI context ãŒãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å˜ä½ã®å®Œå…¨æ€§ä¿è­·ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦
+   ã„ãªã„å ´åˆã§ã•ãˆ ãƒ¦ãƒ¼ã‚¶èªè¨¼ã‚’é€²ã‚ã‚‹ã“ã¨ã‚’è¨±å¯ã—ãŸã„ã¨
+   æœ›ã‚€ã‚µãƒ¼ãƒã‚‚ã‚ã‚‹ã ã‚ã†. ã“ã®ã‚ˆã†ãªå ´åˆ, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®æœ€å¾Œã®
+   GSS_Init_sec_context ã®å‘¼ã³å‡ºã—ãŒå¤±æ•—ã—ã¦ã„ã¦ã‚‚,
+   ã‚µãƒ¼ãƒã¯ GSSAPI ã®æ–¹æ³•ã‚’æˆåŠŸè£ã«å®Œäº†ã™ã‚‹ã“ã¨ãŒã§ãã‚‹. 
+   ã‚µãƒ¼ãƒãŒå˜ã«ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®éƒ¨åˆ†ã®æˆåŠŸã¨èªè¨¼ã‚µãƒ¼ãƒ“ã‚¹ã®å®Œäº†ã‚’
+   ä»®å®šã™ã‚‹ãªã‚‰, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯ èªè¨¼æ³•ã®å®Œäº†ã‚’å¤±æ•—ã•ã›ã‚‹ã“ã¨ãŒã§ãã‚‹ãŒ,
+   ã‚µãƒ¼ãƒã¯ã™ã§ã« (æ¬¡ã®æ®µéšã«) ç§»ã£ã¦ã„ã‚‹ã®ã§, åˆ¥ã®æ–¹æ³•ã‚’
+   å†è©¦è¡Œã™ã‚‹ã“ã¨ãŒã§ããªã„. ã“ã‚Œã‚’é˜²ããŸã‚, ã‚¯ãƒ©ã‚¢ã‚¤ãƒ³ãƒˆãŒèªè¨¼ã‚’
+   çµ‚ãˆãŸã“ã¨ã‚’ç¤ºã™ãŸã‚ ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰æœ€å¾Œã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒé€ã‚‰ã‚Œã‚‹.
 
    When the client's call to GSS_Init_sec_context () returns
    GSS_S_COMPLETE with the integ_avail flag not set, the client MUST
    conclude the user authentication exchange by sending the following
    message:
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤Î GSS_Init_sec_context () ¤Î¸Æ½Ğ¤·¤¬ integ_avail
-   flag ¤¬ ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤ GSS_S_COMPLETE ¤òÊÖ¤¹¾ì¹ç,
-   ¥¯¥é¥¤¥¢¥ó¥È¤Ï¼¡¤Î¥á¥Ã¥»¡¼¥¸¤òÁ÷¤ë¤³¤È¤Ç¥æ¡¼¥¶Ç§¾Ú¤Î¸ò´¹¤ò
-   À®Î©¤µ¤»¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã® GSS_Init_sec_context () ã®å‘¼å‡ºã—ãŒ integ_avail
+   flag ãŒ è¨­å®šã•ã‚Œã¦ã„ãªã„ GSS_S_COMPLETE ã‚’è¿”ã™å ´åˆ,
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ã‚‹ã“ã¨ã§ãƒ¦ãƒ¼ã‚¶èªè¨¼ã®äº¤æ›ã‚’
+   æˆç«‹ã•ã›ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
            byte      SSH_MSG_USERAUTH_GSSAPI_EXCHANGE_COMPLETE
 
@@ -1296,16 +1296,16 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    GSS_S_COMPLETE.  If a token is also returned then the
    SSH_MSG_USERAUTH_GSSAPI_TOKEN message MUST be sent before this one.
 
-   ¤³¤Î¥á¥Ã¥»¡¼¥¸¤Ï, GSS_Init_sec_context () ¤¬ GSS_S_COMPLETE ¤òÊÖ¤·¤¿
-   ¾ì¹ç¤Ë¤Î¤ßÁ÷¤é¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤. token ¤âÊÖ¤µ¤ì¤¿¾ì¹ç¤Ï,
-   ¤³¤ÎÁ°¤Ë SSH_MSG_USERAUTH_GSSAPI_TOKEN ¥á¥Ã¥»¡¼¥¸¤¬Á÷¤é¤ì¤Ê¤±¤ì¤Ğ
-   ¤Ê¤é¤Ê¤¤
+   ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯, GSS_Init_sec_context () ãŒ GSS_S_COMPLETE ã‚’è¿”ã—ãŸ
+   å ´åˆã«ã®ã¿é€ã‚‰ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„. token ã‚‚è¿”ã•ã‚ŒãŸå ´åˆã¯,
+   ã“ã®å‰ã« SSH_MSG_USERAUTH_GSSAPI_TOKEN ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒé€ã‚‰ã‚Œãªã‘ã‚Œã°
+   ãªã‚‰ãªã„
 
    If this message is received by the server before the GSSAPI context
    is fully established, the server MUST fail the authentication.
 
-   GSSAPI context ¤¬´°Á´¤Ë³ÎÎ©¤µ¤ì¤ëÁ°¤Ë¥µ¡¼¥Ğ¤Ë¤è¤Ã¤Æ¤³¤Î¥á¥Ã¥»¡¼¥¸¤¬
-   ¼õ¤±¼è¤é¤ì¤¿¤Ê¤é, ¥µ¡¼¥Ğ¤Ï Ç§¾Ú¤ò¼ºÇÔ¤µ¤»¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   GSSAPI context ãŒå®Œå…¨ã«ç¢ºç«‹ã•ã‚Œã‚‹å‰ã«ã‚µãƒ¼ãƒã«ã‚ˆã£ã¦ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒ
+   å—ã‘å–ã‚‰ã‚ŒãŸãªã‚‰, ã‚µãƒ¼ãƒã¯ èªè¨¼ã‚’å¤±æ•—ã•ã›ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
 
 
@@ -1318,9 +1318,9 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    context supports per-message integrity protection, the server MUST
    fail the authentication.
 
-   ¸ò¾Ä¤µ¤ì¤¿ GSSAPI context ¤¬ ¥á¥Ã¥»¡¼¥¸Ã±°Ì¤Ç¤Î´°Á´À­Êİ¸î¤ò¥µ¥İ¡¼¥È¤·¤Æ¤¤¤ë
-   ¾ì¹ç¤Ë¥µ¡¼¥Ğ¤Ë¤è¤Ã¤Æ¤³¤Î¥á¥Ã¥»¡¼¥¸¤¬
-   ¼õ¤±¼è¤é¤ì¤¿¤Ê¤é, ¥µ¡¼¥Ğ¤Ï Ç§¾Ú¤ò¼ºÇÔ¤µ¤»¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   äº¤æ¸‰ã•ã‚ŒãŸ GSSAPI context ãŒ ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å˜ä½ã§ã®å®Œå…¨æ€§ä¿è­·ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã‚‹
+   å ´åˆã«ã‚µãƒ¼ãƒã«ã‚ˆã£ã¦ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒ
+   å—ã‘å–ã‚‰ã‚ŒãŸãªã‚‰, ã‚µãƒ¼ãƒã¯ èªè¨¼ã‚’å¤±æ•—ã•ã›ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    It is a site policy descision for the server whether or not to permit
    authentication using GSSAPI mechanisms and/or contexts which do not
@@ -1328,15 +1328,15 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    otherwise valid gssapi-with-mic authentication if per-message
    integrity protection is not supported.
 
-   GSSAPI ¥á¥«¥Ë¥º¥à¤ò»È¤Ã¤¿Ç§¾Ú¤òµö¤¹¤«¤É¤¦¤« ¤«¤Ä/¤â¤·¤¯¤Ï
-   ¥á¥Ã¥»¡¼¥¸Ã±°Ì¤Î´°Á´À­Êİ¸î¤ò¥µ¥İ¡¼¥È¤·¤Ê¤¤ context ¤òµö¤¹¤«¤É¤¦¤«¤Ï
-   ¥µ¡¼¥Ğ¤Î ¥µ¥¤¥È¥İ¥ê¥·¡¼¤Î·èÄê¤Ë¤è¤ë. ¥µ¡¼¥Ğ¤Ï,
-   ¥á¥Ã¥»¡¼¥¸Ã±°Ì¤Î´°Á´À­Êİ¸î¤ò¥µ¥İ¡¼¥È¤·¤Ê¤¤¾ì¹ç, 
-   ÀµÅö¤Ê gssapi-with-mic Ç§¾Ú¤ò¼ºÇÔ¤Ë¤·¤Æ¤â¤è¤¤.
+   GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚’ä½¿ã£ãŸèªè¨¼ã‚’è¨±ã™ã‹ã©ã†ã‹ ã‹ã¤/ã‚‚ã—ãã¯
+   ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å˜ä½ã®å®Œå…¨æ€§ä¿è­·ã‚’ã‚µãƒãƒ¼ãƒˆã—ãªã„ context ã‚’è¨±ã™ã‹ã©ã†ã‹ã¯
+   ã‚µãƒ¼ãƒã® ã‚µã‚¤ãƒˆãƒãƒªã‚·ãƒ¼ã®æ±ºå®šã«ã‚ˆã‚‹. ã‚µãƒ¼ãƒã¯,
+   ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å˜ä½ã®å®Œå…¨æ€§ä¿è­·ã‚’ã‚µãƒãƒ¼ãƒˆã—ãªã„å ´åˆ, 
+   æ­£å½“ãª gssapi-with-mic èªè¨¼ã‚’å¤±æ•—ã«ã—ã¦ã‚‚ã‚ˆã„.
 
 3.7 Completion
 
-3.7 ´°Î»
+3.7 å®Œäº†
 
    As with all SSH authentication methods, successful completion is
    indicated by a SSH_MSG_USERAUTH_SUCCESS if no other authentication is
@@ -1345,27 +1345,27 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    should be sent immediately following receipt of the the
    SSH_MSG_USERAUTH_GSSAPI_EXCHANGE_COMPLETE packet.
 
-   ¤¹¤Ù¤Æ¤Î SSH Ç§¾ÚË¡¤Î¤è¤¦¤Ë, À®¸ù¤Î´°Î»¤Ï, ¤µ¤é¤Ê¤ëÇ§¾Ú¤¬É¬Í×¤Ç¤Ê¤¤¾ì¹ç¤Ï,
-   SSH_MSG_USERAUTH_SUCCESS ¤Ç,
-   ¥µ¡¼¥Ğ¤¬¤µ¤é¤Ê¤ëÇ§¾Ú¤òÉ¬Í×¤È¤¹¤ë¾ì¹ç¤Ï,
-   partial success ¥Õ¥é¥°¤¬ÀßÄê¤µ¤ì¤¿ SSH_MSG_USERAUTH_SUCCESS
-   ¤Ë¤è¤Ã¤Æ ¼¨¤µ¤ì¤ë. ¤³¤Î¥Ñ¥±¥Ã¥È¤Ï SSH_MSG_USERAUTH_GSSAPI_EXCHANGE_COMPLETE
-   ¥Ñ¥±¥Ã¥È¤ò¼õ¿®¤·¤¿¼¡¤Ë¤¹¤°¤ËÁ÷¤é¤ì¤ë¤Ù¤­¤Ç¤¢¤ë.
+   ã™ã¹ã¦ã® SSH èªè¨¼æ³•ã®ã‚ˆã†ã«, æˆåŠŸã®å®Œäº†ã¯, ã•ã‚‰ãªã‚‹èªè¨¼ãŒå¿…è¦ã§ãªã„å ´åˆã¯,
+   SSH_MSG_USERAUTH_SUCCESS ã§,
+   ã‚µãƒ¼ãƒãŒã•ã‚‰ãªã‚‹èªè¨¼ã‚’å¿…è¦ã¨ã™ã‚‹å ´åˆã¯,
+   partial success ãƒ•ãƒ©ã‚°ãŒè¨­å®šã•ã‚ŒãŸ SSH_MSG_USERAUTH_SUCCESS
+   ã«ã‚ˆã£ã¦ ç¤ºã•ã‚Œã‚‹. ã“ã®ãƒ‘ã‚±ãƒƒãƒˆã¯ SSH_MSG_USERAUTH_GSSAPI_EXCHANGE_COMPLETE
+   ãƒ‘ã‚±ãƒƒãƒˆã‚’å—ä¿¡ã—ãŸæ¬¡ã«ã™ãã«é€ã‚‰ã‚Œã‚‹ã¹ãã§ã‚ã‚‹.
 
 
 3.8 Error Status
 
-3.8 ¥¨¥é¡¼¾õÂÖ
+3.8 ã‚¨ãƒ©ãƒ¼çŠ¶æ…‹
 
    In the event a GSSAPI error occurs on the server during context
    establishment, the server MAY send the following message to inform
    the client of the details of the error before sending a
    SSH_MSG_USERAUTH_FAILURE message:
    
-   context ¤ò³ÎÎ©¤¹¤¦ºİ¤Ë ¥µ¡¼¥Ğ¤Ç GSSAPI ¥¨¥é¡¼¤¬µ¯¤­¤¿¾ì¹ç,
-   ¥µ¡¼¥Ğ¤Ï SSH_MSG_USERAUTH_FAILURE ¥á¥Ã¥»¡¼¥¸¤òÁ÷¤ëÁ°¤Ë
-   ¥¨¥é¡¼¤Î¾ÜºÙ¤ò¥¯¥é¥¤¥¢¥ó¥È¤ËÃÎ¤é¤»¤ë¤¿¤á¤Ë¼¡¤Î¥á¥Ã¥»¡¼¥¸¤ò
-   Á÷¤Ã¤Æ¤â¤è¤¤:
+   context ã‚’ç¢ºç«‹ã™ã†éš›ã« ã‚µãƒ¼ãƒã§ GSSAPI ã‚¨ãƒ©ãƒ¼ãŒèµ·ããŸå ´åˆ,
+   ã‚µãƒ¼ãƒã¯ SSH_MSG_USERAUTH_FAILURE ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ã‚‹å‰ã«
+   ã‚¨ãƒ©ãƒ¼ã®è©³ç´°ã‚’ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«çŸ¥ã‚‰ã›ã‚‹ãŸã‚ã«æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’
+   é€ã£ã¦ã‚‚ã‚ˆã„:
 
            byte      SSH_MSG_USERAUTH_GSSAPI_ERROR
            uint32    major_status
@@ -1379,20 +1379,20 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    return-line feed (CRLF) sequences. Application developers should take
    this into account when displaying these messages.
 
-   message ¥Æ¥­¥¹¥È¤Ï [10] ¤Ëµ­½Ò¤µ¤ì¤ë UTF-8 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç
-   Éä¹æ²½¤µ¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤. Language tag ¤Ï [11] ¤Ëµ­½Ò¤µ¤ì¤Æ¤¤¤ë¤â¤Î¤À.
-   message ¤Ï carriage return-line feed (CRLF) ¥·¡¼¥±¥ó¥¹¤Ç
-   ¶èÀÚ¤é¤ì¤ë Ê£¿ô¤Î¹Ô¤ò´Ş¤à¤«¤â¤·¤ì¤Ê¤¤¤³¤È¤ËÃí°Õ. ¥¢¥×¥ê¥±¡¼¥·¥ç¥ó¤Î
-   ³«È¯¼Ô¤Ï¤³¤ì¤é¤Î¥á¥Ã¥»¡¼¥¸¤òÉ½¼¨¤¹¤ëºİ¤Ë¤³¤ì¤ò¹ÍÎ¸¤¹¤Ù¤­¤Ç¤¢¤ë.
+   message ãƒ†ã‚­ã‚¹ãƒˆã¯ [10] ã«è¨˜è¿°ã•ã‚Œã‚‹ UTF-8 ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã§
+   ç¬¦å·åŒ–ã•ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„. Language tag ã¯ [11] ã«è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹ã‚‚ã®ã .
+   message ã¯ carriage return-line feed (CRLF) ã‚·ãƒ¼ã‚±ãƒ³ã‚¹ã§
+   åŒºåˆ‡ã‚‰ã‚Œã‚‹ è¤‡æ•°ã®è¡Œã‚’å«ã‚€ã‹ã‚‚ã—ã‚Œãªã„ã“ã¨ã«æ³¨æ„. ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®
+   é–‹ç™ºè€…ã¯ã“ã‚Œã‚‰ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤ºã™ã‚‹éš›ã«ã“ã‚Œã‚’è€ƒæ…®ã™ã¹ãã§ã‚ã‚‹.
 
    Clients receiving this message MAY log the error details and/or
    report them to the user.  Any server sending this message MUST ignore
    any SSH_MSG_UNIMPLEMENTED sent by the client in response.
 
-   ¤³¤Î¥á¥Ã¥»¡¼¥¸¤ò¼õ¤±¼è¤Ã¤¿¥¯¥é¥¤¥¢¥ó¥È¤Ï ¥¨¥é¡¼¤Î¾ÜºÙ¤òµ­Ï¿¤¹¤ë
-   ¤«¤Ä/¤â¤·¤¯¤Ï ¥æ¡¼¥¶¤Ë¾ÜºÙ¤òÅÁ¤¨¤ë¤« ¤·¤Æ¤â¤è¤¤. ¤³¤Î¥á¥Ã¥»¡¼¥¸¤ò
-   Á÷¤ë¥µ¡¼¥Ğ¤Ï ¥¯¥é¥¤¥¢¥ó¥È¤«¤éÊÖÅú¤È¤·¤ÆÁ÷¤é¤ì¤Æ¤¯¤ë ¤É¤Î
-   SSH_MSG_UNIMPLEMENTED ¤âÌµ»ë¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘å–ã£ãŸã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯ ã‚¨ãƒ©ãƒ¼ã®è©³ç´°ã‚’è¨˜éŒ²ã™ã‚‹
+   ã‹ã¤/ã‚‚ã—ãã¯ ãƒ¦ãƒ¼ã‚¶ã«è©³ç´°ã‚’ä¼ãˆã‚‹ã‹ ã—ã¦ã‚‚ã‚ˆã„. ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’
+   é€ã‚‹ã‚µãƒ¼ãƒã¯ ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰è¿”ç­”ã¨ã—ã¦é€ã‚‰ã‚Œã¦ãã‚‹ ã©ã®
+   SSH_MSG_UNIMPLEMENTED ã‚‚ç„¡è¦–ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
    
 
 
@@ -1409,17 +1409,17 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
 
 3.9 Error Token
 
-3.9 ¥¨¥é¡¼¥È¡¼¥¯¥ó
+3.9 ã‚¨ãƒ©ãƒ¼ãƒˆãƒ¼ã‚¯ãƒ³
 
    In the event that, during context establishment, a client's call to
    GSS_Init_sec_context or a server's call to GSS_Accept_sec_context
    returns a token along with an error status, the resulting "error
    token" SHOULD be sent to the peer using the following message:
 
-   context ¤Î³ÎÎ©Ãæ¤Ë ¥¯¥é¥¤¥¢¥ó¥È¤Î GSS_Init_sec_context ¤Î¸Æ¤Ó½Ğ¤·
-   ¤Ê¤¤¤· ¥µ¡¼¥Ğ¤Î GSS_Accept_sec_context ¤Î¸Æ¤Ó½Ğ¤·¤¬ ¥¨¥é¡¼¾õÂÖ¤È
-   ¶¦¤Ë token ¤òÊÖ¤·¤¿¤é, ·ë²Ì¤Î "error token" ¤Ï ¼¡¤Î¥á¥Ã¥»¡¼¥¸¤ò
-   »È¤Ã¤ÆÁê¼ê¤ËÁ÷¤é¤ì¤ëÉ¬Í×¤¬¤¢¤ë.
+   context ã®ç¢ºç«‹ä¸­ã« ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã® GSS_Init_sec_context ã®å‘¼ã³å‡ºã—
+   ãªã„ã— ã‚µãƒ¼ãƒã® GSS_Accept_sec_context ã®å‘¼ã³å‡ºã—ãŒ ã‚¨ãƒ©ãƒ¼çŠ¶æ…‹ã¨
+   å…±ã« token ã‚’è¿”ã—ãŸã‚‰, çµæœã® "error token" ã¯ æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’
+   ä½¿ã£ã¦ç›¸æ‰‹ã«é€ã‚‰ã‚Œã‚‹å¿…è¦ãŒã‚ã‚‹.
 
            byte        SSH_MSG_USERAUTH_GSSAPI_ERRTOK
            string      error token
@@ -1428,10 +1428,10 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    defined to allow the error token to be communicated without losing
    synchronization.
 
-   ¤³¤Î¥á¥Ã¥»¡¼¥¸¤ÏÇ§¾Ú¤¬¼ºÇÔ¤·¤¿¤È¤³¤í¤Ç¤¢¤ë¤³¤È¤ò°ÕÌ£¤¹¤ë.
-   ¤Ş¤¿, ¤³¤Î¥á¥Ã¥»¡¼¥¸¤Ï 
-   error token ¤¬Æ±´ü¤ò¼º¤Ê¤¦¤³¤È¤Ê¤·¤ËÄÌ¿®¤µ¤ì¤ë¤¿¤á¤Ë
-   ÄêµÁ¤µ¤ì¤ë.
+   ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯èªè¨¼ãŒå¤±æ•—ã—ãŸã¨ã“ã‚ã§ã‚ã‚‹ã“ã¨ã‚’æ„å‘³ã™ã‚‹.
+   ã¾ãŸ, ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯ 
+   error token ãŒåŒæœŸã‚’å¤±ãªã†ã“ã¨ãªã—ã«é€šä¿¡ã•ã‚Œã‚‹ãŸã‚ã«
+   å®šç¾©ã•ã‚Œã‚‹.
 
    When a server sends this message, it MUST be followed by a
    SSH_MSG_USERAUTH_FAILURE message, which is to be interpreted as
@@ -1439,11 +1439,11 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    message SHOULD wait for the following SSH_MSG_USERAUTH_FAILURE
    message before beginning another authentication attempt.
 
-   ¥µ¡¼¥Ğ¤¬¤³¤Î¥á¥Ã¥»¡¼¥¸¤òÁ÷¤ë»ş¤Ï, Æ±°ì¤ÎÇ§¾ÚÍ×µá¤Ø¤ÎÅ¬ÍÑ¤È¤·¤Æ
-   ²ò¼á¤µ¤ì¤ë, SSH_MSG_USERAUTH_FAILURE ¥á¥Ã¥»¡¼¥¸¤¬¤³¤Î¥á¥Ã¥»¡¼¥¸¤Ë
-   Â³¤±¤é¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤. ¤³¤Î¥á¥Ã¥»¡¼¥¸¤ò¼õ¤±¤È¤Ã¤¿¥¯¥é¥¤¥¢¥ó¥È¤Ï
-   ¼¡¤Î SSH_MSG_USERAUTH_FAILURE ¥á¥Ã¥»¡¼¥¸¤ò
-   ¤µ¤é¤Ê¤ëÇ§¾Ú¤Î»î¹Ô¤ò»Ï¤á¤ëÁ°¤ËÂÔ¤ÄÉ¬Í×¤¬¤¢¤ë.
+   ã‚µãƒ¼ãƒãŒã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ã‚‹æ™‚ã¯, åŒä¸€ã®èªè¨¼è¦æ±‚ã¸ã®é©ç”¨ã¨ã—ã¦
+   è§£é‡ˆã•ã‚Œã‚‹, SSH_MSG_USERAUTH_FAILURE ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã«
+   ç¶šã‘ã‚‰ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„. ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘ã¨ã£ãŸã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯
+   æ¬¡ã® SSH_MSG_USERAUTH_FAILURE ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’
+   ã•ã‚‰ãªã‚‹èªè¨¼ã®è©¦è¡Œã‚’å§‹ã‚ã‚‹å‰ã«å¾…ã¤å¿…è¦ãŒã‚ã‚‹.
 
    When a client sends this message, it MUST be followed by a new
    authentication request or by terminating the connection.  A server
@@ -1451,11 +1451,11 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    reply, since such a message might otherwise be interpreted by a
    client as a response to the following authentication sequence.
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤¬¤³¤Î¥á¥Ã¥»¡¼¥¸¤òÁ÷¤ë»ş¤Ï, ¿·¤·¤¤Ç§¾ÚÍ×µá¤«ÀÜÂ³¤Î½ªÎ»
-   ¤¬¤³¤Î¥á¥Ã¥»¡¼¥¸¤ËÂ³¤±¤é¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤. ¤³¤Î¥á¥Ã¥»¡¼¥¸¤ò¼õ¤±¤È¤Ã¤¿
-   ¥µ¡¼¥Ğ¤Ï, ÊÖÅú¤Ë SSH_MSG_USERAUTH_FAILURE ¤òÁ÷¤Ã¤Æ¤Ï¤Ê¤é¤Ê¤¤.
-   ¤³¤Î¥á¥Ã¥»¡¼¥¸¤Ï, ¥¯¥é¥¤¥¢¥ó¥È¤Ë¤è¤Ã¤Æ¼¡¤ÎÇ§¾Ú¥·¡¼¥±¥ó¥¹¤Ø¤Î±şÅú
-   ¤È¤·¤Æ²ò¼á¤µ¤ì¤ë¤«¤â¤·¤ì¤Ê¤¤¤«¤é.
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ã‚‹æ™‚ã¯, æ–°ã—ã„èªè¨¼è¦æ±‚ã‹æ¥ç¶šã®çµ‚äº†
+   ãŒã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã«ç¶šã‘ã‚‰ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„. ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘ã¨ã£ãŸ
+   ã‚µãƒ¼ãƒã¯, è¿”ç­”ã« SSH_MSG_USERAUTH_FAILURE ã‚’é€ã£ã¦ã¯ãªã‚‰ãªã„.
+   ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«ã‚ˆã£ã¦æ¬¡ã®èªè¨¼ã‚·ãƒ¼ã‚±ãƒ³ã‚¹ã¸ã®å¿œç­”
+   ã¨ã—ã¦è§£é‡ˆã•ã‚Œã‚‹ã‹ã‚‚ã—ã‚Œãªã„ã‹ã‚‰.
 
    Any server sending this message MUST ignore any SSH_MSG_UNIMPLEMENTED
    sent by the client in response.  If a server sends both this message
@@ -1464,12 +1464,12 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    the client to store and/or display the error status before processing
    the error token.
 
-   ¤³¤Î¥á¥Ã¥»¡¼¥¸¤òÁ÷¤ë¤É¤ó¤Ê¥µ¡¼¥Ğ¤â, ¥¯¥é¥¤¥¢¥ó¥È¤Ë¤è¤Ã¤ÆÁ÷¤é¤ì¤ë±şÅú¤Î
-   SSH_MSG_UNIMPLEMENTED ¤òÌµ»ë¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤. ¥µ¡¼¥Ğ¤¬
-   ¤³¤Î¥á¥Ã¥»¡¼¥¸¤È SSH_MSG_USERAUTH_GSSAPI_ERROR ¤ÎÎ¾Êı¤òÁ÷¤ë¤È¤­,
-   SSH_MSG_USERAUTH_GSSAPI_ERROR ¤¬ºÇ½é¤ËÁ÷¤é¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
-   error token ¤ò½èÍı¤¹¤ëÁ°¤Ë¥¨¥é¡¼¤Î¾õÂÖ¤òÊİÂ¸ ¤«¤Ä/¤Ê¤¤¤· É½¼¨¤¹¤ë¤³¤È¤ò
-   ¥¯¥é¥¤¥¢¥ó¥È¤Ëµö¤¹¤¿¤á¤À.
+   ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ã‚‹ã©ã‚“ãªã‚µãƒ¼ãƒã‚‚, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«ã‚ˆã£ã¦é€ã‚‰ã‚Œã‚‹å¿œç­”ã®
+   SSH_MSG_UNIMPLEMENTED ã‚’ç„¡è¦–ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„. ã‚µãƒ¼ãƒãŒ
+   ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¨ SSH_MSG_USERAUTH_GSSAPI_ERROR ã®ä¸¡æ–¹ã‚’é€ã‚‹ã¨ã,
+   SSH_MSG_USERAUTH_GSSAPI_ERROR ãŒæœ€åˆã«é€ã‚‰ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„.
+   error token ã‚’å‡¦ç†ã™ã‚‹å‰ã«ã‚¨ãƒ©ãƒ¼ã®çŠ¶æ…‹ã‚’ä¿å­˜ ã‹ã¤/ãªã„ã— è¡¨ç¤ºã™ã‚‹ã“ã¨ã‚’
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«è¨±ã™ãŸã‚ã .
 
 
 
@@ -1496,20 +1496,20 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
 
 4. Authentication using GSSAPI Key Exchange
 
-4. GSSAPI ¸°¸ò´¹¤òÍÑ¤¤¤¿Ç§¾Ú
+4. GSSAPI éµäº¤æ›ã‚’ç”¨ã„ãŸèªè¨¼
 
    This section describes a user authentication method building on the
    framework described in [9].  This method performs user authentication
    by making use of an existing GSSAPI context established during key
    exchange.
 
-   ¤³¤Î¥»¥¯¥·¥ç¥ó¤Ç¤Ï, [9] ¤Çµ­½Ò¤µ¤ì¤¿¥Õ¥ì¡¼¥à¥ï¡¼¥¯¤ò´ğ¤Ë¤·¤¿
-   ¥æ¡¼¥¶Ç§¾ÚË¡¤òµ­½Ò¤¹¤ë. ¤³¤ÎÊıË¡¤Ï, ¸°¸ò´¹¤Ç³ÎÎ©¤·¤¿¤¹¤Ç¤ËÂ¸ºß¤¹¤ë
-   GSSAPI context ¤ò»È¤Ã¤Æ¥æ¡¼¥¶Ç§¾Ú¤ò¹Ô¤Ê¤¦.
+   ã“ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³ã§ã¯, [9] ã§è¨˜è¿°ã•ã‚ŒãŸãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¯ãƒ¼ã‚¯ã‚’åŸºã«ã—ãŸ
+   ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•ã‚’è¨˜è¿°ã™ã‚‹. ã“ã®æ–¹æ³•ã¯, éµäº¤æ›ã§ç¢ºç«‹ã—ãŸã™ã§ã«å­˜åœ¨ã™ã‚‹
+   GSSAPI context ã‚’ä½¿ã£ã¦ãƒ¦ãƒ¼ã‚¶èªè¨¼ã‚’è¡Œãªã†.
 
    The authentication method name for this protocol is "gssapi-keyex".
 
-   ¤³¤Î¥×¥í¥È¥³¥ë¤ÎÇ§¾ÚË¡¤ÎÌ¾Á°¤Ï "gssapi-keyex" ¤À.
+   ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®èªè¨¼æ³•ã®åå‰ã¯ "gssapi-keyex" ã .
 
    This method may be used only if the initial key exchange was
    performed using a GSSAPI-based key exchange method defined in
@@ -1518,11 +1518,11 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    exchange.  Any context established during key exchange for the
    purpose of rekeying MUST NOT be used with this method.
 
-   ¥»¥¯¥·¥ç¥ó 2 ¤Ë´ğ¤Å¤¤¤ÆÄêµÁ¤µ¤ì¤¿ GSSAPI ¥Ù¡¼¥¹¤Î¸°¸ò´¹Ë¡¤ò»È¤Ã¤Æ
-   ºÇ½é¤Î¸°¸ò´¹¤¬¹Ô¤Ê¤ï¤ì¤¿¾ì¹ç¤Ë¤Î¤ß, ¤³¤ÎÊıË¡¤Ï, »È¤ï¤ì¤ë.
-   ¤³¤ÎÊıË¡¤Ç»È¤ï¤ì¤ë GSSAPI context ¤Ï ¤¤¤Ä¤â ºÇ½é¤Î GSSAPI ¥Ù¡¼¥¹¤Î
-   ¸°¸ò´¹¤Ç ³ÎÎ©¤·¤¿¤â¤Î¤À. ¸°¤ÎºÆÀ¸À®¤Î¤¿¤á¤Î¸°¸ò´¹¤Ç³ÎÎ©¤·¤¿
-   ¤É¤ó¤Ê context ¤â ¤³¤ÎÊıË¡¤Ç»È¤ï¤ì¤Æ¤Ï¤Ê¤é¤Ê¤¤.
+   ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 2 ã«åŸºã¥ã„ã¦å®šç¾©ã•ã‚ŒãŸ GSSAPI ãƒ™ãƒ¼ã‚¹ã®éµäº¤æ›æ³•ã‚’ä½¿ã£ã¦
+   æœ€åˆã®éµäº¤æ›ãŒè¡Œãªã‚ã‚ŒãŸå ´åˆã«ã®ã¿, ã“ã®æ–¹æ³•ã¯, ä½¿ã‚ã‚Œã‚‹.
+   ã“ã®æ–¹æ³•ã§ä½¿ã‚ã‚Œã‚‹ GSSAPI context ã¯ ã„ã¤ã‚‚ æœ€åˆã® GSSAPI ãƒ™ãƒ¼ã‚¹ã®
+   éµäº¤æ›ã§ ç¢ºç«‹ã—ãŸã‚‚ã®ã . éµã®å†ç”Ÿæˆã®ãŸã‚ã®éµäº¤æ›ã§ç¢ºç«‹ã—ãŸ
+   ã©ã‚“ãª context ã‚‚ ã“ã®æ–¹æ³•ã§ä½¿ã‚ã‚Œã¦ã¯ãªã‚‰ãªã„.
 
    The server SHOULD include this user authentication method in the list
    of methods that can continue (in a SSH_MSG_USERAUTH_FAILURE) if the
@@ -1532,12 +1532,12 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    key exchange was not performed using a GSSAPI-based key exchange
    method defined in accordance with Section 2.
 
-   GSSAPI ¥Ù¡¼¥¹¤Î¸°¸ò´¹¤òÍÑ¤¤¤ÆºÇ½é¤Î¸°¸ò´¹¤¬¹Ô¤Ê¤ï¤ì¤Æ, ¤½¤Î¸°¸ò´¹¤¬,
-   ¥µ¡¼¥Ğ¤ËÂĞ¤·¤ÆÍøÍÑ¤Ç¤­¤ë¥æ¡¼¥¶¤Î identity ¤Ë¤Ä¤¤¤Æ¤Î¾ğÊó¤ò
-   Äó¶¡¤¹¤ë¾ì¹ç¤Ë, ¥µ¡¼¥Ğ¤Ï (SSH_MSG_USERAUTH_FAILURE ¤Ç)
-   Â³¤±¤ë¤³¤È¤Î¤Ç¤­¤ëÊıË¡¤Î¥ê¥¹¥È¤Ë ¤³¤Î¥æ¡¼¥¶Ç§¾ÚË¡¤ò´Ş¤á¤ëÉ¬Í×¤¬¤¢¤ë.
-   ¥»¥¯¥·¥ç¥ó 2 ¤Ë´ğ¤Å¤¤¤ÆÄêµÁ¤µ¤ì¤¿ GSSAPI ¥Ù¡¼¥¹¤Î¸°¸ò´¹Ë¡¤ò»È¤Ã¤Æ
-   ºÇ½é¤Î¸°¸ò´¹¤¬¹Ô¤Ê¤ï¤ì¤Æ¤¤¤Ê¤¤¤Ê¤é, ¥µ¡¼¥Ğ¤Ï¤³¤ÎÊıË¡¤ò´Ş¤á¤Æ¤Ï¤Ê¤é¤Ê¤¤.
+   GSSAPI ãƒ™ãƒ¼ã‚¹ã®éµäº¤æ›ã‚’ç”¨ã„ã¦æœ€åˆã®éµäº¤æ›ãŒè¡Œãªã‚ã‚Œã¦, ãã®éµäº¤æ›ãŒ,
+   ã‚µãƒ¼ãƒã«å¯¾ã—ã¦åˆ©ç”¨ã§ãã‚‹ãƒ¦ãƒ¼ã‚¶ã® identity ã«ã¤ã„ã¦ã®æƒ…å ±ã‚’
+   æä¾›ã™ã‚‹å ´åˆã«, ã‚µãƒ¼ãƒã¯ (SSH_MSG_USERAUTH_FAILURE ã§)
+   ç¶šã‘ã‚‹ã“ã¨ã®ã§ãã‚‹æ–¹æ³•ã®ãƒªã‚¹ãƒˆã« ã“ã®ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•ã‚’å«ã‚ã‚‹å¿…è¦ãŒã‚ã‚‹.
+   ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 2 ã«åŸºã¥ã„ã¦å®šç¾©ã•ã‚ŒãŸ GSSAPI ãƒ™ãƒ¼ã‚¹ã®éµäº¤æ›æ³•ã‚’ä½¿ã£ã¦
+   æœ€åˆã®éµäº¤æ›ãŒè¡Œãªã‚ã‚Œã¦ã„ãªã„ãªã‚‰, ã‚µãƒ¼ãƒã¯ã“ã®æ–¹æ³•ã‚’å«ã‚ã¦ã¯ãªã‚‰ãªã„.
 
    The client SHOULD attempt to use this method if it is advertised by
    the server, initial key exchange was performed using a GSSAPI-based
@@ -1547,27 +1547,27 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    using a GSSAPI-based key exchange method defined in accordance with
    Section 2.
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤Ï, ¤³¤ÎÊıË¡¤¬¥µ¡¼¥Ğ¤«¤é¹ğÃÎ¤µ¤ì¤Æ¤¤¤Æ, ºÇ½é¤Î¸°¸ò´¹¤¬
-   GSSAPI ¥Ù¡¼¥¹¤Î¸°¸ò´¹Ë¡¤ò»È¤Ã¤Æ¹Ô¤Ê¤ï¤ì¤Æ¤¤¤Æ, ¤³¤ÎÊıË¡¤¬¤¹¤Ç¤Ë
-   »î¤µ¤ì¤Æ¤¤¤¿¾ì¹ç¤Ë (?), ¤³¤ÎÊıË¡¤ò»È¤ª¤¦¤È»î¤¹É¬Í×¤¬¤¢¤ë.
-   ¥¯¥é¥¤¥¢¥ó¥È¤Ï ¥»¥Ã¥·¥ç¥ó¤´¤È¤Ë 1 ÅÙ¤è¤êÂ¿¤¯¤³¤ÎÊıË¡¤ò»È¤ï¤Ê¤¤¤Û¤¦¤¬¤è¤¤.
-   ¥»¥¯¥·¥ç¥ó 2 ¤Ë´ğ¤Å¤¤¤ÆÄêµÁ¤µ¤ì¤¿ 
-   GSSAPI ¥Ù¡¼¥¹¤Î¸°¸ò´¹Ë¡¤ò»È¤Ã¤ÆºÇ½é¤Î¸°¸ò´¹¤¬¹Ô¤Ê¤ï¤ì¤Æ¤¤¤Ê¤¤¤Ê¤é,
-   ¥¯¥é¥¤¥¢¥ó¥È¤Ï¤³¤ÎÊıË¡¤ò »î¤·¤Æ¤Ï¤Ê¤é¤Ê¤¤.
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯, ã“ã®æ–¹æ³•ãŒã‚µãƒ¼ãƒã‹ã‚‰å‘ŠçŸ¥ã•ã‚Œã¦ã„ã¦, æœ€åˆã®éµäº¤æ›ãŒ
+   GSSAPI ãƒ™ãƒ¼ã‚¹ã®éµäº¤æ›æ³•ã‚’ä½¿ã£ã¦è¡Œãªã‚ã‚Œã¦ã„ã¦, ã“ã®æ–¹æ³•ãŒã™ã§ã«
+   è©¦ã•ã‚Œã¦ã„ãŸå ´åˆã« (?), ã“ã®æ–¹æ³•ã‚’ä½¿ãŠã†ã¨è©¦ã™å¿…è¦ãŒã‚ã‚‹.
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯ ã‚»ãƒƒã‚·ãƒ§ãƒ³ã”ã¨ã« 1 åº¦ã‚ˆã‚Šå¤šãã“ã®æ–¹æ³•ã‚’ä½¿ã‚ãªã„ã»ã†ãŒã‚ˆã„.
+   ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 2 ã«åŸºã¥ã„ã¦å®šç¾©ã•ã‚ŒãŸ 
+   GSSAPI ãƒ™ãƒ¼ã‚¹ã®éµäº¤æ›æ³•ã‚’ä½¿ã£ã¦æœ€åˆã®éµäº¤æ›ãŒè¡Œãªã‚ã‚Œã¦ã„ãªã„ãªã‚‰,
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯ã“ã®æ–¹æ³•ã‚’ è©¦ã—ã¦ã¯ãªã‚‰ãªã„.
 
    If a server receives a request for this method when initial key
    exchange was not performed using a GSSAPI-based key exchange method
    defined in accordance with Section 2, it MUST return
    SSH_MSG_USERAUTH_FAILURE.
 
-   ¥»¥¯¥·¥ç¥ó 2 ¤Ë´ğ¤Å¤¤¤ÆÄêµÁ¤µ¤ì¤¿ 
-   GSSAPI ¥Ù¡¼¥¹¤Î¸°¸ò´¹Ë¡¤ò»È¤Ã¤ÆºÇ½é¤Î¸°¸ò´¹¤¬¹Ô¤Ê¤ï¤ì¤Æ¤¤¤Ê¤¤¤Î¤Ë
-   ¥µ¡¼¥Ğ¤¬¤³¤ÎÊıË¡¤ËÂĞ¤¹¤ëÍ×µá¤ò¼õ¤±¤È¤Ã¤¿¤é, ¥µ¡¼¥Ğ¤Ï
-   SSH_MSG_USERAUTH_FAILURE ¤òÊÖ¤µ¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 2 ã«åŸºã¥ã„ã¦å®šç¾©ã•ã‚ŒãŸ 
+   GSSAPI ãƒ™ãƒ¼ã‚¹ã®éµäº¤æ›æ³•ã‚’ä½¿ã£ã¦æœ€åˆã®éµäº¤æ›ãŒè¡Œãªã‚ã‚Œã¦ã„ãªã„ã®ã«
+   ã‚µãƒ¼ãƒãŒã“ã®æ–¹æ³•ã«å¯¾ã™ã‚‹è¦æ±‚ã‚’å—ã‘ã¨ã£ãŸã‚‰, ã‚µãƒ¼ãƒã¯
+   SSH_MSG_USERAUTH_FAILURE ã‚’è¿”ã•ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    This method is defined as a single message:
 
-   ¤³¤ÎÊıË¡¤ÏÃ±°ì¤Î¥á¥Ã¥»¡¼¥¸¤È¤·¤ÆÄêµÁ¤µ¤ì¤ë.
+   ã“ã®æ–¹æ³•ã¯å˜ä¸€ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¨ã—ã¦å®šç¾©ã•ã‚Œã‚‹.
 
            byte        SSH_MSG_USERAUTH_REQUEST
            string      user name
@@ -1579,8 +1579,8 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    the following, using the GSSAPI context which was established during
    initial key exchange:
 
-   MIC ¥Õ¥£¡¼¥ë¥É¤ÎÃæ¿È¤Ï, ºÇ½é¤Î¸°¸ò´¹¤Ç³ÎÎ©¤µ¤ì¤¿ GSSAPI context
-  ¤ò»È¤Ã¤¿¼¡¤ËÂĞ¤¹¤ë GSS_GetMIC ¤Î¸Æ¤Ó½Ğ¤·¤ÇÆÀ¤é¤ì¤ë.
+   MIC ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®ä¸­èº«ã¯, æœ€åˆã®éµäº¤æ›ã§ç¢ºç«‹ã•ã‚ŒãŸ GSSAPI context
+  ã‚’ä½¿ã£ãŸæ¬¡ã«å¯¾ã™ã‚‹ GSS_GetMIC ã®å‘¼ã³å‡ºã—ã§å¾—ã‚‰ã‚Œã‚‹.
    
 
 Hutzelman, et al.        Expires March 12, 2004                [Page 18]
@@ -1600,21 +1600,21 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    is not valid, the user authentication fails, and the server MUST
    return SSH_MSG_USERAUTH_FAILURE.
 
-   GSSAPI ¥Ù¡¼¥¹¤Î¸°¸ò´¹Ë¡¤ò»È¤Ã¤ÆºÇ½é¤Î¸°¸ò´¹¤¬¹Ô¤Ê¤ï¤ì¤¿¾ì¹ç¤Ë
-   ¤³¤Î¥á¥Ã¥»¡¼¥¸¤ò¼õ¤±¼è¤Ã¤¿¤Ê¤é, ¥µ¡¼¥Ğ¤Ï
-   GSS_VerifyMIC ¤ò»È¤Ã¤Æ ¼õ¤±¼è¤Ã¤¿ MIC ¤¬ÀµÅö¤«¸¡ºº¤¹¤ë.
-   MIC ¤¬ÀµÅö¤Ç¤Ê¤±¤ì¤Ğ, ¥æ¡¼¥¶Ç§¾Ú¤Ï¼ºÇÔ¤·,
-   ¥µ¡¼¥Ğ¤Ï SSH_MSG_USERAUTH_FAILURE ¤òÊÖ¤µ¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   GSSAPI ãƒ™ãƒ¼ã‚¹ã®éµäº¤æ›æ³•ã‚’ä½¿ã£ã¦æœ€åˆã®éµäº¤æ›ãŒè¡Œãªã‚ã‚ŒãŸå ´åˆã«
+   ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘å–ã£ãŸãªã‚‰, ã‚µãƒ¼ãƒã¯
+   GSS_VerifyMIC ã‚’ä½¿ã£ã¦ å—ã‘å–ã£ãŸ MIC ãŒæ­£å½“ã‹æ¤œæŸ»ã™ã‚‹.
+   MIC ãŒæ­£å½“ã§ãªã‘ã‚Œã°, ãƒ¦ãƒ¼ã‚¶èªè¨¼ã¯å¤±æ•—ã—,
+   ã‚µãƒ¼ãƒã¯ SSH_MSG_USERAUTH_FAILURE ã‚’è¿”ã•ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    If the MIC is valid and the server is satisfied as to the user's
    credentials, it MAY return either SSH_MSG_USERAUTH_SUCCESS, or
    SSH_MSG_USERAUTH_FAILURE with the partial success flag set, depending
    on whether additional authentications are needed.
 
-   MIC ¤¬ÀµÅö¤Ç, ¥µ¡¼¥Ğ¤¬ ¥æ¡¼¥¶¤Î¾ÚÌÀ½ñ¤Ë¤Ä¤¤¤Æ ËşÂ­¤·¤¿¤Ê¤é, 
-   ÄÉ²Ã¤ÎÇ§¾Ú¤¬É¬Í×¤«¤É¤¦¤«¤Ë°ÍÂ¸¤·¤Æ,
-   SSH_MSG_USERAUTH_SUCCESS ¤« partial success ¥Õ¥é¥°¤¬ÀßÄê¤µ¤ì¤¿
-   SSH_MSG_USERAUTH_FAILURE ¤òÊÖ¤·¤Æ¤â¤è¤¤.
+   MIC ãŒæ­£å½“ã§, ã‚µãƒ¼ãƒãŒ ãƒ¦ãƒ¼ã‚¶ã®è¨¼æ˜æ›¸ã«ã¤ã„ã¦ æº€è¶³ã—ãŸãªã‚‰, 
+   è¿½åŠ ã®èªè¨¼ãŒå¿…è¦ã‹ã©ã†ã‹ã«ä¾å­˜ã—ã¦,
+   SSH_MSG_USERAUTH_SUCCESS ã‹ partial success ãƒ•ãƒ©ã‚°ãŒè¨­å®šã•ã‚ŒãŸ
+   SSH_MSG_USERAUTH_FAILURE ã‚’è¿”ã—ã¦ã‚‚ã‚ˆã„.
    
    
 
@@ -1657,7 +1657,7 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
 
 5. Null Host Key Algorithm
 
-5. ¥Ì¥ë¥Û¥¹¥È¸°¥¢¥ë¥´¥ê¥º¥à
+5. ãƒŒãƒ«ãƒ›ã‚¹ãƒˆéµã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ 
 
    The "null" host key algorithm has no associated host key material,
    and provides neither signature nor encryption algorithms.  Thus, it
@@ -1666,11 +1666,11 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    material.  The key exchange methods described in section 1 of this
    document are examples of such methods.
 
-   "null" ¥Û¥¹¥È¸°¥¢¥ë¥´¥ê¥º¥à¤Ï, ´ØÏ¢¤¹¤ë¥Û¥¹¥È¸°¤Î¼ÂÂÎ¤ò»ı¤¿¤º,
-   ½ğÌ¾¤ä°Å¹æ²½¤Î¥¢¥ë¥´¥ê¥º¥à¤âÄó¶¡¤·¤Ê¤¤. ¤½¤ì¤æ¤¨, 
-   ¤É¤ó¤Ê ¸ø³«¸°Áàºî¤âÉ¬Í×¤È¤»¤º¥Û¥¹¥È¸ø³«¸°¤Î¼ÂÂÎ¤ò»È¤¦É¬Í×¤â¤Ê¤¤
-   ¸°¸ò´¹Ë¡¤È¶¦¤Ë¤Î¤ß»È¤ï¤ì¤ë¤³¤È¤¬¤Ç¤­¤ë. ¤³¤ÎÊ¸½ñ¤Î
-   ¥»¥¯¥·¥ç¥ó 1 ¤Çµ­½Ò¤·¤¿ ¸°¸ò´¹Ë¡¤Ï, ¤³¤Î¤è¤¦¤ÊÊıË¡¤ÎÎã¤À.
+   "null" ãƒ›ã‚¹ãƒˆéµã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã¯, é–¢é€£ã™ã‚‹ãƒ›ã‚¹ãƒˆéµã®å®Ÿä½“ã‚’æŒãŸãš,
+   ç½²åã‚„æš—å·åŒ–ã®ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚‚æä¾›ã—ãªã„. ãã‚Œã‚†ãˆ, 
+   ã©ã‚“ãª å…¬é–‹éµæ“ä½œã‚‚å¿…è¦ã¨ã›ãšãƒ›ã‚¹ãƒˆå…¬é–‹éµã®å®Ÿä½“ã‚’ä½¿ã†å¿…è¦ã‚‚ãªã„
+   éµäº¤æ›æ³•ã¨å…±ã«ã®ã¿ä½¿ã‚ã‚Œã‚‹ã“ã¨ãŒã§ãã‚‹. ã“ã®æ–‡æ›¸ã®
+   ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 1 ã§è¨˜è¿°ã—ãŸ éµäº¤æ›æ³•ã¯, ã“ã®ã‚ˆã†ãªæ–¹æ³•ã®ä¾‹ã .
 
    This algorithm is used when, as a matter of configuration, the host
    does not have or does not wish to use a public key.  For example, it
@@ -1685,16 +1685,16 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    some key exchange algorithm to advertise; the "null" algorithm fills
    this purpose.
 
-   ÀßÄê¤È¤·¤Æ, ¥Û¥¹¥È¤¬¸ø³«¸°¤ò»ı¤¿¤Ê¤«¤Ã¤¿¤ê,¸ø³«¸°¤ò»È¤¦¤³¤È¤ò
-   Ë¾¤Ş¤Ê¤¤¾ì¹ç, ¤³¤Î¥¢¥ë¥´¥ê¥º¥à¤¬»È¤ï¤ì¤ë. Îã¤¨¤Ğ,
-   ´ÉÍı¼Ô¤¬, ¥İ¥ê¥·¡¼¤È¤·¤Æ,  Kerberos [12] ¤òÍÑ¤¤¤Æ¤¹¤Ù¤Æ¤Î
-   ¸°¸ò´¹¤òÇ§¾Ú¤¹¤ë¤³¤È¤òÉ¬Í×¤È¤¹¤ë¤È·èÄê¤·,µö¤µ¤ì¤ë¸°¸ò´¹Ë¡¤¬
-   ´ğÁÃ¤È¤Ê¤ë GSSAPI ¥á¥«¥Ë¥º¥à¤È¤·¤Æ Kerberos V5 ÍÑ¤¤¤ë
-   ¾åµ­¤Î GSSAPI ¤ÇÇ§¾Ú¤µ¤ì¤¿ Diffie-Hellman ¸ò´¹¤Î¾ì¹ç¤Ë»È¤ï¤ì¤ë¤³¤È¤¬
-   ¤Ç¤­¤ë. ¤³¤Î¤è¤¦¤ÊÀßÄê¤Ç, ¥µ¡¼¥Ğ¤Î¼ÂÁõ¤Ï ([8] ¤ÇÉ¬Í×¤È¤µ¤ì¤ë) "ssh-dss"
-   ¸°¥¢¥ë¥´¥ê¥º¥à¤ò¥µ¥İ¡¼¥È¤¹¤ë¤¬, ¤³¤ì¤òÍøÍÑ¤¹¤ë¤³¤È¤òÀßÄê¤Ç
-   ¶Ø»ß¤¹¤ë¤³¤È¤¬¤Ç¤­¤ë. ¤³¤Î¾õ¶·¤Ç, ¥µ¡¼¥Ğ¤Ï, ²¿¤«ÄÌÃÎ¤¹¤ë
-   ¸°¸ò´¹¥¢¥ë¥´¥ê¥º¥à¤¬É¬Í×¤À: "null" ¥¢¥ë¥´¥ê¥º¥à¤Ï¤³¤ÎÌÜÅª¤òËş¤¿¤¹.
+   è¨­å®šã¨ã—ã¦, ãƒ›ã‚¹ãƒˆãŒå…¬é–‹éµã‚’æŒãŸãªã‹ã£ãŸã‚Š,å…¬é–‹éµã‚’ä½¿ã†ã“ã¨ã‚’
+   æœ›ã¾ãªã„å ´åˆ, ã“ã®ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ãŒä½¿ã‚ã‚Œã‚‹. ä¾‹ãˆã°,
+   ç®¡ç†è€…ãŒ, ãƒãƒªã‚·ãƒ¼ã¨ã—ã¦,  Kerberos [12] ã‚’ç”¨ã„ã¦ã™ã¹ã¦ã®
+   éµäº¤æ›ã‚’èªè¨¼ã™ã‚‹ã“ã¨ã‚’å¿…è¦ã¨ã™ã‚‹ã¨æ±ºå®šã—,è¨±ã•ã‚Œã‚‹éµäº¤æ›æ³•ãŒ
+   åŸºç¤ã¨ãªã‚‹ GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã¨ã—ã¦ Kerberos V5 ç”¨ã„ã‚‹
+   ä¸Šè¨˜ã® GSSAPI ã§èªè¨¼ã•ã‚ŒãŸ Diffie-Hellman äº¤æ›ã®å ´åˆã«ä½¿ã‚ã‚Œã‚‹ã“ã¨ãŒ
+   ã§ãã‚‹. ã“ã®ã‚ˆã†ãªè¨­å®šã§, ã‚µãƒ¼ãƒã®å®Ÿè£…ã¯ ([8] ã§å¿…è¦ã¨ã•ã‚Œã‚‹) "ssh-dss"
+   éµã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹ãŒ, ã“ã‚Œã‚’åˆ©ç”¨ã™ã‚‹ã“ã¨ã‚’è¨­å®šã§
+   ç¦æ­¢ã™ã‚‹ã“ã¨ãŒã§ãã‚‹. ã“ã®çŠ¶æ³ã§, ã‚µãƒ¼ãƒã¯, ä½•ã‹é€šçŸ¥ã™ã‚‹
+   éµäº¤æ›ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ãŒå¿…è¦ã : "null" ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã¯ã“ã®ç›®çš„ã‚’æº€ãŸã™.
 
    Note that the use of the "null" algorithm in this way means that the
    server will not be able to interoperate with clients which do not
@@ -1703,21 +1703,21 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    with implementations that do not support the GSSAPI-authenticated key
    exchange and Kerberos.
 
-   ¤³¤Î¤è¤¦¤Ê "null" ¥¢¥ë¥´¥ê¥º¥à¤Î»ÈÍÑ¤Ï, ¤³¤Î¥¢¥ë¥´¥ê¥º¥à¤ò¥µ¥İ¡¼¥È¤·¤Ê¤¤
-   ¥¯¥é¥¤¥¢¥ó¥È¤È¤Î´Ö¤Ç¥µ¡¼¥Ğ¤¬Áê¸ß±¿ÍÑ¤Ç¤­¤Ê¤¯¤Ê¤ë¤³¤È¤ò°ÕÌ£¤¹¤ë¤³¤È¤Ë
-   Ãí°Õ. ¤³¤ì¤Ï½ÅÂç¤ÊÌäÂê¤Ç¤Ï¤Ê¤¤. µ­½Ò¤µ¤ì¤¿ÀßÄê¤Ç¤Ï,
-   GSSAPI ¤ÇÇ§¾Ú¤µ¤ì¤¿¸°¸ò´¹¤È Kerberos ¤ò¥µ¥İ¡¼¥È¤·¤Ê¤¤¼ÂÁõ¤È
-   Áê¸ß±¿ÍÑ¤¹¤ë¤³¤È¤â¤Ç¤­¤Ê¤¤¤«¤é.
+   ã“ã®ã‚ˆã†ãª "null" ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã®ä½¿ç”¨ã¯, ã“ã®ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’ã‚µãƒãƒ¼ãƒˆã—ãªã„
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¨ã®é–“ã§ã‚µãƒ¼ãƒãŒç›¸äº’é‹ç”¨ã§ããªããªã‚‹ã“ã¨ã‚’æ„å‘³ã™ã‚‹ã“ã¨ã«
+   æ³¨æ„. ã“ã‚Œã¯é‡å¤§ãªå•é¡Œã§ã¯ãªã„. è¨˜è¿°ã•ã‚ŒãŸè¨­å®šã§ã¯,
+   GSSAPI ã§èªè¨¼ã•ã‚ŒãŸéµäº¤æ›ã¨ Kerberos ã‚’ã‚µãƒãƒ¼ãƒˆã—ãªã„å®Ÿè£…ã¨
+   ç›¸äº’é‹ç”¨ã™ã‚‹ã“ã¨ã‚‚ã§ããªã„ã‹ã‚‰.
 
    Any implementation supporting at least one key exchange method which
    conforms to section 1 of this document MUST also support the "null"
    host key algorithm.  Servers MUST NOT advertise the "null" host key
    algorithm unless it is the only algorithm advertised.
 
-   ¤³¤ÎÊ¸½ñ¤Î¥»¥¯¥·¥ç¥ó 1 ¤Ë½¾¤¦¸°¸ò´¹Ë¡¤ò¾¯¤Ê¤¯¤È¤â 1 ¤Ä¥µ¥İ¡¼¥È¤¹¤ë
-   ¤É¤ó¤Ê¼ÂÁõ¤â "null" ¥Û¥¹¥È¸°¥¢¥ë¥´¥ê¥º¥à¤ò¥µ¥İ¡¼¥È¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
-   ¥µ¡¼¥Ğ¤Ï, ÄÌÃÎ¤¹¤ë¥¢¥ë¥´¥ê¥º¥à¤¬ Í£°ì "null" ¥¢¥ë¥´¥ê¥º¥à¤Ç¤Ê¤¤¾ì¹ç¤Ë
-   "null" ¥Û¥¹¥È¸°¥¢¥ë¥´¥ê¥º¥à¤òÄÌÃÎ¤·¤Æ¤Ï¤Ê¤é¤Ê¤¤.
+   ã“ã®æ–‡æ›¸ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 1 ã«å¾“ã†éµäº¤æ›æ³•ã‚’å°‘ãªãã¨ã‚‚ 1 ã¤ã‚µãƒãƒ¼ãƒˆã™ã‚‹
+   ã©ã‚“ãªå®Ÿè£…ã‚‚ "null" ãƒ›ã‚¹ãƒˆéµã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’ã‚µãƒãƒ¼ãƒˆã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
+   ã‚µãƒ¼ãƒã¯, é€šçŸ¥ã™ã‚‹ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ãŒ å”¯ä¸€ "null" ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã§ãªã„å ´åˆã«
+   "null" ãƒ›ã‚¹ãƒˆéµã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’é€šçŸ¥ã—ã¦ã¯ãªã‚‰ãªã„.
 
 
 
@@ -1742,13 +1742,13 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
 
 6. Summary of Message Numbers
 
-6. ¥á¥Ã¥»¡¼¥¸ÈÖ¹æ¤Î¤Ş¤È¤á.
+6. ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç•ªå·ã®ã¾ã¨ã‚.
 
    The following message numbers have been defined for use with
    GSSAPI-based key exchange methods:
 
-   ¼¡¤Î¥á¥Ã¥»¡¼¥¸ÈÖ¹æ¤¬, GSSAPI ¥Ù¡¼¥¹¤Î¸°¸ò´¹Ë¡¤Ç»È¤ï¤ì¤ë¤¿¤á¤Ë
-   ÄêµÁ¤µ¤ì¤Æ¤¤¤ë.
+   æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç•ªå·ãŒ, GSSAPI ãƒ™ãƒ¼ã‚¹ã®éµäº¤æ›æ³•ã§ä½¿ã‚ã‚Œã‚‹ãŸã‚ã«
+   å®šç¾©ã•ã‚Œã¦ã„ã‚‹.
 
           #define SSH_MSG_KEXGSS_INIT                       30
           #define SSH_MSG_KEXGSS_CONTINUE                   31
@@ -1759,13 +1759,13 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    The numbers 30-49 are specific to key exchange and may be redefined
    by other kex methods.
 
-   ÈÖ¹æ 30-49 ¤Ï ¸°¸ò´¹¤ËÆÃÍ­¤Ç, ÊÌ¤Î¸°¸ò´¹Ë¡¤ÇºÆÄêµÁ¤µ¤ì¤¦¤ë.
+   ç•ªå· 30-49 ã¯ éµäº¤æ›ã«ç‰¹æœ‰ã§, åˆ¥ã®éµäº¤æ›æ³•ã§å†å®šç¾©ã•ã‚Œã†ã‚‹.
 
    The following message numbers have been defined for use with the
    'gssapi' user authentication method:
 
-   ¼¡¤Î¥á¥Ã¥»¡¼¥¸ÈÖ¹æ¤¬, 'gssapi' ¥æ¡¼¥¶Ç§¾ÚË¡¤Ç»È¤ï¤ì¤ë¤¿¤á¤Ë
-   ÄêµÁ¤µ¤ì¤Æ¤¤¤ë.
+   æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç•ªå·ãŒ, 'gssapi' ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•ã§ä½¿ã‚ã‚Œã‚‹ãŸã‚ã«
+   å®šç¾©ã•ã‚Œã¦ã„ã‚‹.
 
           #define SSH_MSG_USERAUTH_GSSAPI_RESPONSE          60
           #define SSH_MSG_USERAUTH_GSSAPI_TOKEN             61
@@ -1778,8 +1778,8 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    redefined by other user auth methods.  Note that in the method
    described in this document, message number 62 is unused.
 
-   ÈÖ¹æ 60-79 ¤Ï ¥æ¡¼¥¶Ç§¾ÚË¡¤ÇÆÃÍ­¤Ç, ÊÌ¤Î¥æ¡¼¥¶Ç§¾ÚË¡¤ÇºÆÄêµÁ¤µ¤ì¤¦¤ë.
-   ¤³¤ÎÊ¸½ñ¤Çµ­½Ò¤·¤¿ÊıË¡¤Ç¤Ï, ¥á¥Ã¥»¡¼¥¸ÈÖ¹æ 62 ¤¬ Ì¤»ÈÍÑ¤Ç¤¢¤ë¤³¤È¤ËÃí°Õ.
+   ç•ªå· 60-79 ã¯ ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•ã§ç‰¹æœ‰ã§, åˆ¥ã®ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•ã§å†å®šç¾©ã•ã‚Œã†ã‚‹.
+   ã“ã®æ–‡æ›¸ã§è¨˜è¿°ã—ãŸæ–¹æ³•ã§ã¯, ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç•ªå· 62 ãŒ æœªä½¿ç”¨ã§ã‚ã‚‹ã“ã¨ã«æ³¨æ„.
 
 
 
@@ -1809,11 +1809,11 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
 
 7. GSSAPI Considerations
 
-7. GSSAPI ¤Ë´Ø¤¹¤ë¹Í»¡
+7. GSSAPI ã«é–¢ã™ã‚‹è€ƒå¯Ÿ
 
 7.1 Naming Conventions
 
-7.1 Ì¿Ì¾µ¬Â§
+7.1 å‘½åè¦å‰‡
 
    In order to establish a GSSAPI security context, the SSH client needs
    to determine the appropriate targ_name to use in identifying the
@@ -1821,27 +1821,27 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    GSSAPI mechanism-independent name form for host-based services is
    used, as described in section 4.1 of [2].
 
-   GSSAPI ¥»¥­¥å¥ê¥Æ¥£ context ¤ò³ÎÎ©¤¹¤ë¤¿¤á¤Ë, 
-   GSS_Init_sec_context ¤ò¸Æ¤Öºİ SSH ¥¯¥é¥¤¥¢¥ó¥È¤Ï
-   ¥µ¡¼¥Ğ¤òÆ±Äê¤¹¤ë¤Î¤Ë»È¤¦Å¬Åö¤Ê targ_name ¤ò·èÄê¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
-   ¤³¤ÎÌÜÅª¤Î¤¿¤á, [2] ¤Î¥»¥¯¥·¥ç¥ó 4.1 ¤Ëµ­½Ò¤µ¤ì¤Æ¤¤¤ë
-   ¥Û¥¹¥È¥Ù¡¼¥¹¤Î¥µ¡¼¥Ó¥¹¤Î¤¿¤á¤Î
-   GSSAPI ¤Î¥á¥«¥Ë¥º¥à¤ËÈó°ÍÂ¸¤ÊÌ¾Á°¤Î·Á¼°¤¬»È¤ï¤ì¤ë.
+   GSSAPI ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ context ã‚’ç¢ºç«‹ã™ã‚‹ãŸã‚ã«, 
+   GSS_Init_sec_context ã‚’å‘¼ã¶éš› SSH ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯
+   ã‚µãƒ¼ãƒã‚’åŒå®šã™ã‚‹ã®ã«ä½¿ã†é©å½“ãª targ_name ã‚’æ±ºå®šã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
+   ã“ã®ç›®çš„ã®ãŸã‚, [2] ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 4.1 ã«è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹
+   ãƒ›ã‚¹ãƒˆãƒ™ãƒ¼ã‚¹ã®ã‚µãƒ¼ãƒ“ã‚¹ã®ãŸã‚ã®
+   GSSAPI ã®ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã«éä¾å­˜ãªåå‰ã®å½¢å¼ãŒä½¿ã‚ã‚Œã‚‹.
 
    In particular, the targ_name to pass to GSS_Init_sec_context is
    obtained by calling GSS_Import_name with an input_name_type of
    GSS_C_NT_HOSTBASED_SERVICE, and an input_name_string consisting of
    the string "host@" concatenated with the hostname of the SSH server.
 
-   ¶ñÂÎÅª¤Ë¤Ï, GSS_Init_sec_context ¤ËÅÏ¤µ¤ì¤ë targ_name ¤Ï, 
-   input_name_type ¤ò GSS_C_NT_HOSTBASED_SERVICE ¤Ë¤·,
-   input_name_string ¤ò "host@"¤È¤¤¤¦Ê¸»úÎó¤Ë SSH ¥µ¡¼¥Ğ¤Î
-   ¥Û¥¹¥ÈÌ¾¤òÏ¢·ë¤·¤¿¤â¤Î¤ò»È¤¦ GSS_Import_name ¤ò¸Æ¤Ö¤³¤È¤Ç,
-   ÆÀ¤é¤ì¤ë.
+   å…·ä½“çš„ã«ã¯, GSS_Init_sec_context ã«æ¸¡ã•ã‚Œã‚‹ targ_name ã¯, 
+   input_name_type ã‚’ GSS_C_NT_HOSTBASED_SERVICE ã«ã—,
+   input_name_string ã‚’ "host@"ã¨ã„ã†æ–‡å­—åˆ—ã« SSH ã‚µãƒ¼ãƒã®
+   ãƒ›ã‚¹ãƒˆåã‚’é€£çµã—ãŸã‚‚ã®ã‚’ä½¿ã† GSS_Import_name ã‚’å‘¼ã¶ã“ã¨ã§,
+   å¾—ã‚‰ã‚Œã‚‹.
    
 7.2 Channel Bindings
 
-7.2 ¥Á¥ã¥ó¥Í¥ë¤ÎÂ«Çû
+7.2 ãƒãƒ£ãƒ³ãƒãƒ«ã®æŸç¸›
 
    This document recommends that channel bindings SHOULD NOT be
    specified in the calls during context establishment.  This document
@@ -1849,11 +1849,11 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    the use of network addresses as channel bindings may break SSH in
    environments where it is most useful.
 
-   ¤³¤ÎÊ¸½ñ¤Ï context ¤Î³ÎÎ©Ãæ¤Î´Ø¿ô¤Î¸Æ¤Ó½Ğ¤·¤Ç ¥Á¥ã¥ó¥Í¥ë¤ÎÂ«Çû¤Ï
-   »ØÄê¤µ¤ì¤Ê¤¤¤Û¤¦¤¬¤è¤¤¤³¤È¤ò´«¤á¤ë. ¤³¤ÎÊ¸½ñ¤Ï, ¥Á¥ã¥ó¥Í¥ë¤ÎÂ«Çû¤È¤·¤Æ
-   »È¤ï¤ì¤ë¤É¤ó¤ÊÉ¸½à¤Î¥Ç¡¼¥¿¤â»ØÄê¤·¤Ê¤¤. ¤Ş¤¿, ¥Á¥ã¥ó¥Í¥ë¤ÎÂ«Çû¤È¤·¤Æ
-   ¥Í¥Ã¥È¥ï¡¼¥¯¥¢¥É¥ì¥¹¤ò»È¤¦¤³¤È¤Ï, ¤½¤ì¤¬Èó¾ï¤ËÍ­ÍÑ¤Ê´Ä¶­¤Ë¤ª¤¤¤Æ
-   SSH ¤ò²õ¤¹¤«¤â¤·¤ì¤Ê¤¤.
+   ã“ã®æ–‡æ›¸ã¯ context ã®ç¢ºç«‹ä¸­ã®é–¢æ•°ã®å‘¼ã³å‡ºã—ã§ ãƒãƒ£ãƒ³ãƒãƒ«ã®æŸç¸›ã¯
+   æŒ‡å®šã•ã‚Œãªã„ã»ã†ãŒã‚ˆã„ã“ã¨ã‚’å‹§ã‚ã‚‹. ã“ã®æ–‡æ›¸ã¯, ãƒãƒ£ãƒ³ãƒãƒ«ã®æŸç¸›ã¨ã—ã¦
+   ä½¿ã‚ã‚Œã‚‹ã©ã‚“ãªæ¨™æº–ã®ãƒ‡ãƒ¼ã‚¿ã‚‚æŒ‡å®šã—ãªã„. ã¾ãŸ, ãƒãƒ£ãƒ³ãƒãƒ«ã®æŸç¸›ã¨ã—ã¦
+   ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ä½¿ã†ã“ã¨ã¯, ãã‚ŒãŒéå¸¸ã«æœ‰ç”¨ãªç’°å¢ƒã«ãŠã„ã¦
+   SSH ã‚’å£Šã™ã‹ã‚‚ã—ã‚Œãªã„.
    
 
 7.3 SPNEGO
@@ -1864,11 +1864,11 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    result, mechanisms conforming to this document MUST NOT use SPNEGO as
    the underlying GSSAPI mechanism.
 
-   ¤³¤ÎÊ¸½ñ¤Çµ­½Ò¤µ¤ì¤¿Ç§¾Ú¤È¸°¸ò´¹¤ÈÆ±»ş¤Ë
-   Ã±½ã¤ÇÊİ¸î¤µ¤ì¤¿ GSS-API ¸ò¾Ä¥á¥«¥Ë¥º¥à (SPNEGO) [14] ¤ò»ÈÍÑ¤¹¤ë¤³¤È¤Ï,
-   ÉÔÉ¬Í×¤Ç¤«¤ÄË¾¤Ş¤·¤¯¤Ê¤¤¤³¤È¤Ç¤¢¤ë. ¤³¤Î·ë²Ì¤È¤·¤Æ, ¤³¤ÎÊ¸½ñ¤Ë½¾¤¦
-   ¥á¥«¥Ë¥º¥à¤Ï ´ğÁÃ¤È¤Ê¤ë GSSAPI ¤Î¥á¥«¥Ë¥º¥à¤È¤·¤Æ SPNEGO ¤ò»È¤Ã¤Æ¤Ï
-   ¤Ê¤é¤Ê¤¤.
+   ã“ã®æ–‡æ›¸ã§è¨˜è¿°ã•ã‚ŒãŸèªè¨¼ã¨éµäº¤æ›ã¨åŒæ™‚ã«
+   å˜ç´”ã§ä¿è­·ã•ã‚ŒãŸ GSS-API äº¤æ¸‰ãƒ¡ã‚«ãƒ‹ã‚ºãƒ  (SPNEGO) [14] ã‚’ä½¿ç”¨ã™ã‚‹ã“ã¨ã¯,
+   ä¸å¿…è¦ã§ã‹ã¤æœ›ã¾ã—ããªã„ã“ã¨ã§ã‚ã‚‹. ã“ã®çµæœã¨ã—ã¦, ã“ã®æ–‡æ›¸ã«å¾“ã†
+   ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã¯ åŸºç¤ã¨ãªã‚‹ GSSAPI ã®ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã¨ã—ã¦ SPNEGO ã‚’ä½¿ã£ã¦ã¯
+   ãªã‚‰ãªã„.
 
 #http://www.csci.yamanashi.ac.jp/~kohi/RFC2478JA.html
 
@@ -1877,10 +1877,10 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    provide any added benefit.  In fact, as described below, it has the
    potential to result in the use of a weaker method than desired.
 
-   SSH ¥×¥é¥Ã¥È¥Õ¥©¡¼¥à¤Ï ¼«¿È¤ÇÇ§¾Ú¤È¸°¸ò´¹¤ÎÊıË¡¤ò¸ò¾Ä¤ò¹Ô¤Ê¤¦¤Î¤Ç,
-   SPNEGO ¤Î¸ò¾Ä¤ÎÇ½ÎÏ¼«¿È¤Ï, ¤É¤ó¤ÊÄÉ²Ã¤ÎÍø±×¤âÄó¶¡¤·¤Ê¤¤.
-   ¼Âºİ, °Ê²¼¤Çµ­½Ò¤µ¤ì¤ë¤è¤¦¤Ë, Ë¾¤ó¤À¤â¤Î¤è¤ê¼å¤¤ÊıË¡¤ò»ÈÍÑ¤¹¤ë·ë²Ì¤Ë¤Ê¤ë
-   ²ÄÇ½À­¤¬¤¢¤ë.
+   SSH ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ã¯ è‡ªèº«ã§èªè¨¼ã¨éµäº¤æ›ã®æ–¹æ³•ã‚’äº¤æ¸‰ã‚’è¡Œãªã†ã®ã§,
+   SPNEGO ã®äº¤æ¸‰ã®èƒ½åŠ›è‡ªèº«ã¯, ã©ã‚“ãªè¿½åŠ ã®åˆ©ç›Šã‚‚æä¾›ã—ãªã„.
+   å®Ÿéš›, ä»¥ä¸‹ã§è¨˜è¿°ã•ã‚Œã‚‹ã‚ˆã†ã«, æœ›ã‚“ã ã‚‚ã®ã‚ˆã‚Šå¼±ã„æ–¹æ³•ã‚’ä½¿ç”¨ã™ã‚‹çµæœã«ãªã‚‹
+   å¯èƒ½æ€§ãŒã‚ã‚‹.
 
    Normally, SPNEGO provides the added benefit of protecting the GSSAPI
    mechanism negotiation.  It does this by having the server compute a
@@ -1894,15 +1894,15 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    needed because the negotiation occurs over a secure channel, and the
    host's identity has already been proved to the user.
 
-   ÄÌ¾ï, SPNEGO ¤Ï GSSAPI ¥á¥«¥Ë¥º¥à¤Î¸ò¾Ä¤òÊİ¸î¤¹¤ëÄÉ²Ã¤ÎÍø±×¤ò
-   Äó¶¡¤¹¤ë. ¤³¤ì¤Ï, ¥µ¡¼¥Ğ¤¬¥¯¥é¥¤¥¢¥ó¥È¤«¤éÄó°Æ¤µ¤ì¤¿¥á¥«¥Ë¥º¥à¤Î¥ê¥¹¥È¤Î
-   MIC ¤ò·×»»¤·¤Æ, ¥¯¥é¥¤¥¢¥ó¥È¤¬¤½¤ÎÃÍ¤ò¸¡ºº¤¹¤ë¤³¤È¤Ç, ¹Ô¤ï¤ì¤ë.
-   ¸°¸ò´¹¤Î¾ì¹ç, ¤³¤ÎÊİ¸î¤ÏÉ¬Í×¤Ê¤¤. ¤³¤³¤Çµ­½Ò¤µ¤ì¤¿¸°¸ò´¹¤ÎÊıË¡¤Ï
-   ¤¹¤Ç¤ËÆ±Åù¤ÎÁàºî¤ò¹Ô¤Ê¤¦¤«¤é. ¤¹¤Ê¤ï¤Á, ¤³¤³¤Çµ­½Ò¤µ¤ì¤¿¸°¸ò´¹¤ÎÊıË¡¤Ï,
-   Î¾Êı¤ÎÂ¦¤Ç¥µ¥İ¡¼¥È¤µ¤ì¤ë¸°¸ò´¹¥á¥«¥Ë¥º¥à¤Î¥ê¥¹¥È¤ò´Ş¤à¤¤¤¯¤Ä¤«¤Î¹àÌÜ¤Î
-   ¥Ï¥Ã¥·¥å¤È¤·¤Æ, SSH ¸ò´¹¥Ï¥Ã¥·¥å¤Î MIC ¤òÀ¸À®¤¹¤ë. ¥æ¡¼¥¶Ç§¾Ú¤Î¾ì¹ç¤Ï,
-   Êİ¸î¤ÏÉ¬Í×¤Ê¤¤. ¸ò¾Ä¤Ï°ÂÁ´¤Ê¥Á¥ã¥ó¥Í¥ë¤Î¾å¤Çµ¯¤³¤ê, ¥Û¥¹¥È¤ÎÆ±°ìÀ­¤Ï
-   ¥æ¡¼¥¶¤ËÂĞ¤·¤Æ¤¹¤Ç¤Ë¾ÚÌÀ¤µ¤ì¤Æ¤¤¤ë¤«¤é.
+   é€šå¸¸, SPNEGO ã¯ GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã®äº¤æ¸‰ã‚’ä¿è­·ã™ã‚‹è¿½åŠ ã®åˆ©ç›Šã‚’
+   æä¾›ã™ã‚‹. ã“ã‚Œã¯, ã‚µãƒ¼ãƒãŒã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ææ¡ˆã•ã‚ŒãŸãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã®ãƒªã‚¹ãƒˆã®
+   MIC ã‚’è¨ˆç®—ã—ã¦, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒãã®å€¤ã‚’æ¤œæŸ»ã™ã‚‹ã“ã¨ã§, è¡Œã‚ã‚Œã‚‹.
+   éµäº¤æ›ã®å ´åˆ, ã“ã®ä¿è­·ã¯å¿…è¦ãªã„. ã“ã“ã§è¨˜è¿°ã•ã‚ŒãŸéµäº¤æ›ã®æ–¹æ³•ã¯
+   ã™ã§ã«åŒç­‰ã®æ“ä½œã‚’è¡Œãªã†ã‹ã‚‰. ã™ãªã‚ã¡, ã“ã“ã§è¨˜è¿°ã•ã‚ŒãŸéµäº¤æ›ã®æ–¹æ³•ã¯,
+   ä¸¡æ–¹ã®å´ã§ã‚µãƒãƒ¼ãƒˆã•ã‚Œã‚‹éµäº¤æ›ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã®ãƒªã‚¹ãƒˆã‚’å«ã‚€ã„ãã¤ã‹ã®é …ç›®ã®
+   ãƒãƒƒã‚·ãƒ¥ã¨ã—ã¦, SSH äº¤æ›ãƒãƒƒã‚·ãƒ¥ã® MIC ã‚’ç”Ÿæˆã™ã‚‹. ãƒ¦ãƒ¼ã‚¶èªè¨¼ã®å ´åˆã¯,
+   ä¿è­·ã¯å¿…è¦ãªã„. äº¤æ¸‰ã¯å®‰å…¨ãªãƒãƒ£ãƒ³ãƒãƒ«ã®ä¸Šã§èµ·ã“ã‚Š, ãƒ›ã‚¹ãƒˆã®åŒä¸€æ€§ã¯
+   ãƒ¦ãƒ¼ã‚¶ã«å¯¾ã—ã¦ã™ã§ã«è¨¼æ˜ã•ã‚Œã¦ã„ã‚‹ã‹ã‚‰.
 
 
 
@@ -1919,13 +1919,13 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    directly.  As a result, allowing GSSAPI mechanisms to be used both
    with and without SPNEGO is undesirable.
 
-   SPNEGO ¤Ê¤·¤Ç»È¤ï¤ì¤ë GSSAPI ¥á¥«¥Ë¥º¥à¤È ÁÈ¹ç¤»¤Æ SPNEGO ¤ò»È¤¦¤³¤È¤Ï
-   Áê¸ß±¿ÍÑÀ­¤ÎÌäÂê¤ò°ú¤­µ¯¤³¤¹¤«¤â¤·¤ì¤Ê¤¤. Îã¤¨¤Ğ, 
-   ´ğÁÃ¤Ë SPNEGO ¤Î¤ß¤¬¤¢¤ë Kerberos V5 GSSAPI ¥á¥«¥Ë¥º¥à [13] ¤ò
-   »È¤Ã¤¿¸°¸ò´¹¤ò¥µ¥İ¡¼¥È¤·¤¿¥¯¥é¥¤¥¢¥ó¥È¤Ï, Ä¾ÀÜ
-   Kerberos V5 GSSAPI ¥á¥«¥Ë¥º¥à¤Î¤ß¤ò»È¤¦¸°¸ò´¹¤ò¥µ¥İ¡¼¥È¤¹¤ë
-   ¥µ¡¼¥Ğ¤ÈÁê¸ß±¿ÍÑ¤Ç¤­¤Ê¤¤¤À¤í¤¦. ·ë²Ì¤È¤·¤Æ, SPNEGO ¤¢¤ê¤Ç¤â¤Ê¤·¤Ç¤â
-   GSSAPI ¥á¥«¥Ë¥º¥à¤¬»È¤ï¤ì¤ë¤³¤È¤òµö¤¹¤³¤È¤¬Ë¾¤Ş¤·¤¯¤Ê¤¤.
+   SPNEGO ãªã—ã§ä½¿ã‚ã‚Œã‚‹ GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã¨ çµ„åˆã›ã¦ SPNEGO ã‚’ä½¿ã†ã“ã¨ã¯
+   ç›¸äº’é‹ç”¨æ€§ã®å•é¡Œã‚’å¼•ãèµ·ã“ã™ã‹ã‚‚ã—ã‚Œãªã„. ä¾‹ãˆã°, 
+   åŸºç¤ã« SPNEGO ã®ã¿ãŒã‚ã‚‹ Kerberos V5 GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ  [13] ã‚’
+   ä½¿ã£ãŸéµäº¤æ›ã‚’ã‚µãƒãƒ¼ãƒˆã—ãŸã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯, ç›´æ¥
+   Kerberos V5 GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã®ã¿ã‚’ä½¿ã†éµäº¤æ›ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹
+   ã‚µãƒ¼ãƒã¨ç›¸äº’é‹ç”¨ã§ããªã„ã ã‚ã†. çµæœã¨ã—ã¦, SPNEGO ã‚ã‚Šã§ã‚‚ãªã—ã§ã‚‚
+   GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ãŒä½¿ã‚ã‚Œã‚‹ã“ã¨ã‚’è¨±ã™ã“ã¨ãŒæœ›ã¾ã—ããªã„.
 
    If a client's policy is to first prefer GSSAPI-based key exchange
    method X, then non-GSSAPI method Y, then GSSAPI-based method Z, and
@@ -1937,14 +1937,14 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    and/or the negotiation algorithm for user authentication methods as
    described in [9].
 
-   ¥¯¥é¥¤¥¢¥ó¥È¤Î¥İ¥ê¥·¡¼¤¬, ºÇ½é¤Ë GSSAPI ¥Ù¡¼¥¹¤Î¸°¸ò´¹Ë¡ X ¤ò»î¤·
-   ¼¡¤Ë GSSAPI ¥Ù¡¼¥¹¤Ç¤Ê¤¤ÊıË¡ Y ¤ò, ¤½¤·¤Æ GSSAPI ¥Ù¡¼¥¹¤ÎÊıË¡ Z ¤ò
-   »î¤¹¤È¤¤¤¦¾ì¹ç¤Ç, ¥µ¡¼¥Ğ¤¬ ¥á¥«¥Ë¥º¥à Y ¤È Z ¤Ï¥µ¥İ¡¼¥È¤¹¤ë¤¬ X ¤Ï¤·¤Ê¤¤¾ì¹ç,
-   GSSAPI ¥á¥«¥Ë¥º¥à¤ò¸ò¾Ä¤¹¤ë¤Î¤Ë SPNEGO ¤òÍÑ¤¤¤è¤¦¤È»î¤ß¤ë¤³¤È¤Ï,
-   ÊıË¡ Y ¤Î¤Û¤¦¤¬¤è¤ê¹¥¤Ş¤ì¤ë¤Î¤Ë, ÊıË¡ Z ¤¬»È¤ï¤ì¤ë¤È¤¤¤¦·ë²Ì¤Ë¤Ê¤ë¤À¤í¤¦.
-   ·ë²Ì¤È¤·¤Æ, SPNEGO ¤Î»ÈÍÑ¤Ï [8] ¤Î¥»¥¯¥·¥ç¥ó 5.1 ¤Çµ­½Ò¤µ¤ì¤¿
-   ¸°¸ò´¹Ë¡¤Î¸ò¾Ä¥¢¥ë¥´¥ê¥º¥à ¤ä/¤â¤·¤¯¤Ï [9] ¤Çµ­½Ò¤µ¤ì¤¿¥æ¡¼¥¶Ç§¾ÚË¡
-   ¤Î¤¿¤á¤Î¸ò¾Ä¥¢¥ë¥´¥ê¥º¥à¤ÎÇË²õ¤È¤Ê¤ë¤«¤â¤·¤ì¤Ê¤¤.
+   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®ãƒãƒªã‚·ãƒ¼ãŒ, æœ€åˆã« GSSAPI ãƒ™ãƒ¼ã‚¹ã®éµäº¤æ›æ³• X ã‚’è©¦ã—
+   æ¬¡ã« GSSAPI ãƒ™ãƒ¼ã‚¹ã§ãªã„æ–¹æ³• Y ã‚’, ãã—ã¦ GSSAPI ãƒ™ãƒ¼ã‚¹ã®æ–¹æ³• Z ã‚’
+   è©¦ã™ã¨ã„ã†å ´åˆã§, ã‚µãƒ¼ãƒãŒ ãƒ¡ã‚«ãƒ‹ã‚ºãƒ  Y ã¨ Z ã¯ã‚µãƒãƒ¼ãƒˆã™ã‚‹ãŒ X ã¯ã—ãªã„å ´åˆ,
+   GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚’äº¤æ¸‰ã™ã‚‹ã®ã« SPNEGO ã‚’ç”¨ã„ã‚ˆã†ã¨è©¦ã¿ã‚‹ã“ã¨ã¯,
+   æ–¹æ³• Y ã®ã»ã†ãŒã‚ˆã‚Šå¥½ã¾ã‚Œã‚‹ã®ã«, æ–¹æ³• Z ãŒä½¿ã‚ã‚Œã‚‹ã¨ã„ã†çµæœã«ãªã‚‹ã ã‚ã†.
+   çµæœã¨ã—ã¦, SPNEGO ã®ä½¿ç”¨ã¯ [8] ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 5.1 ã§è¨˜è¿°ã•ã‚ŒãŸ
+   éµäº¤æ›æ³•ã®äº¤æ¸‰ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ  ã‚„/ã‚‚ã—ãã¯ [9] ã§è¨˜è¿°ã•ã‚ŒãŸãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•
+   ã®ãŸã‚ã®äº¤æ¸‰ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã®ç ´å£Šã¨ãªã‚‹ã‹ã‚‚ã—ã‚Œãªã„.
 
 
 
@@ -1983,20 +1983,20 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
 
 8. IANA Considerations
 
-8. IANA ¤Ë´Ø¤¹¤ë¹Í»¡
+8. IANA ã«é–¢ã™ã‚‹è€ƒå¯Ÿ
 
    Consistent with section 7 of [6], the IANA is directed to make the
    following registrations:
 
-   [7] ¤Î ¥»¥¯¥·¥ç¥ó 7 ¤È°ìÃ×¤·¤Æ, IANA ¤Ï ¼¡¤ÎÅĞÏ¿¤ò¤¹¤ë¤è¤¦¤Ë»Ø¼¨¤µ¤ì¤ë.
+   [7] ã® ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 7 ã¨ä¸€è‡´ã—ã¦, IANA ã¯ æ¬¡ã®ç™»éŒ²ã‚’ã™ã‚‹ã‚ˆã†ã«æŒ‡ç¤ºã•ã‚Œã‚‹.
 
       The family of SSH key exchange method names beginning with
       "gss-group1-sha1-" and not containing the at-sign ('@'), to name
       the key exchange methods defined in Section 2.2.
 
-      ¥»¥¯¥·¥ç¥ó 2.2 ¤ÇÄêµÁ¤µ¤ì¤¿ ¸°¸ò´¹Ë¡¤ËÌ¿Ì¾¤¹¤ë¤¿¤á¤Î
-      "gss-group1-sha1-" ¤Ç»Ï¤Ş¤ê¥¢¥Ã¥È¥Ş¡¼¥¯ ('@') ¤ò´Ş¤Ş¤Ê¤¤
-      SSH ¸°¸ò´¹Ë¡Ì¾¤Î¥Õ¥¡¥ß¥ê¡¼.
+      ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 2.2 ã§å®šç¾©ã•ã‚ŒãŸ éµäº¤æ›æ³•ã«å‘½åã™ã‚‹ãŸã‚ã®
+      "gss-group1-sha1-" ã§å§‹ã¾ã‚Šã‚¢ãƒƒãƒˆãƒãƒ¼ã‚¯ ('@') ã‚’å«ã¾ãªã„
+      SSH éµäº¤æ›æ³•åã®ãƒ•ã‚¡ãƒŸãƒªãƒ¼.
 
 
       All other SSH key exchange method names beginning with "gss-" and
@@ -2004,46 +2004,46 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
       exchange methods defined in conformance with this document, as
       noted in Section 2.3.
 
-      ¥»¥¯¥·¥ç¥ó 2.3 ¤ÇÃí°Õ¤µ¤ì¤¿¤è¤¦¤Ë, ¤³¤ÎÊ¸½ñ¤Ë½¾¤Ã¤ÆÄêµÁ¤µ¤ì¤ë
-      ¾­Íè¤Î¸°¸ò´¹Ë¡¤ËÂĞ¤·¤ÆÍ½Ìó¤µ¤ì¤¿,
-      "gss-"¤Ç»Ï¤Ş¤ê ¥¢¥Ã¥È¥Ş¡¼¥¯ ('@') ¤ò´Ş¤Ş¤Ê¤¤ ¾åµ­°Ê³°¤Î SSH
-      ¸°¸ò´¹Ë¡Ì¾.
+      ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 2.3 ã§æ³¨æ„ã•ã‚ŒãŸã‚ˆã†ã«, ã“ã®æ–‡æ›¸ã«å¾“ã£ã¦å®šç¾©ã•ã‚Œã‚‹
+      å°†æ¥ã®éµäº¤æ›æ³•ã«å¯¾ã—ã¦äºˆç´„ã•ã‚ŒãŸ,
+      "gss-"ã§å§‹ã¾ã‚Š ã‚¢ãƒƒãƒˆãƒãƒ¼ã‚¯ ('@') ã‚’å«ã¾ãªã„ ä¸Šè¨˜ä»¥å¤–ã® SSH
+      éµäº¤æ›æ³•å.
 
       The SSH host public key algorithm name "null", to name the NULL
       host key algorithm defined in Section 5.
 	   
-      ¥»¥¯¥·¥ç¥ó 5 ¤ÇÄêµÁ¤µ¤ì¤¿ NULL ¥Û¥¹¥È¸°¥¢¥ë¥´¥ê¥º¥à¤òÌ¿Ì¾¤¹¤ë
-      SSH ¥Û¥¹¥È¸ø³«¸°¥¢¥ë¥´¥ê¥º¥àÌ¾ "null"
+      ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 5 ã§å®šç¾©ã•ã‚ŒãŸ NULL ãƒ›ã‚¹ãƒˆéµã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã‚’å‘½åã™ã‚‹
+      SSH ãƒ›ã‚¹ãƒˆå…¬é–‹éµã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ å "null"
 
       The SSH user authentication method name "gssapi-with-mic", to name
       the GSSAPI user authentication method defined in Section 3.
 
-      ¥»¥¯¥·¥ç¥ó 3 ¤ÇÄêµÁ¤µ¤ì¤¿ GSSAPI ¥æ¡¼¥¶Ç§¾ÚË¡¤òÌ¿Ì¾¤¹¤ë
-      SSH ¥æ¡¼¥¶Ç§¾ÚË¡Ì¾ "gssapi-with-mic".
+      ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 3 ã§å®šç¾©ã•ã‚ŒãŸ GSSAPI ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•ã‚’å‘½åã™ã‚‹
+      SSH ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•å "gssapi-with-mic".
 
       The SSH user authentication method name "gssapi-keyex", to name
       the GSSAPI user authentication method defined in Section 4.
 
-      ¥»¥¯¥·¥ç¥ó 4 ¤ÇÄêµÁ¤µ¤ì¤¿ ¥æ¡¼¥¶Ç§¾ÚË¡¤òÌ¿Ì¾¤¹¤ë
-      SSH ¥æ¡¼¥¶Ç§¾ÚË¡Ì¾ "gssapi-keyex".
+      ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 4 ã§å®šç¾©ã•ã‚ŒãŸ ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•ã‚’å‘½åã™ã‚‹
+      SSH ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•å "gssapi-keyex".
 
       The SSH user authentication method name "gssapi" is to be
       reserved, in order to avoid conflicts with implementations
       supporting an earlier version of this specification.
 
-      ¤³¤Î»ÅÍÍ¤Î²áµî¤Î¥Ğ¡¼¥¸¥ç¥ó¤ò¥µ¥İ¡¼¥È¤¹¤ë¼ÂÁõ¤È¤Î¾×ÆÍ¤òËÉ¤°¤¿¤á,
-      SSH ¥æ¡¼¥¶Ç§¾ÚË¡Ì¾ "gssapi" ¤ÏÍ½Ìó¤µ¤ì¤Æ¤¤¤ë.
+      ã“ã®ä»•æ§˜ã®éå»ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹å®Ÿè£…ã¨ã®è¡çªã‚’é˜²ããŸã‚,
+      SSH ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•å "gssapi" ã¯äºˆç´„ã•ã‚Œã¦ã„ã‚‹.
 
       The SSH user authentication method name "external-keyx" is to be
       reserved, in order to avoid conflicts with implementations
       supporting an earlier version of this specification.
 
-      ¤³¤Î»ÅÍÍ¤Î²áµî¤Î¥Ğ¡¼¥¸¥ç¥ó¤ò¥µ¥İ¡¼¥È¤¹¤ë¼ÂÁõ¤È¤Î¾×ÆÍ¤òËÉ¤°¤¿¤á,
-      SSH ¥æ¡¼¥¶Ç§¾ÚË¡Ì¾ "external-keyx" ¤ÏÍ½Ìó¤µ¤ì¤Æ¤¤¤ë.
+      ã“ã®ä»•æ§˜ã®éå»ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹å®Ÿè£…ã¨ã®è¡çªã‚’é˜²ããŸã‚,
+      SSH ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•å "external-keyx" ã¯äºˆç´„ã•ã‚Œã¦ã„ã‚‹.
 
    This document creates no new registries.
 
-   ¤³¤ÎÊ¸½ñ¤Ï¿·¤·¤¤¥ì¥¸¥¹¥È¥ê¤Ïºî¤é¤Ê¤¤.
+   ã“ã®æ–‡æ›¸ã¯æ–°ã—ã„ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã¯ä½œã‚‰ãªã„.
 
 
 
@@ -2069,13 +2069,13 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
 
 9. Security Considerations
 
-9. ¥»¥­¥å¥ê¥Æ¥£¤Ë´Ø¤¹¤ë¹Í»¡
+9. ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã«é–¢ã™ã‚‹è€ƒå¯Ÿ
 
    This document describes authentication and key-exchange protocols. As
    such, security considerations are discussed throughout.
 
-   ¤³¤ÎÊ¸ÁÇ¤Ï Ç§¾Ú¤È¸°¸ò´¹¥×¥í¥È¥³¥ë¤òµ­½Ò¤·¤Æ¤¤¤ë. ¤½¤ì¤æ¤¨,
-   ¥»¥­¥å¥ê¥Æ¥£¤Ë´Ø¤¹¤ë¹Í»¡¤ÏÁ´ÂÎ¤Ë¤ï¤¿¤Ã¤ÆµÄÏÀ¤µ¤ì¤Æ¤¤¤ë.
+   ã“ã®æ–‡ç´ ã¯ èªè¨¼ã¨éµäº¤æ›ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã‚’è¨˜è¿°ã—ã¦ã„ã‚‹. ãã‚Œã‚†ãˆ,
+   ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã«é–¢ã™ã‚‹è€ƒå¯Ÿã¯å…¨ä½“ã«ã‚ãŸã£ã¦è­°è«–ã•ã‚Œã¦ã„ã‚‹.
 
    This protocol depends on the SSH protocol itself, the GSSAPI, any
    underlying GSSAPI mechanisms which are used, and any protocols on
@@ -2083,10 +2083,10 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    part in the security of the resulting connection, and each will have
    its own security considerations.
 
-   ¤³¤Î¥×¥í¥È¥³¥ë¤Ï, SSH ¥×¥í¥È¥³¥ë¼«ÂÎ, GSSAPI, ÍøÍÑ¤µ¤ì¤ë´ğÁÃ¤È¤Ê¤ë GSSAPI
-   ¥á¥«¥Ë¥º¥à, ¤½¤ì¤é¤Î¥á¥«¥Ë¥º¥à¤¬°ÍÂ¸¤¹¤ë¤¹¤Ù¤Æ¤Î¥×¥í¥È¥³¥ë,
-   ¤Ë°ÍÂ¸¤¹¤ë. ¤³¤ì¤é¤Î¹½À®Í×ÁÇ¤Î¤½¤ì¤¾¤ì¤¬, ·ë²Ì¤ÎÀÜÂ³¤Î¥»¥­¥å¥ê¥Æ¥£¤Ë
-   ÂĞ¤·¤ÆÌò³ä¤ò±é¤¸, ¤½¤ì¤¾¤ì¤¬¤½¤ì¤¾¤ì¤Î¥»¥­¥å¥ê¥Æ¥£¤Ë´Ø¤¹¤ë¹Í»¡¤ò»ı¤Ä.
+   ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¯, SSH ãƒ—ãƒ­ãƒˆã‚³ãƒ«è‡ªä½“, GSSAPI, åˆ©ç”¨ã•ã‚Œã‚‹åŸºç¤ã¨ãªã‚‹ GSSAPI
+   ãƒ¡ã‚«ãƒ‹ã‚ºãƒ , ãã‚Œã‚‰ã®ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ãŒä¾å­˜ã™ã‚‹ã™ã¹ã¦ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«,
+   ã«ä¾å­˜ã™ã‚‹. ã“ã‚Œã‚‰ã®æ§‹æˆè¦ç´ ã®ãã‚Œãã‚ŒãŒ, çµæœã®æ¥ç¶šã®ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã«
+   å¯¾ã—ã¦å½¹å‰²ã‚’æ¼”ã˜, ãã‚Œãã‚ŒãŒãã‚Œãã‚Œã®ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã«é–¢ã™ã‚‹è€ƒå¯Ÿã‚’æŒã¤.
 
    The key exchange method described in section 1 of this document
    depends on the underlying GSSAPI mechanism to provide both mutual
@@ -2095,20 +2095,20 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    by a particular implementation of a GSSAPI mechanism, then the key
    exchange is not secure and MUST fail.
 
-   ¤³¤ÎÊ¸½ñ¤Ç¤Î¥»¥¯¥·¥ç¥ó 1 ¤Çµ­½Ò¤µ¤ì¤¿ ¸°¸ò´¹Ë¡¤Ï, Áê¸ß¤ÎÇ§¾Ú¤È
-   ¥á¥Ã¥»¡¼¥¸Ã±°Ì¤Ç¤Î´°Á´À­¥µ¡¼¥Ó¥¹¤òÄó¶¡¤¹¤ë´ğÁÃ¤È¤Ê¤ë GSSAPI ¥á¥«¥Ë¥º¥à
-   ¤Ë°ÍÂ¸¤¹¤ë. ¤³¤ì¤é¤ÎÆÃÄ§¤Î¤É¤Á¤é¤«¤¬ ÆÃÄê¤Î GSSAPI ¥á¥«¥Ë¥º¥à¤ä
-   ÆÃÄê¤Î GSSAPI ¥á¥«¥Ë¥º¥à¤Î¼ÂÁõ¤Ç¥µ¥İ¡¼¥È¤µ¤ì¤Æ¤¤¤Ê¤«¤Ã¤¿¤é,
-   ¸°¸ò´¹¤Ï°ÂÁ´¤Ç¤Ï¤Ê¤¯, ¼ºÇÔ¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   ã“ã®æ–‡æ›¸ã§ã®ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 1 ã§è¨˜è¿°ã•ã‚ŒãŸ éµäº¤æ›æ³•ã¯, ç›¸äº’ã®èªè¨¼ã¨
+   ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å˜ä½ã§ã®å®Œå…¨æ€§ã‚µãƒ¼ãƒ“ã‚¹ã‚’æä¾›ã™ã‚‹åŸºç¤ã¨ãªã‚‹ GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ 
+   ã«ä¾å­˜ã™ã‚‹. ã“ã‚Œã‚‰ã®ç‰¹å¾´ã®ã©ã¡ã‚‰ã‹ãŒ ç‰¹å®šã® GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚„
+   ç‰¹å®šã® GSSAPI ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã®å®Ÿè£…ã§ã‚µãƒãƒ¼ãƒˆã•ã‚Œã¦ã„ãªã‹ã£ãŸã‚‰,
+   éµäº¤æ›ã¯å®‰å…¨ã§ã¯ãªã, å¤±æ•—ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    In order for the "external-keyx" user authentication method to be
    used, it MUST have access to user authentication information obtained
    as a side-effect of the key exchange.  If this information is
    unavailable, the authentication MUST fail.
 
-   "gssapi-keyex" ("external-keyx") ¥æ¡¼¥¶Ç§¾ÚË¡¤ò»È¤¦¤Ë¤Ï, 
-   ¸°¸ø³«¤ÎÉû¼¡¸ú²Ì¤È¤·¤ÆÆÀ¤é¤ì¤ë¥æ¡¼¥¶Ç§¾Ú¾ğÊó¤Ë¥¢¥¯¥»¥¹¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
-   ¤³¤Î¾ğÊó¤¬ÍøÍÑ¤Ç¤­¤Ê¤¤¤Ê¤é, ¤³¤ÎÇ§¾Ú¤Ï¼ºÇÔ¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+   "gssapi-keyex" ("external-keyx") ãƒ¦ãƒ¼ã‚¶èªè¨¼æ³•ã‚’ä½¿ã†ã«ã¯, 
+   éµå…¬é–‹ã®å‰¯æ¬¡åŠ¹æœã¨ã—ã¦å¾—ã‚‰ã‚Œã‚‹ãƒ¦ãƒ¼ã‚¶èªè¨¼æƒ…å ±ã«ã‚¢ã‚¯ã‚»ã‚¹ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
+   ã“ã®æƒ…å ±ãŒåˆ©ç”¨ã§ããªã„ãªã‚‰, ã“ã®èªè¨¼ã¯å¤±æ•—ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
    Revealing information about the reason for an authentication failure
    may be considered by some sites to be an unacceptable security risk
@@ -2119,14 +2119,14 @@ Internet-Draft             SSH GSSAPI Methods             September 2003
    SSH_MSG_USERAUTH_GSSAPI_ERRTOK, and SSH_MSG_KEXGSS_ERROR messages,
    and SSH_MSG_KEXGEE_CONTINUE messages containing a GSSAPI error token.
 
-   Ç§¾Ú¤Î¼ºÇÔ¤ÎÍıÍ³¤Ë¤Ä¤¤¤Æ¤Î¾ğÊó¤òÌÀ¤«¤¹¤³¤È¤Ï, ¤¤¤¯¤Ä¤«¤Î¥µ¥¤¥È¤Ç¤Ï
-   ¼Â²ÔÆ¯´Ä¶­¤ËÂĞ¤¹¤ë¼õ¤±Æş¤ì¤é¤ì¤Ê¤¤¥»¥­¥å¥ê¥Æ¥£¤Î´í¸±¤È¤ß¤Ê¤µ¤ì¤ë
-   ¤«¤â¤·¤ì¤Ê¤¤. ¤·¤«¤·¤Ê¤¬¤é, ¤³¤ì¤é¤Î¾ğÊó¤òÍøÍÑ²ÄÇ½¤Ë¤¹¤ë¤³¤È¤Ï
-   ¥Ç¥Ğ¥Ã¥°ÌÜÅª¤Î¤¿¤á¤Ë¤ÏÈó¾ï¤Ë½ÅÍ×¤À. ¤½¤ì¤æ¤¨, 
-   ¼ÂÁõ¤Ï, ¥İ¥ê¥·¡¼¤ÎÌäÂê¤È¤·¤Æ, GSSAPI ¥¨¥é¡¼¥È¡¼¥¯¥ó¤ò´Ş¤à
+   èªè¨¼ã®å¤±æ•—ã®ç†ç”±ã«ã¤ã„ã¦ã®æƒ…å ±ã‚’æ˜ã‹ã™ã“ã¨ã¯, ã„ãã¤ã‹ã®ã‚µã‚¤ãƒˆã§ã¯
+   å®Ÿç¨¼åƒç’°å¢ƒã«å¯¾ã™ã‚‹å—ã‘å…¥ã‚Œã‚‰ã‚Œãªã„ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã®å±é™ºã¨ã¿ãªã•ã‚Œã‚‹
+   ã‹ã‚‚ã—ã‚Œãªã„. ã—ã‹ã—ãªãŒã‚‰, ã“ã‚Œã‚‰ã®æƒ…å ±ã‚’åˆ©ç”¨å¯èƒ½ã«ã™ã‚‹ã“ã¨ã¯
+   ãƒ‡ãƒãƒƒã‚°ç›®çš„ã®ãŸã‚ã«ã¯éå¸¸ã«é‡è¦ã . ãã‚Œã‚†ãˆ, 
+   å®Ÿè£…ã¯, ãƒãƒªã‚·ãƒ¼ã®å•é¡Œã¨ã—ã¦, GSSAPI ã‚¨ãƒ©ãƒ¼ãƒˆãƒ¼ã‚¯ãƒ³ã‚’å«ã‚€
    SSH_MSG_USERAUTH_GSSAPI_ERROR, SSH_MSG_USERAUTH_GSSAPI_ERRTOK, 
-   SSH_MSG_KEXGSS_ERROR,  SSH_MSG_KEXGEE_CONTINUE ¥á¥Ã¥»¡¼¥¸¤ò
-   Á÷¤ë¤«¤É¤¦¤«¤òÀ©¸æ¤¹¤ë¤Î¤¿¤á¤ÎÊıË¡¤òÄó¶¡¤¹¤ë¤³¤È¤¬¿ä¾©¤µ¤ì¤ë.
+   SSH_MSG_KEXGSS_ERROR,  SSH_MSG_KEXGEE_CONTINUE ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’
+   é€ã‚‹ã‹ã©ã†ã‹ã‚’åˆ¶å¾¡ã™ã‚‹ã®ãŸã‚ã®æ–¹æ³•ã‚’æä¾›ã™ã‚‹ã“ã¨ãŒæ¨å¥¨ã•ã‚Œã‚‹.
 
 
 

@@ -10,7 +10,7 @@ Expires in six months                                 William A. Simpson
                                                                July 2003
 
 
-# ���� �ջ����� haruyama@unixuser.org
+# 訳者 春山征吾 haruyama@unixuser.org
 
    Diffie-Hellman Group Exchange for the SSH Transport Layer Protocol
                draft-ietf-secsh-dh-group-exchange-04.txt
@@ -45,22 +45,22 @@ Expires in six months                                 William A. Simpson
 
 3.  Abstract
 
-3.  ����
+3.  概要
 
      This memo describes a new key exchange method for the SSH protocol.
      It allows the SSH server to propose to the client new groups on
      which to perform the Diffie-Hellman key exchange.  The proposed
      groups need not be fixed and can change with time.
 
-     ���Υ��� SSH �ץ��ȥ�����Ф��뿷�������򴹤���ˡ�򵭽Ҥ��Ƥ���.
-     ���Υ���, SSH �Υ����Ф� Diffie-Hellman ���򴹤�¹Ԥ��뿷������
-     �򥯥饤����Ȥ���Ƥ���. ������Ƥ��줿����
-     ���ꤵ��Ƥ���ɬ�פ��ʤ�, ���ȤȤ���Ѥ��뤳�Ȥ��Ǥ���.
+     このメモは SSH プロトコルに対する新しい鍵交換の方法を記述している.
+     このメモで, SSH のサーバに Diffie-Hellman 鍵交換を実行する新しい群
+     をクライアントに提案する. この提案された群は
+     固定されている必要がなく, 時とともに変えることができる.
 
 
 4.  Overview and Rational
 
-4.  ���פ�����
+4.  概要と理論
 
      SSH [4,5,6,7] is a a very common protocol for secure remote login
      on the Internet.  Currently, SSH performs the initial key exchange
@@ -75,19 +75,19 @@ INTERNET DRAFT                                                 July 2003
      using the "diffie-hellman-group1-sha1" method.  This method pre-
      scribes a fixed group on which all operations are performed.
 
-     SSH[4,5,6,7] �� ���󥿡��ͥåȾ�Ǥΰ����ʥ�⡼�ȥ�������Τ����
-     �����ɤ��Τ��Ƥ���ץ��ȥ����. ����, SSH �Ϻǽ�θ��򴹤�
-     "diffie-hellman-group1-sha1" �Ȥ�����ˡ���Ѥ��Ƽ¹Ԥ���.
-     ������ˡ��, ���٤Ƥ�̿�᤬���η��ξ�Ǽ¹Ԥ����
-     ���ꤵ�줿�����ꤷ�Ƥ���.
+     SSH[4,5,6,7] は インターネット上での安全なリモートログインのための
+     非常に良く知られているプロトコルだ. 現在, SSH は最初の鍵交換を
+     "diffie-hellman-group1-sha1" という方法を用いて実行する.
+     この方法は, すべての命令がその群の上で実行される
+     固定された群を規定している.
 
      The Diffie-Hellman key exchange provides a shared secret that can
      not be determined by either party alone.  In SSH, the key exchange
      is signed with the host key to provide host authentication.
 
-     Diffie-Hellman ���򴹤� ���������ǤϷ��ꤹ�뤳�ȤΤǤ��ʤ�
-     ��ͭ���줿��̩���󶡤���. SSH �ˤ����Ƥ�, ���򴹤�
-     �ۥ���ǧ�ڤ��󶡤���ۥ��ȸ��ǽ�̾�����.
+     Diffie-Hellman 鍵交換は 一方だけでは決定することのできない
+     共有された秘密を提供する. SSH においては, 鍵交換は
+     ホスト認証を提供するホスト鍵で署名される.
 
      The security of the Diffie-Hellman key exchange is based on the
      difficulty of solving the Discrete Logarithm Problem (DLP).  Since
@@ -96,11 +96,11 @@ INTERNET DRAFT                                                 July 2003
      cient algorithms to compute the discrete logarithm over a fixed
      group might pose a security threat to the SSH protocol.
 
-     Diffie-Hellman ���򴹤ΰ������� Υ���п����� (DLP) �β�ˡ�κ��񤵤�
-     ���ä�����. SSH �ץ��ȥ��뤬����Ĺ���������Ȥ��뤳�Ȥ�桹��
-     ���Ԥ��Ƥ���Τ�, ���귲���Ф���Υ���п���׻�����
-     ���Ϥ��������Ȥ���ΨŪ�ʥ��르�ꥺ�ब
-     SSH �ץ��ȥ�����Ф��������ζ��ҤȤʤꤦ�뤳�Ȥ򶲤��.
+     Diffie-Hellman 鍵交換の安全性は 離散対数問題 (DLP) の解法の困難さに
+     基礎がある. SSH プロトコルが将来長いあいだ使われることを我々は
+     期待しているので, 固定群に対する離散対数を計算する
+     広範な前処理とより効率的なアルゴリズムが
+     SSH プロトコルに対する安全上の脅威となりうることを恐れる.
 
      The ability to propose new groups will reduce the incentive to use
      precomputation for more efficient calculation of the discrete loga-
@@ -108,21 +108,21 @@ INTERNET DRAFT                                                 July 2003
      ground.
 
 
-     ��Ƥ��뿷�������ˤ�ä�, Υ���п��Τ���Ψ�Τ褤�׻��Τ����������
-     �򤹤��̣�򸺤餹���Ȥ��Ǥ���. �����ФϥХå����饦��ɤ�
-     ���ĤǤ⿷��������׻��Ǥ���.
+     提案する新しい群によって, 離散対数のより効率のよい計算のための前処理
+     をする意味を減らすことができる. サーバはバックグラウンドで
+     いつでも新しい群を計算できる.
      
 5.  Diffie-Hellman Group and Key Exchange
 
-5.  Diffie-Hellman ���ȸ���
+5.  Diffie-Hellman 群と鍵交換
 
      The server keeps a list of safe primes and corresponding generators
      that it can select from.  A prime p is safe, if p = 2q + 1, and q
      is prime.  New primes can be generated in the background.
 
-     �����Ф�, �����������򤹤뤳�ȤΤǤ��� �������ǿ����б�����
-     �����ͥ졼���Υꥹ�Ȥ�ݻ�����. �ǿ� p �������ʤ�, p = 2q + 1 ��
-     �񤤤��Ȥ� q ���ǿ���. �������ǿ��ϥХå����饦��ɤ����������.
+     サーバは, そこから選択することのできる 安全な素数と対応する
+     ジェネレータのリストを維持する. 素数 p が安全なら, p = 2q + 1 と
+     書いたとき q も素数だ. 新しい素数はバックグラウンドで生成される.
 
      The generator g should be chosen such that the order of the gener-
      ated subgroup does not factor into small primes, i.e., with p = 2q
@@ -132,28 +132,28 @@ INTERNET DRAFT                                                 July 2003
      through a smaller subset. Such a generator is called a "primitive
      root" (which is trivial to find when p is "safe").
 
-     �����ͥ졼�� g ���������줿��ʬ���ΰ̿����������ǿ��ǰ���ʬ��Ǥ��ʤ�
-     �褦�����Ф��. ���ʤ��, p = 2q + 1 �Ȥ����, �̿���
-     q �� p - 1  �Τɤ��餫�Ǥʤ��ƤϤʤ�ʤ�. �̿��� p-1 �ξ��,
-     ���Υ٥��Ϥ��٤Ƥβ�ǽ�� ������ ��������, �����
-     ��꾮������ʬ����ǽ۴Ĥ��뤳�Ȥʤ��� �⥸��饹 p ��
-     �ϰϤ�ʿ����ʬ�ۤ����. ���Τ褦�ʥ����ͥ졼���� "primitive root"
-     (���Ϻ�) �ȸƤФ�� (p ��"����"�ʾ�缫���˸��Ĥ�����).
+     ジェネレータ g は生成された部分群の位数が小さい素数で因数分解できない
+     ように選ばれる. すなわち, p = 2q + 1 とすると, 位数は
+     q か p - 1  のどちらかでなくてはならない. 位数が p-1 の場合,
+     そのベキはすべての可能な 公開値 を生成し, それは
+     より小さい部分集合で循環することなしに モジュラス p の
+     範囲に平等に分配される. このようなジェネレータは "primitive root"
+     (原始根) と呼ばれる (p が"安全"な場合自明に見つけられる).
 
-# ����: http://www.asahi-net.or.jp/~KC2H-MSM/excel/excel010.htm
+# 参考: http://www.asahi-net.or.jp/~KC2H-MSM/excel/excel010.htm
 #       http://www.nara-edu.ac.jp/~asait/cpp/gf/primitive.htm
 
      Implementation Notes:
 
-     �����������:
+     実装上の注意:
 
           One useful technique is to select the generator, and then
           limit the modulus selection sieve to primes with that genera-
           tor:
 
-	  ͭ�Ѥʥƥ��˥å���, �����ͥ졼��������
-	  ������ �⥸��饹������Τդ뤤�򤽤Υ����ͥ졼�����б�����
-	  �ǿ������¤��뤳�Ȥ�����.
+	  有用なテクニックに, ジェネレータを選び
+	  そして モジュラスの選択のふるいをそのジェネレータに対応する
+	  素数に制限することがある.
 
             2   when p (mod 24) = 11.
             5   when p (mod 10) = 3 or 7.
@@ -164,10 +164,10 @@ INTERNET DRAFT                                                 July 2003
           the space of possible residues.
 
 
-	  2 �򥸥��ͥ졼���Ȥ��ƻȤ����Ȥ�侩����. �ʤ��ʤ�,
-	  �������Υѥե����ޥ󥹤θ�Ψ���褤����.
-	  �ޤ� 2 �ʤ� ���Ȥ������ǿ��θ��Ϻ��Ǥʤ��Ƥ�,
-	  ��ǽ�ʾ�;�ζ��֤�Ⱦʬ�򥫥С�����Τ�ͭ�Ѥ�.
+	  2 をジェネレータとして使うことを推奨する. なぜなら,
+	  かけ算のパフォーマンスの効率がよいから.
+	  また 2 なら たとえある素数の原始根でなくても,
+	  可能な剰余の空間の半分をカバーするので有用だ.
 
 
 
@@ -187,32 +187,32 @@ INTERNET DRAFT                                                 July 2003
      host key; I_C is C's KEXINIT message and I_S S's KEXINIT message
      which have been exchanged before this part begins):
 
-     ���饤����Ȥ� ���ޤ�������������ꤷ�ƥ����Ф���Υ⥸��饹��	
-     �׵᤹��. �ʲ��ε��Ҥ� (C �ϥ��饤�����,S �ϥ�����,�⥸��饹 p ��
-     �礭�ʰ������ǿ�, g �� GF (p) ����ʬ���Υ����ͥ졼��,min �ϥ��饤�����
-     �������Ĥ����� p �κ���Υ������� bit,n �� ���饤����Ȥ�������
-     ��������Ȥꤿ�� modulus p �Υ������� bit,max �� ���饤�����
-     �������Ĥ����� p �κ���Υ������� bit, V_S �� S �ΥС������ʸ����
-     V_C �� C �ΥС������ʸ����, K_S �� S �Υۥ��ȸ�����,
-     I_C �� C �� KEXINIT ��å������� I_S �� S �� KEXINIT ��å�������, ������
-     ������ʬ�����Ϥ������˸򴹤���Ƥ���)
+     クライアントは 好ましいサイズを指定してサーバからのモジュラスを	
+     要求する. 以下の記述で (C はクライアント,S はサーバ,モジュラス p は
+     大きな安全な素数, g は GF (p) の部分群のジェネレータ,min はクライアント
+     が受けつけられる p の最大のサイズの bit,n は クライアントがサーバ
+     から受けとりたい modulus p のサイズの bit,max は クライアント
+     が受けつけられる p の最大のサイズの bit, V_S は S のバージョン文字列
+     V_C は C のバージョン文字列, K_S は S のホスト公開鍵,
+     I_C は C の KEXINIT メッセージは I_S は S の KEXINIT メッセージで, これらは
+     この部分が開始する前に交換されている)
 
      1.   C sends "min || n || max" to S, indicating the minimal accept-
           able group size, the preferred size of the group and the maxi-
           mal group size in bits the client will accept.
 
-     1.   C �� S ��  "min || n || max"  ������. ����� �Ǿ��μ����Ĥ�����
-          ���Υ�����, ���ෲ�Υ�����, ���饤����Ȥ������Ĥ�����
-	  ����η��Υ���������ꤹ��.
+     1.   C は S に  "min || n || max"  を送る. これで 最小の受けつけられる
+          群のサイズ, 好む群のサイズ, クライアントが受けつけられる
+	  最大の群のサイズを指定する.
 
-     2.   S �� ���饤����Ȥ��׵�ˤ�äȤ��ɤ��礦���򸫤Ĥ�,
-          C �� "P || g"������.
+     2.   S は クライアントの要求にもっとも良く合う群を見つけ,
+          C に "P || g"を送る.
 
      3.   C generates a random number x (1 < x < (p-1)/2). It computes e
           = g^x mod p, and sends "e" to S.
 
-     3.   C �� ��� x (1 < x < (p-1)/2) ����������.
-	  e = g^x mod p ��׻��� "e" �� S ������.
+     3.   C は 乱数 x (1 < x < (p-1)/2) を生成する.
+	  e = g^x mod p を計算し "e" を S に送る.
 
      4.   S generates a random number y (0 < y < (p-1)/2) and computes f
           = g^y mod p. S receives "e".  It computes K = e^y mod p, H =
@@ -222,17 +222,17 @@ INTERNET DRAFT                                                 July 2003
           host key.  S sends "K_S || f || s" to C.  The signing opera-
           tion may involve a second hashing operation.
 
-     4.   S �� ��� y (0 < y < (p-1)/2) �������� f = g^y mod p ��
-	  �׻�����. S �� "e" ��������. K = e^y mod p, H =
+     4.   S は 乱数 y (0 < y < (p-1)/2) を生成し f = g^y mod p を
+	  計算する. S は "e" を受け取る. K = e^y mod p, H =
           hash (V_C || V_S || I_C || I_S || K_S || min || n || max || p
-          || g || e || f || K) (���������ǤϤ��줾��Υ����פ˱�����
-	  ���󥳡��ɤ����;�ʲ��򸫤�) ��׻�����. �ޤ� �ۥ�����̩����
-	  H ���̾�� ��̾ s ����. S �� "K_S || f || s" �� C ������.
-	  ��̾������ �⤦���Υϥå������򤹤뤫�⤷��ʤ�.
+          || g || e || f || K) (これらの要素はそれぞれのタイプに応じて
+	  エンコードされる;以下を見よ) を計算する. また ホスト秘密鍵で
+	  H を署名し 署名 s を作る. S あ "K_S || f || s" を C に送る.
+	  署名の操作は もう一回のハッシュ操作をするかもしれない.
 
           Implementation Notes:
 
-	  �����������:
+	  実装上の注意:
 
                To increase the speed of the key exchange, both client
                and server may reduce the size of their private expo-
@@ -241,11 +241,11 @@ INTERNET DRAFT                                                 July 2003
                more details see the paper by van Oorschot and Wiener
                [1].
 
-	       ���򴹤�®�٤�夲�뤿���, ���饤����Ȥ⥵���Ф�
-	       ������Υ٥��Υ������򸺤餷�Ƥ�褤.
-	       ����Ͼ��ʤ��Ȥⶦͭ�������̩������������븰��
-	       ������ 2 ��Ĺ��ɬ�פ�����. ���ܤ�����,
-	        van Oorschot ��  Wiener �ˤ����ʸ [1] �򸫤�.
+	       鍵交換の速度を上げるために, クライアントもサーバも
+	       非公開のベキのサイズを減らしてもよい.
+	       これは少なくとも共有される秘密から生成される鍵の
+	       材料の 2 倍長い必要がある. より詳しくは,
+	        van Oorschot と  Wiener による論文 [1] を見よ.
 
      5.   C verifies that K_S really is the host key for S (e.g. using
           certificates or a local database).  C is also allowed to
@@ -257,15 +257,15 @@ INTERNET DRAFT                                                 July 2003
           f || K), and verifies the signature s on H.
 
 
-     5.   C �� K_S �������� S �Υۥ��ȸ����� (�㤨�� �������
-          ��������ʥǡ����١������Ѥ���) ���ڤ���. C �ϸ��ڤʤ���
-	  ��������Ĥ��Ƥ�褤��, ���������
-	  ǽưŪ�ʹ�����Ф��ƥץ��ȥ��������ˤ���.
-	  (������, ¿���δĶ���û���֤ʤ�º�Ū����ͳ����
-	  ���ޤ������⤷��ʤ�). ������ C �� K = f^x mod p, 
+     5.   C は K_S が本当に S のホスト鍵かを (例えば 証明書や
+          ローカルなデータベースを用いて) 検証する. C は検証なしで
+	  鍵を受けつけてもよいが, そうすると
+	  能動的な攻撃に対してプロトコルを危険にする.
+	  (しかし, 多くの環境で短期間なら実際的な理由から
+	  好ましいかもしれない). そして C は K = f^x mod p, 
 	  H = hash (V_C || V_S || I_C || I_S || K_S || min || n ||
-	  max || p || g || e || f || K) ��׻���, ��̾ s ��
-	  H �Τ�Τ����ڤ���.
+	  max || p || g || e || f || K) を計算し, 署名 s が
+	  H のものか検証する.
 
           Servers and clients SHOULD support groups with a modulus
 
@@ -279,20 +279,20 @@ INTERNET DRAFT                                                 July 2003
           length of k bits, where 1024 <= k <= 8192.  The recommended
           values for min and max are 1024 and 8192 respectively.
 
-	  �����Фȥ��饤����Ȥ�   1024 <= k <= 8192 bit ��Ĺ����
-	  �⥸��饹����ķ��򥵥ݡ��Ȥ���ɬ�פ�����. min �� max ��
-	  �侩������ͤ� ���줾�� 1024,8192 ��.
+	  サーバとクライアントは   1024 <= k <= 8192 bit の長さの
+	  モジュラスを持つ群をサポートする必要がある. min と max の
+	  推奨される値は それぞれ 1024,8192 だ.
 
           Either side MUST NOT send or accept e or f values that are not
           in the range [1, p-1]. If this condition is violated, the key
           exchange fails.  To prevent confinement attacks, they MUST
           accept the shared secret K only if 1 < K < p - 1.
 
-	  �ɤ����¦�� e �� f ���ͤȤ��� [1, p-1] ���ϰϤǤϤʤ���Τ�
-	  ���ä�������Ȥä��ꤷ�ƤϤʤ�ʤ�. ���ξ�郎���줿��ʤ�
-	  ���򴹤ϼ��Ԥ���. ���¹�����ɤ������
-	  ��ͭ�������̩ K �� 1 < K < p - 1 �ξ����������Ĥ��ʤ����
-	  �ʤ�ʤ�.
+	  どちらの側も e や f の値として [1, p-1] の範囲ではないものを
+	  送ったり受けとったりしてはならない. この条件が崩れたらなら
+	  鍵交換は失敗する. 制限攻撃を防ぐために
+	  共有される秘密 K は 1 < K < p - 1 の場合だけ受けつけなければ
+	  ならない.
 
      The server should return the smallest group it knows that is larger
      than the size the client requested.  If the server does not know a
@@ -300,25 +300,25 @@ INTERNET DRAFT                                                 July 2003
      the largest group it knows.  In all cases, the size of the returned
      group SHOULD be at least 1024 bits.
 
-     �����Фϥ��饤����Ȥ��׵ᤷ�������������礭�ʻ��äƤ���
-     ��äȤ⾮���������֤�ɬ�פ�����. �⤷�����Ф����饤����Ȥ�
-     �׵ᤷ����Τ���礭�ʷ�����äƤ��ʤ��ä���, ���äƤ���
-     �����礭�ʷ����֤�ɬ�פ�����. �ɤ�ʾ���, �֤����Υ�������
-     �����ʤ��Ȥ� 1024bit ����ɬ�פ�����.
+     サーバはクライアントが要求したサイズよりも大きな持っている
+     もっとも小さい群を返す必要がある. もしサーバがクライアントが
+     要求したものより大きな群を持っていなかったら, 持っている
+     一番大きな群を返す必要がある. どんな場合も, 返す群のサイズは
+     すくなくとも 1024bit ある必要がある.
 
      This is implemented with the following messages.  The hash algo-
      rithm for computing the exchange hash is defined by the method
      name, and is called HASH.  The public key algorithm for signing is
      negotiated with the KEXINIT messages.
 
-     ����� ���Τ褦�ʥ�å������Ǽ��������. �򴹥ϥå����׻�����
-     �ϥå��奢�르�ꥺ��� ��ˡ��̾�����������, HASH �ȸƤФ��.
-     ��̾�˻Ȥ����������르�ꥺ��� KEXINIT ��å�������
-     ��������.
+     これは 次のようなメッセージで実装される. 交換ハッシュを計算する
+     ハッシュアルゴリズムは 方法の名前で定義され, HASH と呼ばれる.
+     署名に使う公開鍵アルゴリズムは KEXINIT メッセージで
+     取り決められる.
 
      First, the client sends:
 
-     �ޤ�, ���饤����Ȥ�����Τ�:
+     まず, クライアントが送るのは:
 
        byte      SSH_MSG_KEY_DH_GEX_REQUEST
        uint32    min, minimal size in bits of an acceptable group
@@ -327,7 +327,7 @@ INTERNET DRAFT                                                 July 2003
 
      The server responds with
 
-     �����Фϼ����֤� (�ʲ�ά):
+     サーバは次を返す (以下略):
 
        byte      SSH_MSG_KEX_DH_GEX_GROUP
        mpint     p, safe prime
@@ -346,7 +346,7 @@ INTERNET DRAFT                                                 July 2003
      The hash H is computed as the HASH hash of the concatenation of the
      following:
 
-     �ϥå��� H �� ���Τ�Τ�Ϣ���ϥå���ؿ� HASH �Ƿ׻��������.
+     ハッシュ H は 次のものの連結をハッシュ関数 HASH で計算したもの.
      
        string    V_C, the client's version string (CR and NL excluded)
        string    V_S, the server's version string (CR and NL excluded)
@@ -373,24 +373,24 @@ INTERNET DRAFT                                                 July 2003
      This value is called the exchange hash, and it is used to authenti-
      cate the key exchange.
 
-     �����ͤϸ򴹥ϥå���ȸƤФ�, ���򴹤˿��꤬�����뤫�ɤ�����ǧ�ڤ�
-     �Ȥ���.
+     この値は交換ハッシュと呼ばれ, 鍵交換に信頼がおけるかどうかの認証に
+     使われる.
 
 6.  diffie-hellman-group-exchange-sha1
 
      The "diffie-hellman-group-exchange-sha1" method specifies Diffie-
      Hellman Group and Key Exchange with SHA-1 as HASH.
 
-     "diffie-hellman-group-exchange-sha1" ˡ�� HASH �Ȥ��� SHA-1 ��Ȥ�
-     Diffie-Hellman ���ȸ��򴹤���ꤹ��.
+     "diffie-hellman-group-exchange-sha1" 法は HASH として SHA-1 を使う
+     Diffie-Hellman 群と鍵交換を指定する.
 
 7.  Summary of Message numbers
 
-7.  ��å������ֹ�ΤޤȤ�.
+7.  メッセージ番号のまとめ.
 
      The following message numbers have been defined in this document.
 
-     �ʲ��Υ�å������ֹ椬����ʸ�Ϥ��������Ƥ���.
+     以下のメッセージ番号がこの文章で定義されている.
 
        #define SSH_MSG_KEX_DH_GEX_REQUEST_OLD  30
        #define SSH_MSG_KEX_DH_GEX_REQUEST      34
@@ -403,37 +403,37 @@ INTERNET DRAFT                                                 July 2003
      Additionally, the hash is calculated using only "n" instead of "min
      || n || max".
 
-     SSH_MSG_KEX_DH_GEX_REQUEST_OLD �� �����ߴ����Τ���˻Ȥ���.
-     "min || n || max"�����뤫����, ���饤����Ȥ� "n" ������.
-     �ä���, �ϥå����"min || n || max"�Τ����� "n"�������Ѥ���
-     �׻������.
+     SSH_MSG_KEX_DH_GEX_REQUEST_OLD は 後方互換性のために使われる.
+     "min || n || max"を送るかわりに, クライアントは "n" を送る.
+     加えて, ハッシュは"min || n || max"のかわりに "n"だけを用いて
+     計算される.
 
      The numbers 30-49 are key exchange specific and may be redefined by
      other kex methods.
 
-     �ֹ� 30-49 �ϸ��򴹤���ͭ���̤θ��򴹤���ˡ�Ǻ�������Ƥ�褤.
+     番号 30-49 は鍵交換に特有で別の鍵交換の方法で再定義してもよい.
 
 8.  Security Considerations
 
-8.  �������ƥ��˴ؤ���ͻ�
+8.  セキュリティに関する考察
 
      This protocol aims to be simple and uses only well understood prim-
      itives.  This encourages acceptance by the community and allows for
      ease of implementation, which hopefully leads to a more secure sys-
      tem.
 
-     ���Υץ��ȥ����ñ��Ǥ��뤳�Ȥ�ظ���, �褯���򤵤�Ƥ���
-     ����Ū�ʱ黻 (?) �Τߤ�Ȥ�. ����� ���ߥ�˥ƥ��˼�������䤹��
-     ���뤷, �������ưפˤ���. ���줬���ޤ������а����ʥ����ƥब
-     �⤿�餵���.
+     このプロトコルは単純であることを指向し, よく理解されている
+     基本的な演算 (?) のみを使う. これは コミュニティに受けいれやすく
+     するし, 実装を容易にする. これがうまくいけば安全なシステムが
+     もたらされる.
 
      The use of multiple moduli inhibits a determined attacker from pre-
      calculating moduli exchange values, and discourages dedication of
      resources for analysis of any particular modulus.
 
-     ʣ���Υ⥸��饹�λ��Ѥ�, �������빶��Ԥ�
-     �򴹤���⥸��饹���ͤ����������뤳�Ȥ��ɤ�, ����Υ⥸��饹
-     �β��ϤΤ���˥꥽������Ȥ����Ȥ��ᤵ����.
+     複数のモジュラスの使用は, 決然たる攻撃者が
+     交換するモジュラスの値を前処理することを防ぎ, 特定のモジュラス
+     の解析のためにリソースを使うことをやめさせる.
      
 
      It is important to employ only safe primes as moduli.  Van Oorshot
@@ -450,10 +450,10 @@ INTERNET DRAFT                                                 July 2003
      easy [1].  However, they also state that this problem does not
      apply to safe primes.
 
-     �⥸��饹�Ȥ��ư������ǿ�������Ȥ����Ȥ����פ�. Van Oorshot ��
-     Wiener �� ��������ǿ��⥸��饹 q �� û����������Υ٥���
-     �Ȥ����Ȥ�, Υ���п��η׻����ưפˤ���ȸ��ڤ��Ƥ��� [1]. ������
-     ��������ϰ������ǿ��ˤ�Ŭ�Ѥ���ʤ��Ȥ��٤Ƥ���.
+     モジュラスとして安全な素数だけを使うことが重要だ. Van Oorshot と
+     Wiener は ランダムな素数モジュラス q の 短かい非公開のベキを
+     使うことは, 離散対数の計算を容易にすると言及している [1]. しかし
+     この問題は安全な素数には適用されないとも延べている.
 
      The least significant bit of the private exponent can be recovered,
      when the modulus is a safe prime [2].  However, this is not a prob-
@@ -463,12 +463,12 @@ INTERNET DRAFT                                                 July 2003
      entropy is less than 2 bits away from the maximum, lg (p-1) [3].
 
 
-     ������Υ٥��κǲ��̥ӥå� (LSB) ��, �⥸��饹���������ǿ��ʤ�
-     �������뤳�Ȥ��Ǥ��� [2]. ������, ������Υ٥�����ʬ�礭�����
-     , ���������ˤϤʤ�ʤ�. ����˴�Ϣ����, Waldvogel �� Massey
-     ���Ҥ٤Ƥ���Ȥ����ˤ���: ������Υ٥��� {0,...,p-2} ����
-     ��Ω�ˤ��İ��ͤ˥��������������, ���Υ���ȥ��ԡ���
-     ������ lg (p-1) ���� 2bit �������ʤ� [3].
+     非公開のベキの最下位ビット (LSB) は, モジュラスが安全な素数なら
+     回復することができる [2]. しかし, 非公開のベキが十分大きければ
+     , これは問題にはならない. これに関連して, Waldvogel と Massey
+     が述べているところによると: 非公開のベキを {0,...,p-2} から
+     独立にかつ一様にランダムに選んだ場合, 鍵のエントロピーは
+     最大値 lg (p-1) から 2bit 小さくなる [3].
      
 9.  Acknowledgments
 
@@ -533,11 +533,11 @@ INTERNET DRAFT                                                 July 2003
 
 11.  Appendix A:  Generation of safe primes
 
-11.  ��Ͽ A: �������ǿ�������
+11.  付録 A: 安全な素数の生成
 
-    Applied Cryptography �ϥ�ɥ֥å� [2] �Ǥ� k-bit �ΰ������ǿ���
-     �������뼡�Υ��르�ꥺ�ब�󤲤��Ƥ���. 2 ��
-     ��ˡ�� mod p �Υ����ͥ졼���Ȥ��ƻȤ��褦�˽�������.
+    Applied Cryptography ハンドブック [2] では k-bit の安全な素数を
+     生成する次のアルゴリズムが挙げられている. 2 を
+     乗法群 mod p のジェネレータとして使うように修正した.
 
       1. Do the following:
         1.1 Select a random (k-1)-bit prime q, so that q mod 12 = 5.
@@ -545,18 +545,18 @@ INTERNET DRAFT                                                 July 2003
             trial division and the Rabin-Miller test.)
         Repeat until p is prime.
 
-     1. ���Τ褦�ˤ���.
-        1.1 q mod 12 = 5 �Ǥ��� (k-1)-bit ���ǿ� q ������������.
-	1.2 p := 2q + 1 ��׻��� p ���ǿ��Ǥ��뤫Ĵ�٤�
-	    (���Ȥ���, ��껻�λ�Ԥ� Rabin-Miller ��Ƚ��ˡ���Ѥ���)
-	p ���ǿ��ˤʤ�ޤǷ����֤�.
+     1. 次のようにする.
+        1.1 q mod 12 = 5 である (k-1)-bit の素数 q をランダムに選ぶ.
+	1.2 p := 2q + 1 を計算し p が素数であるか調べる
+	    (たとえば, 割り算の試行や Rabin-Miller の判定法を用いて)
+	p が素数になるまで繰り返す.
 
    If an implementation uses the OpenSSL libraries, a group consisting
    of a 1024-bit safe prime and 2 as generator can be created as fol-
    lows:
 
-   ������ OpenSSL �饤�֥���Ȥ��ʤ�, 1024bit �ΰ������ǿ���
-   �����ͥ졼�� 2 ����ʤ뷲�򼡤Τ褦�˺�뤳�Ȥ��Ǥ���.
+   実装が OpenSSL ライブラリを使うなら, 1024bit の安全な素数と
+   ジェネレータ 2 からなる群を次のように作ることができる.
    
 
       DH *d = NULL;
@@ -565,7 +565,7 @@ INTERNET DRAFT                                                 July 2003
 
       The order of the subgroup generated by 2 is q = p - 1.
             
-      2 �ˤ�ä��������줿��ʬ���ΰ̿��� q = p - 1 ��.
+      2 によって生成された部分群の位数は q = p - 1 だ.
 
 
 

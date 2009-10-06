@@ -4,57 +4,57 @@ Expires: March 31, 2004                           D. Moffat, Editor, Ed.
                                                    Sun Microsystems, Inc
                                                                 Oct 2003
 
-# ���� �ջ����� haruyama@unixuser.org
+# 訳者 春山征吾 haruyama@unixuser.org
 
                       SSH Transport Layer Protocol
                    draft-ietf-secsh-transport-17.txt
 
 Status of this Memo
 
-���Υ��ˤĤ���
+このメモについて
 
    This document is an Internet-Draft and is in full conformance with
    all provisions of Section 10 of RFC2026.
 
-   ����ʸ��ϥ��󥿡��ͥåȥɥ�եȤ�, RFC2026 ���� 10 ��Τ��٤Ƥε����
-   ��򤷤Ƥ���.
+   この文書はインターネットドラフトで, RFC2026 の第 10 節のすべての規定に
+   準拠している.
 
    Internet-Drafts are working documents of the Internet Engineering
    Task Force (IETF), its areas, and its working groups. Note that other
    groups may also distribute working documents as Internet-Drafts.
 
-   ���󥿡��ͥåȥɥ�եȤ�  Internet Engineering Task Force (IETF) ��
-   , �����ΰ�, ���Υ���󥰥��롼�פǺ�����ʸ���. ¾�Υ��롼�פ�
-   ������ʸ��򥤥󥿡��ͥåȥɥ�եȤȤ���Ʊ�ͤ����դ��Ƥ��뤳�Ȥ�
-   ���դ���.
+   インターネットドラフトは  Internet Engineering Task Force (IETF) と
+   , その領域, そのワーキンググループで作業中の文書だ. 他のグループも
+   作業中の文書をインターネットドラフトとして同様に配付していることに
+   注意せよ.
 
    Internet-Drafts are draft documents valid for a maximum of six months
    and may be updated, replaced, or obsoleted by other documents at any
    time. It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   ���󥿡��ͥåȥɥ�եȤ�, ���� 6 �����ͭ���ʵ��𤵤줿ʸ���, ���ĤǤ�
-   �������줿��, �ִ����줿��, ¾��ʸ��ˤ�ä����岽�����.
-   ���󥿡��ͥåȥɥ�եȤ򻲹�ʸ���Ȥ��ƻȤä���, "�ʹ���λŻ�"
-   �Ȥ��ưʳ��˰��Ѥ��뤳�Ȥ�Ŭ�ڤǤϤʤ�.
+   インターネットドラフトは, 最大 6 か月間有効な起草された文書で, いつでも
+   更新されたり, 置換されたり, 他の文書によって陳腐化される.
+   インターネットドラフトを参考文献として使ったり, "進行中の仕事"
+   として以外に引用することは適切ではない.
 
    The list of current Internet-Drafts can be accessed at http://
    www.ietf.org/ietf/1id-abstracts.txt.
 
-   ���ߤΥ��󥿡��ͥåȥɥ�եȤΥꥹ�Ȥ�
+   現在のインターネットドラフトのリストは
    http://www.ietf.org/ietf/1id-abstracts.txt
-   �ǥ��������Ǥ���.
+   でアクセスできる.
 
    The list of Internet-Draft Shadow Directories can be accessed at
    http://www.ietf.org/shadow.html.
 
-   ���󥿡��ͥåȥɥ�եȤΥߥ顼�����ȤΥꥹ�Ȥ�
+   インターネットドラフトのミラーサイトのリストは
    http://www.ietf.org/shadow.html.
-   �ǥ��������Ǥ���.
+   でアクセスできる.
 
    This Internet-Draft will expire on March 31, 2004.
 
-   ���Υ��󥿡��ͥåȥɥ�եȤ� 2004 ǯ 3 �� 31 ���˴����ڤ�Ȥʤ�.
+   このインターネットドラフトは 2004 年 3 月 31 日に期限切れとなる.
 
 
 Copyright Notice
@@ -63,13 +63,13 @@ Copyright Notice
 
 Abstract
 
-����
+概要
 
    SSH is a protocol for secure remote login and other secure network
    services over an insecure network.
 
-   SSH ��, �����ǤϤʤ��ͥåȥ���ۤ���, �����ʥ�⡼�ȥ�������ڤ�¾��
-   �����ʥͥåȥ�������ӥ��Τ���Υץ��ȥ����.
+   SSH は, 安全ではないネットワーク越しの, 安全なリモートログイン及び他の
+   安全なネットワークサービスのためのプロトコルだ.
 
    This document describes the SSH transport layer protocol which
    typically runs on top of TCP/IP. The protocol can be used as a basis
@@ -77,11 +77,11 @@ Abstract
    encryption, server authentication, and integrity protection. It may
    also provide compression.
 
-   ����ʸ��Ǥ�, ŵ��Ū�ˤ� TCP/IP �ξ��ư�� SSH �Υȥ�󥹥ݡ����ؤ�
-   �ץ��ȥ���ˤĤ��Ƶ��Ҥ��Ƥ���. ���Υץ��ȥ����, ¿����
-   �����ʥͥåȥ�������ӥ��δ��äȤ��ƻȤ����Ȥ��Ǥ���.
-   ���Υץ��ȥ����, ���ϤʰŹ沽�䥵���Ф�ǧ��, ���������ݸ��
-   �󶡤���. �ޤ�, ���̤��󶡤���.
+   この文書では, 典型的には TCP/IP の上で動く SSH のトランスポート層の
+   プロトコルについて記述している. このプロトコルは, 多くの
+   安全なネットワークサービスの基礎として使うことができる.
+   このプロトコルは, 強力な暗号化やサーバの認証, 完全性の保護を
+   提供する. また, 圧縮も提供する.
 
    Key exchange method, public key algorithm, symmetric encryption
    algorithm, message authentication algorithm, and hash algorithm are
@@ -95,17 +95,17 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
    all negotiated.
 
-   ���򴹤���ˡ��, ���������르�ꥺ��, �оΰŹ沽���르�ꥺ��,
-   ��å�����ǧ�ڥ��르�ꥺ��, �ϥå��奢�르�ꥺ���, ���٤�
-   ��������.
+   鍵交換の方法や, 公開鍵アルゴリズム, 対称暗号化アルゴリズム,
+   メッセージ認証アルゴリズム, ハッシュアルゴリズムは, すべて
+   取り決められる.
 
    This document also describes the Diffie-Hellman key exchange method
    and the minimal set of algorithms that are needed to implement the
    SSH transport layer protocol.
 
-   ����ʸ���, Diffie-Hellman �θ��򴹤���ˡ�� SSH �Υȥ�󥹥ݡ����ؤ�
-   �ץ��ȥ���˼�������ɬ�פΤ��륢�르�ꥺ��κǾ��¤ν���ˤĤ���
-   �⵭�Ҥ���.
+   この文書は, Diffie-Hellman の鍵交換の方法と SSH のトランスポート層の
+   プロトコルに実装する必要のあるアルゴリズムの最小限の集合について
+   も記述する.
 
 
 Table of Contents
@@ -160,47 +160,47 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
 1. Contributors
 
-1. ��ƲȤ���.
+1. 寄稿家たち.
 
    The major original contributors of this document were: Tatu Ylonen,
    Tero Kivinen, Timo J. Rinne, Sami Lehtinen (all of SSH Communications
    Security Corp), and Markku-Juhani O. Saarinen (University of
    Jyvaskyla)
 
-   ����ʸ��μ��פǤ�Ȥ�Ȥδ�ƲȤϰʲ����̤�Ǥ���:
+   この文書の主要でもともとの寄稿家は以下の通りである:
    Tatu Ylonen, Tero Kivinen, Timo J. Rinne, Sami Lehtinen 
-   (�ʾ夹�٤� SSH Communications Security Corp ��), 
+   (以上すべて SSH Communications Security Corp 社), 
    Markku-Juhani O. Saarinen (University of Jyvaskyla).
 
    The document editor is: Darren.Moffat@Sun.COM.  Comments on this
    internet draft should be sent to the IETF SECSH working group,
    details at: http://ietf.org/html.charters/secsh-charter.html
 
-   ʸ����ԼԤ�: Darren.Moffat@Sun.COM ��. ���Υ��󥿡��ͥåȥɥ�եȤ�
-   �Ф��륳���Ȥ�, IETF SECSH ����󥰥��롼�פ����äƤۤ���.
-   ����󥰥��롼�פξܺ٤� 
-   http://ietf.org/html.charters/secsh-charter.html �ˤ���.
+   文書の編者は: Darren.Moffat@Sun.COM だ. このインターネットドラフトに
+   対するコメントは, IETF SECSH ワーキンググループに送ってほしい.
+   ワーキンググループの詳細は 
+   http://ietf.org/html.charters/secsh-charter.html にある.
 
 
 2. Introduction
 
-2. ����ȥ����������
+2. イントロダクション
 
    The SSH transport layer is a secure low level transport protocol. It
    provides strong encryption, cryptographic host authentication, and
    integrity protection.
 
-   SSH �Υȥ�󥹥ݡ����ؤ�, ���������٥�ȥ�󥹥ݡ��ȥץ��ȥ����.
-   ����϶��ϤʰŹ沽��Ź沽���줿�ۥ��Ȥ�ǧ��, ���������ݸ��
-   �󶡤���.
+   SSH のトランスポート層は, 安全な低レベルトランスポートプロトコルだ.
+   これは強力な暗号化や暗号化されたホストの認証, 完全性の保護を
+   提供する.
 
    Authentication in this protocol level is host-based; this protocol
    does not perform user authentication. A higher level protocol for
    user authentication can be designed on top of this protocol.
 
-   ���Υץ��ȥ���Υ�٥�Ǥ�ǧ�ڤϥۥ��ȥ١�����. ���Υץ��ȥ����
-   �桼����ǧ�ڤ�Ԥʤ�ʤ�. �桼��ǧ�ڤΤ���Τ��⤤��٥��
-   �ץ��ȥ���򤳤Υץ�������ξ���߷פ��뤳�Ȥ��Ǥ��롣
+   このプロトコルのレベルでの認証はホストベースだ. このプロトコルは
+   ユーザの認証を行なわない. ユーザ認証のためのより高いレベルの
+   プロトコルをこのプロコロルの上に設計することができる。
 
    The protocol has been designed to be simple, flexible, to allow
    parameter negotiation, and to minimize the number of round-trips.
@@ -211,57 +211,57 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    authentication, service request, and acceptance notification of
    service request.  The worst case is 3 round-trips.
 
-   ���Υץ��ȥ���ϥ���ץ��, ������������, �ѥ�᡼���θ�Ĥ����
-   �����β����Ǿ�������褦���߷פ���Ƥ���. ���򴹤���ˡ��
-   ���������르�ꥺ��, �оΰŹ沽���르�ꥺ��, ��å�����ǧ�ڥ��르�ꥺ��
-   , �ϥå��奢�르�ꥺ��Ϥ��٤� (�����д֤�) ��Ĥ����.
-   ¿���δĶ���, �����ʸ��򴹤䥵���Ф�ǧ��, �����ӥ����׵�,
-   �����ӥ����׵�μ������Τ� 2 ������ɬ�פȤʤ뤳�Ȥ����Ԥ���Ƥ���.
-   ��äȤⰭ������ 3 ������ɬ�פȤʤ�.
+   このプロトコルはシンプルで, 柔軟性があり, パラメータの交渉を許し
+   往復の回数を最小化するように設計されている. 鍵交換の方法や
+   公開鍵アルゴリズム, 対称暗号化アルゴリズム, メッセージ認証アルゴリズム
+   , ハッシュアルゴリズムはすべて (サーバ間で) 交渉される.
+   多くの環境で, 完全な鍵交換やサーバの認証, サービスの要求,
+   サービスの要求の受諾通知に 2 往復が必要となることが期待されている.
+   もっとも悪い場合で 3 往復が必要となる.
 
 3. Conventions Used in This Document
 
-3. ����ʸ��ǻȤ���«��
+3. この文書で使う約束事
 
    The keywords "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT",
    and "MAY" that appear in this document are to be interpreted as
    described in [RFC2119].
 
-   ����ʸ��˽ФƤ���
-   "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT", "MAY" �Ȥ��ä�
-   ������ɤ� [RFC2119] �˵��Ҥ���Ƥ���褦�˲�ᤵ���.
+   この文書に出てくる
+   "MUST", "MUST NOT", "REQUIRED", "SHOULD", "SHOULD NOT", "MAY" といった
+   キーワードは [RFC2119] に記述されているように解釈される.
 
-#http://www.ipa.go.jp/security/rfc/RFC2119JA.html �ˤ���
-#�֤��ʤ���Фʤ�ʤ��� MUST �ˡס��׵ᤵ��Ƥ���� REQUIRED �ˡס֤��뤳�Ȥˤʤ�� SHALL �ˡ�
-#�֤��ƤϤʤ�ʤ��� MUST NOT �ˡ� �֤��뤳�ȤϤʤ��� SHALL NOT �ˡ�
-#�֤���ɬ�פ������ SHOULD �ˡסֿ侩������ RECOMMENDED �ˡ�
-#�֤��ʤ��ۤ����褤�� SHOULD NOT �ˡ� �ֿ侩����ʤ��� NOT RECOMENDED �ˡ�
-#�֤��Ƥ�褤�� MAY �ˡס�����Ǥ���� OPTIONAL �ˡ�
+#http://www.ipa.go.jp/security/rfc/RFC2119JA.html によると
+#「しなければならない（ MUST ）」「要求されている（ REQUIRED ）」「することになる（ SHALL ）」
+#「してはならない（ MUST NOT ）」 「することはない（ SHALL NOT ）」
+#「する必要がある（ SHOULD ）」「推奨される（ RECOMMENDED ）」
+#「しないほうがよい（ SHOULD NOT ）」 「推奨されない（ NOT RECOMENDED ）」
+#「してもよい（ MAY ）」「選択できる（ OPTIONAL ）」
 
    The used data types and terminology are specified in the architecture
    document [SSH-ARCH].
 
-   ���Ѥ����ǡ����Υ����פ��Ѹ�ϥ������ƥ�����Υɥ������
-   [SSH-ARCH] ���������Ƥ���.
+   使用されるデータのタイプや用語はアーキテクチャのドキュメント
+   [SSH-ARCH] で定義されている.
 
    The architecture document also discusses the algorithm naming
    conventions that MUST be used with the SSH protocols.
 
-   �������ƥ�����Υɥ�����ȤǤ�, SSH�ץ��ȥ���ȶ��˻Ȥ�ʤ���Фʤ�ʤ�
-   ���르�ꥺ���̿̾��§�ˤĤ��Ƥ�������Ƥ���.
+   アーキテクチャのドキュメントでは, SSHプロトコルと共に使わなければならない
+   アルゴリズムの命名規則についても議論している.
 
 4. Connection Setup
 
-4. ��³�Υ��åȥ��å�
+4. 接続のセットアップ
 
    SSH works over any 8-bit clean, binary-transparent transport.  The
    underlying transport SHOULD protect against transmission errors as
    such errors cause the SSH connection to terminate.
 
 
-   SSH �Ϥɤ�� 8bit ���꡼��ǥХ��ʥ�Ʃ��ʥȥ�󥹥ݡ��ȤǤ�ư��.
-   ���ˤ���ȥ�󥹥ݡ��Ȥ�ž�����顼���Ф����ݸ�򤹤�ɬ�פ�����.
-   ���Τ褦�ʥ��顼�� SSH ����³�ν�λ���������������.
+   SSH はどんな 8bit クリーンでバイナリ透過なトランスポートでも動く.
+   下にあるトランスポートは転送エラーに対する保護をする必要がある.
+   このようなエラーは SSH の接続の終了を引きおこすから.
 
 
 Ylonen & Moffat, Editor    Expires March 31, 2004               [Page 3]
@@ -271,24 +271,24 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
    The client initiates the connection.
 
-   ���饤����Ȥ���³�򳫻Ϥ���.
+   クライアントが接続を開始する.
 
 4.1 Use over TCP/IP
 
-4.1 TCP/IP ��Ǥλ���    
+4.1 TCP/IP 上での使用    
 
    When used over TCP/IP, the server normally listens for connections on
    port 22.  This port number has been registered with the IANA, and has
    been officially assigned for SSH.
 
-   TCP/IP ��ǻ��Ѥ������, �����Ф�������³�� 22 �֥ݡ��Ȥ��Ԥ�.
-   ���Υݡ����ֹ�� IANA ����Ͽ����Ƥ���, SSH �Τ���˸�����
-   �����Ƥ��Ƥ���.
+   TCP/IP 上で使用される場合, サーバは普通接続を 22 番ポートで待つ.
+   このポート番号は IANA に登録されていて, SSH のために公式に
+   割当てられている.
 
 
 4.2 Protocol Version Exchange
 
-4.2 �ץ��ȥ���С������θ�
+4.2 プロトコルバージョンの交換
 
    When the connection has been established, both sides MUST send an
    identification string of the form "SSH-protoversion-softwareversion
@@ -298,20 +298,20 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    character is sent.  The maximum length of the string is 255
    characters, including the carriage return and newline.
    
-   ��³����Ω������, �����Х��饤����Ȥ�ξ���Ȥ�
-   "SSH-�ץ��ȥ���ΥС������-���եȥ������ΥС������ ������"
-   �Ȥ������μ���ʸ����򥭥��å��꥿����ȥ˥塼�饤���ʸ��
-   (���줾�� ASCII �Ǥ� 13 �� 10) ���դ�������ʤ���Фʤ�ʤ�.
-   ξ¦�Ȥ⥭���å��꥿����ʸ��ȴ���μ���ʸ����ⰷ�����ʤ��Ƥ�
-   �ʤ�ʤ�. �̥�ʸ��������ʤ�. ����ʸ����κ���Ĺ��
-   �����å��꥿����ȥ˥塼�饤���ޤ�� 255 ʸ����.
+   接続が確立されると, サーバクライアントの両方とも
+   "SSH-プロトコルのバージョン-ソフトウェアのバージョン コメント"
+   という形の識別文字列をキャリッジリターンとニューラインの文字
+   (それぞれ ASCII では 13 と 10) を付けて送らなければならない.
+   両側ともキャリッジリターン文字抜きの識別文字列も扱かえなくては
+   ならない. ヌル文字は送らない. この文字列の最大長は
+   キャリッジリターンとニューラインを含めて 255 文字だ.
 
    The part of the identification string preceding carriage return and
    newline is used in the Diffie-Hellman key exchange (see Section
    Section 7).
 
-   �����å��꥿����ȥ˥塼�饤������ˤ��뼱��ʸ�������ʬ��
-   Diffie-Hellman ���򴹤ǻ��Ѥ���� (��������� 7 �򻲾�).
+   キャリッジリターンとニューラインの前にある識別文字列の部分は
+   Diffie-Hellman 鍵交換で使用される (セクション 7 を参照).
 
    The server MAY send other lines of data before sending the version
    string.  Each line SHOULD be terminated by a carriage return and
@@ -323,16 +323,16 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    be used.  The primary use of this feature is to allow TCP-wrappers to
    display an error message before disconnecting.
 
-   �����ФϥС������ʸ��������������̤Υǡ�����ʣ�������äƤ�褤.
-   ���줾��ιԤϥ����å��꥿����ȥ˥塼�饤��ˤ�äƽ�ü�����
-   ����ɬ�פ�����. �����ιԤ�, "SSH-"�ǻϤޤäƤϤʤ餺,
-   ISO-10646 UTF-8 [RFC2279] �ǥ��󥳡��ɤ���Ƥ���ɬ�פ�����.
-   (����ϻ��ꤵ��ʤ�). ���饤����ȤϤ����ιԤ�������뤳�Ȥ�
-   �Ǥ�*�ʤ��ƤϤʤ�ʤ�*. �������Ť���̵�뤵��Ƥ�褤��,
-   ���饤����ȤΥ桼����ɽ������Ƥ�褤. ����餬ɽ�������ʤ�
-   [SSH-ARCH] �ǵ�������Ƥ��륳��ȥ�����ʸ���Υե��륿�򤹤�
-   ɬ�פ�����. ������ħ�μ�����Ӥ�, TCP-wrappers ��
-   ��³���ڤ����˥��顼��å�������ɽ�������뤳�Ȥ�.
+   サーバはバージョン文字列を送る前に別のデータを複数行送ってもよい.
+   それぞれの行はキャリッジリターンとニューラインによって終端されて
+   いる必要がある. これらの行は, "SSH-"で始まってはならず,
+   ISO-10646 UTF-8 [RFC2279] でエンコードされている必要がある.
+   (言語は指定されない). クライアントはこれらの行を処理することが
+   でき*なくてはならない*. これらは静かに無視されてもよいし,
+   クライアントのユーザに表示されてもよい. それらが表示されるなら
+   [SSH-ARCH] で議論されているコントロール文字のフィルタをする
+   必要がある. この特徴の主な用途は, TCP-wrappers に
+   接続を切る前にエラーメッセージを表示させることだ.
 
    Version strings MUST consist of printable US-ASCII characters, not
    including whitespaces or a minus sign (-).  The version string is
@@ -341,28 +341,28 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    contain additional information that might be useful in solving user
    problems.
 
-   �С������ʸ����ϥۥ磻�ȥ��ڡ�����ޥ��ʥ���� (-) ��ޤޤʤ�
-   ������ǽ�� US-ASCII ʸ���ǹ�������Ƥʤ��ƤϤʤ�ʤ�.
-   ���ΥС������ʸ�����, �ߴ����γ�ĥ���ư��������
-   �����������򼨤�����˼�Ȥ��ƻȤ���. ������ʸ�����
-   �桼����������褹��Τ�ͭ�ѤȻפ����ɲäξ����ޤ�ʤ��Ƥ�
-   �ʤ�ʤ�.
+   バージョン文字列はホワイトスペースやマイナス符号 (-) を含まない
+   印刷可能な US-ASCII 文字で構成されてなくてはならない.
+   このバージョン文字列は, 互換性の拡張を始動させたり
+   実装の特性を示すために主として使われる. コメント文字列は
+   ユーザの問題を解決するのに有用と思われる追加の情報を含めなくては
+   ならない.
 
    The protocol version described in this document is 2.0.
 
-   ����ʸ��ǵ��Ҥ����ץ��ȥ���ΥС������� 2.0 ��.
+   この文書で記述されるプロトコルのバージョンは 2.0 だ.
 
    Key exchange will begin immediately after sending this identifier.
    All packets following the identification string SHALL use the binary
    packet protocol, to be described below.
 
-   ���μ��̻Ҥ����ä����Ȥ����˸��θ򴹤��Ϥޤ�.
-   ���μ���ʸ�����³�����٤ƤΥѥ��åȤ�, �ʲ��˼������
-   �Х��ʥ�ѥ��åȥץ��ȥ����Ȥ����Ȥˤʤ�.
+   この識別子を送ったあとすぐに鍵の交換が始まる.
+   この識別文字列に続くすべてのパケットは, 以下に示される
+   バイナリパケットプロトコルを使うことになる.
 
 4.3 Compatibility With Old SSH Versions
 
-4.3 �Ť� SSH �ΥС������Ȥθߴ���
+4.3 古い SSH のバージョンとの互換性
 
    During the transition period, it is important to be able to work in a
 
@@ -381,17 +381,17 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    documentation of the 1.x protocol is contained in README files that
    are shipped along with the source code.
 
-   ���ϴ��ˤ�, ���Ť��ץ��ȥ���ΥС�������Ȥ� (Ƴ�����줿)
-   SSH �Υ��饤����Ȥȥ����Фȸߴ����Τ���������
-   ư��Ǥ��뤳�Ȥ����פ�. ���Υ��������ξ����
-   SSH version 1.x �Ȥθߴ����򥵥ݡ��Ȥ�������ˤΤߴ�Ϣ������. 
-   SSH 1.x �ץ��ȥ�����������ɸ�������ɥ�եȤ�¸�ߤ��ʤ�.
-   1.x�ץ��ȥ���ˤĤ��Ƥ�������Τ�줿ʸ���, �����������ɤȶ���
-   ȯ�Ԥ��줿 README �ե����뷲�˴ޤޤ�Ƥ���.
+   過渡期には, より古いプロトコルのバージョンを使う (導入された)
+   SSH のクライアントとサーバと互換性のある方式で
+   動作できることが重要だ. このセクションの情報は
+   SSH version 1.x との互換性をサポートする実装にのみ関連がある. 
+   SSH 1.x プロトコルを定義する標準課程やドラフトは存在しない.
+   1.xプロトコルについてただ一つ知られた文書は, ソースコードと共に
+   発行された README ファイル群に含まれている.
 
 4.3.1 Old Client, New Server
 
-4.3.1 �Ť����饤����Ȥǿ����������Фξ��
+4.3.1 古いクライアントで新しいサーバの場合
 
    Server implementations MAY support a configurable "compatibility"
    flag that enables compatibility with old versions.  When this flag is
@@ -400,12 +400,12 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    to "2.0".  In this mode the server SHOULD NOT send the carriage
    return character (ASCII 13) after the version identification string.
 
-   �����Фμ����ϸŤ��С������Ȥθߴ�������������ǽ��"compatibility"
-   �ե饰�򥵥ݡ��Ȥ��Ƥ�褤. ���Υե饰��ͭ���ʤ��, �����Ф�
-   ���Υץ��ȥ���С�������"1.99"��̾���ɬ�פ�����.
-   �ץ��ȥ��� 2.0 ��ȤäƤ��륯�饤����Ȥ�, "2.0"�ȼ�ʬ��̾���
-   �ʤ���Фʤ�ʤ�. ���Υ⡼�ɤǤ�, �����ФϥС��������ʸ����
-   �Τ��Ȥǥ����å��꥿���� (ASCII 13) ������ʤ��ۤ����褤.
+   サーバの実装は古いバージョンとの互換性を持つ設定可能な"compatibility"
+   フラグをサポートしてもよい. このフラグが有効ならば, サーバは
+   そのプロトコルバージョンを"1.99"と名乗る必要がある.
+   プロトコル 2.0 を使っているクライアントは, "2.0"と自分を名乗れ
+   なければならない. このモードでは, サーバはバージョン識別文字列
+   のあとでキャリッジリターン (ASCII 13) を送らないほうがよい.
 
    In the compatibility mode the server SHOULD NOT send any further data
    after its initialization string until it has received an
@@ -414,24 +414,24 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    old protocol if required.  In the compatibility mode, the server MUST
    NOT send additional data before the version string.
 
-   �ߴ��⡼�ɤǤ�, �����ФϤ��ν����ʸ���Τ��Ȥϥ��饤����Ȥ����
-   ����ʸ���������Ȥ�ޤ�, �ɤ�ʤ���ʤ�ǡ���������ʤ��ۤ����褤.
-   �����ФϤ����,
-   ���饤����Ȥ��Ť��ץ��ȥ����ȤäƤ���Τ�, ɬ�פȤ���Ƥ���ʤ�
-   �Ť��ץ��ȥ������뤳�Ȥ��Ǥ��� (�Ĥޤ� 2.0 ��Ȥ���) ������ꤹ��.
-   ���θߴ��⡼�ɤǤ�, �����ФϥС������ʸ����������̤Υǡ�����
-   ���äƤϤʤ�ʤ�.
+   互換モードでは, サーバはこの初期化文字のあとはクライアントからの
+   識別文字列を受けとるまで, どんなさらなるデータも送らないほうがよい.
+   サーバはそれで,
+   クライアントが古いプロトコルを使っているのか, 必要とされているなら
+   古いプロトコルに戻ることができる (つまり 2.0 も使える) かを決定する.
+   この互換モードでは, サーバはバージョン文字列の前に別のデータを
+   送ってはならない.
 
    When compatibility with old clients is not needed, the server MAY
    send its initial key exchange data immediately after the
    identification string.
    
-   �Ť����饤����Ȥθߴ�����ɬ�פǤϤʤ����, �����Фϼ���ʸ����Τ���
-   �����˺ǽ�˸��򴹤Υǡ��������äƤ�褤.
+   古いクライアントの互換性が必要ではない場合, サーバは識別文字列のあと
+   すぐに最初に鍵交換のデータを送ってもよい.
 
 4.3.2 New Client, Old Server
 
-4.3.2 ���������饤����ȤǸŤ�������
+4.3.2 新しいクライアントで古いサーバ
 
    Since the new client MAY immediately send additional data after its
    identification string (before receiving server's identification), the
@@ -439,20 +439,20 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    that the server is old.  When this happens, the client SHOULD close
    the connection to the server, and reconnect using the old protocol.
 
-   ���������饤����Ȥ� (�����Фμ���ʸ���������Ȥ�����) ��ʬ��
-   ����ʸ����Τ����̤Υǡ����򤹤������äƤ�褤�Τ�,
-   ���饤����Ȥ������Ф��Ť��ȵ��դ����Ȥ��ˤ�, �Ť��ץ��ȥ����
-   ���Ǥ��������Ƥ��������. �����ʤä���, ���饤����Ȥ�
-   �����ФȤ���³���Ĥ�, �����ƸŤ����饤����Ȥ�Ȥäƺ���³
-   ����ɬ�פ�����.
+   新しいクライアントは (サーバの識別文字列を受けとる前に) 自分の
+   識別文字列のあと別のデータをすぐに送ってもよいので,
+   クライアントがサーバが古いと気付いたときには, 古いプロトコルは
+   すでに崩壊しているだろう. こうなったら, クライアントは
+   サーバとの接続を閉じ, そして古いクライアントを使って再接続
+   する必要がある.
 
 5. Binary Packet Protocol
 
-5. �Х��ʥ�ѥ��åȥץ��ȥ���
+5. バイナリパケットプロトコル
 
    Each packet is in the following format:
 
-   ���줾��Υѥ��åȤϼ��Υե����ޥåȤ˽���
+   それぞれのパケットは次のフォーマットに従う
 
      uint32    packet_length
      byte      padding_length
@@ -462,7 +462,7 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
       packet_length
 
-      �ѥ��å�Ĺ
+      パケット長
 
 Ylonen & Moffat, Editor    Expires March 31, 2004               [Page 5]
 
@@ -472,49 +472,49 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
          The length of the packet (bytes), not including MAC or the
          packet_length field itself.
 	 
-	 �ѥ��åȤ�Ĺ�� (�Х���). MAC �� packet_length �ե�����ɤ��Τ��
-	 ��ޤޤʤ�.
+	 パケットの長さ (バイト). MAC や packet_length フィールドそのもの
+	 を含まない.
 
       padding_length
 
-      �ѥǥ���Ĺ
+      パディング長
 
          Length of padding (bytes).
 
-	 �ѥǥ��󥰤�Ĺ�� (�Х���).
+	 パディングの長さ (バイト).
 
       payload
 
-      �ڥ�������
+      ペイロード
 
          The useful contents of the packet.  If compression has been
          negotiated, this field is compressed.  Initially, compression
          MUST be "none".
 
-	 �ѥ��åȤ�ͭ�������. ���̤��������Ƥ�����,
-	 ���Υե�����ɤϰ��̤���Ƥ���. �ǽ�Τ�����
-	 ���̤�"none"�Ǥʤ��ƤϤʤ�ʤ�.
+	 パケットの有効な中身. 圧縮が取り決められていたら,
+	 このフィールドは圧縮されている. 最初のうちは
+	 圧縮は"none"でなくてはならない.
 
       random padding
 
-      ������ѥǥ���
+      ランダムパディング
       
          Arbitrary-length padding, such that the total length of
          (packet_length || padding_length || payload || padding) is a
          multiple of the cipher block size or 8, whichever is larger.
 
-	 (packet_length || padding_length || payload || padding) ��
-	 ���Ƥ�Ĺ�����Ź�Υ֥��å��������� 8 �Τɤ��餫�礭���ۤ���
-	 �ܿ��ˤʤ�褦��, Ǥ�դ�Ĺ���Υѥǥ���.
+	 (packet_length || padding_length || payload || padding) の
+	 全ての長さが暗号のブロックサイズか 8 のどちらか大きいほうの
+	 倍数になるような, 任意の長さのパディング.
 
 
          There MUST be at least four bytes of padding.  The padding
          SHOULD consist of random bytes.  The maximum amount of padding
          is 255 bytes.
 
-	 �����ʤ��Ȥ� 4 �Х��ȤΥѥǥ��󥰤��ʤ��ƤϤʤ�ʤ�.
-	 ���Υѥǥ��󥰤ϥ�����ʥХ��Ȥǹ�������Ƥ���ɬ�פ�����.
-	 �ѥǥ��󥰤κ����̤� 255 �Х��Ȥ�.
+	 すくなくとも 4 バイトのパディングがなくてはならない.
+	 このパディングはランダムなバイトで構成されている必要がある.
+	 パディングの最大量は 255 バイトだ.
 
       mac
 
@@ -524,9 +524,9 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
          been negotiated, this field contains the MAC bytes.  Initially,
          the MAC algorithm MUST be "none".
 
-	 ��å�����ǧ�ڥ�����. ��å�����ǧ�ڤ��������Ƥ�����
-	 ���Υե�����ɤ� MAC ��ޤ�. �ǽ�Τ�����, MAC �Υ��르�ꥺ���
-	 "none"�Ǥʤ���Фʤ�ʤ�.
+	 メッセージ認証コード. メッセージ認証が取り決められていたら
+	 このフィールドは MAC を含む. 最初のうちは, MAC のアルゴリズムは
+	 "none"でなければならない.
 
 
    Note that length of the concatenation of packet length, padding
@@ -536,25 +536,25 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    also encrypted, and processing it requires special care when sending
    or receiving packets.
 
-   packet length, padding length, payload, padding ��Ϣ�ʤ��Ĺ����
-   �Ź�Υ֥��å��������� 8 �Τɤ��餫�礭���ۤ����ܿ��Ǥʤ��ƤϤʤ�ʤ�
-   ���Ȥ�����. �������¤�, ���ȥ꡼��Ź���Ѥ������Ǥ⶯�������.
-   �ѥ��åȤ�Ĺ���Υե�����ɤ�Ź沽�����, ������������ˤ�
-   �ѥ��åȤ��������������̤����դ�ɬ�פʤ��Ȥ����դ���.
+   packet length, padding length, payload, padding の連なりの長さは
+   暗号のブロックサイズか 8 のどちらか大きいほうの倍数でなくてはならない
+   ことに注意. この制限は, ストリーム暗号を用いた場合でも強制される.
+   パケットの長さのフィールドも暗号化されて, それを処理するには
+   パケットの送受信時に特別な注意が必要なことに注意せよ.
 
    The minimum size of a packet is 16 (or the cipher block size,
    whichever is larger) bytes (plus MAC); implementations SHOULD decrypt
    the length after receiving the first 8 (or cipher block size,
    whichever is larger) bytes of a packet.
 
-   �ѥ��åȤκǾ��Υ������� 16 (�ʤ����Ź�Υ֥��å��Υ�����,
-   �ɤ��餫�礭���ۤ�) �Х��� (�� MAC) ��. �����ϥѥ��åȤκǽ�� 8 (�ʤ���
-   �Ź�Υ֥��å��Υ�����, �ɤ��餫�礭���ۤ�) �Х��Ȥ��������
-   ���Ȥ�, ����Ĺ�������椹��ɬ�פ�����.
+   パケットの最小のサイズは 16 (ないし暗号のブロックのサイズ,
+   どちらか大きいほう) バイト (に MAC) だ. 実装はパケットの最初の 8 (ないし
+   暗号のブロックのサイズ, どちらか大きいほう) バイトを受信した
+   あとで, その長さを復号する必要がある.
 
 5.1 Maximum Packet Length
 
-5.1 ����ѥ��å�Ĺ
+5.1 最大パケット長
 
    All implementations MUST be able to process packets with uncompressed
    payload length of 32768 bytes or less and total packet size of 35000
@@ -574,45 +574,45 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    length is reasonable for the implementation to avoid 
    denial-of-service and/or buffer overflow attacks.
 
-   ���٤Ƥμ����ϰ��̤���Ƥ��ʤ��ڥ������ɤ�Ĺ���� 32768 �Х��Ȱʲ���
-   ���ѥ��åȤΥ����� (length, padding length, payload, padding ,MAC
-   ���ޤޤ��) �� 35000 �Х��Ȱʲ��Υѥ��åȤ�����Ǥ��ʤ���Фʤ�ʤ�.
-   35000 �Х��ȤȤ��������ͤ�, ���̤���Ƥ��ʤ������������礭��
-   �����������ͤ�. �����Ϥ��Ĺ���ѥ��åȤ⥵�ݡ��Ȥ���ɬ�פ�����,
-   ����Ϥ����餯ɬ�פˤʤ������, ���Ȥ���, ������
-   �������̤ξ���������ꤿ������. �����Υѥ��åȤ�
-   �С������ʸ����, ���⤽�������Ǥ��뤳�Ȥ򼨤��Ƥ������
-   �����Ƥ�褤. ������, �ѥ��åȤ�Ĺ����,
-   �����ӥ���ǽ�����Хåե������С��ե���������򤱤뤿���
-   �����ˤȤäƹ���Ū�Ǥ��뤫, �����ϸ�������ɬ�פ�����.
+   すべての実装は圧縮されていないペイロードの長さが 32768 バイト以下で
+   全パケットのサイズ (length, padding length, payload, padding ,MAC
+   が含まれる) が 35000 バイト以下のパケットを処理できなければならない.
+   35000 バイトという最大値は, 圧縮されていないサイズよりも大きい
+   勝手に選んだ値だ. 実装はより長いパケットもサポートする必要がある,
+   それはおそらく必要になるだろう, たとえば, 実装が
+   非常に大量の証明書を送りたい場合に. それらのパケットは
+   バージョン文字列が, 相手もそれを処理できることを示している場合に
+   送られてもよい. しかし, パケットの長さが,
+   サービス不能攻撃やバッファオーバーフロー攻撃を避けるために
+   実装にとって合理的であるか, 実装は検査する必要がある.
 
 5.2 Compression
 
-5.2 ����
+5.2 圧縮
 
    If compression has been negotiated, the payload field (and only it)
    will be compressed using the negotiated algorithm. The length field
    and MAC will be computed from the compressed payload. Encryption will
    be done after compression.
 
-   ���̤�������줿��, �ڥ������ɥե������ (�����Ƥ���Τ�) ��
-   �����館�����르�ꥺ��ˤ�äư��̤����. Ĺ���Υե�����ɤ�
-   MAC �ϰ��̤��줿�ڥ������ɤ��Ф��Ʒ׻������. �Ź沽�ϰ��̤Τ��Ȥ�
-   �Ԥʤ���.
+   圧縮が取り決められたら, ペイロードフィールド (そしてそれのみ) が
+   取り決めらえたアルゴリズムによって圧縮される. 長さのフィールドや
+   MAC は圧縮されたペイロードに対して計算される. 暗号化は圧縮のあとで
+   行なわれる.
 
    Compression MAY be stateful, depending on the method. Compression
    MUST be independent for each direction, and implementations MUST
    allow independently choosing the algorithm for each direction.
 
-   ���̤�, ������ˡ�˰�¸����, ���ơ��ȥե�Ǥ�褤
-   (���־������äƤ�褤). ���̤��������줾����Ф�����Ω��
-   �ʤ���Фʤ�ʤ�. �ޤ�, �������������줾����Ф��ƥ��르�ꥺ���
-   ��Ω�����٤�褦�ˤ��ʤ���Фʤ�ʤ�.
+   圧縮は, その方法に依存して, ステートフルでもよい
+   (状態情報を持ってもよい). 圧縮は方向それぞれに対して独立で
+   なければならない. また, 実装は方向それぞれに対してアルゴリズムを
+   独立に選べるようにしなければならない.
    
 
    The following compression methods are currently defined:
 
-   �ʲ��ΰ���ˡ�������������Ƥ���:
+   以下の圧縮法が現在定義されている:
 
      none     REQUIRED        no compression
      zlib     OPTIONAL        ZLIB (LZ77) compression
@@ -627,27 +627,27 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    bits counting from the start of the end-of-block code of the current
    block to the end of the packet payload.
 
-   "zlib"���̤� [RFC1950] �� [RFC1951] �ǵ��Ҥ���Ƥ���.
-   ���̥���ƥ����Ȥ�, ���줾��θ���򴹤�����ǽ��������,
-   ���줾��Υѥ��åȤκǸ�ǹԤ�����ʬŪ�� (partial) flush �ΤߤȤȤ��
-   ��ĤΥѥ��åȤ��鼡�Τ�Τ������. ��ʬŪ�� flush ���Ԥʤ����,
-   ���߰��̤���Ƥ���֥��å����Ǹ�ޤǤ��ä�, ���٤ƤΥǡ��������Ϥ�
-   �ʤ�. �⤷���ߤΥ֥��å�����¸����� (stored) ���ʤ��ʤ�,
-   ���ߤΥ֥��å��� �֥��å��κǸ�Υ����ɤγ��Ϥ���
-   �ѥ��åȤΥڥ������ɤκǸ�ޤǤ����ʤ��Ȥ� 8bit ñ�̤ǿ������뤳��
-   ���ݾڤ���褦�˸��ߤΥ֥��å��Τ��Ȥ˰�İʾ��
-   ���Υ֥��å���­�����. (�褦�� align ����)
+   "zlib"圧縮は [RFC1950] と [RFC1951] で記述されている.
+   圧縮コンテキストは, それぞれの鍵を交換した後で初期化され,
+   それぞれのパケットの最後で行われる部分的な (partial) flush のみとともに
+   一つのパケットから次のものに伝わる. 部分的な flush が行なわれると,
+   現在圧縮されているブロックが最後までいって, すべてのデータが出力に
+   なる. もし現在のブロックが保存されて (stored) いないなら,
+   現在のブロックの ブロックの最後のコードの開始から
+   パケットのペイロードの最後まですくなくとも 8bit 単位で数えられること
+   を保証するように現在のブロックのあとに一つ以上の
+   空のブロックが足される. (ようは align する)
 
 
-# zlib Ū�ˤ� sync flush �Ȥʤä�
+# zlib 的には sync flush となった
 #define Z_PARTIAL_FLUSH 1 
 	/* will be removed, use Z_SYNC_FLUSH instead */
 #define Z_SYNC_FLUSH 2
-# zlib.h �������򸫤��ۤ����狼��䤹��. ��ΤǤϤ狼���.
-# ssh �μ���Ū�ˤ� zlib ��Ȥä�
+# zlib.h の説明を見たほうがわかりやすい. 上のではわからん.
+# ssh の実装的には zlib を使って
 # status = deflate (&outgoing_stream, Z_PARTIAL_FLUSH);
-# �ʤɤȤ�������Ǥ���. (OpenSSH 3.1p1 compress.c)
-# zlib.h ���
+# などとするだけである. (OpenSSH 3.1p1 compress.c)
+# zlib.h より
 #####
     If the parameter flush is set to Z_SYNC_FLUSH, all pending output is
   flushed to the output buffer and the output is aligned on a byte boundary, so
@@ -660,21 +660,21 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
    Additional methods may be defined as specified in [SSH-ARCH].
 
-   �̤���ˡ�� [SSH-ARCH] ���������Ƥ��뤫�⤷��ʤ�.
+   別の方法が [SSH-ARCH] で定義されているかもしれない.
 
 5.3 Encryption
 
-5.3 �Ź沽
+5.3 暗号化
 
    An encryption algorithm and a key will be negotiated during the key
    exchange.  When encryption is in effect, the packet length, padding
    length, payload and padding fields of each packet MUST be encrypted
    with the given algorithm.
 
-   �Ź沽���르�ꥺ��ȸ��ϸ��򴹤κݤ˼�������. �Ź沽��
-   �»ܤ��줿��, ���줾��Υѥ��åȤ� packet length, padding length,
-   payload, padding �ե�����ɤ�Ϳ����줿���르�ꥺ��ǰŹ沽
-   ����ʤ���Фʤ�ʤ�
+   暗号化アルゴリズムと鍵は鍵交換の際に取り決められる. 暗号化が
+   実施されたら, それぞれのパケットの packet length, padding length,
+   payload, padding フィールドは与えられたアルゴリズムで暗号化
+   されなければならない
 
    The encrypted data in all packets sent in one direction SHOULD be
    considered a single data stream.  For example, initialization vectors
@@ -682,21 +682,21 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    next packet. All ciphers SHOULD use keys with an effective key length
    of 128 bits or more.
 
-   �������������뤹�٤ƤΥѥ��åȤΰŹ沽���줿�ǡ�����
-   ñ��Υǡ������ȥ꡼��Ȥߤʤ���ɬ�פ�����. ���Ȥ���,
-   (�Ź��) ������٥��ȥ� (���������) ��, ����ѥ��åȤκǸ夫��
-   ���Υѥ��åȤκǽ����������ɬ�פ�����. ���٤ƤΰŹ椬
-   128bit ������ʾ��ͭ����Ĺ������ĸ���Ȥ�ɬ�פ�����.
+   一方向に送られるすべてのパケットの暗号化されたデータは
+   単一のデータストリームとみなせる必要がある. たとえば,
+   (暗号の) 初期化ベクトル (初期化配列) は, あるパケットの最後から
+   次のパケットの最初に伝えられる必要がある. すべての暗号が
+   128bit かそれ以上の有効な長さを持つ鍵を使う必要がある.
 
    The ciphers in each direction MUST run independently of each other,
    and implementations MUST allow independently choosing the algorithm
    for each direction (if multiple algorithms are allowed by local
    policy).
    
-   ���줾��������ΰŹ�ϸߤ�����Ω��ư���ͤФʤ�ʤ���,
-   �����Ϥ��줾��������Υ��르�ꥺ�����Ω�����٤�褦�ˤ��ʤ����
-   �ʤ�ʤ�
-   (�⤷ʣ���Υ��르�ꥺ�ब��������ʥݥꥷ���ˤ�äƵ�����Ƥ���ʤ�).
+   それぞれの方向の暗号は互いに独立に動かねばならないし,
+   実装はそれぞれの方向のアルゴリズムを独立に選べるようにしなければ
+   ならない
+   (もし複数のアルゴリズムがローカルなポリシーによって許されているなら).
 
 
 
@@ -707,7 +707,7 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
    The following ciphers are currently defined:
 
-   �ʲ��ΰŹ椬�����������Ƥ���:
+   以下の暗号が現在定義されている:
 
      3des-cbc         REQUIRED          three-key 3DES in CBC mode
      blowfish-cbc     OPTIONALi         Blowfish in CBC mode
@@ -731,7 +731,7 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
      cast128-cbc      OPTIONAL          CAST-128 in CBC mode
      none             OPTIONAL          no encryption; NOT RECOMMENDED
 
-###����: OPTIONALi�ϸ�����.
+###訳注: OPTIONALiは誤植か.
 
    The "3des-cbc" cipher is three-key triple-DES
    (encrypt-decrypt-encrypt), where the first 8 bytes of the key are
@@ -742,46 +742,46 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    one initialization vector).  This is a block cipher with 8 byte
    blocks.  This algorithm is defined in [FIPS-46-3]
 
-   "3des-cbc"�Ź��, 3 �Ĥθ��� triple-DES (�Ź沽-���沽-�Ź沽)
-   ��, ���κǽ�� 8bytes ���ǽ�ΰŹ沽�˼��� 8 �Х��Ȥ����沽��
-   �����Ƽ��� 8 �Х��Ȥ��Ǹ�ΰŹ沽�˻Ȥ���. ������, ���Υǡ�����
-   24byte �Ǥ��뤳�Ȥ��׵᤹�� (������Ǽºݤ˻Ȥ���Τ� 168bit ��).
-   CBC �⡼�ɤǼ��������Τ�, outer chaining ���Ȥ��ʤ���Фʤ�ʤ�.
+   "3des-cbc"暗号は, 3 つの鍵の triple-DES (暗号化-復号化-暗号化)
+   で, 鍵の最初の 8bytes が最初の暗号化に次の 8 バイトが復号化に
+   そして次の 8 バイトが最後の暗号化に使われる. こえは, 鍵のデータが
+   24byte であることを要求する (その中で実際に使われるのは 168bit だ).
+   CBC モードで実装されるので, outer chaining が使われなければならない.
    ([SCHNEIER] p360, 
-   �ޤ� Biham has shown that inner chaining weakens 3DES. �餷��)
-   (���ʤ��, ������٥��ȥ�Ϥ��ä����).
-   ����� 8 �Х��ȤΥ֥��å�����ĥ֥��å��Ź��. ���Υ��르�ꥺ���
-   [FIPS-46-3] ���������Ƥ���.
+   また Biham has shown that inner chaining weakens 3DES. らしい)
+   (すなわち, 初期化ベクトルはたった一つ).
+   これは 8 バイトのブロックを持つブロック暗号だ. このアルゴリズムは
+   [FIPS-46-3] で定義されている.
 
    The "blowfish-cbc" cipher is Blowfish in CBC mode, with 128 bit keys
    [SCHNEIER]. This is a block cipher with 8 byte blocks.
 
-   "blowfish-cbc" �Ź�� CBC �⡼�ɤ� 128bit �θ��� Blowfish �� [SCHNEIER].
-   ����� 8 �Х��ȤΥ֥��å�����ĥ֥��å��Ź��.
+   "blowfish-cbc" 暗号は CBC モードで 128bit の鍵の Blowfish だ [SCHNEIER].
+   これは 8 バイトのブロックを持つブロック暗号だ.
 
    The "twofish-cbc" or "twofish256-cbc" cipher is Twofish in CBC mode,
    with 256 bit keys as described [TWOFISH]. This is a block cipher with
    16 byte blocks.
 
-   "twofish-cbc"�ʤ���   "twofish256-cbc" �Ź�� [TWOFISH] �˵��Ҥ���Ƥ���
-   CBC �⡼�ɤ� 256 �ӥåȤθ������ Twofish ��.
-   ����� 16 �Х��ȤΥ֥��å�����ĥ֥��å��Ź��.
+   "twofish-cbc"ないし   "twofish256-cbc" 暗号は [TWOFISH] に記述されている
+   CBC モードで 256 ビットの鍵を持つ Twofish だ.
+   これは 16 バイトのブロックを持つブロック暗号だ.
 
    The "twofish192-cbc" cipher. Same as above but with 192-bit key.
 
-   "twofish192-cbc" �Ź�. ���Ʊ�ͤ������� 192 �ӥå�.
+   "twofish192-cbc" 暗号. 上と同様だが鍵が 192 ビット.
 
    The "twofish128-cbc" cipher. Same as above but with 128-bit key.
 
-   "twofish128-cbc" �Ź�. ���Ʊ�ͤ������� 128 �ӥå�
+   "twofish128-cbc" 暗号. 上と同様だが鍵が 128 ビット
 
    The "aes256-cbc" cipher is AES (Advanced Encryption Standard)
    [FIPS-197], formerly Rijndael, in CBC mode. This version uses 256-bit
    key.
 
-   "aes256-cbc" �Ź�� CBC �⡼�ɤ�, ������ Rijndael �ȸ��ä�
-   AES (Advanced Encryption Standard)[FIPS-197] ��.
-   ���ΥС������� 256bit �θ������.
+   "aes256-cbc" 暗号は CBC モードの, 以前は Rijndael と言った
+   AES (Advanced Encryption Standard)[FIPS-197] だ.
+   このバージョンは 256bit の鍵を持つ.
 
 
 
@@ -793,25 +793,25 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
    The "aes192-cbc" cipher. Same as above but with 192-bit key.
 
-   "aes192-cbc" �Ź�. ���Ʊ�ͤ������� 192 �ӥå�.
+   "aes192-cbc" 暗号. 上と同様だが鍵が 192 ビット.
 
    The "aes128-cbc" cipher. Same as above but with 128-bit key.
 
-   "aes128-cbc" �Ź�. ���Ʊ�ͤ������� 128 �ӥå�.
+   "aes128-cbc" 暗号. 上と同様だが鍵が 128 ビット.
 
    The "serpent256-cbc" cipher in CBC mode, with 256-bit key as
    described in the Serpent AES submission.
 
-   "serpent256-cbc" �Ź�� CBC �⡼�ɤ� 256bit �θ������
-   Serpent AES ��Ƥǵ��Ҥ��줿���.
+   "serpent256-cbc" 暗号は CBC モードで 256bit の鍵を持つ
+   Serpent AES 提案で記述されたもの.
 
    The "serpent192-cbc" cipher. Same as above but with 192-bit key.
 
-   "serpent192-cbc" �Ź�. ���Ʊ�ͤ������� 192 �ӥå�.
+   "serpent192-cbc" 暗号. 上と同様だが鍵が 192 ビット.
 
    The "serpent128-cbc" cipher. Same as above but with 128-bit key.
 
-   "serpent128-cbc" �Ź�. ���Ʊ�ͤ������� 128 �ӥå�.
+   "serpent128-cbc" 暗号. 上と同様だが鍵が 128 ビット.
 
    The "arcfour" is the Arcfour stream cipher with 128 bit keys. The
    Arcfour cipher is believed to be compatible with the RC4 cipher
@@ -819,25 +819,25 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    Arcfour (and RC4) has problems with weak keys, and should be used
    with caution.
 
-   "arcfour"�� 128bit �θ������ Arcfour ���ȥ꡼��Ź��.
-   Arcfour �Ź�� RC4 �Ź� [SCHNEIER] �ȸߴ���������Ȼפ��Ƥ���.
-   RC4 �� RSA �ǡ����������ƥ�����Ͽ��ɸ��.
-   Arcfour (�� RC4) �ϼ夤��������Ȥ����������äƤ���Τ�,
-   �Ȥ��ݤˤ����դ�ɬ�פ�.
+   "arcfour"は 128bit の鍵を持つ Arcfour ストリーム暗号だ.
+   Arcfour 暗号は RC4 暗号 [SCHNEIER] と互換性があると思われている.
+   RC4 は RSA データセキュリティの登録商標だ.
+   Arcfour (と RC4) は弱い鍵があるという問題を持っているので,
+   使う際には注意が必要だ.
 
 
 
 
    The "idea-cbc" cipher is the IDEA cipher in CBC mode [SCHNEIER].
    
-   "idea-cbc"�Ź�� CBC �⡼�ɤ� IDEA �Ź�� [SCHNEIER].
+   "idea-cbc"暗号は CBC モードの IDEA 暗号だ [SCHNEIER].
 
-##����:   IDEA���õ����ڤ줿.
+##訳注:   IDEAの特許は切れた.
 
    The "cast128-cbc" cipher is the CAST-128 cipher in CBC mode
    [RFC2144].
 
-   "cast128-cbc" �Ź�� CBC �⡼�ɤ� CAST-128 �Ź�� [RFC2114].
+   "cast128-cbc" 暗号は CBC モードの CAST-128 暗号だ [RFC2114].
    
    The "none" algorithm specifies that no encryption is to be done.
    Note that this method provides no confidentiality protection, and it
@@ -845,26 +845,26 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    authentication) may be disabled for security reasons if this cipher
    is chosen.
 
-   "none" ���르�ꥺ��Ϥɤ�ʰŹ沽�⤵��Ƥ��ʤ����Ȥ򼨤�.
-   ������ˡ�� ��̩���ݸ��ޤä����󶡤��ʤ���, �������ʤ�.
-   ���ΰŹ椬���Ф줿��� �����Ĥ��ε�ǽ (���Ȥ��� �ѥ����ǧ��) �� 
-   �������ƥ������ͳ����̵���ˤ����ۤ����褤.
+   "none" アルゴリズムはどんな暗号化もされていないことを示す.
+   この方法は 秘密の保護をまったく提供しないし, 勧めれられない.
+   この暗号が選ばれた場合 いくつかの機能 (たとえば パスワード認証) は 
+   セキュリティ上の理由から無効にしたほうがよい.
 
    Additional methods may be defined as specified in [SSH-ARCH].
    
-   �̤���ˡ�� [SSH-ARCH] ���������Ƥ��뤫�⤷��ʤ�.
+   別の方法が [SSH-ARCH] で定義されているかもしれない.
 
 5.4 Data Integrity
 
-5.4 �ǡ����δ�����
+5.4 データの完全性
 
    Data integrity is protected by including with each packet a message
    authentication code (MAC) that is computed from a shared secret,
    packet sequence number, and the contents of the packet.
 
-   �ǡ����δ����� �� ���줾��Υѥ��åȤ˴ޤޤ��
-   ���̤���̩�Υѥ��åȤΥ��������ֹ�ȥѥ��åȤ����Ƥ���׻������ 
-   ��å�����ǧ�ڥ����� (MAC) �ˤ�ä��ݸ���.
+   データの完全性 は それぞれのパケットに含まれる
+   共通で秘密のパケットのシーケンス番号とパケットの内容から計算される 
+   メッセージ認証コード (MAC) によって保護される.
 
 
    The message authentication algorithm and key are negotiated during
@@ -872,10 +872,10 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    MUST be zero.  After key exchange, the selected MAC will be computed
    before encryption from the concatenation of packet data:
 
-   ��å�����ǧ�ڥ��르�ꥺ��Ȥ��θ���, ���򴹤κݤ˼�������.
-   �ǽ��, MAC ��ͭ���ǤϤʤ�, ����ή���� �����Ǥʤ��ƤϤʤ�ʤ�.
-   ���򴹤Τ���, ���򤵤줿 MAC �� �ѥ��åȤΥǡ����ΤĤ�ʤ꤫��
-   �Ź沽�����˷׻������.
+   メッセージ認証アルゴリズムとその鍵は, 鍵交換の際に取り決められる.
+   最初は, MAC は有効ではなく, その流さは ゼロでなくてはならない.
+   鍵交換のあと, 選択された MAC が パケットのデータのつらなりから
+   暗号化の前に計算される.
 
      mac = MAC (key, sequence_number || unencrypted_packet)
 
@@ -896,34 +896,34 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    wraps around to zero after every 2^32 packets. The packet sequence
    number itself is not included in the packet sent over the wire.
 
-   ������ unencrypted_packet �� MAC ��������ѥ��åȤ����� (the length
-   fields, payload , padding) ��, sequence_number �� uint32 ��ɽ�蘆���
-   ���ۤΥѥ��åȥ��������ֹ��. ���Υ��������ֹ�Ϻǽ�Υѥå��Ȥ�
-   �����˽��������, �ѥ��åȤ��Ȥ������Ƥ��� (�ɤ�ʰŹ�� MAC ���Ȥ���
-   ���Ƥ�). ����Ϸ褷�ƥꥻ�åȤ���ʤ�, ���Ȥ� ���䥢�르�ꥺ�ब
-   ���ȤǺƤӼ������Ƥ�. �����, 2^32 �ĤΥѥ��åȤ��Ȥ� 0 �����.
-   �ѥ��åȤΥ��������ֹ漫�Τ�, �̿���������ѥ��åȤˤ�
-   �ޤޤ�ʤ�.
+   ここで unencrypted_packet は MAC を除いたパケットの全て (the length
+   fields, payload , padding) で, sequence_number は uint32 で表わされる
+   暗黙のパケットシーケンス番号だ. このシーケンス番号は最初のパッケトで
+   ゼロに初期化され, パケットごとに増えていく (どんな暗号や MAC が使われて
+   いても). これは決してリセットされない, たとえ 鍵やアルゴリズムが
+   あとで再び取り決められても. これは, 2^32 個のパケットごとに 0 に戻る.
+   パケットのシーケンス番号自体は, 通信で送られるパケットには
+   含まれない.
 
    The MAC algorithms for each direction MUST run independently, and
    implementations MUST allow choosing the algorithm independently for
    both directions.
 
-   ���줾��������� MAC �Υ��르�ꥺ�����Ω��ư���ʤ��ƤϤʤ�ʤ���,
-   �����Ϥ��줾��������Υ��르�ꥺ�����Ω�����٤�褦�ˤ��ʤ����
-   �ʤ�ʤ�.
+   それぞれの方向の MAC のアルゴリズムは独立に動かなくてはならないし,
+   実装はそれぞれの方向のアルゴリズムを独立に選べるようにしなければ
+   ならない.
 
    The MAC bytes resulting from the MAC algorithm MUST be transmitted
    without encryption as the last part of the packet.  The number of MAC
    bytes depends on the algorithm chosen.
    
-   MAC ���르�ꥺ�फ�������� MAC �Х��Ȥ� �ѥ��åȤκǸ����ʬ��
-   �Ź沽�ʤ���ž������ʤ���Фʤ�ʤ�. MAC ���礭����
-   ���Ф줿���르�ꥺ��˰�¸����.
+   MAC アルゴリズムから得られる MAC バイトは パケットの最後の部分に
+   暗号化なしで転送されなければならない. MAC の大きさは
+   選ばれたアルゴリズムに依存する.
 
    The following MAC algorithms are currently defined:
 
-   �ʲ��� MAC ���르�ꥺ�ब�����������Ƥ���.
+   以下の MAC アルゴリズムが現在定義されている.
 
      hmac-sha1    REQUIRED        HMAC-SHA1 (digest length = key
                                   length = 20)
@@ -941,45 +941,45 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    The "hmac-*" algorithms are described in [RFC2104] The "*-n" MACs use
    only the first n bits of the resulting value.
 
-   "hmac-*"���르�ꥺ��� [RFC2104] �ǵ��Ҥ���Ƥ���. "*-n" MAC ��
-   ��̤��ͤκǽ�� n bit �Τߤ�Ȥ�.
+   "hmac-*"アルゴリズムは [RFC2104] で記述されている. "*-n" MAC は
+   結果の値の最初の n bit のみを使う.
 
    The hash algorithms are described in [SCHNEIER].
    
-   �ϥå��奢�르�ꥺ��ˤĤ��Ƥ� [SCHNEIER] �˵��Ҥ���Ƥ���.
+   ハッシュアルゴリズムについては [SCHNEIER] に記述されている.
 
    Additional methods may be defined as specified in [SSH-ARCH].
 
-   �̤���ˡ�� [SSH-ARCH] ���������Ƥ��뤫�⤷��ʤ�.
+   別の方法が [SSH-ARCH] で定義されているかもしれない.
 
 5.5 Key Exchange Methods
     
-5.5 ���򴹤���ˡ
+5.5 鍵交換の方法
 
    The key exchange method specifies how one-time session keys are
    generated for encryption and for authentication, and how the server
    authentication is done.
    
-   ���θ��򴹤���ˡ�Ǥ� �Ź沽��ǧ�ڤΤ���ΰ�����å���󸰤��ɤΤ褦��
-   ��������뤫, �ޤ��ɤΤ褦�˥����Ф�ǧ�ڤ��Ԥʤ��뤫���������.
+   この鍵交換の方法では 暗号化と認証のための一時セッション鍵がどのように
+   生成されるか, またどのようにサーバの認証が行なわれるかを定義する.
    
    Only one REQUIRED key exchange method has been defined:
 
-   ��Ĥ����׵ᤵ��Ƥ��븰�򴹤���ˡ���������Ƥ���.
+   一つだけ要求されている鍵交換の方法が定義されている.
 
      diffie-hellman-group1-sha1       REQUIRED
 
    This method is described later in this document.
 
-   ������ˡ�ˤĤ��ƤϤ���ʸ��Ǹ�Ҥ���.
+   この方法についてはこの文書で後述する.
 
    Additional methods may be defined as specified in [SSH-ARCH].
    
-   �̤���ˡ�� [SSH-ARCH] ���������Ƥ��뤫�⤷��ʤ�.
+   別の方法が [SSH-ARCH] で定義されているかもしれない.
 
 #Diffie-Hellman Group Exchange for the SSH Transport Layer Protocol
 #               draft-ietf-secsh-dh-group-exchange-xx.txt
-#OpenSSH �ˤ��������Ƥ���
+#OpenSSH にも実装されている
 
 
 
@@ -990,26 +990,26 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
 5.6 Public Key Algorithms
 
-5.6 ���������르�ꥺ��
+5.6 公開鍵アルゴリズム
 
    This protocol has been designed to be able to operate with almost any
    public key format, encoding, and algorithm (signature and/or
    encryption).
 
-   ���Υץ��ȥ����, �ۤܤ����븰�Υե����ޥå�, ���󥳡��ǥ���
-   ���르�ꥺ�� (��̾��/�ޤ��ϰŹ沽) �����Ǥ���褦���߷פ���Ƥ���.
+   このプロトコルは, ほぼあらゆる鍵のフォーマット, エンコーディング
+   アルゴリズム (署名と/または暗号化) を操作できるように設計されている.
 
    There are several aspects that define a public key type:
 
-   �������μ�����������Τˤ����Ĥ��θ��Ϥ�����.
+   公開鍵の種類を定義するのにいくつかの見地がある.
 
    o  Key format: how is the key encoded and how are certificates
       represented.  The key blobs in this protocol MAY contain
       certificates in addition to keys.
 
-   o  ���Υե����ޥå�: �ɤΤ褦�˸������󥳡��ɤ���ɤΤ褦��
-      ������ɽ����뤫. ���Υץ��ȥ���Ǥϸ��Υ֥��� (�����ޤ�) �ϸ��˲ä���
-      ���������äƤ�褤.
+   o  鍵のフォーマット: どのように鍵がエンコードされどのように
+      証明が表されるか. このプロトコルでは鍵のブロブ (かたまり) は鍵に加えて
+      証明書も持ってもよい.
 
    o  Signature and/or encryption algorithms.  Some key types may not
       support both signing and encryption.  Key usage may also be
@@ -1017,22 +1017,22 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
       case, different key types SHOULD be defined for the different
       policy alternatives.
 
-   o  ��̾ ��/�ʤ��� �Ź沽�Υ��르�ꥺ��. �����Ĥ��μ���θ���
-      ��̾�ȰŹ沽�������򥵥ݡ��Ȥ��Ƥ��ʤ�. ���λȤ�����,
-      ���Ȥ��о�������Υݥꥷ���������ˤ�ä����¤���뤳�Ȥ⤢��.
-      ���ξ��, �ۤʤ����θ��ϰۤʤ�ݥꥷ���������Ȥ���
-      ��������ɬ�פ�����.
+   o  署名 と/ないし 暗号化のアルゴリズム. いくつかの種類の鍵は
+      署名と暗号化の双方をサポートしていない. 鍵の使い方は,
+      たとえば証明書中のポリシーの声明によって制限されることもある.
+      この場合, 異なる種類の鍵は異なるポリシーの選択肢として
+      定義される必要がある.
 
    o  Encoding of signatures and/or encrypted data. This includes but is
       not limited to padding, byte order, and data formats.
 
-   o  ��̾ ��/�ʤ��� �Ź沽�Υ��󥳡��ǥ���. ����� 
-      (�ǡ�����? �ޤ�Ǥ��뤬)
-      �ѥǥ��󥰤�Х��ȥ�������, �ǡ����ե����ޥåȤ����¤���ʤ�.
+   o  署名 と/ないし 暗号化のエンコーディング. これは 
+      (データを? 含んでいるが)
+      パディングやバイトオーダー, データフォーマットに制限されない.
 
    The following public key and/or certificate formats are currently defined:
 
-   ���˼��������� ��/�ʤ��� ������Υե����ޥåȤ������������Ƥ���.
+   次に示す公開鍵 と/ないし 証明書のフォーマットが現在定義されている.
 
    ssh-dss              REQUIRED     sign    Raw DSS Key
    ssh-rsa              RECOMMENDED  sign    Raw RSA Key
@@ -1045,18 +1045,18 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
    Additional key types may be defined as specified in [SSH-ARCH].
 
-   �̤μ���θ��� [SSH-ARCH] ���������Ƥ��뤫�⤷��ʤ�.
+   別の種類の鍵が [SSH-ARCH] で定義されているかもしれない.
 
    The key type MUST always be explicitly known (from algorithm
    negotiation or some other source).  It is not normally included in
    the key blob.
 
-   ���μ���Ͼ�ˤϤä���� (���르�ꥺ��η���䤽��¾�Υ���������)
-   �Τ餵��ʤ���Фʤ�ʤ�. ��������̤ϸ��Υ֥��֤���ˤϴޤޤ�ʤ�.
+   鍵の種類は常にはっきりと (アルゴリズムの決定やその他のソースから)
+   知らされなければならない. これは普通は鍵のブロブの中には含まれない.
 
    Certificates and public keys are encoded as follows:
 
-   ������ȸ������ϼ��Τ褦�˥��󥳡��ɤ����:
+   証明書と公開鍵は次のようにエンコードされる:
 
      string   certificate or public key format identifier
      byte[n]  key/certificate data
@@ -1066,17 +1066,17 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    authentication; the certificate sequence contained in the certificate
    blob can be used to provide authorization.
 
-   ���������ʬ��Ĺ�� 0 ��ʸ���󤫤⤷��ʤ���, ��������ɬ�פ�.
-   �����, ǧ�ڤ˻Ȥ����������. ������Υ֥��֤˴ޤޤ��
-   ������Υ��������󥹤�ǧ�ڤ��󶡤���Τ˻Ȥ���.
+   証明書の部分は長さ 0 の文字列かもしれないが, 公開鍵は必要だ.
+   これは, 認証に使われる公開鍵だ. 証明書のブロブに含まれる
+   証明書のシークエンスは認証を提供するのに使われる.
 
    Public key / certifcate formats that do not explicitly specify a
    signature format identifier MUST use the public key / certificate
    format identifier as the signature identifier.
 
-   ��̾�Υե����ޥåȼ��̻Ҥ�����Ū�ˤ�������ʤ�
-   ������ / ������Υե����ޥåȤ�, ��̾�μ��̻Ҥ�Ʊ�ͤ�
-   ������ / ������Υե����ޥåȼ��̻Ҥ�Ȥ�ʤ��ƤϤʤ�ʤ�.
+   署名のフォーマット識別子を明示的には定義しない
+   公開鍵 / 証明書のフォーマットは, 署名の識別子と同様に
+   公開鍵 / 証明書のフォーマット識別子を使わなくてはならない.
 
 
 
@@ -1088,7 +1088,7 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
    Signatures are encoded as follows:
 
-   ��̾�ϰʲ��Τ褦�˥��󥳡��ɤ����.
+   署名は以下のようにエンコードされる.
 
      string    signature format identifier (as specified by the
                public key / cert format)
@@ -1097,7 +1097,7 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
    The "ssh-dss" key format has the following specific encoding:
 
-   "ssh-dss" ���Υե����ޥåȤϰʲ��Τ褦�����Τʥ��󥳡��ǥ��󥰤����.
+   "ssh-dss" 鍵のフォーマットは以下のような明確なエンコーディングを持つ.
 
      string    "ssh-dss"
      mpint     p
@@ -1107,19 +1107,19 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
    Here the p, q, g, and y parameters form the signature key blob.
 
-   ������, �ѥ�᡼�� p,q,g,y �� ��̾���Υ֥��֤���Τ�Τ�.
+   ここで, パラメータ p,q,g,y は 署名鍵のブロブからのものだ.
 
    Signing and verifying using this key format is done according to the
    Digital Signature Standard [FIPS-186] using the SHA-1 hash. A
    description can also be found in [SCHNEIER].
 
-   ���θ��Υե����ޥåȤ�ȤäƤν�̾�ȸ��ڤ�, SHA-1 �ϥå����Ȥ�
-   Digital Signature Standard [FIPS-186] �ˤ�äƹԤʤ���.
-   �ܺ٤� [SCHNEIER] �ˤ⤢��.
+   この鍵のフォーマットを使っての署名と検証は, SHA-1 ハッシュを使う
+   Digital Signature Standard [FIPS-186] によって行なわれる.
+   詳細は [SCHNEIER] にもある.
 
    The resulting signature is encoded as follows:
 
-   ���������������̾�ϼ��Τ褦�˥��󥳡��ɤ����.
+   ここから生じる署名は次のようにエンコードされる.
 
      string    "ssh-dss"
      string    dss_signature_blob
@@ -1128,13 +1128,13 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    (which are 160 bits long integers, without lengths or padding,
    unsigned and in network byte order).
 
-   dss_signature_blob �� (Ĺ�� (�ξ���?) ��ѥǥ��󥰤ʤ���, ���̵����
-   �ͥåȥ���Х��ȥ��������� 160bit ������) s �Τ��Ȥ� r ��ޤ�
-   ʸ����Ȥ��ƥ��󥳡��ɤ���Ƥ���.
+   dss_signature_blob は (長さ (の情報?) やパディングなしの, 符号無しで
+   ネットワークバイトオーダーの 160bit の整数) s のあとに r を含む
+   文字列としてエンコードされている.
 
    The "ssh-rsa" key format has the following specific encoding:
 
-   "ssh-rsa" ���Υե����ޥåȤϰʲ��Τ褦�����Τʥ��󥳡��ǥ��󥰤����.
+   "ssh-rsa" 鍵のフォーマットは以下のような明確なエンコーディングを持つ.
 
      string    "ssh-rsa"
      mpint     e
@@ -1142,17 +1142,17 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
    Here the e and n parameters form the signature key blob.
 
-   ������, �ѥ�᡼�� e,n �� ��̾���Υ֥��֤���Τ�Τ�.
+   ここで, パラメータ e,n は 署名鍵のブロブからのものだ.
 
    Signing and verifying using this key format is done according to
    [SCHNEIER] and [PKCS1] using the SHA-1 hash.
 
-   ���θ��Υե����ޥåȤ�ȤäƤν�̾�ȸ��ڤ�, SHA-1 �ϥå�������Ѥ���
-   [SCHNEIER] �� [PKCS1] �˽��äƹԤʤ���.
+   この鍵のフォーマットを使っての署名と検証は, SHA-1 ハッシュを利用して
+   [SCHNEIER] と [PKCS1] に従って行なわれる.
 
    The resulting signature is encoded as follows:
 
-   ���������������̾�ϼ��Τ褦�˥��󥳡��ɤ����.
+   ここから生じる署名は次のようにエンコードされる.
 
      string    "ssh-rsa"
      string    rsa_signature_blob
@@ -1161,9 +1161,9 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    integer, without lengths or padding, unsigned and in network byte
    order).
 
-   rsa_signature_blob �� (Ĺ�� (�ξ���?) ��ѥǥ��󥰤ʤ���, ���̵����
-   �ͥåȥ���Х��ȥ�������������) s ��ޤ�ʸ����Ȥ���
-   ���󥳡��ɤ����.
+   rsa_signature_blob は (長さ (の情報?) やパディングなしの, 符号無しで
+   ネットワークバイトオーダーの整数) s を含む文字列として
+   エンコードされる.
 
 Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 12]
 
@@ -1175,33 +1175,33 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    certificates is described in [RFC2693]. This method indicates that
    the key (or one of the keys in the certificate) is an RSA-key.
 
-   "spki-sign-rsa" ˡ��, ������Υ֥��֤� SPKI ������Υ���������
-   ��ޤळ�Ȥ򼨤�. SPKI ������Υե����ޥåȤ� [RFC2693]
-   �˵��Ҥ���Ƥ���. ������ˡ�� �� (�ʤ�����������θ��ΰ��) ��
-   RSA ���Ǥ��뤳�Ȥ򼨤�.
+   "spki-sign-rsa" 法は, 証明書のブロブが SPKI 証明書のシークエンス
+   を含むことを示す. SPKI 証明書のフォーマットは [RFC2693]
+   に記述されている. この方法は 鍵 (ないし証明書中の鍵の一つ) が
+   RSA 鍵であることを示す.
    
    The "spki-sign-dss". As above, but indicates that the key (or one of
    the keys in the certificate) is a DSS-key.
 
-   "spki-sign-dss". ���Ʊ�ͤ���, �� (�ʤ�����������θ��ΰ��) ��
-   DSS ���Ǥ��뤳�Ȥ򼨤�.
+   "spki-sign-dss". 上と同様だが, 鍵 (ないし証明書中の鍵の一つ) が
+   DSS 鍵であることを示す.
 
    The "pgp-sign-rsa" method indicates the certificates, the public key,
    and the signature are in OpenPGP compatible binary format
    ([RFC2440]). This method indicates that the key is an RSA-key.
 
-   "pgp-sign-rsa" ˡ��, ������, ������, ��̾�� OpenPGP �ߴ�
-   �Х��ʥ�ե����ޥå� ([RFC2440]) �Ǥ��뤳�Ȥ򼨤�.
-   ������ˡ�ϸ��� RSA ���Ǥ��뤳�Ȥ򼨤�.
+   "pgp-sign-rsa" 法は, 証明書, 公開鍵, 署名が OpenPGP 互換
+   バイナリフォーマット ([RFC2440]) であることを示す.
+   この方法は鍵が RSA 鍵であることを示す.
    
    The "pgp-sign-dss". As above, but indicates that the key is a 
    DSS-key.
 
-   pgp-sign-dss". ���Ʊ�ͤ���, ������ˡ�ϸ��� DSS ���Ǥ��뤳�Ȥ򼨤�.
+   pgp-sign-dss". 上と同様だが, この方法は鍵が DSS 鍵であることを示す.
 
 6. Key Exchange
 
-6. ���θ�
+6. 鍵の交換
 
    Key exchange begins by each side sending lists of supported
    algorithms. Each side has a preferred algorithm in each category, and
@@ -1210,37 +1210,37 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    the other side is using, and MAY send an initial key exchange packet
    according to the algorithm if appropriate for the preferred method.
 
-   ���θ򴹤Ϥ��ߤ������ݡ��Ȥ��륢�르�ꥺ��Υꥹ�Ȥ����ꤢ�ä�
-   �Ϥޤ�. ���ߤ����������Ƥ�ͥ�褹�륢�르�ꥺ�ब���뤬,
-   ���λ�����¿���μ�����Ʊ�����르�ꥺ���ͥ�褷��
-   �Ȥ����Ȥ����ꤵ��Ƥ���.
-   �ɤ����¦��⤦������¦���ɤ�ʥ��르�ꥺ���Ȥ������¬���Ƥ�
-   �褤��, ������ˡ�ˤȤä�Ŭ�ڤʤ餽�Υ��르�ꥺ��˽��ä�
-   �ǽ�θ��򴹥ѥ��åȤ����äƤ�褤.
+   鍵の交換はお互いがサポートするアルゴリズムのリストを送りあって
+   始まる. お互いがその範疇で優先するアルゴリズムがあるが,
+   その時々で多くの実装が同じアルゴリズムを優先して
+   使うことが仮定されている.
+   どちらの側ももう一方の側がどんなアルゴリズムを使うかを推測しても
+   よいし, 好む方法にとって適切ならそのアルゴリズムに従って
+   最初の鍵交換パケットを送ってもよい.
    
 
    Guess is considered wrong, if:
 
-   �ʲ��ξ��Ͽ�¬���ְ�äƤ���Ȥߤʤ����:
+   以下の場合は推測が間違っているとみなされる:
 
    o  the kex algorithm and/or the host key algorithm is guessed wrong
       (server and client have different preferred algorithm), or
 
-   o  ���򴹤Υ��르�ꥺ�� ��/�ʤ��� �ۥ��ȸ��Υ��르�ꥺ�ब
-      ���äƿ�¬���줿 (�����Фȥ��饤����Ȥ��ۤʤ륢�르�ꥺ���
-      ͥ�褷�Ƥ���) ��,
+   o  鍵交換のアルゴリズム と/ないし ホスト鍵のアルゴリズムが
+      誤って推測された (サーバとクライアントが異なるアルゴリズムを
+      優先している) か,
 
    o  if any of the other algorithms cannot be agreed upon (the
       procedure is defined below in Section Section 6.1).
 
-   o  �⤦������¦�Υ��르�ꥺ��Τɤ�ˤ���פǤ��ʤ�. (���μ�³����
-      �ʲ��Υ�������� 6.1 ����������)
+   o  もう一方の側のアルゴリズムのどれにも一致できない. (この手続きは
+      以下のセクション 6.1 で定義される)
 
    Otherwise, the guess is considered to be right and the optimistically
    sent packet MUST be handled as the first key exchange packet.
 
-   ����ʤ����, ��¬���������ȸ��ʤ���, �ڴ�Ū������줿�ѥ��åȤ�
-   �ǽ�θ��򴹤Υѥ��åȤȤ��ư����ʤ��ƤϤʤ�ʤ�.
+   さもなければ, 推測は正しいと見なされ, 楽観的に送られたパケットは
+   最初の鍵交換のパケットとして扱われなくてはならない.
 
    However, if the guess was wrong, and a packet was optimistically sent
    by one or both parties, such packets MUST be ignored (even if the
@@ -1248,29 +1248,29 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    packet(s)), and the appropriate side MUST send the correct initial
    packet.
 
-   ������, ��¬���ְ�äƤ��ư�������ʤ���ξ������ڴ�Ū������줿
-   �ѥ��åȤ�����ʤ�, ���Τ褦�ʥѥ��åȤ�̵�뤵��ʤ���Фʤ�ʤ�
-   (���Ȥ����ο�¬�θ��꤬�ǽ�Υѥ��åȤ����Ƥ˱ƶ����ʤ��Ƥ�) ��,
-   Ŭ����¦���������ǽ�Υѥ��åȤ�����ʤ���Фʤ�ʤ�.
+   しかし, 推測が間違っていて一方からないし両方から楽観的に送られた
+   パケットがあるなら, そのようなパケットは無視されなければならない
+   (たとえその推測の誤りが最初のパケットの内容に影響しなくても) し,
+   適当な側が正しい最初のパケットを送らなければならない.
 
    Server authentication in the key exchange MAY be implicit.  After a
    key exchange with implicit server authentication, the client MUST
    wait for response to its service request message before sending any
    further data.
 
-   ��ǧ�ڤǤΥ����Ф�ǧ�ڤ�, ����Ū�Ǥʤ��Ƥ�褤.
-   ������ǧ�ڤ�����Ū�Ǥʤ����ϸ��򴹤Τ���, ���饤����Ȥ�
-   ������Υǡ������������˼���Υ����ӥ��׵��å�����������
-   ȿ�����Ԥ��ʤ��ƤϤʤ�ʤ�.
+   鍵認証でのサーバの認証は, 明示的でなくてもよい.
+   サーバ認証が明示的でない場合は鍵交換のあと, クライアントは
+   その先のデータを送る前に自らのサービス要求メッセージの前に
+   反応を待たなくてはならない.
 
 6.1 Algorithm Negotiation
 
-6.1 ���르�ꥺ��μ����
+6.1 アルゴリズムの取り決め
 
    Key exchange begins by each side sending the following packet:
 
-   ���򴹤�, ���줾���¦����������
-   ���Τ褦�ʥѥ��åȤˤ�äƻϤ����.
+   鍵交換は, それぞれの側から送られる
+   次のようなパケットによって始められる.
 
 
 
@@ -1298,26 +1298,26 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    algorithm names (see ''Algorithm Naming'' in [SSH-ARCH]). Each
    supported (allowed) algorithm MUST be listed in order of preference.
 
-   �ɤΥ��르�ꥺ��ʸ�����, ���르�ꥺ��̾�Υ���޶��ڤ�ꥹ��
-   �Ǥʤ���Фʤ�ʤ� ( [SSH-ARCH] �Υ��르�ꥺ��̿̾��§�򸫤�)
-   �ɤΥ��ݡ��Ȥ��� (���Ĥ���) ���르�ꥺ���,
-   ͥ�褹�����¤٤ʤ��ƤϤʤ�ʤ�.
+   どのアルゴリズム文字列の, アルゴリズム名のコンマ区切りリスト
+   でなければならない ( [SSH-ARCH] のアルゴリズム命名規則を見よ)
+   どのサポートする (許可する) アルゴリズムも,
+   優先する順に並べなくてはならない.
 
    The first algorithm in each list MUST be the preferred (guessed)
    algorithm.  Each string MUST contain at least one algorithm name.
 
-   �ɤΥꥹ�Ȥˤ����Ƥ�ǽ�Υ��르�ꥺ�ब, ͥ�褹�� (��¬����)
-   ���르�ꥺ��Ǥʤ��ƤϤʤ�ʤ�. ���줾���ʸ�����
-   ���ʤ��Ȥ��ĤΥ��르�ꥺ��̾��ޤޤͤФʤ�ʤ�.
+   どのリストにおいても最初のアルゴリズムが, 優先する (推測する)
+   アルゴリズムでなくてはならない. それぞれの文字列は
+   少なくとも一つのアルゴリズム名を含まねばならない.
 
       cookie
          The cookie MUST be a random value generated by the sender.  Its
          purpose is to make it impossible for either side to fully
          determine the keys and the session identifier.
 
-	 ���Υ��å����������ˤ�ä��������줿��������ͤǤʤ����
-	 �ʤ�ʤ�. ������Ū��, ���ȥ��å����μ��̻Ҥ�⤦������¦��
-	 �����˳��Ф����Ȥ��Բ�ǽ�ˤ��뤳�Ȥ�.
+	 このクッキーは送り手によって生成されたランダムな値でなければ
+	 ならない. この目的は, 鍵とセッションの識別子をもう一方の側が
+	 完全に割り出すことを不可能にすることだ.
 
       kex_algorithms
          Key exchange algorithms were defined above.  The first
@@ -1328,44 +1328,44 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
          time.  Choose the first algorithm that satisfies the following
          conditions:
 
-	 ���򴹤Υ��르�ꥺ��Ͼ��������줿. �ǽ�Υ��르�ꥺ�ब
-	 ͥ�褹�� ( �ޤ� ��¬����) ���르�ꥺ��Ǥʤ��ƤϤʤ�ʤ�.
-	 ξ¦��Ʊ����¬�򤷤��ʤ�, ���Υ��르�ꥺ�ब�Ȥ��ʤ����
-	 �ʤ�ʤ�. �����Ǥʤ��ʤ�, ���Υ��르�ꥺ��ˤ�ä�
-	 ���򴹤���ˡ�����򤬤���ʤ���Фʤ�ʤ�. ����ϥ��饤����Ȥ�
-	 �����르�ꥺ����Ф��ư�Ĥ��ķ����֤�. ���ξ��򸫤���
-	 �ǽ�Υ��르�ꥺ������򤹤�.
+	 鍵交換のアルゴリズムは上で定義された. 最初のアルゴリズムが
+	 優先する ( また 推測した) アルゴリズムでなくてはならない.
+	 両側が同じ推測をしたなら, そのアルゴリズムが使われなければ
+	 ならない. そうでないなら, 次のアルゴリズムによって
+	 鍵交換の方法の選択がされなければならない. これはクライアントの
+	 鍵アルゴリズムに対して一つずつ繰り返す. 次の条件を見たす
+	 最初のアルゴリズムを選択する.
 
          +  the server also supports the algorithm,
 
-	 +  �����Ф⤽�Υ��르�ꥺ��򥵥ݡ��Ȥ���.
+	 +  サーバもそのアルゴリズムをサポートする.
 
          +  if the algorithm requires an encryption-capable host key,
             there is an encryption-capable algorithm on the server's
             server_host_key_algorithms that is also supported by the
             client, and
 
-         +  ���Υ��르�ꥺ�ब�Ź沽��ǽ�ʥۥ��ȸ���ɬ�פȤ��Ƥ���ʤ�
-	     �����Ф�, ���饤����Ȥ⥵�ݡ��Ȥ��Ƥ���,
-	     server_host_key_algorithms  �˰Ź沽��ǽ�ʥ��르�ꥺ��
-	     ������, �ޤ�
+         +  そのアルゴリズムが暗号化可能なホスト鍵を必要としているなら
+	     サーバの, クライアントもサポートしている,
+	     server_host_key_algorithms  に暗号化可能なアルゴリズム
+	     がある, また
 	    
          +  if the algorithm requires a signature-capable host key,
             there is a signature-capable algorithm on the server's
             server_host_key_algorithms that is also supported by the
             client.
 
-	 +  ���르�ꥺ�ब��̾��ǽ�ʥۥ��ȸ���ɬ�פȤ��Ƥ��ʤ�,
-	    �����Ф�, ���饤����Ȥ⥵�ݡ��Ȥ��Ƥ���
-	    server_host_key_algorithms �� ��̾��ǽ�ʥ��르�ꥺ�ब
-	    ����.
+	 +  アルゴリズムが署名可能なホスト鍵を必要としていなら,
+	    サーバの, クライアントもサポートしている
+	    server_host_key_algorithms に 署名可能なアルゴリズムが
+	    ある.
 
          +  If no algorithm satisfying all these conditions can be
             found, the connection fails, and both sides MUST disconnect.
 
 
-         +  ����餹�٤Ƥξ��򸫤������르�ꥺ��򸫤Ĥ��뤳�Ȥ��Ǥ��ʤ�
-	    �ʤ�, ��³�ϼ��Ԥ�, ξ����¦����³���ڤ�ʤ���Фʤ�ʤ�.
+         +  これらすべての条件を見たすアルゴリズムを見つけることができない
+	    なら, 接続は失敗し, 両方の側は接続を切らなければならない.
 
 
 Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 14]
@@ -1380,20 +1380,20 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
          (There MAY be multiple host keys for a host, possibly with
          different algorithms.)
 
-	 �����Хۥ��ȸ��ˤĤ��ƥ��ݡ��Ȥ��륢�르�ꥺ��Υꥹ��.
-	 �����Фϼ��餬�ݻ����Ƥ���ۥ��ȸ��Υ��르�ꥺ������
-	 ����. ���饤����Ȥϼ�������뤳�ȤΤǤ���
-	 ���르�ꥺ�����󤹤�. (�ۥ��Ȥ�ʣ����, ���Ȥˤ���
-	 �ۤʤ륢�르�ꥺ��Υۥ��ȸ������äƤ�褤)
+	 サーバホスト鍵についてサポートするアルゴリズムのリスト.
+	 サーバは自らが保持しているホスト鍵のアルゴリズムを列挙
+	 する. クライアントは受け入れることのできる
+	 アルゴリズムを列挙する. (ホストに複数の, ことによると
+	 異なるアルゴリズムのホスト鍵があってもよい)
 
          Some host keys may not support both signatures and encryption
          (this can be determined from the algorithm), and thus not all
          host keys are valid for all key exchange methods.
 
-	 �ۥ��ȸ��Τ��������Ĥ��Ͻ�̾�ȰŹ沽��ξ���򥵥ݡ��Ȥ��ʤ�����
-	 ����ʤ� (����ϥ��르�ꥺ��ˤ�äƷ�����) ��,����椨
-	 ���٤ƤΥۥ��ȸ������٤Ƥθ��򴹤���ˡ�ˤȤä�ͭ���Ȥ������Ȥ�
-	 �ʤ�.
+	 ホスト鍵のうちいくつかは署名と暗号化の両方をサポートしないかも
+	 しれない (これはアルゴリズムによって決められる) し,それゆえ
+	 すべてのホスト鍵がすべての鍵交換の方法にとって有効ということは
+	 ない.
 
          Algorithm selection depends on whether the chosen key exchange
          algorithm requires a signature or encryption capable host key.
@@ -1403,13 +1403,13 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
          MUST be chosen.  If there is no such algorithm, both sides MUST
          disconnect.
 
-	 ���르�ꥺ�����������Ф줿���򴹥��르�ꥺ�ब��̾�ʤ����Ź沽
-	 ��ǽ�ʸ���ɬ�פȤ��뤫�ɤ����˰�¸����. ���������르�ꥺ��̾
-	 ���餳�Υ��르�ꥺ�����ꤹ�뤳�Ȥ���ǽ�Ǥʤ��ƤϤʤ�ʤ�.
-	 ����ɬ�פ򸫤��������Фˤ�äƤ⥵�ݡ��Ȥ���� ���饤����Ȥ�
-	 �ꥹ�Ȥκǽ�Υ��르�ꥺ�ब���Ф�ʤ���Фʤ�ʤ�.
-	 ���Τ褦�ʥ��르�ꥺ�ब�ʤ����, ξ¦����³���ڤ�ͤ�
-	 �ʤ�ʤ�.
+	 アルゴリズムの選択は選ばれた鍵交換アルゴリズムが署名ないし暗号化
+	 可能な鍵を必要とするかどうかに依存する. 公開鍵アルゴリズム名
+	 からこのアルゴリズムを決定することが可能でなくてはならない.
+	 この必要を見たしサーバによってもサポートされる クライアントの
+	 リストの最初のアルゴリズムが選ばれなければならない.
+	 そのようなアルゴリズムがなければ, 両側で接続を切らねば
+	 ならない.
 
       encryption_algorithms
          Lists the acceptable symmetric encryption algorithms in order
@@ -1418,20 +1418,20 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
          that is also on the server's list. If there is no such
          algorithm, both sides MUST disconnect.
 
-	 ͥ�褹�����¤٤�줿������������оΰŹ沽���르�ꥺ���
-	 ��󤹤�.
-	 ���줾������������Ф��Ź沽���르�ꥺ���
-	 ���饤�����¦�Υꥹ�ȤǤ⥵����¦�Υꥹ�ȤǤ�ǽ�Υ��르�ꥺ��
-	 �Ǥʤ���Фʤ�ʤ�. ���Τ褦�ʥ��르�ꥺ�ब�ʤ��ä���.
-	 ξ¦����³���ڤ�ͤФʤ�ʤ�.
+	 優先する順に並べられた受け入れられる対称暗号化アルゴリズムを
+	 列挙する.
+	 それぞれの方向で選ばれる暗号化アルゴリズムは
+	 クライアント側のリストでもサーバ側のリストでも最初のアルゴリズム
+	 でなければならない. そのようなアルゴリズムがなかったら.
+	 両側で接続を切らねばならない.
 
          Note that "none" must be explicitly listed if it is to be
          acceptable.  The defined algorithm names are listed in Section
          Section 5.3.
 
-	 "none" ��, ���줬�⤷��������������,
-	 ����Ū����󤵤�ʤ���Фʤ�ʤ����Ȥ�����. ������줿
-	 ���르�ꥺ��̾�ϥ�������� 5.3 ����󤵤�Ƥ���.
+	 "none" は, それがもし受け入れられる場合は,
+	 明示的に列挙されなければならないことに注意. 定義された
+	 アルゴリズム名はセクション 5.3 に列挙されている.
 	 
       mac_algorithms
          Lists the acceptable MAC algorithms in order of preference.
@@ -1439,19 +1439,19 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
          client's list that is also on the server's list.  If there is
          no such algorithm, both sides MUST disconnect.
 	 
-	 ͥ�褹�����¤٤�줿����������� MAC �Υ��르�ꥺ���
-	 ��󤹤�. ���줾������������Ф�� MAC ���르�ꥺ���
-	 ���饤�����¦�Υꥹ�ȤǤ⥵����¦�Υꥹ�ȤǤ�ǽ�Υ��르�ꥺ��
-	 �Ǥʤ���Фʤ�ʤ�. ���Τ褦�ʥ��르�ꥺ�ब�ʤ��ä���.
-	 ξ¦����³���ڤ�ͤФʤ�ʤ�.
+	 優先する順に並べられた受け入れられる MAC のアルゴリズムを
+	 列挙する. それぞれの方向で選ばれる MAC アルゴリズムは
+	 クライアント側のリストでもサーバ側のリストでも最初のアルゴリズム
+	 でなければならない. そのようなアルゴリズムがなかったら.
+	 両側で接続を切らねばならない.
 
          Note that "none" must be explicitly listed if it is to be
          acceptable.  The MAC algorithm names are listed in Section
          Figure 1.
 
-	 "none" ��, ���줬�⤷��������������,
-	 ����Ū����󤵤�ʤ���Фʤ�ʤ����Ȥ�����. MAC
-	 ���르�ꥺ��̾�Ͽ� 1 ����󤵤�Ƥ���.
+	 "none" は, それがもし受け入れられる場合は,
+	 明示的に列挙されなければならないことに注意. MAC
+	 アルゴリズム名は図 1 に列挙されている.
 	 
 
       compression_algorithms
@@ -1462,11 +1462,11 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
          disconnect.
 
 
-	 ͥ�褹�����¤٤�줿����������밵�̥��르�ꥺ���
-	 ��󤹤�. ���줾������������Ф�밵�̥��르�ꥺ���
-	 ���饤�����¦�Υꥹ�ȤǤ⥵����¦�Υꥹ�ȤǤ�ǽ�Υ��르�ꥺ��
-	 �Ǥʤ���Фʤ�ʤ�. ���Τ褦�ʥ��르�ꥺ�ब�ʤ��ä���.
-	 ξ¦����³���ڤ�ͤФʤ�ʤ�.
+	 優先する順に並べられた受け入れられる圧縮アルゴリズムを
+	 列挙する. それぞれの方向で選ばれる圧縮アルゴリズムは
+	 クライアント側のリストでもサーバ側のリストでも最初のアルゴリズム
+	 でなければならない. そのようなアルゴリズムがなかったら.
+	 両側で接続を切らねばならない.
 
 
 
@@ -1479,9 +1479,9 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
          acceptable.  The compression algorithm names are listed in
          Section Section 5.2.
 
-	 "none" ��, ���줬�⤷��������������,
-	 ����Ū����󤵤�ʤ���Фʤ�ʤ����Ȥ�����. ����
-	 ���르�ꥺ��̾�� Section 5.2 ����󤵤�Ƥ���.
+	 "none" は, それがもし受け入れられる場合は,
+	 明示的に列挙されなければならないことに注意. 圧縮
+	 アルゴリズム名は Section 5.2 に列挙されている.
 
       languages
          This is a comma-separated list of language tags in order of
@@ -1490,22 +1490,22 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
          Language tags SHOULD NOT be present unless they are known to be
          needed by the sending party.
 
-	 �����ͥ�褹�����¤٤�줿���쥿���Υ���޶��ڤ�ꥹ�Ȥ�
+	 これは優先する順に並べられた言語タグのコンマ区切りリストだ
 	 [RFC3066].
-	 �ɤ����¦�⤳�Υꥹ�Ȥ�̵�뤷�Ƥ褤. �⤷ͥ�褹����줬
-	 �ʤ��ʤ�, ���Υꥹ�Ȥ϶��ˤ��Ƥ���ɬ�פ�����.
-	 ���쥿����, �����¦��ɬ�פȤ��Ƥ�����Τ��Ƥ��ʤ����
-	 ¸�ߤ��ʤ��ۤ�������.
+	 どちらの側もこのリストは無視してよい. もし優先する言語が
+	 ないなら, このリストは空にしておく必要がある.
+	 言語タグは, 送り手側が必要としていると知られていなければ
+	 存在しないほうがいい.
 
       first_kex_packet_follows
          Indicates whether a guessed key exchange packet follows.  If a
          guessed packet will be sent, this MUST be TRUE.  If no guessed
          packet will be sent, this MUST be FALSE.
 
-	 ��¬�����򴹤Υѥ��åȤ�³�����򼨤�.
-	 ��¬�����ѥ��åȤ�������ʤ�, ������ TRUE �Ǥʤ���Фʤ�ʤ�. 
-	 ��¬�����ѥ��åȤ������ʤ��ʤ�, ������
-	 FALSE �Ǥʤ���Фʤ�ʤ�. 	
+	 推測した交換のパケットが続くかを示す.
+	 推測したパケットが送られるなら, ここは TRUE でなければならない. 
+	 推測したパケットが送られないなら, ここは
+	 FALSE でなければならない. 	
 
          After receiving the SSH_MSG_KEXINIT packet from the other side,
          each party will know whether their guess was right.  If the
@@ -1515,26 +1515,26 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
          the guess was right, key exchange MUST continue using the
          guessed packet.
 
-	 ������¦���� SSH_MSG_KEXINIT �ѥ��åȤ�����Ȥ��
-	 ���줾���¦�ǿ�¬���������ä����ɤ����狼��.
-	 �⤷������¦�ο�¬���ְ�äƤ���, ���Υե�����ɤ� TRUE
-	 �Ǥ��ä���, ���Υѥ��åȤϤޤä���̵�뤵��, ������ξ¦��
-	 ����ˡ����Ĥ��Ʒ��ꤵ�줿�Ȥ���Ư���ʤ����
-	 �ʤ�ʤ�. �⤷��¬���������ʤ�, ���򴹤Ϥ��ο�¬���줿�ѥ��å�
-	 ���Ѥ���³������.
+	 一方の側から SSH_MSG_KEXINIT パケットを受けとると
+	 それぞれの側で推測が正しかったかどうかわかる.
+	 もし一方の側の推測が間違っていて, このフィールドが TRUE
+	 であったら, 次のパケットはまったく無視され, そして両側が
+	 鍵交換法が交渉して決定されたとして働かなければ
+	 ならない. もし推測が正しいなら, 鍵交換はその推測されたパケット
+	 を用いて続けられる.
 
 
    After the KEXINIT packet exchange, the key exchange algorithm is run.
    It may involve several packet exchanges, as specified by the key
    exchange method.
 
-   KEXINIT �ѥ��åȤ��򴹤��줿��, ���򴹥��르�ꥺ�ब�ʹԤ���.
-   ���θ��򴹤���ˡ���������Ƥ���褦��, �����Ĥ��Υѥ��åȤθ򴹤�
-   �Ԥʤ��뤫�⤷��ʤ�.
+   KEXINIT パケットが交換されたら, 鍵交換アルゴリズムが進行する.
+   この鍵交換の方法で定義されているように, いくつかのパケットの交換が
+   行なわれるかもしれない.
 
 6.2 Output from Key Exchange
 
-6.2 ���򴹤���ν���
+6.2 鍵交換からの出力
 
    The key exchange produces two values: a shared secret K, and an
    exchange hash H.  Encryption and authentication keys are derived from
@@ -1545,26 +1545,26 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    private key.  Once computed, the session identifier is not changed,
    even if keys are later re-exchanged.
 
-   ���򴹤� 2 �Ĥ��ͤ���������. ��ͭ����̩ K �� �򴹤Υϥå��� H ��.
-   �Ź��ǧ�ڤθ��Ϥ���餫��Ƴ�Ф����. �ǽ�θ��򴹤ˤ��
-   �򴹥ϥå��� H �� ����Ȥ��̤�, ������³�ˤȤä���ͭ�ʼ��̻ҤȤ���
-   ���å�����̻ҤȤ��Ƥ�Ȥ���. �������̩������äƤ���ڵ�
-   �Ȥ��ƽ�̾����ǡ����ΰ����Ȥ���, ǧ��ˡ�˻Ȥ���. ���ٷ׻����줿��
-   ���å�����̻Ҥ��ѹ�����ʤ�, ���Ȥ����ȤǸ��򴹤��ޤ��Ԥʤ��Ƥ�.
+   鍵交換は 2 つの値を生成する. 共有の秘密 K と 交換のハッシュ H だ.
+   暗号と認証の鍵はこれらから導出される. 最初の鍵交換による
+   交換ハッシュ H は これとは別に, この接続にとって特有な識別子として
+   セッション識別子としても使われる. これは秘密鍵を持っている証拠
+   として署名するデータの一部として, 認証法に使われる. 一度計算されたら
+   セッション識別子は変更されない, たとえあとで鍵交換がまた行なわれても.
 
    Each key exchange method specifies a hash function that is used in
    the key exchange.  The same hash algorithm MUST be used in key
    derivation. Here, we'll call it HASH.
 
-   ���줾��θ��򴹤���ˡ�Ǥϸ��򴹤ǻȤ��ϥå���ؿ����������Ƥ���.
-   Ʊ���ϥå���ؿ�������Ƴ�Ф˻Ȥ��ʤ���Фʤ�ʤ�. �����Ǥ�
-   ����� HASH �ȸƤ�.
+   それぞれの鍵交換の方法では鍵交換で使うハッシュ関数が定義されている.
+   同じハッシュ関数が鍵の導出に使われなければならない. ここでは
+   それを HASH と呼ぶ.
 
    Encryption keys MUST be computed as HASH of a known value and K as
    follows:
 
-   �Ź沽���ϼ��Τ褦�˴��Τ��ͤ� K �Υϥå���ˤ�äƷ׻�����ʤ����
-   �ʤ�ʤ�.
+   暗号化鍵は次のように既知の値と K のハッシュによって計算されなければ
+   ならない.
 
 
 
@@ -1577,19 +1577,19 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
       (Here K is encoded as mpint and "A" as byte and session_id as raw
       data."A" means the single character A, ASCII 65).
 
-   o  ���饤����Ȥ��饵���Фؤκǽ�ν�����٥��ȥ�
+   o  クライアントからサーバへの最初の初期化ベクトル
       : HASH(K || H || "A" || session_id)
-      (������ K �� mpint �� "A"�ϥХ��Ȥ� session_id �����Υǡ�����
-      ���󥳡��ɤ���Ƥ���. "A" �ϰ�ʸ���� A,ASCII 65 �� A  ��)
+      (ここで K は mpint で "A"はバイトで session_id は生のデータで
+      エンコードされている. "A" は一文字の A,ASCII 65 の A  だ)
 
    o  Initial IV server to client: HASH(K || H || "B" || session_id)
 
-   o  �����Ф��饯�饤����Ȥؤκǽ�ν�����٥��ȥ�:
+   o  サーバからクライアントへの最初の初期化ベクトル:
       HASH(K || H || "B" || session_id)
 
    o  Encryption key client to server: HASH(K || H || "C" || session_id)
 
-   o  �ʲ�ά
+   o  以下略
 
    o  Encryption key server to client: HASH(K || H || "D" || session_id)
    o  Integrity key client to server: HASH(K || H || "E" || session_id)
@@ -1607,16 +1607,16 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    available; the key is taken from the beginning of this value. In
    other words:
 
-   ���Υǡ����ϥϥå���ν��Ϥκǽ餫�����ʤ���Фʤ�ʤ�.
-   ����Ĺ�θ��Υ��르�ꥺ��Ǥ� 128bit (16 �Х���) �Ȥ�ɬ�פ�����.
-   (����ʸ���������Ƥ���ͣ��θ���Ĺ�������ѤΥ��르�ꥺ��� arcfour
-   ���� (����: ��ʸ��'('��­��ʤ��Ȼפ���.)
-   ����¾�Υ��르�ꥺ��Ǥ�, ɬ�פʥХ��Ȥ�
-   �ϥå����ͤκǽ餫������. �⤷����Ĺ���� HASH �ν��Ϥ���Ĺ���ʤ�,
-   ����, K �� H �Ȥ��ޤޤǤθ���Ϣ��� HASH ��׻������η�̤ΥХ���
-   (HASH ����������Τ�Ʊ��Ĺ��) �򸰤��ɲä���, ��ĥ�����. ���β�����
-   ��ʬ�ʸ��κ�����������ޤǷ����֤����. ���Ϥ����ͤκǽ餫��
-   �����. ����������:
+   鍵のデータはハッシュの出力の最初から取られなければならない.
+   可変長の鍵のアルゴリズムでは 128bit (16 バイト) 使う必要がある.
+   (この文書で定義している唯一の鍵の長さが可変のアルゴリズムは arcfour
+   だけ (訳注: 原文は'('が足りないと思われる.)
+   その他のアルゴリズムでは, 必要なバイトを
+   ハッシュ値の最初から得る. もし鍵の長さが HASH の出力よりも長いなら,
+   鍵は, K と H といままでの鍵の連結の HASH を計算しその結果のバイト
+   (HASH が生成するのと同じ長さ) を鍵に追加して, 拡張される. この過程は
+   十分な鍵の材料が得られるまで繰り返される. 鍵はこの値の最初から
+   取られる. いいかれれば:
 
 
      K1 = HASH(K || H || X || session_id)   (X is e.g. "A")
@@ -1628,27 +1628,27 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    This process will lose entropy if the amount of entropy in K is
    larger than the internal state size of HASH.
 
-   ���β�����, �⤷ K ����Υ���ȥ��ԡ��̤� HASH ���������֤Υ���������
-   �礭���ä��ʤ�, ����ȥ��ԡ��򼺤ʤ碌��.
+   この過程は, もし K の中のエントロピー量が HASH の内部状態のサイズよりも
+   大きかったなら, エントロピーを失なわせる.
 
 6.3 Taking Keys Into Use
 
-6.3 ���λ���
+6.3 鍵の使用
 
    Key exchange ends by each side sending an SSH_MSG_NEWKEYS message.
    This message is sent with the old keys and algorithms.  All messages
    sent after this message MUST use the new keys and algorithms.
 
-   ���򴹤Ϥ��줾���¦�� SSH_MSG_NEWKEYS ��å����������뤳�Ȥ�
-   ��λ����. ���Υ�å������ϸŤ����ȥ��르�ꥺ��ˤ�ä�������.
-   ���Υ�å������θ�Τ��٤ƤΥ�å�������, ���������ȥ��르�ꥺ��
-   ��Ȥ�ʤ���Фʤ�ʤ�.
+   鍵交換はそれぞれの側が SSH_MSG_NEWKEYS メッセージを送ることで
+   終了する. このメッセージは古い鍵とアルゴリズムによって送られる.
+   このメッセージの後のすべてのメッセージは, 新しい鍵とアルゴリズム
+   を使わなければならない.
 
    When this message is received, the new keys and algorithms MUST be
    taken into use for receiving.
 
-   ���Υ�å������������ä��ʤ�, ���������ȥ��르�ꥺ�ब�����Τ����
-   �Ȥ��ʤ���Фʤ�ʤ�.
+   このメッセージを受け取ったなら, 新しい鍵とアルゴリズムが受信のために
+   使われなければならない.
 
    This message is the only valid message after key exchange, in
    addition to SSH_MSG_DEBUG, SSH_MSG_DISCONNECT and SSH_MSG_IGNORE
@@ -1658,13 +1658,13 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    Implementations MUST NOT accept any other messages after key exchange
    before receiving SSH_MSG_NEWKEYS.
 
-   ���Υ�å������ϸ��򴹤˲ä���
-   SSH_MSG_DEBUG,SSH_MSG_DISCONNECT,SSH_MSG_IGNORE ��å�������
-   ��ǤΤ�ͭ���ʥ�å�������. ���Υ�å���������Ū��,
-   �⤷���򴹤Ǥʤˤ������Ԥ������ˤ⤦����������Ǥ���
-   ���ǥ�å�����������뤳�Ȥ��ݾڤ��뤳�Ȥ�. ������
-   ���򴹤Τ��Ȥ� SSH_MSG_NEWKEYS ������Ȥ����ˤ�¾�Τɤ�ʥ�å�������
-   �����դ��ƤϤʤ�ʤ�.
+   このメッセージは鍵交換に加えて
+   SSH_MSG_DEBUG,SSH_MSG_DISCONNECT,SSH_MSG_IGNORE メッセージの
+   後でのみ有効なメッセージだ. このメッセージの目的は,
+   もし鍵交換でなにかが失敗した場合にもう一方が理解できる
+   切断メッセージを送れることを保証することだ. 実装は
+   鍵交換のあとで SSH_MSG_NEWKEYS を受けとる前には他のどんなメッセージも
+   受け付けてはならない.
 
 Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 17]
 
@@ -1676,16 +1676,16 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
 7. Diffie-Hellman Key Exchange
 
-7. Diffie-Hellman ����
+7. Diffie-Hellman 鍵交換
 
 
    The Diffie-Hellman key exchange provides a shared secret that can not
    be determined by either party alone. The key exchange is combined
    with a signature with the host key to provide host authentication.
 
-   Diffie-Hellman ���򴹤� ���������ǤϷ���Ǥ��ʤ���ͭ����̩����
-   ����. ���򴹤� �ۥ���ǧ�ڤ��󶡤���ۥ��ȸ��ˤ���̾��
-   ��礵��Ƥ���.
+   Diffie-Hellman 鍵交換は 一方だけでは決定できない共有の秘密を提供
+   する. 鍵交換は ホスト認証を提供するホスト鍵による署名と
+   結合されている.
 
    In the following description (C is the client, S is the server; p is
    a large safe prime, g is a generator for a subgroup of GF(p), and q
@@ -1694,16 +1694,16 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    message and I_S S's KEXINIT message which have been exchanged before
    this part begins):
 
-   �ʲ��˲���򼨤� ( C �ϥ��饤����� S �ϥ����� p ���礭���������ǿ� g ��
-   GF (p) ��ʬ���Υ����ͥ졼�� q ����ʬ���Υ�����.V_S �� S �ΥС������ʸ����
-   V_C �� C �ΥС������ʸ����.K_S �� S �θ����ۥ��ȸ�,I_C �� C �� KEXINIT ��å�����
-   I_S �� S �� KEXINIT ��å������� ���줾�줳����ʬ���Ϥޤ����˸򴹤���Ƥ���)
+   以下に解説を示す ( C はクライアント S はサーバ p は大きく安全な素数 g は
+   GF (p) 部分群のジェネレータ q は部分群のオーダ.V_S は S のバージョン文字列
+   V_C は C のバージョン文字列.K_S は S の公開ホスト鍵,I_C は C の KEXINIT メッセージ
+   I_S は S の KEXINIT メッセージで それぞれこの部分が始まる前に交換されている)
 
    1.  C generates a random number x (1 < x < q) and computes e = g^x
        mod p.  C sends "e" to S.
 
-   1.  C �� ��� x (1<x<q) �������� e = g^x mod p ��׻�����.
-       C �� S �� "e" ������.
+   1.  C は 乱数 x (1<x<q) を生成し e = g^x mod p を計算する.
+       C は S に "e" を送る.
 
    2.  S generates a random number y (0 < y < q) and computes f = g^y
        mod p.  S receives "e".  It computes K = e^y mod p, H = hash(V_C
@@ -1713,13 +1713,13 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
        signing operation may involve a second hashing operation.
 
 
-   2.  S �� ��� y (0<y<q) �������� f = g^y mod p ��׻�����.
-       S �� "e" ��������. S ��, K = e^y mod p �� H = hash(V_C
-       || V_S || I_C || I_S || K_S || e || f || K) ��׻���
-       (���������ǤϤ��μ���˱��������󥳡��ɤ��ʤ����. �����
-       ����) , ��̾ s �� S �Υۥ�����̩���� H ���̾���Ʒ׻�����.
-       S �� "K_S || f || s" �� C ������. ��̾������
-       �⤦��ĤΥϥå��������ɬ�פȤ��뤫�⤷��ʤ�.
+   2.  S は 乱数 y (0<y<q) を生成し f = g^y mod p を計算する.
+       S は "e" を受け取る. S は, K = e^y mod p と H = hash(V_C
+       || V_S || I_C || I_S || K_S || e || f || K) を計算し
+       (これらの要素はその種類に応じたエンコードがなされる. 後ろを
+       見よ) , 署名 s を S のホスト秘密鍵で H を署名して計算する.
+       S は "K_S || f || s" を C に送る. 署名の操作は
+       もう一つのハッシュの操作を必要とするかもしれない.
 
 
    3.  C verifies that K_S really is the host key for S (e.g. using
@@ -1730,33 +1730,33 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
        then computes K = f^x mod p, H = hash(V_C || V_S || I_C || I_S ||
        K_S || e || f || K), and verifies the signature s on H.
 
-   3.  C �� K_S �� ������ S �Υۥ��ȸ����� (���Ȥ��� �������
-       ��������ʥǡ����١�����Ȥä�) ���ڤ���. C �� ���ڤʤ���
-       ��������Ĥ��Ƥ�褤��, �������뤳�Ȥϳ�ȯ�ʹ���ˤ�������
-       �ץ��ȥ��������ˤ��� (������, ¿���δĶ���û���֤ʤ�
-       �º�Ū����ͳ�ˤ��̥��Ū���⤷��ʤ�) ������
-       C �� K = f^x mod p �� H = hash(V_C || V_S || I_C || I_S ||
-       K_S || e || f || K) ��׻��� H �ν�̾ s �򸡾ڤ���.
+   3.  C は K_S が 本当に S のホスト鍵かを (たとえば 証明書や
+       ローカルなデータベースを使って) 検証する. C は 検証なしで
+       鍵を受けつけてもよいが, そうすることは活発な攻撃にたいして
+       プロトコルを危険にする (しかし, 多くの環境で短期間なら
+       実際的な理由により魅力的かもしれない) そして
+       C は K = f^x mod p と H = hash(V_C || V_S || I_C || I_S ||
+       K_S || e || f || K) を計算し H の署名 s を検証する.
 
    Either side MUST NOT send or accept e or f values that are not in the
    range [1, p-1]. If this condition is violated, the key exchange
    fails.
 
-   �ɤ����¦�� [1,p-1] ���ϰϤˤʤ� e �� f ���ͤ����ä��������ä���
-   ���ƤϤʤ�ʤ�. ���ξ�郎������, ���򴹤ϼ��Ԥ���.
+   どちらの側も [1,p-1] の範囲にない e や f の値を送ったり受け取ったり
+   してはならない. この条件が崩れると, 鍵交換は失敗する.
 
    This is implemented with the following messages.  The hash algorithm
    for computing the exchange hash is defined by the method name, and is
    called HASH.  The public key algorithm for signing is negotiated with
    the KEXINIT messages.
 
-   ���Υ�å����������������. �򴹥ϥå����׻�����ϥå��奢�르�ꥺ��
-   �� ��ˡ��̾���ˤ�ä��������, ����� HASH �ȸƤФ��. ��̾�˻Ȥ�
-   ���������르�ꥺ��� KEXINIT ��å������ˤ�äƷ�����.
+   次のメッセージが実装される. 交換ハッシュを計算するハッシュアルゴリズム
+   は 方法の名前によって定義され, これは HASH と呼ばれる. 署名に使う
+   公開鍵アルゴリズムは KEXINIT メッセージによって決められる.
 
    First, the client sends the following:
 
-   �ޤ����饤����Ȥϰʲ��Τ�Τ�����
+   まずクライアントは以下のものを送る
 
 
 Ylonen & Moffat, Editor    Expires March 31, 2004              [Page 18]
@@ -1770,7 +1770,7 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
    The server responds with the following:
 
-   �����Фϰʲ��Τ�Τ��֤�.
+   サーバは以下のものを返す.
 
      byte      SSH_MSG_KEXDH_REPLY
      string    server public host key and certificates (K_S)
@@ -1780,7 +1780,7 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    The hash H is computed as the HASH hash of the concatenation of the
    following:
 
-   �ϥå��� H �� ���Τ�Τ�Ϣ��� �ϥå���ؿ� HASH �ˤ�äƷ׻������.
+   ハッシュ H は 次のものの連結を ハッシュ関数 HASH によって計算される.
 
      string    V_C, the client's version string (CR and NL excluded)
      string    V_S, the server's version string (CR and NL excluded)
@@ -1797,8 +1797,8 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    authenticate the key exchange. The exchange hash SHOULD be kept
    secret.
 
-   �����ͤϸ򴹥ϥå���ȸƤФ�, ���򴹤�����Ǥ��뤫�ɤ������������Τ�
-   �Ȥ���. �򴹥ϥå������̩�ˤ���ɬ�פ�����.
+   この値は交換ハッシュと呼ばれ, 鍵交換が信頼できるかどうかを証明するのに
+   使われる. 交換ハッシュは秘密にする必要がある.
 
 
    The signature algorithm MUST be applied over H, not the original
@@ -1807,11 +1807,11 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    case, the data is first hashed with HASH to compute H, and H is then
    hashed with SHA-1 as part of the signing operation.
 
-   ��̾�Υ��르�ꥺ��� ���Υǡ����ǤϤʤ� H ���Ф���Ŭ�Ѥ���ʤ����
-   �ʤ�ʤ�. ¿���ν�̾���르�ꥺ��� �ϥå�����ɲäΥѥǥ��󥰤�
-   �ޤ�Ǥ���. ���Ȥ���, "ssh-dss" �� SHA-1 �ϥå���ˡ����ꤷ�Ƥ���.
-   ���ξ��, �ǡ����� HASH ���Ѥ��� H �� �׻�����Τ˰��٥ϥå��夷
-   ������ H �� ��̾���ΰ����Ȥ��� SHA-1 �ǥϥå��夵���.
+   署名のアルゴリズムは 元のデータではなく H に対して適用されなければ
+   ならない. 多くの署名アルゴリズムは ハッシュと追加のパディングを
+   含んでいる. たとえば, "ssh-dss" は SHA-1 ハッシュ法を指定している.
+   この場合, データは HASH を用いて H を 計算するのに一度ハッシュし
+   そして H は 署名操作の一部として SHA-1 でハッシュされる.
 
 7.1 diffie-hellman-group1-sha1
 
@@ -1819,15 +1819,15 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    exchange with SHA-1 as HASH, and Oakley group 14 [RFC3526] (2048-bit
    MODP Group).  It is included below in hexadecimal and decimal.
 
-   "diffie-hellman-group1-sha1" ˡ�� SHA-1 �� HASH �Ȥ��ƻȤ�
-   Oakley �� 14 [RFC3526] (2048-bit MODP ��) ��Ȥ� Diffie-Hellman ���򴹤�.
-   �����, 16�ʿ���10�ʿ��ǰʲ��Τ�Τ�ޤ�Ǥ��ޤ�.
+   "diffie-hellman-group1-sha1" 法は SHA-1 を HASH として使い
+   Oakley 群 14 [RFC3526] (2048-bit MODP 群) を使う Diffie-Hellman 鍵交換だ.
+   これは, 16進数と10進数で以下のものを含んでいます.
 
    The prime p is equal to 2^1024 - 2^960 - 1 + 2^64 * floor( 2^894 Pi +
    129093 ).  Its hexadecimal value is:
 
-   �ǿ� p �� 2^1024 - 2^960 - 1 + 2^64 * floor ( 2^894 Pi +   129093 ).
-   16 �ʿ�����:
+   素数 p は 2^1024 - 2^960 - 1 + 2^64 * floor ( 2^894 Pi +   129093 ).
+   16 進数だと:
 
          FFFFFFFF FFFFFFFF C90FDAA2 2168C234 C4C6628B 80DC1CD1
          29024E08 8A67CC74 020BBEA6 3B139B22 514A0879 8E3404DD
@@ -1847,7 +1847,7 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
    In decimal, this value is:
 
-   10 �ʿ�����:
+   10 進数だと:
 
          179769313486231590770839156793787453197860296048756011706444
          423684197180216158519368947833795864925541502180565485980503
@@ -1859,13 +1859,13 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    The generator used with this prime is g = 2. The group order q is (p
    - 1) / 2.
 
-   �����ǿ���Ȥ��Τ��դ��ä������ͥ졼���� g=2 ��. ���ΰ̿� q ��
-   (p - 1) / 2 ��.
+   この素数を使うのに付かったジェネレータは g=2 だ. 群の位数 q は
+   (p - 1) / 2 だ.
 
 
 8. Key Re-Exchange
 
-8. ���κƸ�
+8. 鍵の再交換
 
    Key re-exchange is started by sending an SSH_MSG_KEXINIT packet when
    not already doing a key exchange (as described in Section Section
@@ -1875,13 +1875,13 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    roles MUST NOT be changed (i.e., the server remains the server, and
    the client remains the client).
 
-   ���κƸ򴹤�    (Section 6.1 �ǵ��Ҥ���) ���򴹤�ޤ����Ƥ��ʤ����
-   �ˤ�������  SSH_MSG_KEXINIT �ѥ��åȤ����뤳�ȤǻϤ����
-   ���Υ�å����������������, �������� SSH_MSG_KEXINIT �����Ǥ� 
-   �ֻ��Ǥ�����������, ���Ȥ� SSH_MSG_KEXINIT ��
-   �ֿ����ʤ���Фʤ�ʤ�. �ɤ����¦���Ƹ򴹤�Ϥ�Ƥ�褤��,
-   ���������ѹ����ƤϤʤ�ʤ� (���ʤ��, �����Фϥ����ФΤޤޤ���
-   ���饤����Ȥϥ��饤����ȤΤޤ�)
+   鍵の再交換は    (Section 6.1 で記述した) 鍵交換をまだしていない場合
+   にも送られる  SSH_MSG_KEXINIT パケットを送ることで始められる
+   このメッセージを受信したら, 受信した SSH_MSG_KEXINIT がすでに 
+   返事である場合を除いて, 自身の SSH_MSG_KEXINIT を
+   返信しなければならない. どちらの側が再交換を始めてもよいが,
+   その役割は変更してはならない (すなわち, サーバはサーバのままだし
+   クライアントはクライアントのまま)
 
    Key re-exchange is performed using whatever encryption was in effect
    when the exchange was started.  Encryption, compression, and MAC
@@ -1894,14 +1894,14 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    recomputed after the exchange.  Compression and encryption contexts
    are reset.
 
-   ���κƸ򴹤� �򴹤��Ϥޤä��Ȥ��ˤɤ�ʰŹ沽��ͭ���Ǥ��äƤ⤽���
-   �ȤäƼ¹Ԥ����. ������ SSH_MSG_NEWKEYS ����������
-   (�Ť�)���򴹤��Ԥʤ�줿��Ρ��Ź沽, ����, MAC ����ˡ��
-   (�ǽ�θ��򴹤Τ褦��) �ѹ�����ʤ��� �Ƹ򴹤ϡ��ǽ�θ��򴹤�
-   �ޤä���Ʊ�ͤ˹Ԥʤ��뤬�����������å�����̻Ҥ��Ѥ�餺�˻Ĥ롣
-   �Ƹ򴹤δ֤˥��르�ꥺ��Τ����Ĥ��ʤ������٤Ƥ��Ѥ�äƤ�
-   �����Ĥ����ʤ������٤Ƥθ��Ƚ�����٥��ȥ�ϸ򴹤Τ��ȺƷ׻�����롣
-   ���̤ȰŹ沽�Υ���ƥ����Ȥϥꥻ�åȤ���롣
+   鍵の再交換は 交換が始まったときにどんな暗号化が有効であってもそれを
+   使って実行される. 新しい SSH_MSG_NEWKEYS を送る前は
+   (古い)鍵交換が行なわれた後の、暗号化, 圧縮, MAC の方法は
+   (最初の鍵交換のように) 変更されない。 再交換は、最初の鍵交換と
+   まったく同様に行なわれるが、ただしセッション識別子は変わらずに残る。
+   再交換の間にアルゴリズムのいくつかないしすべてが変わっても
+   差しつかえない。すべての鍵と初期化ベクトルは交換のあと再計算される。
+   圧縮と暗号化のコンテキストはリセットされる。
 
    It is recommended that the keys are changed after each gigabyte of
    transmitted data or after each hour of connection time, whichever
@@ -1909,17 +1909,17 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    operation, it requires a fair amount of processing power and should
    not be performed too often.
 
-   1GB�Υǡ�����ž���ʤ���1���֤���³���ɤ��餫�ᤤ�ۤ��Τ��Ȥ�
-   �����ѹ����뤳�Ȥ򴫤�롣���������Ƹ򴹤ϸ����������ʤΤǡ�
-   �����ν���ǽ�Ϥ�ɬ�פǤ��ޤꤷ�Ф��йԤʤ���٤��ǤϤʤ���
+   1GBのデータの転送ないし1時間の接続、どちらか早いほうのごとに
+   鍵を変更することを勧める。しかし、再交換は公開鍵の操作なので、
+   相当の処理能力が必要であまりしばしば行なわれるべきではない。
 
    More application data may be sent after the SSH_MSG_NEWKEYS packet
    has been sent; key exchange does not affect the protocols that lie
    above the SSH transport layer.
 
-   SSH_MSG_NEWKEYS �ѥ��åȤ�����줿���Ȥ���˥��ץꥱ�������Υǡ���
-   �������Ƥ�褤�����򴹤�SSH�ȥ�󥹥ݡ����ؤ���ˤ���
-   �ץ��ȥ���ˤϱƶ����ʤ���
+   SSH_MSG_NEWKEYS パケットが送られたあとさらにアプリケーションのデータ
+   が送られてもよい。鍵交換はSSHトランスポート層より上にある
+   プロトコルには影響しない。
 
 
 
@@ -1931,19 +1931,19 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
 9. Service Request
 
-9. �����ӥ��׵�
+9. サービス要求
 
    After the key exchange, the client requests a service. The service is
    identified by a name. The format of names and procedures for defining
    new names are defined in [SSH-ARCH].
 
-   ���򴹤Τ��ȡ����饤����Ȥϥ����ӥ����׵᤹�롣�����ӥ���̾����
-   ���̤���롣̾���Υե����ޥåȤȿ�����̾��������������
-   [SSH-ARCH]���������Ƥ��롣
+   鍵交換のあと、クライアントはサービスを要求する。サービスは名前で
+   識別される。名前のフォーマットと新しい名前を定義する手順は
+   [SSH-ARCH]で定義されている。
 
    Currently, the following names have been reserved:
 
-   ���߼���̾����ͽ�󤵤�Ƥ���:
+   現在次の名前が予約されている:
 
      ssh-userauth
      ssh-connection
@@ -1952,9 +1952,9 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    applied to the algorithm names; a local service should use the
    "servicename@domain" syntax.
 
-   ���르�ꥺ��̾��Ŭ�Ѥ��줿�褦�ˡ��褯�������������
-   ̾���դ��ݥꥷ���������ӥ���̾����Ŭ�Ѥ���롣��������ʥ����ӥ���
-   "servicename@domain" ���󥿥å�����Ȥ�ɬ�פ����롣
+   アルゴリズム名に適用されたように、よく似たローカルな
+   名前付けポリシーがサービスの名前に適用される。ローカルなサービスは
+   "servicename@domain" シンタックスを使う必要がある。
 
      byte      SSH_MSG_SERVICE_REQUEST
      string    service name
@@ -1962,22 +1962,22 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    If the server rejects the service request, it SHOULD send an
    appropriate SSH_MSG_DISCONNECT message and MUST disconnect.
 
-   �⤷�����Ф������ӥ��Υꥯ�����Ȥ���ݤ���ʤ顢�����Ф�Ŭ�ڤ�
-   SSH_MSG_DISCONNECT ��å�����������ɬ�פ�����
-   ��³���ڤ�ʤ��ƤϤʤ�ʤ���
+   もしサーバがサービスのリクエストを拒否するなら、サーバは適切な
+   SSH_MSG_DISCONNECT メッセージを送る必要があり
+   接続を切らなくてはならない。
 
 
    When the service starts, it may have access to the session identifier
    generated during the key exchange.
 
-   �����ӥ����Ϥޤä��顢�����ӥ��ϸ��򴹤δ֤������������å�����̻Ҥ�
-   ���Ѥ��Ƥ�褤��
+   サービスが始まったら、サービスは鍵交換の間に生成したセッション識別子を
+   利用してもよい。
 
    If the server supports the service (and permits the client to use
    it), it MUST respond with the following:
 
-   �����Ф������ӥ��򥵥ݡ���(�����ĥ��饤����Ȥˤ��λ��Ѥ����)�ʤ�
-   �����֤�ɬ�פ����롣
+   サーバがサービスをサポート(しかつクライアントにその使用を許す)なら
+   次を返す必要がある。
 
      byte      SSH_MSG_SERVICE_ACCEPT
      string    service name
@@ -1986,25 +1986,25 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    them (see Section 6 in [SSH-ARCH]).  The transport level will
    continue to process its own messages.
 
-   �����ӥ��ǻȤ����å��������ֹ�ϡ����Υ����ӥ���ͽ�󤵤�Ƥ���
-   �ΰ�Τ�ΤǤ���٤���([SSH-ARCH]��Section 6�򸫤�)��
-   �ȥ�󥹥ݡ����ؤϡ����ȤΥ�å������������³���롣
+   サービスで使われるメッセージの番号は、そのサービスに予約されている
+   領域のものであるべきだ([SSH-ARCH]のSection 6を見よ)。
+   トランスポート層は、自身のメッセージを処理し続ける。
 
    Note that after a key exchange with implicit server authentication,
    the client MUST wait for response to its service request message
    before sending any further data.
 
-   ����Ū�Ǥʤ�������ǧ�ڤ�ȼ�ʤ����򴹤Τ��Ȥǡ����饤����Ȥ�
-   ����¾�Υǡ������������˥����ӥ��׵��å�������ȿ����ޤ�
-   �ͤФʤ�ʤ����Ȥ����ա�
+   明示的でないサーバ認証を伴なう鍵交換のあとで、クライアントは
+   その他のデータを送る前にサービス要求メッセージの反応をまた
+   ねばならないことに注意。
 
 10. Additional Messages
 
-10. ����Υ�å�����
+10. 補助のメッセージ
 
    Either party may send any of the following messages at any time.
 
-   �ɤ����¦�⼡�ΤɤΥ�å������⤤�ĤǤ����äƤ褤��
+   どちらの側も次のどのメッセージもいつでも送ってよい。
 
 
 
@@ -2018,7 +2018,7 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
 10.1 Disconnection Message
 
-10.1 ��³���ǥ�å�����
+10.1 接続切断メッセージ
 
      byte      SSH_MSG_DISCONNECT
      uint32    reason code
@@ -2029,9 +2029,9 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    implementations MUST be able to process this message; they SHOULD be
    able to send this message.
 
-   ���Υ�å���������³��¨����λ��⤿�餹�����٤Ƥμ�����
-   ���Υ�å�����������Ǥ��ʤ���Фʤ�ʤ����ޤ����Υ�å�������
-   �����ɬ�פ����롣
+   このメッセージは接続の即時終了をもたらす。すべての実装は
+   このメッセージを処理できなければならない。またこのメッセージを
+   送れる必要がある。
 
    The sender MUST NOT send or receive any data after this message, and
    the recipient MUST NOT accept any data after receiving this message.
@@ -2040,12 +2040,12 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    machine-readable format (suitable for localization), and can have the
    following values:
 
-   �����Ϥ��Υ�å������θ�ɤ�ʥǡ��������ä�������Ȥä���
-   ���ƤϤʤ�ʤ����������⤳�Υ�å�����������Ȥä���
-   �ɤ�ʥǡ������������ƤϤʤ�ʤ��� description �ե�����ɤ�
-   �ʹ֤��ɤ����Ǥ�����Τ�������Ϳ���롣���顼�����ɤ�
-   (l10n��Ŭ����)��굡����ǧ�����䤹���ե����ޥåȤ���ͳ��Ϳ���ơ�
-   �����ͤ����:
+   送り手はこのメッセージの後どんなデータも送ったり受けとったり
+   してはならないし、受取手もこのメッセージを受けとったら
+   どんなデータを受け入れてはならない。 description フィールドは
+   人間が読める形でより明確な説明を与える。エラーコードは
+   (l10nに適した)より機械が認識しやすいフォーマットで理由を与えて、
+   次の値を取れる:
 
      #define SSH_DISCONNECT_HOST_NOT_ALLOWED_TO_CONNECT      1
      #define SSH_DISCONNECT_PROTOCOL_ERROR                   2
@@ -2067,14 +2067,14 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    discussed in [SSH-ARCH] should be used to avoid attacks by sending
    terminal control characters.
 
-   description string ��ɽ�������ʤ顢ü������ȥ�����ʸ�������뤳�Ȥ�
-   ��빶����򤱤뤿���[SSH-ARCH] �ǵ�������Ƥ���
-   ����ȥ�����ʸ���Υե��륿�򤹤�ɬ�פ�����.
+   description string が表示されるなら、端末コントロール文字を送ることに
+   よる攻撃を避けるために[SSH-ARCH] で議論されている
+   コントロール文字のフィルタをする必要がある.
 
 
 10.2 Ignored Data Message
 
-10.2 ̵�뤵���ǡ��� ��å�����
+10.2 無視されるデータ メッセージ
 
      byte      SSH_MSG_IGNORE
      string    data
@@ -2084,13 +2084,13 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
    required to send them. This message can be used as an additional
    protection measure against advanced traffic analysis techniques.
 
-   ���٤Ƥμ�����(�ץ��ȥ���С�����������Ȥä����Ȥ�)
-   �����ʤ���⤳�Υ�å�����������(̵�뤷)�ʤ���Фʤ�ʤ���
-   ���������ɬ�פΤ�������Ϥʤ������Υ�å�������
-   �ʤ���ȥ�ե��å����ϵ��Ѥ��Ф����ղ�Ū���ݸ���ʤȤ���
-   �Ȥ�줦�롣
+   すべての実装が(プロトコルバージョンを受けとったあとの)
+   いかなる場合もこのメッセージを理解し(無視し)なければならない。
+   これを送る必要のある実装はない。このメッセージは
+   進んだトラフィック解析技術に対する付加的な保護手段として
+   使われうる。
 
-���º�OpenSSH�ˤ�patch������
+＃実際OpenSSHにはpatchがある
 
 
 
@@ -2102,7 +2102,7 @@ Internet-Draft        SSH Transport Layer Protocol               Oct 2003
 
 10.3 Debug Message
 
-10.3 �ǥХå���å�����
+10.3 デバッグメッセージ
 
      byte      SSH_MSG_DEBUG
      boolean   always_display
@@ -2116,42 +2116,42 @@ Internet-Draft        SSH Transport Layer Protocol               Oct 2003
    unless debugging information has been explicitly requested by the
    user.
 
-   ���٤Ƥμ����Ϥ��Υ�å����������򤷤ʤ���Фʤ�ʤ�����
-   �����̵�뤷�Ƥ褤�����Υ�å������Ϥ⤦������¦�˥ǥХå��ν�����
-   �ʤ뤫�⤷��ʤ�������Ϥ�����˻Ȥ��롣 always_display ��TRUE
-   �ˤʤäƤ���ʤ顢��å�������ɽ�������ɬ�פ����롣����ʤ����
-   �桼��������Ū�˥ǥХå�������׵ᤷ�Ƥʤ����ɽ�����뤳�ȤϤʤ���
+   すべての実装はこのメッセージを理解しなければならないが、
+   これは無視してよい。このメッセージはもう一方の側にデバッグの助けに
+   なるかもしれない情報を渡すために使われる。 always_display がTRUE
+   になっているなら、メッセージは表示される必要がある。さもなければ
+   ユーザが明示的にデバッグ情報を要求してなければ表示することはない。
 
    The message doesn't need to contain a newline. It is, however,
    allowed to consist of multiple lines separated by CRLF (Carriage
    Return - Line Feed) pairs.
 
-   ���Υ�å������� newline��ޤ�ǤϤʤ�ʤ�����������
-   CRLF (Carriage Return - Line Feed)�Υڥ��Ƕ��ڤ�줿ʣ���ιԤ�
-   �ޤޤ�Ƥ��Ƥ�褤��
+   このメッセージは newlineを含んではならない。しかし、
+   CRLF (Carriage Return - Line Feed)のペアで区切られた複数の行が
+   含まれていてもよい。
 
    If the message string is displayed, terminal control character
    filtering discussed in [SSH-ARCH] should be used to avoid attacks by
    sending terminal control characters.
 
-   ��å�����ʸ����ɽ�������ʤ顢ü������ȥ�����ʸ�������뤳�Ȥˤ��
-   ������򤱤뤿��ˡ�[SSH-ARCH] �ǵ�������Ƥ���
-   ü������ȥ�����ʸ���Υե��륿�򤹤�ɬ�פ����롣
+   メッセージ文字列が表示されるなら、端末コントロール文字を送ることによる
+   攻撃を避けるために、[SSH-ARCH] で議論されている
+   端末コントロール文字のフィルタをする必要がある。
 
 10.4 Reserved Messages
 
-10.4 ͽ�󤵤줿��å�����
+10.4 予約されたメッセージ
 
    An implementation MUST respond to all unrecognized messages with an
    SSH_MSG_UNIMPLEMENTED message in the order in which the messages were
    received.  Such messages MUST be otherwise ignored.  Later protocol
    versions may define other meanings for these message types.
 
-   �����Ϥ��٤Ƥ�����Ǥ��ʤ���å��������Ф��� SSH_MSG_UNIMPLEMENTED��
-   ��å����������������� �֤��ʤ���Фʤ�ʤ��������Υ�å�������
-   �⤦������¦�Ǥ�̵�뤵��ʤ���Фʤ�ʤ�������Υץ��ȥ����
-   �С������Ϥ����Υ�å������μ�����Ф����̤ΰ�̣�����
-   ����뤫�⤷��ʤ���
+   実装はすべての理解できないメッセージに対して SSH_MSG_UNIMPLEMENTEDを
+   メッセージを受信した順に 返さなければならない。これらのメッセージは
+   もう一方の側では無視されなければならない。将来のプロトコルの
+   バージョンはこれらのメッセージの種類に対して別の意味が定義
+   されるかもしれない。
 
      byte      SSH_MSG_UNIMPLEMENTED
      uint32    packet sequence number of rejected message
@@ -2159,11 +2159,11 @@ Internet-Draft        SSH Transport Layer Protocol               Oct 2003
 
 11. Summary of Message Numbers
 
-11. ��å������ֹ�ΤޤȤ�
+11. メッセージ番号のまとめ
 
    The following message numbers have been defined in this protocol:
 
-   �ʲ��Υ�å������ֹ椬���Υץ��ȥ�����������Ƥ���:
+   以下のメッセージ番号がこのプロトコルで定義されている:
 
      #define SSH_MSG_DISCONNECT             1
      #define SSH_MSG_IGNORE                 2
@@ -2191,37 +2191,37 @@ Internet-Draft        SSH Transport Layer Protocol              Oct 2003
 
 12. IANA Considerations
 
-12. IANA �ιͻ�.
+12. IANA の考察.
 
    This document is part of a set, the IANA considerations for the SSH
    protocol as defined in [SSH-ARCH], [SSH-TRANS], [SSH-USERAUTH],
    [SSH-CONNECT] are detailed in [SSH-NUMBERS].
 
-   ����ʸ��Ͻ���ΰ���ʬ��, [SSH-ARCH], [SSH-TRANS], [SSH-USERAUTH],
-   [SSH-CONNECT] ���������Ƥ��� SSH �ץ��ȥ�����Ф���IANA�ιͻ���
-   [SSH-NUMBERS] �� �ܽҤ���Ƥ���.
+   この文書は集合の一部分で, [SSH-ARCH], [SSH-TRANS], [SSH-USERAUTH],
+   [SSH-CONNECT] で定義されている SSH プロトコルに対するIANAの考察は
+   [SSH-NUMBERS] で 詳述されている.
 
 
 13. Security Considerations
 
-13. �������ƥ��˴ؤ���ͻ�
+13. セキュリティに関する考察
 
    This protocol provides a secure encrypted channel over an insecure
    network.  It performs server host authentication, key exchange,
    encryption, and integrity protection.  It also derives a unique
    session id that may be used by higher-level protocols.
 
-   ���Υץ��ȥ���ϡ������Ǥʤ��ͥåȥ����Ǥ�
-   �����ʰŹ沽���줿�����ͥ���󶡤��롣���Υץ��ȥ����
-   �����Хۥ���ǧ�ڡ����򴹡��Ź沽�����������ݸ��Ԥʤ���
-   ���⼡�Υץ��ȥ�����Ѥ��뤳�ȤΤǤ����ˡ����� session id
-   ��Ƴ�Ф��롣
+   このプロトコルは、安全でないネットワーク上での
+   安全な暗号化されたチャンネルを提供する。このプロトコルは
+   サーバホスト認証、鍵交換、暗号化、完全性の保護を行なう。
+   より高次のプロトコルで用いることのできるユニークな session id
+   も導出する。
 
    Full security considerations for this protocol are provided in
    Section 8 of [SSH-ARCH]
 
-   ���Υץ��ȥ�����Ф��봰���ʥ������ƥ��ιͻ��� [SSH-ARCH]��
-   ��������� 8 ���󶡤���Ƥ���.
+   このプロトコルに対する完全なセキュリティの考察は [SSH-ARCH]の
+   セクション 8 で提供されている.
 
 
 14. Intellectual Property

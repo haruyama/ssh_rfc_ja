@@ -10,10 +10,10 @@ Expires: July 30, 2004                       SSH Communications Security
 
                Secure Shell Authentication Agent Protocol
 	       
-	       SSH Ç§¾Ú¥¨¡¼¥¸¥§¥ó¥È¥×¥í¥È¥³¥ë
+	       SSH èªè¨¼ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆãƒ—ãƒ­ãƒˆã‚³ãƒ«
 
 
-# Ìõ¼Ô ½Õ»³À¬¸ã haruyama@unixuser.org
+# è¨³è€… æ˜¥å±±å¾å¾ haruyama@unixuser.org
 
 Status of This Memo
 
@@ -39,7 +39,7 @@ http://www.ietf.org/shadow.html.
 
 Abstract
 
-³µÍ×
+æ¦‚è¦
 
 This document describes the Secure Shell authentication agent protocol
 (i.e., the protocol used between a client requesting authentication and
@@ -48,11 +48,11 @@ cific local channel or over a forwarded authentication channel.  It is
 assumed that the channel is trusted, so no protection for the communica-
 tions channel is provided by this protocol.
 
-¤³¤ÎÊ¸½ñ¤Ï SSH Ç§¾Ú¥¨¡¼¥¸¥§¥ó¥È¥×¥í¥È¥³¥ë (¤¹¤Ê¤ï¤Á¥¯¥é¥¤¥¢¥ó¥È¤ÎÇ§¾Ú¤ÎÍ×µá¤È
-Ç§¾Ú¥¨¡¼¥¸¥§¥ó¥È´Ö¤Î¥×¥í¥È¥³¥ë) ¤òµ­½Ò¤¹¤ë. ¤³¤Î¥×¥í¥È¥³¥ë¤ÏÄÌ¾ï
-µ¡´ï¤ËÆÃÍ­¤Î¥í¡¼¥«¥ë¤Ê¥Á¥ã¥ó¥Í¥ë¤«, Å¾Á÷¤µ¤ì¤¿Ç§¾Ú¥Á¥ã¥ó¥Í¥ë¤Î¾å¤ÇÆ¯¤¯.
-¥Á¥ã¥ó¥Í¥ë¤¬¿®Íê¤Ç¤­¤ë¤³¤È¤ò¤³¤Î¥×¥í¥È¥³¥ë¤Ï²¾Äê¤·¤Æ¤ª¤ê, ¤³¤Î¥×¥í¥È¥³¥ë¤Ç¤Ï
-ÅÁÃ£¥Á¥ã¥ó¥Í¥ë¤ËÂĞ¤¹¤ëÊİ¸î¤ÏÄó¶¡¤µ¤ì¤Ê¤¤.
+ã“ã®æ–‡æ›¸ã¯ SSH èªè¨¼ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆãƒ—ãƒ­ãƒˆã‚³ãƒ« (ã™ãªã‚ã¡ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®èªè¨¼ã®è¦æ±‚ã¨
+èªè¨¼ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆé–“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«) ã‚’è¨˜è¿°ã™ã‚‹. ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¯é€šå¸¸
+æ©Ÿå™¨ã«ç‰¹æœ‰ã®ãƒ­ãƒ¼ã‚«ãƒ«ãªãƒãƒ£ãƒ³ãƒãƒ«ã‹, è»¢é€ã•ã‚ŒãŸèªè¨¼ãƒãƒ£ãƒ³ãƒãƒ«ã®ä¸Šã§åƒã.
+ãƒãƒ£ãƒ³ãƒãƒ«ãŒä¿¡é ¼ã§ãã‚‹ã“ã¨ã‚’ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¯ä»®å®šã—ã¦ãŠã‚Š, ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã§ã¯
+ä¼é”ãƒãƒ£ãƒ³ãƒãƒ«ã«å¯¾ã™ã‚‹ä¿è­·ã¯æä¾›ã•ã‚Œãªã„.
 
 
 
@@ -104,7 +104,7 @@ Table of Contents
 
 1.  Authentication Agent Protocol
 
-1.  Ç§¾Ú¥¨¡¼¥¸¥§¥ó¥È¥×¥í¥È¥³¥ë
+1.  èªè¨¼ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆãƒ—ãƒ­ãƒˆã‚³ãƒ«
 
 The authentication agent is a piece of software that runs in a user's
 local workstation, laptop, or other trusted device.  It is used to
@@ -113,36 +113,36 @@ storage, and can perform requested operations using the private key.  It
 allows the keys to be kept on a smartcard or other special hardware that
 can perform cryptographic operations.
 
-Ç§¾Ú¥¨¡¼¥¸¥§¥ó¥È¤Ï ¥æ¡¼¥¶¤Î¥í¡¼¥«¥ë¤Ê¥ï¡¼¥¯¥¹¥Æ¡¼¥·¥ç¥ó, ¥é¥Ã¥×¥È¥Ã¥×
-¤½¤ÎÂ¾¤Î¿®Íê¤µ¤ì¤¿¥Ç¥Ğ¥¤¥¹¤Î¾å¤ÇÆ°¤¯¥½¥Õ¥È¥¦¥§¥¢¤À. ¥·¥ó¥°¥ë¥µ¥¤¥ó¥ª¥ó
-¤ò¼Â¸½¤¹¤ë¤¿¤á¤Ë»È¤ï¤ì¤ë. ¤³¤ì¤Ï, ¼«¿È¤Î¥¹¥È¥ì¡¼¥¸¤Ë¥æ¡¼¥¶¤ÎÈëÌ©¸°¤ò»ı¤Á
-¤³¤ÎÈëÌ©¸°¤òÍÑ¤¤¤ëÍ×µá¤µ¤ì¤¿Áàºî¤ò¹Ô¤¦¤³¤È¤¬¤Ç¤­¤ë. ¤³¤ì¤Ï, ¸°¤ò, 
-¥¹¥Ş¡¼¥È¥«¡¼¥É¤ä°Å¹æ¤ÎÁàºî¤ò¹Ô¤Ê¤¨¤ëÂ¾¤ÎÆÃÊÌ¤Ê¥Ï¡¼¥É¥¦¥§¥¢¤Ë
-ÃÖ¤¤¤Æ¤ª¤¯¤³¤È¤¬¤Ç¤­¤ë.						    
+èªè¨¼ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯ ãƒ¦ãƒ¼ã‚¶ã®ãƒ­ãƒ¼ã‚«ãƒ«ãªãƒ¯ãƒ¼ã‚¯ã‚¹ãƒ†ãƒ¼ã‚·ãƒ§ãƒ³, ãƒ©ãƒƒãƒ—ãƒˆãƒƒãƒ—
+ãã®ä»–ã®ä¿¡é ¼ã•ã‚ŒãŸãƒ‡ãƒã‚¤ã‚¹ã®ä¸Šã§å‹•ãã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã . ã‚·ãƒ³ã‚°ãƒ«ã‚µã‚¤ãƒ³ã‚ªãƒ³
+ã‚’å®Ÿç¾ã™ã‚‹ãŸã‚ã«ä½¿ã‚ã‚Œã‚‹. ã“ã‚Œã¯, è‡ªèº«ã®ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã«ãƒ¦ãƒ¼ã‚¶ã®ç§˜å¯†éµã‚’æŒã¡
+ã“ã®ç§˜å¯†éµã‚’ç”¨ã„ã‚‹è¦æ±‚ã•ã‚ŒãŸæ“ä½œã‚’è¡Œã†ã“ã¨ãŒã§ãã‚‹. ã“ã‚Œã¯, éµã‚’, 
+ã‚¹ãƒãƒ¼ãƒˆã‚«ãƒ¼ãƒ‰ã‚„æš—å·ã®æ“ä½œã‚’è¡Œãªãˆã‚‹ä»–ã®ç‰¹åˆ¥ãªãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢ã«
+ç½®ã„ã¦ãŠãã“ã¨ãŒã§ãã‚‹.						    
 
 The authentication agent protocol is used to communicate between the
 authentication agent and clients wanting to authenticate something or
 wanting to perform private key operations.
 
-Ç§¾Ú¥¨¡¼¥¸¥§¥ó¥È¥×¥í¥È¥³¥ë¤Ï, Ç§¾Ú¥¨¡¼¥¸¥§¥ó¥È¤È, ¤Ê¤Ë¤«¤òÇ§¾Ú¤·¤¿¤¤
-¤Ê¤¤¤·ÈëÌ©¸°¤ÎÁàºî¤ò¹Ô¤Ê¤¤¤¿¤¤¥¯¥é¥¤¥¢¥ó¥È¤È¤Î´Ö¤Ç»È¤ï¤ì¤ë.
+èªè¨¼ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¯, èªè¨¼ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¨, ãªã«ã‹ã‚’èªè¨¼ã—ãŸã„
+ãªã„ã—ç§˜å¯†éµã®æ“ä½œã‚’è¡Œãªã„ãŸã„ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¨ã®é–“ã§ä½¿ã‚ã‚Œã‚‹.
 
 The actual communication between the client and the agent happens using
 a machine-dependent trusted communications channel.  This channel would
 typically be a local socket, named pipe, or some kind of secure
 messaging system that works inside the local machine.
 
-¥¯¥é¥¤¥¢¥ó¥È¤È¥¨¡¼¥¸¥§¥ó¥È¤Î¼Âºİ¤ÎÄÌ¿®¤Ï, ¥Ş¥·¥ó¤Ë°ÍÂ¸¤¹¤ë¿®Íê¤µ¤ì¤¿
-ÄÌ¿®¥Á¥ã¥ó¥Í¥ë¤ò»È¤Ã¤Æ¹Ô¤Ê¤ï¤ì¤ë. ¤³¤Î¥Á¥ã¥ó¥Í¥ë¤Ï, Åµ·¿Åª¤Ë¤Ï
-¥í¡¼¥«¥ë¤Ê¥½¥±¥Ã¥È¤À¤Ã¤¿¤ê, Ì¾Á°ÉÕ¤­¥Ñ¥¤¥×¤À¤Ã¤¿¤ê, ¤â¤·¤¯¤Ï
-¥í¡¼¥«¥ë¤Ê¥Ş¥·¥óÆâÉô¤ÇÆ¯¤¯¤Ê¤ó¤é¤«¤Î°ÂÁ´¤Ê¥á¥Ã¥»¡¼¥¸¥ó¥°¥·¥¹¥Æ¥à
-¤À¤Ã¤¿¤ê¤¹¤ë.
+ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¨ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®å®Ÿéš›ã®é€šä¿¡ã¯, ãƒã‚·ãƒ³ã«ä¾å­˜ã™ã‚‹ä¿¡é ¼ã•ã‚ŒãŸ
+é€šä¿¡ãƒãƒ£ãƒ³ãƒãƒ«ã‚’ä½¿ã£ã¦è¡Œãªã‚ã‚Œã‚‹. ã“ã®ãƒãƒ£ãƒ³ãƒãƒ«ã¯, å…¸å‹çš„ã«ã¯
+ãƒ­ãƒ¼ã‚«ãƒ«ãªã‚½ã‚±ãƒƒãƒˆã ã£ãŸã‚Š, åå‰ä»˜ããƒ‘ã‚¤ãƒ—ã ã£ãŸã‚Š, ã‚‚ã—ãã¯
+ãƒ­ãƒ¼ã‚«ãƒ«ãªãƒã‚·ãƒ³å†…éƒ¨ã§åƒããªã‚“ã‚‰ã‹ã®å®‰å…¨ãªãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ³ã‚°ã‚·ã‚¹ãƒ†ãƒ 
+ã ã£ãŸã‚Šã™ã‚‹.
 
 The protocol works by the client sending requests to the agent, and the
 agent responding to these requests.
 
-¤³¤Î¥×¥í¥È¥³¥ë¤Ï, ¥¯¥é¥¤¥¢¥ó¥È¤¬¥¨¡¼¥¸¥§¥ó¥È¤Ë¥ê¥¯¥¨¥¹¥È¤òÅê¤²,¥¨¡¼¥¸¥§¥ó¥È¤¬
-¤½¤ì¤é¤Î¥ê¥¯¥¨¥¹¥È¤ËÊÖÅú¤¹¤ë¤³¤È¤ÇÆ¯¤¯.		  
+ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¯, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã«ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’æŠ•ã’,ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆãŒ
+ãã‚Œã‚‰ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆã«è¿”ç­”ã™ã‚‹ã“ã¨ã§åƒã.		  
 
 
 Tatu Ylonen, Timo J. Rinne and Sami Lehtinen                    [page 2]
@@ -151,13 +151,13 @@ INTERNET-DRAFT                                          30 January, 2004
  
 1.1.  Packet Format
 
-1.1   ¥Ñ¥±¥Ã¥È¤Î¥Õ¥©¡¼¥Ş¥Ã¥È
+1.1   ãƒ‘ã‚±ãƒƒãƒˆã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
 
 All messages passed to/from the authentication agent have the following
 format:
 
-Ç§¾Ú¥¨¡¼¥¸¥§¥ó¥È¤È¤Î´Ö¤Ç¤ä¤ê¤È¤ê¤µ¤ì¤ë¤¹¤Ù¤Æ¤Î¥á¥Ã¥»¡¼¥¸¤Ï¼¡¤Î
-¥Õ¥©¡¼¥Ş¥Ã¥È¤ò»ı¤Ä.
+èªè¨¼ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¨ã®é–“ã§ã‚„ã‚Šã¨ã‚Šã•ã‚Œã‚‹ã™ã¹ã¦ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯æ¬¡ã®
+ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’æŒã¤.
 
   uint32           length
   byte             type
@@ -165,7 +165,7 @@ format:
 
 The following packet types are currently defined:
 
-¼¡¤Î¥Ñ¥±¥Ã¥È¥¿¥¤¥×¤¬¸½ºßÄêµÁ¤µ¤ì¤Æ¤¤¤ë.
+æ¬¡ã®ãƒ‘ã‚±ãƒƒãƒˆã‚¿ã‚¤ãƒ—ãŒç¾åœ¨å®šç¾©ã•ã‚Œã¦ã„ã‚‹.
 
    /* Messages sent by the client. */
    #define SSH_AGENT_REQUEST_VERSION                        1
@@ -193,7 +193,7 @@ The following packet types are currently defined:
 
 1.2.  Forwarding Notices
 
-1.2   Å¾Á÷¤Î¹ğÃÎ
+1.2   è»¢é€ã®å‘ŠçŸ¥
 
 If the agent connection is forwarded through intermediate hosts (using
 the SSH Connection Protocol agent forwarding feature (described in
@@ -206,15 +206,15 @@ connection is from a local machine and if not, can log the path where
 the connection came from.  These messages must be wrapped in the
 appropriate header.
 
-(SSH ¥³¥Í¥¯¥·¥ç¥ó¥×¥í¥È¥³¥ë¤Î (``Agent Forwarding With Secure Shell''
-¥»¥¯¥·¥ç¥ó¤Çµ­½Ò¤µ¤ì¤Æ¤¤¤ë) ¥¨¡¼¥¸¥§¥ó¥ÈÅ¾Á÷¤ÎÆÃÄ§¤òÍÑ¤¤¤Æ, ¤Ê¤¤¤·
-(¤Ê¤Ë¤«ÊÌ¤Î¼êÃÊ¤Ç) ) ¥¨¡¼¥¸¥§¥ó¥È¤ÎÀÜÂ³¤¬ Ãæ´Ö¥Û¥¹¥È¤ò²ğ¤·¤ÆÅ¾Á÷¤µ¤ì¤Æ¤¤¤ë¾ì¹ç
-Ãæ´Ö¤Î¥Î¡¼¥É (¤Î SSH ¤Î¥¯¥é¥¤¥¢¥ó¥È) ¤½¤ì¤¾¤ì¤¬ ¤½¤ÎÂ¾¤Î¥á¥Ã¥»¡¼¥¸¤òÅ¾Á÷¤¹¤ë
-¤è¤êÁ°¤Ë ¥¨¡¼¥¸¥§¥ó¥È¥Á¥ã¥ó¥Í¥ë¤Ë¼¡¤Î¥á¥Ã¥»¡¼¥¸¤òÁŞÆş¤¹¤ë¤Ù¤­¤Ç¤¢¤ë.
-¼Âºİ¤Î¥¨¡¼¥¸¥§¥ó¥È¤Ï,°ìÈÖ¶á¤¤¥Î¡¼¥É¤«¤é½ç¤Ë¤³¤ì¤é¤Î¥á¥Ã¥»¡¼¥¸¤ò¼õ¤±¤È¤ë¤³¤È¤Ç,
-ÀÜÂ³¤¬¥í¡¼¥«¥ë¤Î¥Ş¥·¥ó¤«¤é¤«¤½¤ì¤Ç¤Ê¤¤¤«¤òÈ½ÃÇ¤·,
-ÀÜÂ³¤¬¤ä¤Ã¤Æ¤­¤¿¥Ñ¥¹¤òµ­Ï¿¤¹¤ë¤³¤È¤¬¤Ç¤­¤ë. ¤³¤ì¤é¤Î¥á¥Ã¥»¡¼¥¸¤Ï
-Å¬ÀÚ¤Ê¥Ø¥Ã¥À¤ÎÃæ¤ËÊñ¤Ş¤ì¤Æ¤¤¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+(SSH ã‚³ãƒã‚¯ã‚·ãƒ§ãƒ³ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã® (``Agent Forwarding With Secure Shell''
+ã‚»ã‚¯ã‚·ãƒ§ãƒ³ã§è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹) ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆè»¢é€ã®ç‰¹å¾´ã‚’ç”¨ã„ã¦, ãªã„ã—
+(ãªã«ã‹åˆ¥ã®æ‰‹æ®µã§) ) ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®æ¥ç¶šãŒ ä¸­é–“ãƒ›ã‚¹ãƒˆã‚’ä»‹ã—ã¦è»¢é€ã•ã‚Œã¦ã„ã‚‹å ´åˆ
+ä¸­é–“ã®ãƒãƒ¼ãƒ‰ (ã® SSH ã®ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆ) ãã‚Œãã‚ŒãŒ ãã®ä»–ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è»¢é€ã™ã‚‹
+ã‚ˆã‚Šå‰ã« ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆãƒãƒ£ãƒ³ãƒãƒ«ã«æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’æŒ¿å…¥ã™ã‚‹ã¹ãã§ã‚ã‚‹.
+å®Ÿéš›ã®ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯,ä¸€ç•ªè¿‘ã„ãƒãƒ¼ãƒ‰ã‹ã‚‰é †ã«ã“ã‚Œã‚‰ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘ã¨ã‚‹ã“ã¨ã§,
+æ¥ç¶šãŒãƒ­ãƒ¼ã‚«ãƒ«ã®ãƒã‚·ãƒ³ã‹ã‚‰ã‹ãã‚Œã§ãªã„ã‹ã‚’åˆ¤æ–­ã—,
+æ¥ç¶šãŒã‚„ã£ã¦ããŸãƒ‘ã‚¹ã‚’è¨˜éŒ²ã™ã‚‹ã“ã¨ãŒã§ãã‚‹. ã“ã‚Œã‚‰ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯
+é©åˆ‡ãªãƒ˜ãƒƒãƒ€ã®ä¸­ã«åŒ…ã¾ã‚Œã¦ã„ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
   byte      SSH_AGENT_FORWARDING_NOTICE
   string    remote host name  (as typed by the user, preferably)
@@ -229,16 +229,16 @@ INTERNET-DRAFT                                          30 January, 2004
  
 1.3.  Requesting Version Number
 
-1.3   ¥Ğ¡¼¥¸¥ç¥óÈÖ¹æ¤ÎÍ×µá
+1.3   ãƒãƒ¼ã‚¸ãƒ§ãƒ³ç•ªå·ã®è¦æ±‚
 
 When the client opens a connection, it must send the following message
 to the server.  This must be the first message sent.  The real agent
 will receive this after zero or more forwarding notice messages.
 
-¥¯¥é¥¤¥¢¥ó¥È¤¬ÀÜÂ³¤ò³«¤¯ºİ, ¼¡¤Î¥á¥Ã¥»¡¼¥¸¤ò¥µ¡¼¥Ğ¤Ë
-Á÷¤é¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤. ¤³¤ì¤Ï Á÷¤é¤ì¤ëºÇ½é¤Î¥á¥Ã¥»¡¼¥¸¤Ç¤Ê¤¯¤Æ¤Ï¤Ê¤é¤Ê¤¤.
-¼Âºİ¤Î¥¨¡¼¥¸¥§¥ó¥È¤Ï, ¤³¤ì¤ò, 0 ¸Ä°Ê¾å¤ÎÅ¾Á÷¤Î¹ğÃÎ¥á¥Ã¥»¡¼¥¸¤Î¸å¤Ç
-¤³¤ì¤ò¼õ¤±¤È¤ë.
+ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒæ¥ç¶šã‚’é–‹ãéš›, æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ã‚µãƒ¼ãƒã«
+é€ã‚‰ãªã‘ã‚Œã°ãªã‚‰ãªã„. ã“ã‚Œã¯ é€ã‚‰ã‚Œã‚‹æœ€åˆã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã§ãªãã¦ã¯ãªã‚‰ãªã„.
+å®Ÿéš›ã®ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯, ã“ã‚Œã‚’, 0 å€‹ä»¥ä¸Šã®è»¢é€ã®å‘ŠçŸ¥ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®å¾Œã§
+ã“ã‚Œã‚’å—ã‘ã¨ã‚‹.
 
   byte      SSH_AGENT_REQUEST_VERSION
   string    version string of the application sending the request
@@ -246,7 +246,7 @@ will receive this after zero or more forwarding notice messages.
 
 If the agent follows this protocol, it will respond with
 
-¥¨¡¼¥¸¥§¥ó¥È¤¬¤³¤Î¥×¥í¥È¥³¥ë¤Ë½¾¤¦¤Ê¤é, ¼¡¤ÇÊÖÅú¤¹¤ë.
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆãŒã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã«å¾“ã†ãªã‚‰, æ¬¡ã§è¿”ç­”ã™ã‚‹.
 
   byte      SSH_AGENT_VERSION_RESPONSE
   uint32    version number, 3 for this protocol
@@ -258,13 +258,13 @@ then respond with a message whose first byte is 2.  This can be used to
 determine the version of the agent if compatibility with Secure Shell
 1.x is desired.
 
-¥Ğ¡¼¥¸¥ç¥óÈÖ¹æÍ×µá¤¬, SSH 1.x ¥¨¡¼¥¸¥§¥ó¥È¤ØÁ÷¤é¤ì¤¿¤Î¤Ê¤é,
-¥¨¡¼¥¸¥§¥ó¥È¤Ï, identitiy ¤ò¥ê¥¹¥È¤¹¤ëÍ×µá¤È¤·¤Æ¤³¤ì¤ò²ò¼á¤¹¤ë¤À¤í¤¦.
-¤½¤·¤Æ, ¥¨¡¼¥¸¥§¥ó¥È¤Ï, ºÇ½é¤Î¥Ğ¥¤¥È¤¬ 2 ¤Ç¤¢¤ë¥á¥Ã¥»¡¼¥¸¤ÇÊÖÅú¤¹¤ë¤À¤í¤¦.
-SSH 1.x ¤È¤Î¸ß´¹À­¤òË¾¤à¤Ê¤é, ¤³¤ì¤ò»È¤Ã¤Æ, ¥¨¡¼¥¸¥§¥ó¥È¤Î¥Ğ¡¼¥¸¥ç¥ó¤ò·èÄê
-¤¹¤ë¤³¤È¤¬¤Ç¤­¤ë.
+ãƒãƒ¼ã‚¸ãƒ§ãƒ³ç•ªå·è¦æ±‚ãŒ, SSH 1.x ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¸é€ã‚‰ã‚ŒãŸã®ãªã‚‰,
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯, identitiy ã‚’ãƒªã‚¹ãƒˆã™ã‚‹è¦æ±‚ã¨ã—ã¦ã“ã‚Œã‚’è§£é‡ˆã™ã‚‹ã ã‚ã†.
+ãã—ã¦, ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯, æœ€åˆã®ãƒã‚¤ãƒˆãŒ 2 ã§ã‚ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã§è¿”ç­”ã™ã‚‹ã ã‚ã†.
+SSH 1.x ã¨ã®äº’æ›æ€§ã‚’æœ›ã‚€ãªã‚‰, ã“ã‚Œã‚’ä½¿ã£ã¦, ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’æ±ºå®š
+ã™ã‚‹ã“ã¨ãŒã§ãã‚‹.
 
-#it will interpret it ¤Ã¤Æ¥Ş¥Æ
+#it will interpret it ã£ã¦ãƒãƒ†
 
 If the version string query arrives without trailing string identifying
 the client software version, it can be translated list identities
@@ -272,16 +272,16 @@ request sent by Secure Shell 1.x and handled accordingly.  If agent
 software does not support the agent protocol of Secure Shell 1.x, it MAY
 also interpret this query as valid SSH_AGENT_REQUEST_VERSION packet.
 
-version string  ¥¯¥¨¥ê¤¬ ¥¯¥é¥¤¥¢¥ó¥È¤Î¥½¥Õ¥È¥¦¥§¥¢¤Î¥Ğ¡¼¥¸¥ç¥ó¤òÆÃÄê¤¹¤ë
-Ê¸»úÎó¤òÉÕ¤±¤º¤ËÆÏ¤¤¤¿¤Ê¤é,  SSH 1.x ¤«¤éÁ÷¤é¤ì¤¿ identity ¤òÎóµó¤¹¤ëÍ×µá
-¤È²ò¼á¤µ¤ì¤½¤Î¤è¤¦¤Ë½èÍı¤µ¤ì¤ë¤«¤â¤·¤ì¤Ê¤¤. ¥¨¡¼¥¸¥§¥ó¥È¥½¥Õ¥È¥¦¥§¥¢¤¬
-SSH 1.x ¥¨¡¼¥¸¥§¥ó¥È¥×¥í¥È¥³¥ë¤ò¥µ¥İ¡¼¥È¤·¤Ê¤¤¤Ê¤é, ¤³¤Î¥¯¥¨¥ê¤ò
-Àµ¤·¤¤ SSH_AGENT_REQUEST_VERSION ¥Ñ¥±¥Ã¥È¤È¤·¤Æ²ò¼á¤·¤Æ¤â¤è¤¤.
+version string  ã‚¯ã‚¨ãƒªãŒ ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’ç‰¹å®šã™ã‚‹
+æ–‡å­—åˆ—ã‚’ä»˜ã‘ãšã«å±Šã„ãŸãªã‚‰,  SSH 1.x ã‹ã‚‰é€ã‚‰ã‚ŒãŸ identity ã‚’åˆ—æŒ™ã™ã‚‹è¦æ±‚
+ã¨è§£é‡ˆã•ã‚Œãã®ã‚ˆã†ã«å‡¦ç†ã•ã‚Œã‚‹ã‹ã‚‚ã—ã‚Œãªã„. ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ãŒ
+SSH 1.x ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆãƒ—ãƒ­ãƒˆã‚³ãƒ«ã‚’ã‚µãƒãƒ¼ãƒˆã—ãªã„ãªã‚‰, ã“ã®ã‚¯ã‚¨ãƒªã‚’
+æ­£ã—ã„ SSH_AGENT_REQUEST_VERSION ãƒ‘ã‚±ãƒƒãƒˆã¨ã—ã¦è§£é‡ˆã—ã¦ã‚‚ã‚ˆã„.
 					    
 The extension data in the SSH_AGENT_VERSION_RESPONSE may be empty, or
 may be a sequence of
 
-SSH_AGENT_VERSION_RESPONSE ¤Î³ÈÄ¥¥Ç¡¼¥¿¤Ï¶õ¤«, ¼¡¤Î¥Ú¥¢¤Î¥·¡¼¥±¥ó¥¹¤À.
+SSH_AGENT_VERSION_RESPONSE ã®æ‹¡å¼µãƒ‡ãƒ¼ã‚¿ã¯ç©ºã‹, æ¬¡ã®ãƒšã‚¢ã®ã‚·ãƒ¼ã‚±ãƒ³ã‚¹ã .
 
   string extension_name
   string extension_data
@@ -295,27 +295,27 @@ nization defining the extension.  Additional names that are not of this
 format may be defined later by the IETF.  Implementations MUST silently
 ignore any extensions whose name they do not recognize.
 
-(Ê¸»úÎó¤Ï¶¦¤Ë, ÊÒÊı¤¬¤¢¤ì¤Ğ¾ï¤ËÂ¸ºß¤¹¤ë. ¤·¤«¤·, `extension_data' ¤Ï
-0 ¤ÎÄ¹¤µ¤ÎÊ¸»úÎó¤«¤â¤·¤ì¤Ê¤¤) ¤â¤·Â¸ºß¤¹¤ë¤Ê¤é, ¤³¤ì¤é¤ÎÊ¸»úÎó¤Ï
-´ğËÜ¤Î¥×¥í¥È¥³¥ë¤Ø¤Î³ÈÄ¥¤ò»Ø¼¨¤¹¤ë. `extension_name' ¥Õ¥£¡¼¥ë¥É¤Ï
-³Î¾Ú¤ÎÌ¾Á°¤òÆ±Äê¤¹¤ë. Ì¾Á°¤Ï, "name@domain" ¤È¤¤¤¦·Á¼°¤Ç¤¢¤ëÉ¬Í×¤¬¤¢¤¢¤ë.
-¤³¤³¤Ç, domain ¤Ï ³ÈÄ¥¤òÄêµÁ¤·¤¿ÁÈ¿¥¤Î DNS ¥É¥á¥¤¥óÌ¾¤À. ¤³¤Î¥Õ¥©¡¼¥Ş¥Ã¥È
-¤Ç¤Ê¤¤ÄÉ²Ã¤ÎÌ¾Á°¤Ï, ¤¢¤È¤Ç IETF ¤Ë¤è¤Ã¤ÆÄêµÁ¤µ¤ì¤ë¤«¤â¤·¤ì¤Ê¤¤.
-¼ÂÁõ¤Ï, Íı²ò¤Ç¤­¤Ê¤¤Ì¾Á°¤Î³ÈÄ¥¤òÀÅ¤«¤ËÌµ»ë¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+(æ–‡å­—åˆ—ã¯å…±ã«, ç‰‡æ–¹ãŒã‚ã‚Œã°å¸¸ã«å­˜åœ¨ã™ã‚‹. ã—ã‹ã—, `extension_data' ã¯
+0 ã®é•·ã•ã®æ–‡å­—åˆ—ã‹ã‚‚ã—ã‚Œãªã„) ã‚‚ã—å­˜åœ¨ã™ã‚‹ãªã‚‰, ã“ã‚Œã‚‰ã®æ–‡å­—åˆ—ã¯
+åŸºæœ¬ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¸ã®æ‹¡å¼µã‚’æŒ‡ç¤ºã™ã‚‹. `extension_name' ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¯
+ç¢ºè¨¼ã®åå‰ã‚’åŒå®šã™ã‚‹. åå‰ã¯, "name@domain" ã¨ã„ã†å½¢å¼ã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚ã‚‹.
+ã“ã“ã§, domain ã¯ æ‹¡å¼µã‚’å®šç¾©ã—ãŸçµ„ç¹”ã® DNS ãƒ‰ãƒ¡ã‚¤ãƒ³åã . ã“ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
+ã§ãªã„è¿½åŠ ã®åå‰ã¯, ã‚ã¨ã§ IETF ã«ã‚ˆã£ã¦å®šç¾©ã•ã‚Œã‚‹ã‹ã‚‚ã—ã‚Œãªã„.
+å®Ÿè£…ã¯, ç†è§£ã§ããªã„åå‰ã®æ‹¡å¼µã‚’é™ã‹ã«ç„¡è¦–ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
 1.4.  Adding Keys to the Agent
 
-1.4.  ¥¨¡¼¥¸¥§¥ó¥È¤Ø¤Î¸°¤ÎÄÉ²Ã
+1.4.  ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¸ã®éµã®è¿½åŠ 
 
 The client can add a new private key to the agent with the following
 message. Using this message over the net has security implications, and
 the implementation SHOULD warn the user before decryption or sending the
 private key. (XXX how does ssh-add detect this condition?)
 
-¥¯¥é¥¤¥¢¥ó¥È¤Ï¼¡¤Î¥á¥Ã¥»¡¼¥¸¤Ç¥¨¡¼¥¸¥§¥ó¥È¤Ë¿·¤·¤¤ÈëÌ©¸°¤òÄÉ²Ã¤¹¤ë¤³¤È¤¬
-¤Ç¤­¤ë. ¥Í¥Ã¥È±Û¤·¤Ç¤Î¤³¤Î¥á¥Ã¥»¡¼¥¸¤Î»ÈÍÑ¤Ï ¥»¥­¥å¥ê¥Æ¥£¤¬¤¢¤ë¤³¤È¤ò
-²¾Äê¤·¤Æ¤¤¤ë. ¤½¤·¤Æ ¼ÂÁõ¤Ï, ÈëÌ©¸°¤ÎÉü¹æ¤äÁ÷¿®¤ÎÁ°¤Ë¥æ¡¼¥¶¤Ë·Ù¹ğ¤¹¤ë
-É¬Í×¤¬¤¢¤ë. (XXX ssh-add ¤Ï¤É¤¦¤ä¤Ã¤Æ¤³¤Î¾ò·ï¤ò¸¡½Ğ¤¹¤ë¤Î?)
+ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã§ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã«æ–°ã—ã„ç§˜å¯†éµã‚’è¿½åŠ ã™ã‚‹ã“ã¨ãŒ
+ã§ãã‚‹. ãƒãƒƒãƒˆè¶Šã—ã§ã®ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ä½¿ç”¨ã¯ ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ãŒã‚ã‚‹ã“ã¨ã‚’
+ä»®å®šã—ã¦ã„ã‚‹. ãã—ã¦ å®Ÿè£…ã¯, ç§˜å¯†éµã®å¾©å·ã‚„é€ä¿¡ã®å‰ã«ãƒ¦ãƒ¼ã‚¶ã«è­¦å‘Šã™ã‚‹
+å¿…è¦ãŒã‚ã‚‹. (XXX ssh-add ã¯ã©ã†ã‚„ã£ã¦ã“ã®æ¡ä»¶ã‚’æ¤œå‡ºã™ã‚‹ã®?)
 
   byte      SSH_AGENT_ADD_KEY
   string    private key encoding
@@ -333,7 +333,7 @@ INTERNET-DRAFT                                          30 January, 2004
 
 1.4.1.  Key types
 
-1.4.1   ¸°¤Î¼ïÎà
+1.4.1   éµã®ç¨®é¡
 
 Key blobs are preceeded by the encoding field, which defines how the
 blob should be interpreted. Defined values for public key encoding are
@@ -341,21 +341,21 @@ blob should be interpreted. Defined values for public key encoding are
 specified in [SECSH-ARCH], under Section IANA Considerations (Section
 8).
 
-¸°¤Î blob ¤Ï, blob ¤¬¤É¤Î¤è¤¦¤Ë²ò¼á¤µ¤ì¤ë¤Ù¤­¤«ÄêµÁ¤¹¤ë,  encoding 
-¥Õ¥£¡¼¥ë¥É¤ËÂ³¤±¤é¤ì¤ë.  ¸ø³«¸°¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ÇÄêµÁ¤µ¤ì¤Æ¤¤¤ëÃÍ¤Ï
-"ssh-dss" ¤È "ssh-rsa" ¤À. ÄÉ²Ã¤Î¸°¤Î¼ïÎà¤¬,  {SECSH-ARCH] ¤Î
-IANA Considerations ¥»¥¯¥·¥ç¥ó (¥»¥¯¥·¥ç¥ó 8) ¤Ë½¾¤Ã¤Æ
-»ØÄê¤µ¤ì¤ë¤è¤¦¤Ë ÄêµÁ¤µ¤ì¤Æ¤â¤è¤¤.
+éµã® blob ã¯, blob ãŒã©ã®ã‚ˆã†ã«è§£é‡ˆã•ã‚Œã‚‹ã¹ãã‹å®šç¾©ã™ã‚‹,  encoding 
+ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«ç¶šã‘ã‚‰ã‚Œã‚‹.  å…¬é–‹éµã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã§å®šç¾©ã•ã‚Œã¦ã„ã‚‹å€¤ã¯
+"ssh-dss" ã¨ "ssh-rsa" ã . è¿½åŠ ã®éµã®ç¨®é¡ãŒ,  {SECSH-ARCH] ã®
+IANA Considerations ã‚»ã‚¯ã‚·ãƒ§ãƒ³ (ã‚»ã‚¯ã‚·ãƒ§ãƒ³ 8) ã«å¾“ã£ã¦
+æŒ‡å®šã•ã‚Œã‚‹ã‚ˆã†ã« å®šç¾©ã•ã‚Œã¦ã‚‚ã‚ˆã„.
 
 "ssh-dss" and "ssh-rsa" public key format encodings are defined in
 [SECSH-TRANS].
 
-"ssh-dss" ¤È "ssh-rsa" ¸ø³«¸°¥Õ¥©¡¼¥Ş¥Ã¥È¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ï 
-[SECSH-TRANS] ¤ÇÄêµÁ¤µ¤ì¤Æ¤¤¤ë.
+"ssh-dss" ã¨ "ssh-rsa" å…¬é–‹éµãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã¯ 
+[SECSH-TRANS] ã§å®šç¾©ã•ã‚Œã¦ã„ã‚‹.
 
 The "ssh-dss" private key format has the following specific encoding:
 
-"ssh-dss" ¸ø³«¸°¥Õ¥©¡¼¥Ş¥Ã¥È¤Ï ¼¡¤ÎÆÃÍ­¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò»ı¤Ä.
+"ssh-dss" å…¬é–‹éµãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã¯ æ¬¡ã®ç‰¹æœ‰ã®ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã‚’æŒã¤.
 
   string    "ssh-dss"
   mpint     p
@@ -366,7 +366,7 @@ The "ssh-dss" private key format has the following specific encoding:
 
 The "ssh-rsa" private key format has the following specific encoding:
 
-"ssh-rsa" ¸ø³«¸°¥Õ¥©¡¼¥Ş¥Ã¥È¤Ï ¼¡¤ÎÆÃÍ­¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò»ı¤Ä.
+"ssh-rsa" å…¬é–‹éµãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã¯ æ¬¡ã®ç‰¹æœ‰ã®ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°ã‚’æŒã¤.
 
   string    "ssh-rsa"
   mpint     e
@@ -379,15 +379,15 @@ The "ssh-rsa" private key format has the following specific encoding:
 XXX Additional key-types (for private keys), for example "ssh-rsa-
 encrypted"?
 
-XXX ÄÉ²Ã¤Î (ÈëÌ©¸°¤Î¤¿¤á¤Î) ¸°¤Î¼ïÎà. Îã¤¨¤Ğ "ssh-rsa-encrypted" ?
+XXX è¿½åŠ ã® (ç§˜å¯†éµã®ãŸã‚ã®) éµã®ç¨®é¡. ä¾‹ãˆã° "ssh-rsa-encrypted" ?
 
 1.4.2.  Forwarding constraints
 
-1.4.2   Å¾Á÷¤ÎÀ©Ìó (constraint)
+1.4.2   è»¢é€ã®åˆ¶ç´„ (constraint)
 
 All constraints are pairs of following format:
 
-¤¹¤Ù¤Æ¤ÎÀ©Ìó¤¬¼¡¤Î¥Õ¥©¡¼¥Ş¥Ã¥È¤Î¥Ú¥¢¤ÇÍ¿¤¨¤é¤ì¤ë.
+ã™ã¹ã¦ã®åˆ¶ç´„ãŒæ¬¡ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®ãƒšã‚¢ã§ä¸ãˆã‚‰ã‚Œã‚‹.
 
   byte      SSH_AGENT_CONSTRAINT_*
   variable  argument for the constraint
@@ -395,12 +395,12 @@ All constraints are pairs of following format:
 The type of the argument is dependent on the constraint type.  Following
 constraint types are currently defined:
 
-¤³¤Î argument ¤Î¼ïÎà¤Ï À©Ìó¤Î¼ïÎà¤Ë°ÍÂ¸¤¹¤ë. ¼¡¤ÎÀ©Ìó¤Î¼ïÎà¤¬
-¸½ºßÄêµÁ¤µ¤ì¤Æ¤¤¤ë.   
+ã“ã® argument ã®ç¨®é¡ã¯ åˆ¶ç´„ã®ç¨®é¡ã«ä¾å­˜ã™ã‚‹. æ¬¡ã®åˆ¶ç´„ã®ç¨®é¡ãŒ
+ç¾åœ¨å®šç¾©ã•ã‚Œã¦ã„ã‚‹.   
 
    /* Constraints 50-99 have a uint32 argument */
 
-   /* Constraints 50-99 ¤Ï uint32 ¤Î argument ¤ò¤â¤Ä*/
+   /* Constraints 50-99 ã¯ uint32 ã® argument ã‚’ã‚‚ã¤*/
 
    /* Argument is uint32 defining key expiration time-out in
       seconds. After this timeout expires, the key can't be used.
@@ -414,70 +414,70 @@ INTERNET-DRAFT                                          30 January, 2004
  
    #define SSH_AGENT_CONSTRAINT_TIMEOUT                 50
 
-   /* Argument ¤Ï ÉÃ¤Ç»ØÄê¤µ¤ì¤ë ¸°¤Î´ü¸ÂÀÚ¤ì¥¿¥¤¥à¥¢¥¦¥È¤òÄêµÁ¤¹¤ë
-      uint32 ¤À. ¤³¤Î¥¿¥¤¥à¥¢¥¦¥È¤¬·Ğ²á¤¹¤ë¤È ¸°¤Ï»È¤¨¤Ê¤¯¤Ê¤ë.
-      0 == ¥¿¥¤¥à¥¢¥¦¥È¤Ê¤· */
+   /* Argument ã¯ ç§’ã§æŒ‡å®šã•ã‚Œã‚‹ éµã®æœŸé™åˆ‡ã‚Œã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã‚’å®šç¾©ã™ã‚‹
+      uint32 ã . ã“ã®ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆãŒçµŒéã™ã‚‹ã¨ éµã¯ä½¿ãˆãªããªã‚‹.
+      0 == ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆãªã— */
 
    /* Argument is uint32 defining the number of operations that can
       be performed with this key.  0xffffffff == no limit */
    #define SSH_AGENT_CONSTRAINT_USE_LIMIT               51
 
-   /* Argument ¤Ï ¤³¤Î¸°¤ò»È¤Ã¤Æ¹Ô¤Ê¤¨¤ëÁàºî¤Î¿ô¤òÄêµÁ¤¹¤ë uint32 ¤À.
-      0xffffffff == À©¸Â¤Ê¤· */
+   /* Argument ã¯ ã“ã®éµã‚’ä½¿ã£ã¦è¡Œãªãˆã‚‹æ“ä½œã®æ•°ã‚’å®šç¾©ã™ã‚‹ uint32 ã .
+      0xffffffff == åˆ¶é™ãªã— */
 
    /* Argument is uint32 defining the number of forwarding steps that
       this key can be forwarded.  0xffffffff == no limit */
    #define SSH_AGENT_CONSTRAINT_FORWARDING_STEPS        52
 
-   /* Argument ¤Ï ¤³¤Î¸°¤òÅ¾Á÷¤¹¤ë¤³¤È¤¬¤Ç¤­¤ë Å¾Á÷¥¹¥Æ¥Ã¥×¤Î¿ô¤òÄêµÁ¤¹¤ë
-      uint32 ¤À. 0xffffffff == À©¸Â¤Ê¤·  */
+   /* Argument ã¯ ã“ã®éµã‚’è»¢é€ã™ã‚‹ã“ã¨ãŒã§ãã‚‹ è»¢é€ã‚¹ãƒ†ãƒƒãƒ—ã®æ•°ã‚’å®šç¾©ã™ã‚‹
+      uint32 ã . 0xffffffff == åˆ¶é™ãªã—  */
 
    /* Constraints 100-149 have a string argument */
 
-   /* Constraints 100-149 ¤Ï string ¤Î argument ¤ò»ı¤Ä */
+   /* Constraints 100-149 ã¯ string ã® argument ã‚’æŒã¤ */
 
    /* Argument is string defining the allowed forwarding steps for
       this key. XXX define this. */
    #define SSH_AGENT_CONSTRAINT_FORWARDING_PATH        100
 
-   /* Argument ¤Ï ¤³¤Î¸°¤Îµö¤µ¤ì¤ëÅ¾Á÷¥Ñ¥¹¤òÄêµÁ¤¹¤ë string ¤À
-      XXX ¤³¤ì¤òÄêµÁ. */
+   /* Argument ã¯ ã“ã®éµã®è¨±ã•ã‚Œã‚‹è»¢é€ãƒ‘ã‚¹ã‚’å®šç¾©ã™ã‚‹ string ã 
+      XXX ã“ã‚Œã‚’å®šç¾©. */
 
    /* Constraints 150-199 have a boolean argument */
 
-   /* Constraints 150-199 ¤Ï  boolean ¤Î argument ¤ò»ı¤Ä*/
+   /* Constraints 150-199 ã¯  boolean ã® argument ã‚’æŒã¤*/
 
    /* Argument is a boolean telling whether the key can be used
       in Secure Shell 1.x compatibility operations. */
 
    #define SSH_AGENT_CONSTRAINT_SSH1_COMPAT            150
 
-   /* Argument ¤Ï SSH 1.x ¤Ë¸ß´¹¤¹¤ëÁàºî¤¬¸°¤Ë»È¤ï¤ì¤ë¤«¤É¤¦¤«¤ò
-      »ØÄê¤¹¤ë boolean ¤À */
+   /* Argument ã¯ SSH 1.x ã«äº’æ›ã™ã‚‹æ“ä½œãŒéµã«ä½¿ã‚ã‚Œã‚‹ã‹ã©ã†ã‹ã‚’
+      æŒ‡å®šã™ã‚‹ boolean ã  */
 
    /* Argument is a boolean telling whether operations performed
       with this key should  be confirmed interactively by the user
       or not. */
    #define SSH_AGENT_CONSTRAINT_NEED_USER_VERIFICATION 151
 
-   /* Argument ¤Ï ¤³¤Î¸°¤ò»È¤Ã¤¿Áàºî¤Ï¥æ¡¼¥¶¤Ë¥¤¥ó¥¿¥é¥¯¥Æ¥£¥Ö¤Ë³ÎÇ§¤µ¤ì¤ë
-      ¤Ù¤­¤«¤É¤¦¤«¤ò»ØÄê¤¹¤ë boolean ¤À */
+   /* Argument ã¯ ã“ã®éµã‚’ä½¿ã£ãŸæ“ä½œã¯ãƒ¦ãƒ¼ã‚¶ã«ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒ†ã‚£ãƒ–ã«ç¢ºèªã•ã‚Œã‚‹
+      ã¹ãã‹ã©ã†ã‹ã‚’æŒ‡å®šã™ã‚‹ boolean ã  */
 
 Message can contain zero, one or multiple constraints.
 
-Message ¤Ï 0, 1, ¤½¤·¤ÆÊ£¿ô¤Î constraint ¤ò»ı¤Ä¤³¤È¤¬¤Ç¤­¤ë.
+Message ã¯ 0, 1, ãã—ã¦è¤‡æ•°ã® constraint ã‚’æŒã¤ã“ã¨ãŒã§ãã‚‹.
 
 If the operation is successful, the agent will respond with the
 following message.
 
-Áàºî¤¬À®¸ù¤·¤¿¤é, ¥¨¡¼¥¸¥§¥ó¥È¤Ï¼¡¤Î¥á¥Ã¥»¡¼¥¸¤òÊÖÅú¤¹¤ë.
+æ“ä½œãŒæˆåŠŸã—ãŸã‚‰, ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¿”ç­”ã™ã‚‹.
 
    byte      SSH_AGENT_SUCCESS
 
 If the operation fails for some reason, the following message will be
 returned instead.
 
-¤Ê¤ó¤é¤«¤ÎÍıÍ³¤Ç Áàºî¤¬¼ºÇÔ¤·¤¿¤é, ¤«¤ï¤ê¤Ë¼¡¤Î¥á¥Ã¥»¡¼¥¸¤¬Á÷¤é¤ì¤ë.
+ãªã‚“ã‚‰ã‹ã®ç†ç”±ã§ æ“ä½œãŒå¤±æ•—ã—ãŸã‚‰, ã‹ã‚ã‚Šã«æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒé€ã‚‰ã‚Œã‚‹.
 
    byte      SSH_AGENT_FAILURE
    uint32    error code
@@ -489,14 +489,14 @@ The last two fields are optional; they don't need to be present in
 SSH_AGENT_FAILURE message. However, both MUST be provided if they are to
 be used. If client is version 2, the agent SHOULD NOT use these fields.
 
-ºÇ¸å¤Î 2 ¤Ä¤Î¥Õ¥£¡¼¥ë¥É¤Ï ÁªÂò¤Ç¤­¤ë. SSH_AGENT_FAILURE ¤ËÉ¬Í×¤Ê¤â¤Î¤Ç¤Ï¤Ê¤¤.
-¤·¤«¤· , ¤³¤ì¤é¤¬»È¤ï¤ì¤ëºİ¤Ë¤Ï, Î¾Êı¤¬Äó¶¡¤µ¤ì¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
-¥¯¥é¥¤¥¢¥ó¥È¤¬ ¥Ğ¡¼¥¸¥ç¥ó 2 ¤Ê¤é ¥¨¡¼¥¸¥§¥ó¥È¤Ï ¤³¤ì¤é¤Î¥Õ¥£¡¼¥ë¥É¤ò
-»È¤ï¤Ê¤¤¤Û¤¦¤¬¤¤¤¤.
+æœ€å¾Œã® 2 ã¤ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¯ é¸æŠã§ãã‚‹. SSH_AGENT_FAILURE ã«å¿…è¦ãªã‚‚ã®ã§ã¯ãªã„.
+ã—ã‹ã— , ã“ã‚Œã‚‰ãŒä½¿ã‚ã‚Œã‚‹éš›ã«ã¯, ä¸¡æ–¹ãŒæä¾›ã•ã‚Œãªã‘ã‚Œã°ãªã‚‰ãªã„.
+ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒ ãƒãƒ¼ã‚¸ãƒ§ãƒ³ 2 ãªã‚‰ ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯ ã“ã‚Œã‚‰ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’
+ä½¿ã‚ãªã„ã»ã†ãŒã„ã„.
 
 The error code is one of the following:
 
-error code ¤Ï ¼¡¤Î¤¦¤Á¤Î 1 ¤Ä¤À.
+error code ã¯ æ¬¡ã®ã†ã¡ã® 1 ã¤ã .
 
    #define SSH_AGENT_ERROR_TIMEOUT               1
    #define SSH_AGENT_ERROR_KEY_NOT_FOUND         2
@@ -515,30 +515,30 @@ INTERNET-DRAFT                                          30 January, 2004
 
 1.5.  Deleting Keys from the Agent
 
-1.5   ¥¨¡¼¥¸¥§¥ó¥È¤«¤é¤Î¤¹¤Ù¤Æ¤Î¸°¤Îºï½ü
+1.5   ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã‹ã‚‰ã®ã™ã¹ã¦ã®éµã®å‰Šé™¤
 
 All keys that are in possession of the agent can be deleted with the
 following message.  (The client is allowed to ignore this for some keys
 if desired.)
 
-¥¨¡¼¥¸¥§¥ó¥È¤ËÊİ»ı¤µ¤ì¤Æ¤¤¤ë¤¹¤Ù¤Æ¤Î¸°¤ò¼¡¤Î¥á¥Ã¥»¡¼¥¸¤Çºï½ü¤¹¤ë¤³¤È¤¬¤Ç¤­¤ë.
-(¤â¤·Ë¾¤à¤Ê¤é, ¤¤¤¯¤Ä¤«¤Î¸°¤ËÂĞ¤·¤Æ¤Ï¤³¤ì¤òÌµ»ë¤¹¤ë¤³¤È¤ò¥¯¥é¥¤¥¢¥ó¥È¤Ë
-µö¤·¤Æ¤â¤è¤¤)
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã«ä¿æŒã•ã‚Œã¦ã„ã‚‹ã™ã¹ã¦ã®éµã‚’æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã§å‰Šé™¤ã™ã‚‹ã“ã¨ãŒã§ãã‚‹.
+(ã‚‚ã—æœ›ã‚€ãªã‚‰, ã„ãã¤ã‹ã®éµã«å¯¾ã—ã¦ã¯ã“ã‚Œã‚’ç„¡è¦–ã™ã‚‹ã“ã¨ã‚’ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã«
+è¨±ã—ã¦ã‚‚ã‚ˆã„)
 
    byte      SSH_AGENT_DELETE_ALL_KEYS
 
 The agent responds with either SSH_AGENT_SUCCESS or SSH_AGENT_FAILURE.
 
-¥¨¡¼¥¸¥§¥ó¥È¤Ï SSH_AGENT_SUCCESS ¤« SSH_AGENT_FAILURE ¤ò¤â¤Ã¤ÆÊÖÅú¤¹¤ë.
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯ SSH_AGENT_SUCCESS ã‹ SSH_AGENT_FAILURE ã‚’ã‚‚ã£ã¦è¿”ç­”ã™ã‚‹.
 
 1.6.  Deleting specific key from the Agent
 
-1.6   ¥¨¡¼¥¸¥§¥ó¥È¤«¤é¤ÎÆÃÄê¤Î¸°¤Îºï½ü
+1.6   ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã‹ã‚‰ã®ç‰¹å®šã®éµã®å‰Šé™¤
 
 The client can delete a specific key with given public key with
 following message.
 
-¥¯¥é¥¤¥¢¥ó¥È¤Ï¼¡¤Î¥á¥Ã¥»¡¼¥¸¤ÇÍ¿¤¨¤é¤ì¤¿¸ø³«¸°¤ò»ı¤ÄÆÃÄê¤Î¸°¤òºï½ü¤Ç¤­¤ë.
+ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã§ä¸ãˆã‚‰ã‚ŒãŸå…¬é–‹éµã‚’æŒã¤ç‰¹å®šã®éµã‚’å‰Šé™¤ã§ãã‚‹.
 
    byte      SSH_AGENT_DELETE_KEY
    string    public key and/or certificates for it
@@ -546,22 +546,22 @@ following message.
 
 The agent responds with either SSH_AGENT_SUCCESS or SSH_AGENT_FAILURE.
 
-¥¨¡¼¥¸¥§¥ó¥È¤Ï SSH_AGENT_SUCCESS ¤« SSH_AGENT_FAILURE ¤ò¤â¤Ã¤ÆÊÖÅú¤¹¤ë.
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯ SSH_AGENT_SUCCESS ã‹ SSH_AGENT_FAILURE ã‚’ã‚‚ã£ã¦è¿”ç­”ã™ã‚‹.
 
 1.7.  Listing the Keys that the Agent Can Use
 
-1.7   ¥¨¡¼¥¸¥§¥ó¥È¤¬ÍøÍÑ¤Ç¤­¤ë¸°¤ÎÎóµó
+1.7   ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆãŒåˆ©ç”¨ã§ãã‚‹éµã®åˆ—æŒ™
 
 The following message requests a list of all keys that the agent can
 use.
 
-¼¡¤Î¥á¥Ã¥»¡¼¥¸¤Ï, ¥¨¡¼¥¸¥§¥ó¥È¤¬ÍøÍÑ¤Ç¤­¤ë¤¹¤Ù¤Æ¤Î¸°¤Î¥ê¥¹¥È¤òÍ×µá¤¹¤ë.
+æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯, ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆãŒåˆ©ç”¨ã§ãã‚‹ã™ã¹ã¦ã®éµã®ãƒªã‚¹ãƒˆã‚’è¦æ±‚ã™ã‚‹.
 
    byte      SSH_AGENT_LIST_KEYS
 
 The agent will respond with the following message.
 
-¥¨¡¼¥¸¥§¥ó¥È¤Ï¼¡¤Î¥á¥Ã¥»¡¼¥¸¤ÇÊÖÅú¤¹¤ë.
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã§è¿”ç­”ã™ã‚‹.
 
    byte      SSH_AGENT_KEY_LIST
    uint32    number_of_keys
@@ -571,13 +571,13 @@ The agent will respond with the following message.
 
 2.  Performing Private Key Operations
 
-2.  ÈëÌ©¸°Áàºî¤Î¼Â¹Ô
+2.  ç§˜å¯†éµæ“ä½œã®å®Ÿè¡Œ
 
 The real purpose of the agent is to perform private key operations.
 Such operations are performed with the following message.
 
-¥¨¡¼¥¸¥§¥ó¥È¤ÎËÜÍè¤ÎÌÜÅª¤Ï, ÈëÌ©¸°¤ÎÁàºî¤ò¼Â¹Ô¤¹¤ë¤³¤È¤À. 
-¤³¤ì¤é¤ÎÁàºî¤Ï¼¡¤Î¥á¥Ã¥»¡¼¥¸¤Ç¼Â¹Ô¤µ¤ì¤ë.
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®æœ¬æ¥ã®ç›®çš„ã¯, ç§˜å¯†éµã®æ“ä½œã‚’å®Ÿè¡Œã™ã‚‹ã“ã¨ã . 
+ã“ã‚Œã‚‰ã®æ“ä½œã¯æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã§å®Ÿè¡Œã•ã‚Œã‚‹.
 
    byte      SSH_AGENT_PRIVATE_KEY_OP
    string    operation name
@@ -595,16 +595,16 @@ operations can be added by suffixing the operation name by the fully
 qualified domain name of the person/organization adding the new
 operation.
 
-¼Â¹Ô¤µ¤ì¤ëÁàºî¤Ï, name (string) ¤ÇÆ±Äê¤µ¤ì¤ë. 
-¿·¤·¤¤Áàºî¤òÂ­¤¹¸Ä¿Í¤äÁÈ¿¥¤Î FQDN ¤ò operation name ¤ÎËöÈø¤ËÉÕ¤±¤ë¤³¤È¤Ç
-¤¢¤Ä¤é¤¨¤¿Áàºî¤òÄÉ²Ã¤Ç¤­¤ë.
+å®Ÿè¡Œã•ã‚Œã‚‹æ“ä½œã¯, name (string) ã§åŒå®šã•ã‚Œã‚‹. 
+æ–°ã—ã„æ“ä½œã‚’è¶³ã™å€‹äººã‚„çµ„ç¹”ã® FQDN ã‚’ operation name ã®æœ«å°¾ã«ä»˜ã‘ã‚‹ã“ã¨ã§
+ã‚ã¤ã‚‰ãˆãŸæ“ä½œã‚’è¿½åŠ ã§ãã‚‹.
 
 When the operation is complete, the agent will respond with either
 SSH_AGENT_FAILURE or with the following message if the operation is
 successful:
 
-Áàºî¤¬´°Î»¤·¤¿¤È¤­, ¥¨¡¼¥¸¥§¥ó¥È¤Ï SSH_AGENT_FAILURE ¤òÊÖ¤¹¤«,
-Áàºî¤¬À®¸ù¤·¤¿¾ì¹ç¤Ï ¼¡¤Î¥á¥Ã¥»¡¼¥¸¤òÊÖ¤¹.
+æ“ä½œãŒå®Œäº†ã—ãŸã¨ã, ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯ SSH_AGENT_FAILURE ã‚’è¿”ã™ã‹,
+æ“ä½œãŒæˆåŠŸã—ãŸå ´åˆã¯ æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¿”ã™.
 
 
    byte      SSH_AGENT_OPERATION_COMPLETE
@@ -614,17 +614,17 @@ If an operation is attempted that is not supported by the agent, the
 agent will respond with SSH_AGENT_FAILURE with error code set to
 SSH_AGENT_ERROR_UNSUPPORTED_OP.
 
-»î¤µ¤ì¤è¤¦¤È¤·¤¿Áàºî¤¬¥¨¡¼¥¸¥§¥ó¥È¤Ë¤è¤Ã¤Æ¥µ¥İ¡¼¥È¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç,
-¥¨¡¼¥¸¥§¥ó¥È¤Ï SSH_AGENT_ERROR_UNSUPPORTED_OP ¤ò ¥¨¥é¡¼¥³¡¼¥É¤ËÀßÄê¤·¤¿
-SSH_AGENT_FAILURE ¤òÊÖ¤¹.
+è©¦ã•ã‚Œã‚ˆã†ã¨ã—ãŸæ“ä½œãŒã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã«ã‚ˆã£ã¦ã‚µãƒãƒ¼ãƒˆã•ã‚Œã¦ã„ãªã„å ´åˆ,
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯ SSH_AGENT_ERROR_UNSUPPORTED_OP ã‚’ ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ã«è¨­å®šã—ãŸ
+SSH_AGENT_FAILURE ã‚’è¿”ã™.
 
 The standard operations are defined below.
 
-É¸½à¤ÎÁàºî¤Ï°Ê²¼¤ËÄêµÁ¤µ¤ì¤Æ¤¤¤ë.
+æ¨™æº–ã®æ“ä½œã¯ä»¥ä¸‹ã«å®šç¾©ã•ã‚Œã¦ã„ã‚‹.
 
 2.1.  Signing
 
-2.1   ½ğÌ¾
+2.1   ç½²å
 
 The agent can be used to create a digital signature using a key held by
 the agent.  The operation name is "sign", and data in is a hash
@@ -634,15 +634,15 @@ data will be a binary representation of the output of the private key
 operation.  The exact details of the operations to be performed depend
 on the key being used.
 
-¥¨¡¼¥¸¥§¥ó¥È¤Ï, »ı¤Ã¤Æ¤¤¤ë¸°¤ò»È¤Ã¤Æ ÅÅ»Ò½ğÌ¾¤òºî¤ë¤Î¤Ë»È¤¦¤³¤È¤¬¤Ç¤­¤ë.
-¤³¤Î operation name ¤Ï "sign" ¤Ç, ÆşÎÏ data ¤Ï ½ğÌ¾¤µ¤ì¤ë¤¿¤á¤Î (¸°¤ËÅ¬¤·¤¿)
-¥Ï¥Ã¥·¥åÃÍ¤À. ¤³¤ì¤ÏÄÌ¾ï, ºÇ½é¤Ë¥Ç¡¼¥¿¤ò¥Ï¥Ã¥·¥å¤¹¤ë¤³¤È¤Ï¤»¤º¤Ë
-À¸¤ÎÈëÌ©¸°Áàºî¤ò¼Â¹Ô¤¹¤ë. resulting data ¤Ï ÈëÌ©¸°Áàºî¤Î½ĞÎÏ¤Î
-2 ¿ÊÉ½¸½¤À. ¹Ô¤Ê¤ï¤ì¤ëÁàºî¤ÎÀµ³Î¤Ê¾ÜºÙ¤Ï, »È¤ï¤ì¤ë¸°¤Ë°ÍÂ¸¤¹¤ë.
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯, æŒã£ã¦ã„ã‚‹éµã‚’ä½¿ã£ã¦ é›»å­ç½²åã‚’ä½œã‚‹ã®ã«ä½¿ã†ã“ã¨ãŒã§ãã‚‹.
+ã“ã® operation name ã¯ "sign" ã§, å…¥åŠ› data ã¯ ç½²åã•ã‚Œã‚‹ãŸã‚ã® (éµã«é©ã—ãŸ)
+ãƒãƒƒã‚·ãƒ¥å€¤ã . ã“ã‚Œã¯é€šå¸¸, æœ€åˆã«ãƒ‡ãƒ¼ã‚¿ã‚’ãƒãƒƒã‚·ãƒ¥ã™ã‚‹ã“ã¨ã¯ã›ãšã«
+ç”Ÿã®ç§˜å¯†éµæ“ä½œã‚’å®Ÿè¡Œã™ã‚‹. resulting data ã¯ ç§˜å¯†éµæ“ä½œã®å‡ºåŠ›ã®
+2 é€²è¡¨ç¾ã . è¡Œãªã‚ã‚Œã‚‹æ“ä½œã®æ­£ç¢ºãªè©³ç´°ã¯, ä½¿ã‚ã‚Œã‚‹éµã«ä¾å­˜ã™ã‚‹.
 
 The operation-specific data has the following format:
 
-¤³¤ÎÁàºî¤ËÆÃÍ­¤Î¥Ç¡¼¥¿¤Ï¼¡¤Î¥Õ¥©¡¼¥Ş¥Ã¥È¤ò»ı¤Ä.
+ã“ã®æ“ä½œã«ç‰¹æœ‰ã®ãƒ‡ãƒ¼ã‚¿ã¯æ¬¡ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’æŒã¤.
 
    string    data to be signed
 
@@ -650,39 +650,39 @@ Alternatively, it is possible to give the actual data to be signed to
 the agent.  This is done using the operation "hash-and-sign".  This is
 otherwise equal, but performs key-dependent hashing before signing.
 
-¤â¤¦ 1 ¤Ä¤ÎÊıË¡¤È¤·¤Æ, ¥¨¡¼¥¸¥§¥ó¥È¤Ë½ğÌ¾¤µ¤ì¤ë¼Âºİ¤Î¥Ç¡¼¥¿¤òÍ¿¤¨¤ë¤³¤È¤â¤Ç¤­¤ë.
-Áàºî "hash-and-sign" ¤òÍÑ¤¤¤Æ¹Ô¤Ê¤ï¤ì¤ë. ¤³¤ì¤Ï ½ğÌ¾¤ÎÁ°¤Ë¸°¤Ë°ÍÂ¸¤·¤¿
-¥Ï¥Ã¥·¥å¤¬¼Â¹Ô¤µ¤ì¤ë¤³¤È¤ò½ü¤±¤Ğ, Åù¤·¤¤.
+ã‚‚ã† 1 ã¤ã®æ–¹æ³•ã¨ã—ã¦, ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã«ç½²åã•ã‚Œã‚‹å®Ÿéš›ã®ãƒ‡ãƒ¼ã‚¿ã‚’ä¸ãˆã‚‹ã“ã¨ã‚‚ã§ãã‚‹.
+æ“ä½œ "hash-and-sign" ã‚’ç”¨ã„ã¦è¡Œãªã‚ã‚Œã‚‹. ã“ã‚Œã¯ ç½²åã®å‰ã«éµã«ä¾å­˜ã—ãŸ
+ãƒãƒƒã‚·ãƒ¥ãŒå®Ÿè¡Œã•ã‚Œã‚‹ã“ã¨ã‚’é™¤ã‘ã°, ç­‰ã—ã„.
 
 If the requested operation is not legal for the key, SSH_AGENT_FAILURE
 will be returned with error code set to
 SSH_AGENT_ERROR_KEY_NOT_SUITABLE.
 
-Í×µá¤µ¤ì¤¿Áàºî¤¬¸°¤ËÂĞ¤·¤ÆÀµÅö¤Ç¤Ê¤¤¤Ê¤é, SSH_AGENT_ERROR_KEY_NOT_SUITABLE
-¤¬ error code ¤ËÀßÄê¤µ¤ì¤¿ SSH_AGENT_FAILURE ¤¬ÊÖ¤µ¤ì¤ë.
+è¦æ±‚ã•ã‚ŒãŸæ“ä½œãŒéµã«å¯¾ã—ã¦æ­£å½“ã§ãªã„ãªã‚‰, SSH_AGENT_ERROR_KEY_NOT_SUITABLE
+ãŒ error code ã«è¨­å®šã•ã‚ŒãŸ SSH_AGENT_FAILURE ãŒè¿”ã•ã‚Œã‚‹.
 
 2.2.  Decrypting
 
-2.2   Éü¹æ
+2.2   å¾©å·
 
 The agent can be used to decrypt a public key encrypted message with the
 operation "decrypt".  This takes in raw public-key encrypted data, and
 returns the resulting decrypted data.
 
-¥¨¡¼¥¸¥§¥ó¥È¤Ï, Áàºî "decrypt" ¤Ç ¸ø³«¸°¤Ç°Å¹æ²½¤µ¤ì¤¿¥á¥Ã¥»¡¼¥¸¤ò
-Éü¹æ¤¹¤ë¤¿¤á¤Ë»È¤ï¤ì¤ë¤³¤È¤¬¤Ç¤­¤ë. ¤³¤ì¤Ï, À¸¤Î¸ø³«¸°¤Ç°Å¹æ²½¤µ¤ì¤¿¥Ç¡¼¥¿¤ò
-¼è¤ê, ·ë²Ì¤ÎÉü¹æ¤µ¤ì¤¿¥Ç¡¼¥¿¤òÊÖ¤¹.
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯, æ“ä½œ "decrypt" ã§ å…¬é–‹éµã§æš—å·åŒ–ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’
+å¾©å·ã™ã‚‹ãŸã‚ã«ä½¿ã‚ã‚Œã‚‹ã“ã¨ãŒã§ãã‚‹. ã“ã‚Œã¯, ç”Ÿã®å…¬é–‹éµã§æš—å·åŒ–ã•ã‚ŒãŸãƒ‡ãƒ¼ã‚¿ã‚’
+å–ã‚Š, çµæœã®å¾©å·ã•ã‚ŒãŸãƒ‡ãƒ¼ã‚¿ã‚’è¿”ã™.
 
 This may also fail.  If the requested operation is not legal for the
 key, error code is set to SSH_AGENT_ERROR_KEY_NOT_SUITABLE.
 
-¤³¤ì¤Ï¼ºÇÔ¤¹¤ë¤«¤â¤·¤ì¤Ê¤¤, Í×µá¤µ¤ì¤¿Áàºî¤¬¸°¤ËÂĞ¤·¤ÆÀµÅö¤Ç¤Ê¤¤¤Ê¤é,
+ã“ã‚Œã¯å¤±æ•—ã™ã‚‹ã‹ã‚‚ã—ã‚Œãªã„, è¦æ±‚ã•ã‚ŒãŸæ“ä½œãŒéµã«å¯¾ã—ã¦æ­£å½“ã§ãªã„ãªã‚‰,
 SSH_AGENT_ERROR_KEY_NOT_SUITABLE
-¤¬ error code ¤ËÀßÄê¤µ¤ì¤¿ SSH_AGENT_FAILURE ¤¬ÊÖ¤µ¤ì¤ë.
+ãŒ error code ã«è¨­å®šã•ã‚ŒãŸ SSH_AGENT_FAILURE ãŒè¿”ã•ã‚Œã‚‹.
 
 The operation-specific data has the following format:
 
-¤³¤ÎÁàºî¤ËÆÃÍ­¤Î¥Ç¡¼¥¿¤Ï¼¡¤Î¥Õ¥©¡¼¥Ş¥Ã¥È¤ò»ı¤Ä.
+ã“ã®æ“ä½œã«ç‰¹æœ‰ã®ãƒ‡ãƒ¼ã‚¿ã¯æ¬¡ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’æŒã¤.
 
    string    data to be decrypted
 
@@ -695,22 +695,22 @@ INTERNET-DRAFT                                          30 January, 2004
  
 2.3.  Secure Shell Challenge-Response Authentication
 
-2.3   Secure Shell ¥Á¥ã¥ì¥ó¥¸-¥ì¥¹¥İ¥ó¥¹ Ç§¾Ú
+2.3   Secure Shell ãƒãƒ£ãƒ¬ãƒ³ã‚¸-ãƒ¬ã‚¹ãƒãƒ³ã‚¹ èªè¨¼
 
 Performs Secure Shell challenge-response authentication.  This operation
 has the name "ssh1-challenge-response".
 
-Secure Shell  ¥Á¥ã¥ì¥ó¥¸-¥ì¥¹¥İ¥ó¥¹ Ç§¾Ú¤ò¼Â¹Ô¤¹¤ë. ¤³¤ÎÁàºî¤Ï
-"ssh1-challenge-response" ¤È¤¤¤¦Ì¾Á°¤ò»ı¤Ä.
+Secure Shell  ãƒãƒ£ãƒ¬ãƒ³ã‚¸-ãƒ¬ã‚¹ãƒãƒ³ã‚¹ èªè¨¼ã‚’å®Ÿè¡Œã™ã‚‹. ã“ã®æ“ä½œã¯
+"ssh1-challenge-response" ã¨ã„ã†åå‰ã‚’æŒã¤.
 
 This operation works by first decrypting the challenge, then computing
 MD5 of the concatenation of the decrypted challenge and the session id
 (in this order), and returns the resulting 16 byte hash.  The operation-
 specific data is in the following format:
 
-¤³¤ÎÁàºî¤Ï ¤Ş¤º ¥Á¥ã¥ì¥ó¥¸¤òÉü¹æ¤·, ¤½¤·¤Æ Éü¹æ¤µ¤ì¤¿¥Á¥ã¥ì¥ó¥¸¤È¥»¥Ã¥·¥ç¥ó id
-¤ò (¤³¤Î½ç) ¤ÇÏ¢·ë¤·¤¿¤â¤Î¤Î MD5 ¤ò·×»»¤·, ·ë²Ì¤Î 16byte ¥Ï¥Ã¥·¥å¤òÊÖ¤¹.
-¤³¤ÎÁàºî¤ËÆÃÍ­¤Î¥Ç¡¼¥¿¤Ï¼¡¤Î¥Õ¥©¡¼¥Ş¥Ã¥È¤À.
+ã“ã®æ“ä½œã¯ ã¾ãš ãƒãƒ£ãƒ¬ãƒ³ã‚¸ã‚’å¾©å·ã—, ãã—ã¦ å¾©å·ã•ã‚ŒãŸãƒãƒ£ãƒ¬ãƒ³ã‚¸ã¨ã‚»ãƒƒã‚·ãƒ§ãƒ³ id
+ã‚’ (ã“ã®é †) ã§é€£çµã—ãŸã‚‚ã®ã® MD5 ã‚’è¨ˆç®—ã—, çµæœã® 16byte ãƒãƒƒã‚·ãƒ¥ã‚’è¿”ã™.
+ã“ã®æ“ä½œã«ç‰¹æœ‰ã®ãƒ‡ãƒ¼ã‚¿ã¯æ¬¡ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã .
 
    string    challenge encrypted using the public key
    string    session id
@@ -719,12 +719,12 @@ Normally, the length of the challenge before encryption will be 32 bytes
 and the length of the session id 16 bytes.  The length of the encrypted
 challenge depends on the key and algorithm used.
 
-ÄÌ¾ï, °Å¹æ²½Á°¤Î¥Á¥ã¥ì¥ó¥¸¤ÎÄ¹¤µ¤Ï 32 byte ¤Ç, ¥»¥Ã¥·¥ç¥ó id ¤ÎÄ¹¤µ¤Ï
-16 byte ¤À. °Å¹æ²½¤µ¤ì¤¿¥Á¥ã¥ì¥ó¥¸¤ÎÄ¹¤µ¤ÏÍøÍÑ¤µ¤ì¤ë¸°¤È¥¢¥ë¥´¥ê¥º¥à¤Ë°ÍÂ¸¤¹¤ë.
+é€šå¸¸, æš—å·åŒ–å‰ã®ãƒãƒ£ãƒ¬ãƒ³ã‚¸ã®é•·ã•ã¯ 32 byte ã§, ã‚»ãƒƒã‚·ãƒ§ãƒ³ id ã®é•·ã•ã¯
+16 byte ã . æš—å·åŒ–ã•ã‚ŒãŸãƒãƒ£ãƒ¬ãƒ³ã‚¸ã®é•·ã•ã¯åˆ©ç”¨ã•ã‚Œã‚‹éµã¨ã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ ã«ä¾å­˜ã™ã‚‹.
 
 3.  Administrative Messages
 
-3. ´ÉÍı¤Î¤¿¤á¤Î¥á¥Ã¥»¡¼¥¸
+3. ç®¡ç†ã®ãŸã‚ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 
 There are also a number of messages that are only used to administer the
 agent.  These might e.g. be used by a user interface for the agent.  The
@@ -732,19 +732,19 @@ agent should only allow these messages from local connection (i.e., if
 no forwarding notice messages were received before the version number
 request).
 
-¥¨¡¼¥¸¥§¥ó¥È¤Î´ÉÍı¤Î¤¿¤á¤À¤±¤Ë»È¤ï¤ì¤ë¥á¥Ã¥»¡¼¥¸¤â¤¤¤¯¤Ä¤«¤¢¤ë.
-¤¹¤Ê¤ï¤Á, ¤³¤ì¤é¤Ï, ¥¨¡¼¥¸¥§¥ó¥È¤Î¥æ¡¼¥¶¥¤¥ó¥¿¥Õ¥§¥¤¥¹¤È¤·¤Æ»È¤ï¤ì¤ë.
-¥¨¡¼¥¸¥§¥ó¥È¤Ï¤³¤ì¤é¤Î¥á¥Ã¥»¡¼¥¸¤ò¥í¡¼¥«¥ë¤ÊÀÜÂ³¤«¤é¤Î¤ßµö¤¹É¬Í×¤¬¤¢¤ë.
-(¤¹¤Ê¤ï¤Á, ¥Ğ¡¼¥¸¥ç¥óÈÖ¹æ¥ê¥¯¥¨¥¹¥È¤ÎÁ°¤Ë Å¾Á÷¹ğÃÎ¥á¥Ã¥»¡¼¥¸¤ò¼õ¤±¤È¤Ã¤Æ¤¤¤Ê¤¤
-¾ì¹ç)
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®ç®¡ç†ã®ãŸã‚ã ã‘ã«ä½¿ã‚ã‚Œã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚‚ã„ãã¤ã‹ã‚ã‚‹.
+ã™ãªã‚ã¡, ã“ã‚Œã‚‰ã¯, ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®ãƒ¦ãƒ¼ã‚¶ã‚¤ãƒ³ã‚¿ãƒ•ã‚§ã‚¤ã‚¹ã¨ã—ã¦ä½¿ã‚ã‚Œã‚‹.
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯ã“ã‚Œã‚‰ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ãƒ­ãƒ¼ã‚«ãƒ«ãªæ¥ç¶šã‹ã‚‰ã®ã¿è¨±ã™å¿…è¦ãŒã‚ã‚‹.
+(ã™ãªã‚ã¡, ãƒãƒ¼ã‚¸ãƒ§ãƒ³ç•ªå·ãƒªã‚¯ã‚¨ã‚¹ãƒˆã®å‰ã« è»¢é€å‘ŠçŸ¥ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘ã¨ã£ã¦ã„ãªã„
+å ´åˆ)
 
 3.1.  Locking and unlocking the agent
 
-3.1   ¥¨¡¼¥¸¥§¥ó¥È¤Î¥í¥Ã¥¯¤È¥¢¥ó¥í¥Ã¥¯
+3.1   ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®ãƒ­ãƒƒã‚¯ã¨ã‚¢ãƒ³ãƒ­ãƒƒã‚¯
 
 The agent can be temporarily locked by message:
 
-¥¨¡¼¥¸¥§¥ó¥È¤Ï¼¡¤Î¥á¥Ã¥»¡¼¥¸¤Ç°ì»şÅª¤Ë¥í¥Ã¥¯¤µ¤ì¤ë.
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã§ä¸€æ™‚çš„ã«ãƒ­ãƒƒã‚¯ã•ã‚Œã‚‹.
 
    byte      SSH_AGENT_LOCK
    string    locking password
@@ -754,10 +754,10 @@ Particularily SSH_AGENT_FAILURE is sent, if agent is already locked.
 After this message, agent responds to all commands with
 SSH_AGENT_FAILURE until it receives a following command.
 
-¥¨¡¼¥¸¥§¥ó¥È¤Ï SSH_AGENT_SUCCESS ¤« SSH_AGENT_FAILURE ¤òÊÖ¤¹.
-ÆÃ¤Ë SSH_AGENT_FAILURE ¤¬Á÷¤é¤ì¤ë¾ì¹ç, ¥¨¡¼¥¸¥§¥ó¥È¤Ï¤¹¤Ç¤Ë¥í¥Ã¥¯¤µ¤ì¤Æ¤¤¤ë.
-¤³¤Î¥á¥Ã¥»¡¼¥¸¤Î¤¢¤È, ¥¨¡¼¥¸¥§¥ó¥È¤Ï, ¼¡¤Î¥á¥Ã¥»¡¼¥¸¤ò¼õ¤±¤È¤ë¤Ş¤Ç,
-¤¹¤Ù¤Æ¤Î¥³¥Ş¥ó¥É¤ËÂĞ¤·¤Æ SSH_AGENT_FAILURE ¤òÊÖ¤¹.
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯ SSH_AGENT_SUCCESS ã‹ SSH_AGENT_FAILURE ã‚’è¿”ã™.
+ç‰¹ã« SSH_AGENT_FAILURE ãŒé€ã‚‰ã‚Œã‚‹å ´åˆ, ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯ã™ã§ã«ãƒ­ãƒƒã‚¯ã•ã‚Œã¦ã„ã‚‹.
+ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ã‚ã¨, ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯, æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘ã¨ã‚‹ã¾ã§,
+ã™ã¹ã¦ã®ã‚³ãƒãƒ³ãƒ‰ã«å¯¾ã—ã¦ SSH_AGENT_FAILURE ã‚’è¿”ã™.
 
    byte      SSH_AGENT_UNLOCK
    string    locking password
@@ -767,22 +767,22 @@ Particularily SSH_AGENT_FAILURE is sent, if agent is not locked or if
 the submitted password does not match with one given with SSH_AGENT_LOCK
 message.
 
-¥¨¡¼¥¸¥§¥ó¥È¤Ï SSH_AGENT_SUCCESS ¤« SSH_AGENT_FAILURE ¤òÊÖ¤¹.
-SSH_AGENT_FAILURE ¤¬Á÷¤é¤ì¤ë¤Î¤Ï, ¥¨¡¼¥¸¥§¥ó¥È¤¬¥í¥Ã¥¯¤µ¤ì¤Æ¤¤¤Ê¤¤¤«,
-Á÷¤é¤ì¤Æ¤­¤¿¥Ñ¥¹¥ï¡¼¥É¤¬ SSH_AGENT_LOCK ¥á¥Ã¥»¡¼¥¸¤Ç Í¿¤¨¤é¤ì¤¿¤â¤Î¤È
-°ìÃ×¤·¤Ê¤¤¤«¤Î¾ì¹ç¤À.
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯ SSH_AGENT_SUCCESS ã‹ SSH_AGENT_FAILURE ã‚’è¿”ã™.
+SSH_AGENT_FAILURE ãŒé€ã‚‰ã‚Œã‚‹ã®ã¯, ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆãŒãƒ­ãƒƒã‚¯ã•ã‚Œã¦ã„ãªã„ã‹,
+é€ã‚‰ã‚Œã¦ããŸãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒ SSH_AGENT_LOCK ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã§ ä¸ãˆã‚‰ã‚ŒãŸã‚‚ã®ã¨
+ä¸€è‡´ã—ãªã„ã‹ã®å ´åˆã .
 
 3.2.  Miscellaneous Agent Commands
 
-3.2   ¤µ¤Ş¤¶¤Ş¤Ê¥¨¡¼¥¸¥§¥ó¥È¤Î¥³¥Ş¥ó¥É
+3.2   ã•ã¾ã–ã¾ãªã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®ã‚³ãƒãƒ³ãƒ‰
 
    byte      SSH_AGENT_PING
    ... arbitrary padding data
 
 Any agent or client receiving this message, should respond with
 
-¤¹¤Ù¤Æ¤Î¥¨¡¼¥¸¥§¥ó¥È¤Ê¤¤¤·¥¯¥é¥¤¥¢¥ó¥È¤Ï¤³¤Î¥á¥Ã¥»¡¼¥¸¤ò¼õ¤±¤È¤¿¤é
-¼¡¤Î¥á¥Ã¥»¡¼¥¸¤òÊÖ¤¹É¬Í×¤¬¤¢¤ë.
+ã™ã¹ã¦ã®ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆãªã„ã—ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘ã¨ãŸã‚‰
+æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¿”ã™å¿…è¦ãŒã‚ã‚‹.
 
    byte      SSH_AGENT_ALIVE
 
@@ -796,7 +796,7 @@ INTERNET-DRAFT                                          30 January, 2004
 where the padding data is identical to the data sent with
 SSH_AGENT_PING.
 
-padding data ¤Ï  SSH_AGENT_PING ¤ÇÁ÷¤é¤ì¤¿ data ¤ÈÆ±°ì.
+padding data ã¯  SSH_AGENT_PING ã§é€ã‚‰ã‚ŒãŸ data ã¨åŒä¸€.
 
    byte      SSH_AGENT_RANDOM
    uint32    the length of the requested random buffer
@@ -804,9 +804,9 @@ padding data ¤Ï  SSH_AGENT_PING ¤ÇÁ÷¤é¤ì¤¿ data ¤ÈÆ±°ì.
 Client can request random data from the agent by this message.  Agent
 responds either with SSH_AGENT_RANDOM_DATA or SSH_AGENT_FAILURE message.
 
-¥¯¥é¥¤¥¢¥ó¥È¤Ï¤³¤Î¥á¥Ã¥»¡¼¥¸¤Ç¥¨¡¼¥¸¥§¥ó¥È¤«¤é¤Î¥é¥ó¥À¥à¤Ê¥Ç¡¼¥¿¤ò
-Í×µá¤Ç¤­¤ë. ¥¨¡¼¥¸¥§¥ó¥È¤Ï SSH_AGENT_RANDOM_DATA ¤« SSH_AGENT_FAILURE
-¥á¥Ã¥»¡¼¥¸¤Ç±şÅú¤¹¤ë.
+ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã§ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã‹ã‚‰ã®ãƒ©ãƒ³ãƒ€ãƒ ãªãƒ‡ãƒ¼ã‚¿ã‚’
+è¦æ±‚ã§ãã‚‹. ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯ SSH_AGENT_RANDOM_DATA ã‹ SSH_AGENT_FAILURE
+ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã§å¿œç­”ã™ã‚‹.
 
    byte      SSH_AGENT_RANDOM_DATA
    string    random data
@@ -814,27 +814,27 @@ responds either with SSH_AGENT_RANDOM_DATA or SSH_AGENT_FAILURE message.
 This message is a successful response to SSH_AGENT_RANDOM message.
 Message contains the random string of requested length.
 
-¤³¤Î¥á¥Ã¥»¡¼¥¸¤Ï, SSH_AGENT_RANDOM ¥á¥Ã¥»¡¼¥¸¤Ø¤ÎÀ®¸ù¤ÎÊÖÅú¤À.
-¥á¥Ã¥»¡¼¥¸¤Ï Í×µá¤µ¤ì¤¿Ä¹¤µ¤Î¥é¥ó¥À¥à¤Ê string ¤ò´Ş¤à.
+ã“ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯, SSH_AGENT_RANDOM ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¸ã®æˆåŠŸã®è¿”ç­”ã .
+ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯ è¦æ±‚ã•ã‚ŒãŸé•·ã•ã®ãƒ©ãƒ³ãƒ€ãƒ ãª string ã‚’å«ã‚€.
 
 4.  Agent Forwarding With Secure Shell
 
-4.  Secure Shell ¤Î ¥¨¡¼¥¸¥§¥ó¥ÈÅ¾Á÷
+4.  Secure Shell ã® ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆè»¢é€
 
 The agent connection is typically forwarded over a Secure Shell
 connection. This requires small additions to the SSH Connection Protocol
 [SSH-CONN].
 
-¥¨¡¼¥¸¥§¥ó¥È¤ÎÀÜÂ³¤Ï, Secure Shell ÀÜÂ³±Û¤·¤ËÅ¾Á÷¤µ¤ì¤ë. 
-¤³¤ì¤Ï SSH ¥³¥Í¥¯¥·¥ç¥ó¥×¥í¥È¥³¥ë [SSH-CONN] ¤Î¾¯¤·¤ÎÄÉ²Ã¤òÉ¬Í×¤È¤¹¤ë.
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®æ¥ç¶šã¯, Secure Shell æ¥ç¶šè¶Šã—ã«è»¢é€ã•ã‚Œã‚‹. 
+ã“ã‚Œã¯ SSH ã‚³ãƒã‚¯ã‚·ãƒ§ãƒ³ãƒ—ãƒ­ãƒˆã‚³ãƒ« [SSH-CONN] ã®å°‘ã—ã®è¿½åŠ ã‚’å¿…è¦ã¨ã™ã‚‹.
 
 4.1.  Requesting Agent Forwarding
 
-4.1   ¥¨¡¼¥¸¥§¥ó¥ÈÅ¾Á÷¤ÎÍ×µá
+4.1   ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆè»¢é€ã®è¦æ±‚
 
 Agent forwarding may be requested for a session by sending
 
-¥¨¡¼¥¸¥§¥ó¥È¤ÎÅ¾Á÷¤Ï ¼¡¤Î¥á¥Ã¥»¡¼¥¸¤òÁ÷¤ë¤³¤È¤Ç¥»¥Ã¥·¥ç¥ó¤ËÂĞ¤·¤ÆÍ×µá¤µ¤ì¤ë.
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®è»¢é€ã¯ æ¬¡ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ã‚‹ã“ã¨ã§ã‚»ãƒƒã‚·ãƒ§ãƒ³ã«å¯¾ã—ã¦è¦æ±‚ã•ã‚Œã‚‹.
 
   byte      SSH_MSG_CHANNEL_REQUEST
   uint32    recipient channel
@@ -843,17 +843,17 @@ Agent forwarding may be requested for a session by sending
 
 This will, on success, create an agent listener to the remote end.
 
-À®¸ù¤¹¤ë¤È, ¥ê¥â¡¼¥ÈÂ¦¤Ë¥¨¡¼¥¸¥§¥ó¥È¤Î¥ê¥¹¥Ê¤¬ºî¤é¤ì¤ë.
+æˆåŠŸã™ã‚‹ã¨, ãƒªãƒ¢ãƒ¼ãƒˆå´ã«ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®ãƒªã‚¹ãƒŠãŒä½œã‚‰ã‚Œã‚‹.
 
 4.2.  Agent Forwarding Channels
 
-4.2   ¥¨¡¼¥¸¥§¥ó¥ÈÅ¾Á÷¥Á¥ã¥ó¥Í¥ë
+4.2   ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆè»¢é€ãƒãƒ£ãƒ³ãƒãƒ«
 
 When a connection comes to the forwarded agent listener, a channel is
 opened to forward the connection to the other side.
 
-Å¾Á÷¤µ¤ì¤¿¥¨¡¼¥¸¥§¥ó¥È¤Ø¤ÎÀÜÂ³¤¬¹Ô¤Ê¤ï¤ì¤ë¤È, ÊÌ¤ÎÂ¦¤Ø¤ÎÀÜÂ³¤òÅ¾Á÷¤¹¤ë
-¤¿¤á¤Î¥Á¥ã¥ó¥Í¥ë¤¬³«¤«¤ì¤ë.
+è»¢é€ã•ã‚ŒãŸã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¸ã®æ¥ç¶šãŒè¡Œãªã‚ã‚Œã‚‹ã¨, åˆ¥ã®å´ã¸ã®æ¥ç¶šã‚’è»¢é€ã™ã‚‹
+ãŸã‚ã®ãƒãƒ£ãƒ³ãƒãƒ«ãŒé–‹ã‹ã‚Œã‚‹.
 
   byte      SSH_MSG_CHANNEL_OPEN
   string    "auth-agent"
@@ -864,16 +864,16 @@ opened to forward the connection to the other side.
 Implementations MUST reject these messages unless they have previously
 requested agent forwarding.
 
-¼ÂÁõ¤Ï, Àè¤Ë¥¨¡¼¥¸¥§¥ó¥ÈÅ¾Á÷¤òÍ×µá¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ë, ¤³¤ì¤é¤Î¥á¥Ã¥»¡¼¥¸¤ò
-µñÈİ¤·¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤.
+å®Ÿè£…ã¯, å…ˆã«ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆè»¢é€ã‚’è¦æ±‚ã•ã‚Œã¦ã„ãªã„å ´åˆã«, ã“ã‚Œã‚‰ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’
+æ‹’å¦ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„.
 
 Forwarded agent channels are independent of any sessions, and closing a
 session channel does not in any way imply that forwarded connections
 should be closed.
 
-Å¾Á÷¤µ¤ì¤¿¥¨¡¼¥¸¥§¥ó¥È¥Á¥ã¥ó¥Í¥ë¤Ï¤É¤Î¥»¥Ã¥·¥ç¥ó¤«¤é¤âÆÈÎ©¤Ç,
-¥»¥Ã¥·¥ç¥ó¥Á¥ã¥ó¥Í¥ë¤¬ÊÄ¤¸¤é¤ì¤Æ¤â, ¤³¤ÎÅ¾Á÷¤µ¤ì¤¿ÀÜÂ³¤¬ÊÄ¤¸¤é¤ì¤Ê¤±¤ì¤Ğ
-¤Ê¤é¤Ê¤¤¤È¤¤¤¦¤³¤È¤ò·è¤·¤Æ°ÕÌ£¤·¤Ê¤¤.
+è»¢é€ã•ã‚ŒãŸã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆãƒãƒ£ãƒ³ãƒãƒ«ã¯ã©ã®ã‚»ãƒƒã‚·ãƒ§ãƒ³ã‹ã‚‰ã‚‚ç‹¬ç«‹ã§,
+ã‚»ãƒƒã‚·ãƒ§ãƒ³ãƒãƒ£ãƒ³ãƒãƒ«ãŒé–‰ã˜ã‚‰ã‚Œã¦ã‚‚, ã“ã®è»¢é€ã•ã‚ŒãŸæ¥ç¶šãŒé–‰ã˜ã‚‰ã‚Œãªã‘ã‚Œã°
+ãªã‚‰ãªã„ã¨ã„ã†ã“ã¨ã‚’æ±ºã—ã¦æ„å‘³ã—ãªã„.
 
 
 Tatu Ylonen, Timo J. Rinne and Sami Lehtinen                   [page 10]
@@ -882,7 +882,7 @@ INTERNET-DRAFT                                          30 January, 2004
  
 5.  Vendor-Specific Extensions
 
-5.  ¥Ù¥ó¥ÀÆÃÍ­¤Î³ÈÄ¥
+5.  ãƒ™ãƒ³ãƒ€ç‰¹æœ‰ã®æ‹¡å¼µ
 
 The SSH_AGENT_EXTENSION request provides a generic extension mechanism
 for adding vendor-specific commands.  The request has the following
@@ -891,55 +891,55 @@ format:
   string     extension_id
   ... extension-specific data follows ...
 
-SSH_AGENT_EXTENSION ¥ê¥¯¥¨¥¹¥È¤Ï ¥Ù¥ó¥ÀÆÃÍ­¤Î¥³¥Ş¥ó¥É¤òÄÉ²Ã¤¹¤ë¤¿¤á¤Î
-°ìÈÌÅª¤Ê³ÈÄ¥¥á¥«¥Ë¥º¥à¤òÄó¶¡¤¹¤ë. ¤³¤Î¥ê¥¯¥¨¥¹¥È¤Ï¼¡¤Î¥Õ¥©¡¼¥Ş¥Ã¥È¤ò»ı¤Ä.
+SSH_AGENT_EXTENSION ãƒªã‚¯ã‚¨ã‚¹ãƒˆã¯ ãƒ™ãƒ³ãƒ€ç‰¹æœ‰ã®ã‚³ãƒãƒ³ãƒ‰ã‚’è¿½åŠ ã™ã‚‹ãŸã‚ã®
+ä¸€èˆ¬çš„ãªæ‹¡å¼µãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚’æä¾›ã™ã‚‹. ã“ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆã¯æ¬¡ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’æŒã¤.
 
 `extension_id' is a string of the format "name@domain", where domain is
 an internet domain name of the vendor defining the request.  The rest of
 the request is completely vendor-specific, and servers should only
 attempt to interpret it if they recognize the `extension_id' name.
 
-`extension_id' ¤Ï "name@domain" ·Á¼°¤ÎÊ¸»úÎó¤À. ¤³¤³¤Ç domain ¤Ï
-¥ê¥¯¥¨¥¹¥È¤òÄêµÁ¤¹¤ë¥Ù¥ó¥À¤Î¥¤¥ó¥¿¡¼¥Í¥Ã¥È¥É¥á¥¤¥óÌ¾¤À. ¥ê¥¯¥¨¥¹¥È¤Î
-»Ä¤ê¤ÎÉôÊ¬¤Ï´°Á´¤Ë ¥Ù¥ó¥À¡¼ÆÃÍ­¤Ç, ¥µ¡¼¥Ğ¤Ï, `extension_id' Ì¾¤¬
-Íı²ò¤Ç¤­¤ë¾ì¹ç¤Ë¤À¤±, ¤³¤ì¤ò²ò¼á¤·¤è¤¦¤È¤¹¤ëÉ¬Í×¤¬¤¢¤ë.
+`extension_id' ã¯ "name@domain" å½¢å¼ã®æ–‡å­—åˆ—ã . ã“ã“ã§ domain ã¯
+ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’å®šç¾©ã™ã‚‹ãƒ™ãƒ³ãƒ€ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆãƒ‰ãƒ¡ã‚¤ãƒ³åã . ãƒªã‚¯ã‚¨ã‚¹ãƒˆã®
+æ®‹ã‚Šã®éƒ¨åˆ†ã¯å®Œå…¨ã« ãƒ™ãƒ³ãƒ€ãƒ¼ç‰¹æœ‰ã§, ã‚µãƒ¼ãƒã¯, `extension_id' åãŒ
+ç†è§£ã§ãã‚‹å ´åˆã«ã ã‘, ã“ã‚Œã‚’è§£é‡ˆã—ã‚ˆã†ã¨ã™ã‚‹å¿…è¦ãŒã‚ã‚‹.
 
 These messages can be sent to either direction. However, the agent MUST
 send these messages only as responses to the client's requests. As an
 implementation note, the agent should use the standard responses if at
 all possible.
 
-¤³¤ì¤é¤Î¥á¥Ã¥»¡¼¥¸¤Ï¤É¤Á¤é¤ÎÊı¸ş¤Ë¤âÁ÷¤é¤ì¤ë. ¤·¤«¤·, ¥¨¡¼¥¸¥§¥ó¥È¤Ï
-¥¯¥é¥¤¥¢¥ó¥È¤Î¥ê¥¯¥¨¥¹¥È¤ËÂĞ¤¹¤ëÊÖÅú¤È¤·¤Æ¤Î¤ß¤³¤ì¤é¤Î¥á¥Ã¥»¡¼¥¸¤ò 
-Á÷¤é¤Ê¤±¤ì¤Ğ¤Ê¤é¤Ê¤¤. ¼ÂÁõ¾å¤ÎÃí°Õ¤È¤·¤Æ, ¥¨¡¼¥¸¥§¥ó¥È¤Ï
-²ÄÇ½¤Ê¸Â¤êÉ¸½à¤Î±şÅú¤ò»È¤¦É¬Í×¤¬¤¢¤ë.
+ã“ã‚Œã‚‰ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯ã©ã¡ã‚‰ã®æ–¹å‘ã«ã‚‚é€ã‚‰ã‚Œã‚‹. ã—ã‹ã—, ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯
+ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆã«å¯¾ã™ã‚‹è¿”ç­”ã¨ã—ã¦ã®ã¿ã“ã‚Œã‚‰ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ 
+é€ã‚‰ãªã‘ã‚Œã°ãªã‚‰ãªã„. å®Ÿè£…ä¸Šã®æ³¨æ„ã¨ã—ã¦, ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯
+å¯èƒ½ãªé™ã‚Šæ¨™æº–ã®å¿œç­”ã‚’ä½¿ã†å¿…è¦ãŒã‚ã‚‹.
 
 If the agent sees an extension message it doesn't understand, it should
 respond with SSH_AGENT_FAILURE with error
 SSH_AGENT_ERROR_UNSUPPORTED_OP.
 
-¥¨¡¼¥¸¥§¥ó¥È¤¬ Íı²ò¤Ç¤­¤Ê¤¤³ÈÄ¥¥á¥Ã¥»¡¼¥¸¤ò¼õ¤±¤È¤Ã¤¿¤é,
-SSH_AGENT_ERROR_UNSUPPORTED_OP ¤ò error ¤È¤·¤Æ»ı¤Ä SSH_AGENT_FAILURE
-¤òÊÖ¤¹É¬Í×¤¬¤¢¤ë.
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆãŒ ç†è§£ã§ããªã„æ‹¡å¼µãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘ã¨ã£ãŸã‚‰,
+SSH_AGENT_ERROR_UNSUPPORTED_OP ã‚’ error ã¨ã—ã¦æŒã¤ SSH_AGENT_FAILURE
+ã‚’è¿”ã™å¿…è¦ãŒã‚ã‚‹.
 
 6.  Security Considerations
 
-6.  ¥»¥­¥å¥ê¥Æ¥£¤Ë´Ø¤¹¤ë¹Í»¡
+6.  ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã«é–¢ã™ã‚‹è€ƒå¯Ÿ
 
 The authentication agent is used to control security-sensitive
 operations, and is used to implement single sign-on.
 
-Ç§¾Ú¥¨¡¼¥¸¥§¥ó¥È¤Ï, ¥»¥­¥å¥ê¥Æ¥£¤ËÉÒ´¶¤ÊÁàºî¤òÀ©¸æ¤¹¤ë¤¿¤á¤È
-¥·¥ó¥°¥ë¥µ¥¤¥ó¥ª¥ó¤ò¼Â¸½¤µ¤ì¤ë¤¿¤á¤Ë»È¤ï¤ì¤ë.
+èªè¨¼ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯, ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã«æ•æ„Ÿãªæ“ä½œã‚’åˆ¶å¾¡ã™ã‚‹ãŸã‚ã¨
+ã‚·ãƒ³ã‚°ãƒ«ã‚µã‚¤ãƒ³ã‚ªãƒ³ã‚’å®Ÿç¾ã•ã‚Œã‚‹ãŸã‚ã«ä½¿ã‚ã‚Œã‚‹.
 
 Anyone with access to the authentication agent can perform private key
 operations with the agent.  This is a power equivalent to possession of
 the private key as long as the connection to the key is maintained.  It
 is not possible to retrieve the key from the agent.
 
-Ç§¾Ú¥¨¡¼¥¸¥§¥ó¥È¤Ë¥¢¥¯¥»¥¹¤¹¤ë¤¹¤Ù¤Æ¤Î¿Í¤Ï, ¥¨¡¼¥¸¥§¥ó¥È¤ò»È¤Ã¤¿
-ÈëÌ©¸°Áàºî¤ò¼Â¹Ô¤Ç¤­¤ë. ¸°¤Ø¤ÎÀÜÂ³¤¬°İ»ı¤µ¤ì¤ë¸Â¤êÈëÌ©¸°¤ò½êÍ­¤¹¤ë¤Î¤È
-Æ±Åù¤ÎÎÏ¤ò»ı¤Ä. ¥¨¡¼¥¸¥§¥ó¥È¤«¤é¸°¤òÆÀ¤ë¤³¤È¤ÏÉÔ²ÄÇ½¤À.
+èªè¨¼ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã«ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ã™ã¹ã¦ã®äººã¯, ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã‚’ä½¿ã£ãŸ
+ç§˜å¯†éµæ“ä½œã‚’å®Ÿè¡Œã§ãã‚‹. éµã¸ã®æ¥ç¶šãŒç¶­æŒã•ã‚Œã‚‹é™ã‚Šç§˜å¯†éµã‚’æ‰€æœ‰ã™ã‚‹ã®ã¨
+åŒç­‰ã®åŠ›ã‚’æŒã¤. ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã‹ã‚‰éµã‚’å¾—ã‚‹ã“ã¨ã¯ä¸å¯èƒ½ã .
 
 It is recommended that agent implementations allow and perform some form
 of logging and access control.  This access control may utilize
@@ -949,31 +949,31 @@ is reliable only up to and including the first unreliable machine.).
 Implementations should also allow restricting the operations that can be
 performed with keys - e.g., limiting them to challenge-response only.
 
-¥¨¡¼¥¸¥§¥ó¥È¤Î¼ÂÁõ¤Ï, ¥í¥°¤Îµ­Ï¿¤È¥¢¥¯¥»¥¹À©¸æ¤Î¤¤¤¯¤Ä¤«¤Î·Á¼°¤òµö¤·
-¼Â¹Ô¤¹¤ë¤³¤È¤¬¿ä¾©¤µ¤ì¤ë. ¤³¤Î¥¢¥¯¥»¥¹À©¸æ¤Ï, ·ĞÍ³¤·¤ÆÀÜÂ³¤¬¼õ¤±¤È¤é¤ì¤ë
-¥Ñ¥¹¤Ë¤Ä¤¤¤Æ¤Î¾ğÊó¤òÍøÍÑ¤¹¤ë¤À¤í¤¦.
-(SSH_AGENT_FORWARDING_NOTICE ¥á¥Ã¥»¡¼¥¸¤ò½¸¤á¤ë¤³¤È¤Ç; ¤·¤«¤·
-¥Ñ¥¹¤Ï ºÇ½é¤Î¿®Íê¤Ç¤­¤Ê¤¤¥Ş¥·¥ó¤ò´Ş¤à¤â¤Î¤Ş¤Ç¤À¤±¿®Íê¤Ç¤­¤ë (?)).
-¼ÂÁõ¤Ï, ¸°¤ò»È¤Ã¤Æ¼Â¹Ô¤µ¤ì¤ëÁàºî¤òÀ©¸Â¤¹¤ë¤³¤È¤òµö¤¹¤Ù¤­¤Ç¤¢¤ë.
-Îã¤¨¤Ğ, ¥Á¥ã¥ì¥ó¥¸-¥ì¥¹¥İ¥ó¥¹¤Î¤ß¤ËÁàºî¤òÀ©¸Â¤¹¤ë¤Ê¤É.
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®å®Ÿè£…ã¯, ãƒ­ã‚°ã®è¨˜éŒ²ã¨ã‚¢ã‚¯ã‚»ã‚¹åˆ¶å¾¡ã®ã„ãã¤ã‹ã®å½¢å¼ã‚’è¨±ã—
+å®Ÿè¡Œã™ã‚‹ã“ã¨ãŒæ¨å¥¨ã•ã‚Œã‚‹. ã“ã®ã‚¢ã‚¯ã‚»ã‚¹åˆ¶å¾¡ã¯, çµŒç”±ã—ã¦æ¥ç¶šãŒå—ã‘ã¨ã‚‰ã‚Œã‚‹
+ãƒ‘ã‚¹ã«ã¤ã„ã¦ã®æƒ…å ±ã‚’åˆ©ç”¨ã™ã‚‹ã ã‚ã†.
+(SSH_AGENT_FORWARDING_NOTICE ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é›†ã‚ã‚‹ã“ã¨ã§; ã—ã‹ã—
+ãƒ‘ã‚¹ã¯ æœ€åˆã®ä¿¡é ¼ã§ããªã„ãƒã‚·ãƒ³ã‚’å«ã‚€ã‚‚ã®ã¾ã§ã ã‘ä¿¡é ¼ã§ãã‚‹ (?)).
+å®Ÿè£…ã¯, éµã‚’ä½¿ã£ã¦å®Ÿè¡Œã•ã‚Œã‚‹æ“ä½œã‚’åˆ¶é™ã™ã‚‹ã“ã¨ã‚’è¨±ã™ã¹ãã§ã‚ã‚‹.
+ä¾‹ãˆã°, ãƒãƒ£ãƒ¬ãƒ³ã‚¸-ãƒ¬ã‚¹ãƒãƒ³ã‚¹ã®ã¿ã«æ“ä½œã‚’åˆ¶é™ã™ã‚‹ãªã©.
 
 One should note that a local superuser will be able to obtain access to
 agents running on the local machine.  This cannot be prevented; in most
 operating systems, a user with sufficient privileges will be able to
 read the keys from the physical memory.
 
-¥í¡¼¥«¥ë¤Î¥¹¡¼¥Ñ¥æ¡¼¥¶¤Ï, ¥í¡¼¥«¥ë¤Ê¥Ş¥·¥ó¾å¤ÇÁö¤ë¥¨¡¼¥¸¥§¥ó¥È¤Ø¤Î¥¢¥¯¥»¥¹¤ò
-ÆÀ¤ë¤³¤È¤¬¤Ç¤­¤ë¤³¤È¤ËÃí°Õ. ¤³¤ì¤ÏËÉ¤°¤³¤È¤¬¤Ç¤­¤Ê¤¤. Â¿¤¯¤Î OS ¤Ç¤Ï.
-½½Ê¬¤ÊÆÃ¸¢¤ò»ı¤Ä¥æ¡¼¥¶¤Ï, ÊªÍı¥á¥â¥ê¤«¤é¸°¤òÆÉ¤ß½Ğ¤¹¤³¤È¤¬¤Ç¤­¤ë.
+ãƒ­ãƒ¼ã‚«ãƒ«ã®ã‚¹ãƒ¼ãƒ‘ãƒ¦ãƒ¼ã‚¶ã¯, ãƒ­ãƒ¼ã‚«ãƒ«ãªãƒã‚·ãƒ³ä¸Šã§èµ°ã‚‹ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ã‚’
+å¾—ã‚‹ã“ã¨ãŒã§ãã‚‹ã“ã¨ã«æ³¨æ„. ã“ã‚Œã¯é˜²ãã“ã¨ãŒã§ããªã„. å¤šãã® OS ã§ã¯.
+ååˆ†ãªç‰¹æ¨©ã‚’æŒã¤ãƒ¦ãƒ¼ã‚¶ã¯, ç‰©ç†ãƒ¡ãƒ¢ãƒªã‹ã‚‰éµã‚’èª­ã¿å‡ºã™ã“ã¨ãŒã§ãã‚‹.
 
 The authentication agent should not be run or forwarded to machine whose
 integrity is not trusted, as security on such machines might be
 compromised and might allow an attacker to obtain unauthorized access to
 the agent.
 
-Ç§¾Ú¥¨¡¼¥¸¥§¥ó¥È¤Ï, ´°Á´À­¤¬¿®Íê¤Ç¤­¤Ê¤¤¥Ş¥·¥ó¤ÇÁö¤é¤µ¤ì¤¿¤êÅ¾Á÷¤µ¤ì¤¿¤ê
-¤¹¤ë¤Ù¤­¤Ç¤Ï¤Ê¤¤. ¤½¤ì¤é¤Î¥Ş¥·¥ó¤Î¥»¥­¥å¥ê¥Æ¥£¤Ï¶¼¤«¤µ¤ì¤Æ
-¥¨¡¼¥¸¥§¥ó¥È¤Ø¤ÎÀµÅö¤Ç¤Ê¤¤¥¢¥¯¥»¥¹¤ò¹¶·â¼Ô¤¬ÆÀ¤ë¤³¤È¤òµö¤·¤Æ¤·¤Ş¤¦¤À¤í¤¦.
+èªè¨¼ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¯, å®Œå…¨æ€§ãŒä¿¡é ¼ã§ããªã„ãƒã‚·ãƒ³ã§èµ°ã‚‰ã•ã‚ŒãŸã‚Šè»¢é€ã•ã‚ŒãŸã‚Š
+ã™ã‚‹ã¹ãã§ã¯ãªã„. ãã‚Œã‚‰ã®ãƒã‚·ãƒ³ã®ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã¯è„…ã‹ã•ã‚Œã¦
+ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã¸ã®æ­£å½“ã§ãªã„ã‚¢ã‚¯ã‚»ã‚¹ã‚’æ”»æ’ƒè€…ãŒå¾—ã‚‹ã“ã¨ã‚’è¨±ã—ã¦ã—ã¾ã†ã ã‚ã†.
 
 Adding a key with SSH_AGENT_ADD_KEY over the net (especially over the
 Internet) is generally not recommended, because at present the private
@@ -987,10 +987,10 @@ key has to be moved unencrypted. Implementations SHOULD warn the user of
 the implications. Even moving the key in encrypted form could be
 considered unwise.
 
-¥Í¥Ã¥È±Û¤·¤Ë (ÆÃ¤Ë Internet ±Û¤·¤Ë) SSH_AGENT_ADD_KEY ¤Ç ¸°¤òÄÉ²Ã¤¹¤ë¤³¤È¤Ï
-¤Ï°ìÈÌÅª¤Ë´«¤á¤é¤ì¤Ê¤¤. ¸½ºß¸ø³«¸°¤Ï°Å¹æ²½¤µ¤ì¤º¤Ë°ÜÆ°¤µ¤ì¤ë¤«¤é¤À.
-¼ÂÁõ¤Ï, ¤³¤Î°ÕÌ£¤Ë¤Ä¤¤¤Æ¥æ¡¼¥¶¤Ë·Ù¹ğ¤¹¤ëÉ¬Í×¤¬¤¢¤ë. °Å¹æ²½¤µ¤ì¤¿·Á¼°¤Ç
-¸°¤ò°ÜÆ°¤¹¤ë¤³¤È¤â, ¸­¤¯¤Ê¤¤¤È¹Í¤¨¤é¤ì¤ë.
+ãƒãƒƒãƒˆè¶Šã—ã« (ç‰¹ã« Internet è¶Šã—ã«) SSH_AGENT_ADD_KEY ã§ éµã‚’è¿½åŠ ã™ã‚‹ã“ã¨ã¯
+ã¯ä¸€èˆ¬çš„ã«å‹§ã‚ã‚‰ã‚Œãªã„. ç¾åœ¨å…¬é–‹éµã¯æš—å·åŒ–ã•ã‚Œãšã«ç§»å‹•ã•ã‚Œã‚‹ã‹ã‚‰ã .
+å®Ÿè£…ã¯, ã“ã®æ„å‘³ã«ã¤ã„ã¦ãƒ¦ãƒ¼ã‚¶ã«è­¦å‘Šã™ã‚‹å¿…è¦ãŒã‚ã‚‹. æš—å·åŒ–ã•ã‚ŒãŸå½¢å¼ã§
+éµã‚’ç§»å‹•ã™ã‚‹ã“ã¨ã‚‚, è³¢ããªã„ã¨è€ƒãˆã‚‰ã‚Œã‚‹.
 
 7.  Intellectual Property
 
