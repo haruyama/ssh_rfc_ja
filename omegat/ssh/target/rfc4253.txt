@@ -1,0 +1,1326 @@
+
+
+
+
+
+
+Network Working Group                                          T. Ylonen
+Request for Comments: 4253              SSH Communications Security Corp
+Category: Standards Track                                C. Lonvick, Ed.
+                                                     Cisco Systems, Inc.
+                                                            January 2006
+
+
+            セキュア シェル (SSH) トランスポート層プロトコル
+
+このメモについて
+
+   この文書は, インターネットコミュニティに対するインターネットの標準トラックプロトコルを定義している. また, 改善のための議論と示唆を求めているこのプロトコルの標準化の状態と状況は "Internet
+   Official Protocol Standards" (STD 1) の現在の版を参照してほしい.  このメモの配布は制限しない.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2006). 訳者: 春山 征吾 <haruyama@unixuser.org> 
+
+概要
+
+   セキュア シェル (SSH) プロトコルは, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.
+
+   この文書は, SSH トランスポート層プロトコルについて記述する. このプロトコルは, 通常は TCP/IP 上で動作する.  このプロトコルは, 多くの安全なネットワークサービスのための基盤として使うことができる.  このプロトコルは, 強力な暗号化, サーバの認証, 完全性の保護を提供する.  さらに, 圧縮も提供できる.
+
+   鍵交換法, 公開鍵アルゴリズム, 対称暗号アルゴリズム, メッセージ認証アルゴリズム, ハッシュアルゴリズムはすべて交渉によって決まる.
+
+   さらに, この文書は, Diffie-Hellman 鍵交換法とSSHトランスポート層プロトコルの実装に必要な最低限のアルゴリズムの集合についても記述する.
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                     [Page 1]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+目次
+
+   1. イントロダクション ...............................................3
+   2. Contributors ....................................................3
+   3. Conventions Used in This Document ...............................3
+   4. 接続のセットアップ...........................................4
+      4.1. TCP/IP上での利用.......................................4
+      4.2. プロトコルバージョンの交換.................................4
+   5. 古い SSH のバージョンとの互換性 .............................5
+      5.1. 古いクライアントで新しいサーバ..........................6
+      5.2. 新しいクライアントで古いサーバ.........................6
+      5.3. パケットのサイズとオーバーヘッド.......................6
+   6.  バイナリパケットプロトコル..................................7
+      6.1. 最大パケット長 ......................................8
+      6.2. 圧縮...........................................8
+      6.3. 暗号化...............................................9
+      6.4. データの完全性........................................12
+      6.5. 鍵交換法.....................................13
+      6.6. 公開鍵アルゴリズム..................................13
+   7. 鍵交換.................................................15
+      7.1. アルゴリズムのネゴシエーション........................17
+      7.2. 鍵交換からの出力................................20
+      7.3. 鍵の利用...............................21
+   8. Diffie-Hellman 鍵交換..................................21
+      8.1. diffie-hellman-group1-sha1 ................................23
+      8.2. diffie-hellman-group14-sha1 ...............................23
+   9. 鍵の再交換.............................................23
+   10. サービスの要求.....................................24
+   11. 追加のメッセージ......................................25
+      11.1. 切断メッセージ................................25
+      11.2. 無視データメッセージ............................26
+      11.3.  デバッグメッセージ...............................26
+      11.4. 予約されたメッセージ................................27
+   12. メッセージ番号のまとめ.................................27
+   13. IANA の考慮 ........................................27
+   14. セキュリティの考察......................................28
+   15. References ....................................................29
+      15.1. Normative References .....................................29
+      15.2. Informative References ...................................30
+   Authors' Addresses ................................................31
+   Trademark Notice ..................................................31
+
+
+
+
+
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                     [Page 2]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+1.  イントロダクション
+
+   The SSH transport layer is a secure, low level transport protocol.
+   It provides strong encryption, cryptographic host authentication, and
+   integrity protection.
+
+   Authentication in this protocol level is host-based; this protocol
+   does not perform user authentication.  A higher level protocol for
+   user authentication can be designed on top of this protocol.
+
+   The protocol has been designed to be simple and flexible to allow
+   parameter negotiation, and to minimize the number of round-trips.
+   The key exchange method, public key algorithm, symmetric encryption
+   algorithm, message authentication algorithm, and hash algorithm are
+   all negotiated.  It is expected that in most environments, only 2
+   round-trips will be needed for full key exchange, server
+   authentication, service request, and acceptance notification of
+   service request.  The worst case is 3 round-trips.
+
+2.  Contributors
+
+   The major original contributors of this set of documents have been:
+   Tatu Ylonen, Tero Kivinen, Timo J. Rinne, Sami Lehtinen (all of SSH
+   Communications Security Corp), and Markku-Juhani O. Saarinen
+   (University of Jyvaskyla).  Darren Moffat was the original editor of
+   this set of documents and also made very substantial contributions.
+
+   Many people contributed to the development of this document over the
+   years.  People who should be acknowledged include Mats Andersson, Ben
+   Harris, Bill Sommerfeld, Brent McClure, Niels Moller, Damien Miller,
+   Derek Fawcus, Frank Cusack, Heikki Nousiainen, Jakob Schlyter, Jeff
+   Van Dyke, Jeffrey Altman, Jeffrey Hutzelman, Jon Bright, Joseph
+   Galbraith, Ken Hornstein, Markus Friedl, Martin Forssen, Nicolas
+   Williams, Niels Provos, Perry Metzger, Peter Gutmann, Simon
+   Josefsson, Simon Tatham, Wei Dai, Denis Bider, der Mouse, and
+   Tadayoshi Kohno.  Listing their names here does not mean that they
+   endorse this document, but that they have contributed to it.
+
+3.  Conventions Used in This Document
+
+   All documents related to the SSH protocols shall use the keywords
+   "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+   "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" to describe
+   requirements.  These keywords are to be interpreted as described in
+   [RFC2119].
+
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                     [Page 3]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   The keywords "PRIVATE USE", "HIERARCHICAL ALLOCATION", "FIRST COME
+   FIRST SERVED", "EXPERT REVIEW", "SPECIFICATION REQUIRED", "IESG
+   APPROVAL", "IETF CONSENSUS", and "STANDARDS ACTION" that appear in
+   this document when used to describe namespace allocation are to be
+   interpreted as described in [RFC2434].
+
+   プロトコルのフィールドとフィールドで取り得る値は , この文書群で定義される.  メッセージの定義で, プロトコルのフィールドは定義される.  例として, SSH_MSG_CHANNEL_DATA を次で定義する
+
+      byte      SSH_MSG_CHANNEL_DATA
+      uint32    recipient channel
+      string    data
+
+   この文書群では, フィールドが参照される場合には, シングルクォートで囲まれて表記される.  フィールドに入る値が参照される場合は, ダブルクォートで囲まれて表記される.  上の例を用いると, 'data' の取り得る値には, "foo" や "bar" がある.
+
+4.  接続のセットアップ
+
+   SSH は, 8-bit クリーンでバイナリ透過などんなトランスポート上でも動作する. 下層にあるトランスポートは, 転送エラーに対する保護をする必要がある. そのようなエラーはSSHのコネクションを終了させる原因となる.
+
+   クライアントが, 接続を開始する.
+
+4.1.  TCP/IP上での利用
+
+   TCP/IP上で利用する際, サーバは通常22番ポートで接続を待ち受ける.  このポート番号は IANA によって登録されている. また, SSHに対して正式に割り当てられている.
+
+4.2.  プロトコルバージョンの交換
+
+   接続が確立したら, 両方の側が識別文字列を送らなければならない.  この接続文字列は, 次の形式でなければならない.
+
+      SSH-protoversion-softwareversion SP comments CR LF
+
+   この文書群で定義されるプロトコルはバージョン.2.0 なので, 'protoversion'は 2.0 でなければならない.  'comments' 文字列の存在は選択できる.  'comments' 文字列が含まれる場合, 'space' 文字(上では SP で示した. ASCII 32) が 'softwareversion' と 'comments' を区切らなければならない..  この識別文字列は, 単一のキャリッジリターン (CR) と単一のラインフィード （LF) (それぞれ ASCII の 13 と 10) で終了されなければならない.  Implementers who wish to maintain
+
+
+
+Ylonen &  Lonvick           Standards Track                     [Page 4]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   より古いこのプロトコルの文書化されていないバージョンとの互換性を維持したい実装者は, この文書の5節で記述する理由からキャリッジリターンが存在しなくても識別文字列の処理をしたいだろう.  null 文字は送られてはならない.
+   文字列の最大長は, 255文字だ. これには キャリッジリターンとラインフィードを含む.
+
+   キャリッジリターンとラインフィードの前の文字列の部分は, Diffie-Hellman 鍵交換に使われる(8 節を参照).
+
+   サーバは, バージョン文字列の前に別のデータを何行か送ってもよい.  それぞれの行は, キャリッジリターンとラインフィードで終端されている必要がある.  これらの行は, "SSH-" で始まってはならない. また,ISO-10646 UTF-8 [RFC3629] でエンコーングされている必要がある(言語は特定されない).  クライアントは, これらの行を処理できる必要がある.  それぞれの行は静かに無視されてもよいし, クライアントユーザに表示されてもよい.  もし表示されるなら, [SSH-ARCH] で議論されているように, 制御文字のフィルタリングが利用される必要がある. この特徴の主要な目的は, TCP-wrappers に切断の前にエラーメッセージを表示することを許すことだ.
+
+   'protoversion' と 'softwareversion' は, 空白とマイナス(-)を除く印刷可能な US-ASCII 文字で構成されなければならない.  'softwareversion' は, 主に互換性のための拡張を動作させたり, 実装の能力を示すために使われる.  'comments' は, ユーザの問題を解決するのに有用な追加の情報を含む必要がある.  正しい識別文字列の例は以下だ.
+
+      SSH-2.0-billsSSH_3.6.3q3<CR><LF>
+
+   この識別文字列は, 選択可能な 'comments'を含んでいない. そのため, 'softwareversion' の直後に CR と LFで終端されている.
+
+   この識別子を送ったらすぐに鍵交換が始まる.
+   識別文字列のあとのすべてのパケットは, 6節で記述する, バイナリパケットプロトコルを利用することになる.
+
+5.  古い SSH のバージョンとの互換性
+
+   前述したように, このプロトコルのために定義された 'protoversion' は "2.0" だ.  このプロトコルのより以前のバージョンについては公式に文書化されていないが, より以前のバージョンは 'protoversion' に "1.x" (たとえば, "1.5" or "1.3") を利用していたことが広く知られている.  執筆時点では, SSHの多くの実装が プロトコルバージョン 2.0 を利用しているが, まだ以前のバージョンを利用するデバイスも存在している.
+   移行期間では, プロトコルのより古いバージョンを利用するインストール済みの SSH のクライアントやサーバと互換する方法で動作できることが重要だ.
+
+
+
+Ylonen &  Lonvick           Standards Track                     [Page 5]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+    この節では, SSH バージョン 1.x との互換性をサポートする実装にのみ関係する情報を記述する.  興味のある者のために紹介しておくと, 1.x プロトコルについての唯一の文書は, ソースコード [ssh-1.2.30] と共にリリースされた README ファイルに含まれている.
+
+5.1.  古いクライアントで新しいサーバ
+
+   サーバの実装は, 古いバージョンとの互換性を有効にする互換性についての設定フラグをサポートしてもよい.  このフラグが有効ならば, サーバは 'protoversion' を "1.99" とする必要がある.  プロトコル 2.0 を用いるクライアントは, 'protoversion' を "2.0" とできなければならない.  このモードでは, サーバは識別文字列のあとのキャリッジリターン (ASCII 13) を送らないほうがよい.
+
+   この互換モードでは, クライアントからの識別文字列を受信するまではサーバはサーバの識別文字列を送ったあとでデータを送らないほうがよい.  そしてサーバは, クライアントが古いプロトコルを利用するかどうかを決定し必要ならば古いプロトコルに戻すことができる.  この互換モードでは, サーバは識別文字列の前に追加の文字列を送ってはならない.
+
+   古いクライアントとの互換性が不要なら, サーバは識別文字列の後ですぐに初期の鍵交換のデータを送ってもよい.
+
+5.2.  新しいクライアントで古いサーバ
+
+   新しいクライアントは, 認証文字列のあとすぐに (サーバの認証文字列を受け取る前に) 追加のデータを送ってもよいので, クライアントがサーバが古いと知るときには古いプロトコルはすでに壊れていることがある. このときは, クライアントはサーバとの接続を切断し古いプロトコルを利用して再接続する必要がある.
+
+5.3.  パケットのサイズとオーバーヘッド
+
+   新しいヘッダやパディング, メッセージ認証コード(MAC)のためにパケットサイズが増大することを心配する読者もいるだろう.  最小のパケットサイズは, 28 byteのオーダーだ (取り決められるアルゴリズムに依存する).  大きなパケットについては, 増大は無視できる. しかし, (telnetタイプのセッションでの) 1バイトのパケットについては非常に大きい. しかし, いくつかの理由によりほとんどすべての場合で重大とならない.
+
+   o  TCP/IPのヘッダの最小サイズは, 32 byteだ.  そのため, 実際の増大は, (おおまかにいって)33 byte から 51 byteになる.
+
+
+
+Ylonen &  Lonvick           Standards Track                     [Page 6]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   o  イーサネットのパケットのデータフィールドの最小サイズは, 46 byte だ [RFC0894].  このため, 増大は, 5byteよりも大きくならない.
+      イーサネットのヘッダも考慮すると, 増大は10%よりも少ない.
+
+   o  インターネットでのtelnetタイプのデータの割合は無視できる. たとえ, パケットサイズが増大してもだ.
+
+   パケットサイズの増大で重大な影響がでる可能性のある唯一の環境は, 遅いモデム回線でのPPP [RFC1661]だ (PPP は TCP/IPのヘッダを圧縮するので, パケットサイズの増大を強調する) .  しかし, 現在のモデムは転送にかかる時間は2ミリ秒のオーダで, 人間がタイプできる速度よりもかなり早い.
+
+   最大のパケットサイズに関連する問題もある.  画面の更新の遅れを最小にするため, インタラクティブなセッションで過剰な大きなパケットは求められない.  最大のパケットサイズはそれぞれのチャンネルで独立に取り決められる.
+
+6.   バイナリパケットプロトコル
+
+   パケットは以下のフォーマットに従う:
+
+      uint32    packet_length
+      byte      padding_length
+      byte[n1]  payload; n1 = packet_length - padding_length - 1
+      byte[n2]  random padding; n2 = padding_length
+      byte[m]   mac (Message Authentication Code - MAC); m = mac_length
+
+      packet_length
+         byte単位のパケットの長さ. 'mac' と 'packet_length' 自体の長さは含まない.
+
+      padding_length
+         'random padding' の長さ (byte単位).
+
+      payload
+         パケットの有用な中身圧縮(すること)が取り決められていたなら, このフィールドは圧縮される.  最初は, 圧縮は "none" でなければならない.
+
+      random padding
+         任意の長さのパディング, (packet_length || padding_length || payload || random padding) の全体の長さが, 暗号のブロックサイズか8のどちらか大きいほうの倍数になるようにする.
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                     [Page 7]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+          少なくとも 4 byte のパディングをしなければならない.  パディングは, ランダムなbyteで構成される必要がある.  パディングの最大長は, 255 byte だ.
+
+      mac
+         メッセージ認証コード.  メッセージ認証コードが取り決められていたら, このフィールドはMACを含む.  最初は, MACのアルゴリズムは "none" でなければならない.
+
+   'packet_length', 'padding_length', 'payload', 'random padding を連結した長さが, 暗号のブロックサイズか8のどちらか大きいほうの倍数になっていなければならないことに注意.  この制限は, たとえストリーム暗号を用いる場合にも実施されなければならない.  'packet_length' フィールドも暗号化されるので, パケットを送受信する際の packet_lengthの扱いには特別な注意が必要なことに注意.  さらに, 可変の 'random padding'の挿入がトラフィック解析の防止に役立つことに注意.
+
+   パケットの最小サイズは, 16(ないし暗号のブロックサイズ, どちらか大きいほう) byte に 'mac' が追加されたものだ.  実装は, パケットの最初の8byte(ないし暗号のブロックサイズ, どちらか大きいほう)を受信したら長さを復号する必要がある.
+
+6.1.  最大パケット長
+
+   すべての実装は, 32768byte以下の非圧縮の payload を持つパケットを処理できなければならない. また, 全パケットサイズ( 'packet_length',
+   'padding_length', 'payload', 'random padding', 'mac' を含む) が 35000 byte 以下のパケットを処理できなければならない.  最大値の 35000 byte は, 上で述べた非圧縮の長さよりも大きい任意に選ばれた値だ.  実装は, 必要がある場合はより長いパケットをサポートする必要がある.  例えば, ある実装が非常にたくさんの数の証明書を送りたい場合, 識別文字列によってもう一方の側もそのような証明書群の処理ができることが示されているならば, より大きなパケットが送られてもよい.  しかし, 実装は, DoS攻撃やバッファオーバーフロー攻撃を避けるためにパケットの長さが合理的かチェックする必要がある.
+
+6.2.  圧縮
+
+   圧縮が取り決められている場合は, 'payload' フィールド(のみ)は, 取り決められたアルゴリズムを用いて圧縮される.  'packet_length' と 'mac' は, 圧縮された payload から計算される.  圧縮のあとで, 暗号化が行なわれる.
+
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                     [Page 8]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   圧縮は, 方法によってはステートフルでもよい.  圧縮は, 通信の方向それぞれで独立でなければならない. また, 実装は方向それぞれについてアルゴリズムを独立に選択できなければならない.  しかしながら実際上は, どちらの方向でも同じ圧縮アルゴリズムを用いることが推奨される.
+
+   次の圧縮アルゴリズムが現在定義されている:
+
+      none     REQUIRED        no compression
+      zlib     OPTIONAL        ZLIB (LZ77) compression
+
+    "zlib" 圧縮は, [RFC1950] と [RFC1951] に記述されている.
+   圧縮コンテキストは鍵交換のあとで初期化され, 1つのパケットからその次のパケットへと渡される. それぞれのパケットの終わりでは, 部分的な flush のみが行なわれる.  部分的な flush とは, 現在の圧縮ブロックが終了されてすべてのデータが出力となっているということである.  もし, 現在のブロックが保存されたブロックではない場合, 現在のブロックのブロック終了コードの始まりからパケットの payload の終わりまでが少なくとも8bit単位であることを保証するために現在のブロックのあとで1つかそれ以上のブロックが追加される.
+
+   追加の方法が, [SSH-ARCH] や [SSH-NUMBERS] で定義されるかもしれない.
+
+6.3.  暗号化
+
+   暗号アルゴリズムと鍵は, 鍵交換の間に取り決められる.  暗号化が行なわれている場合, パケットの packet length, padding
+   length, payload, padding のフィールドは, 取り決められた暗号アリゴリズムによって暗号化されなければならない.
+
+   ある通信の方向で送られるすべてのパケットの暗号化済みのデータは, 単一のデータストリームとみなされる必要がある.  たとえば, 初期化ベクトルは, パケットの最後から次のパケットの最初へと引き継がれる必要がある.  すべての暗号は, 128bit以上の有効な鍵長を持つ鍵を使う必要がある.
+
+   それぞれの通信の方向の暗号は, お互いに独立に動作しなければならない.
+   実装は, ローカルなポリシーによって複数のアルゴリズムが許可されているならば, それぞれの方向のアルゴリズムが独立に選択されることを許さなければならない.  しかしながら実際上は, どちらの方向でも同じアルゴリズムを用いることが推奨される.
+
+
+
+
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                     [Page 9]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   現在次の暗号が定義されている:
+
+      3des-cbc         REQUIRED          three-key 3DES in CBC mode
+      blowfish-cbc     OPTIONAL          Blowfish in CBC mode
+      twofish256-cbc   OPTIONAL          Twofish in CBC mode,
+                                         with a 256-bit key
+      twofish-cbc      OPTIONAL          alias for "twofish256-cbc"
+                                         (this is being retained
+                                         for historical reasons)
+      twofish192-cbc   OPTIONAL          Twofish with a 192-bit key
+      twofish128-cbc   OPTIONAL          Twofish with a 128-bit key
+      aes256-cbc       OPTIONAL          AES in CBC mode,
+                                         with a 256-bit key
+      aes192-cbc       OPTIONAL          AES with a 192-bit key
+      aes128-cbc       RECOMMENDED       AES with a 128-bit key
+      serpent256-cbc   OPTIONAL          Serpent in CBC mode, with
+                                         a 256-bit key
+      serpent192-cbc   OPTIONAL          Serpent with a 192-bit key
+      serpent128-cbc   OPTIONAL          Serpent with a 128-bit key
+      arcfour          OPTIONAL          the ARCFOUR stream cipher
+                                         with a 128-bit key
+      idea-cbc         OPTIONAL          IDEA in CBC mode
+      cast128-cbc      OPTIONAL          CAST-128 in CBC mode
+      none             OPTIONAL          no encryption; NOT RECOMMENDED
+
+   "3des-cbc" 暗号は, 3つの鍵を用いる triple-DES (encrypt-decrypt-encrypt)で, 鍵の最初の8byteが最初の暗号化に用いられ, 次の8byteが復号に用いられ, 続く8byteが最後の暗号化に用いられる.  24byteの鍵データを必要とする(このうち 168 bit が実際に用いられる).  CBCモードの実装には, outer chaining が使われなければならない(すなわち, 初期化ベクトルを1つだけ用いる).  これは, 8byteブロックのブロック暗号だ.  このアルゴリズムは, [FIPS-46-3] で定義されている.  このアルゴリズムは, 112 bitの有効な鍵長しか持たないので ([SCHNEIER]), SSH の暗号アルゴリズムは128bit以上の鍵を使うべきという仕様に合致しない.  しかし, このアルゴリズムは歴史的な理由により依然要求されている; 実質的な面から見て, 執筆時点でのすべての知られた実装はこのアルゴリズムを実装しており, 基本的な相互運用可能なアルゴリズムであるという理由で広く用いられているからだ. 近い将来において, より強度の高い別のアルゴリズムが広く普及して, 別の STANDARDS ACTIONによって"3des-cbc'の利用が非推奨となるだろう.
+
+   "blowfish-cbc" 暗号は CBCモードでの Blowfish で, 128-bit の鍵を使う [SCHNEIER].  これは, 8byteブロックのブロック暗号だ.
+
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 10]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   "twofish-cbc" もしくは "twofish256-cbc" 暗号は, CBCモードの Twofish で, 256-bitの鍵を使う. [TWOFISH] で記述されている.  これは, 16byteブロックのブロック暗号だ.
+
+   "twofish192-cbc" 暗号は, 同様の暗号だが, 192-bit の鍵を使う.
+
+   "twofish128-cbc" 暗号は, 同様の暗号だが, 128-bit の鍵を使う.
+
+   "aes256-cbc" 暗号は, CBCモードの AES (Advanced Encryption Standard) [FIPS-197] だ.  このバージョンは, 256-bitの鍵を用いる.
+
+   "aes192-cbc" 暗号は, 同様の暗号だが, 192-bit の鍵を使う.
+
+   "aes128-cbc" 暗号は, 同様の暗号だが, 128-bit の鍵を使う.
+
+   "serpent256-cbc" 暗号は, CBCモードで 256-bitの鍵を用いる. Serpent AES submission.で記述されている.
+
+   "serpent192-cbc" 暗号は, 同様の暗号だが, 192-bit の鍵を使う.
+
+   "serpent128-cbc" 暗号は, 同様の暗号だが, 128-bit の鍵を使う.
+
+   "arcfour" 暗号は, 128-bit鍵を用いる Arcfour(Alleged RC4) ストリーム暗号だ.
+   Arcfour 暗号は, RC4 暗号 [SCHNEIER] と互換すると考えられている.  Arcfour (と RC4) には弱い鍵の問題がある. 注意しながら利用するべきだ.
+
+   "idea-cbc" 暗号は, CBCモードの IDEA 暗号だ [SCHNEIER].
+
+   "cast128-cbc" 暗号は, CBCモードで l28-bitの鍵を用いる CAST-128 暗号だ [RFC2144].
+
+   "none" アルゴリズムは, 暗号化が行なわれないことを指定する.
+   この方法は機密性の保護を提供しないことに注意. そしてこの方法は推奨されない.  この暗号を用いる場合は, いくつかの機能(たとえば, パスワード認証)がセキュリティ上の理由から無効にされるだろう.
+
+   追加の方法が, [SSH-ARCH] や [SSH-NUMBERS] で定義されるかもしれない.
+
+
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 11]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+6.4.  データの完全性
+
+   それぞれのパケットにMACが含まれるとによりデータの完全性が保護される. MACは, 共有の秘密, パケットのシーケンス番号, パケットの中身から計算される.
+
+   メッセージ認証アルゴリズムと鍵は, 鍵交換の間に取り決められる.  最初は, MACは有効ではなく, その長さは 0 でなければならない.  鍵交換の後で, 選択された MACによる 'mac' が, パケットデータの連結を暗号化する前に計算される.
+
+      mac = MAC(key, sequence_number || unencrypted_packet)
+
+   unencrypted_packet は, 'mac' を除くパケット全体(the
+   length fields, 'payload', 'random padding')だ. sequence_number は, uint32 で表現される明示されないパケットのシーケンス番号だ.  sequence_number は, 最初のパケットで 0 に初期化される. そして(暗号化やMACの使用にかかわらず) すべてのパケットごとに増加される.  これはけっしてリセットされない. たとえ鍵やアルゴリズムが再度取り決められた後でもだ.  これは, 2^32 パケットの後で 0 に戻る.  パケットの sequence_number 自体は, 通信で送られるパケットには含まれない.
+
+   MACのアルゴリズムは, 通信の方向それぞれで独立に動作しなければならない. また, 実装は方向それぞれについてアルゴリズムを独立に選択できなければならない.  しかしながら実際上は, どちらの方向でも同じアルゴリズムを用いることが推奨される.
+
+   MAC アルゴリズムによって計算された 'mac' の値は, パケットの最後の部分に暗号化なしで転送されなければならない.  'mac' のバイト数は, 選ばれたアルゴリズムに依存する.
+
+   以下の MAC アルゴリズムが現在定義されている:
+
+      hmac-sha1    REQUIRED        HMAC-SHA1 (digest length = key
+                                   length = 20)
+      hmac-sha1-96 RECOMMENDED     first 96 bits of HMAC-SHA1 (digest
+                                   length = 12, key length = 20)
+      hmac-md5     OPTIONAL        HMAC-MD5 (digest length = key
+                                   length = 16)
+      hmac-md5-96  OPTIONAL        first 96 bits of HMAC-MD5 (digest
+                                   length = 12, key length = 16)
+      none         OPTIONAL        no MAC; NOT RECOMMENDED
+
+   "hmac-*" アルゴリズムは, [RFC2104] に記述されている..  "*-n" MACは, 結果の値の最初の n bit のみを利用する.
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 12]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   SHA-1 は [FIPS-180-2] に, MD5 は [RFC1321] に記述されている.
+
+   追加の方法が, [SSH-ARCH] や [SSH-NUMBERS] で定義されるかもしれない.
+
+6.5.  鍵交換法
+
+   鍵交換法は, 暗号と認証のための一時的なセッション鍵がどう作られるかとサーバ認証がどう行なわれるかを指定する.
+
+   2つの要求されている鍵交換法が定義されている:
+
+      diffie-hellman-group1-sha1 REQUIRED
+      diffie-hellman-group14-sha1 REQUIRED
+
+   これらの方法は, 8 節に記述されている.
+
+   追加の方法が, [SSH-NUMBERS] で定義されるかもしれない.   名前 "diffie-hellman-group1-sha1" は, [RFC2409]で定義されている Oakley群を用いる鍵交換法のために用いられる.  SSHは, Oakley [RFC2412] や IKE と論理的に異なる, 自身の群識別子を維持している. しかし, 追加の群として, ワーキンググループは[RFC3526] で割当てられた数を採用した. この2つ目の群の名前として, "diffie-hellman-group14-sha1" を用いる.
+   実装は, これらの名前を内部識別子として扱わなければならない. また, SSHが用いる群とIKEで定義された群との間の関係を仮定してはならない.
+
+6.6.  公開鍵アルゴリズム
+
+   このプロトコルは, 公開鍵フォーマット, エンコーディング, アルゴリズム (署名と/ないし暗号化) のほとんどのものと共に動作するように設計されている.
+
+   公開鍵の種類を定義するいくつかの側面がある:
+
+   o  鍵フォーマット: どのように鍵がエンコードされ証明書が示されるか.  このプロトコルの key blob は 鍵に加えて証明書も含んでもよい.
+
+   o  署名と/ないし暗号化アルゴリズム鍵の種類の中には, 署名と暗号化の両方をサポートしないものがある.  鍵の利用法は, (たとえば証明書の中での)ポリシーの記述によって制限されるかもしれない.  この場合, ポリシーの異なる選択肢に対しては異なる鍵の種類が定義されなければならない.
+
+   o  署名のエンコーディングと/ないし暗号化されたデータ.  これは, パディング, バイトオーダー, データフォーマットを含んでいる. それ以外のものも含まれる.
+
+
+
+lonen &  Lonvick           Standards Track                    [Page 13]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   次の公開鍵と/ないし証明書のフォーマットが現在定義されている:
+
+   ssh-dss           REQUIRED     sign   Raw DSS Key
+   ssh-rsa           RECOMMENDED  sign   Raw RSA Key
+   pgp-sign-rsa      OPTIONAL     sign   OpenPGP certificates (RSA key)
+   pgp-sign-dss      OPTIONAL     sign   OpenPGP certificates (DSS key)
+
+   追加の鍵の種類が, [SSH-ARCH] や [SSH-NUMBERS] で定義されるかもしれない.
+
+   鍵の種類は, (アルゴリズムの取り決めや他のソースによって)常に明示的に知られてなければならない通常, key blob には含まれない.
+
+   証明書と公開鍵は次のようにエンコードされる:
+
+      string    certificate or public key format identifier
+      byte[n]   key/certificate data
+
+   certificate の部分は 長さ0の string の場合ががある. 一方 public key は必須だ.  この公開鍵は認証に利用される.  承認の提供が利用できるように, 証明書のシーケンスが, certificate blob に含まれる.
+
+   明示的に署名のフォーマット識別子が指定されていない公開鍵/証明書のフォーマットは, 署名の識別子として鍵/証明書フォーマット識別子を利用しなければならない.
+
+   署名は次のようにエンコードされる:
+
+      string    signature format identifier (as specified by the
+                public key/certificate format)
+      byte[n]   signature blob in format specific encoding.
+
+   "ssh-dss" 鍵フォーマットは次のような特有のエンコーディングを持つ:
+
+      string    "ssh-dss"
+      mpint     p
+      mpint     q
+      mpint     g
+      mpint     y
+
+   ここで, パラメータ 'p', 'q', 'g', 'y'は署名のkey blob を生成する.
+
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 14]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   この鍵フォーマットでの署名と検証は, SHA-1 ハッシュ [FIPS-180-2] を用いるDigital Signature Standard [FIPS-186-2] に従って行なわれる.
+
+   署名の結果次のようにエンコードされる:
+
+      string    "ssh-dss"
+      string    dss_signature_blob
+
+   'dss_signature_blob' の値は, (それぞれ長さやパディングがない符号無しのネットワークバイトオーダーの160-bitの整数である) r とそれに続く s を含む文字列としてエンコードされる.
+
+   "ssh-rsa" 鍵フォーマットは次のような特有のエンコーディングを持つ:
+
+      string    "ssh-rsa"
+      mpint     e
+      mpint     n
+
+   ここで, パラメータ 'e', 'n' は署名のkey blob を生成する
+
+   この鍵フォーマットでの署名と検証は, SHA-1 ハッシュを用いる RSASSA-PKCS1-v1_5 scheme in [RFC3447] に従って行なわれる.
+
+   署名の結果次のようにエンコードされる:
+
+      string    "ssh-rsa"
+      string    rsa_signature_blob
+
+   'rsa_signature_blob' の値は,(長さやパディングがない符号無しのネットワークバイトオーダーの160-bitの整数である) s を含む文字列としてエンコードされる.
+
+   "pgp-sign-rsa" 法は, OpenPGP 互換バイナリフォーマット ([RFC2440]) による証明書と公開鍵, 署名を示しているこの方法は, 鍵がRSA鍵であることを示している.
+
+   "pgp-sign-dss" も同様だが, 鍵が DSS鍵であることを示している.
+
+7.  鍵交換
+
+   鍵交換 (kex) は, それぞれの側がサポートするアルゴリズムの名前のリストを送ることで始まる.  それぞれの側が, それぞれのカテゴリについて優先するアルゴリズムがある. そして, ほとんどの実装で, 常に同じ優先のアルゴリズムを用いると仮定できる.   
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 15]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   どちらの側も, もう一方の側が用いるアルゴリズムを推測してもよい. また, 優先の方法にとって適切ならば, そのアルゴリズムに従った初期鍵交換パケットを送ってもよい.
+
+   推測は以下の場合に間違っていると考えられる:
+
+   o  鍵交換アルゴリズムと/ないしホスト鍵のアルゴリズムが間違って推測された(サーバとクライアントが異なる優先アルゴリズムを持つ), ないし
+
+   o  どのアルゴリズムでの同意できなかった(この同意の手順は 7.1 節で後述する).
+
+   さもなければ, 推測が正しいと考え, 楽観的に送られたパケットは最初の鍵交換パケットとして扱われなければならない.
+
+   しかし, 推測が間違っていて, かつパケットが一方ないし両方の側から楽観的に送られたなら, それらのパケットが無視されなければならない (たとえ推測のエラーが最初のパケットの内容に影響しなくても). また, 適切な側が正しい初期パケットを送らなければならない.
+
+   鍵交換のメッセージが署名やサーバの信頼性を証明するなにかを含んでいるなら, 鍵交換法は明示的なサーバ認証を用いる.  サーバの信頼性を証明するために, クライアントがメッセージと関連するMACを検証するためにサーバが共有の秘密 K を知っていることを示す必要がある場合には, 鍵交換法は暗黙のサーバ認証を用いる.
+
+   この文書で定義される鍵交換法は明示的なサーバ認証を用いる.  しかし, 暗黙のサーバ認証を用いる鍵交換法をこのプロトコルで用いてもよい.  暗黙のサーバ認証での鍵交換の後で, クライアントは, 他のデータを送る前にサービスの要求メッセージに対する返答を待たなければならない.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 16]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+7.1.  アルゴリズムのネゴシエーション
+
+   鍵交換は, それぞれの側が次のパケットを送ることで開始する.
+
+      byte         SSH_MSG_KEXINIT
+      byte[16]     cookie (random bytes)
+      name-list    kex_algorithms
+      name-list    server_host_key_algorithms
+      name-list    encryption_algorithms_client_to_server
+      name-list    encryption_algorithms_server_to_client
+      name-list    mac_algorithms_client_to_server
+      name-list    mac_algorithms_server_to_client
+      name-list    compression_algorithms_client_to_server
+      name-list    compression_algorithms_server_to_client
+      name-list    languages_client_to_server
+      name-list    languages_server_to_client
+      boolean      first_kex_packet_follows
+      uint32       0 (reserved for future extension)
+
+   アルゴリズムの名前リストのそれぞれは, アルゴリズム名のカンマ区切りリストでなければならない ( [SSH-ARCH] の Algorithm Naming と [SSH-NUMBERS] の追加の情報を参照).  それぞれのサポートする(許可する)アルゴリズムは, 優先度の降順にリストされなければならない.
+
+   それぞれの名前リストの最初のアルゴリズムが, 優先する(推測する)アルゴリズムでなければならない.  それぞれの名前リストは, 少なくとも1つのアルゴリズム名を含まなければならない.
+
+      cookie
+         'cookie' は, 送り手が生成するランダムな値でなければならない.
+         もう一方の側が完全に鍵やセッション識別子を決めるのを防ぐために使われる.
+
+      kex_algorithms
+         前述した鍵交換アルゴリズムのリスト最初のアルゴリズムが, 優先する(そして推測する)アルゴリズムでなければならない.  もし, 両方の側が同じ推測をしていたら, そのアルゴリズムが使われなければならない.
+         さもなければ, それに続くアルゴリズムが鍵交換法として使われなければならない: クライアントの鍵交換アルゴリズムが1つずつ反復される.  次の条件を満たす最初のアルゴリズムを選択する:
+
+         +  サーバもそのアルゴリズムをサポートしている.
+
+         +  そのアルゴリズムが暗号化可能なホスト鍵を必要とするなら, クライアントとサーバ双方の server_host_key_algorithms に挙げられた暗号化可能アルゴリズムである.
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 17]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+         +  もしアルゴリズムが署名可能なホスト鍵を必要とするなら, クライアントとサーバ双方の server_host_key_algorithms に挙げられた署名可能なアルゴリズムである.
+
+      この条件を満たすアルゴリズムが見付からない場合は, 接続は失敗し, 両方の側が切断しなければならない.
+
+      server_host_key_algorithms
+         サポートするサーバホスト鍵のアルゴリズムの名前リスト.  サーバは, 保有するホスト鍵のアルゴリズムを挙げる. クライアントは, 受け入れられるアルゴリズムのリストを挙げる.  ホストに対して, 場合によっては異なるアルゴリズムを用いる, 複数のホスト鍵があってもよい.
+
+         ホスト鍵によっては, 署名と暗号化の両方をサポートしない(これはアルゴリズムによって決まる). このため, すべてのホスト鍵がすべての鍵交換法で有効とはならない.
+
+         アルゴリズムの選択は, 選択された鍵交換アルゴリズムが署名ないし暗号化可能なホスト鍵を必要とするかどうかに依存する.  アルゴリズムは, 公開鍵アルゴリズム名から決められなければならない.  クライアントの名前リストの最初のアルゴリズムが, この必要条件を満たしサーバもサポートしているなら, 選ばれなければならない.  そのようなアルゴリズムがなければ, 両方の側が切断しなければならない.
+
+      encryption_algorithms
+         受け入れ可能な対称暗号化アルゴリズム( cipher としても知られる) の優先度順の名前リスト.  それぞれの方向の選択される暗号化アルゴリズムは, サーバの名前リストに存在するものの中でクライアントの名前リストの最初にあるアルゴリズムでなければならない.  そのようなアルゴリズムがなければ, 両方の側が切断しなければならない.
+
+         "none" が受け入れられる場合には, 明示的に挙げなければならないことに注意.  定義済みのアルゴリズム名は, 6.3  節に挙げられている.
+
+      mac_algorithms
+         受け入れ可能なMACアルゴリズムの優先度順の名前リスト.  選択されるMACアルゴリズムは, サーバの名前リストに存在するものの中でクライアントの名前リストの最初にあるアルゴリズムでなければならない.  そのようなアルゴリズムがなければ, 両方の側が切断しなければならない.
+
+         "none" が受け入れられる場合には, 明示的に挙げなければならないことに注意.  MAC アルゴリズム名は, 6.4 節に挙げられている.
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 18]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+      compression_algorithms
+         受け入れ可能な圧縮アルゴリズムの優先度順の名前リスト.  選択される圧縮アルゴリズムは, サーバの名前リストに存在するものの中でクライアントの名前リストの最初にあるアルゴリズムでなければならない.  そのようなアルゴリズムがなければ, 両方の側が切断しなければならない.
+
+         "none" が受け入れられる場合には, 明示的に挙げなければならないことに注意.  圧縮アルゴリズム名は, 6.2節に挙げられている.
+
+      languages
+         優先度順の言語タグ名前リストだ [RFC3066].  どちらの側もこの名前リストを無視してよい.  優先する言語がなければ, この名前リストは, [SSH-ARCH] の 5節で定義したように空の必要がある.  送り手側で必要だとされていなければ, 言語タグは存在しないほうがよい.
+
+      first_kex_packet_follows
+         推測された鍵交換パケット後に続くかどうかを示す.  推測されたパケットが送られる場合, これは TRUE でなければならない.  推測されたパケットが送られないなら, これは, FALSE でなければならない.
+
+         もう一方の側から SSH_MSG_KEXINIT パケットを受け取った後で, それぞれの側は推測が正しいか知る.  もう一方の側の推測が間違っていてこのフィールドがTRUEなら, 次のパケットは静かに無視されなければならない. そして, 両方の側は取り決められた鍵交換法によって決められた行動をしなければならない.  推測が正しければ, 鍵交換は推測されたパケットを用いて続けられる.
+
+   SSH_MSG_KEXINIT メッセージが交換されたら, 鍵交換アルゴリズムが動作する.  鍵交換法の指定によっては, 複数のパケットの交換が行なわれる.
+
+   一度, 一方の側が 鍵交換ないし鍵の再交換のために SSH_MSG_KEXINIT メッセージを送ったら, SSH_MSG_NEWKEYS メッセージを送るまで (7.3節参照) 以下以外のメッセージを送ってはならない:
+
+   o  トランスポート層の一般メッセージ (1 to 19) (しかし, SSH_MSG_SERVICE_REQUEST と SSH_MSG_SERVICE_ACCEPT は 送ってはならない);
+
+   o  アルゴリズムネゴシエーションメッセージ (20 to 29) (しかし, さらなる SSH_MSG_KEXINIT メッセージは送ってはならない);
+
+   o  鍵交換法特有のメッセージ (30 to 49).
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 19]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   11 節の規定が, 認識されないメッセージに適用される.
+
+   しかし, SSH_MSG_KEXINIT が送られた後の鍵交換の間に, もう一方の側から SSH_MSG_KEXINIT メッセージを受け取るまでは 送信中かもしれない任意の番号のメッセージを処理する準備がされていなければならないことに注意.
+
+7.2.  鍵交換からの出力
+
+   鍵交換は2つの値を生成する: 共有の秘密 K と 交換ハッシュ H だ.  暗号化と認証の鍵はこれらから導出される.  最初の鍵交換からの交換ハッシュ H は, 接続の唯一の識別子として, セッション識別子としても使われる.  これは, 認証法の中で, 秘密鍵の所有を証明するために署名されるデータの一部として使われる.  一度計算されたら, セッション識別子は変更されない. たとえ, あとで鍵を再交換してもだ.
+
+   それぞれの鍵交換法は, 鍵交換で使うハッシュ関数を指定している.  鍵の導出にも同じハッシュアルゴリズムが用いられなければならない.  ここで, これを HASH とする.
+
+   暗号鍵は, 既知の値とKに対する HASH によって次のように計算されなければならない. 
+
+   o  クライアンントからサーバへの初期 IV : HASH(K || H || "A" || session_id (ここで, K は mpint に, "A" は バイトに, session_id は 生データとしてエンコードされる.  "A" は, 単一の文字 A ASCII 65を意味する).
+
+   o  サーバからクライアントへの初期 IV: HASH(K || H || "B" || session_id)
+
+   o  クライアントからサーバへの暗号鍵: HASH(K || H || "C" || session_id)
+
+   o  サーバからクライアントへの暗号鍵: HASH(K || H || "D" || session_id)
+
+   o  クライアントからサーバへの完全性のための(MACの)鍵: HASH(K || H || "E" || session_id)
+
+   o  サーバからクライアントへの完全性のための(MACの)鍵: HASH(K || H || "F" || session_id)
+
+   鍵データは, ハッシュの出力の先頭から取得されなければならない.  必要なバイト数を, ハッシュの値の最初から取得する.
+   HASHの出力よりも必要な鍵長が長い場合は, K と H とそれまでの鍵すべてを連結したものの HASH を計算し結果のバイトを(HASHが生成するのと同じだけ)追加して鍵は拡張される.  このプロセスは, 鍵の素材が十分な長さになるまで繰替えされる; そして鍵はこの素材の最初から取得される.  式で表現すると次のようになる:
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 20]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+      K1 = HASH(K || H || X || session_id)   (X is e.g., "A")
+      K2 = HASH(K || H || K1)
+      K3 = HASH(K || H || K1 || K2)
+      ...
+      key = K1 || K2 || K3 || ...
+
+   このプロセスは, Kのエントロピー量がHASHの内部状態のサイズよりも大きい場合, エントロピーを失なう.
+
+7.3.  鍵の利用
+
+   鍵交換は, それぞれの側が SSH_MSG_NEWKEYS メッセージを送ることで終了する.
+   このメッセージは, 古い鍵とアルゴリズムで送られる.  このメッセージの後のすべてのメッセージは, 新しい鍵とアルゴリズムで送られなければならない.
+
+   このメッセージを受け取ったら, 新しい鍵とアルゴリズムを受信に利用しなければならない.
+
+   このメッセージの目的は, 鍵交換で何か問題があったかどうかをもう一方の側が理解できるように SSH_MSG_DISCONNECT メッセージを返信できることを保証することだ.
+
+      byte      SSH_MSG_NEWKEYS
+
+8.  Diffie-Hellman 鍵交換
+
+   Diffie-Hellman (DH) 鍵交換は, 一方の側だけでは決定できない共有の秘密を提供する.  この鍵交換は, ホスト認証を提供するホスト鍵による署名と結合している.  この鍵交換法は,  7節で定義した 明示的なサーバ認証を提供する.
+
+   鍵を交換するために次の手順が使われる.  ここで, C はクライアント; S はサーバ; p は大きく安全な素数; g は GF(p) 部分群の生成子; q は部分群のオーダー; V_S は S の識別文字列; V_C は C の識別文字列; K_S は S のホスト公開鍵; I_C は C の SSH_MSG_KEXINIT メッセージ;  I_S は, この処理が始まる前に交換される S の SSH_MSG_KEXINIT メッセージだ.
+
+   1. C は, 乱数 x (1 < x < q) を生成し, e = g^x mod p を計算する.  C は S に e を送る.
+
+
+
+
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 21]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   2. S  は乱数 y (0 < y < q) を生成し f = g^y mod p を計算する.  S は e を受け取る.  K = e^y mod p と H = hash(V_C || V_S || I_C || I_S || K_S || e || f || K) を計算する (これらの要素はそれぞれの種類に従ってエンコードされる. 以下を参照). そして, ホスト秘密鍵で H に署名する. 署名の結果は s とする.  S は (K_S || f || s) を C に送る.  署名の操作は2回目のハッシュの操作をするかもしれない.
+
+   3. C は, K_S が本当に S のホスト鍵かを検証する(例えば, 証明書やローカルなデータベースを用いて).  C は, 鍵を検証無しで受け入れることもできる; しかし, そうするとプロトコルを能動的な攻撃に対して安全ではなくしてしまう (しかし, 多くの環境で短い期間実際的な理由から望まれている).  そして C は K = f^x mod p と H = hash(V_C || V_S || I_C || I_S || K_S || e || f || K)を計算し H に対する署名 s を検証する.
+
+   [1, p-1] の範囲ではない'e' や 'f' の値は, どちらの側も送ったり受け取ったりしてはならない.  この条件が破られたら, 鍵交換は失敗する.
+
+   これは, 次のメッセージ群で実装される.  交換ハッシュを計算するハッシュ関数は, 方法の名前で定義される. これを HASH と呼ぶ.  署名に用いる公開鍵アルゴリズムは, SSH_MSG_KEXINIT メッセージで取り決める.
+
+   まず, クライアントは次のメッセージを送る.
+
+      byte      SSH_MSG_KEXDH_INIT
+      mpint     e
+
+   サーバは次のメッセージで応答する:
+
+      byte      SSH_MSG_KEXDH_REPLY
+      string    server public host key and certificates (K_S)
+      mpint     f
+      string    signature of H
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 22]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   ハッシュ H は, 次の連結に対する HASH の結果だ:
+
+      string    V_C, the client's identification string (CR and LF
+                excluded)
+      string    V_S, the server's identification string (CR and LF
+                excluded)
+      string    I_C, the payload of the client's SSH_MSG_KEXINIT
+      string    I_S, the payload of the server's SSH_MSG_KEXINIT
+      string    K_S, the host key
+      mpint     e, exchange value sent by the client
+      mpint     f, exchange value sent by the server
+      mpint     K, the shared secret
+
+   この値は交換ハッシュと呼ばれる. 鍵交換を認証するのに用いられる.  交換ハッシュは秘密にする必要がある.
+
+   元データではなく H に対して署名のアルゴリズムが適用されなければならない.  殆どの署名のアルゴリズムは, ハッシュと追加のパディングを含んでいる(たとえば, 'ssh-dss' は SHA-1 ハッシュを指定する).  この場合, データはまず H を計算するために HASH でハッシュされ, そして署名の計算の一部分として SHA-1 でハッシュされる.
+
+8.1.  diffie-hellman-group1-sha1
+
+   "diffie-hellman-group1-sha1" 法は, HASH として SHA-1 またOakley Group 2 [RFC2409] (1024-bit MODP Group)を用いる Diffie-Hellman 鍵交換を指定する.  この方法は, 現在知られている実装はすべてサポートしているので, 相互運用性のためにサポートされなければならない.  この方法は, Oakley Group 2の利用を指定しているのに "group1" を用いて名前付けされていることに注意.
+
+8.2.  diffie-hellman-group14-sha1
+
+   "diffie-hellman-group14-sha1" 法は, HASH として SHA-1 またOakley Group 14 [RFC3526] (2048-bit MODP Group)を用いる Diffie-Hellman 鍵交換を指定する. そしてこの方法もサポートされなければならない.
+
+9.  鍵の再交換
+
+   鍵の再交換は, (7.1 節で記述した) 鍵交換をまだ行なっていない場合にも送られる SSH_MSG_KEXINIT パケットの送信によって始められる. このメッセージを受信したら, 受け取った側は自身の SSH_MSG_KEXINIT メッセージを送らなければならない. ただし, 受け取った SSH_MSG_KEXINIT が返信の場合は除く.  どちらの側も, 鍵の再交換を始めてもよい. ただし, 役割を変更してはならない (すなわち, サーバはサーバのままでクライアントはクライアントのままでなければならない).
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 23]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   鍵の再交換は, 交換は始まる際に有効な暗号化などをすべて用いて行なわれる.  暗号化, 圧縮, MAC は, (最初の鍵交換と同様に) 鍵交換の後で  新しい SSH_MSG_NEWKEYS が送られるまでは変更されない.  再交換は, セッション識別子が変更されないことを除くと, 最初の鍵交換と同様に処理される.  鍵の再交換でいくつかないしすべてのアルゴリズムを変更することが許されている.  ホスト鍵も変更できる.  交換のあとで, すべての鍵と初期化ベクトルが再計算される.  圧縮と暗号化のコンテキストはリセットされる.
+
+   転送データが1ギガバイトになるたびもしくは接続時間1時間経過のたび, どちらか早い方の後で, 鍵を変更することが推奨される.  しかし, 鍵交換は公開鍵の操作で, かなりの処理量を必要とするので頻繁に行ないすぎないほうがよい.
+
+   SSH_MSG_NEWKEYS が送られた後で, さらなるアプリケーションのデータが送られるだろう; 鍵交換はSSHトランスポート層の上位のプロトコルには影響しない.
+
+10.  サービスの要求
+
+   鍵交換の後で, クライアントはサービスを要求する.  サービスは名前で識別される.  名前の形式や新しい名前を定義する手続きは, [SSH-ARCH] と [SSH-NUMBERS] で定義されている.
+
+   現在, 次の名前が予約されている:
+
+      ssh-userauth
+      ssh-connection
+
+   アルゴリズム名に適用されているのと同様のローカルな名前付けのポリシーが, サービス名にも適用される.  ローカルなサービス名は, "servicename@domain" という PRIVATE USE な構文を使わなければならない.
+
+      byte      SSH_MSG_SERVICE_REQUEST
+      string    service name
+
+   サーバがサービスの要求を拒否するなら, 適切な SSH_MSG_DISCONNECT メッセージを送る必要がある. そして 切断しなければならない.
+
+   サービスを開始する場合は, 鍵交換の間に生成されたセッション識別子にアクセスするかもしれない.
+
+
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 24]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   サーバがサービスをサポートし(クライアントによる利用を許可するなら), 次のメッセージを返答しなければならない:
+
+      byte      SSH_MSG_SERVICE_ACCEPT
+      string    service name
+
+   サービスで用いられるメッセージ番号は, 予約されている領域のものを利用しなければならない([SSH-ARCH] と [SSH-NUMBERS] を参照).  トランスポートのレベルでは, トランスポート自身のメッセージを処理し続ける.
+
+   暗黙のサーバ認証での鍵交換の後では, クラアイントは, 他のデータを送る前にサービスの要求メッセージに対する返答を待たなければならないことに注意すること.
+
+11.  追加のメッセージ
+
+   どちらの側も, 任意の時点で次のメッセージのどれかを送ってもよい.
+
+11.1.  切断メッセージ
+
+      byte      SSH_MSG_DISCONNECT
+      uint32    reason code
+      string    description in ISO-10646 UTF-8 encoding [RFC3629]
+      string    language tag [RFC3066]
+
+   このメッセージ, 接続の即時の終了を起こす.  すべての実装は, このメッセージを処理できなければならない; すべての実装はこのメッセージを送信可能である必要がある.
+
+   送り手は, このメッセージの後でどんなデータも送ったり受け取ったりしてはならない. 受け取り手はこのメッセージを受け取った後でどんなデータも受け取ってはならない.
+   切断メッセージの 'description' 文字列は, より具体的な説明を人間が読める形で提供する.  切断メッセージの 'reason code' は, (地域化に適した)より機械よりの形式で理由を提供する. 以下の表で示す値を持つ.  この表では読み易いように10進で表記されているが, 実際にはuint32の値であることに注意.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 25]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+           Symbolic name                                reason code
+           -------------                                -----------
+      SSH_DISCONNECT_HOST_NOT_ALLOWED_TO_CONNECT             1
+      SSH_DISCONNECT_PROTOCOL_ERROR                          2
+      SSH_DISCONNECT_KEY_EXCHANGE_FAILED                     3
+      SSH_DISCONNECT_RESERVED                                4
+      SSH_DISCONNECT_MAC_ERROR                               5
+      SSH_DISCONNECT_COMPRESSION_ERROR                       6
+      SSH_DISCONNECT_SERVICE_NOT_AVAILABLE                   7
+      SSH_DISCONNECT_PROTOCOL_VERSION_NOT_SUPPORTED          8
+      SSH_DISCONNECT_HOST_KEY_NOT_VERIFIABLE                 9
+      SSH_DISCONNECT_CONNECTION_LOST                        10
+      SSH_DISCONNECT_BY_APPLICATION                         11
+      SSH_DISCONNECT_TOO_MANY_CONNECTIONS                   12
+      SSH_DISCONNECT_AUTH_CANCELLED_BY_USER                 13
+      SSH_DISCONNECT_NO_MORE_AUTH_METHODS_AVAILABLE         14
+      SSH_DISCONNECT_ILLEGAL_USER_NAME                      15
+
+   'description' 文字列を表示するなら, [SSH-ARCH]での議論のように, 端末の制御文字を利用した攻撃を避けるために制御文字のフィルタを用いる必要がある.
+
+   新しい切断メッセージの 'reason code' の値(と関連する 'description') を割り当てる要求は, 0x00000010 から 0xFDFFFFFF の範囲については [RFC2434] に記述されている IETF CONSENSUS におってされなければならない.  0xFE000000 から 0xFFFFFFFF の範囲の 'reason code' の値は, プライベートな利用(PRIVATE USE)に予約されている.  IANA への実際の指示は [SSH-NUMBERS] にあることに注意.
+
+11.2.  無視データメッセージ
+
+      byte      SSH_MSG_IGNORE
+      string    data
+
+   すべての実装は, (識別文字列を受け取った後の)どの時点でもこのメッセージを理解(そして無視)しなければならない.  このメッセージを送ることは, どの実装にも要求されていない.  このメッセージは, 高度なトラフィック解析技術に対する追加の保護手段のために用いられる.
+
+11.3.   デバッグメッセージ
+
+      byte      SSH_MSG_DEBUG
+      boolean   always_display
+      string    message in ISO-10646 UTF-8 encoding [RFC3629]
+      string    language tag [RFC3066]
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 26]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   すべての実装はこのメッセージを理解しなければならない. しかし無視してもよい.  このメッセージは, デバッグを助ける情報を転送するのに使われる.  'always_display' が TRUE なら, メッセージを表示する必要がある.  しかし, ユーザが明示的にデバッグ情報の表示を求めていない場合には表示しないほうがよい.
+
+   'message' は改行を含む必要はない.  しかし, CRLF (キャリッジリターン - ラインフィード) の組で区切られた複数の行を含んでもよい.
+
+   'message' 文字列を表示するなら, [SSH-ARCH]での議論のように, 端末の制御文字を利用した攻撃を避けるために制御文字のフィルタを用いる必要がある.
+
+11.4.  予約されたメッセージ
+
+   すべての実装は, すべての認識できないメッセージに対して受け取った順にSSH_MSG_UNIMPLEMENTED メッセージで応答しなければならない.  さもなければ, これらのメッセージは無視されなければならない.  プロトコルのより後のバージョンが, これらのメッセージタイプに別の意味を定義するかもしれない.
+
+      byte      SSH_MSG_UNIMPLEMENTED
+      uint32    packet sequence number of rejected message
+
+12.  メッセージ番号のまとめ
+
+   メッセージのまとめと関連するメッセージ番号を以下に示す.
+
+         SSH_MSG_DISCONNECT             1
+         SSH_MSG_IGNORE                 2
+         SSH_MSG_UNIMPLEMENTED          3
+         SSH_MSG_DEBUG                  4
+         SSH_MSG_SERVICE_REQUEST        5
+         SSH_MSG_SERVICE_ACCEPT         6
+         SSH_MSG_KEXINIT                20
+         SSH_MSG_NEWKEYS                21
+
+   番号 30-49 が, 鍵交換のパケットに使われることに注意.  異なる鍵交換法は, この範囲のメッセージ番号を再利用する.
+
+13.  IANA の考慮
+
+   この文書は, (訳注: プロトコルを定義する文書の)集合の一部分だ.  [SSH-ARCH],
+   [SSH-USERAUTH],  [SSH-CONNECT] とこの文書で定義される SSH プロトコルに対する IANA の考慮は,  [SSH-NUMBERS]
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 27]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+14.  セキュリティの考察
+
+   このプロトコルは, 安全でないネットワーク上で安全な暗号化されたチャンネルを提供する.  サーバの認証, 鍵の交換, 暗号化, 完全性の保護を行なう.  さらに, より上位のプロトコルで利用される, ユニークなセッションidを導出する.
+
+   このプトトコルのセキュリティについての考慮のすべては, [SSH-ARCH]で提供されている.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 28]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+15.  References
+
+15.1.  Normative References
+
+   [SSH-ARCH]     Ylonen, T. and C. Lonvick, Ed., "The Secure Shell
+                  (SSH) Protocol Architecture", RFC 4251, January 2006.
+
+   [SSH-USERAUTH] Ylonen, T. and C. Lonvick, Ed., "The Secure Shell
+                  (SSH) Authentication Protocol", RFC 4252, January
+                  2006.
+
+   [SSH-CONNECT]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell
+                  (SSH) Connection Protocol", RFC 4254, January 2006.
+
+   [SSH-NUMBERS]  Lehtinen, S. and C. Lonvick, Ed., "The Secure Shell
+                  (SSH) Protocol Assigned Numbers", RFC 4250, January
+                  2006.
+
+   [RFC1321]      Rivest, R., "The MD5 Message-Digest Algorithm ", RFC
+                  1321, April 1992.
+
+   [RFC1950]      Deutsch, P. and J-L. Gailly, "ZLIB Compressed Data
+                  Format Specification version 3.3", RFC 1950, May 1996.
+
+   [RFC1951]      Deutsch, P., "DEFLATE Compressed Data Format
+                  Specification version 1.3", RFC 1951, May 1996.
+
+   [RFC2104]      Krawczyk, H., Bellare, M., and R. Canetti, "HMAC:
+                  Keyed-Hashing for Message Authentication", RFC 2104,
+                  February 1997.
+
+   [RFC2119]      Bradner, S., "Key words for use in RFCs to Indicate
+                  Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC2144]      Adams, C., "The CAST-128 Encryption Algorithm", RFC
+                  2144, May 1997.
+
+   [RFC2409]      Harkins, D. and D. Carrel, "The Internet Key Exchange
+                  (IKE)", RFC 2409, November 1998.
+
+   [RFC2434]      Narten, T. and H. Alvestrand, "Guidelines for Writing
+                  an IANA Considerations Section in RFCs", BCP 26, RFC
+                  2434, October 1998.
+
+   [RFC2440]      Callas, J., Donnerhacke, L., Finney, H., and R.
+                  Thayer, "OpenPGP Message Format", RFC 2440, November
+                  1998.
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 29]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   [RFC3066]      Alvestrand, H., "Tags for the Identification of
+                  Languages", BCP 47, RFC 3066, January 2001.
+
+   [RFC3447]      Jonsson, J. and B. Kaliski, "Public-Key Cryptography
+                  Standards (PKCS) #1: RSA Cryptography Specifications
+                  Version 2.1", RFC 3447, February 2003.
+
+   [RFC3526]      Kivinen, T. and M. Kojo, "More Modular Exponential
+                  (MODP) Diffie-Hellman groups for Internet Key Exchange
+                  (IKE)", RFC 3526, May 2003.
+
+   [RFC3629]      Yergeau, F., "UTF-8, a transformation format of ISO
+                  10646", STD 63, RFC 3629, November 2003.
+
+   [FIPS-180-2]   US National Institute of Standards and Technology,
+                  "Secure Hash Standard (SHS)", Federal Information
+                  Processing Standards Publication 180-2, August 2002.
+
+   [FIPS-186-2]   US National Institute of Standards and Technology,
+                  "Digital Signature Standard (DSS)", Federal
+                  Information Processing Standards Publication 186-2,
+                  January 2000.
+
+   [FIPS-197]     US National Institute of Standards and Technology,
+                  "Advanced Encryption Standard (AES)", Federal
+                  Information Processing Standards Publication 197,
+                  November 2001.
+
+   [FIPS-46-3]    US National Institute of Standards and Technology,
+                  "Data Encryption Standard (DES)", Federal Information
+                  Processing Standards Publication 46-3, October 1999.
+
+   [SCHNEIER]     Schneier, B., "Applied Cryptography Second Edition:
+                  protocols algorithms and source in code in C", John
+                  Wiley and Sons, New York, NY, 1996.
+
+   [TWOFISH]      Schneier, B., "The Twofish Encryptions Algorithm: A
+                  128-Bit Block Cipher, 1st Edition", March 1999.
+
+15.2.  Informative References
+
+   [RFC0894]      Hornig, C., "Standard for the transmission of IP
+                  datagrams over Ethernet networks", STD 41, RFC 894,
+                  April 1984.
+
+   [RFC1661]      Simpson, W., "The Point-to-Point Protocol (PPP)", STD
+                  51, RFC 1661, July 1994.
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 30]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+   [RFC2412]      Orman, H., "The OAKLEY Key Determination Protocol",
+                  RFC 2412, November 1998.
+
+   [ssh-1.2.30]   Ylonen, T., "ssh-1.2.30/RFC", File within compressed
+                  tarball ftp://ftp.funet.fi/pub/unix/security/
+                  login/ssh/ssh-1.2.30.tar.gz, November 1995.
+
+Authors' Addresses
+
+   Tatu Ylonen
+   SSH Communications Security Corp
+   Valimotie 17
+   00380 Helsinki
+   Finland
+
+   EMail: ylo@ssh.com
+
+
+   Chris Lonvick (editor)
+   Cisco Systems, Inc.
+   12515 Research Blvd.
+   Austin  78759
+   USA
+
+   EMail: clonvick@cisco.com
+
+Trademark Notice
+
+   "ssh" is a registered trademark in the United States and/or other
+   countries.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 31]
+ 
+RFC 4253              SSH Transport Layer Protocol          January 2006
+
+
+Full Copyright Statement
+
+   Copyright (C) The Internet Society (2006). 訳者: 春山 征吾 <haruyama@unixuser.org> 
+
+   This document is subject to the rights, licenses and restrictions
+   contained in BCP 78, and except as set forth therein, the authors
+   retain all their rights.
+
+   This document and the information contained herein are provided on an
+   "AS IS" basis and THE CONTRIBUTOR, THE ORGANIZATION HE/SHE REPRESENTS
+   OR IS SPONSORED BY (IF ANY), THE INTERNET SOCIETY AND THE INTERNET
+   ENGINEERING TASK FORCE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED,
+   INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE
+   INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED
+   WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+Intellectual Property
+
+   The IETF takes no position regarding the validity or scope of any
+   Intellectual Property Rights or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; nor does it represent that it has
+   made any independent effort to identify any such rights.  Information
+   on the procedures with respect to rights in RFC documents can be
+   found in BCP 78 and BCP 79.
+
+   Copies of IPR disclosures made to the IETF Secretariat and any
+   assurances of licenses to be made available, or the result of an
+   attempt made to obtain a general license or permission for the use of
+   such proprietary rights by implementers or users of this
+   specification can be obtained from the IETF on-line IPR repository at
+   http://www.ietf.org/ipr.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights that may cover technology that may be required to implement
+   this standard.  Please address the information to the IETF at
+   ietf-ipr@ietf.org.
+
+Acknowledgement
+
+   Funding for the RFC Editor function is provided by the IETF
+   Administrative Support Activity (IASA).
+
+
+
+
+
+
+
+Ylonen &  Lonvick           Standards Track                    [Page 32]
+

@@ -1,0 +1,945 @@
+
+
+
+
+
+
+Network Working Group                                        S. Lehtinen
+Request for Comments: 4250              SSH Communications Security Corp
+Category: Standards Track                                C. Lonvick, Ed.
+                                                     Cisco Systems, Inc.
+                                                            January 2006
+
+
+            セキュア シェル (SSH) プロトコルに割り当てられた番号(訳注: や名前)
+
+このメモについて
+
+   この文書は, インターネットコミュニティに対するインターネットの標準トラックプロトコルを定義している. また, 改善のための議論と示唆を求めているこのプロトコルの標準化の状態と状況は "Internet
+   Official Protocol Standards" (STD 1) の現在の版を参照してほしい.  このメモの配布は制限しない.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2006). 訳者: 春山 征吾 <haruyama@unixuser.org> 
+
+概要
+
+   この文書は, セキュアシェル(SSH)プロトコルについてのIANAへの指示とIANAで割当てられる番号の初期状態を定義する.  SSHの文書群で参照されるIANAのレジストリの初期化のみを意図している.
+
+目次
+
+   1. イントロダクション ..........................................2
+   2. Contributors ....................................................3
+   3. Conventions Used in This Document ...............................3
+      3.1. RFC 2119 Keywords ..........................................3
+      3.2. RFC 2434 Keywords ..........................................3
+      3.3. プロトコルのフィールドと値..............................4
+   4. IANA の考慮  .............................................5
+      4.1. メッセージ番号 .........................................5
+           4.1.1. 規約............................................5
+           4.1.2. 初期の割り当て .................................6
+           4.1.3. 将来の割り当て.................................6
+      4.2. 切断メッセージの reason code (理由コード)と description(説明)...7
+           4.2.1. 規約 .........................................7
+           4.2.2. 初期の割り当て..................................7
+           4.2.3. 将来の割り当て..................................8
+      4.3. チャンネル接続失敗の reason code (理由コード)と description(説明)..8
+           4.3.1. 規約 .........................................8
+           4.3.2. 初期の割り当て .................................8
+
+
+
+Lehtinen & Lonvick          Standards Track                     [Page 1]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+           4.3.3. 将来の割り当て ..................................8
+           4.3.4. プライベートな利用(PRIVATE USE) の範囲についての注意.........9
+      4.4. 拡張チャンネルデータ転送の data_type_code と data.....9
+           4.4.1. 規約 .........................................9
+           4.4.2. 初期の割り当て ................................10
+           4.4.3. 将来の割り当て.................................10
+      4.5. 擬似ターミナルの Encoded Terminal Modes...............10
+           4.5.1. 規約 ........................................10
+           4.5.2. 初期の割り当て................................10
+           4.5.3. 将来の割り当て.................................12
+      4.6. 名前..................................................12
+           4.6.1. 命名規約..............................13
+           4.6.2. 名前の将来の割り当て........................13
+      4.7. サービス名............................................13
+      4.8. 認証法の名前 ...............................14
+      4.9. コネクションプロトコルに割り当てられる名前............14
+           4.9.1. コネクションプロトコルのチャンネルのタイプ.....14
+           4.9.2. コネクションプロトコルのグローバルなリクエスト名.....14
+           4.9.3. コネクションプロトコルのチャンネルのリクエスト名.......15
+           4.9.4. シグナル名の初期の割り当て.............15
+           4.9.5. コネクションプロトコルのサブシステムの名前.......15
+      4.10. 鍵交換法の名前.................................16
+      4.11. 割り当て済みのアルゴリズム名.........................16
+           4.11.1. 暗号アルゴリズム名........................16
+           4.11.2. MACアルゴリズム名 ...............................17
+           4.11.3. 公開鍵アルゴリズム名 ........................17
+           4.11.4. 圧縮アルゴリズム名 .......................17
+   5. セキュリティの考察 ........................................17
+   6. References .....................................................18
+      6.1. Normative References ......................................18
+      6.2. Informative References ....................................18
+   Authors' Addresses ................................................19
+   Trademark Notice ..................................................19
+
+1.  イントロダクション
+
+   この文書は, 新しいプロトコルは定義していない.  SSHプロトコルについてのIANAのデータベースの初期状態を作ることだけが目的だ. また, 将来の割り当てについての指示も含んでいる.
+   一般に時代遅れとみなされている1つの歴史的なアルゴリズムを除いて, この文書は,[SSH-ARCH], [SSH-TRANS], [SSH-USERAUTH], [SSH-CONNECT] で定義されていない新しいプロトコルや番号の範囲を定義していない. 
+
+
+
+
+
+
+
+
+Lehtinen & Lonvick          Standards Track                     [Page 2]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+2.  Contributors
+
+   The major original contributors of this set of documents have been:
+   Tatu Ylonen, Tero Kivinen, Timo J. Rinne, Sami Lehtinen (all of SSH
+   Communications Security Corp), and Markku-Juhani O. Saarinen
+   (University of Jyvaskyla).  Darren Moffat was the original editor of
+   this set of documents and also made very substantial contributions.
+
+   Many people contributed to the development of this document over the
+   years.  People who should be acknowledged include Mats Andersson, Ben
+   Harris, Bill Sommerfeld, Brent McClure, Niels Moller, Damien Miller,
+   Derek Fawcus, Frank Cusack, Heikki Nousiainen, Jakob Schlyter, Jeff
+   Van Dyke, Jeffrey Altman, Jeffrey Hutzelman, Jon Bright, Joseph
+   Galbraith, Ken Hornstein, Markus Friedl, Martin Forssen, Nicolas
+   Williams, Niels Provos, Perry Metzger, Peter Gutmann, Simon
+   Josefsson, Simon Tatham, Wei Dai, Denis Bider, der Mouse, and
+   Tadayoshi Kohno.  Listing their names here does not mean that they
+   endorse this document, but that they have contributed to it.
+
+3.  Conventions Used in This Document
+
+3.1.  RFC 2119 Keywords
+
+   All documents related to the SSH protocols shall use the keywords
+   "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+   "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" to describe
+   requirements.  These keywords are to be interpreted as described in
+   [RFC2119].
+
+3.2.  RFC 2434 Keywords
+
+   The keywords "PRIVATE USE", "HIERARCHICAL ALLOCATION", "FIRST COME
+   FIRST SERVED", "EXPERT REVIEW", "SPECIFICATION REQUIRED", "IESG
+   APPROVAL", "IETF CONSENSUS", and "STANDARDS ACTION" that appear in
+   this document when used to describe namespace allocation are to be
+   interpreted as described in [RFC2434].  These designations are
+   repeated in this document for clarity.
+
+   PRIVATE USE - For private or local use only, with the type and
+   purpose defined by the local site.  No attempt is made to prevent
+   multiple sites from using the same value in different (and
+   incompatible) ways.  There is no need for IANA to review such
+   assignments and assignments are not generally useful for
+   interoperability.
+
+
+
+
+
+
+
+Lehtinen & Lonvick          Standards Track                     [Page 3]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+   HIERARCHICAL ALLOCATION - Delegated managers can assign values
+   provided they have been given control over that part of the name
+   space.  IANA controls the higher levels of the namespace according to
+   one of the other policies.
+
+   FIRST COME FIRST SERVED - Anyone can obtain an assigned number, so
+   long as they provide a point of contact and a brief description of
+   what the value would be used for.  For numbers, the exact value is
+   generally assigned by the IANA; with names, specific names are
+   usually requested.
+
+   EXPERT REVIEW - approval by a Designated Expert is required.
+
+   SPECIFICATION REQUIRED - Values and their meaning must be documented
+   in an RFC or other permanent and readily available reference, in
+   sufficient detail so that interoperability between independent
+   implementations is possible.
+
+   IESG APPROVAL - New assignments must be approved by the IESG, but
+   there is no requirement that the request be documented in an RFC
+   (though the IESG has discretion to request documents or other
+   supporting materials on a case-by-case basis).
+
+   IETF CONSENSUS - New values are assigned through the IETF consensus
+   process.  Specifically, new assignments are made via RFCs approved by
+   the IESG.  Typically, the IESG will seek input on prospective
+   assignments from appropriate persons (e.g., a relevant Working Group
+   if one exists).
+
+   STANDARDS ACTION - Values are assigned only for Standards Track RFCs
+   approved by the IESG.
+
+3.3.  プロトコルのフィールドと値
+
+   プロトコルのフィールドとフィールドで取り得る値は , この文書群で定義される.  メッセージの定義で, プロトコルのフィールドは定義される.  例として, SSH_MSG_CHANNEL_DATA を次で定義する
+
+      byte      SSH_MSG_CHANNEL_DATA
+      uint32    recipient channel
+      string    data
+
+   この文書群では, フィールドが参照される場合には, シングルクォートで囲まれて表記される.  フィールドに入る値が参照される場合は, ダブルクォートで囲まれて表記される.  上の例を用いると, 'data' の取り得る値には, "foo" や "bar" がある.
+
+
+
+
+Lehtinen & Lonvick          Standards Track                     [Page 4]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+4.  IANA の考慮
+
+   この文書全体が,[SSH-ARCH], [SSH-TRANS], [SSH-USERAUTH], [SSH-CONNECT]で定義されているSSHプロトコルに対するIANAの考慮だ.
+   この節は, 名前空間を命名規約や, レジストリの初期状態, 将来の割り当てに対する指示を含んでいる.
+
+4.1.  メッセージ番号
+
+   メッセージ番号は, パケットのペイロードを示すbyteの値だ.
+
+4.1.1.  規約
+
+   プロトコルのパケットは, 1から255の範囲のメッセージ番号を持つ.  この番号は次のように割当てられる:
+
+      トランスポート層プロトコル:
+
+        1 to 19    トランスポート層一般(例: 切断, 無視, デバッグなど
+      20 to 29   アルゴリズムのネゴシエーション
+      30 to 49   鍵交換方式ごとに特有(番号は, 異なる方式で再利用されてもよい)
+
+      ユーザ認証プロトコル:
+
+        50 to 59   ユーザ認証一般
+      60 to 79   ユーザ認証法ごとに特有(番号は, 異なる方式で再利用されてもよい)
+
+      コネクション プロトコル:
+
+        80 to 89   コネクションプロトコル一般
+      90 to 127  チャンネルに関連したメッセージ
+
+      クライアントプロトコルのための予約:
+
+        128 to 191 予約
+
+      ローカルな拡張:
+
+        192 to 255 ローカルな拡張
+
+
+
+
+
+
+
+Lehtinen & Lonvick          Standards Track                     [Page 5]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+4.1.2.  初期の割り当て
+
+   次の表で, メッセージIDの値の初期の割り当てを示す
+
+         Message ID                            Value    Reference
+         -----------                           -----    ---------
+         SSH_MSG_DISCONNECT                       1     [SSH-TRANS]
+         SSH_MSG_IGNORE                           2     [SSH-TRANS]
+         SSH_MSG_UNIMPLEMENTED                    3     [SSH-TRANS]
+         SSH_MSG_DEBUG                            4     [SSH-TRANS]
+         SSH_MSG_SERVICE_REQUEST                  5     [SSH-TRANS]
+         SSH_MSG_SERVICE_ACCEPT                   6     [SSH-TRANS]
+         SSH_MSG_KEXINIT                         20     [SSH-TRANS]
+         SSH_MSG_NEWKEYS                         21     [SSH-TRANS]
+         SSH_MSG_USERAUTH_REQUEST                50     [SSH-USERAUTH]
+         SSH_MSG_USERAUTH_FAILURE                51     [SSH-USERAUTH]
+         SSH_MSG_USERAUTH_SUCCESS                52     [SSH-USERAUTH]
+         SSH_MSG_USERAUTH_BANNER                 53     [SSH-USERAUTH]
+         SSH_MSG_GLOBAL_REQUEST                  80     [SSH-CONNECT]
+         SSH_MSG_REQUEST_SUCCESS                 81     [SSH-CONNECT]
+         SSH_MSG_REQUEST_FAILURE                 82     [SSH-CONNECT]
+         SSH_MSG_CHANNEL_OPEN                    90     [SSH-CONNECT]
+         SSH_MSG_CHANNEL_OPEN_CONFIRMATION       91     [SSH-CONNECT]
+         SSH_MSG_CHANNEL_OPEN_FAILURE            92     [SSH-CONNECT]
+         SSH_MSG_CHANNEL_WINDOW_ADJUST           93     [SSH-CONNECT]
+         SSH_MSG_CHANNEL_DATA                    94     [SSH-CONNECT]
+         SSH_MSG_CHANNEL_EXTENDED_DATA           95     [SSH-CONNECT]
+         SSH_MSG_CHANNEL_EOF                     96     [SSH-CONNECT]
+         SSH_MSG_CHANNEL_CLOSE                   97     [SSH-CONNECT]
+         SSH_MSG_CHANNEL_REQUEST                 98     [SSH-CONNECT]
+         SSH_MSG_CHANNEL_SUCCESS                 99     [SSH-CONNECT]
+         SSH_MSG_CHANNEL_FAILURE                100     [SSH-CONNECT]
+
+4.1.3.  将来の割り当て
+
+   1 から 29, 50 から 59, 80から 127 の範囲に新たなメッセージ番号を割り当てる要求は, [RFC2434] に記述されている STANDARDS ACTION におってされなければならない.
+
+   30から49の範囲のメッセージ番号は, 利用する鍵交換法に特有だ. その意味は方法の定義で決まる.
+
+
+
+
+
+
+
+
+Lehtinen & Lonvick          Standards Track                     [Page 6]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+   60から79の範囲のメッセージ番号は, 利用する認証法に特有だ. その意味は方法の定義で決まる.T
+
+   128から191の範囲に新たなメッセージ番号を割り当てる要求は, [RFC2434] に記述されている IETF CONSENSUS によってされなければならない.
+
+   IANAは, 192 から 255 の範囲のメッセージ番号は制御しない.  この範囲は, プライベートな利用(PRIVATE USE)のために残されている.
+
+4.2.  切断メッセージの reason code (理由コード)と description(説明)
+
+   切断メッセージの 'reason code' は uint32 の値だ.  関連する切断メッセージの 'description' は, 切断の理由を示す人間が解読できるメッセージだ.
+
+4.2.1.  規約
+
+   SSH_MSG_DISCONNECT メッセージを含むプロトコルのパケットは, 0x00000001 から 0xFFFFFFFF の範囲の切断メッセージの 'reason code' を持たなければならない..  これらは, [SSH-TRANS]で記述されている.
+
+4.2.2.  初期の割り当て
+
+   次の表で, SSH_MSG_DISCONNECT の 'description' と 'reason code' の値の初期の割り当てを示す.
+
+         シンボル名                                    reason code
+         -------------                                  -----------
+         SSH_DISCONNECT_HOST_NOT_ALLOWED_TO_CONNECT          1
+         SSH_DISCONNECT_PROTOCOL_ERROR                       2
+         SSH_DISCONNECT_KEY_EXCHANGE_FAILED                  3
+         SSH_DISCONNECT_RESERVED                             4
+         SSH_DISCONNECT_MAC_ERROR                            5
+         SSH_DISCONNECT_COMPRESSION_ERROR                    6
+         SSH_DISCONNECT_SERVICE_NOT_AVAILABLE                7
+         SSH_DISCONNECT_PROTOCOL_VERSION_NOT_SUPPORTED       8
+         SSH_DISCONNECT_HOST_KEY_NOT_VERIFIABLE              9
+         SSH_DISCONNECT_CONNECTION_LOST                     10
+         SSH_DISCONNECT_BY_APPLICATION                      11
+         SSH_DISCONNECT_TOO_MANY_CONNECTIONS                12
+         SSH_DISCONNECT_AUTH_CANCELLED_BY_USER              13
+         SSH_DISCONNECT_NO_MORE_AUTH_METHODS_AVAILABLE      14
+         SSH_DISCONNECT_ILLEGAL_USER_NAME                   15
+
+
+
+
+
+
+Lehtinen & Lonvick          Standards Track                     [Page 7]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+4.2.3.  将来の割り当て
+
+   切断メッセージの 'reason code' の値は, 連続して割り当てられなければならない.  新しい切断メッセージの 'reason code' の値と関連する切断メッセージの 'description' を割り当てる要求は, 0x00000010 から 0xFDFFFFFF の範囲については [RFC2434] に記述されている IETF CONSENSUS におってされなければならないIANAは, 0xFE000000 から 0xFFFFFFFF の範囲の 切断メッセージの'reason code' の値は割り当てない.
+   その範囲の切断メッセージの 'reason code'の値は, やはり [RFC2434]に記述されている プライベートな利用 (PRIVATE USE) に予約されている.
+
+4.3.  チャンネル接続失敗の reason code (理由コード)と description(説明)
+
+   チャンネル接続失敗の 'reason code' は uint32 の値だ. 関連するチャンネル接続失敗の 'description' は, チャンネル接続失敗の理由を示す人間が解読できるメッセージだ.  これは, [SSH-TRANS]で記述されている.
+
+4.3.1.  規約
+
+   SSH_MSG_CHANNEL_OPEN_FAILURE メッセージを含むプロトコルのパケットは, 0x00000001 から 0xFFFFFFFF の範囲のチャンネル接続失敗の 'reason code' を持たなければならない.
+
+4.3.2.  初期の割り当て
+
+   'reason code' の値と 'description' の値の初期の割り当ては, 次の表で示されている.  'reason code' は読み易いように10進のフォーマットで書かれているが, 実際にはuint32の値であることに注意.
+
+         シンボル名                                    reason code
+         -------------                                  -----------
+         SSH_OPEN_ADMINISTRATIVELY_PROHIBITED                1
+         SSH_OPEN_CONNECT_FAILED                             2
+         SSH_OPEN_UNKNOWN_CHANNEL_TYPE                       3
+         SSH_OPEN_RESOURCE_SHORTAGE                          4
+
+4.3.3.  将来の割り当て
+
+   チャンネル接続失敗の 'reason code' の値は, 連続して割り当てられなければならない.  チャンネル接続失敗の 'reason code' の値と関連するチャンネル接続失敗の 'description' を割り当てる要求は, 0x00000010 から 0xFDFFFFFF の範囲については [RFC2434] に記述されている IETF CONSENSUS によってされなければならないIANAは, 0xFE000000 から 0xFFFFFFFF の範囲の チャンネル接続失敗の'reason code' の値は割り当てない.
+
+
+
+
+Lehtinen & Lonvick          Standards Track                     [Page 8]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+    この範囲のチャンネル接続失敗の 'reason code'の値は, [RFC2434]に記述されている プライベートな利用 (PRIVATE USE) に予約されている.
+
+4.3.4.  プライベートな利用(PRIVATE USE) の範囲についての注意
+
+   0xFE000000 to 0xFFFFFFFF の範囲についてはIANAはなんの制御もしないが, この範囲は次の規約に従って2つの部分に分割されて管理される. 
+
+   o  0xFE000000 から 0xFEFFFFFF の範囲は, ローカルに割り当てられたチャンネルと共に利用されるためにある.  たとえば,"example_session@example.com" という 'channel type' のチャンネルが提案されたが失敗したとき, サーバは(前述ないし0x00000001 から 0xFDFFFFFFの範囲の) IANA で割り当てられた 'reason code'を返すか,  0xFE000000 から 0xFEFFFFFF の埴のローカルに割り当てられた値を'reason code' を返す.  もちろん, サーバが提案された 'channel type' を理解できない場合は, それがローカルに定義された 'channel type' であっても, 'reason code' は 前述した0x00000003 でなければならない.  サーバが 'channel type' を理解するがチャンネルの開始に失敗するなら, サーバは提案されたローカルな 'channel type' に対応するローカルに割り当てられた値を返す必要がある.  実行する者が, まずIANAで割り当てられた 'reason code' を利用しようとし, その次にローカルに割り当てられた 'reason code' を利用しようとすることを前提としている.
+
+   o  0xFFで始まる範囲については, 制限や示唆はない.  この範囲を利用する際は, 相互運用性は期待されない.  基本的に, この範囲は実験のためにある. 
+
+4.4.  拡張チャンネルデータ転送の data_type_code と data
+
+   拡張チャンネルデータ転送の 'data_type_code' は uint32の値だ.  関連する拡張チャンネルデータ転送の 'data' は, チャンネルで転送されるデータの種類を示した人間が解読できるメッセージだ.
+
+4.4.1.  規約
+
+    SSH_MSG_CHANNEL_EXTENDED_DATA メッセージを含むプロトコルのパケットは, 0x00000001 から 0xFFFFFFFF の範囲の拡張チャンネルデータ転送の 'data_type_code' を持たなければならない.  これは, [SSH-CONNECT] で記述されている. 
+
+
+
+
+
+
+
+Lehtinen & Lonvick          Standards Track                     [Page 9]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+4.4.2.  初期の割り当て
+
+   'data_type_code' と ''data' の初期の割り当ては, 以下に示す表で与えられる.  'data_type_code' は読み易いように10進のフォーマットで書かれているが, 実際にはuint32の値であることに注意.
+
+         シンボル名                             data_type_code
+         -------------                        --------------
+         SSH_EXTENDED_DATA_STDERR                   1
+
+4.4.3.  将来の割り当て
+
+   拡張チャンネルデータ転送の 'data_type_code' の値は, 連続して割り当てられなければならない.  拡張チャンネルデータ転送の 'data_type_code' の値と関連する拡張チャンネルデータ転送の 'data' を割り当てる要求は, 0x00000002 から 0xFDFFFFFF の範囲については [RFC2434] に記述されている IETF CONSENSUS によってされなければならない. IANAは, 0xFE000000 から 0xFFFFFFFF の範囲の 拡張チャンネルデータ転送の 'data_type_code' の値は割り当てない.  この範囲の拡張チャンネルデータ転送の 'data_type_code'の値は,  [RFC2434]に記述されている プライベートな利用 (PRIVATE USE) に予約されている.
+
+4.5.  擬似ターミナルの Encoded Terminal Modes
+
+   "ptr-req" string を含む SSH_MSG_CHANNEL_REQUEST メッセージは,  'encoded terminal modes' を含まなければならない.  'encoded terminal modes' の値は, オペコード-引数のペアのバイトストリームだ.
+
+4.5.1.  規約
+
+   "ptr-req" string を含む SSH_MSG_CHANNEL_REQUEST メッセージを含むプロトコルのパケットは, "ptr-req" string を含む SSH_MSG_CHANNEL_REQUEST メッセージは,  'encoded terminal modes' の値を含まなければならない.
+   オペコードの値は, 1から255の範囲の単一の byte からなる.  1 から 159 までのオペコードは, uint32 の引数を1つ持つ.  160 から 255 のオペコードはまだ定義されていない.
+
+4.5.2.  初期の割り当て
+
+   次の表で, 'encoded terminal modes' の値に使われるオペコードの値の初期の割り当てを示す.
+
+
+
+
+
+
+
+
+
+Lehtinen & Lonvick          Standards Track                    [Page 10]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+         オペコード  mnemonic       説明
+         ------  --------       -----------
+         0     TTY_OP_END  オプションの終りを示す.
+         1     VINTR       割り込み文字. もしなければ255.  他の文字についても同様.  これらの文字すべてが, すべてのシステムでサポートされているわけではない.
+         2     VQUIT       終了文字(POSIX シテムでは, SIGQUITを送る).
+         3     VERASE      カーソルの左側の文字を消す.
+         4     VKILL       現在の入力行を消す.
+         5     VEOF        End-of-file 文字 (ターミナルからEOFを送る).
+         6     VEOL        キャリッジリターンと/もしくはラインフィードに追加される End-of-line 文字7     VEOL2       追加の end-of-line 文字.
+         8     VSTART      中断した出力を再開する(通常は control-Q).
+         9     VSTOP       出力を中断する. (通常は control-S).
+         10    VSUSP       現在のプログラムを中断する.
+         11    VDSUSP      別の中断文字.
+         12    VREPRINT    現在の入力行を再表示する.
+         13    VWERASE     カーソルの左の word を消す.
+         14    VLNEXT      次に入力される文字が特別な文字だったとしてもその通りに入力する.
+         15    VFLUSH      出力を flush する文字16    VSWTCH      別の shell layer に切り替える.
+         17    VSTATUS     システムのステータス行(負荷, コマンド, pidなど)を表示する.
+         18    VDISCARD    端末の出力をflushするかを切り替える.
+         30    IGNPAR      パリティ無視フラグ.  FALSEならパラメータを0に, TRUE なら 1 にする必要がある.
+         31    PARMRK      パリティーとフレームのエラーをマークを追加する.
+         32    INPCK       パリティエラーのチェックを有効にする.
+         33    ISTRIP      文字の8bit目を落す.
+         34    INLCR       入力でNLをCRに置き換える.
+         35    IGNCR       入力でCRを無視する. (36    ICRNL       入力でCRをNLに置き換える.
+         37    IUCLC       大文字を小文字に変換する.
+         38    IXON        出力のフロー制御を有効にする.
+         39    IXANY       どの文字でもストップ後の再開を行なう.
+         40    IXOFF       入力のフロー制御を有効にする.
+         41    IMAXBEL     入力キューがいっぱいのときにベルを鳴らす.
+         50    ISIG        INTR, QUIT, [D]SUSP シグナルを有効にする.
+         51    ICANON      入力行を正規化する.
+
+
+
+
+
+Lehtinen & Lonvick          Standards Track                    [Page 11]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+         52    XCASE       (訳注: 小文字のみ有効な場合に)小文字の前に "\" を付けることで大文字の入出力を有効にする.Enable input and output of uppercase
+                            characters by preceding their lowercase
+                            equivalents with "\".
+         53    ECHO        エコーヲを有効にする.
+         54    ECHOE       視覚的なerase文字55    ECHOK       現在の行を捨てる Kill 文字56    ECHONL      ECHO が無効でも NL をエコーする.
+         57    NOFLSH      割り込みの後でflushしない.
+         58    TOSTOP      バックグラウンドのジョブから出力があったらジョブを止める.
+         59    IEXTEN      拡張を有効にする.
+         60    ECHOCTL     ＾文字付きでコントロール文字をエコーする.
+         61    ECHOKE      行の削除を視覚的に行なう.
+         62    PENDIN      中断した入力を再入力する.
+         70    OPOST       出力処理を有効にする.
+         71    OLCUC       小文字を大文字に変換する.
+         72    ONLCR       NLをCR-NLに置き換える.
+         73    OCRNL       出力で, CRをNLに置き換える.
+         74    ONOCR       出力で, NLをCR-NLに置き換える.
+         75    ONLRET      出力で, NLがCRを実行する.
+         90    CS7         7 bit モード.
+         91    CS8         8 bit モード.
+         92    PARENB      パリティ有効93    PARODD      設定されると奇数パリティ. もしくは 偶数パリティ
+
+         128 TTY_OP_ISPEED  bit/秒単位で入力バンドレートを指定する.
+         129 TTY_OP_OSPEED  bit/秒単位で出力バンドレートを指定する.
+
+4.5.3.  将来の割り当て
+
+   新しいオペコードと関連する引数の割り当ての要求は, [RFC2434] に記述されている IETF CONSENSUS によってされなければならない.
+
+4.6.  名前
+
+   以降の節で, 名前空間に対する値をに表記する.  この節には, 規約と, 将来の割り当てについてのIANAへの指示がある.  初期の割り当ては, それぞれの節で与えられる.
+
+
+
+
+
+
+
+Lehtinen & Lonvick          Standards Track                    [Page 12]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+4.6.1.  命名規約
+
+   以降の節のIANAによって登録されるすべての名前は, 表示可能なUS-ASCIIの文字列で,アットマーク("@"), コンマ (","), スペース, 制御文字(ASCIIコード 32以下), ASCIIコードの127 (DEL)を含んではならない. 名前は大文字小文字が区別され, 64文字以下でなければならない.
+
+   ローカルに拡張可能な名前についての準備が以下のようにされている.  IANAは,  アットマークを含む名前を登録しないし管理しない.
+
+   アットマークを含む名前は, "name@domainname" (ダブルクォーテーションを除く) という形式だ. アットマークに先行する部分が(狭い意味での)名前だ.  アットマークの前の部分の形式は指定されていない; しかし, 表示可能な US-ASCIIの文字列で, コンマ (","), スペース, 制御文字(ASCIIコード 32以下), ASCIIコードの127 (DEL)を含んではならない.  1つのアットマークだけが含まれなければならない.  アットマークに続く部分は, 名前を定義する個人ないし組織で管理されている有効な完全に記述したドメイン名 [RFC1034]でなければならない.  名前は大文字小文字が区別され, 64文字以下でなければならない.  ローカルな名前空間をどう管理するかは, それぞれのドメイン次第だ.  この名前が, STD 11 [RFC0822]のメールアドレスと似ていることを明記しておく.  これは, 単なる偶然でありSTD 11 [RFC0822]とは関係ない.  ローカルに定義される名前の例の1つは, "ourcipher-cbc@example.com" (ダブルクォーテーションを除く) だ.
+
+4.6.2.  名前の将来の割り当て
+
+   新しい名前の割り当ての要求は, [RFC2434] に記述されている IETF CONSENSUS によってされなければならない.
+
+4.7.  サービス名
+
+    'service name' は, プロトコルの層を記述するのに使われる.  次の表で, service_name の初期の割り当てを示す.
+
+         Service Name                  Reference
+         -------------                 ---------
+         ssh-userauth                  [SSH-USERAUTH]
+         ssh-connection                [SSH-CONNECT]
+
+
+
+
+
+
+
+
+
+Lehtinen & Lonvick          Standards Track                    [Page 13]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+4.8.  認証法の名前
+
+   認証法の名前は, "ssh-userauth" サービス [SSH-USERAUTH] の認証法を記述するのに使われる. 次の表で, 認証法の名前の初期の割り当てを示す.
+
+         Method Name                   Reference
+         ------------                  ---------
+         publickey                     [SSH-USERAUTH, Section 7]
+         password                      [SSH-USERAUTH, Section 8]
+         hostbased                     [SSH-USERAUTH, Section 9]
+         none                          [SSH-USERAUTH, Section 5.2]
+
+4.9.  コネクションプロトコルに割り当てられる名前
+
+   次の表で, コネクションプロトコルのタイプとリクエスト名の初期の割り当てを示す.
+
+4.9.1.  コネクションプロトコルのチャンネルのタイプ
+
+   次の表で, コネクションプロトコルのチャンネルのタイプの初期の割り当てを示す.
+
+         Channel type                  Reference
+         ------------                  ---------
+         session                       [SSH-CONNECT, Section 6.1]
+         x11                           [SSH-CONNECT, Section 6.3.2]
+         forwarded-tcpip               [SSH-CONNECT, Section 7.2]
+         direct-tcpip                  [SSH-CONNECT, Section 7.2]
+
+4.9.2.  コネクションプロトコルのグローバルなリクエスト名
+
+   次の表で, コネクションプロトコルのグローバルなリクエスト名の初期の割り当てを示す.
+
+         Request type                  Reference
+         ------------                  ---------
+         tcpip-forward                 [SSH-CONNECT, Section 7.1]
+         cancel-tcpip-forward          [SSH-CONNECT, Section 7.1]
+
+
+
+
+
+
+
+
+
+
+
+Lehtinen & Lonvick          Standards Track                    [Page 14]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+4.9.3.  コネクションプロトコルのチャンネルのリクエスト名
+
+   次の表で, コネクションプロトコルのチャンネルのリクエスト名の初期の割り当てを示す.
+
+         Request type                  Reference
+         ------------                  ---------
+         pty-req                       [SSH-CONNECT, Section 6.2]
+         x11-req                       [SSH-CONNECT, Section 6.3.1]
+         env                           [SSH-CONNECT, Section 6.4]
+         shell                         [SSH-CONNECT, Section 6.5]
+         exec                          [SSH-CONNECT, Section 6.5]
+         subsystem                     [SSH-CONNECT, Section 6.5]
+         window-change                 [SSH-CONNECT, Section 6.7]
+         xon-xoff                      [SSH-CONNECT, Section 6.8]
+         signal                        [SSH-CONNECT, Section 6.9]
+         exit-status                   [SSH-CONNECT, Section 6.10]
+         exit-signal                   [SSH-CONNECT, Section 6.10]
+
+4.9.4.  シグナル名の初期の割り当て
+
+   次の表で, シグナル名の初期の割り当てを示す.
+
+         Signal                        Reference
+         ------                        ---------
+          ABRT                         [SSH-CONNECT]
+          ALRM                         [SSH-CONNECT]
+          FPE                          [SSH-CONNECT]
+          HUP                          [SSH-CONNECT]
+          ILL                          [SSH-CONNECT]
+          INT                          [SSH-CONNECT]
+          KILL                         [SSH-CONNECT]
+          PIPE                         [SSH-CONNECT]
+          QUIT                         [SSH-CONNECT]
+          SEGV                         [SSH-CONNECT]
+          TERM                         [SSH-CONNECT]
+          USR1                         [SSH-CONNECT]
+          USR2                         [SSH-CONNECT]
+
+4.9.5.  コネクションプロトコルのサブシステムの名前
+
+   コネクションプロトコルのサブシステムの名前には初期の割り当てはない.
+
+
+
+
+
+
+
+Lehtinen & Lonvick          Standards Track                    [Page 15]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+4.10.  鍵交換法の名前
+
+    名前 "diffie-hellman-group1-sha1" は, [RFC2409]で定義されている Oakley群を用いる鍵交換法のために用いられる.  SSHは, Oakley [RFC2412] や IKE と論理的に異なる, 自身の群識別子を維持している. しかし, 追加の群として, ワーキンググループは[RFC3526] で割当てられた数を採用した. この2つ目の群の名前として, "diffie-hellman-group14-sha1" を用いる.  実装は, これらの名前を内部識別子として扱わなければならない. また, SSHが用いる群とIKEで定義された群との間の関係を仮定してはならない.
+
+   次の表で, 鍵交換法の初期の割り当てを示す.
+
+         Method name                          Reference
+         ------------                         ---------
+         diffie-hellman-group1-sha1     [SSH-TRANS, Section 8.1]
+         diffie-hellman-group14-sha1    [SSH-TRANS, Section 8.2]
+
+4.11.  割り当て済みのアルゴリズム名
+
+4.11.1.  暗号アルゴリズム名
+
+   次の表で, 暗号アルゴリズムの名前の初期の割り当てを示す.
+
+         暗号アロゴリズム名                     Reference
+         -------------------------                   ---------
+         3des-cbc                           [SSH-TRANS, Section 6.3]
+         blowfish-cbc                       [SSH-TRANS, Section 6.3]
+         twofish256-cbc                     [SSH-TRANS, Section 6.3]
+         twofish-cbc                        [SSH-TRANS, Section 6.3]
+         twofish192-cbc                     [SSH-TRANS, Section 6.3]
+         twofish128-cbc                     [SSH-TRANS, Section 6.3]
+         aes256-cbc                         [SSH-TRANS, Section 6.3]
+         aes192-cbc                         [SSH-TRANS, Section 6.3]
+         aes128-cbc                         [SSH-TRANS, Section 6.3]
+         serpent256-cbc                     [SSH-TRANS, Section 6.3]
+         serpent192-cbc                     [SSH-TRANS, Section 6.3]
+         serpent128-cbc                     [SSH-TRANS, Section 6.3]
+         arcfour                            [SSH-TRANS, Section 6.3]
+         idea-cbc                           [SSH-TRANS, Section 6.3]
+         cast128-cbc                        [SSH-TRANS, Section 6.3]
+         none                               [SSH-TRANS, Section 6.3]
+         des-cbc                            [FIPS-46-3] HISTORIC; See
+                                              page 4 of [FIPS-46-3]
+
+
+
+
+Lehtinen & Lonvick          Standards Track                    [Page 16]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+4.11.2.  MACアルゴリズム名
+
+   次の表で, MACアルゴリズムの名前の初期の割り当てを示す.
+
+         MAC アルゴリズム名                      Reference
+         ------------------                      ---------
+         hmac-sha1                         [SSH-TRANS, Section 6.4]
+         hmac-sha1-96                      [SSH-TRANS, Section 6.4]
+         hmac-md5                          [SSH-TRANS, Section 6.4]
+         hmac-md5-96                       [SSH-TRANS, Section 6.4]
+         none                              [SSH-TRANS, Section 6.4]
+
+4.11.3.  公開鍵アルゴリズム名
+
+   次の表で, 公開鍵アルゴリズムの名前の初期の割り当てを示す.
+
+         公開鍵アルゴリズム名                  Reference
+         -------------------------                 ---------
+         ssh-dss                            [SSH-TRANS, Section 6.6]
+         ssh-rsa                            [SSH-TRANS, Section 6.6]
+         pgp-sign-rsa                       [SSH-TRANS, Section 6.6]
+         pgp-sign-dss                       [SSH-TRANS, Section 6.6]
+
+4.11.4.  圧縮アルゴリズム名
+
+   次の表で, 圧縮アルゴリズムの名前の初期の割り当てを示す.
+
+         圧縮アルゴリズム名                Reference
+         --------------------------                ---------
+         none                               [SSH-TRANS, Section 6.2]
+         zlib                               [SSH-TRANS, Section 6.2]
+
+5.  セキュリティの考察
+
+   このプロトコルは, 安全でないネットワーク上で安全な暗号化されたチャンネルを提供する.
+
+   このプトトコルのセキュリティについての考慮のすべては, [SSH-ARCH]で提供されている.
+
+
+
+
+
+
+
+
+
+Lehtinen & Lonvick          Standards Track                    [Page 17]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+6.  References
+
+6.1.  Normative References
+
+   [SSH-ARCH]     Ylonen, T. and C. Lonvick, Ed., "The Secure Shell
+                  (SSH) Protocol Architecture", RFC 4251, January 2006.
+
+   [SSH-TRANS]    Ylonen, T. and C. Lonvick, Ed., "The Secure Shell
+                  (SSH) Transport Layer Protocol", RFC 4253, January
+                  2006.
+
+   [SSH-USERAUTH] Ylonen, T. and C. Lonvick, Ed., "The Secure Shell
+                  (SSH) Authentication Protocol", RFC 4252, January
+                  2006.
+
+   [SSH-CONNECT]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell
+                  (SSH) Connection Protocol", RFC 4254, January 2006.
+
+   [RFC2119]      Bradner, S., "Key words for use in RFCs to Indicate
+                  Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC2409]      Harkins, D. and D. Carrel, "The Internet Key Exchange
+                  (IKE)", RFC 2409, November 1998.
+
+   [RFC2434]      Narten, T. and H. Alvestrand, "Guidelines for Writing
+                  an IANA Considerations Section in RFCs", BCP 26, RFC
+                  2434, October 1998.
+
+   [RFC3526]      Kivinen, T. and M. Kojo, "More Modular Exponential
+                  (MODP) Diffie-Hellman groups for Internet Key Exchange
+                  (IKE)", RFC 3526, May 2003.
+
+6.2.  Informative References
+
+   [RFC0822]      Crocker, D., "Standard for the format of ARPA Internet
+                  text messages", STD 11, RFC 822, August 1982.
+
+   [RFC1034]      Mockapetris, P., "Domain names - concepts and
+                  facilities", STD 13, RFC 1034, November 1987.
+
+   [RFC2412]      Orman, H., "The OAKLEY Key Determination Protocol",
+                  RFC 2412, November 1998.
+
+   [FIPS-46-3]    US National Institute of Standards and Technology,
+                  "Data Encryption Standard (DES)", Federal Information
+                  Processing Standards Publication 46-3, October 1999.
+
+
+
+
+
+Lehtinen & Lonvick          Standards Track                    [Page 18]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+Authors' Addresses
+
+   Sami Lehtinen
+   SSH Communications Security Corp
+   Valimotie 17
+   00380 Helsinki
+   Finland
+
+   EMail: sjl@ssh.com
+
+
+   Chris Lonvick (editor)
+   Cisco Systems, Inc.
+   12515 Research Blvd.
+   Austin  78759
+   USA
+
+   EMail: clonvick@cisco.com
+
+Trademark Notice
+
+   "ssh" is a registered trademark in the United States and/or other
+   countries.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lehtinen & Lonvick          Standards Track                    [Page 19]
+ 
+RFC 4250             SSH Protocol Assigned Numbers          January 2006
+
+
+Full Copyright Statement
+
+   Copyright (C) The Internet Society (2006). 訳者: 春山 征吾 <haruyama@unixuser.org> 
+
+   This document is subject to the rights, licenses and restrictions
+   contained in BCP 78, and except as set forth therein, the authors
+   retain all their rights.
+
+   This document and the information contained herein are provided on an
+   "AS IS" basis and THE CONTRIBUTOR, THE ORGANIZATION HE/SHE REPRESENTS
+   OR IS SPONSORED BY (IF ANY), THE INTERNET SOCIETY AND THE INTERNET
+   ENGINEERING TASK FORCE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED,
+   INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE
+   INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED
+   WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+Intellectual Property
+
+   The IETF takes no position regarding the validity or scope of any
+   Intellectual Property Rights or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; nor does it represent that it has
+   made any independent effort to identify any such rights.  Information
+   on the procedures with respect to rights in RFC documents can be
+   found in BCP 78 and BCP 79.
+
+   Copies of IPR disclosures made to the IETF Secretariat and any
+   assurances of licenses to be made available, or the result of an
+   attempt made to obtain a general license or permission for the use of
+   such proprietary rights by implementers or users of this
+   specification can be obtained from the IETF on-line IPR repository at
+   http://www.ietf.org/ipr.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights that may cover technology that may be required to implement
+   this standard.  Please address the information to the IETF at
+   ietf-ipr@ietf.org.
+
+Acknowledgement
+
+   Funding for the RFC Editor function is provided by the IETF
+   Administrative Support Activity (IASA).
+
+
+
+
+
+
+
+Lehtinen & Lonvick          Standards Track                    [Page 20]
+
