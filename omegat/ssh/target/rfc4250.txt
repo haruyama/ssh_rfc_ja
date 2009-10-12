@@ -11,41 +11,41 @@ Category: Standards Track                                C. Lonvick, Ed.
                                                             January 2006
 
 
-            �����奢 ������ (SSH) �ץ��ȥ���˳�����Ƥ�줿�ֹ�(����: ��̾��)
+            セキュア シェル (SSH) プロトコルに割り当てられた番号(訳注: や名前)
 
-���Υ��ˤĤ���
+このメモについて
 
-   ����ʸ���, ���󥿡��ͥåȥ��ߥ�˥ƥ����Ф��륤�󥿡��ͥåȤ�ɸ��ȥ�å��ץ��ȥ����������Ƥ���. �ޤ�, �����Τ���ε����ȼ�������Ƥ��뤳�Υץ��ȥ����ɸ�ಽ�ξ��֤Ⱦ����� "Internet
-   Official Protocol Standards" (STD 1) �θ��ߤ��Ǥ򻲾Ȥ��Ƥۤ���.  ���Υ������ۤ����¤��ʤ�.
+   この文書は, インターネットコミュニティに対するインターネットの標準トラックプロトコルを定義している. また, 改善のための議論と示唆を求めているこのプロトコルの標準化の状態と状況は "Internet
+   Official Protocol Standards" (STD 1) の現在の版を参照してほしい.  このメモの配布は制限しない.
 
 Copyright Notice
 
-   Copyright (C) The Internet Society (2006). ����: �ջ� ���� <haruyama@unixuser.org> 
+   Copyright (C) The Internet Society (2006). 訳者: 春山 征吾 <haruyama@unixuser.org> 
 
-����
+概要
 
-   ����ʸ���, �����奢������(SSH)�ץ��ȥ���ˤĤ��Ƥ�IANA�ؤλؼ���IANA�ǳ����Ƥ����ֹ�ν�����֤��������.  SSH��ʸ�񷲤ǻ��Ȥ����IANA�Υ쥸���ȥ�ν�����Τߤ�տޤ��Ƥ���.
+   この文書は, セキュアシェル(SSH)プロトコルについてのIANAへの指示とIANAで割当てられる番号の初期状態を定義する.  SSHの文書群で参照されるIANAのレジストリの初期化のみを意図している.
 
-�ܼ�
+目次
 
-   1. ����ȥ���������� ..........................................2
+   1. イントロダクション ..........................................2
    2. Contributors ....................................................3
    3. Conventions Used in This Document ...............................3
       3.1. RFC 2119 Keywords ..........................................3
       3.2. RFC 2434 Keywords ..........................................3
-      3.3. �ץ��ȥ���Υե�����ɤ���..............................4
-   4. IANA �ι�θ  .............................................5
-      4.1. ��å������ֹ� .........................................5
-           4.1.1. ����............................................5
-           4.1.2. ����γ������ .................................6
-           4.1.3. ����γ������.................................6
-      4.2. ���ǥ�å������� reason code (��ͳ������)�� description(����)...7
-           4.2.1. ���� .........................................7
-           4.2.2. ����γ������..................................7
-           4.2.3. ����γ������..................................8
-      4.3. �����ͥ���³���Ԥ� reason code (��ͳ������)�� description(����)..8
-           4.3.1. ���� .........................................8
-           4.3.2. ����γ������ .................................8
+      3.3. プロトコルのフィールドと値..............................4
+   4. IANA の考慮  .............................................5
+      4.1. メッセージ番号 .........................................5
+           4.1.1. 規約............................................5
+           4.1.2. 初期の割り当て .................................6
+           4.1.3. 将来の割り当て.................................6
+      4.2. 切断メッセージの reason code (理由コード)と description(説明)...7
+           4.2.1. 規約 .........................................7
+           4.2.2. 初期の割り当て..................................7
+           4.2.3. 将来の割り当て..................................8
+      4.3. チャンネル接続失敗の reason code (理由コード)と description(説明)..8
+           4.3.1. 規約 .........................................8
+           4.3.2. 初期の割り当て .................................8
 
 
 
@@ -54,44 +54,44 @@ Lehtinen & Lonvick          Standards Track                     [Page 1]
 RFC 4250             SSH Protocol Assigned Numbers          January 2006
 
 
-           4.3.3. ����γ������ ..................................8
-           4.3.4. �ץ饤�١��Ȥ�����(PRIVATE USE) ���ϰϤˤĤ��Ƥ�����.........9
-      4.4. ��ĥ�����ͥ�ǡ���ž���� data_type_code �� data.....9
-           4.4.1. ���� .........................................9
-           4.4.2. ����γ������ ................................10
-           4.4.3. ����γ������.................................10
-      4.5. ���������ߥʥ�� Encoded Terminal Modes...............10
-           4.5.1. ���� ........................................10
-           4.5.2. ����γ������................................10
-           4.5.3. ����γ������.................................12
-      4.6. ̾��..................................................12
-           4.6.1. ̿̾����..............................13
-           4.6.2. ̾���ξ���γ������........................13
-      4.7. �����ӥ�̾............................................13
-      4.8. ǧ��ˡ��̾�� ...............................14
-      4.9. ���ͥ������ץ��ȥ���˳�����Ƥ���̾��............14
-           4.9.1. ���ͥ������ץ��ȥ���Υ����ͥ�Υ�����.....14
-           4.9.2. ���ͥ������ץ��ȥ���Υ������Х�ʥꥯ������̾.....14
-           4.9.3. ���ͥ������ץ��ȥ���Υ����ͥ�Υꥯ������̾.......15
-           4.9.4. �����ʥ�̾�ν���γ������.............15
-           4.9.5. ���ͥ������ץ��ȥ���Υ��֥����ƥ��̾��.......15
-      4.10. ����ˡ��̾��.................................16
-      4.11. ������ƺѤߤΥ��르�ꥺ��̾.........................16
-           4.11.1. �Ź楢�르�ꥺ��̾........................16
-           4.11.2. MAC���르�ꥺ��̾ ...............................17
-           4.11.3. ���������르�ꥺ��̾ ........................17
-           4.11.4. ���̥��르�ꥺ��̾ .......................17
-   5. �������ƥ��ιͻ� ........................................17
+           4.3.3. 将来の割り当て ..................................8
+           4.3.4. プライベートな利用(PRIVATE USE) の範囲についての注意.........9
+      4.4. 拡張チャンネルデータ転送の data_type_code と data.....9
+           4.4.1. 規約 .........................................9
+           4.4.2. 初期の割り当て ................................10
+           4.4.3. 将来の割り当て.................................10
+      4.5. 擬似ターミナルの Encoded Terminal Modes...............10
+           4.5.1. 規約 ........................................10
+           4.5.2. 初期の割り当て................................10
+           4.5.3. 将来の割り当て.................................12
+      4.6. 名前..................................................12
+           4.6.1. 命名規約..............................13
+           4.6.2. 名前の将来の割り当て........................13
+      4.7. サービス名............................................13
+      4.8. 認証法の名前 ...............................14
+      4.9. コネクションプロトコルに割り当てられる名前............14
+           4.9.1. コネクションプロトコルのチャンネルのタイプ.....14
+           4.9.2. コネクションプロトコルのグローバルなリクエスト名.....14
+           4.9.3. コネクションプロトコルのチャンネルのリクエスト名.......15
+           4.9.4. シグナル名の初期の割り当て.............15
+           4.9.5. コネクションプロトコルのサブシステムの名前.......15
+      4.10. 鍵交換法の名前.................................16
+      4.11. 割り当て済みのアルゴリズム名.........................16
+           4.11.1. 暗号アルゴリズム名........................16
+           4.11.2. MACアルゴリズム名 ...............................17
+           4.11.3. 公開鍵アルゴリズム名 ........................17
+           4.11.4. 圧縮アルゴリズム名 .......................17
+   5. セキュリティの考察 ........................................17
    6. References .....................................................18
       6.1. Normative References ......................................18
       6.2. Informative References ....................................18
    Authors' Addresses ................................................19
    Trademark Notice ..................................................19
 
-1.  ����ȥ����������
+1.  イントロダクション
 
-   ����ʸ���, �������ץ��ȥ����������Ƥ��ʤ�.  SSH�ץ��ȥ���ˤĤ��Ƥ�IANA�Υǡ����١����ν�����֤��뤳�Ȥ�������Ū��. �ޤ�, ����γ�����ƤˤĤ��Ƥλؼ���ޤ�Ǥ���.
-   ���̤˻����٤�Ȥߤʤ���Ƥ���1�Ĥ����Ū�ʥ��르�ꥺ��������, ����ʸ���,[SSH-ARCH], [SSH-TRANS], [SSH-USERAUTH], [SSH-CONNECT] ���������Ƥ��ʤ��������ץ��ȥ�����ֹ���ϰϤ�������Ƥ��ʤ�. 
+   この文書は, 新しいプロトコルは定義していない.  SSHプロトコルについてのIANAのデータベースの初期状態を作ることだけが目的だ. また, 将来の割り当てについての指示も含んでいる.
+   一般に時代遅れとみなされている1つの歴史的なアルゴリズムを除いて, この文書は,[SSH-ARCH], [SSH-TRANS], [SSH-USERAUTH], [SSH-CONNECT] で定義されていない新しいプロトコルや番号の範囲を定義していない. 
 
 
 
@@ -193,15 +193,15 @@ RFC 4250             SSH Protocol Assigned Numbers          January 2006
    STANDARDS ACTION - Values are assigned only for Standards Track RFCs
    approved by the IESG.
 
-3.3.  �ץ��ȥ���Υե�����ɤ���
+3.3.  プロトコルのフィールドと値
 
-   �ץ��ȥ���Υե�����ɤȥե�����ɤǼ�������ͤ� , ����ʸ�񷲤���������.  ��å������������, �ץ��ȥ���Υե�����ɤ���������.  ��Ȥ���, SSH_MSG_CHANNEL_DATA �򼡤��������
+   プロトコルのフィールドとフィールドで取り得る値は , この文書群で定義される.  メッセージの定義で, プロトコルのフィールドは定義される.  例として, SSH_MSG_CHANNEL_DATA を次で定義する
 
       byte      SSH_MSG_CHANNEL_DATA
       uint32    recipient channel
       string    data
 
-   ����ʸ�񷲤Ǥ�, �ե�����ɤ����Ȥ������ˤ�, ���󥰥륯�����ȤǰϤޤ��ɽ�������.  �ե�����ɤ������ͤ����Ȥ�������, ���֥륯�����ȤǰϤޤ��ɽ�������.  �������Ѥ����, 'data' �μ�������ͤˤ�, "foo" �� "bar" ������.
+   この文書群では, フィールドが参照される場合には, シングルクォートで囲まれて表記される.  フィールドに入る値が参照される場合は, ダブルクォートで囲まれて表記される.  上の例を用いると, 'data' の取り得る値には, "foo" や "bar" がある.
 
 
 
@@ -211,42 +211,42 @@ Lehtinen & Lonvick          Standards Track                     [Page 4]
 RFC 4250             SSH Protocol Assigned Numbers          January 2006
 
 
-4.  IANA �ι�θ
+4.  IANA の考慮
 
-   ����ʸ�����Τ�,[SSH-ARCH], [SSH-TRANS], [SSH-USERAUTH], [SSH-CONNECT]���������Ƥ���SSH�ץ��ȥ�����Ф���IANA�ι�θ��.
-   �������, ̾�����֤�̿̾�����, �쥸���ȥ�ν������, ����γ�����Ƥ��Ф���ؼ���ޤ�Ǥ���.
+   この文書全体が,[SSH-ARCH], [SSH-TRANS], [SSH-USERAUTH], [SSH-CONNECT]で定義されているSSHプロトコルに対するIANAの考慮だ.
+   この節は, 名前空間を命名規約や, レジストリの初期状態, 将来の割り当てに対する指示を含んでいる.
 
-4.1.  ��å������ֹ�
+4.1.  メッセージ番号
 
-   ��å������ֹ��, �ѥ��åȤΥڥ������ɤ򼨤�byte���ͤ�.
+   メッセージ番号は, パケットのペイロードを示すbyteの値だ.
 
-4.1.1.  ����
+4.1.1.  規約
 
-   �ץ��ȥ���Υѥ��åȤ�, 1����255���ϰϤΥ�å������ֹ�����.  �����ֹ�ϼ��Τ褦�˳����Ƥ���:
+   プロトコルのパケットは, 1から255の範囲のメッセージ番号を持つ.  この番号は次のように割当てられる:
 
-      �ȥ�󥹥ݡ����إץ��ȥ���:
+      トランスポート層プロトコル:
 
-        1 to 19    �ȥ�󥹥ݡ����ذ���(��: ����, ̵��, �ǥХå��ʤ�
-      20 to 29   ���르�ꥺ��Υͥ������������
-      30 to 49   �����������Ȥ���ͭ(�ֹ��, �ۤʤ������Ǻ����Ѥ���Ƥ�褤)
+        1 to 19    トランスポート層一般(例: 切断, 無視, デバッグなど
+      20 to 29   アルゴリズムのネゴシエーション
+      30 to 49   鍵交換方式ごとに特有(番号は, 異なる方式で再利用されてもよい)
 
-      �桼��ǧ�ڥץ��ȥ���:
+      ユーザ認証プロトコル:
 
-        50 to 59   �桼��ǧ�ڰ���
-      60 to 79   �桼��ǧ��ˡ���Ȥ���ͭ(�ֹ��, �ۤʤ������Ǻ����Ѥ���Ƥ�褤)
+        50 to 59   ユーザ認証一般
+      60 to 79   ユーザ認証法ごとに特有(番号は, 異なる方式で再利用されてもよい)
 
-      ���ͥ������ �ץ��ȥ���:
+      コネクション プロトコル:
 
-        80 to 89   ���ͥ������ץ��ȥ������
-      90 to 127  �����ͥ�˴�Ϣ������å�����
+        80 to 89   コネクションプロトコル一般
+      90 to 127  チャンネルに関連したメッセージ
 
-      ���饤����ȥץ��ȥ���Τ����ͽ��:
+      クライアントプロトコルのための予約:
 
-        128 to 191 ͽ��
+        128 to 191 予約
 
-      ��������ʳ�ĥ:
+      ローカルな拡張:
 
-        192 to 255 ��������ʳ�ĥ
+        192 to 255 ローカルな拡張
 
 
 
@@ -259,9 +259,9 @@ Lehtinen & Lonvick          Standards Track                     [Page 5]
 RFC 4250             SSH Protocol Assigned Numbers          January 2006
 
 
-4.1.2.  ����γ������
+4.1.2.  初期の割り当て
 
-   ����ɽ��, ��å�����ID���ͤν���γ�����Ƥ򼨤�
+   次の表で, メッセージIDの値の初期の割り当てを示す
 
          Message ID                            Value    Reference
          -----------                           -----    ---------
@@ -292,11 +292,11 @@ RFC 4250             SSH Protocol Assigned Numbers          January 2006
          SSH_MSG_CHANNEL_SUCCESS                 99     [SSH-CONNECT]
          SSH_MSG_CHANNEL_FAILURE                100     [SSH-CONNECT]
 
-4.1.3.  ����γ������
+4.1.3.  将来の割り当て
 
-   1 ���� 29, 50 ���� 59, 80���� 127 ���ϰϤ˿����ʥ�å������ֹ�������Ƥ��׵��, [RFC2434] �˵��Ҥ���Ƥ��� STANDARDS ACTION �ˤ��äƤ���ʤ���Фʤ�ʤ�.
+   1 から 29, 50 から 59, 80から 127 の範囲に新たなメッセージ番号を割り当てる要求は, [RFC2434] に記述されている STANDARDS ACTION におってされなければならない.
 
-   30����49���ϰϤΥ�å������ֹ��, ���Ѥ��븰��ˡ����ͭ��. ���ΰ�̣����ˡ������Ƿ�ޤ�.
+   30から49の範囲のメッセージ番号は, 利用する鍵交換法に特有だ. その意味は方法の定義で決まる.
 
 
 
@@ -310,25 +310,25 @@ Lehtinen & Lonvick          Standards Track                     [Page 6]
 RFC 4250             SSH Protocol Assigned Numbers          January 2006
 
 
-   60����79���ϰϤΥ�å������ֹ��, ���Ѥ���ǧ��ˡ����ͭ��. ���ΰ�̣����ˡ������Ƿ�ޤ�.T
+   60から79の範囲のメッセージ番号は, 利用する認証法に特有だ. その意味は方法の定義で決まる.T
 
-   128����191���ϰϤ˿����ʥ�å������ֹ�������Ƥ��׵��, [RFC2434] �˵��Ҥ���Ƥ��� IETF CONSENSUS �ˤ�äƤ���ʤ���Фʤ�ʤ�.
+   128から191の範囲に新たなメッセージ番号を割り当てる要求は, [RFC2434] に記述されている IETF CONSENSUS によってされなければならない.
 
-   IANA��, 192 ���� 255 ���ϰϤΥ�å������ֹ�����椷�ʤ�.  �����ϰϤ�, �ץ饤�١��Ȥ�����(PRIVATE USE)�Τ���˻Ĥ���Ƥ���.
+   IANAは, 192 から 255 の範囲のメッセージ番号は制御しない.  この範囲は, プライベートな利用(PRIVATE USE)のために残されている.
 
-4.2.  ���ǥ�å������� reason code (��ͳ������)�� description(����)
+4.2.  切断メッセージの reason code (理由コード)と description(説明)
 
-   ���ǥ�å������� 'reason code' �� uint32 ���ͤ�.  ��Ϣ�������ǥ�å������� 'description' ��, ���Ǥ���ͳ�򼨤��ʹ֤����ɤǤ����å�������.
+   切断メッセージの 'reason code' は uint32 の値だ.  関連する切断メッセージの 'description' は, 切断の理由を示す人間が解読できるメッセージだ.
 
-4.2.1.  ����
+4.2.1.  規約
 
-   SSH_MSG_DISCONNECT ��å�������ޤ�ץ��ȥ���Υѥ��åȤ�, 0x00000001 ���� 0xFFFFFFFF ���ϰϤ����ǥ�å������� 'reason code' ������ʤ���Фʤ�ʤ�..  ������, [SSH-TRANS]�ǵ��Ҥ���Ƥ���.
+   SSH_MSG_DISCONNECT メッセージを含むプロトコルのパケットは, 0x00000001 から 0xFFFFFFFF の範囲の切断メッセージの 'reason code' を持たなければならない..  これらは, [SSH-TRANS]で記述されている.
 
-4.2.2.  ����γ������
+4.2.2.  初期の割り当て
 
-   ����ɽ��, SSH_MSG_DISCONNECT �� 'description' �� 'reason code' ���ͤν���γ�����Ƥ򼨤�.
+   次の表で, SSH_MSG_DISCONNECT の 'description' と 'reason code' の値の初期の割り当てを示す.
 
-         ����ܥ�̾                                    reason code
+         シンボル名                                    reason code
          -------------                                  -----------
          SSH_DISCONNECT_HOST_NOT_ALLOWED_TO_CONNECT          1
          SSH_DISCONNECT_PROTOCOL_ERROR                       2
@@ -356,33 +356,33 @@ Lehtinen & Lonvick          Standards Track                     [Page 7]
 RFC 4250             SSH Protocol Assigned Numbers          January 2006
 
 
-4.2.3.  ����γ������
+4.2.3.  将来の割り当て
 
-   ���ǥ�å������� 'reason code' ���ͤ�, Ϣ³���Ƴ�����Ƥ��ʤ���Фʤ�ʤ�.  ���������ǥ�å������� 'reason code' ���ͤȴ�Ϣ�������ǥ�å������� 'description' �������Ƥ��׵��, 0x00000010 ���� 0xFDFFFFFF ���ϰϤˤĤ��Ƥ� [RFC2434] �˵��Ҥ���Ƥ��� IETF CONSENSUS �ˤ��äƤ���ʤ���Фʤ�ʤ�IANA��, 0xFE000000 ���� 0xFFFFFFFF ���ϰϤ� ���ǥ�å�������'reason code' ���ͤϳ�����Ƥʤ�.
-   �����ϰϤ����ǥ�å������� 'reason code'���ͤ�, ��Ϥ� [RFC2434]�˵��Ҥ���Ƥ��� �ץ饤�١��Ȥ����� (PRIVATE USE) ��ͽ�󤵤�Ƥ���.
+   切断メッセージの 'reason code' の値は, 連続して割り当てられなければならない.  新しい切断メッセージの 'reason code' の値と関連する切断メッセージの 'description' を割り当てる要求は, 0x00000010 から 0xFDFFFFFF の範囲については [RFC2434] に記述されている IETF CONSENSUS におってされなければならないIANAは, 0xFE000000 から 0xFFFFFFFF の範囲の 切断メッセージの'reason code' の値は割り当てない.
+   その範囲の切断メッセージの 'reason code'の値は, やはり [RFC2434]に記述されている プライベートな利用 (PRIVATE USE) に予約されている.
 
-4.3.  �����ͥ���³���Ԥ� reason code (��ͳ������)�� description(����)
+4.3.  チャンネル接続失敗の reason code (理由コード)と description(説明)
 
-   �����ͥ���³���Ԥ� 'reason code' �� uint32 ���ͤ�. ��Ϣ��������ͥ���³���Ԥ� 'description' ��, �����ͥ���³���Ԥ���ͳ�򼨤��ʹ֤����ɤǤ����å�������.  �����, [SSH-TRANS]�ǵ��Ҥ���Ƥ���.
+   チャンネル接続失敗の 'reason code' は uint32 の値だ. 関連するチャンネル接続失敗の 'description' は, チャンネル接続失敗の理由を示す人間が解読できるメッセージだ.  これは, [SSH-TRANS]で記述されている.
 
-4.3.1.  ����
+4.3.1.  規約
 
-   SSH_MSG_CHANNEL_OPEN_FAILURE ��å�������ޤ�ץ��ȥ���Υѥ��åȤ�, 0x00000001 ���� 0xFFFFFFFF ���ϰϤΥ����ͥ���³���Ԥ� 'reason code' ������ʤ���Фʤ�ʤ�.
+   SSH_MSG_CHANNEL_OPEN_FAILURE メッセージを含むプロトコルのパケットは, 0x00000001 から 0xFFFFFFFF の範囲のチャンネル接続失敗の 'reason code' を持たなければならない.
 
-4.3.2.  ����γ������
+4.3.2.  初期の割り当て
 
-   'reason code' ���ͤ� 'description' ���ͤν���γ�����Ƥ�, ����ɽ�Ǽ�����Ƥ���.  'reason code' ���ɤ߰פ��褦��10�ʤΥե����ޥåȤǽ񤫤�Ƥ��뤬, �ºݤˤ�uint32���ͤǤ��뤳�Ȥ�����.
+   'reason code' の値と 'description' の値の初期の割り当ては, 次の表で示されている.  'reason code' は読み易いように10進のフォーマットで書かれているが, 実際にはuint32の値であることに注意.
 
-         ����ܥ�̾                                    reason code
+         シンボル名                                    reason code
          -------------                                  -----------
          SSH_OPEN_ADMINISTRATIVELY_PROHIBITED                1
          SSH_OPEN_CONNECT_FAILED                             2
          SSH_OPEN_UNKNOWN_CHANNEL_TYPE                       3
          SSH_OPEN_RESOURCE_SHORTAGE                          4
 
-4.3.3.  ����γ������
+4.3.3.  将来の割り当て
 
-   �����ͥ���³���Ԥ� 'reason code' ���ͤ�, Ϣ³���Ƴ�����Ƥ��ʤ���Фʤ�ʤ�.  �����ͥ���³���Ԥ� 'reason code' ���ͤȴ�Ϣ��������ͥ���³���Ԥ� 'description' �������Ƥ��׵��, 0x00000010 ���� 0xFDFFFFFF ���ϰϤˤĤ��Ƥ� [RFC2434] �˵��Ҥ���Ƥ��� IETF CONSENSUS �ˤ�äƤ���ʤ���Фʤ�ʤ�IANA��, 0xFE000000 ���� 0xFFFFFFFF ���ϰϤ� �����ͥ���³���Ԥ�'reason code' ���ͤϳ�����Ƥʤ�.
+   チャンネル接続失敗の 'reason code' の値は, 連続して割り当てられなければならない.  チャンネル接続失敗の 'reason code' の値と関連するチャンネル接続失敗の 'description' を割り当てる要求は, 0x00000010 から 0xFDFFFFFF の範囲については [RFC2434] に記述されている IETF CONSENSUS によってされなければならないIANAは, 0xFE000000 から 0xFFFFFFFF の範囲の チャンネル接続失敗の'reason code' の値は割り当てない.
 
 
 
@@ -392,23 +392,23 @@ Lehtinen & Lonvick          Standards Track                     [Page 8]
 RFC 4250             SSH Protocol Assigned Numbers          January 2006
 
 
-    �����ϰϤΥ����ͥ���³���Ԥ� 'reason code'���ͤ�, [RFC2434]�˵��Ҥ���Ƥ��� �ץ饤�١��Ȥ����� (PRIVATE USE) ��ͽ�󤵤�Ƥ���.
+    この範囲のチャンネル接続失敗の 'reason code'の値は, [RFC2434]に記述されている プライベートな利用 (PRIVATE USE) に予約されている.
 
-4.3.4.  �ץ饤�١��Ȥ�����(PRIVATE USE) ���ϰϤˤĤ��Ƥ�����
+4.3.4.  プライベートな利用(PRIVATE USE) の範囲についての注意
 
-   0xFE000000 to 0xFFFFFFFF ���ϰϤˤĤ��Ƥ�IANA�Ϥʤ������⤷�ʤ���, �����ϰϤϼ��ε���˽��ä�2�Ĥ���ʬ��ʬ�䤵��ƴ��������. 
+   0xFE000000 to 0xFFFFFFFF の範囲についてはIANAはなんの制御もしないが, この範囲は次の規約に従って2つの部分に分割されて管理される. 
 
-   o  0xFE000000 ���� 0xFEFFFFFF ���ϰϤ�, ��������˳�����Ƥ�줿�����ͥ�ȶ������Ѥ���뤿��ˤ���.  ���Ȥ���,"example_session@example.com" �Ȥ��� 'channel type' �Υ����ͥ뤬��Ƥ��줿�����Ԥ����Ȥ�, �����Ф�(���Ҥʤ���0x00000001 ���� 0xFDFFFFFF���ϰϤ�) IANA �ǳ�����Ƥ�줿 'reason code'���֤���,  0xFE000000 ���� 0xFEFFFFFF �ξ��Υ�������˳�����Ƥ�줿�ͤ�'reason code' ���֤�.  �������, �����Ф���Ƥ��줿 'channel type' ������Ǥ��ʤ�����, ���줬���������������줿 'channel type' �Ǥ��äƤ�, 'reason code' �� ���Ҥ���0x00000003 �Ǥʤ���Фʤ�ʤ�.  �����Ф� 'channel type' �����򤹤뤬�����ͥ�γ��Ϥ˼��Ԥ���ʤ�, �����Ф���Ƥ��줿��������� 'channel type' ���б������������˳�����Ƥ�줿�ͤ��֤�ɬ�פ�����.  �¹Ԥ���Ԥ�, �ޤ�IANA�ǳ�����Ƥ�줿 'reason code' �����Ѥ��褦�Ȥ�, ���μ��˥�������˳�����Ƥ�줿 'reason code' �����Ѥ��褦�Ȥ��뤳�Ȥ�����Ȥ��Ƥ���.
+   o  0xFE000000 から 0xFEFFFFFF の範囲は, ローカルに割り当てられたチャンネルと共に利用されるためにある.  たとえば,"example_session@example.com" という 'channel type' のチャンネルが提案されたが失敗したとき, サーバは(前述ないし0x00000001 から 0xFDFFFFFFの範囲の) IANA で割り当てられた 'reason code'を返すか,  0xFE000000 から 0xFEFFFFFF の埴のローカルに割り当てられた値を'reason code' を返す.  もちろん, サーバが提案された 'channel type' を理解できない場合は, それがローカルに定義された 'channel type' であっても, 'reason code' は 前述した0x00000003 でなければならない.  サーバが 'channel type' を理解するがチャンネルの開始に失敗するなら, サーバは提案されたローカルな 'channel type' に対応するローカルに割り当てられた値を返す必要がある.  実行する者が, まずIANAで割り当てられた 'reason code' を利用しようとし, その次にローカルに割り当てられた 'reason code' を利用しようとすることを前提としている.
 
-   o  0xFF�ǻϤޤ��ϰϤˤĤ��Ƥ�, ���¤伨���Ϥʤ�.  �����ϰϤ����Ѥ���ݤ�, ��߱������ϴ��Ԥ���ʤ�.  ����Ū��, �����ϰϤϼ¸��Τ���ˤ���. 
+   o  0xFFで始まる範囲については, 制限や示唆はない.  この範囲を利用する際は, 相互運用性は期待されない.  基本的に, この範囲は実験のためにある. 
 
-4.4.  ��ĥ�����ͥ�ǡ���ž���� data_type_code �� data
+4.4.  拡張チャンネルデータ転送の data_type_code と data
 
-   ��ĥ�����ͥ�ǡ���ž���� 'data_type_code' �� uint32���ͤ�.  ��Ϣ�����ĥ�����ͥ�ǡ���ž���� 'data' ��, �����ͥ��ž�������ǡ����μ���򼨤����ʹ֤����ɤǤ����å�������.
+   拡張チャンネルデータ転送の 'data_type_code' は uint32の値だ.  関連する拡張チャンネルデータ転送の 'data' は, チャンネルで転送されるデータの種類を示した人間が解読できるメッセージだ.
 
-4.4.1.  ����
+4.4.1.  規約
 
-    SSH_MSG_CHANNEL_EXTENDED_DATA ��å�������ޤ�ץ��ȥ���Υѥ��åȤ�, 0x00000001 ���� 0xFFFFFFFF ���ϰϤγ�ĥ�����ͥ�ǡ���ž���� 'data_type_code' ������ʤ���Фʤ�ʤ�.  �����, [SSH-CONNECT] �ǵ��Ҥ���Ƥ���. 
+    SSH_MSG_CHANNEL_EXTENDED_DATA メッセージを含むプロトコルのパケットは, 0x00000001 から 0xFFFFFFFF の範囲の拡張チャンネルデータ転送の 'data_type_code' を持たなければならない.  これは, [SSH-CONNECT] で記述されている. 
 
 
 
@@ -421,30 +421,30 @@ Lehtinen & Lonvick          Standards Track                     [Page 9]
 RFC 4250             SSH Protocol Assigned Numbers          January 2006
 
 
-4.4.2.  ����γ������
+4.4.2.  初期の割り当て
 
-   'data_type_code' �� ''data' �ν���γ�����Ƥ�, �ʲ��˼���ɽ��Ϳ������.  'data_type_code' ���ɤ߰פ��褦��10�ʤΥե����ޥåȤǽ񤫤�Ƥ��뤬, �ºݤˤ�uint32���ͤǤ��뤳�Ȥ�����.
+   'data_type_code' と ''data' の初期の割り当ては, 以下に示す表で与えられる.  'data_type_code' は読み易いように10進のフォーマットで書かれているが, 実際にはuint32の値であることに注意.
 
-         ����ܥ�̾                             data_type_code
+         シンボル名                             data_type_code
          -------------                        --------------
          SSH_EXTENDED_DATA_STDERR                   1
 
-4.4.3.  ����γ������
+4.4.3.  将来の割り当て
 
-   ��ĥ�����ͥ�ǡ���ž���� 'data_type_code' ���ͤ�, Ϣ³���Ƴ�����Ƥ��ʤ���Фʤ�ʤ�.  ��ĥ�����ͥ�ǡ���ž���� 'data_type_code' ���ͤȴ�Ϣ�����ĥ�����ͥ�ǡ���ž���� 'data' �������Ƥ��׵��, 0x00000002 ���� 0xFDFFFFFF ���ϰϤˤĤ��Ƥ� [RFC2434] �˵��Ҥ���Ƥ��� IETF CONSENSUS �ˤ�äƤ���ʤ���Фʤ�ʤ�. IANA��, 0xFE000000 ���� 0xFFFFFFFF ���ϰϤ� ��ĥ�����ͥ�ǡ���ž���� 'data_type_code' ���ͤϳ�����Ƥʤ�.  �����ϰϤγ�ĥ�����ͥ�ǡ���ž���� 'data_type_code'���ͤ�,  [RFC2434]�˵��Ҥ���Ƥ��� �ץ饤�١��Ȥ����� (PRIVATE USE) ��ͽ�󤵤�Ƥ���.
+   拡張チャンネルデータ転送の 'data_type_code' の値は, 連続して割り当てられなければならない.  拡張チャンネルデータ転送の 'data_type_code' の値と関連する拡張チャンネルデータ転送の 'data' を割り当てる要求は, 0x00000002 から 0xFDFFFFFF の範囲については [RFC2434] に記述されている IETF CONSENSUS によってされなければならない. IANAは, 0xFE000000 から 0xFFFFFFFF の範囲の 拡張チャンネルデータ転送の 'data_type_code' の値は割り当てない.  この範囲の拡張チャンネルデータ転送の 'data_type_code'の値は,  [RFC2434]に記述されている プライベートな利用 (PRIVATE USE) に予約されている.
 
-4.5.  ���������ߥʥ�� Encoded Terminal Modes
+4.5.  擬似ターミナルの Encoded Terminal Modes
 
-   "ptr-req" string ��ޤ� SSH_MSG_CHANNEL_REQUEST ��å�������,  'encoded terminal modes' ��ޤޤʤ���Фʤ�ʤ�.  'encoded terminal modes' ���ͤ�, ���ڥ�����-�����Υڥ��ΥХ��ȥ��ȥ꡼���.
+   "ptr-req" string を含む SSH_MSG_CHANNEL_REQUEST メッセージは,  'encoded terminal modes' を含まなければならない.  'encoded terminal modes' の値は, オペコード-引数のペアのバイトストリームだ.
 
-4.5.1.  ����
+4.5.1.  規約
 
-   "ptr-req" string ��ޤ� SSH_MSG_CHANNEL_REQUEST ��å�������ޤ�ץ��ȥ���Υѥ��åȤ�, "ptr-req" string ��ޤ� SSH_MSG_CHANNEL_REQUEST ��å�������,  'encoded terminal modes' ���ͤ�ޤޤʤ���Фʤ�ʤ�.
-   ���ڥ����ɤ��ͤ�, 1����255���ϰϤ�ñ��� byte ����ʤ�.  1 ���� 159 �ޤǤΥ��ڥ����ɤ�, uint32 �ΰ�����1�Ļ���.  160 ���� 255 �Υ��ڥ����ɤϤޤ��������Ƥ��ʤ�.
+   "ptr-req" string を含む SSH_MSG_CHANNEL_REQUEST メッセージを含むプロトコルのパケットは, "ptr-req" string を含む SSH_MSG_CHANNEL_REQUEST メッセージは,  'encoded terminal modes' の値を含まなければならない.
+   オペコードの値は, 1から255の範囲の単一の byte からなる.  1 から 159 までのオペコードは, uint32 の引数を1つ持つ.  160 から 255 のオペコードはまだ定義されていない.
 
-4.5.2.  ����γ������
+4.5.2.  初期の割り当て
 
-   ����ɽ��, 'encoded terminal modes' ���ͤ˻Ȥ��륪�ڥ����ɤ��ͤν���γ�����Ƥ򼨤�.
+   次の表で, 'encoded terminal modes' の値に使われるオペコードの値の初期の割り当てを示す.
 
 
 
@@ -459,38 +459,38 @@ Lehtinen & Lonvick          Standards Track                    [Page 10]
 RFC 4250             SSH Protocol Assigned Numbers          January 2006
 
 
-         ���ڥ�����  mnemonic       ����
+         オペコード  mnemonic       説明
          ------  --------       -----------
-         0     TTY_OP_END  ���ץ����ν���򼨤�.
-         1     VINTR       ������ʸ��. �⤷�ʤ����255.  ¾��ʸ���ˤĤ��Ƥ�Ʊ��.  ������ʸ�����٤Ƥ�, ���٤ƤΥ����ƥ�ǥ��ݡ��Ȥ���Ƥ���櫓�ǤϤʤ�.
-         2     VQUIT       ��λʸ��(POSIX ���ƥ�Ǥ�, SIGQUIT������).
-         3     VERASE      ��������κ�¦��ʸ����ä�.
-         4     VKILL       ���ߤ����ϹԤ�ä�.
-         5     VEOF        End-of-file ʸ�� (�����ߥʥ뤫��EOF������).
-         6     VEOL        �����å��꥿�����/�⤷���ϥ饤��ե����ɤ��ɲä���� End-of-line ʸ��7     VEOL2       �ɲä� end-of-line ʸ��.
-         8     VSTART      ���Ǥ������Ϥ�Ƴ�����(�̾�� control-Q).
-         9     VSTOP       ���Ϥ����Ǥ���. (�̾�� control-S).
-         10    VSUSP       ���ߤΥץ����������Ǥ���.
-         11    VDSUSP      �̤�����ʸ��.
-         12    VREPRINT    ���ߤ����ϹԤ��ɽ������.
-         13    VWERASE     ��������κ��� word ��ä�.
-         14    VLNEXT      �������Ϥ����ʸ�������̤�ʸ�����ä��Ȥ��Ƥ⤽���̤�����Ϥ���.
-         15    VFLUSH      ���Ϥ� flush ����ʸ��16    VSWTCH      �̤� shell layer ���ڤ��ؤ���.
-         17    VSTATUS     �����ƥ�Υ��ơ�������(���, ���ޥ��, pid�ʤ�)��ɽ������.
-         18    VDISCARD    ü���ν��Ϥ�flush���뤫���ڤ��ؤ���.
-         30    IGNPAR      �ѥ�ƥ�̵��ե饰.  FALSE�ʤ�ѥ�᡼����0��, TRUE �ʤ� 1 �ˤ���ɬ�פ�����.
-         31    PARMRK      �ѥ�ƥ����ȥե졼��Υ��顼��ޡ������ɲä���.
-         32    INPCK       �ѥ�ƥ����顼�Υ����å���ͭ���ˤ���.
-         33    ISTRIP      ʸ����8bit�ܤ��.
-         34    INLCR       ���Ϥ�NL��CR���֤�������.
-         35    IGNCR       ���Ϥ�CR��̵�뤹��. (36    ICRNL       ���Ϥ�CR��NL���֤�������.
-         37    IUCLC       ��ʸ����ʸ�����Ѵ�����.
-         38    IXON        ���ϤΥե��������ͭ���ˤ���.
-         39    IXANY       �ɤ�ʸ���Ǥ⥹�ȥå׸�κƳ���Ԥʤ�.
-         40    IXOFF       ���ϤΥե��������ͭ���ˤ���.
-         41    IMAXBEL     ���ϥ��塼�����äѤ��ΤȤ��˥٥���Ĥ餹.
-         50    ISIG        INTR, QUIT, [D]SUSP �����ʥ��ͭ���ˤ���.
-         51    ICANON      ���ϹԤ�����������.
+         0     TTY_OP_END  オプションの終りを示す.
+         1     VINTR       割り込み文字. もしなければ255.  他の文字についても同様.  これらの文字すべてが, すべてのシステムでサポートされているわけではない.
+         2     VQUIT       終了文字(POSIX シテムでは, SIGQUITを送る).
+         3     VERASE      カーソルの左側の文字を消す.
+         4     VKILL       現在の入力行を消す.
+         5     VEOF        End-of-file 文字 (ターミナルからEOFを送る).
+         6     VEOL        キャリッジリターンと/もしくはラインフィードに追加される End-of-line 文字7     VEOL2       追加の end-of-line 文字.
+         8     VSTART      中断した出力を再開する(通常は control-Q).
+         9     VSTOP       出力を中断する. (通常は control-S).
+         10    VSUSP       現在のプログラムを中断する.
+         11    VDSUSP      別の中断文字.
+         12    VREPRINT    現在の入力行を再表示する.
+         13    VWERASE     カーソルの左の word を消す.
+         14    VLNEXT      次に入力される文字が特別な文字だったとしてもその通りに入力する.
+         15    VFLUSH      出力を flush する文字16    VSWTCH      別の shell layer に切り替える.
+         17    VSTATUS     システムのステータス行(負荷, コマンド, pidなど)を表示する.
+         18    VDISCARD    端末の出力をflushするかを切り替える.
+         30    IGNPAR      パリティ無視フラグ.  FALSEならパラメータを0に, TRUE なら 1 にする必要がある.
+         31    PARMRK      パリティーとフレームのエラーをマークを追加する.
+         32    INPCK       パリティエラーのチェックを有効にする.
+         33    ISTRIP      文字の8bit目を落す.
+         34    INLCR       入力でNLをCRに置き換える.
+         35    IGNCR       入力でCRを無視する. (36    ICRNL       入力でCRをNLに置き換える.
+         37    IUCLC       大文字を小文字に変換する.
+         38    IXON        出力のフロー制御を有効にする.
+         39    IXANY       どの文字でもストップ後の再開を行なう.
+         40    IXOFF       入力のフロー制御を有効にする.
+         41    IMAXBEL     入力キューがいっぱいのときにベルを鳴らす.
+         50    ISIG        INTR, QUIT, [D]SUSP シグナルを有効にする.
+         51    ICANON      入力行を正規化する.
 
 
 
@@ -501,37 +501,37 @@ Lehtinen & Lonvick          Standards Track                    [Page 11]
 RFC 4250             SSH Protocol Assigned Numbers          January 2006
 
 
-         52    XCASE       (����: ��ʸ���Τ�ͭ���ʾ���)��ʸ�������� "\" ���դ��뤳�Ȥ���ʸ���������Ϥ�ͭ���ˤ���.Enable input and output of uppercase
+         52    XCASE       (訳注: 小文字のみ有効な場合に)小文字の前に "\" を付けることで大文字の入出力を有効にする.Enable input and output of uppercase
                             characters by preceding their lowercase
                             equivalents with "\".
-         53    ECHO        ���������ͭ���ˤ���.
-         54    ECHOE       ���Ū��eraseʸ��55    ECHOK       ���ߤιԤ�ΤƤ� Kill ʸ��56    ECHONL      ECHO ��̵���Ǥ� NL �򥨥�������.
-         57    NOFLSH      �����ߤθ��flush���ʤ�.
-         58    TOSTOP      �Хå����饦��ɤΥ���֤�����Ϥ����ä��饸��֤�ߤ��.
-         59    IEXTEN      ��ĥ��ͭ���ˤ���.
-         60    ECHOCTL     ��ʸ���դ��ǥ���ȥ�����ʸ���򥨥�������.
-         61    ECHOKE      �Ԥκ������Ū�˹Ԥʤ�.
-         62    PENDIN      ���Ǥ������Ϥ�����Ϥ���.
-         70    OPOST       ���Ͻ�����ͭ���ˤ���.
-         71    OLCUC       ��ʸ������ʸ�����Ѵ�����.
-         72    ONLCR       NL��CR-NL���֤�������.
-         73    OCRNL       ���Ϥ�, CR��NL���֤�������.
-         74    ONOCR       ���Ϥ�, NL��CR-NL���֤�������.
-         75    ONLRET      ���Ϥ�, NL��CR��¹Ԥ���.
-         90    CS7         7 bit �⡼��.
-         91    CS8         8 bit �⡼��.
-         92    PARENB      �ѥ�ƥ�ͭ��93    PARODD      ���ꤵ���ȴ���ѥ�ƥ�. �⤷���� �����ѥ�ƥ�
+         53    ECHO        エコーヲを有効にする.
+         54    ECHOE       視覚的なerase文字55    ECHOK       現在の行を捨てる Kill 文字56    ECHONL      ECHO が無効でも NL をエコーする.
+         57    NOFLSH      割り込みの後でflushしない.
+         58    TOSTOP      バックグラウンドのジョブから出力があったらジョブを止める.
+         59    IEXTEN      拡張を有効にする.
+         60    ECHOCTL     ＾文字付きでコントロール文字をエコーする.
+         61    ECHOKE      行の削除を視覚的に行なう.
+         62    PENDIN      中断した入力を再入力する.
+         70    OPOST       出力処理を有効にする.
+         71    OLCUC       小文字を大文字に変換する.
+         72    ONLCR       NLをCR-NLに置き換える.
+         73    OCRNL       出力で, CRをNLに置き換える.
+         74    ONOCR       出力で, NLをCR-NLに置き換える.
+         75    ONLRET      出力で, NLがCRを実行する.
+         90    CS7         7 bit モード.
+         91    CS8         8 bit モード.
+         92    PARENB      パリティ有効93    PARODD      設定されると奇数パリティ. もしくは 偶数パリティ
 
-         128 TTY_OP_ISPEED  bit/��ñ�̤����ϥХ�ɥ졼�Ȥ���ꤹ��.
-         129 TTY_OP_OSPEED  bit/��ñ�̤ǽ��ϥХ�ɥ졼�Ȥ���ꤹ��.
+         128 TTY_OP_ISPEED  bit/秒単位で入力バンドレートを指定する.
+         129 TTY_OP_OSPEED  bit/秒単位で出力バンドレートを指定する.
 
-4.5.3.  ����γ������
+4.5.3.  将来の割り当て
 
-   ���������ڥ����ɤȴ�Ϣ��������γ�����Ƥ��׵��, [RFC2434] �˵��Ҥ���Ƥ��� IETF CONSENSUS �ˤ�äƤ���ʤ���Фʤ�ʤ�.
+   新しいオペコードと関連する引数の割り当ての要求は, [RFC2434] に記述されている IETF CONSENSUS によってされなければならない.
 
-4.6.  ̾��
+4.6.  名前
 
-   �ʹߤ����, ̾�����֤��Ф����ͤ��ɽ������.  ������ˤ�, �����, ����γ�����ƤˤĤ��Ƥ�IANA�ؤλؼ�������.  ����γ�����Ƥ�, ���줾������Ϳ������.
+   以降の節で, 名前空間に対する値をに表記する.  この節には, 規約と, 将来の割り当てについてのIANAへの指示がある.  初期の割り当ては, それぞれの節で与えられる.
 
 
 
@@ -544,21 +544,21 @@ Lehtinen & Lonvick          Standards Track                    [Page 12]
 RFC 4250             SSH Protocol Assigned Numbers          January 2006
 
 
-4.6.1.  ̿̾����
+4.6.1.  命名規約
 
-   �ʹߤ����IANA�ˤ�ä���Ͽ����뤹�٤Ƥ�̾����, ɽ����ǽ��US-ASCII��ʸ�����,���åȥޡ���("@"), ����� (","), ���ڡ���, ����ʸ��(ASCII������ 32�ʲ�), ASCII�����ɤ�127 (DEL)��ޤ�ǤϤʤ�ʤ�. ̾������ʸ����ʸ�������̤���, 64ʸ���ʲ��Ǥʤ���Фʤ�ʤ�.
+   以降の節のIANAによって登録されるすべての名前は, 表示可能なUS-ASCIIの文字列で,アットマーク("@"), コンマ (","), スペース, 制御文字(ASCIIコード 32以下), ASCIIコードの127 (DEL)を含んではならない. 名前は大文字小文字が区別され, 64文字以下でなければならない.
 
-   ��������˳�ĥ��ǽ��̾���ˤĤ��Ƥν������ʲ��Τ褦�ˤ���Ƥ���.  IANA��,  ���åȥޡ�����ޤ�̾������Ͽ���ʤ����������ʤ�.
+   ローカルに拡張可能な名前についての準備が以下のようにされている.  IANAは,  アットマークを含む名前を登録しないし管理しない.
 
-   ���åȥޡ�����ޤ�̾����, "name@domainname" (���֥륯�����ơ����������) �Ȥ���������. ���åȥޡ�������Ԥ�����ʬ��(������̣�Ǥ�)̾����.  ���åȥޡ�����������ʬ�η����ϻ��ꤵ��Ƥ��ʤ�; ������, ɽ����ǽ�� US-ASCII��ʸ�����, ����� (","), ���ڡ���, ����ʸ��(ASCII������ 32�ʲ�), ASCII�����ɤ�127 (DEL)��ޤ�ǤϤʤ�ʤ�.  1�ĤΥ��åȥޡ����������ޤޤ�ʤ���Фʤ�ʤ�.  ���åȥޡ�����³����ʬ��, ̾�����������Ŀͤʤ����ȿ��Ǵ�������Ƥ���ͭ���ʴ����˵��Ҥ����ɥᥤ��̾ [RFC1034]�Ǥʤ���Фʤ�ʤ�.  ̾������ʸ����ʸ�������̤���, 64ʸ���ʲ��Ǥʤ���Фʤ�ʤ�.  ���������̾�����֤�ɤ��������뤫��, ���줾��Υɥᥤ�����.  ����̾����, STD 11 [RFC0822]�Υ᡼�륢�ɥ쥹�Ȼ��Ƥ��뤳�Ȥ��������Ƥ���.  �����, ñ�ʤ�����Ǥ���STD 11 [RFC0822]�Ȥϴط��ʤ�.  �����������������̾�������1�Ĥ�, "ourcipher-cbc@example.com" (���֥륯�����ơ����������) ��.
+   アットマークを含む名前は, "name@domainname" (ダブルクォーテーションを除く) という形式だ. アットマークに先行する部分が(狭い意味での)名前だ.  アットマークの前の部分の形式は指定されていない; しかし, 表示可能な US-ASCIIの文字列で, コンマ (","), スペース, 制御文字(ASCIIコード 32以下), ASCIIコードの127 (DEL)を含んではならない.  1つのアットマークだけが含まれなければならない.  アットマークに続く部分は, 名前を定義する個人ないし組織で管理されている有効な完全に記述したドメイン名 [RFC1034]でなければならない.  名前は大文字小文字が区別され, 64文字以下でなければならない.  ローカルな名前空間をどう管理するかは, それぞれのドメイン次第だ.  この名前が, STD 11 [RFC0822]のメールアドレスと似ていることを明記しておく.  これは, 単なる偶然でありSTD 11 [RFC0822]とは関係ない.  ローカルに定義される名前の例の1つは, "ourcipher-cbc@example.com" (ダブルクォーテーションを除く) だ.
 
-4.6.2.  ̾���ξ���γ������
+4.6.2.  名前の将来の割り当て
 
-   ������̾���γ�����Ƥ��׵��, [RFC2434] �˵��Ҥ���Ƥ��� IETF CONSENSUS �ˤ�äƤ���ʤ���Фʤ�ʤ�.
+   新しい名前の割り当ての要求は, [RFC2434] に記述されている IETF CONSENSUS によってされなければならない.
 
-4.7.  �����ӥ�̾
+4.7.  サービス名
 
-    'service name' ��, �ץ��ȥ�����ؤ򵭽Ҥ���Τ˻Ȥ���.  ����ɽ��, service_name �ν���γ�����Ƥ򼨤�.
+    'service name' は, プロトコルの層を記述するのに使われる.  次の表で, service_name の初期の割り当てを示す.
 
          Service Name                  Reference
          -------------                 ---------
@@ -578,9 +578,9 @@ Lehtinen & Lonvick          Standards Track                    [Page 13]
 RFC 4250             SSH Protocol Assigned Numbers          January 2006
 
 
-4.8.  ǧ��ˡ��̾��
+4.8.  認証法の名前
 
-   ǧ��ˡ��̾����, "ssh-userauth" �����ӥ� [SSH-USERAUTH] ��ǧ��ˡ�򵭽Ҥ���Τ˻Ȥ���. ����ɽ��, ǧ��ˡ��̾���ν���γ�����Ƥ򼨤�.
+   認証法の名前は, "ssh-userauth" サービス [SSH-USERAUTH] の認証法を記述するのに使われる. 次の表で, 認証法の名前の初期の割り当てを示す.
 
          Method Name                   Reference
          ------------                  ---------
@@ -589,13 +589,13 @@ RFC 4250             SSH Protocol Assigned Numbers          January 2006
          hostbased                     [SSH-USERAUTH, Section 9]
          none                          [SSH-USERAUTH, Section 5.2]
 
-4.9.  ���ͥ������ץ��ȥ���˳�����Ƥ���̾��
+4.9.  コネクションプロトコルに割り当てられる名前
 
-   ����ɽ��, ���ͥ������ץ��ȥ���Υ����פȥꥯ������̾�ν���γ�����Ƥ򼨤�.
+   次の表で, コネクションプロトコルのタイプとリクエスト名の初期の割り当てを示す.
 
-4.9.1.  ���ͥ������ץ��ȥ���Υ����ͥ�Υ�����
+4.9.1.  コネクションプロトコルのチャンネルのタイプ
 
-   ����ɽ��, ���ͥ������ץ��ȥ���Υ����ͥ�Υ����פν���γ�����Ƥ򼨤�.
+   次の表で, コネクションプロトコルのチャンネルのタイプの初期の割り当てを示す.
 
          Channel type                  Reference
          ------------                  ---------
@@ -604,9 +604,9 @@ RFC 4250             SSH Protocol Assigned Numbers          January 2006
          forwarded-tcpip               [SSH-CONNECT, Section 7.2]
          direct-tcpip                  [SSH-CONNECT, Section 7.2]
 
-4.9.2.  ���ͥ������ץ��ȥ���Υ������Х�ʥꥯ������̾
+4.9.2.  コネクションプロトコルのグローバルなリクエスト名
 
-   ����ɽ��, ���ͥ������ץ��ȥ���Υ������Х�ʥꥯ������̾�ν���γ�����Ƥ򼨤�.
+   次の表で, コネクションプロトコルのグローバルなリクエスト名の初期の割り当てを示す.
 
          Request type                  Reference
          ------------                  ---------
@@ -628,9 +628,9 @@ Lehtinen & Lonvick          Standards Track                    [Page 14]
 RFC 4250             SSH Protocol Assigned Numbers          January 2006
 
 
-4.9.3.  ���ͥ������ץ��ȥ���Υ����ͥ�Υꥯ������̾
+4.9.3.  コネクションプロトコルのチャンネルのリクエスト名
 
-   ����ɽ��, ���ͥ������ץ��ȥ���Υ����ͥ�Υꥯ������̾�ν���γ�����Ƥ򼨤�.
+   次の表で, コネクションプロトコルのチャンネルのリクエスト名の初期の割り当てを示す.
 
          Request type                  Reference
          ------------                  ---------
@@ -646,9 +646,9 @@ RFC 4250             SSH Protocol Assigned Numbers          January 2006
          exit-status                   [SSH-CONNECT, Section 6.10]
          exit-signal                   [SSH-CONNECT, Section 6.10]
 
-4.9.4.  �����ʥ�̾�ν���γ������
+4.9.4.  シグナル名の初期の割り当て
 
-   ����ɽ��, �����ʥ�̾�ν���γ�����Ƥ򼨤�.
+   次の表で, シグナル名の初期の割り当てを示す.
 
          Signal                        Reference
          ------                        ---------
@@ -666,9 +666,9 @@ RFC 4250             SSH Protocol Assigned Numbers          January 2006
           USR1                         [SSH-CONNECT]
           USR2                         [SSH-CONNECT]
 
-4.9.5.  ���ͥ������ץ��ȥ���Υ��֥����ƥ��̾��
+4.9.5.  コネクションプロトコルのサブシステムの名前
 
-   ���ͥ������ץ��ȥ���Υ��֥����ƥ��̾���ˤϽ���γ�����ƤϤʤ�.
+   コネクションプロトコルのサブシステムの名前には初期の割り当てはない.
 
 
 
@@ -681,24 +681,24 @@ Lehtinen & Lonvick          Standards Track                    [Page 15]
 RFC 4250             SSH Protocol Assigned Numbers          January 2006
 
 
-4.10.  ����ˡ��̾��
+4.10.  鍵交換法の名前
 
-    ̾�� "diffie-hellman-group1-sha1" ��, [RFC2409]���������Ƥ��� Oakley�����Ѥ��븰��ˡ�Τ�����Ѥ�����.  SSH��, Oakley [RFC2412] �� IKE ������Ū�˰ۤʤ�, ���Ȥη����̻Ҥ�ݻ����Ƥ���. ������, �ɲäη��Ȥ���, ����󥰥��롼�פ�[RFC3526] �ǳ����Ƥ�줿������Ѥ���. ����2���ܤη���̾���Ȥ���, "diffie-hellman-group14-sha1" ���Ѥ���.  ������, ������̾�����������̻ҤȤ��ư���ʤ���Фʤ�ʤ�. �ޤ�, SSH���Ѥ��뷲��IKE��������줿���Ȥδ֤δط����ꤷ�ƤϤʤ�ʤ�.
+    名前 "diffie-hellman-group1-sha1" は, [RFC2409]で定義されている Oakley群を用いる鍵交換法のために用いられる.  SSHは, Oakley [RFC2412] や IKE と論理的に異なる, 自身の群識別子を維持している. しかし, 追加の群として, ワーキンググループは[RFC3526] で割当てられた数を採用した. この2つ目の群の名前として, "diffie-hellman-group14-sha1" を用いる.  実装は, これらの名前を内部識別子として扱わなければならない. また, SSHが用いる群とIKEで定義された群との間の関係を仮定してはならない.
 
-   ����ɽ��, ����ˡ�ν���γ�����Ƥ򼨤�.
+   次の表で, 鍵交換法の初期の割り当てを示す.
 
          Method name                          Reference
          ------------                         ---------
          diffie-hellman-group1-sha1     [SSH-TRANS, Section 8.1]
          diffie-hellman-group14-sha1    [SSH-TRANS, Section 8.2]
 
-4.11.  ������ƺѤߤΥ��르�ꥺ��̾
+4.11.  割り当て済みのアルゴリズム名
 
-4.11.1.  �Ź楢�르�ꥺ��̾
+4.11.1.  暗号アルゴリズム名
 
-   ����ɽ��, �Ź楢�르�ꥺ���̾���ν���γ�����Ƥ򼨤�.
+   次の表で, 暗号アルゴリズムの名前の初期の割り当てを示す.
 
-         �Ź楢�����ꥺ��̾                     Reference
+         暗号アロゴリズム名                     Reference
          -------------------------                   ---------
          3des-cbc                           [SSH-TRANS, Section 6.3]
          blowfish-cbc                       [SSH-TRANS, Section 6.3]
@@ -727,11 +727,11 @@ Lehtinen & Lonvick          Standards Track                    [Page 16]
 RFC 4250             SSH Protocol Assigned Numbers          January 2006
 
 
-4.11.2.  MAC���르�ꥺ��̾
+4.11.2.  MACアルゴリズム名
 
-   ����ɽ��, MAC���르�ꥺ���̾���ν���γ�����Ƥ򼨤�.
+   次の表で, MACアルゴリズムの名前の初期の割り当てを示す.
 
-         MAC ���르�ꥺ��̾                      Reference
+         MAC アルゴリズム名                      Reference
          ------------------                      ---------
          hmac-sha1                         [SSH-TRANS, Section 6.4]
          hmac-sha1-96                      [SSH-TRANS, Section 6.4]
@@ -739,31 +739,31 @@ RFC 4250             SSH Protocol Assigned Numbers          January 2006
          hmac-md5-96                       [SSH-TRANS, Section 6.4]
          none                              [SSH-TRANS, Section 6.4]
 
-4.11.3.  ���������르�ꥺ��̾
+4.11.3.  公開鍵アルゴリズム名
 
-   ����ɽ��, ���������르�ꥺ���̾���ν���γ�����Ƥ򼨤�.
+   次の表で, 公開鍵アルゴリズムの名前の初期の割り当てを示す.
 
-         ���������르�ꥺ��̾                  Reference
+         公開鍵アルゴリズム名                  Reference
          -------------------------                 ---------
          ssh-dss                            [SSH-TRANS, Section 6.6]
          ssh-rsa                            [SSH-TRANS, Section 6.6]
          pgp-sign-rsa                       [SSH-TRANS, Section 6.6]
          pgp-sign-dss                       [SSH-TRANS, Section 6.6]
 
-4.11.4.  ���̥��르�ꥺ��̾
+4.11.4.  圧縮アルゴリズム名
 
-   ����ɽ��, ���̥��르�ꥺ���̾���ν���γ�����Ƥ򼨤�.
+   次の表で, 圧縮アルゴリズムの名前の初期の割り当てを示す.
 
-         ���̥��르�ꥺ��̾                Reference
+         圧縮アルゴリズム名                Reference
          --------------------------                ---------
          none                               [SSH-TRANS, Section 6.2]
          zlib                               [SSH-TRANS, Section 6.2]
 
-5.  �������ƥ��ιͻ�
+5.  セキュリティの考察
 
-   ���Υץ��ȥ����, �����Ǥʤ��ͥåȥ����ǰ����ʰŹ沽���줿�����ͥ���󶡤���.
+   このプロトコルは, 安全でないネットワーク上で安全な暗号化されたチャンネルを提供する.
 
-   ���Υץȥȥ���Υ������ƥ��ˤĤ��Ƥι�θ�Τ��٤Ƥ�, [SSH-ARCH]���󶡤���Ƥ���.
+   このプトトコルのセキュリティについての考慮のすべては, [SSH-ARCH]で提供されている.
 
 
 
@@ -892,7 +892,7 @@ RFC 4250             SSH Protocol Assigned Numbers          January 2006
 
 Full Copyright Statement
 
-   Copyright (C) The Internet Society (2006). ����: �ջ� ���� <haruyama@unixuser.org> 
+   Copyright (C) The Internet Society (2006). 訳者: 春山 征吾 <haruyama@unixuser.org> 
 
    This document is subject to the rights, licenses and restrictions
    contained in BCP 78, and except as set forth therein, the authors

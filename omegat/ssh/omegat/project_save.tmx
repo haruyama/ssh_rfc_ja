@@ -483,7 +483,7 @@
    size in the message.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>次のメッセージをもう一方の側に送る. メッセージにはローカルなチャンネル番号と初期 window サイズ が含まれる.</seg>
+        <seg>次のメッセージを相手側に送る. メッセージにはローカルなチャンネル番号と初期 window サイズ が含まれる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -560,7 +560,7 @@
    the other side.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>'recipient channel' は, 元の開始要求で与えられたチャンネル番号だ. 'sender channel' はもう一方の側で割り当てられたチャンネル番号だ.</seg>
+        <seg>'recipient channel' は, 元の開始要求で与えられたチャンネル番号だ. 'sender channel' は相手側で割り当てられたチャンネル番号だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -745,7 +745,7 @@
    before it must wait for the window to be adjusted.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>window size は, windowが調整されるまでにもう一方の側が送ることのできるバイト数を指定する.</seg>
+        <seg>window size は, windowが調整されるまでに相手側が送ることのできるバイト数を指定する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -987,7 +987,7 @@
    send SSH_MSG_CHANNEL_EOF.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>どちらかの側がチャンネルにもうこれ以上データを送らないなら, SSH_MSG_CHANNEL_EOF を送る必要がある.</seg>
+        <seg>チャンネルにもうこれ以上データを送らないなら, SSH_MSG_CHANNEL_EOF を送る必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1005,7 +1005,7 @@
    channel.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>しかし, チャンネルのもう一方の側が終了したときに, アプリケーションが EOF を送るかもしれない.</seg>
+        <seg>しかし, チャンネルの相手側が終了したときに, アプリケーションが EOF を送るかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1014,7 +1014,7 @@
    more data may still be sent in the other direction.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>このメッセージのあともチャンネルは開かれた状態で残り, もう一方の方向でさらなるデータが送られるかもしれないことに注意.</seg>
+        <seg>このメッセージのあともチャンネルは開かれた状態で残り, 逆の方向でさらなるデータが送られるかもしれないことに注意.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1543,7 +1543,7 @@
    defined in /etc/passwd in UNIX systems) be started at the other end.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>このメッセージは, もう一方の側で( UNIX システムでは典型的に /etc/passwd で定義される) ユーザのデフォルトシェルの起動を要求する.</seg>
+        <seg>このメッセージは, 相手側で( UNIX システムでは典型的に /etc/passwd で定義される) ユーザのデフォルトシェルの起動を要求する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1698,7 +1698,7 @@
    send a message to the other side to inform it of the new dimensions.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>ウィンドウ (ターミナル) サイズがクライアント側で変更する場合, 新しい容量をもう一方の側に知らせるために次のメッセージを送ってもよい.</seg>
+        <seg>ウィンドウ (ターミナル) サイズがクライアント側で変更する場合, 新しい容量を相手側に知らせるために次のメッセージを送ってもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1760,7 +1760,7 @@
    session, and server means the other side.)</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>(ここで, 繰り返すが, クライアントはセッションを始める側で, サーバはもう一方の側だ.)</seg>
+        <seg>(ここで, 繰り返すが, クライアントはセッションを始める側で, サーバは相手側だ.)</seg>
       </tuv>
     </tu>
     <tu>
@@ -1847,7 +1847,7 @@
    message can be sent to return the exit status of the command.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>もう一方の側で動作していたコマンドが終了すると, コマンドの終了ステータスを返却するために次のメッセージが送られる.</seg>
+        <seg>相手側で動作していたコマンドが終了すると, コマンドの終了ステータスを返却するために次のメッセージが送られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1973,6 +1973,267 @@
       </tuv>
       <tuv lang="JA">
         <seg>もし表示するなら, クライアントソフトウェアは, [SSH-ARCH]で議論した予防措置を取らなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>TCP/IP Port Forwarding</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>TCP/IP ポート転送</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Requesting Port Forwarding</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>ポート転送の要求</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A party need not explicitly request forwardings from its own end to
+   the other direction.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>自身のポートを相手側に転送する場合は要求を明示的にする必要はない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>However, if it wishes that connections to a
+   port on the other side be forwarded to the local side, it must
+   explicitly request this.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>しかし, 相手側のポートへの接続をローカル側に転送したいと望むならば明示的に要求しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The 'address to bind' and 'port number to bind' specify the IP
+   address (or domain name) and port on which connections for forwarding
+   are to be accepted.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>'address to bind' と 'port number to bind' は, 転送のための接続が受け入れる IPアドレス(ないしドメイン名) とポートを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Some strings used for 'address to bind' have
+   special-case semantics.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>'address to bind' には, 特別な意味を持つ文字列がいくつか使われる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  &quot;&quot; means that connections are to be accepted on all protocol
+      families supported by the SSH implementation.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>o  &quot;&quot;' は, SSHの実装がサポートするすべてのプロトコルファミリで接続を受け入れることを意味する</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  &quot;0.0.0.0&quot; means to listen on all IPv4 addresses.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>o  &quot;0.0.0.0&quot; は, すべてのIPv4アドレスで受け入れることを意味する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  &quot;::&quot; means to listen on all IPv6 addresses.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>o  &quot;::&quot; は, すべてのIPv6アドレスで受け入れることを意味する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  &quot;localhost&quot; means to listen on all protocol families supported by
+      the SSH implementation on loopback addresses only ([RFC3330] and
+      [RFC3513]).</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>o  &quot;localhost&quot; は, SSHの実装がサポートするすべてのプロトコルファミリでループバックのアドレスでだけ受け入れることを意味する. ([RFC3330] and
+      [RFC3513]).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  &quot;127.0.0.1&quot; and &quot;::1&quot; indicate listening on the loopback
+      interfaces for IPv4 and IPv6, respectively.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>o  &quot;127.0.0.1&quot; と &quot;::1&quot; は, それぞれ IPv4とIPv6のループバックインタフェイスで受け入れることを意味する.i</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Note that the client can still filter connections based on
+   information passed in the open request.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>クライアントがこのオープンな要求で送られた接続の情報をさらにフィルタすることがあるのに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementations should only allow forwarding privileged ports if the
+   user has been authenticated as a privileged user.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>実装は, ユーザが特権ユーザとして認証されている場合にのみ特権ポートの転送を許すようにする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Client implementations SHOULD reject these messages; they are
+   normally only sent by the client.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>クライアントの実装は, これらのメッセージを拒否する必要がある. これらは通常クライアントからのみ送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If a client passes 0 as port number to bind and has 'want reply' as
+   TRUE, then the server allocates the next available unprivileged port
+   number and replies with the following message; otherwise, there is no
+   response-specific data.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>クライアントが port number to bind として 0を 'want reply' として TRUE を指定した場合, サーバは次に利用可能な特権ポートではないポートを割り当て次のメッセージで返信する. 割り当てなければ返信しない.
+   response-specific data.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A port forwarding can be canceled with the following message.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>ポート転送は次のメッセージでキャンセルできる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Note
+   that channel open requests may be received until a reply to this
+   message is received.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>チャンネルの開始の要求がこのメッセージが受信されるより前に受信されるかもしれないことに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>TCP/IP Forwarding Channels</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>TCP/IP転送チャンネル</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When a connection comes to a port for which remote forwarding has
+   been requested, a channel is opened to forward the port to the other
+   side.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>リモートへの転送が要求されたポートに接続が来ると, 相手側のポートに転送をするチャンネルが開かれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementations MUST reject these messages unless they have
+   previously requested a remote TCP/IP port forwarding with the given
+   port number.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>実装は, このポート番号でのリモートのTCP/IPポート転送を先に要求していなければ, このメッセージを拒否しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When a connection comes to a locally forwarded TCP/IP port, the
+   following packet is sent to the other side.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>接続がローカルに転送されたTCP/IPポートに来ると, 次のパケットが相手側に送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Note that these messages
+   MAY also be sent for ports for which no forwarding has been
+   explicitly requested.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>このメッセージは, ポートに対する転送が明示的に要求されることなく送られてもよいことに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The receiving side must decide whether to
+   allow the forwarding.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>受信した側は転送を受け入れるか決めなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The 'host to connect' and 'port to connect' specify the TCP/IP host
+   and port where the recipient should connect the channel.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>'host to connect' と 'port to connect' は, 受信側がチャンネルに接続する ＴＣＰ/IP ホストとポートを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The 'host
+   to connect' may be either a domain name or a numeric IP address.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>'host
+   to connect' には ドメイン名か数値のIPアドレスだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The 'originator IP address' is the numeric IP address of the machine
+   from where the connection request originates, and the 'originator
+   port' is the port on the host from where the connection originated.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>'originator IP address' は, 接続要求が開始されたマシンの数値のIPアドレスだ. 'originator
+   port' は, 接続が開始されたホストのポートだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Forwarded TCP/IP channels are independent of any sessions, and
+   closing a session channel does not in any way imply that forwarded
+   connections should be closed.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>転送されたTCP/IPチャンネルは他のセッションとは独立だ. またセッションチャンネルが終了しても, 転送された接続が閉じられることを意味しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Client implementations SHOULD reject direct TCP/IP open requests for
+   security reasons.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>クライアントの実装は, セキュリティ上の理由により direct TCP/IP の開始要求を拒否する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2350,7 +2611,7 @@
    [SSH-ARCH].</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>このプトトコルのセキュリティについての考慮のすべては, [SSH-ARCH]で提供されている.</seg>
+        <seg>このプロトコルのセキュリティについての考慮のすべては, [SSH-ARCH]で提供されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6944,7 +7205,7 @@
    minimal when using modern cryptographic methods.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>強調されなければならないが, 現代の暗号技術を利用していればこのようなことが起こる可能性は, 言うまでもなく, ほとんどない.</seg>
+        <seg>現代の暗号技術を利用していればこのようなことが起こる可能性は, 言うまでもなく, ほとんどないことを強調しておく.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9693,7 +9954,7 @@
    that the other party is able to process them.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>例えば, ある実装が非常にたくさんの数の証明書を送りたい場合, 識別文字列によってもう一方の側もそのような証明書群の処理ができることが示されているならば, より大きなパケットが送られてもよい.</seg>
+        <seg>例えば, ある実装が非常にたくさんの数の証明書を送りたい場合, 識別文字列によって相手側もそのような証明書群の処理ができることが示されているならば, より大きなパケットが送られてもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10767,7 +11028,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
    preferred method.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>どちらの側も, もう一方の側が用いるアルゴリズムを推測してもよい. また, 優先の方法にとって適切ならば, そのアルゴリズムに従った初期鍵交換パケットを送ってもよい.</seg>
+        <seg>どちらの側も, 相手側が用いるアルゴリズムを推測してもよい. また, 優先の方法にとって適切ならば, そのアルゴリズムに従った初期鍵交換パケットを送ってもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10936,7 +11197,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
          determine the keys and the session identifier.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>もう一方の側が完全に鍵やセッション識別子を決めるのを防ぐために使われる.</seg>
+        <seg>相手側が完全に鍵やセッション識別子を決めるのを防ぐために使われる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11284,7 +11545,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
          each party will know whether their guess was right.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>もう一方の側から SSH_MSG_KEXINIT パケットを受け取った後で, それぞれの側は推測が正しいか知る.</seg>
+        <seg>相手側から SSH_MSG_KEXINIT パケットを受け取った後で, それぞれの側は推測が正しいか知る.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11295,7 +11556,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
          act as determined by the negotiated key exchange method.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>もう一方の側の推測が間違っていてこのフィールドがTRUEなら, 次のパケットは静かに無視されなければならない. そして, 両方の側は取り決められた鍵交換法によって決められた行動をしなければならない.</seg>
+        <seg>相手側の推測が間違っていてこのフィールドがTRUEなら, 次のパケットは静かに無視されなければならない. そして, 両方の側は取り決められた鍵交換法によって決められた行動をしなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11379,7 +11640,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
    SSH_MSG_KEXINIT message from the other party.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>しかし, SSH_MSG_KEXINIT が送られた後の鍵交換の間に, もう一方の側から SSH_MSG_KEXINIT メッセージを受け取るまでは 送信中かもしれない任意の番号のメッセージを処理する準備がされていなければならないことに注意.</seg>
+        <seg>しかし, SSH_MSG_KEXINIT が送られた後の鍵交換の間に, 相手側から SSH_MSG_KEXINIT メッセージを受け取るまでは 送信中かもしれない任意の番号のメッセージを処理する準備がされていなければならないことに注意.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11616,7 +11877,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
    understand if something goes wrong with the key exchange.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>このメッセージの目的は, 鍵交換で何か問題があったかどうかをもう一方の側が理解できるように SSH_MSG_DISCONNECT メッセージを返信できることを保証することだ.</seg>
+        <seg>このメッセージの目的は, 鍵交換で何か問題があったかどうかを相手側が理解できるように SSH_MSG_DISCONNECT メッセージを返信できることを保証することだ.</seg>
       </tuv>
     </tu>
     <tu>
