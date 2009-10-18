@@ -1288,7 +1288,7 @@
    dimension parameters MUST be ignored.</seg>
       </tuv>
       <tuv xml:lang="JA">
-        <seg>0 の次元パラメータは無視されなければならない.</seg>
+        <seg>次元パラメータが0の場合は無視されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1322,7 +1322,7 @@
         <seg>The client SHOULD ignore pty requests.</seg>
       </tuv>
       <tuv xml:lang="JA">
-        <seg>クリアントは, pty 要求を無視する必要がある.</seg>
+        <seg>クライアントは, pty 要求を無視する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1997,7 +1997,7 @@
    the other direction.</seg>
       </tuv>
       <tuv xml:lang="JA">
-        <seg>一方の側が, 自身のポートを相手側に転送する場合は要求を明示的にする必要はない.</seg>
+        <seg>自身のポートを相手側に転送する場合は要求を明示的にする必要はない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2012,10 +2012,396 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The 'address to bind' and 'port number to bind' specify the IP
+   address (or domain name) and port on which connections for forwarding
+   are to be accepted.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>'address to bind' と 'port number to bind' は, 転送のための接続が受け入れる IPアドレス(ないしドメイン名) とポートを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Some strings used for 'address to bind' have
+   special-case semantics.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>'address to bind' には, 特別な意味を持つ文字列がいくつか使われる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  &quot;&quot; means that connections are to be accepted on all protocol
+      families supported by the SSH implementation.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>o  &quot;&quot;' は, SSHの実装がサポートするすべてのプロトコルファミリで接続を受け入れることを意味する</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  &quot;0.0.0.0&quot; means to listen on all IPv4 addresses.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>o  &quot;0.0.0.0&quot; は, すべてのIPv4アドレスで受け入れることを意味する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  &quot;::&quot; means to listen on all IPv6 addresses.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>o  &quot;::&quot; は, すべてのIPv6アドレスで受け入れることを意味する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  &quot;localhost&quot; means to listen on all protocol families supported by
+      the SSH implementation on loopback addresses only ([RFC3330] and
+      [RFC3513]).</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>o  &quot;localhost&quot; は, SSHの実装がサポートするすべてのプロトコルファミリでループバックのアドレスでだけ受け入れることを意味する. ([RFC3330] and
+      [RFC3513]).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  &quot;127.0.0.1&quot; and &quot;::1&quot; indicate listening on the loopback
+      interfaces for IPv4 and IPv6, respectively.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>o  &quot;127.0.0.1&quot; と &quot;::1&quot; は, それぞれ IPv4とIPv6のループバックインタフェイスで受け入れることを意味する.i</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Note that the client can still filter connections based on
+   information passed in the open request.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>クライアントがこのオープンな要求で送られた接続の情報をさらにフィルタすることがあるのに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Implementations should only allow forwarding privileged ports if the
+   user has been authenticated as a privileged user.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>実装は, ユーザが特権ユーザとして認証されている場合にのみ特権ポートの転送を許すようにする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Client implementations SHOULD reject these messages; they are
+   normally only sent by the client.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>クライアントの実装は, これらのメッセージを拒否する必要がある. これらは通常クライアントからのみ送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If a client passes 0 as port number to bind and has 'want reply' as
+   TRUE, then the server allocates the next available unprivileged port
+   number and replies with the following message; otherwise, there is no
+   response-specific data.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>クライアントが port number to bind として 0を 'want reply' として TRUE を指定した場合, サーバは次に利用可能な特権ポートではないポートを割り当て次のメッセージで返信する. 割り当てなければ返信しない.
+   response-specific data.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>A port forwarding can be canceled with the following message.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>ポート転送は次のメッセージでキャンセルできる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Note
+   that channel open requests may be received until a reply to this
+   message is received.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>チャンネルの開始の要求がこのメッセージが受信されるより前に受信されるかもしれないことに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>TCP/IP Forwarding Channels</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>TCP/IP転送チャンネル</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>When a connection comes to a port for which remote forwarding has
+   been requested, a channel is opened to forward the port to the other
+   side.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>リモートへの転送が要求されたポートに接続が来ると, 相手側のポートに転送をするチャンネルが開かれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Implementations MUST reject these messages unless they have
+   previously requested a remote TCP/IP port forwarding with the given
+   port number.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>実装は, このポート番号でのリモートのTCP/IPポート転送を先に要求していなければ, このメッセージを拒否しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>When a connection comes to a locally forwarded TCP/IP port, the
+   following packet is sent to the other side.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>接続がローカルに転送されたTCP/IPポートに来ると, 次のパケットが相手側に送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Note that these messages
+   MAY also be sent for ports for which no forwarding has been
+   explicitly requested.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>このメッセージは, ポートに対する転送が明示的に要求されることなく送られてもよいことに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The receiving side must decide whether to
+   allow the forwarding.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>受信した側は転送を受け入れるか決めなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The 'host to connect' and 'port to connect' specify the TCP/IP host
+   and port where the recipient should connect the channel.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>'host to connect' と 'port to connect' は, 受信側がチャンネルに接続する ＴＣＰ/IP ホストとポートを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The 'host
+   to connect' may be either a domain name or a numeric IP address.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>'host
+   to connect' は ドメイン名か数値のIPアドレスだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The 'originator IP address' is the numeric IP address of the machine
+   from where the connection request originates, and the 'originator
+   port' is the port on the host from where the connection originated.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>'originator IP address' は, 接続要求が開始されたマシンの数値のIPアドレスだ. 'originator
+   port' は, 接続が開始されたホストのポートだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Forwarded TCP/IP channels are independent of any sessions, and
+   closing a session channel does not in any way imply that forwarded
+   connections should be closed.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>転送されたTCP/IPチャンネルは他のセッションとは独立だ. またセッションチャンネルが終了しても, 転送された接続が閉じられることを意味しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Client implementations SHOULD reject direct TCP/IP open requests for
+   security reasons.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>クライアントの実装は, セキュリティ上の理由により direct TCP/IP の開始要求を拒否する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Encoding of Terminal Modes</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>ターミナルモードのエンコーディング</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>All 'encoded terminal modes' (as passed in a pty request) are encoded
+   into a byte stream.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>(ptyの要求で渡される)すべての 'encoded terminal modes' は, バイトストリームへエンコードされている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>It is intended that the coding be portable
+   across different environments.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>これは, 異なる環境間でコードをポータブルにするためだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The stream consists of opcode-
+   argument pairs wherein the opcode is a byte value.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>ストリームは, opcodeがバイトの値である opcode-argumentのペアで構成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Opcodes 1 to 159
+   have a single uint32 argument.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>Opcode の 1 から 159 までは単一のuint32の引数を持つ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Opcodes 160 to 255 are not yet
+   defined, and cause parsing to stop (they should only be used after
+   any other data).</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>Opcode の 160 から 255 までは, まだ定義されていない. これを受けとった側はパースを停止する(これらは他のデータの後でのみ利用される必要がある).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The stream is terminated by opcode TTY_OP_END
+   (0x00).</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>ストリームは,  opcode TTY_OP_END (0x00) で終わる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The client SHOULD put any modes it knows about in the stream, and the
+   server MAY ignore any modes it does not know about.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>クラアイントは, 知っているすべてのモードをストリームに加える必要がある. サーバは, 知らないモードを無視してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This allows some
+   degree of machine-independence, at least between systems that use a
+   POSIX-like tty interface.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>少なくともPOSIX風のttyインタフェイスを利用するシステム間では, マシンに依存する部分があってよい. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The protocol can support other systems as
+   well, but the client may need to fill reasonable values for a number
+   of parameters so the server pty gets set to a reasonable mode (the
+   server leaves all unspecified mode bits in their default values, and
+   only some combinations make sense).</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>このプロトコルは, 他のシステムも同様にサポートできる. ただし, サーバのptyが適切なモードを設定できるように, クライアントはいくつかのパラメータを適切に設定する必要があるだろう ( サーバはすべての指定されていないモードのビットをデフォルト値のまま残すので, いくつかの組合せだけが意味を成す)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The naming of opcode values mostly follows the POSIX terminal mode
+   flags.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>opcode 値の名前は, POSIX 端末モードのフラグにだいたい従っている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The following opcode values have been defined.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>以下の opcode 値が定義されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Note that the
+   values given below are in decimal format for readability, but they
+   are actually byte values.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>以下で示す値は, 読み易いように10進のフォーマットで書かれているが. 実際には byte の値であることに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>opcode  mnemonic       description
+          ------  --------       -----------
+          0     TTY_OP_END  Indicates end of options.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>オペコード  mnemonic       説明
+         ------  --------       -----------
+         0     TTY_OP_END  オプションの終りを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>1     VINTR       Interrupt character; 255 if none.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>1     VINTR       割り込み文字. もしなければ255.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Similarly
+                             for the other characters.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>他の文字についても同様.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Not all of these
+                             characters are supported on all systems.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>これらの文字すべてが, すべてのシステムでサポートされているわけではない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>2     VQUIT       The quit character (sends SIGQUIT signal on
+                             POSIX systems).</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>2     VQUIT       終了文字(POSIX シテムでは, SIGQUITを送る).</seg>
       </tuv>
     </tu>
     <tu>
@@ -2036,10 +2422,37 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>5     VEOF        End-of-file character (sends EOF from the
+                             terminal).</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>5     VEOF        End-of-file 文字 (ターミナルからEOFを送る).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>6     VEOL        End-of-line character in addition to
+                             carriage return and/or linefeed.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>6     VEOL        キャリッジリターンと/もしくはラインフィードに追加される End-of-line 文字</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>7     VEOL2       Additional end-of-line character.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>7     VEOL2       追加の end-of-line 文字.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>8     VSTART      Continues paused output (normally
+                             control-Q).</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>8     VSTART      中断した出力を再開する(通常は control-Q).</seg>
       </tuv>
     </tu>
     <tu>
@@ -2084,10 +2497,30 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>14    VLNEXT      Enter the next character typed literally,
+                             even if it is a special character
+          15    VFLUSH      Character to flush output.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>14    VLNEXT      次に入力される文字が特別な文字だったとしてもその通りに入力する.
+         15    VFLUSH      出力を flush する文字</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>16    VSWTCH      Switch to a different shell layer.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>16    VSWTCH      別の shell layer に切り替える.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>17    VSTATUS     Prints system status line (load, command,
+                             pid, etc).</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>17    VSTATUS     システムのステータス行(負荷, コマンド, pidなど)を表示する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2104,6 +2537,16 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>30    IGNPAR      パリティ無視フラグ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The parameter
+                             SHOULD be 0 if this flag is FALSE,
+                             and 1 if it is TRUE.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>FALSEならパラメータを0に, TRUE なら 1 にする必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2156,6 +2599,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>37    IUCLC       Translate uppercase characters to
+                             lowercase.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>37    IUCLC       大文字を小文字に変換する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>38    IXON        Enable output flow control.</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -2204,10 +2656,22 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>52    XCASE       Enable input and output of uppercase
+                             characters by preceding their lowercase
+                             equivalents with &quot;\&quot;.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>52    XCASE       (訳注: 小文字のみ有効な場合に)小文字の前に &quot;\&quot; を付けることで大文字の入出力を有効にする.Enable input and output of uppercase
+                            characters by preceding their lowercase
+                            equivalents with &quot;\&quot;.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>53    ECHO        Enable echoing.</seg>
       </tuv>
       <tuv xml:lang="JA">
-        <seg>53    ECHO        エコーヲを有効にする.</seg>
+        <seg>53    ECHO        エコーを有効にする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2308,6 +2772,33 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>73    OCRNL       Translate carriage return to newline
+                             (output).</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>73    OCRNL       出力で, CRをNLに置き換える.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>74    ONOCR       Translate newline to carriage
+                             return-newline (output).</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>74    ONOCR       出力で, NLをCR-NLに置き換える.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>75    ONLRET      Newline performs a carriage return
+                             (output).</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>75    ONLRET      出力で, NLがCRを実行する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>90    CS7         7 bit mode.</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -2336,6 +2827,24 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>93    PARODD      設定されると奇数パリティ. もしくは 偶数パリティ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>128 TTY_OP_ISPEED  Specifies the input baud rate in
+                              bits per second.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>128 TTY_OP_ISPEED  bit/秒単位で入力バンドレートを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>129 TTY_OP_OSPEED  Specifies the output baud rate in
+                              bits per second.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>129 TTY_OP_OSPEED  bit/秒単位で出力バンドレートを指定する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2373,6 +2882,17 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The IANA considerations for the SSH
+   protocol as defined in [SSH-ARCH], [SSH-TRANS], [SSH-USERAUTH], and
+   this document, are detailed in [SSH-NUMBERS].</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>[SSH-ARCH],
+   [SSH-TRANS],  [SSH-USERAUTH] とこの文書で定義される SSH プロトコルに対する IANA の考慮は,  [SSH-NUMBERS] で詳述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Security Considerations</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -2381,11 +2901,40 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This protocol is assumed to run on top of a secure, authenticated
+   transport.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>このプロトコルは, 安全で認証済みのトランスポート上で動くことを仮定している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>User authentication and protection against network-level
+   attacks are assumed to be provided by the underlying protocols.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>ユーザ認証とネットワークレベルでの攻撃に対する対処は, 基底のプロトコルで提供されていることを仮定している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Full security considerations for this protocol are provided in
    [SSH-ARCH].</seg>
       </tuv>
       <tuv xml:lang="JA">
-        <seg>このプトトコルのセキュリティについての考慮のすべては, [SSH-ARCH]で提供されている.</seg>
+        <seg>このプロトコルのセキュリティについての考慮のすべては, [SSH-ARCH]で提供されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Specific to this document, it is RECOMMENDED that
+   implementations disable all the potentially dangerous features (e.g.,
+   agent forwarding, X11 forwarding, and TCP/IP forwarding) if the host
+   key has changed without notice or explanation.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>この文書に特有のこととして, ホスト鍵が注意や説明なしに変更された場合には, すべての潜在的に危険な特徴(たとえば, エージェントの転送, X11の転送, TCP/IPの転送)を実装が無効にすることを推奨する.</seg>
       </tuv>
     </tu>
     <tu>
