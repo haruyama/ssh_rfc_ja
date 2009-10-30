@@ -4618,6 +4618,889 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Using DNS to Securely Publish Secure Shell (SSH) Key Fingerprints</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>DNSを利用したセキュア シェル (SSH) の鍵の指紋の安全な配布</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document describes a method of verifying Secure Shell (SSH) host
+   keys using Domain Name System Security (DNSSEC).</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この文書は, Domain Name System Security (DNSSEC) を使ったセキュア シェル (SSH) ホスト鍵の検証法を記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The document
+   defines a new DNS resource record that contains a standard SSH key
+   fingerprint.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この文書は, 標準SSH鍵指紋を含む新しい DNS リソースレコードを定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH Host Key Verification .......................................2
+      2.1.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSH ホスト鍵の検証 .......................................2
+      2.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Method .....................................................2
+      2.2.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>方法 .....................................................2
+      2.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementation Notes .......................................2
+      2.3.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>実装上の注意 .......................................2
+      2.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Fingerprint Matching .......................................3
+      2.4.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>指紋の一致 .......................................3
+      2.4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Authentication .............................................3
+   3.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>認証 .............................................3
+   3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSHFP Resource Record .......................................3
+      3.1.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSHFP リソースレコード .......................................3
+      3.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSHFP RDATA Format .....................................4
+           3.1.1.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSHFP RDATE フォーマット .....................................4
+           3.1.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Algorithm Number Specification ......................4
+           3.1.2.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>アルゴリズム番号の仕様 .......................4
+           3.1.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Fingerprint Type Specification ......................4
+           3.1.3.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>指紋のタイプの仕様 ......................4
+           3.1.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Fingerprint .........................................5
+      3.2.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>指紋 .........................................5
+      3.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Presentation Format of the SSHFP RR ........................5
+   4.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSHFP RR の 表示形式 ........................5
+   4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Security Considerations .........................................5
+   5.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>セキュリティの考察 .........................................5
+   5.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>IANA Considerations .............................................6
+   6.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>IANA の考慮 .............................................6
+   6.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Normative References ............................................7
+   7.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>標準のリファレンス ............................................7
+   7.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Informational References ........................................7
+   8.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>情報のリファレンス ........................................7
+   8.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH [6] protocol provides secure remote login and other secure
+   network services over an insecure network.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSH [6] プロトコルは, 安全ではないネットワーク上での安全なログインや他の安全なネットワークサービスを提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The security of the
+   connection relies on the server authenticating itself to the client
+   as well as the user authenticating itself to the server.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>接続のセキュリティは, クライアントに対するサーバの認証とサーバに対するユーザの認証双方に依存している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If a connection is established to a server whose public key is not
+   already known to the client, a fingerprint of the key is presented to
+   the user for verification.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>クライアントがまだ知らない公開鍵を持つサーバと接続を確立する場合, 検証のために鍵の指紋がユーザに提示される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the user decides that the fingerprint
+   is correct and accepts the key, the key is saved locally and used for
+   verification for all following connections.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>指紋が正しく鍵を受け入れるとユーザが決めると, 鍵はローカルに保存され今後の接続の検証に使われる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>While some security-
+   conscious users verify the fingerprint out-of-band before accepting
+   the key, many users blindly accept the presented key.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>セキュリティ意識の高いユーザは鍵を受け入れる前に SSHの通信の外側で指紋を検査する. しかし, 多くのユーザは提示されたキーを受け入れる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The method described here can provide out-of-band verification by
+   looking up a fingerprint of the server public key in the DNS [1][2]
+   and using DNSSEC [5] to verify the lookup.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>ここに記述する方法は, DNS[1][2]でサーバの指紋を検索しその検索を DNSSEC [5] で保証する, SSHの通信の外側での検証を提供する. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In order to distribute the fingerprint using DNS, this document
+   defines a new DNS resource record, &quot;SSHFP&quot;, to carry the fingerprint.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>DNS を用いて指紋を配布するために, 指紋を伝達する  &quot;SSHFP&quot; という新しいDNS リソースレコードをこの文書は定義する. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Basic understanding of the DNS system [1][2] and the DNS security
+   extensions [5] is assumed by this document.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>DNS システム [1][2] と DNS セキュリティ拡張 [5] の基本的な理解をこの文書では仮定している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
+   &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this
+   document are to be interpreted as described in RFC 2119 [3].</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この文書でのキーワード &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
+   &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;,  &quot;OPTIONAL&quot; は, RFC 2119 [3] で記述されているように解釈される. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH Host Key Verification</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSH ホスト鍵の検証</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Method</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>方法</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Upon connection to an SSH server, the SSH client MAY look up the
+   SSHFP resource record(s) for the host it is connecting to.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSH サーバへの接続で, SSH クライアントは接続中のホストの SSHFP リソースレコードを検索してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the
+   algorithm and fingerprint of the key received from the SSH server
+   match the algorithm and fingerprint of one of the SSHFP resource
+   record(s) returned from DNS, the client MAY accept the identity of
+   the server.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSH サーバから取得した鍵のアルゴリズムと指紋が, DNSから返されたSSHFP リソースレコードの1つの鍵のアルゴリズムと指紋と一致したら, クライアントはサーバの同一性を受け入れてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementation Notes</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>実装上の注意</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Client implementors SHOULD provide a configurable policy used to
+   select the order of methods used to verify a host key.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>クライアントの実装者は, ホスト鍵の検証法の順番を選択する設定可能なポリシーを提供する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document
+   defines one method: Fingerprint storage in DNS.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この文書は1つの方法を定義している: DNSの指紋ストレージ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Another method
+   defined in the SSH Architecture [6] uses local files to store keys
+   for comparison.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSH アーキテクチャ [6] に別の方法が定義されている. その方法は, 鍵を保存するローカルファイルを比較のために使う.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Other methods that could be defined in the future
+   might include storing fingerprints in LDAP or other databases.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>将来, LDAPや他のデータベースに指紋を保存する他の方法が定義されるだろう. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>configurable policy will allow administrators to determine which
+   methods they want to use and in what order the methods should be
+   prioritized.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>設定可能なポリシーによって, どの方法を使ってほしいかやどの方法が優先されるべきかの順番を管理者が決められるようになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This will allow administrators to determine how much
+   trust they want to place in the different methods.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>それぞれの方法をどれくらい信用するかについても管理者が決められるようになるだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>One specific scenario for having a configurable policy is where
+   clients do not use fully qualified host names to connect to servers.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>設定可能なポリシーを持つ場合の特有のシナリオとして, クライアントが接続するサーバのFQDNを使わない場合がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In this scenario, the implementation SHOULD verify the host key
+   against a local database before verifying the key via the fingerprint
+   returned from DNS.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>このシナリオでは, DNSから返される指紋による鍵の検証の前にローカルなデータベースに対するホスト鍵の検証を実装する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This would help prevent an attacker from
+   injecting a DNS search path into the local resolver and forcing the
+   client to connect to a different host.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>これにより, ローカルなリゾルバにDNS検索パスを挿入して他のホストにクライアントを接続させようとする攻撃を防ぐ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Fingerprint Matching</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>指紋の一致</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The public key and the SSHFP resource record are matched together by
+   comparing algorithm number and fingerprint.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>アルゴリズム番号と指紋を比較して, 公開鍵と SSHFP リソースレコードが一致するか調べる</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The public key algorithm and the SSHFP algorithm number MUST
+      match.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>公開鍵のアルゴリズムと SSHFP のアルゴリズム番号は, 一致しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A message digest of the public key, using the message digest
+      algorithm specified in the SSHFP fingerprint type, MUST match the
+      SSHFP fingerprint.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>ＳＳＨＦＰ の指紋のタイプで定義されたメッセージダイジェストアルゴリズムを使った公開鍵のメッセージダイジェストと SSHFP の指紋は一致しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Authentication</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>認証</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A public key verified using this method MUST NOT be trusted if the
+   SSHFP resource record (RR) used for verification was not
+   authenticated by a trusted SIG RR.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>信頼できるIG RRによって SSHFP リソースレコード（ＲＲ）が認証されていなければ, この方法を用いて検証された公開鍵は, 信用してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Clients that do validate the DNSSEC signatures themselves SHOULD use
+   standard DNSSEC validation procedures.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>DNSECの署名を自ら検証するクライアントは, 標準の DNSSEC 検証手続きを使う必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Clients that do not validate the DNSSEC signatures themselves MUST
+   use a secure transport (e.g., TSIG [9], SIG(0) [10], or IPsec [8])
+   between themselves and the entity performing the signature
+   validation.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>DNSSEC の署名を自らは検証しないクライアントは, 署名の検証を行なうエンティティとの間に安全なトランスポート(例えば TSIG [9] や SIG(0) [10],  IPsec [8])を使わなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSHFP Resource Record</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSHFP リソースレコード</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSHFP resource record (RR) is used to store a fingerprint of an
+   SSH public host key that is associated with a Domain Name System
+   (DNS) name.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSHFP リソースレコード (RR) は, DNS名に関連した SSH 公開鍵の指紋を保存するのに用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The RR type code for the SSHFP RR is 44.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSHFP RR の RR タイプコードは 44 だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSHFP RDATA Format</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSHFP RDATA フォーマット</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The RDATA for a SSHFP RR consists of an algorithm number, fingerprint
+   type and the fingerprint of the public host key.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSHFP RR の ＲＤＡＴＡ は, アルゴリズム番号と署名の種類, 公開鍵の指紋で構成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Algorithm Number Specification</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>アルゴリズム番号の仕様</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This algorithm number octet describes the algorithm of the public
+   key.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>アルゴリズム番号のオクテットは, 公開鍵のアルゴリズムを記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The following values are assigned:</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>次の値が割り当てられている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Reserving other types requires IETF consensus [4].</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>他のタイプを予約するにはIETFの合意が必要だ[4].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Fingerprint Type Specification</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>指紋のタイプの仕様</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fingerprint type octet describes the message-digest algorithm
+   used to calculate the fingerprint of the public key.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>指紋の種類のオクテットは, 公開鍵の指紋を計算するのに使われるメッセージダイジェストアルゴリズムを記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The following
+   values are assigned:</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>次の値が割り当てられている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For interoperability reasons, as few fingerprint types as possible
+   should be reserved.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>相互運用性のため, 予約される指紋のタイプは可能な限り少なくする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The only reason to reserve additional types is
+   to increase security.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>追加のタイプを予約するために理由として認められるのは, セキュリティが向上することだけだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Fingerprint</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>指紋</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The fingerprint is calculated over the public key blob as described
+   in [7].</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>[7] で記述された public key blob に対して計算されたものが指紋だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The message-digest algorithm is presumed to produce an opaque octet
+   string output, which is placed as-is in the RDATA fingerprint field.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>メッセージダイジェストアルゴリズムは, 不透明な(バイナリの?)オクテット文字列の出力をすると仮定される. これは, そのまま RDATA の指紋のフィールドに配置される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Presentation Format of the SSHFP RR</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSHFP RR の 表示形式</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The RDATA of the presentation format of the SSHFP resource record
+   consists of two numbers (algorithm and fingerprint type) followed by
+   the fingerprint itself, presented in hex, e.g.:</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSHFP リソースレコードの RDATA の表示形式は次のように構成される. まず, アルゴリズムと指紋の種類を表す2つの番号, 続いて16進文字列で表現された指紋自身が来る. 例えば以下のようになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The use of mnemonics instead of numbers is not allowed.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>番号の代わりにニーモニックを使うのは許されない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Currently, the amount of trust a user can realistically place in a
+   server key is proportional to the amount of attention paid to
+   verifying that the public key presented actually corresponds to the
+   private key of the server.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>現在, ユーザが現実的にサーバ鍵に起ける信頼の大きさは, サーバの秘密鍵と提示された公開鍵が実際に関係していることを検証するために払う注意の大きさと比例している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If a user accepts a key without verifying
+   the fingerprint with something learned through a secured channel, the
+   connection is vulnerable to a man-in-the-middle attack.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>安全なチャンネルから得た公開鍵の指紋を検証しないでユーザが鍵を受け入れると, その接続は中間者攻撃に対して脆弱だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The overall security of using SSHFP for SSH host key verification is
+   dependent on the security policies of the SSH host administrator and
+   DNS zone administrator (in transferring the fingerprint), detailed
+   aspects of how verification is done in the SSH implementation, and in
+   the client's diligence in accessing the DNS in a secure manner.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSHのホスト鍵の検証に SSHFP を使う場合の総合的なセキュリティは, SSH のホスト管理者と (指紋を転送する) ＤＮＳ ゾーンの管理者のセキュリティポリシーや SSHの実装でどのように検証が行なわれるかの詳細, DNSに安全な方法でアクセスするクライアントの努力の詳細に依存している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>One such aspect is in which order fingerprints are looked up (e.g.,
+   first checking local file and then SSHFP).</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この一つの面が, どの順番で指紋を検索するかだ(例えば, 最初にローカルファイルを検査し次にSSHFPをチェック).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>We note that, in addition
+   to protecting the first-time transfer of host keys, SSHFP can
+   optionally be used for stronger host key protection.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSHFPは, ホスト鍵の最初の転送の保護に加えて, より協力なホスト鍵の保護にもなることをここで言及しておく.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If SSHFP is checked first, new SSH host keys may be distributed by
+      replacing the corresponding SSHFP in DNS.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSHFP が最初に検査されるなら, 新しいSSHホスト鍵は, DNS上の関連する SSHFP を置き換えることで配布されるだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If SSH host key verification can be configured to require SSHFP,
+      SSH host key revocation can be implemented by removing the
+      corresponding SSHFP from DNS.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSH ホスト鍵認証に SSHFP が必要だと設定可能ならば, SSH のホスト鍵の廃止は DNS上の関連する SSHFP を除去することで実装できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As stated in Section 2.2, we recommend that SSH implementors provide
+   a policy mechanism to control the order of methods used for host key
+   verification.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>2.2節で述べたように, SSHの実装者がホスト鍵の検証法の順番を制御するポリシー機構を提供することを推奨する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>One specific scenario for having a configurable policy
+   is where clients use unqualified host names to connect to servers.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>設定可能なポリシーを持つ場合の特有のシナリオとして, クライアントが接続するサーバのFQDNを使わない場合がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In this case, we recommend that SSH implementations check the host
+   key against a local database before verifying the key via the
+   fingerprint returned from DNS.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この場合, DNSから返される指紋による鍵の検証の前にローカルなデータベースに対するホスト鍵の検証をSSHの実装がすることを推奨する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This would help prevent an attacker
+   from injecting a DNS search path into the local resolver and forcing
+   the client to connect to a different host.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>これにより, ローカルなリゾルバにDNS検索パスを挿入して他のホストにクライアントを接続させようとする攻撃を防ぐ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A different approach to solve the DNS search path issue would be for
+   clients to use a trusted DNS search path, i.e., one not acquired
+   through DHCP or other autoconfiguration mechanisms.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>DNS のサーチパス問題を解決する別のアプローチに, クライアントが信頼できる DNS サーチパス, すなわちDHCPや他の自動設定メカニズムによって得られたものではないもの, を使うことがあるだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Since there is
+   no way with current DNS lookup APIs to tell whether a search path is
+   from a trusted source, the entire client system would need to be
+   configured with this trusted DNS search path.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>どのサーチパスが信頼できるソースから得られたものかわかる ＤＮＳ 検索 API は現在ないので, クライアントシステム全体が信頼できるDNSサーチパスによって設定されている必要があるだろう. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Another dependency is on the implementation of DNSSEC itself.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>別に依存している部分にDNSSEC自体の実装がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As
+   stated in Section 2.4, we mandate the use of secure methods for
+   lookup and that SSHFP RRs are authenticated by trusted SIG RRs.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>2.4節で述べたように, 検索に安全な方法を使われ, SSHFP RRが信頼できる SIG RR で認証されることが要求される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This
+   is especially important if SSHFP is to be used as a basis for host
+   key rollover and/or revocation, as described above.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>上で述べたように ホスト鍵の変更や廃止の基盤として SSHFPが使われる場合に, これは非常に重要だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Since DNSSEC only protects the integrity of the host key fingerprint
+   after it is signed by the DNS zone administrator, the fingerprint
+   must be transferred securely from the SSH host administrator to the
+   DNS zone administrator.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>DNSSEC は, DNS ゾーン管理者によって署名されたホスト鍵の指紋の完全性のみを保証するので, SSH ホスト管理者からDNS ゾーン管理者に対して指紋が安全に転送されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This could be done manually between the
+   administrators or automatically using secure DNS dynamic update [11]
+   between the SSH server and the nameserver.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>これは, 管理者間で手で行なうこともできるし, SSHサーバとネームサーバの間で安全なDNS 動的更新 [11] を使って自動的に行なうこともできる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>We note that this is no
+   different from other key enrollment situations, e.g., a client
+   sending a certificate request to a certificate authority for signing.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>たとえば, 署名のために認証の要求をクライアントが認証機関に送る場合などの, 他の鍵の登録の場合と同じだということを注記しておく. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>IANA has allocated the RR type code 44 for SSHFP from the standard RR
+   type space.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>IANA は, 標準 RR タイプ空間から SSHFP に RR タイプコード 44 を割り当てた. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>IANA has opened a new registry for the SSHFP RR type for public key
+   algorithms.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>IANA は, 公開鍵アルゴリズムのための SSHFP RR タイプの新しいレジストリを開いた.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The defined types are:</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>定義済みのタイプは以下の通り:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Adding new reservations requires IETF consensus [4].</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>他の予約を追加するには IETF の合意が必要だ [4].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>IANA has opened a new registry for the SSHFP RR type for fingerprint
+   types.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>IANA は, 指紋のタイプのための SSHFP RR タイプの新しいレジストリを開いた.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This requires 24 bytes of key data
+   (of which 168 bits are actually used).</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>24byteの鍵データを必要とする(このうち 168 bit が実際に用いられる).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Secure Shell (SSH) Protocol Architecture</seg>
       </tuv>
       <tuv lang="JA">
@@ -10510,15 +11393,6 @@
       </tuv>
       <tuv lang="JA">
         <seg>&quot;3des-cbc&quot; 暗号は, 3つの鍵を用いる triple-DES (encrypt-decrypt-encrypt)で, 鍵の最初の8byteが最初の暗号化に用いられ, 次の8byteが復号に用いられ, 続く8byteが最後の暗号化に用いられる.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>This requires 24 bytes of key data
-   (of which 168 bits are actually used).</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>24byteの鍵データを必要とする(このうち 168 bit が実際に用いられる).</seg>
       </tuv>
     </tu>
     <tu>
