@@ -5524,6 +5524,140 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The SSH authentication protocol [SSH-USERAUTH] is a general-purpose
+   user authentication protocol.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSH 認証プロトコル [SSH-USERAUTH] は, 汎用のユーザ認証プロトコルだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The authentication protocol
+   assumes that the underlying protocols provide integrity and
+   confidentiality protection.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>認証プロトコルは, その下層のプロトコルが完全性と機密性を提供することを前提とする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document describes a general purpose authentication method for
+   the SSH authentication protocol.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この文書は, SSH認証プロトコルのための汎用の認証法を記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This method is suitable for
+   interactive authentication methods that do not need any special
+   software support on the client side.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この方法は, クライアント側に特別なソフトウェアのサポートが必要ないインタラクティブな認証法に適している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Instead, all authentication
+   data should be entered via the keyboard.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>かわりに, すべての認証データはキーボードから入力される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The major goal of this
+   method is to allow the SSH client to have little or no knowledge of</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この方法の主な目的は, SSH サーバが使う認証メカニズムの仕様を(ほとんどないしまったく)SSHクライアントが知らなくてもよいようにすることだ. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>the specifics of the underlying authentication mechanism(s) used by
+   the SSH server.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This will allow the server to arbitrarily select or
+   change the underlying authentication mechanism(s) without having to
+   update client code.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>これは, クライアントのコードを更新する必要なしに認証メカニズムをサーバが任意に選択/変更できるということでもある</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The name for this authentication method is &quot;keyboard-interactive&quot;.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この認証法の名前は, &quot;keyboard-interactive&quot; だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document should be read only after reading the SSH architecture
+   document [SSH-ARCH] and the SSH authentication document
+   [SSH-USERAUTH].</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この文書は, SSH アーキテクシャ文書 [SSH-ARCH] と SSH 認証文書 [SSH-USERAUTH] を読んでからのみ読むべきだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document freely uses terminology and notation
+   from both documents without reference or further explanation.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この文書は, 参照や説明なしに2つの文書から用語や表記法を自由に利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document also describes some of the client interaction with the
+   user in obtaining the authentication information.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この文書は, 認証の情報を得る際のユーザとクライアントのやりとりについても記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>While this is
+   somewhat out of the scope of a protocol specification, it is
+   described here anyway because some aspects of the protocol are
+   specifically designed based on user interface issues, and omitting
+   this information may lead to incompatible or awkward implementations.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>これはある意味プロトコルの仕様外の話だ. しかし, このプロトコルはユーザインタファイスの問題に基いて仕様が設計されている面がありまたこの情報を除くと互換性がなかったり不恰好な実装を埋むかもしれないので, ここで記述することになった. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
+   &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this
+   document are to be interpreted as described in [RFC-2119].</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この文書でのキーワード &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
+   &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;,  &quot;OPTIONAL&quot; は, [RFC-2119] で記述されているように解釈される. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Secure Shell (SSH) Protocol Architecture</seg>
       </tuv>
       <tuv lang="JA">
