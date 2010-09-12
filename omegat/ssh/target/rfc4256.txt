@@ -14,7 +14,7 @@ Category: Standards Track                                     M. Forssen
               Generic Message Exchange Authentication for
                     the Secure Shell Protocol (SSH)
 
-このメモについて
+このメモの位置づけ
 
    この文書は, インターネットコミュニティに対するインターネットの標準トラックプロトコルを定義している. また, 改善のための議論と示唆を求めているこのプロトコルの標準化の状態と状況は "Internet
    Official Protocol Standards" (STD 1) の現在の版を参照してほしい.  このメモの配布は制限しない.
@@ -25,28 +25,13 @@ Copyright Notice
 
 概要
 
-   セキュア シェル (SSH) プロトコルは, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.  This
-   document describes a general purpose authentication method for the
-   SSH protocol, suitable for interactive authentications where the
-   authentication data should be entered via a keyboard (or equivalent
-   alphanumeric input device).  The major goal of this method is to
-   allow the SSH client to support a whole class of authentication
-   mechanism(s) without knowing the specifics of the actual
-   authentication mechanism(s).
+   セキュア シェル (SSH) プロトコルは, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.  この文書は, SSHプロトコルのための汎用の認証法を記述している.  この認証法は, 認証データをキーボード(や同様の英数入力デバイス)で入力する状況でインタラクティブな認証を行なうのに適している.  この方法の主な目的は, SSH クライアントが認証メカニズムの具体形な仕様を知らなくても認証メカニズムをサポートできるようにすることだ.
 
 1.  イントロダクション
 
-   The SSH authentication protocol [SSH-USERAUTH] is a general-purpose
-   user authentication protocol.  SSH トランスポート層プロトコル [SSH-TRANS] の上で動作することを想定している.  The authentication protocol
-   assumes that the underlying protocols provide integrity and
-   confidentiality protection.
+   SSH 認証プロトコル [SSH-USERAUTH] は, 汎用のユーザ認証プロトコルだ.  SSH トランスポート層プロトコル [SSH-TRANS] の上で動作することを想定している.  認証プロトコルは, その下層のプロトコルが完全性と機密性を提供することを前提とする.
 
-   This document describes a general purpose authentication method for
-   the SSH authentication protocol.  This method is suitable for
-   interactive authentication methods that do not need any special
-   software support on the client side.  Instead, all authentication
-   data should be entered via the keyboard.  The major goal of this
-   method is to allow the SSH client to have little or no knowledge of
+   この文書は, SSH認証プロトコルのための汎用の認証法を記述している.  この方法は, クライアント側に特別なソフトウェアのサポートが必要ないインタラクティブな認証法に適している.  かわりに, すべての認証データはキーボードから入力される必要がある.  この方法の主な目的は, SSH サーバが使う認証メカニズムの仕様を(ほとんどないしまったく)SSHクライアントが知らなくてもよいようにすることだ. 
 
 
 
@@ -55,28 +40,16 @@ Cusack & Forssen            Standards Track                     [Page 1]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-   the specifics of the underlying authentication mechanism(s) used by
-   the SSH server.  This will allow the server to arbitrarily select or
-   change the underlying authentication mechanism(s) without having to
-   update client code.
+    これは, クライアントのコードを更新する必要なしに認証メカニズムをサーバが任意に選択/変更できるということでもある
 
-   The name for this authentication method is "keyboard-interactive".
+   この認証法の名前は, "keyboard-interactive" だ.
 
-   This document should be read only after reading the SSH architecture
-   document [SSH-ARCH] and the SSH authentication document
-   [SSH-USERAUTH].  This document freely uses terminology and notation
-   from both documents without reference or further explanation.
+   この文書は, SSH アーキテクシャ文書 [SSH-ARCH] と SSH 認証文書 [SSH-USERAUTH] を読んでからのみ読むべきだ.  この文書は, 参照や説明なしに2つの文書から用語や表記法を自由に利用する.
 
-   This document also describes some of the client interaction with the
-   user in obtaining the authentication information.  While this is
-   somewhat out of the scope of a protocol specification, it is
-   described here anyway because some aspects of the protocol are
-   specifically designed based on user interface issues, and omitting
-   this information may lead to incompatible or awkward implementations.
+   この文書は, 認証の情報を得る際のユーザとクライアントのやりとりについても記述する.  これはある意味プロトコルの仕様外の話だ. しかし, このプロトコルはユーザインタファイスの問題に基いて仕様が設計されている面がありまたこの情報を除くと互換性がなかったり不恰好な実装を埋むかもしれないので, ここで記述することになった. 
 
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   document are to be interpreted as described in [RFC-2119].
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, [RFC-2119] で記述されているように解釈される. 
 
 2.  Rationale
 
@@ -111,16 +84,9 @@ Cusack & Forssen            Standards Track                     [Page 2]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-3.  Protocol Exchanges
+3.  プロトコルのやりとり
 
-   The client initiates the authentication with an
-   SSH_MSG_USERAUTH_REQUEST message.  The server then requests
-   authentication information from the client with an
-   SSH_MSG_USERAUTH_INFO_REQUEST message.  The client obtains the
-   information from the user and then responds with an
-   SSM_MSG_USERAUTH_INFO_RESPONSE message.  The server MUST NOT send
-   another SSH_MSG_USERAUTH_INFO_REQUEST before it has received the
-   answer from the client.
+   クライアントは認証を SSH_MSG_USERAUTH_REQUEST メッセージで開始する.  そしてサーバは, クライアントからの認証情報を SSH_MSG_USERAUTH_INFO_REQUEST で要求する.  クライアントはユーザから情報を得て, SSM_MSG_USERAUTH_INFO_RESPONSE で応答する.  クライアントからの返答を受け取る前に, サーバは別の SSH_MSG_USERAUTH_INFO_REQUEST を送ってはならない.
 
 3.1.  Initial Exchange
 

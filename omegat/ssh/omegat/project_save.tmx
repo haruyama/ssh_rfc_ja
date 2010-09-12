@@ -3,7 +3,7 @@
 <tmx version="1.1">
   <header
     creationtool="OmegaT"
-    creationtoolversion="1.8.1_2"
+    creationtoolversion="2.0.5_4"
     segtype="sentence"
     o-tmf="OmegaT TMX"
     adminlang="EN-US"
@@ -17,7 +17,7 @@
         <seg>The Secure Shell (SSH) Connection Protocol</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>セキュア シェル (SSH) コネクションプロトコル</seg>
+        <seg>セキュアシェル（SSH）接続プロトコル</seg>
       </tuv>
     </tu>
     <tu>
@@ -25,7 +25,7 @@
         <seg>Status of This Memo</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>このメモについて</seg>
+        <seg>このメモの位置づけ</seg>
       </tuv>
     </tu>
     <tu>
@@ -5658,6 +5658,53 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Protocol Exchanges</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>プロトコルのやりとり</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The client initiates the authentication with an
+   SSH_MSG_USERAUTH_REQUEST message.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>クライアントは認証を SSH_MSG_USERAUTH_REQUEST メッセージで開始する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The server then requests
+   authentication information from the client with an
+   SSH_MSG_USERAUTH_INFO_REQUEST message.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>そしてサーバは, クライアントからの認証情報を SSH_MSG_USERAUTH_INFO_REQUEST で要求する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The client obtains the
+   information from the user and then responds with an
+   SSM_MSG_USERAUTH_INFO_RESPONSE message.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>クライアントはユーザから情報を得て, SSM_MSG_USERAUTH_INFO_RESPONSE で応答する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The server MUST NOT send
+   another SSH_MSG_USERAUTH_INFO_REQUEST before it has received the
+   answer from the client.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>クライアントからの返答を受け取る前に, サーバは別の SSH_MSG_USERAUTH_INFO_REQUEST を送ってはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Secure Shell (SSH) Protocol Architecture</seg>
       </tuv>
       <tuv lang="JA">
@@ -10186,7 +10233,7 @@
    5.</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>プロトコルバージョンの交換.................................4
+        <seg>プロトコルバージョンのやりとり.................................4
    5.</seg>
       </tuv>
     </tu>
@@ -10515,7 +10562,7 @@
         <seg>Protocol Version Exchange</seg>
       </tuv>
       <tuv lang="JA">
-        <seg>プロトコルバージョンの交換</seg>
+        <seg>プロトコルバージョンのやりとり</seg>
       </tuv>
     </tu>
     <tu>
