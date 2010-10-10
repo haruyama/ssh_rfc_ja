@@ -11,27 +11,26 @@ Category: Standards Track                                     M. Forssen
                                                             January 2006
 
 
-              Generic Message Exchange Authentication for
-                    the Secure Shell Protocol (SSH)
+              SSHƒvƒƒgƒRƒ‹ (SSH) ‚Ì‚½‚ß‚Ì ˆê”ÊƒƒbƒZ[ƒWŒğŠ·”FØ
 
-ã“ã®ãƒ¡ãƒ¢ã®ä½ç½®ã¥ã‘
+‚±‚Ìƒƒ‚‚ÌˆÊ’u‚Ã‚¯
 
-   ã“ã®æ–‡æ›¸ã¯, ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆã‚³ãƒŸãƒ¥ãƒ‹ãƒ†ã‚£ã«å¯¾ã™ã‚‹ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆã®æ¨™æº–ãƒˆãƒ©ãƒƒã‚¯ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã‚’å®šç¾©ã—ã¦ã„ã‚‹. ã¾ãŸ, æ”¹å–„ã®ãŸã‚ã®è­°è«–ã¨ç¤ºå”†ã‚’æ±‚ã‚ã¦ã„ã‚‹ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®æ¨™æº–åŒ–ã®çŠ¶æ…‹ã¨çŠ¶æ³ã¯ "Internet
-   Official Protocol Standards" (STD 1) ã®ç¾åœ¨ã®ç‰ˆã‚’å‚ç…§ã—ã¦ã»ã—ã„.  ã“ã®ãƒ¡ãƒ¢ã®é…å¸ƒã¯åˆ¶é™ã—ãªã„.
+   ‚±‚Ì•¶‘‚Í, ƒCƒ“ƒ^[ƒlƒbƒgƒRƒ~ƒ…ƒjƒeƒB‚É‘Î‚·‚éƒCƒ“ƒ^[ƒlƒbƒg‚Ì•W€ƒgƒ‰ƒbƒNƒvƒƒgƒRƒ‹‚ğ’è‹`‚µ‚Ä‚¢‚é. ‚Ü‚½, ‰ü‘P‚Ì‚½‚ß‚Ì‹c˜_‚Æ¦´‚ğ‹‚ß‚Ä‚¢‚é‚±‚ÌƒvƒƒgƒRƒ‹‚Ì•W€‰»‚Ìó‘Ô‚Æó‹µ‚Í "Internet
+   Official Protocol Standards" (STD 1) ‚ÌŒ»İ‚Ì”Å‚ğQÆ‚µ‚Ä‚Ù‚µ‚¢.  ‚±‚Ìƒƒ‚‚Ì”z•z‚Í§ŒÀ‚µ‚È‚¢.
 
 Copyright Notice
 
-   Copyright (C) The Internet Society (2006). è¨³è€…: æ˜¥å±± å¾å¾ <haruyama@unixuser.org> 
+   Copyright (C) The Internet Society (2006). –óÒ: tR ªŒá <haruyama@unixuser.org> 
 
-æ¦‚è¦
+ŠT—v
 
-   ã‚»ã‚­ãƒ¥ã‚¢ ã‚·ã‚§ãƒ« (SSH) ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¯, å®‰å…¨ã§ã¯ãªã„ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ä¸Šã§ã®å®‰å…¨ãªãƒªãƒ¢ãƒ¼ãƒˆãƒ­ã‚°ã‚¤ãƒ³ã‚„ä»–ã®å®‰å…¨ãªãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã‚µãƒ¼ãƒ“ã‚¹ã®ãŸã‚ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã .  ã“ã®æ–‡æ›¸ã¯, SSHãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ãŸã‚ã®æ±ç”¨ã®èªè¨¼æ³•ã‚’è¨˜è¿°ã—ã¦ã„ã‚‹.  ã“ã®èªè¨¼æ³•ã¯, èªè¨¼ãƒ‡ãƒ¼ã‚¿ã‚’ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰(ã‚„åŒæ§˜ã®è‹±æ•°å…¥åŠ›ãƒ‡ãƒã‚¤ã‚¹)ã§å…¥åŠ›ã™ã‚‹çŠ¶æ³ã§ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒ†ã‚£ãƒ–ãªèªè¨¼ã‚’è¡Œãªã†ã®ã«é©ã—ã¦ã„ã‚‹.  ã“ã®æ–¹æ³•ã®ä¸»ãªç›®çš„ã¯, SSH ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒèªè¨¼ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã®å…·ä½“å½¢ãªä»•æ§˜ã‚’çŸ¥ã‚‰ãªãã¦ã‚‚èªè¨¼ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚’ã‚µãƒãƒ¼ãƒˆã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹ã“ã¨ã .
+   ƒZƒLƒ…ƒA ƒVƒFƒ‹ (SSH) ƒvƒƒgƒRƒ‹‚Í, ˆÀ‘S‚Å‚Í‚È‚¢ƒlƒbƒgƒ[ƒNã‚Å‚ÌˆÀ‘S‚ÈƒŠƒ‚[ƒgƒƒOƒCƒ“‚â‘¼‚ÌˆÀ‘S‚Èƒlƒbƒgƒ[ƒNƒT[ƒrƒX‚Ì‚½‚ß‚ÌƒvƒƒgƒRƒ‹‚¾.  ‚±‚Ì•¶‘‚Í, SSHƒvƒƒgƒRƒ‹‚Ì‚½‚ß‚Ì”Ä—p‚Ì”FØ–@‚ğ‹Lq‚µ‚Ä‚¢‚é.  ‚±‚Ì”FØ–@‚Í, ”FØƒf[ƒ^‚ğƒL[ƒ{[ƒh(‚â“¯—l‚Ì‰p”“ü—ÍƒfƒoƒCƒX)‚Å“ü—Í‚·‚éó‹µ‚ÅƒCƒ“ƒ^ƒ‰ƒNƒeƒBƒu‚È”FØ‚ğs‚È‚¤‚Ì‚É“K‚µ‚Ä‚¢‚é.  ‚±‚Ì•û–@‚Ìå‚È–Ú“I‚Í, SSH ƒNƒ‰ƒCƒAƒ“ƒg‚ª”FØƒƒJƒjƒYƒ€‚Ì‹ï‘ÌŒ`‚Èd—l‚ğ’m‚ç‚È‚­‚Ä‚à”FØƒƒJƒjƒYƒ€‚ğƒTƒ|[ƒg‚Å‚«‚é‚æ‚¤‚É‚·‚é‚±‚Æ‚¾.
 
-1.  ã‚¤ãƒ³ãƒˆãƒ­ãƒ€ã‚¯ã‚·ãƒ§ãƒ³
+1.  ƒCƒ“ƒgƒƒ_ƒNƒVƒ‡ƒ“
 
-   SSH èªè¨¼ãƒ—ãƒ­ãƒˆã‚³ãƒ« [SSH-USERAUTH] ã¯, æ±ç”¨ã®ãƒ¦ãƒ¼ã‚¶èªè¨¼ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã .  SSH ãƒˆãƒ©ãƒ³ã‚¹ãƒãƒ¼ãƒˆå±¤ãƒ—ãƒ­ãƒˆã‚³ãƒ« [SSH-TRANS] ã®ä¸Šã§å‹•ä½œã™ã‚‹ã“ã¨ã‚’æƒ³å®šã—ã¦ã„ã‚‹.  èªè¨¼ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¯, ãã®ä¸‹å±¤ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ãŒå®Œå…¨æ€§ã¨æ©Ÿå¯†æ€§ã‚’æä¾›ã™ã‚‹ã“ã¨ã‚’å‰æã¨ã™ã‚‹.
+   SSH ”FØƒvƒƒgƒRƒ‹ [SSH-USERAUTH] ‚Í, ”Ä—p‚Ìƒ†[ƒU”FØƒvƒƒgƒRƒ‹‚¾.  SSH ƒgƒ‰ƒ“ƒXƒ|[ƒg‘wƒvƒƒgƒRƒ‹ [SSH-TRANS] ‚Ìã‚Å“®ì‚·‚é‚±‚Æ‚ğ‘z’è‚µ‚Ä‚¢‚é.  ”FØƒvƒƒgƒRƒ‹‚Í, ‚»‚Ì‰º‘w‚ÌƒvƒƒgƒRƒ‹‚ªŠ®‘S«‚Æ‹@–§«‚ğ’ñ‹Ÿ‚·‚é‚±‚Æ‚ğ‘O’ñ‚Æ‚·‚é.
 
-   ã“ã®æ–‡æ›¸ã¯, SSHèªè¨¼ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ãŸã‚ã®æ±ç”¨ã®èªè¨¼æ³•ã‚’è¨˜è¿°ã—ã¦ã„ã‚‹.  ã“ã®æ–¹æ³•ã¯, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆå´ã«ç‰¹åˆ¥ãªã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã®ã‚µãƒãƒ¼ãƒˆãŒå¿…è¦ãªã„ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒ†ã‚£ãƒ–ãªèªè¨¼æ³•ã«é©ã—ã¦ã„ã‚‹.  ã‹ã‚ã‚Šã«, ã™ã¹ã¦ã®èªè¨¼ãƒ‡ãƒ¼ã‚¿ã¯ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã‹ã‚‰å…¥åŠ›ã•ã‚Œã‚‹å¿…è¦ãŒã‚ã‚‹.  ã“ã®æ–¹æ³•ã®ä¸»ãªç›®çš„ã¯, SSH ã‚µãƒ¼ãƒãŒä½¿ã†èªè¨¼ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã®ä»•æ§˜ã‚’(ã»ã¨ã‚“ã©ãªã„ã—ã¾ã£ãŸã)SSHã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãŒçŸ¥ã‚‰ãªãã¦ã‚‚ã‚ˆã„ã‚ˆã†ã«ã™ã‚‹ã“ã¨ã . 
+   ‚±‚Ì•¶‘‚Í, SSH”FØƒvƒƒgƒRƒ‹‚Ì‚½‚ß‚Ì”Ä—p‚Ì”FØ–@‚ğ‹Lq‚µ‚Ä‚¢‚é.  ‚±‚Ì•û–@‚Í, ƒNƒ‰ƒCƒAƒ“ƒg‘¤‚É“Á•Ê‚Èƒ\ƒtƒgƒEƒFƒA‚ÌƒTƒ|[ƒg‚ª•K—v‚È‚¢ƒCƒ“ƒ^ƒ‰ƒNƒeƒBƒu‚È”FØ–@‚É“K‚µ‚Ä‚¢‚é.  ‚©‚í‚è‚É, ‚·‚×‚Ä‚Ì”FØƒf[ƒ^‚ÍƒL[ƒ{[ƒh‚©‚ç“ü—Í‚³‚ê‚é•K—v‚ª‚ ‚é.  ‚±‚Ì•û–@‚Ìå‚È–Ú“I‚Í, SSH ƒT[ƒo‚ªg‚¤”FØƒƒJƒjƒYƒ€‚Ìd—l‚ğ(‚Ù‚Æ‚ñ‚Ç‚È‚¢‚µ‚Ü‚Á‚½‚­)SSHƒNƒ‰ƒCƒAƒ“ƒg‚ª’m‚ç‚È‚­‚Ä‚à‚æ‚¢‚æ‚¤‚É‚·‚é‚±‚Æ‚¾. 
 
 
 
@@ -40,39 +39,26 @@ Cusack & Forssen            Standards Track                     [Page 1]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-    ã“ã‚Œã¯, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®ã‚³ãƒ¼ãƒ‰ã‚’æ›´æ–°ã™ã‚‹å¿…è¦ãªã—ã«èªè¨¼ãƒ¡ã‚«ãƒ‹ã‚ºãƒ ã‚’ã‚µãƒ¼ãƒãŒä»»æ„ã«é¸æŠ/å¤‰æ›´ã§ãã‚‹ã¨ã„ã†ã“ã¨ã§ã‚‚ã‚ã‚‹
+    ‚±‚ê‚Í, ƒNƒ‰ƒCƒAƒ“ƒg‚ÌƒR[ƒh‚ğXV‚·‚é•K—v‚È‚µ‚É”FØƒƒJƒjƒYƒ€‚ğƒT[ƒo‚ª”CˆÓ‚É‘I‘ğ/•ÏX‚Å‚«‚é‚Æ‚¢‚¤‚±‚Æ‚Å‚à‚ ‚é
 
-   ã“ã®èªè¨¼æ³•ã®åå‰ã¯, "keyboard-interactive" ã .
+   ‚±‚Ì”FØ–@‚Ì–¼‘O‚Í, "keyboard-interactive" ‚¾.
 
-   ã“ã®æ–‡æ›¸ã¯, SSH ã‚¢ãƒ¼ã‚­ãƒ†ã‚¯ã‚·ãƒ£æ–‡æ›¸ [SSH-ARCH] ã¨ SSH èªè¨¼æ–‡æ›¸ [SSH-USERAUTH] ã‚’èª­ã‚“ã§ã‹ã‚‰ã®ã¿èª­ã‚€ã¹ãã .  ã“ã®æ–‡æ›¸ã¯, å‚ç…§ã‚„èª¬æ˜ãªã—ã«2ã¤ã®æ–‡æ›¸ã‹ã‚‰ç”¨èªã‚„è¡¨è¨˜æ³•ã‚’è‡ªç”±ã«åˆ©ç”¨ã™ã‚‹.
+   ‚±‚Ì•¶‘‚Í, SSH ƒA[ƒLƒeƒNƒVƒƒ•¶‘ [SSH-ARCH] ‚Æ SSH ”FØ•¶‘ [SSH-USERAUTH] ‚ğ“Ç‚ñ‚Å‚©‚ç‚Ì‚İ“Ç‚Ş‚×‚«‚¾.  ‚±‚Ì•¶‘‚Í, QÆ‚âà–¾‚È‚µ‚É2‚Â‚Ì•¶‘‚©‚ç—pŒê‚â•\‹L–@‚ğ©—R‚É—˜—p‚·‚é.
 
-   ã“ã®æ–‡æ›¸ã¯, èªè¨¼ã®æƒ…å ±ã‚’å¾—ã‚‹éš›ã®ãƒ¦ãƒ¼ã‚¶ã¨ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã®ã‚„ã‚Šã¨ã‚Šã«ã¤ã„ã¦ã‚‚è¨˜è¿°ã™ã‚‹.  ã“ã‚Œã¯ã‚ã‚‹æ„å‘³ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ä»•æ§˜å¤–ã®è©±ã . ã—ã‹ã—, ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã¯ãƒ¦ãƒ¼ã‚¶ã‚¤ãƒ³ã‚¿ãƒ•ã‚¡ã‚¤ã‚¹ã®å•é¡Œã«åŸºã„ã¦ä»•æ§˜ãŒè¨­è¨ˆã•ã‚Œã¦ã„ã‚‹é¢ãŒã‚ã‚Šã¾ãŸã“ã®æƒ…å ±ã‚’é™¤ãã¨äº’æ›æ€§ãŒãªã‹ã£ãŸã‚Šä¸æ°å¥½ãªå®Ÿè£…ã‚’åŸ‹ã‚€ã‹ã‚‚ã—ã‚Œãªã„ã®ã§, ã“ã“ã§è¨˜è¿°ã™ã‚‹ã“ã¨ã«ãªã£ãŸ. 
+   ‚±‚Ì•¶‘‚Í, ”FØ‚Ìî•ñ‚ğ“¾‚éÛ‚Ìƒ†[ƒU‚ÆƒNƒ‰ƒCƒAƒ“ƒg‚Ì‚â‚è‚Æ‚è‚É‚Â‚¢‚Ä‚à‹Lq‚·‚é.  ‚±‚ê‚Í‚ ‚éˆÓ–¡ƒvƒƒgƒRƒ‹‚Ìd—lŠO‚Ì˜b‚¾. ‚µ‚©‚µ, ‚±‚ÌƒvƒƒgƒRƒ‹‚Íƒ†[ƒUƒCƒ“ƒ^ƒtƒ@ƒCƒX‚Ì–â‘è‚ÉŠî‚¢‚Äd—l‚ªİŒv‚³‚ê‚Ä‚¢‚é–Ê‚ª‚ ‚è‚Ü‚½‚±‚Ìî•ñ‚ğœ‚­‚ÆŒİŠ·«‚ª‚È‚©‚Á‚½‚è•sŠ†D‚ÈÀ‘•‚ğ–„‚Ş‚©‚à‚µ‚ê‚È‚¢‚Ì‚Å, ‚±‚±‚Å‹Lq‚·‚é‚±‚Æ‚É‚È‚Á‚½. 
 
-   ã“ã®æ–‡æ›¸ã§ã®ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" ã¯, [RFC-2119] ã§è¨˜è¿°ã•ã‚Œã¦ã„ã‚‹ã‚ˆã†ã«è§£é‡ˆã•ã‚Œã‚‹. 
+   ‚±‚Ì•¶‘‚Å‚ÌƒL[ƒ[ƒh "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" ‚Í, [RFC-2119] ‚Å‹Lq‚³‚ê‚Ä‚¢‚é‚æ‚¤‚É‰ğß‚³‚ê‚é. 
 
-2.  Rationale
+2.  ˜_‹’
 
-   Currently defined authentication methods for SSH are tightly coupled
-   with the underlying authentication mechanism.  This makes it
-   difficult to add new mechanisms for authentication as all clients
-   must be updated to support the new mechanism.  With the generic
-   method defined here, clients will not require code changes to support
-   new authentication mechanisms, and if a separate authentication layer
-   is used, such as [PAM], then the server may not need any code changes
-   either.
+   Œ»İSSH‚Ì‚½‚ß‚É’è‹`‚³‚ê‚Ä‚¢‚é”FØ–@‚Í, Šî”Õ‚Æ‚È‚Á‚Ä‚¢‚é”FØƒƒJƒjƒYƒ€‚Æ–§‚ÉŒ‹‡‚µ‚Ä‚¢‚é.  ‚±‚ê‚É‚æ‚è, V‚µ‚¢”FØƒƒJƒjƒYƒ€‚ğ’Ç‰Á‚·‚é‚É‚Í, ‚·‚×‚Ä‚ÌƒNƒ‰ƒCƒAƒ“ƒg‚ª‚»‚ÌV‚µ‚¢ƒƒJƒjƒYƒ€‚ğƒTƒ|[ƒg‚·‚é‚½‚ß‚ÉXV‚³‚ê‚È‚¯‚ê‚Î‚È‚ç‚¸, V‚µ‚¢ƒƒJƒjƒYƒ€‚Ì’Ç‰Á‚ğ¢“ï‚É‚µ‚Ä‚¢‚é.  ‚±‚±‚Å’è‹`‚·‚éˆê”Ê“I‚È•û–@‚ğ—p‚¢‚é‚Æ, ƒNƒ‰ƒCƒAƒ“ƒg‚ÍV‚µ‚¢”FØƒƒJƒjƒYƒ€‚ğƒTƒ|[ƒg‚·‚é‚½‚ß‚ÉƒR[ƒh‚ğ•ÏX‚·‚é•K—v‚ª‚È‚­‚È‚é. ‚Ü‚½, [PAM]‚Ì‚æ‚¤‚È•ª—£‚³‚ê‚½”FØ‘w‚ğ—p‚¢‚Ä‚¢‚é‚È‚ç, ƒT[ƒo‚àƒR[ƒh‚Ì•ÏX‚ª•K—v‚È‚¢‚©‚à‚µ‚ê‚È‚¢.
 
-   This presents a significant advantage to other methods, such as the
-   "password" method (defined in [SSH-USERAUTH]), as new (presumably
-   stronger) methods may be added "at will" and system security can be
-   transparently enhanced.
+   ‚±‚ê‚Í, ([SSH-USERAUTH] ‚Å’è‹`‚³‚ê‚Ä‚¢‚é) "password"  •û®‚Ì‚æ‚¤‚È‘¼‚Ì•û–@‚É‘Î‚µ‚Ä”ñí‚É—L—˜‚Å‚ ‚é. V‚µ‚¢(‚¨‚»‚ç‚­‚æ‚è‹­ŒÅ‚È)•û–@‚ª "v‚¢‚Ì‚Ü‚Ü‚É" ’Ç‰Á‚Å‚«‚é‚Ì‚Å, ƒVƒXƒeƒ€‚ÌƒZƒLƒ…ƒŠƒeƒB‚Í“§‰ß“I‚É‹­‰»‚Å‚«‚é.
 
-   Challenge-response and One Time Password mechanisms are also easily
-   supported with this authentication method.
+   ƒ`ƒƒƒŒƒ“ƒW-ƒŒƒXƒ|ƒ“ƒX‚Æƒƒ“ƒ^ƒCƒ€ƒpƒXƒ[ƒh‚ÌƒƒJƒjƒYƒ€‚Í, ‚±‚Ì”FØ–@‚Å—eˆÕ‚ÉƒTƒ|[ƒg‚³‚ê‚é
 
-   However, this authentication method is limited to authentication
-   mechanisms that do not require any special code, such as hardware
-   drivers or password mangling, on the client.
+   ‚µ‚©‚µ, ‚±‚Ì”FØ–@‚Í, ƒNƒ‰ƒCƒAƒ“ƒg‚Å(ƒn[ƒhƒEƒFƒA‚Ìƒhƒ‰ƒCƒo‚âƒpƒXƒ[ƒhƒ}ƒ“ƒOƒŠƒ“ƒO‚Ì‚æ‚¤‚È)“Á•Ê‚ÈƒR[ƒh‚ğ•K—v‚Æ‚µ‚È‚¢”FØƒƒJƒjƒYƒ€‚É§ŒÀ‚³‚ê‚é.
 
 
 
@@ -84,14 +70,13 @@ Cusack & Forssen            Standards Track                     [Page 2]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-3.  ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®ã‚„ã‚Šã¨ã‚Š
+3.  ƒvƒƒgƒRƒ‹‚Ì‚â‚è‚Æ‚è
 
-   ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯èªè¨¼ã‚’ SSH_MSG_USERAUTH_REQUEST ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã§é–‹å§‹ã™ã‚‹.  ãã—ã¦ã‚µãƒ¼ãƒã¯, ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ã®èªè¨¼æƒ…å ±ã‚’ SSH_MSG_USERAUTH_INFO_REQUEST ã§è¦æ±‚ã™ã‚‹.  ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¯ãƒ¦ãƒ¼ã‚¶ã‹ã‚‰æƒ…å ±ã‚’å¾—ã¦, SSM_MSG_USERAUTH_INFO_RESPONSE ã§å¿œç­”ã™ã‚‹.  ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‹ã‚‰ã®è¿”ç­”ã‚’å—ã‘å–ã‚‹å‰ã«, ã‚µãƒ¼ãƒã¯åˆ¥ã® SSH_MSG_USERAUTH_INFO_REQUEST ã‚’é€ã£ã¦ã¯ãªã‚‰ãªã„.
+   ƒNƒ‰ƒCƒAƒ“ƒg‚Í”FØ‚ğ SSH_MSG_USERAUTH_REQUEST ƒƒbƒZ[ƒW‚ÅŠJn‚·‚é.  ‚»‚µ‚ÄƒT[ƒo‚Í, ƒNƒ‰ƒCƒAƒ“ƒg‚©‚ç‚Ì”FØî•ñ‚ğ SSH_MSG_USERAUTH_INFO_REQUEST ‚Å—v‹‚·‚é.  ƒNƒ‰ƒCƒAƒ“ƒg‚Íƒ†[ƒU‚©‚çî•ñ‚ğ“¾‚Ä, SSM_MSG_USERAUTH_INFO_RESPONSE ‚Å‰“š‚·‚é.  ƒNƒ‰ƒCƒAƒ“ƒg‚©‚ç‚Ì•Ô“š‚ğó‚¯æ‚é‘O‚É, ƒT[ƒo‚Í•Ê‚Ì SSH_MSG_USERAUTH_INFO_REQUEST ‚ğ‘—‚Á‚Ä‚Í‚È‚ç‚È‚¢.
 
-3.1.  Initial Exchange
+3.1.  Å‰‚ÌŒğŠ·
 
-   The authentication starts with the client sending the following
-   packet:
+   ”FØ‚Í, ƒNƒ‰ƒCƒAƒ“ƒg‚ªŸ‚ÌƒpƒPƒbƒg‚ğ‘—‚é‚±‚Æ‚Ån‚Ü‚é.
 
       byte      SSH_MSG_USERAUTH_REQUEST
       string    user name (ISO-10646 UTF-8, as defined in [RFC-3629])
@@ -100,31 +85,15 @@ RFC 4256         SSH Generic Interactive Authentication     January 2006
       string    language tag (as defined in [RFC-3066])
       string    submethods (ISO-10646 UTF-8)
 
-   The language tag is deprecated and SHOULD be the empty string.  It
-   may be removed in a future revision of this specification.  Instead,
-   the server SHOULD select the language to be used based on the tags
-   communicated during key exchange [SSH-TRANS].
+   language tag ‚Í„§‚³‚ê‚Ä‚¨‚ç‚¸A‹ó‚Ì•¶š—ñ‚Å‚ ‚é•K—v‚ª‚ ‚é.  ‚±‚Ìd—l‚Ì«—ˆ‚Ìƒo[ƒWƒ‡ƒ“‚Å‚Í, íœ‚³‚ê‚é‚¾‚ë‚¤.  ‘ã‚í‚è‚É, ƒT[ƒo‚ÍŒ®ŒğŠ·‚É’ÊM‚³‚ê‚éƒ^ƒO‚ÉŠî‚Ã‚¢‚ÄŒ¾Œê‚ğ‘I‘ğ‚·‚é•K—v‚ª‚ ‚é [SSH-TRANS].
 
-   If the language tag is not the empty string, the server SHOULD use
-   the specified language for any messages sent to the client as part of
-   this protocol.  The language tag SHOULD NOT be used for language
-   selection for messages outside of this protocol.  If the server does
-   not support the requested language, the language to be used is
-   implementation-dependent.
+   ‚à‚µ, language tag ‚ª‹ó‚Ì•¶š—ñ‚Å‚È‚©‚Á‚½‚ç, ƒT[ƒo‚Í, ‚±‚ÌƒvƒƒgƒRƒ‹‚Ìˆê•”‚Æ‚µ‚ÄƒNƒ‰ƒCƒAƒ“ƒg‚Ö‘—‚é‚·‚×‚Ä‚ÌƒƒbƒZ[ƒW‚Éw’è‚³‚ê‚½Œ¾Œê‚ğ—p‚¢‚é•K—v‚ª‚ ‚é.  language tag ‚ğ, ‚±‚ÌƒvƒƒgƒRƒ‹ŠO•”‚ÌƒƒbƒZ[ƒW‚ÌŒ¾Œê‘I‘ğ‚Ég‚í‚È‚¢‚Ù‚¤‚ª‚æ‚¢.  ƒT[ƒo‚ª—v‹‚³‚ê‚½Œ¾Œê‚ğƒTƒ|[ƒg‚µ‚Ä‚È‚¢‚È‚ç, —˜—p‚³‚ê‚éŒ¾Œê‚ÍÀ‘•ˆË‘¶‚¾.
 
-   The submethods field is included so the user can give a hint of which
-   actual methods he wants to use.  It is a comma-separated list of
-   authentication submethods (software or hardware) that the user
-   prefers.  If the client has knowledge of the submethods preferred by
-   the user, presumably through a configuration setting, it MAY use the
-   submethods field to pass this information to the server.  Otherwise,
-   it MUST send the empty string.
+   submethods ƒtƒB[ƒ‹ƒh‚Í, ƒ†[ƒU‚ª—˜—p‚µ‚½‚¢‚Æ–]‚ŞÀÛ‚Ì•û–@‚Ìƒqƒ“ƒg‚ªŠÜ‚Ü‚ê‚é.  ƒ†[ƒU‚ªD‚Ş”FØ submethod (ƒ\ƒtƒgƒEƒFƒA‚È‚¢‚µƒn[ƒhƒEƒFƒA)‚ÌƒRƒ“ƒ}‹æØ‚èƒŠƒXƒg‚¾. İ’è‚È‚Ç‚©‚çƒNƒ‰ƒCƒAƒ“ƒg‚ªƒ†[ƒU‚ÌD‚Ş submethod ‚É‚Â‚¢‚Ä’m‚Á‚Ä‚¢‚é‚È‚ç, ƒT[ƒo‚É‚»‚Ìî•ñ‚ğ“n‚·‚½‚ß‚É submethods ƒtƒB[ƒ‹ƒh‚ğ—˜—p‚µ‚Ä‚à‚æ‚¢.  ‚»‚¤‚Å‚È‚¯‚ê‚Î, ‹ó•¶š—ñ‚ğ‘—‚ç‚È‚¯‚ê‚Î‚È‚ç‚È‚¢.
 
-   The actual names of the submethods is something the user and the
-   server need to agree upon.
+   submethods ‚ÌÀÛ‚Ì–¼‘O‚Í, ƒ†[ƒU‚ÆƒT[ƒo‚ÌŠÔ‚Å“¯ˆÓ‚ª•K—v‚¾.
 
-   Server interpretation of the submethods field is implementation-
-   dependent.
+   submethods ‚ÌƒT[ƒo‚Ì‰ğß‚Í, À‘•ˆË‘¶‚¾.
 
 
 
@@ -133,45 +102,23 @@ Cusack & Forssen            Standards Track                     [Page 3]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-   One possible implementation strategy of the submethods field on the
-   server is that, unless the user may use multiple different
-   submethods, the server ignores this field.  If the user may
-   authenticate using one of several different submethods, the server
-   should treat the submethods field as a hint on which submethod the
-   user wants to use this time.
+   submethods ƒtƒB[ƒ‹ƒh‚ÌƒT[ƒo‘¤‚Ìˆê‚Â‚Ì‰Â”\‚ÈÀ‘•í—ª‚Í, ƒ†[ƒU‚ª•¡”‚ÌˆÙ‚È‚é submethod‚ğ—˜—p‚µ‚æ‚¤‚Æ‚à, ƒT[ƒo‚ª‚±‚ÌƒtƒB[ƒ‹ƒh‚ğ–³‹‚·‚é‚±‚Æ‚¾.  ƒ†[ƒU‚ª‚¢‚­‚Â‚©‚ÌˆÙ‚È‚ésubmethod‚Ì1‚Â‚ğ—p‚¢‚Ä”FØ‚µ‚½‚¢, ƒT[ƒo‚Í, ƒ†[ƒU‚ª‚±‚Ì‚É—˜—p‚µ‚½‚¢ submethod ‚Ìƒqƒ“ƒg‚Æ‚µ‚Ä submethods ‚ğæ‚èˆµ‚¤•K—v‚ª‚ ‚é.
 
-   Note that when this message is sent to the server, the client has not
-   yet prompted the user for a password, and so that information is NOT
-   included with this initial message (unlike the "password" method).
+   ‚±‚ÌƒƒbƒZ[ƒW‚ªƒT[ƒo‚É‘—M‚³‚ê‚é, ƒNƒ‰ƒCƒAƒ“ƒg‚Í‚Ü‚¾ƒ†[ƒU‚ÉƒpƒXƒ[ƒh‚Ì‚½‚ß‚Ìƒvƒƒ“ƒvƒg‚ğo‚µ‚Ä‚¨‚ç‚¸, ("password" –@‚Æ‚ÍˆÙ‚È‚è) ‚±‚ÌÅ‰‚ÌƒƒbƒZ[ƒW‚É‚ÍƒpƒXƒ[ƒh‚Ì‚æ‚¤‚Èî•ñ‚ÍŠÜ‚Ü‚ê‚Ä‚¢‚È‚¢.
 
-   The server MUST reply with an SSH_MSG_USERAUTH_SUCCESS,
-   SSH_MSG_USERAUTH_FAILURE, or SSH_MSG_USERAUTH_INFO_REQUEST message.
+   ƒT[ƒo‚Í, SSH_MSG_USERAUTH_SUCCESS ‚©,
+   SSH_MSG_USERAUTH_FAILURE, SSH_MSG_USERAUTH_INFO_REQUEST ƒƒbƒZ[ƒW‚Å‰“š‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢.
 
-   The server SHOULD NOT reply with the SSH_MSG_USERAUTH_FAILURE message
-   if the failure is based on the user name or service name; instead, it
-   SHOULD send SSH_MSG_USERAUTH_INFO_REQUEST message(s), which look just
-   like the one(s) that would have been sent in cases where
-   authentication should proceed, and then send the failure message
-   (after a suitable delay, as described below).  The goal is to make it
-   impossible to find valid usernames by comparing the results when
-   authenticating as different users.
+   ƒ†[ƒU–¼‚©ƒT[ƒrƒX–¼‚ªŒ´ˆö‚Å¸”s‚µ‚½‚Æ‚«, ƒT[ƒo‚Í SSH_MSG_USERAUTH_FAILURE ƒƒbƒZ[ƒW‚Å‰“š‚µ‚È‚¢‚Ù‚¤‚ª‚æ‚¢. ‘ã‚í‚è‚É,  ”FØ‚ªi‚Şê‡‚Ì‚Æ“¯—l‚É, SSH_MSG_USERAUTH_INFO_REQUEST ƒƒbƒZ[ƒW‚ğ‘—‚é•K—v‚ª‚ ‚é. ‚»‚µ‚Ä(Œãq‚·‚é“KØ‚È’x‰„‚ÌŒã‚Å)¸”sƒƒbƒZ[ƒW‚ğ‘—‚é.  ‚±‚Ì–Ú“I‚Í, ˆÙ‚È‚éƒ†[ƒU‚Å”FØ‚·‚é‚ÌŒ‹‰Ê‚ğ”äŠr‚µ‚Ä—LŒø‚Èƒ†[ƒU–¼‚ğ’T‚·‚Ì‚ğ¢“ï‚É‚·‚é‚½‚ß‚¾.
 
-   The server MAY reply with an SSH_MSG_USERAUTH_SUCCESS message if no
-   authentication is required for the user in question.  However, a
-   better approach, for reasons discussed above, might be to reply with
-   an SSH_MSG_USERAUTH_INFO_REQUEST message and ignore (don't validate)
-   the response.
+   ƒT[ƒo‚Í, ƒ†[ƒU‚É—v‹‚³‚ê‚½”FØ‚ª‚È‚¢ê‡‚É SSH_MSG_USERAUTH_SUCCESS ƒƒbƒZ[ƒW‚Å‰“š‚µ‚Ä‚à‚æ‚¢.  ‚µ‚©‚µ, ã‚Å‹c˜_‚µ‚½——R‚É‚æ‚è, ‚æ‚è‚æ‚¢ƒAƒvƒ[ƒ`‚Í,  SSH_MSG_USERAUTH_INFO_REQUEST ƒƒbƒZ[ƒW‚Å‰“š‚µ‚Ä ‚»‚Ì•Ô“š‚ğ–³‹ (ŒŸØ‚µ‚È‚¢)‚·‚é‚±‚Æ‚¾‚ë‚¤..
 
-3.2.  Information Requests
+3.2.  î•ñ‚Ì—v‹
 
-   Requests are generated from the server using the
-   SSH_MSG_USERAUTH_INFO_REQUEST message.
+   SSH_MSG_USERAUTH_INFO_REQUEST ƒƒbƒZ[ƒW‚ğ—p‚¢‚Ä, ƒT[ƒo‚©‚ç—v‹‚ª¶¬‚³‚ê‚é.
 
-   The server may send as many requests as are necessary to authenticate
-   the client; the client MUST be prepared to handle multiple exchanges.
-   However, the server MUST NOT ever have more than one
-   SSH_MSG_USERAUTH_INFO_REQUEST message outstanding.  That is, it may
-   not send another request before the client has answered.
+   ƒT[ƒo‚Í, ƒNƒ‰ƒCƒAƒ“ƒg‚ğ”FØ‚·‚é‚½‚ß‚É‚½‚­‚³‚ñ‚Ì—v‹‚ğ•K—v‚Æ‚·‚é‚©‚à‚µ‚ê‚È‚¢. ƒNƒ‰ƒCƒAƒ“ƒg‚Í•¡”‚ÌŒğŠ·‚ğˆ—‚·‚é€”õ‚ğ‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢.
+   ‚µ‚©‚µ, ƒT[ƒo‚Í, 2‚ÂˆÈã‚Ì–¢ˆ—‚Ì SSH_MSG_USERAUTH_INFO_REQUEST ƒƒbƒZ[ƒW‚ğˆµ‚Á‚Ä‚Í‚È‚ç‚È‚¢..  ‚Â‚Ü‚è, ƒNƒ‰ƒCƒAƒ“ƒg‚ª•Ô“š‚·‚é‘O‚É•Ê‚Ì—v‹‚ğ‘—‚Á‚Ä‚Í‚È‚ç‚È‚¢.
 
 
 
@@ -189,7 +136,7 @@ Cusack & Forssen            Standards Track                     [Page 4]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-   The SSH_MSG_USERAUTH_INFO_REQUEST message is defined as follows:
+   SSH_MSG_USERAUTH_INFO_REQUEST ƒƒbƒZ[ƒW‚ÍŸ‚Ì‚æ‚¤‚É’è‹`‚³‚ê‚é.
 
       byte      SSH_MSG_USERAUTH_INFO_REQUEST
       string    name (ISO-10646 UTF-8)
@@ -202,35 +149,16 @@ RFC 4256         SSH Generic Interactive Authentication     January 2006
       string    prompt[num-prompts] (ISO-10646 UTF-8)
       boolean   echo[num-prompts]
 
-   The language tag is deprecated and SHOULD be the empty string.  It
-   may be removed in a future revision of this specification.  Instead,
-   the server SHOULD select the language used based on the tags
-   communicated during key exchange [SSH-TRANS].
+   language tag ‚Í„§‚³‚ê‚Ä‚¨‚ç‚¸A‹ó‚Ì•¶š—ñ‚Å‚ ‚é•K—v‚ª‚ ‚é.  ‚±‚Ìd—l‚Ì«—ˆ‚Ìƒo[ƒWƒ‡ƒ“‚Å‚Í, íœ‚³‚ê‚é‚¾‚ë‚¤.  ‘ã‚í‚è‚É, ƒT[ƒo‚ÍŒ®ŒğŠ·‚É’ÊM‚³‚ê‚éƒ^ƒO‚ÉŠî‚Ã‚¢‚ÄŒ¾Œê‚ğ‘I‘ğ‚·‚é•K—v‚ª‚ ‚é [SSH-TRANS].
 
-   If the language tag is not the empty string, the server SHOULD use
-   the specified language for any messages sent to the client as part of
-   this protocol.  The language tag SHOULD NOT be used for language
-   selection for messages outside of this protocol.  If the server does
-   not support the requested language, the language to be used is
-   implementation-dependent.
+   ‚à‚µ, language tag ‚ª‹ó‚Ì•¶š—ñ‚Å‚È‚©‚Á‚½‚ç, ƒT[ƒo‚Í, ‚±‚ÌƒvƒƒgƒRƒ‹‚Ìˆê•”‚Æ‚µ‚ÄƒNƒ‰ƒCƒAƒ“ƒg‚Ö‘—‚é‚·‚×‚Ä‚ÌƒƒbƒZ[ƒW‚Éw’è‚³‚ê‚½Œ¾Œê‚ğ—p‚¢‚é•K—v‚ª‚ ‚é.  language tag ‚ğ, ‚±‚ÌƒvƒƒgƒRƒ‹ŠO•”‚ÌƒƒbƒZ[ƒW‚ÌŒ¾Œê‘I‘ğ‚Ég‚í‚È‚¢‚Ù‚¤‚ª‚æ‚¢.  ƒT[ƒo‚ª—v‹‚³‚ê‚½Œ¾Œê‚ğƒTƒ|[ƒg‚µ‚Ä‚È‚¢‚È‚ç, —˜—p‚³‚ê‚éŒ¾Œê‚ÍÀ‘•ˆË‘¶‚¾.
 
-   The server SHOULD take into consideration that some clients may not
-   be able to properly display a long name or prompt field (see next
-   section), and limit the lengths of those fields if possible.  For
-   example, instead of an instruction field of "Enter Password" and a
-   prompt field of "Password for user23@host.domain: ", a better choice
-   might be an instruction field of "Password authentication for
-   user23@host.domain" and a prompt field of "Password: ".  It is
-   expected that this authentication method would typically be backended
-   by [PAM] and so such choices would not be possible.
+   ƒT[ƒo‚Í, ƒNƒ‰ƒCƒAƒ“ƒg‚ª’·‚¢ name ‚â prompt ƒtƒB[ƒ‹ƒh‚ğ“KØ‚É•\¦‚Å‚«‚È‚¢‰Â”\«‚ğl—¶‚·‚é•K—v‚ª‚ ‚é(Ÿ‚Ìß‚ğQÆ). ‰Â”\‚È‚ç‚Î‚±‚ê‚ç‚ÌƒtƒB[ƒ‹ƒh‚Ì—¬‚³‚ğ§ŒÀ‚·‚é•K—v‚ª‚ ‚é.  —á‚¦‚Î, instruction ƒtƒB[ƒ‹ƒh‚É"Enter Password", prompt ƒtƒB[ƒ‹ƒh‚É"Password for user23@host.domain: " ‚Æ‚·‚é‘ã‚í‚è‚É, instruction ƒtƒB[ƒ‹ƒh‚É "Password authentication for
+   user23@host.domain" , prompt ƒtƒB[ƒ‹ƒh‚É "Password: " ‚Æ‚·‚é‚Ì‚ª—Ç‚¢‘I‘ğ‚¾..  ‚±‚Ì”FØ•û®‚Í, “TŒ^“I‚É‚Í [PAM] ‚É‚æ‚Á‚Äx‰‡‚³‚ê‚é‚Ì‚Å‚±‚Ì‚æ‚¤‚È‘I‘ğ‚Í‰Â”\‚Å‚Í‚È‚¢‚±‚Æ‚à—\‘z‚³‚ê‚é.
 
-   The name and instruction fields MAY be empty strings; the client MUST
-   be prepared to handle this correctly.  The prompt field(s) MUST NOT
-   be empty strings.
+   name ‚â instruction ƒtƒB[ƒ‹ƒh‚Í‹ó‚Ì•¶š—ñ‚Å‚à‚æ‚¢. ƒNƒ‰ƒCƒAƒ“ƒg‚Í‚±‚ê‚ç‚ğ³‚µ‚­ˆ—‚·‚é‚æ‚¤€”õ‚³‚ê‚È‚¯‚ê‚Î‚È‚ç‚È‚¢.  prompt ƒtƒB[ƒ‹ƒh‚Í ‹ó•¶š—ñ‚Å‚ ‚Á‚Ä‚Í‚È‚ç‚È‚¢.
 
-   The num-prompts field may be `0', in which case there will be no
-   prompt/echo fields in the message, but the client SHOULD still
-   display the name and instruction fields (as described below).
+   num-prompts ƒtƒB[ƒ‹ƒh‚Í ƒƒbƒZ[ƒW‚Å prompt/echo ƒtƒB[ƒ‹ƒh‚ª‘¶İ‚µ‚È‚¢ê‡‚É `0' ‚Ìê‡‚à‚ ‚é. (Œãq‚·‚é‚æ‚¤‚É)‚»‚Ìê‡‚àƒNƒ‰ƒCƒAƒ“ƒg‚Í name ‚Æ instruction ƒtƒB[ƒ‹ƒh‚ğ•\¦‚·‚é•K—v‚ª‚ ‚é.
 
 
 
@@ -245,51 +173,19 @@ Cusack & Forssen            Standards Track                     [Page 5]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-3.3.  User Interface
+3.3.  ƒ†[ƒUƒCƒ“ƒ^ƒtƒF[ƒX
 
-   Upon receiving a request message, the client SHOULD prompt the user
-   as follows:
+   —v‹ƒƒbƒZ[ƒW‚ğó‚¯•t‚¯‚½‚ç, ƒNƒ‰ƒCƒAƒ“ƒg‚ÍŸ‚Ì‚æ‚¤‚Éƒ†[ƒU‚Éƒvƒƒ“ƒvƒg‚ğo‚·•K—v‚ª‚ ‚é.
 
-   A command line interface (CLI) client SHOULD print the name and
-   instruction (if non-empty), adding newlines.  Then, for each prompt
-   in turn, the client SHOULD display the prompt and read the user
-   input.
+   ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“ƒCƒ“ƒ^ƒtƒFƒCƒX (CLI)  ƒNƒ‰ƒCƒAƒ“ƒg‚Í, name ‚Æ instruction (‹ó•¶š—ñ‚Å‚È‚©‚Á‚½‚ç) ‚ğ•\¦‚µ, ‰üs‚ğ’Ç‰Á‚·‚é.  ‚»‚µ‚Ä, ‡”Ô‚É‚»‚ê‚¼‚ê‚Ìprompt‚É‚Â‚¢‚Ä, ƒNƒ‰ƒCƒAƒ“ƒg‚Í prompt‚ğ•\¦‚µƒ†[ƒU‚Ì“ü—Í‚ğ“Ç‚İæ‚é•K—v‚ª‚ ‚é.
 
-   A graphical user interface (GUI) client has many choices on how to
-   prompt the user.  One possibility is to use the name field (possibly
-   prefixed with the application's name) as the title of a dialog window
-   in which the prompt(s) are presented.  In that dialog window, the
-   instruction field would be a text message, and the prompts would be
-   labels for text entry fields.  All fields SHOULD be presented to the
-   user.  For example, an implementation SHOULD NOT discard the name
-   field because its windows lack titles; instead, it SHOULD find
-   another way to display this information.  If prompts are presented in
-   a dialog window, then the client SHOULD NOT present each prompt in a
-   separate window.
+   ƒOƒ‰ƒtƒBƒJƒ‹ƒ†[ƒUƒCƒ“ƒ^ƒtƒFƒCƒX (GUI) ƒNƒ‰ƒCƒAƒ“ƒg‚Í, ƒ†[ƒU‚Éƒvƒƒ“ƒvƒg‚ğo‚·‚½‚ß‚É‚½‚­‚³‚ñ‚Ì‘I‘ğˆ‚ª‚ ‚é.  ˆê‚Â‚Ì•û–@‚Í, prompt‚Ì•\¦‚·‚éƒ_ƒCƒAƒƒOƒEƒBƒ“ƒhƒE‚Ìƒ^ƒCƒgƒ‹‚Æ‚µ‚Ä,  name ƒtƒB[ƒ‹ƒh‚ğ—p‚¢‚é‚±‚Æ‚¾(ƒAƒvƒŠƒP[ƒVƒ‡ƒ“–¼‚ğ‘O’u‚·‚é‚©‚à‚µ‚ê‚È‚¢). ‚±‚Ìƒ_ƒCƒAƒƒOƒEƒBƒ“ƒhƒE‚Å, instruction ƒtƒB[ƒ‹ƒh‚ÍƒeƒLƒXƒg‚ÌƒƒbƒZ[ƒW‚Å, prompt ‚ÍƒeƒLƒXƒgƒGƒ“ƒgƒŠƒtƒB[ƒ‹ƒh‚Ìƒ‰ƒxƒ‹‚Æ‚È‚é‚¾‚ë‚¤.  ‚·‚×‚Ä‚ÌƒtƒB[ƒ‹ƒh‚ªƒ†[ƒU‚É•\¦‚³‚ê‚é•K—v‚ª‚ ‚é.  —á‚¦‚Î, À‘•‚ÍƒEƒBƒ“ƒhƒE‚Éƒ^ƒCƒgƒ‹‚ª‚È‚¢‚©‚ç‚Æ‚¢‚Á‚Ä name ƒtƒB[ƒ‹ƒh‚ğ”jŠü‚µ‚È‚¢‚Ù‚¤‚ª‚æ‚¢. ‚±‚Ìî•ñ‚ğ•\¦‚·‚é•Ê‚Ì•û–@‚ğŒ©‚Â‚¯‚é•K—v‚ª‚ ‚é.  ƒ_ƒCƒAƒƒOƒEƒBƒ“ƒhƒE‚Å prompt ‚ª•\¦‚³‚ê‚éÛ, ƒNƒ‰ƒCƒAƒ“ƒg‚Í‚»‚ê‚¼‚ê‚Ìprompt‚ğ•Ê‚Ìwindow‚Å•\¦‚µ‚È‚¢‚Ù‚¤‚ª‚æ‚¢.
 
-   All clients MUST properly handle an instruction field with embedded
-   newlines.  They SHOULD also be able to display at least 30 characters
-   for the name and prompts.  If the server presents names or prompts
-   longer than 30 characters, the client MAY truncate these fields to
-   the length it can display.  If the client does truncate any fields,
-   there MUST be an obvious indication that such truncation has
-   occurred.  The instruction field SHOULD NOT be truncated.
+   ‚·‚×‚Ä‚ÌƒNƒ‰ƒCƒAƒ“ƒg‚Í, ‰üs‚ğŠÜ‚Ş instruction ƒtƒB[ƒ‹ƒh‚ğ“KØ‚Éˆµ‚¦‚È‚¯‚ê‚Î‚È‚ç‚È‚¢.  ‚Ü‚½, ‚·‚×‚Ä‚ÌƒNƒ‰ƒCƒAƒ“ƒg‚Í, name ‚Æ prompt ‚É‚Â‚¢‚Ä ­‚È‚­‚Æ‚à 30 •¶š•\¦‚Å‚«‚é•K—v‚ª‚ ‚é.  ƒT[ƒo‚ª30•¶š‚ğ‰z‚¦‚é name ‚â prompt ‚ğ’ñ‹Ÿ‚µ‚½‚È‚ç, ƒNƒ‰ƒCƒAƒ“ƒg‚Í ‚±‚ê‚ç‚ÌƒtƒB[ƒ‹ƒh‚ğ•\¦‚Å‚«‚é’·‚³‚ÉØ‚è‹l‚ß‚Ä‚à‚æ‚¢.  ƒNƒ‰ƒCƒAƒ“ƒg‚ªƒtƒB[ƒ‹ƒh‚ğØ‚è‹l‚ß‚é‚È‚ç, Ø‚è‹l‚ß‚ª‹N‚Á‚½‚±‚Æ‚ğ–¾Šm‚É•\¦‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢.  instruction ƒtƒB[ƒ‹ƒh‚Í, Ø‚è‹l‚ß‚È‚¢‚Ù‚¤‚ª‚æ‚¢.
 
-   Clients SHOULD use control character filtering, as discussed in
-   [SSH-ARCH], to avoid attacks by including terminal control characters
-   in the fields to be displayed.
+   [SSH-ARCH} ‚Å‹c˜_‚³‚ê‚Ä‚¢‚é‚æ‚¤‚É, •\¦‚³‚ê‚éƒtƒB[ƒ‹ƒh‚É’[––§Œä•¶š‚ªŠÜ‚Ü‚ê‚éUŒ‚‚ğ–h‚®‚½‚ß‚É, ƒNƒ‰ƒCƒAƒ“ƒg‚Í§Œä•¶š‚ÌƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚ğ‚·‚é•K—v‚ª‚ ‚é.
 
-   For each prompt, the corresponding echo field indicates whether the
-   user input should be echoed as characters are typed.  Clients SHOULD
-   correctly echo/mask user input for each prompt independently of other
-   prompts in the request message.  If a client does not honor the echo
-   field for whatever reason, then the client MUST err on the side of
-   masking input.  A GUI client might like to have a checkbox toggling
-   echo/mask.  Clients SHOULD NOT add any additional characters to the
-   prompt, such as ": " (colon-space); the server is responsible for
-   supplying all text to be displayed to the user.  Clients MUST also
-   accept empty responses from the user and pass them on as empty
-   strings.
+   ‚»‚ê‚¼‚ê‚Ìprompt‚Å, ‘Î‰‚·‚é echo ƒtƒB[ƒ‹ƒh‚Í, ƒ†[ƒU‚Ì“ü—Í‚ğ“ü—Í‚³‚ê‚½•¶š‚ÅƒGƒR[‚·‚é‚©‚Ç‚¤‚©‚ğw’è‚·‚é.  ƒNƒ‰ƒCƒAƒ“ƒg‚Í, —v‹ƒƒbƒZ[ƒW‚Ì’†‚Ìprompto‚²‚Æ‚É“Æ—§‚É³Šm‚Éƒ†[ƒU‚Ì“ü—Í‚ğƒGƒR[/ƒ}ƒXƒN‚·‚é•K—v‚ª‚ ‚é.  ƒNƒ‰ƒCƒAƒ“ƒg‚ª‰½‚ç‚©‚Ì——R‚Å echo ƒtƒB[ƒ‹ƒh‚ğ‘¸d‚µ‚È‚¢ê‡‚Í, ƒNƒ‰ƒCƒAƒ“ƒg‚Í“ü—Í‚ğ‰B‚³‚È‚¯‚ê‚Î‚È‚ç‚È‚¢.  GUI ƒNƒ‰ƒCƒAƒ“ƒg‚Í, echo/mask‚ÌƒgƒOƒ‹‚ğs‚È‚¤ƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚ğ•t‚¯‚Ä‚à‚æ‚¢.  ƒNƒ‰ƒCƒAƒ“ƒg‚Í, ": " (ƒRƒƒ“-ƒXƒy[ƒX)‚Ì‚æ‚¤‚È’Ç‰Á‚Ì•¶š‚ğ prompt  ‚É‘«‚³‚È‚¢‚Ù‚¤‚ª‚æ‚¢. ƒT[ƒo‚Í, ƒ†[ƒU‚Ì•\¦‚³‚ê‚é‚·‚×‚Ä‚Ì•¶š—ñ‚ğ’ñ‹Ÿ‚·‚éÓ”C‚ª‚ ‚é.  ƒNƒ‰ƒCƒAƒ“ƒg‚Í, ƒ†[ƒU‚©‚ç‚Ì‹ó‚Ì‰“š‚ğó‚¯•t‚¯‹ó‚Ì•¶š—ñ‚Æ‚µ‚Äˆµ‚í‚È‚¯‚ê‚Î‚È‚ç‚È‚¢.
 
 
 
@@ -301,13 +197,11 @@ Cusack & Forssen            Standards Track                     [Page 6]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-3.4.  Information Responses
+3.4.  î•ñ‚Ì‰“š
 
-   After obtaining the requested information from the user, the client
-   MUST respond with an SSH_MSG_USERAUTH_INFO_RESPONSE message.
+   ƒ†[ƒU‚©‚ç—v‹‚³‚ê‚½î•ñ‚ğ“¾‚½‚ç, ƒNƒ‰ƒCƒAƒ“ƒg‚Í,  SH_MSG_USERAUTH_INFO_RESPONSE ƒƒbƒZ[ƒW‚Å‰“š‚·‚é.
 
-   The format of the SSH_MSG_USERAUTH_INFO_RESPONSE message is as
-   follows:
+   SSH_MSG_USERAUTH_INFO_RESPONSE ‚ÌŒ`®‚ÍŸ‚Ì‚Æ‚¨‚è:
 
       byte      SSH_MSG_USERAUTH_INFO_RESPONSE
       int       num-responses
@@ -315,40 +209,21 @@ RFC 4256         SSH Generic Interactive Authentication     January 2006
       ...
       string    response[num-responses] (ISO-10646 UTF-8)
 
-   Note that the responses are encoded in ISO-10646 UTF-8.  It is up to
-   the server how it interprets the responses and validates them.
-   However, if the client reads the responses in some other encoding
-   (e.g., ISO 8859-1), it MUST convert the responses to ISO-10646 UTF-8
-   before transmitting.
+   response ‚Í ISO-10646 UTF-8 ‚ÅƒGƒ“ƒR[ƒh‚³‚ê‚é‚±‚Æ‚É’ˆÓ.  response ‚ğ‚Ç‚¤‰ğß‚µŒŸØ‚·‚é‚©‚Í ƒT[ƒoŸ‘æ‚¾.
+   ‚½‚¾‚µ, ƒNƒ‰ƒCƒAƒ“ƒg‚ª‘¼‚ÌƒGƒ“ƒR[ƒfƒBƒ“ƒO(—á: ISO 8859-1) ‚Å‰“š‚ğ“Ç‚ñ‚¾ê‡‚Å‚à, ƒNƒ‰ƒCƒAƒ“ƒg‚Í“]‘—‚Ì‘O‚É ISO-10646 UTF-8 ‚É•ÏŠ·‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢.
 
-   From an internationalization standpoint, it is desired that if a user
-   enters responses, the authentication process will work regardless of
-   what OS and client software they are using.  Doing so requires
-   normalization.  Systems supporting non-ASCII passwords SHOULD always
-   normalize passwords and usernames whenever they are added to the
-   database, or compare them (with or without hashing) to existing
-   entries in the database.  SSH implementations that both store the
-   passwords and compare them SHOULD use [SASLPREP] for normalization.
+   ‘Û‰»‚ÌŠÏ“_‚©‚ç, ƒ†[ƒU‚ª‰“š‚ğ“ü—Í‚·‚éÛ, ”FØ‚ÌƒvƒƒZƒX‚Íƒ†[ƒU‚ª—p‚¢‚éOS‚âƒNƒ‰ƒCƒAƒ“ƒgƒ\ƒtƒgƒEƒFƒA‚ÉŠÖŒW‚È‚­“®‚­‚±‚Æ‚ª–]‚Ü‚µ‚¢.  ‚±‚Ì‚½‚ß‚É³‹K‰»‚ª•K—v‚¾.  ASCIIˆÈŠO‚ÌƒpƒXƒ[ƒh‚ğƒTƒ|[ƒg‚·‚éƒVƒXƒeƒ€‚Í, ƒpƒXƒ[ƒh‚Æƒ†[ƒU–¼‚ğƒf[ƒ^ƒx[ƒX‚É’Ç‰Á‚µ‚½‚è(ƒnƒbƒVƒ…‚µ‚½‚è,‚à‚µ‚­‚Í‚¹‚¸‚É)ƒf[ƒ^ƒx[ƒX“à‚ÌƒGƒ“ƒgƒŠ‚Æ”äŠr‚·‚éÛ‚É‚¢‚Â‚Å‚à³‹K‰»‚·‚é•K—v‚ª‚ ‚é. ƒpƒXƒ[ƒh‚ğ•Û‘¶‚µ‚½‚è”äŠr‚·‚éSSH‚ÌÀ‘•‚Í, ³‹K‰»‚É [SASLPREP] ‚ğg‚¤•K—v‚ª‚ ‚é.
 
-   If the num-responses field does not match the num-prompts field in
-   the request message, the server MUST send a failure message.
+   num-responses ƒtƒB[ƒ‹ƒh‚ª —v‹ƒƒbƒZ[ƒW‚Ì num-prompts ƒtƒB[ƒ‹ƒh‚Æˆê’v‚µ‚È‚¢ê‡, ƒT[ƒo‚Í, ¸”sƒƒbƒZ[ƒW‚ğ‘—‚ç‚È‚¯‚ê‚Î‚È‚ç‚È‚¢.
 
-   In the case that the server sends a `0' num-prompts field in the
-   request message, the client MUST send a response message with a `0'
-   num-responses field to complete the exchange.
+   ƒT[ƒo‚ª —v‹ƒƒbƒZ[ƒW‚Å `0' ‚È num-prompts ƒtƒB[ƒ‹ƒh‚ğ‘—‚Á‚½ê‡, ƒNƒ‰ƒCƒAƒ“ƒg‚Í, ŒğŠ·‚ğŠ®—¹‚·‚é‚½‚ß‚É '0' ‚È num-responses ƒtƒB[ƒ‹ƒh‚Å ‰“šƒƒbƒZ[ƒW‚ğ‘—‚ç‚È‚¯‚ê‚Î‚È‚ç‚È‚¢.
 
-   The responses MUST be ordered as the prompts were ordered.  That is,
-   response[n] MUST be the answer to prompt[n].
+   responses ‚Í, prompts ‚Ì‡”Ô‚Å•À‚ñ‚Å‚È‚¯‚ê‚Î‚È‚ç‚È‚¢.  ‚Â‚Ü‚è,  response[n] ‚Í, prompt[n] ‚Ì‰“š‚Å‚È‚¯‚ê‚Î‚È‚ç‚È‚¢.
 
-   After receiving the response, the server MUST send either an
-   SSH_MSG_USERAUTH_SUCCESS, SSH_MSG_USERAUTH_FAILURE, or another
-   SSH_MSG_USERAUTH_INFO_REQUEST message.
+   ‰“š‚ğó‚¯æ‚Á‚½‚ç, ƒT[ƒo‚Í, SSH_MSG_USERAUTH_SUCCESS ‚©,
+   SSH_MSG_USERAUTH_FAILURE, ‚³‚ç‚É‚à‚¤1‚Â‚Ì SSH_MSG_USERAUTH_INFO_REQUEST ƒƒbƒZ[ƒW‚Å‰“š‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢.
 
-   If the server fails to authenticate the user (through the underlying
-   authentication mechanism(s)), it SHOULD NOT send another request
-   message(s) in an attempt to obtain new authentication data; instead,
-   it SHOULD send a failure message.  The only time the server should
-   send multiple request messages is if additional authentication data
+   (Šî”Õ‚Æ‚È‚Á‚Ä‚¢‚é”FØƒƒJƒjƒYƒ€‚ğ’Ê‚µ‚Ä) ƒT[ƒo‚ªƒ†[ƒU‚Ì”FØ‚É¸”s‚µ‚½‚È‚ç, V‚µ‚¢”FØƒf[ƒ^‚ğ“¾‚æ‚¤‚Æ‚µ‚Ä •Ê‚Ì—v‹ƒƒbƒZ[ƒW‚ğ‘—‚ç‚È‚¢‚Ù‚¤‚ª‚æ‚¢. ‘ã‚í‚è‚É ¸”sƒƒbƒZ[ƒW‚ğ‘—‚é•K—v‚ª‚ ‚é.  ’Ç‰Á‚Ì”FØƒf[ƒ^‚ª•K—v‚Èê‡‚Ì‚İ, ƒT[ƒo‚Í•¡”‚Ì—v‹ƒƒbƒZ[ƒW‚ğ‘—‚é•K—v‚ª‚ ‚é.
 
 
 
@@ -357,20 +232,15 @@ Cusack & Forssen            Standards Track                     [Page 7]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-   is needed (i.e., because there are multiple underlying authentication
-   mechanisms that must be used to authenticate the user).
+   (‚Â‚Ü‚è, ƒ†[ƒU‚ğ”FØ‚·‚é‚Ì‚Ég‚í‚ê‚È‚¯‚ê‚Î‚È‚ç‚È‚¢Šî”Õ‚Æ‚È‚é”FØƒƒJƒjƒYƒ€‚ª•¡”‚ ‚éê‡‚¾).
 
-   If the server intends to respond with a failure message, it MAY delay
-   for an implementation-dependent time before sending it to the client.
-   It is suspected that implementations are likely to make the time
-   delay configurable; a suggested default is 2 seconds.
+   ƒT[ƒo‚ª¸”sƒƒbƒZ[ƒW‚Å‰“š‚µ‚æ‚¤‚Æ‚·‚éê‡, ƒNƒ‰ƒCƒAƒ“ƒg‚É‘—M‚·‚é‘O‚ÉÀ‘•ˆË‘¶‚ÌŠÔ‘—‚ç‚¹‚Ä‚à‚æ‚¢.
+   À‘•‚Í‚±‚Ì’x‰„‚ğİ’è‰Â”\‚É‚·‚é‚©‚à‚µ‚ê‚È‚¢. „§‚³‚ê‚éƒfƒtƒHƒ‹ƒg‚Í 2•b‚¾.
 
-4.  Authentication Examples
+4.  ”FØ‚Ì—á
 
-   Here are two example exchanges between a client and server.  The
-   first is an example of challenge/response with a handheld token.
-   This is an authentication that is not otherwise possible with other
-   authentication methods.
+   ƒNƒ‰ƒCƒAƒ“ƒg‚ÆƒT[ƒo‚ÌŠÔ‚ÌŒğŠ·‚ğ2—á‹“‚°‚é.  Å‰‚Í, ƒnƒ“ƒhƒwƒ‹ƒhƒg[ƒNƒ“‚É‚æ‚éƒ`ƒƒƒŒƒ“ƒW/ƒŒƒXƒ|ƒ“ƒX‚Ì—á‚¾.
+   ‚±‚ê‚Í, ‘¼‚Ì”FØ–@‚Å‚Í•s‰Â”\‚È”FØ‚¾.
 
       C:   byte      SSH_MSG_USERAUTH_REQUEST
       C:   string    "user23"
@@ -413,8 +283,7 @@ Cusack & Forssen            Standards Track                     [Page 8]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-   The second example is a standard password authentication; in this
-   case, the user's password is expired.
+   2‚Â–Ú‚Ì—á‚Í, •W€“I‚ÈƒpƒXƒ[ƒh”FØ‚¾. ‚±‚Ìê‡ƒ†[ƒU‚ÌƒpƒXƒ[ƒh‚ÌŠúŒÀ‚ªØ‚ê‚Ä‚¢‚é.
 
       C:   byte      SSH_MSG_USERAUTH_REQUEST
       C:   string    "user23"
@@ -476,31 +345,20 @@ RFC 4256         SSH Generic Interactive Authentication     January 2006
 
       S:   byte      SSH_MSG_USERAUTH_SUCCESS
 
-5.  IANA ã®è€ƒæ…®
+5.  IANA ‚Ìl—¶
 
-   The userauth type "keyboard-interactive" is used for this
-   authentication method.
+   userauth ‚Ìƒ^ƒCƒv "keyboard-interactive" ‚ª‚±‚Ì”FØ–@‚Ì‚½‚ß‚Ég‚í‚ê‚é.
 
-   The following method-specific constants are used with this
-   authentication method:
+   Ÿ‚Ì”FØ–@“Á—L‚Ì’è”‚ª‚±‚Ì”FØ–@‚Åg‚í‚ê‚é.
 
       SSH_MSG_USERAUTH_INFO_REQUEST           60
       SSH_MSG_USERAUTH_INFO_RESPONSE          61
 
-6.  ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã®è€ƒå¯Ÿ
+6.  ƒZƒLƒ…ƒŠƒeƒB‚Ìl@
 
-   The authentication protocol and this authentication method depend on
-   the security of the underlying SSH transport layer.  Without the
-   confidentiality provided therein, any authentication data passed with
-   this method is subject to interception.
+   ”FØƒvƒƒgƒRƒ‹‚Æ‚±‚Ì”FØ–@‚Í, Šî”Õ‚Æ‚È‚Á‚Ä‚¢‚éSSHƒgƒ‰ƒ“ƒXƒ|[ƒg‘w‚ÌƒZƒLƒ…ƒŠƒeƒB‚ÉˆË‘¶‚·‚é.  ”é“½«‚ª’ñ‹Ÿ‚³‚ê‚È‚¢‚Æ, ‚±‚Ì•û–@‚Å“]‘—‚³‚ê‚é‚·‚×‚Ä‚Ì”FØƒf[ƒ^‚Í–Tó‚³‚ê‚Ü‚·.
 
-   The number of client-server exchanges required to complete an
-   authentication using this method may be variable.  It is possible
-   that an observer may gain valuable information simply by counting
-   that number.  For example, an observer may guess that a user's
-   password has expired, and with further observation may be able to
-   determine the password lifetime imposed by a site's password
-   expiration policy.
+   ‚±‚Ì•û–@‚Å”FØ‚ğŠ®—¹‚·‚é‚½‚ß‚É•K—v‚ÈƒNƒ‰ƒCƒAƒ“ƒg-ƒT[ƒo‚ÌŒğŠ·‚Ì”‚Í•Ï‰»‚·‚é‚©‚à‚µ‚ê‚È‚¢.  ‚±‚Ìz‚¤‚ğ”‚¦‚é‚¾‚¯‚ÅˆÓ–¡‚Ì‚ ‚éî•ñ‚ğ“¾‚ç‚ê‚éŠÏ@Ò‚ª‚¢‚é‚©‚à‚µ‚ê‚È‚¢. —á‚¦‚Î, ŠÏ@Ò‚Í, ƒ†[ƒU‚ÌƒpƒXƒ[ƒh‚ªŠúŒÀØ‚ê‚©‚Ç‚¤‚©„‘ª‚Å‚«‚é‚©‚à‚µ‚ê‚È‚¢. ‚³‚ç‚È‚éŠÏ@‚É‚æ‚è, ƒT[ƒo‚ÌƒpƒXƒ[ƒhŠúŒÀƒ|ƒŠƒV[‚ÅŒˆ‚ß‚ç‚ê‚½ƒpƒXƒ[ƒh‚Ì¶‘¶ŠúŠÔ‚ğŒˆ’è‚Å‚«‚é‚©‚à‚µ‚ê‚È‚¢.
 
 7.  References
 
@@ -583,7 +441,7 @@ RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 Full Copyright Statement
 
-   Copyright (C) The Internet Society (2006). è¨³è€…: æ˜¥å±± å¾å¾ <haruyama@unixuser.org> 
+   Copyright (C) The Internet Society (2006). –óÒ: tR ªŒá <haruyama@unixuser.org> 
 
    This document is subject to the rights, licenses and restrictions
    contained in BCP 78, and except as set forth therein, the authors

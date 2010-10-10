@@ -14,16 +14,16 @@ Category: Standards Track                                   UC San Diego
 
         The Secure Shell (SSH) Transport Layer Encryption Modes
 
-ã“ã®ãƒ¡ãƒ¢ã®ä½ç½®ã¥ã‘
+‚±‚Ìƒƒ‚‚ÌˆÊ’u‚Ã‚¯
 
-   ã“ã®æ–‡æ›¸ã¯, ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆã‚³ãƒŸãƒ¥ãƒ‹ãƒ†ã‚£ã«å¯¾ã™ã‚‹ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆã®æ¨™æº–ãƒˆãƒ©ãƒƒã‚¯ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã‚’å®šç¾©ã—ã¦ã„ã‚‹. ã¾ãŸ, æ”¹å–„ã®ãŸã‚ã®è­°è«–ã¨ç¤ºå”†ã‚’æ±‚ã‚ã¦ã„ã‚‹ã“ã®ãƒ—ãƒ­ãƒˆã‚³ãƒ«ã®æ¨™æº–åŒ–ã®çŠ¶æ…‹ã¨çŠ¶æ³ã¯ "Internet
-   Official Protocol Standards" (STD 1) ã®ç¾åœ¨ã®ç‰ˆã‚’å‚ç…§ã—ã¦ã»ã—ã„.  ã“ã®ãƒ¡ãƒ¢ã®é…å¸ƒã¯åˆ¶é™ã—ãªã„.
+   ‚±‚Ì•¶‘‚Í, ƒCƒ“ƒ^[ƒlƒbƒgƒRƒ~ƒ…ƒjƒeƒB‚É‘Î‚·‚éƒCƒ“ƒ^[ƒlƒbƒg‚Ì•W€ƒgƒ‰ƒbƒNƒvƒƒgƒRƒ‹‚ğ’è‹`‚µ‚Ä‚¢‚é. ‚Ü‚½, ‰ü‘P‚Ì‚½‚ß‚Ì‹c˜_‚Æ¦´‚ğ‹‚ß‚Ä‚¢‚é‚±‚ÌƒvƒƒgƒRƒ‹‚Ì•W€‰»‚Ìó‘Ô‚Æó‹µ‚Í "Internet
+   Official Protocol Standards" (STD 1) ‚ÌŒ»İ‚Ì”Å‚ğQÆ‚µ‚Ä‚Ù‚µ‚¢.  ‚±‚Ìƒƒ‚‚Ì”z•z‚Í§ŒÀ‚µ‚È‚¢.
 
 Copyright Notice
 
-   Copyright (C) The Internet Society (2006). è¨³è€…: æ˜¥å±± å¾å¾ <haruyama@unixuser.org> 
+   Copyright (C) The Internet Society (2006). –óÒ: tR ªŒá <haruyama@unixuser.org> 
 
-æ¦‚è¦
+ŠT—v
 
    Researchers have discovered that the authenticated encryption portion
    of the current SSH Transport Protocol is vulnerable to several
@@ -33,15 +33,15 @@ Copyright Notice
    Secure Shell (SSH) Transport Protocol and gives specific
    recommendations on how frequently SSH implementations should rekey.
 
-ç›®æ¬¡
+–ÚŸ
 
-   1. ã‚¤ãƒ³ãƒˆãƒ­ãƒ€ã‚¯ã‚·ãƒ§ãƒ³ ..........................................2
+   1. ƒCƒ“ƒgƒƒ_ƒNƒVƒ‡ƒ“ ..........................................2
    2. Conventions Used in This Document ...............................2
    3. Rekeying ........................................................2
       3.1. First Rekeying Recommendation ..............................3
       3.2. Second Rekeying Recommendation .............................3
    4. Encryption Modes ................................................3
-   5. IANA ã®è€ƒæ…® .............................................6
+   5. IANA ‚Ìl—¶ .............................................6
    6. Security Considerations .........................................6
       6.1. Rekeying Considerations ....................................7
       6.2. Encryption Method Considerations ...........................8
@@ -57,7 +57,7 @@ Bellare, et al.             Standards Track                     [Page 1]
 RFC 4344          SSH Transport Layer Encryption Modes      January 2006
 
 
-1.  ã‚¤ãƒ³ãƒˆãƒ­ãƒ€ã‚¯ã‚·ãƒ§ãƒ³
+1.  ƒCƒ“ƒgƒƒ_ƒNƒVƒ‡ƒ“
 
    The symmetric portion of the SSH Transport Protocol was designed to
    provide both privacy and integrity of encapsulated data.  Researchers
@@ -253,7 +253,7 @@ RFC 4344          SSH Transport Layer Encryption Modes      January 2006
    The "3des-ctr" method uses three-key triple-DES (encrypt-decrypt-
    encrypt), where the first 8 bytes of the key are used for the first
    encryption, the next 8 bytes for the decryption, and the following 8
-   bytes for the final encryption.  24byteã®éµãƒ‡ãƒ¼ã‚¿ã‚’å¿…è¦ã¨ã™ã‚‹(ã“ã®ã†ã¡ 168 bit ãŒå®Ÿéš›ã«ç”¨ã„ã‚‰ã‚Œã‚‹).  The block size is 8 bytes.
+   bytes for the final encryption.  24byte‚ÌŒ®ƒf[ƒ^‚ğ•K—v‚Æ‚·‚é(‚±‚Ì‚¤‚¿ 168 bit ‚ªÀÛ‚É—p‚¢‚ç‚ê‚é).  The block size is 8 bytes.
    This algorithm is defined in [DES].
 
    The "blowfish-ctr" method uses Blowfish with 256-bit keys [SCHNEIER].
@@ -288,13 +288,13 @@ RFC 4344          SSH Transport Layer Encryption Modes      January 2006
    The "cast128-ctr" method uses the CAST-128 cipher with 128-bit keys
    [RFC2144].  The block size is 8 bytes.
 
-5.  IANA ã®è€ƒæ…®
+5.  IANA ‚Ìl—¶
 
    The thirteen encryption algorithm names defined in Section 4 have
    been added to the Secure Shell Encryption Algorithm Name registry
    established by Section 4.11.1 of [RFC4250].
 
-6.  ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã®è€ƒå¯Ÿ
+6.  ƒZƒLƒ…ƒŠƒeƒB‚Ìl@
 
    This document describes additional encryption methods and
    recommendations for the SSH Transport Protocol [RFC4253].
@@ -618,7 +618,7 @@ RFC 4344          SSH Transport Layer Encryption Modes      January 2006
 
 Full Copyright Statement
 
-   Copyright (C) The Internet Society (2006). è¨³è€…: æ˜¥å±± å¾å¾ <haruyama@unixuser.org> 
+   Copyright (C) The Internet Society (2006). –óÒ: tR ªŒá <haruyama@unixuser.org> 
 
    This document is subject to the rights, licenses and restrictions
    contained in BCP 78, and except as set forth therein, the authors
