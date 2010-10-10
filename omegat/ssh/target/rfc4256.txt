@@ -11,26 +11,26 @@ Category: Standards Track                                     M. Forssen
                                                             January 2006
 
 
-              SSH�v���g�R�� (SSH) �̂��߂� ��ʃ��b�Z�[�W�����F��
+              SSHプロトコル (SSH) のための 一般メッセージ交換認証
 
-���̃����̈ʒu�Â�
+このメモの位置づけ
 
-   ���̕�����, �C���^�[�l�b�g�R�~���j�e�B�ɑ΂���C���^�[�l�b�g�̕W���g���b�N�v���g�R�����`���Ă���. �܂�, ���P�̂��߂̋c�_�Ǝ��������߂Ă��邱�̃v���g�R���̕W�����̏�ԂƏ󋵂� "Internet
-   Official Protocol Standards" (STD 1) �̌��݂̔ł��Q�Ƃ��Ăق���.  ���̃����̔z�z�͐������Ȃ�.
+   この文書は, インターネットコミュニティに対するインターネットの標準トラックプロトコルを定義している. また, 改善のための議論と示唆を求めているこのプロトコルの標準化の状態と状況は "Internet
+   Official Protocol Standards" (STD 1) の現在の版を参照してほしい.  このメモの配布は制限しない.
 
 Copyright Notice
 
-   Copyright (C) The Internet Society (2006). ���: �t�R ���� <haruyama@unixuser.org> 
+   Copyright (C) The Internet Society (2006). 訳者: 春山 征吾 <haruyama@unixuser.org> 
 
-�T�v
+概要
 
-   �Z�L���A �V�F�� (SSH) �v���g�R����, ���S�ł͂Ȃ��l�b�g���[�N��ł̈��S�ȃ����[�g���O�C���⑼�̈��S�ȃl�b�g���[�N�T�[�r�X�̂��߂̃v���g�R����.  ���̕�����, SSH�v���g�R���̂��߂̔ėp�̔F�ؖ@���L�q���Ă���.  ���̔F�ؖ@��, �F�؃f�[�^���L�[�{�[�h(�⓯�l�̉p�����̓f�o�C�X)�œ��͂���󋵂ŃC���^���N�e�B�u�ȔF�؂��s�Ȃ��̂ɓK���Ă���.  ���̕��@�̎�ȖړI��, SSH �N���C�A���g���F�؃��J�j�Y���̋�̌`�Ȏd�l��m��Ȃ��Ă��F�؃��J�j�Y�����T�|�[�g�ł���悤�ɂ��邱�Ƃ�.
+   セキュア シェル (SSH) プロトコルは, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.  この文書は, SSHプロトコルのための汎用の認証法を記述している.  この認証法は, 認証データをキーボード(や同様の英数入力デバイス)で入力する状況でインタラクティブな認証を行なうのに適している.  この方法の主な目的は, SSH クライアントが認証メカニズムの具体形な仕様を知らなくても認証メカニズムをサポートできるようにすることだ.
 
-1.  �C���g���_�N�V����
+1.  イントロダクション
 
-   SSH �F�؃v���g�R�� [SSH-USERAUTH] ��, �ėp�̃��[�U�F�؃v���g�R����.  SSH �g�����X�|�[�g�w�v���g�R�� [SSH-TRANS] �̏�œ��삷�邱�Ƃ�z�肵�Ă���.  �F�؃v���g�R����, ���̉��w�̃v���g�R�������S���Ƌ@������񋟂��邱�Ƃ�O��Ƃ���.
+   SSH 認証プロトコル [SSH-USERAUTH] は, 汎用のユーザ認証プロトコルだ.  SSH トランスポート層プロトコル [SSH-TRANS] の上で動作することを想定している.  認証プロトコルは, その下層のプロトコルが完全性と機密性を提供することを前提とする.
 
-   ���̕�����, SSH�F�؃v���g�R���̂��߂̔ėp�̔F�ؖ@���L�q���Ă���.  ���̕��@��, �N���C�A���g���ɓ��ʂȃ\�t�g�E�F�A�̃T�|�[�g���K�v�Ȃ��C���^���N�e�B�u�ȔF�ؖ@�ɓK���Ă���.  ������, ���ׂĂ̔F�؃f�[�^�̓L�[�{�[�h������͂����K�v������.  ���̕��@�̎�ȖړI��, SSH �T�[�o���g���F�؃��J�j�Y���̎d�l��(�قƂ�ǂȂ����܂�����)SSH�N���C�A���g���m��Ȃ��Ă��悢�悤�ɂ��邱�Ƃ�. 
+   この文書は, SSH認証プロトコルのための汎用の認証法を記述している.  この方法は, クライアント側に特別なソフトウェアのサポートが必要ないインタラクティブな認証法に適している.  かわりに, すべての認証データはキーボードから入力される必要がある.  この方法の主な目的は, SSH サーバが使う認証メカニズムの仕様を(ほとんどないしまったく)SSHクライアントが知らなくてもよいようにすることだ. 
 
 
 
@@ -39,26 +39,26 @@ Cusack & Forssen            Standards Track                     [Page 1]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-    �����, �N���C�A���g�̃R�[�h���X�V����K�v�Ȃ��ɔF�؃��J�j�Y�����T�[�o���C�ӂɑI��/�ύX�ł���Ƃ������Ƃł�����
+    これは, クライアントのコードを更新する必要なしに認証メカニズムをサーバが任意に選択/変更できるということでもある
 
-   ���̔F�ؖ@�̖��O��, "keyboard-interactive" ��.
+   この認証法の名前は, "keyboard-interactive" だ.
 
-   ���̕�����, SSH �A�[�L�e�N�V������ [SSH-ARCH] �� SSH �F�ؕ��� [SSH-USERAUTH] ��ǂ�ł���̂ݓǂނׂ���.  ���̕�����, �Q�Ƃ�����Ȃ���2�̕�������p���\�L�@�����R�ɗ��p����.
+   この文書は, SSH アーキテクシャ文書 [SSH-ARCH] と SSH 認証文書 [SSH-USERAUTH] を読んでからのみ読むべきだ.  この文書は, 参照や説明なしに2つの文書から用語や表記法を自由に利用する.
 
-   ���̕�����, �F�؂̏��𓾂�ۂ̃��[�U�ƃN���C�A���g�̂��Ƃ�ɂ��Ă��L�q����.  ����͂���Ӗ��v���g�R���̎d�l�O�̘b��. ������, ���̃v���g�R���̓��[�U�C���^�t�@�C�X�̖��Ɋ�Ďd�l���݌v����Ă���ʂ�����܂����̏��������ƌ݊������Ȃ�������s���D�Ȏ����𖄂ނ�������Ȃ��̂�, �����ŋL�q���邱�ƂɂȂ���. 
+   この文書は, 認証の情報を得る際のユーザとクライアントのやりとりについても記述する.  これはある意味プロトコルの仕様外の話だ. しかし, このプロトコルはユーザインタファイスの問題に基いて仕様が設計されている面がありまたこの情報を除くと互換性がなかったり不恰好な実装を埋むかもしれないので, ここで記述することになった. 
 
-   ���̕����ł̃L�[���[�h "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" ��, [RFC-2119] �ŋL�q����Ă���悤�ɉ��߂����. 
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, [RFC-2119] で記述されているように解釈される. 
 
-2.  �_��
+2.  論拠
 
-   ����SSH�̂��߂ɒ�`����Ă���F�ؖ@��, ��ՂƂȂ��Ă���F�؃��J�j�Y���Ɩ��Ɍ������Ă���.  ����ɂ��, �V�����F�؃��J�j�Y����ǉ�����ɂ�, ���ׂẴN���C�A���g�����̐V�������J�j�Y�����T�|�[�g���邽�߂ɍX�V����Ȃ���΂Ȃ炸, �V�������J�j�Y���̒ǉ�������ɂ��Ă���.  �����Œ�`�����ʓI�ȕ��@��p�����, �N���C�A���g�͐V�����F�؃��J�j�Y�����T�|�[�g���邽�߂ɃR�[�h��ύX����K�v���Ȃ��Ȃ�. �܂�, [PAM]�̂悤�ȕ������ꂽ�F�ؑw��p���Ă���Ȃ�, �T�[�o���R�[�h�̕ύX���K�v�Ȃ���������Ȃ�.
+   現在SSHのために定義されている認証法は, 基盤となっている認証メカニズムと密に結合している.  これにより, 新しい認証メカニズムを追加するには, すべてのクライアントがその新しいメカニズムをサポートするために更新されなければならず, 新しいメカニズムの追加を困難にしている.  ここで定義する一般的な方法を用いると, クライアントは新しい認証メカニズムをサポートするためにコードを変更する必要がなくなる. また, [PAM]のような分離された認証層を用いているなら, サーバもコードの変更が必要ないかもしれない.
 
-   �����, ([SSH-USERAUTH] �Œ�`����Ă���) "password"  �����̂悤�ȑ��̕��@�ɑ΂��Ĕ��ɗL���ł���. �V����(�����炭��苭�ł�)���@�� "�v���̂܂܂�" �ǉ��ł���̂�, �V�X�e���̃Z�L�����e�B�͓��ߓI�ɋ����ł���.
+   これは, ([SSH-USERAUTH] で定義されている) "password"  方式のような他の方法に対して非常に有利である. 新しい(おそらくより強固な)方法が "思いのままに" 追加できるので, システムのセキュリティは透過的に強化できる.
 
-   �`�������W-���X�|���X�ƃ����^�C���p�X���[�h�̃��J�j�Y����, ���̔F�ؖ@�ŗe�ՂɃT�|�[�g�����
+   チャレンジ-レスポンスとワンタイムパスワードのメカニズムは, この認証法で容易にサポートされる
 
-   ������, ���̔F�ؖ@��, �N���C�A���g��(�n�[�h�E�F�A�̃h���C�o��p�X���[�h�}���O�����O�̂悤��)���ʂȃR�[�h��K�v�Ƃ��Ȃ��F�؃��J�j�Y���ɐ��������.
+   しかし, この認証法は, クライアントで(ハードウェアのドライバやパスワードマングリングのような)特別なコードを必要としない認証メカニズムに制限される.
 
 
 
@@ -70,13 +70,13 @@ Cusack & Forssen            Standards Track                     [Page 2]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-3.  �v���g�R���̂��Ƃ�
+3.  プロトコルのやりとり
 
-   �N���C�A���g�͔F�؂� SSH_MSG_USERAUTH_REQUEST ���b�Z�[�W�ŊJ�n����.  �����ăT�[�o��, �N���C�A���g����̔F�؏��� SSH_MSG_USERAUTH_INFO_REQUEST �ŗv������.  �N���C�A���g�̓��[�U������𓾂�, SSM_MSG_USERAUTH_INFO_RESPONSE �ŉ�������.  �N���C�A���g����̕ԓ����󂯎��O��, �T�[�o�͕ʂ� SSH_MSG_USERAUTH_INFO_REQUEST �𑗂��Ă͂Ȃ�Ȃ�.
+   クライアントは認証を SSH_MSG_USERAUTH_REQUEST メッセージで開始する.  そしてサーバは, クライアントからの認証情報を SSH_MSG_USERAUTH_INFO_REQUEST で要求する.  クライアントはユーザから情報を得て, SSM_MSG_USERAUTH_INFO_RESPONSE で応答する.  クライアントからの返答を受け取る前に, サーバは別の SSH_MSG_USERAUTH_INFO_REQUEST を送ってはならない.
 
-3.1.  �ŏ��̌���
+3.1.  最初の交換
 
-   �F�؂�, �N���C�A���g�����̃p�P�b�g�𑗂邱�ƂŎn�܂�.
+   認証は, クライアントが次のパケットを送ることで始まる.
 
       byte      SSH_MSG_USERAUTH_REQUEST
       string    user name (ISO-10646 UTF-8, as defined in [RFC-3629])
@@ -85,15 +85,15 @@ RFC 4256         SSH Generic Interactive Authentication     January 2006
       string    language tag (as defined in [RFC-3066])
       string    submethods (ISO-10646 UTF-8)
 
-   language tag �͐�������Ă��炸�A��̕�����ł���K�v������.  ���̎d�l�̏����̃o�[�W�����ł�, �폜����邾�낤.  �����, �T�[�o�͌��������ɒʐM�����^�O�Ɋ�Â��Č����I������K�v������ [SSH-TRANS].
+   language tag は推奨されておらず、空の文字列である必要がある.  この仕様の将来のバージョンでは, 削除されるだろう.  代わりに, サーバは鍵交換時に通信されるタグに基づいて言語を選択する必要がある [SSH-TRANS].
 
-   ����, language tag ����̕�����łȂ�������, �T�[�o��, ���̃v���g�R���̈ꕔ�Ƃ��ăN���C�A���g�֑��邷�ׂẴ��b�Z�[�W�Ɏw�肳�ꂽ�����p����K�v������.  language tag ��, ���̃v���g�R���O���̃��b�Z�[�W�̌���I���Ɏg��Ȃ��ق����悢.  �T�[�o���v�����ꂽ������T�|�[�g���ĂȂ��Ȃ�, ���p����錾��͎����ˑ���.
+   もし, language tag が空の文字列でなかったら, サーバは, このプロトコルの一部としてクライアントへ送るすべてのメッセージに指定された言語を用いる必要がある.  language tag を, このプロトコル外部のメッセージの言語選択に使わないほうがよい.  サーバが要求された言語をサポートしてないなら, 利用される言語は実装依存だ.
 
-   submethods �t�B�[���h��, ���[�U�����p�������Ɩ]�ގ��ۂ̕��@�̃q���g���܂܂��.  ���[�U���D�ޔF�� submethod (�\�t�g�E�F�A�Ȃ����n�[�h�E�F�A)�̃R���}��؂胊�X�g��. �ݒ�Ȃǂ���N���C�A���g�����[�U�̍D�� submethod �ɂ��Ēm���Ă���Ȃ�, �T�[�o�ɂ��̏���n�����߂� submethods �t�B�[���h�𗘗p���Ă��悢.  �����łȂ����, �󕶎���𑗂�Ȃ���΂Ȃ�Ȃ�.
+   submethods フィールドは, ユーザが利用したいと望む実際の方法のヒントが含まれる.  ユーザが好む認証 submethod (ソフトウェアないしハードウェア)のコンマ区切りリストだ. 設定などからクライアントがユーザの好む submethod について知っているなら, サーバにその情報を渡すために submethods フィールドを利用してもよい.  そうでなければ, 空文字列を送らなければならない.
 
-   submethods �̎��ۂ̖��O��, ���[�U�ƃT�[�o�̊Ԃœ��ӂ��K�v��.
+   submethods の実際の名前は, ユーザとサーバの間で同意が必要だ.
 
-   submethods �̃T�[�o�̉��߂�, �����ˑ���.
+   submethods のサーバの解釈は, 実装依存だ.
 
 
 
@@ -102,23 +102,23 @@ Cusack & Forssen            Standards Track                     [Page 3]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-   submethods �t�B�[���h�̃T�[�o���̈�̉\�Ȏ����헪��, ���[�U�������̈قȂ� submethod�𗘗p���悤�Ƃ�, �T�[�o�����̃t�B�[���h�𖳎����邱�Ƃ�.  ���[�U���������̈قȂ�submethod��1��p���ĔF�؂�������, �T�[�o��, ���[�U�����̎��ɗ��p������ submethod �̃q���g�Ƃ��� submethods ����舵���K�v������.
+   submethods フィールドのサーバ側の一つの可能な実装戦略は, ユーザが複数の異なる submethodを利用しようとも, サーバがこのフィールドを無視することだ.  ユーザがいくつかの異なるsubmethodの1つを用いて認証したい時, サーバは, ユーザがこの時に利用したい submethod のヒントとして submethods を取り扱う必要がある.
 
-   ���̃��b�Z�[�W���T�[�o�ɑ��M����鎞, �N���C�A���g�͂܂����[�U�Ƀp�X���[�h�̂��߂̃v�����v�g���o���Ă��炸, ("password" �@�Ƃ͈قȂ�) ���̍ŏ��̃��b�Z�[�W�ɂ̓p�X���[�h�̂悤�ȏ��͊܂܂�Ă��Ȃ�.
+   このメッセージがサーバに送信される時, クライアントはまだユーザにパスワードのためのプロンプトを出しておらず, ("password" 法とは異なり) この最初のメッセージにはパスワードのような情報は含まれていない.
 
-   �T�[�o��, SSH_MSG_USERAUTH_SUCCESS ��,
-   SSH_MSG_USERAUTH_FAILURE, SSH_MSG_USERAUTH_INFO_REQUEST ���b�Z�[�W�ŉ������Ȃ���΂Ȃ�Ȃ�.
+   サーバは, SSH_MSG_USERAUTH_SUCCESS か,
+   SSH_MSG_USERAUTH_FAILURE, SSH_MSG_USERAUTH_INFO_REQUEST メッセージで応答しなければならない.
 
-   ���[�U�����T�[�r�X���������Ŏ��s�����Ƃ�, �T�[�o�� SSH_MSG_USERAUTH_FAILURE ���b�Z�[�W�ŉ������Ȃ��ق����悢. �����,  �F�؂��i�ޏꍇ�̂Ɠ��l��, SSH_MSG_USERAUTH_INFO_REQUEST ���b�Z�[�W�𑗂�K�v������. ������(��q����K�؂Ȓx���̌��)���s���b�Z�[�W�𑗂�.  ���̖ړI��, �قȂ郆�[�U�ŔF�؂��鎞�̌��ʂ��r���ėL���ȃ��[�U����T���̂�����ɂ��邽�߂�.
+   ユーザ名かサービス名が原因で失敗したとき, サーバは SSH_MSG_USERAUTH_FAILURE メッセージで応答しないほうがよい. 代わりに,  認証が進む場合のと同様に, SSH_MSG_USERAUTH_INFO_REQUEST メッセージを送る必要がある. そして(後述する適切な遅延の後で)失敗メッセージを送る.  この目的は, 異なるユーザで認証する時の結果を比較して有効なユーザ名を探すのを困難にするためだ.
 
-   �T�[�o��, ���[�U�ɗv�����ꂽ�F�؂��Ȃ��ꍇ�� SSH_MSG_USERAUTH_SUCCESS ���b�Z�[�W�ŉ������Ă��悢.  ������, ��ŋc�_�������R�ɂ��, ���悢�A�v���[�`��,  SSH_MSG_USERAUTH_INFO_REQUEST ���b�Z�[�W�ŉ������� ���̕ԓ��𖳎� (���؂��Ȃ�)���邱�Ƃ��낤..
+   サーバは, ユーザに要求された認証がない場合に SSH_MSG_USERAUTH_SUCCESS メッセージで応答してもよい.  しかし, 上で議論した理由により, よりよいアプローチは,  SSH_MSG_USERAUTH_INFO_REQUEST メッセージで応答して その返答を無視 (検証しない)することだろう..
 
-3.2.  ���̗v��
+3.2.  情報の要求
 
-   SSH_MSG_USERAUTH_INFO_REQUEST ���b�Z�[�W��p����, �T�[�o����v�������������.
+   SSH_MSG_USERAUTH_INFO_REQUEST メッセージを用いて, サーバから要求が生成される.
 
-   �T�[�o��, �N���C�A���g��F�؂��邽�߂ɂ�������̗v����K�v�Ƃ��邩������Ȃ�. �N���C�A���g�͕����̌������������鏀�������Ȃ���΂Ȃ�Ȃ�.
-   ������, �T�[�o��, 2�ȏ�̖������� SSH_MSG_USERAUTH_INFO_REQUEST ���b�Z�[�W�������Ă͂Ȃ�Ȃ�..  �܂�, �N���C�A���g���ԓ�����O�ɕʂ̗v���𑗂��Ă͂Ȃ�Ȃ�.
+   サーバは, クライアントを認証するためにたくさんの要求を必要とするかもしれない. クライアントは複数の交換を処理する準備をしなければならない.
+   しかし, サーバは, 2つ以上の未処理の SSH_MSG_USERAUTH_INFO_REQUEST メッセージを扱ってはならない..  つまり, クライアントが返答する前に別の要求を送ってはならない.
 
 
 
@@ -136,7 +136,7 @@ Cusack & Forssen            Standards Track                     [Page 4]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-   SSH_MSG_USERAUTH_INFO_REQUEST ���b�Z�[�W�͎��̂悤�ɒ�`�����.
+   SSH_MSG_USERAUTH_INFO_REQUEST メッセージは次のように定義される.
 
       byte      SSH_MSG_USERAUTH_INFO_REQUEST
       string    name (ISO-10646 UTF-8)
@@ -149,16 +149,16 @@ RFC 4256         SSH Generic Interactive Authentication     January 2006
       string    prompt[num-prompts] (ISO-10646 UTF-8)
       boolean   echo[num-prompts]
 
-   language tag �͐�������Ă��炸�A��̕�����ł���K�v������.  ���̎d�l�̏����̃o�[�W�����ł�, �폜����邾�낤.  �����, �T�[�o�͌��������ɒʐM�����^�O�Ɋ�Â��Č����I������K�v������ [SSH-TRANS].
+   language tag は推奨されておらず、空の文字列である必要がある.  この仕様の将来のバージョンでは, 削除されるだろう.  代わりに, サーバは鍵交換時に通信されるタグに基づいて言語を選択する必要がある [SSH-TRANS].
 
-   ����, language tag ����̕�����łȂ�������, �T�[�o��, ���̃v���g�R���̈ꕔ�Ƃ��ăN���C�A���g�֑��邷�ׂẴ��b�Z�[�W�Ɏw�肳�ꂽ�����p����K�v������.  language tag ��, ���̃v���g�R���O���̃��b�Z�[�W�̌���I���Ɏg��Ȃ��ق����悢.  �T�[�o���v�����ꂽ������T�|�[�g���ĂȂ��Ȃ�, ���p����錾��͎����ˑ���.
+   もし, language tag が空の文字列でなかったら, サーバは, このプロトコルの一部としてクライアントへ送るすべてのメッセージに指定された言語を用いる必要がある.  language tag を, このプロトコル外部のメッセージの言語選択に使わないほうがよい.  サーバが要求された言語をサポートしてないなら, 利用される言語は実装依存だ.
 
-   �T�[�o��, �N���C�A���g������ name �� prompt �t�B�[���h��K�؂ɕ\���ł��Ȃ��\�����l������K�v������(���̐߂��Q��). �\�Ȃ�΂����̃t�B�[���h�̗����𐧌�����K�v������.  �Ⴆ��, instruction �t�B�[���h��"Enter Password", prompt �t�B�[���h��"Password for user23@host.domain: " �Ƃ�������, instruction �t�B�[���h�� "Password authentication for
-   user23@host.domain" , prompt �t�B�[���h�� "Password: " �Ƃ���̂��ǂ��I����..  ���̔F�ؕ�����, �T�^�I�ɂ� [PAM] �ɂ���Ďx�������̂ł��̂悤�ȑI���͉\�ł͂Ȃ����Ƃ��\�z�����.
+   サーバは, クライアントが長い name や prompt フィールドを適切に表示できない可能性を考慮する必要がある(次の節を参照). 可能ならばこれらのフィールドの流さを制限する必要がある.  例えば, instruction フィールドに"Enter Password", prompt フィールドに"Password for user23@host.domain: " とする代わりに, instruction フィールドに "Password authentication for
+   user23@host.domain" , prompt フィールドに "Password: " とするのが良い選択だ..  この認証方式は, 典型的には [PAM] によって支援されるのでこのような選択は可能ではないことも予想される.
 
-   name �� instruction �t�B�[���h�͋�̕�����ł��悢. �N���C�A���g�͂����𐳂�����������悤��������Ȃ���΂Ȃ�Ȃ�.  prompt �t�B�[���h�� �󕶎���ł����Ă͂Ȃ�Ȃ�.
+   name や instruction フィールドは空の文字列でもよい. クライアントはこれらを正しく処理するよう準備されなければならない.  prompt フィールドは 空文字列であってはならない.
 
-   num-prompts �t�B�[���h�� ���b�Z�[�W�� prompt/echo �t�B�[���h�����݂��Ȃ��ꍇ�� `0' �̏ꍇ������. (��q����悤��)���̏ꍇ���N���C�A���g�� name �� instruction �t�B�[���h��\������K�v������.
+   num-prompts フィールドは メッセージで prompt/echo フィールドが存在しない場合に `0' の場合もある. (後述するように)その場合もクライアントは name と instruction フィールドを表示する必要がある.
 
 
 
@@ -173,19 +173,19 @@ Cusack & Forssen            Standards Track                     [Page 5]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-3.3.  ���[�U�C���^�t�F�[�X
+3.3.  ユーザインタフェース
 
-   �v�����b�Z�[�W���󂯕t������, �N���C�A���g�͎��̂悤�Ƀ��[�U�Ƀv�����v�g���o���K�v������.
+   要求メッセージを受け付けたら, クライアントは次のようにユーザにプロンプトを出す必要がある.
 
-   �R�}���h���C���C���^�t�F�C�X (CLI)  �N���C�A���g��, name �� instruction (�󕶎���łȂ�������) ��\����, ���s��ǉ�����.  ������, ���Ԃɂ��ꂼ���prompt�ɂ���, �N���C�A���g�� prompt��\�������[�U�̓��͂�ǂݎ��K�v������.
+   コマンドラインインタフェイス (CLI)  クライアントは, name と instruction (空文字列でなかったら) を表示し, 改行を追加する.  そして, 順番にそれぞれのpromptについて, クライアントは promptを表示しユーザの入力を読み取る必要がある.
 
-   �O���t�B�J�����[�U�C���^�t�F�C�X (GUI) �N���C�A���g��, ���[�U�Ƀv�����v�g���o�����߂ɂ�������̑I����������.  ��̕��@��, prompt�̕\������_�C�A���O�E�B���h�E�̃^�C�g���Ƃ���,  name �t�B�[���h��p���邱�Ƃ�(�A�v���P�[�V��������O�u���邩������Ȃ�). ���̃_�C�A���O�E�B���h�E��, instruction �t�B�[���h�̓e�L�X�g�̃��b�Z�[�W��, prompt �̓e�L�X�g�G���g���t�B�[���h�̃��x���ƂȂ邾�낤.  ���ׂẴt�B�[���h�����[�U�ɕ\�������K�v������.  �Ⴆ��, �����̓E�B���h�E�Ƀ^�C�g�����Ȃ�����Ƃ����� name �t�B�[���h��j�����Ȃ��ق����悢. ���̏���\������ʂ̕��@��������K�v������.  �_�C�A���O�E�B���h�E�� prompt ���\��������, �N���C�A���g�͂��ꂼ���prompt��ʂ�window�ŕ\�����Ȃ��ق����悢.
+   グラフィカルユーザインタフェイス (GUI) クライアントは, ユーザにプロンプトを出すためにたくさんの選択肢がある.  一つの方法は, promptの表示するダイアログウィンドウのタイトルとして,  name フィールドを用いることだ(アプリケーション名を前置するかもしれない). このダイアログウィンドウで, instruction フィールドはテキストのメッセージで, prompt はテキストエントリフィールドのラベルとなるだろう.  すべてのフィールドがユーザに表示される必要がある.  例えば, 実装はウィンドウにタイトルがないからといって name フィールドを破棄しないほうがよい. この情報を表示する別の方法を見つける必要がある.  ダイアログウィンドウで prompt が表示される際, クライアントはそれぞれのpromptを別のwindowで表示しないほうがよい.
 
-   ���ׂẴN���C�A���g��, ���s���܂� instruction �t�B�[���h��K�؂Ɉ����Ȃ���΂Ȃ�Ȃ�.  �܂�, ���ׂẴN���C�A���g��, name �� prompt �ɂ��� ���Ȃ��Ƃ� 30 �����\���ł���K�v������.  �T�[�o��30�������z���� name �� prompt ��񋟂����Ȃ�, �N���C�A���g�� �����̃t�B�[���h��\���ł��钷���ɐ؂�l�߂Ă��悢.  �N���C�A���g���t�B�[���h��؂�l�߂�Ȃ�, �؂�l�߂��N�������Ƃ𖾊m�ɕ\�����Ȃ���΂Ȃ�Ȃ�.  instruction �t�B�[���h��, �؂�l�߂Ȃ��ق����悢.
+   すべてのクライアントは, 改行を含む instruction フィールドを適切に扱えなければならない.  また, すべてのクライアントは, name と prompt について 少なくとも 30 文字表示できる必要がある.  サーバが30文字を越える name や prompt を提供したなら, クライアントは これらのフィールドを表示できる長さに切り詰めてもよい.  クライアントがフィールドを切り詰めるなら, 切り詰めが起ったことを明確に表示しなければならない.  instruction フィールドは, 切り詰めないほうがよい.
 
-   [SSH-ARCH} �ŋc�_����Ă���悤��, �\�������t�B�[���h�ɒ[�����䕶�����܂܂��U����h�����߂�, �N���C�A���g�͐��䕶���̃t�B���^�����O������K�v������.
+   [SSH-ARCH} で議論されているように, 表示されるフィールドに端末制御文字が含まれる攻撃を防ぐために, クライアントは制御文字のフィルタリングをする必要がある.
 
-   ���ꂼ���prompt��, �Ή����� echo �t�B�[���h��, ���[�U�̓��͂���͂��ꂽ�����ŃG�R�[���邩�ǂ������w�肷��.  �N���C�A���g��, �v�����b�Z�[�W�̒���prompto���ƂɓƗ��ɐ��m�Ƀ��[�U�̓��͂��G�R�[/�}�X�N����K�v������.  �N���C�A���g�����炩�̗��R�� echo �t�B�[���h�𑸏d���Ȃ��ꍇ��, �N���C�A���g�͓��͂��B���Ȃ���΂Ȃ�Ȃ�.  GUI �N���C�A���g��, echo/mask�̃g�O�����s�Ȃ��`�F�b�N�{�b�N�X��t���Ă��悢.  �N���C�A���g��, ": " (�R����-�X�y�[�X)�̂悤�Ȓǉ��̕����� prompt  �ɑ����Ȃ��ق����悢. �T�[�o��, ���[�U�̕\������邷�ׂĂ̕������񋟂���ӔC������.  �N���C�A���g��, ���[�U����̋�̉������󂯕t����̕�����Ƃ��Ĉ���Ȃ���΂Ȃ�Ȃ�.
+   それぞれのpromptで, 対応する echo フィールドは, ユーザの入力を入力された文字でエコーするかどうかを指定する.  クライアントは, 要求メッセージの中のpromptoごとに独立に正確にユーザの入力をエコー/マスクする必要がある.  クライアントが何らかの理由で echo フィールドを尊重しない場合は, クライアントは入力を隠さなければならない.  GUI クライアントは, echo/maskのトグルを行なうチェックボックスを付けてもよい.  クライアントは, ": " (コロン-スペース)のような追加の文字を prompt  に足さないほうがよい. サーバは, ユーザの表示されるすべての文字列を提供する責任がある.  クライアントは, ユーザからの空の応答を受け付け空の文字列として扱わなければならない.
 
 
 
@@ -197,11 +197,11 @@ Cusack & Forssen            Standards Track                     [Page 6]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-3.4.  ���̉���
+3.4.  情報の応答
 
-   ���[�U����v�����ꂽ���𓾂���, �N���C�A���g��,  SH_MSG_USERAUTH_INFO_RESPONSE ���b�Z�[�W�ŉ�������.
+   ユーザから要求された情報を得たら, クライアントは,  SH_MSG_USERAUTH_INFO_RESPONSE メッセージで応答する.
 
-   SSH_MSG_USERAUTH_INFO_RESPONSE �̌`���͎��̂Ƃ���:
+   SSH_MSG_USERAUTH_INFO_RESPONSE の形式は次のとおり:
 
       byte      SSH_MSG_USERAUTH_INFO_RESPONSE
       int       num-responses
@@ -209,21 +209,21 @@ RFC 4256         SSH Generic Interactive Authentication     January 2006
       ...
       string    response[num-responses] (ISO-10646 UTF-8)
 
-   response �� ISO-10646 UTF-8 �ŃG���R�[�h����邱�Ƃɒ���.  response ���ǂ����߂����؂��邩�� �T�[�o���悾.
-   ������, �N���C�A���g�����̃G���R�[�f�B���O(��: ISO 8859-1) �ŉ�����ǂ񂾏ꍇ�ł�, �N���C�A���g�͓]���̑O�� ISO-10646 UTF-8 �ɕϊ����Ȃ���΂Ȃ�Ȃ�.
+   response は ISO-10646 UTF-8 でエンコードされることに注意.  response をどう解釈し検証するかは サーバ次第だ.
+   ただし, クライアントが他のエンコーディング(例: ISO 8859-1) で応答を読んだ場合でも, クライアントは転送の前に ISO-10646 UTF-8 に変換しなければならない.
 
-   ���ۉ��̊ϓ_����, ���[�U����������͂����, �F�؂̃v���Z�X�̓��[�U���p����OS��N���C�A���g�\�t�g�E�F�A�Ɋ֌W�Ȃ��������Ƃ��]�܂���.  ���̂��߂ɐ��K�����K�v��.  ASCII�ȊO�̃p�X���[�h���T�|�[�g����V�X�e����, �p�X���[�h�ƃ��[�U�����f�[�^�x�[�X�ɒǉ�������(�n�b�V��������,�������͂�����)�f�[�^�x�[�X���̃G���g���Ɣ�r����ۂɂ��ł����K������K�v������. �p�X���[�h��ۑ��������r����SSH�̎�����, ���K���� [SASLPREP] ���g���K�v������.
+   国際化の観点から, ユーザが応答を入力する際, 認証のプロセスはユーザが用いるOSやクライアントソフトウェアに関係なく動くことが望ましい.  このために正規化が必要だ.  ASCII以外のパスワードをサポートするシステムは, パスワードとユーザ名をデータベースに追加したり(ハッシュしたり,もしくはせずに)データベース内のエントリと比較する際にいつでも正規化する必要がある. パスワードを保存したり比較するSSHの実装は, 正規化に [SASLPREP] を使う必要がある.
 
-   num-responses �t�B�[���h�� �v�����b�Z�[�W�� num-prompts �t�B�[���h�ƈ�v���Ȃ��ꍇ, �T�[�o��, ���s���b�Z�[�W�𑗂�Ȃ���΂Ȃ�Ȃ�.
+   num-responses フィールドが 要求メッセージの num-prompts フィールドと一致しない場合, サーバは, 失敗メッセージを送らなければならない.
 
-   �T�[�o�� �v�����b�Z�[�W�� `0' �� num-prompts �t�B�[���h�𑗂����ꍇ, �N���C�A���g��, �������������邽�߂� '0' �� num-responses �t�B�[���h�� �������b�Z�[�W�𑗂�Ȃ���΂Ȃ�Ȃ�.
+   サーバが 要求メッセージで `0' な num-prompts フィールドを送った場合, クライアントは, 交換を完了するために '0' な num-responses フィールドで 応答メッセージを送らなければならない.
 
-   responses ��, prompts �̏��Ԃŕ���łȂ���΂Ȃ�Ȃ�.  �܂�,  response[n] ��, prompt[n] �̉����łȂ���΂Ȃ�Ȃ�.
+   responses は, prompts の順番で並んでなければならない.  つまり,  response[n] は, prompt[n] の応答でなければならない.
 
-   �������󂯎������, �T�[�o��, SSH_MSG_USERAUTH_SUCCESS ��,
-   SSH_MSG_USERAUTH_FAILURE, ����ɂ���1�� SSH_MSG_USERAUTH_INFO_REQUEST ���b�Z�[�W�ŉ������Ȃ���΂Ȃ�Ȃ�.
+   応答を受け取ったら, サーバは, SSH_MSG_USERAUTH_SUCCESS か,
+   SSH_MSG_USERAUTH_FAILURE, さらにもう1つの SSH_MSG_USERAUTH_INFO_REQUEST メッセージで応答しなければならない.
 
-   (��ՂƂȂ��Ă���F�؃��J�j�Y����ʂ���) �T�[�o�����[�U�̔F�؂Ɏ��s�����Ȃ�, �V�����F�؃f�[�^�𓾂悤�Ƃ��� �ʂ̗v�����b�Z�[�W�𑗂�Ȃ��ق����悢. ����� ���s���b�Z�[�W�𑗂�K�v������.  �ǉ��̔F�؃f�[�^���K�v�ȏꍇ�̂�, �T�[�o�͕����̗v�����b�Z�[�W�𑗂�K�v������.
+   (基盤となっている認証メカニズムを通して) サーバがユーザの認証に失敗したなら, 新しい認証データを得ようとして 別の要求メッセージを送らないほうがよい. 代わりに 失敗メッセージを送る必要がある.  追加の認証データが必要な場合のみ, サーバは複数の要求メッセージを送る必要がある.
 
 
 
@@ -232,15 +232,15 @@ Cusack & Forssen            Standards Track                     [Page 7]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-   (�܂�, ���[�U��F�؂���̂Ɏg���Ȃ���΂Ȃ�Ȃ���ՂƂȂ�F�؃��J�j�Y������������ꍇ��).
+   (つまり, ユーザを認証するのに使われなければならない基盤となる認証メカニズムが複数ある場合だ).
 
-   �T�[�o�����s���b�Z�[�W�ŉ������悤�Ƃ���ꍇ, �N���C�A���g�ɑ��M����O�Ɏ����ˑ��̎��ԑ��点�Ă��悢.
-   �����͂��̒x����ݒ�\�ɂ��邩������Ȃ�. ���������f�t�H���g�� 2�b��.
+   サーバが失敗メッセージで応答しようとする場合, クライアントに送信する前に実装依存の時間送らせてもよい.
+   実装はこの遅延を設定可能にするかもしれない. 推奨されるデフォルトは 2秒だ.
 
-4.  �F�؂̗�
+4.  認証の例
 
-   �N���C�A���g�ƃT�[�o�̊Ԃ̌�����2�ዓ����.  �ŏ���, �n���h�w���h�g�[�N���ɂ��`�������W/���X�|���X�̗Ⴞ.
-   �����, ���̔F�ؖ@�ł͕s�\�ȔF�؂�.
+   クライアントとサーバの間の交換を2例挙げる.  最初は, ハンドヘルドトークンによるチャレンジ/レスポンスの例だ.
+   これは, 他の認証法では不可能な認証だ.
 
       C:   byte      SSH_MSG_USERAUTH_REQUEST
       C:   string    "user23"
@@ -283,7 +283,7 @@ Cusack & Forssen            Standards Track                     [Page 8]
 RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 
-   2�ڂ̗��, �W���I�ȃp�X���[�h�F�؂�. ���̏ꍇ���[�U�̃p�X���[�h�̊������؂�Ă���.
+   2つ目の例は, 標準的なパスワード認証だ. この場合ユーザのパスワードの期限が切れている.
 
       C:   byte      SSH_MSG_USERAUTH_REQUEST
       C:   string    "user23"
@@ -345,20 +345,20 @@ RFC 4256         SSH Generic Interactive Authentication     January 2006
 
       S:   byte      SSH_MSG_USERAUTH_SUCCESS
 
-5.  IANA �̍l��
+5.  IANA の考慮
 
-   userauth �̃^�C�v "keyboard-interactive" �����̔F�ؖ@�̂��߂Ɏg����.
+   userauth のタイプ "keyboard-interactive" がこの認証法のために使われる.
 
-   ���̔F�ؖ@���L�̒萔�����̔F�ؖ@�Ŏg����.
+   次の認証法特有の定数がこの認証法で使われる.
 
       SSH_MSG_USERAUTH_INFO_REQUEST           60
       SSH_MSG_USERAUTH_INFO_RESPONSE          61
 
-6.  �Z�L�����e�B�̍l�@
+6.  セキュリティの考察
 
-   �F�؃v���g�R���Ƃ��̔F�ؖ@��, ��ՂƂȂ��Ă���SSH�g�����X�|�[�g�w�̃Z�L�����e�B�Ɉˑ�����.  �铽�����񋟂���Ȃ���, ���̕��@�œ]������邷�ׂĂ̔F�؃f�[�^�͖T�󂳂�܂�.
+   認証プロトコルとこの認証法は, 基盤となっているSSHトランスポート層のセキュリティに依存する.  秘匿性が提供されないと, この方法で転送されるすべての認証データは傍受されます.
 
-   ���̕��@�ŔF�؂��������邽�߂ɕK�v�ȃN���C�A���g-�T�[�o�̌����̐��͕ω����邩������Ȃ�.  ���̎z���𐔂��邾���ňӖ��̂�����𓾂���ώ@�҂����邩������Ȃ�. �Ⴆ��, �ώ@�҂�, ���[�U�̃p�X���[�h�������؂ꂩ�ǂ��������ł��邩������Ȃ�. ����Ȃ�ώ@�ɂ��, �T�[�o�̃p�X���[�h�����|���V�[�Ō��߂�ꂽ�p�X���[�h�̐������Ԃ�����ł��邩������Ȃ�.
+   この方法で認証を完了するために必要なクライアント-サーバの交換の数は変化するかもしれない.  この斯うを数えるだけで意味のある情報を得られる観察者がいるかもしれない. 例えば, 観察者は, ユーザのパスワードが期限切れかどうか推測できるかもしれない. さらなる観察により, サーバのパスワード期限ポリシーで決められたパスワードの生存期間を決定できるかもしれない.
 
 7.  References
 
@@ -441,7 +441,7 @@ RFC 4256         SSH Generic Interactive Authentication     January 2006
 
 Full Copyright Statement
 
-   Copyright (C) The Internet Society (2006). ���: �t�R ���� <haruyama@unixuser.org> 
+   Copyright (C) The Internet Society (2006). 訳者: 春山 征吾 <haruyama@unixuser.org> 
 
    This document is subject to the rights, licenses and restrictions
    contained in BCP 78, and except as set forth therein, the authors

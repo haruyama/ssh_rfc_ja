@@ -11,28 +11,28 @@ Category: Standards Track                                     P. Remaker
                                                             January 2006
 
 
-         �Z�L���A�V�F�� (SSH) �Z�b�V�����`�����l��Break�g��
+         セキュアシェル (SSH) セッションチャンネルBreak拡張
 
-���̃����̈ʒu�Â�
+このメモの位置づけ
 
-   ���̕�����, �C���^�[�l�b�g�R�~���j�e�B�ɑ΂���C���^�[�l�b�g�̕W���g���b�N�v���g�R�����`���Ă���. �܂�, ���P�̂��߂̋c�_�Ǝ��������߂Ă��邱�̃v���g�R���̕W�����̏�ԂƏ󋵂� "Internet
-   Official Protocol Standards" (STD 1) �̌��݂̔ł��Q�Ƃ��Ăق���.  ���̃����̔z�z�͐������Ȃ�.
+   この文書は, インターネットコミュニティに対するインターネットの標準トラックプロトコルを定義している. また, 改善のための議論と示唆を求めているこのプロトコルの標準化の状態と状況は "Internet
+   Official Protocol Standards" (STD 1) の現在の版を参照してほしい.  このメモの配布は制限しない.
 
 Copyright Notice
 
-   Copyright (C) The Internet Society (2006). ���: �t�R ���� <haruyama@unixuser.org> 
+   Copyright (C) The Internet Society (2006). 訳者: 春山 征吾 <haruyama@unixuser.org> 
 
-�T�v
+概要
 
-   �Z�b�V�����`�����l��Break�g����, �Z�L���A�V�F��(SSH)�̃^�[�~�i���Z�b�V������ BREAK �V�O�i���𑗂��i��񋟂���.
+   セッションチャンネルBreak拡張は, セキュアシェル(SSH)のターミナルセッションで BREAK シグナルを送る手段を提供する.
 
-�ڎ�
+目次
 
-   1. �C���g���_�N�V���� ..........................................2
-   2. ���̕����ŗp����\�L ...............................2
-   3. Break �v�� ...............................................3
-   4. �Z�L�����e�B�̍l�@ .........................................4
-   5. INAN�̍l�� .............................................4
+   1. イントロダクション ..........................................2
+   2. この文書で用いる表記 ...............................2
+   3. Break 要求 ...............................................3
+   4. セキュリティの考察 .........................................4
+   5. INANの考慮 .............................................4
    6. References ......................................................4
       6.1. Normative References .......................................4
       6.2. Informative References .....................................5
@@ -56,24 +56,24 @@ Galbraith & Remaker         Standards Track                     [Page 1]
 RFC 4335                  SSH Break Extension               January 2006
 
 
-1.  �C���g���_�N�V����
+1.  イントロダクション
 
-   �Z�L���A�V�F�� (SSH) [5]  �Z�b�V�����`�����l����, SSH�̃g�����X�|�[�g�̔閧���Ɗ��S���̓����𗘗p���Ȃ���, �N���C�A���g���[�U�ɃC���^���N�e�B�u�ɃR�}���h����͂������[�g�z�X�g����o�͂��󂯂郁�J�j�Y����񋟂���.  SSH �� �^�[�~�i���A�N�Z�X�A�v���P�[�V�����Ƃ��� Telnet ��u�������邽�߂ɂ��񂾂�Ǝg���o���Ă���.
+   セキュアシェル (SSH) [5]  セッションチャンネルは, SSHのトランスポートの秘密性と完全性の特徴を利用しながら, クライアントユーザにインタラクティブにコマンドを入力しリモートホストから出力を受けるメカニズムを提供する.  SSH は ターミナルアクセスアプリケーションとして Telnet を置き換えるためにだんだんと使われ出している.
 
-   Telnet �v���g�R���̋��ʂ̃A�v���P�[�V������ "Console Server" [7] ������. ����ɂ��, Telnet Network Virtual Terminal (NVT) ��, ���� RS-232/V.24 �񓯊��|�[�g�ɐڑ�������, ���� Telnet NVT �� ���̃|�[�g�Ƀ��[�J���ɐڑ����ꂽ�悤�Ɍ���, ���̕����|�[�g�� �l�b�g���[�N�̃A�h���X�����f�o�C�X�̂悤�ɂ݂���. �����̃��W���[�Ȍv�Z�@�@��x���_�[��, �񓯊��V���A���|�[�g��ʂ��������x���̊Ǘ��@�\��񋟂��Ă���. ������, �ڑ����ꂽ�^�[�~�i���� BREAK �V�O�i���𑗂�\�͂����邱�Ƃ���ʓI�Ɋ��҂��Ă���.
+   Telnet プロトコルの共通のアプリケーションに "Console Server" [7] がある. これにより, Telnet Network Virtual Terminal (NVT) は, 物理 RS-232/V.24 非同期ポートに接続されると, この Telnet NVT は そのポートにローカルに接続されたように見え, その物理ポートは ネットワークのアドレスを持つデバイスのようにみえる. 多数のメジャーな計算機機器ベンダーが, 非同期シリアルポートを通じた高レベルの管理機能を提供している. そして, 接続されたターミナルに BREAK シグナルを送る能力があることを一般的に期待している.
 
-   BREAK �V�O�i����, �S�̂̃L�����N�^���Ԃ��������� SPACE ("0") ��Ԃ�ێ����� TxD �M���Ƃ��Ē�`�����.  ���ۂɂ�, BREAK �M���͓T�^�I�� 250����500 ms�̒����� .
+   BREAK シグナルは, 全体のキャラクタ時間よりも長い間 SPACE ("0") 状態を保持する TxD 信号として定義される.  実際には, BREAK 信号は典型的に 250から500 msの長さだ .
 
-   Telnet �v���g�R����, "BREAK" �M���𑗂���@��񋟂��Ă���. RFC 854[1]�ňȉ��̂悤�ɒ�`���Ă��� "�����̃V�X�e���Ō��݃��[�J���ȈӖ���^�����Ă���USASCII�̏W���̊O���ɂ���M��". Console Server �̃x���_�[��, TELNET BREAK �M���� �����I�� BREAK �M���Ƃ��ĉ��߂���. ����ɂ��, �񓯊��V���A���R���\�[���|�[�g�ŗ��p�\�ȊǗ��@�\�̂��ׂĂ͈̔͂ւ̃A�N�Z�X���\�ɂ���. 
+   Telnet プロトコルは, "BREAK" 信号を送る方法を提供している. RFC 854[1]で以下のように定義している "多くのシステムで現在ローカルな意味を与えられているUSASCIIの集合の外部にある信号". Console Server のベンダーは, TELNET BREAK 信号を 物理的な BREAK 信号として解釈する. これにより, 非同期シリアルコンソールポートで利用可能な管理機能のすべての範囲へのアクセスを可能にする. 
 
-   SSH �Z�b�V�����`�����l���Ŏ����@�\���Ȃ����Ƃ�, "Console Server"�@�\�̂��߂�Telnet��p�������邱�Ƃ����[�U�ɋ����Ă���.
+   SSH セッションチャンネルで似た機能がないことは, "Console Server"機能のためにTelnetを用い続けることをユーザに強いてきた.
 
-2.  ���̕����ŗp����\�L
+2.  この文書で用いる表記
 
-   ���̕����ł̃L�[���[�h "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" ��, [2] �ŋL�q����Ă���悤�ɉ��߂����. 
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, [2] で記述されているように解釈される. 
 
-   "byte" �� "boolean", "uint32", "string" �f�[�^�^�C�v�� [3] �Œ�`����Ă���.
+   "byte" や "boolean", "uint32", "string" データタイプは [3] で定義されている.
 
 
 
@@ -90,9 +90,9 @@ Galbraith & Remaker         Standards Track                     [Page 2]
 RFC 4335                  SSH Break Extension               January 2006
 
 
-3.  Break �v��
+3.  Break 要求
 
-   ���̃`�����l�����L�̃��N�G�X�g��, �����[�g�z�X�g�� BREAK ������s�Ȃ��v���̂��߂� ([4] �ŋL�q����Ă���) �Z�b�V�����`�����l����ő�����.
+   次のチャンネル特有のリクエストが, リモートホストで BREAK 操作を行なう要求のために ([4] で記述されている) セッションチャンネル上で送られる.
 
         byte      SSH_MSG_CHANNEL_REQUEST
         uint32    recipient channel
@@ -100,18 +100,18 @@ RFC 4335                  SSH Break Extension               January 2006
         boolean   want_reply
         uint32    break-length in milliseconds
 
-   ���̗v�����󂯂�A�v���P�[�V������ BREAK �̒����𐧌�ł��Ȃ��Ȃ�, BREAK length �p�����[�^��, ���������K�v������. �`�b�v�Z�b�g���ՂƂȂ�`�b�v�Z�b�g�̃h���C�o�̃f�t�H���g�� BREAK �V�O�i���̒����������Ȃ���΂Ȃ�Ȃ�. 
+   この要求を受けるアプリケーションが BREAK の長さを制御できないなら, BREAK length パラメータは, 無視される必要がある. チップセットや基盤となるチップセットのドライバのデフォルトの BREAK シグナルの長さが送られなければならない. 
 
-   ���̃��N�G�X�g���󂯂�A�v���P�[�V������ BREAK �̒����𐧌�ł���Ȃ�, BREAK�̎������Ԃɂ���, ���̎���������.
-   3000 ms ���z���� BREAK �������Ԃ̗v�����󂯎������, 3000 ms �� BREAK�Ɖ��߂����K�v������. ���̗\�h��i��, ���s�s�ɒ��� BREAK �v���� BREAK�����s����Ԃ�49.7���̊ԃ|�[�g�𗘗p�s�\�ɂ���̂�h��.
+   このリクエストを受けるアプリケーションが BREAK の長さを制御できるなら, BREAKの持続時間について, 次の示唆がある.
+   3000 ms を越える BREAK 持続時間の要求を受け取ったら, 3000 ms の BREAKと解釈される必要がある. この予防手段は, 理不尽に長い BREAK 要求が BREAKを実行する間に49.7日の間ポートを利用不能にするのを防ぐ.
    safeguard prevents an unreasonably long BREAK request from causing a
    port to become unavailable for as long as 49.7 days while executing
-   the BREAK.  ��蒷�� BREAK��K�v�Ƃ���A�v���P�[�V������, ���̎����𖳎����Ă��悢.  BREAK�̎������Ԃ� 500 ms�������������N�G�X�g���󂯎������, 500 ms BREAK �Ɖ��߂����K�v������. �����̃f�o�C�X�ł��̒����� BREAK�ƔF������邩�炾.  ���Z�� BREAK��K�v�Ƃ���A�v���P�[�V������, ���̎����𖳎����Ă��悢.  BREAK length parameter �� 0 �Ȃ�, �`�b�v�Z�b�g���ՂƂȂ�`�b�v�Z�b�g�̃h���C�o�̃f�t�H���g�� BREAK �V�O�i���̒����Ɖ��߂����.  �f�t�H���g���Ȃ����, 500ms�� BREAK �̒����Ƃ��ėp������.
+   the BREAK.  より長い BREAKを必要とするアプリケーションは, この示唆を無視してもよい.  BREAKの持続時間が 500 msよりも小さいリクエストを受け取ったら, 500 ms BREAK と解釈される必要がある. 多くのデバイスでこの長さが BREAKと認識されるからだ.  より短い BREAKを必要とするアプリケーションは, この示唆を無視してもよい.  BREAK length parameter が 0 なら, チップセットや基盤となるチップセットのドライバのデフォルトの BREAK シグナルの長さと解釈される.  デフォルトがなければ, 500msが BREAK の長さとして用いられる.
    length.
 
-   SSH �ڑ��������V���A���|�[�g�ŏI������Ȃ��Ȃ�, BREAK�̕\����, ����/���荞�݂̃V�O�i���Ƃ��Ă�BREAK�̈�ʓI�ȗ��p�@�ƍ��v������@�Ŏ�舵��Ȃ���΂Ȃ�Ȃ�. �Ⴆ��, �Ǘ�����V�X�e���̒��ӂ��������߂ɑш�O�̋@�\��v������T�[�r�X�v���Z�b�T��.
+   SSH 接続が物理シリアルポートで終了されないなら, BREAKの表示は, 注意/割り込みのシグナルとしてのBREAKの一般的な利用法と合致する方法で取り扱わなければならない. 例えば, 管理するシステムの注意を引くために帯域外の機能を要求するサービスプロセッサだ.
 
-   SSH�̐ڑ����ʂ̐ڑ��ɃJ�X�P�[�h����Ă���ꍇ��, BREAK�̓J�X�P�[�h���ꂽ�ڑ��ɓn�����K�v������.  �Ⴆ��, SSH �V�F�������Telnet�Z�b�V������, SSH���N�_�Ƃ��� BREAK ��]������K�v������. Telnet �ڑ��Ŏn�߂�ꂽ SSH �N���C�A���g�� Telnet �ڑ������ BREAK �\����]������K�v������. 
+   SSHの接続が別の接続にカスケードされている場合は, BREAKはカスケードされた接続に渡される必要がある.  例えば, SSH シェルからのTelnetセッションは, SSHを起点とする BREAK を転送する必要がある. Telnet 接続で始められた SSH クライアントは Telnet 接続からの BREAK 表示を転送する必要がある. 
 
 
 
@@ -124,20 +124,20 @@ Galbraith & Remaker         Standards Track                     [Page 3]
 RFC 4335                  SSH Break Extension               January 2006
 
 
-   'want_reply' ���ݒ肳��Ă�����, �T�[�o��  SSH_MSG_CHANNEL_SUCCESS �� SSH_MSG_CHANNEL_FAILURE [5] ���b�Z�[�W��p���ĉ������Ȃ���΂Ȃ�Ȃ�.  �Ȃ�炩�� BREAK �����s���ꂽ��, SSH_MSG_CHANNEL_SUCCESS �������Ȃ���΂Ȃ�Ȃ�.
-BREAK �����s����Ȃ�������, SSH_MSG_CHANNEL_FAILURE �������Ȃ���΂Ȃ�Ȃ�.
+   'want_reply' が設定されていたら, サーバは  SSH_MSG_CHANNEL_SUCCESS か SSH_MSG_CHANNEL_FAILURE [5] メッセージを用いて応答しなければならない.  なんらかの BREAK が実行されたら, SSH_MSG_CHANNEL_SUCCESS が送られなければならない.
+BREAK が実行されなかったら, SSH_MSG_CHANNEL_FAILURE が送られなければならない.
 
-   ���̑����, ��ʓI�ȖړI��SSH�N���C�A���g�̓T�|�[�g����K�v������.
+   この操作を, 一般的な目的のSSHクライアントはサポートする必要がある.
 
-4.  �Z�L�����e�B�̍l�@
+4.  セキュリティの考察
 
-   �����̌v�Z�@�V�X�e����, �V���A���R���\�[�������[�J���ň��S�Ȃ��̂Ǝ�舵��. ������ BREAK �M���� �I�y���[�e�B���O�V�X�e���̒��f�̎��{������ݒ胂�[�h�֐i���̎w���Ƃ��ĉ��߂���.  ���̂���, BREAK���L���ȃ|�[�g�ւ�SSH�̃A�N�Z�X�������̋@�\�����s���邽�߂̓K�؂Ȍ����������[�U�Ɍ��肳��Ă��邱�Ƃ�, ���ɒ��ӂ���K�v������.  �܂�, BREAK �@�\�̃T�|�[�g��, �|�[�g�P�ʂ�T�[�r�X�P�ʂ̃x�[�X�Őݒ�\�Ɏ�������Ă��悢.
+   多くの計算機システムは, シリアルコンソールをローカルで安全なものと取り扱う. そして BREAK 信号を オペレーティングシステムの中断の実施や特権設定モードへ進入の指示として解釈する.  このため, BREAKが有効なポートへのSSHのアクセスがこれらの機能を実行するための適切な権限を持つユーザに限定されていることを, 非常に注意する必要がある.  また, BREAK 機能のサポートは, ポート単位やサービス単位のベースで設定可能に実装されてもよい.
 
-   �������� BREAK���Ԃ̐������s�Ȃ�Ȃ� BREAK length �p�����[�^�̂܂܉��߂��������, ���ɒ��� BREAK �M�����󂯂� , �ڑ������f�o�C�X����T�[�r�X�s�\��\�����Ȃ����ʂɂȂ邩������Ȃ�. 
+   示唆した BREAK時間の制限を行なわなず BREAK length パラメータのまま解釈する実装は, 非常に長い BREAK 信号を受けて , 接続したデバイスからサービス不能や予期しない結果になるかもしれない. 
 
-5.  IANA �̍l��
+5.  IANA の考慮
 
-   IANA ��, [6] �ɏ]���� ���̃R�l�N�V�����v���g�R���`�����l���̗v������ "break" �Ɗ��蓖�Ă�.
+   IANA は, [6] に従って このコネクションプロトコルチャンネルの要求名を "break" と割り当てた.
 
 6.  References
 
@@ -224,7 +224,7 @@ RFC 4335                  SSH Break Extension               January 2006
 
 Full Copyright Statement
 
-   Copyright (C) The Internet Society (2006). ���: �t�R ���� <haruyama@unixuser.org> 
+   Copyright (C) The Internet Society (2006). 訳者: 春山 征吾 <haruyama@unixuser.org> 
 
    This document is subject to the rights, licenses and restrictions
    contained in BCP 78, and except as set forth therein, the authors

@@ -11,24 +11,24 @@ Category: Standards Track                                C. Lonvick, Ed.
                                                             January 2006
 
 
-               �Z�L���A�V�F���iSSH�j�ڑ��v���g�R��
+               セキュアシェル（SSH）接続プロトコル
 
-���̃����̈ʒu�Â�
+このメモの位置づけ
 
-   ���̕�����, �C���^�[�l�b�g�R�~���j�e�B�ɑ΂���C���^�[�l�b�g�̕W���g���b�N�v���g�R�����`���Ă���. �܂�, ���P�̂��߂̋c�_�Ǝ��������߂Ă��邱�̃v���g�R���̕W�����̏�ԂƏ󋵂� "Internet
-   Official Protocol Standards" (STD 1) �̌��݂̔ł��Q�Ƃ��Ăق���.  ���̃����̔z�z�͐������Ȃ�.
+   この文書は, インターネットコミュニティに対するインターネットの標準トラックプロトコルを定義している. また, 改善のための議論と示唆を求めているこのプロトコルの標準化の状態と状況は "Internet
+   Official Protocol Standards" (STD 1) の現在の版を参照してほしい.  このメモの配布は制限しない.
 
 Copyright Notice
 
-   Copyright (C) The Internet Society (2006). ���: �t�R ���� <haruyama@unixuser.org> 
+   Copyright (C) The Internet Society (2006). 訳者: 春山 征吾 <haruyama@unixuser.org> 
 
-�T�v
+概要
 
-   �Z�L���A �V�F�� (SSH) ��, ���S�ł͂Ȃ��l�b�g���[�N��ł̈��S�ȃ����[�g���O�C���⑼�̈��S�ȃl�b�g���[�N�T�[�r�X�̂��߂̃v���g�R����.
+   セキュア シェル (SSH) は, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.
 
-   ���̕�����, SSH �R�l�N�V�����v���g�R���ɂ��ċL�q����.  ���̃v���g�R����, �C���^���N�e�B�u�ȃ��O�C���Z�b�V����, �R�}���h�̃����[�g���s, TCP/IP�ڑ��̓]��, X11�ڑ��̓]����񋟂���.  �����̃`�����l�����ׂĂ�, �P��̈Í������ꂽ�g���l���ɑ��d�������.
+   この文書は, SSH コネクションプロトコルについて記述する.  このプロトコルは, インタラクティブなログインセッション, コマンドのリモート実行, TCP/IP接続の転送, X11接続の転送を提供する.  これらのチャンネルすべては, 単一の暗号化されたトンネルに多重化される.
 
-   SSH �R�l�N�V�����v���g�R����, SSH �g�����X�|�[�g�w�E���[�U�F�؃v���g�R����œ��삷��悤�ɐ݌v����Ă���.
+   SSH コネクションプロトコルは, SSH トランスポート層・ユーザ認証プロトコル上で動作するように設計されている.
 
 
 
@@ -52,9 +52,9 @@ Ylonen & Lonvick            Standards Track                     [Page 1]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-�ڎ�
+目次
 
-   1. �C���g���_�N�V���� ..........................................2
+   1. イントロダクション ..........................................2
    2. Contributors ....................................................3
    3. Conventions Used in This Document ...............................3
    4. Global Requests .................................................4
@@ -89,11 +89,11 @@ RFC 4254                SSH Connection Protocol             January 2006
    Authors' Addresses ................................................23
    Trademark Notice ..................................................23
 
-1.  �C���g���_�N�V����
+1.  イントロダクション
 
-   SSH �R�l�N�V�����v���g�R����, SSH �g�����X�|�[�g�w�E���[�U�F�؃v���g�R����œ��삷��悤�ɐ݌v����Ă���([SSH-TRANS] �� [SSH-USERAUTH]).  ���̃v���g�R����, �C���^���N�e�B�u�ȃ��O�C���Z�b�V����, �R�}���h�̃����[�g���s, TCP/IP�ڑ��̓]��, X11�ڑ��̓]����񋟂���.
+   SSH コネクションプロトコルは, SSH トランスポート層・ユーザ認証プロトコル上で動作するように設計されている([SSH-TRANS] と [SSH-USERAUTH]).  このプロトコルは, インタラクティブなログインセッション, コマンドのリモート実行, TCP/IP接続の転送, X11接続の転送を提供する.
 
-   ���̃v���g�R���� 'service name' ��, "ssh-connection" ��.
+   このプロトコルの 'service name' は, "ssh-connection" だ.
 
 
 
@@ -104,7 +104,7 @@ Ylonen & Lonvick            Standards Track                     [Page 2]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-   ���̕�����, SSH�A�[�L�e�N�`������ [SSH-ARCH]��ǂ񂾂��Ƃɓǂނׂ���.  ���̕�����, �Q�Ƃ�����Ȃ��ɃA�[�L�e�N�`����������p���\�L�@�����R�ɗ��p����.
+   この文書は, SSHアーキテクチャ文書 [SSH-ARCH]を読んだあとに読むべきだ.  この文書は, 参照や説明なしにアーキテクチャ文書から用語や表記法を自由に利用する.
 
 2.  Contributors
 
@@ -125,7 +125,7 @@ RFC 4254                SSH Connection Protocol             January 2006
    Tadayoshi Kohno.  Listing their names here does not mean that they
    endorse this document, but that they have contributed to it.
 
-3.  ���̕����ŗp����\�L
+3.  この文書で用いる表記
 
    All documents related to the SSH protocols shall use the keywords
    "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
@@ -139,7 +139,7 @@ RFC 4254                SSH Connection Protocol             January 2006
    this document when used to describe namespace allocation are to be
    interpreted as described in [RFC2434].
 
-   �v���g�R���̃t�B�[���h�ƃt�B�[���h�Ŏ�蓾��l�� , ���̕����Q�Œ�`�����.  ���b�Z�[�W�̒�`��, �v���g�R���̃t�B�[���h�͒�`�����.  ��Ƃ���, SSH_MSG_CHANNEL_DATA �����Œ�`����
+   プロトコルのフィールドとフィールドで取り得る値は , この文書群で定義される.  メッセージの定義で, プロトコルのフィールドは定義される.  例として, SSH_MSG_CHANNEL_DATA を次で定義する
 
       byte      SSH_MSG_CHANNEL_DATA
       uint32    recipient channel
@@ -154,31 +154,31 @@ Ylonen & Lonvick            Standards Track                     [Page 3]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-   ���̕����Q�ł�, �t�B�[���h���Q�Ƃ����ꍇ�ɂ�, �V���O���N�H�[�g�ň͂܂�ĕ\�L�����.  �t�B�[���h�ɓ���l���Q�Ƃ����ꍇ��, �_�u���N�H�[�g�ň͂܂�ĕ\�L�����.  ��̗��p�����, 'data' �̎�蓾��l�ɂ�, "foo" �� "bar" ������.
+   この文書群では, フィールドが参照される場合には, シングルクォートで囲まれて表記される.  フィールドに入る値が参照される場合は, ダブルクォートで囲まれて表記される.  上の例を用いると, 'data' の取り得る値には, "foo" や "bar" がある.
 
-4.  �S�̓I�ȗv��
+4.  全体的な要求
 
-   �����[�g�̏�ԂɑS�̓I��(�`�����l���Ƃ͓Ɨ���)�e������v��������������.  ����������, ����̃|�[�g�ɑ΂���TCP/IP�]���̊J�n�̗v����.  �N���C�A���g���T�[�o�����ł��S�̓I�ȗv���𑗂��Ă悭�󂯎���͓K�؂ɕԓ����Ȃ���΂Ȃ�Ȃ����Ƃɒ���.  �����̗v���͂��ׂĎ��̃t�H�[�}�b�g�ɏ]��.
+   リモートの状態に全体的に(チャンネルとは独立に)影響する要求がいくつかある.  例を挙げると, 特定のポートに対するTCP/IP転送の開始の要求だ.  クライアントもサーバもいつでも全体的な要求を送ってよく受け取り手は適切に返答しなければならないことに注意.  それらの要求はすべて次のフォーマットに従う.
 
       byte      SSH_MSG_GLOBAL_REQUEST
       string    request name in US-ASCII only
       boolean   want reply
-      ....      �v�����L�̃f�[�^������.
+      ....      要求特有のデータが続く.
 
-   'request name' �̒l��, [SSH-ARCH] �Ő�������Ă���DNS �g�������K���ɏ]��.
+   'request name' の値は, [SSH-ARCH] で説明されているDNS 拡張命名規則に従う.
 
-   �󂯎���͂��̃��b�Z�[�W�ɑ΂���, SSH_MSG_REQUEST_SUCCESS ��, 'want_reply' �� TRUE �� SSH_MSG_REQUEST_FAILURE �ŕԓ�����.
+   受け取り手はこのメッセージに対して, SSH_MSG_REQUEST_SUCCESS か, 'want_reply' が TRUE の SSH_MSG_REQUEST_FAILURE で返答する.
 
       byte      SSH_MSG_REQUEST_SUCCESS
       ....     response specific data
 
-   �ʏ�, 'response specific data' �͑��݂��Ȃ�.
+   通常, 'response specific data' は存在しない.
 
-   �󂯎��肪�v���𗝉����Ȃ�������T�|�[�g���Ȃ��ꍇ��, �P��SSH_MSG_REQUEST_FAILURE ��Ԃ�.
+   受け取り手が要求を理解しなかったりサポートしない場合は, 単にSSH_MSG_REQUEST_FAILURE を返す.
 
       byte      SSH_MSG_REQUEST_FAILURE
 
-   ��ʂ�, ���̕ԓ����b�Z�[�W�͗v���̎�ނ̎��ʎq���܂܂Ȃ�.  �v�����J�n���������ǂ̗v�����Q�Ƃ��Ă邩�����ʂ���̂��\�ɂ��邽�߂�,SSH_MSG_GLOBAL_REQUESTS �̕ԓ���, �֘A����v���̃��b�Z�[�W�Ɠ������Ԃő����Ȃ���΂Ȃ�Ȃ����Ƃ��v������Ă���.  �`�����l���̗v���ł�, �����`�����l���Ɋ֌W���鉞���͐��������ԂłȂ���Ȃ���΂Ȃ�Ȃ�.  ������, �ʂ̃`�����l���ɑ΂���v���ɂ�, ���Ԃ�����ς��ĕԓ�����Ă��悢.
+   一般に, この返答メッセージは要求の種類の識別子を含まない.  要求を開始した側がどの要求を参照してるかを識別するのを可能にするために,SSH_MSG_GLOBAL_REQUESTS の返答は, 関連する要求のメッセージと同じ順番で送られなければならないことが要求されている.  チャンネルの要求でも, 同じチャンネルに関係する応答は正しい順番でなされなければならない.  しかし, 別のチャンネルに対する要求には, 順番が入れ変って返答されてもよい.
 
 
 
@@ -191,29 +191,29 @@ Ylonen & Lonvick            Standards Track                     [Page 4]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-5.  �`�����l���̃��J�j�Y��
+5.  チャンネルのメカニズム
 
-   ���ׂẴ^�[�~�i���̃Z�b�V����, �]�����ꂽ�ڑ��Ȃǂ�, �`�����l����.
-   �ǂ���̑�������`�����l�����J����.  �����̃`�����l����, �P��̐ڑ��ɑ��d�������.
+   すべてのターミナルのセッション, 転送された接続などは, チャンネルだ.
+   どちらの側からもチャンネルを開ける.  複数のチャンネルは, 単一の接続に多重化される.
 
-   �`�����l���͗����̑��Ŕԍ��ɂ���Ď��ʂ����.  �`�����l���������ԍ���, ���ꂼ��̑��ňقȂ邱�Ƃ�����.  �`�����l�����J�n����v����, �����̃`�����l���ԍ����܂�.  ����ȊO�̃`�����l���Ɋւ��郁�b�Z�[�W��, ���̃`�����l���̎󂯎���̃`�����l���ԍ����܂�.
+   チャンネルは両方の側で番号によって識別される.  チャンネルを示す番号は, それぞれの側で異なることがある.  チャンネルを開始する要求は, 送り手のチャンネル番号を含む.  それ以外のチャンネルに関するメッセージは, そのチャンネルの受け取り手のチャンネル番号を含む.
 
-   �`�����l���̓t���[���䂳���.  window �̃X�y�[�X�����邱�Ƃ��������b�Z�[�W���󂯂Ƃ���܂�, �`�����l���ɂ̓f�[�^�͑����Ȃ�.
+   チャンネルはフロー制御される.  window のスペースがあることを示すメッセージが受けとられるまで, チャンネルにはデータは送られない.
 
-5.1.  �`�����l���̊J�n
+5.1.  チャンネルの開始
 
-   ����̑����`�����l�����J�n��������, �`�����l���ɑ΂��ă��[�J���Ȕԍ������蓖�Ă�.  ���̃��b�Z�[�W�𑊎葤�ɑ���. ���b�Z�[�W�ɂ̓��[�J���ȃ`�����l���ԍ��Ə��� window �T�C�Y ���܂܂��.
+   一方の側がチャンネルを開始したい時, チャンネルに対してローカルな番号を割り当てる.  次のメッセージを相手側に送る. メッセージにはローカルなチャンネル番号と初期 window サイズ が含まれる.
 
       byte      SSH_MSG_CHANNEL_OPEN
       string    channel type in US-ASCII only
       uint32    sender channel
       uint32    initial window size
       uint32    maximum packet size
-      ....      channel type ����ɑ����f�[�^���w�肷��.
+      ....      channel type が後に続くデータを指定する.
 
-   'channel type' �͖��O��, [SSH-ARCH] �� [SSH-NUMBERS] �ɋL�q���ꂽ�悤�Ȋg���̃��J�j�Y��������.  'sender channel' ��, ���̃��b�Z�[�W�̑���肪�g���`�����l���̃��[�J���Ȏ��ʎq��.  'initial window size'��, �`�����l���̃f�[�^�����̃��b�Z�[�W�̑�����window �̒����Ȃ��ő���� byte �����w�肷��.  'maximum packet size' ��, �����ɑ��邱�Ƃ��ł���1�̃f�[�^�p�P�b�g�̍ő�T�C�Y���w�肷��.  ���Ƃ���, �x������ł��悢�C���^���N�e�B�u�ȕԓ��𓾂邽�߂�, �C���^���N�e�B�u�Ȑڑ��ň���̑�����菬�����p�P�b�g��p����悤�ɋ��߂�ꍇ������.
+   'channel type' は名前で, [SSH-ARCH] と [SSH-NUMBERS] に記述されたような拡張のメカニズムを持つ.  'sender channel' は, このメッセージの送り手が使うチャンネルのローカルな識別子だ.  'initial window size'は, チャンネルのデータをこのメッセージの送り手にwindow の調整なしで送れる byte 数を指定する.  'maximum packet size' は, 送り手に送ることができる1つのデータパケットの最大サイズを指定する.  たとえば, 遅い回線でよりよいインタラクティブな返答を得るために, インタラクティブな接続で一方の側がより小さいパケットを用いるように求める場合がある.
 
-   �����[�g���̓`�����l�����J�n���邩�ǂ��������肷��. ������ SSH_MSG_CHANNEL_OPEN_CONFIRMATION �� SSH_MSG_CHANNEL_OPEN_FAILURE �ŕԓ�����.
+   リモート側はチャンネルを開始するかどうかを決定する. そして SSH_MSG_CHANNEL_OPEN_CONFIRMATION か SSH_MSG_CHANNEL_OPEN_FAILURE で返答する.
 
 
 
@@ -232,9 +232,9 @@ RFC 4254                SSH Connection Protocol             January 2006
       uint32    sender channel
       uint32    initial window size
       uint32    maximum packet size
-      ....      channel type ����ɑ����f�[�^���w�肷��.
+      ....      channel type が後に続くデータを指定する.
 
-   'recipient channel' ��, ���̊J�n�v���ŗ^����ꂽ�`�����l���ԍ���. 'sender channel' �͑��葤�Ŋ��蓖�Ă�ꂽ�`�����l���ԍ���.
+   'recipient channel' は, 元の開始要求で与えられたチャンネル番号だ. 'sender channel' は相手側で割り当てられたチャンネル番号だ.
 
       byte      SSH_MSG_CHANNEL_OPEN_FAILURE
       uint32    recipient channel
@@ -242,9 +242,9 @@ RFC 4254                SSH Connection Protocol             January 2006
       string    description in ISO-10646 UTF-8 encoding [RFC3629]
       string    language tag [RFC3066]
 
-   SSH_MSG_CHANNEL_OPEN ���b�Z�[�W�̎󂯎��肪 �w�肳�ꂽ 'channel type' ���T�|�[�g���Ă��Ȃ��Ȃ�, SSH_MSG_CHANNEL_OPEN_FAILURE �ŒP���ɕԓ�����.  �N���C�A���g��, 'description' ����������[�U�ɕ\�����Ă��悢.  �����\������Ȃ�, �N���C�A���g�\�t�g�E�F�A��, [SSH-ARCH]�ŋc�_�����\�h�[�u�����Ȃ���΂Ȃ�Ȃ�.
+   SSH_MSG_CHANNEL_OPEN メッセージの受け取り手が 指定された 'channel type' をサポートしていないなら, SSH_MSG_CHANNEL_OPEN_FAILURE で単純に返答する.  クライアントは, 'description' 文字列をユーザに表示してもよい.  もし表示するなら, クライアントソフトウェアは, [SSH-ARCH]で議論した予防措置を取らなければならない.
 
-   SSH_MSG_CHANNEL_OPEN_FAILURE �� 'reason code' �̒l��, ���̕\�Œ�`�����.  'reason code' �͓ǂ݈Ղ��悤��10�i�̃t�H�[�}�b�g�ŏ�����Ă��邪, ���ۂɂ�uint32�̒l�ł��邱�Ƃɒ���.
+   SSH_MSG_CHANNEL_OPEN_FAILURE の 'reason code' の値は, 次の表で定義される.  'reason code' は読み易いように10進のフォーマットで書かれているが, 実際にはuint32の値であることに注意.
 
              Symbolic name                           reason code
              -------------                           -----------
@@ -253,9 +253,9 @@ RFC 4254                SSH Connection Protocol             January 2006
             SSH_OPEN_UNKNOWN_CHANNEL_TYPE                 3
             SSH_OPEN_RESOURCE_SHORTAGE                    4
 
-   �V����SSH_MSG_CHANNEL_OPEN�� 'reason code' �̒l(�Ɗ֘A���� 'description' �e�L�X�g) �����蓖�Ă�v����, 0x00000005 ���� 0xFDFFFFFF �͈̔͂ɂ��Ă� [RFC2434] �ɋL�q����Ă��� IETF CONSENSUS �ɂ����Ă���Ȃ���΂Ȃ�Ȃ�.  IANA��, 0xFE000000 ���� 0xFFFFFFFF �͈̔͂̃`�����l���ڑ����s��'reason code' �̒l�͊��蓖�ĂȂ�.  ���͈̔͂̃`�����l���ڑ����s�� 'reason code'�̒l��, [RFC2434]�ɋL�q����Ă��� �v���C�x�[�g�ȗ��p (PRIVATE USE) �ɗ\�񂳂�Ă���.
+   新しいSSH_MSG_CHANNEL_OPENの 'reason code' の値(と関連する 'description' テキスト) を割り当てる要求は, 0x00000005 から 0xFDFFFFFF の範囲については [RFC2434] に記述されている IETF CONSENSUS におってされなければならない.  IANAは, 0xFE000000 から 0xFFFFFFFF の範囲のチャンネル接続失敗の'reason code' の値は割り当てない.  この範囲のチャンネル接続失敗の 'reason code'の値は, [RFC2434]に記述されている プライベートな利用 (PRIVATE USE) に予約されている.
 
-   0xFE000000 to 0xFFFFFFFF �͈̔͂ɂ��Ă�IANA�͂Ȃ�̐�������Ȃ���, ���͈͎̔͂��̋K��ɏ]����2�̕����ɕ�������ĊǗ������. 
+   0xFE000000 to 0xFFFFFFFF の範囲についてはIANAはなんの制御もしないが, この範囲は次の規約に従って2つの部分に分割されて管理される. 
 
 
 
@@ -266,27 +266,27 @@ Ylonen & Lonvick            Standards Track                     [Page 6]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-   o  0xFE000000 ���� 0xFEFFFFFF �͈̔͂�, ���[�J���Ɋ��蓖�Ă�ꂽ�`�����l���Ƌ��ɗ��p����邽�߂ɂ���.  ���Ƃ���,"example_session@example.com" �Ƃ��� 'channel type' �̃`�����l������Ă��ꂽ�����s�����Ƃ�, ���X�|���X�ɂ�, (�O�q�Ȃ���0x00000001 ���� 0xFDFFFFFF�͈̔͂�) IANA �Ŋ��蓖�Ă�ꂽ 'reason code'���܂܂�邩,  0xFE000000 ���� 0xFEFFFFFF �̏��̃��[�J���Ɋ��蓖�Ă�ꂽ�l��'reason code' ���܂܂��.  �������, �T�[�o����Ă��ꂽ 'channel type' �𗝉��ł��Ȃ��ꍇ��, ���ꂪ���[�J���ɒ�`���ꂽ 'channel type' �ł����Ă�, 'reason code' �� �O�q����0x00000003 �łȂ���΂Ȃ�Ȃ�.  �T�[�o�� 'channel type' �𗝉����邪�`�����l���̊J�n�Ɏ��s����Ȃ�, �T�[�o�͒�Ă��ꂽ���[�J���� 'channel type' �ɑΉ����郍�[�J���Ɋ��蓖�Ă�ꂽ�l��Ԃ��K�v������.  ���s����҂�, �܂�IANA�Ŋ��蓖�Ă�ꂽ 'reason code' �𗘗p���悤�Ƃ�, ���̎��Ƀ��[�J���Ɋ��蓖�Ă�ꂽ 'reason code' �𗘗p���悤�Ƃ��邱�Ƃ�O��Ƃ��Ă���.
+   o  0xFE000000 から 0xFEFFFFFF の範囲は, ローカルに割り当てられたチャンネルと共に利用されるためにある.  たとえば,"example_session@example.com" という 'channel type' のチャンネルが提案されたが失敗したとき, レスポンスには, (前述ないし0x00000001 から 0xFDFFFFFFの範囲の) IANA で割り当てられた 'reason code'が含まれるか,  0xFE000000 から 0xFEFFFFFF の埴のローカルに割り当てられた値を'reason code' が含まれる.  もちろん, サーバが提案された 'channel type' を理解できない場合は, それがローカルに定義された 'channel type' であっても, 'reason code' は 前述した0x00000003 でなければならない.  サーバが 'channel type' を理解するがチャンネルの開始に失敗するなら, サーバは提案されたローカルな 'channel type' に対応するローカルに割り当てられた値を返す必要がある.  実行する者が, まずIANAで割り当てられた 'reason code' を利用しようとし, その次にローカルに割り当てられた 'reason code' を利用しようとすることを前提としている.
 
-   o  0xFF�Ŏn�܂�͈͂ɂ��Ă�, �����⎦���͂Ȃ�.  ���͈̔͂𗘗p����ۂ�, ���݉^�p���͊��҂���Ȃ�.  ��{�I��, ���͈͎̔͂����̂��߂ɂ���. 
+   o  0xFFで始まる範囲については, 制限や示唆はない.  この範囲を利用する際は, 相互運用性は期待されない.  基本的に, この範囲は実験のためにある. 
 
-5.2.  �f�[�^�]��
+5.2.  データ転送
 
-   window size ��, window�����������܂łɑ��葤�����邱�Ƃ̂ł���o�C�g�����w�肷��.  �ǂ���̑������̃��b�Z�[�W�� window �𒲐��ł���.
+   window size は, windowが調整されるまでに相手側が送ることのできるバイト数を指定する.  どちらの側も次のメッセージで window を調整できる.
 
       byte      SSH_MSG_CHANNEL_WINDOW_ADJUST
       uint32    recipient channel
       uint32    bytes to add
 
-   ���̃��b�Z�[�W���󂯎������, �󂯎���͈ȑO���鎖��������Ă������̂����w�肳�ꂽ�����傫��byte���𑗂��Ă��悢; window size ����������.  ������, 2^32 -1 byte�܂ł�window size �𐳂��������Ȃ���΂Ȃ�Ȃ�.  2�O32 - 1 byte ���z���� window ���g�傳��邱�Ƃ͂Ȃ�.
+   このメッセージを受け取ったら, 受け取り手は以前送る事を許可されていたものよりも指定されただけ大きいbyte数を送ってもよい; window size が増加する.  実装は, 2^32 -1 byteまでのwindow size を正しく扱えなければならない.  2＾32 - 1 byte を越えて window が拡大されることはない.
 
-   �f�[�^�̓]���͎��̎�ނ̃��b�Z�[�W�ōs�Ȃ���.
+   データの転送は次の種類のメッセージで行なわれる.
 
       byte      SSH_MSG_CHANNEL_DATA
       uint32    recipient channel
       string    data
 
-   �������f�[�^�̍ő�ʂ�, �`�����l���̍ő� packet size �ƌ��݂� window size �̏������ق��Ō��肳���.  window size ��, �]�����ꂽ�f�[�^�ʂ�����������.  ������� window ����ɂȂ������Ƃœ]�����ꂽ���ׂĂ̗]���ȃf�[�^��, �ǂ���̑����������Ă��悢.
+   許されるデータの最大量は, チャンネルの最大 packet size と現在の window size の小さいほうで決定される.  window size は, 転送されたデータ量だけ減少する.  許される window が空になったあとで転送されたすべての余分なデータは, どちらの側も無視してもよい.
 
 
 
@@ -295,28 +295,28 @@ Ylonen & Lonvick            Standards Track                     [Page 7]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-   �����ɂ�, SSH �g�����X�|�[�g�w�� packet size �ɐ��������邱�Ƃ����҂���� (packet �̎�M�̂��߂̂ǂ̂悤�Ȑ�����, [SSH-TRANS]�ɋL�q����Ă���悤��, 32768 byte �ȏ�łȂ���΂Ȃ�Ȃ�.).  SSH �R�l�N�V�����w�̎�����
+   実装には, SSH トランスポート層の packet size に制限があることを期待される (packet の受信のためのどのような制限も, [SSH-TRANS]に記述されているように, 32768 byte 以上でなければならない.).  SSH コネクション層の実装は
 
-   o  �g�����X�|�[�g�w����M�ł�������傫�ȃg�����X�|�[�g packet �ɂȂ�ő� packet size �����m���Ă͂Ȃ�Ȃ�.
+   o  トランスポート層が受信できるよりも大きなトランスポート packet になる最大 packet size を告知してはならない.
 
-   o  �g�����X�|�[�g�w���������̂����傫�� data packet �𐶐����Ă͂Ȃ�Ȃ�. ���Ƃ�, �����[�g�������ɑ傫�� packet ���󂯂Ƃ肽���ꍇ�ł���.
+   o  トランスポート層が送れるものよりも大きな data packet を生成してはならない. たとえ, リモート側が非常に大きな packet を受けとりたい場合でもだ.
 
-   ������, �������̃f�[�^�̎�ނ�]������`�����l��������.  ���̗�Ƃ���, �C���^���N�e�B�u�ȃZ�b�V��������� stderr �f�[�^������.  ���̂悤�ȃf�[�^��, SSH_MSG_CHANNEL_EXTENDED_DATA ���b�Z�[�W�ɂ���ē]�������. �����ňقȂ� integer �ɂ���ăf�[�^�̎�ނ��w�肷��. ���p�ł����ނƂ��̉��߂�, �`�����l���̎�ނɈˑ�����.
+   加えて, いくつかのデータの種類を転送するチャンネルがある.  この例として, インタラクティブなセッションからの stderr データがある.  このようなデータは, SSH_MSG_CHANNEL_EXTENDED_DATA メッセージによって転送される. ここで異なる integer によってデータの種類を指定する. 利用できる種類とその解釈は, チャンネルの種類に依存する.
 
       byte      SSH_MSG_CHANNEL_EXTENDED_DATA
       uint32    recipient channel
       uint32    data_type_code
       string    data
 
-   ���̃��b�Z�[�W�ő���ꂽ�f�[�^��, �ʏ�̃f�[�^�Ɠ��� window �������.
+   このメッセージで送られたデータは, 通常のデータと同じ window を消費する.
 
-   ����, ���̎�ނ�������`����Ă���.  'data_type_code' �͓ǂ݈Ղ��悤��10�i�̃t�H�[�}�b�g�ŏ�����Ă��邪, ���ۂɂ�uint32�̒l�ł��邱�Ƃɒ���.
+   現在, 次の種類だけが定義されている.  'data_type_code' は読み易いように10進のフォーマットで書かれているが, 実際にはuint32の値であることに注意.
 
                Symbolic name                  data_type_code
                -------------                  --------------
              SSH_EXTENDED_DATA_STDERR               1
 
-   �g���`�����l���f�[�^�]���� 'data_type_code' �̒l��, �A�����Ċ��蓖�Ă��Ȃ���΂Ȃ�Ȃ�.  �g���`�����l���f�[�^�]���� 'data_type_code' �̒l�Ɗ֘A����g���`�����l���f�[�^�]���� 'data' �����蓖�Ă�v����, 0x00000002 ���� 0xFDFFFFFF �͈̔͂ɂ��Ă� [RFC2434] �ɋL�q����Ă��� IETF CONSENSUS �ɂ���Ă���Ȃ���΂Ȃ�Ȃ�. IANA��, 0xFE000000 ���� 0xFFFFFFFF �͈̔͂� �g���`�����l���f�[�^�]���� 'data_type_code' �̒l�͊��蓖�ĂȂ�.  ���͈̔͂̊g���`�����l���f�[�^�]���� 'data_type_code'�̒l��,  [RFC2434]�ɋL�q����Ă��� �v���C�x�[�g�ȗ��p (PRIVATE USE) �ɗ\�񂳂�Ă���.  IANA �ւ̎��ۂ̎w���� [SSH-NUMBERS] �ɂ��邱�Ƃɒ���.
+   拡張チャンネルデータ転送の 'data_type_code' の値は, 連続して割り当てられなければならない.  拡張チャンネルデータ転送の 'data_type_code' の値と関連する拡張チャンネルデータ転送の 'data' を割り当てる要求は, 0x00000002 から 0xFDFFFFFF の範囲については [RFC2434] に記述されている IETF CONSENSUS によってされなければならない. IANAは, 0xFE000000 から 0xFFFFFFFF の範囲の 拡張チャンネルデータ転送の 'data_type_code' の値は割り当てない.  この範囲の拡張チャンネルデータ転送の 'data_type_code'の値は,  [RFC2434]に記述されている プライベートな利用 (PRIVATE USE) に予約されている.  IANA への実際の指示は [SSH-NUMBERS] にあることに注意.
 
 
 
@@ -327,35 +327,35 @@ Ylonen & Lonvick            Standards Track                     [Page 8]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-5.3.  �`�����l���̏I��
+5.3.  チャンネルの終了
 
-   �`�����l���ɂ�������ȏ�f�[�^�𑗂�Ȃ��Ȃ�, SSH_MSG_CHANNEL_EOF �𑗂�K�v������.
+   チャンネルにもうこれ以上データを送らないなら, SSH_MSG_CHANNEL_EOF を送る必要がある.
 
       byte      SSH_MSG_CHANNEL_EOF
       uint32    recipient channel
 
-   ���̃��b�Z�[�W�ɖ����I�ȕԓ��͑����Ȃ�.  ������, �`�����l���̑��葤���I�������Ƃ���, �A�v���P�[�V������ EOF �𑗂邩������Ȃ�.  ���̃��b�Z�[�W�̂��Ƃ��`�����l���͊J���ꂽ��ԂŎc��, �t�̕����ł���Ȃ�f�[�^�������邩������Ȃ����Ƃɒ���.  ���̃��b�Z�[�W��, window space ������Ȃ�. window space ���c���Ă��Ȃ��ꍇ�ɂ����邱�Ƃ��ł���.
+   このメッセージに明示的な返答は送られない.  しかし, チャンネルの相手側が終了したときに, アプリケーションが EOF を送るかもしれない.  このメッセージのあともチャンネルは開かれた状態で残り, 逆の方向でさらなるデータが送られるかもしれないことに注意.  このメッセージは, window space を消費しない. window space が残っていない場合にも送ることができる.
 
-   �ǂ��炩�̑����`�����l�����I���������Ɩ]�ނȂ�, SSH_MSG_CHANNEL_CLOSE �𑗂�.  �܂����̃��b�Z�[�W�𑗐M���Ă��Ȃ��̂ɂ��̃��b�Z�[�W����M��������, SSH_MSG_CHANNEL_CLOSE �𑗂�Ԃ��Ȃ���΂Ȃ�Ȃ�.  �ǂ���̑���SSH_MSG_CHANNEL_CLOSE �𑗎�M������`�����l���͏I�������ƌ��Ȃ����. ���̌�Ń`�����l���ԍ��͍ė��p����邩������Ȃ�.  SSH_MSG_CHANNEL_EOF �𑗐M�Ȃ�����M������ SSH_MSG_CHANNEL_CLOSE �𑗂��Ă悢.
+   どちらかの側がチャンネルを終了したいと望むなら, SSH_MSG_CHANNEL_CLOSE を送る.  まだこのメッセージを送信していないのにこのメッセージを受信した側は, SSH_MSG_CHANNEL_CLOSE を送り返さなければならない.  どちらの側もSSH_MSG_CHANNEL_CLOSE を送受信したらチャンネルは終了したと見なされる. この後でチャンネル番号は再利用されるかもしれない.  SSH_MSG_CHANNEL_EOF を送信ないし受信せずに SSH_MSG_CHANNEL_CLOSE を送ってよい.
 
       byte      SSH_MSG_CHANNEL_CLOSE
       uint32    recipient channel
 
-   ���̃��b�Z�[�W��, window space ������Ȃ�. window space ���c���Ă��Ȃ��ꍇ�ɂ����邱�Ƃ��ł���.
+   このメッセージは, window space を消費しない. window space が残っていない場合にも送ることができる.
 
-   �\�Ȃ��, ���̃��b�Z�[�W�̑O�ɑ���ꂽ���ׂẴf�[�^�������������ɓ`�B����邱�Ƃ����������.
+   可能ならば, このメッセージの前に送られたすべてのデータが正しい送り先に伝達されることが推奨される.
 
-5.4.  �`�����l�����L�̗v��
+5.4.  チャンネル特有の要求
 
-   ������ 'channel type' �̒l��, ����� 'channel type' �ɓ��L�̊g��������.  ���, �C���^���N�e�B�u�ȃZ�b�V�����ł� pty (�[���^�[�~�i��)�̗v��������.
+   多くの 'channel type' の値が, 特定の 'channel type' に特有の拡張を持つ.  例に, インタラクティブなセッションでの pty (擬似ターミナル)の要求がある.
 
-   ���ׂẴ`�����l�����L�̗v���͎��̌`����p����.
+   すべてのチャンネル特有の要求は次の形式を用いる.
 
       byte      SSH_MSG_CHANNEL_REQUEST
       uint32    recipient channel
       string    request type in US-ASCII characters only
       boolean   want reply
-      ....      �^�C�v�ɓ��L�̃f�[�^������.
+      ....      タイプに特有のデータが続く.
 
 
 
@@ -366,14 +366,14 @@ Ylonen & Lonvick            Standards Track                     [Page 9]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-   'want reply' �� FALSE �Ȃ�, �v���ɑ΂���ԓ��͑����Ȃ�.
-   ������, �󂯎���� SSH_MSG_CHANNEL_SUCCESS �Ȃ��� SSH_MSG_CHANNEL_FAILURE, �������� �v�����L�̌p�����b�Z�[�W��Ԃ�.  �v���������ł��Ȃ�������`�����l���ŃT�|�[�g����Ă��Ȃ��ꍇ��, SSH_MSG_CHANNEL_FAILURE ��Ԃ�.
+   'want reply' が FALSE なら, 要求に対する返答は送られない.
+   しかし, 受け取り手は SSH_MSG_CHANNEL_SUCCESS ないし SSH_MSG_CHANNEL_FAILURE, もしくは 要求特有の継続メッセージを返す.  要求が理解できなかったりチャンネルでサポートされていない場合は, SSH_MSG_CHANNEL_FAILURE を返す.
 
-   ���̃��b�Z�[�W��, window space ������Ȃ�. window space ���c���Ă��Ȃ��ꍇ�ɂ����邱�Ƃ��ł���.  'request type' �̒l�� ���ꂼ��� channel type �ɋǏ��I��.
+   このメッセージは, window space を消費しない. window space が残っていない場合にも送ることができる.  'request type' の値は それぞれの channel type に局所的だ.
 
-   �N���C�A���g��, ���N�G�X�g�ɑ΂���ԓ���҂��ƂȂ�����Ȃ郁�b�Z�[�W�𑗂��Ă��悢.
+   クライアントは, リクエストに対する返答を待つことなくさらなるメッセージを送ってもよい.
 
-   'request type' �̒l��, [SSH-ARCH] �� [SSH-NUMBERS] �Ő�������Ă��� DNS �g�������K���ɏ]��.
+   'request type' の値は, [SSH-ARCH] と [SSH-NUMBERS] で説明されている DNS 拡張命名規則に従う.
 
       byte      SSH_MSG_CHANNEL_SUCCESS
       uint32    recipient channel
@@ -382,16 +382,16 @@ RFC 4254                SSH Connection Protocol             January 2006
       byte      SSH_MSG_CHANNEL_FAILURE
       uint32    recipient channel
 
-   ����烁�b�Z�[�W��, window space ������Ȃ�. window space ���c���Ă��Ȃ��ꍇ�ɂ����邱�Ƃ��ł���.
+   これらメッセージは, window space を消費しない. window space が残っていない場合にも送ることができる.
 
-6.  �C���^���N�e�B�u�ȃZ�b�V����
+6.  インタラクティブなセッション
 
-   �Z�b�V������, �v���O�����̃����[�g�Ȏ��s��.  ���̃v���O������, �V�F����A�v���P�[�V������V�X�e���̃R�}���h��g�ݍ��܂ꂽ�T�u�V�X�e����.
-   ���̃v���O������, tty������������Ȃ��������Ȃ���������Ȃ�. �܂�, X11�̓]�����N�����邩������Ȃ������Ȃ���������Ȃ�.  �����̃Z�b�V�����������ɗL���ɂȂ肤��.
+   セッションは, プログラムのリモートな実行だ.  このプログラムは, シェルやアプリケーションやシステムのコマンドや組み込まれたサブシステムだ.
+   このプログラムは, ttyを持つかもしれないし持たないかもしれない. また, X11の転送を起動するかもしれないししないかもしれない.  複数のセッションが同時に有効になりうる.
 
-6.1.  �Z�b�V�����̊J�n
+6.1.  セッションの開始
 
-   �Z�b�V������, ���̃��b�Z�[�W�𑗂邱�ƂŊJ�n�����.
+   セッションは, 次のメッセージを送ることで開始される.
 
       byte      SSH_MSG_CHANNEL_OPEN
       string    "session"
@@ -399,7 +399,7 @@ RFC 4254                SSH Connection Protocol             January 2006
       uint32    initial window size
       uint32    maximum packet size
 
-   �N���C�A���g�̎�����, �ǂ�ȃZ�b�V�����`�����l���̊J�n�v�������ۂ���K�v������. �׈��ȃT�[�o���N���C�A���g���U������̂���������邽�߂�.
+   クライアントの実装は, どんなセッションチャンネルの開始要求も拒否する必要がある. 邪悪なサーバがクライアントを攻撃するのをより難しくするためだ.
 
 
 
@@ -410,9 +410,9 @@ Ylonen & Lonvick            Standards Track                    [Page 10]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-6.2.  �[���^�[�~�i���̗v��
+6.2.  擬似ターミナルの要求
 
-   ���̃��b�Z�[�W�𑗂邱�Ƃ�, �[���^�[�~�i�����Z�b�V�����Ɋ��蓖�Ă���.
+   次のメッセージを送ることで, 擬似ターミナルがセッションに割り当てられる.
 
       byte      SSH_MSG_CHANNEL_REQUEST
       uint32    recipient channel
@@ -425,17 +425,17 @@ RFC 4254                SSH Connection Protocol             January 2006
       uint32    terminal height, pixels (e.g., 480)
       string    encoded terminal modes
 
-   'encoded terminal modes' �� 8�߂ŋL�q����.  �����p�����[�^��0�̏ꍇ�͖�������Ȃ���΂Ȃ�Ȃ�.  0�ȊO�� character/row �����p�����[�^��, pixel �������㏑������.  pixel ������, �E�B���h�E�̕`��\�̈���Q�Ƃ���.
+   'encoded terminal modes' は 8節で記述する.  次元パラメータが0の場合は無視されなければならない.  0以外の character/row 次元パラメータは, pixel 次元を上書きする.  pixel 次元は, ウィンドウの描画可能領域を参照する.
 
-   �����p�����[�^��, �P�ɏ���񋟂��邾����.
+   次元パラメータは, 単に情報を提供するだけだ.
 
-   �N���C�A���g��, pty �v���𖳎�����K�v������.
+   クライアントは, pty 要求を無視する必要がある.
 
-6.3.  X11 �̓]��
+6.3.  X11 の転送
 
-6.3.1.  X11 �]���̗v��
+6.3.1.  X11 転送の要求
 
-   X11�̓]����, �Z�b�V������ SSH_MSG_CHANNEL_REQUEST ���b�Z�[�W�𑗂邱�Ƃŗv�������.
+   X11の転送は, セッションに SSH_MSG_CHANNEL_REQUEST メッセージを送ることで要求される.
 
       byte      SSH_MSG_CHANNEL_REQUEST
       uint32    recipient channel
@@ -446,9 +446,9 @@ RFC 4254                SSH Connection Protocol             January 2006
       string    x11 authentication cookie
       uint32    x11 screen number
 
-   ������ 'x11 authentication cookie' ��, �ɂ����̃����_���ȃN�b�L�[��, �ڑ��v�����󂯓����ꂽ�ۂɂ��̃N�b�L�[���`�F�b�N���u�������邱�Ƃ����������.
+   送られる 'x11 authentication cookie' は, にせ物のランダムなクッキーで, 接続要求が受け入れられた際にそのクッキーをチェックし置き換えることが推奨される.
 
-   X11 �ڑ��̓]����, �Z�b�V�����̃`�����l�����I���������~�����ׂ���.  ������, ���łɊJ�n����Ă���]����, �Z�b�V�������I������Ă������I�ɂ͏I������Ȃ��ׂ���.
+   X11 接続の転送は, セッションのチャンネルが終了したら停止されるべきだ.  しかし, すでに開始されている転送は, セッションが終了されても自動的には終了されないべきだ.
 
 
 
@@ -457,17 +457,17 @@ Ylonen & Lonvick            Standards Track                    [Page 11]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-   'single connection' �� TRUE �Ȃ�, �P��̐ڑ��݂̂��]�������ׂ���.  �ŏ��̂��̈ȍ~�Ȃ����Z�b�V�����`�����l���̏I���ȍ~��, �ڑ����]������邱�Ƃ͂Ȃ�.
+   'single connection' が TRUE なら, 単一の接続のみが転送されるべきだ.  最初のもの以降ないしセッションチャンネルの終了以降に, 接続が転送されることはない.
 
-   'x11 authentication protocol' ��, ���p����X11�̔F�ؖ@�̖��O��. ��, "MIT-MAGIC-COOKIE-1".
+   'x11 authentication protocol' は, 利用するX11の認証法の名前だ. 例, "MIT-MAGIC-COOKIE-1".
 
-   'x11 authentication cookie' �� 16�i�ɃG���R�[�h����Ȃ���΂Ȃ�Ȃ�.
+   'x11 authentication cookie' は 16進にエンコードされなければならない.
 
-   X �̃v���g�R����, [SCHEIFLER] �ɋL�q����Ă���.
+   X のプロトコルは, [SCHEIFLER] に記述されている.
 
-6.3.2.  X11 �̃`�����l��
+6.3.2.  X11 のチャンネル
 
-   X11 �̃`�����l����, �`�����l���J�n�v���ŊJ�n�����.  �J�n���ꂽ�`�����l���̓Z�b�V�����ɂ͓Ɨ���, �Z�b�V�����`�����l�����I�����Ă��]�����ꂽX11�̃`�����l���͏I������Ȃ�.
+   X11 のチャンネルは, チャンネル開始要求で開始される.  開始されたチャンネルはセッションには独立で, セッションチャンネルが終了しても転送されたX11のチャンネルは終了されない.
 
       byte      SSH_MSG_CHANNEL_OPEN
       string    "x11"
@@ -477,13 +477,13 @@ RFC 4254                SSH Connection Protocol             January 2006
       string    originator address (e.g., "192.168.7.38")
       uint32    originator port
 
-   �󂯎����, SSH_MSG_CHANNEL_OPEN_CONFIRMATION �� SSH_MSG_CHANNEL_OPEN_FAILURE �ŉ������Ȃ���΂Ȃ�Ȃ�.
+   受け取り手は, SSH_MSG_CHANNEL_OPEN_CONFIRMATION か SSH_MSG_CHANNEL_OPEN_FAILURE で応答しなければならない.
 
-   X11�]�����v������Ă��Ȃ��ꍇ�ɂ�, �����͂ǂ�X11 �`�����l���J�n�v�������ۂ��Ȃ���΂Ȃ�Ȃ�.
+   X11転送が要求されていない場合には, 実装はどのX11 チャンネル開始要求も拒否しなければならない.
 
-6.4.  ���ϐ��̓]��
+6.4.  環境変数の転送
 
-   ��ŊJ�n�����V�F����R�}���h��, ���ϐ���]�����邱�Ƃ��ł���.  ���������v���Z�X�Ŋ��ϐ��̐ݒ�𐧌䂵�Ȃ���, �Z�L�����e�B�̊댯�ƂȂ肤��.  ������ϐ����̃��X�g���Ǘ����邩�T�[�o�v���Z�X���\���Ȍ����𗎂������ƂŊ��ϐ���ݒ肷�邩�̂ǂ��炩�ɂ��邱�Ƃ�, �����ɂ͐��������.
+   後で開始されるシェルやコマンドに, 環境変数を転送することができる.  特権を持つプロセスで環境変数の設定を制御しないと, セキュリティの危険となりうる.  許可する変数名のリストを管理するかサーバプロセスが十分な権限を落したあとで環境変数を設定するかのどちらかにすることが, 実装には推奨される.
 
       byte      SSH_MSG_CHANNEL_REQUEST
       uint32    recipient channel
@@ -501,16 +501,16 @@ Ylonen & Lonvick            Standards Track                    [Page 12]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-6.5.  �V�F���Ȃ����R�}���h�̋N��
+6.5.  シェルないしコマンドの起動
 
-   �Z�b�V�������ݒ肳����, �v���O�����������[�g���ŋN�������.  ���̃v���O������, �V�F���ł�, �A�v���P�[�V�����ł�, �z�X�g�Ɉˑ����Ȃ����O�����T�u�V�X�e���ł��悢.  �����̗v���̂���, �`�����l�����Ƃ�1��������������.
+   セッションが設定されると, プログラムがリモート側で起動される.  このプログラムは, シェルでも, アプリケーションでも, ホストに依存しない名前を持つサブシステムでもよい.  これらの要求のうち, チャンネルごとに1つだけが成功する.
 
       byte      SSH_MSG_CHANNEL_REQUEST
       uint32    recipient channel
       string    "shell"
       boolean   want reply
 
-   ���̃��b�Z�[�W��, ���葤��( UNIX �V�X�e���ł͓T�^�I�� /etc/passwd �Œ�`�����) ���[�U�̃f�t�H���g�V�F���̋N����v������.
+   このメッセージは, 相手側で( UNIX システムでは典型的に /etc/passwd で定義される) ユーザのデフォルトシェルの起動を要求する.
 
       byte      SSH_MSG_CHANNEL_REQUEST
       uint32    recipient channel
@@ -518,7 +518,7 @@ RFC 4254                SSH Connection Protocol             January 2006
       boolean   want reply
       string    command
 
-   ���̃��b�Z�[�W��, �T�[�o���^����ꂽ�R�}���h�����s���邱�Ƃ�v������.  'command' ������̓p�X���܂�ł��悢.  �����̂Ȃ��R�}���h�̎��s��h�~����, �ʏ�̗\�h�[�u������Ȃ���΂Ȃ�Ȃ�.
+   このメッセージは, サーバが与えられたコマンドを実行することを要求する.  'command' 文字列はパスを含んでもよい.  権限のないコマンドの実行を防止する, 通常の予防措置が取られなければならない.
 
       byte      SSH_MSG_CHANNEL_REQUEST
       uint32    recipient channel
@@ -526,11 +526,11 @@ RFC 4254                SSH Connection Protocol             January 2006
       boolean   want reply
       string    subsystem name
 
-   ���̍Ō�̌`����, ��ɒ�`���ꂽ�T�u�V�X�e�������s����.  �T�u�V�X�e���ɂ͈�ʓI�ȃt�@�C���]�����J�j�Y���₠�邢�͑��̓������܂܂�邱�Ƃ����҂����.  ������, ���̂悤�ȃ��J�j�Y��������ɐݒ肷�邱�Ƃ������Ă��悢.  �T�u�V�X�e�������s����̂Ƀ��[�U�̃V�F�����ʏ�g����̂�, �T�u�V�X�e���̃v���g�R���̓V�F���̏������X�N���v�g�ȂǂŐ��������C�ӂ̏o�͂ƃv���g�R���̃g�����U�N�V�����̊J�n������ʂ��邽�߂�"magic cookie"�������Ƃ��]�܂���. �V�F������̌�����o�͂�, �T�[�o�Ȃ����N���C�A���g�̂ǂ��炩�Ńt�B���^���ꂤ��.
+   この最後の形式は, 先に定義されたサブシステムを実行する.  サブシステムには一般的なファイル転送メカニズムやあるいは他の特徴が含まれることが期待される.  実装は, このようなメカニズムをさらに設定することを許してもよい.  サブシステムを実行するのにユーザのシェルが通常使われるので, サブシステムのプロトコルはシェルの初期化スクリプトなどで生成される任意の出力とプロトコルのトランザクションの開始時を区別するために"magic cookie"を持つことが望ましい. シェルからの誤った出力は, サーバないしクライアントのどちらかでフィルタされうる.
 
-   �T�[�o��, �V�F����v���O�����̋N�����Ƀv���g�R���X�^�b�N�̎��s���~���Ȃ��ق����悢.  �V�F����v���O��������̂��ׂĂ̓��͂Əo�͂�, �`�����l�����Í������ꂽ�g���l���Ƀ��_�C���N�g�����K�v������.
+   サーバは, シェルやプログラムの起動時にプロトコルスタックの実行を停止しないほうがよい.  シェルやプログラムからのすべての入力と出力は, チャンネルか暗号化されたトンネルにリダイレクトされる必要がある.
 
-   �����̃��b�Z�[�W�ɑ΂���ԓ��͗v�����ꌟ������邱�Ƃ����������.  �N���C�A���g�͂����̃��b�Z�[�W�𖳎�����K�v������.
+   これらのメッセージに対する返答は要求され検査されることが推奨される.  クライアントはこれらのメッセージを無視する必要がある.
 
 
 
@@ -539,15 +539,15 @@ Ylonen & Lonvick            Standards Track                    [Page 13]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-   �T�u�V�X�e���̖��O��, [SSH-NUMBERS] �Ő�������Ă��� DNS �g�������K���ɏ]��.
+   サブシステムの名前は, [SSH-NUMBERS] で説明されている DNS 拡張命名規則に従う.
 
-6.6.  �Z�b�V�����̃f�[�^�]��
+6.6.  セッションのデータ転送
 
-   �Z�b�V�����̃f�[�^�]����, SSH_MSG_CHANNEL_DATA ��SSH_MSG_CHANNEL_EXTENDED_DATA �p�P�b�g�� �E�B���h�E���J�j�Y����p���čs�Ȃ���.  �g���f�[�^�^�C�v SSH_EXTENDED_DATA_STDERR ���W���G���[�o�͂̂��߂ɒ�`����Ă���.
+   セッションのデータ転送は, SSH_MSG_CHANNEL_DATA とSSH_MSG_CHANNEL_EXTENDED_DATA パケットと ウィンドウメカニズムを用いて行なわれる.  拡張データタイプ SSH_EXTENDED_DATA_STDERR が標準エラー出力のために定義されている.
 
-6.7.  �E�B���h�E�e�ʕύX���b�Z�[�W
+6.7.  ウィンドウ容量変更メッセージ
 
-   �E�B���h�E (�^�[�~�i��) �T�C�Y���N���C�A���g���ŕύX����ꍇ, �V�����e�ʂ𑊎葤�ɒm�点�邽�߂Ɏ��̃��b�Z�[�W�𑗂��Ă��悢.
+   ウィンドウ (ターミナル) サイズがクライアント側で変更する場合, 新しい容量を相手側に知らせるために次のメッセージを送ってもよい.
 
       byte      SSH_MSG_CHANNEL_REQUEST
       uint32    recipient channel
@@ -558,14 +558,14 @@ RFC 4254                SSH Connection Protocol             January 2006
       uint32    terminal width, pixels
       uint32    terminal height, pixels
 
-   ���̃��b�Z�[�W�ɑ΂��Ă͕ԓ��𑗂�Ȃ��ق����悢.
+   このメッセージに対しては返答を送らないほうがよい.
 
-6.8.  ���[�J���ȃt���[����
+6.8.  ローカルなフロー制御
 
-   �����̃V�X�e����, �[���^�[�~�i����Control-S/Control-Q�̃t���[������g�����ǂ��������߂邱�Ƃ��ł���.  �t���[���䂪������Ă���Ȃ�, ���[�U�̃��N�G�X�g�ɑ΂��鉞�����X�s�[�h�A�b�v���邽�߂ɃN���C�A���g�̑��Ńt���[��������邱�Ƃ��]�܂����ꍇ������.  ����͎��̍��m�ɂ���đ��i�����.  �܂�, �T�[�o���t���[����̐ӔC������.  (������, �J��Ԃ���, �N���C�A���g�̓Z�b�V�������n�߂鑤��, �T�[�o�͑��葤��.)
+   多くのシステムで, 擬似ターミナルがControl-S/Control-Qのフロー制御を使うかどうかを決めることができる.  フロー制御が許されているなら, ユーザのリクエストに対する応答をスピードアップするためにクライアントの側でフロー制御をすることが望ましい場合がある.  これは次の告知によって促進される.  まず, サーバがフロー制御の責任を持つ.  (ここで, 繰り返すが, クライアントはセッションを始める側で, サーバは相手側だ.)
 
-   �ȉ��̃��b�Z�[�W��, �T�[�o���N���C�A���g�Ƀt���[���䂪(Control-S/Control-Q����������)���s�ł��邩�ǂ�����m�点��̂Ɏg����.
-   'client can do' �� TRUE�Ȃ�, �N���C�A���g��, control-S �� control-Q ��p���ăt���[����ł���.  �N���C�A���g��, ���̃��b�Z�[�W�𖳎����Ă��悢.
+   以下のメッセージは, サーバがクライアントにフロー制御が(Control-S/Control-Qを処理して)実行できるかどうかを知らせるのに使われる.
+   'client can do' が TRUEなら, クライアントは, control-S と control-Q を用いてフロー制御できる.  クライアントは, このメッセージを無視してもよい.
 
       byte      SSH_MSG_CHANNEL_REQUEST
       uint32    recipient channel
@@ -573,7 +573,7 @@ RFC 4254                SSH Connection Protocol             January 2006
       boolean   FALSE
       boolean   client can do
 
-   ���̃��b�Z�[�W�ɂ͉����͑����Ȃ�.
+   このメッセージには応答は送られない.
 
 
 
@@ -582,9 +582,9 @@ Ylonen & Lonvick            Standards Track                    [Page 14]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-6.9.  �V�O�i��
+6.9.  シグナル
 
-   ���̃��b�Z�[�W��p���ă����[�g�̃v���Z�X/�T�[�r�X�ɃV�O�i�����`�B�����.  �V�O�i�����������Ă��Ȃ��V�X�e���̏ꍇ��, ���̃��b�Z�[�W�͖��������K�v������.
+   次のメッセージを用いてリモートのプロセス/サービスにシグナルが伝達される.  シグナルを実装していないシステムの場合は, このメッセージは無視される必要がある.
 
       byte      SSH_MSG_CHANNEL_REQUEST
       uint32    recipient channel
@@ -592,14 +592,14 @@ RFC 4254                SSH Connection Protocol             January 2006
       boolean   FALSE
       string    signal name (without the "SIG" prefix)
 
-   'signal name' �̒l��, ���̐߂� "exit-signal" ��p���� SSH_MSG_CHANNEL_REQUEST ���b�Z�[�W���L�q���Ă���߂ŋc�_����Ă���悤�ɃG���R�[�h�����.
+   'signal name' の値は, この節の "exit-signal" を用いる SSH_MSG_CHANNEL_REQUEST メッセージを記述している節で議論されているようにエンコードされる.
 
-6.10.  �I���X�e�[�^�X�̕ԋp
+6.10.  終了ステータスの返却
 
-   ���葤�œ��삵�Ă����R�}���h���I�������, �R�}���h�̏I���X�e�[�^�X��ԋp���邽�߂Ɏ��̃��b�Z�[�W��������.
-   �X�e�[�^�X��Ԃ����Ƃ͐�������Ă���.  ���̃��b�Z�[�W�ɂ͉����͕Ԃ�Ȃ�.  ���̃��b�Z�[�W�̌�� SSH_MSG_CHANNEL_CLOSE �Ń`�����l���͕�����K�v������.
+   相手側で動作していたコマンドが終了すると, コマンドの終了ステータスを返却するために次のメッセージが送られる.
+   ステータスを返すことは推奨されている.  このメッセージには応答は返らない.  このメッセージの後の SSH_MSG_CHANNEL_CLOSE でチャンネルは閉じられる必要がある.
 
-   �N���C�A���g�����̃��b�Z�[�W�𖳎����Ă��悢.
+   クライアントこれらのメッセージを無視してもよい.
 
       byte      SSH_MSG_CHANNEL_REQUEST
       uint32    recipient channel
@@ -607,8 +607,8 @@ RFC 4254                SSH Connection Protocol             January 2006
       boolean   FALSE
       uint32    exit_status
 
-   �����[�g�̃R�}���h��, �V�O�i���ɂ���ċ����I�ɏI������邩������Ȃ�.
-   ���̂悤�ȏ�Ԃ�, ���̃��b�Z�[�W�ɂ���Ď������.  �[���� 'exit_status' ��, �ʏ�R�}���h������I���������Ƃ��Ӗ�����.
+   リモートのコマンドは, シグナルによって強制的に終了されるかもしれない.
+   そのような状態は, 次のメッセージによって示される.  ゼロの 'exit_status' は, 通常コマンドが正常終了したことを意味する.
 
       byte      SSH_MSG_CHANNEL_REQUEST
       uint32    recipient channel
@@ -630,7 +630,7 @@ Ylonen & Lonvick            Standards Track                    [Page 15]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-   'signal name' �͎��̂�����1�� (������ [POSIX] �ɂ��).
+   'signal name' は次のうちの1つだ (これらは [POSIX] による).
 
             ABRT
             ALRM
@@ -646,15 +646,15 @@ RFC 4254                SSH Connection Protocol             January 2006
             USR1
             USR2
 
-   �ǉ��� 'signal name' �̒l��, �t�H�[�}�b�g "sig-name@xyz" �ő����Ă��悢. ������  "sig-name" �� "xyz" ��, ("@" ������)�����҂��]�ނǂ�ȕ�����ł��悢.  ������, 'configure' �X�N���v�g���g����Ȃ�, �ǂ�Ȕ�W���� 'signal name' �̒l�� "SIG@xyz.config.guess" �Ƃ����`���ŃG���R�[�h����邱�Ƃ����������. ������, "SIG" �� SIG�ړ����������� 'signal name' �� "xyz" �� "config.guess" �Ō��肳���z�X�g�^�C�v��.
+   追加の 'signal name' の値が, フォーマット "sig-name@xyz" で送られてもよい. ここで  "sig-name" と "xyz" は, ("@" を除く)実装者が望むどんな文字列でもよい.  しかし, 'configure' スクリプトが使われるなら, どんな非標準の 'signal name' の値も "SIG@xyz.config.guess" という形式でエンコードされることが推奨される. ここで, "SIG" は SIG接頭辞を除いた 'signal name' で "xyz" は "config.guess" で決定されるホストタイプだ.
 
-   'error message' ��, �ǉ��̃G���[���b�Z�[�W�̃e�L�X�g�ł̐������܂܂��.  ���̃��b�Z�[�W��,  CRLF (�L�����b�W���^�[�� - ���C���t�B�[�h) �̃y�A�ŕ������ꂽ�����s���܂ނ�������Ȃ�.  �N���C�A���g�\�t�g�E�F�A��, ���[�U�ɂ��̃��b�Z�[�W��\�����Ă��悢.  �����\������Ȃ�, �N���C�A���g�\�t�g�E�F�A��, [SSH-ARCH]�ŋc�_�����\�h�[�u�����Ȃ���΂Ȃ�Ȃ�.
+   'error message' は, 追加のエラーメッセージのテキストでの説明が含まれる.  このメッセージは,  CRLF (キャリッジリターン - ラインフィード) のペアで分割された複数行を含むかもしれない.  クライアントソフトウェアは, ユーザにこのメッセージを表示してもよい.  もし表示するなら, クライアントソフトウェアは, [SSH-ARCH]で議論した予防措置を取らなければならない.
 
-7.  TCP/IP �|�[�g�]��
+7.  TCP/IP ポート転送
 
-7.1.  �|�[�g�]���̗v��
+7.1.  ポート転送の要求
 
-   ���g�̃|�[�g�𑊎葤�ɓ]������ꍇ�͗v���𖾎��I�ɂ���K�v�͂Ȃ�.  ������, ���葤�̃|�[�g�ւ̐ڑ������[�J�����ɓ]���������Ɩ]�ނȂ�Ζ����I�ɗv�����Ȃ���΂Ȃ�Ȃ�.
+   自身のポートを相手側に転送する場合は要求を明示的にする必要はない.  しかし, 相手側のポートへの接続をローカル側に転送したいと望むならば明示的に要求しなければならない.
 
       byte      SSH_MSG_GLOBAL_REQUEST
       string    "tcpip-forward"
@@ -673,32 +673,32 @@ Ylonen & Lonvick            Standards Track                    [Page 16]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-   'address to bind' �� 'port number to bind' ��, �]���̂��߂̐ڑ����󂯓���� IP�A�h���X(�Ȃ����h���C����) �ƃ|�[�g���w�肷��.  'address to bind' �ɂ�, ���ʂȈӖ����������񂪂������g����.
+   'address to bind' と 'port number to bind' は, 転送のための接続が受け入れる IPアドレス(ないしドメイン名) とポートを指定する.  'address to bind' には, 特別な意味を持つ文字列がいくつか使われる.
 
-   o  ""' ��, SSH�̎������T�|�[�g���邷�ׂẴv���g�R���t�@�~���Őڑ����󂯓���邱�Ƃ��Ӗ�����
+   o  ""' は, SSHの実装がサポートするすべてのプロトコルファミリで接続を受け入れることを意味する
 
-   o  "0.0.0.0" ��, ���ׂĂ�IPv4�A�h���X�Ŏ󂯓���邱�Ƃ��Ӗ�����.
+   o  "0.0.0.0" は, すべてのIPv4アドレスで受け入れることを意味する.
 
-   o  "::" ��, ���ׂĂ�IPv6�A�h���X�Ŏ󂯓���邱�Ƃ��Ӗ�����.
+   o  "::" は, すべてのIPv6アドレスで受け入れることを意味する.
 
-   o  "localhost" ��, SSH�̎������T�|�[�g���邷�ׂẴv���g�R���t�@�~���Ń��[�v�o�b�N�̃A�h���X�ł����󂯓���邱�Ƃ��Ӗ�����. ([RFC3330] and
+   o  "localhost" は, SSHの実装がサポートするすべてのプロトコルファミリでループバックのアドレスでだけ受け入れることを意味する. ([RFC3330] and
       [RFC3513]).
 
-   o  "127.0.0.1" �� "::1" ��, ���ꂼ�� IPv4��IPv6�̃��[�v�o�b�N�C���^�t�F�C�X�Ŏ󂯓���邱�Ƃ��Ӗ�����.i
+   o  "127.0.0.1" と "::1" は, それぞれ IPv4とIPv6のループバックインタフェイスで受け入れることを意味する.i
 
-   �N���C�A���g�����̃I�[�v���ȗv���ő���ꂽ�ڑ��̏�������Ƀt�B���^���邱�Ƃ�����̂ɒ���.
+   クライアントがこのオープンな要求で送られた接続の情報をさらにフィルタすることがあるのに注意.
 
-   ������, ���[�U���������[�U�Ƃ��ĔF�؂���Ă���ꍇ�ɂ̂ݓ����|�[�g�̓]���������悤�ɂ���K�v������.
+   実装は, ユーザが特権ユーザとして認証されている場合にのみ特権ポートの転送を許すようにする必要がある.
 
-   �N���C�A���g�̎�����, �����̃��b�Z�[�W�����ۂ���K�v������. �����͒ʏ�N���C�A���g����̂ݑ�����.
+   クライアントの実装は, これらのメッセージを拒否する必要がある. これらは通常クライアントからのみ送られる.
 
-   �N���C�A���g�� port number to bind �Ƃ��� 0�� 'want reply' �Ƃ��� TRUE ���w�肵���ꍇ, �T�[�o�͎��ɗ��p�\�ȓ����|�[�g�ł͂Ȃ��|�[�g�����蓖�Ď��̃��b�Z�[�W�ŕԐM����. ���蓖�ĂȂ���ΕԐM���Ȃ�.
+   クライアントが port number to bind として 0を 'want reply' として TRUE を指定した場合, サーバは次に利用可能な特権ポートではないポートを割り当て次のメッセージで返信する. 割り当てなければ返信しない.
    response-specific data.
 
       byte     SSH_MSG_REQUEST_SUCCESS
       uint32   port that was bound on the server
 
-   �|�[�g�]���͎��̃��b�Z�[�W�ŃL�����Z���ł���.  �`�����l���̊J�n�̗v�������̃��b�Z�[�W����M�������O�Ɏ�M����邩������Ȃ����Ƃɒ���.
+   ポート転送は次のメッセージでキャンセルできる.  チャンネルの開始の要求がこのメッセージが受信されるより前に受信されるかもしれないことに注意.
 
       byte      SSH_MSG_GLOBAL_REQUEST
       string    "cancel-tcpip-forward"
@@ -706,7 +706,7 @@ RFC 4254                SSH Connection Protocol             January 2006
       string    address_to_bind (e.g., "127.0.0.1")
       uint32    port number to bind
 
-   �N���C�A���g�̎�����, �����̃��b�Z�[�W�����ۂ���K�v������. �����͒ʏ�N���C�A���g����̂ݑ�����.
+   クライアントの実装は, これらのメッセージを拒否する必要がある. これらは通常クライアントからのみ送られる.
 
 
 
@@ -715,9 +715,9 @@ Ylonen & Lonvick            Standards Track                    [Page 17]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-7.2.  TCP/IP�]���`�����l��
+7.2.  TCP/IP転送チャンネル
 
-   �����[�g�ւ̓]�����v�����ꂽ�|�[�g�ɐڑ��������, ���葤�̃|�[�g�ɓ]��������`�����l�����J�����.
+   リモートへの転送が要求されたポートに接続が来ると, 相手側のポートに転送をするチャンネルが開かれる.
 
       byte      SSH_MSG_CHANNEL_OPEN
       string    "forwarded-tcpip"
@@ -729,9 +729,9 @@ RFC 4254                SSH Connection Protocol             January 2006
       string    originator IP address
       uint32    originator port
 
-   ������, ���̃|�[�g�ԍ��ł̃����[�g��TCP/IP�|�[�g�]�����ɗv�����Ă��Ȃ����, ���̃��b�Z�[�W�����ۂ��Ȃ���΂Ȃ�Ȃ�.
+   実装は, このポート番号でのリモートのTCP/IPポート転送を先に要求していなければ, このメッセージを拒否しなければならない.
 
-   �ڑ������[�J���ɓ]�����ꂽTCP/IP�|�[�g�ɗ����, ���̃p�P�b�g�����葤�ɑ�����.  ���̃��b�Z�[�W��, �|�[�g�ɑ΂���]���������I�ɗv������邱�ƂȂ������Ă��悢���Ƃɒ���.  ��M�������͓]�����󂯓���邩���߂Ȃ���΂Ȃ�Ȃ�.
+   接続がローカルに転送されたTCP/IPポートに来ると, 次のパケットが相手側に送られる.  このメッセージは, ポートに対する転送が明示的に要求されることなく送られてもよいことに注意.  受信した側は転送を受け入れるか決めなければならない.
 
       byte      SSH_MSG_CHANNEL_OPEN
       string    "direct-tcpip"
@@ -743,13 +743,13 @@ RFC 4254                SSH Connection Protocol             January 2006
       string    originator IP address
       uint32    originator port
 
-   'host to connect' �� 'port to connect' ��, ��M�����`�����l���ɐڑ����� �s�b�o/IP �z�X�g�ƃ|�[�g���w�肷��.  'host
-   to connect' �� �h���C���������l��IP�A�h���X��.
+   'host to connect' と 'port to connect' は, 受信側がチャンネルに接続する ＴＣＰ/IP ホストとポートを指定する.  'host
+   to connect' は ドメイン名か数値のIPアドレスだ.
 
-   'originator IP address' ��, �ڑ��v�����J�n���ꂽ�}�V���̐��l��IP�A�h���X��. 'originator
-   port' ��, �ڑ����J�n���ꂽ�z�X�g�̃|�[�g��.
+   'originator IP address' は, 接続要求が開始されたマシンの数値のIPアドレスだ. 'originator
+   port' は, 接続が開始されたホストのポートだ.
 
-   �]�����ꂽTCP/IP�`�����l���͑��̃Z�b�V�����Ƃ͓Ɨ���. �܂��Z�b�V�����`�����l�����I�����Ă�, �]�����ꂽ�ڑ��������邱�Ƃ��Ӗ����Ȃ�.
+   転送されたTCP/IPチャンネルは他のセッションとは独立だ. またセッションチャンネルが終了しても, 転送された接続が閉じられることを意味しない.
 
 
 
@@ -759,29 +759,29 @@ Ylonen & Lonvick            Standards Track                    [Page 18]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-   �N���C�A���g�̎�����, �Z�L�����e�B��̗��R�ɂ�� direct TCP/IP �̊J�n�v�������ۂ���K�v������.
+   クライアントの実装は, セキュリティ上の理由により direct TCP/IP の開始要求を拒否する必要がある.
 
-8.  �^�[�~�i�����[�h�̃G���R�[�f�B���O
+8.  ターミナルモードのエンコーディング
 
-   (pty�̗v���œn�����)���ׂĂ� 'encoded terminal modes' ��, �o�C�g�X�g���[���փG���R�[�h����Ă���.  �����, �قȂ���ԂŃR�[�h���|�[�^�u���ɂ��邽�߂�.  �X�g���[����, opcode���o�C�g�̒l�ł��� opcode-argument�̃y�A�ō\�������.  Opcode �� 1 ���� 159 �܂ł͒P���uint32�̈���������Opcode �� 160 ���� 255 �܂ł�, �܂���`����Ă��Ȃ�. ������󂯂Ƃ������̓p�[�X���~����(�����͑��̃f�[�^�̌�ł̂ݗ��p�����K�v������).  �X�g���[����,  opcode TTY_OP_END (0x00) �ŏI���.
+   (ptyの要求で渡される)すべての 'encoded terminal modes' は, バイトストリームへエンコードされている.  これは, 異なる環境間でコードをポータブルにするためだ.  ストリームは, opcodeがバイトの値である opcode-argumentのペアで構成される.  Opcode の 1 から 159 までは単一のuint32の引数を持つOpcode の 160 から 255 までは, まだ定義されていない. これを受けとった側はパースを停止する(これらは他のデータの後でのみ利用される必要がある).  ストリームは,  opcode TTY_OP_END (0x00) で終わる.
 
-   �N���A�C���g��, �m���Ă��邷�ׂẴ��[�h���X�g���[���ɉ�����K�v������. �T�[�o��, �m��Ȃ����[�h�𖳎����Ă��悢.  ���Ȃ��Ƃ�POSIX����tty�C���^�t�F�C�X�𗘗p����V�X�e���Ԃł�, �}�V���Ɉˑ����镔���������Ă悢. ���̃v���g�R����, ���̃V�X�e�������l�ɃT�|�[�g�ł���. ������, �T�[�o��pty���K�؂ȃ��[�h��ݒ�ł���悤��, �N���C�A���g�͂������̃p�����[�^��K�؂ɐݒ肷��K�v�����邾�낤 ( �T�[�o�͂��ׂĂ̎w�肳��Ă��Ȃ����[�h�̃r�b�g���f�t�H���g�l�̂܂܎c���̂�, �������̑g�����������Ӗ��𐬂�)
+   クラアイントは, 知っているすべてのモードをストリームに加える必要がある. サーバは, 知らないモードを無視してもよい.  少なくともPOSIX風のttyインタフェイスを利用するシステム間では, マシンに依存する部分があってよい. このプロトコルは, 他のシステムも同様にサポートできる. ただし, サーバのptyが適切なモードを設定できるように, クライアントはいくつかのパラメータを適切に設定する必要があるだろう ( サーバはすべての指定されていないモードのビットをデフォルト値のまま残すので, いくつかの組合せだけが意味を成す)
 
-   opcode �l�̖��O��, POSIX �[�����[�h�̃t���O�ɂ��������]���Ă���.  �ȉ��� opcode �l����`����Ă���.  �ȉ��Ŏ����l��, �ǂ݈Ղ��悤��10�i�̃t�H�[�}�b�g�ŏ�����Ă��邪. ���ۂɂ� byte �̒l�ł��邱�Ƃɒ���.
+   opcode 値の名前は, POSIX 端末モードのフラグにだいたい従っている.  以下の opcode 値が定義されている.  以下で示す値は, 読み易いように10進のフォーマットで書かれているが. 実際には byte の値であることに注意.
 
-          �I�y�R�[�h  mnemonic       ����
+          オペコード  mnemonic       説明
          ------  --------       -----------
-         0     TTY_OP_END  �I�v�V�����̏I�������.
-          1     VINTR       ���荞�ݕ���. �����Ȃ����255.  ���̕����ɂ��Ă����l.  �����̕������ׂĂ�, ���ׂẴV�X�e���ŃT�|�[�g����Ă���킯�ł͂Ȃ�.
-          2     VQUIT       �I������(POSIX �V�e���ł�, SIGQUIT�𑗂�).
-          3     VERASE      �J�[�\���̍����̕���������.
-          4     VKILL       ���݂̓��͍s������.
-          5     VEOF        End-of-file ���� (�^�[�~�i������EOF�𑗂�).
-          6     VEOL        �L�����b�W���^�[����/�������̓��C���t�B�[�h�ɒǉ������ End-of-line ����7     VEOL2       �ǉ��� end-of-line ����.
-          8     VSTART      ���f�����o�͂��ĊJ����(�ʏ�� control-Q).
-          9     VSTOP       �o�͂𒆒f����. (�ʏ�� control-S).
-          10    VSUSP       ���݂̃v���O�����𒆒f����.
-          11    VDSUSP      �ʂ̒��f����.
+         0     TTY_OP_END  オプションの終りを示す.
+          1     VINTR       割り込み文字. もしなければ255.  他の文字についても同様.  これらの文字すべてが, すべてのシステムでサポートされているわけではない.
+          2     VQUIT       終了文字(POSIX シテムでは, SIGQUITを送る).
+          3     VERASE      カーソルの左側の文字を消す.
+          4     VKILL       現在の入力行を消す.
+          5     VEOF        End-of-file 文字 (ターミナルからEOFを送る).
+          6     VEOL        キャリッジリターンと/もしくはラインフィードに追加される End-of-line 文字7     VEOL2       追加の end-of-line 文字.
+          8     VSTART      中断した出力を再開する(通常は control-Q).
+          9     VSTOP       出力を中断する. (通常は control-S).
+          10    VSUSP       現在のプログラムを中断する.
+          11    VDSUSP      別の中断文字.
 
 
 
@@ -790,42 +790,42 @@ Ylonen & Lonvick            Standards Track                    [Page 19]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-          12VREPRINT    Reprints the current input line.
-          13    VWERASE     �J�[�\���̍��� word ������.
-          14    VLNEXT      ���ɓ��͂���镶�������ʂȕ����������Ƃ��Ă����̒ʂ�ɓ��͂���.
-         15    VFLUSH      �o�͂� flush ���镶��16    VSWTCH      �ʂ� shell layer �ɐ؂�ւ���.
-          17    VSTATUS     �V�X�e���̃X�e�[�^�X�s(����, �R�}���h, pid�Ȃ�)��\������.
-          18    VDISCARD    �[���̏o�͂�flush���邩��؂�ւ���.
-          30    IGNPAR      �p���e�B�����t���O.  FALSE�Ȃ�p�����[�^��0��, TRUE �Ȃ� 1 �ɂ���K�v������.
-          31    PARMRK      �p���e�B�[�ƃt���[���̃G���[���}�[�N��ǉ�����.
-          32    INPCK       �p���e�B�G���[�̃`�F�b�N��L���ɂ���.
-          33    ISTRIP      ������8bit�ڂ𗎂�.
-          34    INLCR       ���͂�NL��CR�ɒu��������.
-          35    IGNCR       ���͂�CR�𖳎�����. (36    ICRNL       ���͂�CR��NL�ɒu��������.
-          37    IUCLC       �啶�����������ɕϊ�����.
-          38    IXON        �o�͂̃t���[�����L���ɂ���.
-          39    IXANY       �ǂ̕����ł��X�g�b�v��̍ĊJ���s�Ȃ�.
-          40    IXOFF       ���͂̃t���[�����L���ɂ���.
-          41    IMAXBEL     ���̓L���[�������ς��̂Ƃ��Ƀx����炷.
-          50    ISIG        INTR, QUIT, [D]SUSP �V�O�i����L���ɂ���.
-          51    ICANON      ���͍s�𐳋K������.
-          52    XCASE       (��: �������̂ݗL���ȏꍇ��)�������̑O�� "\" ��t���邱�Ƃő啶���̓��o�͂�L���ɂ���.Enable input and output of uppercase
+          12    VREPRINT    現在の入力行を再表示する.
+          13    VWERASE     カーソルの左の word を消す.
+          14    VLNEXT      次に入力される文字が特別な文字だったとしてもその通りに入力する.
+         15    VFLUSH      出力を flush する文字16    VSWTCH      別の shell layer に切り替える.
+          17    VSTATUS     システムのステータス行(負荷, コマンド, pidなど)を表示する.
+          18    VDISCARD    端末の出力をflushするかを切り替える.
+          30    IGNPAR      パリティ無視フラグ.  FALSEならパラメータを0に, TRUE なら 1 にする必要がある.
+          31    PARMRK      パリティーとフレームのエラーをマークを追加する.
+          32    INPCK       パリティエラーのチェックを有効にする.
+          33    ISTRIP      文字の8bit目を落す.
+          34    INLCR       入力でNLをCRに置き換える.
+          35    IGNCR       入力でCRを無視する. (36    ICRNL       入力でCRをNLに置き換える.
+          37    IUCLC       大文字を小文字に変換する.
+          38    IXON        出力のフロー制御を有効にする.
+          39    IXANY       どの文字でもストップ後の再開を行なう.
+          40    IXOFF       入力のフロー制御を有効にする.
+          41    IMAXBEL     入力キューがいっぱいのときにベルを鳴らす.
+          50    ISIG        INTR, QUIT, [D]SUSP シグナルを有効にする.
+          51    ICANON      入力行を正規化する.
+          52    XCASE       (訳注: 小文字のみ有効な場合に)小文字の前に "\" を付けることで大文字の入出力を有効にする.Enable input and output of uppercase
                             characters by preceding their lowercase
                             equivalents with "\".
-          53    ECHO        �G�R�[��L���ɂ���.
-          54    ECHOE       ���o�I��erase����55    ECHOK       ���݂̍s���̂Ă� Kill ����56    ECHONL      ECHO �������ł� NL ���G�R�[����.
-          57    NOFLSH      ���荞�݂̌��flush���Ȃ�.
-          58    TOSTOP      �o�b�N�O���E���h�̃W���u����o�͂���������W���u���~�߂�.
-          59    IEXTEN      �g����L���ɂ���.
-          60    ECHOCTL     �O�����t���ŃR���g���[���������G�R�[����.
-          61    ECHOKE      �s�̍폜�����o�I�ɍs�Ȃ�.
-          62    PENDIN      ���f�������͂��ē��͂���.
-          70    OPOST       �o�͏�����L���ɂ���.
-          71    OLCUC       ��������啶���ɕϊ�����.
-          72    ONLCR       NL��CR-NL�ɒu��������.
-          73    OCRNL       �o�͂�, CR��NL�ɒu��������.
-          74    ONOCR       �o�͂�, NL��CR-NL�ɒu��������.
-          75    ONLRET      �o�͂�, NL��CR�����s����.
+          53    ECHO        エコーを有効にする.
+          54    ECHOE       視覚的なerase文字55    ECHOK       現在の行を捨てる Kill 文字56    ECHONL      ECHO が無効でも NL をエコーする.
+          57    NOFLSH      割り込みの後でflushしない.
+          58    TOSTOP      バックグラウンドのジョブから出力があったらジョブを止める.
+          59    IEXTEN      拡張を有効にする.
+          60    ECHOCTL     ＾文字付きでコントロール文字をエコーする.
+          61    ECHOKE      行の削除を視覚的に行なう.
+          62    PENDIN      中断した入力を再入力する.
+          70    OPOST       出力処理を有効にする.
+          71    OLCUC       小文字を大文字に変換する.
+          72    ONLCR       NLをCR-NLに置き換える.
+          73    OCRNL       出力で, CRをNLに置き換える.
+          74    ONOCR       出力で, NLをCR-NLに置き換える.
+          75    ONLRET      出力で, NLがCRを実行する.
 
 
 
@@ -834,17 +834,16 @@ Ylonen & Lonvick            Standards Track                    [Page 20]
 RFC 4254                SSH Connection Protocol             January 2006
 
 
-          90CS7         7 bit mode.
-          91    CS8         8 bit ���[�h.
-          92    PARENB      �p���e�B�L��93    PARODD      �ݒ肳���Ɗ�p���e�B. �������� �����p���e�B
+          90    CS7         7 bit モード.
+          91    CS8         8 bit モード.
+          92    PARENB      パリティ有効93    PARODD      設定されると奇数パリティ. もしくは 偶数パリティ
 
-          128TTY_OP_ISPEED  Specifies the input baud rate in
-                              bits per second.
-          129 TTY_OP_OSPEED  bit/�b�P�ʂŏo�̓o���h���[�g���w�肷��.
+          128 TTY_OP_ISPEED  bit/秒単位で入力バンドレートを指定する.
+          129 TTY_OP_OSPEED  bit/秒単位で出力バンドレートを指定する.
 
-9.  ���b�Z�[�W�ԍ��̂܂Ƃ�
+9.  メッセージ番号のまとめ
 
-   ���b�Z�[�W�̂܂Ƃ߂Ɗ֘A���郁�b�Z�[�W�ԍ����ȉ��Ɏ���.
+   メッセージのまとめと関連するメッセージ番号を以下に示す.
 
             SSH_MSG_GLOBAL_REQUEST                  80
             SSH_MSG_REQUEST_SUCCESS                 81
@@ -861,16 +860,16 @@ RFC 4254                SSH Connection Protocol             January 2006
             SSH_MSG_CHANNEL_SUCCESS                 99
             SSH_MSG_CHANNEL_FAILURE                100
 
-10.  IANA �̍l��
+10.  IANA の考慮
 
-   ���̕�����, (��: �v���g�R�����`���镶����)�W���̈ꕔ����.  [SSH-ARCH],
-   [SSH-TRANS],  [SSH-USERAUTH] �Ƃ��̕����Œ�`����� SSH �v���g�R���ɑ΂��� IANA �̍l����,  [SSH-NUMBERS] �ŏڏq����Ă���.
+   この文書は, (訳注: プロトコルを定義する文書の)集合の一部分だ.  [SSH-ARCH],
+   [SSH-TRANS],  [SSH-USERAUTH] とこの文書で定義される SSH プロトコルに対する IANA の考慮は,  [SSH-NUMBERS] で詳述されている.
 
-11.  �Z�L�����e�B�̍l�@
+11.  セキュリティの考察
 
-   ���̃v���g�R����, ���S�ŔF�؍ς݂̃g�����X�|�[�g��œ������Ƃ����肵�Ă���.  ���[�U�F�؂ƃl�b�g���[�N���x���ł̍U���ɑ΂���Ώ���, ���̃v���g�R���Œ񋟂���Ă��邱�Ƃ����肵�Ă���.
+   このプロトコルは, 安全で認証済みのトランスポート上で動くことを仮定している.  ユーザ認証とネットワークレベルでの攻撃に対する対処は, 基底のプロトコルで提供されていることを仮定している.
 
-   ���̃v���g�R���̃Z�L�����e�B�ɂ��Ă̍l���̂��ׂĂ�, [SSH-ARCH]�Œ񋟂���Ă���.  ���̕����ɓ��L�̂��ƂƂ���, �z�X�g�������ӂ�����Ȃ��ɕύX���ꂽ�ꍇ�ɂ�, ���ׂĂ̐��ݓI�Ɋ댯�ȓ���(���Ƃ���, �G�[�W�F���g�̓]��, X11�̓]��, TCP/IP�̓]��)�������������ɂ��邱�Ƃ𐄏�����.
+   このプロトコルのセキュリティについての考慮のすべては, [SSH-ARCH]で提供されている.  この文書に特有のこととして, ホスト鍵が注意や説明なしに変更された場合には, すべての潜在的に危険な特徴(たとえば, エージェントの転送, X11の転送, TCP/IPの転送)を実装が無効にすることを推奨する.
 
 
 
@@ -994,7 +993,7 @@ RFC 4254                SSH Connection Protocol             January 2006
 
 Full Copyright Statement
 
-   Copyright (C) The Internet Society (2006). ���: �t�R ���� <haruyama@unixuser.org> 
+   Copyright (C) The Internet Society (2006). 訳者: 春山 征吾 <haruyama@unixuser.org> 
 
    This document is subject to the rights, licenses and restrictions
    contained in BCP 78, and except as set forth therein, the authors
