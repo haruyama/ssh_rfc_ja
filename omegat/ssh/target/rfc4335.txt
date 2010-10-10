@@ -11,7 +11,7 @@ Category: Standards Track                                     P. Remaker
                                                             January 2006
 
 
-         The Secure Shell (SSH) Session Channel Break Extension
+         セキュアシェル (SSH) セッションチャンネルBreak拡張
 
 このメモの位置づけ
 
@@ -24,16 +24,15 @@ Copyright Notice
 
 概要
 
-   The Session Channel Break Extension provides a means to send a BREAK
-   signal over a Secure Shell (SSH) terminal session.
+   セッションチャンネルBreak拡張は, セキュアシェル(SSH)のターミナルセッションで BREAK シグナルを送る手段を提供する.
 
 目次
 
    1. イントロダクション ..........................................2
-   2. Conventions Used in This Document ...............................2
-   3. The Break Request ...............................................3
-   4. Security Considerations .........................................4
-   5. IANA Considerations .............................................4
+   2. この文書で用いる表記 ...............................2
+   3. Break 要求 ...............................................3
+   4. セキュリティの考察 .........................................4
+   5. INANの考慮 .............................................4
    6. References ......................................................4
       6.1. Normative References .......................................4
       6.2. Informative References .....................................5
@@ -59,44 +58,22 @@ RFC 4335                  SSH Break Extension               January 2006
 
 1.  イントロダクション
 
-   The Secure Shell (SSH) [5] session channel provides a mechanism for
-   the client-user to interactively enter commands and receive output
-   from a remote host while taking advantage of the SSH transport's
-   privacy and integrity features.  SSH is increasingly being used to
-   replace Telnet for terminal access applications.
+   セキュアシェル (SSH) [5]  セッションチャンネルは, SSHのトランスポートの秘密性と完全性の特徴を利用しながら, クライアントユーザにインタラクティブにコマンドを入力しリモートホストから出力を受けるメカニズムを提供する.  SSH は ターミナルアクセスアプリケーションとして Telnet を置き換えるためにだんだんと使われ出している.
 
-   A common application of the Telnet protocol is the "Console Server"
-   [7] whereby a Telnet Network Virtual Terminal (NVT) can be connected
-   to a physical RS-232/V.24 asynchronous port, making the Telnet NVT
-   appear as a locally attached terminal to that port, and making that
-   physical port appear as a network-addressable device.  A number of
-   major computer equipment vendors provide high-level administrative
-   functions through an asynchronous serial port and generally expect
-   the attached terminal to be capable of sending a BREAK signal.
+   Telnet プロトコルの共通のアプリケーションに "Console Server" [7] がある. これにより, Telnet Network Virtual Terminal (NVT) は, 物理 RS-232/V.24 非同期ポートに接続されると, この Telnet NVT は そのポートにローカルに接続されたように見え, その物理ポートは ネットワークのアドレスを持つデバイスのようにみえる. 多数のメジャーな計算機機器ベンダーが, 非同期シリアルポートを通じた高レベルの管理機能を提供している. そして, 接続されたターミナルに BREAK シグナルを送る能力があることを一般的に期待している.
 
-   A BREAK signal is defined as the TxD signal being held in a SPACE
-   ("0") state for a time greater than a whole character time.  In
-   practice, a BREAK signal is typically 250 to 500 ms in length.
+   BREAK シグナルは, 全体のキャラクタ時間よりも長い間 SPACE ("0") 状態を保持する TxD 信号として定義される.  実際には, BREAK 信号は典型的に 250から500 msの長さだ .
 
-   The Telnet protocol furnishes a means to send a "BREAK" signal, which
-   RFC 854 [1] defines as "a signal outside the USASCII set which is
-   currently given local meaning within many systems".  Console Server
-   vendors interpret the TELNET BREAK signal as a physical BREAK signal,
-   which can then allow access to the full range of administrative
-   functions available on an asynchronous serial console port.
+   Telnet プロトコルは, "BREAK" 信号を送る方法を提供している. RFC 854[1]で以下のように定義している "多くのシステムで現在ローカルな意味を与えられているUSASCIIの集合の外部にある信号". Console Server のベンダーは, TELNET BREAK 信号を 物理的な BREAK 信号として解釈する. これにより, 非同期シリアルコンソールポートで利用可能な管理機能のすべての範囲へのアクセスを可能にする. 
 
-   The lack of a similar facility in the SSH session channel has forced
-   users to continue the use of Telnet for the "Console Server"
-   function.
+   SSH セッションチャンネルで似た機能がないことは, "Console Server"機能のためにTelnetを用い続けることをユーザに強いてきた.
 
-2.  Conventions Used in This Document
+2.  この文書で用いる表記
 
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   document are to be interpreted as described in [2].
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, [2] で記述されているように解釈される. 
 
-   The "byte", "boolean", "uint32", and "string" data types are defined
-   in [3].
+   "byte" や "boolean", "uint32", "string" データタイプは [3] で定義されている.
 
 
 
@@ -113,11 +90,9 @@ Galbraith & Remaker         Standards Track                     [Page 2]
 RFC 4335                  SSH Break Extension               January 2006
 
 
-3.  The Break Request
+3.  Break 要求
 
-   The following channel-specific request can be sent over a session
-   channel (as described in [4]) to request that the remote host perform
-   a BREAK operation.
+   次のチャンネル特有のリクエストが, リモートホストで BREAK 操作を行なう要求のために ([4] で記述されている) セッションチャンネル上で送られる.
 
         byte      SSH_MSG_CHANNEL_REQUEST
         uint32    recipient channel
@@ -125,38 +100,18 @@ RFC 4335                  SSH Break Extension               January 2006
         boolean   want_reply
         uint32    break-length in milliseconds
 
-   If the BREAK length cannot be controlled by the application receiving
-   this request, the BREAK length parameter SHOULD be ignored and the
-   default BREAK signal length of the chipset or underlying chipset
-   driver SHOULD be sent.
+   この要求を受けるアプリケーションが BREAK の長さを制御できないなら, BREAK length パラメータは, 無視される必要がある. チップセットや基盤となるチップセットのドライバのデフォルトの BREAK シグナルの長さが送られなければならない. 
 
-   If the application receiving this request can control the BREAK
-   length, the following suggestions are made regarding BREAK duration.
-   If a BREAK duration request of greater than 3000 ms is received, it
-   SHOULD be interpreted as a request for a 3000 ms BREAK.  This
+   このリクエストを受けるアプリケーションが BREAK の長さを制御できるなら, BREAKの持続時間について, 次の示唆がある.
+   3000 ms を越える BREAK 持続時間の要求を受け取ったら, 3000 ms の BREAKと解釈される必要がある. この予防手段は, 理不尽に長い BREAK 要求が BREAKを実行する間に49.7日の間ポートを利用不能にするのを防ぐ.
    safeguard prevents an unreasonably long BREAK request from causing a
    port to become unavailable for as long as 49.7 days while executing
-   the BREAK.  Applications that require a longer BREAK may choose to
-   ignore this suggestion.  If BREAK duration request of less than 500
-   ms is received, it SHOULD be interpreted as a 500 ms BREAK since most
-   devices will recognize a BREAK of that length.  Applications that
-   require a shorter BREAK may choose to ignore this suggestion.  If the
-   BREAK length parameter is 0, the BREAK SHOULD be interpreted as the
-   default BREAK signal length of the chipset or underlying chipset
-   driver.  If no default exists, 500 ms can be used as the BREAK
+   the BREAK.  より長い BREAKを必要とするアプリケーションは, この示唆を無視してもよい.  BREAKの持続時間が 500 msよりも小さいリクエストを受け取ったら, 500 ms BREAK と解釈される必要がある. 多くのデバイスでこの長さが BREAKと認識されるからだ.  より短い BREAKを必要とするアプリケーションは, この示唆を無視してもよい.  BREAK length parameter が 0 なら, チップセットや基盤となるチップセットのドライバのデフォルトの BREAK シグナルの長さと解釈される.  デフォルトがなければ, 500msが BREAK の長さとして用いられる.
    length.
 
-   If the SSH connection does not terminate on a physical serial port,
-   the BREAK indication SHOULD be handled in a manner consistent with
-   the general use of BREAK as an attention/interrupt signal; for
-   instance, a service processor that requires an out-of-band facility
-   to get the attention of a system it manages.
+   SSH 接続が物理シリアルポートで終了されないなら, BREAKの表示は, 注意/割り込みのシグナルとしてのBREAKの一般的な利用法と合致する方法で取り扱わなければならない. 例えば, 管理するシステムの注意を引くために帯域外の機能を要求するサービスプロセッサだ.
 
-   In a case where an SSH connection cascades to another connection, the
-   BREAK SHOULD be passed along the cascaded connection.  For example, a
-   Telnet session from an SSH shell should carry along an SSH-initiated
-   BREAK, and an SSH client initiated from a Telnet connection SHOULD
-   pass a BREAK indication from the Telnet connection.
+   SSHの接続が別の接続にカスケードされている場合は, BREAKはカスケードされた接続に渡される必要がある.  例えば, SSH シェルからのTelnetセッションは, SSHを起点とする BREAK を転送する必要がある. Telnet 接続で始められた SSH クライアントは Telnet 接続からの BREAK 表示を転送する必要がある. 
 
 
 
@@ -169,34 +124,20 @@ Galbraith & Remaker         Standards Track                     [Page 3]
 RFC 4335                  SSH Break Extension               January 2006
 
 
-   If the 'want_reply' boolean is set, the server MUST reply using an
-   SSH_MSG_CHANNEL_SUCCESS or SSH_MSG_CHANNEL_FAILURE [5] message.  If a
-   BREAK of any kind was preformed, SSH_MSG_CHANNEL_SUCCESS MUST be
-   sent.  If no BREAK was preformed, SSH_MSG_CHANNEL_FAILURE MUST be
-   sent.
+   'want_reply' が設定されていたら, サーバは  SSH_MSG_CHANNEL_SUCCESS か SSH_MSG_CHANNEL_FAILURE [5] メッセージを用いて応答しなければならない.  なんらかの BREAK が実行されたら, SSH_MSG_CHANNEL_SUCCESS が送られなければならない.
+BREAK が実行されなかったら, SSH_MSG_CHANNEL_FAILURE が送られなければならない.
 
-   This operation SHOULD be supported by any general purpose SSH client.
+   この操作を, 一般的な目的のSSHクライアントはサポートする必要がある.
 
 4.  セキュリティの考察
 
-   Many computer systems treat serial consoles as local and secured, and
-   interpret a BREAK signal as an instruction to halt execution of the
-   operating system or to enter privileged configuration modes.  Because
-   of this, extra care should be taken to ensure that SSH access to
-   BREAK-enabled ports are limited to users with appropriate privileges
-   to execute such functions.  Alternatively, support for the BREAK
-   facility MAY be implemented as configurable on a per-port or
-   per-server basis.
+   多くの計算機システムは, シリアルコンソールをローカルで安全なものと取り扱う. そして BREAK 信号を オペレーティングシステムの中断の実施や特権設定モードへ進入の指示として解釈する.  このため, BREAKが有効なポートへのSSHのアクセスがこれらの機能を実行するための適切な権限を持つユーザに限定されていることを, 非常に注意する必要がある.  また, BREAK 機能のサポートは, ポート単位やサービス単位のベースで設定可能に実装されてもよい.
 
-   Implementations that literally interpret the BREAK length parameter
-   without imposing the suggested BREAK time limit may cause a denial of
-   service to or unexpected results from attached devices receiving the
-   very long BREAK signal.
+   示唆した BREAK時間の制限を行なわなず BREAK length パラメータのまま解釈する実装は, 非常に長い BREAK 信号を受けて , 接続したデバイスからサービス不能や予期しない結果になるかもしれない. 
 
 5.  IANA の考慮
 
-   IANA has assigned the Connection Protocol Channel Request Name
-   "break" in accordance with [6].
+   IANA は, [6] に従って このコネクションプロトコルチャンネルの要求名を "break" と割り当てた.
 
 6.  References
 
