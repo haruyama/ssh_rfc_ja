@@ -15,11 +15,7 @@ SSH トランスポート層での楕円曲線アルゴリズムの統合
 
 概要
 
-   この文章は,  セキュアシェル(SSH) トランスポートプロトコルの中で利用する 楕円曲線暗号(ECC)ベースのアルゴリズムを記述する.
-   protocol.  In particular, it specifies Elliptic Curve Diffie-Hellman
-   (ECDH) key agreement, Elliptic Curve Menezes-Qu-Vanstone (ECMQV) key
-   agreement, and Elliptic Curve Digital Signature Algorithm (ECDSA) for
-   use in the SSH Transport Layer protocol.
+   この文章は,  セキュアシェル(SSH) トランスポートプロトコルの中で利用する 楕円曲線暗号(ECC)ベースのアルゴリズムを記述する.  特に, 楕円曲線 Diffie-Hellman (ECDH) 鍵交換(鍵同意) と  楕円曲線 Menezes-Qu-Vanstone (ECMQV) 鍵交換(鍵同意), 楕円曲線 Digital Signature Algorithm (ECDSA) を SSHトランスポート層プロトコルで利用するために仕様を定める.
 
 このメモの位置づけ
 
@@ -64,31 +60,30 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
 目次
 
    1. イントロダクション ...............................................3
-   2. Notation ........................................................4
-   3. SSH ECC Public Key Algorithm ....................................4
-      3.1. Key Format .................................................4
-           3.1.1. Signature Algorithm .................................5
-           3.1.2. Signature Encoding ..................................5
-   4. ECDH Key Exchange ...............................................5
-   5. ECMQV Key Exchange ..............................................8
-   6. Method Names ...................................................10
-      6.1. Elliptic Curve Domain Parameter Identifiers ...............10
-      6.2. ECC Public Key Algorithm (ecdsa-sha2-*) ...................11
-           6.2.1. Elliptic Curve Digital Signature Algorithm .........11
-      6.3. ECDH Key Exchange Method Names (ecdh-sha2-*) ..............12
-      6.4. ECMQV Key Exchange and Verification Method Name
-           (ecmqv-sha2) ..............................................12
-   7. Key Exchange Messages ..........................................13
-      7.1. ECDH Message Numbers ......................................13
-      7.2. ECMQV Message Numbers .....................................13
-   8. Manageability Considerations ...................................13
-      8.1. Control of Function through Configuration and Policy ......13
-      8.2. Impact on Network Operation ...............................14
-   9. Security Considerations ........................................14
-   10. Named Elliptic Curve Domain Parameters ........................16
-      10.1. Required Curves ..........................................16
-      10.2. Recommended Curves .......................................17
-   11. IANA Considerations ...........................................17
+   2. 表記法 ........................................................4
+   3. SSH 楕円曲線暗号公開鍵アルゴリズム .....................................4
+      3.1. 鍵のフォーマット .................................................4
+           3.1.1. 署名アルゴリズム .................................5
+           3.1.2. 署名のエンコーディング ..................................5
+   4. ECDH 鍵交換 ...............................................5
+   5. ECMQV 鍵交換 ..............................................8
+   6. 農法の名前 ...................................................10
+      6.1. 楕円曲線ドメインパラメータ識別子 ...............10
+      6.2. 楕円曲線暗号公開鍵アルゴリズム (ecdsa-sha2-*) ...................11
+           6.2.1. 楕円曲線 Digital Signature Algorithm .........11
+      6.3. ECDH 鍵公開法の名前 (ecdh-sha2-*) ..............12
+      6.4. ECMQV 鍵交換/検証法の名前 (ecmqv-sha2) ..............................................12
+   7. 鍵交換のメッセージ ..........................................13
+      7.1. ECDH メッセージ番号 ......................................13
+      7.2. ECMQV メッセージ番号 .....................................13
+   8. 管理に関する考慮 ...................................13
+      8.1. 設定とポリシーを通しての機能の管理 ......13
+      8.2. ネットワーク操作への影響 ...............................14
+   9. セキュリティの考慮 ........................................14
+   10. 名前付き楕円曲線ドメインパラメータ ........................16
+      10.1. 必須の曲線 ..........................................16
+      10.2. 推奨される曲線 .......................................17
+   11. IANAの考慮 ...........................................17
    12. References ....................................................18
       12.1. Normative References .....................................18
       12.2. Informative References ...................................19
@@ -114,25 +109,14 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 1.  イントロダクション
 
-   This document adds the following elliptic curve cryptography
-   algorithms to the Secure Shell arsenal: Elliptic Curve Diffie-Hellman
-   (ECDH) and Elliptic Curve Digital Signature Algorithm (ECDSA), as
-   well as utilizing the SHA2 family of secure hash algorithms.
-   Additionally, support is provided for Elliptic Curve Menezes-Qu-
-   Vanstone (ECMQV).
+   この文書は, 次の楕円曲線アルゴリズムを セキュアシェルの機能に加える: 楕円曲線 Diffie-Hellman
+   (ECDH) , 楕円曲線 Digital Signature Algorithm (ECDSA). また, 安全なハッシュアルゴリズムのSHA2ファミリの利用も加える.
+   さらに, 楕円曲線 Menezes-Qu-Vanstone (ECMQV) のサポートを提供する.
 
-   Due to its small key sizes and its inclusion in the National Security
-   Agency's Suite B, Elliptic Curve Cryptography (ECC) is becoming a
-   widely utilized and attractive public-key cryptosystem.
+   鍵サイズが小さいことと National Security Agencyの Suite B に含まれていることから, 楕円曲線暗号 (ECC) は広く利用され魅力的な公開鍵暗号システムとなってきている.
 
-   Compared to cryptosystems such as RSA, the Digital Signature
-   Algorithm (DSA), and Diffie-Hellman (DH) key exchange, ECC variations
-   on these schemes offer equivalent security with smaller key sizes.
-   This is illustrated in the following table, based on Section 5.6.1 of
-   NIST 800-57 [NIST-800-57], which gives approximate comparable key
-   sizes for symmetric- and asymmetric-key cryptosystems based on the
-   best known algorithms for attacking them.  L is the field size and N
-   is the sub-field size.
+   RSAや Digital Signature Algorithm (DSA), Diffie-Hellman (DH) 鍵交換のような暗号システムに比べて, これらの方式のECCでのバリエーションは, より小さい鍵サイズで同等のセキュリティを提供する.
+   これは, NIST 800-57 [NIST-800-57] の Section 5.6.1 に基づく次のテーブルに示されている. この表は, アルゴリズムを攻撃するときのもっとも良く知られたアルゴリズムに基づいた 対称/非対称鍵の暗号システムのおおよそ同等の鍵サイズを示している.  L はフィールドサイズで, Nは サブフィールドのサイズだ.
 
       +-----------+------------------------------+-------+---------+
       | Symmetric | Discrete Log (e.g., DSA, DH) |  RSA  |   ECC   |
@@ -148,14 +132,9 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
       |    256    |      L = 15360, N = 512      | 15360 |   512+  |
       +-----------+------------------------------+-------+---------+
 
-   Implementation of this specification requires familiarity with both
-   SSH [RFC4251] [RFC4253] [RFC4250] and ECC [SEC1] (additional
-   information on ECC available in [HMV04], [ANSI-X9.62], and
-   [ANSI-X9.63]).
+   この仕様の実装は, SSH [RFC4251] [RFC4253] [RFC4250] と  ECC [SEC1] ([HMV04]と [ANSI-X9.62],  [ANSI-X9.63] で利用可能なECCの追加の情報) の両方に精通している必要がある.
 
-   This document is concerned with SSH implementation details;
-   specification of the underlying cryptographic algorithms is left to
-   other standards documents.
+   この文書は, SSHの実装の詳細に関係している. 基底の暗号アルゴリズムの仕様は, 他の標準文書に任されている.
 
 
 
@@ -170,32 +149,20 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 2.  Notation
 
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   document are to be interpreted as described in [RFC2119].
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, [RFC-2119] で記述されているように解釈される. 
 
-   The data types boolean, byte, uint32, uint64, string, and mpint are
-   to be interpreted in this document as described in [RFC4251].
+   データ型 boolean, byte, uint32, uint64, string, mpint は, [RFC4251] で記述されているように解釈される.
 
-   The size of a set of elliptic curve domain parameters on a prime
-   curve is defined as the number of bits in the binary representation
-   of the field order, commonly denoted by p.  Size on a
-   characteristic-2 curve is defined as the number of bits in the binary
-   representation of the field, commonly denoted by m.  A set of
-   elliptic curve domain parameters defines a group of order n generated
-   by a base point P.
+   prime curve上の楕円曲線ドメインパラメータの集合のサイズは, フィールドオーダーの2進表現のビット数で定義される. 通常 p で示される.  characteristic-2 曲線のサイズは, フィールドの2進表現のビット数で定義される. 通常 m で示される.  楕円曲線ドメインパラメータの集合は, ベースポイント(基底点) P から生成される オーダ(位数)の群 n で定義される.
 
-3.  SSH ECC Public Key Algorithm
+3.  SSH 楕円曲線暗号公開鍵アルゴリズム
 
-   The SSH ECC public key algorithm is defined by its key format,
-   corresponding signature algorithm ECDSA, signature encoding, and
-   algorithm identifiers.
+   SSH ECC 公開鍵アルゴリズムは, その鍵のフォーマットや対応する署名アルゴリズム ECDSA, 署名のエンコーディング, アルゴリズムの識別子で定義される.
 
-   This section defines the family of "ecdsa-sha2-*" public key formats
-   and corresponding signature formats.  Every compliant SSH ECC
-   implementation MUST implement this public key format.
+   この節では,  "ecdsa-sha2-*" ファミリーの公開鍵フォーマットと対応する署名フォーマットを定義する.  すべての準拠する SSH ECC 実装は, この公開鍵フォーマットを実装しなければならない.
 
-3.1.  Key Format
+3.1.  鍵のフォーマット
 
    The "ecdsa-sha2-*" key formats all have the following encoding:
 
