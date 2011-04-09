@@ -164,25 +164,19 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 3.1.  鍵のフォーマット
 
-   The "ecdsa-sha2-*" key formats all have the following encoding:
+   "ecdsa-sha2-*" 鍵フォーマットは, すべて次のようなエンコーディングを持つ:
 
       string   "ecdsa-sha2-[identifier]"
       byte[n]  ecc_key_blob
 
-   The ecc_key_blob value has the following specific encoding:
+   ecc_key_blob の値は, 次のような特有のエンコーディングを持つ:
 
       string   [identifier]
       string   Q
 
-   The string [identifier] is the identifier of the elliptic curve
-   domain parameters.  The format of this string is specified in
-   Section 6.1.  Information on the REQUIRED and RECOMMENDED sets of
-   elliptic curve domain parameters for use with this algorithm can be
-   found in Section 10.
+   文字列 [identifier] は, 楕円曲線のドメインパラメータの識別子だ.  この文字列のフォーマットは, 6.1節で指定する.  このアルゴリズムと共に用いる楕円曲線ドメインパラメータの要求されている集合と推奨される集合の情報は, 10節で示す.
 
-   Q is the public key encoded from an elliptic curve point into an
-   octet string as defined in Section 2.3.3 of [SEC1]; point compression
-   MAY be used.
+   Q は, [SEC1] の 2.3.3節で定義されているように, 楕円曲線上の点をオクテット文字列にエンコードした公開鍵だ; ポイント圧縮が利用されてもよい.
 
 
 
@@ -191,52 +185,33 @@ Stebila & Green             Standards Track                     [Page 4]
 RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 
-   The algorithm for ECC key generation can be found in Section 3.2 of
-   [SEC1].  Given some elliptic curve domain parameters, an ECC key pair
-   can be generated containing a private key (an integer d), and a
-   public key (an elliptic curve point Q).
+   ECC 鍵生成のアルゴリズムは, [SEC1]の 3.2節にある.  いくつかの楕円曲線ドメインパラメータより, 秘密鍵(整数 d) と公開鍵(楕円曲線上の点 Q)を含む ECC鍵ペアが生成される.
 
-3.1.1.  Signature Algorithm
+3.1.1.  署名アルゴリズム
 
-   Signing and verifying is done using the Elliptic Curve Digital
-   Signature Algorithm (ECDSA).  ECDSA is specified in [SEC1].  The
-   message hashing algorithm MUST be from the SHA2 family of hash
-   functions [FIPS-180-3] and is chosen according to the curve size as
-   specified in Section 6.2.1.
+   楕円曲線デジタル署名アルゴリズム (ECDSA) を用いて署名と検証が行なわれる.  ECDSA は [SEC1] で指定されている.  メッセージハッシュアルゴリズムは, SHA2 ファミリーのハッシュ関数 [FIPS-180-3] のものでなければならない. 6.2.1節で指定される曲線のサイズに応じて, ハッシュアルゴリズムは選ばれる.
 
-3.1.2.  Signature Encoding
+3.1.2.  署名のエンコーディング
 
    署名は次のようにエンコードされる:
 
       string   "ecdsa-sha2-[identifier]"
       string   ecdsa_signature_blob
 
-   The string [identifier] is the identifier of the elliptic curve
-   domain parameters.  The format of this string is specified in
-   Section 6.1.  Information on the REQUIRED and RECOMMENDED sets of
-   elliptic curve domain parameters for use with this algorithm can be
-   found in Section 10.
+   文字列 [identifier] は, 楕円曲線のドメインパラメータの識別子だ.  この文字列のフォーマットは, 6.1節で指定する.  このアルゴリズムと共に用いる楕円曲線ドメインパラメータの要求されている集合と推奨される集合の情報は, 10節で示す.
 
-   The ecdsa_signature_blob value has the following specific encoding:
+   ecdsa_signature_blob の値は, 次のような特有のエンコーディングを持つ:
 
       mpint    r
       mpint    s
 
-   The integers r and s are the output of the ECDSA algorithm.
+   整数 r と s は ECDSA アルゴリズムの出力だ.
 
-   The width of the integer fields is determined by the curve being
-   used.  Note that the integers r and s are integers modulo the order
-   of the cryptographic subgroup, which may be larger than the size of
-   the finite field.
+   整数のフィールドの大きさは, 利用する曲線によって決定される.  整数 r と s は, 暗号学的なサブグループのオーダーを法とする整数で, 有限体のサイズよりも大きいかもしれないことに注意.
 
-4.  ECDH Key Exchange
+4.  ECDH 鍵交換
 
-   The Elliptic Curve Diffie-Hellman (ECDH) key exchange method
-   generates a shared secret from an ephemeral local elliptic curve
-   private key and ephemeral remote elliptic curve public key.  This key
-   exchange method provides explicit server authentication as defined in
-   [RFC4253] using a signature on the exchange hash.  Every compliant
-   SSH ECC implementation MUST implement ECDH key exchange.
+   楕円曲線 Diffie-Hellman (ECDH) 鍵交換法は, 一時的でローカルな楕円曲線秘密鍵と一時的でリモートの楕円曲線公開鍵から共有の秘密(shared secret)を生成する.  この鍵交換法は, 交換ハッシュ(exchange hash) の署名を用いる [RFC4253] で定義された明示的なサーバ認証を提供する.  すべての準拠する SSH ECC実装は, ECDH 鍵交換を実装しなければならない.
 
 
 
@@ -247,24 +222,13 @@ Stebila & Green             Standards Track                     [Page 5]
 RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 
-   The primitive used for shared key generation is ECDH with cofactor
-   multiplication, the full specification of which can be found in
-   Section 3.3.2 of [SEC1].  The algorithm for key pair generation can
-   be found in Section 3.2.1 of [SEC1].
+   共有鍵の生成に使われる primitive は, 余因子の乗算(cofactor multiplication)を用いる ECDHだ. 完全な仕様は, [SEC1}の 3.3.2 節にある.  鍵ペアの生成のアルゴリズムは, [SEC1]の 3.2.1節にある.
 
-   The family of key exchange method names defined for use with this key
-   exchange can be found in Section 6.3.  Algorithm negotiation chooses
-   the public key algorithm to be used for signing and the method name
-   of the key exchange.  The method name of the key exchange chosen
-   determines the elliptic curve domain parameters and hash function to
-   be used in the remainder of this section.
+   この鍵交換の利用のために定義された鍵交換法の名前のファミリーは 6.3 節にある.  アルゴリズムのネゴシエーションでは, 署名に用いる公開鍵アルゴリズムと鍵交換の方法名を選ぶ.  選ばれた鍵交換の方法名は, この節の残りで用いる楕円曲線ドメインパラメータとハッシュ関数を決定する.
 
-   Information on the REQUIRED and RECOMMENDED elliptic curve domain
-   parameters for use with this method can be found in Section 10.
+   この方法で利用する必須および推奨の楕円曲線ドメインパラメータに関する情報は、 10節にある.
 
-   All elliptic curve public keys MUST be validated after they are
-   received.  An example of a validation algorithm can be found in
-   Section 3.2.2 of [SEC1].  If a key fails validation, the key exchange
+   すべての楕円曲線公開鍵は, 受信後に検証されなければならない.  検証アルゴリズムの例は, [SEC1]の 3.2.1節にある.  鍵が検証に失敗したら, 鍵交換は失敗しなければならない.If a key fails validation, the key exchange
    MUST fail.
 
    The elliptic curve public keys (points) that must be transmitted are
@@ -425,9 +389,7 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
    implicit server authentication, the domain parameters associated with
    the host key are used throughout this section.
 
-   All elliptic curve public keys MUST be validated after they are
-   received.  An example of a validation algorithm can be found in
-   Section 3.2.2 of [SEC1].  If a key fails validation, the key exchange
+   すべての楕円曲線公開鍵は, 受信後に検証されなければならない.  検証アルゴリズムの例は, [SEC1]の 3.2.1節にある.  鍵が検証に失敗したら, 鍵交換は失敗しなければならない.If a key fails validation, the key exchange
    MUST fail.
 
    The elliptic curve ephemeral public keys (points) that must be

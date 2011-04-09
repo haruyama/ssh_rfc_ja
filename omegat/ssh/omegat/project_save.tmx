@@ -50,6 +50,23 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>*  It is RECOMMENDED that the client verify that the host key sent
+         is the server's host key (for example, using a local database).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T094359Z" changeid="haruyama">
+        <seg>*  クライアントが(例えばローカルなデータベースを用いて)送られたホスト鍵がサーバのホスト鍵かどうか検証するのを推奨する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>*Verify host key belongs to server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T093728Z" changeid="haruyama">
+        <seg>*ホスト鍵がサーバのものか検証</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>+  if the algorithm requires a signature-capable host key,
             there is a signature-capable algorithm on the server's
             server_host_key_algorithms that is also supported by the
@@ -1408,6 +1425,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Algorithm negotiation chooses
+   the public key algorithm to be used for signing and the method name
+   of the key exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T091216Z" changeid="haruyama">
+        <seg>アルゴリズムのネゴシエーションでは, 署名に用いる公開鍵アルゴリズムと鍵交換の方法名を選ぶ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Algorithm selection depends on whether the chosen key exchange
          algorithm requires a signature or an encryption-capable host
          key.</seg>
@@ -1485,6 +1512,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>すべてのクライアントは, 改行を含む instruction フィールドを適切に扱えなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>All elliptic curve public keys MUST be validated after they are
+   received.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T091517Z" changeid="haruyama">
+        <seg>すべての楕円曲線公開鍵は, 受信後に検証されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1794,6 +1830,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>可能な方法の例として, 最初にホストに接続した際だけはチェックなしでホスト鍵を受け入れ, 鍵をローカルなデータベースに保存し, 以降のそのホストへのすべての接続では鍵を比較する, というものがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An example of a validation algorithm can be found in
+   Section 3.2.2 of [SEC1].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T091905Z" changeid="haruyama">
+        <seg>検証アルゴリズムの例は, [SEC1]の 3.2.1節にある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2622,6 +2667,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Client                                                Server
+      ------                                                ------
+      Generate ephemeral key pair.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T093610Z" changeid="haruyama">
+        <seg>クライアント                                                サーバ
+      ------                                                ------
+      一時鍵ペアの生成</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Client implementations SHOULD reject any session channel open
    requests to make it more difficult for a corrupt server to attack the
    client.</seg>
@@ -2865,6 +2922,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>圧縮と暗号化のコンテキストはリセットされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Compute shared secret.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T093639Z" changeid="haruyama">
+        <seg>共有の秘密の計算</seg>
       </tuv>
     </tu>
     <tu>
@@ -3582,6 +3647,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>ECDH Key Exchange</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T090014Z" changeid="haruyama">
+        <seg>ECDH 鍵交換</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>ECDH Key Exchange ...............................................5
    5.</seg>
       </tuv>
@@ -4044,6 +4117,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>ユーザの認証資格を漏らさない認証の場合でも, 攻撃者はハニーポットと同様の働きにおりキーストロークをキャプチャし得られるべきではない情報を取得するかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Every compliant
+   SSH ECC implementation MUST implement ECDH key exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T090341Z" changeid="haruyama">
+        <seg>すべての準拠する SSH ECC実装は, ECDH 鍵交換を実装しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4686,6 +4768,30 @@
       <tuv lang="JA">
         <seg>名前の将来の割り当て........................13
       4.7.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Generate and sign exchange hash.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T093650Z" changeid="haruyama">
+        <seg>交換ハッシュの生成と署名</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Generate ephemeral key pair.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T093632Z" changeid="haruyama">
+        <seg>一時鍵ペアの生成</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Generate exchange hash.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T093713Z" changeid="haruyama">
+        <seg>交換ハッシュの生成</seg>
       </tuv>
     </tu>
     <tu>
@@ -5431,6 +5537,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>ホストが鍵を持つなら, 少なくとも, 必須の公開鍵アルゴリズム(DSS [FIPS-186-2])を用いる鍵を1つ持たなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If a key fails validation, the key exchange
+   MUST fail.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T091926Z" changeid="haruyama">
+        <seg>鍵が検証に失敗したら, 鍵交換は失敗しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6993,6 +7108,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>この節では, SSH バージョン 1.x との互換性をサポートする実装にのみ関係する情報を記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Information on the REQUIRED and RECOMMENDED elliptic curve domain
+   parameters for use with this method can be found in Section 10.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T091444Z" changeid="haruyama">
+        <seg>この方法で利用する必須および推奨の楕円曲線ドメインパラメータに関する情報は、 10節にある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10913,6 +11037,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Specification of the message numbers SSH_MSG_KEX_ECDH_INIT and
+   SSH_MSG_KEX_ECDH_REPLY is found in Section 7.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T092939Z" changeid="haruyama">
+        <seg>SSH_MSG_KEX_ECDH_INIT と SSH_MSG_KEX_ECDH_REPLY のメッセージ番号の定義は, 7節にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Standard methods are provided for setting up
    secure interactive shell sessions and for forwarding (&quot;tunneling&quot;)
    arbitrary TCP/IP ports and X11 connections.</seg>
@@ -11467,6 +11600,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>sequence_number は, 最初のパケットで 0 に初期化される. そして(暗号化やMACの使用にかかわらず) すべてのパケットごとに増加される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   transformation between elliptic curve points and octet strings is
+   specified in Sections 2.3.3 and 2.3.4 of [SEC1]; point compression
+   MAY be used.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T092600Z" changeid="haruyama">
+        <seg>楕円曲線の点と8bit文字列との変換は, [SEC1]の2.3.3と2.3.4節で指定されている; 点の圧縮が利用されるかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12138,6 +12282,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The Elliptic Curve Diffie-Hellman (ECDH) key exchange method
+   generates a shared secret from an ephemeral local elliptic curve
+   private key and ephemeral remote elliptic curve public key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T090214Z" changeid="haruyama">
+        <seg>楕円曲線 Diffie-Hellman (ECDH) 鍵交換法は, 一時的でローカルな楕円曲線秘密鍵と一時的でリモートの楕円曲線公開鍵から共有の秘密(shared secret)を生成する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Extended Channel Data Transfer 'data_type_code' is a uint32
    value.</seg>
       </tuv>
@@ -12381,6 +12535,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The SSH framework requires that the shared key be an integer.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T092842Z" changeid="haruyama">
+        <seg>SSHのフレームワークでは, 共有鍵が整数でなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The SSH protocol consists of three major components: The
    Transport Layer Protocol provides server authentication,
    confidentiality, and integrity with perfect forward secrecy.</seg>
@@ -12604,6 +12766,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The algorithm for key pair generation can
+   be found in Section 3.2.1 of [SEC1].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T090937Z" changeid="haruyama">
+        <seg>鍵ペアの生成のアルゴリズムは, [SEC1]の 3.2.1節にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The amount of entropy available to a given client or server may
    sometimes be less than what is required.</seg>
       </tuv>
@@ -12775,6 +12946,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client MAY accept the host key without verification, but
+         doing so will render the protocol insecure against active
+         attacks; see the discussion in Section 4.1 of [RFC4251].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T094502Z" changeid="haruyama">
+        <seg>クライアントは, 検証なしにホスト鍵を受けいれてもよい. しかし, これはプロトコルヲを能動的な攻撃に対して安全でなくしてしまう; [RFC4251] の 4.1節の議論を見よ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client MAY also send
    this message instead of the normal password authentication request
    without the server asking for it.</seg>
@@ -12936,6 +13117,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client sends:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T094529Z" changeid="haruyama">
+        <seg>クライアントは以下を送る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client software MAY
    display this message to the user.</seg>
       </tuv>
@@ -13010,6 +13199,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The conversion between a field element and an integer is specified in
+   Section 2.3.9 of [SEC1].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T092915Z" changeid="haruyama">
+        <seg>フィールド要素と整数との変換は, [SEC1]の2.3.9節で指定されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The data types boolean, byte, uint32, uint64, string, and mpint are
    to be interpreted in this document as described in [RFC4251].</seg>
       </tuv>
@@ -13079,6 +13277,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The elliptic curve public keys (points) that must be transmitted are
+   encoded into octet strings before they are transmitted.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T092509Z" changeid="haruyama">
+        <seg>転送される楕円曲線公開鍵(点)は, 転送前に8bit文字列にエンコードする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The encrypted data in all packets sent in one direction SHOULD be
    considered a single data stream.</seg>
       </tuv>
@@ -13098,6 +13305,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The exchange hash H is computed as the hash of the concatenation of
+   the following.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T094608Z" changeid="haruyama">
+        <seg>交換ハッシュ H は, 以下の連結のハッシュで計算される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The exchange hash SHOULD be kept
    secret.</seg>
       </tuv>
@@ -13112,6 +13328,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>異なる公開鍵アルゴリズムを持つ複数の信頼されたホスト鍵が存在する場合もこの選択に影響する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The family of key exchange method names defined for use with this key
+   exchange can be found in Section 6.3.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T091114Z" changeid="haruyama">
+        <seg>この鍵交換の利用のために定義された鍵交換法の名前のファミリーは 6.3 節にある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13228,6 +13453,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>メッセージのまとめと関連するメッセージ番号を以下に示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The following is an overview of the key exchange process:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T093535Z" changeid="haruyama">
+        <seg>鍵交換プロセスの概要を以下に示す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13894,6 +14127,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The method name of the key exchange chosen
+   determines the elliptic curve domain parameters and hash function to
+   be used in the remainder of this section.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T091359Z" changeid="haruyama">
+        <seg>選ばれた鍵交換の方法名は, この節の残りで用いる楕円曲線ドメインパラメータとハッシュ関数を決定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The minimum size of a packet is 16 (or the cipher block size,
    whichever is larger) bytes (plus 'mac').</seg>
       </tuv>
@@ -14038,6 +14281,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The output of shared key generation is a field element
+   xp.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T092809Z" changeid="haruyama">
+        <seg>共有鍵の生成の出力は, フィールド要素 xp だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The overall security of using SSHFP for SSH host key verification is
    dependent on the security policies of the SSH host administrator and
    DNS zone administrator (in transferring the fingerprint), detailed
@@ -14141,6 +14393,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>この特徴の主要な目的は, TCP-wrappers に切断の前にエラーメッセージを表示することを許すことだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The primitive used for shared key generation is ECDH with cofactor
+   multiplication, the full specification of which can be found in
+   Section 3.3.2 of [SEC1].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T090916Z" changeid="haruyama">
+        <seg>共有鍵の生成に使われる primitive は, 余因子の乗算(cofactor multiplication)を用いる ECDHだ. 完全な仕様は, [SEC1}の 3.3.2 節にある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14676,6 +14938,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>サーバは, それぞれの要求のメッセージに SSH_MSG_USERAUTH_SUCCESS, SSH_MSG_USERAUTH_FAILURE, もしくは SSH_MSG_USERAUTH_PASSWD_CHANGEREQ で応答しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The server responds with:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T094541Z" changeid="haruyama">
+        <seg>サーバは以下で応答する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15793,6 +16063,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This is implemented using the following messages.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T094516Z" changeid="haruyama">
+        <seg>これは, 次のメッセージ群を用いて実装される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This is implemented with the following messages.</seg>
       </tuv>
       <tuv lang="JA">
@@ -15824,6 +16102,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>この公開鍵は認証に利用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This key
+   exchange method provides explicit server authentication as defined in
+   [RFC4253] using a signature on the exchange hash.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T090316Z" changeid="haruyama">
+        <seg>この鍵交換法は, 交換ハッシュ(exchange hash) の署名を用いる [RFC4253] で定義された明示的なサーバ認証を提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16560,6 +16848,22 @@
       </tuv>
       <tuv lang="JA">
         <seg>[1, p-1] の範囲ではない'e' や 'f' の値は, どちらの側も送ったり受け取ったりしてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Verify received key is valid.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T093623Z" changeid="haruyama">
+        <seg>受信した鍵の検証が成功</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Verify server's signature.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110409T093719Z" changeid="haruyama">
+        <seg>サーバの署名の検証</seg>
       </tuv>
     </tu>
     <tu>
