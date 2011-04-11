@@ -228,20 +228,12 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
 
    この方法で利用する必須および推奨の楕円曲線ドメインパラメータに関する情報は、 10節にある.
 
-   すべての楕円曲線公開鍵は, 受信後に検証されなければならない.  検証アルゴリズムの例は, [SEC1]の 3.2.1節にある.  鍵が検証に失敗したら, 鍵交換は失敗しなければならない.If a key fails validation, the key exchange
-   MUST fail.
+   すべての楕円曲線公開鍵は, 受信後に検証されなければならない.  検証アルゴリズムの例は, [SEC1]の 3.2.1節にある.  鍵が検証に失敗したら, 鍵交換は失敗しなければならない.
 
-   The elliptic curve public keys (points) that must be transmitted are
-   encoded into octet strings before they are transmitted.  The
-   transformation between elliptic curve points and octet strings is
-   specified in Sections 2.3.3 and 2.3.4 of [SEC1]; point compression
-   MAY be used.  The output of shared key generation is a field element
-   xp.  The SSH framework requires that the shared key be an integer.
-   The conversion between a field element and an integer is specified in
-   Section 2.3.9 of [SEC1].
+   転送される楕円曲線公開鍵(点)は, 転送前に8bit文字列にエンコードする必要がある.  楕円曲線の点と8bit文字列との変換は, [SEC1]の2.3.3と2.3.4節で指定されている; 点の圧縮が利用されるかもしれない.  共有鍵の生成の出力は, フィールド要素 xp だ.  SSHのフレームワークでは, 共有鍵が整数でなければならない.
+   フィールド要素と整数との変換は, [SEC1]の2.3.9節で指定されている.
 
-   Specification of the message numbers SSH_MSG_KEX_ECDH_INIT and
-   SSH_MSG_KEX_ECDH_REPLY is found in Section 7.
+   SSH_MSG_KEX_ECDH_INIT と SSH_MSG_KEX_ECDH_REPLY のメッセージ番号の定義は, 7節にある.
 
 
 
@@ -267,39 +259,27 @@ Stebila & Green             Standards Track                     [Page 6]
 RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 
-   The following is an overview of the key exchange process:
+   鍵交換プロセスの概要を以下に示す.
 
-      Client                                                Server
+      クライアント                                                サーバ
       ------                                                ------
-      Generate ephemeral key pair.
-      SSH_MSG_KEX_ECDH_INIT  -------------->
+      一時鍵ペアの生成SSH_MSG_KEX_ECDH_INIT  -------------->
 
-                                      Verify received key is valid.
-                                       Generate ephemeral key pair.
-                                             Compute shared secret.
-                                   Generate and sign exchange hash.
-                             <------------- SSH_MSG_KEX_ECDH_REPLY
+                                      受信した鍵の検証が成功一時鍵ペアの生成共有の秘密の計算交換ハッシュの生成と署名<------------- SSH_MSG_KEX_ECDH_REPLY
 
-      Verify received key is valid.
-      *Verify host key belongs to server.
-      Compute shared secret.
-      Generate exchange hash.
-      Verify server's signature.
+      受信した鍵の検証が成功*ホスト鍵がサーバのものか検証共有の秘密の計算交換ハッシュの生成サーバの署名の検証
 
-      *  It is RECOMMENDED that the client verify that the host key sent
-         is the server's host key (for example, using a local database).
-         The client MAY accept the host key without verification, but
-         doing so will render the protocol insecure against active
-         attacks; see the discussion in Section 4.1 of [RFC4251].
+      *  クライアントが(例えばローカルなデータベースを用いて)送られたホスト鍵がサーバのホスト鍵かどうか検証するのを推奨する.
+         クライアントは, 検証なしにホスト鍵を受けいれてもよい. しかし, これはプロトコルヲを能動的な攻撃に対して安全でなくしてしまう; [RFC4251] の 4.1節の議論を見よ.
 
-   This is implemented using the following messages.
+   これは, 次のメッセージ群を用いて実装される.
 
-   The client sends:
+   クライアントは以下を送る.
 
       byte     SSH_MSG_KEX_ECDH_INIT
       string   Q_C, client's ephemeral public key octet string
 
-   The server responds with:
+   サーバは以下で応答する.
 
       byte     SSH_MSG_KEX_ECDH_REPLY
       string   K_S, server's public host key
@@ -323,8 +303,7 @@ Stebila & Green             Standards Track                     [Page 7]
 RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 
-   The exchange hash H is computed as the hash of the concatenation of
-   the following.
+   交換ハッシュ H は, 以下の連結のハッシュで計算される.
 
       string   V_C, client's identification string (CR and LF excluded)
       string   V_S, server's identification string (CR and LF excluded)
@@ -335,7 +314,7 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
       string   Q_S, server's ephemeral public key octet string
       mpint    K,   shared secret
 
-5.  ECMQV Key Exchange
+5.  ECMQV 鍵交換
 
    The Elliptic Curve Menezes-Qu-Vanstone (ECMQV) key exchange algorithm
    generates a shared secret from two local elliptic curve key pairs and
@@ -389,8 +368,7 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
    implicit server authentication, the domain parameters associated with
    the host key are used throughout this section.
 
-   すべての楕円曲線公開鍵は, 受信後に検証されなければならない.  検証アルゴリズムの例は, [SEC1]の 3.2.1節にある.  鍵が検証に失敗したら, 鍵交換は失敗しなければならない.If a key fails validation, the key exchange
-   MUST fail.
+   すべての楕円曲線公開鍵は, 受信後に検証されなければならない.  検証アルゴリズムの例は, [SEC1]の 3.2.1節にある.  鍵が検証に失敗したら, 鍵交換は失敗しなければならない.
 
    The elliptic curve ephemeral public keys (points) that must be
    transmitted are encoded into octet strings before they are
@@ -401,27 +379,20 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
    key be an integer.  The conversion between a field element and an
    integer is specified in Section 2.3.9 of [SEC1].
 
-   The following is an overview of the key exchange process:
+   鍵交換プロセスの概要を以下に示す.
 
-      Client                                                Server
+      クライアント                                                サーバ
       ------                                                ------
-      Generate ephemeral key pair.
-      SSH_MSG_KEX_ECMQV_INIT ------------->
+      一時鍵ペアの生成SSH_MSG_KEX_ECMQV_INIT ------------->
 
-                                      Verify received key is valid.
-                                       Generate ephemeral key pair.
-                                             Compute shared secret.
-                                Generate exchange hash and compute
+                                      受信した鍵の検証が成功一時鍵ペアの生成共有の秘密の計算Generate exchange hash and compute
                               HMAC over it using the shared secret.
                             <------------- SSH_MSG_KEX_ECMQV_REPLY
 
       Verify received keys are valid.
-      *Verify host key belongs to server.
-      Compute shared secret.
-      Verify HMAC.
+      *ホスト鍵がサーバのものか検証共有の秘密の計算Verify HMAC.
 
-      *  It is RECOMMENDED that the client verify that the host key sent
-         is the server's host key (for example, using a local database).
+      *  クライアントが(例えばローカルなデータベースを用いて)送られたホスト鍵がサーバのホスト鍵かどうか検証するのを推奨する.
          The client MAY accept the host key without verification, but
          doing so will render the protocol insecure against active
          attacks.
@@ -439,7 +410,7 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
    This key exchange algorithm is implemented with the following
    messages.
 
-   The client sends:
+   クライアントは以下を送る.
 
       byte     SSH_MSG_ECMQV_INIT
       string   Q_C, client's ephemeral public key octet string

@@ -864,6 +864,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A full description of the ECMQV primitive can be found in Section 3.4
+   of [SEC1].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T134208Z" changeid="haruyama">
+        <seg>ECMQV プリミティブの完全な説明は, [SEC1] の 3.4 節にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A graphical user interface (GUI) client has many choices on how to
    prompt the user.</seg>
       </tuv>
@@ -3629,6 +3638,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>During algorithm negotiation with the SSH_MSG_KEXINIT messages, the
+   ECMQV key exchange method can only be chosen if a public key
+   algorithm supporting ECC host keys can also be chosen.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T134406Z" changeid="haruyama">
+        <seg>SSH_MSG_KEXINIT メッセージを用いる アルゴリズムネゴシエーションにおいて, ECCホスト鍵をサポートする公開鍵アルゴリズムが選ばれた場合のみECMQV 鍵交換法は選択されうる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>During the transition period, it is important to be able to work in a</seg>
       </tuv>
       <tuv lang="JA">
@@ -3693,6 +3712,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>ECMQV Key Exchange</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T132431Z" changeid="haruyama">
+        <seg>ECMQV 鍵交換</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>ECMQV Key Exchange ..............................................8
    6.</seg>
       </tuv>
@@ -3720,6 +3747,15 @@
       <tuv lang="JA" changedate="20110306T084706Z" changeid="haruyama">
         <seg>ECMQV メッセージ番号 .....................................13
    8.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>ECMQV requires that all the keys used to generate a shared secret are
+   generated over the same elliptic curve domain parameters.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T135408Z" changeid="haruyama">
+        <seg>ECMQV は, 共有の秘密を生成するのに使われるすべての鍵が同じ楕円曲線ドメインパラメータで生成されていることを要求する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4772,6 +4808,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Future RFCs may define new method names specifying new hash
+   algorithms for use with ECMQV.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T132845Z" changeid="haruyama">
+        <seg>将来のRFCが, ECMQVと共に用いる新しいハッシュアルゴリズムを指定する新しい認証法の名前が定義するかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Generate and sign exchange hash.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110409T093650Z" changeid="haruyama">
@@ -4784,6 +4829,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110409T093632Z" changeid="haruyama">
         <seg>一時鍵ペアの生成</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Generate exchange hash and compute
+                              HMAC over it using the shared secret.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T135930Z" changeid="haruyama">
+        <seg>交換ハッシュの生成と, 共有の秘密を用いた交換ハッシュのHMACの計算.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5447,6 +5501,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>BREAKの持続時間が 500 msよりも小さいリクエストを受け取ったら, 500 ms BREAK と解釈される必要がある. 多くのデバイスでこの長さが BREAKと認識されるからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If ECMQV key exchange is
+   chosen, then the public key algorithm supporting ECC host keys MUST
+   also be chosen.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T134829Z" changeid="haruyama">
+        <seg>ECMQV 鍵交換が選ばれる場合は, ECC ホスト鍵をサポートする公開鍵アルゴリズムが選ばれなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6765,6 +6829,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>どちらの場合も, 攻撃者はSSHのストリームに挿入できる1つないし複数のパケットを構成できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In general, the ECMQV key exchange is performed using the ephemeral
+   and long-term key pair of both the client and server, which is a
+   total of 4 keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T133017Z" changeid="haruyama">
+        <seg>一般に, ECMQV 鍵交換はクライアントとサーバ両方で一時的な鍵と長期間の鍵を用いて行なわれる. すなわち 全部で4つの鍵を用いる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8491,6 +8565,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>SSH_MSG_NEWKEYS が送られた後で, さらなるアプリケーションのデータが送られるだろう; 鍵交換はSSHトランスポート層の上位のプロトコルには影響しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>More information about the method
+   name and HMAC can be found in Section 6.4.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T132909Z" changeid="haruyama">
+        <seg>認証法の名前とHMACについてのさらなる情報は, 6.4節にある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10846,6 +10929,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Since the
+   host key is used in the generation of the shared secret, allowing for
+   implicit server authentication, the domain parameters associated with
+   the host key are used throughout this section.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T135722Z" changeid="haruyama">
+        <seg>ホスト鍵が共有の秘密の生成に用いられるため, 暗黙的なサーバの認証を考慮すると, ホスト鍵に関連するドメインパラメータはこの節の間中用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Since the new client MAY immediately send additional data after its
    identification string (before receiving the server's identification
    string), the old protocol may already be corrupt when the client
@@ -12282,12 +12376,31 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The ECMQV key
+   exchange method is OPTIONAL.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T132618Z" changeid="haruyama">
+        <seg>ECMQV 鍵交換法は選択できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Elliptic Curve Diffie-Hellman (ECDH) key exchange method
    generates a shared secret from an ephemeral local elliptic curve
    private key and ephemeral remote elliptic curve public key.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110409T090214Z" changeid="haruyama">
         <seg>楕円曲線 Diffie-Hellman (ECDH) 鍵交換法は, 一時的でローカルな楕円曲線秘密鍵と一時的でリモートの楕円曲線公開鍵から共有の秘密(shared secret)を生成する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The Elliptic Curve Menezes-Qu-Vanstone (ECMQV) key exchange algorithm
+   generates a shared secret from two local elliptic curve key pairs and
+   two remote public keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T132528Z" changeid="haruyama">
+        <seg>楕円曲線 Menezes-Qu-Vanstone (ECMQV) 鍵交換アルゴリズムは, 2つのローカルな楕円曲線鍵ペアと2つのリモートの公開鍵から 共有の秘密を生成する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12535,6 +12648,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The SSH framework requires that the shared
+   key be an integer.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T135817Z" changeid="haruyama">
+        <seg>SSHのフレームワークでは, 共有鍵が整数でなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The SSH framework requires that the shared key be an integer.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110409T092842Z" changeid="haruyama">
@@ -12775,6 +12897,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The algorithm for key pair generation can be found in
+   Section 3.2.1 of [SEC1].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T134229Z" changeid="haruyama">
+        <seg>鍵ペア生成のアルゴリズムは, [SEC1]の 3.2.1 節にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The amount of entropy available to a given client or server may
    sometimes be less than what is required.</seg>
       </tuv>
@@ -12942,6 +13073,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>それぞれの通信の方向の暗号は, お互いに独立に動作しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The client MAY accept the host key without verification, but
+         doing so will render the protocol insecure against active
+         attacks.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T140055Z" changeid="haruyama">
+        <seg>クライアントは, 検証なしにホスト鍵を受けいれてもよい. しかし, これはプロトコルヲを能動的な攻撃に対して安全でなくしてしまう.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13199,6 +13340,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The conversion between a field element and an
+   integer is specified in Section 2.3.9 of [SEC1].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T135821Z" changeid="haruyama">
+        <seg>フィールド要素と整数との変換は, [SEC1]の2.3.9節で指定されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The conversion between a field element and an integer is specified in
    Section 2.3.9 of [SEC1].</seg>
       </tuv>
@@ -13277,6 +13427,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The elliptic curve ephemeral public keys (points) that must be
+   transmitted are encoded into octet strings before they are
+   transmitted.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T135758Z" changeid="haruyama">
+        <seg>転送される楕円曲線一時的公開鍵(点)は, 転送前に8bit文字列にエンコードする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The elliptic curve public keys (points) that must be transmitted are
    encoded into octet strings before they are transmitted.</seg>
       </tuv>
@@ -13335,8 +13495,8 @@
         <seg>The family of key exchange method names defined for use with this key
    exchange can be found in Section 6.3.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110409T091114Z" changeid="haruyama">
-        <seg>この鍵交換の利用のために定義された鍵交換法の名前のファミリーは 6.3 節にある.</seg>
+      <tuv lang="JA" changedate="20110411T132710Z" changeid="haruyama">
+        <seg>この鍵交換の利用のために定義された名前のファミリーは 6.3 節にある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13728,6 +13888,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The hash H is formed by applying the algorithm HASH on a
+   concatenation of the following:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T140215Z" changeid="haruyama">
+        <seg>ハッシュ H は, 次の連結に対して HASH アルゴリズムを適用した結果だ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The hash algorithm
    for computing the exchange hash is defined by the method name, and is
    called HASH.</seg>
@@ -13855,6 +14024,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>この文書で定義される鍵交換法は明示的なサーバ認証を用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The key exchange method name defined for use with this key exchange
+   is &quot;ecmqv-sha2&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T132707Z" changeid="haruyama">
+        <seg>この鍵交換法を利用するために定義された名前は, &quot;ecmqv-sha2&quot; だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14277,6 +14455,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>name-listのnameの順序は, 重要かもしれないしそうでないかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The output of shared key generation
+   is a field element xp.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T135815Z" changeid="haruyama">
+        <seg>共有鍵の生成の出力は, フィールド要素 xp だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14950,6 +15137,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The server sends:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T140142Z" changeid="haruyama">
+        <seg>サーバは以下を送る:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The server then requests
    authentication information from the client with an
    SSH_MSG_USERAUTH_INFO_REQUEST message.</seg>
@@ -15032,6 +15227,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The specification of the message numbers SSH_MSG_ECMQV_INIT and
+   SSH_MSG_ECMQV_REPLY can be found in Section 7.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T140116Z" changeid="haruyama">
+        <seg>SSH_MSG_ECMQV_INIT と SSH_MSG_ECMQV_REPLY のメッセージ番号の定義は, 7節にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The stream consists of opcode-
    argument pairs wherein the opcode is a byte value.</seg>
       </tuv>
@@ -15082,6 +15286,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>終端のnull 文字は, 通常はstringには格納しないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The transformation between elliptic curve points and
+   octet strings is specified in Sections 2.3.3 and 2.3.4 of [SEC1];
+   point compression MAY be used.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T135810Z" changeid="haruyama">
+        <seg>楕円曲線の点と8bit文字列との変換は, [SEC1]の2.3.3と2.3.4節で指定されている; 点の圧縮が利用されるかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15459,6 +15673,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Therefore,
+   we generate an ephemeral key and use that as both the clients keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T133716Z" changeid="haruyama">
+        <seg>したがって, 1つの一時的鍵を生成し, それをあたかも2つのクライアント鍵のように利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>These
    messages may reveal surprising amounts of information about the host
    if not properly designed.</seg>
@@ -15712,6 +15935,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>少なくともPOSIX風のttyインタフェイスを利用するシステム間では, マシンに依存する部分があってよい. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This case is handled the same way that key exchange methods
+   requiring encryption/signature capable public key algorithms are</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T134749Z" changeid="haruyama">
+        <seg>[RFC4253]の 7.1 節での 暗号化/署名可能な公開鍵アルゴリズムを必要とする鍵交換法が扱われるのと同じように, この場合も扱われる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16043,6 +16275,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This is due
+   to the use of implicit server authentication in this key exchange
+   method.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T134547Z" changeid="haruyama">
+        <seg>これは, この鍵交換法で暗黙的なサーバ認証を利用するためだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This is facilitated by
    the following notification.</seg>
       </tuv>
@@ -16075,6 +16317,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>これは, 次のメッセージ群で実装される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This is more efficient than using two different ephemeral keys, and
+   it does not adversely affect security (it is analogous to the one-
+   pass protocol in Section 6.1 of [LMQSV98]).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T133813Z" changeid="haruyama">
+        <seg>これは2つの一時的鍵を用いるより効率的で, セキュリティに不利に作用しない(これは, [LMQSV98] の 6.1節の one-passプロトコルに類似している.)</seg>
       </tuv>
     </tu>
     <tu>
@@ -16116,11 +16368,29 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This key exchange algorithm is implemented with the following
+   messages.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T140130Z" changeid="haruyama">
+        <seg>この鍵交換アルゴリズムは, 次のメッセージ群で実装される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This key exchange method provides explicit server
    authentication as defined in Section 7.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>この鍵交換法は,  7節で定義した 明示的なサーバ認証を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This key exchange method provides implicit
+   server authentication as defined in [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T132603Z" changeid="haruyama">
+        <seg>この鍵交換法は, [RFC4253]で定義された暗黙的なサーバ認証を提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16266,6 +16536,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>この方法は, クライアント側に特別なソフトウェアのサポートが必要ないインタラクティブな認証法に適している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This method name gives a hashing algorithm that is
+   to be used for the Hashed Message Authentication Code (HMAC) below.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T132756Z" changeid="haruyama">
+        <seg>この名前は, 以下のHMACで用いられるハッシュアルゴリズムを与える.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16852,6 +17131,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Verify HMAC.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T135953Z" changeid="haruyama">
+        <seg>HMACの検証.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Verify received key is valid.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110409T093623Z" changeid="haruyama">
@@ -17296,6 +17583,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>この認証法では, 秘密鍵を所持によって認証を行なう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Within the framework of SSH, the client does not
+   have a long-term key pair that needs to be authenticated.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T133434Z" changeid="haruyama">
+        <seg>SSHのフレームワークの中では, クライアントは認証に必要な長期間の鍵ペアを持たない.</seg>
       </tuv>
     </tu>
     <tu>
