@@ -1139,6 +1139,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Additional
+   manageability considerations are listed below.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110420T053201Z" changeid="haruyama">
+        <seg>追加の管理の上での考慮を以下に挙げる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Additional 'method name' values may be defined as specified in
    [SSH-ARCH] and [SSH-NUMBERS].</seg>
       </tuv>
@@ -2150,6 +2159,27 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As this document only provides new public key algorithms and key
+   exchange methods within the existing Secure Shell protocol
+   architecture, there are few manageability considerations beyond those
+   that apply for existing Secure Shell implementations.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110420T053817Z" changeid="haruyama">
+        <seg>この文書は, 既存のセキュアシェルプロトコルアーキテクチャに新しい公開鍵アルゴリズムと鍵交換法を提供しているだけで, 既存のセキュアシェル実装への適用されている管理の上での考慮を越えるものはほとんどない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As this document provides new functionality within the Secure Shell
+   protocol architecture, the only impact on network operations is the
+   impact on existing Secure Shell implementations.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110420T053839Z" changeid="haruyama">
+        <seg>この文書はセキュアシェルプロトコルアーキテクチャに新しい機能を追加しているので, ネットワーク操作への影響は, 既存のセキュアシェル実装の影響と同一だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As this example indicates, it is unsafe to use the existence of
    unflushed data in the TCP buffers proper as a guide to whether an
    empty packet is needed, since when the second write() is performed
@@ -3151,11 +3181,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Control of Function through Configuration and Policy</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110420T053449Z" changeid="haruyama">
+        <seg>設定とポリシーによる機能の管理</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Control of Function through Configuration and Policy ......13
       8.2.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110306T084756Z" changeid="haruyama">
-        <seg>設定とポリシーを通しての機能の管理 ......13
+      <tuv lang="JA" changedate="20110420T053459Z" changeid="haruyama">
+        <seg>設定とポリシーによる機能の管理 ......13
       8.2.</seg>
       </tuv>
     </tu>
@@ -3728,6 +3766,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>ECDH Message Numbers</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110420T052822Z" changeid="haruyama">
+        <seg>ECDH メッセージ番号</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>ECDH Message Numbers ......................................13
       7.2.</seg>
       </tuv>
@@ -3779,6 +3825,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110419T122132Z" changeid="haruyama">
         <seg>ECMQV 鍵交換/検証法の名前 (ecmqv-sha2)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>ECMQV Message Numbers</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110420T052827Z" changeid="haruyama">
+        <seg>ECMQV メッセージ番号</seg>
       </tuv>
     </tu>
     <tu>
@@ -6516,6 +6570,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Impact on Network Operation</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110420T053712Z" changeid="haruyama">
+        <seg>ネットワーク操作への影響</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Impact on Network Operation ...............................14
    9.</seg>
       </tuv>
@@ -6696,6 +6758,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>示唆した BREAK時間の制限を行なわなず BREAK length パラメータのまま解釈する実装は, 非常に長い BREAK 信号を受けて , 接続したデバイスからサービス不能や予期しない結果になるかもしれない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementers SHOULD allow system
+   administrators to disable some curves, including REQUIRED or
+   RECOMMENDED curves, to meet local security policy.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110420T053439Z" changeid="haruyama">
+        <seg>実装者は, 必須や推奨の曲線を含むいくつかの曲線をシステム管理者がローカルなセキュリティポリシーを充たすために無効にするのを許可する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6948,6 +7020,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>どちらの場合も, 攻撃者はSSHのストリームに挿入できる1つないし複数のパケットを構成できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In fact, due to its
+   smaller key sizes, elliptic curve cryptography can be implemented
+   more efficiently for the same security level than RSA, finite field
+   Diffie-Hellman, or DSA.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110420T054429Z" changeid="haruyama">
+        <seg>実際, 楕円曲線暗号は, RSAや有限体 Diffie-Hellman, DSA より小さな鍵サイズを持つので, 同じセキュリティレベルをより効率的に実装することができる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8218,6 +8301,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Key Exchange Messages</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110420T052611Z" changeid="haruyama">
+        <seg>鍵交換のメッセージ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Key Exchange Messages ..........................................13
       7.1.</seg>
       </tuv>
@@ -8514,11 +8605,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Manageability Considerations</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110420T053116Z" changeid="haruyama">
+        <seg>管理の上での考慮</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Manageability Considerations ...................................13
       8.1.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110306T084724Z" changeid="haruyama">
-        <seg>管理に関する考慮 ...................................13
+      <tuv lang="JA" changedate="20110420T053130Z" changeid="haruyama">
+        <seg>管理の上での考慮 ...................................13
       8.1.</seg>
       </tuv>
     </tu>
@@ -10730,6 +10829,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Section 10 specifies REQUIRED and RECOMMENDED elliptic curve domain
+   parameters to be used with the public key algorithms and key exchange
+   methods defined in this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110420T053317Z" changeid="haruyama">
+        <seg>10節で, この文書で定義された公開鍵アルゴリズムと鍵交換法と共に用いられる必須と推奨の楕円曲線ドメインパラメータを定義している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Secure Shell (SSH) is a protocol for secure remote login and other
    secure network services over an insecure network.</seg>
       </tuv>
@@ -12929,6 +13038,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The Secure Shell
+   protocol provides negotiation mechanisms for public key algorithms
+   and key exchange methods: any implementations that do not recognize
+   the algorithms and methods defined in this document will ignore them
+   in the negotiation and use the next mutually supported algorithm or
+   method, causing no negative impact on backward compatibility.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110420T054051Z" changeid="haruyama">
+        <seg>セキュアシェルプロトコルは, 公開鍵アルゴリズムと鍵交換法のネゴシエーションメカニズムを提供している: この文書で定義されているアルゴリズムや方法を認識しない実装はどれも, ネゴシエージョンでこれらを無視し相互にサポートしているアルゴリズムか方法を用いる. 後方互換性で問題となる影響は発生しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Secure Shell (SSH) Authentication Protocol</seg>
       </tuv>
       <tuv lang="JA">
@@ -13839,6 +13961,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The following message numbers have been defined in this document:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110420T052816Z" changeid="haruyama">
+        <seg>以下のメッセージ番号を, この文書で定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The following method-specific constants are used with this
    authentication method:</seg>
       </tuv>
@@ -14125,8 +14255,8 @@
    algorithm is defined in the method name to allow room for other
    algorithms to be defined in future documents.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110419T122420Z" changeid="haruyama">
-        <seg>▽zハッシュアルゴリズムは, 方法の名前で定義される. その他のアルゴリズムを許可する余地があるかどうかは, 将来の文書で定義される.</seg>
+      <tuv lang="JA" changedate="20110420T053141Z" changeid="haruyama">
+        <seg>ハッシュアルゴリズムは, 方法の名前で定義される. その他のアルゴリズムを許可する余地があるかどうかは, 将来の文書で定義される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14553,6 +14683,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>このメッセージは,  CRLF (キャリッジリターン - ラインフィード) のペアで分割された複数行を含むかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The message numbers 30-49 are key-exchange-specific and in a private
+   namespace defined in [RFC4250] that may be redefined by any key
+   exchange method [RFC4253] without requiring an IANA registration
+   process.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110420T052754Z" changeid="haruyama">
+        <seg>[RFC4250] でメッセージ番号は鍵交換特有なプライベートな名前空間と定義されている. この空間は, [RFC4253]で IANAの登録手続きを必要とせずに, 任意の鍵交換法で再定義してよいとされている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15624,6 +15765,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>&quot;none&quot; 以外のMACは, 完全性と認証を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The use of elliptic curve cryptography should not place a significant
+   computational burden on an implementing server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110420T054247Z" changeid="haruyama">
+        <seg>楕円曲線暗号の利用は, 実装したサーバに重大な計算の負担を発生されるものではないはずだ.</seg>
       </tuv>
     </tu>
     <tu>
