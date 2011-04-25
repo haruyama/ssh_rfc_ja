@@ -67,7 +67,7 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
            3.1.2. 署名のエンコーディング ..................................5
    4. ECDH 鍵交換 ...............................................5
    5. ECMQV 鍵交換 ..............................................8
-   6. 農法の名前 ...................................................10
+   6. 方法の名前 ...................................................10
       6.1. 楕円曲線ドメインパラメータ識別子 ...............10
       6.2. 楕円曲線暗号公開鍵アルゴリズム (ecdsa-sha2-*) ...................11
            6.2.1. 楕円曲線 Digital Signature Algorithm .........11
@@ -76,8 +76,8 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
    7. 鍵交換のメッセージ ..........................................13
       7.1. ECDH メッセージ番号 ......................................13
       7.2. ECMQV メッセージ番号 .....................................13
-   8. 管理に関する考慮 ...................................13
-      8.1. 設定とポリシーを通しての機能の管理 ......13
+   8. 管理の上での考慮 ...................................13
+      8.1. 設定とポリシーによる機能の管理 ......13
       8.2. ネットワーク操作への影響 ...............................14
    9. セキュリティの考慮 ........................................14
    10. 名前付き楕円曲線ドメインパラメータ ........................16
@@ -224,7 +224,7 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
 
    共有鍵の生成に使われる primitive は, 余因子の乗算(cofactor multiplication)を用いる ECDHだ. 完全な仕様は, [SEC1}の 3.3.2 節にある.  鍵ペアの生成のアルゴリズムは, [SEC1]の 3.2.1節にある.
 
-   この鍵交換の利用のために定義された鍵交換法の名前のファミリーは 6.3 節にある.  アルゴリズムのネゴシエーションでは, 署名に用いる公開鍵アルゴリズムと鍵交換の方法名を選ぶ.  選ばれた鍵交換の方法名は, この節の残りで用いる楕円曲線ドメインパラメータとハッシュ関数を決定する.
+   この鍵交換の利用のために定義された名前のファミリーは 6.3 節にある.  アルゴリズムのネゴシエーションでは, 署名に用いる公開鍵アルゴリズムと鍵交換の方法名を選ぶ.  選ばれた鍵交換の方法名は, この節の残りで用いる楕円曲線ドメインパラメータとハッシュ関数を決定する.
 
    この方法で利用する必須および推奨の楕円曲線ドメインパラメータに関する情報は、 10節にある.
 
@@ -316,38 +316,17 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 5.  ECMQV 鍵交換
 
-   The Elliptic Curve Menezes-Qu-Vanstone (ECMQV) key exchange algorithm
-   generates a shared secret from two local elliptic curve key pairs and
-   two remote public keys.  This key exchange method provides implicit
-   server authentication as defined in [RFC4253].  The ECMQV key
-   exchange method is OPTIONAL.
+   楕円曲線 Menezes-Qu-Vanstone (ECMQV) 鍵交換アルゴリズムは, 2つのローカルな楕円曲線鍵ペアと2つのリモートの公開鍵から 共有の秘密を生成する.  この鍵交換法は, [RFC4253]で定義された暗黙的なサーバ認証を提供する.  ECMQV 鍵交換法は選択できる.
 
-   The key exchange method name defined for use with this key exchange
-   is "ecmqv-sha2".  This method name gives a hashing algorithm that is
-   to be used for the Hashed Message Authentication Code (HMAC) below.
-   Future RFCs may define new method names specifying new hash
-   algorithms for use with ECMQV.  More information about the method
-   name and HMAC can be found in Section 6.4.
+   この鍵交換法を利用するために定義された名前は, "ecmqv-sha2" だ.  この名前は, 以下のHMACで用いられるハッシュアルゴリズムを与える.
+   将来のRFCが, ECMQVと共に用いる新しいハッシュアルゴリズムを指定する新しい認証法の名前が定義するかもしれない.  認証法の名前とHMACについてのさらなる情報は, 6.4節にある.
 
-   In general, the ECMQV key exchange is performed using the ephemeral
-   and long-term key pair of both the client and server, which is a
-   total of 4 keys.  Within the framework of SSH, the client does not
-   have a long-term key pair that needs to be authenticated.  Therefore,
-   we generate an ephemeral key and use that as both the clients keys.
-   This is more efficient than using two different ephemeral keys, and
-   it does not adversely affect security (it is analogous to the one-
-   pass protocol in Section 6.1 of [LMQSV98]).
+   一般に, ECMQV 鍵交換はクライアントとサーバ両方で一時的な鍵と長期間の鍵を用いて行なわれる. すなわち 全部で4つの鍵を用いる.  SSHのフレームワークの中では, クライアントは認証に必要な長期間の鍵ペアを持たない.  したがって, 1つの一時的鍵を生成し, それをあたかも2つのクライアント鍵のように利用する.
+   これは2つの一時的鍵を用いるより効率的で, セキュリティに不利に作用しない(これは, [LMQSV98] の 6.1節の one-passプロトコルに類似している.)
 
-   A full description of the ECMQV primitive can be found in Section 3.4
-   of [SEC1].  The algorithm for key pair generation can be found in
-   Section 3.2.1 of [SEC1].
+   ECMQV プリミティブの完全な説明は, [SEC1] の 3.4 節にある.  鍵ペア生成のアルゴリズムは, [SEC1]の 3.2.1 節にある.
 
-   During algorithm negotiation with the SSH_MSG_KEXINIT messages, the
-   ECMQV key exchange method can only be chosen if a public key
-   algorithm supporting ECC host keys can also be chosen.  This is due
-   to the use of implicit server authentication in this key exchange
-   method.  This case is handled the same way that key exchange methods
-   requiring encryption/signature capable public key algorithms are
+   SSH_MSG_KEXINIT メッセージを用いる アルゴリズムネゴシエーションにおいて, ECCホスト鍵をサポートする公開鍵アルゴリズムが選ばれた場合のみECMQV 鍵交換法は選択されうる.  これは, この鍵交換法で暗黙的なサーバ認証を利用するためだ.  [RFC4253]の 7.1 節での 暗号化/署名可能な公開鍵アルゴリズムを必要とする鍵交換法が扱われるのと同じように, この場合も扱われる.
 
 
 
@@ -358,26 +337,13 @@ Stebila & Green             Standards Track                     [Page 8]
 RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 
-   handled in Section 7.1 of [RFC4253].  If ECMQV key exchange is
-   chosen, then the public key algorithm supporting ECC host keys MUST
-   also be chosen.
+   handled in Section 7.1 of [RFC4253].  ECMQV 鍵交換が選ばれる場合は, ECC ホスト鍵をサポートする公開鍵アルゴリズムが選ばれなければならない.
 
-   ECMQV requires that all the keys used to generate a shared secret are
-   generated over the same elliptic curve domain parameters.  Since the
-   host key is used in the generation of the shared secret, allowing for
-   implicit server authentication, the domain parameters associated with
-   the host key are used throughout this section.
+   ECMQV は, 共有の秘密を生成するのに使われるすべての鍵が同じ楕円曲線ドメインパラメータで生成されていることを要求する.  ホスト鍵が共有の秘密の生成に用いられるため, 暗黙的なサーバの認証を考慮すると, ホスト鍵に関連するドメインパラメータはこの節の間中用いられる.
 
    すべての楕円曲線公開鍵は, 受信後に検証されなければならない.  検証アルゴリズムの例は, [SEC1]の 3.2.1節にある.  鍵が検証に失敗したら, 鍵交換は失敗しなければならない.
 
-   The elliptic curve ephemeral public keys (points) that must be
-   transmitted are encoded into octet strings before they are
-   transmitted.  The transformation between elliptic curve points and
-   octet strings is specified in Sections 2.3.3 and 2.3.4 of [SEC1];
-   point compression MAY be used.  The output of shared key generation
-   is a field element xp.  The SSH framework requires that the shared
-   key be an integer.  The conversion between a field element and an
-   integer is specified in Section 2.3.9 of [SEC1].
+   転送される楕円曲線一時的公開鍵(点)は, 転送前に8bit文字列にエンコードする必要がある.  楕円曲線の点と8bit文字列との変換は, [SEC1]の2.3.3と2.3.4節で指定されている; 点の圧縮が利用されるかもしれない.  共有鍵の生成の出力は, フィールド要素 xp だ.  SSHのフレームワークでは, 共有鍵が整数でなければならない.  フィールド要素と整数との変換は, [SEC1]の2.3.9節で指定されている.
 
    鍵交換プロセスの概要を以下に示す.
 
@@ -385,17 +351,14 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
       ------                                                ------
       一時鍵ペアの生成SSH_MSG_KEX_ECMQV_INIT ------------->
 
-                                      受信した鍵の検証が成功一時鍵ペアの生成共有の秘密の計算Generate exchange hash and compute
-                              HMAC over it using the shared secret.
+                                      受信した鍵の検証が成功一時鍵ペアの生成共有の秘密の計算交換ハッシュの生成と, 共有の秘密を用いた交換ハッシュのHMACの計算.
                             <------------- SSH_MSG_KEX_ECMQV_REPLY
 
       Verify received keys are valid.
-      *ホスト鍵がサーバのものか検証共有の秘密の計算Verify HMAC.
+      *ホスト鍵がサーバのものか検証共有の秘密の計算HMACの検証.
 
       *  クライアントが(例えばローカルなデータベースを用いて)送られたホスト鍵がサーバのホスト鍵かどうか検証するのを推奨する.
-         The client MAY accept the host key without verification, but
-         doing so will render the protocol insecure against active
-         attacks.
+         クライアントは, 検証なしにホスト鍵を受けいれてもよい. しかし, これはプロトコルヲを能動的な攻撃に対して安全でなくしてしまう.
 
 
 
@@ -404,26 +367,23 @@ Stebila & Green             Standards Track                     [Page 9]
 RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 
-   The specification of the message numbers SSH_MSG_ECMQV_INIT and
-   SSH_MSG_ECMQV_REPLY can be found in Section 7.
+   SSH_MSG_ECMQV_INIT と SSH_MSG_ECMQV_REPLY のメッセージ番号の定義は, 7節にある.
 
-   This key exchange algorithm is implemented with the following
-   messages.
+   この鍵交換アルゴリズムは, 次のメッセージ群で実装される.
 
    クライアントは以下を送る.
 
       byte     SSH_MSG_ECMQV_INIT
       string   Q_C, client's ephemeral public key octet string
 
-   The server sends:
+   サーバは以下を送る:
 
       byte     SSH_MSG_ECMQV_REPLY
       string   K_S, server's public host key
       string   Q_S, server's ephemeral public key octet string
       string   HMAC tag computed on H using the shared secret
 
-   The hash H is formed by applying the algorithm HASH on a
-   concatenation of the following:
+   ハッシュ H は, 次の連結に対して HASH アルゴリズムを適用した結果だ:
 
       string   V_C, client's identification string (CR and LF excluded)
       string   V_S, server's identification string (CR and LF excluded)
@@ -434,22 +394,15 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
       string   Q_S, server's ephemeral public key octet string
       mpint    K,   shared secret
 
-6.  Method Names
+6.  方法の名前
 
-   This document defines a new family of key exchange method names, a
-   new key exchange method name, and a new family of public key
-   algorithm names in the SSH name registry.
+   この文章は, 鍵交換の方法名の新しいファミリや新しい鍵交換法の名前, 公開鍵アルゴリズムの新しいファミリを SSHの名前レジストリに定義する.
 
-6.1.  Elliptic Curve Domain Parameter Identifiers
+6.1.  楕円曲線ドメインパラメータ識別子
 
-   This section specifies identifiers encoding named elliptic curve
-   domain parameters.  These identifiers are used in this document to
-   identify the curve used in the SSH ECC public key format, the ECDSA
-   signature blob, and the ECDH method name.
+   この節では, 指定された楕円曲線ドメインパラメータをエンコードする識別子を指定する.  これらの識別子は, この文書で以下を識別するために用いられている: SSH 楕円曲線公開鍵フォーマットや, ECDSA署名blob, ECDHの方法名だ.
 
-   For the REQUIRED elliptic curves nistp256, nistp384, and nistp521,
-   the elliptic curve domain parameter identifiers are the strings
-   "nistp256", "nistp384", and "nistp521".
+   必須の楕円曲線として, nistp256 と nistp384, nistp521 がある. 楕円曲線ドメインパラメータの識別子は, 文字列 "nistp256" と  "nistp384", "nistp521" だ.
 
 
 
@@ -460,45 +413,23 @@ Stebila & Green             Standards Track                    [Page 10]
 RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 
-   For all other elliptic curves, including all other NIST curves and
-   all other RECOMMENDED curves, the elliptic curve domain parameter
-   identifier is the ASCII period-separated decimal representation of
-   the Abstract Syntax Notation One (ASN.1) [ASN1] Object Identifier
-   (OID) of the named curve domain parameters that are associated with
-   the server's ECC host keys.  This identifier is defined provided that
-   the concatenation of the public key format identifier and the
-   elliptic curve domain parameter identifier (or the method name and
-   the elliptic curve domain parameter identifier) does not exceed the
-   maximum specified by the SSH protocol architecture [RFC4251], namely
-   64 characters; otherwise, the identifier for that curve is undefined,
-   and the curve is not supported by this specification.
+   他のすべてのNISTの曲線と他のすべての推奨される曲線を含む他のすべての楕円曲線のために, 楕円曲線ドメインパラメータ識別子は, サーバの楕円曲線ホスト鍵に関連付いて指定された曲線ドメインパラメータのASN.1[ASN1]オブジェクト識別子(OID)のASCIIでピリオドで分割された10進表現で表現される.  公開鍵識別子と楕円曲線ドメインパラメータ識別子(もしくは方法の名前と楕円曲線ドメインパラメータ識別子)の連結でこの識別子は定義され提供される. このとき, この識別子はSSH プロトコルアーキテクチャ [RFC4251]で指定された最大長, すなわち 64文字を越えない. そうでなければ, 曲線の識別子が定義されず, この曲線はこの仕様ではサポートされない.
 
-   A list of the REQUIRED and RECOMMENDED curves and their OIDs can be
-   found in Section 10.
+   必須/推奨の曲線とそのOIDのリストは, 10節にある.
 
-   Note that implementations MUST use the string identifiers for the
-   three REQUIRED NIST curves, even when an OID exists for that curve.
+   実装は, 3つの必須のNISTの曲線については, これらの曲線のOIDがあったとしても, 文字列の識別子を用いなければならないことに注意.
 
-6.2.  ECC Public Key Algorithm (ecdsa-sha2-*)
+6.2.  楕円曲線公開鍵アルゴリズム  (ecdsa-sha2-*)
 
-   The SSH ECC public key algorithm is specified by a family of public
-   key format identifiers.  Each identifier is the concatenation of the
-   string "ecdsa-sha2-" with the elliptic curve domain parameter
-   identifier as defined in Section 6.1.  A list of the required and
-   recommended curves and their OIDs can be found in Section 10.
+   SSH楕円曲線公開鍵アルゴリズムは, 公開鍵フォーマット識別子のファミリで指定される.  それぞれの識別子は, 文字列 "ecdsa-sha2-" と 6.1節で定義した楕円曲線ドメインパラメータ識別子の連結だ.  必須/推奨の曲線とそのOIDのリストは, 10節にある.
 
-   For example, the method name for ECDH key exchange with ephemeral
-   keys generated on the nistp256 curve is "ecdsa-sha2-nistp256".
+   たとえば, nistp256 曲線から生成された一時鍵を用いるECDHの方法の名前は, "ecdsa-sha2-nistp256" だ.
 
-6.2.1.  Elliptic Curve Digital Signature Algorithm
+6.2.1.  楕円曲線 Digital Signature Algorithm
 
-   The Elliptic Curve Digital Signature Algorithm (ECDSA) is specified
-   for use with the SSH ECC public key algorithm.
+   楕円曲線 Digital Signature Algorithm (ECDSA) は, SSHの楕円曲線公開鍵アルゴリズムの共に利用するために指定される.
 
-   The hashing algorithm defined by this family of method names is the
-   SHA2 family of hashing algorithms [FIPS-180-3].  The algorithm from
-   the SHA2 family that will be used is chosen based on the size of the
-   named curve specified in the public key:
+   このファミリで定義されるハッシュアルゴリズムは, SHA2ファミリのハッシュアルゴリズム [FIPS-180-3] だ.  SHA2ファミリからどのアルゴリズムが選ばれるかは, 公開鍵に指定された曲線のサイズを元に決められる.
 
 
 
@@ -526,40 +457,21 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
                     |     384 < b    |     SHA-512    |
                     +----------------+----------------+
 
-6.3.  ECDH Key Exchange Method Names (ecdh-sha2-*)
+6.3.  ECDH 鍵交換法の名前 (ecdh-sha2-*)
 
-   The Elliptic Curve Diffie-Hellman (ECDH) key exchange is defined by a
-   family of method names.  Each method name is the concatenation of the
-   string "ecdh-sha2-" with the elliptic curve domain parameter
-   identifier as defined in Section 6.1.  A list of the required and
-   recommended curves and their OIDs can be found in Section 10.
+   楕円曲線 Diffie-Hellman (ECDH) 鍵交換は, 方法の名前のファミリで定義される.  それぞれの方法の名前は, 文字列 "ecdh-sha2-" と 6.1節で定義した楕円曲線ドメインパラメータ識別子の連結だ.  必須/推奨の曲線とそのOIDのリストは, 10節にある.
 
-   For example, the method name for ECDH key exchange with ephemeral
-   keys generated on the sect409k1 curve is "ecdh-sha2-1.3.132.0.36".
+   たとえば, sect409k1 曲線から生成された一時鍵を用いるECDHの方法の名前は "ecdh-sha2-1.3.132.0.36" だ.
 
-   The hashing algorithm defined by this family of method names is the
-   SHA2 family of hashing algorithms [FIPS-180-3].  The hashing
-   algorithm is defined in the method name to allow room for other
-   algorithms to be defined in future documents.  The algorithm from the
-   SHA2 family that will be used is chosen based on the size of the
-   named curve specified in the method name according to the table in
-   Section 6.2.1.
+   このファミリで定義されるハッシュアルゴリズムは, SHA2ファミリのハッシュアルゴリズム [FIPS-180-3] だ.  ハッシュアルゴリズムは, 方法の名前で定義される. その他のアルゴリズムを許可する余地があるかどうかは, 将来の文書で定義される.  SHA2ファミリからどのアルゴリズムが選ばれるかは, 6.2.1節の表に基づいて方法の名前で指定された曲線のサイズを元に決められる.
 
-   The concatenation of any so encoded ASN.1 OID specifying a set of
-   elliptic curve domain parameters with "ecdh-sha2-" is implicitly
-   registered under this specification.
+   "ecdh-sha2-" と連結される 楕円曲線ドメインパラメータの集合を指定する ASN.1 OID は, この仕様の元で暗黙的に登録される.
 
-6.4.  ECMQV Key Exchange and Verification Method Name (ecmqv-sha2)
+6.4.  ECMQV 鍵交換/検証法の名前 (ecmqv-sha2)
 
-   The Elliptic Curve Menezes-Qu-Vanstone (ECMQV) key exchange is
-   defined by the method name "ecmqv-sha2".  Unlike the ECDH key
-   exchange method, ECMQV relies on a public key algorithm that uses ECC
-   keys: it does not need a family of method names because the curve
-   information can be gained from the public key algorithm.
+   楕円曲線 Menezes-Qu-Vanstone (ECMQV) 鍵交換は名前 "ecmqv-sha2" で定義される.  ECDH 鍵交換とは異なり, ECMQV は楕円曲線鍵を用いる公開鍵アルゴリズムに依存している: 方法の名前のファミリは必要ない. 曲線の情報は公開鍵アルゴリズムから入手できる.
 
-   The hashing and message authentication code algorithms are defined by
-   the method name to allow room for other algorithms to be defined for
-   use with ECMQV in future documents.
+   ハッシュとメッセージ認証コードのアルゴリズムは, 方法の名前で定義される. その他のアルゴリズムをECMQVで許可する余地があるかどうかは, 将来の文書で定義される.
 
 
 
@@ -572,51 +484,33 @@ Stebila & Green             Standards Track                    [Page 12]
 RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 
-   The hashing algorithm defined by this method name is the SHA2 family
-   of hashing algorithms [FIPS-180-3].  The algorithm from the SHA2
-   family that will be used is chosen based on the size of the named
-   curve specified for use with ECMQV by the chosen public key algorithm
-   according to the table in Section 6.2.1.
+   この名前で定義されるハッシュアルゴリズムは, SHA2ファミリのハッシュアルゴリズム [FIPS-180-3] だ.  SHA2ファミリからどのアルゴリズムが選ばれるかは, 6.2.1節の表に基づいて, ECMQVと共に用いられる公開鍵アルゴリズムで指定された曲線のサイズを元に決められる.
 
-   The keyed-hash message authentication code that is used to identify
-   the server and verify communications is based on the hash chosen
-   above.  The information on implementing the HMAC based on the chosen
-   hash algorithm can be found in [RFC2104].
+   サーバの同定と通信の検証に用いられる鍵付きハッシュのメッセージ認証コードは, 上で選ばれたハッシュを元にする.  選ばれたハッシュアルゴリズムに基づくHMACを実装するための情報は [RFC2104]にある.
 
-7.  Key Exchange Messages
+7.  鍵交換のメッセージ
 
-   The message numbers 30-49 are key-exchange-specific and in a private
-   namespace defined in [RFC4250] that may be redefined by any key
-   exchange method [RFC4253] without requiring an IANA registration
-   process.
+   [RFC4250] でメッセージ番号は鍵交換特有なプライベートな名前空間と定義されている. この空間は, [RFC4253]で IANAの登録手続きを必要とせずに, 任意の鍵交換法で再定義してよいとされている.
 
-   The following message numbers have been defined in this document:
+   以下のメッセージ番号を, この文書で定義する.
 
-7.1.  ECDH Message Numbers
+7.1.  ECDH メッセージ番号
 
       #define SSH_MSG_KEX_ECDH_INIT                30
       #define SSH_MSG_KEX_ECDH_REPLY               31
 
-7.2.  ECMQV Message Numbers
+7.2.  ECMQV メッセージ番号
 
       #define SSH_MSG_ECMQV_INIT                   30
       #define SSH_MSG_ECMQV_REPLY                  31
 
-8.  Manageability Considerations
+8.  管理の上での考慮
 
-   As this document only provides new public key algorithms and key
-   exchange methods within the existing Secure Shell protocol
-   architecture, there are few manageability considerations beyond those
-   that apply for existing Secure Shell implementations.  Additional
-   manageability considerations are listed below.
+   この文書は, 既存のセキュアシェルプロトコルアーキテクチャに新しい公開鍵アルゴリズムと鍵交換法を提供しているだけで, 既存のセキュアシェル実装への適用されている管理の上での考慮を越えるものはほとんどない.  追加の管理の上での考慮を以下に挙げる.
 
-8.1.  Control of Function through Configuration and Policy
+8.1.  設定とポリシーによる機能の管理
 
-   Section 10 specifies REQUIRED and RECOMMENDED elliptic curve domain
-   parameters to be used with the public key algorithms and key exchange
-   methods defined in this document.  Implementers SHOULD allow system
-   administrators to disable some curves, including REQUIRED or
-   RECOMMENDED curves, to meet local security policy.
+   10節で, この文書で定義された公開鍵アルゴリズムと鍵交換法と共に用いられる必須と推奨の楕円曲線ドメインパラメータを定義している.  実装者は, 必須や推奨の曲線を含むいくつかの曲線をシステム管理者がローカルなセキュリティポリシーを充たすために無効にするのを許可する必要がある.
 
 
 
@@ -628,54 +522,21 @@ Stebila & Green             Standards Track                    [Page 13]
 RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 
-8.2.  Impact on Network Operation
+8.2.  ネットワーク操作への影響
 
-   As this document provides new functionality within the Secure Shell
-   protocol architecture, the only impact on network operations is the
-   impact on existing Secure Shell implementations.  The Secure Shell
-   protocol provides negotiation mechanisms for public key algorithms
-   and key exchange methods: any implementations that do not recognize
-   the algorithms and methods defined in this document will ignore them
-   in the negotiation and use the next mutually supported algorithm or
-   method, causing no negative impact on backward compatibility.
+   この文書はセキュアシェルプロトコルアーキテクチャに新しい機能を追加しているので, ネットワーク操作への影響は, 既存のセキュアシェル実装の影響と同一だ.  セキュアシェルプロトコルは, 公開鍵アルゴリズムと鍵交換法のネゴシエーションメカニズムを提供している: この文書で定義されているアルゴリズムや方法を認識しない実装はどれも, ネゴシエージョンでこれらを無視し相互にサポートしているアルゴリズムか方法を用いる. 後方互換性で問題となる影響は発生しない.
 
-   The use of elliptic curve cryptography should not place a significant
-   computational burden on an implementing server.  In fact, due to its
-   smaller key sizes, elliptic curve cryptography can be implemented
-   more efficiently for the same security level than RSA, finite field
-   Diffie-Hellman, or DSA.
+   楕円曲線暗号の利用は, 実装したサーバに重大な計算の負担を発生されるものではないはずだ.  実際, 楕円曲線暗号は, RSAや有限体 Diffie-Hellman, DSA より小さな鍵サイズを持つので, 同じセキュリティレベルをより効率的に実装することができる.
 
 9.  セキュリティの考察
 
-   This document provides new public key algorithms and new key
-   agreement methods for the Secure Shell protocol.  For the most part,
-   the security considerations involved in using the Secure Shell
-   protocol apply.  Additionally, implementers should be aware of
-   security considerations specific to elliptic curve cryptography.
+   この文書はセキュアシェルプロトコルに新しい公開鍵アルゴリズムと新しい同意方法を提供する.   セキュアシェルプロトコル利用上のセキュリティの考察が大部分適用される.  さらに, 実装者は楕円曲線暗号に特有のセキュリティの考察に注意する必要がある.
 
-   For all three classes of functionality added by this document (the
-   public key algorithms involving ECDSA, key exchange involving ECDH,
-   and authenticated key exchange involving ECMQV), the current best
-   known technique for breaking the cryptosystems is by solving the
-   elliptic curve discrete logarithm problem (ECDLP).
+   この文書で追加された3つのクラス(ECDSAに関連する公開鍵アルゴリズムと, ECDHに関連する鍵交換, ECMQVに関連する認証付き鍵交換)のすべてについて, 暗号系を破る現在もっともよく知られた技術は, 楕円曲線離散対数問題(ECDLP)を解くことだ.
 
-   The difficulty of breaking the ECDLP depends on the size and quality
-   of the elliptic curve parameters.  Certain types of curves can be
-   more susceptible to known attacks than others.  For example, curves
-   over finite fields GF(2^m), where m is composite, may be susceptible
-   to an attack based on the Weil descent.  All of the RECOMMENDED
-   curves in Section 10 do not have this problem.  System administrators
-   should be cautious when enabling curves other than the ones specified
-   in Section 10 and should make a more detailed investigation into the
-   security of the curve in question.
+   ECDLPを破る難易度は, 楕円曲線パラメータのサイズと品質に依存する.  特定の種類の曲線は, 他のものよりも既知の攻撃に対して弱い可能性がある.  たとえば, 有限体 GR(2^m) 上の曲線(mは合成数)は, Weil descent に基づく攻撃に対して弱いかもしれない.  10節でのすべての推奨の曲線には, この問題はない.  システム管理者は, 10節で指定されたもの以外の曲線を有効にするときに注意する必要がある.. また, 問題の曲線のセキュリティについてよく詳しい調査する必要がある.
 
-   It is believed (see, for example, Section B.2.1 of [SEC1]) that when
-   curve parameters are generated at random, the curves will be
-   resistant to special attacks, and must rely on the most general
-   attacks.  The REQUIRED curves in Section 10 were all generated
-   verifiably pseudorandomly.  The runtime of general attacks depends on
-   the algorithm used.  At present, the best known algorithm is the
-   Pollard-rho method.  (Shor's algorithm for quantum computers can
+   曲線パラメータをランダムに生成すると, 曲線は特有の攻撃に耐性を持ちもっとも一般的な攻撃だけが有効になると信じられている.(例えば, [SEC1] のB.2.1節を参照). 10節の必須の曲線は, すべて検証できる疑似乱数で生成されている.  一般的な攻撃のランタイムは, 利用されるアルゴリズムに依存する.  現在, もっとも良く知られているアルゴリズムは, Pollard-rho 素因数分解法だ.   
 
 
 
@@ -684,37 +545,17 @@ Stebila & Green             Standards Track                    [Page 14]
 RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 
-   solve the ECDLP in polynomial time, but at present large-scale
-   quantum computers have not been constructed and significant
-   experimental physics and engineering work needs to be done before
-   large-scale quantum computers can be constructed.  There is no solid
-   estimate as to when this may occur, but it is widely believed to be
-   at least 20 years from the present.)
+   (量子計算機での Shorのアルゴリズムは多項式時間で ECDLP を解ける. しかし, 現在大規模な量子計算機は構築されておらず, その構築には, 非常の実験的な物理やエンジニアリングの作業がなされなければならない.  いつ達成されるかのしっかりした見積りはないが, 現在より少なくとも20年はかかると広く信じられている.)
 
-   Based on projections of computation power, it is possible to estimate
-   the running time of the best known attacks based on the size of the
-   finite field.  The table in Section 1 gives an estimate of the
-   equivalence between elliptic curve field size and symmetric key size.
-   Roughly speaking, an N-bit elliptic curve offers the same security as
-   an N/2-bit symmetric cipher, so a 256-bit elliptic curve (such as the
-   REQUIRED nistp256 curve) is suitable for use with 128-bit AES, for
+   計算能力の予測に基づいて, 有限体のサイズに基づくもっとも良い既知の方法の時間を見積もれる.  1 節の表は, 楕円曲線フィールドサイズと対称鍵サイズの等しさの見積りだ.
+   おおざっぱにいって, N-ビットの楕円曲線は, N/2-bitの対称暗号と同じセキュリティを提供する. たとえば, (必須の nistp256 曲線のような) 256-bitの楕円曲線は, 128-bitのAECと共に利用するのに適している.
    example.
 
-   Many estimates consider that 2^80-2^90 operations are beyond
-   feasible, so that would suggest using elliptic curves of at least
-   160-180 bits.  The REQUIRED curves in this document are 256-, 384-,
-   and 521-bit curves; implementations SHOULD NOT use curves smaller
-   than 160 bits.
+   多くの見積りが2^80-2^90の操作が実行可能な線を越えているとみなしている. これは少なくとも160-180 ビットの楕円曲線の利用を示唆している.  この文書の必須の曲線は, 256や384, 512 ビットの曲線だ. 実装は160ビットよりも小さい曲線を使わないほうがよい.
 
-   A detailed discussion on the security considerations of elliptic
-   curve domain parameters and the ECDH, ECDSA, and ECMQV algorithms can
-   be found in Appendix B of [SEC1].
+   楕円曲線ドメインパラメータとECDHやECDSA, ECMQVアルゴリズムのセキュリティの考察についてより詳しい議論は, [SEC1] の付録Bにある.
 
-   Additionally, the key exchange methods defined in this document rely
-   on the SHA2 family of hash functions, defined in [FIPS-180-3].  The
-   appropriate security considerations of that document apply.  Although
-   some weaknesses have been discovered in the predecessor, SHA-1, no
-   weaknesses in the SHA2 family are known at present.  The SHA2 family
+   また, この文書で定義された鍵交換法は, [FIPS-180-3] で定義されたハッシュ関数 SHA2ファミリに依存している.  この文書の適切なセキュリティの考察が適用される.  先祖であるSHA-1にはいくつかの弱点が見つかっているが, SHA2ファミリには現在弱点は知られていない.  The SHA2 family
    consists of four variants -- SHA-224, SHA-256, SHA-384, and SHA-521
    -- named after their digest lengths.  In the absence of special
    purpose attacks exploiting the specific structure of the hash
