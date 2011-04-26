@@ -80,7 +80,7 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
       8.1. 設定とポリシーによる機能の管理 ......13
       8.2. ネットワーク操作への影響 ...............................14
    9. セキュリティの考慮 ........................................14
-   10. 名前付き楕円曲線ドメインパラメータ ........................16
+   10. 指定された楕円曲線ドメインパラメータ ........................16
       10.1. 必須の曲線 ..........................................16
       10.2. 推奨される曲線 .......................................17
    11. IANAの考慮 ...........................................17
@@ -555,23 +555,10 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
 
    楕円曲線ドメインパラメータとECDHやECDSA, ECMQVアルゴリズムのセキュリティの考察についてより詳しい議論は, [SEC1] の付録Bにある.
 
-   また, この文書で定義された鍵交換法は, [FIPS-180-3] で定義されたハッシュ関数 SHA2ファミリに依存している.  この文書の適切なセキュリティの考察が適用される.  先祖であるSHA-1にはいくつかの弱点が見つかっているが, SHA2ファミリには現在弱点は知られていない.  The SHA2 family
-   consists of four variants -- SHA-224, SHA-256, SHA-384, and SHA-521
-   -- named after their digest lengths.  In the absence of special
-   purpose attacks exploiting the specific structure of the hash
-   function, the difficulty of finding collisions, preimages, and second
-   preimages for the hash function is related to the digest length.
-   This document specifies in Section 6.2.1 which SHA2 variant should be
-   used with which elliptic curve size based on this guidance.
+   また, この文書で定義された鍵交換法は, [FIPS-180-3] で定義されたハッシュ関数 SHA2ファミリに依存している.  この文書の適切なセキュリティの考察が適用される.  先祖であるSHA-1にはいくつかの弱点が見つかっているが, SHA2ファミリには現在弱点は知られていない.  SHA2 ファミリは4つのバリエーションで構成されている. SHA-224 と SHA-256, SHA-384, SHA-521 だ. そのダイジェストの長さによって命名された.  ハッシュ関数特有の構造を攻撃する特別な攻撃がなければ, そのハッシュ関数の衝突や原像, 第2原像の発見の難しさはダイジェストの長さに依存する.
+   この文書では, このガイダンスに基づく楕円曲線のサイズと共に利用する必要のある SHA2のバリエーションを 6.2.1節で指定している.
 
-   Since ECDH and ECMQV allow for elliptic curves of arbitrary sizes and
-   thus arbitrary security strength, it is important that the size of
-   elliptic curve be chosen to match the security strength of other
-   elements of the SSH handshake.  In particular, host key sizes,
-   hashing algorithms and bulk encryption algorithms must be chosen
-   appropriately.  Information regarding estimated equivalence of key
-   sizes is available in [NIST-800-57]; the discussion in [RFC3766] is
-   also relevant.  We note in particular that when ECDSA is used as the
+   ECDHとECMQVは, 任意の楕円曲線サイズ, つまり任意のセキュリティ強度を許すので, SSHハンドシェイクの他の要素のセキュリティ強度に一致する楕円曲線のサイズを選ぶことが重要だ.  特に ホスト鍵のサイズとハッシュアルゴリズムとバルク(任意長)暗号化アルゴリズムは, 適切に選択しなければならない.  鍵サイズの同等性の見積りについての情報は, [NIST-800-57] にある. [RFC3766]の議論も関連している.  We note in particular that when ECDSA is used as the
 
 
 
@@ -581,39 +568,22 @@ Stebila & Green             Standards Track                    [Page 15]
 RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 
-   signature algorithm and ECDH is used as the key exchange method, if
-   curves of different sizes are used, then it is possible that
-   different hash functions from the SHA2 family could be used.
+   特に, ECDSAを署名アルゴリズムとしてかつECDHを鍵交換法として利用する際, 異なるサイズの曲線を利用していると, SHA2ファミリの異なるハッシュ関数が利用される可能性があることに注意.
 
-   The REQUIRED and RECOMMENDED curves in this document are at present
-   believed to offer security at the levels indicated in this section
-   and as specified with the table in Section 1.
+   この文書での必須/推奨の曲線は, この節で示しまた1節の表で指定されたレベルのセキュリティを提供すると現時点では考えられている.
 
-   System administrators and implementers should take careful
-   consideration of the security issues when enabling curves other than
-   the REQUIRED or RECOMMENDED curves in this document.  Not all
-   elliptic curves are secure, even if they are over a large field.
+   システムの管理者と実装者は, この文書での必須や推奨でない曲線を有効にする際にセキュリティ問題について注意深く考察する必要がある.  すべての楕円曲線は安全ではない. たとえ大きなフィールド上のものだったとしてもだ.
 
-   Implementers SHOULD ensure that any ephemeral private keys or random
-   values -- including the value k used in ECDSA signature generation
-   and the ephemeral private key values in ECDH and ECMQV -- are
-   generated from a random number generator or a properly seeded
-   pseudorandom number generator, are protected from leakage, are not
-   reused outside of the context of the protocol in this document, and
-   are erased from memory when no longer needed.
+   すべての一時秘密鍵や乱数値 -- ECDSA署名生成での値 k や ECDHやECMQVの一時秘密鍵の値を含む -- が乱数生成器か適切にシードされ(漏洩から保護され)た疑似乱数生成器から生成され, この文書でのプロトコルの文脈の外側で再利用されず, 必要なくなった際にメモリから削除されるように 実装者は保証する必要がある.
 
-10.  Named Elliptic Curve Domain Parameters
+10.  指定された楕円曲線ドメインパラメータ
 
-   Implementations MAY support any ASN.1 object identifier (OID) in the
-   ASN.1 object tree that defines a set of elliptic curve domain
-   parameters [ASN1].
+   実装は, 楕円曲線ドメインパラメータの集合を定義する ASN.1 オブジェクトツリーのすべての ASN.1 オブジェクト識別子(OID)をサポートしてもよい.[ASN1].
 
-10.1.  Required Curves
+10.1.  必須の曲線
 
-   Every SSH ECC implementation MUST support the named curves below.
-   These curves are defined in [SEC2]; the NIST curves were originally
-   defined in [NIST-CURVES].  These curves SHOULD always be enabled
-   unless specifically disabled by local security policy.
+   すべての SSH 楕円曲線暗号実装は, 以下の指定された曲線をサポートしなければならない.
+   これらの曲線は [SEC2]で定義されている; NISTの曲線はもともと [NIST-CURVES]で定義されている.  これらの曲線は, ローカルなセキュリティポリシーで明示的に無効にされていない限り, 常に有効である必要がある.
 
               +----------+-----------+---------------------+
               |   NIST*  |    SEC    |         OID         |
@@ -625,9 +595,7 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
               | nistp521 | secp521r1 |     1.3.132.0.35    |
               +----------+-----------+---------------------+
 
-      *  For these three REQUIRED curves, the elliptic curve domain
-         parameter identifier is the string in the first column of the
-         table, the NIST name of the curve.  (See Section 6.1.)
+      *  これらの3つの必須の曲線では, 楕円曲線ドメインパラメータ識別子は, この表の最初のカラムの文字列, 曲線のNIST名だ.  (6.1節参照)
 
 
 
@@ -637,10 +605,9 @@ Stebila & Green             Standards Track                    [Page 16]
 RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 
-10.2.  Recommended Curves
+10.2.  推奨される曲線
 
-   It is RECOMMENDED that SSH ECC implementations also support the
-   following curves.  These curves are defined in [SEC2].
+   SSH楕円曲線暗号実装は次の曲線もサポートすることが推奨される.  これらの曲線は [SEC2] で定義されている.
 
               +----------+-----------+---------------------+
               |   NIST   |    SEC    |         OID*        |
@@ -664,25 +631,15 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
               | nistt571 | sect571k1 |     1.3.132.0.38    |
               +----------+-----------+---------------------+
 
-      *  For these RECOMMENDED curves, the elliptic curve domain
-         parameter identifier is the string in the third column of the
-         table, the ASCII representation of the OID of the curve.  (See
-         Section 6.1.)
+      *  これらの推奨の曲線では, 楕円曲線ドメインパラメータ識別子は, この表の3番目のカラムの文字列, 曲線のOIDのASCII表現だ.  (6.1節参照)
 
 11.  IANA の考慮
 
-   Consistent with Section 8 of [RFC4251] and Section 4.6 of [RFC4250],
-   this document makes the following registrations:
+   [RFC4251] の 8節と [RFC4250] の4.6節と整合するため, この文書は次の登録を行なう.
 
-   In the Public Key Algorithm Names registry: The family of SSH public
-   key algorithm names beginning with "ecdsa-sha2-" and not containing
-   the at-sign ('@'), to name the public key algorithms defined in
-   Section 3.
+   公開鍵アルゴリズム名レジストリに: "ecdsa-sha2-" で始まり アットマーク('@')を含まない SSH公開鍵アルゴリズム名のファミリを, 3節で定義した公開鍵アルゴリズムを指定するために登録.
 
-   In the Key Exchange Method Names registry: The family of SSH key
-   exchange method names beginning with "ecdh-sha2-" and not containing
-   the at-sign ('@'), to name the key exchange methods defined in
-   Section 4.
+   鍵交換法名レジストリに: "ecdh-sha2-" で始まり アットマーク('@')を含まないSSH鍵交換法名を 4節で定義した鍵交換法を指定するために登録.
 
 
 
@@ -693,11 +650,9 @@ Stebila & Green             Standards Track                    [Page 17]
 RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 
-   In the Key Exchange Method Names registry: The SSH key exchange
-   method name "ecmqv-sha2" to name the key exchange method defined in
-   Section 5.
+   鍵交換法名レジストリに: SSH鍵交換法名 "ecmqv-sha2" を 5節で定義した鍵交換法を指定するために登録.
 
-   This document creates no new registries.
+   この文書は新しいレジストリは作成しない.
 
 12.  References
 
