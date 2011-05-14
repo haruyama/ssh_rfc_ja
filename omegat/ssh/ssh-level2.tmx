@@ -9728,6 +9728,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>2     VQUIT       The quit character (sends SIGQUIT signal on
+                             POSIX systems).</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>2     VQUIT       終了文字(POSIX シテムでは, SIGQUITを送る).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>It is expected that in most environments, only 2
    round-trips will be needed for full key exchange, server
    authentication, service request, and acceptance notification of
@@ -9735,15 +9744,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110514T023407Z" changeid="haruyama">
         <seg>多くの環境で, 完全な鍵交換, サーバ認証, サービスの要求, サービスの要求の承認の通知のために2回の往復しか必要がない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>2     VQUIT       The quit character (sends SIGQUIT signal on
-                             POSIX systems).</seg>
-      </tuv>
-      <tuv xml:lang="JA">
-        <seg>2     VQUIT       終了文字(POSIX シテムでは, SIGQUITを送る).</seg>
       </tuv>
     </tu>
     <tu>
@@ -18963,6 +18963,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>その範囲の切断メッセージの 'reason code'の値は, やはり [RFC2434]に記述されている プライベートな利用 (PRIVATE USE) に予約されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The key exchange produces two values: a shared secret K, and an
+   exchange hash H.  Encryption and authentication keys are derived from
+   these.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110514T024415Z" changeid="haruyama">
+        <seg>鍵交換は2つの値を生成する: 共有の秘密 K と 交換ハッシュ H だ. 暗号化と認証の鍵はこれらから導出される.</seg>
       </tuv>
     </tu>
     <tu>
