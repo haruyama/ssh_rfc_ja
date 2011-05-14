@@ -493,21 +493,21 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The format of the SSH_MSG_USERAUTH_INFO_RESPONSE message is as
+   follows:</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSH_MSG_USERAUTH_INFO_RESPONSE の形式は次のとおり:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Of course, if the DH private parameters for the client and server are
    revealed, then the session key is revealed, but these items can be
    thrown away after the key exchange completes.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>もちろん, クライアントやサーバのDHの秘密のパラメータが漏れたら, セッション鍵が漏れる. しかし, これらのパラメータは鍵交換が終わると捨てられる.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>The format of the SSH_MSG_USERAUTH_INFO_RESPONSE message is as
-   follows:</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>SSH_MSG_USERAUTH_INFO_RESPONSE の形式は次のとおり:</seg>
       </tuv>
     </tu>
     <tu>
@@ -1079,15 +1079,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>It is RECOMMENDED that SSH ECC implementations also support the
-   following curves.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110426T084053Z" changeid="haruyama">
-        <seg>SSH楕円曲線暗号実装は次の曲線もサポートすることが推奨される.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The major goal of this method is to
    allow the SSH client to support a whole class of authentication
    mechanism(s) without knowing the specifics of the actual
@@ -1095,6 +1086,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>この方法の主な目的は, SSH クライアントが認証メカニズムの具体形な仕様を知らなくても認証メカニズムをサポートできるようにすることだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is RECOMMENDED that SSH ECC implementations also support the
+   following curves.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110426T084053Z" changeid="haruyama">
+        <seg>SSH楕円曲線暗号実装は次の曲線もサポートすることが推奨される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2562,6 +2562,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The use of public key authentication assumes that the client host has
+   not been compromised.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>公開鍵認証の利用では, クライアントのホストが侵害されてないことを前提とする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Since ECDH and ECMQV allow for elliptic curves of arbitrary sizes and
    thus arbitrary security strength, it is important that the size of
    elliptic curve be chosen to match the security strength of other
@@ -2569,15 +2578,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110425T075912Z" changeid="haruyama">
         <seg>ECDHとECMQVは, 任意の楕円曲線サイズ, つまり任意のセキュリティ強度を許すので, SSHハンドシェイクの他の要素のセキュリティ強度に一致する楕円曲線のサイズを選ぶことが重要だ.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>The use of public key authentication assumes that the client host has
-   not been compromised.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>公開鍵認証の利用では, クライアントのホストが侵害されてないことを前提とする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3410,14 +3410,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>A byte represents an arbitrary 8-bit value (octet).</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>byte は任意の8-bitの値(octet)を表す.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
    &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this
    document are to be interpreted as described in RFC 2119 [3].</seg>
@@ -3425,6 +3417,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv lang="JA">
         <seg>この文書でのキーワード &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
    &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;,  &quot;OPTIONAL&quot; は, RFC 2119 [3] で記述されているように解釈される. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A byte represents an arbitrary 8-bit value (octet).</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>byte は任意の8-bitの値(octet)を表す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3712,21 +3712,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This protocol has been designed to operate with almost any public key
+   format, encoding, and algorithm (signature and/or encryption).</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>このプロトコルは, 公開鍵フォーマット, エンコーディング, アルゴリズム (署名と/ないし暗号化) のほとんどのものと共に動作するように設計されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Implementations MAY support any ASN.1 object identifier (OID) in the
    ASN.1 object tree that defines a set of elliptic curve domain
    parameters [ASN1].</seg>
       </tuv>
       <tuv lang="JA" changedate="20110426T083643Z" changeid="haruyama">
         <seg>実装は, 楕円曲線ドメインパラメータの集合を定義する ASN.1 オブジェクトツリーのすべての ASN.1 オブジェクト識別子(OID)をサポートしてもよい.[ASN1].</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>This protocol has been designed to operate with almost any public key
-   format, encoding, and algorithm (signature and/or encryption).</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>このプロトコルは, 公開鍵フォーマット, エンコーディング, アルゴリズム (署名と/ないし暗号化) のほとんどのものと共に動作するように設計されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4005,20 +4005,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>If the server intends to respond with a failure message, it MAY delay
-   for an implementation-dependent time before sending it to the client.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>サーバが失敗メッセージで応答しようとする場合, クライアントに送信する前に実装依存の時間送らせてもよい.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The following table lists the initial assignments of the Signal
    Names.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>次の表で, シグナル名の初期の割り当てを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the server intends to respond with a failure message, it MAY delay
+   for an implementation-dependent time before sending it to the client.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>サーバが失敗メッセージで応答しようとする場合, クライアントに送信する前に実装依存の時間送らせてもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4534,15 +4534,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>It
-      is up to each domain how it manages its local namespace.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>ローカルな名前空間をどう管理するかは, それぞれのドメイン次第だ.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
    &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this
    document are to be interpreted as described in [RFC-2119].</seg>
@@ -4550,6 +4541,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv lang="JA">
         <seg>この文書でのキーワード &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
    &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;,  &quot;OPTIONAL&quot; は, [RFC-2119] で記述されているように解釈される. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It
+      is up to each domain how it manages its local namespace.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>ローカルな名前空間をどう管理するかは, それぞれのドメイン次第だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4597,17 +4597,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>System administrators
-   should be cautious when enabling curves other than the ones specified
-   in Section 10 and should make a more detailed investigation into the
-   security of the curve in question.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110425T070914Z" changeid="haruyama">
-        <seg>システム管理者は, 10節で指定されたもの以外の曲線を有効にするときに注意する必要がある.. また, 問題の曲線のセキュリティについてよく詳しい調査する必要がある.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>If the random data here (e.g., Diffie-
    Hellman (DH) parameters) are pseudo-random, then the pseudo-random
    number generator should be cryptographically secure (i.e., its next
@@ -4625,6 +4614,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110420T053449Z" changeid="haruyama">
         <seg>設定とポリシーによる機能の管理</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>System administrators
+   should be cautious when enabling curves other than the ones specified
+   in Section 10 and should make a more detailed investigation into the
+   security of the curve in question.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110425T070914Z" changeid="haruyama">
+        <seg>システム管理者は, 10節で指定されたもの以外の曲線を有効にするときに注意する必要がある.. また, 問題の曲線のセキュリティについてよく詳しい調査する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4648,20 +4648,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Such lines MAY be silently
-   ignored, or MAY be displayed to the client user.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>それぞれの行は静かに無視されてもよいし, クライアントユーザに表示されてもよい.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The format of names and procedures for
    defining new names are defined in [SSH-ARCH] and [SSH-NUMBERS].</seg>
       </tuv>
       <tuv lang="JA">
         <seg>名前の形式や新しい名前を定義する手続きは, [SSH-ARCH] と [SSH-NUMBERS] で定義されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Such lines MAY be silently
+   ignored, or MAY be displayed to the client user.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>それぞれの行は静かに無視されてもよいし, クライアントユーザに表示されてもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4810,20 +4810,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>As
-   many bytes as needed are taken from the beginning of the hash value.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>必要なバイト数を, ハッシュの値の最初から取得する.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The following table lists the initial assignments of the Connection
    Protocol Channel Types.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>次の表で, コネクションプロトコルのチャンネルのタイプの初期の割り当てを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As
+   many bytes as needed are taken from the beginning of the hash value.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>必要なバイト数を, ハッシュの値の最初から取得する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4963,21 +4963,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  Algorithm negotiation messages (20 to 29) (but further
+      SSH_MSG_KEXINIT messages MUST NOT be sent);</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>o  アルゴリズムネゴシエーションメッセージ (20 to 29) (しかし, さらなる SSH_MSG_KEXINIT メッセージは送ってはならない);</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>*  For these RECOMMENDED curves, the elliptic curve domain
          parameter identifier is the string in the third column of the
          table, the ASCII representation of the OID of the curve.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110426T084203Z" changeid="haruyama">
         <seg>*  これらの推奨の曲線では, 楕円曲線ドメインパラメータ識別子は, この表の3番目のカラムの文字列, 曲線のOIDのASCII表現だ.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>o  Algorithm negotiation messages (20 to 29) (but further
-      SSH_MSG_KEXINIT messages MUST NOT be sent);</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>o  アルゴリズムネゴシエーションメッセージ (20 to 29) (しかし, さらなる SSH_MSG_KEXINIT メッセージは送ってはならない);</seg>
       </tuv>
     </tu>
     <tu>
@@ -5002,20 +5002,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>SSH works over any 8-bit clean, binary-transparent transport.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>SSH は, 8-bit クリーンでバイナリ透過などんなトランスポート上でも動作する. </seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The key exchange is
    combined with a signature with the host key to provide host
    authentication.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>この鍵交換は, ホスト認証を提供するホスト鍵による署名と結合している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH works over any 8-bit clean, binary-transparent transport.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSH は, 8-bit クリーンでバイナリ透過などんなトランスポート上でも動作する. </seg>
       </tuv>
     </tu>
     <tu>
@@ -5118,21 +5118,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Additionally, implementers should be aware of
-   security considerations specific to elliptic curve cryptography.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110425T052707Z" changeid="haruyama">
-        <seg>さらに, 実装者は楕円曲線暗号に特有のセキュリティの考察に注意する必要がある.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>From an internationalization standpoint, it is desired that if a user
    enters responses, the authentication process will work regardless of
    what OS and client software they are using.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>国際化の観点から, ユーザが応答を入力する際, 認証のプロセスはユーザが用いるOSやクライアントソフトウェアに関係なく動くことが望ましい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Additionally, implementers should be aware of
+   security considerations specific to elliptic curve cryptography.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110425T052707Z" changeid="haruyama">
+        <seg>さらに, 実装者は楕円曲線暗号に特有のセキュリティの考察に注意する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5279,6 +5279,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg> デバッグメッセージ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH transport layer is a secure, low level transport protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110514T023003Z" changeid="haruyama">
+        <seg>SSH トランスポート層は, 安全で低レベルなトランスポートプロトコルだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5891,20 +5899,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Consistent with Section 8 of [RFC4251] and Section 4.6 of [RFC4250],
-   this document makes the following registrations:</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110426T084553Z" changeid="haruyama">
-        <seg>[RFC4251] の 8節と [RFC4250] の4.6節と整合するため, この文書は次の登録を行なう.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>There are no initial assignments of the Connection Protocol Subsystem
    Names.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>コネクションプロトコルのサブシステムの名前には初期の割り当てはない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Consistent with Section 8 of [RFC4251] and Section 4.6 of [RFC4250],
+   this document makes the following registrations:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110426T084553Z" changeid="haruyama">
+        <seg>[RFC4251] の 8節と [RFC4250] の4.6節と整合するため, この文書は次の登録を行なう.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6900,16 +6908,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Data Type Representations Used in the SSH Protocols .............8
-   6.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>SSH プロトコルで利用されるデータ型の表現 .............8
-   6.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The key exchange method specifies how one-time session keys are
    generated for encryption and for authentication, and how the server
    authentication is done.</seg>
@@ -6920,10 +6918,12 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Every SSH ECC implementation MUST support the named curves below.</seg>
+        <seg>Data Type Representations Used in the SSH Protocols .............8
+   6.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110426T083743Z" changeid="haruyama">
-        <seg>すべての SSH 楕円曲線暗号実装は, 以下の指定された曲線をサポートしなければならない.</seg>
+      <tuv lang="JA">
+        <seg>SSH プロトコルで利用されるデータ型の表現 .............8
+   6.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6932,6 +6932,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>X11 の転送</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Every SSH ECC implementation MUST support the named curves below.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110426T083743Z" changeid="haruyama">
+        <seg>すべての SSH 楕円曲線暗号実装は, 以下の指定された曲線をサポートしなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7214,6 +7222,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A higher level protocol for
+   user authentication can be designed on top of this protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110514T023124Z" changeid="haruyama">
+        <seg>ユーザ認証のためのより高レベルのプロトコルが, このプロトコルの上で設計される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Old Client, New Server</seg>
       </tuv>
       <tuv lang="JA">
@@ -7471,16 +7488,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>In that case, the
-   data is first hashed with HASH to compute H, and H is then hashed
-   with SHA-1 as part of the signing operation.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>この場合, データはまず H を計算するために HASH でハッシュされ, そして署名の計算の一部分として SHA-1 でハッシュされる.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>In addition, this protocol is vulnerable to denial of service attacks
    because an attacker can force the server to go through the CPU and
    memory intensive tasks of connection setup and key exchange without
@@ -7488,6 +7495,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>加えて, このプロトコルは, サービス妨害攻撃に対して脆弱だ. なぜなら,接続の設定や認証なしの鍵交換といったCPUやメモリをたくさん利用するタスクの実行を, 攻撃者がサーバに強制できるからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In that case, the
+   data is first hashed with HASH to compute H, and H is then hashed
+   with SHA-1 as part of the signing operation.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この場合, データはまず H を計算するために HASH でハッシュされ, そして署名の計算の一部分として SHA-1 でハッシュされる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7632,15 +7649,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The amount of entropy available to a given client or server may
-   sometimes be less than what is required.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>クライアントやサーバで利用できるエントロピーの量が, 必要よりも少ないことがある.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
    &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this
    document are to be interpreted as described in [RFC2119].</seg>
@@ -7648,6 +7656,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv lang="JA" changedate="20110306T091428Z" changeid="haruyama">
         <seg>この文書でのキーワード &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
    &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;,  &quot;OPTIONAL&quot; は, [RFC-2119] で記述されているように解釈される. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The amount of entropy available to a given client or server may
+   sometimes be less than what is required.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>クライアントやサーバで利用できるエントロピーの量が, 必要よりも少ないことがある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7698,20 +7715,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>50    ISIG        Enable signals INTR, QUIT, [D]SUSP.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>50    ISIG        INTR, QUIT, [D]SUSP シグナルを有効にする.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The increase is negligible for large
    packets, but very significant for one-byte packets (telnet-type
    sessions).</seg>
       </tuv>
       <tuv lang="JA">
         <seg>大きなパケットについては, 増大は無視できる. しかし, (telnetタイプのセッションでの) 1バイトのパケットについては非常に大きい. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>50    ISIG        Enable signals INTR, QUIT, [D]SUSP.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>50    ISIG        INTR, QUIT, [D]SUSP シグナルを有効にする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7951,21 +7968,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The
-   appropriate security considerations of that document apply.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110425T074944Z" changeid="haruyama">
-        <seg>この文書の適切なセキュリティの考察が適用される.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Applications typically use
    the terminal type to determine what character set they use, or the
    character set is determined using some external means.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>アプリケーションは, 利用する文字セットを決定するために端末タイプを典型的に利用する. もしくは, 文字セットは他の外部の方法によって決定される</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   appropriate security considerations of that document apply.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110425T074944Z" changeid="haruyama">
+        <seg>この文書の適切なセキュリティの考察が適用される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8897,19 +8914,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>This document creates no new registries.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110426T085937Z" changeid="haruyama">
-        <seg>この文書は新しいレジストリは作成しない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>When this flag is on,
    the server SHOULD identify its 'protoversion' as &quot;1.99&quot;.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>このフラグが有効ならば, サーバは 'protoversion' を &quot;1.99&quot; とする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document creates no new registries.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110426T085937Z" changeid="haruyama">
+        <seg>この文書は新しいレジストリは作成しない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9298,20 +9315,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>If the application receiving this request can control the BREAK
-   length, the following suggestions are made regarding BREAK duration.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>このリクエストを受けるアプリケーションが BREAK の長さを制御できるなら, BREAKの持続時間について, 次の示唆がある.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The hash H is computed as the HASH hash of the concatenation of the
    following:</seg>
       </tuv>
       <tuv lang="JA">
         <seg>ハッシュ H は, 次の連結に対する HASH の結果だ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the application receiving this request can control the BREAK
+   length, the following suggestions are made regarding BREAK duration.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>このリクエストを受けるアプリケーションが BREAK の長さを制御できるなら, BREAKの持続時間について, 次の示唆がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9655,15 +9672,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Initially,
-         the MAC algorithm MUST be &quot;none&quot;.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>最初は, MACのアルゴリズムは &quot;none&quot; でなければならない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The format of the part preceding the at-sign is not specified;
       however, these names MUST be printable US-ASCII strings, and MUST
       NOT contain the comma character (&quot;,&quot;), whitespace, control
@@ -9671,6 +9679,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>アットマークの前の部分の形式は指定されていない; しかし, 表示可能な US-ASCIIの文字列で, コンマ (&quot;,&quot;), スペース, 制御文字(ASCIIコード 32以下), ASCIIコードの127 (DEL)を含んではならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Initially,
+         the MAC algorithm MUST be &quot;none&quot;.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>最初は, MACのアルゴリズムは &quot;none&quot; でなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9707,6 +9724,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>まだこのメッセージを送信していないのにこのメッセージを受信した側は, SSH_MSG_CHANNEL_CLOSE を送り返さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is expected that in most environments, only 2
+   round-trips will be needed for full key exchange, server
+   authentication, service request, and acceptance notification of
+   service request.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110514T023407Z" changeid="haruyama">
+        <seg>多くの環境で, 完全な鍵交換, サーバ認証, サービスの要求, サービスの要求の承認の通知のために2回の往復しか必要がない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9843,6 +9871,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>'host to connect' と 'port to connect' は, 受信側がチャンネルに接続する ＴＣＰ/IP ホストとポートを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The key exchange method, public key algorithm, symmetric encryption
+   algorithm, message authentication algorithm, and hash algorithm are
+   all negotiated.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110514T023228Z" changeid="haruyama">
+        <seg>鍵交換法, 公開鍵アルゴリズム, 対称暗号アルゴリズム, メッセージ認証アルゴリズム, ハッシュアルゴリズムはすべて交渉によって決まる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10449,19 +10487,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>92    PARENB      Parity enable.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>92    PARENB      パリティ有効</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The hashing algorithm defined by this family of method names is the
    SHA2 family of hashing algorithms [FIPS-180-3].</seg>
       </tuv>
       <tuv lang="JA" changedate="20110419T121105Z" changeid="haruyama">
         <seg>このファミリで定義されるハッシュアルゴリズムは, SHA2ファミリのハッシュアルゴリズム [FIPS-180-3] だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>92    PARENB      Parity enable.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>92    PARENB      パリティ有効</seg>
       </tuv>
     </tu>
     <tu>
@@ -10503,21 +10541,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>These curves are defined in [SEC2]; the NIST curves were originally
-   defined in [NIST-CURVES].</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110426T083813Z" changeid="haruyama">
-        <seg>これらの曲線は [SEC2]で定義されている; NISTの曲線はもともと [NIST-CURVES]で定義されている.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>We note that this is no
    different from other key enrollment situations, e.g., a client
    sending a certificate request to a certificate authority for signing.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>たとえば, 署名のために認証の要求をクライアントが認証機関に送る場合などの, 他の鍵の登録の場合と同じだということを注記しておく. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These curves are defined in [SEC2]; the NIST curves were originally
+   defined in [NIST-CURVES].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110426T083813Z" changeid="haruyama">
+        <seg>これらの曲線は [SEC2]で定義されている; NISTの曲線はもともと [NIST-CURVES]で定義されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10542,20 +10580,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>16    VSWTCH      Switch to a different shell layer.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>16    VSWTCH      別の shell layer に切り替える.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The keyed-hash message authentication code that is used to identify
    the server and verify communications is based on the hash chosen
    above.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110419T122651Z" changeid="haruyama">
         <seg>サーバの同定と通信の検証に用いられる鍵付きハッシュのメッセージ認証コードは, 上で選ばれたハッシュを元にする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>16    VSWTCH      Switch to a different shell layer.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>16    VSWTCH      別の shell layer に切り替える.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11144,6 +11182,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The protocol has been designed to be simple and flexible to allow
+   parameter negotiation, and to minimize the number of round-trips.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110514T023400Z" changeid="haruyama">
+        <seg>プロトコルは, パラメータのネトシエーションや往復の回数を最小限にするように単純で柔軟に設計されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client has the freedom to try the methods listed by
    the server in any order.</seg>
       </tuv>
@@ -11643,21 +11690,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Not all
-   elliptic curves are secure, even if they are over a large field.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110425T080903Z" changeid="haruyama">
-        <seg>すべての楕円曲線は安全ではない. たとえ大きなフィールド上のものだったとしてもだ.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Elliptic Curve Domain Parameter Identifiers ...............10
       6.2.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110306T084538Z" changeid="haruyama">
         <seg>楕円曲線ドメインパラメータ識別子 ...............10
       6.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Not all
+   elliptic curves are secure, even if they are over a large field.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110425T080903Z" changeid="haruyama">
+        <seg>すべての楕円曲線は安全ではない. たとえ大きなフィールド上のものだったとしてもだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12245,20 +12292,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>These curves are defined in [SEC2].</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110426T084111Z" changeid="haruyama">
-        <seg>これらの曲線は [SEC2] で定義されている.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This may be a concern for
    network administrators who wish to control the access of certain
    applications by users located outside of their physical location.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>アプリケーションの物理的な位置以外からのユーザによるアプリケーションのアクセスを制御したいネットワーク管理者にとって, これは懸念事項だろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These curves are defined in [SEC2].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110426T084111Z" changeid="haruyama">
+        <seg>これらの曲線は [SEC2] で定義されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12700,6 +12747,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It provides strong encryption, cryptographic host authentication, and
+   integrity protection.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110514T023024Z" changeid="haruyama">
+        <seg>このプロトコルは, 強力な暗号化, ホストの認証, 完全性の保護を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In some jurisdictions, sending a warning message before
    authentication may be relevant for getting legal protection.</seg>
       </tuv>
@@ -13037,22 +13093,22 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Debug Messages .....................................22
-           9.4.3.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>デバッグメッセージ ..................................22
-           9.4.3.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The hashing and message authentication code algorithms are defined by
    the method name to allow room for other algorithms to be defined for
    use with ECMQV in future documents.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110419T122415Z" changeid="haruyama">
         <seg>ハッシュとメッセージ認証コードのアルゴリズムは, 方法の名前で定義される. その他のアルゴリズムをECMQVで許可する余地があるかどうかは, 将来の文書で定義される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Debug Messages .....................................22
+           9.4.3.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>デバッグメッセージ ..................................22
+           9.4.3.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13705,20 +13761,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>35    IGNCR       Ignore CR on input.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>35    IGNCR       入力でCRを無視する. (</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Denial of Service ..................................19
            9.3.6.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>サービス妨害 ..................................19
            9.3.6.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>35    IGNCR       Ignore CR on input.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>35    IGNCR       入力でCRを無視する. (</seg>
       </tuv>
     </tu>
     <tu>
@@ -14294,6 +14350,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The following table lists the initial assignments to the Connection
+   Protocol Type and Request names.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>次の表で, コネクションプロトコルのタイプとリクエスト名の初期の割り当てを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Requests for assignments of new Channel Connection
    Failure 'reason code' values, and their associated Channel Connection
    Failure 'description string', in the range of 0x00000005 to
@@ -14302,15 +14367,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>チャンネル接続失敗の 'reason code' の値と関連するチャンネル接続失敗の 'description' を割り当てる要求は, 0x00000010 から 0xFDFFFFFF の範囲については [RFC2434] に記述されている IETF CONSENSUS によってされなければならない</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>The following table lists the initial assignments to the Connection
-   Protocol Type and Request names.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>次の表で, コネクションプロトコルのタイプとリクエスト名の初期の割り当てを示す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14488,21 +14544,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Additional algorithms, methods, formats, and extension protocols can
+   be defined in separate documents.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>追加のアルゴリズム, 方式, フォーマット, 拡張プロトコルは, 別のドキュメントで定義されることがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In particular, host key sizes,
    hashing algorithms and bulk encryption algorithms must be chosen
    appropriately.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110425T080421Z" changeid="haruyama">
         <seg>特に ホスト鍵のサイズとハッシュアルゴリズムとバルク(任意長)暗号化アルゴリズムは, 適切に選択しなければならない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Additional algorithms, methods, formats, and extension protocols can
-   be defined in separate documents.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>追加のアルゴリズム, 方式, フォーマット, 拡張プロトコルは, 別のドキュメントで定義されることがある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14556,22 +14612,22 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>System administrators and implementers should take careful
-   consideration of the security issues when enabling curves other than
-   the REQUIRED or RECOMMENDED curves in this document.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110425T080840Z" changeid="haruyama">
-        <seg>システムの管理者と実装者は, この文書での必須や推奨でない曲線を有効にする際にセキュリティ問題について注意深く考察する必要がある.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>There is no solid
    estimate as to when this may occur, but it is widely believed to be
    at least 20 years from the present.)</seg>
       </tuv>
       <tuv lang="JA" changedate="20110425T072223Z" changeid="haruyama">
         <seg>いつ達成されるかのしっかりした見積りはないが, 現在より少なくとも20年はかかると広く信じられている.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>System administrators and implementers should take careful
+   consideration of the security issues when enabling curves other than
+   the REQUIRED or RECOMMENDED curves in this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110425T080840Z" changeid="haruyama">
+        <seg>システムの管理者と実装者は, この文書での必須や推奨でない曲線を有効にする際にセキュリティ問題について注意深く考察する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14791,6 +14847,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>この文書は, SSHのプロトコルのアーキテクチャを記述している. また, SSHのプロトコルのドキュメントで使われる表記法や用語も記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Authentication in this protocol level is host-based; this protocol
+   does not perform user authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110514T023051Z" changeid="haruyama">
+        <seg>このプロトコルレベルでの認証は, ホストベースだ. このプロトコルはユーザ認証を実施しない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15138,21 +15203,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The following table lists the initial assignments of the Connection
+   Protocol Channel Request Names.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>次の表で, コネクションプロトコルのチャンネルのリクエスト名の初期の割り当てを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Because public key authentication exchanges
    are cryptographically bound to the session (i.e., to the initial key
    exchange), they cannot be successfully replayed in other sessions.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>公開鍵認証の交換が暗号学的にセッションと(すなわち最初の鍵交換と)束縛しているので, 別のセッションでのリプレイを成功させることができない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>The following table lists the initial assignments of the Connection
-   Protocol Channel Request Names.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>次の表で, コネクションプロトコルのチャンネルのリクエスト名の初期の割り当てを示す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16078,19 +16143,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Named Elliptic Curve Domain Parameters</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110426T083649Z" changeid="haruyama">
-        <seg>指定された楕円曲線ドメインパラメータ</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>It is not normally included in
    the key blob.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>通常, key blob には含まれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Named Elliptic Curve Domain Parameters</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110426T083649Z" changeid="haruyama">
+        <seg>指定された楕円曲線ドメインパラメータ</seg>
       </tuv>
     </tu>
     <tu>
@@ -16708,21 +16773,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If both hold, the authentication request MUST be
+   accepted; otherwise, it MUST be rejected.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>以上の両方が成立したら, 認証の要求は受け入れられなければならない. さもなければ, 拒否されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In the case that the server sends a `0' num-prompts field in the
    request message, the client MUST send a response message with a `0'
    num-responses field to complete the exchange.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>サーバが 要求メッセージで `0' な num-prompts フィールドを送った場合, クライアントは, 交換を完了するために '0' な num-responses フィールドで 応答メッセージを送らなければならない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>If both hold, the authentication request MUST be
-   accepted; otherwise, it MUST be rejected.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>以上の両方が成立したら, 認証の要求は受け入れられなければならない. さもなければ, 拒否されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16964,6 +17029,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The worst case is 3 round-trips.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110514T023417Z" changeid="haruyama">
+        <seg>最悪の場合は3回の往復が必要となる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If no authentication is needed for the user, the server MUST return
    SSH_MSG_USERAUTH_SUCCESS.</seg>
       </tuv>
@@ -17029,22 +17102,22 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The SHA2 family
-   consists of four variants -- SHA-224, SHA-256, SHA-384, and SHA-521
-   -- named after their digest lengths.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110425T075336Z" changeid="haruyama">
-        <seg>SHA2 ファミリは4つのバリエーションで構成されている. SHA-224 と SHA-256, SHA-384, SHA-521 だ. そのダイジェストの長さによって命名された.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This identification string does not contain the optional 'comments'
    string and is thus terminated by a CR and LF immediately after the
    'softwareversion' string.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>この識別文字列は, 選択可能な 'comments'を含んでいない. そのため, 'softwareversion' の直後に CR と LFで終端されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SHA2 family
+   consists of four variants -- SHA-224, SHA-256, SHA-384, and SHA-521
+   -- named after their digest lengths.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110425T075336Z" changeid="haruyama">
+        <seg>SHA2 ファミリは4つのバリエーションで構成されている. SHA-224 と SHA-256, SHA-384, SHA-521 だ. そのダイジェストの長さによって命名された.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17413,22 +17486,22 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>For the most part,
-   the security considerations involved in using the Secure Shell
-   protocol apply.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110425T052631Z" changeid="haruyama">
-        <seg> セキュアシェルプロトコル利用上のセキュリティの考察が大部分適用される.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Implementers should note the importance
    of entropy and the well-meant, anecdotal warning about the difficulty
    in properly implementing pseudo-random number generating functions.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>実装者は, エントロピーの重要性を注記する必要がある. また, 疑似乱数生成関数の正しい実装の難しさをわかりやすく事例付きで警告する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For the most part,
+   the security considerations involved in using the Secure Shell
+   protocol apply.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110425T052631Z" changeid="haruyama">
+        <seg> セキュアシェルプロトコル利用上のセキュリティの考察が大部分適用される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18726,20 +18799,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Allocation of the following types of names in the SSH protocols is
-   assigned by IETF consensus:</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>SSH プロトコルの次の種類の名前の割当ては, IETFの合意で行なわれる.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>6     VEOL        End-of-line character in addition to
                              carriage return and/or linefeed.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>6     VEOL        キャリッジリターンと/もしくはラインフィードに追加される End-of-line 文字</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Allocation of the following types of names in the SSH protocols is
+   assigned by IETF consensus:</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>SSH プロトコルの次の種類の名前の割当ては, IETFの合意で行なわれる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19411,20 +19484,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>All of these
-   channels are multiplexed into a single encrypted tunnel.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>これらのチャンネルすべては, 単一の暗号化されたトンネルに多重化される.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>73    OCRNL       Translate carriage return to newline
                             (output).</seg>
       </tuv>
       <tuv lang="JA">
         <seg>73    OCRNL       出力で, CRをNLに置き換える.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>All of these
+   channels are multiplexed into a single encrypted tunnel.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>これらのチャンネルすべては, 単一の暗号化されたトンネルに多重化される.</seg>
       </tuv>
     </tu>
     <tu>

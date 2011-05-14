@@ -106,22 +106,13 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 1.  イントロダクション
 
-   The SSH transport layer is a secure, low level transport protocol.
-   It provides strong encryption, cryptographic host authentication, and
-   integrity protection.
+   SSH トランスポート層は, 安全で低レベルなトランスポートプロトコルだ.
+   このプロトコルは, 強力な暗号化, ホストの認証, 完全性の保護を提供する.
 
-   Authentication in this protocol level is host-based; this protocol
-   does not perform user authentication.  A higher level protocol for
-   user authentication can be designed on top of this protocol.
+   このプロトコルレベルでの認証は, ホストベースだ. このプロトコルはユーザ認証を実施しない.  ユーザ認証のためのより高レベルのプロトコルが, このプロトコルの上で設計される.
 
-   The protocol has been designed to be simple and flexible to allow
-   parameter negotiation, and to minimize the number of round-trips.
-   The key exchange method, public key algorithm, symmetric encryption
-   algorithm, message authentication algorithm, and hash algorithm are
-   all negotiated.  It is expected that in most environments, only 2
-   round-trips will be needed for full key exchange, server
-   authentication, service request, and acceptance notification of
-   service request.  The worst case is 3 round-trips.
+   プロトコルは, パラメータのネトシエーションや往復の回数を最小限にするように単純で柔軟に設計されている.
+   鍵交換法, 公開鍵アルゴリズム, 対称暗号アルゴリズム, メッセージ認証アルゴリズム, ハッシュアルゴリズムはすべて交渉によって決まる.  多くの環境で, 完全な鍵交換, サーバ認証, サービスの要求, サービスの要求の承認の通知のために2回の往復しか必要がない.  最悪の場合は3回の往復が必要となる.
 
 2.  Contributors
 
