@@ -1329,6 +1329,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Additionally, if not rekeyed frequently enough, the SSH Transport
+   Protocol may leak information about payload data.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T141554Z" changeid="haruyama">
+        <seg>また, 十分に鍵の再発行が行なわれないと, SSH トランスポートプロトコルは ペイロードデータの情報を漏らしてしまうかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Additionally, implementers should be aware of
    security considerations specific to elliptic curve cryptography.</seg>
       </tuv>
@@ -4289,6 +4298,28 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Encryption Method Considerations ...........................8
+   Normative References ...............................................9
+   Informative References ............................................10</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T141215Z" changeid="haruyama">
+        <seg>暗号モードの考察 ...........................8
+   Normative References ...............................................9
+   Informative References ............................................10</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Encryption Modes ................................................3
+   5.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T141152Z" changeid="haruyama">
+        <seg>暗号モード ................................................3
+   5.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Encryption and authentication keys are derived from
    these.</seg>
       </tuv>
@@ -4619,6 +4650,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>First Rekeying Recommendation ..............................3
+      3.2.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T141140Z" changeid="haruyama">
+        <seg>1番目の鍵の再発行の推奨 ..............................3
+      3.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>First, the client sends the following:</seg>
       </tuv>
       <tuv lang="JA">
@@ -4894,6 +4935,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>例えば, 認証プロトコル ([SSH-USERAUTH]) は, セッション識別子を以前のセッションからの署名のリプレイの防止に利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For example, the encryption mode specified
+   in [RFC4253] is vulnerable to a chosen-plaintext privacy attack.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T141518Z" changeid="haruyama">
+        <seg>たとえば, [RFC4253]で定義された暗号モードは, 選択平文プライバシー攻撃に脆弱だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6122,9 +6172,8 @@
         <seg>If no default exists, 500 ms can be used as the BREAK
    length.</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>デフォルトがなければ, 500msが BREAK の長さとして用いられる.
-   length.</seg>
+      <tuv lang="JA" changedate="20110527T140539Z" changeid="haruyama">
+        <seg>デフォルトがなければ, 500msが BREAK の長さとして用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7135,6 +7184,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>CBCモードでは, これは前のブロックの暗号化の出力だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In [BKN1,BKN2], Bellare, Kohno, and Namprempre show how to modify the
+   symmetric portion of the SSH Transport Protocol so that it provably
+   preserves privacy and integrity against chosen-plaintext, chosen-
+   ciphertext, and reaction attacks.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T142311Z" changeid="haruyama">
+        <seg>[BKN1,BKN2]で, Bellare と Kohno, Namprempre は, 選択平文, 選択暗号文, 反応攻撃(reaction attack) に対して秘匿と完全性を保持するために, SSH トランスポートプロトコルの対称部分をどう変更すればいいか示している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10690,6 +10750,26 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Rekeying ........................................................2
+      3.1.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T141125Z" changeid="haruyama">
+        <seg>鍵の再発行 ........................................................2
+      3.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Rekeying Considerations ....................................7
+      6.2.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T141210Z" changeid="haruyama">
+        <seg>鍵の再発行の考察 ....................................7
+      6.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Replay</seg>
       </tuv>
       <tuv lang="JA">
@@ -10909,6 +10989,27 @@
       <tuv lang="JA" changedate="20110306T084855Z" changeid="haruyama">
         <seg>必須の曲線 ..........................................16
       10.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Researchers
+   ([DAI,BKN1,BKN2]) have, however, identified several security problems
+   with the symmetric portion of the SSH Transport Protocol, as
+   described in [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T141444Z" changeid="haruyama">
+        <seg>しかし, 研究者 ([DAI,BKN1,BKN2]) が, [RFC4253]で記述されたSSH トランスポートプロトコルの対称部分にいくつかのセキュリティの問題を確認した.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Researchers have discovered that the authenticated encryption portion
+   of the current SSH Transport Protocol is vulnerable to several
+   attacks.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T140802Z" changeid="haruyama">
+        <seg>現在のSSHトランスポートプロトコルの認証された暗号化部分がいくつかの攻撃に脆弱であることを研究者が発見した.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11198,6 +11299,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Second Rekeying Recommendation .............................3
+   4.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T141147Z" changeid="haruyama">
+        <seg>2番目の鍵の再発行の推奨 .............................3
+   4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Section 10 specifies REQUIRED and RECOMMENDED elliptic curve domain
    parameters to be used with the public key algorithms and key exchange
    methods defined in this document.</seg>
@@ -11241,6 +11352,16 @@
       <tuv lang="JA">
         <seg>セキュリティの考察 .........................................5
    5.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Security Considerations .........................................6
+      6.1.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T141201Z" changeid="haruyama">
+        <seg>セキュリティの考察 .........................................6
+      6.1.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13328,6 +13449,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110419T120409Z" changeid="haruyama">
         <seg>SSH楕円曲線公開鍵アルゴリズムは, 公開鍵フォーマット識別子のファミリで指定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH Transport Protocol is specified in the transport document
+   [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T142505Z" changeid="haruyama">
+        <seg>SSHトランスポートプロトコルは, トランスポート文書 [RFC4253] で定義されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16188,6 +16318,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The symmetric portion of the SSH Transport Protocol was designed to
+   provide both privacy and integrity of encapsulated data.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T141328Z" changeid="haruyama">
+        <seg>SSH トランスポートプロトコルの対称部分は, カプセル化されたデータの秘匿と完全性を提供するために設計されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The table in Section 1 gives an estimate of the
    equivalence between elliptic curve field size and symmetric key size.</seg>
       </tuv>
@@ -16314,6 +16453,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>パスフレーズを強制可能なポリシーにできるスマートカードや他の技術の利用が示唆される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The used data types and terminology are specified in the architecture
+   document [RFC4251].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T142445Z" changeid="haruyama">
+        <seg>利用しているデータのタイプと用語は, アーキテクチャ文書 [RFC4251] で定義されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16864,11 +17012,8 @@
    port to become unavailable for as long as 49.7 days while executing
    the BREAK.</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>この予防手段は, 理不尽に長い BREAK 要求が BREAKを実行する間に49.7日の間ポートを利用不能にするのを防ぐ.
-   safeguard prevents an unreasonably long BREAK request from causing a
-   port to become unavailable for as long as 49.7 days while executing
-   the BREAK.</seg>
+      <tuv lang="JA" changedate="20110527T140531Z" changeid="haruyama">
+        <seg>この予防手段は, 理不尽に長い BREAK 要求が BREAKを実行する間に49.7日の間ポートを利用不能にするのを防ぐ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17051,6 +17196,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document describes new symmetric encryption methods for the
+   Secure Shell (SSH) Transport Protocol and gives specific
+   recommendations on how frequently SSH implementations should rekey.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T140934Z" changeid="haruyama">
+        <seg>この文書では, セキュアシェル (SSH) トランスポートプロトコルのための新しい対称暗号法を記述する. また, SSHの実装がどのくらいの頻度で鍵の再発行(rekey)すべきかの具体的な推奨を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document describes the SSH Connection Protocol.</seg>
       </tuv>
       <tuv lang="JA">
@@ -17091,6 +17246,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>この文書は, 参照や説明なしに2つの文書から用語や表記法を自由に利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document instantiates the
+   recommendations described in [BKN1,BKN2].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T142356Z" changeid="haruyama">
+        <seg>この文書は, [BKN1,BKN2] に記述された推奨を具体的に記述している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17437,6 +17601,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>この最後の形式は, 先に定義されたサブシステムを実行する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This latter
+   property is true regardless of what encryption mode is used.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T141642Z" changeid="haruyama">
+        <seg>後者の性質は, 利用暗号モードに関係なく存在する.</seg>
       </tuv>
     </tu>
     <tu>
