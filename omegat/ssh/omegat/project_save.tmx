@@ -4653,8 +4653,8 @@
         <seg>First Rekeying Recommendation ..............................3
       3.2.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110527T141140Z" changeid="haruyama">
-        <seg>1番目の鍵の再発行の推奨 ..............................3
+      <tuv lang="JA" changedate="20110530T071149Z" changeid="haruyama">
+        <seg>鍵の再生成についての1番目の推奨 ..............................3
       3.2.</seg>
       </tuv>
     </tu>
@@ -7151,6 +7151,16 @@
     <tu>
       <tuv lang="EN-US">
         <seg>In
+   Section 6, we discuss the motivation for these rekeying
+   recommendations in more detail.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110530T071013Z" changeid="haruyama">
+        <seg>6節では, これらの再発行の推奨の動機にういてより詳しく議論する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In
    any case, the character set for the terminal session is considered
    primarily a client local issue.</seg>
       </tuv>
@@ -7682,6 +7692,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>認証プロトコルで定義されるそれぞれのプロトコルは, トランスポートプロトコルで提供されるセッションidを利用したり, トランスポート層のセキュリティと完全性の保証に依存することがある. 両方を必要とする場合もある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Informally, the first
+   recommendation is intended to protect against possible information
+   leakage through the MAC tag, and the second recommendation is
+   intended to protect against possible information leakage through the
+   block cipher.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110530T072147Z" changeid="haruyama">
+        <seg>簡単に言うと, 1番目の推奨はMAGタグからの情報の漏洩を防ぐため, 2番目はブロック暗号からの情報の漏洩を防ぐためのものだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9834,6 +9856,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Note that, depending on the block length of the</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110530T072325Z" changeid="haruyama">
+        <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Note, however, that during a key re-exchange, after sending a
    SSH_MSG_KEXINIT message, each party MUST be prepared to process an
    arbitrary number of messages that may be in-flight before receiving a
@@ -10750,11 +10780,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Rekeying</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110530T070611Z" changeid="haruyama">
+        <seg>鍵の再生成</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Rekeying ........................................................2
       3.1.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110527T141125Z" changeid="haruyama">
-        <seg>鍵の再発行 ........................................................2
+      <tuv lang="JA" changedate="20110530T070617Z" changeid="haruyama">
+        <seg>鍵の再生成 ........................................................2
       3.1.</seg>
       </tuv>
     </tu>
@@ -11302,8 +11340,8 @@
         <seg>Second Rekeying Recommendation .............................3
    4.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110527T141147Z" changeid="haruyama">
-        <seg>2番目の鍵の再発行の推奨 .............................3
+      <tuv lang="JA" changedate="20110530T071142Z" changeid="haruyama">
+        <seg>鍵の再生成についての2番目の推奨 .............................3
    4.</seg>
       </tuv>
     </tu>
@@ -11315,6 +11353,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110420T053317Z" changeid="haruyama">
         <seg>10節で, この文書で定義された公開鍵アルゴリズムと鍵交換法と共に用いられる必須と推奨の楕円曲線ドメインパラメータを定義している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Section 9 of [RFC4253] suggests that SSH implementations rekey after
+   every gigabyte of transmitted data.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110530T070725Z" changeid="haruyama">
+        <seg>[RFC4253] の 9節は, 転送データ1GBごとにSSHの実装が鍵を再生成するよう示唆している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17960,6 +18007,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This section makes two recommendations.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110530T071020Z" changeid="haruyama">
+        <seg>この節は, 2つの推奨からなる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This section serves to strengthen
+   the suggestion in [RFC4253] by giving firm upper bounds on the
+   tolerable number of encryptions between rekeying operations.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110530T070941Z" changeid="haruyama">
+        <seg>この節では, 鍵の再生成の間に許容できる暗号化の回数の上限をしっかりと与えることによって, [RFC4253]の示唆を強化する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This section specifies identifiers encoding named elliptic curve
    domain parameters.</seg>
       </tuv>
@@ -18966,6 +19031,16 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>[RFC4253] does not, however,
+   discuss all the problems that could arise if an SSH implementation
+   does not rekey frequently enough.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110530T070808Z" changeid="haruyama">
+        <seg>しかし, [RFC4253] は SSHの実装が十分頻繁に鍵を再生成しない場合におきうるすべての問題については議論していない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>and users to understand the importance of verifying this association
    before any session is initiated.</seg>
       </tuv>
@@ -19713,6 +19788,16 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>タイプに特有のデータが続く.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>underlying block cipher and the length of the encrypted packets, the
+   first recommendation may supersede the second recommendation, or vice
+   versa.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110530T072319Z" changeid="haruyama">
+        <seg>注意: 基底にあるブロック暗号のブロックサイズと暗号化されたパケットの長さに依存して, 1番目の推奨が2番目の推奨を上書きするかもしれない. また逆もある. </seg>
       </tuv>
     </tu>
     <tu>
