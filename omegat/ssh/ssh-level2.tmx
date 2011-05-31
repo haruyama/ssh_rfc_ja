@@ -927,6 +927,14 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>First Rekeying Recommendation</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110531T064231Z" changeid="haruyama">
+        <seg>鍵の再生成についての1番目の推奨</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Opcodes 160 to 255 are not yet
    defined, and cause parsing to stop (they should only be used after
    any other data).</seg>
@@ -1880,6 +1888,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The used data types and terminology are specified in the architecture
+   document [RFC4251].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110527T142445Z" changeid="haruyama">
+        <seg>利用しているデータのタイプと用語は, アーキテクチャ文書 [RFC4251] で定義されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>With the generic
    method defined here, clients will not require code changes to support
    new authentication mechanisms, and if a separate authentication layer
@@ -2121,6 +2138,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Second Rekeying Recommendation .............................3
+   4.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110530T071142Z" changeid="haruyama">
+        <seg>鍵の再生成についての2番目の推奨 .............................3
+   4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>o  MUST NOT advertise a maximum packet size that would result in
       transport packets larger than its transport layer is willing to
       receive.</seg>
@@ -2315,6 +2342,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The symmetric portion of the SSH Transport Protocol was designed to
+   provide both privacy and integrity of encapsulated data.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110527T141328Z" changeid="haruyama">
+        <seg>SSH トランスポートプロトコルの対称部分は, カプセル化されたデータの秘匿と完全性を提供するために設計されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The Secure Shell (SSH) Session Channel Break Extension</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -2403,6 +2439,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>しかし, これらは時にはログやレポートなどに表示される. これらは,ISO 10646 UTF-8 を用いてエンコードされなければならない. しかし, 時には別のエンコーディングが必要とされる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document instantiates the
+   recommendations described in [BKN1,BKN2].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110527T142356Z" changeid="haruyama">
+        <seg>この文書は, [BKN1,BKN2] に記述された推奨を具体的に記述している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2624,6 +2669,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>submethods の実際の名前は, ユーザとサーバの間で同意が必要だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Additionally, if not rekeyed frequently enough, the SSH Transport
+   Protocol may leak information about payload data.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110527T141554Z" changeid="haruyama">
+        <seg>また, 十分に鍵の再発行が行なわれないと, SSH トランスポートプロトコルは ペイロードデータの情報を漏らしてしまうかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3768,6 +3822,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The SSH Transport Protocol is specified in the transport document
+   [RFC4253].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110527T142505Z" changeid="haruyama">
+        <seg>SSHトランスポートプロトコルは, トランスポート文書 [RFC4253] で定義されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Information regarding estimated equivalence of key
    sizes is available in [NIST-800-57]; the discussion in [RFC3766] is
    also relevant.</seg>
@@ -4647,6 +4710,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Because of possible information leakage through the MAC tag, SSH
+   implementations SHOULD rekey at least once every 2**32 outgoing
+   packets.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110531T064539Z" changeid="haruyama">
+        <seg>MACタグから情報漏洩する可能性があるため, 少なくとも 2**32 のパケット発信ごとにSSHの実装は鍵の再生成をする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The format of names and procedures for
    defining new names are defined in [SSH-ARCH] and [SSH-NUMBERS].</seg>
       </tuv>
@@ -4782,6 +4855,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>このとき, 攻撃用のデバイスは, 正当なサーバのふりをしようとする. そして, クライアントがセッションを開始しようとする際に, 自らの公開鍵をクライアントに送信する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>[RFC4253] does not, however,
+   discuss all the problems that could arise if an SSH implementation
+   does not rekey frequently enough.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110530T070808Z" changeid="haruyama">
+        <seg>しかし, [RFC4253] は SSHの実装が十分頻繁に鍵を再生成しない場合におきうるすべての問題については議論していない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5787,6 +5870,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Second Rekeying Recommendation</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110531T064825Z" changeid="haruyama">
+        <seg>鍵の再生成についての2番目の推奨 </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>128 to 191 Reserved</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -6032,6 +6123,18 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Informally, the first
+   recommendation is intended to protect against possible information
+   leakage through the MAC tag, and the second recommendation is
+   intended to protect against possible information leakage through the
+   block cipher.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110530T072147Z" changeid="haruyama">
+        <seg>簡単に言うと, 1番目の推奨はMAGタグからの情報の漏洩を防ぐため, 2番目はブロック暗号からの情報の漏洩を防ぐためのものだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This makes it possible
    for the server to avoid disclosing information on which accounts
    exist.</seg>
@@ -6250,6 +6353,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>次の 'method name' の値が定義されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Rekeying</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110530T070611Z" changeid="haruyama">
+        <seg>鍵の再生成</seg>
       </tuv>
     </tu>
     <tu>
@@ -6565,6 +6676,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Rekeying ........................................................2
+      3.1.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110530T070617Z" changeid="haruyama">
+        <seg>鍵の再生成 ........................................................2
+      3.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Future Assignments ..................................8
       4.3.</seg>
       </tuv>
@@ -6868,6 +6989,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Because of a birthday property of block ciphers and some modes of
+   operation, implementations must be careful not to encrypt too many
+   blocks with the same encryption key.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110531T070157Z" changeid="haruyama">
+        <seg>ブロック暗号の誕生日の特性と暗号モードがいくつか存在するために, 実装は同じ暗号化鍵で多すぎるブロックを暗号化しないよう注意しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Host
    keys can also change.</seg>
       </tuv>
@@ -7022,6 +7153,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>サーバの公開鍵が安全に配布されないと, クライアントは目的のサーバと接続ているのかどうか知ることができない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Researchers have discovered that the authenticated encryption portion
+   of the current SSH Transport Protocol is vulnerable to several
+   attacks.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110527T140802Z" changeid="haruyama">
+        <seg>現在のSSHトランスポートプロトコルの認証された暗号化部分がいくつかの攻撃に脆弱であることを研究者が発見した.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7824,6 +7965,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>underlying block cipher and the length of the encrypted packets, the
+   first recommendation may supersede the second recommendation, or vice
+   versa.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110530T072319Z" changeid="haruyama">
+        <seg>注意: 基底にあるブロック暗号のブロックサイズと暗号化されたパケットの長さに依存して, 1番目の推奨が2番目の推奨を上書きするかもしれない. また逆もある. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>18    VDISCARD    Toggles the flushing of terminal output.</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -8223,6 +8374,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Encryption Modes ................................................3
+   5.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110527T141152Z" changeid="haruyama">
+        <seg>暗号モード ................................................3
+   5.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>encryption_algorithms
          A name-list of acceptable symmetric encryption algorithms (also
          known as ciphers) in order of preference.</seg>
@@ -8230,6 +8391,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv xml:lang="JA">
         <seg>encryption_algorithms
          受け入れ可能な対称暗号化アルゴリズム( cipher としても知られる) の優先度順の名前リスト.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Section 9 of [RFC4253] suggests that SSH implementations rekey after
+   every gigabyte of transmitted data.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110530T070725Z" changeid="haruyama">
+        <seg>[RFC4253] の 9節は, 転送データ1GBごとにSSHの実装が鍵を再生成するよう示唆している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8555,6 +8725,24 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv xml:lang="JA">
         <seg>鍵交換法の名前.................................16
       4.11.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>First Rekeying Recommendation ..............................3
+      3.2.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110530T071149Z" changeid="haruyama">
+        <seg>鍵の再生成についての1番目の推奨 ..............................3
+      3.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Note that, depending on the block length of the</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110530T072325Z" changeid="haruyama">
+        <seg> </seg>
       </tuv>
     </tu>
     <tu>
@@ -9297,6 +9485,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>More explicitly, after a key exchange, an SSH
+   implementation SHOULD NOT send more than 2**32 packets before
+   rekeying again.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110531T064624Z" changeid="haruyama">
+        <seg>より明確に言うと, 鍵の交換の後で再び再生成をする前に 2**32個以上のパケットをSSHの実装は送らないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This identifier is defined provided that
    the concatenation of the public key format identifier and the
    elliptic curve domain parameter identifier (or the method name and
@@ -9439,6 +9637,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>セキュリティ意識の高いユーザは鍵を受け入れる前に SSHの通信の外側で指紋を検査する. しかし, 多くのユーザは提示されたキーを受け入れる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>In
+   Section 6, we discuss the motivation for these rekeying
+   recommendations in more detail.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110530T071013Z" changeid="haruyama">
+        <seg>6節では, これらの再発行の推奨の動機にういてより詳しく議論する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10354,6 +10562,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>この文書群では, フィールドが参照される場合には, シングルクォートで囲まれて表記される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>SSH implementations SHOULD also attempt to rekey before receiving
+   more than 2**32 packets since the last rekey operation.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110531T064712Z" changeid="haruyama">
+        <seg>また, 最後の鍵の再生成の操作をしてから2**32個以上のパケットを受信する前にSSHの実装は再生成を試みる必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11948,6 +12165,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>For example, the encryption mode specified
+   in [RFC4253] is vulnerable to a chosen-plaintext privacy attack.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110527T141518Z" changeid="haruyama">
+        <seg>たとえば, [RFC4253]で定義された暗号モードは, 選択平文プライバシー攻撃に脆弱だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>If no confidentiality is provided (&quot;none&quot; cipher),
    password authentication SHOULD be disabled.</seg>
       </tuv>
@@ -12060,6 +12286,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>クライアントは, これらの行を処理できる必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The
+   preferred way to do this is to rekey after receiving more than 2**31
+   packets since the last rekey operation.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110531T064814Z" changeid="haruyama">
+        <seg>これを行なうために好ましい方法は, 最後の再生成操作の後に2**31個以上のパケットを受け取ったら鍵の再生成をすることだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12496,6 +12732,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>圧縮のあとで, 暗号化が行なわれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Rekeying Considerations ....................................7
+      6.2.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110527T141210Z" changeid="haruyama">
+        <seg>鍵の再発行の考察 ....................................7
+      6.2.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13244,6 +13490,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>In [BKN1,BKN2], Bellare, Kohno, and Namprempre show how to modify the
+   symmetric portion of the SSH Transport Protocol so that it provably
+   preserves privacy and integrity against chosen-plaintext, chosen-
+   ciphertext, and reaction attacks.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110527T142311Z" changeid="haruyama">
+        <seg>[BKN1,BKN2]で, Bellare と Kohno, Namprempre は, 選択平文, 選択暗号文, 反応攻撃(reaction attack) に対して秘匿と完全性を保持するために, SSH トランスポートプロトコルの対称部分をどう変更すればいいか示している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>After a key exchange
    with implicit server authentication, the client MUST wait for a
    response to its service request message before sending any further
@@ -13553,6 +13810,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>少なくとも 4 byte のパディングをしなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This latter
+   property is true regardless of what encryption mode is used.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110527T141642Z" changeid="haruyama">
+        <seg>後者の性質は, 利用暗号モードに関係なく存在する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14106,6 +14372,18 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>このメッセージは, 古い鍵とアルゴリズムで送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Encryption Method Considerations ...........................8
+   Normative References ...............................................9
+   Informative References ............................................10</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110527T141215Z" changeid="haruyama">
+        <seg>暗号モードの考察 ...........................8
+   Normative References ...............................................9
+   Informative References ............................................10</seg>
       </tuv>
     </tu>
     <tu>
@@ -16201,6 +16479,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Security Considerations .........................................6
+      6.1.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110527T141201Z" changeid="haruyama">
+        <seg>セキュリティの考察 .........................................6
+      6.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Doing so requires
    normalization.</seg>
       </tuv>
@@ -16467,6 +16755,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>シェルないしコマンドの起動</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document describes new symmetric encryption methods for the
+   Secure Shell (SSH) Transport Protocol and gives specific
+   recommendations on how frequently SSH implementations should rekey.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110527T140934Z" changeid="haruyama">
+        <seg>この文書では, セキュアシェル (SSH) トランスポートプロトコルのための新しい対称暗号法を記述する. また, SSHの実装がどのくらいの頻度で鍵の再発行(rekey)すべきかの具体的な推奨を提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17678,6 +17976,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This section serves to strengthen
+   the suggestion in [RFC4253] by giving firm upper bounds on the
+   tolerable number of encryptions between rekeying operations.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110530T070941Z" changeid="haruyama">
+        <seg>この節では, 鍵の再生成の間に許容できる暗号化の回数の上限をしっかりと与えることによって, [RFC4253]の示唆を強化する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>It is a comma-separated list of
    authentication submethods (software or hardware) that the user
    prefers.</seg>
@@ -18631,6 +18939,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Researchers
+   ([DAI,BKN1,BKN2]) have, however, identified several security problems
+   with the symmetric portion of the SSH Transport Protocol, as
+   described in [RFC4253].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110527T141444Z" changeid="haruyama">
+        <seg>しかし, 研究者 ([DAI,BKN1,BKN2]) が, [RFC4253]で記述されたSSH トランスポートプロトコルの対称部分にいくつかのセキュリティの問題を確認した.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>In practice however, it is RECOMMENDED that the same
    algorithm be used in both directions.</seg>
       </tuv>
@@ -18844,6 +19163,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>このメッセージには応答は返らない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This section makes two recommendations.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110530T071020Z" changeid="haruyama">
+        <seg>この節は, 2つの推奨からなる.</seg>
       </tuv>
     </tu>
     <tu>

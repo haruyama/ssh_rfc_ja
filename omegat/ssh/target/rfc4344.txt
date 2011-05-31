@@ -25,26 +25,22 @@ Copyright Notice
 
 概要
 
-   Researchers have discovered that the authenticated encryption portion
-   of the current SSH Transport Protocol is vulnerable to several
-   attacks.
+   現在のSSHトランスポートプロトコルの認証された暗号化部分がいくつかの攻撃に脆弱であることを研究者が発見した.
 
-   This document describes new symmetric encryption methods for the
-   Secure Shell (SSH) Transport Protocol and gives specific
-   recommendations on how frequently SSH implementations should rekey.
+   この文書では, セキュアシェル (SSH) トランスポートプロトコルのための新しい対称暗号法を記述する. また, SSHの実装がどのくらいの頻度で鍵の再発行(rekey)すべきかの具体的な推奨を提供する.
 
 目次
 
    1. イントロダクション ..........................................2
    2. この文書で用いる表記 ...............................2
-   3. Rekeying ........................................................2
-      3.1. First Rekeying Recommendation ..............................3
-      3.2. Second Rekeying Recommendation .............................3
-   4. Encryption Modes ................................................3
+   3. 鍵の再生成 ........................................................2
+      3.1. 鍵の再生成についての1番目の推奨 ..............................3
+      3.2. 鍵の再生成についての2番目の推奨 .............................3
+   4. 暗号モード ................................................3
    5. IANA の考慮 .............................................6
-   6. Security Considerations .........................................6
-      6.1. Rekeying Considerations ....................................7
-      6.2. Encryption Method Considerations ...........................8
+   6. セキュリティの考察 .........................................6
+      6.1. 鍵の再発行の考察 ....................................7
+      6.2. 暗号モードの考察 ...........................8
    Normative References ...............................................9
    Informative References ............................................10
 
@@ -59,49 +55,25 @@ RFC 4344          SSH Transport Layer Encryption Modes      January 2006
 
 1.  イントロダクション
 
-   The symmetric portion of the SSH Transport Protocol was designed to
-   provide both privacy and integrity of encapsulated data.  Researchers
-   ([DAI,BKN1,BKN2]) have, however, identified several security problems
-   with the symmetric portion of the SSH Transport Protocol, as
-   described in [RFC4253].  For example, the encryption mode specified
-   in [RFC4253] is vulnerable to a chosen-plaintext privacy attack.
-   Additionally, if not rekeyed frequently enough, the SSH Transport
-   Protocol may leak information about payload data.  This latter
-   property is true regardless of what encryption mode is used.
+   SSH トランスポートプロトコルの対称部分は, カプセル化されたデータの秘匿と完全性を提供するために設計されている.  しかし, 研究者 ([DAI,BKN1,BKN2]) が, [RFC4253]で記述されたSSH トランスポートプロトコルの対称部分にいくつかのセキュリティの問題を確認した.  たとえば, [RFC4253]で定義された暗号モードは, 選択平文プライバシー攻撃に脆弱だ.
+   また, 十分に鍵の再発行が行なわれないと, SSH トランスポートプロトコルは ペイロードデータの情報を漏らしてしまうかもしれない.  後者の性質は, 利用暗号モードに関係なく存在する.
 
-   In [BKN1,BKN2], Bellare, Kohno, and Namprempre show how to modify the
-   symmetric portion of the SSH Transport Protocol so that it provably
-   preserves privacy and integrity against chosen-plaintext, chosen-
-   ciphertext, and reaction attacks.  This document instantiates the
-   recommendations described in [BKN1,BKN2].
+   [BKN1,BKN2]で, Bellare と Kohno, Namprempre は, 選択平文, 選択暗号文, 反応攻撃(reaction attack) に対して秘匿と完全性を保持するために, SSH トランスポートプロトコルの対称部分をどう変更すればいいか示している.  この文書は, [BKN1,BKN2] に記述された推奨を具体的に記述している.
 
 2.  この文書で用いる表記
 
    この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, [RFC-2119] で記述されているように解釈される. 
 
-   The used data types and terminology are specified in the architecture
-   document [RFC4251].
+   利用しているデータのタイプと用語は, アーキテクチャ文書 [RFC4251] で定義されている.
 
-   The SSH Transport Protocol is specified in the transport document
-   [RFC4253].
+   SSHトランスポートプロトコルは, トランスポート文書 [RFC4253] で定義されている.
 
-3.  Rekeying
+3.  鍵の再生成
 
-   Section 9 of [RFC4253] suggests that SSH implementations rekey after
-   every gigabyte of transmitted data.  [RFC4253] does not, however,
-   discuss all the problems that could arise if an SSH implementation
-   does not rekey frequently enough.  This section serves to strengthen
-   the suggestion in [RFC4253] by giving firm upper bounds on the
-   tolerable number of encryptions between rekeying operations.  In
-   Section 6, we discuss the motivation for these rekeying
-   recommendations in more detail.
+   [RFC4253] の 9節は, 転送データ1GBごとにSSHの実装が鍵を再生成するよう示唆している.  しかし, [RFC4253] は SSHの実装が十分頻繁に鍵を再生成しない場合におきうるすべての問題については議論していない.  この節では, 鍵の再生成の間に許容できる暗号化の回数の上限をしっかりと与えることによって, [RFC4253]の示唆を強化する.  6節では, これらの再発行の推奨の動機にういてより詳しく議論する.
 
-   This section makes two recommendations.  Informally, the first
-   recommendation is intended to protect against possible information
-   leakage through the MAC tag, and the second recommendation is
-   intended to protect against possible information leakage through the
-   block cipher.  Note that, depending on the block length of the
+   この節は, 2つの推奨からなる.  簡単に言うと, 1番目の推奨はMAGタグからの情報の漏洩を防ぐため, 2番目はブロック暗号からの情報の漏洩を防ぐためのものだ.   
 
 
 
@@ -112,28 +84,17 @@ Bellare, et al.             Standards Track                     [Page 2]
 RFC 4344          SSH Transport Layer Encryption Modes      January 2006
 
 
-   underlying block cipher and the length of the encrypted packets, the
-   first recommendation may supersede the second recommendation, or vice
-   versa.
+   注意: 基底にあるブロック暗号のブロックサイズと暗号化されたパケットの長さに依存して, 1番目の推奨が2番目の推奨を上書きするかもしれない. また逆もある. 
 
-3.1.  First Rekeying Recommendation
+3.1.  鍵の再生成についての1番目の推奨
 
-   Because of possible information leakage through the MAC tag, SSH
-   implementations SHOULD rekey at least once every 2**32 outgoing
-   packets.  More explicitly, after a key exchange, an SSH
-   implementation SHOULD NOT send more than 2**32 packets before
-   rekeying again.
+   MACタグから情報漏洩する可能性があるため, 少なくとも 2**32 のパケット発信ごとにSSHの実装は鍵の再生成をする必要がある.  より明確に言うと, 鍵の交換の後で再び再生成をする前に 2**32個以上のパケットをSSHの実装は送らないほうがよい.
 
-   SSH implementations SHOULD also attempt to rekey before receiving
-   more than 2**32 packets since the last rekey operation.  The
-   preferred way to do this is to rekey after receiving more than 2**31
-   packets since the last rekey operation.
+   また, 最後の鍵の再生成の操作をしてから2**32個以上のパケットを受信する前にSSHの実装は再生成を試みる必要がある.  これを行なうために好ましい方法は, 最後の再生成操作の後に2**31個以上のパケットを受け取ったら鍵の再生成をすることだ.
 
-3.2.  Second Rekeying Recommendation
+3.2.  鍵の再生成についての2番目の推奨 
 
-   Because of a birthday property of block ciphers and some modes of
-   operation, implementations must be careful not to encrypt too many
-   blocks with the same encryption key.
+   ブロック暗号の誕生日の特性と暗号モードがいくつか存在するために, 実装は同じ暗号化鍵で多すぎるブロックを暗号化しないよう注意しなければならない.
 
    Let L be the block length (in bits) of an SSH encryption method's
    block cipher (e.g., 128 for AES).  If L is at least 128, then, after

@@ -1844,6 +1844,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Also
+   note that the keystream can be pre-computed and that encryption is
+   parallelizable.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T081833Z" changeid="haruyama">
+        <seg>さらに注意: 鍵ストリームは前処理でき, 暗号化は並列化できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Also note that the
    insertion of variable amounts of 'random padding' may help thwart
    traffic analysis.</seg>
@@ -2160,6 +2170,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>例として 次の場合を考える:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As before, the keystream can be pre-computed, and
+   decryption is parallelizable.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T082434Z" changeid="haruyama">
+        <seg>同様に, 鍵ストリームは前処理でき, 復号は並列化できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2566,6 +2585,26 @@
       </tuv>
       <tuv lang="JA">
         <seg>MACは32bitのシーケンス番号を利用するので, 2**32のパケットが送られたあとでは情報を漏らしはじめる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Because of a birthday property of block ciphers and some modes of
+   operation, implementations must be careful not to encrypt too many
+   blocks with the same encryption key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T070157Z" changeid="haruyama">
+        <seg>ブロック暗号の誕生日の特性と暗号モードがいくつか存在するために, 実装は同じ暗号化鍵で多すぎるブロックを暗号化しないよう注意しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Because of possible information leakage through the MAC tag, SSH
+   implementations SHOULD rekey at least once every 2**32 outgoing
+   packets.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T064539Z" changeid="haruyama">
+        <seg>MACタグから情報漏洩する可能性があるため, 少なくとも 2**32 のパケット発信ごとにSSHの実装は鍵の再生成をする必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4310,6 +4349,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Encryption Modes</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T072721Z" changeid="haruyama">
+        <seg>暗号モード</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Encryption Modes ................................................3
    5.</seg>
       </tuv>
@@ -4650,6 +4697,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>First Rekeying Recommendation</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T064231Z" changeid="haruyama">
+        <seg>鍵の再生成についての1番目の推奨</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>First Rekeying Recommendation ..............................3
       3.2.</seg>
       </tuv>
@@ -4864,6 +4919,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>たとえば,&quot;example_session@example.com&quot; という 'channel type' のチャンネルが提案されたが失敗したとき, レスポンスには, (前述ないし0x00000001 から 0xFDFFFFFFの範囲の) IANA で割り当てられた 'reason code'が含まれるか,  0xFE000000 から 0xFEFFFFFF の埴のローカルに割り当てられた値を'reason code' が含まれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For example, implementations may store X
+   as multiple unsigned 32-bit counters.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T074306Z" changeid="haruyama">
+        <seg>たとえば, 実装は複数の符号なし32-bitカウンタとしてXを保持してよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5128,6 +5192,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>このプロトコルのセキュリティについての考慮のすべては, [SSH-ARCH]で提供されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Further recall that the total length of the
+   concatenation of the packet length, padding length, payload, and
+   padding MUST be a multiple of the cipher's block size when the
+   cipher's block size is greater than or equal to 8 bytes (which is the
+   case for all of the following methods).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T073300Z" changeid="haruyama">
+        <seg>さらに思い出してください: 暗号のブロックサイズが8byte以上の場合(以下の方法のすべてに当てはまる),  packet length, padding length, payload, padding を連結した全体の長さが, 暗号のブロックサイズの倍数でなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5851,6 +5927,18 @@
     <tu>
       <tuv lang="EN-US">
         <seg>If
+   an SSH implementation uses a block cipher with a larger block size
+   (e.g., Rijndael with 256-bit blocks), then the recommendations in
+   Section 3.1 may supersede the recommendations in this subsection
+   (depending on the lengths of the packets).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T071609Z" changeid="haruyama">
+        <seg>SSHの実装が より大きなブロックサイズのブロック暗号(例えば 256-bitブロックのRijndael) を利用する場合, 3.1節の推奨がこの節の推奨を上書きするかもしれない(パケットの長さに依存する).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If
    the session stays active long enough, however, this sequence number
    will wrap.</seg>
       </tuv>
@@ -5925,6 +6013,39 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If L is at least 128, then SSH
+   implementations should also attempt to force a rekey before receiving
+   more than 2**(L/4) blocks.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T070743Z" changeid="haruyama">
+        <seg>また, L が128 以上の場合, SSHの実装は 2**(L/4) ブロック以上を受信する前に鍵の再生成を強制的に行なわなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If L is at least 128, then, after
+   rekeying, an SSH implementation SHOULD NOT encrypt more than 2**(L/4)
+   blocks before rekeying again.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T070704Z" changeid="haruyama">
+        <seg>L が128以上の場合, 鍵の再発行の後でもう一度再発行するまでの間にSSHの実装は 2**(L/4)ブロック以上の暗号化をしないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If L is less than 128 (which is the case
+   for older ciphers such as 3DES, Blowfish, CAST-128, and IDEA), then,
+   although it may be too expensive to rekey every 2**(L/4) blocks, it
+   is still advisable for SSH implementations to follow the original
+   recommendation in [RFC4253]: rekey at least once for every gigabyte
+   of transmitted data.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T071322Z" changeid="haruyama">
+        <seg>Lが128未満の場合(3DES, Blowfish, CAST-128, IDEAなどの古い暗号の場合), 2**(L/4)ブロックごとの鍵の再生成は非常にコストが高い場合がある. この場合は, [RFC4253] の元々の推奨 (転送データ1GBバイトごとにすくなくとも1回鍵の再生成をする)に従うのがSSHの実装に取って望ましい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If SSH host key verification can be configured to require SSHFP,
       SSH host key revocation can be implemented by removing the
       corresponding SSHFP from DNS.</seg>
@@ -5940,6 +6061,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>SSHFP が最初に検査されるなら, 新しいSSHホスト鍵は, DNS上の関連する SSHFP を置き換えることで配布されるだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If X=(2**L)-1, then
+   &quot;increment X&quot; has the traditional semantics of &quot;set X to 0.&quot;  We use
+   the notation &lt;X&gt; to mean &quot;convert X to an L-bit string in network-
+   byte-order.&quot;  Naturally, implementations may differ in how the
+   internal value X is stored.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T074217Z" changeid="haruyama">
+        <seg>X=(2**L)-1 のとき, &quot;increment X&quot; は &quot;set X to 0&quot; という伝統的な意味を持つ.  表記 &lt;X&gt; を &quot;XをL-bitのネットワークバイトオーダー文字列に変換する&quot; という意味で用いる. 当然, 実装は, 内部的な値であるXを保持する方法で別の表現をしてもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7441,6 +7574,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In stateful-decryption counter
+   mode, both the sender and the receiver maintain an internal L-bit
+   counter X.  The initial value of X should be the initial IV (as
+   computed in Section 7.2 of [RFC4253]) interpreted as an L-bit
+   unsigned integer in network-byte-order.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T074058Z" changeid="haruyama">
+        <seg>stateful-decryption counter モードでは, 送信側と受信側の両方が内部のL-bitなカウンタ X を保持する. Xの初期値は([RFC4253]の7.2節で計算される) 初期IV である必要がある. 初期IVは L-bitのネットワークバイトオーダー符号無し整数として解釈される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In summary, the use of this protocol without a reliable association
    of the binding between a host and its host keys is inherently
    insecure and is NOT RECOMMENDED.</seg>
@@ -8893,6 +9038,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Let L be the
+   block length of &lt;cipher&gt; in bits.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T073444Z" changeid="haruyama">
+        <seg>L を &lt;cipher&gt;のビットでのブロック長とする</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Let L be the block length (in bits) of an SSH encryption method's
+   block cipher (e.g., 128 for AES).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T070352Z" changeid="haruyama">
+        <seg>L をSSHの暗号法でのブロック暗号の(ビットでの)ブロック長とする (例えばAESでは128).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Local Flow Control</seg>
       </tuv>
       <tuv lang="JA">
@@ -9197,6 +9360,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>SSH_MSG_NEWKEYS が送られた後で, さらなるアプリケーションのデータが送られるだろう; 鍵交換はSSHトランスポート層の上位のプロトコルには影響しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>More explicitly, after a key exchange, an SSH
+   implementation SHOULD NOT send more than 2**32 packets before
+   rekeying again.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T064624Z" changeid="haruyama">
+        <seg>より明確に言うと, 鍵の交換の後で再び再生成をする前に 2**32個以上のパケットをSSHの実装は送らないほうがよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9622,6 +9795,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>暗号化されないパスワードがパケットに含まれて転送されるが, パケット全体はトランスポート層で暗号化されることを注記しておく.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Note that if L is less than or equal to 128, then the recommendation
+   in this subsection supersedes the recommendation in Section 3.1.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T071511Z" changeid="haruyama">
+        <seg>注意: L が128以下の場合, この節の推奨は 3.1節の推奨よりを上書きする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10743,6 +10925,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Recall from [RFC4253] that the encryption methods in each direction
+   of an SSH connection MUST run independently of each other and that,
+   when encryption is in effect, the packet length, padding length,
+   payload, and padding fields of each packet MUST be encrypted with the
+   chosen method.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T073028Z" changeid="haruyama">
+        <seg>[RFC4253] を思い出してください: SSH接続のそれぞれの方向の暗号法はそれぞれ独立に働く. また, 暗号化が行なわれている場合, パケットの packet length, padding length, payload, padding のフィールドは, 取り決められた暗号アリゴリズムによって暗号化されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Recommended Curves</seg>
       </tuv>
       <tuv lang="JA" changedate="20110426T084029Z" changeid="haruyama">
@@ -11202,6 +11396,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>SSH implementations SHOULD also attempt to rekey before receiving
+   more than 2**32 packets since the last rekey operation.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T064712Z" changeid="haruyama">
+        <seg>また, 最後の鍵の再生成の操作をしてから2**32個以上のパケットを受信する前にSSHの実装は再生成を試みる必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>SSH implementations that both
    store the passwords and compare them SHOULD use [RFC4013] for
    normalization.</seg>
@@ -11333,6 +11536,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>SSH_MSG_USERAUTH_SUCCESS は1回のみ送られなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Second Rekeying Recommendation</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T064825Z" changeid="haruyama">
+        <seg>鍵の再生成についての2番目の推奨 </seg>
       </tuv>
     </tu>
     <tu>
@@ -12506,6 +12717,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>アットマークに続く部分は, 名前を定義する個人ないし組織で管理されている有効な完全に記述したドメイン名 [RFC1034]でなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   preferred way to do this is to rekey after receiving more than 2**31
+   packets since the last rekey operation.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T064814Z" changeid="haruyama">
+        <seg>これを行なうために好ましい方法は, 最後の再生成操作の後に2**31個以上のパケットを受け取ったら鍵の再生成をすることだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13952,6 +14173,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The block B1 is then XORed with P1 to generate
+   the ciphertext block C1.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T081538Z" changeid="haruyama">
+        <seg>次にブロック B1 を P1 と XORし 暗号文ブロック C1 を生成する.rtext block C1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The certificate part may be a zero length string, but a public key is
    required.</seg>
       </tuv>
@@ -14328,11 +14558,30 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The counter X is then incremented, and the
+   process is repeated for each subsequent block in order to generate</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T081739Z" changeid="haruyama">
+        <seg>そして カウンタ X をインクリメントする. パケット P に対応する全暗号文 C=C1||C2||...||Cn を生成するために, 後続のブロックに対してこのプロセスが繰替えされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The data types boolean, byte, uint32, uint64, string, and mpint are
    to be interpreted in this document as described in [RFC4251].</seg>
       </tuv>
       <tuv lang="JA" changedate="20110306T091507Z" changeid="haruyama">
         <seg>データ型 boolean, byte, uint32, uint64, string, mpint は, [RFC4251] で記述されているように解釈される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The decryptor then increments its copy of the counter X and repeats
+   the above process for each block to obtain the plaintext packet
+   P=P1||P2||...||Pn.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T082415Z" changeid="haruyama">
+        <seg>復号器はカウンタ Ｘ のコピーをインクリメントする. 以上のプロセスをそれぞれのブロックに繰り返して 平文パケットP=P1||P2||...||Pn を得る.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15169,6 +15418,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110419T122651Z" changeid="haruyama">
         <seg>サーバの同定と通信の検証に用いられる鍵付きハッシュのメッセージ認証コードは, 上で選ばれたハッシュを元にする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The label &lt;cipher&gt;-ctr indicates that the block cipher &lt;cipher&gt; is to
+   be used in &quot;stateful-decryption counter&quot; (SDCTR) mode.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T073415Z" changeid="haruyama">
+        <seg>ラベル &lt;cipher&gt;-ctr は, ブロック暗号 &lt;cipher&gt; を &quot;stateful-decryption counter&quot; (SDCTR) モードで利用することを示している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16910,6 +17168,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>These encryption methods are in addition to the
+   encryption methods described in Section 6.3 of [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T072819Z" changeid="haruyama">
+        <seg>これらの暗号法は [RFC4253]の6.3節で記述されている暗号法に追加される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>These identifiers are used in this document to
    identify the curve used in the SSH ECC public key format, the ECDSA
    signature blob, and the ECDH method name.</seg>
@@ -17243,6 +17510,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document describes new encryption methods for use with the SSH
+   Transport Protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T072751Z" changeid="haruyama">
+        <seg>この文書は, SSHトランスポートプロトコルで利用する新しい暗号法を記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document describes new symmetric encryption methods for the
    Secure Shell (SSH) Transport Protocol and gives specific
    recommendations on how frequently SSH implementations should rekey.</seg>
@@ -17266,6 +17542,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>この文書は, SSH トランスポート層プロトコルについて記述する. このプロトコルは, 通常は TCP/IP 上で動作する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document describes the following new methods:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T073327Z" changeid="haruyama">
+        <seg>この文書は, 次の新しい方法を定義する:</seg>
       </tuv>
     </tu>
     <tu>
@@ -18159,6 +18443,26 @@
       </tuv>
       <tuv lang="JA">
         <seg>不必要な処理とユーザとの対話を避けるため, &quot;publickey&quot; 認証法を用いた認証が受け入れられるかどうかを尋ねるために, 以下のメッセージが提供されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To decrypt a ciphertext C=C1||C2||...||Cn, the decryptor (who also
+   maintains its own copy of X) first encrypts its copy of &lt;X&gt; with
+   &lt;cipher&gt; to generate a block B1 and then XORs B1 to C1 to get P1.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T082259Z" changeid="haruyama">
+        <seg>暗号文 C=C1||C2||...||Cn を復号するには, (やはりXのコピーを自身で管理している)復号器が &lt;X&gt;のコピーを &lt;cipher&gt;で暗号化し ブロック B1 を生成し, B1 と C1 を XOR して P1を得る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To encrypt a packet P=P1||P2||...||Pn (where P1, P2, ..., Pn are each
+   blocks of length L), the encryptor first encrypts &lt;X&gt; with &lt;cipher&gt;
+   to obtain a block B1.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T081459Z" changeid="haruyama">
+        <seg>パケット P=P1||P2||...||Pn (P1, P2, ..., Pn はそれぞれ長さ L のブロック) を暗号化するため, 暗号化器は まず &lt;X&gt;を &lt;cipher&gt; で暗号化しブロック B1を得る.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19754,6 +20058,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>the entire ciphertext C=C1||C2||...||Cn corresponding to the packet
+   P.  Note that the counter X is not included in the ciphertext.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T081804Z" changeid="haruyama">
+        <seg>注意: カウンタ X は暗号文に含まれない.</seg>
       </tuv>
     </tu>
     <tu>
