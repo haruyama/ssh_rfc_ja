@@ -50,6 +50,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>(Note that &quot;blowfish-cbc&quot; from [RFC4253]
+   uses 128-bit keys.)</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T134226Z" changeid="haruyama">
+        <seg>(注意: [RFC4253]の &quot;blowfish-cbc&quot; は 128-bit鍵を用いる.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>(See
          Section 6.1.)</seg>
       </tuv>
@@ -2394,6 +2403,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>執筆時点では, SSHの多くの実装が プロトコルバージョン 2.0 を利用しているが, まだ以前のバージョンを利用するデバイスも存在している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>At this time, it appears likely that a future specification will
+      promote aes128-ctr to be REQUIRED; implementation of this
+      algorithm is very strongly encouraged.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T133804Z" changeid="haruyama">
+        <seg>この時点で, 将来の仕様では aes128-ctr を要求されている(必須である)に格付けするようだ. このアルゴリズムの実装は非常に強く推奨されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12802,10 +12821,30 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The &quot;3des-ctr&quot; method uses three-key triple-DES (encrypt-decrypt-
+   encrypt), where the first 8 bytes of the key are used for the first
+   encryption, the next 8 bytes for the decryption, and the following 8
+   bytes for the final encryption.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T135312Z" changeid="haruyama">
+        <seg>&quot;3des-ctr&quot; は 3つの鍵を用いる トリプルDES (encrypt-decrypt-encrypt) を使う.  鍵の最初の8byteを最初の暗号化に, 次の8byteを復号に, 続く8byteを最後の暗号化に用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The &quot;aes128-cbc&quot; cipher is the same as above, but with a 128-bit key.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>&quot;aes128-cbc&quot; 暗号は, 同様の暗号だが, 128-bit の鍵を使う.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The &quot;aes128-ctr&quot; method uses AES (the Advanced Encryption Standard,
+   formerly Rijndael) with 128-bit keys [AES].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T135255Z" changeid="haruyama">
+        <seg>&quot;aes128-ctr&quot; は, 128-bit 鍵を用いる AES (Advanced Encryption Standard, 以前は Rijndael) を使う[AES].</seg>
       </tuv>
     </tu>
     <tu>
@@ -12818,11 +12857,27 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The &quot;aes192-ctr&quot; method uses AES with 192-bit keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T135301Z" changeid="haruyama">
+        <seg>&quot;aes192-ctr&quot; は 192-bit の鍵を用いる AES を使う.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The &quot;aes256-cbc&quot; cipher is AES (Advanced Encryption Standard)
    [FIPS-197], in CBC mode.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>&quot;aes256-cbc&quot; 暗号は, CBCモードの AES (Advanced Encryption Standard) [FIPS-197] だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The &quot;aes256-ctr&quot; method uses AES with 256-bit keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T135307Z" changeid="haruyama">
+        <seg>&quot;aes256-ctr&quot; は 256-bit の鍵を用いる ＡＥＳ を使う.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12844,6 +12899,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The &quot;blowfish-ctr&quot; method uses Blowfish with 256-bit keys [SCHNEIER].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T135321Z" changeid="haruyama">
+        <seg>&quot;blowfish-ctr&quot; は 256-bitの鍵を用いる Blowfish を使う [SCHNEIER].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The &quot;byte&quot;, &quot;boolean&quot;, &quot;uint32&quot;, and &quot;string&quot; data types are defined
    in [3].</seg>
       </tuv>
@@ -12858,6 +12921,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>&quot;cast128-cbc&quot; 暗号は, CBCモードで l28-bitの鍵を用いる CAST-128 暗号だ [RFC2144].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The &quot;cast128-ctr&quot; method uses the CAST-128 cipher with 128-bit keys
+   [RFC2144].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T135424Z" changeid="haruyama">
+        <seg>&quot;cast128-ctr&quot; は 128-bit 鍵を用いる CAST-128 暗号を使う [RFC2144].</seg>
       </tuv>
     </tu>
     <tu>
@@ -12902,6 +12974,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>&quot;idea-cbc&quot; 暗号は, CBCモードの IDEA 暗号だ [SCHNEIER].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The &quot;idea-ctr&quot; method uses the IDEA cipher [SCHNEIER].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T135223Z" changeid="haruyama">
+        <seg>&quot;idea-ctr&quot; は IDEA 暗号を用いる [SCHNEIER].</seg>
       </tuv>
     </tu>
     <tu>
@@ -12978,6 +13058,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The &quot;serpent128-ctr&quot; method uses the Serpent block cipher [SERPENT]
+   with 128-bit keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T135347Z" changeid="haruyama">
+        <seg>&quot;serpent128-ctr&quot; は 128-bit 鍵を用いる Serpent ブロック暗号 [SERPENT] を使う,</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The &quot;serpent192-cbc&quot; cipher is the same as above, but with a 192-bit
    key.</seg>
       </tuv>
@@ -12987,11 +13076,27 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The &quot;serpent192-ctr&quot; method uses Serpent with 192-bit keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T135358Z" changeid="haruyama">
+        <seg>&quot;serpent192-ctr&quot; は 192-bit 鍵を用いる Serpent を使う.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The &quot;serpent256-cbc&quot; cipher in CBC mode, with a 256-bit key as
    described in the Serpent AES submission.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>&quot;serpent256-cbc&quot; 暗号は, CBCモードで 256-bitの鍵を用いる. Serpent AES submission.で記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The &quot;serpent256-ctr&quot; method uses Serpent with 256-bit keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T135410Z" changeid="haruyama">
+        <seg>&quot;serpent256-ctr&quot; は 256-bit 鍵を用いる Serpent を使う.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13030,11 +13135,35 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The &quot;twofish128-ctr&quot; method uses Twofish with 128-bit keys [TWOFISH].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T135330Z" changeid="haruyama">
+        <seg>&quot;twofish128-ctr&quot; は 128-bit 鍵を用いる Twofish を使う [TWOFISH].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The &quot;twofish192-cbc&quot; cipher is the same as above, but with a 192-bit
    key.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>&quot;twofish192-cbc&quot; 暗号は, 同様の暗号だが, 192-bit の鍵を使う.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The &quot;twofish192-ctr&quot; method uses Twofish with 192-bit keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T135336Z" changeid="haruyama">
+        <seg>&quot;twofish192-ctr&quot; は 192-bit 鍵を用いる Twofish を使う.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The &quot;twofish256-ctr&quot; method uses Twofish with 256-bit keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T135344Z" changeid="haruyama">
+        <seg>&quot;twofish256-ctr&quot; は 256-bit 鍵を用いる Twofish を使う.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14173,11 +14302,45 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The block
+   size is 8 bytes.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T135227Z" changeid="haruyama">
+        <seg>ブロックサイズは 8byte だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The block B1 is then XORed with P1 to generate
    the ciphertext block C1.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110531T081538Z" changeid="haruyama">
         <seg>次にブロック B1 を P1 と XORし 暗号文ブロック C1 を生成する.rtext block C1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The block size is 16
+   bytes.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T134118Z" changeid="haruyama">
+        <seg>ブロックサイズは １６byte だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The block size is 16 bytes.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T134334Z" changeid="haruyama">
+        <seg>ブロックサイズは  16 byte だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The block size is 8 bytes.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T134122Z" changeid="haruyama">
+        <seg>ブロックサイズは 8byte だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16659,6 +16822,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The thirteen encryption algorithm names defined in Section 4 have
+   been added to the Secure Shell Encryption Algorithm Name registry
+   established by Section 4.11.1 of [RFC4250].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T135524Z" changeid="haruyama">
+        <seg>4節で定義された13の暗号アルゴリズムモードは, [RFC4250] の 4.11.1 節で確立された Secure Shell Encryption Algorithm Name registry に追加されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The transformation between elliptic curve points and
    octet strings is specified in Sections 2.3.3 and 2.3.4 of [SEC1];
    point compression MAY be used.</seg>
@@ -17345,6 +17518,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>このアルゴリズムは, [FIPS-46-3] で定義されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This algorithm is defined in [DES].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T134134Z" changeid="haruyama">
+        <seg>このアルゴリズムは, [DES]で定義されている.</seg>
       </tuv>
     </tu>
     <tu>
