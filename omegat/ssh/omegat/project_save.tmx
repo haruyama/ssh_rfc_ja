@@ -1320,6 +1320,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Additional motivation and discussion, as well as proofs of
+   security, appear in the research papers [BKN1,BKN2].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110607T072318Z" changeid="haruyama">
+        <seg>さらなる動機と議論, セキュリティの証明は, 研究論文 [BKN1,BKN2] にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Additional thoughts about authentication timeouts and retries may be
    found in [ssh-1.2.30].</seg>
       </tuv>
@@ -3344,6 +3353,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>コネクション プロトコル:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Consequently, even though the methods described herein come with
+   proofs of security, developers must still execute caution when
+   developing applications that implement these methods.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110607T081608Z" changeid="haruyama">
+        <seg>結果として, この文書で記述した方法にセキュリティの証明があっても, これらの方法を実装したアプリケーションを開発する際には開発者は慎重に実行しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6099,8 +6118,8 @@
         <seg>If a
          guessed packet will be sent, this MUST be TRUE.</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>推測されたパケットが送られる場合, これは TRUE でなければならない.</seg>
+      <tuv lang="JA" changedate="20110607T071155Z" changeid="haruyama">
+        <seg>推測したパケットが送られる場合, これは TRUE でなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6333,8 +6352,8 @@
         <seg>If no guessed
          packet will be sent, this MUST be FALSE.</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>推測されたパケットが送られないなら, これは, FALSE でなければならない.</seg>
+      <tuv lang="JA" changedate="20110607T071158Z" changeid="haruyama">
+        <seg>推測したパケットが送られないなら, これは, FALSE でなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6940,6 +6959,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If we make the reasonable assumption that the underlying
+   components (such as AES and HMAC-SHA1) are secure, then the attacker
+   against the symmetric portion of the SSH protocol cannot be very
+   successful (since otherwise there would be a contradiction).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110607T075341Z" changeid="haruyama">
+        <seg>基底の部分(AESやHMAC-SHA1のような)が安全だという合理的な仮定ができる場合, SSHプロトコルの対称部分への攻撃はほぼ成功しないだろう(さもなければ矛盾となる).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Ignored Data Message</seg>
       </tuv>
       <tuv lang="JA">
@@ -7524,6 +7554,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In particular, attacks are not
+   impossible, just extremely improbable (unless the building blocks,
+   like AES, are insecure).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110607T080116Z" changeid="haruyama">
+        <seg>特に, (AESのようにブロックの作成が安全でない場合でなければ) 攻撃はほとんど不可能で, まったく起こりえない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In particular, because
    of the flexible nature of the SSH connection protocol, it may not be
    possible to determine the local security policy, if any, that should
@@ -7698,6 +7738,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In the case of the SSH
+   Transport Protocol, even though an application might implement the
+   symmetric portion of the SSH protocol exactly as described in this
+   document, the application may still be vulnerable to non-protocol-</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110607T081321Z" changeid="haruyama">
+        <seg>SSH トランスポートプロトコルの場合, アプリケーションがSSHプロトコルの対称部分をこの文書の記述に正確に実装したとしても, アプリケーションはプロトコルに依存しない攻撃に脆弱かもしれない.(ひどい例を挙げると, アプリケーションが暗号鍵を保護されていないファイルに平文で保存する可能性がある)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In the case that the server sends a `0' num-prompts field in the
    request message, the client MUST send a response message with a `0'
    num-responses field to complete the exchange.</seg>
@@ -7750,9 +7801,8 @@
    manipulate packets in transit between peers after the session has
    been established.</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>3つ目のケースは, セッションが確立された後でピア間の通信のパケットを操作しようとするものだ.s after the session has
-   been established.</seg>
+      <tuv lang="JA" changedate="20110607T070627Z" changeid="haruyama">
+        <seg>3つ目のケースは, セッションが確立された後でピア間の通信のパケットを操作しようとするものだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9751,6 +9801,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Note also that cryptography often plays only a small (but critical)
+   role in an application's overall security.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110607T080157Z" changeid="haruyama">
+        <seg>注意: アプリケーション全体のセキュリティでは, 暗号はしばしば小さい(しかし重大な)役割のみを果している. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Note that
    both the client and server MAY send global requests at any time, and
    the receiver MUST respond appropriately.</seg>
@@ -10563,6 +10622,29 @@
       </tuv>
       <tuv lang="JA">
         <seg>pixel 次元は, ウィンドウの描画可能領域を参照する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Please
+   see [BKN1,BKN2] for details.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110607T075837Z" changeid="haruyama">
+        <seg>詳細は [BKN1,BKN2] を参照せよ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Please note that the notion of &quot;prove&quot; in the context of [BKN1,BKN2]
+   is that of practice-oriented reductionist security: if an attacker is
+   able to break the symmetric portion of the SSH Transport Protocol
+   using a certain type of attack (e.g., a chosen-ciphertext attack),
+   then the attacker will also be able to break one of the transport
+   protocol's underlying components (e.g., the underlying block cipher
+   or MAC).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110607T074934Z" changeid="haruyama">
+        <seg>注意: [BKN1, BKN2]の文脈での&quot;証明&quot;の概念は,  実践指向の還元主義者のセキュリティの概念だ. 攻撃者がSSHトランスポートプロトコルの対称部分をなんらかの方法(たとえば選択暗号文攻撃)で破れる場合に 攻撃者はトランスポートプロトコルの基底となっている部分の対称部分(たとえば基底のブロック暗号やMAC)も破れるということだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17681,6 +17763,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document describes additional encryption methods and
+   recommendations for the SSH Transport Protocol [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110607T071616Z" changeid="haruyama">
+        <seg>この文書は, SSH トランスポートプロトコル [RFC4253] への新しい暗号法と推薦を記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document describes algorithms based on Elliptic Curve
    Cryptography (ECC) for use within the Secure Shell (SSH) transport
    protocol.</seg>
@@ -18468,6 +18559,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>この節では, この点を詳述し, セッションを始める前にこの関係を検証することの重要性を管理者とユーザが理解するように勧めている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This section is designed to help implementors understand the
+   security-related motivations for, as well as possible consequences of
+   deviating from, the methods and recommendations described in this
+   document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110607T072249Z" changeid="haruyama">
+        <seg>この節は, この文書で記述された方法と推薦に対するセキュリティに関する動機と方法や推薦を採用しない場合に起こりえる結果についての実装者の理解を支援する</seg>
       </tuv>
     </tu>
     <tu>
@@ -19507,6 +19609,17 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>[BKN1,BKN2] prove that if an SSH application incorporates the methods
+   and recommendations described in this document, then the symmetric
+   cryptographic portion of that application will resist a large class
+   of privacy and integrity attacks.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110607T071921Z" changeid="haruyama">
+        <seg>[BKN1,BKN2] は以下を示している. SSHアプリケーションがこの文書で記述された方法と推薦を組み込めば, アプリケーションの対称暗号の部分は, 秘匿と完全性への攻撃の大部分に抵抗できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>[RFC4086] offers suggestions for sources of
    random numbers and entropy.</seg>
       </tuv>
@@ -19530,6 +19643,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
    before any session is initiated.</seg>
       </tuv>
       <tuv lang="JA">
+        <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>based attacks (as an egregious example, an application might save
+   cryptographic keys in cleartext to an unprotected file).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110607T081335Z" changeid="haruyama">
         <seg> </seg>
       </tuv>
     </tu>
@@ -19618,9 +19740,9 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
         <seg>first_kex_packet_follows
          Indicates whether a guessed key exchange packet follows.</seg>
       </tuv>
-      <tuv lang="JA">
+      <tuv lang="JA" changedate="20110607T071148Z" changeid="haruyama">
         <seg>first_kex_packet_follows
-         推測された鍵交換パケット後に続くかどうかを示す.</seg>
+         (鍵交換法を事前に)推測した鍵交換パケットが後に続くかどうかを示す.</seg>
       </tuv>
     </tu>
     <tu>
