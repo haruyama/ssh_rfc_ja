@@ -1365,6 +1365,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Additionally, recommendation (2) is designed to protect an encryptor
+   from encrypting more than 2**L blocks with the same key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110610T072958Z" changeid="haruyama">
+        <seg>また, 推奨 (2) は 同じ鍵で 2**L ブロックより多く暗号化する暗号者を保護するために設計されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Additionally, some channels can transfer several types of data.</seg>
       </tuv>
       <tuv lang="JA">
@@ -1398,6 +1407,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110425T074917Z" changeid="haruyama">
         <seg>また, この文書で定義された鍵交換法は, [FIPS-180-3] で定義されたハッシュ関数 SHA2ファミリに依存している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Additionally, the underlying MAC may
+   begin to leak information about the protocol's payload data.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110609T052829Z" changeid="haruyama">
+        <seg>さらに, 基底のMACがプロトコルのペイロードのデータについての情報を漏らしはじめる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1872,6 +1890,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Also note that although
+   compressing payload data before encrypting and MACing and the use of
+   random padding may reduce the risk of information leakage through the
+   underlying MAC, compression and the use of random padding will not
+   prevent information leakage.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110609T053444Z" changeid="haruyama">
+        <seg>さらに注意: 暗号化とMACの前の圧縮やランダムなパディングの利用は基底のMACからの情報漏洩のリスクを軽減するが, 圧縮やランダムなパディングの利用は情報漏洩を防ぐわけではない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Also note that the
    insertion of variable amounts of 'random padding' may help thwart
    traffic analysis.</seg>
@@ -2023,6 +2053,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>すべての実装は, すべての認識できないメッセージに対して受け取った順にSSH_MSG_UNIMPLEMENTED メッセージで応答しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Another alternative to recommendation
+   (1) would be to switch from basic HMAC to a another MAC, such as a</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110610T071010Z" changeid="haruyama">
+        <seg>推薦(1)の別の代替手段に, 基本的なHMACから, 自身の内部カウンタを持つMACのような, 別のMACに切り替えることがある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2637,6 +2676,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Because of the 32-bit counter
+   already present in the protocol, such a counter would only need to be
+   incremented once every 2**32 packets.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110610T071108Z" changeid="haruyama">
+        <seg>32-bitカウンタがプロトコルですでにあるので, このようなカウンタは, 2**32 パケットごとに一度インクリメントするだけでよいだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Because public key authentication exchanges
    are cryptographically bound to the session (i.e., to the initial key
    exchange), they cannot be successfully replayed in other sessions.</seg>
@@ -2729,6 +2778,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>'protoversion' と 'softwareversion' は, 空白とマイナス(-)を除く印刷可能な US-ASCII 文字で構成されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Briefly, (1) is designed to protect against
+   information leakage through the SSH protocol's underlying MAC, and
+   (2) is designed to protect against information leakage through the
+   SSH protocol's underlying encryption scheme.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110609T052006Z" changeid="haruyama">
+        <seg>簡潔に言うと, (1) は SSHプロトコルの基底にあるMACからの情報漏洩を防ぐために設計されている. そして (2) はSSHプロトコルの基底にある暗号方式からの情報漏洩を防ぐために設計されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5068,6 +5128,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For example, there is a theoretical privacy
+   attack against stateful-decryption counter mode if an adversary is
+   allowed to encrypt approximately 2**(L/2) messages with the same key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110610T072854Z" changeid="haruyama">
+        <seg>例えば, 同じ鍵でおおよそ 2**(L/2)のメッセージを暗号化すると, ステートフル復号カウンターモードに対する理論的な秘匿性への攻撃ができる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For example: the US-ASCII
       string &quot;testing&quot; is represented as 00 00 00 07 t e s t i n g.</seg>
       </tuv>
@@ -6166,6 +6236,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If a collision is
+   found, then the payload data associated with those two ciphertexts is
+   probably identical.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110609T053048Z" changeid="haruyama">
+        <seg>衝突が見付かったら, それらの2つの暗号文のペイロードデータは, おそらく同一だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If a connection is established to a server whose public key is not
    already known to the client, a fingerprint of the key is presented to
    the user for verification.</seg>
@@ -6300,6 +6380,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>メッセージ認証コードが取り決められていたら, このフィールドはMACを含む.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If more than 2**32 packets are
+   encrypted and MACed by the SSH Transport Protocol between rekeyings,
+   then the SSH Transport Protocol may become vulnerable to replay and
+   re-ordering attacks.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110609T052513Z" changeid="haruyama">
+        <seg>再生成の間にSSHトランスポートプロトコルによって2**32 パケット以上暗号化とMACが行なわれると, SSHトランスポートプロトコルは 再生攻撃や再順序攻撃(re-ordering attack)に脆弱となるかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7332,6 +7423,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Implementors who decide not to rekey at
+   least once every 2**32 packets should understand these issues.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110609T053523Z" changeid="haruyama">
+        <seg>2**32パケットごとに少なくとも1度の鍵の再発行をしないと決める実装者は, この問題を理解する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In
    Section 6, we discuss the motivation for these rekeying
    recommendations in more detail.</seg>
@@ -7513,6 +7613,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>一般に, この返答メッセージは要求の種類の識別子を含まない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In more
+   detail, an adversary looks for a collision between the MACs
+   associated to two packets that were MACed with the same 32-bit
+   sequence number (see Section 4.4 of [RFC4253]).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110609T053002Z" changeid="haruyama">
+        <seg>より詳細には, 同じ 32-bitシーケンス番号([RFC 4253] の 4.4節) でMACされた2つのパケットのMACの衝突を探す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8491,6 +8602,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It is because of these birthday attacks that implementors are highly
+   encouraged to use secure block ciphers with large block lengths.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110610T072842Z" changeid="haruyama">
+        <seg>これらの誕生日攻撃のために, 実装者は長いブロック長の安全なブロック暗号を使うことが推奨される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It is believed (see, for example, Section B.2.1 of [SEC1]) that when
    curve parameters are generated at random, the curves will be
    resistant to special attacks, and must rely on the most general
@@ -9211,6 +9331,14 @@
       <tuv lang="JA">
         <seg>MACアルゴリズム名 ...............................17
            4.11.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>MAC that has its own internal counter.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110610T071014Z" changeid="haruyama">
+        <seg> </seg>
       </tuv>
     </tu>
     <tu>
@@ -10106,6 +10234,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Note that this problem occurs regardless of how
+   secure the underlying encryption method is.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110609T053109Z" changeid="haruyama">
+        <seg>注意; 基底の暗号法の安全性に関係なくこの問題はおこる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Note that when this message is sent to the server, the client has not
    yet prompted the user for a password, and so that information is NOT
    included with this initial message (unlike the &quot;password&quot; method).</seg>
@@ -10262,6 +10399,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>セッションが設定されると, プログラムがリモート側で起動される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>One alternative to recommendation (1) would be to make the SSH
+   Transport Protocol's sequence number more than 32 bits long.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110610T070803Z" changeid="haruyama">
+        <seg>推薦 (1) の代替手段の1つに, SSHトランスポートプロトコルのシーケンス番号を 32bitよりも長くすることがある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10645,6 +10791,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110607T074934Z" changeid="haruyama">
         <seg>注意: [BKN1, BKN2]の文脈での&quot;証明&quot;の概念は,  実践指向の還元主義者のセキュリティの概念だ. 攻撃者がSSHトランスポートプロトコルの対称部分をなんらかの方法(たとえば選択暗号文攻撃)で破れる場合に 攻撃者はトランスポートプロトコルの基底となっている部分の対称部分(たとえば基底のブロック暗号やMAC)も破れるということだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Please note that,
+   depending on the encryption method's block length L and the number of
+   blocks encrypted per packet, recommendation (1) may supersede
+   recommendation (2) or vice versa.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110609T052113Z" changeid="haruyama">
+        <seg>注意: 暗号法のブロック長 L と パケットごとの暗号化されたブロックの数によって, 推奨(1)が(2)を上書きするかもしれないし, また逆もある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11038,6 +11195,25 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Recommendation (1) states that SSH implementations should rekey at
+   least once every 2**32 packets.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110609T052149Z" changeid="haruyama">
+        <seg>推奨 (1) は SSHの実装は少なくとも 2**32パケットごとに1度鍵の再生成をする必要があると主張している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Recommendation (2) states that SSH implementations should rekey
+   before encrypting more than 2**(L/4) blocks with the same key
+   (assuming L is at least 128).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110610T072230Z" changeid="haruyama">
+        <seg>推奨 (2) は, (ブロック暗号のブロックサイズ L が少なくとも128bitの場合に) 同じ鍵で 2**(L/4) より多くの暗号化をする前にSSHの実装が鍵を再生成すべきと述べている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Recommended Curves</seg>
       </tuv>
       <tuv lang="JA" changedate="20110426T084029Z" changeid="haruyama">
@@ -11089,6 +11265,14 @@
       <tuv lang="JA" changedate="20110530T070617Z" changeid="haruyama">
         <seg>鍵の再生成 ........................................................2
       3.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Rekeying Considerations</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110609T051404Z" changeid="haruyama">
+        <seg>鍵の再発行の考察</seg>
       </tuv>
     </tu>
     <tu>
@@ -11665,6 +11849,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110420T053317Z" changeid="haruyama">
         <seg>10節で, この文書で定義された公開鍵アルゴリズムと鍵交換法と共に用いられる必須と推奨の楕円曲線ドメインパラメータを定義している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Section 3 of this document makes two rekeying recommendations: (1)
+   rekey at least once every 2**32 packets, and (2) rekey after a
+   certain number of encrypted blocks (e.g., 2**(L/4) blocks if the
+   block cipher's block length L is at least 128 bits).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110609T051615Z" changeid="haruyama">
+        <seg>この文書の3節で, 2つの鍵の再発行の推奨を示した: (1) 少なくとも 2**32 パケットごとの再発行, (2) 暗号化されたブロックが特定の数(例えば, ブロック暗号のブロック長 L が少なくとも128 bitなら, 2**(L/4) ブロック) に逹したら再発行.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12788,6 +12983,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>最小のパケットサイズは, 28 byteのオーダーだ (取り決められるアルゴリズムに依存する).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   motivation here is that, if an encryptor were to use SDCTR mode to
+   encrypt more than 2**L blocks with the same key, then the encryptor
+   would reuse keystream, and the reuse of keystream can lead to serious
+   privacy attacks [SCHNEIER].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110610T073157Z" changeid="haruyama">
+        <seg>ここでの動機は以下の通り. 暗号者が SDCTRモードにで同じ鍵で 2**L より多い暗号化して鍵ストリームを再利用すると, 鍵ストリームの再利用が深刻な秘匿性への攻撃を導くことがある [SCHNEIER].</seg>
       </tuv>
     </tu>
     <tu>
@@ -14162,6 +14369,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>セキュアシェル (SSH) セッションチャンネルBreak拡張</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The Secure Shell (SSH) Transport Layer Encryption Modes</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110609T051353Z" changeid="haruyama">
+        <seg>セキュア シェル (SSH) トランスポート層暗号モード</seg>
       </tuv>
     </tu>
     <tu>
@@ -15910,6 +16125,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The motivations
+   for recommendations (1) and (2) are different, and we consider each
+   recommendation in turn.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110609T051647Z" changeid="haruyama">
+        <seg>推奨(1)と(2)の動機は異なるので, それぞれの推奨について順番に考察する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The name &quot;diffie-hellman-group1-sha1&quot; is used for a key exchange
    method using an Oakley group, as defined in [RFC2409].</seg>
       </tuv>
@@ -17343,6 +17568,15 @@
     <tu>
       <tuv lang="EN-US">
         <seg>These
+   issues are discussed further in [BKN1,BKN2].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110609T053555Z" changeid="haruyama">
+        <seg>この問題については, [BKN1,BKN2]でより詳しく議論されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These
    messages may reveal surprising amounts of information about the host
    if not properly designed.</seg>
       </tuv>
@@ -17553,6 +17787,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>この文書は, SSHのプロトコルのアーキテクチャを記述している. また, SSHのプロトコルのドキュメントで使われる表記法や用語も記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This
+   document does not suggest increasing the length of the sequence
+   number because doing so could hinder interoperability with older
+   versions of the SSH protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110610T070905Z" changeid="haruyama">
+        <seg>この文書では, シーケンス番号の長さを増やすことを示唆しない. こうすると, 古いバージョンのSSHプロトコルとの相互運用性を妨げるかもしれないからだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18247,6 +18492,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This means that an adversary may be able to
+   convince the receiver to accept the same message more than once or to
+   accept messages out of order.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110609T052753Z" changeid="haruyama">
+        <seg>同じメッセージを1回より多く受け取ったり順番がおかしいメッセージを受け取るのを受信者に納得させることが攻撃者ができる, ということを意味する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This message
    does not consume window space and can be sent even if no window space
    is available.</seg>
@@ -18514,6 +18769,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>この範囲は, プライベートな利用(PRIVATE USE)のために残されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This recommendation is designed to
+   minimize the risk of birthday attacks against the encryption method's
+   underlying block cipher.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110610T072305Z" changeid="haruyama">
+        <seg>この推奨は, 暗号法の基底のブロック暗号に対する誕生日攻撃のリスクを最小限にするために設計されている.</seg>
       </tuv>
     </tu>
     <tu>
