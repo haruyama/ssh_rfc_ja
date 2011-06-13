@@ -41,6 +41,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>(Although
+   there may be some network savings from padding to only 8-bytes even
+   if the block cipher uses 16-byte blocks, because of (1) we do not
+   make that recommendation here.)</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110613T032804Z" changeid="haruyama">
+        <seg>(16-byteブロックのブロック暗号の場合でさえパディングから8byteのネットワークの節約しかないので, (1) より ここでパディングの節約の推奨はしない.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>(Here, again, client means the side originating the
    session, and server means the other side.)</seg>
       </tuv>
@@ -1962,6 +1973,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Although not padding messages can reduce the protocol's
+   network consumption, this document requires that padding be a
+   multiple of the block cipher's block length in order to (1) not alter</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110613T032105Z" changeid="haruyama">
+        <seg>パディングしないメッセージがプロトコルのネットワークの消費を抑えうるにもかかわらず, この文書はブロック暗号のブロック長の倍数のパディングを要求する. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>An
    attacker may use social engineering techniques to pass off server
    keys to unsuspecting users and may then place a man-in-the-middle
@@ -2210,6 +2231,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>実装者とユーザは, 常に, 製品に利用している暗号に新しい脆弱性が見付かっていないことを保証するために最近の文献をチェックする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As an additional note, when one of the stateful-decryption counter
+   mode encryption methods (Section 4) is used, then the padding
+   included in an SSH packet (Section 4 of [RFC4253]) need not be (but
+   can still be) random.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110613T031823Z" changeid="haruyama">
+        <seg>追加の注意として, (4節の)ステートフル復号カウンターモード暗号法の1つを使う場合, ([RFC4253]の4節)のSSHのパケットに含まれるpaddingはランダムでなくてもよい(ただしランダムのままでもよい).</seg>
       </tuv>
     </tu>
     <tu>
@@ -4435,6 +4467,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Encryption Method Considerations</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110613T031129Z" changeid="haruyama">
+        <seg>暗号モードの考察</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Encryption Method Considerations ...........................8
    Normative References ...............................................9
    Informative References ............................................10</seg>
@@ -5231,6 +5271,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>興味のある者のために紹介しておくと, 1.x プロトコルについての唯一の文書は, ソースコード [ssh-1.2.30] と共にリリースされた README ファイルに含まれている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Fortunately, the
+   common concerns with counter mode do not apply to SSH because of the
+   rekeying recommendations and because of the additional protection
+   provided by the transport protocol's MAC.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110613T031630Z" changeid="haruyama">
+        <seg>幸いにも, カウンターモードについての一般的な懸念はSSHには適用されない. 鍵の再生成の推奨とトランスポートプロトコルのMACで提供される追加の保護のおがけだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7500,6 +7551,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In addition to stateful-decryption counter mode, [BKN1,BKN2] describe
+   other provably secure encryption methods for use with the SSH
+   Transport Protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110613T033721Z" changeid="haruyama">
+        <seg>ステートフル-復号カウンターモードに加えて, [BKN1,BNK2]は, SSHトランスポートプロトコルで利用するためのおそらく安全と思われる別の暗号法を記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In addition to the above, there is a range of message numbers (60 to
    79) reserved for method-specific messages.</seg>
       </tuv>
@@ -9429,6 +9490,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Many people shy away from counter mode-based encryption schemes
+   because, when used incorrectly (such as when the keystream is allowed
+   to repeat), counter mode can be very insecure.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110613T031526Z" changeid="haruyama">
+        <seg>多くの人がカウンターモードベースの暗号方式を避けている. 正しく利用しないと(鍵ストリームの繰り返しが許可されている場合など), カウンターモードは非常に危険となりうるからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Maximum Packet Length</seg>
       </tuv>
       <tuv lang="JA">
@@ -10445,6 +10516,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>submethods フィールドのサーバ側の一つの可能な実装戦略は, ユーザが複数の異なる submethodを利用しようとも, サーバがこのフィールドを無視することだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>One property of counter mode encryption is that it does not require
+   that messages be padded to a multiple of the block cipher's block
+   length.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110613T031956Z" changeid="haruyama">
+        <seg>カウンターモード暗号化の特徴の1つは, ブロック暗号のブロック長の倍数にメッセージをパディングする必要がないことだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11527,6 +11608,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110527T140802Z" changeid="haruyama">
         <seg>現在のSSHトランスポートプロトコルの認証された暗号化部分がいくつかの攻撃に脆弱であることを研究者が発見した.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Researchers have shown that the original CBC-based encryption methods
+   in [RFC4253] are vulnerable to chosen-plaintext privacy attacks
+   [DAI,BKN1,BKN2].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110613T031231Z" changeid="haruyama">
+        <seg>[RFC4253] の元々のCBCモードベースの暗号法は, 選択平文攻撃に対して脆弱だと研究者は示した.[DAI, BKN1, BKN2].</seg>
       </tuv>
     </tu>
     <tu>
@@ -16170,6 +16261,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The new stateful-decryption counter mode encryption
+   methods described in Section 4 of this document were designed to be
+   secure replacements to the original encryption methods described in
+   [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110613T031340Z" changeid="haruyama">
+        <seg>この文書の4節で記述した新しいステートフル-復号 カウンターモード暗号法は, [RFC4253]で記述された元々の暗号法の安全な代替法として設計された.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The null character MUST NOT be sent.</seg>
       </tuv>
       <tuv lang="JA">
@@ -17057,6 +17159,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The stateful-decryption counter mode methods in
+   Section 4 are, however, the preferred alternatives to the insecure
+   methods in [RFC4253] because stateful-decryption counter mode is the
+   most efficient (in terms of both network consumption and the number
+   of required cryptographic operations per packet).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110613T033859Z" changeid="haruyama">
+        <seg>しかし, 4節のステートフル-復号 カウンターモード法が[RFC4253]の危険な方法の好ましい代替だ. ステートフル-復号カウンターモードが(ネットワーク消費とパケットごとに必要な暗号操作の数の両方で)もっとも効率的だからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The stream consists of opcode-
    argument pairs wherein the opcode is a byte value.</seg>
       </tuv>
@@ -17922,6 +18036,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This discussion is
+   formalized with proofs of security in [BKN1,BKN2].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110613T031651Z" changeid="haruyama">
+        <seg>この議論は, [BKN1,BKN2}のセキュリティの照明で定式化されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document
    defines one method: Fingerprint storage in DNS.</seg>
       </tuv>
@@ -18168,6 +18291,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110425T075713Z" changeid="haruyama">
         <seg>この文書では, このガイダンスに基づく楕円曲線のサイズと共に利用する必要のある SHA2のバリエーションを 6.2.1節で指定している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This eliminates the need to generate
+   cryptographically secure pseudorandom bytes for each packet.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110613T031912Z" changeid="haruyama">
+        <seg>パケットごとに暗号学的に安全な疑似乱数バイト列を生成する必要がなくなる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20635,6 +20767,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110531T081804Z" changeid="haruyama">
         <seg>注意: カウンタ X は暗号文に含まれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>the packet description in [RFC4253] and (2) not leak precise
+   information about the length of the packet's payload data.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110613T032145Z" changeid="haruyama">
+        <seg>理由は(1) [RFC4253]のパケットの記述を変更しないため, (2) パケットのペイロードデータの長さの正確な情報を漏らさないため, だ.</seg>
       </tuv>
     </tu>
     <tu>

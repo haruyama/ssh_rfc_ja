@@ -12,7 +12,7 @@ Category: Standards Track                                   UC San Diego
                                                             January 2006
 
 
-        The Secure Shell (SSH) Transport Layer Encryption Modes
+        セキュア シェル (SSH) トランスポート層暗号モード
 
 このメモの位置づけ
 
@@ -213,48 +213,13 @@ RFC 4344          SSH Transport Layer Encryption Modes      January 2006
 
     結果として, この文書で記述した方法にセキュリティの証明があっても, これらの方法を実装したアプリケーションを開発する際には開発者は慎重に実行しなければならない.
 
-6.1.  Rekeying Considerations
+6.1.  鍵の再発行の考察
 
-   Section 3 of this document makes two rekeying recommendations: (1)
-   rekey at least once every 2**32 packets, and (2) rekey after a
-   certain number of encrypted blocks (e.g., 2**(L/4) blocks if the
-   block cipher's block length L is at least 128 bits).  The motivations
-   for recommendations (1) and (2) are different, and we consider each
-   recommendation in turn.  Briefly, (1) is designed to protect against
-   information leakage through the SSH protocol's underlying MAC, and
-   (2) is designed to protect against information leakage through the
-   SSH protocol's underlying encryption scheme.  Please note that,
-   depending on the encryption method's block length L and the number of
-   blocks encrypted per packet, recommendation (1) may supersede
-   recommendation (2) or vice versa.
+   この文書の3節で, 2つの鍵の再発行の推奨を示した: (1) 少なくとも 2**32 パケットごとの再発行, (2) 暗号化されたブロックが特定の数(例えば, ブロック暗号のブロック長 L が少なくとも128 bitなら, 2**(L/4) ブロック) に逹したら再発行.  推奨(1)と(2)の動機は異なるので, それぞれの推奨について順番に考察する.  簡潔に言うと, (1) は SSHプロトコルの基底にあるMACからの情報漏洩を防ぐために設計されている. そして (2) はSSHプロトコルの基底にある暗号方式からの情報漏洩を防ぐために設計されている.  注意: 暗号法のブロック長 L と パケットごとの暗号化されたブロックの数によって, 推奨(1)が(2)を上書きするかもしれないし, また逆もある.
 
-   Recommendation (1) states that SSH implementations should rekey at
-   least once every 2**32 packets.  If more than 2**32 packets are
-   encrypted and MACed by the SSH Transport Protocol between rekeyings,
-   then the SSH Transport Protocol may become vulnerable to replay and
-   re-ordering attacks.  This means that an adversary may be able to
-   convince the receiver to accept the same message more than once or to
-   accept messages out of order.  Additionally, the underlying MAC may
-   begin to leak information about the protocol's payload data.  In more
-   detail, an adversary looks for a collision between the MACs
-   associated to two packets that were MACed with the same 32-bit
-   sequence number (see Section 4.4 of [RFC4253]).  If a collision is
-   found, then the payload data associated with those two ciphertexts is
-   probably identical.  Note that this problem occurs regardless of how
-   secure the underlying encryption method is.  Also note that although
-   compressing payload data before encrypting and MACing and the use of
-   random padding may reduce the risk of information leakage through the
-   underlying MAC, compression and the use of random padding will not
-   prevent information leakage.  Implementors who decide not to rekey at
-   least once every 2**32 packets should understand these issues.  These
-   issues are discussed further in [BKN1,BKN2].
+   推奨 (1) は SSHの実装は少なくとも 2**32パケットごとに1度鍵の再生成をする必要があると主張している.  再生成の間にSSHトランスポートプロトコルによって2**32 パケット以上暗号化とMACが行なわれると, SSHトランスポートプロトコルは 再生攻撃や再順序攻撃(re-ordering attack)に脆弱となるかもしれない.  同じメッセージを1回より多く受け取ったり順番がおかしいメッセージを受け取るのを受信者に納得させることが攻撃者ができる, ということを意味する.  さらに, 基底のMACがプロトコルのペイロードのデータについての情報を漏らしはじめる.  より詳細には, 同じ 32-bitシーケンス番号([RFC 4253] の 4.4節) でMACされた2つのパケットのMACの衝突を探す.  衝突が見付かったら, それらの2つの暗号文のペイロードデータは, おそらく同一だ.  注意; 基底の暗号法の安全性に関係なくこの問題はおこる.  さらに注意: 暗号化とMACの前の圧縮やランダムなパディングの利用は基底のMACからの情報漏洩のリスクを軽減するが, 圧縮やランダムなパディングの利用は情報漏洩を防ぐわけではない.  2**32パケットごとに少なくとも1度の鍵の再発行をしないと決める実装者は, この問題を理解する必要がある.  この問題については, [BKN1,BKN2]でより詳しく議論されている.
 
-   One alternative to recommendation (1) would be to make the SSH
-   Transport Protocol's sequence number more than 32 bits long.  This
-   document does not suggest increasing the length of the sequence
-   number because doing so could hinder interoperability with older
-   versions of the SSH protocol.  Another alternative to recommendation
-   (1) would be to switch from basic HMAC to a another MAC, such as a
+   推薦 (1) の代替手段の1つに, SSHトランスポートプロトコルのシーケンス番号を 32bitよりも長くすることがある.  この文書では, シーケンス番号の長さを増やすことを示唆しない. こうすると, 古いバージョンのSSHプロトコルとの相互運用性を妨げるかもしれないからだ.  推薦(1)の別の代替手段に, 基本的なHMACから, 自身の内部カウンタを持つMACのような, 別のMACに切り替えることがある.
 
 
 
@@ -263,54 +228,21 @@ Bellare, et al.             Standards Track                     [Page 7]
 RFC 4344          SSH Transport Layer Encryption Modes      January 2006
 
 
-   MAC that has its own internal counter.  Because of the 32-bit counter
-   already present in the protocol, such a counter would only need to be
-   incremented once every 2**32 packets.
+    32-bitカウンタがプロトコルですでにあるので, このようなカウンタは, 2**32 パケットごとに一度インクリメントするだけでよいだろう.
 
-   Recommendation (2) states that SSH implementations should rekey
-   before encrypting more than 2**(L/4) blocks with the same key
-   (assuming L is at least 128).  This recommendation is designed to
-   minimize the risk of birthday attacks against the encryption method's
-   underlying block cipher.  For example, there is a theoretical privacy
-   attack against stateful-decryption counter mode if an adversary is
-   allowed to encrypt approximately 2**(L/2) messages with the same key.
-   It is because of these birthday attacks that implementors are highly
-   encouraged to use secure block ciphers with large block lengths.
-   Additionally, recommendation (2) is designed to protect an encryptor
-   from encrypting more than 2**L blocks with the same key.  The
-   motivation here is that, if an encryptor were to use SDCTR mode to
-   encrypt more than 2**L blocks with the same key, then the encryptor
-   would reuse keystream, and the reuse of keystream can lead to serious
-   privacy attacks [SCHNEIER].
+   推奨 (2) は, (ブロック暗号のブロックサイズ L が少なくとも128bitの場合に) 同じ鍵で 2**(L/4) より多くの暗号化をする前にSSHの実装が鍵を再生成すべきと述べている.  この推奨は, 暗号法の基底のブロック暗号に対する誕生日攻撃のリスクを最小限にするために設計されている.  例えば, 同じ鍵でおおよそ 2**(L/2)のメッセージを暗号化すると, ステートフル復号カウンターモードに対する理論的な秘匿性への攻撃ができる.
+   これらの誕生日攻撃のために, 実装者は長いブロック長の安全なブロック暗号を使うことが推奨される.
+   また, 推奨 (2) は 同じ鍵で 2**L ブロックより多く暗号化する暗号者を保護するために設計されている.  ここでの動機は以下の通り. 暗号者が SDCTRモードにで同じ鍵で 2**L より多い暗号化して鍵ストリームを再利用すると, 鍵ストリームの再利用が深刻な秘匿性への攻撃を導くことがある [SCHNEIER].
 
-6.2.  Encryption Method Considerations
+6.2.  暗号モードの考察
 
-   Researchers have shown that the original CBC-based encryption methods
-   in [RFC4253] are vulnerable to chosen-plaintext privacy attacks
-   [DAI,BKN1,BKN2].  The new stateful-decryption counter mode encryption
-   methods described in Section 4 of this document were designed to be
-   secure replacements to the original encryption methods described in
-   [RFC4253].
+   [RFC4253] の元々のCBCモードベースの暗号法は, 選択平文攻撃に対して脆弱だと研究者は示した.[DAI, BKN1, BKN2].  この文書の4節で記述した新しいステートフル-復号 カウンターモード暗号法は, [RFC4253]で記述された元々の暗号法の安全な代替法として設計された.
 
-   Many people shy away from counter mode-based encryption schemes
-   because, when used incorrectly (such as when the keystream is allowed
-   to repeat), counter mode can be very insecure.  Fortunately, the
-   common concerns with counter mode do not apply to SSH because of the
-   rekeying recommendations and because of the additional protection
-   provided by the transport protocol's MAC.  This discussion is
-   formalized with proofs of security in [BKN1,BKN2].
+   多くの人がカウンターモードベースの暗号方式を避けている. 正しく利用しないと(鍵ストリームの繰り返しが許可されている場合など), カウンターモードは非常に危険となりうるからだ.  幸いにも, カウンターモードについての一般的な懸念はSSHには適用されない. 鍵の再生成の推奨とトランスポートプロトコルのMACで提供される追加の保護のおがけだ.  この議論は, [BKN1,BKN2}のセキュリティの照明で定式化されている.
 
-   As an additional note, when one of the stateful-decryption counter
-   mode encryption methods (Section 4) is used, then the padding
-   included in an SSH packet (Section 4 of [RFC4253]) need not be (but
-   can still be) random.  This eliminates the need to generate
-   cryptographically secure pseudorandom bytes for each packet.
+   追加の注意として, (4節の)ステートフル復号カウンターモード暗号法の1つを使う場合, ([RFC4253]の4節)のSSHのパケットに含まれるpaddingはランダムでなくてもよい(ただしランダムのままでもよい).  パケットごとに暗号学的に安全な疑似乱数バイト列を生成する必要がなくなる.
 
-   One property of counter mode encryption is that it does not require
-   that messages be padded to a multiple of the block cipher's block
-   length.  Although not padding messages can reduce the protocol's
-   network consumption, this document requires that padding be a
-   multiple of the block cipher's block length in order to (1) not alter
+   カウンターモード暗号化の特徴の1つは, ブロック暗号のブロック長の倍数にメッセージをパディングする必要がないことだ.  パディングしないメッセージがプロトコルのネットワークの消費を抑えうるにもかかわらず, この文書はブロック暗号のブロック長の倍数のパディングを要求する. 
 
 
 
@@ -319,19 +251,9 @@ Bellare, et al.             Standards Track                     [Page 8]
 RFC 4344          SSH Transport Layer Encryption Modes      January 2006
 
 
-   the packet description in [RFC4253] and (2) not leak precise
-   information about the length of the packet's payload data.  (Although
-   there may be some network savings from padding to only 8-bytes even
-   if the block cipher uses 16-byte blocks, because of (1) we do not
-   make that recommendation here.)
+   理由は(1) [RFC4253]のパケットの記述を変更しないため, (2) パケットのペイロードデータの長さの正確な情報を漏らさないため, だ.  (16-byteブロックのブロック暗号の場合でさえパディングから8byteのネットワークの節約しかないので, (1) より ここでパディングの節約の推奨はしない.)
 
-   In addition to stateful-decryption counter mode, [BKN1,BKN2] describe
-   other provably secure encryption methods for use with the SSH
-   Transport Protocol.  The stateful-decryption counter mode methods in
-   Section 4 are, however, the preferred alternatives to the insecure
-   methods in [RFC4253] because stateful-decryption counter mode is the
-   most efficient (in terms of both network consumption and the number
-   of required cryptographic operations per packet).
+   ステートフル-復号カウンターモードに加えて, [BKN1,BNK2]は, SSHトランスポートプロトコルで利用するためのおそらく安全と思われる別の暗号法を記述している.  しかし, 4節のステートフル-復号 カウンターモード法が[RFC4253]の危険な方法の好ましい代替だ. ステートフル-復号カウンターモードが(ネットワーク消費とパケットごとに必要な暗号操作の数の両方で)もっとも効率的だからだ.
 
 Normative References
 
