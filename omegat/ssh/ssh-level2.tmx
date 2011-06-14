@@ -2656,6 +2656,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The security considerations in [RFC4251] apply.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T025721Z" changeid="haruyama">
+        <seg>[RFC4251]のセキュリティの考察が適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Implementors who decide not to rekey at
    least once every 2**32 packets should understand these issues.</seg>
       </tuv>
@@ -3228,6 +3236,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Strong distinguishers distinguish an Arcfour keystream from
+   randomness at the start of the stream and are defended against by the
+   algorithm defined in this document.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T030940Z" changeid="haruyama">
+        <seg>強い識別者による攻撃では, Arcfourの鍵ストリームからストリームも最初の乱数を識別する. この文書で定義したアルゴリズムで防御される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>One big issue is the character set of the interactive session.</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -3289,16 +3307,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>Implementations should treat these names as opaque
-   identifiers and should not assume any relationship between the groups
-   used by SSH and the groups defined for IKE.</seg>
-      </tuv>
-      <tuv xml:lang="JA">
-        <seg>実装は, これらの名前を内部識別子として扱わなければならない. また, SSHが用いる群とIKEで定義された群との間の関係を仮定してはならない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>If X=(2**L)-1, then
    &quot;increment X&quot; has the traditional semantics of &quot;set X to 0.&quot;  We use
    the notation &lt;X&gt; to mean &quot;convert X to an L-bit string in network-
@@ -3307,6 +3315,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110531T074217Z" changeid="haruyama">
         <seg>X=(2**L)-1 のとき, &quot;increment X&quot; は &quot;set X to 0&quot; という伝統的な意味を持つ.  表記 &lt;X&gt; を &quot;XをL-bitのネットワークバイトオーダー文字列に変換する&quot; という意味で用いる. 当然, 実装は, 内部的な値であるXを保持する方法で別の表現をしてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Implementations should treat these names as opaque
+   identifiers and should not assume any relationship between the groups
+   used by SSH and the groups defined for IKE.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>実装は, これらの名前を内部識別子として扱わなければならない. また, SSHが用いる群とIKEで定義された群との間の関係を仮定してはならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3618,6 +3636,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Implementations of Arcfour are typically slightly faster and much
+   smaller than those of any other encryption algorithm currently
+   defined for SSH.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T025313Z" changeid="haruyama">
+        <seg>Arcfourの実装は, 現在SSHで指定されている他の暗号アルゴリズムのものよりもわずかに早くまたかなり小さい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The following table identifies the initial assignment of the
    Encryption Algorithm Names.</seg>
       </tuv>
@@ -3832,6 +3860,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>セキュア シェル (SSH) プロトコルは, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Conventions Used in this Document</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T024923Z" changeid="haruyama">
+        <seg>この文書で用いる表記</seg>
       </tuv>
     </tu>
     <tu>
@@ -4814,6 +4850,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Applicability Statement</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T025041Z" changeid="haruyama">
+        <seg>適用性についての意見</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>In order to make the entire body of Security Considerations more
    accessible, Security Considerations for the transport,
    authentication, and connection documents have been gathered here.</seg>
@@ -4834,17 +4878,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>(Although
-   there may be some network savings from padding to only 8-bytes even
-   if the block cipher uses 16-byte blocks, because of (1) we do not
-   make that recommendation here.)</seg>
-      </tuv>
-      <tuv xml:lang="JA" changedate="20110613T032804Z" changeid="haruyama">
-        <seg>(16-byteブロックのブロック暗号の場合でさえパディングから8byteのネットワークの節約しかないので, (1) より ここでパディングの節約の推奨はしない.)</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>Currently, the amount of trust a user can realistically place in a
    server key is proportional to the amount of attention paid to
    verifying that the public key presented actually corresponds to the
@@ -4852,6 +4885,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>現在, ユーザが現実的にサーバ鍵に起ける信頼の大きさは, サーバの秘密鍵と提示された公開鍵が実際に関係していることを検証するために払う注意の大きさと比例している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>(Although
+   there may be some network savings from padding to only 8-bytes even
+   if the block cipher uses 16-byte blocks, because of (1) we do not
+   make that recommendation here.)</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110613T032804Z" changeid="haruyama">
+        <seg>(16-byteブロックのブロック暗号の場合でさえパディングから8byteのネットワークの節約しかないので, (1) より ここでパディングの節約の推奨はしない.)</seg>
       </tuv>
     </tu>
     <tu>
@@ -5334,6 +5378,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>One of
+   the algorithms specified in the base protocol is &quot;arcfour&quot;, which
+   specifies the use of Arcfour (also known as RC4), a fast stream
+   cipher.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T024039Z" changeid="haruyama">
+        <seg>基底のプロトコルで指定されたアルゴリズムの1つが &quot;arcfour&quot; で, 高速なストリーム暗号である Arcfour (RC4としても知られる) を利用するよう指定されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>o  Algorithm negotiation messages (20 to 29) (but further
       SSH_MSG_KEXINIT messages MUST NOT be sent);</seg>
       </tuv>
@@ -5541,6 +5596,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
         <seg>オペコード  mnemonic       説明
          ------  --------       -----------
          0     TTY_OP_END  オプションの終りを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The IANA has assigned the Encryption Algorithm Names &quot;arcfour128&quot; and
+   &quot;arcfour256&quot; in accordance with [RFC4250].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T031248Z" changeid="haruyama">
+        <seg>IANA は 暗号アルゴリズム名(Encryption Algorithm Names) に &quot;arcfour128&quot; と &quot;arcfour256&quot;  を [RFC4250] に従って割り当てた.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5929,6 +5993,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>そして C は K = f^x mod p と H = hash(V_C || V_S || I_C || I_S || K_S || e || f || K)を計算し H に対する署名 s を検証する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The first 1536 bytes of keystream
+   generated by the cipher MUST be discarded, and the first byte of the
+   first encrypted packet MUST be encrypted using the 1537th byte of
+   keystream.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T025549Z" changeid="haruyama">
+        <seg>暗号から生成される鍵ストリームの最初の1536バイトは破棄されなければならない. 最初の暗号化されたパケットの最初のバイトは, 鍵ストリームの1537番目のバイトで暗号化されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6938,8 +7013,8 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
    additionally used as the session identifier, which is a unique
    identifier for this connection.</seg>
       </tuv>
-      <tuv xml:lang="JA">
-        <seg>最初の鍵交換からの交換ハッシュ H は, 接続の唯一の識別子として, セッション識別子としても使われる.</seg>
+      <tuv xml:lang="JA" changedate="20110613T110041Z" changeid="haruyama">
+        <seg>最初の鍵交換からの交換ハッシュ H は, 接続の唯一の識別子として, セッション識別子(session_id)としても使われる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7319,6 +7394,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This document specifies methods of using the Arcfour cipher in the
+   Secure Shell (SSH) protocol that mitigate the weakness of the
+   cipher's key-scheduling algorithm.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T023647Z" changeid="haruyama">
+        <seg>この文書は, セキュア シェル (SSH) プロトコルで Arcfour 暗号を利用する方法を指定する. この方法はArcfourの鍵スケジュールアルゴリズムの弱点を軽減する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Data sent with these messages consumes the same window as ordinary
    data.</seg>
       </tuv>
@@ -7577,6 +7662,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110420T053817Z" changeid="haruyama">
         <seg>この文書は, 既存のセキュアシェルプロトコルアーキテクチャに新しい公開鍵アルゴリズムと鍵交換法を提供しているだけで, 既存のセキュアシェル実装への適用されている管理の上での考慮を越えるものはほとんどない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Improved Arcfour Modes for
+            the Secure Shell (SSH) Transport Layer Protocol</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T023519Z" changeid="haruyama">
+        <seg>セキュア シェル (SSH) トランスポート層プロトコルの 改良された Arcfour モード</seg>
       </tuv>
     </tu>
     <tu>
@@ -7845,21 +7939,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This document describes additional encryption methods and
+   recommendations for the SSH Transport Protocol [RFC4253].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110607T071616Z" changeid="haruyama">
+        <seg>この文書は, SSH トランスポートプロトコル [RFC4253] への新しい暗号法と推薦を記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>In addition to stateful-decryption counter mode, [BKN1,BKN2] describe
    other provably secure encryption methods for use with the SSH
    Transport Protocol.</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110613T033721Z" changeid="haruyama">
         <seg>ステートフル-復号カウンターモードに加えて, [BKN1,BNK2]は, SSHトランスポートプロトコルで利用するためのおそらく安全と思われる別の暗号法を記述している.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>This document describes additional encryption methods and
-   recommendations for the SSH Transport Protocol [RFC4253].</seg>
-      </tuv>
-      <tuv xml:lang="JA" changedate="20110607T071616Z" changeid="haruyama">
-        <seg>この文書は, SSH トランスポートプロトコル [RFC4253] への新しい暗号法と推薦を記述している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7927,6 +8021,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>追加の方法が, [SSH-NUMBERS] で定義されるかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>There are two classes of attack on Arcfour described in [MIRONOV].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T025852Z" changeid="haruyama">
+        <seg>[MIRONOV]ではArcfourへの2つの種類の攻撃が記述されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8432,16 +8534,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>Researchers have shown that the original CBC-based encryption methods
-   in [RFC4253] are vulnerable to chosen-plaintext privacy attacks
-   [DAI,BKN1,BKN2].</seg>
-      </tuv>
-      <tuv xml:lang="JA" changedate="20110613T031231Z" changeid="haruyama">
-        <seg>[RFC4253] の元々のCBCモードベースの暗号法は, 選択平文攻撃に対して脆弱だと研究者は示した.[DAI, BKN1, BKN2].</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>The receiving side must decide whether to
    allow the forwarding.</seg>
       </tuv>
@@ -8457,6 +8549,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>このダイアログウィンドウで, instruction フィールドはテキストのメッセージで, prompt はテキストエントリフィールドのラベルとなるだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Researchers have shown that the original CBC-based encryption methods
+   in [RFC4253] are vulnerable to chosen-plaintext privacy attacks
+   [DAI,BKN1,BKN2].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110613T031231Z" changeid="haruyama">
+        <seg>[RFC4253] の元々のCBCモードベースの暗号法は, 選択平文攻撃に対して脆弱だと研究者は示した.[DAI, BKN1, BKN2].</seg>
       </tuv>
     </tu>
     <tu>
@@ -9453,6 +9555,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Secure Shell (SSH) [RFC4251] is a secure remote-login protocol.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T023725Z" changeid="haruyama">
+        <seg>セキュア シェル(SSH) [RFC4251] は 安全なロモートログインプロトコルだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The following public key and/or certificate formats are currently
    defined:</seg>
       </tuv>
@@ -9856,6 +9966,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The discarded bytes of keystream MUST be kept secret and MUST NOT be
+   transmitted over the network.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T025809Z" changeid="haruyama">
+        <seg>鍵ストリームの破棄されるバイト列は, 秘密にしなければならない. またネットワーク越しに転送してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Note that the responses are encoded in ISO-10646 UTF-8.</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -9897,6 +10016,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>実装を義務付けられているアリゴリズムはそれぞれのプロトコルの文書で指定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Weak distinguishers can operate
+   on any part of the keystream, and the best ones, described in [FMcG]
+   and [MANTIN05], can use data from multiple, different keystreams.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T030944Z" changeid="haruyama">
+        <seg>弱い識別者による攻撃は鍵ストリームの任意の部分を操作する. [FMcG]や[MANTIN05]で記述された最良の攻撃では, 複数の異なる鍵ストリームからデータを識別できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10496,19 +10625,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>Public Key Algorithm Names</seg>
-      </tuv>
-      <tuv xml:lang="JA">
-        <seg>公開鍵アルゴリズム名</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>The authentication protocol and this authentication method depend on
    the security of the underlying SSH transport layer.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>認証プロトコルとこの認証法は, 基盤となっているSSHトランスポート層のセキュリティに依存する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Public Key Algorithm Names</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>公開鍵アルゴリズム名</seg>
       </tuv>
     </tu>
     <tu>
@@ -10648,6 +10777,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>暗号アルゴリズムと鍵は, 鍵交換の間に取り決められる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This must be balanced, though, against the known
+   security problems with Arcfour described in Section 5.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T025357Z" changeid="haruyama">
+        <seg>しかし, 5節で記述する Arcfour の既知のセキュリティの問題によって釣り合いがとれている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11311,6 +11449,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>It is
+   thus RECOMMENDED that Arcfour (either in the form described here or
+   that described in [RFC4251]) not be used for high-volume password-
+   authenticated connections.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T031151Z" changeid="haruyama">
+        <seg>よって, (この文書で記述したものも [RFC4251]で記述したものもどちらも) Arcfour は大量のパスワード認証接続に利用しないよう推奨する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>We note that this is no
    different from other key enrollment situations, e.g., a client
    sending a certificate request to a certificate authority for signing.</seg>
@@ -11532,6 +11681,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The contents of these bytes could
+   reveal information about the key.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T025830Z" changeid="haruyama">
+        <seg>これらのバイト列の内容は, 鍵の情報を漏らす可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This message contains text to be
    displayed to the client user before authentication is attempted.</seg>
       </tuv>
@@ -11730,21 +11888,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>Additionally, recommendation (2) is designed to protect an encryptor
-   from encrypting more than 2**L blocks with the same key.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changedate="20110610T072958Z" changeid="haruyama">
-        <seg>また, 推奨 (2) は 同じ鍵で 2**L ブロックより多く暗号化する暗号者を保護するために設計されている.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>The first algorithm on the client's name-list
          that satisfies the requirements and is also supported by the
          server MUST be chosen.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>クライアントの名前リストの最初のアルゴリズムが, この必要条件を満たしサーバもサポートしているなら, 選ばれなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Additionally, recommendation (2) is designed to protect an encryptor
+   from encrypting more than 2**L blocks with the same key.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110610T072958Z" changeid="haruyama">
+        <seg>また, 推奨 (2) は 同じ鍵で 2**L ブロックより多く暗号化する暗号者を保護するために設計されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12118,6 +12276,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>In most
+   cases, where speed and code size are not critical issues, the
+   algorithms specified by [RFC4344] should be used instead.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T025303Z" changeid="haruyama">
+        <seg>多くの場合では, 速度とコードサイズは重大な問題ではないので, [RFC4344] で指定されたアルゴリズムをかわりに使う必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>As always,
    implementers and users should check current literature to ensure that
    no recent vulnerabilities have been found in ciphers used within
@@ -12325,6 +12493,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Algorithm Definitions</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T025403Z" changeid="haruyama">
+        <seg>アルゴリズムの定義</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>It is RECOMMENDED that all data sent before this message be delivered
    to the actual destination, if possible.</seg>
       </tuv>
@@ -12376,6 +12552,18 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv xml:lang="JA">
         <seg>メッセージ番号 .........................................5
            4.1.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>As [RFC4253] says, though, &quot;Arcfour (and RC4) has problems
+   with weak keys, and should be used with caution.&quot;  These problems are
+   described in more detail in [MANTIN01], along with a recommendation
+   to discard the first 1536 bytes of keystream so as to ensure that the
+   cipher's internal state is thoroughly mixed.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T024310Z" changeid="haruyama">
+        <seg>しかし, [RFC4253] では, &quot;Arcfour (と RC4) は弱い鍵の問題がある. 注意して利用しなければならない&quot; となっている. [MANTIN01]にこれらの問題はより詳細に記述されている. [MANTIN01]では暗号の内部状態が完全に混合されるのを保証するために 鍵ストリームの最初の 1536 バイトを破棄するよう推奨している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12451,18 +12639,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>The
-   motivation here is that, if an encryptor were to use SDCTR mode to
-   encrypt more than 2**L blocks with the same key, then the encryptor
-   would reuse keystream, and the reuse of keystream can lead to serious
-   privacy attacks [SCHNEIER].</seg>
-      </tuv>
-      <tuv xml:lang="JA" changedate="20110610T073157Z" changeid="haruyama">
-        <seg>ここでの動機は以下の通り. 暗号者が SDCTRモードにで同じ鍵で 2**L より多い暗号化して鍵ストリームを再利用すると, 鍵ストリームの再利用が深刻な秘匿性への攻撃を導くことがある [SCHNEIER].</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>They SHOULD also be able to display at least 30 characters
    for the name and prompts.</seg>
       </tuv>
@@ -12477,6 +12653,18 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>チャレンジ-レスポンスとワンタイムパスワードのメカニズムは, この認証法で容易にサポートされる</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The
+   motivation here is that, if an encryptor were to use SDCTR mode to
+   encrypt more than 2**L blocks with the same key, then the encryptor
+   would reuse keystream, and the reuse of keystream can lead to serious
+   privacy attacks [SCHNEIER].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110610T073157Z" changeid="haruyama">
+        <seg>ここでの動機は以下の通り. 暗号者が SDCTRモードにで同じ鍵で 2**L より多い暗号化して鍵ストリームを再利用すると, 鍵ストリームの再利用が深刻な秘匿性への攻撃を導くことがある [SCHNEIER].</seg>
       </tuv>
     </tu>
     <tu>
@@ -14592,6 +14780,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>A
+   consequence of this is that encrypting the same data (for instance, a
+   password) sufficiently many times in separate Arcfour keystreams can
+   be sufficient to leak information about it to an adversary.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T031044Z" changeid="haruyama">
+        <seg>この結果として, (例えばパスワードなどの)同じデータの暗号化を異なる Arcfourの鍵ストリームで何度も行なうと, 攻撃者に情報を漏らす可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>To make it possible for the originator of a request to
    identify to which request each reply refers, it is REQUIRED that
    replies to SSH_MSG_GLOBAL_REQUESTS MUST be sent in the same order as
@@ -15475,6 +15674,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>It
+   allows for the use of an extensible variety of symmetric cipher
+   algorithms to provide confidentiality for data in transit.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T023920Z" changeid="haruyama">
+        <seg>転送中のデータの機密性を提供するため, 対称暗号アルゴリズムを拡張して利用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Another form of proxy forwarding provided by the SSH connection
    protocol is the forwarding of the X11 protocol.</seg>
       </tuv>
@@ -15999,6 +16208,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>認証プロトコル [SSH-USERAUTH] は, クライアントのユーザをサーバに認証するのに利用される一連のメカニズムを提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The &quot;arcfour256&quot; algorithm is the same, but uses a 256-bit key.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T025610Z" changeid="haruyama">
+        <seg>&quot;arcfour256&quot; アルゴリズムも同じで, ただし 256-bit の鍵を利用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17098,6 +17315,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This message will request that the user's default shell (typically
+   defined in /etc/passwd in UNIX systems) be started at the other end.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>このメッセージは, 相手側で( UNIX システムでは典型的に /etc/passwd で定義される) ユーザのデフォルトシェルの起動を要求する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Fortunately, the
    common concerns with counter mode do not apply to SSH because of the
    rekeying recommendations and because of the additional protection
@@ -17105,15 +17331,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110613T031630Z" changeid="haruyama">
         <seg>幸いにも, カウンターモードについての一般的な懸念はSSHには適用されない. 鍵の再生成の推奨とトランスポートプロトコルのMACで提供される追加の保護のおがけだ.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>This message will request that the user's default shell (typically
-   defined in /etc/passwd in UNIX systems) be started at the other end.</seg>
-      </tuv>
-      <tuv xml:lang="JA">
-        <seg>このメッセージは, 相手側で( UNIX システムでは典型的に /etc/passwd で定義される) ユーザのデフォルトシェルの起動を要求する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17817,6 +18034,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>業界内で確立され受け入れられている暗号のうち, どれが優れているか分析したり優れた暗号を推奨することは, この文書やセキュアシェルワーキンググループの範囲を超えている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The &quot;arcfour128&quot; algorithm is the RC4 cipher, as described in
+   [SCHNEIER], using a 128-bit key.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T025449Z" changeid="haruyama">
+        <seg>&quot;arcfour128&quot; アルゴリズムは [SCHNEIER] で記述されている RC4 暗号で, 128-bit鍵を利用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20220,20 +20446,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>One alternative to recommendation (1) would be to make the SSH
-   Transport Protocol's sequence number more than 32 bits long.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changedate="20110610T070803Z" changeid="haruyama">
-        <seg>推薦 (1) の代替手段の1つに, SSHトランスポートプロトコルのシーケンス番号を 32bitよりも長くすることがある.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>The width of the integer fields is determined by the curve being
    used.</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110321T131301Z" changeid="haruyama">
         <seg>整数のフィールドの大きさは, 利用する曲線によって決定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>One alternative to recommendation (1) would be to make the SSH
+   Transport Protocol's sequence number more than 32 bits long.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110610T070803Z" changeid="haruyama">
+        <seg>推薦 (1) の代替手段の1つに, SSHトランスポートプロトコルのシーケンス番号を 32bitよりも長くすることがある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20702,6 +20928,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>チャンネルにもうこれ以上データを送らないなら, SSH_MSG_CHANNEL_EOF を送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document specifies
+   new cipher algorithms for SSH that follow this recommendation.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T024345Z" changeid="haruyama">
+        <seg>この文書では, この推奨に従う新しい暗号アルゴリズムをSSHに定義する.</seg>
       </tuv>
     </tu>
     <tu>
