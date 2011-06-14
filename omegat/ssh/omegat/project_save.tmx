@@ -836,6 +836,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A
+   consequence of this is that encrypting the same data (for instance, a
+   password) sufficiently many times in separate Arcfour keystreams can
+   be sufficient to leak information about it to an adversary.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T031044Z" changeid="haruyama">
+        <seg>この結果として, (例えばパスワードなどの)同じデータの暗号化を異なる Arcfourの鍵ストリームで何度も行なうと, 攻撃者に情報を漏らす可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A BREAK signal is defined as the TxD signal being held in a SPACE
    (&quot;0&quot;) state for a time greater than a whole character time.</seg>
       </tuv>
@@ -1545,6 +1556,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Algorithm Definitions</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T025403Z" changeid="haruyama">
+        <seg>アルゴリズムの定義</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Algorithm Negotiation</seg>
       </tuv>
       <tuv lang="JA">
@@ -2142,6 +2161,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Applicability Statement</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T025041Z" changeid="haruyama">
+        <seg>適用性についての意見</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Applications that
    require a shorter BREAK may choose to ignore this suggestion.</seg>
       </tuv>
@@ -2220,6 +2247,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>2.4節で述べたように, 検索に安全な方法を使われ, SSHFP RRが信頼できる SIG RR で認証されることが要求される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As [RFC4253] says, though, &quot;Arcfour (and RC4) has problems
+   with weak keys, and should be used with caution.&quot;  These problems are
+   described in more detail in [MANTIN01], along with a recommendation
+   to discard the first 1536 bytes of keystream so as to ensure that the
+   cipher's internal state is thoroughly mixed.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T024310Z" changeid="haruyama">
+        <seg>しかし, [RFC4253] では, &quot;Arcfour (と RC4) は弱い鍵の問題がある. 注意して利用しなければならない&quot; となっている. [MANTIN01]にこれらの問題はより詳細に記述されている. [MANTIN01]では暗号の内部状態が完全に混合されるのを保証するために 鍵ストリームの最初の 1536 バイトを破棄するよう推奨している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3596,6 +3635,14 @@
       <tuv lang="JA">
         <seg>この文書で用いる表記 ...............................2
    3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Conventions Used in this Document</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T024923Z" changeid="haruyama">
+        <seg>この文書で用いる表記</seg>
       </tuv>
     </tu>
     <tu>
@@ -7292,6 +7339,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Implementations of Arcfour are typically slightly faster and much
+   smaller than those of any other encryption algorithm currently
+   defined for SSH.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T025313Z" changeid="haruyama">
+        <seg>Arcfourの実装は, 現在SSHで指定されている他の暗号アルゴリズムのものよりもわずかに早くまたかなり小さい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Implementations should only allow forwarding privileged ports if the
    user has been authenticated as a privileged user.</seg>
       </tuv>
@@ -7479,6 +7536,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110609T053523Z" changeid="haruyama">
         <seg>2**32パケットごとに少なくとも1度の鍵の再発行をしないと決める実装者は, この問題を理解する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Improved Arcfour Modes for
+            the Secure Shell (SSH) Transport Layer Protocol</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T023519Z" changeid="haruyama">
+        <seg>セキュア シェル (SSH) トランスポート層プロトコルの 改良された Arcfour モード</seg>
       </tuv>
     </tu>
     <tu>
@@ -7685,6 +7751,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110609T053002Z" changeid="haruyama">
         <seg>より詳細には, 同じ 32-bitシーケンス番号([RFC 4253] の 4.4節) でMACされた2つのパケットのMACの衝突を探す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In most
+   cases, where speed and code size are not critical issues, the
+   algorithms specified by [RFC4344] should be used instead.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T025303Z" changeid="haruyama">
+        <seg>多くの場合では, 速度とコードサイズは重大な問題ではないので, [RFC4344] で指定されたアルゴリズムをかわりに使う必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8371,6 +8447,16 @@
     <tu>
       <tuv lang="EN-US">
         <seg>It
+   allows for the use of an extensible variety of symmetric cipher
+   algorithms to provide confidentiality for data in transit.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T023920Z" changeid="haruyama">
+        <seg>転送中のデータの機密性を提供するため, 対称暗号アルゴリズムを拡張して利用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It
    is up to the server to decide how to map user names to accepted user
    names.</seg>
       </tuv>
@@ -8542,6 +8628,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>この認証方式は, 典型的には [PAM] によって支援されるのでこのような選択は可能ではないことも予想される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is
+   thus RECOMMENDED that Arcfour (either in the form described here or
+   that described in [RFC4251]) not be used for high-volume password-
+   authenticated connections.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T031151Z" changeid="haruyama">
+        <seg>よって, (この文書で記述したものも [RFC4251]で記述したものもどちらも) Arcfour は大量のパスワード認証接続に利用しないよう推奨する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10500,6 +10597,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>One of
+   the algorithms specified in the base protocol is &quot;arcfour&quot;, which
+   specifies the use of Arcfour (also known as RC4), a fast stream
+   cipher.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T024039Z" changeid="haruyama">
+        <seg>基底のプロトコルで指定されたアルゴリズムの1つが &quot;arcfour&quot; で, 高速なストリーム暗号である Arcfour (RC4としても知られる) を利用するよう指定されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>One possibility is to use the name field (possibly
    prefixed with the application's name) as the title of a dialog window
    in which the prompt(s) are presented.</seg>
@@ -11964,6 +12072,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Secure Shell (SSH) [RFC4251] is a secure remote-login protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T023725Z" changeid="haruyama">
+        <seg>セキュア シェル(SSH) [RFC4251] は 安全なロモートログインプロトコルだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Secure Shell (SSH) is a protocol for secure remote login and other
    secure network services over an insecure network.</seg>
       </tuv>
@@ -12597,6 +12713,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>stringはテキストを格納するのにも利用される</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Strong distinguishers distinguish an Arcfour keystream from
+   randomness at the start of the stream and are defended against by the
+   algorithm defined in this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T030940Z" changeid="haruyama">
+        <seg>強い識別者による攻撃では, Arcfourの鍵ストリームからストリームも最初の乱数を識別する. この文書で定義したアルゴリズムで防御される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13266,6 +13392,23 @@
       </tuv>
       <tuv lang="JA">
         <seg>&quot;arcfour&quot; 暗号は, 128-bit鍵を用いる Arcfour(Alleged RC4) ストリーム暗号だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The &quot;arcfour128&quot; algorithm is the RC4 cipher, as described in
+   [SCHNEIER], using a 128-bit key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T025449Z" changeid="haruyama">
+        <seg>&quot;arcfour128&quot; アルゴリズムは [SCHNEIER] で記述されている RC4 暗号で, 128-bit鍵を利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The &quot;arcfour256&quot; algorithm is the same, but uses a 256-bit key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T025610Z" changeid="haruyama">
+        <seg>&quot;arcfour256&quot; アルゴリズムも同じで, ただし 256-bit の鍵を利用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14023,6 +14166,15 @@
       <tuv lang="JA">
         <seg>[SSH-ARCH],
    [SSH-TRANS],  [SSH-CONNECT] とこの文書で定義される SSH プロトコルに対する IANA の考慮は,  [SSH-NUMBERS] で詳述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The IANA has assigned the Encryption Algorithm Names &quot;arcfour128&quot; and
+   &quot;arcfour256&quot; in accordance with [RFC4250].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T031248Z" changeid="haruyama">
+        <seg>IANA は 暗号アルゴリズム名(Encryption Algorithm Names) に &quot;arcfour128&quot; と &quot;arcfour256&quot;  を [RFC4250] に従って割り当てた.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15082,6 +15234,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The contents of these bytes could
+   reveal information about the key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T025830Z" changeid="haruyama">
+        <seg>これらのバイト列の内容は, 鍵の情報を漏らす可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The conventions and instructions to the IANA for future
    assignments are given in this section.</seg>
       </tuv>
@@ -15167,6 +15328,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>次元パラメータは, 単に情報を提供するだけだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The discarded bytes of keystream MUST be kept secret and MUST NOT be
+   transmitted over the network.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T025809Z" changeid="haruyama">
+        <seg>鍵ストリームの破棄されるバイト列は, 秘密にしなければならない. またネットワーク越しに転送してはならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15303,6 +15473,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>最初のアルゴリズムが, 優先する(そして推測する)アルゴリズムでなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The first 1536 bytes of keystream
+   generated by the cipher MUST be discarded, and the first byte of the
+   first encrypted packet MUST be encrypted using the 1537th byte of
+   keystream.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T025549Z" changeid="haruyama">
+        <seg>暗号から生成される鍵ストリームの最初の1536バイトは破棄されなければならない. 最初の暗号化されたパケットの最初のバイトは, 鍵ストリームの1537番目のバイトで暗号化されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16794,6 +16975,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The security considerations in [RFC4251] apply.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T025721Z" changeid="haruyama">
+        <seg>[RFC4251]のセキュリティの考察が適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The security of the
    connection relies on the server authenticating itself to the client
    as well as the user authenticating itself to the server.</seg>
@@ -17627,6 +17816,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>There are two classes of attack on Arcfour described in [MIRONOV].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T025852Z" changeid="haruyama">
+        <seg>[MIRONOV]ではArcfourへの2つの種類の攻撃が記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>There are two formats for algorithm and method names:</seg>
       </tuv>
       <tuv lang="JA">
@@ -18276,6 +18473,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document specifies
+   new cipher algorithms for SSH that follow this recommendation.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T024345Z" changeid="haruyama">
+        <seg>この文書では, この推奨に従う新しい暗号アルゴリズムをSSHに定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document specifies an Internet standards track protocol for the
    Internet community, and requests discussion and suggestions for
    improvements.</seg>
@@ -18291,6 +18497,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110425T075713Z" changeid="haruyama">
         <seg>この文書では, このガイダンスに基づく楕円曲線のサイズと共に利用する必要のある SHA2のバリエーションを 6.2.1節で指定している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document specifies methods of using the Arcfour cipher in the
+   Secure Shell (SSH) protocol that mitigate the weakness of the
+   cipher's key-scheduling algorithm.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T023647Z" changeid="haruyama">
+        <seg>この文書は, セキュア シェル (SSH) プロトコルで Arcfour 暗号を利用する方法を指定する. この方法はArcfourの鍵スケジュールアルゴリズムの弱点を軽減する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18765,6 +18981,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>ユーザの秘密鍵で作られた署名を送ることで, この認証法は動作する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This must be balanced, though, against the known
+   security problems with Arcfour described in Section 5.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T025357Z" changeid="haruyama">
+        <seg>しかし, 5節で記述する Arcfour の既知のセキュリティの問題によって釣り合いがとれている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19488,6 +19713,16 @@
       <tuv lang="JA">
         <seg>弱いトランスポート ..................................21
            9.4.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Weak distinguishers can operate
+   on any part of the keystream, and the best ones, described in [FMcG]
+   and [MANTIN05], can use data from multiple, different keystreams.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110614T030944Z" changeid="haruyama">
+        <seg>弱い識別者による攻撃は鍵ストリームの任意の部分を操作する. [FMcG]や[MANTIN05]で記述された最良の攻撃では, 複数の異なる鍵ストリームからデータを識別できる.</seg>
       </tuv>
     </tu>
     <tu>
