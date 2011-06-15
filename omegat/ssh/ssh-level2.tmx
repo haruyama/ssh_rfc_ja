@@ -2860,20 +2860,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>At present, the best known algorithm is the
-   Pollard-rho method.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changedate="20110425T071706Z" changeid="haruyama">
-        <seg>現在, もっとも良く知られているアルゴリズムは, Pollard-rho 素因数分解法だ.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>The actual names of the submethods is something the user and the
    server need to agree upon.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>submethods の実際の名前は, ユーザとサーバの間で同意が必要だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>At present, the best known algorithm is the
+   Pollard-rho method.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110425T071706Z" changeid="haruyama">
+        <seg>現在, もっとも良く知られているアルゴリズムは, Pollard-rho 素因数分解法だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3149,6 +3149,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>It allows the SSH server to propose new groups on
+   which to perform the Diffie-Hellman key exchange to the client.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110615T053137Z" changeid="haruyama">
+        <seg>SSHのサーバとクライアントが Diffie-Hellman 鍵交換をするための新しい群を提案します.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>In the compatibility mode, the server SHOULD NOT send any further
    data after sending its identification string until it has received an
    identification string from the client.</seg>
@@ -3236,20 +3245,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>One big issue is the character set of the interactive session.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>インタラクティブなセッションでの文字セットは大きな問題だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Strong distinguishers distinguish an Arcfour keystream from
    randomness at the start of the stream and are defended against by the
    algorithm defined in this document.</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110614T031713Z" changeid="haruyama">
         <seg>強い識別者による攻撃では, Arcfourの鍵ストリームからストリームと最初の乱数を識別する. この文書で定義したアルゴリズムで防御される.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>One big issue is the character set of the interactive session.</seg>
-      </tuv>
-      <tuv xml:lang="JA">
-        <seg>インタラクティブなセッションでの文字セットは大きな問題だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3954,6 +3963,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Overview and Rationale</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110615T053356Z" changeid="haruyama">
+        <seg>概要と原理</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Terminating null
       characters are not used.</seg>
       </tuv>
@@ -4276,18 +4293,18 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>Covert Channels</seg>
-      </tuv>
-      <tuv xml:lang="JA">
-        <seg>コバートチャンネル(隠れチャンネル, プロトコルの想定外の手段で情報を伝えること) </seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>The Secure Shell (SSH) Transport Layer Encryption Modes</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110609T051353Z" changeid="haruyama">
         <seg>セキュア シェル (SSH) トランスポート層暗号モード</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Covert Channels</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>コバートチャンネル(隠れチャンネル, プロトコルの想定外の手段で情報を伝えること) </seg>
       </tuv>
     </tu>
     <tu>
@@ -4328,6 +4345,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The algorithm from
+   the SHA2 family that will be used is chosen based on the size of the
+   named curve specified in the public key:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110419T121152Z" changeid="haruyama">
+        <seg>SHA2ファミリからどのアルゴリズムが選ばれるかは, 公開鍵に指定された曲線のサイズを元に決められる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Message numbers of 80 and higher are reserved for protocols running
    after this authentication protocol, so receiving one of them before
    authentication is complete is an error, to which the server MUST
@@ -4336,16 +4363,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>80以上のメッセージ番号は, 認証プロトコルのあとで動作するプロトコルのために予約されている. 認証が完了する前にこの範囲の番号を受けとったらそれはエラーだ. サーバは, 切断を返答しなければならない. トラブルシューティングを容易にするために適切な切断メッセージをM送ることが好ましい.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>The algorithm from
-   the SHA2 family that will be used is chosen based on the size of the
-   named curve specified in the public key:</seg>
-      </tuv>
-      <tuv xml:lang="JA" changedate="20110419T121152Z" changeid="haruyama">
-        <seg>SHA2ファミリからどのアルゴリズムが選ばれるかは, 公開鍵に指定された曲線のサイズを元に決められる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7626,6 +7643,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Diffie-Hellman Group Exchange for
+            the Secure Shell (SSH) Transport Layer Protocol</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110615T053007Z" changeid="haruyama">
+        <seg>セキュア シェル (SSH) トランスポート層プロトコルのための Diffie-Hellman Group Exchange</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Additional motivation and discussion, as well as proofs of
    security, appear in the research papers [BKN1,BKN2].</seg>
       </tuv>
@@ -8120,21 +8146,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>Implementations may also allow configuring more such
-   mechanisms.</seg>
-      </tuv>
-      <tuv xml:lang="JA">
-        <seg>実装は, このようなメカニズムをさらに設定することを許してもよい.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>From an internationalization standpoint, it is desired that if a user
    enters their password, the authentication process will work
    regardless of what OS and client software the user is using.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>国際化の立場から, パスワード認証が行なわれるときに, ユーザの使うOSやクライアントのソフトウェアに依らずに認証が行なわれることが望ましい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Implementations may also allow configuring more such
+   mechanisms.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>実装は, このようなメカニズムをさらに設定することを許してもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9983,6 +10009,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The Session Channel Break Extension provides a means to send a BREAK
+   signal over a Secure Shell (SSH) terminal session.</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>セッションチャンネルBreak拡張は, セキュアシェル(SSH)のターミナルセッションで BREAK シグナルを送る手段を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The
    message hashing algorithm MUST be from the SHA2 family of hash
    functions [FIPS-180-3] and is chosen according to the curve size as
@@ -9990,15 +10025,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110321T131146Z" changeid="haruyama">
         <seg>メッセージハッシュアルゴリズムは, SHA2 ファミリーのハッシュ関数 [FIPS-180-3] のものでなければならない. 6.2.1節で指定される曲線のサイズに応じて, ハッシュアルゴリズムは選ばれる.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>The Session Channel Break Extension provides a means to send a BREAK
-   signal over a Secure Shell (SSH) terminal session.</seg>
-      </tuv>
-      <tuv xml:lang="JA">
-        <seg>セッションチャンネルBreak拡張は, セキュアシェル(SSH)のターミナルセッションで BREAK シグナルを送る手段を提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10030,20 +10056,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The X Protocol is documented in [SCHEIFLER].</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>X のプロトコルは, [SCHEIFLER] に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>It is used by authentication methods
    as a part of the data that is signed as a proof of possession of a
    private key.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>これは, 認証法の中で, 秘密鍵の所有を証明するために署名されるデータの一部として使われる.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>The X Protocol is documented in [SCHEIFLER].</seg>
-      </tuv>
-      <tuv xml:lang="JA">
-        <seg>X のプロトコルは, [SCHEIFLER] に記述されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10254,6 +10280,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv xml:lang="JA">
         <seg>切断メッセージの reason code (理由コード)と description(説明)...7
            4.2.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This memo describes a new key exchange method for the Secure Shell
+   (SSH) protocol.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110615T053045Z" changeid="haruyama">
+        <seg>このメモは, セキュア シェル （ＳＳＨ） プロトコルのための 新しい鍵交換法を記述している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11124,6 +11159,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>イーサネットのヘッダも考慮すると, 増大は10%よりも少ない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The
+   proposed groups need not be fixed and can change with time.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110615T053218Z" changeid="haruyama">
+        <seg>この提案された群は固定される必要はなく時間とともに変化できます.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12568,20 +12612,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>Some readers will worry about the increase in packet size due to new
-   headers, padding, and the Message Authentication Code (MAC).</seg>
-      </tuv>
-      <tuv xml:lang="JA">
-        <seg>新しいヘッダやパディング, メッセージ認証コード(MAC)のためにパケットサイズが増大することを心配する読者もいるだろう.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>The Secure Shell (SSH) is a protocol for secure remote login and
    other secure network services over an insecure network.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>セキュア シェル (SSH) プロトコルは, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Some readers will worry about the increase in packet size due to new
+   headers, padding, and the Message Authentication Code (MAC).</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>新しいヘッダやパディング, メッセージ認証コード(MAC)のためにパケットサイズが増大することを心配する読者もいるだろう.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13328,21 +13372,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The algorithm for ECC key generation can be found in Section 3.2 of
+   [SEC1].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110321T125333Z" changeid="haruyama">
+        <seg>ECC 鍵生成のアルゴリズムは, [SEC1]の 3.2節にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Note
    that channel open requests may be received until a reply to this
    message is received.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>チャンネルの開始の要求がこのメッセージが受信されるより前に受信されるかもしれないことに注意.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>The algorithm for ECC key generation can be found in Section 3.2 of
-   [SEC1].</seg>
-      </tuv>
-      <tuv xml:lang="JA" changedate="20110321T125333Z" changeid="haruyama">
-        <seg>ECC 鍵生成のアルゴリズムは, [SEC1]の 3.2節にある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15882,14 +15926,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>The SSH_MSG_USERAUTH_INFO_REQUEST message is defined as follows:</seg>
-      </tuv>
-      <tuv xml:lang="JA">
-        <seg>SSH_MSG_USERAUTH_INFO_REQUEST メッセージは次のように定義される.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>The Secure Shell (SSH) [5] session channel provides a mechanism for
    the client-user to interactively enter commands and receive output
    from a remote host while taking advantage of the SSH transport's
@@ -15897,6 +15933,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>セキュアシェル (SSH) [5]  セッションチャンネルは, SSHのトランスポートの秘密性と完全性の特徴を利用しながら, クライアントユーザにインタラクティブにコマンドを入力しリモートホストから出力を受けるメカニズムを提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The SSH_MSG_USERAUTH_INFO_REQUEST message is defined as follows:</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>SSH_MSG_USERAUTH_INFO_REQUEST メッセージは次のように定義される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16212,14 +16256,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>The &quot;arcfour256&quot; algorithm is the same, but uses a 256-bit key.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changedate="20110614T025610Z" changeid="haruyama">
-        <seg>&quot;arcfour256&quot; アルゴリズムも同じで, ただし 256-bit の鍵を利用する.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>If a connection is established to a server whose public key is not
    already known to the client, a fingerprint of the key is presented to
    the user for verification.</seg>
@@ -16237,6 +16273,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>便宜のために簡単なまとめを次に挙げる. しかし, [SSH-NUMBERS]は, IANA への実際の指示を含んでいる. これは, 将来置き換えられるかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The &quot;arcfour256&quot; algorithm is the same, but uses a 256-bit key.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T025610Z" changeid="haruyama">
+        <seg>&quot;arcfour256&quot; アルゴリズムも同じで, ただし 256-bit の鍵を利用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17506,20 +17550,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The Secure Shell (SSH) Transport Layer Protocol</seg>
+      </tuv>
+      <tuv xml:lang="JA">
+        <seg>セキュア シェル (SSH) トランスポート層プロトコル</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>In this
       case, different key types SHOULD be defined for the different
       policy alternatives.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>この場合, ポリシーの異なる選択肢に対しては異なる鍵の種類が定義されなければならない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>The Secure Shell (SSH) Transport Layer Protocol</seg>
-      </tuv>
-      <tuv xml:lang="JA">
-        <seg>セキュア シェル (SSH) トランスポート層プロトコル</seg>
       </tuv>
     </tu>
     <tu>
@@ -18038,20 +18082,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>The &quot;arcfour128&quot; algorithm is the RC4 cipher, as described in
-   [SCHNEIER], using a 128-bit key.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changedate="20110614T025449Z" changeid="haruyama">
-        <seg>&quot;arcfour128&quot; アルゴリズムは [SCHNEIER] で記述されている RC4 暗号で, 128-bit鍵を利用する.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>Initially, the server is responsible for
    flow control.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>まず, サーバがフロー制御の責任を持つ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The &quot;arcfour128&quot; algorithm is the RC4 cipher, as described in
+   [SCHNEIER], using a 128-bit key.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110614T025449Z" changeid="haruyama">
+        <seg>&quot;arcfour128&quot; アルゴリズムは [SCHNEIER] で記述されている RC4 暗号で, 128-bit鍵を利用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19648,8 +19692,8 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv xml:lang="EN-US">
         <seg>Rationale</seg>
       </tuv>
-      <tuv xml:lang="JA">
-        <seg>論拠</seg>
+      <tuv xml:lang="JA" changedate="20110615T053405Z" changeid="haruyama">
+        <seg>原理</seg>
       </tuv>
     </tu>
     <tu>

@@ -3700,6 +3700,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Currently, SSH performs the initial key exchange using
+   the &quot;diffie-hellman-group1-sha1&quot; method [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110615T053552Z" changeid="haruyama">
+        <seg>現在, SSHは &quot;diffie-hellman-group1-sha1&quot; 法 [RFC4253] を用いて最初の鍵交換をしている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Currently, only the following type is defined.</seg>
       </tuv>
       <tuv lang="JA">
@@ -3954,6 +3963,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>異なる端末エミュレーションのタイプがクライアントで用いられることがある. また, 端末エミュレーションによって利用される文字セットが事実上決定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Diffie-Hellman Group Exchange for
+            the Secure Shell (SSH) Transport Layer Protocol</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110615T053007Z" changeid="haruyama">
+        <seg>セキュア シェル (SSH) トランスポート層プロトコルのための Diffie-Hellman Group Exchange</seg>
       </tuv>
     </tu>
     <tu>
@@ -5420,6 +5438,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>さらに, いくつかの組織が自身のアルゴリズムや方式を使いたいと求めることが予想される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Furthermore, the shared secret
+   is known only to the participant parties.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110615T053909Z" changeid="haruyama">
+        <seg>さらに, 共有の秘密は参加している当事者のみがわかる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7597,6 +7624,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In SSH, the key exchange
+   is signed with the host key to provide host authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110615T053931Z" changeid="haruyama">
+        <seg>SSHでは, 鍵交換は, ホスト認証を提供するホスト鍵で署名されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In [BKN1,BKN2], Bellare, Kohno, and Namprempre show how to modify the
    symmetric portion of the SSH Transport Protocol so that it provably
    preserves privacy and integrity against chosen-plaintext, chosen-
@@ -8489,6 +8525,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>アルゴリズムは, 公開鍵アルゴリズム名から決められなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It allows the SSH server to propose new groups on
+   which to perform the Diffie-Hellman key exchange to the client.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110615T053137Z" changeid="haruyama">
+        <seg>SSHのサーバとクライアントが Diffie-Hellman 鍵交換をするための新しい群を提案します.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10857,6 +10902,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Overview and Rationale</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110615T053356Z" changeid="haruyama">
+        <seg>概要と原理</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>PFS is essentially defined as the
    cryptographic property of a key-establishment protocol in which the
    compromise of a session key or long-term private key after a given
@@ -11356,8 +11409,8 @@
       <tuv lang="EN-US">
         <seg>Rationale</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>論拠</seg>
+      <tuv lang="JA" changedate="20110615T053405Z" changeid="haruyama">
+        <seg>原理</seg>
       </tuv>
     </tu>
     <tu>
@@ -11876,6 +11929,15 @@
       <tuv lang="JA">
         <seg>SSH ホスト鍵の検証 .......................................2
       2.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH [RFC4251] is a very common protocol for secure remote login on
+   the Internet.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110615T053512Z" changeid="haruyama">
+        <seg>SSH [RFC4251] は, インターネットでの安全なリモートログインのための非常に一般的なプロトコルだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12474,6 +12536,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>どのサーチパスが信頼できるソースから得られたものかわかる ＤＮＳ 検索 API は現在ないので, クライアントシステム全体が信頼できるDNSサーチパスによって設定されている必要があるだろう. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Since we
+   expect that the SSH protocol will be in use for many years in the
+   future, we fear that extensive precomputation and more efficient
+   algorithms to compute the discrete logarithm over a fixed group might
+   pose a security threat to the SSH protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110615T054248Z" changeid="haruyama">
+        <seg>将来何年にも渡って SSHプロトコルが利用されることを期待しているので, 固定された群に対する広範囲の事前計算と群の上の離散対数を計算するより効率的なアルゴリズムが, SSH プロトコルのセキュリティの脅威になることを恐れている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13257,6 +13331,15 @@
     <tu>
       <tuv lang="EN-US">
         <seg>The
+   proposed groups need not be fixed and can change with time.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110615T053218Z" changeid="haruyama">
+        <seg>この提案された群は固定される必要はなく時間とともに変化できます.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
    sequence_number is initialized to zero for the first packet, and is
    incremented after every packet (regardless of whether encryption or
    MAC is in use).</seg>
@@ -14034,6 +14117,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The Diffie-Hellman key exchange provides a shared secret that cannot
+   be determined by either party alone.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110615T053841Z" changeid="haruyama">
+        <seg>Diffie-Hellman 鍵交換は, 一方の側だけでは決定できない共有の秘密を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Disconnection Message
    'reason code' gives the reason in a more machine-readable format
    (suitable for localization), and can have the values as displayed in
@@ -14684,6 +14776,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>X のプロトコルは, [SCHEIFLER] に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The ability to propose new groups will reduce the incentive to use
+   precomputation for more efficient calculation of the discrete
+   logarithm.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110615T055159Z" changeid="haruyama">
+        <seg>新しい群を提案できると, 離散対数のより効率的な計算のために事前処理をする動機を減らすことができる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16993,6 +17095,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The security of the Diffie-Hellman key exchange is based on the
+   difficulty of solving the Discrete Logarithm Problem (DLP).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110615T054003Z" changeid="haruyama">
+        <seg>Diffie-Hellman 鍵交換のセキュリティは, 離散対数問題 (DLP) が容易に解けないことに基づいている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The sender MUST NOT send or receive any data after this message, and
    the recipient MUST NOT accept any data after receiving this message.</seg>
       </tuv>
@@ -17149,6 +17260,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>サーバは, クライアントが長い name や prompt フィールドを適切に表示できない可能性を考慮する必要がある(次の節を参照). 可能ならばこれらのフィールドの流さを制限する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The server can constantly compute new groups in the
+   background.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110615T055219Z" changeid="haruyama">
+        <seg>サーバはバックグラウンドで常に新しい群を計算できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18850,6 +18970,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This memo describes a new key exchange method for the Secure Shell
+   (SSH) protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110615T053045Z" changeid="haruyama">
+        <seg>このメモは, セキュア シェル （ＳＳＨ） プロトコルのための 新しい鍵交換法を記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This message
    does not consume window space and can be sent even if no window space
    is available.</seg>
@@ -18926,6 +19055,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>このメッセージは, 相手側で( UNIX システムでは典型的に /etc/passwd で定義される) ユーザのデフォルトシェルの起動を要求する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This method
+   prescribes a fixed group on which all operations are performed.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110615T053723Z" changeid="haruyama">
+        <seg>この方法は, すべての操作を固定された群の上で実行するよう規定しています.</seg>
       </tuv>
     </tu>
     <tu>
