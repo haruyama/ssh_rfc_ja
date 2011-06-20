@@ -110,7 +110,7 @@ RFC 4419                 SSH DH Group Exchange                March 2006
      mpint   p, safe prime
      mpint   g, generator for subgroup in GF(p)
 
-   クライアントは以下で応答するThe client responds with:
+   クライアントは以下で応答する:
 
      byte    SSH_MSG_KEX_DH_GEX_INIT
      mpint   e
@@ -138,14 +138,11 @@ RFC 4419                 SSH DH Group Exchange                March 2006
      mpint   f, exchange value sent by the server
      mpint   K, the shared secret
 
-   This value is called the exchange hash, and it is used to
-   authenticate the key exchange as per [RFC4253].
+   この値は交換ハッシュと呼ばれる. [RFC4253] により鍵交換を認証するのに用いられる.
 
 4.  鍵交換法
 
-   This document defines two new key exchange methods:
-   "diffie-hellman-group-exchange-sha1" and
-   "diffie-hellman-group-exchange-sha256".
+   この文書は 新しい2つの鍵交換法を定義する: "diffie-hellman-group-exchange-sha1" と "diffie-hellman-group-exchange-sha256" だ.
 
 
 
@@ -161,26 +158,18 @@ RFC 4419                 SSH DH Group Exchange                March 2006
 
 4.1.  diffie-hellman-group-exchange-sha1
 
-   The "diffie-hellman-group-exchange-sha1" method specifies
-   Diffie-Hellman Group and Key Exchange with SHA-1 [FIPS-180-2] as
-   HASH.
+   "diffie-hellman-group-exchange-sha1" 法は, SHA-1 [FIPS-180-2] を HASH として用いる Diffie-Hellman 群と鍵交換を指定する.
 
 4.2.  diffie-hellman-group-exchange-sha256
 
-   The "diffie-hellman-group-exchange-sha256" method specifies
-   Diffie-Hellman Group and Key Exchange with SHA-256 [FIPS-180-2] as
-   HASH.
+   "diffie-hellman-group-exchange-sha256" 法は, SHA-256 [FIPS-180-2] を HASH として用いる Diffie-Hellman 群と鍵交換を指定する.
 
-   Note that the hash used in key exchange (in this case, SHA-256) must
-   also be used in the key derivation pseudo-random function (PRF), as
-   per the requirement in the "Output from Key Exchange" section in
-   [RFC4253].
+   鍵交換で利用されるハッシュ(この場合 SHA-256)は, 鍵導出疑似乱数関数(PRF)でも用いられなければならない. これは, [RFC4253]の「鍵交換からの出力」での要件によるものだ.
 
 5.  メッセージ番号のまとめ
 
-   The following message numbers have been defined in this document.
-   They are in a name space private to this document and not assigned by
-   IANA.
+   以下のメッセージ番号を, この文書で定義する.
+   これらはこの文書で閉じた名前空間の中にあり, IANAによって割り当てられていない.
 
      #define SSH_MSG_KEX_DH_GEX_REQUEST_OLD  30
      #define SSH_MSG_KEX_DH_GEX_REQUEST      34
@@ -188,23 +177,19 @@ RFC 4419                 SSH DH Group Exchange                March 2006
      #define SSH_MSG_KEX_DH_GEX_INIT         32
      #define SSH_MSG_KEX_DH_GEX_REPLY        33
 
-   SSH_MSG_KEX_DH_GEX_REQUEST_OLD is used for backward compatibility.
-   Instead of sending "min || n || max", the client only sends "n".  In
-   addition, the hash is calculated using only "n" instead of "min || n
-   || max".
+   SSH_MSG_KEX_DH_GEX_REQUEST_OLD は 後方互換性のために用いられる.
+   "min || n || max" を送る代わりに クライアントは "n" のみを送る.  さらに, "min || n || max" の代わりに "n" のみを用いてハッシュが計算される.
 
-   The numbers 30-49 are key exchange specific and may be redefined by
-   other kex methods.
+   30-49 の範囲の数は鍵交換特有のもので, 他の鍵交換法で再定義できる.
 
 6.  実装上の注意
 
-6.1.  Choice of Generator
+6.1.  生成器の選択
 
-   One useful technique is to select the generator, and then limit the
-   modulus selection sieve to primes with that generator:
+   1つの有用なテクニックとして, 生成器を選択し法(modulus)の選択の篩をその生成器の素数に限する, というものがある.
 
-      2   when p (mod 24) = 11.
-      5   when p (mod 10) = 3 or 7.
+      2   p (mod 24) = 11 のとき.
+      5   p (mod 10) = 3 or 7 のとき.
 
 
 
@@ -215,51 +200,23 @@ Friedl, et al.              Standards Track                     [Page 5]
 RFC 4419                 SSH DH Group Exchange                March 2006
 
 
-   It is recommended to use 2 as generator, because it improves
-   efficiency in multiplication performance.  It is usable even when it
-   is not a primitive root, as it still covers half of the space of
-   possible residues.
+   2と生成器として利用するのが推奨される. 乗算のパフォーマンスが良いからだ.  これは, 原始根でない場合も有効だ. 可能な剰余の空間の半分をカバーするからだ.
 
-6.2.  Private Exponents
+6.2.  プライベート指数
 
-   To increase the speed of the key exchange, both client and server may
-   reduce the size of their private exponents.  It should be at least
-   twice as long as the key material that is generated from the shared
-   secret.  For more details, see the paper by van Oorschot and Wiener
-   [VAN-OORSCHOT].
+   鍵交換のスピードを増すため, クライアントとサーバがそれぞれのプライベート指数のサイズを減らすことができる.  プライベート指数は, 共有の秘密から生成される鍵の素材の少なくとも2倍の長さが必要だ.  より詳細には, van Oorschot と Wiener の論文 [VAN-OORSCHOT] を参照せよ.
 
 7.  セキュリティの考察
 
-   This protocol aims to be simple and uses only well-understood
-   primitives.  This encourages acceptance by the community and allows
-   for ease of implementation, which hopefully leads to a more secure
-   system.
+   このプロトコルは単純であることを目指しており, よく知られたプリミティブのみを利用している.  コミュニティが受け入れやすくし実装を容易にしている. これにより, うまくいけばより安全なシステムを構成できる.
 
-   The use of multiple moduli inhibits a determined attacker from
-   precalculating moduli exchange values, and discourages dedication of
-   resources for analysis of any particular modulus.
+   複数の法(moduli)を利用すると, 特定の攻撃者が法の交換の値の事前計算することを抑制し, 特定の法の分析に専念できなくさせる.
 
-   It is important to employ only safe primes as moduli, as they allow
-   us to find a generator g so that the order of the generated subgroup
-   does not factor into small primes, that is, with p = 2q + 1, the
-   order has to be either q or p - 1.  If the order is p - 1, then the
-   exponents generate all possible public values, evenly distributed
-   throughout the range of the modulus p, without cycling through a
-   smaller subset.  Van Oorshot and Wiener note that using short private
-   exponents with a random prime modulus p makes the computation of the
-   discrete logarithm easy [VAN-OORSCHOT].  However, they also state
-   that this problem does not apply to safe primes.
+   法として安全な素数だけを採用することは重要だ. そうすることで小さい素数に因数分解できないオーダーを持つ部分群を生成する生成器 g を見つけられる. つまり, p = 2q + 1 で, オーダーは q か p -1 のどちらかになる.  オーダーが p - 1 のとき, 指数は, pの法の範囲を均等に分布し小さいサブセットを巡回することがない, 可能なすべての公開値を生成する.  Van Oorshot と Wiener note は ランダムな素数法(modulus) p で小さいプライベート指数を使うと 離散対数の計算を簡単にできることを示した [VAN-OORSCHOT].  しかし, この問題は安全な素数には適用されないことを彼らは述べている.
 
-   The least significant bit of the private exponent can be recovered
-   when the modulus is a safe prime [MENEZES].  However, this is not a
-   problem if the size of the private exponent is big enough.  Related
-   to this, Waldvogel and Massey note: When private exponents are chosen
-   independently and uniformly at random from {0,...,p-2}, the key
-   entropy is less than 2 bits away from the maximum, lg(p-1)
-   [WALDVOGEL].
+   プライベート指数の最下位ビットは, 法が安全な素数の時に回復できる [MENEZES].  しかし, プライベート指数が十分大きければ問題ではない.  これに関連して, Waldvogel と Massey は主張している : プライベート指数が{0,...,p-2}で独立に一様にランダムに選択されるなら, 鍵のエントロピーは最大値である lg(p-1)から2bit未満しか小さくならない [WALDVOGEL].
 
-   The security considerations in [RFC4251] also apply to this key
-   exchange method.
+   [RFC4251]のセキュリティの考察はこの鍵公開法にも適用される.
 
 
 
@@ -327,30 +284,25 @@ Friedl, et al.              Standards Track                     [Page 7]
 RFC 4419                 SSH DH Group Exchange                March 2006
 
 
-Appendix A:  Generation of Safe Primes
+付録A：安全な素数の生成
 
-   The "Handbook of Applied Cryptography" [MENEZES] lists the following
-   algorithm to generate a k-bit safe prime p.  It has been modified so
-   that 2 is a generator for the multiplicative group mod p.
+   "Handbook of Applied Cryptography" [MENEZES] は, k-bitの安全な素数の生成のために次のアルゴリズムを示している.  pを法とする乗法群 (multiplicative group mod p) に対して2が生成器になるよう修正した.
 
-   1.  Do the following:
+   1.  以下の手順を実行:
 
-       1.  Select a random (k-1)-bit prime q, so that q mod 12 = 5.
+       1.  ランダムな (k-1)-bit の素数 q を選択. このとき q mod 12 = 5.
 
-       2.  Compute p := 2q + 1, and test whether p is prime (using,
-           e.g., trial division and the Rabin-Miller test).
+       2.  p := 2q + 1 を計算し, p が素数かテスト (たとえば除算の試行とRabin-Millerテストを用いて)
 
-   2.  Repeat until p is prime.
+   2.  pが素数になるまで繰り返し.
 
-   If an implementation uses the OpenSSL libraries, a group consisting
-   of a 1024-bit safe prime and 2 as generator can be created as
-   follows:
+   実装がOpenSSLのライブラリを利用する場合, 1024-bit の安全な素数と 2 を生成器として持つ群は以下のように作成できる:
 
        DH *d = NULL;
        d = DH_generate_parameters(1024, DH_GENERATOR_2, NULL, NULL);
        BN_print_fp(stdout, d->p);
 
-   The order of the subgroup generated by 2 is q = p - 1.
+   2で生成された部分群のオーダーは q = p -1 だ.
 
 References
 

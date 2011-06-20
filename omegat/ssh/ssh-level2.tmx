@@ -358,6 +358,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>It is usable even when it
+   is not a primitive root, as it still covers half of the space of
+   possible residues.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T034038Z" changeid="haruyama">
+        <seg>これは, 原始根でない場合も有効だ. 可能な剰余の空間の半分をカバーするからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The value for 'rsa_signature_blob' is encoded as a string containing
    s (which is an integer, without lengths or padding, unsigned, and in
    network byte order).</seg>
@@ -1816,6 +1826,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>One useful technique is to select the generator, and then limit the
+   modulus selection sieve to primes with that generator:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T033837Z" changeid="haruyama">
+        <seg>1つの有用なテクニックとして, 生成器を選択し法(modulus)の選択の篩をその生成器の素数に限する, というものがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This message does not consume window space and can be sent even if no
    window space is available.</seg>
       </tuv>
@@ -1980,6 +1999,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv xml:lang="JA">
         <seg>規約 .........................................9
            4.4.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>For more details, see the paper by van Oorschot and Wiener
+   [VAN-OORSCHOT].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T034415Z" changeid="haruyama">
+        <seg>より詳細には, van Oorschot と Wiener の論文 [VAN-OORSCHOT] を参照せよ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2604,6 +2632,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The &quot;diffie-hellman-group-exchange-sha256&quot; method specifies
+   Diffie-Hellman Group and Key Exchange with SHA-256 [FIPS-180-2] as
+   HASH.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T032618Z" changeid="haruyama">
+        <seg>&quot;diffie-hellman-group-exchange-sha256&quot; 法は, SHA-256 [FIPS-180-2] を HASH として用いる Diffie-Hellman 群と鍵交換を指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The maximum length of the string is 255 characters, including the
    Carriage Return and Line Feed.</seg>
       </tuv>
@@ -3173,6 +3211,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
          SSH_DISCONNECT_AUTH_CANCELLED_BY_USER              13
          SSH_DISCONNECT_NO_MORE_AUTH_METHODS_AVAILABLE      14
          SSH_DISCONNECT_ILLEGAL_USER_NAME                   15</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>In
+   addition, the hash is calculated using only &quot;n&quot; instead of &quot;min || n
+   || max&quot;.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T033022Z" changeid="haruyama">
+        <seg>さらに, &quot;min || n || max&quot; の代わりに &quot;n&quot; のみを用いてハッシュが計算される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3811,6 +3859,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>It is important to employ only safe primes as moduli, as they allow
+   us to find a generator g so that the order of the generated subgroup
+   does not factor into small primes, that is, with p = 2q + 1, the
+   order has to be either q or p - 1.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T035748Z" changeid="haruyama">
+        <seg>法として安全な素数だけを採用することは重要だ. そうすることで小さい素数に因数分解できないオーダーを持つ部分群を生成する生成器 g を見つけられる. つまり, p = 2q + 1 で, オーダーは q か p -1 のどちらかになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Additionally, another CBC mode attack may be mitigated through the
    insertion of packets containing SSH_MSG_IGNORE.</seg>
       </tuv>
@@ -4160,6 +4219,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Appendix A:  Generation of Safe Primes</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T040858Z" changeid="haruyama">
+        <seg>付録A：安全な素数の生成</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Requesting X11 Forwarding</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -4253,6 +4320,18 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>下層にあるトランスポートは, 転送エラーに対する保護をする必要がある. そのようなエラーはSSHのコネクションを終了させる原因となる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Related
+   to this, Waldvogel and Massey note: When private exponents are chosen
+   independently and uniformly at random from {0,...,p-2}, the key
+   entropy is less than 2 bits away from the maximum, lg(p-1)
+   [WALDVOGEL].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T040831Z" changeid="haruyama">
+        <seg>これに関連して, Waldvogel と Massey は主張している : プライベート指数が{0,...,p-2}で独立に一様にランダムに選択されるなら, 鍵のエントロピーは最大値である lg(p-1)から2bit未満しか小さくならない [WALDVOGEL].</seg>
       </tuv>
     </tu>
     <tu>
@@ -4560,6 +4639,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This protocol aims to be simple and uses only well-understood
+   primitives.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T035135Z" changeid="haruyama">
+        <seg>このプロトコルは単純であることを目指しており, よく知られたプリミティブのみを利用している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This document describes the SSH transport layer protocol, which
    typically runs on top of TCP/IP.</seg>
       </tuv>
@@ -4693,6 +4781,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv xml:lang="JA">
         <seg>この文書でのキーワード &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
    &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;,  &quot;OPTIONAL&quot; は, [2] で記述されているように解釈される. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Private Exponents</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T034119Z" changeid="haruyama">
+        <seg>プライベート指数</seg>
       </tuv>
     </tu>
     <tu>
@@ -5009,6 +5105,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Van Oorshot and Wiener note that using short private
+   exponents with a random prime modulus p makes the computation of the
+   discrete logarithm easy [VAN-OORSCHOT].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T040448Z" changeid="haruyama">
+        <seg>Van Oorshot と Wiener note は ランダムな素数法(modulus) p で小さいプライベート指数を使うと 離散対数の計算を簡単にできることを示した [VAN-OORSCHOT].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Summary of Message Numbers</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -5232,6 +5338,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This document defines two new key exchange methods:
+   &quot;diffie-hellman-group-exchange-sha1&quot; and
+   &quot;diffie-hellman-group-exchange-sha256&quot;.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T032502Z" changeid="haruyama">
+        <seg>この文書は 新しい2つの鍵交換法を定義する: &quot;diffie-hellman-group-exchange-sha1&quot; と &quot;diffie-hellman-group-exchange-sha256&quot; だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Multiple channels are multiplexed
    into a single connection.</seg>
       </tuv>
@@ -5309,6 +5425,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv xml:lang="JA">
         <seg>ホストベース認証 ..........................23
       9.5.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>It has been modified so
+   that 2 is a generator for the multiplicative group mod p.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T041033Z" changeid="haruyama">
+        <seg>pを法とする乗法群 (multiplicative group mod p) に対して2が生成器になるよう修正した.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5789,6 +5914,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>鍵の利用法は, (たとえば証明書の中での)ポリシーの記述によって制限されるかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Note that the hash used in key exchange (in this case, SHA-256) must
+   also be used in the key derivation pseudo-random function (PRF), as
+   per the requirement in the &quot;Output from Key Exchange&quot; section in
+   [RFC4253].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T032747Z" changeid="haruyama">
+        <seg>鍵交換で利用されるハッシュ(この場合 SHA-256)は, 鍵導出疑似乱数関数(PRF)でも用いられなければならない. これは, [RFC4253]の「鍵交換からの出力」での要件によるものだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6564,6 +6700,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The use of multiple moduli inhibits a determined attacker from
+   precalculating moduli exchange values, and discourages dedication of
+   resources for analysis of any particular modulus.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T035508Z" changeid="haruyama">
+        <seg>複数の法(moduli)を利用すると, 特定の攻撃者が法の交換の値の事前計算することを抑制し, 特定の法の分析に専念できなくさせる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Because the protocol is extensible,
    future extensions to the protocol may provide better mechanisms for
    dealing with the need to know the server's host key before
@@ -6919,6 +7065,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>SSH_MSG_KEX_DH_GEX_REQUEST_OLD is used for backward compatibility.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T032922Z" changeid="haruyama">
+        <seg>SSH_MSG_KEX_DH_GEX_REQUEST_OLD は 後方互換性のために用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The following 'method name' values are defined.</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -7130,12 +7284,31 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The order of the subgroup generated by 2 is q = p - 1.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T043259Z" changeid="haruyama">
+        <seg>2で生成された部分群のオーダーは q = p -1 だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Information on the REQUIRED and RECOMMENDED sets of
    elliptic curve domain parameters for use with this algorithm can be
    found in Section 10.</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110321T122654Z" changeid="haruyama">
         <seg>このアルゴリズムと共に用いる楕円曲線ドメインパラメータの要求されている集合と推奨される集合の情報は, 10節で示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If the order is p - 1, then the
+   exponents generate all possible public values, evenly distributed
+   throughout the range of the modulus p, without cycling through a
+   smaller subset.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T040340Z" changeid="haruyama">
+        <seg>オーダーが p - 1 のとき, 指数は, pの法の範囲を均等に分布し小さいサブセットを巡回することがない, 可能なすべての公開値を生成する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7605,6 +7778,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110419T112549Z" changeid="haruyama">
         <seg>必須の楕円曲線として, nistp256 と nistp384, nistp521 がある. 楕円曲線ドメインパラメータの識別子は, 文字列 &quot;nistp256&quot; と  &quot;nistp384&quot;, &quot;nistp521&quot; だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>5   when p (mod 10) = 3 or 7.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T033612Z" changeid="haruyama">
+        <seg>5   p (mod 10) = 3 or 7 のとき.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9644,6 +9825,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>It is recommended to use 2 as generator, because it improves
+   efficiency in multiplication performance.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T033920Z" changeid="haruyama">
+        <seg>2と生成器として利用するのが推奨される. 乗算のパフォーマンスが良いからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>If the server fails to authenticate the user (through the underlying
    authentication mechanism(s)), it SHOULD NOT send another request
    message(s) in an attempt to obtain new authentication data; instead,
@@ -10510,6 +10700,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Repeat until p is prime.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T041226Z" changeid="haruyama">
+        <seg>pが素数になるまで繰り返し.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Control of Function through Configuration and Policy ......13
       8.2.</seg>
       </tuv>
@@ -10684,6 +10882,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv xml:lang="JA">
         <seg>将来の割り当て ..................................8
            4.3.4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This encourages acceptance by the community and allows
+   for ease of implementation, which hopefully leads to a more secure
+   system.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T035257Z" changeid="haruyama">
+        <seg>コミュニティが受け入れやすくし実装を容易にしている. これにより, うまくいけばより安全なシステムを構成できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11026,6 +11234,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>さもなければ, これらのメッセージは無視されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>They are in a name space private to this document and not assigned by
+   IANA.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T032906Z" changeid="haruyama">
+        <seg>これらはこの文書で閉じた名前空間の中にあり, IANAによって割り当てられていない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11855,6 +12072,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Compute p := 2q + 1, and test whether p is prime (using,
+           e.g., trial division and the Rabin-Miller test).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T041216Z" changeid="haruyama">
+        <seg>p := 2q + 1 を計算し, p が素数かテスト (たとえば除算の試行とRabin-Millerテストを用いて)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>based attacks (as an egregious example, an application might save
    cryptographic keys in cleartext to an unprotected file).</seg>
       </tuv>
@@ -12085,6 +12311,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>利用できる種類とその解釈は, チャンネルの種類に依存する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If an implementation uses the OpenSSL libraries, a group consisting
+   of a 1024-bit safe prime and 2 as generator can be created as
+   follows:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T043237Z" changeid="haruyama">
+        <seg>実装がOpenSSLのライブラリを利用する場合, 1024-bit の安全な素数と 2 を生成器として持つ群は以下のように作成できる:</seg>
       </tuv>
     </tu>
     <tu>
@@ -13486,6 +13722,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>圧縮は, 方法によってはステートフルでもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Choice of Generator</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T033333Z" changeid="haruyama">
+        <seg>生成器の選択</seg>
       </tuv>
     </tu>
     <tu>
@@ -15149,6 +15393,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>To increase the speed of the key exchange, both client and server may
+   reduce the size of their private exponents.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T034258Z" changeid="haruyama">
+        <seg>鍵交換のスピードを増すため, クライアントとサーバがそれぞれのプライベート指数のサイズを減らすことができる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Note that the session id can be made public without harming the
    security of the protocol.</seg>
       </tuv>
@@ -15348,6 +15601,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The following message numbers have been defined in this document.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T032753Z" changeid="haruyama">
+        <seg>以下のメッセージ番号を, この文書で定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>61    ECHOKE      Visual erase for line kill.</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -15444,6 +15705,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>異なる認証法は, 同じメッセージ番号を再利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The security considerations in [RFC4251] also apply to this key
+   exchange method.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T040849Z" changeid="haruyama">
+        <seg>[RFC4251]のセキュリティの考察はこの鍵公開法にも適用される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15733,6 +16003,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Do the following:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T041042Z" changeid="haruyama">
+        <seg>以下の手順を実行:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The hash H is formed by applying the algorithm HASH on a
    concatenation of the following:</seg>
       </tuv>
@@ -15766,6 +16044,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>ホストベース認証</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The &quot;Handbook of Applied Cryptography&quot; [MENEZES] lists the following
+   algorithm to generate a k-bit safe prime p.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T040922Z" changeid="haruyama">
+        <seg>&quot;Handbook of Applied Cryptography&quot; [MENEZES] は, k-bitの安全な素数の生成のために次のアルゴリズムを示している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15842,6 +16129,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>しかし, ユーザがファイルにアクセスするかインタラクティブなシェルを使うか, その両方かは, 認証プロトコルの間にはわからない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>However, they also state
+   that this problem does not apply to safe primes.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T040522Z" changeid="haruyama">
+        <seg>しかし, この問題は安全な素数には適用されないことを彼らは述べている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16474,6 +16770,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>However, this is not a
+   problem if the size of the private exponent is big enough.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T040623Z" changeid="haruyama">
+        <seg>しかし, プライベート指数が十分大きければ問題ではない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This section defines the family of &quot;ecdsa-sha2-*&quot; public key formats
    and corresponding signature formats.</seg>
       </tuv>
@@ -16526,6 +16831,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>サブシステムの名前は, [SSH-NUMBERS] で説明されている DNS 拡張命名規則に従う.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This value is called the exchange hash, and it is used to
+   authenticate the key exchange as per [RFC4253].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110616T235615Z" changeid="haruyama">
+        <seg>この値は交換ハッシュと呼ばれる. [RFC4253] により鍵交換を認証するのに用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17223,6 +17537,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>&quot;ptr-req&quot; string を含む SSH_MSG_CHANNEL_REQUEST メッセージは,  'encoded terminal modes' を含まなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>2   when p (mod 24) = 11.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T033604Z" changeid="haruyama">
+        <seg>2   p (mod 24) = 11 のとき.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17943,6 +18265,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The numbers 30-49 are key exchange specific and may be redefined by
+   other kex methods.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T033057Z" changeid="haruyama">
+        <seg>30-49 の範囲の数は鍵交換特有のもので, 他の鍵交換法で再定義できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The SSH Connection Protocol has been designed to run on top of the
    SSH transport layer and user authentication protocols.</seg>
       </tuv>
@@ -18520,6 +18851,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The &quot;diffie-hellman-group-exchange-sha1&quot; method specifies
+   Diffie-Hellman Group and Key Exchange with SHA-1 [FIPS-180-2] as
+   HASH.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T032556Z" changeid="haruyama">
+        <seg>&quot;diffie-hellman-group-exchange-sha1&quot; 法は, SHA-1 [FIPS-180-2] を HASH として用いる Diffie-Hellman 群と鍵交換を指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>When the service starts, it may have access to the session identifier
    generated during the key exchange.</seg>
       </tuv>
@@ -18720,8 +19061,8 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv xml:lang="EN-US">
         <seg>The client responds with:</seg>
       </tuv>
-      <tuv xml:lang="JA" changedate="20110616T235205Z" changeid="haruyama">
-        <seg>クライアントは以下で応答するThe client responds with:</seg>
+      <tuv xml:lang="JA" changedate="20110616T235214Z" changeid="haruyama">
+        <seg>クライアントは以下で応答する:</seg>
       </tuv>
     </tu>
     <tu>
@@ -19053,6 +19394,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>このプロトコルは, インタラクティブなログインセッション, コマンドのリモート実行, TCP/IP接続の転送, X11接続の転送を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Select a random (k-1)-bit prime q, so that q mod 12 = 5.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T041115Z" changeid="haruyama">
+        <seg>ランダムな (k-1)-bit の素数 q を選択. このとき q mod 12 = 5.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19833,6 +20182,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The least significant bit of the private exponent can be recovered
+   when the modulus is a safe prime [MENEZES].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T040601Z" changeid="haruyama">
+        <seg>プライベート指数の最下位ビットは, 法が安全な素数の時に回復できる [MENEZES].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The message below is used by the server to inform the client when it
    can or cannot perform flow control (control-S/control-Q processing).</seg>
       </tuv>
@@ -20052,6 +20410,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>これは, [SSH-TRANS]で記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Instead of sending &quot;min || n || max&quot;, the client only sends &quot;n&quot;.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T032949Z" changeid="haruyama">
+        <seg>&quot;min || n || max&quot; を送る代わりに クライアントは &quot;n&quot; のみを送る.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20363,6 +20729,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>プロトコルのやりとり</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>It should be at least
+   twice as long as the key material that is generated from the shared
+   secret.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110620T034346Z" changeid="haruyama">
+        <seg>プライベート指数は, 共有の秘密から生成される鍵の素材の少なくとも2倍の長さが必要だ.</seg>
       </tuv>
     </tu>
     <tu>
