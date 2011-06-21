@@ -15,8 +15,7 @@ Category: Standards Track                                     J. Salowey
                                                                 May 2006
 
 
-    Generic Security Service Application Program Interface (GSS-API)
-  Authentication and Key Exchange for the Secure Shell (SSH) Protocol
+    セキュア シェル (SSH) プロトコルのための汎用セキュリティサービスアプリケーションプログラムインタフェイス(GSS-API) 認証と鍵交換 
 
 このメモの位置づけ
 
@@ -29,24 +28,13 @@ Copyright Notice
 
 概要
 
-   The Secure Shell protocol (SSH) is a protocol for secure remote login
-   and other secure network services over an insecure network.
+   セキュア シェル (SSH) プロトコルは, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.
 
-   The Generic Security Service Application Program Interface (GSS-API)
-   provides security services to callers in a mechanism-independent
-   fashion.
+   汎用セキュリティサービスアプリケーションプログラムインタフェイス (GSS-API) はメカニズムに依存しない形式でセキュリティサービスを呼び出し側に提供する.
 
-   This memo describes methods for using the GSS-API for authentication
-   and key exchange in SSH.  It defines an SSH user authentication
-   method that uses a specified GSS-API mechanism to authenticate a
-   user, and a family of SSH key exchange methods that use GSS-API to
-   authenticate a Diffie-Hellman key exchange.
+   このメモは, SSHで認証と鍵交換のためにGSS-APIを使う方法を記述する.  ユーザを認証する特定のGSS-APIメカニズムを用いるSSHユーザ認証法と Diffie-Hellman 鍵交換を認証するためにGSS-APIを用いるSSHの鍵交換法のファミリを定義する.
 
-   This memo also defines a new host public key algorithm that can be
-   used when no operations are needed using a host's public key, and a
-   new user authentication method that allows an authorization name to
-   be used in conjunction with any authentication that has already
-   occurred as a side-effect of GSS-API-based key exchange.
+   このメモは, ホスト公開鍵の利用になにも操作が必要ではない新しいホスト公開鍵アルゴリズムも定義する. さらに, GSS-APIベースの鍵交換の副作用として生じたどの認証に対しても連携して利用できる新しいユーザ認証法も定義する. 
 
 
 
@@ -59,35 +47,35 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 目次
 
-   1. Introduction ....................................................3
-      1.1. SSH Terminology ............................................3
-      1.2. Key Words ..................................................3
-   2. GSS-API-Authenticated Diffie-Hellman Key Exchange ...............3
-      2.1. Generic GSS-API Key Exchange ...............................4
-      2.2. Group Exchange ............................................10
+   1. イントロダクション ....................................................3
+      1.1. SSH の用語 ............................................3
+      1.2. キーワード ..................................................3
+   2. GSS-API に認証された Diffie-Hellman 鍵交換 ..............3
+      2.1. 汎用 GSS-API 鍵交換 ...............................4
+      2.2. 群の交換 ............................................10
       2.3. gss-group1-sha1-* .........................................11
       2.4. gss-group14-sha1-* ........................................12
       2.5. gss-gex-sha1-* ............................................12
-      2.6. Other GSS-API Key Exchange Methods ........................12
-   3. GSS-API User Authentication ....................................13
-      3.1. GSS-API Authentication Overview ...........................13
-      3.2. Initiating GSS-API Authentication .........................13
-      3.3. Initial Server Response ...................................14
-      3.4. GSS-API Session ...........................................15
-      3.5. Binding Encryption Keys ...................................16
-      3.6. Client Acknowledgement ....................................16
-      3.7. Completion ................................................17
-      3.8. Error Status ..............................................17
-      3.9. Error Token ...............................................18
-   4. Authentication Using GSS-API Key Exchange ......................19
-   5. Null Host Key Algorithm ........................................20
-   6. Summary of Message Numbers .....................................21
-   7. GSS-API Considerations .........................................22
-      7.1. Naming Conventions ........................................22
-      7.2. Channel Bindings ..........................................22
+      2.6. その他の GSS-API 鍵交換法 ........................12
+   3. GSS-API ユーザ認証 ....................................13
+      3.1. GSS-API 認証の概要 ...........................13
+      3.2. GSS-API 認証の開始 .........................13
+      3.3. 最初のサーバの応答 ...................................14
+      3.4. GSS-API セッション ...........................................15
+      3.5. 暗号鍵の束縛 ...................................16
+      3.6. クライアントの確認応答 ....................................16
+      3.7. 完了 ................................................17
+      3.8. エラー状態 ..............................................17
+      3.9. エラートークン ...............................................18
+   4. GSS-API 鍵交換を利用する認証 ......................19
+   5. ヌルホスト鍵アルゴリズム ........................................20
+   6. メッセージ番号のまとめ .....................................21
+   7. GSS-API の考察 .........................................22
+      7.1. 命名規則 ........................................22
+      7.2. チャンネルの束縛 ..........................................22
       7.3. SPNEGO ....................................................23
-   8. IANA Considerations ............................................24
-   9. Security Considerations ........................................24
+   8. IANA の考慮 ............................................24
+   9. セキュリティの考察 ........................................24
    10. Acknowledgements ..............................................25
    11. References ....................................................26
       11.1. Normative References .....................................26
@@ -115,48 +103,27 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 1.  イントロダクション
 
-   This document describes the methods used to perform key exchange and
-   user authentication in the Secure Shell protocol using the GSS-API.
-   To do this, it defines a family of key exchange methods, two user
-   authentication methods, and a new host key algorithm.  These
-   definitions allow any GSS-API mechanism to be used with the Secure
-   Shell protocol.
+   この文書は, GSS-APIを用いてセキュアシェルプロトコルで鍵交換とユーザ認証を行なう方法を記述する.
+   このために, 鍵交換法のファミリと2つのユーザ認証法, 新しいホスト鍵アルゴリズムを定義する.  これらの定義によって, セキュアシェルプロトコルと共に任意のGSS-APIメカニズムを利用できる.
 
-   This document should be read only after reading the documents
-   describing the SSH protocol architecture [SSH-ARCH], transport layer
-   protocol [SSH-TRANSPORT], and user authentication protocol
-   [SSH-USERAUTH].  This document freely uses terminology and notation
-   from the architecture document without reference or further
-   explanation.
+   この文書は SSHプロトコルアーキテクチャ [SSH-ARCH], トランスポート層プロトコル [SSH-TRANSPORT], ユーザ認証プロトコル [SSH-USERAUTH] を読んでからのみ読むべきだ.  この文書は, 参照や説明なしにアーキテクチャ文書から用語や表記法を自由に利用する.
 
-1.1.  SSH Terminology
+1.1.  SSHの用語
 
-   The data types used in the packets are defined in the SSH
-   architecture document [SSH-ARCH].  It is particularly important to
-   note the definition of string allows binary content.
+   パケットで利用しているデータのタイプは, アーキテクチャ文書 [SSH-ARCH] で定義されている.  文字列の定義がバイナリの内容を許していることに注意することが特に重要だ.
 
-   The SSH_MSG_USERAUTH_REQUEST packet refers to a service; this service
-   name is an SSH service name and has no relationship to GSS-API
-   service names.  Currently, the only defined service name is
-   "ssh-connection", which refers to the SSH connection protocol
-   [SSH-CONNECT].
+   SSH_MSG_USERAUTH_REQUEST パケットはサービスを参照する. このサービス名は SSHのサービス名で GSS-APIのサービス名とは無関係だ.  現在, (この場面で)唯一定義されたサービス名は "ssh-connection" で, SSH コネクションプロトコル [SSH-CONNECT] を参照する.
 
-1.2.  Key Words
+1.2.  キーワード
 
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   document are to be interpreted as described in [KEYWORDS].
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, [KEYWORDS] で記述されているように解釈される. 
 
-2.  GSS-API-Authenticated Diffie-Hellman Key Exchange
+2.  GSS-API に認証された Diffie-Hellman 鍵交換
 
-   This section defines a class of key exchange methods that combine the
-   Diffie-Hellman key exchange from Section 8 of [SSH-TRANSPORT] with
-   mutual authentication using GSS-API.
+   この節では, [SSH-TRANSPORT]の8節の Diffie-Hellman 鍵交換とGSS-APIを用いた相互認証とを組合せた鍵交換法のクラスを定義する.
 
-   Since the GSS-API key exchange methods described in this section do
-   not require the use of public key signature or encryption algorithms,
-   they MAY be used with any host key algorithm, including the "null"
-   algorithm described in Section 5.
+   この節で記述するGSS-API 鍵交換法は, 公開鍵の署名や暗号アルゴリズムの利用を必要としないので,  5節で記述する  "null" アルゴリズムを含むどのホスト鍵アルゴリズムに対しても利用してもよい.
 
 
 
@@ -169,54 +136,28 @@ Hutzelman, et al.           Standards Track                     [Page 3]
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
-2.1.  Generic GSS-API Key Exchange
+2.1.  汎用 GSS-API 鍵交換
 
-   The following symbols are used in this description:
+   この記述では次の記号を利用する:
 
-   o  C is the client, and S is the server
+   o  C はクライアントでSはサーバだ
 
-   o  p is a large safe prime, g is a generator for a subgroup of GF(p),
-      and q is the order of the subgroup
+   o  p は安全な大きな素数で, gは GF(p)の部分群の生成器, qは部分群のオーダだ.
 
-   o  V_S is S's version string, and V_C is C's version string
+   o  V_S は Sのバージョン文字列, V_C は Cのバージョン文字列だ.
 
-   o  I_C is C's KEXINIT message, and I_S is S's KEXINIT message
+   o  I_C は C の KEXINIT メッセージ, I_S は S の KEXINIT メッセージだ.
 
-   1.  C generates a random number x (1 < x < q) and computes e = g^x
-       mod p.
+   1.  C は 乱数 x (1 < x < q) を生成し, e = g^x mod p を計算する.
 
-   2.  C calls GSS_Init_sec_context(), using the most recent reply token
-       received from S during this exchange, if any.  For this call, the
-       client MUST set mutual_req_flag to "true" to request that mutual
-       authentication be performed.  It also MUST set integ_req_flag to
-       "true" to request that per-message integrity protection be
-       supported for this context.  In addition, deleg_req_flag MAY be
-       set to "true" to request access delegation, if requested by the
-       user.  Since the key exchange process authenticates only the
-       host, the setting of anon_req_flag is immaterial to this process.
-       If the client does not support the "gssapi-keyex" user
-       authentication method described in Section 4, or does not intend
-       to use that method in conjunction with the GSS-API context
-       established during key exchange, then anon_req_flag SHOULD be set
-       to "true".  Otherwise, this flag MAY be set to true if the client
-       wishes to hide its identity.  Since the key exchange process will
-       involve the exchange of only a single token once the context has
-       been established, it is not necessary that the GSS-API context
-       support detection of replayed or out-of-sequence tokens.  Thus,
-       replay_det_req_flag and sequence_req_flag need not be set for
-       this process.  These flags SHOULD be set to "false".
+   2.  C は GSS_Init_sec_context() を呼ぶ. この交換でSから最も最近受信した応答トークンがあれば, それを用いる.  この呼び出しでは, クライアントは相互認証の実行を要求するために mutual_req_flag を "true" に設定しなければならない.  また, この文脈でメッセージ単位での完全性保護のサポートを要求するため,  integ_req_flag も "true" に設定しなければならない.  加えて, ユーザが求めるならば アクセスの委譲を要求するために deleg_req_flag を "true" に設定してもよい. 鍵交換プロレスはホストのみ認証するので, anon_req_flag の設定は重要ではない.
+       クライアントが 4節で記述する "gssapi-keyex" ユーザ認証をサポートしていなかったり, 鍵交換時に確立した GSS-APIコンテクストと連携した方法を使おうとしない場合は, anon_req_flag は "true" に設定する必要がある.  もしくは, クライアントがそのアイデンティティを隠そうとする場合にこのフラグを true に設定してもよい.  一度コンテクストが確立されると鍵交換プロセスは単一のトークンの交換のみ実行されるので, GSS-APIコンテクストは再送やシーケンスを外れたトークンの検出をサポートする必要はない.  このため, replay_det_req_flag と sequence_req_flag はこのプロセスでは設定する必要がない.  これらのフラグは "false" に設定する必要がある.
 
-       *  If the resulting major_status code is GSS_S_COMPLETE and the
-          mutual_state flag is not true, then mutual authentication has
-          not been established, and the key exchange MUST fail.
+       *  結果の major_status コードが GSS_S_COMPLETE で mutual_state フラグが trueでなければ, 相互認証は確立していないので鍵交換は失敗しなければならない.
 
-       *  If the resulting major_status code is GSS_S_COMPLETE and the
-          integ_avail flag is not true, then per-message integrity
-          protection is not available, and the key exchange MUST fail.
+       *  結果の major_status コードが GSS_S_COMPLETE で integ_avail フラグが trueでなければ, メッセージ単位の完全性保護が利用できないので鍵交換は失敗しなければならない.
 
-       *  If the resulting major_status code is GSS_S_COMPLETE and both
-          the mutual_state and integ_avail flags are true, the resulting
-          output token is sent to S.
+       *  結果の major_status コードが GSS_S_COMPLETE で mutual_state と integ_avail フラグが共に trueなら, 結果のoutput tokenをSに送る.
 
 
 
@@ -225,29 +166,18 @@ Hutzelman, et al.           Standards Track                     [Page 4]
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
-       *  If the resulting major_status code is GSS_S_CONTINUE_NEEDED,
-          the output_token is sent to S, which will reply with a new
-          token to be provided to GSS_Init_sec_context().
+       *  結果の major_status コードが GSS_S_CONTINUE_NEEDED なら, Sに output_token を送り, Sは GSS_Init_sec_context() に提供される新しい token で応答する.
 
-       *  The client MUST also include "e" with the first message it
-          sends to the server during this process; if the server
-          receives more than one "e" or none at all, the key exchange
-          fails.
+       *  クライアントは, このプロセスでサーバに送る最初のメッセージに "e" を含めなければならない. サーバが1つより多い"e"を受けとったりまったく受け取らなかったら, 鍵交換は失敗する.
 
-       *  It is an error if the call does not produce a token of non-
-          zero length to be sent to the server.  In this case, the key
-          exchange MUST fail.
+       *  呼び出しがサーバに送信される0でない長さのトークンを生成できなかったらエラーだ.  この場合, 鍵交換は失敗しなければならない.
 
    3.  S calls GSS_Accept_sec_context(), using the token received from
        C.
 
-       *  If the resulting major_status code is GSS_S_COMPLETE and the
-          mutual_state flag is not true, then mutual authentication has
-          not been established, and the key exchange MUST fail.
+       *  結果の major_status コードが GSS_S_COMPLETE で mutual_state フラグが trueでなければ, 相互認証は確立していないので鍵交換は失敗しなければならない.
 
-       *  If the resulting major_status code is GSS_S_COMPLETE and the
-          integ_avail flag is not true, then per-message integrity
-          protection is not available, and the key exchange MUST fail.
+       *  結果の major_status コードが GSS_S_COMPLETE で integ_avail フラグが trueでなければ, メッセージ単位の完全性保護が利用できないので鍵交換は失敗しなければならない.
 
        *  If the resulting major_status code is GSS_S_COMPLETE and both
           the mutual_state and integ_avail flags are true, then the
