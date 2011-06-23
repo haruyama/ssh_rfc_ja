@@ -125,6 +125,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>*  If the resulting major_status code is GSS_S_COMPLETE and both
+          the mutual_state and integ_avail flags are true, then the
+          security context has been established, and processing
+          continues with step 4.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T033517Z" changeid="haruyama">
+        <seg>*  結果の major_status コードが GSS_S_COMPLETE で mutual_state と integ_avail フラグが共に trueなら, セキュリティコンテキストが確立された. ステップ4 から処理が続けられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>*  If the resulting major_status code is GSS_S_COMPLETE and the
           integ_avail flag is not true, then per-message integrity
           protection is not available, and the key exchange MUST fail.</seg>
@@ -145,12 +156,32 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>*  If the resulting major_status code is GSS_S_COMPLETE, but a
+          non-zero-length reply token is returned, then that token is
+          sent to the client.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T033636Z" changeid="haruyama">
+        <seg>*  結果のmajor_status コードが GSS_S_COMPLETE だが 長さが0ではない応答トークンが返されたなら, そのトークンがクライアントに送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>*  If the resulting major_status code is GSS_S_CONTINUE_NEEDED,
           the output_token is sent to S, which will reply with a new
           token to be provided to GSS_Init_sec_context().</seg>
       </tuv>
       <tuv lang="JA" changedate="20110621T024634Z" changeid="haruyama">
         <seg>*  結果の major_status コードが GSS_S_CONTINUE_NEEDED なら, Sに output_token を送り, Sは GSS_Init_sec_context() に提供される新しい token で応答する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>*  If the resulting major_status code is GSS_S_CONTINUE_NEEDED,
+          then the output token is sent to C, and processing continues
+          with step 2.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T033539Z" changeid="haruyama">
+        <seg>*  結果の major_status コードが GSS_S_CONTINUE_NEEDED なら, Cに output トークンを送って, ステップ2から処理が続けられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2451,6 +2482,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As noted in Section 9, it may be desirable under site security policy
+   to obscure information about the precise nature of the error; thus,
+   it is RECOMMENDED that implementations provide a method to suppress
+   these messages as a matter of policy.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T051849Z" changeid="haruyama">
+        <seg>9節で述べるように, エラーの詳細な性質の情報は隠したほうがサイトのセキュリティポリシー上望ましいかもしれない; つまり, ポリシーの問題としてこれらのメッセージを抑制する方法を実装が提供することが望ましい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As noted, the actual instructions to the IANA are in
    [SSH-NUMBERS].</seg>
       </tuv>
@@ -2991,6 +3033,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110621T022510Z" changeid="haruyama">
         <seg>C は GSS_Init_sec_context() を呼ぶ. この交換でSから最も最近受信した応答トークンがあれば, それを用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>C computes K = f^x mod p, and H = hash(V_C || V_S || I_C || I_S
+       || K_S || e || f || K).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T034935Z" changeid="haruyama">
+        <seg>K = e ^ y mod p, と H = hash(V_C || V_S || I_C || I_S || K_S || e || f || K) を Cは計算する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6263,6 +6314,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>However, if the resulting major_status is anything other than
+       GSS_S_COMPLETE, or a non-zero-length token is returned, it is an
+       error and the key exchange MUST fail.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T034704Z" changeid="haruyama">
+        <seg>しかし, 結果の major_status が GSS_S_COMPLETE でなかったり 0でないトークンが返されたら, これはエラーで鍵交換は失敗しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>However, it MAY be sent by the client.</seg>
       </tuv>
       <tuv lang="JA">
@@ -6860,6 +6921,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110620T043237Z" changeid="haruyama">
         <seg>実装がOpenSSLのライブラリを利用する場合, 1024-bit の安全な素数と 2 を生成器として持つ群は以下のように作成できる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If any call to GSS_Init_sec_context() or GSS_Accept_sec_context()
+   returns a major_status other than GSS_S_COMPLETE or
+   GSS_S_CONTINUE_NEEDED, or any other GSS-API call returns a
+   major_status other than GSS_S_COMPLETE, the key exchange fails.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T035342Z" changeid="haruyama">
+        <seg>GSS_Init_sec_context() や GSS_Accept_sec_context() の呼び出しで GSS_S_COMPLETE か GSS_S_CONTINUE_NEEDED 以外の major_status コードが返ったり, 他の GSS-APIの呼び出しで GSS_S_COMPLETE 以外の major_status コードが返ったら, 鍵交換は失敗する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8120,6 +8192,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In
+   this case, several mechanisms are available for communicating error
+   information to the peer before terminating the connection as required
+   by [SSH-TRANSPORT]:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T035519Z" changeid="haruyama">
+        <seg>この時, [SSH-TRANSPORT] によって 接続を終了する前に必要に応じて相手にエラー情報を伝えるいくつかのメカニズムが提供されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In CBC mode that is
    the output of the encryption of the previous block.</seg>
       </tuv>
@@ -8637,6 +8720,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>この場合, ポリシーの異なる選択肢に対しては異なる鍵の種類が定義されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In this case, if an error token is also sent (see
+      below), then this message MUST be sent before the error token.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T041910Z" changeid="haruyama">
+        <seg>この場合, エラートークンも送るならば(下記参照), このメッセージはエラートークンの前に送らなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9219,6 +9311,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>SSHは, 完全なセキュリティを犠牲にしてでも, 簡単に配置できるやり方でセキュリティを向上しようとする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It computes K = e ^ y mod p, and H = hash(V_C || V_S ||
+       I_C || I_S || K_S || e || f || K).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T033750Z" changeid="haruyama">
+        <seg>K = e ^ y mod p, と H = hash(V_C || V_S || I_C || I_S || K_S || e || f || K) を計算する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9839,6 +9940,26 @@
       </tuv>
       <tuv lang="JA">
         <seg>Diffie-Hellman 鍵交換は完全な前方秘密性(PFS)を提供できることを注記しておく.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It then calls GSS_GetMIC() to
+       obtain a GSS-API message integrity code for H.  S then sends f
+       and the message integrity code (MIC) to C.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T033849Z" changeid="haruyama">
+        <seg>Hに対する GSS-API メッセージ完全性コードを得るために GSS_GetMIC() を呼ぶ. そして S は Cに f と メッセージ完全性コード(MIC)を送る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It then calls GSS_VerifyMIC() to verify
+       that the MIC sent by S matches H.  If the MIC is not successfully
+       verified, the key exchange MUST fail.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T035030Z" changeid="haruyama">
+        <seg>そして GSS_VerifyMIC() を呼び出し, Sから送られたMICが H と一致するか検証する. MIC の検証に失敗したら鍵交換は失敗しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12663,6 +12784,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>S calls GSS_Accept_sec_context(), using the token received from
+       C.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T033302Z" changeid="haruyama">
+        <seg>S は, Cから受け取ったトークンを用いて GSS_Accept_sec_context() を呼ぶ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>S finds a group that best matches the client's request, and sends
        &quot;p || g&quot; to C.</seg>
       </tuv>
@@ -12676,6 +12806,15 @@
       f = g^y mod p.</seg>
       </tuv>
       <tuv lang="JA">
+        <seg>S  は乱数 y (0 &lt; y &lt; q) を生成し f = g^y mod p を計算する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>S generates a random number y (0 &lt; y &lt; q) and computes f = g^y
+       mod p.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T033731Z" changeid="haruyama">
         <seg>S  は乱数 y (0 &lt; y &lt; q) を生成し f = g^y mod p を計算する.</seg>
       </tuv>
     </tu>
@@ -16989,6 +17128,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The group used for Diffie-Hellman key exchange and the
+   underlying GSS-API mechanism are also defined by the method name.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T052014Z" changeid="haruyama">
+        <seg>Diffie-Hellman 鍵交換と基底にある GSS-API メカニズムで用いる群も, その方法の名前で定義される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The guess is considered wrong if:</seg>
       </tuv>
       <tuv lang="JA">
@@ -19500,6 +19648,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This call is made exactly as described above.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T034624Z" changeid="haruyama">
+        <seg>この呼び出しは, 前述の通りに行なわれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This case is handled the same way that key exchange methods
    requiring encryption/signature capable public key algorithms are</seg>
       </tuv>
@@ -20626,6 +20782,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This step is performed only (1) if the server's final call to
+       GSS_Accept_sec_context() produced a non-zero-length final reply
+       token to be sent to the client and (2) if no previous call by the
+       client to GSS_Init_sec_context() has resulted in a major_status
+       of GSS_S_COMPLETE.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T034505Z" changeid="haruyama">
+        <seg>(1) サーバの最後の GSS_Accept_sec_context() 呼び出しが, クライアントに送られる0でない最終応答トークンを生成し, (2) クライアントの GSS_Init_sec_context() のそれまでの呼び出しが major_status が GSS_S_COMPLETE である結果を生成しなかった場合にのみ, このステップは実行される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This value is called the exchange hash, and it is used to
    authenticate the key exchange as per [RFC4253].</seg>
       </tuv>
@@ -20937,6 +21105,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>特権を持つプロセスで環境変数の設定を制御しないと, セキュリティの危険となりうる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Under these conditions, the client makes an</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T034514Z" changeid="haruyama">
+        <seg> </seg>
       </tuv>
     </tu>
     <tu>
@@ -21730,6 +21906,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>additional call to GSS_Init_sec_context() to process the final
+       reply token.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T034609Z" changeid="haruyama">
+        <seg>この状態の時, クライアントは, 最終の応答トークンの処理に, GSS_Init_sec_context() を追加で呼び出す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>and users to understand the importance of verifying this association
    before any session is initiated.</seg>
       </tuv>
@@ -22068,6 +22253,39 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110621T022339Z" changeid="haruyama">
         <seg>o  I_C は C の KEXINIT メッセージ, I_S は S の KEXINIT メッセージだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  If the key exchange fails due to a GSS-API error returned from the
+      client's call to GSS_Init_sec_context(), and an &quot;error token&quot; is
+      also returned, then the client SHOULD send the error token to the
+      server to allow completion of the GSS security exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T042411Z" changeid="haruyama">
+        <seg>o  クライアントのGSS_Init_sec_context()で GSS-API エラーが返ったことによって鍵交換が失敗し&quot;エラートークン&quot;も返されたならあ, クライアントはサーバにGSSセキュリティ交換の完了を許可するためにエラートークンを送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  If the key exchange fails due to a GSS-API error returned from the
+      server's call to GSS_Accept_sec_context(), and an &quot;error token&quot; is
+      also returned, then the server SHOULD send the error token to the
+      client to allow completion of the GSS security exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T042327Z" changeid="haruyama">
+        <seg>o GSS_Accept_sec_context() のサーバの呼び出しから GSS-APIエラーが返ったために鍵交換が失敗しまた&quot;エラートークン&quot;も返されたならば, サーバはクライアントに GSSセキュリティ交換の完了を許可するためにエラートークンを送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  If the key exchange fails due to any GSS-API error on the server
+      (including errors returned by GSS_Accept_sec_context()), the
+      server MAY send a message informing the client of the details of
+      the error.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T041823Z" changeid="haruyama">
+        <seg>o  (GSS_Accept_sec_context() によって返されるエラーを含む) サーバ側の GSS-API のエラーのために鍵交換が失敗する場合は, エラーの詳細をクライアントに知らせるメッセージをサーバは送ってもよい.</seg>
       </tuv>
     </tu>
     <tu>
