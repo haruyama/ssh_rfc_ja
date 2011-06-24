@@ -368,6 +368,14 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Under these conditions, the client makes an</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T034514Z" changeid="haruyama">
+        <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The value for 'rsa_signature_blob' is encoded as a string containing
    s (which is an integer, without lengths or padding, unsigned, and in
    network byte order).</seg>
@@ -1451,6 +1459,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The server and client continue to trade these two messages as long as
+   the server's calls to GSS_Accept_sec_context() result in major_status
+   codes of GSS_S_CONTINUE_NEEDED.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T045519Z" changeid="haruyama">
+        <seg>GSS_Accept_sec_context() のサーバでの呼び出しで major_status コード が GSS_S_CONTINUE_NEEDED となっている限り, サーバとクライアントはこの2つのメッセージをやりとりし続ける.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>If the
    algorithm and fingerprint of the key received from the SSH server
    match the algorithm and fingerprint of one of the SSHFP resource
@@ -1755,6 +1773,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Since this key exchange method does not require the host key to be
+   used for any encryption operations, this message is OPTIONAL.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T042425Z" changeid="haruyama">
+        <seg>この鍵交換法は暗号の操作でホスト鍵を利用しないので, このメッセージは選択できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Most signature algorithms include hashing and additional
    padding (e.g., &quot;ssh-dss&quot; specifies SHA-1 hashing).</seg>
       </tuv>
@@ -1879,6 +1906,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>'authentications that can continue' は, 認証のやりとりを続行できる認証の 'method_name' の値のコンマ区切りのリストだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  If the key exchange fails due to a GSS-API error returned from the
+      server's call to GSS_Accept_sec_context(), and an &quot;error token&quot; is
+      also returned, then the server SHOULD send the error token to the
+      client to allow completion of the GSS security exchange.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T042327Z" changeid="haruyama">
+        <seg>o GSS_Accept_sec_context() のサーバの呼び出しから GSS-APIエラーが返ったために鍵交換が失敗しまた&quot;エラートークン&quot;も返されたならば, サーバはクライアントに GSSセキュリティ交換の完了を許可するためにエラートークンを送る必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2272,6 +2310,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>メッセージの定義で, プロトコルのフィールドは定義される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>In order to facilitate key re-exchange after the user's GSS-API
+   credentials have expired, client implementations SHOULD store host
+   keys received via SSH_MSG_KEXGSS_HOSTKEY for the duration of the
+   session, even when such keys are not stored for long-term use.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T044003Z" changeid="haruyama">
+        <seg>ユーザの GSS-API 認証の期限が切れたあとで鍵の再交換を支援するため, クライアントの実装は, SSH_MSG_KEXGSS_HOSTKEY で受け取ったホスト鍵を, 長期間保持しない場合でも, セッションの持続中は保持する必要がある.  </seg>
       </tuv>
     </tu>
     <tu>
@@ -2846,6 +2895,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>additional call to GSS_Init_sec_context() to process the final
+       reply token.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T034609Z" changeid="haruyama">
+        <seg>この状態の時, クライアントは, 最終の応答トークンの処理に, GSS_Init_sec_context() を追加で呼び出す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The security considerations in [RFC4251] apply.</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110614T025721Z" changeid="haruyama">
@@ -2961,6 +3019,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110409T091216Z" changeid="haruyama">
         <seg>アルゴリズムのネゴシエーションでは, 署名に用いる公開鍵アルゴリズムと鍵交換の方法名を選ぶ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>In traditional SSH deployments, host keys are normally expected to
+   change infrequently, and there is often no mechanism for validating
+   host keys not already known to the client.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T042802Z" changeid="haruyama">
+        <seg>伝統的なSSHの配置では, ホスト鍵は通常めったに変更されず, クライアントが事前に知らないホスト鍵を検証するためのメカニズムはないことが多い.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3084,6 +3152,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv xml:lang="JA" changedate="20110621T012937Z" changeid="haruyama">
         <seg>命名規則 ........................................22
       7.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>As noted in Section 9, it may be desirable under site security policy
+   to obscure information about the precise nature of the error; thus,
+   it is RECOMMENDED that implementations provide a method to suppress
+   these messages as a matter of policy.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T051849Z" changeid="haruyama">
+        <seg>9節で述べるように, エラーの詳細な性質の情報は隠したほうがサイトのセキュリティポリシー上望ましいかもしれない; つまり, ポリシーの問題としてこれらのメッセージを抑制する方法を実装が提供することが望ましい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4004,6 +4083,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>*  If the resulting major_status code is GSS_S_CONTINUE_NEEDED,
+          then the output token is sent to C, and processing continues
+          with step 2.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T033539Z" changeid="haruyama">
+        <seg>*  結果の major_status コードが GSS_S_CONTINUE_NEEDED なら, Cに output トークンを送って, ステップ2から処理が続けられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>It is RECOMMENDED that the reply to these messages be requested and
    checked.</seg>
       </tuv>
@@ -4246,6 +4335,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>null 文字による終端は利用されない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>S generates a random number y (0 &lt; y &lt; q) and computes f = g^y
+       mod p.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T033731Z" changeid="haruyama">
+        <seg>S  は乱数 y (0 &lt; y &lt; q) を生成し f = g^y mod p を計算する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4572,6 +4670,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Therefore, when a new key for an already-known host is received via
+   the SSH_MSG_KEXGSS_HOSTKEY message, clients SHOULD NOT issue strong
+   warnings or abort the connection, provided the GSS-API-based key
+   exchange succeeds.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T043720Z" changeid="haruyama">
+        <seg>このため, SSH_MSG_KEXGSS_HOSTKEY メッセージで既知のホストから新しい鍵を受け取っても, GSS-APIベースの鍵交換が成功するならば, クライアントは強い警告の発行や接続の中断をしないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Many 'channel type' values have extensions that are specific to that
    particular 'channel type'.</seg>
       </tuv>
@@ -4717,6 +4826,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>56    ECHONL      ECHO が無効でも NL をエコーする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If this message is sent, the server public
+   host key(s) and/or certificate(s) in this message are encoded as a
+   single string, in the format specified by the public key type in use
+   (see [SSH-TRANSPORT], Section 6.6).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T042648Z" changeid="haruyama">
+        <seg>このメッセージが送られる場合, このメッセージ中のサーバホスト鍵 と/もしくは 証明書は, 利用している公開鍵タイプで指定されたフォーマットで単一の文字列としてエンコードされる([SSH-TRANSPORT]の6.6節を参照)</seg>
       </tuv>
     </tu>
     <tu>
@@ -6056,6 +6176,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This call is made exactly as described above.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T034624Z" changeid="haruyama">
+        <seg>この呼び出しは, 前述の通りに行なわれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>All such requests use the
    following format.</seg>
       </tuv>
@@ -6101,6 +6229,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv xml:lang="JA">
         <seg>データの完全性........................................12
       6.5.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If the client receives this message after a call to
+   GSS_Init_sec_context() has returned a major_status code of
+   GSS_S_COMPLETE, a protocol error has occurred and the key exchange
+   MUST fail.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T044436Z" changeid="haruyama">
+        <seg>GSS_Init_sec_context() が major_status コードとして GSS_S_COMPLETE を返したあとでこのメッセージをクライアントが受けとったならば, プロトコルエラーが起きており鍵交換は失敗しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6495,6 +6634,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>S calls GSS_Accept_sec_context(), using the token received from
+       C.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T033302Z" changeid="haruyama">
+        <seg>S は, Cから受け取ったトークンを用いて GSS_Accept_sec_context() を呼ぶ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The first 1536 bytes of keystream
    generated by the cipher MUST be discarded, and the first byte of the
    first encrypted packet MUST be encrypted using the 1537th byte of
@@ -6512,6 +6660,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>権限のないコマンドの実行を防止する, 通常の予防措置が取られなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Upon receiving the SSH_MSG_KEXGSS_INIT message, the server MAY send
+   the following message, prior to any other messages, to inform the
+   client of its host key.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T042331Z" changeid="haruyama">
+        <seg>この SSH_MSG_KEXGSS_INIT メッセージを受けとったら, サーバは, ホスト鍵をクライアントに知らせるために, 他のメッセージより前に次のメッセージを送ってもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7351,6 +7509,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Each time the client receives the message described above, it makes
+   another call to GSS_Init_sec_context().</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T044531Z" changeid="haruyama">
+        <seg>クライアントは上記のメッセージを受け取る度に,GSS_Init_sec_context()をまた呼び出さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>If the 'want_reply' boolean is set, the server MUST reply using an
    SSH_MSG_CHANNEL_SUCCESS or SSH_MSG_CHANNEL_FAILURE [5] message.</seg>
       </tuv>
@@ -7648,6 +7815,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>相手側の推測が間違っていてこのフィールドがTRUEなら, 次のパケットは静かに無視されなければならない. そして, 両方の側は取り決められた鍵交換法によって決められた行動をしなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>C computes K = f^x mod p, and H = hash(V_C || V_S || I_C || I_S
+       || K_S || e || f || K).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T034935Z" changeid="haruyama">
+        <seg>K = e ^ y mod p, と H = hash(V_C || V_S || I_C || I_S || K_S || e || f || K) を Cは計算する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8623,6 +8799,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>However, if the resulting major_status is anything other than
+       GSS_S_COMPLETE, or a non-zero-length token is returned, it is an
+       error and the key exchange MUST fail.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T034704Z" changeid="haruyama">
+        <seg>しかし, 結果の major_status が GSS_S_COMPLETE でなかったり 0でないトークンが返されたら, これはエラーで鍵交換は失敗しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Extended Channel Data Transfer data_type_code and Data</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -8911,11 +9097,30 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>*  If the resulting major_status code is GSS_S_COMPLETE and both
+          the mutual_state and integ_avail flags are true, then the
+          security context has been established, and processing
+          continues with step 4.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T033517Z" changeid="haruyama">
+        <seg>*  結果の major_status コードが GSS_S_COMPLETE で mutual_state と integ_avail フラグが共に trueなら, セキュリティコンテキストが確立された. ステップ4 から処理が続けられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The conversion between a field element and an integer is specified in
    Section 2.3.9 of [SEC1].</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110409T092915Z" changeid="haruyama">
         <seg>フィールド要素と整数との変換は, [SEC1]の2.3.9節で指定されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>It then sends the following:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T044537Z" changeid="haruyama">
+        <seg>そして 以下を送る.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9332,6 +9537,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110425T074944Z" changeid="haruyama">
         <seg>この文書の適切なセキュリティの考察が適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If any call to GSS_Init_sec_context() or GSS_Accept_sec_context()
+   returns a major_status other than GSS_S_COMPLETE or
+   GSS_S_CONTINUE_NEEDED, or any other GSS-API call returns a
+   major_status other than GSS_S_COMPLETE, the key exchange fails.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T035342Z" changeid="haruyama">
+        <seg>GSS_Init_sec_context() や GSS_Accept_sec_context() の呼び出しで GSS_S_COMPLETE か GSS_S_CONTINUE_NEEDED 以外の major_status コードが返ったり, 他の GSS-APIの呼び出しで GSS_S_COMPLETE 以外の major_status コードが返ったら, 鍵交換は失敗する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10222,8 +10438,8 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
         <seg>Stored as eight bytes in
       the order of decreasing significance (network byte order).</seg>
       </tuv>
-      <tuv xml:lang="JA">
-        <seg>位が減少する順の8byteの値として格納される(ネットワークバイトオーダー)</seg>
+      <tuv xml:lang="JA" changedate="20110624T063232Z" changeid="haruyama">
+        <seg>位が降順の8byteの値として格納される(ネットワークバイトオーダー)</seg>
       </tuv>
     </tu>
     <tu>
@@ -10900,8 +11116,8 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
         <seg>Stored as four bytes in the
       order of decreasing significance (network byte order).</seg>
       </tuv>
-      <tuv xml:lang="JA">
-        <seg>位が減少する順の4byteの値として格納される(ネットワークバイトオーダー)</seg>
+      <tuv xml:lang="JA" changedate="20110624T063227Z" changeid="haruyama">
+        <seg>位が降順の4byteの値として格納される(ネットワークバイトオーダー)</seg>
       </tuv>
     </tu>
     <tu>
@@ -11024,6 +11240,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>セキュリティ意識の高いユーザは鍵を受け入れる前に SSHの通信の外側で指紋を検査する. しかし, 多くのユーザは提示されたキーを受け入れる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>In
+   this case, several mechanisms are available for communicating error
+   information to the peer before terminating the connection as required
+   by [SSH-TRANSPORT]:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T035519Z" changeid="haruyama">
+        <seg>この時, [SSH-TRANSPORT] によって 接続を終了する前に必要に応じて相手にエラー情報を伝えるいくつかのメカニズムが提供されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11442,6 +11669,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv xml:lang="JA">
         <seg>公開鍵アルゴリズム..................................13
    7.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>After the client's first call to GSS_Init_sec_context(), it sends the
+   following:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T042233Z" changeid="haruyama">
+        <seg>クライナントは, 最初の GSS_Init_sec_context() の呼び出しの後で以下を送る:</seg>
       </tuv>
     </tu>
     <tu>
@@ -12285,8 +12521,8 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       example: the value 699921578 (0x29b7f4aa) is stored as 29 b7 f4
       aa.</seg>
       </tuv>
-      <tuv xml:lang="JA">
-        <seg>例:  699921578 (0x29b7f4aa) は is 29 b7 f4 aa として格納される..</seg>
+      <tuv xml:lang="JA" changedate="20110624T063239Z" changeid="haruyama">
+        <seg>例:  699921578 (0x29b7f4aa) は 29 b7 f4 aa として格納される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13086,6 +13322,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110531T081538Z" changeid="haruyama">
         <seg>次にブロック B1 を P1 と XORし 暗号文ブロック C1 を生成する.rtext block C1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>It computes K = e ^ y mod p, and H = hash(V_C || V_S ||
+       I_C || I_S || K_S || e || f || K).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T033750Z" changeid="haruyama">
+        <seg>K = e ^ y mod p, と H = hash(V_C || V_S || I_C || I_S || K_S || e || f || K) を計算する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14114,6 +14359,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>o  If the key exchange fails due to any GSS-API error on the server
+      (including errors returned by GSS_Accept_sec_context()), the
+      server MAY send a message informing the client of the details of
+      the error.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T041823Z" changeid="haruyama">
+        <seg>o  (GSS_Accept_sec_context() によって返されるエラーを含む) サーバ側の GSS-API のエラーのために鍵交換が失敗する場合は, エラーの詳細をクライアントに知らせるメッセージをサーバは送ってもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Generic Security Service Application Program Interface (GSS-API)
   Authentication and Key Exchange for the Secure Shell (SSH) Protocol</seg>
       </tuv>
@@ -14447,6 +14703,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110419T120928Z" changeid="haruyama">
         <seg>楕円曲線 Digital Signature Algorithm</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Further, in environments in which GSS-API-based key exchange is used
+   heavily, it is possible and even likely that host keys will change
+   much more frequently and/or without advance warning.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T043552Z" changeid="haruyama">
+        <seg>さらに, GSS-API ベースの鍵交換がよく利用される環境では, ホスト鍵は非常に頻繁に かつ/もしくは 事前の警告なしに変わる可能性がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14961,6 +15227,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>TCP/IP ポート転送</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If the server's final call to GSS_Accept_sec_context() (resulting in
+   a major_status code of GSS_S_COMPLETE) returns a zero-length token or
+   no token at all, it sends the following:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T045739Z" changeid="haruyama">
+        <seg>サーバの最後の (major_status コードが GSS_S_COMPLETE となった) GSS_Accept_sec_context() 呼び出しが クライアントに送るための長さ0のトークンを返したりトークンを返さなかったら, サーバは以下を送る:</seg>
       </tuv>
     </tu>
     <tu>
@@ -15731,6 +16007,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>By contrast, when GSS-API-based key exchange is used, host keys sent
+   via the SSH_MSG_KEXGSS_HOSTKEY message are authenticated as part of
+   the GSS-API key exchange, even when previously unknown to the client.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T043212Z" changeid="haruyama">
+        <seg>対照的に, GSS-API ベースの鍵交換が利用される場合は,  SSH_MSG_KEXGSS_HOSTKEY メッセージで送られるホスト鍵は, クライアントが事前に知らない場合でも,  GSS-API 鍵交換の一部として認証される.  </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>There MUST be at least four bytes of padding.</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -16092,6 +16378,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>61    ECHOKE      行の削除を視覚的に行なう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>It then calls GSS_VerifyMIC() to verify
+       that the MIC sent by S matches H.  If the MIC is not successfully
+       verified, the key exchange MUST fail.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T035030Z" changeid="haruyama">
+        <seg>そして GSS_VerifyMIC() を呼び出し, Sから送られたMICが H と一致するか検証する. MIC の検証に失敗したら鍵交換は失敗しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16995,6 +17291,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>o  If the key exchange fails due to a GSS-API error returned from the
+      client's call to GSS_Init_sec_context(), and an &quot;error token&quot; is
+      also returned, then the client SHOULD send the error token to the
+      server to allow completion of the GSS security exchange.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T042411Z" changeid="haruyama">
+        <seg>o  クライアントのGSS_Init_sec_context()で GSS-API エラーが返ったことによって鍵交換が失敗し&quot;エラートークン&quot;も返されたならあ, クライアントはサーバにGSSセキュリティ交換の完了を許可するためにエラートークンを送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>It
        computes e = g^x mod p, and sends &quot;e&quot; to S.</seg>
       </tuv>
@@ -17219,6 +17526,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>As a result, the use of a
+   new host key by an already-known host is usually considered an
+   indication of a possible man-in-the-middle attack, and clients often
+   present strong warnings and/or abort the connection in such cases.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T043051Z" changeid="haruyama">
+        <seg>結果として, 既知のホストが新しいホスト鍵を用いると, 通常は中間者攻撃の指標だと考えられ, クライアントはこのような場合に強い警告を出す かつ/もしくは 接続を中断する ことが多い.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The security of the
    connection relies on the server authenticating itself to the client
    as well as the user authenticating itself to the server.</seg>
@@ -17355,6 +17673,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>サブシステムの名前は, [SSH-NUMBERS] で説明されている DNS 拡張命名規則に従う.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The group used for Diffie-Hellman key exchange and the
+   underlying GSS-API mechanism are also defined by the method name.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T052014Z" changeid="haruyama">
+        <seg>Diffie-Hellman 鍵交換と基底にある GSS-API メカニズムで用いる群も, その方法の名前で定義される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18146,6 +18473,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>このプロトコルの 'service name' は, &quot;ssh-connection&quot; だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>*  If the resulting major_status code is GSS_S_COMPLETE, but a
+          non-zero-length reply token is returned, then that token is
+          sent to the client.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T033636Z" changeid="haruyama">
+        <seg>*  結果のmajor_status コードが GSS_S_COMPLETE だが 長さが0ではない応答トークンが返されたなら, そのトークンがクライアントに送られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19927,6 +20264,28 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>It then calls GSS_GetMIC() to
+       obtain a GSS-API message integrity code for H.  S then sends f
+       and the message integrity code (MIC) to C.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T033849Z" changeid="haruyama">
+        <seg>Hに対する GSS-API メッセージ完全性コードを得るために GSS_GetMIC() を呼ぶ. そして S は Cに f と メッセージ完全性コード(MIC)を送る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This step is performed only (1) if the server's final call to
+       GSS_Accept_sec_context() produced a non-zero-length final reply
+       token to be sent to the client and (2) if no previous call by the
+       client to GSS_Init_sec_context() has resulted in a major_status
+       of GSS_S_COMPLETE.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T034505Z" changeid="haruyama">
+        <seg>(1) サーバの最後の GSS_Accept_sec_context() 呼び出しが, クライアントに送られる0でない最終応答トークンを生成し, (2) クライアントの GSS_Init_sec_context() のそれまでの呼び出しが major_status が GSS_S_COMPLETE である結果を生成しなかった場合にのみ, このステップは実行される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>o  Public key algorithms and key exchange method to be used for host
       authentication.</seg>
       </tuv>
@@ -20687,6 +21046,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>When a call results in a
+   major_status code of GSS_S_COMPLETE, it sends one of two final
+   messages.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T045557Z" changeid="haruyama">
+        <seg>呼び出しで major_status コードが GSS_S_COMPLETE となったなら, 2つの最終メッセージのうちの1つをサーバは送る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The meanings of message numbers in the range of 30 to 49 are specific
    to the key exchange method in use, and their meaning will be
    specified by the definition of that method.</seg>
@@ -20773,6 +21142,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>アルゴリズムと方式の命名規則</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If the server's final call to GSS_Accept_sec_context() (resulting in
+   a major_status code of GSS_S_COMPLETE) returns a non-zero-length
+   token to be sent to the client, it sends the following:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T045717Z" changeid="haruyama">
+        <seg>サーバの最後の (major_status コードが GSS_S_COMPLETE となった) GSS_Accept_sec_context() 呼び出しが クライアントに送るための0でない長さのトークンを返したら, サーバは以下を送る:</seg>
       </tuv>
     </tu>
     <tu>
@@ -20938,6 +21317,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>これは次の告知によって促進される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>In this case, if an error token is also sent (see
+      below), then this message MUST be sent before the error token.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110623T041910Z" changeid="haruyama">
+        <seg>この場合, エラートークンも送るならば(下記参照), このメッセージはエラートークンの前に送らなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22110,6 +22498,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>If the
+   &quot;null&quot; host key algorithm described in Section 5 is used, this
+   message MUST NOT be sent.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T042454Z" changeid="haruyama">
+        <seg>5節で記述する &quot;null&quot; ホスト鍵アルゴリズムを利用する場合は, このメッセージを送ってはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Thus, providing the option not to check the server host key is</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -22429,6 +22827,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA" changedate="20110614T024345Z" changeid="haruyama">
         <seg>この文書では, この推奨に従う新しい暗号アルゴリズムをSSHに定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Each time the server's call to GSS_Accept_sec_context() returns a
+   major_status code of GSS_S_CONTINUE_NEEDED, it sends the following
+   reply to the client:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changedate="20110624T044337Z" changeid="haruyama">
+        <seg>GSS_Accept_sec_context() のサーバでの呼び出しが major_status コードとして GSS_S_CONTINUE_NEEDEDを返すたびに, サーバは以下の応答をクライアントに送る:</seg>
       </tuv>
     </tu>
     <tu>
