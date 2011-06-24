@@ -1655,6 +1655,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>After the client's first call to GSS_Init_sec_context(), it sends the
+   following:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T042233Z" changeid="haruyama">
+        <seg>クライナントは, 最初の GSS_Init_sec_context() の呼び出しの後で以下を送る:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>After the key exchange, the client requests a service.</seg>
       </tuv>
       <tuv lang="JA">
@@ -2387,6 +2396,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As a result, the use of a
+   new host key by an already-known host is usually considered an
+   indication of a possible man-in-the-middle attack, and clients often
+   present strong warnings and/or abort the connection in such cases.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T043051Z" changeid="haruyama">
+        <seg>結果として, 既知のホストが新しいホスト鍵を用いると, 通常は中間者攻撃の指標だと考えられ, クライアントはこのような場合に強い警告を出す かつ/もしくは 接続を中断する ことが多い.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As always,
    implementers and users should check current literature to ensure that
    no recent vulnerabilities have been found in ciphers used within
@@ -3015,6 +3035,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110609T052006Z" changeid="haruyama">
         <seg>簡潔に言うと, (1) は SSHプロトコルの基底にあるMACからの情報漏洩を防ぐために設計されている. そして (2) はSSHプロトコルの基底にある暗号方式からの情報漏洩を防ぐために設計されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>By contrast, when GSS-API-based key exchange is used, host keys sent
+   via the SSH_MSG_KEXGSS_HOSTKEY message are authenticated as part of
+   the GSS-API key exchange, even when previously unknown to the client.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T043212Z" changeid="haruyama">
+        <seg>対照的に, GSS-API ベースの鍵交換が利用される場合は,  SSH_MSG_KEXGSS_HOSTKEY メッセージで送られるホスト鍵は, クライアントが事前に知らない場合でも,  GSS-API 鍵交換の一部として認証される.  </seg>
       </tuv>
     </tu>
     <tu>
@@ -4657,6 +4687,25 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Each time the client receives the message described above, it makes
+   another call to GSS_Init_sec_context().</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T044531Z" changeid="haruyama">
+        <seg>クライアントは上記のメッセージを受け取る度に,GSS_Init_sec_context()をまた呼び出さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Each time the server's call to GSS_Accept_sec_context() returns a
+   major_status code of GSS_S_CONTINUE_NEEDED, it sends the following
+   reply to the client:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T044337Z" changeid="haruyama">
+        <seg>GSS_Accept_sec_context() のサーバでの呼び出しが major_status コードとして GSS_S_CONTINUE_NEEDEDを返すたびに, サーバは以下の応答をクライアントに送る:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Earlier versions of this protocol have not been formally
    documented, but it is widely known that they use 'protoversion' of
    &quot;1.x&quot; (e.g., &quot;1.5&quot; or &quot;1.3&quot;).</seg>
@@ -5788,6 +5837,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110531T073300Z" changeid="haruyama">
         <seg>さらに思い出してください: 暗号のブロックサイズが8byte以上の場合(以下の方法のすべてに当てはまる),  packet length, padding length, payload, padding を連結した全体の長さが, 暗号のブロックサイズの倍数でなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Further, in environments in which GSS-API-based key exchange is used
+   heavily, it is possible and even likely that host keys will change
+   much more frequently and/or without advance warning.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T043552Z" changeid="haruyama">
+        <seg>さらに, GSS-API ベースの鍵交換がよく利用される環境では, ホスト鍵は非常に頻繁に かつ/もしくは 事前の警告なしに変わる可能性がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7110,6 +7169,16 @@
     <tu>
       <tuv lang="EN-US">
         <seg>If the
+   &quot;null&quot; host key algorithm described in Section 5 is used, this
+   message MUST NOT be sent.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T042454Z" changeid="haruyama">
+        <seg>5節で記述する &quot;null&quot; ホスト鍵アルゴリズムを利用する場合は, このメッセージを送ってはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the
    BREAK length parameter is 0, the BREAK SHOULD be interpreted as the
    default BREAK signal length of the chipset or underlying chipset
    driver.</seg>
@@ -7282,6 +7351,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>設定などからクライアントがユーザの好む submethod について知っているなら, サーバにその情報を渡すために submethods フィールドを利用してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the client receives this message after a call to
+   GSS_Init_sec_context() has returned a major_status code of
+   GSS_S_COMPLETE, a protocol error has occurred and the key exchange
+   MUST fail.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T044436Z" changeid="haruyama">
+        <seg>GSS_Init_sec_context() が major_status コードとして GSS_S_COMPLETE を返したあとでこのメッセージをクライアントが受けとったならば, プロトコルエラーが起きており鍵交換は失敗しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7577,6 +7657,26 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the server's final call to GSS_Accept_sec_context() (resulting in
+   a major_status code of GSS_S_COMPLETE) returns a non-zero-length
+   token to be sent to the client, it sends the following:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T045717Z" changeid="haruyama">
+        <seg>サーバの最後の (major_status コードが GSS_S_COMPLETE となった) GSS_Accept_sec_context() 呼び出しが クライアントに送るための0でない長さのトークンを返したら, サーバは以下を送る:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the server's final call to GSS_Accept_sec_context() (resulting in
+   a major_status code of GSS_S_COMPLETE) returns a zero-length token or
+   no token at all, it sends the following:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T045739Z" changeid="haruyama">
+        <seg>サーバの最後の (major_status コードが GSS_S_COMPLETE となった) GSS_Accept_sec_context() 呼び出しが クライアントに送るための長さ0のトークンを返したりトークンを返さなかったら, サーバは以下を送る:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the threshold is exceeded, the server
    SHOULD disconnect.</seg>
       </tuv>
@@ -7729,6 +7829,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>もし表示するなら, クライアントソフトウェアは, [SSH-ARCH]で議論した予防措置を取らなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If this message is sent, the server public
+   host key(s) and/or certificate(s) in this message are encoded as a
+   single string, in the format specified by the public key type in use
+   (see [SSH-TRANSPORT], Section 6.6).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T042648Z" changeid="haruyama">
+        <seg>このメッセージが送られる場合, このメッセージ中のサーバホスト鍵 と/もしくは 証明書は, 利用している公開鍵タイプで指定されたフォーマットで単一の文字列としてエンコードされる([SSH-TRANSPORT]の6.6節を参照)</seg>
       </tuv>
     </tu>
     <tu>
@@ -8427,6 +8538,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In order to facilitate key re-exchange after the user's GSS-API
+   credentials have expired, client implementations SHOULD store host
+   keys received via SSH_MSG_KEXGSS_HOSTKEY for the duration of the
+   session, even when such keys are not stored for long-term use.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T044003Z" changeid="haruyama">
+        <seg>ユーザの GSS-API 認証の期限が切れたあとで鍵の再交換を支援するため, クライアントの実装は, SSH_MSG_KEXGSS_HOSTKEY で受け取ったホスト鍵を, 長期間保持しない場合でも, セッションの持続中は保持する必要がある.  </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In order to make the entire body of Security Considerations more
    accessible, Security Considerations for the transport,
    authentication, and connection documents have been gathered here.</seg>
@@ -8820,6 +8942,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>ここで, C はクライアント; S はサーバ; p は大きく安全な素数; g は GF(p) 部分群の生成子; q は部分群のオーダー; V_S は S の識別文字列; V_C は C の識別文字列; K_S は S のホスト公開鍵; I_C は C の SSH_MSG_KEXINIT メッセージ;  I_S は, この処理が始まる前に交換される S の SSH_MSG_KEXINIT メッセージだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In traditional SSH deployments, host keys are normally expected to
+   change infrequently, and there is often no mechanism for validating
+   host keys not already known to the client.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T042802Z" changeid="haruyama">
+        <seg>伝統的なSSHの配置では, ホスト鍵は通常めったに変更されず, クライアントが事前に知らないホスト鍵を検証するためのメカニズムはないことが多い.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9970,6 +10102,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>次のメッセージを相手側に送る. メッセージにはローカルなチャンネル番号と初期 window サイズ が含まれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It then sends the following:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T044537Z" changeid="haruyama">
+        <seg>そして 以下を送る.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13594,6 +13734,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>どのサーチパスが信頼できるソースから得られたものかわかる ＤＮＳ 検索 API は現在ないので, クライアントシステム全体が信頼できるDNSサーチパスによって設定されている必要があるだろう. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Since this key exchange method does not require the host key to be
+   used for any encryption operations, this message is OPTIONAL.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T042425Z" changeid="haruyama">
+        <seg>この鍵交換法は暗号の操作でホスト鍵を利用しないので, このメッセージは選択できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18524,6 +18673,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The server and client continue to trade these two messages as long as
+   the server's calls to GSS_Accept_sec_context() result in major_status
+   codes of GSS_S_CONTINUE_NEEDED.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T045519Z" changeid="haruyama">
+        <seg>GSS_Accept_sec_context() のサーバでの呼び出しで major_status コード が GSS_S_CONTINUE_NEEDED となっている限り, サーバとクライアントはこの2つのメッセージをやりとりし続ける.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The server can constantly compute new groups in the
    background.</seg>
       </tuv>
@@ -19290,6 +19449,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110411T133716Z" changeid="haruyama">
         <seg>したがって, 1つの一時的鍵を生成し, それをあたかも2つのクライアント鍵のように利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Therefore, when a new key for an already-known host is received via
+   the SSH_MSG_KEXGSS_HOSTKEY message, clients SHOULD NOT issue strong
+   warnings or abort the connection, provided the GSS-API-based key
+   exchange succeeds.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T043720Z" changeid="haruyama">
+        <seg>このため, SSH_MSG_KEXGSS_HOSTKEY メッセージで既知のホストから新しい鍵を受け取っても, GSS-APIベースの鍵交換が成功するならば, クライアントは強い警告の発行や接続の中断をしないほうがよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21155,6 +21325,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Upon receiving the SSH_MSG_KEXGSS_INIT message, the server MAY send
+   the following message, prior to any other messages, to inform the
+   client of its host key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T042331Z" changeid="haruyama">
+        <seg>この SSH_MSG_KEXGSS_INIT メッセージを受けとったら, サーバは, ホスト鍵をクライアントに知らせるために, 他のメッセージより前に次のメッセージを送ってもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Upon receiving this message, a party MUST
    send back an SSH_MSG_CHANNEL_CLOSE unless it has already sent this
    message for the channel.</seg>
@@ -21397,6 +21577,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>イーサネットのヘッダも考慮すると, 増大は10%よりも少ない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When a call results in a
+   major_status code of GSS_S_COMPLETE, it sends one of two final
+   messages.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110624T045557Z" changeid="haruyama">
+        <seg>呼び出しで major_status コードが GSS_S_COMPLETE となったなら, 2つの最終メッセージのうちの1つをサーバは送る.</seg>
       </tuv>
     </tu>
     <tu>
