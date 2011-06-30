@@ -291,28 +291,16 @@ Hutzelman, et al.           Standards Track                     [Page 8]
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
-   If the client receives this message when no call to
-   GSS_Init_sec_context() has yet resulted in a major_status code of
-   GSS_S_COMPLETE, a protocol error has occurred and the key exchange
-   MUST fail.
+   GSS_Init_sec_context() の呼び出しで major_status コードが GSS_S_COMPLETE になっていないのにこのメッセージをクライアントが受けとったならば, プロトコルエラーが起きており鍵交換は失敗しなければならない.
 
-   If either the client's call to GSS_Init_sec_context() or the server's
-   call to GSS_Accept_sec_context() returns an error status and produces
-   an output token (called an "error token"), then the following SHOULD
-   be sent to convey the error information to the peer:
+   GSS_Init_sec_context() のクライアントでの呼び出しか GSS_Accept_sec_context() のサーバでの呼び出しでエラー状態が返され, ("エラートークン"と呼ばれる) 出力トークンが生成されたら, 相手側にエラー情報を伝えるために次を送る必要がある.
 
            byte      SSH_MSG_KEXGSS_CONTINUE
            string    error_token
 
-   If a server sends both this message and an SSH_MSG_KEXGSS_ERROR
-   message, the SSH_MSG_KEXGSS_ERROR message MUST be sent first, to
-   allow clients to record and/or display the error information before
-   processing the error token.  This is important because a client
-   processing an error token will likely disconnect without reading any
-   further messages.
+   このメッセージと SSH_MSG_KEXGSS_ERROR メッセージの両方をサーバが送る場合は, エラートークンの処理の前にクアイアントがエラー情報を記録したり表示したりできるように, SSH_MSG_KEXGSS_ERROR メッセージを先に送らなければならない. エラートークンを処理するクライアントがそれ以上のメッセージを読むことなく切断できるので, これは重要だ.
 
-   In the event of a GSS-API error on the server, the server MAY send
-   the following message before terminating the connection:
+   GSS-APIエラーがサーバで起きたら, サーバは接続の切断の前に次のメッセージを送ってもよい:
 
            byte      SSH_MSG_KEXGSS_ERROR
            uint32    major_status
@@ -320,11 +308,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
            string    message
            string    language tag
 
-   The message text MUST be encoded in the UTF-8 encoding described in
-   [UTF8].  Language tags are those described in [LANGTAG].  Note that
-   the message text may contain multiple lines separated by carriage
-   return-line feed (CRLF) sequences.  Application developers should
-   take this into account when displaying these messages.
+   message テキストは [UTF8] に記述されている UTF-8 エンコーディングでエンコードされてなければならない.  language タグは [LANGTAG] に記述されているものだ.  注意: message text はキャリッジリターン-ラインフィード (CRLF) シーケンスで区切られた複数行を含むかもしれない.  これらのメッセージを表示するアプリケーション開発者は, 複数行あるかもしれないことに注意しなければならない.
 
    ハッシュ H は, 次の連結に対する HASH の結果だ:
 
@@ -346,46 +330,31 @@ Hutzelman, et al.           Standards Track                     [Page 9]
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
-   この値は交換ハッシュと呼ばれる. 鍵交換を認証するのに用いられる.  交換ハッシュは秘密にする必要がある.  If no SSH_MSG_KEXGSS_HOSTKEY message has been sent by the
-   server or received by the client, then the empty string is used in
-   place of K_S when computing the exchange hash.
+   この値は交換ハッシュと呼ばれる. 鍵交換を認証するのに用いられる.  交換ハッシュは秘密にする必要がある.  SSH_MSG_KEXGSS_HOSTKEY メッセージがサーバから送られたりクライアントで受け取られたりしていなければ, 交換ハッシュの計算で K_S には空文字列を利用する.
 
-   The GSS_GetMIC call MUST be applied over H, not the original data.
+   GSS_GetMIC の呼び出しは 元データではなく Hに対して適用されなければならない.
 
-2.2.  Group Exchange
+2.2.  群の交換
 
-   This section describes a modification to the generic GSS-API-
-   authenticated Diffie-Hellman key exchange to allow the negotiation of
-   the group to be used, using a method based on that described in
-   [GROUP-EXCHANGE].
+   この節では， [GROUP-EXCHANGE] で記述されたものをベースにした方法を用いて利用される群を交渉して決められるようにするための，  汎用GSS-APIで認証される Diffie-Hellman 鍵交換への変更を記述する．
 
-   サーバは, サーバが選択できる安全な素数のリストと対応する生成器を保持する.  These are chosen as described in Section 3
-   of [GROUP-EXCHANGE].  The client requests a modulus from the server,
-   indicating the minimum, maximum, and preferred sizes; the server
-   responds with a suitable modulus and generator.  The exchange then
-   proceeds as described in Section 2.1 above.
+   サーバは, サーバが選択できる安全な素数のリストと対応する生成器を保持する.  これらは， [GROUP-EXCHANGE]の3節で記述されているように選ばれる．クライアントはサーバから法(modulus)を, 最小値， 最大値， 推奨のサイズを指定して， 要求する． サーバは適切な法と生成器で応答する．そして交換は， 2.1節で前述したように進行する．
 
-   This description uses the following symbols, in addition to those
-   defined above:
+   上記で定義したものに加えて， 以下のシンボルをこの記述では用いる．
 
-   o  n is the size of the modulus p in bits that the client would like
-      to receive from the server
+   o  n は， クライアントがサーバから受け取りたい法 p の bit でのサイズ
 
-   o  min and max are the minimal and maximal sizes of p in bits that
-      are acceptable to the client
+   o  min と max は クライアントが許容できる p の bit での最小値と最大値
 
    1.  C は S に "min || n || max" を送り, 群のサイズの最小受容値と希望値, 最大値をbitで示す.
 
    2.  S はクライアントの要求に一番一致する群を見つけ C に "p || g" を送る.
 
-   3.  The exchange proceeds as described in Section 2.1 above,
-       beginning with step 1, except that the exchange hash is computed
-       as described below.
+   3.  そして交換は， 2.1節で前述したように， ステップ1から始まって進行する． 以下で記述する交換ハッシュの計算は除く．
 
    サーバとクライアントは, 法の長さ k が1024 <= k <= 8192 である群をサポートする必要がある.  min と max の推奨値はそれぞれ 1024 と 8192 だ.
 
-   This is implemented using the following messages, in addition to
-   those described above:
+   上記で定義したものに加えて， 以下のメッセージをこの記述では用いる．
 
 
 
@@ -408,9 +377,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
            mpint     p, safe prime
            mpint     g, generator for subgroup in GF(p)
 
-   This is followed by the message exchange described above in
-   Section 2.1, except that the exchange hash H is computed as the HASH
-   hash of the concatenation of the following:
+   2．1 節で前述したメッセージ交換が続く． ただし， 交換ハッシュ H は，  次の連結の HASH でのハッシュとして計算される．
 
            string    V_C, the client's version string (CR, NL excluded)
            string    V_S, the server's version string (CR, NL excluded)
@@ -429,19 +396,9 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 2.3.  gss-group1-sha1-*
 
-   Each of these methods specifies GSS-API-authenticated Diffie-Hellman
-   key exchange as described in Section 2.1 with SHA-1 as HASH, and the
-   group defined in Section 8.1 of [SSH-TRANSPORT].  The method name for
-   each method is the concatenation of the string "gss-group1-sha1-"
-   with the Base64 encoding of the MD5 hash [MD5] of the ASN.1
-   Distinguished Encoding Rules (DER) encoding [ASN1] of the underlying
-   GSS-API mechanism's Object Identifier (OID).  Base64 encoding is
-   described in Section 6.8 of [MIME].
+   この種類のメソッドのそれぞれは， 2．1 節で記述した SHA-1をHASHとするGSS-APIで認証される Diffie-Hellman 鍵交換 と [SSH-TRANSPORT]の8．1節で定義した群を指定します．各方法の方法名は， 文字列 "gss-group1-sha1-" と，  基底のGSS-API メカニズムオブジェクト識別子 (OID) の ASN.1Distinguished Encoding Rules (DER) エンコーディング [ASN1] の MD5 ハッシュの Base64  エンコーディングの連結Base64 エンコーディングは， [MIME] の 6．8節に記述されている．
 
-   Each and every such key exchange method is implicitly registered by
-   this specification.  The IESG is considered to be the owner of all
-   such key exchange methods; this does NOT imply that the IESG is
-   considered to be the owner of the underlying GSS-API mechanism.
+   このような鍵交換法1つ1つすべてが， この指定によって暗黙的に登録される．IESG はこのすべての鍵交換法のオーナーと見なされる． これは， IESG が基底の GSS-API メカニズムのオーナーであることを意味しないことに注意．
 
 
 
@@ -452,42 +409,19 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 2.4.  gss-group14-sha1-*
 
-   Each of these methods specifies GSS-API authenticated Diffie-Hellman
-   key exchange as described in Section 2.1 with SHA-1 as HASH, and the
-   group defined in Section 8.2 of [SSH-TRANSPORT].  The method name for
-   each method is the concatenation of the string "gss-group14-sha1-"
-   with the Base64 encoding of the MD5 hash [MD5] of the ASN.1 DER
-   encoding [ASN1] of the underlying GSS-API mechanism's OID.  Base64
-   encoding is described in Section 6.8 of [MIME].
+   この種類のメソッドのそれぞれは， 2．1 節で記述した SHA-1をHASHとするGSS-APIで認証される Diffie-Hellman 鍵交換 と [SSH-TRANSPORT]の8．2節で定義した群を指定します．各方法の方法名は， 文字列 "gss-group14-sha1-" と，  基底のGSS-API の OID の ASN.1 DER エンコーディング [ASN1] の MD5 ハッシュの Base64  エンコーディングの連結だ．Base64 エンコーディングは， [MIME] の 6．8節に記述されている．
 
-   Each and every such key exchange method is implicitly registered by
-   this specification.  The IESG is considered to be the owner of all
-   such key exchange methods; this does NOT imply that the IESG is
-   considered to be the owner of the underlying GSS-API mechanism.
+   このような鍵交換法1つ1つすべてが， この指定によって暗黙的に登録される．IESG はこのすべての鍵交換法のオーナーと見なされる． これは， IESG が基底の GSS-API メカニズムのオーナーであることを意味しないことに注意．
 
 2.5.  gss-gex-sha1-*
 
-   Each of these methods specifies GSS-API-authenticated Diffie-Hellman
-   key exchange as described in Section 2.2 with SHA-1 as HASH.  The
-   method name for each method is the concatenation of the string "gss-
-   gex-sha1-" with the Base64 encoding of the MD5 hash [MD5] of the
-   ASN.1 DER encoding [ASN1] of the underlying GSS-API mechanism's OID.
-   Base64 encoding is described in Section 6.8 of [MIME].
+   この種類のメソッドのそれぞれは， 2．2 節で記述した SHA-1をHASHとするGSS-APIで認証される Diffie-Hellman 鍵交換 を指定します．各方法の方法名は， 文字列 "gss-gex-sha1-" と，  基底のGSS-API メカニズム OID の ASN.1 DER エンコーディング [ASN1] の MD5 ハッシュの Base64  エンコーディングの連結だ．Base64 エンコーディングは， [MIME] の 6．8節に記述されている．
 
-   Each and every such key exchange method is implicitly registered by
-   this specification.  The IESG is considered to be the owner of all
-   such key exchange methods; this does NOT imply that the IESG is
-   considered to be the owner of the underlying GSS-API mechanism.
+   このような鍵交換法1つ1つすべてが， この指定によって暗黙的に登録される．IESG はこのすべての鍵交換法のオーナーと見なされる． これは， IESG が基底の GSS-API メカニズムのオーナーであることを意味しないことに注意．
 
-2.6.  Other GSS-API Key Exchange Methods
+2.6.  その他の GSS-API 鍵交換法
 
-   Key exchange method names starting with "gss-" are reserved for key
-   exchange methods that conform to this document; in particular, for
-   those methods that use the GSS-API-authenticated Diffie-Hellman key
-   exchange algorithm described in Section 2.1, including any future
-   methods that use different groups and/or hash functions.  The intent
-   is that the names for any such future methods be defined in a similar
-   manner to that used in Section 2.3.
+   "gss-" で始まる鍵交換法名は， この文書に適合する鍵交換法のために予約されている． 具体的には， 異なる群 かつ/もしくは ハッシュ関数を用いるすべての将来の方法を含む 2．1節で記述した GSS-APIで認証される Diffie-Hellman 鍵交換アルゴリズムを用いるその他の方法のために予約されている．すべての将来の方法の名前が， 2．3節で用いられたものと同じように定義されることを意図している．
 
 
 
@@ -506,14 +440,11 @@ Hutzelman, et al.           Standards Track                    [Page 12]
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
-3.  GSS-API User Authentication
+3.  GSS-API ユーザ認証
 
-   This section describes a general-purpose user authentication method
-   based on [GSSAPI].  It is intended to be run over the SSH user
-   authentication protocol [SSH-USERAUTH].
+   この節では， [GSSAPI]に基づく汎用の目的に利用できるユーザ認証法を記述する．SSH 認証プロトコル [SSH-USERAUTH] 上で動くことが目的だ．
 
-   The authentication method name for this protocol is "gssapi-with-
-   mic".
+   このプロトコルの認証法名は "gssapi-with-mic" だ.
 
 3.1.  GSS-API Authentication Overview
 
@@ -792,11 +723,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
            string    message
            string    language tag
 
-   The message text MUST be encoded in the UTF-8 encoding described in
-   [UTF8].  Language tags are those described in [LANGTAG].  Note that
-   the message text may contain multiple lines separated by carriage
-   return-line feed (CRLF) sequences.  Application developers should
-   take this into account when displaying these messages.
+   message テキストは [UTF8] に記述されている UTF-8 エンコーディングでエンコードされてなければならない.  language タグは [LANGTAG] に記述されているものだ.  注意: message text はキャリッジリターン-ラインフィード (CRLF) シーケンスで区切られた複数行を含むかもしれない.  これらのメッセージを表示するアプリケーション開発者は, 複数行あるかもしれないことに注意しなければならない.
 
    Clients receiving this message MAY log the error details and/or
    report them to the user.  Any server sending this message MUST ignore

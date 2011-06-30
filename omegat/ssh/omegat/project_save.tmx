@@ -1655,6 +1655,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>After the client receives SSH_MSG_USERAUTH_GSSAPI_RESPONSE, the
+   client and server exchange SSH_MSG_USERAUTH_GSSAPI_TOKEN packets
+   until the authentication mechanism either succeeds or fails.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T021740Z" changeid="haruyama">
+        <seg>クライアントが SSH_MSG_USERAUTH_GSSAPI_RESPONSE を受け取ったら， 認証メカニズムが成功か失敗するまで  SSH_MSG_USERAUTH_GSSAPI_TOKEN パケットをクライアントとサーバで交換する．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>After the client's first call to GSS_Init_sec_context(), it sends the
    following:</seg>
       </tuv>
@@ -2268,6 +2278,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Any normalization or other preparation of names is done by the ssh
+   server based on the requirements of the system, and is outside the
+   scope of SSH.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T030910Z" changeid="haruyama">
+        <seg>システムの要求に基づいてサーバによって行なわれる 名前の正規化や処理は SSHの範囲外だ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Any other channel-
    related messages contain the recipient's channel number for the
    channel.</seg>
@@ -2704,6 +2724,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>認証</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Authentication
+   begins when the client sends an SSH_MSG_USERAUTH_REQUEST, which
+   specifies the mechanism OIDs the client supports.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T021517Z" changeid="haruyama">
+        <seg>認証は， クライアントが， サポートするメカニズムのOIDを指定する SSH_MSG_USERAUTH_REQUEST を送ることで始まる．</seg>
       </tuv>
     </tu>
     <tu>
@@ -6028,6 +6058,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>GSS-API Authentication Overview</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T021406Z" changeid="haruyama">
+        <seg>GSS-API 認証の概要</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>GSS-API Authentication Overview ...........................13
       3.2.</seg>
       </tuv>
@@ -6058,12 +6096,28 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>GSS-API User Authentication</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110629T041726Z" changeid="haruyama">
+        <seg>GSS-API ユーザ認証</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>GSS-API User Authentication ....................................13
       3.1.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110621T012443Z" changeid="haruyama">
         <seg>GSS-API ユーザ認証 ....................................13
       3.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>GSS-API authentication must maintain a context.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T021428Z" changeid="haruyama">
+        <seg>GSS-API 認証はコンテキストを維持しなければならない．</seg>
       </tuv>
     </tu>
     <tu>
@@ -6419,6 +6473,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>しかし, クライアントが別のエンコーディング (たとえば, ISO 8859-1 - ISO Latin1)でパスワードを取得したなら, 転送前にパスワードを ISO-10646 UTF-8 に変換しなければならない. また. サーバは, システムがパスワードに利用しているエンコーディングにパスワードを変換しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>However, if the client
+   reads the user name in some other encoding (e.g., ISO 8859-1 - ISO
+   Latin1), it MUST convert the user name to ISO-10646 UTF-8 before
+   transmitting, and the server MUST convert the user name to the
+   encoding used on that system for user names.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T030353Z" changeid="haruyama">
+        <seg>しかし， クライアントがその他のエンコーディング(例えば ISO 8859-1 - ISO Latin1) でユーザ名を読み取ったら， クライアントは転送前に ISO-10646 UTF-8 へユーザ名を変換しなければならない． サーバは， ユーザ名のためにシステムで利用しているエンコーディングにユーザ名を変換しなければならない．</seg>
       </tuv>
     </tu>
     <tu>
@@ -7087,6 +7153,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If at any time during the exchange the client sends a new
+   SSH_MSG_USERAUTH_REQUEST packet, the GSS-API context is completely
+   discarded and destroyed, and any further GSS-API authentication MUST
+   restart from the beginning.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T021923Z" changeid="haruyama">
+        <seg>交換中いつでもクライアントは新しい SSH_MSG_USERAUTH_REQUEST パケットを送れる． このとき GSS-API コンテキストは完全に破棄され破壊される． 次のGSS-API認証は最初から始められなければならない．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If both checks succeed, this method is successful.</seg>
       </tuv>
       <tuv lang="JA">
@@ -7426,6 +7503,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the authentication succeeds and a non-empty user name is presented
+   by the client, the SSH server implementation verifies that the user
+   name is authorized based on the credentials exchanged in the GSS-API
+   exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T022614Z" changeid="haruyama">
+        <seg>認証が成功され空でないユーザ名がクライアントから提示されたら， SSHのサーバ実装は， GSS-API交換で交換した認証情報に基づいてユーザ名が認可されるか確認する．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the client does not support the &quot;gssapi-keyex&quot; user
        authentication method described in Section 4, or does not intend
        to use that method in conjunction with the GSS-API context
@@ -7684,6 +7772,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the server does not support any of the specified OIDs, the server
+   MUST fail the request by sending an SSH_MSG_USERAUTH_FAILURE packet.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025258Z" changeid="haruyama">
+        <seg>サーバが指定された OID をどれもサポートしていなければ， SSH_MSG_USERAUTH_FAILURE パケットを送信してサーバは要求を失敗させなければならない．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the server does not support some algorithm,
    it MUST simply reject the request.</seg>
       </tuv>
@@ -7772,6 +7869,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the server supports any of the requested mechanism OIDs, the
+   server sends an SSH_MSG_USERAUTH_GSSAPI_RESPONSE message containing
+   the mechanism OID.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T021612Z" changeid="haruyama">
+        <seg>サーバが要求されたメカニズムのOIDのどれかをサポートしていたら， サーバはメカニズムのOIDを含む SSH_MSG_USERAUTH_GSSAPI_RESPONSE を返す．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the server supports the service (and permits the client to use
    it), it MUST respond with the following:</seg>
       </tuv>
@@ -7849,6 +7956,26 @@
       </tuv>
       <tuv lang="JA">
         <seg>ユーザがいくつかの異なるsubmethodの1つを用いて認証したい時, サーバは, ユーザがこの時に利用したい submethod のヒントとして submethods を取り扱う必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the user name is not
+   empty, and the requested user does not exist, the server MAY
+   disconnect or MAY send a bogus list of acceptable authentications but
+   never accept any.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025457Z" changeid="haruyama">
+        <seg>ユーザ名が空でなく要求されたユーザが存在しなければ， サーバは切断してもよい． もしくは 許容できる認証の偽のリスト(どの認証も受け入れられることはない)を送ってもよい．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the user name is not authorized, then the
+   authentication MUST fail.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T022627Z" changeid="haruyama">
+        <seg>ユーザ名が認可されていなければ， 認証は失敗しなければならない．</seg>
       </tuv>
     </tu>
     <tu>
@@ -8545,6 +8672,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In any case, if
+   the user does not exist, the authentication request MUST NOT be
+   accepted.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025626Z" changeid="haruyama">
+        <seg>どちらの場合でもユーザが存在しなければ， 認証の共有を受け入れてはならない．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In any case, if the
    service does not exist, authentication MUST NOT be accepted.</seg>
       </tuv>
@@ -8730,6 +8867,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110306T084118Z" changeid="haruyama">
         <seg>特に, 楕円曲線 Diffie-Hellman (ECDH) 鍵交換(鍵同意) と  楕円曲線 Menezes-Qu-Vanstone (ECMQV) 鍵交換(鍵同意), 楕円曲線 Digital Signature Algorithm (ECDSA) を SSHトランスポート層プロトコルで利用するために仕様を定める.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In particular, the encoding used by the system for user names is a
+   matter for the ssh server implementation.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T030216Z" changeid="haruyama">
+        <seg>特に， ユーザ名のためにシステムが用いるエンコーディングは， SSHのサーバの実装の問題だ．</seg>
       </tuv>
     </tu>
     <tu>
@@ -9305,6 +9451,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Initiating GSS-API Authentication</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T022656Z" changeid="haruyama">
+        <seg>GSS-API 認証の開始</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Initiating GSS-API Authentication .........................13
       3.3.</seg>
       </tuv>
@@ -9692,6 +9846,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It is
+   up to the server how it interprets the user name and determines
+   whether the client is authorized based on his GSS-API credentials.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025837Z" changeid="haruyama">
+        <seg>ユーザ名がどう解釈されGSS-APIの認証情報に基づいてクライアントが認可されるかどう決定するかは， サーバ次第だ．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It is RECOMMENDED that
    the warning provide sufficient information to the user of the client
    device so the user may make an informed decision.</seg>
@@ -9894,8 +10058,8 @@
         <seg>It is intended only for the initialization of the IANA
    registries referenced in the set of SSH documents.</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>SSHの文書群で参照されるIANAのレジストリの初期化のみを意図している.</seg>
+      <tuv lang="JA" changedate="20110629T041939Z" changeid="haruyama">
+        <seg>SSHの文書群で参照されるIANAのレジストリの初期化のみが目的だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9914,6 +10078,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>SSH トランスポート層プロトコル [SSH-TRANS] の上で動作することを想定している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is intended to be run over the SSH user
+   authentication protocol [SSH-USERAUTH].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110629T042035Z" changeid="haruyama">
+        <seg>SSH 認証プロトコル [SSH-USERAUTH] 上で動くことが目的だ．</seg>
       </tuv>
     </tu>
     <tu>
@@ -10779,6 +10952,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Mechanism OIDs are encoded according to the ASN.1 Distinguished
+   Encoding Rules (DER), as described in [ASN1] and in Section 3.1 of</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025703Z" changeid="haruyama">
+        <seg>メカニズムの OID は [ASN1] と [GSSAPI]の3．1節で記述されているように ASN.1 Distinguished Encoding Rules (DER) に従ってエンコードされる．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Message
    numbers in the 192 to 255 range (local extensions) are reserved for
    PRIVATE USE, also as described in [RFC2434].</seg>
@@ -11461,6 +11643,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Note that the 'user name' value is encoded in ISO-10646 UTF-8.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025645Z" changeid="haruyama">
+        <seg>注意： 'user name' の値は ISO-10646 UTF-8 でエンコードされる．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Note that the channel remains open after this message, and
    more data may still be sent in the other direction.</seg>
       </tuv>
@@ -12026,6 +12216,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>そうでなければ, 空文字列を送らなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Otherwise, authentication methods may be executed out of
+   order.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T024959Z" changeid="haruyama">
+        <seg>そうでなければ， 認証法は順不同で実行されるかもしれない．</seg>
       </tuv>
     </tu>
     <tu>
@@ -13269,6 +13468,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>パスワードを保存したり比較するSSHの実装は, 正規化に [SASLPREP] を使う必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH implementations which maintain private user
+   databases SHOULD prepare user names as described by [SASLPREP].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T030543Z" changeid="haruyama">
+        <seg>秘密のユーザデータベースを維持するSSHの実装は [SASLPREP] に記述されているようにユーザ名を前処理しなければならない．</seg>
       </tuv>
     </tu>
     <tu>
@@ -15666,6 +15874,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The GSS-API authentication method is initiated when the client sends
+   an SSH_MSG_USERAUTH_REQUEST:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T022718Z" changeid="haruyama">
+        <seg>GSS-API 認証法はクライアントが SSH_MSG_USERAUTH_REQUEST を送ることで開始される．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The GSS_GetMIC call MUST be applied over H, not the original data.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110625T005607Z" changeid="haruyama">
@@ -16381,6 +16598,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The authentication method name for this protocol is &quot;gssapi-with-
+   mic&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110629T042059Z" changeid="haruyama">
+        <seg>このプロトコルの認証法名は &quot;gssapi-with-mic&quot; だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The authentication protocol
    assumes that the underlying protocols provide integrity and
    confidentiality protection.</seg>
@@ -16586,6 +16812,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client MAY at any time continue with a new
+   SSH_MSG_USERAUTH_REQUEST message, in which case the server MUST
+   abandon the previous authentication attempt and continue with the new
+   one.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T031028Z" changeid="haruyama">
+        <seg>クライアントは， いつでも 新しい SSH_MSG_USERAUTH_REQUEST を送ってよい． この時， サーバはこれまでの認証の試行を放棄し新しいもので継続しなければならない．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client MAY ignore these messages.</seg>
       </tuv>
       <tuv lang="JA">
@@ -16651,6 +16888,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>クラアイントは, 知っているすべてのモードをストリームに加える必要がある. サーバは, 知らないモードを無視してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The client SHOULD send GSS-API mechanism OIDs only for mechanisms
+   that are of the same priority, compared to non-GSS-API authentication
+   methods.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T024925Z" changeid="haruyama">
+        <seg>クライアントは 非 GSS-API な認証法と同じ優先度の GSS-API メカニズム OID のみを送信する必要がある．</seg>
       </tuv>
     </tu>
     <tu>
@@ -18005,6 +18252,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>60から79の範囲のメッセージ番号は, 利用する認証法に特有だ. その意味は方法の定義で決まる.T</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The mechanism OIDs MUST be listed in order of preference,
+   and the server must choose the first mechanism OID on the list that
+   it supports.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T024647Z" changeid="haruyama">
+        <seg>メカニズム OID は優先順にリストされなければならない． サーバはリストの中でサポートする最初のメカニズム OID を選択しなければならない．</seg>
       </tuv>
     </tu>
     <tu>
@@ -19396,6 +19653,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110527T142445Z" changeid="haruyama">
         <seg>利用しているデータのタイプと用語は, アーキテクチャ文書 [RFC4251] で定義されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The user name may be an empty string if it can be deduced from the
+   results of the GSS-API authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025326Z" changeid="haruyama">
+        <seg>GSS-APIの結果からユーザ名が推定できる場合は， ユーザ名は空文字列でもよい．</seg>
       </tuv>
     </tu>
     <tu>
@@ -20819,6 +21085,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This makes it possible for the server to avoid
+   disclosing information about which accounts exist.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025559Z" changeid="haruyama">
+        <seg>これにより， アカウントが存在するかの情報をサーバが漏らすのを避けることができる．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This may be a concern for
    network administrators who wish to control the access of certain
    applications by users located outside of their physical location.</seg>
@@ -20890,8 +21165,8 @@
       <tuv lang="EN-US">
         <seg>This message causes immediate termination of the connection.</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>このメッセージ, 接続の即時の終了を起こす.</seg>
+      <tuv lang="JA" changedate="20110629T121751Z" changeid="haruyama">
+        <seg>このメッセージは, 接続を直ちに終了させる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21224,6 +21499,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This section describes a general-purpose user authentication method
+   based on [GSSAPI].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110629T041804Z" changeid="haruyama">
+        <seg>この節では， [GSSAPI]に基づく汎用の目的に利用できるユーザ認証法を記述する．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This section describes a modification to the generic GSS-API-
    authenticated Diffie-Hellman key exchange to allow the negotiation of
    the group to be used, using a method based on that described in
@@ -21409,6 +21693,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>そのため, 実際の増大は, (おおまかにいって)33 byte から 51 byteになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Thus, the client could first send an SSH_MSG_USERAUTH_REQUEST
+   for one GSS-API mechanism, then try public key authentication, and
+   then try another GSS-API mechanism.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025122Z" changeid="haruyama">
+        <seg>つまり， クライアントは最初に ある GSS-API メカニズム についての SSH_MSG_USERAUTH_REQUEST を送り， 次に公開鍵認証を試し， そして 別の GSS-API メカニズムを試すことができる．</seg>
       </tuv>
     </tu>
     <tu>
@@ -22402,6 +22696,14 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110607T071921Z" changeid="haruyama">
         <seg>[BKN1,BKN2] は以下を示している. SSHアプリケーションがこの文書で記述された方法と推薦を組み込めば, アプリケーションの対称暗号の部分は, 秘匿と完全性への攻撃の大部分に抵抗できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>[GSSAPI].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T022830Z" changeid="haruyama">
+        <seg> </seg>
       </tuv>
     </tu>
     <tu>
