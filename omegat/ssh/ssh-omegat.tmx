@@ -549,6 +549,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>SSH implementations which maintain private user
+   databases SHOULD prepare user names as described by [SASLPREP].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T030543Z" changeid="haruyama">
+        <seg>秘密のユーザデータベースを維持するSSHの実装は [SASLPREP] に記述されているようにユーザ名を前処理しなければならない．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In addition, deleg_req_flag MAY be
        set to &quot;true&quot; to request access delegation, if requested by the
        user.</seg>
@@ -906,6 +915,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>機密性</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementers who wish to maintain</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110702T000300Z" changeid="haruyama">
+        <seg> </seg>
       </tuv>
     </tu>
     <tu>
@@ -2063,6 +2080,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the user name is not authorized, then the
+   authentication MUST fail.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T022627Z" changeid="haruyama">
+        <seg>ユーザ名が認可されていなければ， 認証は失敗しなければならない．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The following table identifies the initial assignments of the
    SSH_MSG_DISCONNECT 'description' and 'reason code' values.</seg>
       </tuv>
@@ -2491,6 +2517,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The server responds to the SSH_MSG_USERAUTH_REQUEST with either an
+   SSH_MSG_USERAUTH_FAILURE if none of the mechanisms are supported or
+   with an SSH_MSG_USERAUTH_GSSAPI_RESPONSE as follows:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110701T022810Z" changeid="haruyama">
+        <seg>SSH_MSG_USERAUTH_REQUEST に対してサーバは， どのメカニズムもサポートしていない場合にSSH_MSG_USERAUTH_FAILURE を返す． そうでなければ  次の SSH_MSG_USERAUTH_GSSAPI_RESPONSE を返す．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Names with the at-sign (&quot;@&quot;) are locally defined extensions and are
    not controlled by the IANA.</seg>
       </tuv>
@@ -2522,6 +2558,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>&quot;ptr-req&quot; string を含む SSH_MSG_CHANNEL_REQUEST メッセージを含むプロトコルのパケットは, &quot;ptr-req&quot; string を含む SSH_MSG_CHANNEL_REQUEST メッセージは,  'encoded terminal modes' の値を含まなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the server supports any of the requested mechanism OIDs, the
+   server sends an SSH_MSG_USERAUTH_GSSAPI_RESPONSE message containing
+   the mechanism OID.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T021612Z" changeid="haruyama">
+        <seg>サーバが要求されたメカニズムのOIDのどれかをサポートしていたら， サーバはメカニズムのOIDを含む SSH_MSG_USERAUTH_GSSAPI_RESPONSE を返す．</seg>
       </tuv>
     </tu>
     <tu>
@@ -3997,6 +4043,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Authentication
+   begins when the client sends an SSH_MSG_USERAUTH_REQUEST, which
+   specifies the mechanism OIDs the client supports.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T021517Z" changeid="haruyama">
+        <seg>認証は， クライアントが， サポートするメカニズムのOIDを指定する SSH_MSG_USERAUTH_REQUEST を送ることで始まる．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This port number has been registered with the IANA, and has
    been officially assigned for SSH.</seg>
       </tuv>
@@ -4431,6 +4487,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The mechanism OID must be one of the OIDs sent by the client in the
+   SSH_MSG_USERAUTH_REQUEST packet.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110701T022946Z" changeid="haruyama">
+        <seg>メカニズムの OID は， SSH_MSG_USERAUTH_REQUEST パケットでクライアントから送られた OIDの1つでなければならない．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Different types of terminal emulation may also be
    employed in the client, and the character set to be used is
    effectively determined by the terminal emulation.</seg>
@@ -4761,6 +4826,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>多くの 'channel type' の値が, 特定の 'channel type' に特有の拡張を持つ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Any normalization or other preparation of names is done by the ssh
+   server based on the requirements of the system, and is outside the
+   scope of SSH.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T030910Z" changeid="haruyama">
+        <seg>システムの要求に基づいてサーバによって行なわれる 名前の正規化や処理は SSHの範囲外だ</seg>
       </tuv>
     </tu>
     <tu>
@@ -8016,6 +8091,18 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>However, if the client
+   reads the user name in some other encoding (e.g., ISO 8859-1 - ISO
+   Latin1), it MUST convert the user name to ISO-10646 UTF-8 before
+   transmitting, and the server MUST convert the user name to the
+   encoding used on that system for user names.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T030353Z" changeid="haruyama">
+        <seg>しかし， クライアントがその他のエンコーディング(例えば ISO 8859-1 - ISO Latin1) でユーザ名を読み取ったら， クライアントは転送前に ISO-10646 UTF-8 へユーザ名を変換しなければならない． サーバは， ユーザ名のためにシステムで利用しているエンコーディングにユーザ名を変換しなければならない．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Future Assignments ..................................8
       4.3.</seg>
       </tuv>
@@ -8579,6 +8666,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Initial Server Response</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110701T022657Z" changeid="haruyama">
+        <seg>最初のサーバの応答</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Researchers have discovered that the authenticated encryption portion
    of the current SSH Transport Protocol is vulnerable to several
    attacks.</seg>
@@ -8633,8 +8728,8 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
    presence of the carriage return character for reasons described in
    Section 5 of this document.</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>より古いこのプロトコルの文書化されていないバージョンとの互換性を維持したい実装者は, この文書の5節で記述する理由からキャリッジリターンが存在しなくても識別文字列の処理をしたいだろう.</seg>
+      <tuv lang="JA" changedate="20110702T000346Z" changeid="haruyama">
+        <seg>このプロトコルの文書化されていないさらに古いバージョンとの互換性を維持したい実装者は, この文書の5節で記述する理由からキャリッジリターンが存在しなくても識別文字列の処理をしたいだろう.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8925,6 +9020,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>さらなる助言が [RFC3766]で与えられている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The user name may be an empty string if it can be deduced from the
+   results of the GSS-API authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025326Z" changeid="haruyama">
+        <seg>GSS-APIの結果からユーザ名が推定できる場合は， ユーザ名は空文字列でもよい．</seg>
       </tuv>
     </tu>
     <tu>
@@ -11565,6 +11669,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>GSS-API authentication must maintain a context.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T021428Z" changeid="haruyama">
+        <seg>GSS-API 認証はコンテキストを維持しなければならない．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It is RECOMMENDED that the keys be changed after each gigabyte of
    transmitted data or after each hour of connection time, whichever
    comes sooner.</seg>
@@ -12436,6 +12548,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>GSS-API Authentication Overview</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T021406Z" changeid="haruyama">
+        <seg>GSS-API 認証の概要</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>However, following
    the rekeying recommendations should prevent this attack.</seg>
       </tuv>
@@ -12656,6 +12776,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>どんな場合でも, サーバは, 期限切れのパスワードを認証に仕様してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The mechanism OIDs MUST be listed in order of preference,
+   and the server must choose the first mechanism OID on the list that
+   it supports.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T024647Z" changeid="haruyama">
+        <seg>メカニズム OID は優先順にリストされなければならない． サーバはリストの中でサポートする最初のメカニズム OID を選択しなければならない．</seg>
       </tuv>
     </tu>
     <tu>
@@ -13089,6 +13219,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client SHOULD send GSS-API mechanism OIDs only for mechanisms
+   that are of the same priority, compared to non-GSS-API authentication
+   methods.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T024925Z" changeid="haruyama">
+        <seg>クライアントは 非 GSS-API な認証法と同じ優先度の GSS-API メカニズム OID のみを送信する必要がある．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The available types and
    their interpretation depend on the type of channel.</seg>
       </tuv>
@@ -13320,6 +13460,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>サーバは, ユーザに要求された認証がない場合に SSH_MSG_USERAUTH_SUCCESS メッセージで応答してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>After the client receives SSH_MSG_USERAUTH_GSSAPI_RESPONSE, the
+   client and server exchange SSH_MSG_USERAUTH_GSSAPI_TOKEN packets
+   until the authentication mechanism either succeeds or fails.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T021740Z" changeid="haruyama">
+        <seg>クライアントが SSH_MSG_USERAUTH_GSSAPI_RESPONSE を受け取ったら， 認証メカニズムが成功か失敗するまで  SSH_MSG_USERAUTH_GSSAPI_TOKEN パケットをクライアントとサーバで交換する．</seg>
       </tuv>
     </tu>
     <tu>
@@ -13897,6 +14047,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110614T024310Z" changeid="haruyama">
         <seg>しかし, [RFC4253] では, &quot;Arcfour (と RC4) は弱い鍵の問題がある. 注意して利用しなければならない&quot; となっている. [MANTIN01]にこれらの問題はより詳細に記述されている. [MANTIN01]では暗号の内部状態が完全に混合されるのを保証するために 鍵ストリームの最初の 1536 バイトを破棄するよう推奨している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Otherwise, authentication methods may be executed out of
+   order.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T024959Z" changeid="haruyama">
+        <seg>そうでなければ， 認証法は順不同で実行されるかもしれない．</seg>
       </tuv>
     </tu>
     <tu>
@@ -14692,6 +14851,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Initiating GSS-API Authentication</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T022656Z" changeid="haruyama">
+        <seg>GSS-API 認証の開始</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If prompts are presented in
    a dialog window, then the client SHOULD NOT present each prompt in a
    separate window.</seg>
@@ -14855,6 +15022,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>name-listのnameの順序は, 重要かもしれないしそうでないかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Once the mechanism OID has been selected, the client will then
+   initiate an exchange of one or more pairs of
+   SSH_MSG_USERAUTH_GSSAPI_TOKEN packets.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110701T023119Z" changeid="haruyama">
+        <seg>メカニズムのOIDが選択されたら， SSH_MSG_USERAUTH_GSSAPI_TOKEN パケットの1つないしそれ以上のペアをクライアントは交換しはじめる．</seg>
       </tuv>
     </tu>
     <tu>
@@ -15393,6 +15570,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>このプロトコルの 'service name' は, &quot;ssh-userauth&quot; だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In any case, if
+   the user does not exist, the authentication request MUST NOT be
+   accepted.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025626Z" changeid="haruyama">
+        <seg>どちらの場合でもユーザが存在しなければ， 認証の共有を受け入れてはならない．</seg>
       </tuv>
     </tu>
     <tu>
@@ -16533,6 +16720,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the user name is not
+   empty, and the requested user does not exist, the server MAY
+   disconnect or MAY send a bogus list of acceptable authentications but
+   never accept any.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025457Z" changeid="haruyama">
+        <seg>ユーザ名が空でなく要求されたユーザが存在しなければ， サーバは切断してもよい． もしくは 許容できる認証の偽のリスト(どの認証も受け入れられることはない)を送ってもよい．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The intent
    is that the names for any such future methods be defined in a similar
    manner to that used in Section 2.3.</seg>
@@ -16968,6 +17166,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In particular, the encoding used by the system for user names is a
+   matter for the ssh server implementation.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T030216Z" changeid="haruyama">
+        <seg>特に， ユーザ名のためにシステムが用いるエンコーディングは， SSHのサーバの実装の問題だ．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Initial Assignment of Signal Names .................15
            4.9.5.</seg>
       </tuv>
@@ -17256,6 +17463,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>[GSSAPI].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T022830Z" changeid="haruyama">
+        <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Connection Protocol Channel Types ..................14
            4.9.2.</seg>
       </tuv>
@@ -17329,6 +17544,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110420T053116Z" changeid="haruyama">
         <seg>管理の上での考慮</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Mechanism OIDs are encoded according to the ASN.1 Distinguished
+   Encoding Rules (DER), as described in [ASN1] and in Section 3.1 of</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025703Z" changeid="haruyama">
+        <seg>メカニズムの OID は [ASN1] と [GSSAPI]の3．1節で記述されているように ASN.1 Distinguished Encoding Rules (DER) に従ってエンコードされる．</seg>
       </tuv>
     </tu>
     <tu>
@@ -18966,6 +19190,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The actual number of packets
+   exchanged is determined by the underlying GSS-API mechanism.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110701T023213Z" changeid="haruyama">
+        <seg>交換されるパケットの実際の数は， 基底のGSS-API メカニズムで決定される．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>After obtaining the requested information from the user, the client
    MUST respond with an SSH_MSG_USERAUTH_INFO_RESPONSE message.</seg>
       </tuv>
@@ -19077,6 +19310,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>0xFE000000 から 0xFFFFFFFF の範囲の 'reason code' の値は, プライベートな利用(PRIVATE USE)に予約されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Note that the 'user name' value is encoded in ISO-10646 UTF-8.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025645Z" changeid="haruyama">
+        <seg>注意： 'user name' の値は ISO-10646 UTF-8 でエンコードされる．</seg>
       </tuv>
     </tu>
     <tu>
@@ -19387,6 +19628,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110426T083649Z" changeid="haruyama">
         <seg>指定された楕円曲線ドメインパラメータ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The GSS-API authentication method is initiated when the client sends
+   an SSH_MSG_USERAUTH_REQUEST:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T022718Z" changeid="haruyama">
+        <seg>GSS-API 認証法はクライアントが SSH_MSG_USERAUTH_REQUEST を送ることで開始される．</seg>
       </tuv>
     </tu>
     <tu>
@@ -19946,6 +20196,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the authentication succeeds and a non-empty user name is presented
+   by the client, the SSH server implementation verifies that the user
+   name is authorized based on the credentials exchanged in the GSS-API
+   exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T022614Z" changeid="haruyama">
+        <seg>認証が成功され空でないユーザ名がクライアントから提示されたら， SSHのサーバ実装は， GSS-API交換で交換した認証情報に基づいてユーザ名が認可されるか確認する．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This message is used to transmit information
    that may help debugging.</seg>
       </tuv>
@@ -20230,6 +20491,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the server does not support any of the specified OIDs, the server
+   MUST fail the request by sending an SSH_MSG_USERAUTH_FAILURE packet.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025258Z" changeid="haruyama">
+        <seg>サーバが指定された OID をどれもサポートしていなければ， SSH_MSG_USERAUTH_FAILURE パケットを送信してサーバは要求を失敗させなければならない．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>All authentication related messages
    received after sending this message SHOULD be silently ignored.</seg>
       </tuv>
@@ -20314,6 +20584,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>ストレートなビット単位のバイナリの比較が推奨される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The client MAY at any time continue with a new
+   SSH_MSG_USERAUTH_REQUEST message, in which case the server MUST
+   abandon the previous authentication attempt and continue with the new
+   one.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T031028Z" changeid="haruyama">
+        <seg>クライアントは， いつでも 新しい SSH_MSG_USERAUTH_REQUEST を送ってよい． この時， サーバはこれまでの認証の試行を放棄し新しいもので継続しなければならない．</seg>
       </tuv>
     </tu>
     <tu>
@@ -20877,6 +21158,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If at any time during the exchange the client sends a new
+   SSH_MSG_USERAUTH_REQUEST packet, the GSS-API context is completely
+   discarded and destroyed, and any further GSS-API authentication MUST
+   restart from the beginning.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T021923Z" changeid="haruyama">
+        <seg>交換中いつでもクライアントは新しい SSH_MSG_USERAUTH_REQUEST パケットを送れる． このとき GSS-API コンテキストは完全に破棄され破壊される． 次のGSS-API認証は最初から始められなければならない．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>While there is usually little point for clients to send requests that
    the server does not list as acceptable, sending such requests is not
    an error, and the server SHOULD simply reject requests that it does
@@ -21417,6 +21709,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110624T045557Z" changeid="haruyama">
         <seg>呼び出しで major_status コードが GSS_S_COMPLETE となったなら, 2つの最終メッセージのうちの1つをサーバは送る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is
+   up to the server how it interprets the user name and determines
+   whether the client is authorized based on his GSS-API credentials.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025837Z" changeid="haruyama">
+        <seg>ユーザ名がどう解釈されGSS-APIの認証情報に基づいてクライアントが認可されるかどう決定するかは， サーバ次第だ．</seg>
       </tuv>
     </tu>
     <tu>
@@ -22486,6 +22788,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>GSS-API Session</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110701T022952Z" changeid="haruyama">
+        <seg>GSS-API セッション</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Security Properties</seg>
       </tuv>
       <tuv lang="JA">
@@ -22525,6 +22835,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>&quot;none&quot; 認証要求</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Thus, the client could first send an SSH_MSG_USERAUTH_REQUEST
+   for one GSS-API mechanism, then try public key authentication, and
+   then try another GSS-API mechanism.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025122Z" changeid="haruyama">
+        <seg>つまり， クライアントは最初に ある GSS-API メカニズム についての SSH_MSG_USERAUTH_REQUEST を送り， 次に公開鍵認証を試し， そして 別の GSS-API メカニズムを試すことができる．</seg>
       </tuv>
     </tu>
     <tu>
@@ -22683,6 +23003,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110610T070803Z" changeid="haruyama">
         <seg>推薦 (1) の代替手段の1つに, SSHトランスポートプロトコルのシーケンス番号を 32bitよりも長くすることがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These packets contain the
+   tokens produced from the 'GSS_Init_sec_context()' and
+   'GSS_Accept_sec_context()' calls.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110701T023145Z" changeid="haruyama">
+        <seg>これらのパケットは， 'GSS_Init_sec_context()' と 'GSS_Accept_sec_context()' の呼び出しから生成されたトークンを含む．</seg>
       </tuv>
     </tu>
     <tu>
@@ -22877,6 +23207,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110624T042454Z" changeid="haruyama">
         <seg>5節で記述する &quot;null&quot; ホスト鍵アルゴリズムを利用する場合は, このメッセージを送ってはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This makes it possible for the server to avoid
+   disclosing information about which accounts exist.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110630T025559Z" changeid="haruyama">
+        <seg>これにより， アカウントが存在するかの情報をサーバが漏らすのを避けることができる．</seg>
       </tuv>
     </tu>
     <tu>

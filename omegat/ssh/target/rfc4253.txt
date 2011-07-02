@@ -181,7 +181,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
       SSH-protoversion-softwareversion SP comments CR LF
 
-   この文書群で定義されるプロトコルはバージョン.2.0 なので, 'protoversion'は 2.0 でなければならない.  'comments' 文字列の存在は選択できる.  'comments' 文字列が含まれる場合, 'space' 文字(上では SP で示した. ASCII 32) が 'softwareversion' と 'comments' を区切らなければならない..  この識別文字列は, 単一のキャリッジリターン (CR) と単一のラインフィード （LF) (それぞれ ASCII の 13 と 10) で終了されなければならない.  Implementers who wish to maintain
+   この文書群で定義されるプロトコルはバージョン.2.0 なので, 'protoversion'は 2.0 でなければならない.  'comments' 文字列の存在は選択できる.  'comments' 文字列が含まれる場合, 'space' 文字(上では SP で示した. ASCII 32) が 'softwareversion' と 'comments' を区切らなければならない..  この識別文字列は, 単一のキャリッジリターン (CR) と単一のラインフィード （LF) (それぞれ ASCII の 13 と 10) で終了されなければならない.   
 
 
 
@@ -190,7 +190,7 @@ Ylonen &  Lonvick           Standards Track                     [Page 4]
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
-   より古いこのプロトコルの文書化されていないバージョンとの互換性を維持したい実装者は, この文書の5節で記述する理由からキャリッジリターンが存在しなくても識別文字列の処理をしたいだろう.  null 文字は送られてはならない.
+   このプロトコルの文書化されていないさらに古いバージョンとの互換性を維持したい実装者は, この文書の5節で記述する理由からキャリッジリターンが存在しなくても識別文字列の処理をしたいだろう.  null 文字は送られてはならない.
    文字列の最大長は, 255文字だ. これには キャリッジリターンとラインフィードを含む.
 
    キャリッジリターンとラインフィードの前の文字列の部分は, Diffie-Hellman 鍵交換に使われる(8 節を参照).

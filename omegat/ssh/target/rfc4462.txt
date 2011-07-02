@@ -446,35 +446,21 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
    このプロトコルの認証法名は "gssapi-with-mic" だ.
 
-3.1.  GSS-API Authentication Overview
+3.1.  GSS-API 認証の概要
 
-   GSS-API authentication must maintain a context.  Authentication
-   begins when the client sends an SSH_MSG_USERAUTH_REQUEST, which
-   specifies the mechanism OIDs the client supports.
+   GSS-API 認証はコンテキストを維持しなければならない．認証は， クライアントが， サポートするメカニズムのOIDを指定する SSH_MSG_USERAUTH_REQUEST を送ることで始まる．
 
-   If the server supports any of the requested mechanism OIDs, the
-   server sends an SSH_MSG_USERAUTH_GSSAPI_RESPONSE message containing
-   the mechanism OID.
+   サーバが要求されたメカニズムのOIDのどれかをサポートしていたら， サーバはメカニズムのOIDを含む SSH_MSG_USERAUTH_GSSAPI_RESPONSE を返す．
 
-   After the client receives SSH_MSG_USERAUTH_GSSAPI_RESPONSE, the
-   client and server exchange SSH_MSG_USERAUTH_GSSAPI_TOKEN packets
-   until the authentication mechanism either succeeds or fails.
+   クライアントが SSH_MSG_USERAUTH_GSSAPI_RESPONSE を受け取ったら， 認証メカニズムが成功か失敗するまで  SSH_MSG_USERAUTH_GSSAPI_TOKEN パケットをクライアントとサーバで交換する．
 
-   If at any time during the exchange the client sends a new
-   SSH_MSG_USERAUTH_REQUEST packet, the GSS-API context is completely
-   discarded and destroyed, and any further GSS-API authentication MUST
-   restart from the beginning.
+   交換中いつでもクライアントは新しい SSH_MSG_USERAUTH_REQUEST パケットを送れる． このとき GSS-API コンテキストは完全に破棄され破壊される． 次のGSS-API認証は最初から始められなければならない．
 
-   If the authentication succeeds and a non-empty user name is presented
-   by the client, the SSH server implementation verifies that the user
-   name is authorized based on the credentials exchanged in the GSS-API
-   exchange.  If the user name is not authorized, then the
-   authentication MUST fail.
+   認証が成功され空でないユーザ名がクライアントから提示されたら， SSHのサーバ実装は， GSS-API交換で交換した認証情報に基づいてユーザ名が認可されるか確認する．ユーザ名が認可されていなければ， 認証は失敗しなければならない．
 
-3.2.  Initiating GSS-API Authentication
+3.2.  GSS-API 認証の開始
 
-   The GSS-API authentication method is initiated when the client sends
-   an SSH_MSG_USERAUTH_REQUEST:
+   GSS-API 認証法はクライアントが SSH_MSG_USERAUTH_REQUEST を送ることで開始される．
 
            byte      SSH_MSG_USERAUTH_REQUEST
            string    user name (in ISO-10646 UTF-8 encoding)
@@ -483,8 +469,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
            uint32    n, the number of mechanism OIDs client supports
            string[n] mechanism OIDs
 
-   Mechanism OIDs are encoded according to the ASN.1 Distinguished
-   Encoding Rules (DER), as described in [ASN1] and in Section 3.1 of
+   メカニズムの OID は [ASN1] と [GSSAPI]の3．1節で記述されているように ASN.1 Distinguished Encoding Rules (DER) に従ってエンコードされる．
 
 
 
@@ -493,54 +478,23 @@ Hutzelman, et al.           Standards Track                    [Page 13]
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
-   [GSSAPI].  The mechanism OIDs MUST be listed in order of preference,
-   and the server must choose the first mechanism OID on the list that
-   it supports.
+    メカニズム OID は優先順にリストされなければならない． サーバはリストの中でサポートする最初のメカニズム OID を選択しなければならない．
 
-   The client SHOULD send GSS-API mechanism OIDs only for mechanisms
-   that are of the same priority, compared to non-GSS-API authentication
-   methods.  Otherwise, authentication methods may be executed out of
-   order.  Thus, the client could first send an SSH_MSG_USERAUTH_REQUEST
-   for one GSS-API mechanism, then try public key authentication, and
-   then try another GSS-API mechanism.
+   クライアントは 非 GSS-API な認証法と同じ優先度の GSS-API メカニズム OID のみを送信する必要がある．そうでなければ， 認証法は順不同で実行されるかもしれない．つまり， クライアントは最初に ある GSS-API メカニズム についての SSH_MSG_USERAUTH_REQUEST を送り， 次に公開鍵認証を試し， そして 別の GSS-API メカニズムを試すことができる．
 
-   If the server does not support any of the specified OIDs, the server
-   MUST fail the request by sending an SSH_MSG_USERAUTH_FAILURE packet.
+   サーバが指定された OID をどれもサポートしていなければ， SSH_MSG_USERAUTH_FAILURE パケットを送信してサーバは要求を失敗させなければならない．
 
-   The user name may be an empty string if it can be deduced from the
-   results of the GSS-API authentication.  If the user name is not
-   empty, and the requested user does not exist, the server MAY
-   disconnect or MAY send a bogus list of acceptable authentications but
-   never accept any.  This makes it possible for the server to avoid
-   disclosing information about which accounts exist.  In any case, if
-   the user does not exist, the authentication request MUST NOT be
-   accepted.
+   GSS-APIの結果からユーザ名が推定できる場合は， ユーザ名は空文字列でもよい．ユーザ名が空でなく要求されたユーザが存在しなければ， サーバは切断してもよい． もしくは 許容できる認証の偽のリスト(どの認証も受け入れられることはない)を送ってもよい．これにより， アカウントが存在するかの情報をサーバが漏らすのを避けることができる．どちらの場合でもユーザが存在しなければ， 認証の共有を受け入れてはならない．
 
-   Note that the 'user name' value is encoded in ISO-10646 UTF-8.  It is
-   up to the server how it interprets the user name and determines
-   whether the client is authorized based on his GSS-API credentials.
-   In particular, the encoding used by the system for user names is a
-   matter for the ssh server implementation.  However, if the client
-   reads the user name in some other encoding (e.g., ISO 8859-1 - ISO
-   Latin1), it MUST convert the user name to ISO-10646 UTF-8 before
-   transmitting, and the server MUST convert the user name to the
-   encoding used on that system for user names.
+   注意： 'user name' の値は ISO-10646 UTF-8 でエンコードされる．ユーザ名がどう解釈されGSS-APIの認証情報に基づいてクライアントが認可されるかどう決定するかは， サーバ次第だ．特に， ユーザ名のためにシステムが用いるエンコーディングは， SSHのサーバの実装の問題だ．しかし， クライアントがその他のエンコーディング(例えば ISO 8859-1 - ISO Latin1) でユーザ名を読み取ったら， クライアントは転送前に ISO-10646 UTF-8 へユーザ名を変換しなければならない． サーバは， ユーザ名のためにシステムで利用しているエンコーディングにユーザ名を変換しなければならない．
 
-   Any normalization or other preparation of names is done by the ssh
-   server based on the requirements of the system, and is outside the
-   scope of SSH.  SSH implementations which maintain private user
-   databases SHOULD prepare user names as described by [SASLPREP].
+   システムの要求に基づいてサーバによって行なわれる 名前の正規化や処理は SSHの範囲外だ秘密のユーザデータベースを維持するSSHの実装は [SASLPREP] に記述されているようにユーザ名を前処理しなければならない．
 
-   The client MAY at any time continue with a new
-   SSH_MSG_USERAUTH_REQUEST message, in which case the server MUST
-   abandon the previous authentication attempt and continue with the new
-   one.
+   クライアントは， いつでも 新しい SSH_MSG_USERAUTH_REQUEST を送ってよい． この時， サーバはこれまでの認証の試行を放棄し新しいもので継続しなければならない．
 
-3.3.  Initial Server Response
+3.3.  最初のサーバの応答
 
-   The server responds to the SSH_MSG_USERAUTH_REQUEST with either an
-   SSH_MSG_USERAUTH_FAILURE if none of the mechanisms are supported or
-   with an SSH_MSG_USERAUTH_GSSAPI_RESPONSE as follows:
+   SSH_MSG_USERAUTH_REQUEST に対してサーバは， どのメカニズムもサポートしていない場合にSSH_MSG_USERAUTH_FAILURE を返す． そうでなければ  次の SSH_MSG_USERAUTH_GSSAPI_RESPONSE を返す．
 
 
 
@@ -552,17 +506,11 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
            byte        SSH_MSG_USERAUTH_GSSAPI_RESPONSE
            string      selected mechanism OID
 
-   The mechanism OID must be one of the OIDs sent by the client in the
-   SSH_MSG_USERAUTH_REQUEST packet.
+   メカニズムの OID は， SSH_MSG_USERAUTH_REQUEST パケットでクライアントから送られた OIDの1つでなければならない．
 
-3.4.  GSS-API Session
+3.4.  GSS-API セッション
 
-   Once the mechanism OID has been selected, the client will then
-   initiate an exchange of one or more pairs of
-   SSH_MSG_USERAUTH_GSSAPI_TOKEN packets.  These packets contain the
-   tokens produced from the 'GSS_Init_sec_context()' and
-   'GSS_Accept_sec_context()' calls.  The actual number of packets
-   exchanged is determined by the underlying GSS-API mechanism.
+   メカニズムのOIDが選択されたら， SSH_MSG_USERAUTH_GSSAPI_TOKEN パケットの1つないしそれ以上のペアをクライアントは交換しはじめる．これらのパケットは， 'GSS_Init_sec_context()' と 'GSS_Accept_sec_context()' の呼び出しから生成されたトークンを含む．交換されるパケットの実際の数は， 基底のGSS-API メカニズムで決定される．
 
            byte        SSH_MSG_USERAUTH_GSSAPI_TOKEN
            string      data returned from either GSS_Init_sec_context()
