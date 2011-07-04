@@ -2325,6 +2325,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Any server sending this message MUST ignore
+   any SSH_MSG_UNIMPLEMENTED sent by the client in response.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T031709Z" changeid="haruyama">
+        <seg>このメッセージを送るすべてのサーバは, クライアントが応答として送るすべての SSH_MSG_UNIMPLEMENTED を無視しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Appendix A:  Generation of Safe Primes</seg>
       </tuv>
       <tuv lang="JA" changedate="20110620T040858Z" changeid="haruyama">
@@ -2656,6 +2665,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>name のリストであるので, すべての含まれる要素は name だ. また US-ASCIIでなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As with all SSH authentication methods, successful completion is
+   indicated by an SSH_MSG_USERAUTH_SUCCESS if no other authentication
+   is required, or an SSH_MSG_USERAUTH_FAILURE with the partial success
+   flag set if the server requires further authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T031122Z" changeid="haruyama">
+        <seg>すべてのSSH認証法と同様に, 他の認証が必要ない場合は, 成功は SSH_MSG_USERAUTH_SUCCESS で示される. 成功したが, サーバがさらなる認証を必要とする場合は, partial success フラグが設定され たSSH_MSG_USERAUTH_FAILURE で示される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3041,6 +3061,14 @@
       <tuv lang="JA">
         <seg> バイナリパケットプロトコル..................................7
       6.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Binding Encryption Keys</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T021929Z" changeid="haruyama">
+        <seg>暗号鍵の束縛</seg>
       </tuv>
     </tu>
     <tu>
@@ -3444,6 +3472,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Client Acknowledgement</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T025250Z" changeid="haruyama">
+        <seg>クライアントの確認応答</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Client Acknowledgement ....................................16
       3.7.</seg>
       </tuv>
@@ -3550,6 +3586,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Clients receiving this message MAY log the error details and/or
+   report them to the user.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T031600Z" changeid="haruyama">
+        <seg>このメッセージを受け取ったクライアントは エラーの詳細をログに記録したり また/もしくは ユーザに詳細をレポートしたりしてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Clients that do not validate the DNSSEC signatures themselves MUST
    use a secure transport (e.g., TSIG [9], SIG(0) [10], or IPsec [8])
    between themselves and the entity performing the signature
@@ -3602,6 +3647,14 @@
       <tuv lang="JA">
         <seg>古い SSH のバージョンとの互換性 .............................5
       5.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Completion</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T030812Z" changeid="haruyama">
+        <seg>完了</seg>
       </tuv>
     </tu>
     <tu>
@@ -5138,6 +5191,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>後で開始されるシェルやコマンドに, 環境変数を転送することができる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Error Status</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T031215Z" changeid="haruyama">
+        <seg>エラー状態</seg>
       </tuv>
     </tu>
     <tu>
@@ -7149,6 +7210,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If a token is also returned, then the
+   SSH_MSG_USERAUTH_GSSAPI_TOKEN message MUST be sent before this one.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T024155Z" changeid="haruyama">
+        <seg>トークンも返された場合,  SSH_MSG_USERAUTH_GSSAPI_TOKEN メッセージをこのメッセージの前に送らなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If a user accepts a key without verifying
    the fingerprint with something learned through a secured channel, the
    connection is vulnerable to a man-in-the-middle attack.</seg>
@@ -7915,6 +7985,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the server simply assumed
+   success on the part of the client and completed the authentication
+   service, it is possible that the client would fail to complete the
+   authentication method, but not be able to retry other methods because
+   the server had already moved on.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T025731Z" changeid="haruyama">
+        <seg>サーバが単にクライアントの部分の成功を仮定し認証サービスを終了させたら, クライアントは認証法を失敗させられる. しかし サーバがすでに認証成功としているので別の認証法を試すことはできない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the server supports any of the requested mechanism OIDs, the
    server sends an SSH_MSG_USERAUTH_GSSAPI_RESPONSE message containing
    the mechanism OID.</seg>
@@ -8126,6 +8208,35 @@
       </tuv>
       <tuv lang="JA">
         <seg>もし表示するなら, クライアントソフトウェアは, [SSH-ARCH]で議論した予防措置を取らなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If this message is received by the server before the GSS-API context
+   is fully established, the server MUST fail the authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T024842Z" changeid="haruyama">
+        <seg>GSS-APIコンテキストが完全に確立する前にこのメッセージをサーバが受け取ったら, サーバは認証を失敗させなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If this message is received by the server when the negotiated GSS-API
+   context does not support per-message integrity protection, the server
+   MUST fail the authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T024942Z" changeid="haruyama">
+        <seg>交渉済みの GSS-API コンテキストが メッセージ単位の完全性保護をサポートしていない場合にこのメッセージをサーバが受け取ったら, サーバは認証を失敗させなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If this message is received by the server when the negotiated GSS-API
+   context supports per-message integrity protection, the server MUST
+   fail the authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T030516Z" changeid="haruyama">
+        <seg>交渉済みの GSS-API コンテキストが メッセージ単位の完全性保護をサポートしている場合にこのメッセージをサーバが受け取ったら, サーバは認証を失敗させなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8971,6 +9082,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In some cases, it is possible to obtain improved security by allowing
+   access only if the client sends a valid message integrity code (MIC)
+   binding the GSS-API context to the keys used for encryption and
+   integrity protection of the SSH session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T022232Z" changeid="haruyama">
+        <seg>SSHのセッションの暗号化と完全性保護に用いられ鍵にGSS-API コンテキストを束縛する正当なメッセージ完全性コード (MIC) をクライアントが送った場合にもアクセスを許可することで、 セキュリティを向上させられる場合がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In some jurisdictions, sending a warning message before
    authentication may be relevant for getting legal protection.</seg>
       </tuv>
@@ -8988,6 +9110,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110531T074058Z" changeid="haruyama">
         <seg>stateful-decryption counter モードでは, 送信側と受信側の両方が内部のL-bitなカウンタ X を保持する. Xの初期値は([RFC4253]の7.2節で計算される) 初期IV である必要がある. 初期IVは L-bitのネットワークバイトオーダー符号無し整数として解釈される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In such cases, it is possible for the server</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T025513Z" changeid="haruyama">
+        <seg> </seg>
       </tuv>
     </tu>
     <tu>
@@ -9130,6 +9260,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110625T005208Z" changeid="haruyama">
         <seg>GSS-APIエラーがサーバで起きたら, サーバは接続の切断の前に次のメッセージを送ってもよい:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In the event that a GSS-API error occurs on the server during context
+   establishment, the server MAY send the following message to inform
+   the client of the details of the error before sending an
+   SSH_MSG_USERAUTH_FAILURE message:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T031333Z" changeid="haruyama">
+        <seg>コンテキストの確立の間にサーバで GSS-APIエラーが起きたら, SSH_MSG_USERAUTH_FAILURE メッセージを送る前に, エラーの詳細をクライアントに示すため次のメッセージをサーバは送ってもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10020,6 +10161,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>ユーザが好む認証 submethod (ソフトウェアないしハードウェア)のコンマ区切りリストだ. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is a site policy decision for the server whether or not to permit
+   authentication using GSS-API mechanisms and/or contexts that do not
+   support per-message integrity protection.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T030627Z" changeid="haruyama">
+        <seg>メッセージ単位の完全性保護をサポートしないGSS-APIメカニズム と/もしくは コンテクスト を利用する認証を許可するかどうかは, サーバのサイトポリシーの問題だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14328,6 +14479,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Some servers may wish to permit user authentication to proceed even
+   when the negotiated GSS-API context does not support per-message
+   integrity protection.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T025332Z" changeid="haruyama">
+        <seg>交渉済みの GSS-API コンテキストが メッセージ単位の完全性保護をサポートしていない場合でも, ユーザ認証を進めることをサーバが許可する場合がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Some sites wish to allow authentication based on the host that the
    user is coming from and the user name on the remote host.</seg>
       </tuv>
@@ -17206,6 +17367,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The contents of the MIC field are obtained by calling GSS_GetMIC()
+   over the following, using the GSS-API context that was just
+   established:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T024801Z" changeid="haruyama">
+        <seg>MIC フィールドの内容は, ちょうど確立したばかりの GSS-API コンテキストを利用して 以下に対して GSS_Get_MIC() を呼び出すことで得られる</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The contents of these bytes could
    reveal information about the key.</seg>
       </tuv>
@@ -19181,6 +19352,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The server MAY fail the
+   otherwise valid gssapi-with-mic authentication if per-message
+   integrity protection is not supported.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T030807Z" changeid="haruyama">
+        <seg>メッセージ単位の完全性保護がサポートされていない場合に, サーバは正当な gssapi-with-mic 認証を失敗させてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The server MAY reply with an SSH_MSG_USERAUTH_SUCCESS message if no
    authentication is required for the user in question.</seg>
       </tuv>
@@ -20460,6 +20641,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This additional protection is available when the negotiated
+   GSS-API context supports per-message integrity protection, as
+   indicated by the setting of the integ_avail flag on successful return
+   from GSS_Init_sec_context() or GSS_Accept_sec_context().</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T024901Z" changeid="haruyama">
+        <seg>交渉済みの GSS-API コンテキストが メッセージ単位の完全性保護とサポートしている場合,  つまり  GSS_Init_sec_context() かGSS_Accept_sec_context() の呼び出しが成功し integ_avail フラグが設定されている場合, この追加の保護が有効になる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This algorithm
    is defined in [FIPS-46-3].</seg>
       </tuv>
@@ -21312,6 +21504,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This message MUST be sent only if GSS_Init_sec_context() returned
+   GSS_S_COMPLETE.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T023300Z" changeid="haruyama">
+        <seg>GSS_Init_sec_context() が GSS_S_COMPLETE を返した場合のみ, このメッセージを送らなければならない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This message can be used as an additional
    protection measure against advanced traffic analysis techniques.</seg>
       </tuv>
@@ -21459,6 +21660,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>この操作を, 一般的な目的のSSHクライアントはサポートする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This packet
+   SHOULD be sent immediately following receipt of the
+   SSH_MSG_USERAUTH_GSSAPI_EXCHANGE_COMPLETE packet.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T031208Z" changeid="haruyama">
+        <seg>SSH_MSG_USERAUTH_GSSAPI_EXCHANGE_COMPLETE パケットを受け取ったら直ちにこのパケットを送る必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21991,6 +22202,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>To protect against this, a final
+   message is sent by the client to indicate it has completed
+   authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T030343Z" changeid="haruyama">
+        <seg>これを防ぐため, クライアントは認証が完了した事を示す最後のメッセージを送る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Traffic Analysis</seg>
       </tuv>
       <tuv lang="JA">
@@ -22506,6 +22727,28 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>When the client's call to GSS_Init_sec_context() returns
+   GSS_S_COMPLETE with the integ_avail flag not set, the client MUST
+   conclude the user authentication exchange by sending the following
+   message:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T030444Z" changeid="haruyama">
+        <seg>GSS_Init_sec_context() のクライアントの呼び出し結果が GSS_S_COMPLETE で integ_avail フラグが設定されていないなら、 クライアントは 次のメッセージを送ってユーザ認証の交換を成立させなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When the client's call to GSS_Init_sec_context() returns
+   GSS_S_COMPLETE with the integ_avail flag set, the client MUST
+   conclude the user authentication exchange by sending the following
+   message:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T030459Z" changeid="haruyama">
+        <seg>GSS_Init_sec_context() のクライアントの呼び出し結果が GSS_S_COMPLETE で integ_avail フラグが設定されているなら、 クライアントは 次のメッセージを送ってユーザ認証の交換を成立させなければらならない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>When the command running at the other end terminates, the following
    message can be sent to return the exit status of the command.</seg>
       </tuv>
@@ -22714,6 +22957,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>ここで定義する一般的な方法を用いると, クライアントは新しい認証メカニズムをサポートするためにコードを変更する必要がなくなる. また, [PAM]のような分離された認証層を用いているなら, サーバもコードの変更が必要ないかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>With this extra level of
+   protection, a &quot;man-in-the-middle&quot; attacker who has convinced a client
+   of his authenticity cannot then relay user authentication messages
+   between the real client and server, thus gaining access to the real
+   server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T022503Z" changeid="haruyama">
+        <seg>この追加のレベルの保護で、 クライアントにその信頼性を確信させた&quot;中間者攻撃&quot;の攻撃者が、 本物のクライアントとサーバの間でユーザ認証メッセージを中継して本物のサーバのアクセス権限を得ようとすることができなくなる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23763,6 +24018,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>to successfully complete the GSS-API method, while the client's last
+   call to GSS_Init_sec_context() fails.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110704T025507Z" changeid="haruyama">
+        <seg>この場合, クライアントの最後のGSS_Init_sec_context() 呼びだしが失敗しても, GSS-API 認証法をサーバが成功で終わらせることができる.</seg>
       </tuv>
     </tu>
     <tu>
