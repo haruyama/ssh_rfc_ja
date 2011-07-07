@@ -1016,6 +1016,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A client receiving this
+   message SHOULD wait for the following SSH_MSG_USERAUTH_FAILURE
+   message before beginning another authentication attempt.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110707T032319Z" changeid="haruyama">
+        <seg>このメッセージを受け取ったクライアントは, 別の認証を試そうとする前に 次の SSH_MSG_USERAUTH_FAILURE を待つ必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A command line interface (CLI) client SHOULD print the name and
    instruction (if non-empty), adding newlines.</seg>
       </tuv>
@@ -1268,6 +1278,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>2番目のサービスの要求は, ユーザ認証が完了してから送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A server
+   receiving this message MUST NOT send an SSH_MSG_USERAUTH_FAILURE in
+   reply, since such a message might otherwise be interpreted by a
+   client as a response to the following authentication sequence.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110707T032513Z" changeid="haruyama">
+        <seg>メッセージを受けとったサーバは, SSH_MSG_USERAUTH_FAILURE を応答として送ってはならない. 次の認証シーケンスに対する応答だとクライアントが解釈してしまう可能性があるからだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2330,6 +2351,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110704T031709Z" changeid="haruyama">
         <seg>このメッセージを送るすべてのサーバは, クライアントが応答として送るすべての SSH_MSG_UNIMPLEMENTED を無視しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Any server sending this message MUST ignore any SSH_MSG_UNIMPLEMENTED
+   sent by the client in response.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110707T032534Z" changeid="haruyama">
+        <seg>このメッセージを送るサーバは, クライアントから応答として送られる SSH_MSG_UNIMPLEMENTED を無視しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5213,6 +5243,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Error Token</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110707T031814Z" changeid="haruyama">
+        <seg>エラートークン</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Error Token ...............................................18
    4.</seg>
       </tuv>
@@ -7194,6 +7232,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>新しいパケットがストリームに追加されるたびに, 攻撃者は次のパケットに利用されるであろうIVを知る. それゆえ, 攻撃者が正しいIVを推測できなければ攻撃はけっして成功しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If a server sends both this message
+   and an SSH_MSG_USERAUTH_GSSAPI_ERROR message, the
+   SSH_MSG_USERAUTH_GSSAPI_ERROR message MUST be sent first, to allow
+   the client to store and/or display the error status before processing
+   the error token.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110707T032954Z" changeid="haruyama">
+        <seg>このメッセージと SSH_MSG_USERAUTH_GSSAPI_ERROR メッセージをサーバが両方送る場合,  SSH_MSG_USERAUTH_GSSAPI_ERROR メッセージを最初に送らなければならない. エラートークンを処理する前にクライアントがエラー状態を保持する かつ/もしくは 表示できるようにするためだ. </seg>
       </tuv>
     </tu>
     <tu>
@@ -9270,6 +9320,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110704T031333Z" changeid="haruyama">
         <seg>コンテキストの確立の間にサーバで GSS-APIエラーが起きたら, SSH_MSG_USERAUTH_FAILURE メッセージを送る前に, エラーの詳細をクライアントに示すため次のメッセージをサーバは送ってもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In the event that, during context establishment, a client's call to
+   GSS_Init_sec_context() or a server's call to GSS_Accept_sec_context()
+   returns a token along with an error status, the resulting &quot;error
+   token&quot; SHOULD be sent to the peer using the following message:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110707T032011Z" changeid="haruyama">
+        <seg>コンテキスト確立の間にGSS_Init_sec_context() のクライアントでの呼び出しか GSS_Accept_sec_context() のサーバでの呼び出しが, エラー状態付きのトークンを返した場合, 結果の&quot;エラートークン&quot;を 次のメッセージを用いて相手に伝える必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21547,6 +21608,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This message implies that the authentication is about to fail, and is
+   defined to allow the error token to be communicated without losing
+   synchronization.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110707T032108Z" changeid="haruyama">
+        <seg>このメッセージは, 認証が失敗しようとしていることを意味している. また, 同期を失なうことなしにエラートークンを通信できるよう定義されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This message is sent with the old keys and algorithms.</seg>
       </tuv>
       <tuv lang="JA">
@@ -22601,6 +22672,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>When a client sends this message, it MUST be followed by a new
+   authentication request or by terminating the connection.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110707T032355Z" changeid="haruyama">
+        <seg>クライアントがこのメッセージを送る場合は, 次に新しい認証の要求か接続の切断をしなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>When a connection comes to a locally forwarded TCP/IP port, the
    following packet is sent to the other side.</seg>
       </tuv>
@@ -22625,6 +22705,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>チャンネルにもうこれ以上データを送らないなら, SSH_MSG_CHANNEL_EOF を送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When a server sends this message, it MUST be followed by an
+   SSH_MSG_USERAUTH_FAILURE message, which is to be interpreted as
+   applying to the same authentication request.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110707T032229Z" changeid="haruyama">
+        <seg>このメッセージをサーバが送るとき,  同じ認証リクエストに対して適用されるように解釈されるために, SSH_MSG_USERAUTH_FAILURE を続けて送らなければならない.</seg>
       </tuv>
     </tu>
     <tu>
