@@ -1330,8 +1330,8 @@
       <tuv lang="EN-US">
         <seg>A string containing a comma-separated list of names.</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>カンマで区切られた name のリストを含む string</seg>
+      <tuv lang="JA" changedate="20110707T074435Z" changeid="haruyama">
+        <seg>カンマで区切られた name のリストを含む string. </seg>
       </tuv>
     </tu>
     <tu>
@@ -2299,6 +2299,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Any context established during key exchange for the
+   purpose of rekeying MUST NOT be used with this method.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T024237Z" changeid="haruyama">
+        <seg>鍵の再生成目的での鍵交換で確立したコンテキストは, この方法に利用してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Any major status code other than GSS_S_COMPLETE or
    GSS_S_CONTINUE_NEEDED SHOULD be a failure.</seg>
       </tuv>
@@ -2419,8 +2428,8 @@
       <tuv lang="EN-US">
         <seg>Arbitrary length binary string.</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>任意の長さのバイナリ文字列</seg>
+      <tuv lang="JA" changedate="20110707T074356Z" changeid="haruyama">
+        <seg>任意の長さのバイナリ文字列. </seg>
       </tuv>
     </tu>
     <tu>
@@ -2893,6 +2902,14 @@
       <tuv lang="JA">
         <seg>認証の要求......................................4
       5.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Authentication Using GSS-API Key Exchange</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T023846Z" changeid="haruyama">
+        <seg>GSS-API 鍵交換を利用する認証</seg>
       </tuv>
     </tu>
     <tu>
@@ -7236,6 +7253,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If a server receives a request for this method when initial key
+   exchange was not performed using a GSS-API-based key exchange method
+   defined in accordance with Section 2, it MUST return
+   SSH_MSG_USERAUTH_FAILURE.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T035449Z" changeid="haruyama">
+        <seg>2 節に従って定義された GSS-API ベースの鍵交換法を用いずに最初の鍵交換が行なわれた際に この認証法の要求をサーバが受け取ったら, SSH_MSG_USERAUTH_FAILURE を返さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If a server sends both this message
    and an SSH_MSG_USERAUTH_GSSAPI_ERROR message, the
    SSH_MSG_USERAUTH_GSSAPI_ERROR message MUST be sent first, to allow
@@ -7632,6 +7660,27 @@
       </tuv>
       <tuv lang="JA">
         <seg>MACのアルゴリズムに脆弱性があったり弱い場合, 攻撃者は既知のMACの値を生成する入力を特定できるかもしれない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the MIC
+   is not valid, the user authentication fails, and the server MUST
+   return SSH_MSG_USERAUTH_FAILURE.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T035737Z" changeid="haruyama">
+        <seg>MIC が正当でなければ, ユーザ認証は失敗し, SSH_MSG_USERAUTH_FAILURE をサーバは返さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the MIC is valid and the server is satisfied as to the user's
+   credentials, it MAY return either SSH_MSG_USERAUTH_SUCCESS or
+   SSH_MSG_USERAUTH_FAILURE with the partial success flag set, depending
+   on whether additional authentications are needed.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T035905Z" changeid="haruyama">
+        <seg>MIC が正当でサーバがユーザの認証情報に満足したら, 追加の認証が必要ない場合はSSH_MSG_USERAUTH_SUCCESS を返す. 追加の認証が必要な場合は, partial success フラグを設定した SSH_MSG_USERAUTH_FAILURE を返す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9863,6 +9912,17 @@
     <tu>
       <tuv lang="EN-US">
         <seg>It
+   MUST NOT try this method if initial key exchange was not performed
+   using a GSS-API-based key exchange method defined in accordance with
+   Section 2.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T035325Z" changeid="haruyama">
+        <seg>2 節に従って定義された GSS-API ベースの鍵交換法を用いずに最初の鍵交換が行なわれたら, クライアントはこの認証法を試してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It
    allows for the use of an extensible variety of symmetric cipher
    algorithms to provide confidentiality for data in transit.</seg>
       </tuv>
@@ -9887,6 +9947,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>この仕様の将来のバージョンでは, 削除されるだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It MUST NOT include this method if the initial
+   key exchange was not performed using a GSS-API-based key exchange
+   method defined in accordance with Section 2.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T035310Z" changeid="haruyama">
+        <seg>2 節に従って定義された GSS-API ベースの鍵交換法を用いずに最初の鍵交換が行なわれたら, この認証法をサーバは含めてはならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15007,8 +15077,8 @@
         <seg>Terminating null
       characters are not used.</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>null 文字による終端は利用されない.</seg>
+      <tuv lang="JA" changedate="20110707T074425Z" changeid="haruyama">
+        <seg>null 文字による終端は行なわない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15113,6 +15183,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>関連する切断メッセージの 'description' は, 切断の理由を示す人間が解読できるメッセージだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   client SHOULD NOT try this method more than once per session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T032346Z" changeid="haruyama">
+        <seg>クライアントは1セッションに2回以上この方法を試さないほうがよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16207,6 +16286,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The GSS-API context used with this method
+   is always that established during an initial GSS-API-based key
+   exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T024209Z" changeid="haruyama">
+        <seg>この方法で利用される GSS-API コンテキストは, 最初の GSS-API ベース鍵交換で確立されたものが常に利用される. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The GSS_GetMIC call MUST be applied over H, not the original data.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110625T005607Z" changeid="haruyama">
@@ -16931,6 +17020,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The authentication method name for this protocol is &quot;gssapi-keyex&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T024017Z" changeid="haruyama">
+        <seg>このプロトコルの認証法名は &quot;gssapi-keyex&quot; だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The authentication method name for this protocol is &quot;gssapi-with-
    mic&quot;.</seg>
       </tuv>
@@ -17200,6 +17297,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client SHOULD attempt to use this method if it is advertised by
+   the server, initial key exchange was performed using a GSS-API-based
+   key exchange method, and this method has not already been tried.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T032316Z" changeid="haruyama">
+        <seg>サーバからのこの認証法が告示され, 最初の鍵交換がGSS-APIベースの鍵交換法を用いて行なわれ, この認証法を試していない場合, クライアントは, この認証を試す必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client SHOULD ignore pty requests.</seg>
       </tuv>
       <tuv lang="JA">
@@ -17423,6 +17530,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>この場合でも接続は受動的な盗聴に対する保護を提供するが, 能動的な中間者攻撃に対しては脆弱になる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The contents of the MIC field are obtained by calling GSS_GetMIC over
+   the following, using the GSS-API context that was established during
+   initial key exchange:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T035547Z" changeid="haruyama">
+        <seg>MIC フィールドの内容は, 確立した GSS-API コンテキストを利用して 以下に対して GSS_GetMIC を呼び出すことで得られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19553,6 +19670,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The server SHOULD include this user authentication method in the list
+   of methods that can continue (in an SSH_MSG_USERAUTH_FAILURE) if the
+   initial key exchange was performed using a GSS-API-based key exchange
+   method and provides information about the user's identity that is
+   useful to the server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T032105Z" changeid="haruyama">
+        <seg>GSS-API ベースの鍵交換法を用いて最初の鍵交換が行なわれ, 鍵交換によりユーザの識別情報がサーバで利用可能である場合, (SSH_MSG_USERAUTH_FAILURE での) 継続可能な認証法リストに このユーザ認証法を含める必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The server SHOULD take into consideration that some clients may not
    be able to properly display a long name or prompt field (see next
    section), and limit the lengths of those fields if possible.</seg>
@@ -20595,8 +20724,8 @@
       (number of bytes that follow) and zero (= empty string) or more
       bytes that are the value of the string.</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>stringは, その長さ(値のbyte数)のuint32とその値のbyte列によって格納される. 空のstringの場合は, 値がない</seg>
+      <tuv lang="JA" changedate="20110707T074417Z" changeid="haruyama">
+        <seg>stringは, その長さ(値のbyte数)のuint32とその値のbyte列で格納される. 空のstringの場合は, 値がない</seg>
       </tuv>
     </tu>
     <tu>
@@ -21679,6 +21808,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This method is defined as a single message:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T035509Z" changeid="haruyama">
+        <seg>この認証法は, 単一のメッセージで定義される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This method is suitable for
    interactive authentication methods that do not need any special
    software support on the client side.</seg>
@@ -21689,11 +21826,31 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This method may be used only if the initial key exchange was
+   performed using a GSS-API-based key exchange method defined in
+   accordance with Section 2.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T024128Z" changeid="haruyama">
+        <seg>2 節に従って定義された GSS-API ベースの鍵交換法を用いて最初の鍵交換が行なわれた場合にのみ, この方法は利用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This method name gives a hashing algorithm that is
    to be used for the Hashed Message Authentication Code (HMAC) below.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110411T132756Z" changeid="haruyama">
         <seg>この名前は, 以下のHMACで用いられるハッシュアルゴリズムを与える.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This method performs user
+   authentication by making use of an existing GSS-API context
+   established during key exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T024005Z" changeid="haruyama">
+        <seg>この方法は, 鍵交換で確立された既存の GSS-API コンテキストを利用してユーザ認証を行なう.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21954,6 +22111,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110628T021047Z" changeid="haruyama">
         <seg>この節では， [GROUP-EXCHANGE] で記述されたものをベースにした方法を用いて利用される群を交渉して決められるようにするための，  汎用GSS-APIで認証される Diffie-Hellman 鍵交換への変更を記述する．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This section describes a user authentication method building on the
+   framework described in [SSH-USERAUTH].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T023930Z" changeid="haruyama">
+        <seg>この節では, [SSH-USERAUTH] で記述されたフレームワーク上に構築するユーザ認証法を記述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22412,6 +22578,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110624T042331Z" changeid="haruyama">
         <seg>この SSH_MSG_KEXGSS_INIT メッセージを受けとったら, サーバは, ホスト鍵をクライアントに知らせるために, 他のメッセージより前に次のメッセージを送ってもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Upon receiving this message when initial key exchange was performed
+   using a GSS-API-based key exchange method, the server uses
+   GSS_VerifyMIC() to verify that the MIC received is valid.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110712T035710Z" changeid="haruyama">
+        <seg>GSS-API ベースの鍵交換法を用いて最初の鍵交換が行なわれた場合にこのメッセージを受け取ったら, 受け取った MIC が正当化検証するために GSS_VerifyMIC() をサーバは利用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23971,9 +24147,9 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
         <seg>payload
          The useful contents of the packet.</seg>
       </tuv>
-      <tuv lang="JA">
+      <tuv lang="JA" changedate="20110708T073011Z" changeid="haruyama">
         <seg>payload
-         パケットの有用な中身</seg>
+         パケットの有用な中身.</seg>
       </tuv>
     </tu>
     <tu>

@@ -609,38 +609,20 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
    このメッセージを受け取ったクライアントは エラーの詳細をログに記録したり また/もしくは ユーザに詳細をレポートしたりしてもよい.  このメッセージを送るすべてのサーバは, クライアントが応答として送るすべての SSH_MSG_UNIMPLEMENTED を無視しなければならない.
 
-3.9.  Error Token
+3.9.  エラートークン
 
-   In the event that, during context establishment, a client's call to
-   GSS_Init_sec_context() or a server's call to GSS_Accept_sec_context()
-   returns a token along with an error status, the resulting "error
-   token" SHOULD be sent to the peer using the following message:
+   コンテキスト確立の間にGSS_Init_sec_context() のクライアントでの呼び出しか GSS_Accept_sec_context() のサーバでの呼び出しが, エラー状態付きのトークンを返した場合, 結果の"エラートークン"を 次のメッセージを用いて相手に伝える必要がある.
 
            byte        SSH_MSG_USERAUTH_GSSAPI_ERRTOK
            string      error token
 
-   This message implies that the authentication is about to fail, and is
-   defined to allow the error token to be communicated without losing
-   synchronization.
+   このメッセージは, 認証が失敗しようとしていることを意味している. また, 同期を失なうことなしにエラートークンを通信できるよう定義されている.
 
-   When a server sends this message, it MUST be followed by an
-   SSH_MSG_USERAUTH_FAILURE message, which is to be interpreted as
-   applying to the same authentication request.  A client receiving this
-   message SHOULD wait for the following SSH_MSG_USERAUTH_FAILURE
-   message before beginning another authentication attempt.
+   このメッセージをサーバが送るとき,  同じ認証リクエストに対して適用されるように解釈されるために, SSH_MSG_USERAUTH_FAILURE を続けて送らなければならない.  このメッセージを受け取ったクライアントは, 別の認証を試そうとする前に 次の SSH_MSG_USERAUTH_FAILURE を待つ必要がある.
 
-   When a client sends this message, it MUST be followed by a new
-   authentication request or by terminating the connection.  A server
-   receiving this message MUST NOT send an SSH_MSG_USERAUTH_FAILURE in
-   reply, since such a message might otherwise be interpreted by a
-   client as a response to the following authentication sequence.
+   クライアントがこのメッセージを送る場合は, 次に新しい認証の要求か接続の切断をしなければならない.  メッセージを受けとったサーバは, SSH_MSG_USERAUTH_FAILURE を応答として送ってはならない. 次の認証シーケンスに対する応答だとクライアントが解釈してしまう可能性があるからだ.
 
-   Any server sending this message MUST ignore any SSH_MSG_UNIMPLEMENTED
-   sent by the client in response.  If a server sends both this message
-   and an SSH_MSG_USERAUTH_GSSAPI_ERROR message, the
-   SSH_MSG_USERAUTH_GSSAPI_ERROR message MUST be sent first, to allow
-   the client to store and/or display the error status before processing
-   the error token.
+   このメッセージを送るサーバは, クライアントから応答として送られる SSH_MSG_UNIMPLEMENTED を無視しなければならない.  このメッセージと SSH_MSG_USERAUTH_GSSAPI_ERROR メッセージをサーバが両方送る場合,  SSH_MSG_USERAUTH_GSSAPI_ERROR メッセージを最初に送らなければならない. エラートークンを処理する前にクライアントがエラー状態を保持する かつ/もしくは 表示できるようにするためだ. 
 
 
 
