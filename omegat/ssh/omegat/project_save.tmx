@@ -2308,6 +2308,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Any implementation supporting at least one key exchange method that
+   conforms to Section 2 MUST also support the &quot;null&quot; host key
+   algorithm.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T051405Z" changeid="haruyama">
+        <seg>2 節に従う 鍵交換メソッドを1つでもサポートする実装は, &quot;null&quot; ホスト鍵アルゴリズムもサポートしなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Any major status code other than GSS_S_COMPLETE or
    GSS_S_CONTINUE_NEEDED SHOULD be a failure.</seg>
       </tuv>
@@ -5772,6 +5782,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For example, it
+   can be used when the administrator has decided as a matter of policy
+   to require that all key exchanges be authenticated using Kerberos
+   [KRB5], and thus the only permitted key exchange method is the
+   GSS-API-authenticated Diffie-Hellman exchange described above, with
+   Kerberos V5 as the underlying GSS-API mechanism.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T050528Z" changeid="haruyama">
+        <seg>例えば, すべての鍵交換を Kerberos [KRB5]を用いて認証する, つまり 基底の GSS-API メカニズム として Kerberos V5 を用いる 前述の GSS-API で認証された Diffie-Hellman 交換のみを 鍵交換法として許可すると管理者がポリシーを決定した場合に, このアルゴリズムを用いることができる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For example, local policy
    might allow a user to access files on the server, but not start an
    interactive shell.</seg>
@@ -9212,6 +9235,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In such a
+   configuration, the server implementation supports the &quot;ssh-dss&quot; key
+   algorithm (as required by [SSH-TRANSPORT]), but could be prohibited
+   by configuration from using it.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T050638Z" changeid="haruyama">
+        <seg>このような設定では, サーバの実装は &quot;ssh-dss&quot; 鍵アルゴリズムをサポートしている ([SSH-TRANSPORT] で要求されている). しかし, 設定で利用を禁止できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In such cases, it is possible for the server</seg>
       </tuv>
       <tuv lang="JA" changedate="20110704T025513Z" changeid="haruyama">
@@ -9521,6 +9555,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>このシナリオでは, DNSから返される指紋による鍵の検証の前にローカルなデータベースに対するホスト鍵の検証を実装する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In this situation, the server needs
+   some key exchange algorithm to advertise; the &quot;null&quot; algorithm fills
+   this purpose.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T051055Z" changeid="haruyama">
+        <seg>このときサーバはクライアントに告知する鍵交換アルゴリズムが必要だ. &quot;null&quot; アルゴリムはこの目的を満す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12089,6 +12133,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Note that the use of the &quot;null&quot; algorithm in this way means that the
+   server will not be able to interoperate with clients that do not
+   support this algorithm.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T050929Z" changeid="haruyama">
+        <seg>注意: このような&quot;null&quot; アルゴリズムの利用は, このアルゴリズムをサポートしないクライアントとサーバが相互運用できないことを意味する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Note that the value
    for the 'data_type_code' is given in decimal format for readability,
    but the values are actually uint32 values.</seg>
@@ -12204,11 +12258,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Null Host Key Algorithm</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T050813Z" changeid="haruyama">
+        <seg>null ホスト鍵アルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Null Host Key Algorithm ........................................20
    6.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110621T012912Z" changeid="haruyama">
-        <seg>ヌルホスト鍵アルゴリズム ........................................20
+      <tuv lang="JA" changedate="20110714T050826Z" changeid="haruyama">
+        <seg>null ホスト鍵アルゴリズム ........................................20
    6.</seg>
       </tuv>
     </tu>
@@ -14204,6 +14266,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Servers MUST NOT advertise the &quot;null&quot; host key algorithm
+   unless it is the only algorithm advertised.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T051526Z" changeid="haruyama">
+        <seg>&quot;null&quot; ホスト鍵アルゴリズムがクライアントに告知する唯一のアルゴリズムでなければ, このアルゴリズムをサーバは告知してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Servers and clients SHOULD support groups with a modulus length of k
    bits, where 1024 &lt;= k &lt;= 8192.</seg>
       </tuv>
@@ -15680,6 +15751,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>&quot;none&quot; は予約されている. しかし, サポートしている認証法として示してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The &quot;null&quot; host key algorithm has no associated host key material and
+   provides neither signature nor encryption algorithms.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T050810Z" changeid="haruyama">
+        <seg>&quot;null&quot; ホスト鍵アルゴリズムは, 関連するホスト鍵素材を持たず, 署名や暗号化のアルゴリムを提供しない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18465,6 +18545,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The key exchange methods described in Section 2 are
+   examples of such methods.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T050149Z" changeid="haruyama">
+        <seg>2 節で記述した鍵交換法が, このような方法の例だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The key exchange produces two values: a shared secret K, and an
    exchange hash H.</seg>
       </tuv>
@@ -20858,6 +20947,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This algorithm is used when, as a matter of configuration, the host
+   does not have or does not wish to use a public key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T050231Z" changeid="haruyama">
+        <seg>設定の問題として, ホストが公開鍵を持っていないか公開鍵の利用を望まない場合に, このアルゴリムは利用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This algorithm number octet describes the algorithm of the public
    key.</seg>
       </tuv>
@@ -21519,6 +21617,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110411T133813Z" changeid="haruyama">
         <seg>これは2つの一時的鍵を用いるより効率的で, セキュリティに不利に作用しない(これは, [LMQSV98] の 6.1節の one-passプロトコルに類似している.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This is not a significant problem, since in
+   the configuration described, it will also be unable to interoperate
+   with implementations that do not support the GSS-API-authenticated
+   key exchange and Kerberos.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T051030Z" changeid="haruyama">
+        <seg>これは重大な問題ではない. 前述した設定では, GSS-API で認証された 鍵交換と Kerberos をサポートしていない実装と相互運用できないからだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22271,6 +22380,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110621T023608Z" changeid="haruyama">
         <seg>このため, replay_det_req_flag と sequence_req_flag はこのプロセスでは設定する必要がない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Thus, it can
+   be used only with key exchange methods that do not require any
+   public-key operations and do not require the use of host public key
+   material.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T050133Z" changeid="haruyama">
+        <seg>それゆえ, 公開鍵操作が必要ではない鍵交換法とホスト鍵素材の利用が必要でない鍵交換法とともにのみ利用できる.</seg>
       </tuv>
     </tu>
     <tu>
