@@ -3093,6 +3093,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Because the GSS-API mechanism uses the targ_name to authenticate the
+   server's identity, it is important that it be determined in a secure
+   fashion.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T053650Z" changeid="haruyama">
+        <seg>GSS-APIメカニズムは サーバの識別情報の認証に targ_name を用いるので, 安全な方法で決定することは重要だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Because the protocol is extensible,
    future extensions to the protocol may provide better mechanisms for
    dealing with the need to know the server's host key before
@@ -3394,6 +3404,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Channel Bindings</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T060727Z" changeid="haruyama">
+        <seg>チャンネルの束縛</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Channel Bindings ..........................................22
       7.3.</seg>
       </tuv>
@@ -3599,6 +3617,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>プロトコル 2.0 を用いるクライアントは, 'protoversion' を &quot;2.0&quot; とできなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Clients MAY make use of a mapping provided by local configuration or
+   use other secure means to determine the targ_name to be used.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T060436Z" changeid="haruyama">
+        <seg>クライアントは, ローカルな設定で提供されるマッピングを利用したり, 用いられる targ_name を決定する他の安全な方法を利用したりしてよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5609,6 +5636,18 @@
     <tu>
       <tuv lang="EN-US">
         <seg>For
+   example, one should not rely on an unprotected DNS record to map a
+   host alias to the primary name of a server, or an IP address to a
+   hostname, since an attacker can modify the mapping and impersonate
+   the server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T060243Z" changeid="haruyama">
+        <seg>例えば, 攻撃者がマッピングを変更したりサーバになりすますことができるので, ホストエイリアスをサーバのプライマリ名にマップしたりIPアドレスをホスト名にマップする保護されていない DNS レコードに依存してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For
    example, the padding, SSH_MSG_IGNORE messages, and several other
    places in the protocol can be used to pass covert information, and
    the recipient has no reliable way of verifying whether such
@@ -5979,6 +6018,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For this purpose,
+   the GSS-API mechanism-independent name form for host-based services
+   is used, as described in Section 4.1 of [GSSAPI].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T053136Z" changeid="haruyama">
+        <seg>この目的のため, ホストベースサービスでの GSS-API メカニズムに独立な名前の形式が用いられる. [GSSAPI] の 4.1 節に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For this reason, it is RECOMMENDED that debug messages be
    initially disabled at the time of deployment and require an active
    decision by an administrator to allow them to be enabled.</seg>
@@ -6229,6 +6278,14 @@
       <tuv lang="JA" changedate="20110621T012451Z" changeid="haruyama">
         <seg>GSS-API 認証の概要 ...........................13
       3.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>GSS-API Considerations</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T052926Z" changeid="haruyama">
+        <seg>GSS-API の考察</seg>
       </tuv>
     </tu>
     <tu>
@@ -7190,6 +7247,16 @@
       <tuv lang="JA">
         <seg>なんらかの BREAK が実行されたら, SSH_MSG_CHANNEL_SUCCESS が送られなければならない.
 </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If a
+   client system is unable to securely determine which targ_name to use,
+   then it SHOULD NOT use this mechanism.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T060511Z" changeid="haruyama">
+        <seg>クライアントシステムが, 利用する targ_name を安全に決定できないなら, このこのアルゴリズムを利用しないほうがよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8583,6 +8650,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Implementations of mechanisms conforming to this document MUST NOT
+   use the results of insecure DNS queries to construct the targ_name.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T060323Z" changeid="haruyama">
+        <seg>この文書に従うメカニズムの実装者は, targ_name の構築に安全でないDNSクエリの結果を用いてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Implementations should only allow forwarding privileged ports if the
    user has been authenticated as a privileged user.</seg>
       </tuv>
@@ -9095,6 +9171,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In order to establish a GSS-API security context, the SSH client
+   needs to determine the appropriate targ_name to use in identifying
+   the server when calling GSS_Init_sec_context().</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T053610Z" changeid="haruyama">
+        <seg>GSS-API セキュリティコンテキストを確立するために,  GSS_Init_sec_context() を呼ぶ際にサーバの識別に用いる適切な targ_name を クライアントは決定する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In order to facilitate key re-exchange after the user's GSS-API
    credentials have expired, client implementations SHOULD store host
    keys received via SSH_MSG_KEXGSS_HOSTKEY for the duration of the
@@ -9181,6 +9267,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>特に, 鍵交換の際に交渉されたリストに縛られなくてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In particular, the targ_name to pass to GSS_Init_sec_context() is
+   obtained by calling GSS_Import_name() with an input_name_type of
+   GSS_C_NT_HOSTBASED_SERVICE, and an input_name_string consisting of
+   the string &quot;host@&quot; concatenated with the hostname of the SSH server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T053512Z" changeid="haruyama">
+        <seg>具体的には, GSS_Init_sec_context() に渡す targ_name は, input_name_type を GSS_C_NT_HOSTBASED_SERVICE に  input_name_string  を &quot;host@&quot; にSSHサーバのホスト名を連結した文字列にしてGSS_Import_name() を呼び出すことで得られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11642,6 +11739,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Naming Conventions</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T052920Z" changeid="haruyama">
+        <seg>命名規則</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Naming Conventions ........................................22
       7.2.</seg>
       </tuv>
@@ -12421,6 +12526,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>インタラクティブなセッションでの文字セットは大きな問題だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>One common way to do this is to construct the targ_name
+   from the hostname as typed by the user; unfortunately, because some
+   GSS-API mechanisms do not canonicalize hostnames, it is likely that
+   this technique will fail if the user has not typed a fully-qualified,
+   canonical hostname.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T053940Z" changeid="haruyama">
+        <seg>これを行なう一般的な方法として, ユーザが入力した ホスト名から  targ_name を構築するものがある. 残念ながら, GSS-API メカニズムには ホスト名を正規化しないものがあるので, ユーザが完全に正規化されたホスト名を入力しない場合にこのテクニックが失敗する場合がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21101,6 +21218,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document
+   does not specify any standard data to be used as channel bindings,
+   and the use of network addresses as channel bindings may break SSH in
+   environments where it is most useful.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T060934Z" changeid="haruyama">
+        <seg>チャンネル束縛として用いられる標準データをこの文書は指定しない. また, チャンネル束縛としてネットワークアドレスを利用すると, それがもっとも有用な環境において, SSHを壊してしまうかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document adds the following elliptic curve cryptography
    algorithms to the Secure Shell arsenal: Elliptic Curve Diffie-Hellman
    (ECDH) and Elliptic Curve Digital Signature Algorithm (ECDSA), as
@@ -21329,6 +21457,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110425T052442Z" changeid="haruyama">
         <seg>この文書はセキュアシェルプロトコルに新しい公開鍵アルゴリズムと新しい同意方法を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document recommends that channel bindings SHOULD NOT be
+   specified in the calls during context establishment.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T060807Z" changeid="haruyama">
+        <seg>コンテキストの確立の間呼出でチャンネルの束縛を指定しないほうがよいと, この文書は推奨する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22425,6 +22562,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110621T023608Z" changeid="haruyama">
         <seg>このため, replay_det_req_flag と sequence_req_flag はこのプロセスでは設定する必要がない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Thus, implementers may wish to use other
+   methods, but should take care to ensure they are secure.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110714T054051Z" changeid="haruyama">
+        <seg>それゆえ, 実装者は, 別の方法を使いたいと考えるかもしれない. このときその方法が安全なことを保証するよう注意しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
