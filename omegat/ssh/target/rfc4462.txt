@@ -68,7 +68,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
       3.8. エラー状態 ..............................................17
       3.9. エラートークン ...............................................18
    4. GSS-API 鍵交換を利用する認証 ......................19
-   5. ヌルホスト鍵アルゴリズム ........................................20
+   5. null ホスト鍵アルゴリズム ........................................20
    6. メッセージ番号のまとめ .....................................21
    7. GSS-API の考察 .........................................22
       7.1. 命名規則 ........................................22
@@ -631,44 +631,21 @@ Hutzelman, et al.           Standards Track                    [Page 18]
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
-4.  Authentication Using GSS-API Key Exchange
+4.  GSS-API 鍵交換を利用する認証
 
-   This section describes a user authentication method building on the
-   framework described in [SSH-USERAUTH].  This method performs user
-   authentication by making use of an existing GSS-API context
-   established during key exchange.
+   この節では, [SSH-USERAUTH] で記述されたフレームワーク上に構築するユーザ認証法を記述する.  この方法は, 鍵交換で確立された既存の GSS-API コンテキストを利用してユーザ認証を行なう.
 
-   The authentication method name for this protocol is "gssapi-keyex".
+   このプロトコルの認証法名は "gssapi-keyex" だ.
 
-   This method may be used only if the initial key exchange was
-   performed using a GSS-API-based key exchange method defined in
-   accordance with Section 2.  The GSS-API context used with this method
-   is always that established during an initial GSS-API-based key
-   exchange.  Any context established during key exchange for the
-   purpose of rekeying MUST NOT be used with this method.
+   2 節に従って定義された GSS-API ベースの鍵交換法を用いて最初の鍵交換が行なわれた場合にのみ, この方法は利用できる.  この方法で利用される GSS-API コンテキストは, 最初の GSS-API ベース鍵交換で確立されたものが常に利用される. 鍵の再生成目的での鍵交換で確立したコンテキストは, この方法に利用してはならない.
 
-   The server SHOULD include this user authentication method in the list
-   of methods that can continue (in an SSH_MSG_USERAUTH_FAILURE) if the
-   initial key exchange was performed using a GSS-API-based key exchange
-   method and provides information about the user's identity that is
-   useful to the server.  It MUST NOT include this method if the initial
-   key exchange was not performed using a GSS-API-based key exchange
-   method defined in accordance with Section 2.
+   GSS-API ベースの鍵交換法を用いて最初の鍵交換が行なわれ, 鍵交換によりユーザの識別情報がサーバで利用可能である場合, (SSH_MSG_USERAUTH_FAILURE での) 継続可能な認証法リストに このユーザ認証法を含める必要がある.  2 節に従って定義された GSS-API ベースの鍵交換法を用いずに最初の鍵交換が行なわれたら, この認証法をサーバは含めてはならない.
 
-   The client SHOULD attempt to use this method if it is advertised by
-   the server, initial key exchange was performed using a GSS-API-based
-   key exchange method, and this method has not already been tried.  The
-   client SHOULD NOT try this method more than once per session.  It
-   MUST NOT try this method if initial key exchange was not performed
-   using a GSS-API-based key exchange method defined in accordance with
-   Section 2.
+   サーバからのこの認証法が告示され, 最初の鍵交換がGSS-APIベースの鍵交換法を用いて行なわれ, この認証法を試していない場合, クライアントは, この認証を試す必要がある.  クライアントは1セッションに2回以上この方法を試さないほうがよい.  2 節に従って定義された GSS-API ベースの鍵交換法を用いずに最初の鍵交換が行なわれたら, クライアントはこの認証法を試してはならない.
 
-   If a server receives a request for this method when initial key
-   exchange was not performed using a GSS-API-based key exchange method
-   defined in accordance with Section 2, it MUST return
-   SSH_MSG_USERAUTH_FAILURE.
+   2 節に従って定義された GSS-API ベースの鍵交換法を用いずに最初の鍵交換が行なわれた際に この認証法の要求をサーバが受け取ったら, SSH_MSG_USERAUTH_FAILURE を返さなければならない.
 
-   This method is defined as a single message:
+   この認証法は, 単一のメッセージで定義される.
 
            byte        SSH_MSG_USERAUTH_REQUEST
            string      user name
@@ -676,9 +653,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
            string      "gssapi-keyex"
            string      MIC
 
-   The contents of the MIC field are obtained by calling GSS_GetMIC over
-   the following, using the GSS-API context that was established during
-   initial key exchange:
+   MIC フィールドの内容は, 確立した GSS-API コンテキストを利用して 以下に対して GSS_GetMIC を呼び出すことで得られる.
 
 
 
@@ -693,45 +668,17 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
            string      service
            string      "gssapi-keyex"
 
-   Upon receiving this message when initial key exchange was performed
-   using a GSS-API-based key exchange method, the server uses
-   GSS_VerifyMIC() to verify that the MIC received is valid.  If the MIC
-   is not valid, the user authentication fails, and the server MUST
-   return SSH_MSG_USERAUTH_FAILURE.
+   GSS-API ベースの鍵交換法を用いて最初の鍵交換が行なわれた場合にこのメッセージを受け取ったら, 受け取った MIC が正当化検証するために GSS_VerifyMIC() をサーバは利用する.  MIC が正当でなければ, ユーザ認証は失敗し, SSH_MSG_USERAUTH_FAILURE をサーバは返さなければならない.
 
-   If the MIC is valid and the server is satisfied as to the user's
-   credentials, it MAY return either SSH_MSG_USERAUTH_SUCCESS or
-   SSH_MSG_USERAUTH_FAILURE with the partial success flag set, depending
-   on whether additional authentications are needed.
+   MIC が正当でサーバがユーザの認証情報に満足したら, 追加の認証が必要ない場合はSSH_MSG_USERAUTH_SUCCESS を返す. 追加の認証が必要な場合は, partial success フラグを設定した SSH_MSG_USERAUTH_FAILURE を返す.
 
-5.  Null Host Key Algorithm
+5.  null ホスト鍵アルゴリズム
 
-   The "null" host key algorithm has no associated host key material and
-   provides neither signature nor encryption algorithms.  Thus, it can
-   be used only with key exchange methods that do not require any
-   public-key operations and do not require the use of host public key
-   material.  The key exchange methods described in Section 2 are
-   examples of such methods.
+   "null" ホスト鍵アルゴリズムは, 関連するホスト鍵素材を持たず, 署名や暗号化のアルゴリムを提供しない.  それゆえ, 公開鍵操作が必要ではない鍵交換法とホスト鍵素材の利用が必要でない鍵交換法とともにのみ利用できる.  2 節で記述した鍵交換法が, このような方法の例だ.
 
-   This algorithm is used when, as a matter of configuration, the host
-   does not have or does not wish to use a public key.  For example, it
-   can be used when the administrator has decided as a matter of policy
-   to require that all key exchanges be authenticated using Kerberos
-   [KRB5], and thus the only permitted key exchange method is the
-   GSS-API-authenticated Diffie-Hellman exchange described above, with
-   Kerberos V5 as the underlying GSS-API mechanism.  In such a
-   configuration, the server implementation supports the "ssh-dss" key
-   algorithm (as required by [SSH-TRANSPORT]), but could be prohibited
-   by configuration from using it.  In this situation, the server needs
-   some key exchange algorithm to advertise; the "null" algorithm fills
-   this purpose.
+   設定の問題として, ホストが公開鍵を持っていないか公開鍵の利用を望まない場合に, このアルゴリムは利用される.  例えば, すべての鍵交換を Kerberos [KRB5]を用いて認証する, つまり 基底の GSS-API メカニズム として Kerberos V5 を用いる 前述の GSS-API で認証された Diffie-Hellman 交換のみを 鍵交換法として許可すると管理者がポリシーを決定した場合に, このアルゴリズムを用いることができる.  このような設定では, サーバの実装は "ssh-dss" 鍵アルゴリズムをサポートしている ([SSH-TRANSPORT] で要求されている). しかし, 設定で利用を禁止できる.  このときサーバはクライアントに告知する鍵交換アルゴリズムが必要だ. "null" アルゴリムはこの目的を満す.
 
-   Note that the use of the "null" algorithm in this way means that the
-   server will not be able to interoperate with clients that do not
-   support this algorithm.  This is not a significant problem, since in
-   the configuration described, it will also be unable to interoperate
-   with implementations that do not support the GSS-API-authenticated
-   key exchange and Kerberos.
+   注意: このような"null" アルゴリズムの利用は, このアルゴリズムをサポートしないクライアントとサーバが相互運用できないことを意味する.  これは重大な問題ではない. 前述した設定では, GSS-API で認証された 鍵交換と Kerberos をサポートしていない実装と相互運用できないからだ.
 
 
 
@@ -743,15 +690,11 @@ Hutzelman, et al.           Standards Track                    [Page 20]
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
-   Any implementation supporting at least one key exchange method that
-   conforms to Section 2 MUST also support the "null" host key
-   algorithm.  Servers MUST NOT advertise the "null" host key algorithm
-   unless it is the only algorithm advertised.
+   2 節に従う 鍵交換メソッドを1つでもサポートする実装は, "null" ホスト鍵アルゴリズムもサポートしなければならない.  "null" ホスト鍵アルゴリズムがクライアントに告知する唯一のアルゴリズムでなければ, このアルゴリズムをサーバは告知してはならない.
 
 6.  メッセージ番号のまとめ
 
-   The following message numbers have been defined for use with GSS-
-   API-based key exchange methods:
+   GSS-API ベースの鍵交換法で用いるために, 以下のメッセージ番号が定義されている:
 
           #define SSH_MSG_KEXGSS_INIT                       30
           #define SSH_MSG_KEXGSS_CONTINUE                   31
@@ -761,11 +704,9 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
           #define SSH_MSG_KEXGSS_GROUPREQ                   40
           #define SSH_MSG_KEXGSS_GROUP                      41
 
-   The numbers 30-49 are specific to key exchange and may be redefined
-   by other kex methods.
+   30-49 の範囲の数は鍵交換特有のもので, 他の鍵交換法で再定義できる.
 
-   The following message numbers have been defined for use with the
-   'gssapi-with-mic' user authentication method:
+   'gssapi-with-mic' ユーザ認証法で用いるために, 以下のメッセージ番号が定義されている:
 
           #define SSH_MSG_USERAUTH_GSSAPI_RESPONSE          60
           #define SSH_MSG_USERAUTH_GSSAPI_TOKEN             61
@@ -774,9 +715,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
           #define SSH_MSG_USERAUTH_GSSAPI_ERRTOK            65
           #define SSH_MSG_USERAUTH_GSSAPI_MIC               66
 
-   The numbers 60-79 are specific to user authentication and may be
-   redefined by other user auth methods.  Note that in the method
-   described in this document, message number 62 is unused.
+   60-79 の範囲の数はユーザ認証特有のもので, 他の鍵交換法で再定義できる.  注意: この文書で記述された方法では, メッセージ番号 62 は未使用だ.
 
 
 
@@ -799,48 +738,22 @@ Hutzelman, et al.           Standards Track                    [Page 21]
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
-7.  GSS-API Considerations
+7.  GSS-API の考察
 
-7.1.  Naming Conventions
+7.1.  命名規則
 
-   In order to establish a GSS-API security context, the SSH client
-   needs to determine the appropriate targ_name to use in identifying
-   the server when calling GSS_Init_sec_context().  For this purpose,
-   the GSS-API mechanism-independent name form for host-based services
-   is used, as described in Section 4.1 of [GSSAPI].
+   GSS-API セキュリティコンテキストを確立するために,  GSS_Init_sec_context() を呼ぶ際にサーバの識別に用いる適切な targ_name を クライアントは決定する必要がある.  この目的のため, ホストベースサービスでの GSS-API メカニズムに独立な名前の形式が用いられる. [GSSAPI] の 4.1 節に記述されている.
 
-   In particular, the targ_name to pass to GSS_Init_sec_context() is
-   obtained by calling GSS_Import_name() with an input_name_type of
-   GSS_C_NT_HOSTBASED_SERVICE, and an input_name_string consisting of
-   the string "host@" concatenated with the hostname of the SSH server.
+   具体的には, GSS_Init_sec_context() に渡す targ_name は, input_name_type を GSS_C_NT_HOSTBASED_SERVICE に  input_name_string  を "host@" にSSHサーバのホスト名を連結した文字列にしてGSS_Import_name() を呼び出すことで得られる.
 
-   Because the GSS-API mechanism uses the targ_name to authenticate the
-   server's identity, it is important that it be determined in a secure
-   fashion.  One common way to do this is to construct the targ_name
-   from the hostname as typed by the user; unfortunately, because some
-   GSS-API mechanisms do not canonicalize hostnames, it is likely that
-   this technique will fail if the user has not typed a fully-qualified,
-   canonical hostname.  Thus, implementers may wish to use other
-   methods, but should take care to ensure they are secure.  For
-   example, one should not rely on an unprotected DNS record to map a
-   host alias to the primary name of a server, or an IP address to a
-   hostname, since an attacker can modify the mapping and impersonate
-   the server.
+   GSS-APIメカニズムは サーバの識別情報の認証に targ_name を用いるので, 安全な方法で決定することは重要だ.  これを行なう一般的な方法として, ユーザが入力した ホスト名から  targ_name を構築するものがある. 残念ながら, GSS-API メカニズムには ホスト名を正規化しないものがあるので, ユーザが完全に正規化されたホスト名を入力しない場合にこのテクニックが失敗する場合がある.  それゆえ, 実装者は, 別の方法を使いたいと考えるかもしれない. このときその方法が安全なことを保証するよう注意しなければならない.  例えば, 攻撃者がマッピングを変更したりサーバになりすますことができるので, ホストエイリアスをサーバのプライマリ名にマップしたりIPアドレスをホスト名にマップする保護されていない DNS レコードに依存してはならない.
 
-   Implementations of mechanisms conforming to this document MUST NOT
-   use the results of insecure DNS queries to construct the targ_name.
-   Clients MAY make use of a mapping provided by local configuration or
-   use other secure means to determine the targ_name to be used.  If a
-   client system is unable to securely determine which targ_name to use,
-   then it SHOULD NOT use this mechanism.
+   この文書に従うメカニズムの実装者は, targ_name の構築に安全でないDNSクエリの結果を用いてはならない.
+   クライアントは, ローカルな設定で提供されるマッピングを利用したり, 用いられる targ_name を決定する他の安全な方法を利用したりしてよい.  クライアントシステムが, 利用する targ_name を安全に決定できないなら, このこのアルゴリズムを利用しないほうがよい.
 
-7.2.  Channel Bindings
+7.2.  チャンネルの束縛
 
-   This document recommends that channel bindings SHOULD NOT be
-   specified in the calls during context establishment.  This document
-   does not specify any standard data to be used as channel bindings,
-   and the use of network addresses as channel bindings may break SSH in
-   environments where it is most useful.
+   コンテキストの確立の間呼出でチャンネルの束縛を指定しないほうがよいと, この文書は推奨する.  チャンネル束縛として用いられる標準データをこの文書は指定しない. また, チャンネル束縛としてネットワークアドレスを利用すると, それがもっとも有用な環境において, SSHを壊してしまうかもしれない.
 
 
 
@@ -857,46 +770,15 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 7.3.  SPNEGO
 
-   The use of the Simple and Protected GSS-API Negotiation Mechanism
-   [SPNEGO] in conjunction with the authentication and key exchange
-   methods described in this document is both unnecessary and
-   undesirable.  As a result, mechanisms conforming to this document
-   MUST NOT use SPNEGO as the underlying GSS-API mechanism.
+   Simple and Protected GSS-API Negotiation Mechanism [SPNEGO] をこの文書に記述した認証法と鍵交換法と一緒に利用する必要はなく, 望ましくない.  これにより, この文書に従うメカニズムは, 基底のGSS-API メカニズムとして SPENGO を用いてはならない.
 
-   Since SSH performs its own negotiation of authentication and key
-   exchange methods, the negotiation capability of SPNEGO alone does not
-   provide any added benefit.  In fact, as described below, it has the
-   potential to result in the use of a weaker method than desired.
+   SSHは自身で認証法や鍵交換法の交渉をするので, SPENGO 単独での交渉能力は利益をもたらさない.  以下に記述するように, 望まれているものよりも弱い方法を用いてしまう可能性が実際にある.
 
-   Normally, SPNEGO provides the added benefit of protecting the GSS-API
-   mechanism negotiation.  It does this by having the server compute a
-   MIC of the list of mechanisms proposed by the client, and then
-   checking that value at the client.  In the case of key exchange, this
-   protection is not needed because the key exchange methods described
-   here already perform an equivalent operation; namely, they generate a
-   MIC of the SSH exchange hash, which is a hash of several items
-   including the lists of key exchange mechanisms supported by both
-   sides.  In the case of user authentication, the protection is not
-   needed because the negotiation occurs over a secure channel, and the
-   host's identity has already been proved to the user.
+   通常, GSS-API メカニズムの交渉の保護に利益をもたらす.  クライアントが提案したメカニズムのリストから MIC をサーバが計算して クライアントがその値をチェックすることで行なわれる.  鍵交換の場合, この保護は必要ない. ここで記述した鍵交換法は同等の操作を実行するからだ. すなわち, それぞれの側でサポートされる鍵交換メカニズムのリストを含むいくつかの要素のハッシュである SSH の交換ハッシュから MICを生成する.  ユーザ認証の場合もこの保護は必要ない. 安全なチャンネルの上で交渉が行なわれ, ホストの識別情報はユーザにすでに証明されている.
 
-   The use of SPNEGO combined with GSS-API mechanisms used without
-   SPNEGO can lead to interoperability problems.  For example, a client
-   that supports key exchange using the Kerberos V5 GSS-API mechanism
-   [KRB5-GSS] only underneath SPNEGO will not interoperate with a server
-   that supports key exchange only using the Kerberos V5 GSS-API
-   mechanism directly.  As a result, allowing GSS-API mechanisms to be
-   used both with and without SPNEGO is undesirable.
+   SPENGO なしで利用する GSS-API メカニズムと組合せて SPENGO を利用すると, 相互運用上の問題が発生しうる.  たとえば, SPENGO の下で Kerberos V5 GSS-API メカニズム [KRB5-GSS] を用いる鍵交換をサポートするクライアントは,Kerberos V5 GSS-API を直接用いる鍵交換のみをサポートするサーバと, 相互運用できない.  結果として, SPENGO を利用するものと利用しないものの両方を GSS-API メカニズムとして許可するのは望ましくない.
 
-   If a client's policy is to first prefer GSS-API-based key exchange
-   method X, then non-GSS-API method Y, then GSS-API-based method Z, and
-   if a server supports mechanisms Y and Z but not X, then an attempt to
-   use SPNEGO to negotiate a GSS-API mechanism might result in the use
-   of method Z when method Y would have been preferable.  As a result,
-   the use of SPNEGO could result in the subversion of the negotiation
-   algorithm for key exchange methods as described in Section 7.1 of
-   [SSH-TRANSPORT] and/or the negotiation algorithm for user
-   authentication methods as described in [SSH-USERAUTH].
+   最初に GSS-API ベースの鍵交換法 X を好み次に GSS-API でない方法 Y を好み, そして GSS-APIベースの方法を好むクライアントのポリシーでサーバが Y と Z をサポートするが X をサポートしない場合, Y が好ましい方法だが, GSS-API メカニズムの交渉のためにSPENGOを利用すると Z の利用という結果になる.  結果として, SPENGO の利用は, [SSH-TRANSPORT] の 7.1 節で記述された鍵交換法 と/もしくは [SSH-USERAUTH] で記述されたユーザ認証法の 交渉アルゴリズムを転覆させる可能性があります.
 
 
 
@@ -913,51 +795,32 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 8.  IANA の考慮
 
-   Consistent with Section 8 of [SSH-ARCH] and Section 4.6 of
-   [SSH-NUMBERS], this document makes the following registrations:
+   [SSH-ARCH] の 8節と [SSH-NUMBERS] の4.6節と整合するため, この文書は次の登録を行なう.
 
-      The family of SSH key exchange method names beginning with "gss-
-      group1-sha1-" and not containing the at-sign ('@'), to name the
-      key exchange methods defined in Section 2.3.
+      "gss-group1-sha1-" で始まり アットマーク('@')を含まないSSH 鍵交換法名のファミリで 2.3節で定義した鍵交換法を指定する.
 
-      The family of SSH key exchange method names beginning with "gss-
-      gex-sha1-" and not containing the at-sign ('@'), to name the key
-      exchange methods defined in Section 2.5.
+      "gss-gex-sha1-" で始まり アットマーク('@')を含まないSSH 鍵交換法名のファミリで 2.5節で定義した鍵交換法を指定する.
 
-      All other SSH key exchange method names beginning with "gss-" and
-      not containing the at-sign ('@'), to be reserved for future key
-      exchange methods defined in conformance with this document, as
-      noted in Section 2.6.
+      "gss-" で始まり アットマーク('＠')を含まないすべてのSSH鍵交換法名は, 2.6節で注記した, この文書に従って定義された将来の鍵交換法のために予約される.
 
-      The SSH host public key algorithm name "null", to name the NULL
-      host key algorithm defined in Section 5.
+      SSH ホスト公開鍵アルゴリズム名 "nulll" で, 5 節で定義した ヌルホスト鍵アルゴリズムを指定する.
 
-      The SSH user authentication method name "gssapi-with-mic", to name
-      the GSS-API user authentication method defined in Section 3.
+      SSH ホスト公開鍵アルゴリズム名 "gssapi-with-mic" で, 3 節で定義した GSS-API ユーザ認証法を指定する.
 
-      The SSH user authentication method name "gssapi-keyex", to name
-      the GSS-API user authentication method defined in Section 4.
+      SSH ホスト公開鍵アルゴリズム名 "gssapi-keyex" で, 4 節で定義した GSS-API ユーザ認証法を指定する.
 
-      The SSH user authentication method name "gssapi" is to be
-      reserved, in order to avoid conflicts with implementations
-      supporting an earlier version of this specification.
+      SSH ユーザ認証法名 "gssapi" は予約される. この実装の以前のバージョンをサポートする実装との衝突を避けるためだ.
 
-      The SSH user authentication method name "external-keyx" is to be
-      reserved, in order to avoid conflicts with implementations
-      supporting an earlier version of this specification.
+      SSH ユーザ認証法名 "external-keyx" は予約される. この実装の以前のバージョンをサポートする実装との衝突を避けるためだ.
 
    この文書は新しいレジストリは作成しない.
 
 9.  セキュリティの考察
 
-   This document describes authentication and key-exchange protocols.
-   As such, security considerations are discussed throughout.
+   この文書は認証と鍵交換プロトコルを記述している.
+   このため, セキュリティの考慮事項は全体にわたって議論されている.
 
-   This protocol depends on the SSH protocol itself, the GSS-API, any
-   underlying GSS-API mechanisms that are used, and any protocols on
-   which such mechanisms might depend.  Each of these components plays a
-   part in the security of the resulting connection, and each will have
-   its own security considerations.
+   このプロトコルは SSHプロトコル自体, GSS-API, 利用されるすべての基底のGSS-APIメカニズム, それらのメカニズムに依存するすべてのプロトコルに依存している.  これらの要素それぞれが, 結果として生じる接続のセキュリティのある部分をになっており, それぞれが自身のセキュリティの考慮事項を持つ.
 
 
 
@@ -967,27 +830,11 @@ Hutzelman, et al.           Standards Track                    [Page 24]
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
-   The key exchange method described in Section 2 depends on the
-   underlying GSS-API mechanism to provide both mutual authentication
-   and per-message integrity services.  If either of these features is
-   not supported by a particular GSS-API mechanism, or by a particular
-   implementation of a GSS-API mechanism, then the key exchange is not
-   secure and MUST fail.
+   2節で記述した鍵交換法は, 相互認証とメッセージ単位の完全性サービスを提供する基底の GSS-API メカニズムに依存している.  特定の GSS-API メカニズムで もしくは 特定の GSS-API メカニズムの実装で, これらの特徴のどちらかがサポートされていなかったら, 鍵交換は安全ではなく失敗しなければならない.
 
-   In order for the "external-keyx" user authentication method to be
-   used, it MUST have access to user authentication information obtained
-   as a side-effect of the key exchange.  If this information is
-   unavailable, the authentication MUST fail.
+   "external-keyx" ユーザ認証法を利用するためには, 鍵交換の副作用として得られたユーザ認証情報にアクセスしなければならない.  この情報が利用できなければ, 認証は失敗しなければならない.
 
-   Revealing information about the reason for an authentication failure
-   may be considered by some sites to be an unacceptable security risk
-   for a production environment.  However, having that information
-   available can be invaluable for debugging purposes.  Thus, it is
-   RECOMMENDED that implementations provide a means for controlling, as
-   a matter of policy, whether to send SSH_MSG_USERAUTH_GSSAPI_ERROR,
-   SSH_MSG_USERAUTH_GSSAPI_ERRTOK, and SSH_MSG_KEXGSS_ERROR messages,
-   and SSH_MSG_KEXGSS_CONTINUE messages containing a GSS-API error
-   token.
+   認証失敗の理由の情報を開示することは, 本番環境では受け入れられないセキュリティリスクと考えるサイトもある.  しかし, この情報は, デバッグのためには重要だ.  このため,SSH_MSG_USERAUTH_GSSAPI_ERROR と SSH_MSG_USERAUTH_GSSAPI_ERRTOK,  SSH_MSG_KEXGSS_ERROR, GSS-API エラートークンを含む SSH_MSG_KEXGSS_CONTINUE メッセージを送るかどうかを ポリシーの問題として制御する手段を実装が提供することが推奨される.
 
 10.  Acknowledgements
 

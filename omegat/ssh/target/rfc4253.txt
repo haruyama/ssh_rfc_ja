@@ -271,7 +271,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
          'random padding' の長さ (byte単位).
 
       payload
-         パケットの有用な中身圧縮(すること)が取り決められていたなら, このフィールドは圧縮される.  最初は, 圧縮は "none" でなければならない.
+         パケットの有用な中身.  圧縮(すること)が取り決められていたなら, このフィールドは圧縮される.  最初は, 圧縮は "none" でなければならない.
 
       random padding
          任意の長さのパディング, (packet_length || padding_length || payload || random padding) の全体の長さが, 暗号のブロックサイズか8のどちらか大きいほうの倍数になるようにする.

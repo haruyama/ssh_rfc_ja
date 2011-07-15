@@ -2705,6 +2705,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As such, security considerations are discussed throughout.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T061444Z" changeid="haruyama">
+        <seg>このため, セキュリティの考慮事項は全体にわたって議論されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As the user's shell is usually used to execute the
    subsystem, it is advisable for the subsystem protocol to have a
    &quot;magic cookie&quot; at the beginning of the protocol transaction to
@@ -4924,6 +4932,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Each of these components plays a
+   part in the security of the resulting connection, and each will have
+   its own security considerations.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T061439Z" changeid="haruyama">
+        <seg>これらの要素それぞれが, 結果として生じる接続のセキュリティのある部分をになっており, それぞれが自身のセキュリティの考慮事項を持つ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Each of these methods specifies GSS-API authenticated Diffie-Hellman
    key exchange as described in Section 2.1 with SHA-1 as HASH, and the
    group defined in Section 8.2 of [SSH-TRANSPORT].</seg>
@@ -6739,6 +6757,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>However, having that information
+   available can be invaluable for debugging purposes.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T062240Z" changeid="haruyama">
+        <seg>しかし, この情報は, デバッグのためには重要だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>However, if it wishes that connections to a
    port on the other side be forwarded to the local side, it must
    explicitly request this.</seg>
@@ -7552,6 +7579,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>圧縮が取り決められている場合は, 'payload' フィールド(のみ)は, 取り決められたアルゴリズムを用いて圧縮される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If either of these features is
+   not supported by a particular GSS-API mechanism, or by a particular
+   implementation of a GSS-API mechanism, then the key exchange is not
+   secure and MUST fail.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T061728Z" changeid="haruyama">
+        <seg>特定の GSS-API メカニズムで もしくは 特定の GSS-API メカニズムの実装で, これらの特徴のどちらかがサポートされていなかったら, 鍵交換は安全ではなく失敗しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8456,6 +8494,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If this information is
+   unavailable, the authentication MUST fail.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T062118Z" changeid="haruyama">
+        <seg>この情報が利用できなければ, 認証は失敗しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If this is done, the client
    software should take the precautions discussed in [SSH-ARCH].</seg>
       </tuv>
@@ -9241,6 +9288,16 @@
       <tuv lang="JA">
         <seg>ほとんどの場合, ISO-10646
    UTF-8 エンコーディングが使われる [RFC3629].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In order for the &quot;external-keyx&quot; user authentication method to be
+   used, it MUST have access to user authentication information obtained
+   as a side-effect of the key exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T062103Z" changeid="haruyama">
+        <seg>&quot;external-keyx&quot; ユーザ認証法を利用するためには, 鍵交換の副作用として得られたユーザ認証情報にアクセスしなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13954,6 +14011,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>ステータスを返すことは推奨されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Revealing information about the reason for an authentication failure
+   may be considered by some sites to be an unacceptable security risk
+   for a production environment.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T062211Z" changeid="haruyama">
+        <seg>認証失敗の理由の情報を開示することは, 本番環境では受け入れられないセキュリティリスクと考えるサイトもある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18862,6 +18929,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The key exchange method described in Section 2 depends on the
+   underlying GSS-API mechanism to provide both mutual authentication
+   and per-message integrity services.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T061611Z" changeid="haruyama">
+        <seg>2節で記述した鍵交換法は, 相互認証とメッセージ単位の完全性サービスを提供する基底の GSS-API メカニズムに依存している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The key exchange method name defined for use with this key exchange
    is &quot;ecmqv-sha2&quot;.</seg>
       </tuv>
@@ -21557,6 +21634,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document describes authentication and key-exchange protocols.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T061221Z" changeid="haruyama">
+        <seg>この文書は認証と鍵交換プロトコルを記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document describes new encryption methods for use with the SSH
    Transport Protocol.</seg>
       </tuv>
@@ -22491,6 +22576,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This protocol depends on the SSH protocol itself, the GSS-API, any
+   underlying GSS-API mechanisms that are used, and any protocols on
+   which such mechanisms might depend.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T061337Z" changeid="haruyama">
+        <seg>このプロトコルは SSHプロトコル自体, GSS-API, 利用されるすべての基底のGSS-APIメカニズム, それらのメカニズムに依存するすべてのプロトコルに依存している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This protocol does allow the Data Integrity mechanism to be disabled.</seg>
       </tuv>
       <tuv lang="JA">
@@ -22804,6 +22899,19 @@
       </tuv>
       <tuv lang="JA" changedate="20110714T050133Z" changeid="haruyama">
         <seg>それゆえ, 公開鍵操作が必要ではない鍵交換法とホスト鍵素材の利用が必要でない鍵交換法とともにのみ利用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Thus, it is
+   RECOMMENDED that implementations provide a means for controlling, as
+   a matter of policy, whether to send SSH_MSG_USERAUTH_GSSAPI_ERROR,
+   SSH_MSG_USERAUTH_GSSAPI_ERRTOK, and SSH_MSG_KEXGSS_ERROR messages,
+   and SSH_MSG_KEXGSS_CONTINUE messages containing a GSS-API error
+   token.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T062407Z" changeid="haruyama">
+        <seg>このため,SSH_MSG_USERAUTH_GSSAPI_ERROR と SSH_MSG_USERAUTH_GSSAPI_ERRTOK,  SSH_MSG_KEXGSS_ERROR, GSS-API エラートークンを含む SSH_MSG_KEXGSS_CONTINUE メッセージを送るかどうかを ポリシーの問題として制御する手段を実装が提供することが推奨される.</seg>
       </tuv>
     </tu>
     <tu>
