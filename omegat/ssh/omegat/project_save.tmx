@@ -2502,6 +2502,36 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As a result,
+   the use of SPNEGO could result in the subversion of the negotiation
+   algorithm for key exchange methods as described in Section 7.1 of
+   [SSH-TRANSPORT] and/or the negotiation algorithm for user
+   authentication methods as described in [SSH-USERAUTH].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T053338Z" changeid="haruyama">
+        <seg>結果として, SPENGO の利用は, [SSH-TRANSPORT] の 7.1 節で記述された鍵交換法 と/もしくは [SSH-USERAUTH] で記述されたユーザ認証法の 交渉アルゴリズムを転覆させる可能性があります.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As a result, allowing GSS-API mechanisms to be
+   used both with and without SPNEGO is undesirable.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T052833Z" changeid="haruyama">
+        <seg>結果として, SPENGO を利用するものと利用しないものの両方を GSS-API メカニズムとして許可するのは望ましくない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As a result, mechanisms conforming to this document
+   MUST NOT use SPNEGO as the underlying GSS-API mechanism.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T051525Z" changeid="haruyama">
+        <seg>これにより, この文書に従うメカニズムは, 基底のGSS-API メカニズムとして SPENGO を用いてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As a result, the use of a
    new host key by an already-known host is usually considered an
    indication of a possible man-in-the-middle attack, and clients often
@@ -5734,6 +5764,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For example, a client
+   that supports key exchange using the Kerberos V5 GSS-API mechanism
+   [KRB5-GSS] only underneath SPNEGO will not interoperate with a server
+   that supports key exchange only using the Kerberos V5 GSS-API
+   mechanism directly.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T052743Z" changeid="haruyama">
+        <seg>たとえば, SPENGO の下で Kerberos V5 GSS-API メカニズム [KRB5-GSS] を用いる鍵交換をサポートするクライアントは,Kerberos V5 GSS-API を直接用いる鍵交換のみをサポートするサーバと, 相互運用できない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For example, an implementation SHOULD NOT discard the name
    field because its windows lack titles; instead, it SHOULD find
    another way to display this information.</seg>
@@ -7288,6 +7330,18 @@
       <tuv lang="JA">
         <seg>クライアントが port number to bind として 0を 'want reply' として TRUE を指定した場合, サーバは次に利用可能な特権ポートではないポートを割り当て次のメッセージで返信する. 割り当てなければ返信しない.
    response-specific data.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If a client's policy is to first prefer GSS-API-based key exchange
+   method X, then non-GSS-API method Y, then GSS-API-based method Z, and
+   if a server supports mechanisms Y and Z but not X, then an attempt to
+   use SPNEGO to negotiate a GSS-API mechanism might result in the use
+   of method Z when method Y would have been preferable.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T053156Z" changeid="haruyama">
+        <seg>最初に GSS-API ベースの鍵交換法 X を好み次に GSS-API でない方法 Y を好み, そして GSS-APIベースの方法を好むクライアントのポリシーでサーバが Y と Z をサポートするが X をサポートしない場合, Y が好ましい方法だが, GSS-API メカニズムの交渉のためにSPENGOを利用すると Z の利用という結果になる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9101,6 +9155,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In fact, as described below, it has the
+   potential to result in the use of a weaker method than desired.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T051744Z" changeid="haruyama">
+        <seg>以下に記述するように, 望まれているものよりも弱い方法を用いてしまう可能性が実際にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In fact, due to its
    smaller key sizes, elliptic curve cryptography can be implemented
    more efficiently for the same security level than RSA, finite field
@@ -9444,6 +9507,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In the case of key exchange, this
+   protection is not needed because the key exchange methods described
+   here already perform an equivalent operation; namely, they generate a
+   MIC of the SSH exchange hash, which is a hash of several items
+   including the lists of key exchange mechanisms supported by both
+   sides.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T052133Z" changeid="haruyama">
+        <seg>鍵交換の場合, この保護は必要ない. ここで記述した鍵交換法は同等の操作を実行するからだ. すなわち, それぞれの側でサポートされる鍵交換メカニズムのリストを含むいくつかの要素のハッシュである SSH の交換ハッシュから MICを生成する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In the case of the SSH
    Transport Protocol, even though an application might implement the
    symmetric portion of the SSH protocol exactly as described in this
@@ -9451,6 +9527,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110607T081321Z" changeid="haruyama">
         <seg>SSH トランスポートプロトコルの場合, アプリケーションがSSHプロトコルの対称部分をこの文書の記述に正確に実装したとしても, アプリケーションはプロトコルに依存しない攻撃に脆弱かもしれない.(ひどい例を挙げると, アプリケーションが暗号鍵を保護されていないファイルに平文で保存する可能性がある)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In the case of user authentication, the protection is not
+   needed because the negotiation occurs over a secure channel, and the
+   host's identity has already been proved to the user.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T052429Z" changeid="haruyama">
+        <seg>ユーザ認証の場合もこの保護は必要ない. 安全なチャンネルの上で交渉が行なわれ, ホストの識別情報はユーザにすでに証明されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10266,6 +10352,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110621T011428Z" changeid="haruyama">
         <seg>ユーザを認証する特定のGSS-APIメカニズムを用いるSSHユーザ認証法と Diffie-Hellman 鍵交換を認証するためにGSS-APIを用いるSSHの鍵交換法のファミリを定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It does this by having the server compute a
+   MIC of the list of mechanisms proposed by the client, and then
+   checking that value at the client.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T051945Z" changeid="haruyama">
+        <seg>クライアントが提案したメカニズムのリストから MIC をサーバが計算して クライアントがその値をチェックすることで行なわれる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11893,6 +11989,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>権限のないコマンドの実行を防止する, 通常の予防措置が取られなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Normally, SPNEGO provides the added benefit of protecting the GSS-API
+   mechanism negotiation.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T051855Z" changeid="haruyama">
+        <seg>通常, GSS-API メカニズムの交渉の保護に利益をもたらす.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14600,6 +14705,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110425T075912Z" changeid="haruyama">
         <seg>ECDHとECMQVは, 任意の楕円曲線サイズ, つまり任意のセキュリティ強度を許すので, SSHハンドシェイクの他の要素のセキュリティ強度に一致する楕円曲線のサイズを選ぶことが重要だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Since SSH performs its own negotiation of authentication and key
+   exchange methods, the negotiation capability of SPNEGO alone does not
+   provide any added benefit.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T051701Z" changeid="haruyama">
+        <seg>SSHは自身で認証法や鍵交換法の交渉をするので, SPENGO 単独での交渉能力は利益をもたらさない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20345,6 +20460,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The use of SPNEGO combined with GSS-API mechanisms used without
+   SPNEGO can lead to interoperability problems.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T052528Z" changeid="haruyama">
+        <seg>SPENGO なしで利用する GSS-API メカニズムと組合せて SPENGO を利用すると, 相互運用上の問題が発生しうる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The use of a MAC other than &quot;none&quot; provides integrity and
    authentication.</seg>
       </tuv>
@@ -20396,6 +20520,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>パスフレーズを強制可能なポリシーにできるスマートカードや他の技術の利用が示唆される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The use of the Simple and Protected GSS-API Negotiation Mechanism
+   [SPNEGO] in conjunction with the authentication and key exchange
+   methods described in this document is both unnecessary and
+   undesirable.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T051451Z" changeid="haruyama">
+        <seg>Simple and Protected GSS-API Negotiation Mechanism [SPNEGO] をこの文書に記述した認証法と鍵交換法と一緒に利用する必要はなく, 望ましくない.</seg>
       </tuv>
     </tu>
     <tu>
