@@ -2019,6 +2019,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>All other SSH key exchange method names beginning with &quot;gss-&quot; and
+      not containing the at-sign ('@'), to be reserved for future key
+      exchange methods defined in conformance with this document, as
+      noted in Section 2.6.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T055730Z" changeid="haruyama">
+        <seg>&quot;gss-&quot; で始まり アットマーク('＠')を含まないすべてのSSH鍵交換法名は, 2.6節で注記した, この文書に従って定義された将来の鍵交換法のために予約される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>All packets following the identification string SHALL use the binary
    packet protocol, which is described in Section 6.</seg>
       </tuv>
@@ -4062,6 +4073,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110426T084553Z" changeid="haruyama">
         <seg>[RFC4251] の 8節と [RFC4250] の4.6節と整合するため, この文書は次の登録を行なう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Consistent with Section 8 of [SSH-ARCH] and Section 4.6 of
+   [SSH-NUMBERS], this document makes the following registrations:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T055337Z" changeid="haruyama">
+        <seg>[SSH-ARCH] の 8節と [SSH-NUMBERS] の4.6節と整合するため, この文書は次の登録を行なう.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16962,6 +16982,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The SSH host public key algorithm name &quot;null&quot;, to name the NULL
+      host key algorithm defined in Section 5.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T055836Z" changeid="haruyama">
+        <seg>SSH ホスト公開鍵アルゴリズム名 &quot;nulll&quot; で, 5 節で定義した ヌルホスト鍵アルゴリズムを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The SSH protocol consists of three major components: The
    Transport Layer Protocol provides server authentication,
    confidentiality, and integrity with perfect forward secrecy.</seg>
@@ -16995,6 +17024,44 @@
       </tuv>
       <tuv lang="JA" changedate="20110514T023003Z" changeid="haruyama">
         <seg>SSH トランスポート層は, 安全で低レベルなトランスポートプロトコルだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH user authentication method name &quot;external-keyx&quot; is to be
+      reserved, in order to avoid conflicts with implementations
+      supporting an earlier version of this specification.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T060035Z" changeid="haruyama">
+        <seg>SSH ユーザ認証法名 &quot;external-keyx&quot; は予約される. この実装の以前のバージョンをサポートする実装との衝突を避けるためだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH user authentication method name &quot;gssapi&quot; is to be
+      reserved, in order to avoid conflicts with implementations
+      supporting an earlier version of this specification.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T060024Z" changeid="haruyama">
+        <seg>SSH ユーザ認証法名 &quot;gssapi&quot; は予約される. この実装の以前のバージョンをサポートする実装との衝突を避けるためだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH user authentication method name &quot;gssapi-keyex&quot;, to name
+      the GSS-API user authentication method defined in Section 4.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T055927Z" changeid="haruyama">
+        <seg>SSH ホスト公開鍵アルゴリズム名 &quot;gssapi-keyex&quot; で, 4 節で定義した GSS-API ユーザ認証法を指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH user authentication method name &quot;gssapi-with-mic&quot;, to name
+      the GSS-API user authentication method defined in Section 3.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T055934Z" changeid="haruyama">
+        <seg>SSH ホスト公開鍵アルゴリズム名 &quot;gssapi-with-mic&quot; で, 3 節で定義した GSS-API ユーザ認証法を指定する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18106,6 +18173,26 @@
       </tuv>
       <tuv lang="JA">
         <seg>異なる公開鍵アルゴリズムを持つ複数の信頼されたホスト鍵が存在する場合もこの選択に影響する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The family of SSH key exchange method names beginning with &quot;gss-
+      gex-sha1-&quot; and not containing the at-sign ('@'), to name the key
+      exchange methods defined in Section 2.5.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T055749Z" changeid="haruyama">
+        <seg>&quot;gss-gex-sha1-&quot; で始まり アットマーク('@')を含まないSSH 鍵交換法名のファミリで 2.5節で定義した鍵交換法を指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The family of SSH key exchange method names beginning with &quot;gss-
+      group1-sha1-&quot; and not containing the at-sign ('@'), to name the
+      key exchange methods defined in Section 2.3.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110715T055739Z" changeid="haruyama">
+        <seg>&quot;gss-group1-sha1-&quot; で始まり アットマーク('@')を含まないSSH 鍵交換法名のファミリで 2.3節で定義した鍵交換法を指定する.</seg>
       </tuv>
     </tu>
     <tu>
