@@ -79,6 +79,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>(See Section 3.4.)</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T033923Z" changeid="haruyama">
+        <seg>(3.4 節を参照.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>(See Section 6.1.)</seg>
       </tuv>
       <tuv lang="JA" changedate="20110426T084022Z" changeid="haruyama">
@@ -1111,6 +1119,31 @@
       </tuv>
       <tuv lang="JA">
         <seg>サーバの信頼性を証明するために, クライアントがメッセージと関連するMACを検証するためにサーバが共有の秘密 K を知っていることを示す必要がある場合には, 鍵交換法は暗黙のサーバ認証を用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A key file is a text file, containing a sequence of lines.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T031722Z" changeid="haruyama">
+        <seg>鍵ファイルは行の並びを含むテキストファイルだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A line is continued if the last character in the line is a '\'.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T033723Z" changeid="haruyama">
+        <seg>行の最後の文字が '\' なら行は継続される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A line that is not a continuation line that has no ':' in it is the
+   first line of the base64-encoded body.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T035516Z" changeid="haruyama">
+        <seg>':' を含まない継続行でない行は, base64 エンコードされた本体の最初の行だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2778,6 +2811,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As with all other lines, each line in the body MUST NOT be longer
+   than 72 8-bit bytes excluding line termination characters.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T035715Z" changeid="haruyama">
+        <seg>他の行と同様に, 本体の各行も行終端文字を除いて 72 8-bit バイトを越えてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Assigned Algorithm Names</seg>
       </tuv>
       <tuv lang="JA">
@@ -3163,11 +3205,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Begin and End Markers</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T033422Z" changeid="haruyama">
+        <seg>開始と終了のマーカー</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Begin and End Markers ......................................3
       3.3.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110715T063324Z" changeid="haruyama">
-        <seg>最初と最後のマーカー ......................................3
+      <tuv lang="JA" changedate="20110718T033412Z" changeid="haruyama">
+        <seg>開始と終了のマーカー ......................................3
       3.3.</seg>
       </tuv>
     </tu>
@@ -3766,6 +3816,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Comment Header</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T034400Z" changeid="haruyama">
+        <seg>Comment ヘッダ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Comment Header ......................................4
            3.3.3.</seg>
       </tuv>
@@ -3836,6 +3894,24 @@
       <tuv lang="JA">
         <seg>ユーザ認証の完了 ..........................7
       5.4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Compliant implementations MUST function correctly if the quotation
+   marks are omitted.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T034807Z" changeid="haruyama">
+        <seg>この文書に準拠する実装は, 引用符がなくても正常に機能する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Compliant implementations MUST ignore headers with unrecognized
+   header-tags.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T034038Z" changeid="haruyama">
+        <seg>この文書に準拠する実装は, 認識できない header-tag を持つヘッダを無視しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4316,6 +4392,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Currently, common practice is to quote the Header-value of the
+   Comment by prefixing and suffixing it with '&quot;' characters, and some
+   existing implementations fail if these quotation marks are omitted.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T034738Z" changeid="haruyama">
+        <seg>現在, コメントのHeader-value を '&quot;' 文字を前置と後置してクォートするのが慣習となっている. いくつかの既存の実装が, この引用符がないと失敗する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Currently, only the following type is defined.</seg>
       </tuv>
       <tuv lang="JA">
@@ -4552,6 +4638,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>開発者は, 通常のイベントメッセージやデバッグメッセージのいくつかが重要な性質を持つことに注意しなければならない. そして, 不当な人間がこれらの情報に近づけないために管理者に手引きを提供しようとしてもよい. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Differences with RFC 1421 PEM Formats</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T035836Z" changeid="haruyama">
+        <seg>RFC 1421 PEM 形式との違い</seg>
       </tuv>
     </tu>
     <tu>
@@ -4906,6 +5000,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Each field is a line of the following format:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T033603Z" changeid="haruyama">
+        <seg>各行は, 以下の形式の行だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Each identifier is the concatenation of the
    string &quot;ecdsa-sha2-&quot; with the elliptic curve domain parameter
    identifier as defined in Section 6.1.</seg>
@@ -4925,11 +5027,29 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Each line
+   in the file MUST NOT be longer than 72 8-bit bytes excluding line
+   termination characters.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T031800Z" changeid="haruyama">
+        <seg>ファイルの各行は, 行の終端文字を除いて 72 8bit バイトより長くてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Each line SHOULD be terminated by a Carriage Return and Line
    Feed.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>それぞれの行は, キャリッジリターンとラインフィードで終端されている必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Each line in the header MUST NOT be more than 72 8-bit bytes.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T033701Z" changeid="haruyama">
+        <seg>ヘッダの各行は 72 8-bit バイトを越えてはならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5498,6 +5618,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Examples</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T040346Z" changeid="haruyama">
+        <seg>例</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Examples ...................................................5
    4.</seg>
       </tuv>
@@ -6052,6 +6180,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For example:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T034353Z" changeid="haruyama">
+        <seg>例:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For example: the US-ASCII
       string &quot;testing&quot; is represented as 00 00 00 07 t e s t i n g.</seg>
       </tuv>
@@ -6583,6 +6719,15 @@
       <tuv lang="JA" changedate="20110621T012420Z" changeid="haruyama">
         <seg>群の交換 ............................................10
       2.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Headers with header-tags beginning with &quot;x-&quot; are reserved for private
+   use.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T035059Z" changeid="haruyama">
+        <seg>&quot;x-&quot; で始まる header-tag を持つヘッダは私的利用のために予約されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7227,6 +7372,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110531T071609Z" changeid="haruyama">
         <seg>SSHの実装が より大きなブロックサイズのブロック暗号(例えば 256-bitブロックのRijndael) を利用する場合, 3.1節の推奨がこの節の推奨を上書きするかもしれない(パケットの長さに依存する).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If
+   the last character of a line is a '\', then the logical contents of
+   the line are formed by removing the '\' and the line termination
+   characters, and appending the contents of the next line.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T033810Z" changeid="haruyama">
+        <seg>最後の行の文字が '\' の場合, '\' と行終端文字を除いて次の行の内容を連結したものがその行の論理的な内容となる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8055,6 +8211,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the first and
+   last characters of the Header-value are matching quotation marks,
+   implementations SHOULD remove them before using the value.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T034924Z" changeid="haruyama">
+        <seg>Header-value の 最初と最後の文字が引用符と一致するなら, 値を利用する前に引用符を実装は除く必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the key length needed is longer than the output of the HASH, the
    key is extended by computing HASH of the concatenation of K and H and
    the entire key so far, and appending the resulting bytes (as many as
@@ -8696,6 +8862,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Implementations MAY include the quotation marks.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T034826Z" changeid="haruyama">
+        <seg>実装は, この引用符を含んでもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Implementations MAY provide additional methods for verifying the
    correctness of host keys, e.g., a hexadecimal fingerprint derived
    from the SHA-1 hash [FIPS-180-2] of the public key.</seg>
@@ -8779,6 +8953,24 @@
       </tuv>
       <tuv lang="JA">
         <seg>実装は通常このような接続をデフォルトでは許容しないほうがよい. 潜在的なセキュリティの問題をもたらすからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementations SHOULD generate public key files using their system's
+   local text file representation.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T031845Z" changeid="haruyama">
+        <seg>システムのローカルなテキストファイル表現を用いて公開鍵を実装は生成する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementations SHOULD preserve such unrecognized
+   headers when manipulating the key file.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T034102Z" changeid="haruyama">
+        <seg>鍵ファイルを操作する際は, そのような認識できないヘッダを実装は保存する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8987,6 +9179,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>実装者は, エントロピーの重要性を注記する必要がある. また, 疑似乱数生成関数の正しい実装の難しさをわかりやすく事例付きで警告する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementers should take care to notice that while the format is
+   superficially similar to those specified by PEM [RFC1421] and OpenPGP
+   [RFC2440], it is not identical; most notably:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T040053Z" changeid="haruyama">
+        <seg>実装者は, PEM[RFC1421] と OpenPGP [RFC2440] で指定された形式とこの形式が表面的に似ているが, 同一のものではないことに注意する必要がある. 特に以下の点に注意:</seg>
       </tuv>
     </tu>
     <tu>
@@ -9391,6 +9593,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In order to implement public key authentication, SSH implementations
+   must share public key files between the client and the server in
+   order to interoperate.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T031653Z" changeid="haruyama">
+        <seg>公開鍵認証の実装で, SSHの実装は相互運用のために公開鍵ファイルをクライアントとサーバで共有しなければならない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In order to make the entire body of Security Considerations more
    accessible, Security Considerations for the transport,
    authentication, and connection documents have been gathered here.</seg>
@@ -9722,6 +9934,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110704T031333Z" changeid="haruyama">
         <seg>コンテキストの確立の間にサーバで GSS-APIエラーが起きたら, SSH_MSG_USERAUTH_FAILURE メッセージを送る前に, エラーの詳細をクライアントに示すため次のメッセージをサーバは送ってもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In the event that public key files are not transferred as text files,
+   implementations SHOULD be prepared to read files using any of the
+   common line termination sequence, &lt;CR&gt;, &lt;LF&gt;, or &lt;CR&gt;&lt;LF&gt;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T032021Z" changeid="haruyama">
+        <seg>公開鍵ファイルがテキストファイルとして転送されない場合があるので, 一般的な行終端文字 &lt;CR&gt; と, &lt;LF&gt;, &lt;CR&gt;&lt;LF&gt; を用いるファイルすべてを読めるように実装は準備しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10902,6 +11124,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It is suggested that this field default to user@hostname for the user
+   and machine used to generate the key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T034523Z" changeid="haruyama">
+        <seg>このフィールドのデフォルトを, 鍵を作成するのに利用したユーザとマシンからなる user@hostname とするのを推奨する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It is suspected that implementations are likely to make the time
    delay configurable; a suggested default is 2 seconds.</seg>
       </tuv>
@@ -11277,12 +11508,28 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Key File Format</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T031446Z" changeid="haruyama">
+        <seg>鍵ファイルの形式</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Key File Format .................................................2
       3.1.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110715T063305Z" changeid="haruyama">
         <seg>鍵ファイルの形式 .................................................2
       3.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Key File Header</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T033519Z" changeid="haruyama">
+        <seg>鍵ファイルのヘッダ</seg>
       </tuv>
     </tu>
     <tu>
@@ -11491,6 +11738,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110531T070352Z" changeid="haruyama">
         <seg>L をSSHの暗号法でのブロック暗号の(ビットでの)ブロック長とする (例えばAESでは128).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Line Termination Characters</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T031808Z" changeid="haruyama">
+        <seg>行終端文字</seg>
       </tuv>
     </tu>
     <tu>
@@ -13346,11 +13601,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Private Use Headers</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T035104Z" changeid="haruyama">
+        <seg>私的利用のヘッダ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Private Use Headers .................................4
       3.4.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110715T063346Z" changeid="haruyama">
-        <seg>Private Use ヘッダ .................................4
+      <tuv lang="JA" changedate="20110718T035109Z" changeid="haruyama">
+        <seg>私的利用のヘッダ .................................4
       3.4.</seg>
       </tuv>
     </tu>
@@ -13621,11 +13884,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Public Key File Body</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T035448Z" changeid="haruyama">
+        <seg>公開鍵ファイルの本体</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Public Key File Body .......................................4
       3.5.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110715T063359Z" changeid="haruyama">
-        <seg>公開鍵ファイルの Body .......................................4
+      <tuv lang="JA" changedate="20110718T035505Z" changeid="haruyama">
+        <seg>公開鍵ファイルの本体 .......................................4
       3.5.</seg>
       </tuv>
     </tu>
@@ -15318,6 +15589,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Subject Header</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T034208Z" changeid="haruyama">
+        <seg>Subject ヘッダ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Subject Header ......................................3
            3.3.2.</seg>
       </tuv>
@@ -16870,6 +17149,41 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The Header-tag MUST NOT be more than 64 8-bit bytes and is case-
+   insensitive.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T033631Z" changeid="haruyama">
+        <seg>Header-tag は, 64 8-bit バイトを越えてはならず, 大文字小文字を区別しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The Header-tag MUST be encoded in US-ASCII.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T033830Z" changeid="haruyama">
+        <seg>Header-tag は US-ASCII でエンコードされなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The Header-value MUST NOT be more than 1024 8-bit
+   bytes.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T033647Z" changeid="haruyama">
+        <seg>Header-value は 1024 8-bit バイトと越えてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The Header-value MUST be
+   encoded in UTF-8 [RFC3629].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T033845Z" changeid="haruyama">
+        <seg>Header-value は UTF-8 [RFC3629] でエンコードされなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The IANA considerations for the SSH
    protocol as defined in [SSH-ARCH], [SSH-TRANS], [SSH-USERAUTH], and
    this document, are detailed in [SSH-NUMBERS].</seg>
@@ -17748,6 +18062,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The body of a public key file is the base64 encoded ([RFC2045])
+   public key data as specified by [RFC4253], Section 6.6:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T035627Z" changeid="haruyama">
+        <seg>公開鍵ファイルの本体は, [RFC4253]の6.6節で指定された公開鍵データを base64 エンコード ([RFC2045]) したものだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The certificate part may be a zero length string, but a public key is
    required.</seg>
       </tuv>
@@ -18085,6 +18408,23 @@
       </tuv>
       <tuv lang="JA">
         <seg>クライアントソフトウェアは, ユーザにこのメッセージを表示してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The comment
+   SHOULD be displayed when using the key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T034432Z" changeid="haruyama">
+        <seg>このコメントは, 鍵の利用時に表示される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The comment header contains a user-specified comment.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T034419Z" changeid="haruyama">
+        <seg>comment ヘッダは, ユーザが指定したコメントを含む.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18496,6 +18836,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The first line of a conforming key file MUST be a begin marker, which
+   is the literal text:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T033456Z" changeid="haruyama">
+        <seg>この文書に従う鍵ファイルの一行目は 開始マーカーでなければならない. マーカーは以下のテキストだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The following
    table identifies the initial assignments of the Authentication Method
    Names.</seg>
@@ -18527,6 +18876,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>以下の MAC アルゴリズムが現在定義されている:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The following are some examples of public key files that are
+   compliant (note that the examples all wrap before 72 bytes to meet
+   IETF document requirements; however, they are still compliant.)</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T040512Z" changeid="haruyama">
+        <seg>以下は準拠する公開鍵ファイルの例だ. (注意: IETF の文書の要件を満すために すべての例は72 byte より前で折り返されている. ただし, これでも準拠している)</seg>
       </tuv>
     </tu>
     <tu>
@@ -19162,6 +19521,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The key file header section consists of multiple RFC822-style header
+   fields.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T033548Z" changeid="haruyama">
+        <seg>鍵ファイルのヘッダ部は, 複数の RFC822 スタイルのヘッダフィールドから構成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The key type MUST always be explicitly known (from algorithm
    negotiation or some other source).</seg>
       </tuv>
@@ -19268,6 +19636,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>language tag は推奨されておらず、空の文字列である必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The last line of a conforming key file MUST be an end marker, which
+   is the literal text:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T033508Z" changeid="haruyama">
+        <seg>この文書に従う鍵ファイルの最終行は 終了マーカーでなければならない. マーカーは以下のテキストだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20625,6 +21002,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110306T093711Z" changeid="haruyama">
         <seg>prime curve上の楕円曲線ドメインパラメータの集合のサイズは, フィールドオーダーの2進表現のビット数で定義される. 通常 p で示される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The space of header-tags is managed as described in Section 5.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T033958Z" changeid="haruyama">
+        <seg>header-tag の空間は, 5節で記述するように管理される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22076,6 +22461,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>このイベントは, 同一のシーケンス番号を持つ以前に記録したパケットを攻撃者がリプレイする機会を提供する. しかし, そのシーケンス番号の最初のパケットの転送からピアが鍵の再作成をしていない場合のみだ. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This field is used to store the login-name that the key was generated
+   under.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T034349Z" changeid="haruyama">
+        <seg>このフィールドは, 鍵が生成された環境のログイン名を保持するのに利用される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24604,6 +24998,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  Header continuation uses a backslash at the end of the continued
+      line rather than whitespace at the start of the next line.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T040343Z" changeid="haruyama">
+        <seg>o  ヘッダの継続に, 次の行の最初に空白ではなく, 継続される行の末尾にバックシュラッシュを用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>o  I_C is C's KEXINIT message, and I_S is S's KEXINIT message</seg>
       </tuv>
       <tuv lang="JA" changedate="20110621T022339Z" changeid="haruyama">
@@ -24846,6 +25249,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  The other specifications use different BEGIN/END delimiters (five
+      dashes, no space rather than four dashes and a space).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T040200Z" changeid="haruyama">
+        <seg>o  他の仕様は異なる開始/終了デリミタ(4つのダッシュと空白ではなく, 空白なしの5つのダッシュ) を利用している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>o  The range of 0xFE000000 to 0xFEFFFFFF is to be used in conjunction
       with locally assigned channels.</seg>
       </tuv>
@@ -24869,6 +25281,24 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>o  0xFFで始まる範囲については, 制限や示唆はない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  There is no Cyclic Redundancy Check (CRC) at the end of the
+      base64-encoded block.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T040250Z" changeid="haruyama">
+        <seg>o  base64 エンコードされたブロックの終わりに 巡回冗長検索 (CRC)がない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  There is no blank line before the start of the base64-encoded
+      contents.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110718T040223Z" changeid="haruyama">
+        <seg>o  base64 エンコードされた内容の開始の前に空白行はない.</seg>
       </tuv>
     </tu>
     <tu>
