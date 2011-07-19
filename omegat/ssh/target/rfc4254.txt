@@ -599,7 +599,7 @@ RFC 4254                SSH Connection Protocol             January 2006
    相手側で動作していたコマンドが終了すると, コマンドの終了ステータスを返却するために次のメッセージが送られる.
    ステータスを返すことは推奨されている.  このメッセージには応答は返らない.  このメッセージの後の SSH_MSG_CHANNEL_CLOSE でチャンネルは閉じられる必要がある.
 
-   クライアントこれらのメッセージを無視してもよい.
+   クライアントはこれらのメッセージを無視してもよい.
 
       byte      SSH_MSG_CHANNEL_REQUEST
       uint32    recipient channel
