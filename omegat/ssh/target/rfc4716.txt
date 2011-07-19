@@ -25,30 +25,27 @@ Copyright Notice
 
 概要
 
-   This document formally documents an existing public key file format
-   in use for exchanging public keys between different Secure Shell
-   (SSH) implementations.
+   この文書は, 異なるセキュアシェル(SSH) 実装間で公開鍵を交換するために, 現在利用されている公開鍵ファイル形式を公式に説明する.
 
-   In addition, this document defines a standard textual representation
-   for SSH public key fingerprints.
+   さらに, この文書は, SSH公開鍵の指紋の標準のテキスト表現を定義する.
 
 目次
 
    1. イントロダクション ..........................................2
    2. この文書で用いる表記 ...............................2
-   3. Key File Format .................................................2
-      3.1. Line Termination Characters ................................2
-      3.2. Begin and End Markers ......................................3
-      3.3. Key File Header ............................................3
-           3.3.1. Subject Header ......................................3
-           3.3.2. Comment Header ......................................4
-           3.3.3. Private Use Headers .................................4
-      3.4. Public Key File Body .......................................4
-      3.5. Differences with RFC 1421 PEM Formats ......................4
-      3.6. Examples ...................................................5
-   4. Public Key Fingerprints .........................................6
+   3. 鍵ファイルの形式 .................................................2
+      3.1. 行終端文字 ................................2
+      3.2. 開始と終了のマーカー ......................................3
+      3.3. 鍵ファイルのヘッダ ............................................3
+           3.3.1. Subject ヘッダ ......................................3
+           3.3.2. Comment ヘッダ ......................................4
+           3.3.3. 私的利用のヘッダ .................................4
+      3.4. 公開鍵ファイルの本体 .......................................4
+      3.5. RFC 1421 PEM 形式との違い ......................4
+      3.6. 例 ...................................................5
+   4. 公開鍵の指紋 .........................................6
    5. IANA の考慮 .............................................6
-   6. Security Considerations .........................................7
+   6. セキュリティの考慮 .........................................7
    7. References ......................................................8
       7.1. Normative References .......................................8
       7.2. Informative References .....................................8
@@ -62,46 +59,29 @@ RFC 4716               SSH Public Key File Format          November 2006
 
 1.  イントロダクション
 
-   The SSH protocol supports the use of public/private key pairs in
-   order to perform authentication based on public key cryptography.
-   However, in order to use public key authentication in the SSH
-   protocol, public keys must first be exchanged between client and
-   server.
+   SSH プロトコルは, 公開鍵暗号をベースとする認証を実行するために公開/秘密鍵ペアを利用する. SSHプロトコルで公開鍵認証を行なうためには, クライアントとサーバ間で最初に公開鍵を交換しなければならない.
 
-   This document formally describes an existing public key file format
-   that can be used with any of the common existing file transfer
-   mechanisms in order to exchange public keys.
+   この文書は, 公開鍵を交換するために既存の任意の共通ファイル転送メカニズムが利用できる既存の公開鍵ファイルフォーマットを公式に記述する.
 
-   The SSH protocol also uses public/private key pairs to authenticate
-   the server.  In this scenario, it is important to verify that the
-   public key provided by the server is indeed the server's public key.
-   This document describes a mechanism for creating a short text string
-   that uniquely represents a particular public key, called
-   fingerprinting.
+   SSH プロトコルは, サーバの認証でも公開鍵/秘密鍵ペアを利用する.  このシナリオでは, サーバから提供された公開鍵が本当にサーバの公開鍵か確認するのが重要だ.
+   この文書で, 特定の公開鍵を一意に表現する, 指紋と呼ばれる短い文字列を生成するメカニズムを記述する.
 
 2.  この文書で用いる表記
 
    この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, [RFC-2119] で記述されているように解釈される. 
 
-3.  Key File Format
+3.  鍵ファイルの形式
 
-   In order to implement public key authentication, SSH implementations
-   must share public key files between the client and the server in
-   order to interoperate.
+   公開鍵認証の実装で, SSHの実装は相互運用のために公開鍵ファイルをクライアントとサーバで共有しなければならない. 
 
-   A key file is a text file, containing a sequence of lines.  Each line
-   in the file MUST NOT be longer than 72 8-bit bytes excluding line
-   termination characters.
+   鍵ファイルは行の並びを含むテキストファイルだ.  ファイルの各行は, 行の終端文字を除いて 72 8bit バイトより長くてはならない.
 
-3.1.  Line Termination Characters
+3.1.  行終端文字
 
-   Implementations SHOULD generate public key files using their system's
-   local text file representation.
+   システムのローカルなテキストファイル表現を用いて公開鍵を実装は生成する必要がある.
 
-   In the event that public key files are not transferred as text files,
-   implementations SHOULD be prepared to read files using any of the
-   common line termination sequence, <CR>, <LF>, or <CR><LF>.
+   公開鍵ファイルがテキストファイルとして転送されない場合があるので, 一般的な行終端文字 <CR> と, <LF>, <CR><LF> を用いるファイルすべてを読めるように実装は準備しなければならない.
 
 
 
@@ -115,50 +95,37 @@ Galbraith & Thayer           Informational                      [Page 2]
 RFC 4716               SSH Public Key File Format          November 2006
 
 
-3.2.  Begin and End Markers
+3.2.  開始と終了のマーカー
 
-   The first line of a conforming key file MUST be a begin marker, which
-   is the literal text:
+   この文書に従う鍵ファイルの一行目は 開始マーカーでなければならない. マーカーは以下のテキストだ.
 
    ---- BEGIN SSH2 PUBLIC KEY ----
 
-   The last line of a conforming key file MUST be an end marker, which
-   is the literal text:
+   この文書に従う鍵ファイルの最終行は 終了マーカーでなければならない. マーカーは以下のテキストだ.
 
    ---- END SSH2 PUBLIC KEY ----
 
-3.3.  Key File Header
+3.3.  鍵ファイルのヘッダ
 
-   The key file header section consists of multiple RFC822-style header
-   fields.  Each field is a line of the following format:
+   鍵ファイルのヘッダ部は, 複数の RFC822 スタイルのヘッダフィールドから構成される.  各行は, 以下の形式の行だ.
 
    Header-tag ':' ' ' Header-value
 
-   The Header-tag MUST NOT be more than 64 8-bit bytes and is case-
-   insensitive.  The Header-value MUST NOT be more than 1024 8-bit
-   bytes.  Each line in the header MUST NOT be more than 72 8-bit bytes.
+   Header-tag は, 64 8-bit バイトを越えてはならず, 大文字小文字を区別しない.  Header-value は 1024 8-bit バイトと越えてはならない.  ヘッダの各行は 72 8-bit バイトを越えてはならない.
 
-   A line is continued if the last character in the line is a '\'.  If
-   the last character of a line is a '\', then the logical contents of
-   the line are formed by removing the '\' and the line termination
-   characters, and appending the contents of the next line.
+   行の最後の文字が '\' なら行は継続される.  最後の行の文字が '\' の場合, '\' と行終端文字を除いて次の行の内容を連結したものがその行の論理的な内容となる.
 
-   The Header-tag MUST be encoded in US-ASCII.  The Header-value MUST be
-   encoded in UTF-8 [RFC3629].
+   Header-tag は US-ASCII でエンコードされなければならない.  Header-value は UTF-8 [RFC3629] でエンコードされなければならない.
 
-   A line that is not a continuation line that has no ':' in it is the
-   first line of the base64-encoded body.  (See Section 3.4.)
+   ':' を含まない継続行でない行は, base64 エンコードされた本体の最初の行だ.  (3.4 節を参照.)
 
-   The space of header-tags is managed as described in Section 5.
+   header-tag の空間は, 5節で記述するように管理される.
 
-   Compliant implementations MUST ignore headers with unrecognized
-   header-tags.  Implementations SHOULD preserve such unrecognized
-   headers when manipulating the key file.
+   この文書に準拠する実装は, 認識できない header-tag を持つヘッダを無視しなければならない.  鍵ファイルを操作する際は, そのような認識できないヘッダを実装は保存する必要がある.
 
-3.3.1.  Subject Header
+3.3.1.  Subject ヘッダ
 
-   This field is used to store the login-name that the key was generated
-   under.  For example:
+   このフィールドは, 鍵が生成された環境のログイン名を保持するのに利用される.  例:
 
    Subject: user
 
@@ -171,54 +138,40 @@ Galbraith & Thayer           Informational                      [Page 3]
 RFC 4716               SSH Public Key File Format          November 2006
 
 
-3.3.2.  Comment Header
+3.3.2.  Comment ヘッダ
 
-   The comment header contains a user-specified comment.  The comment
-   SHOULD be displayed when using the key.
+   comment ヘッダは, ユーザが指定したコメントを含む.  このコメントは, 鍵の利用時に表示される必要がある.
 
-   It is suggested that this field default to user@hostname for the user
-   and machine used to generate the key.  For example:
+   このフィールドのデフォルトを, 鍵を作成するのに利用したユーザとマシンからなる user@hostname とするのを推奨する.  例:
 
    Comment: user@example.com
 
-   Currently, common practice is to quote the Header-value of the
-   Comment by prefixing and suffixing it with '"' characters, and some
-   existing implementations fail if these quotation marks are omitted.
+   現在, コメントのHeader-value を '"' 文字を前置と後置してクォートするのが慣習となっている. いくつかの既存の実装が, この引用符がないと失敗する.
 
-   Compliant implementations MUST function correctly if the quotation
-   marks are omitted.
+   この文書に準拠する実装は, 引用符がなくても正常に機能する必要がある.
 
-   Implementations MAY include the quotation marks.  If the first and
-   last characters of the Header-value are matching quotation marks,
-   implementations SHOULD remove them before using the value.
+   実装は, この引用符を含んでもよい.  Header-value の 最初と最後の文字が引用符と一致するなら, 値を利用する前に引用符を実装は除く必要がある.
 
-3.3.3.  Private Use Headers
+3.3.3.  私的利用のヘッダ
 
-   Headers with header-tags beginning with "x-" are reserved for private
-   use.
+   "x-" で始まる header-tag を持つヘッダは私的利用のために予約されている.
 
-3.4.  Public Key File Body
+3.4.  公開鍵ファイルの本体
 
-   The body of a public key file is the base64 encoded ([RFC2045])
-   public key data as specified by [RFC4253], Section 6.6:
+   公開鍵ファイルの本体は, [RFC4253]の6.6節で指定された公開鍵データを base64 エンコード ([RFC2045]) したものだ.
 
          string    certificate or public key format identifier
          byte[n]   key/certificate data
 
-   As with all other lines, each line in the body MUST NOT be longer
-   than 72 8-bit bytes excluding line termination characters.
+   他の行と同様に, 本体の各行も行終端文字を除いて 72 8-bit バイトを越えてはならない.
 
-3.5.  Differences with RFC 1421 PEM Formats
+3.5.  RFC 1421 PEM 形式との違い
 
-   Implementers should take care to notice that while the format is
-   superficially similar to those specified by PEM [RFC1421] and OpenPGP
-   [RFC2440], it is not identical; most notably:
+   実装者は, PEM[RFC1421] と OpenPGP [RFC2440] で指定された形式とこの形式が表面的に似ているが, 同一のものではないことに注意する必要がある. 特に以下の点に注意:
 
-   o  The other specifications use different BEGIN/END delimiters (five
-      dashes, no space rather than four dashes and a space).
+   o  他の仕様は異なる開始/終了デリミタ(4つのダッシュと空白ではなく, 空白なしの5つのダッシュ) を利用している.
 
-   o  There is no blank line before the start of the base64-encoded
-      contents.
+   o  base64 エンコードされた内容の開始の前に空白行はない.
 
 
 
@@ -227,17 +180,13 @@ Galbraith & Thayer           Informational                      [Page 4]
 RFC 4716               SSH Public Key File Format          November 2006
 
 
-   o  There is no Cyclic Redundancy Check (CRC) at the end of the
-      base64-encoded block.
+   o  base64 エンコードされたブロックの終わりに 巡回冗長検索 (CRC)がない.
 
-   o  Header continuation uses a backslash at the end of the continued
-      line rather than whitespace at the start of the next line.
+   o  ヘッダの継続に, 次の行の最初に空白ではなく, 継続される行の末尾にバックシュラッシュを用いる.
 
-3.6.  Examples
+3.6.  例
 
-   The following are some examples of public key files that are
-   compliant (note that the examples all wrap before 72 bytes to meet
-   IETF document requirements; however, they are still compliant.)
+   以下は準拠する公開鍵ファイルの例だ. (注意: IETF の文書の要件を満すために すべての例は72 byte より前で折り返されている. ただし, これでも準拠している)
 
    ---- BEGIN SSH2 PUBLIC KEY ----
    Comment: "1024-bit RSA, converted from OpenSSH by me@example.com"
@@ -292,45 +241,31 @@ RFC 4716               SSH Public Key File Format          November 2006
    soW6NUlfDzpvZK2H5E7eQaSeP3SAwGmQKUFHCddNaP0L+hM7zhFNzjFvpaMgJw0=
    ---- END SSH2 PUBLIC KEY ----
 
-4.  Public Key Fingerprints
+4.  公開鍵の指紋
 
-   The security of the SSH protocols relies on the verification of
-   public host keys.  Since public keys tend to be very large, it is
-   difficult for a human to verify an entire host key.  Even with a
-   Public Key Infrastructure (PKI) in place, it is useful to have a
-   standard for exchanging short fingerprints of public keys.
+   SSHプロトコルのセキュリティは, 公開ホスト鍵の検証に依存している.  公開鍵は非常に大きいので, ホスト鍵全体を人間が検証するのは困難だ.  公開鍵基盤(PKI)でも実施されているように, 公開鍵の短い指紋を交換する標準があると便利だ.
 
-   This section formally describes the method of generating public key
-   fingerprints that is in common use in the SSH community.
+   この節では, SSHコミュミティで共通に利用する公開鍵の指紋を生成する方法を記述する.
 
-   The fingerprint of a public key consists of the output of the MD5
-   message-digest algorithm [RFC1321].  The input to the algorithm is
-   the public key data as specified by [RFC4253].  (This is the same
-   data that is base64 encoded to form the body of the public key file.)
+   公開鍵の指紋は, MD5 メッセージダイジェストアルゴリズム[RFC1321] の出力から構成される.  アルゴリズムへの入力は, [RFC4253] で指定された公開鍵データだ.  (公開鍵ファイルの本体を構成するために base64 エンコードされるデータと同じものだ.)
 
-   The output of the algorithm is presented to the user as a sequence of
-   16 octets printed as hexadecimal with lowercase letters and separated
-   by colons.
+   アルゴリズムの出力は, 小文字でコロンで区切られた16進数で表示される 16 オクテットの並びとして, ユーザに提示される.
 
-   For example: "c1:b1:30:29:d7:b8:de:6c:97:77:10:d7:46:41:63:87"
+   例: "c1:b1:30:29:d7:b8:de:6c:97:77:10:d7:46:41:63:87"
 
 5.  IANA の考慮
 
-   Section 3.3 defines a new namespace of "Header-tags".  These are
-   US-ASCII strings of maximum length 64 characters and are
-   case-insensitive.
+   3.3 節で新しい名前空間 "Header-tags" を定義している.  最大 64文字で大文字小文字を区別しない US-ASCII 文字列だ.
 
-   IANA has created and maintains a registry of these header-tags.  The
-   registry maps each header-tag to a reference defining the header.
+   IANA は これらの header-tags のレジストリを作成し管理している.  このレジストリは, それぞれの header-tag を ヘッダを定義しているリファレンスにマップしている.
 
-   The initial contents of the registry are as follows:
+   レジルトリの最初の内容は以下だ:
 
-      subject defined in Section 3.3.1
+      subject は 3.3.1 節で定義されている
 
-      comment defined in Section 3.3.2
+      comment は 3.3.2 節で定義されている.
 
-   Header-tags beginning with "x-" are reserved for private use, as
-   defined in [RFC2434].
+   "x-" で始まる Header-tags は, [RFC2434] で定義されているように, 私的利用のために予約されている.
 
 
 
@@ -339,36 +274,17 @@ Galbraith & Thayer           Informational                      [Page 6]
 RFC 4716               SSH Public Key File Format          November 2006
 
 
-   All other allocations are to be made by IETF consensus, as defined in
-   [RFC2434].
+   [RFC2434] で定義されているように, IETF での合意によってその他のすべての割り当てが行なわれるべきだ.
 
 6.  セキュリティの考察
 
-   The file format described by this document provides no mechanism to
-   verify the integrity or otherwise detect tampering with the data
-   stored in such files.  Given the potential of adversarial tampering
-   with this data, system-specific measures (e.g., Access Control Lists,
-   UNIX permissions, other Discretionary and/or Mandatory Access
-   Controls) SHOULD be used to protect these files.  Also, if the
-   contents of these files are transferred it SHOULD be done over a
-   trusted channel.
+   この文書で記述したファイル形式は, 完全性を検証したり, もしくはファイルに保存されたデータの改竄を検知したりするメカニズムを提供しない.  データに対する悪意のある改善の可能性を考慮して, これらのファイルを保護するためにシステム固有の方法(例えば, アクセスコントロールリスト, UNIXのパーミッション, その他の任意 及び/もしくは 強制のアクセス制限)を利用する必要がある.  加えて, これらのファイルの内容を転送する際は, 信頼されたチャンネル上で行なわれる必要がある.
 
-   The header data allowed by this file format could contain an
-   unlimited range of information.  While in many environments the
-   information conveyed by this header data may be considered innocuous
-   public information, it may constitute a channel through which
-   information about a user, a key, or its use may be disclosed
-   intentionally or otherwise (e.g., "Comment: Mary E. Jones, 123 Main
-   St, Home Phone:...").  The presence and use of this header data
-   SHOULD be reviewed by sites that deploy this file format.
+   このファイル形式で利用できるヘッダのデータは, 情報の範囲の制限がない.  多くの環境ではこのヘッダデータに格納される情報は無害な公開情報だと考えられるが, 意図的またはその他の方法で開示されうるユーザや鍵や鍵の利用についての情報を通すチャンネルを構築するかもしれない. (例, "Comment: Mary E. Jones, 123 Main St(住所), 自宅の電話番号:...").  このヘッダフィールドの有無と利用は, このファイル形式を配置するサイトによって精査される必要がある.
 
-   The public key fingerprint method presented here relies on the MD5
-   one-way hash function, which is known to have certain weaknesses
-   regarding its collision resistance; however, the particular use made
-   of MD5 here depends solely on its 2nd-preimage resistance, not on its
-   collision resistance.
+   この文書で提示した公開鍵の指紋は MD5 一方向関数に依存している. MD5 はその衝突耐性に関する弱点があることで知られている; しかし, この公開鍵指紋での MD5 の利用は単に 2次原像耐性に依存しており, 衝突耐性には依存していない.
 
-   MD5 is used here for historical reasons.
+   MD5 が利用されているのは歴史的な理由による.
 
 
 
