@@ -103,6 +103,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>(This is the same
+   data that is base64 encoded to form the body of the public key file.)</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110719T025555Z" changeid="haruyama">
+        <seg>(公開鍵ファイルの本体を構成するために base64 エンコードされるデータと同じものだ.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>*  For these RECOMMENDED curves, the elliptic curve domain
          parameter identifier is the string in the third column of the
          table, the ASCII representation of the OID of the curve.</seg>
@@ -5592,6 +5601,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Even with a
+   Public Key Infrastructure (PKI) in place, it is useful to have a
+   standard for exchanging short fingerprints of public keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110719T025219Z" changeid="haruyama">
+        <seg>公開鍵基盤(PKI)でも実施されているように, 公開鍵の短い指紋を交換する標準があると便利だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Every SSH ECC implementation MUST support the named curves below.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110426T083743Z" changeid="haruyama">
@@ -6184,6 +6203,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110718T034353Z" changeid="haruyama">
         <seg>例:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For example: &quot;c1:b1:30:29:d7:b8:de:6c:97:77:10:d7:46:41:63:87&quot;</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110719T025700Z" changeid="haruyama">
+        <seg>例: &quot;c1:b1:30:29:d7:b8:de:6c:97:77:10:d7:46:41:63:87&quot;</seg>
       </tuv>
     </tu>
     <tu>
@@ -13902,11 +13929,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Public Key Fingerprints</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110719T024928Z" changeid="haruyama">
+        <seg>公開鍵の指紋</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Public Key Fingerprints .........................................6
    5.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110715T063420Z" changeid="haruyama">
-        <seg>公開鍵指紋 .........................................6
+      <tuv lang="JA" changedate="20110719T024933Z" changeid="haruyama">
+        <seg>公開鍵の指紋 .........................................6
    5.</seg>
       </tuv>
     </tu>
@@ -15211,6 +15246,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110715T051701Z" changeid="haruyama">
         <seg>SSHは自身で認証法や鍵交換法の交渉をするので, SPENGO 単独での交渉能力は利益をもたらさない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Since public keys tend to be very large, it is
+   difficult for a human to verify an entire host key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110719T025112Z" changeid="haruyama">
+        <seg>公開鍵は非常に大きいので, ホスト鍵全体を人間が検証するのは困難だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18788,6 +18832,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The fingerprint of a public key consists of the output of the MD5
+   message-digest algorithm [RFC1321].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110719T025325Z" changeid="haruyama">
+        <seg>公開鍵の指紋は, MD5 メッセージダイジェストアルゴリズム[RFC1321] の出力から構成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The fingerprint type octet describes the message-digest algorithm
    used to calculate the fingerprint of the public key.</seg>
       </tuv>
@@ -19385,6 +19438,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>'reason code' の値と 'description' の値の初期の割り当ては, 次の表で示されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The input to the algorithm is
+   the public key data as specified by [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110719T025416Z" changeid="haruyama">
+        <seg>アルゴリズムへの入力は, [RFC4253] で指定された公開鍵データだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20117,6 +20179,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The output of the algorithm is presented to the user as a sequence of
+   16 octets printed as hexadecimal with lowercase letters and separated
+   by colons.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110719T025656Z" changeid="haruyama">
+        <seg>アルゴリズムの出力は, 小文字でコロンで区切られた16進数で表示される 16 オクテットの並びとして, ユーザに提示される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The overall security of using SSHFP for SSH host key verification is
    dependent on the security policies of the SSH host administrator and
    DNS zone administrator (in transferring the fingerprint), detailed
@@ -20579,6 +20651,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110615T054003Z" changeid="haruyama">
         <seg>Diffie-Hellman 鍵交換のセキュリティは, 離散対数問題 (DLP) が容易に解けないことに基づいている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The security of the SSH protocols relies on the verification of
+   public host keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110719T024958Z" changeid="haruyama">
+        <seg>SSHプロトコルのセキュリティは, 公開ホスト鍵の検証に依存している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23326,6 +23407,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>この節では, この点を詳述し, セッションを始める前にこの関係を検証することの重要性を管理者とユーザが理解するように勧めている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This section formally describes the method of generating public key
+   fingerprints that is in common use in the SSH community.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110719T025251Z" changeid="haruyama">
+        <seg>この節では, SSHコミュミティで共通に利用する公開鍵の指紋を生成する方法を記述する.</seg>
       </tuv>
     </tu>
     <tu>
