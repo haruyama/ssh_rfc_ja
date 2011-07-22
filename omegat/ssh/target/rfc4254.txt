@@ -24,7 +24,7 @@ Copyright Notice
 
 概要
 
-   セキュア シェル (SSH) は, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.
+   セキュアシェル (SSH) は, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.
 
    この文書は, SSH コネクションプロトコルについて記述する.  このプロトコルは, インタラクティブなログインセッション, コマンドのリモート実行, TCP/IP接続の転送, X11接続の転送を提供する.  これらのチャンネルすべては, 単一の暗号化されたトンネルに多重化される.
 
@@ -367,7 +367,7 @@ RFC 4254                SSH Connection Protocol             January 2006
 
 
    'want reply' が FALSE なら, 要求に対する返答は送られない.
-   しかし, 受け取り手は SSH_MSG_CHANNEL_SUCCESS ないし SSH_MSG_CHANNEL_FAILURE, もしくは 要求特有の継続メッセージを返す.  要求が理解できなかったりチャンネルでサポートされていない場合は, SSH_MSG_CHANNEL_FAILURE を返す.
+   そうでなければ, 受け取り手は SSH_MSG_CHANNEL_SUCCESS ないし SSH_MSG_CHANNEL_FAILURE, もしくは 要求特有の継続メッセージを返す.  要求が理解できなかったりチャンネルでサポートされていない場合は, SSH_MSG_CHANNEL_FAILURE を返す.
 
    このメッセージは, window space を消費しない. window space が残っていない場合にも送ることができる.  'request type' の値は それぞれの channel type に局所的だ.
 

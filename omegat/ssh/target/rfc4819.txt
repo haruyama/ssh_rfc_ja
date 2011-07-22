@@ -25,20 +25,13 @@ Copyright Notice
 
 概要
 
-   Secure Shell defines a user authentication mechanism that is based on
-   public keys, but does not define any mechanism for key distribution.
-   No common key management solution exists in current implementations.
-   This document describes a protocol that can be used to configure
-   public keys in an implementation-independent fashion, allowing client
-   software to take on the burden of this configuration.
+   セキュアシェルは公開鍵の基づくユーザ認証アルゴリズムを定義しているが, 鍵配布のメカニズムは定義していない.
+   現在の実装では, 共通の鍵管理ソリューションは存在しない.
+   この文書では, 実装に依存しない形で公開鍵を設定するのに利用できるプロトコルを定義する. この設定に対する負担はクライアントソフトウェアが引き受ける.
 
-   The Public Key Subsystem provides a server-independent mechanism for
-   clients to add public keys, remove public keys, and list the current
-   public keys known by the server.  Rights to manage public keys are
-   specific and limited to the authenticated user.
+   この公開鍵サブシステムは, 公開鍵を追加したり削除したりサーバが知っている現在の公開鍵の一覧を取得する, サーバに依存しないメカニズムをクライアントに提供する.  公開鍵を管理する権限は, 認証されたユーザに特有で制限される.
 
-   A public key may also be associated with various restrictions,
-   including a mandatory command or subsystem.
+   公開鍵を, コマンドやサブシステムの強制を含む様々な制限に関連付けることができる.
 
 
 
@@ -59,32 +52,32 @@ RFC 4819           Secure Shell Public Key Subsystem          March 2007
 
 目次
 
-   1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  3
-   2.  Terminology  . . . . . . . . . . . . . . . . . . . . . . . . .  3
-   3.  Public Key Subsystem Overview  . . . . . . . . . . . . . . . .  3
-     3.1.  Opening the Public Key Subsystem . . . . . . . . . . . . .  4
-     3.2.  Requests and Responses . . . . . . . . . . . . . . . . . .  5
-     3.3.  The Status Message . . . . . . . . . . . . . . . . . . . .  5
-       3.3.1.  Status Codes . . . . . . . . . . . . . . . . . . . . .  5
-     3.4.  The Version Packet . . . . . . . . . . . . . . . . . . . .  6
-   4.  Public Key Subsystem Operations  . . . . . . . . . . . . . . .  7
-     4.1.  Adding a Public Key  . . . . . . . . . . . . . . . . . . .  7
-     4.2.  Removing a Public Key  . . . . . . . . . . . . . . . . . . 10
-     4.3.  Listing Public Keys  . . . . . . . . . . . . . . . . . . . 10
-     4.4.  Listing Server Capabilities  . . . . . . . . . . . . . . . 10
-   5.  Security Considerations  . . . . . . . . . . . . . . . . . . . 11
-   6.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 12
-     6.1.  Registrations  . . . . . . . . . . . . . . . . . . . . . . 12
-     6.2.  Names  . . . . . . . . . . . . . . . . . . . . . . . . . . 12
-       6.2.1.  Conventions for Names  . . . . . . . . . . . . . . . . 12
-       6.2.2.  Future Assignments of Names  . . . . . . . . . . . . . 13
-     6.3.  Public Key Subsystem Request Names . . . . . . . . . . . . 13
-     6.4.  Public Key Subsystem Response Names  . . . . . . . . . . . 13
-     6.5.  Public Key Subsystem Attribute Names . . . . . . . . . . . 13
-     6.6.  Public Key Subsystem Status Codes  . . . . . . . . . . . . 14
-       6.6.1.  Conventions  . . . . . . . . . . . . . . . . . . . . . 14
-       6.6.2.  Initial Assignments  . . . . . . . . . . . . . . . . . 14
-       6.6.3.  Future Assignments . . . . . . . . . . . . . . . . . . 15
+   1.  導入 . . . . . . . . . . . . . . . . . . . . . . . . .  3
+   2.  用語  . . . . . . . . . . . . . . . . . . . . . . . . .  3
+   3.  公開鍵サブシステムの概要  . . . . . . . . . . . . . . . .  3
+     3.1.  公開鍵サブシステムの開始 . . . . . . . . . . . . .  4
+     3.2.  要求と応答 . . . . . . . . . . . . . . . . . .  5
+     3.3.  状態メッセージ . . . . . . . . . . . . . . . . . . . .  5
+       3.3.1.  状態コード . . . . . . . . . . . . . . . . . . . . .  5
+     3.4.  バージョンパケット . . . . . . . . . . . . . . . . . . . .  6
+   4.  公開鍵サブシステムの操作  . . . . . . . . . . . . . . .  7
+     4.1.  公開鍵の追加  . . . . . . . . . . . . . . . . . . .  7
+     4.2.  公開鍵の削除  . . . . . . . . . . . . . . . . . . 10
+     4.3.  公開鍵の一覧の取得  . . . . . . . . . . . . . . . . . . . 10
+     4.4.  サーバ機能の一覧の取得  . . . . . . . . . . . . . . . 10
+   5.  セキュリティの考察  . . . . . . . . . . . . . . . . . . . 11
+   6.  IANA の考察  . . . . . . . . . . . . . . . . . . . . . 12
+     6.1.  登録  . . . . . . . . . . . . . . . . . . . . . . 12
+     6.2.  名前  . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+       6.2.1.  命名規則  . . . . . . . . . . . . . . . . 12
+       6.2.2.  将来の名前の割り当て  . . . . . . . . . . . . . 13
+     6.3.  公開鍵サブシステムの要求名 . . . . . . . . . . . . 13
+     6.4.  公開鍵サブシステムの応答名  . . . . . . . . . . . 13
+     6.5.  公開鍵サブシステムの属性名 . . . . . . . . . . . 13
+     6.6.  公開鍵サブシステムの状態コード  . . . . . . . . . . . . 14
+       6.6.1.  規約  . . . . . . . . . . . . . . . . . . . . . 14
+       6.6.2.  初期の割り当て  . . . . . . . . . . . . . . . . . 14
+       6.6.3.  将来の割り当て . . . . . . . . . . . . . . . . . . 15
    7.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 15
      7.1.  Normative References . . . . . . . . . . . . . . . . . . . 15
      7.2.  Informative References . . . . . . . . . . . . . . . . . . 15
@@ -115,50 +108,27 @@ RFC 4819           Secure Shell Public Key Subsystem          March 2007
 
 1.  イントロダクション
 
-   セキュア シェル (SSH) は, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.  Secure Shell
-   defines a user authentication mechanism that is based on public keys,
-   but does not define any mechanism for key distribution.  Common
-   practice is to authenticate once with password authentication and
-   transfer the public key to the server.  However, to date no two
-   implementations use the same mechanism to configure a public key for
-   use.
+   セキュアシェル (SSH) は, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.  セキュアシェルは公開鍵の基づくユーザ認証アルゴリズムを定義しているが, 鍵配布のメカニズムは定義していない.  一度パスワード認証で認証しサーバに公開鍵を転送するのが一般的な方法だ.  しかし, 公開鍵の利用の設定で, 別々の実装で同じメカニズムを利用する例は今のところない.
 
-   This document describes a subsystem that can be used to configure
-   public keys in an implementation-independent fashion.  This approach
-   allows client software to take on the burden of this configuration.
-   The Public Key Subsystem protocol is designed for extreme simplicity
-   in implementation.  It is not intended as a Public Key Infrastructure
-   for X.509 Certificates (PKIX) replacement.
+   この文書は, 実装に依存しない形で公開鍵を設定するためのサブシステムを記述する.  このアプリートでは, クライアントソフトウェアがこの設定に対する負担を引き受ける.
+   この公開鍵サブシステムプロトコルは, 非常に簡単に実装できるよう設計されている.  これは, X.509 証明書ベースの公開鍵基盤 (PKIX) の代替を意図していない.
 
-   The Secure Shell Public Key Subsystem has been designed to run on top
-   of the Secure Shell transport layer [2] and user authentication
-   protocols [3].  It provides a simple mechanism for the client to
-   manage public keys on the server.
+   セキュアシェル公開鍵サブシステムは, セキュアシェルトランスポート層 [2] と ユーザ認証 [3] プロトコルの上で動作するように設計されている.  サーバ上の公開鍵を管理するクライアントのための簡単なメカニズムを提供する.
 
-   This document should be read only after reading the Secure Shell
-   architecture [1] and Secure Shell connection [4] documents.
+   この文書は, セキュアシェルアーキテクチャ [1] と セキュアシェルコネクション [4] 文書を読んだあとに読むべきだ.
 
-   This protocol is intended to be used from the Secure Shell Connection
-   Protocol [4] as a subsystem, as described in the section "Starting a
-   Shell or a Command".  The subsystem name used with this protocol is
-   "publickey".
+   このプロトコルは, セキュアシェルコネクションプロトコル [4] の, "「シェルまたはコマンドの開始」 節に記述されている, サブシステムから利用されることを意図している.  このプロトコルで用いられるサブシステム名は "publickey" だ.
 
-   This protocol requires that the user be able to authenticate in some
-   fashion before it can be used.  If password authentication is used,
-   servers SHOULD provide a configuration option to disable the use of
-   password authentication after the first public key is added.
+   このプロトコルは, ユーザが利用する前に何らかの形でユーザを認証できる必要がある.  パスワード認証が使える場合, 最初の公開鍵が追加された後でパスワード認証の利用を無効にする設定項目をサーバは提供する必要がある.
 
-2.  Terminology
+2.  用語
 
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   document are to be interpreted as described in RFC 2119 [5].
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, RFC 2119 [5] で記述されているように解釈される. 
 
-3.  Public Key Subsystem Overview
+3.  公開鍵サブシステムの概要
 
-   The Public Key Subsystem provides a server-independent mechanism for
-   clients to add public keys, remove public keys, and list the current
-   public keys known by the server.  The subsystem name is "publickey".
+   この公開鍵サブシステムは, 公開鍵を追加したり削除したりサーバが知っている現在の公開鍵の一覧を取得する, サーバに依存しないメカニズムをクライアントに提供する.  サブシステム名は "publickey" だ.
 
 
 
@@ -168,26 +138,19 @@ Galbraith, et al.           Standards Track                     [Page 3]
 RFC 4819           Secure Shell Public Key Subsystem          March 2007
 
 
-   The public keys added, removed, and listed using this protocol are
-   specific and limited to those of the authenticated user.
+   このプロトコルを用いて公開鍵を追加, 削除, 一覧の取得をするのは, 認証されたユーザの公開鍵に特定され制限される.
 
-   The operations to add, remove, and list the authenticated user's
-   public keys are performed as request packets sent to the server.  The
-   server sends response packets that indicate success or failure as
-   well as provide specific response data.
+   認証されたユーザの公開鍵の追加や削除, 一覧の取得の操作は, サーバに送られる要求パケットで実行される.  サーバは応答パケットを送信して, 成功か失敗を示し応答に特有のデータを提供する.
 
-   The format of public key blobs are detailed in Section 6.6, "Public
-   Key Algorithms" of the SSH Transport Protocol document [2].
+   公開鍵ブロブの形式は SSH トランスポートプロトコル文書 [2] の 6.6 節 「公開鍵アルゴリズム」 に詳述されている.
 
-3.1.  Opening the Public Key Subsystem
+3.1.  公開鍵サブシステムの開始
 
-   The Public Key Subsystem is started by a client sending an
-   SSH_MSG_CHANNEL_REQUEST over an existing session's channel.
+   公開鍵サブシステムは, すでに開始されているセッションチャンネル上で SSH_MSG_CHANNEL_REQUEST をクライアントが送ることで開始される.
 
-   The details of how a session is opened are described in the SSH
-   Connection Protocol document [4] in the section "Opening a Session".
+   どのようにセッションを開始するかの詳細は, SSH コネクションプロトコル文書 [4] の 「セッションの開始」 節に記述されている.
 
-   To open the Public Key Subsystem, the client sends:
+   公開鍵サブシステムを開始するためにクライアントは以下を送る:
 
         byte      SSH_MSG_CHANNEL_REQUEST
         uint32    recipient channel
@@ -195,20 +158,15 @@ RFC 4819           Secure Shell Public Key Subsystem          March 2007
         boolean   want reply
         string    "publickey"
 
-   Client implementations SHOULD reject this request; it is normally
-   sent only by the client.
+   クライアントの実装はこの要求を拒否する必要がある. これは通常クライアントからのみ送られる.
 
-   If want reply is TRUE, the server MUST respond with
-   SSH_MSG_CHANNEL_SUCCESS if the Public Key Subsystem was successfully
-   started, or SSH_MSG_CHANNEL_FAILURE if the server failed to start or
-   does not support the Public Key Subsystem.
+   want reply が TRUE の場合, 公開鍵サブシステムの開始に成功したら SSH_MSG_CHANNEL_SUCCESS をサーバは返さなければならない. 公開鍵サブシステムの開始に失敗したりサポートしていなければ SSH_MSG_CHANNEL_FAILURE サーバは返さなければならない.
 
-   The server SHOULD respond with SSH_MSG_CHANNEL_FAILURE if the user is
+   (例えば制限された公開鍵でユーザが認証したため) 公開鍵サブシステムにアクセスをユーザが許されていない場合も, SSH_MSG_CHANNEL_FAILUREをサーバは返す必要がある.The server SHOULD respond with SSH_MSG_CHANNEL_FAILURE if the user is
    not allowed access to the Public Key Subsystem (for example, because
    the user authenticated with a restricted public key).
 
-   It is RECOMMENDED that clients request and check the reply for this
-   request.
+   クライアントがこの要求で応答を要求し検査するのを推奨する.
 
 
 
@@ -224,42 +182,32 @@ Galbraith, et al.           Standards Track                     [Page 4]
 RFC 4819           Secure Shell Public Key Subsystem          March 2007
 
 
-3.2.  Requests and Responses
+3.2.  要求と応答
 
-   All Public Key Subsystem requests and responses are sent in the
-   following form:
+   すべての公開鍵サブシステムの要求と応答は以下の形式で送られる.
 
         uint32    length
         string    name
         ... request/response specific data follows
 
-   The length field describes the length of the name field and of the
-   request/response-specific data, but does not include the length of
-   the length field itself.  The client MUST receive acknowledgement of
-   each request prior to sending a new request.
+   length フィールドは name フィールドと request/response-specific data の長さを表す. length フィールド自体の長さは含まない.  クライアントは, 新しい要求を送る前にそれぞれの要求の確認応答(状態メッセージ)を受け取らなければならない.
 
-   The version packet, as well as all requests and responses described
-   in Section 4, are a description of the 'name' field and the data part
-   of the packet.
+   (3.4節で記述する)バージョンパケットと4節で記述する要求と応答では, 'name' フィールドとパケットのデータ部を記述している.
 
-3.3.  The Status Message
+3.3.  状態メッセージ
 
-   A request is acknowledged by sending a status packet.  If there is
-   data in response to the request, the status packet is sent after all
-   data has been sent.
+   要求は 状態パケットを送ることで確認応答される.  要求に対するデータが送られる場合は, すべてのデータが送られたあとで状態パケットが送られる.
 
         string    "status"
         uint32    status code
         string    description [7]
         string    language tag [6]
 
-   A status message MUST be sent for any unrecognized packets, and the
-   request SHOULD NOT close the subsystem.
+   状態メッセージは, どのような認識されないパケットに対しても送られなければならない. 対応する要求はサブシステムを終了しないほうがよい.
 
-3.3.1.  Status Codes
+3.3.1.  状態コード
 
-   The status code gives the status in a more machine-readable format
-   (suitable for localization), and can have the following values:
+   状態コードは, より機械可読な形式(ローカライズに適している)で状態を与える. 以下の値を取りうる:
 
         SSH_PUBLICKEY_SUCCESS                      0
         SSH_PUBLICKEY_ACCESS_DENIED                1
@@ -280,41 +228,23 @@ Galbraith, et al.           Standards Track                     [Page 5]
 RFC 4819           Secure Shell Public Key Subsystem          March 2007
 
 
-   If a request completed successfully, the server MUST send the status
-   code SSH_PUBLICKEY_SUCCESS.  The meaning of the failure codes is as
-   implied by their names.
+   要求が正常に完了したら, 状態コード SSH_PUBLICKEY_SUCCESS をサーバは送らなければならない.  失敗のコードの意味は, それらの名前に示されている.
 
-3.4.  The Version Packet
+3.4.  バージョンパケット
 
-   Both sides MUST start a connection by sending a version packet that
-   indicates the version of the protocol they are using.
+   クライアントもサーバも, 利用するプロトコルのバージョンを指定するバージョンパケットを送って接続を開始しなければならない.
 
         string "version"
         uint32 protocol-version-number
 
-   This document describes version 2 of the protocol.  Version 1 was
-   used by an early draft of this document.  The version number was
-   incremented after changes in the handling of status packets.
+   この文書はプロトコルバージョン 2 を記述している.  この文書の初期のドラフトで, バージョン1が使われていた.  状態パケットの処理に変更があったのでバージョン番号が増えた.
 
-   Both sides send the highest version that they implement.  The lower
-   of the version numbers is the version of the protocol to use.  If
-   either side can't support the lower version, it should close the
-   subsystem and notify the other side by sending an
-   SSH_MSG_CHANNEL_CLOSE message.  Before closing the subsystem, a
-   status message with the status SSH_PUBLICKEY_VERSION_NOT_SUPPORTED
-   SHOULD be sent.  Note that, normally, status messages are only sent
-   by the server (in response to requests from the client).  This is the
-   only occasion on which the client sends a status message.
+   クライアントもサーバも, 実装している最も高いバージョンを送る.  低いほうのバージョン番号が, 利用されるプロトコルのバージョンとなる.  もう一方が低いバージョンをサポートしていなければ, サブシステムを終了させ, SSH_MSG_CHANNEL_CLOSE を送って相手側に通知しなければならない.  サブシステムを終了する前に,状態が SSH_PUBLICKEY_VERSION_NOT_SUPPORTED な状態メッセージを送る必要がある.  注意: 通常状態メッセージは(クライアントからの要求への応答として)サーバからのみ送られる.  これは, クライアントが状態メッセージを送る唯一の場合だ.
 
-   Both sides MUST wait to receive this version before continuing.  The
-   "version" packet MUST NOT be sent again after this initial exchange.
-   The SSH_PUBLICKEY_VERSION_NOT_SUPPORTED status code must not be sent
-   in response to any other request.
+   どちらの側も続行する前にこのバージョンを受け取るために待たなければならない.  この "version" パケットは, 最初の交換の後で再び送ってはならない.
+   SSH_PUBLICKEY_VERSION_NOT_SUPPORTED 状態コードは, 他の要求への応答として送られてはならない.
 
-   Implementations MAY use the first 15 bytes of the version packet as a
-   "magic cookie" to avoid processing spurious output from the user's
-   shell (as described in Section 6.5 of [4]).  These bytes will always
-   be:
+   実装は, ([4] の6.5 節で記述しているように) ユーザのシェルからの誤った出力を処理するのを避けるために, バージョンパケットの最初の15バイトに "magic cookie" を利用してもよい.  このバイト列は常に以下だ:
 
    0x00 0x00 0x00 0x0F 0x00 0x00 0x00 0x07 0x76 0x65 0x72 0x73 0x69 0x6F
    0x6E
@@ -336,14 +266,13 @@ Galbraith, et al.           Standards Track                     [Page 6]
 RFC 4819           Secure Shell Public Key Subsystem          March 2007
 
 
-4.  Public Key Subsystem Operations
+4.  公開鍵サブシステムの操作
 
-   The Public Key Subsystem currently defines four operations: add,
-   remove, list, and listattributes.
+   公開鍵サブシステムは4つの操作を現在定義している: 追加, 削除, 一覧の取得, サーバの属性の取得だ.
 
-4.1.  Adding a Public Key
+4.1.  公開鍵の追加
 
-   If the client wishes to add a public key, the client sends:
+   クライアントが公開鍵を追加したい場合, クライアントは以下を送る:
 
         string    "add"
         string    public key algorithm name
@@ -355,34 +284,15 @@ RFC 4819           Secure Shell Public Key Subsystem          March 2007
          bool      critical
         repeated attribute-count times
 
-   The server MUST attempt to store the public key for the user in the
-   appropriate location so the public key can be used for subsequent
-   public key authentications.  If the overwrite field is false and the
-   specified key already exists, the server MUST return
-   SSH_PUBLICKEY_KEY_ALREADY_PRESENT.  If the server returns this, the
-   client SHOULD provide an option to the user to overwrite the key.  If
-   the overwrite field is true and the specified key already exists, but
-   cannot be overwritten, the server MUST return
-   SSH_PUBLICKEY_ACCESS_DENIED.
+   サーバは, 以降の公開鍵認証で公開鍵が利用可能になる適切な場所にユーザの公開鍵を保存しようと試みなければならない.  overwrite フィールドが false で指定された鍵がすでに存在したら, サーバは SSH_PUBLICKEY_KEY_ALREADY_PRESENT を返さなければならない.  サーバがこれを返したら, クライアントはユーザに鍵を上書きするかの選択を提供する必要がある.  overwrite フィールドが true で指定された鍵が存在し, 鍵を上書きできない場合は, サーバは SSH_PUBLICKEY_ACCESS_DENIED を返さなければならない.
 
-   Attribute names are defined following the same scheme laid out for
-   algorithm names in [1].  If the server does not implement a critical
-   attribute, it MUST fail the add, with the status code
-   SSH_PUBLICKEY_ATTRIBUTE_NOT_SUPPORTED.  For the purposes of a
-   critical attribute, mere storage of the attribute is not sufficient
-   -- rather, the server must understand and implement the intent of the
-   attribute.
+   [1] のアルゴリズム名のために示されたのと同じ方式に従ってアルゴリズム名は定義される.  サーバが criticalな属性をサポートしない場合は, 状態コード SSH_PUBLICKEY_ATTRIBUTE_NOT_SUPPORTED で追加に失敗しなければならない.  critical な属性の目的を充たすためには, 単なる属性の保存では十分ではない. サーバは属性の意図を理解し実装していなけばならない.
 
-   The following attributes are currently defined:
+   現在次の属性が定義されている:
 
    "comment"
 
-   The value of the comment attribute contains user-specified text about
-   the public key.  The server SHOULD make every effort to preserve this
-   value and return it with the key during any subsequent list
-   operation.  The server MUST NOT attempt to interpret or act upon the
-   content of the comment field in any way.  The comment attribute must
-   be specified in UTF-8 format [7].
+   comment 属性の値は, 公開鍵についてユーザが指定したテキストだ.  サーバは, この値を保持しその後の一覧取得操作で鍵とともに返すためにあらゆる努力をする必要がある.  サーバは, comment フィールドの内容について, どのようなやり方でも解釈しようとしてはいけないし, またどのようなやり方でも内容に基づいて行動しようとしてはいけない.  comment 属性は UTF-8 形式 [7] で指定しなければならない.
 
 
 
@@ -392,51 +302,29 @@ Galbraith, et al.           Standards Track                     [Page 7]
 RFC 4819           Secure Shell Public Key Subsystem          March 2007
 
 
-   The comment field is useful so the user can identify the key without
-   resorting to comparing its fingerprint.  This attribute SHOULD NOT be
-   critical.
+   comment は, 指紋の比較を頼らずにユーザが鍵を特定するのに有効だ.  この属性は critical にしないほうがよい.
 
    "comment-language"
 
-   If this attribute is specified, it MUST immediately follow a
-   "comment" attribute and specify the language for that attribute [6].
-   The client MAY specify more than one comment if it additionally
-   specifies a different language for each of those comments.  The
-   server SHOULD attempt to store each comment with its language
-   attribute.  This attribute SHOULD NOT be critical.
+   この属性が指定されているなら, "comment" 属性がすぐ次に続かなければならない. また, その "comment" 属性の言語を指定しなければならない [6].
+   クライアントは, それぞれのコメントに異なる言語を指定するなら, 1つ以上のコメントを指定してよい.  サーバは, その言語属性付きでコメントを保存するように試みる必要がある.  この属性は critical にしないほうがよい.
 
    "command-override"
 
-   "command-override" specifies a command to be executed when this key
-   is in use.  The command should be executed by the server when it
-   receives an "exec" or "shell" request from the client, in place of
-   the command or shell which would otherwise have been executed as a
-   result of that request.  If the command string is empty, both "exec"
-   and "shell" requests should be denied.  If no "command-override"
-   attribute is specified, all "exec" and "shell" requests should be
-   permitted (as long as they satisfy other security or authorization
-   checks the server may perform).  This attribute SHOULD be critical.
+   "command-override" は, この鍵が使われるときに実行されるコマンドを指定する.  クライアントから "exec" か "shell" の要求があった場合に,  その要求の結果として他では実行される(要求で指定された)コマンドやシェルの変わりに, ("command-override" で)指定されたコマンドはサーバで実行される必要がある. このコマンド文字列が空なら, "exec" と "shell" の要求は禁止される必要がある.  "command-override" 属性が指定されなければ, すべての "exec" と "shell" 要求は許可される必要がある (サーバが行なう他のセキュリティや認証の検査を満している限り). この属性は critical にする必要がある.
 
    "subsystem"
 
-   "subsystem" specifies a comma-separated list of subsystems that may
-   be started (using a "subsystem" request) when this key is in use.
-   This attribute SHOULD be critical.  If the value is empty, no
-   subsystems may be started.  If the "subsystem" attribute is not
-   specified, no restrictions are placed on which subsystems may be
-   started when authenticated using this key.
+   "subsystem" は, この鍵を利用する場合に ("subsystem" 要求を用いて) 開始できる サブシステムのカンマ区切りリストを指定する.
+   この属性は critical にする必要がある.  この値が空なら, どんなサブシステムも開始できない.  "subsystem" 属性が指定されていなければ, この鍵を用いて認証した際に開始できるサブシステムに制限はない.
 
    "x11"
 
-   "x11" specifies that X11 forwarding may not be performed when this
-   key is in use.  The attribute-value field SHOULD be empty for this
-   attribute.  This attribute SHOULD be critical.
+   "x11" はこの鍵を用いるとX11転送が実行されないことを指定する.  この属性の値は, 空の必要がある.  この属性は critical にする必要がある.
 
    "shell"
 
-   "shell" specifies that session channel "shell" requests should be
-   denied when this key is in use.  The attribute-value field SHOULD be
-   empty for this attribute.  This attribute SHOULD be critical.
+   "shell" は, この鍵を用いるとセッションチャンネルの "shell" 要求が拒否されることを指定する.  この属性の値は, 空の必要がある.  この属性は critical にする必要がある.
 
 
 
@@ -450,52 +338,28 @@ RFC 4819           Secure Shell Public Key Subsystem          March 2007
 
    "exec"
 
-   "exec" specifies that session channel "exec" requests should be
-   denied when this key is in use.  The attribute-value field SHOULD be
-   empty for this attribute.  This attribute SHOULD be critical.
+   "exec" は, この鍵を用いるとセッションチャンネルの "exec" 要求が拒否されることを指定する.  この属性の値は, 空の必要がある.  この属性は critical にする必要がある.
 
    "agent"
 
-   "agent" specifies that session channel "auth-agent-req" requests
-   should be denied when this key is in use.  The attribute-value field
-   SHOULD be empty for this attribute.  This attribute SHOULD be
-   critical.
+   "agent" は, この鍵を用いるとセッションチャンネルの "auth-agent-req" 要求が拒否されることを指定する.  この属性の値は, 空の必要がある.  この属性は critical にする必要がある.
 
    "env"
 
-   "env" specifies that session channel "env" requests should be denied
-   when this key is in use.  The attribute-value field SHOULD be empty
-   for this attribute.  This attribute SHOULD be critical.
+   "env" は, この鍵を用いるとセッションチャンネルの "env" 要求が拒否されることを指定する.  この属性の値は, 空の必要がある.  この属性は critical にする必要がある.
 
    "from"
 
-   "from" specifies a comma-separated list of hosts from which the key
-   may be used.  If a host not in this list attempts to use this key for
-   authorization purposes, the authorization attempt MUST be denied.
-   The server SHOULD make a log entry regarding this.  The server MAY
-   provide a method for administrators to disallow the appearance of a
-   host in this list.  The server should use whatever method is
-   appropriate for its platform to identify the host -- e.g., for IP-
-   based networks, checking the IP address or performing a reverse DNS
-   lookup.  For IP-based networks, it is anticipated that each element
-   of the "from" parameter will take the form of a specific IP address
-   or hostname.
+   "from" は 鍵がそこから使われるホストのカンマ区切りリストを指定する.  このリストに含まれないホストが認証目的でこの鍵を利用しようとしたら, 認証の試行は拒否されなければならない.
+   サーバは, これに関するログを残す必要がある.  サーバは, このリスト中に特定のホストの出現を認めないための管理者用の方法を提供してもよい.  例えば, IPベースのネットワークでIPアドレスをチェックしたり DNS逆引きを実行するなど, その環境に適したホストを特定する方法をサーバは利用する必要がある.  IPベースのネットワークでは, "from" パラメータの要素は, 特定のIPアドレスかホスト名の形式となるのが予想される.
 
    "port-forward"
 
-   "port-forward" specifies that no "direct-tcpip" requests should be
-   accepted, except those to hosts specified in the comma-separated list
-   supplied as a value to this attribute.  If the value of this
-   attribute is empty, all "direct-tcpip" requests should be refused
-   when using this key.  This attribute SHOULD be critical.
+   "port-forward" は, この属性の値として与えられたカンマ区切りリストで指定されたホストへのものを除いて, "direct-tcpip" 要求が受けいれられないことを指定する. この属性の値が空なら, この鍵を用いるすべての "direct-tcpip" 要求は拒否される必要がある.  この属性は critical にする必要がある.
 
    "reverse-forward"
 
-   "reverse-forward" specifies that no "tcpip-forward" requests should
-   be accepted, except for the port numbers in the comma-separated list
-   supplied as a value to this attribute.  If the value of this
-   attribute is empty, all "tcpip-forward" requests should be refused
-   when using this key.  This attribute SHOULD be critical.
+   "reverse-forward" は, この属性の値として与えられたカンマ区切りリストで指定されたホストへのものを除いて, "tcpip-forward" 要求が受けいれられないことを指定する. この属性の値が空なら, この鍵を用いるすべての "tcpip-forward" 要求は拒否される必要がある.  この属性は critical にする必要がある.
 
 
 
@@ -504,29 +368,25 @@ Galbraith, et al.           Standards Track                     [Page 9]
 RFC 4819           Secure Shell Public Key Subsystem          March 2007
 
 
-   In addition to the attributes specified by the client, the server MAY
-   provide a method for administrators to enforce certain attributes
-   compulsorily.
+   クライアントで指定された属性に加えて特定の属性を強制するための, 管理者用の方法をサーバは提供してもよい.
 
-4.2.  Removing a Public Key
+4.2.  公開鍵の削除
 
-   If the client wishes to remove a public key, the client sends:
+   クライアントが公開鍵を削除したい場合, クライアントは以下を送る:
 
         string    "remove"
         string    public key algorithm name
         string    public key blob
 
-   The server MUST attempt to remove the public key for the user from
-   the appropriate location, so that the public key cannot be used for
-   subsequent authentications.
+   サーバは, 以降の公開鍵認証で公開鍵が利用不可能になるよう適切な場所からユーザの公開鍵を削除しようと試みなければならない.
 
-4.3.  Listing Public Keys
+4.3.  公開鍵の一覧の取得
 
-   If the client wishes to list the known public keys, the client sends:
+   クライアントが既知の公開鍵の一覧を取得したい場合, クライアントは以下を送る:
 
         string    "list"
 
-   The server will respond with zero or more of the following responses:
+   サーバは, 0以上の以下の応答を返す:
 
         string    "publickey"
         string    public key algorithm name
@@ -536,20 +396,15 @@ RFC 4819           Secure Shell Public Key Subsystem          March 2007
          string    attrib-value
         repeated attribute-count times
 
-   There is no requirement that the responses be in any particular
-   order.  Whilst some server implementations may send the responses in
-   some order, client implementations should not rely on responses being
-   in any order.
+   応答は, 特定の順序である必要はない.  実装はそれぞれ特定のオーダーで応答を返すだろうが, クライアントの実装は特定のオーダーの応答に依存しないほうがよい.
 
-   Following the last "publickey" response, a status packet MUST be
-   sent.
+   最後の "publickey" 応答に続いて, 状態パケットが送られなければならない.
 
-   Implementations SHOULD support this request.
+   実装は, この要求をサポートする必要がある.
 
-4.4.  Listing Server Capabilities
+4.4.  サーバ機能の一覧の取得
 
-   If the client wishes to know which key attributes the server
-   supports, it sends:
+   クライアントがサーバのサポートする鍵の属性を知りたい場合, 以下を送る:
 
         string    "listattributes"
 
@@ -560,54 +415,26 @@ Galbraith, et al.           Standards Track                    [Page 10]
 RFC 4819           Secure Shell Public Key Subsystem          March 2007
 
 
-   The server will respond with zero or more of the following responses:
+   サーバは, 0以上の以下の応答を返す:
 
         string    "attribute"
         string    attribute name
         boolean   compulsory
 
-   The "compulsory" field indicates whether this attribute will be
-   compulsorily applied to any added keys (irrespective of whether the
-   attribute has been specified by the client) due to administrative
-   settings on the server.  If the server does not support
-   administrative settings of this nature, it MUST return false in the
-   compulsory field.  An example of use of the "compulsory" attribute
-   would be a server with a configuration file specifying that the user
-   is not permitted shell access.  Given this, the server would return
-   the "shell" attribute, with "compulsory" marked true.  Whatever
-   attributes the user subsequently asked the server to apply to their
-   key, the server would also apply the "shell" attribute, rendering it
-   impossible for the user to use a shell.
+   "compulsory" フィールドは, サーバの管理の設定のため, 追加されるどの鍵にも(クライアントがこの属性を指定しているかに関係なく)この属性が強制的に追加されることを示している.  サーバがこの管理の設定をサポートしていないなら, compulsory フィールドは false を返さなければならない.  "compulsory" 属性の利用の例として, ユーザのシェルアクセスを拒否する指定が設定ファイルにあるサーバを挙げる.  このとき, "compulsory" がtrue な "shell" 属性をサーバは返す.  ユーザがその後鍵をサーバに適用する際に要求する属性がどのようなものでも, ユーザのシェルの利用を禁止するため "shell" 属性もサーバは適用する
 
-   Following the last "attribute" response, a status packet MUST be
-   sent.
+   最後の "attribute" 応答に続いて, 状態パケットが送られなければならない.
 
-   An implementation MAY choose not to support this request.
+   実装は, この要求をサポートしないことを選択してもよい.
 
 5.  セキュリティの考察
 
-   This protocol assumes that it is run over a secure channel and that
-   the endpoints of the channel have been authenticated.  Thus, this
-   protocol assumes that it is externally protected from network-level
-   attacks.
+   このプロトコルは, 安全なチャンネル上で動作することとそのチャンネルの末端が認証されていることを前提としている.  つまり, このプロトコルは, ネットワークレベルの攻撃からは非常に保護されていることを前提としている.
 
-   This protocol provides a mechanism that allows client authentication
-   data to be uploaded and manipulated.  It is the responsibility of the
-   server implementation to enforce any access controls that may be
-   required to limit the access allowed for any particular user (the
-   user being authenticated externally to this protocol, typically using
-   the SSH User Authentication Protocol [3]).  In particular, it is
-   possible for users to overwrite an existing key on the server with
-   this protocol, whilst at the same time specifying fewer restrictions
-   for the new key than were previously present.  Servers should take
-   care that when doing this, clients are not able to override presets
-   from the server's administrator.
+   このプロトコルは, クライアントの認証データをアップロードし操作できるメカニズムを提供する.  (このプロトコルの外部, 特に SSHユーザ認証プロトコル [3] を用いてユーザを認証して) 特定のユーザにアクセスを制限するために必要なアクセス制御を実施するのはサーバの実装の責任だ.  特に, このプロトコルを用いて, 以前の制限よりも小さい制限を指定してサーバ上の既存の鍵をユーザが上書きできる.  これを行なう際サーバは注意する必要がある. クライアントはサーバの管理者の事前設定を上書きできない.
 
-   This protocol requires the client to assume that the server will
-   correctly implement and observe attributes applied to keys.
-   Implementation errors in the server could cause clients to authorize
-   keys for access they were not intended to have, or to apply fewer
-   restrictions than were intended.
+   このプロトコルは, サーバが正しく実装され鍵に適用された属性を観測できるという前提をクライアントに要求している.
+   サーバの実装エラーにより, クライアントが意図していないアクセスに対して鍵を認証に利用したり, 意図したものよりも少ない制限を適用する可能性がある.
 
 
 
@@ -620,41 +447,23 @@ RFC 4819           Secure Shell Public Key Subsystem          March 2007
 
    この節は, 名前空間を命名規約や, レジストリの初期状態, 将来の割り当てに対する指示を含んでいる.
 
-6.1.  Registrations
+6.1.  登録
 
-   Consistent with Section 4.9.5 of [8], this document makes the
-   following registration:
+   [8] の 4.9.5節と整合するため, この文書は次の登録を行なう:
 
    The subsystem name "publickey".
 
 6.2.  名前
 
-   In the following sections, the values for the namespaces are textual.
-   The conventions and instructions to the IANA for future assignments
-   are given in this section.  The initial assignments are given in
-   their respective sections.
+   以下の節では, 名前空間の値はテキストだ.
+   この節には, 規約と, 将来の割り当てについてのIANAへの指示がある.  初期の割り当ては, それぞれの節で与えられる.
 
 6.2.1.  命名規約
 
-   All names registered by the IANA in the following sections MUST be
-   printable US-ASCII strings, and MUST NOT contain the characters
-   at-sign ("@"), comma (","), or whitespace or control characters
-   (ASCII codes 32 or less).  Names are case-sensitive, and MUST NOT be
-   longer than 64 characters.
+   以降の節のIANAによって登録されるすべての名前は, 表示可能なUS-ASCIIの文字列で,アットマーク("@"), コンマ (","), スペース, 制御文字(ASCIIコード 32以下) を含んではならない. 名前は大文字小文字が区別され, 64文字以下でなければならない.
 
-   ローカルに拡張可能な名前についての準備が以下のようにされている.  The IANA will
-   not register and will not control names with the at-sign in them.
-   アットマークを含む名前は, "name@domainname" (ダブルクォーテーションを除く) という形式だ. アットマークに先行する部分が(狭い意味での)名前だ.  The format of the part preceding
-   the at-sign is not specified; however, these names MUST be printable
-   US-ASCII strings, and MUST NOT contain the comma character (","), or
-   whitespace, or control characters (ASCII codes 32 or less).  The part
-   following the at-sign MUST be a valid, fully qualified Internet
-   domain name [10] controlled by the person or organization defining
-   the name.  Names are case-sensitive, and MUST NOT be longer than 64
-   characters.  ローカルな名前空間をどう管理するかは, それぞれのドメイン次第だ.  It has been noted that these names resemble STD 11 [9]
-   email addresses.  This is purely coincidental and actually has
-   nothing to do with STD 11 [9].  An example of a locally defined name
-   is "our-attribute@example.com" (without the double quotes).
+   ローカルに拡張可能な名前についての準備が以下のようにされている.  IANAは,  アットマークを含む名前を登録しないし管理しない.
+   アットマークを含む名前は, "name@domainname" (ダブルクォーテーションを除く) という形式だ. アットマークに先行する部分が(狭い意味での)名前だ.  アットマークの前の部分の形式は指定されていない; しかし, 表示可能な US-ASCIIの文字列で, コンマ (","), スペース, 制御文字(ASCIIコード 32以下) を含んではならない.  アットマークに続く部分は, 名前を定義する個人ないし組織で管理されている有効な完全に記述したドメイン名 [10]でなければならない.  名前は大文字小文字が区別され, 64文字以下でなければならない.  ローカルな名前空間をどう管理するかは, それぞれのドメイン次第だ.  この名前が, STD 11 [9]のメールアドレスと似ていることを明記しておく.  これは, 単なる偶然でありSTD 11 [9]とは関係ない.  ローカルに定義される名前の例の1つは, "our-attribute@example.com" (ダブルクォーテーションを除く) だ.
 
 
 
@@ -669,13 +478,11 @@ RFC 4819           Secure Shell Public Key Subsystem          March 2007
 
 6.2.2.  名前の将来の割り当て
 
-   Requests for assignments of new Names MUST be done through the IETF
-   Consensus method as described in [11].
+   新しい名前の割り当ての要求は, [11] に記述されている IETF CONSENSUS によってされなければならない.
 
-6.3.  Public Key Subsystem Request Names
+6.3.  公開鍵サブシステムの要求名
 
-   The following table lists the initial assignments of Public Key
-   Subsystem Request names.
+   次の表で, 公開鍵サブシステムの要求名の初期の割り当てを示す.
 
            Request Name
            -------------
@@ -685,10 +492,9 @@ RFC 4819           Secure Shell Public Key Subsystem          March 2007
            list
            listattributes
 
-6.4.  Public Key Subsystem Response Names
+6.4.  公開鍵サブシステムの応答名
 
-   The following table lists the initial assignments of Public Key
-   Subsystem Response names.
+   次の表で, 公開鍵サブシステムの応答名の初期の割り当てを示す.
 
            Response Name
            --------------
@@ -697,11 +503,9 @@ RFC 4819           Secure Shell Public Key Subsystem          March 2007
            publickey
            attribute
 
-6.5.  Public Key Subsystem Attribute Names
+6.5.  公開鍵サブシステムの属性名
 
-   Attributes are used to define properties or restrictions for public
-   keys.  The following table lists the initial assignments of Public
-   Key Subsystem Attribute names.
+   属性は, 公開鍵の性質や制限を定義するのに用いられる.  次の表で, 公開鍵サブシステムの属性名の初期の割り当てを示す.
 
 
 
@@ -738,20 +542,17 @@ RFC 4819           Secure Shell Public Key Subsystem          March 2007
            port-forward
            reverse-forward
 
-6.6.  Public Key Subsystem Status Codes
+6.6.  公開鍵サブシステムの状態コード
 
-   The status code is a byte value, describing the status of a request.
+   状態コードはバイトの値で, 要求の状態を記述する.
 
 6.6.1.  規約
 
-   Status responses have status codes in the range 0 to 255.  These
-   numbers are allocated as follows.  Of these, the range 192 to 255 is
-   reserved for use by local, private extensions.
+   状態の応答は 0から255までの状態コードを持つ.  以下のように番号が割り当てられる.  このうち, 192から 255 はローカルでプライベートな拡張での利用のため予約されている.
 
 6.6.2.  初期の割り当て
 
-   The following table identifies the initial assignments of the Public
-   Key Subsystem status code values.
+   次の表で, 公開鍵サブシステムの状態コードの値の初期の割り当てを示す.
 
            Status code                           Value    Reference
            ------------                          -----    ---------
@@ -781,12 +582,10 @@ RFC 4819           Secure Shell Public Key Subsystem          March 2007
 
 6.6.3.  将来の割り当て
 
-   Requests for assignments of new status codes in the range of 0 to 191
-   MUST be done through the Standards Action method as described in
-   [11].
+   0から191の範囲に新たな状態コードを割り当てる要求は, [11] に記述されている IETF CONSENSUS によってされなければならない.
 
-   The IANA will not control the status code range of 192 through 255.
-   This range is for private use.
+   IANAは, 192 から 255 の範囲のメッセージ番号は制御しない.
+   この範囲は, プライベートな利用用だ.
 
 7.  References
 

@@ -22,6 +22,98 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>&quot;agent&quot; specifies that session channel &quot;auth-agent-req&quot; requests
+   should be denied when this key is in use.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T054211Z" changeid="haruyama">
+        <seg>&quot;agent&quot; は, この鍵を用いるとセッションチャンネルの &quot;auth-agent-req&quot; 要求が拒否されることを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&quot;command-override&quot; specifies a command to be executed when this key
+   is in use.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T053022Z" changeid="haruyama">
+        <seg>&quot;command-override&quot; は, この鍵が使われるときに実行されるコマンドを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&quot;env&quot; specifies that session channel &quot;env&quot; requests should be denied
+   when this key is in use.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T054233Z" changeid="haruyama">
+        <seg>&quot;env&quot; は, この鍵を用いるとセッションチャンネルの &quot;env&quot; 要求が拒否されることを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&quot;exec&quot; specifies that session channel &quot;exec&quot; requests should be
+   denied when this key is in use.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T054152Z" changeid="haruyama">
+        <seg>&quot;exec&quot; は, この鍵を用いるとセッションチャンネルの &quot;exec&quot; 要求が拒否されることを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&quot;from&quot; specifies a comma-separated list of hosts from which the key
+   may be used.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T054715Z" changeid="haruyama">
+        <seg>&quot;from&quot; は 鍵がそこから使われるホストのカンマ区切りリストを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&quot;port-forward&quot; specifies that no &quot;direct-tcpip&quot; requests should be
+   accepted, except those to hosts specified in the comma-separated list
+   supplied as a value to this attribute.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T055645Z" changeid="haruyama">
+        <seg>&quot;port-forward&quot; は, この属性の値として与えられたカンマ区切りリストで指定されたホストへのものを除いて, &quot;direct-tcpip&quot; 要求が受けいれられないことを指定する. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&quot;reverse-forward&quot; specifies that no &quot;tcpip-forward&quot; requests should
+   be accepted, except for the port numbers in the comma-separated list
+   supplied as a value to this attribute.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T055742Z" changeid="haruyama">
+        <seg>&quot;reverse-forward&quot; は, この属性の値として与えられたカンマ区切りリストで指定されたホストへのものを除いて, &quot;tcpip-forward&quot; 要求が受けいれられないことを指定する. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&quot;shell&quot; specifies that session channel &quot;shell&quot; requests should be
+   denied when this key is in use.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T054131Z" changeid="haruyama">
+        <seg>&quot;shell&quot; は, この鍵を用いるとセッションチャンネルの &quot;shell&quot; 要求が拒否されることを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&quot;subsystem&quot; specifies a comma-separated list of subsystems that may
+   be started (using a &quot;subsystem&quot; request) when this key is in use.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T054647Z" changeid="haruyama">
+        <seg>&quot;subsystem&quot; は, この鍵を利用する場合に (&quot;subsystem&quot; 要求を用いて) 開始できる サブシステムのカンマ区切りリストを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&quot;x11&quot; specifies that X11 forwarding may not be performed when this
+   key is in use.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T054125Z" changeid="haruyama">
+        <seg>&quot;x11&quot; はこの鍵を用いるとX11転送が実行されないことを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>'request type' names follow the DNS extensibility naming convention
    outlined in [SSH-ARCH] and [SSH-NUMBERS].</seg>
       </tuv>
@@ -1307,6 +1399,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A request is acknowledged by sending a status packet.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T050234Z" changeid="haruyama">
+        <seg>要求は 状態パケットを送ることで確認応答される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A request that requires further messages to be exchanged will be
    aborted by a subsequent request.</seg>
       </tuv>
@@ -1379,6 +1479,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A status message MUST be sent for any unrecognized packets, and the
+   request SHOULD NOT close the subsystem.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T050448Z" changeid="haruyama">
+        <seg>状態メッセージは, どのような認識されないパケットに対しても送られなければならない. 対応する要求はサブシステムを終了しないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A string containing a comma-separated list of names.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110707T074435Z" changeid="haruyama">
@@ -1410,6 +1519,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>概要</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Adding a Public Key</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T053513Z" changeid="haruyama">
+        <seg>公開鍵の追加</seg>
       </tuv>
     </tu>
     <tu>
@@ -1891,6 +2008,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>All Public Key Subsystem requests and responses are sent in the
+   following form:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T045754Z" changeid="haruyama">
+        <seg>すべての公開鍵サブシステムの要求と応答は以下の形式で送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>All authentication related messages
    received after sending this message SHOULD be silently ignored.</seg>
       </tuv>
@@ -2035,6 +2161,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>このメッセージの後のすべてのメッセージは, 新しい鍵とアルゴリズムで送られなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>All names registered by the IANA in the following sections MUST be
+   printable US-ASCII strings, and MUST NOT contain the characters
+   at-sign (&quot;@&quot;), comma (&quot;,&quot;), or whitespace or control characters
+   (ASCII codes 32 or less).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063710Z" changeid="haruyama">
+        <seg>以降の節のIANAによって登録されるすべての名前は, 表示可能なUS-ASCIIの文字列で,アットマーク(&quot;@&quot;), コンマ (&quot;,&quot;), スペース, 制御文字(ASCIIコード 32以下) を含んではならない. </seg>
       </tuv>
     </tu>
     <tu>
@@ -2322,6 +2459,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>An example of a locally defined name
+   is &quot;our-attribute@example.com&quot; (without the double quotes).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063811Z" changeid="haruyama">
+        <seg>ローカルに定義される名前の例の1つは, &quot;our-attribute@example.com&quot; (ダブルクォーテーションを除く) だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>An example of a possible strategy is to only accept a host key
    without checking the first time a host is connected, save the key in
    a local database, and compare against that key on all future
@@ -2338,6 +2484,24 @@
       </tuv>
       <tuv lang="JA" changedate="20110409T091905Z" changeid="haruyama">
         <seg>検証アルゴリズムの例は, [SEC1]の 3.2.1節にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An example of use of the &quot;compulsory&quot; attribute
+   would be a server with a configuration file specifying that the user
+   is not permitted shell access.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T061453Z" changeid="haruyama">
+        <seg>&quot;compulsory&quot; 属性の利用の例として, ユーザのシェルアクセスを拒否する指定が設定ファイルにあるサーバを挙げる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An implementation MAY choose not to support this request.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T061850Z" changeid="haruyama">
+        <seg>実装は, この要求をサポートしないことを選択してもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2944,6 +3108,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Attribute names are defined following the same scheme laid out for
+   algorithm names in [1].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T053920Z" changeid="haruyama">
+        <seg>[1] のアルゴリズム名のために示されたのと同じ方式に従ってアルゴリズム名は定義される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Attributes are used to define properties or restrictions for public
+   keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063920Z" changeid="haruyama">
+        <seg>属性は, 公開鍵の性質や制限を定義するのに用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Authentication</seg>
       </tuv>
       <tuv lang="JA">
@@ -3250,6 +3432,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Before closing the subsystem, a
+   status message with the status SSH_PUBLICKEY_VERSION_NOT_SUPPORTED
+   SHOULD be sent.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T052045Z" changeid="haruyama">
+        <seg>サブシステムを終了する前に,状態が SSH_PUBLICKEY_VERSION_NOT_SUPPORTED な状態メッセージを送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Begin and End Markers</seg>
       </tuv>
       <tuv lang="JA" changedate="20110718T033422Z" changeid="haruyama">
@@ -3347,6 +3539,31 @@
       </tuv>
       <tuv lang="JA">
         <seg>どちらの側も次のメッセージで window を調整できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Both sides MUST start a connection by sending a version packet that
+   indicates the version of the protocol they are using.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T051005Z" changeid="haruyama">
+        <seg>クライアントもサーバも, 利用するプロトコルのバージョンを指定するバージョンパケットを送って接続を開始しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Both sides MUST wait to receive this version before continuing.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T052242Z" changeid="haruyama">
+        <seg>どちらの側も続行する前にこのバージョンを受け取るために待たなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Both sides send the highest version that they implement.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T051143Z" changeid="haruyama">
+        <seg>クライアントもサーバも, 実装している最も高いバージョンを送る.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3743,6 +3960,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>クライアントの実装は, これらのメッセージを拒否する必要がある. これらは通常クライアントからのみ送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Client implementations SHOULD reject this request; it is normally
+   sent only by the client.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T031941Z" changeid="haruyama">
+        <seg>クライアントの実装はこの要求を拒否する必要がある. これは通常クライアントからのみ送られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4223,6 +4449,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110607T081608Z" changeid="haruyama">
         <seg>結果として, この文書で記述した方法にセキュリティの証明があっても, これらの方法を実装したアプリケーションを開発する際には開発者は慎重に実行しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Consistent with Section 4.9.5 of [8], this document makes the
+   following registration:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063453Z" changeid="haruyama">
+        <seg>[8] の 4.9.5節と整合するため, この文書は次の登録を行なう:</seg>
       </tuv>
     </tu>
     <tu>
@@ -5918,6 +6153,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Following the last &quot;attribute&quot; response, a status packet MUST be
+   sent.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T061828Z" changeid="haruyama">
+        <seg>最後の &quot;attribute&quot; 応答に続いて, 状態パケットが送られなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Following the last &quot;publickey&quot; response, a status packet MUST be
+   sent.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T061824Z" changeid="haruyama">
+        <seg>最後の &quot;publickey&quot; 応答に続いて, 状態パケットが送られなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For
       example: the value 699921578 (0x29b7f4aa) is stored as 29 b7 f4
       aa.</seg>
@@ -5982,6 +6235,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>このため, シーケンス番号が繰り返される前にピアは鍵の再作成をしなければならないことが強調されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For IP-based networks, it is anticipated that each element
+   of the &quot;from&quot; parameter will take the form of a specific IP address
+   or hostname.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T055534Z" changeid="haruyama">
+        <seg>IPベースのネットワークでは, &quot;from&quot; パラメータの要素は, 特定のIPアドレスかホスト名の形式となるのが予想される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6338,6 +6601,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>ほとんどの部分で, SSH プロトコルはユーザに表示されるテキストを直接には扱わない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For the purposes of a
+   critical attribute, mere storage of the attribute is not sufficient
+   -- rather, the server must understand and implement the intent of the
+   attribute.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T054440Z" changeid="haruyama">
+        <seg>critical な属性の目的を充たすためには, 単なる属性の保存では十分ではない. サーバは属性の意図を理解し実装していなけばならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6809,6 +7083,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110719T030710Z" changeid="haruyama">
         <seg>データに対する悪意のある改善の可能性を考慮して, これらのファイルを保護するためにシステム固有の方法(例えば, アクセスコントロールリスト, UNIXのパーミッション, その他の任意 及び/もしくは 強制のアクセス制限)を利用する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Given this, the server would return
+   the &quot;shell&quot; attribute, with &quot;compulsory&quot; marked true.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T061531Z" changeid="haruyama">
+        <seg>このとき, &quot;compulsory&quot; がtrue な &quot;shell&quot; 属性をサーバは返す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7528,12 +7811,34 @@
     <tu>
       <tuv lang="EN-US">
         <seg>If
+   either side can't support the lower version, it should close the
+   subsystem and notify the other side by sending an
+   SSH_MSG_CHANNEL_CLOSE message.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T051951Z" changeid="haruyama">
+        <seg>もう一方が低いバージョンをサポートしていなければ, サブシステムを終了させ, SSH_MSG_CHANNEL_CLOSE を送って相手側に通知しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If
    the last character of a line is a '\', then the logical contents of
    the line are formed by removing the '\' and the line termination
    characters, and appending the contents of the next line.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110718T033810Z" changeid="haruyama">
         <seg>最後の行の文字が '\' の場合, '\' と行終端文字を除いて次の行の内容を連結したものがその行の論理的な内容となる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If
+   the overwrite field is true and the specified key already exists, but
+   cannot be overwritten, the server MUST return
+   SSH_PUBLICKEY_ACCESS_DENIED.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T053818Z" changeid="haruyama">
+        <seg>overwrite フィールドが true で指定された鍵が存在し, 鍵を上書きできない場合は, サーバは SSH_PUBLICKEY_ACCESS_DENIED を返さなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7780,6 +8085,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If a host not in this list attempts to use this key for
+   authorization purposes, the authorization attempt MUST be denied.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T054748Z" changeid="haruyama">
+        <seg>このリストに含まれないホストが認証目的でこの鍵を利用しようとしたら, 認証の試行は拒否されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If a key fails validation, the key exchange
    MUST fail.</seg>
       </tuv>
@@ -7797,6 +8111,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>新しいパケットがストリームに追加されるたびに, 攻撃者は次のパケットに利用されるであろうIVを知る. それゆえ, 攻撃者が正しいIVを推測できなければ攻撃はけっして成功しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If a request completed successfully, the server MUST send the status
+   code SSH_PUBLICKEY_SUCCESS.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T050626Z" changeid="haruyama">
+        <seg>要求が正常に完了したら, 状態コード SSH_PUBLICKEY_SUCCESS をサーバは送らなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8025,6 +8348,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If no &quot;command-override&quot;
+   attribute is specified, all &quot;exec&quot; and &quot;shell&quot; requests should be
+   permitted (as long as they satisfy other security or authorization
+   checks the server may perform).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T053507Z" changeid="haruyama">
+        <seg>&quot;command-override&quot; 属性が指定されなければ, すべての &quot;exec&quot; と &quot;shell&quot; 要求は許可される必要がある (サーバが行なう他のセキュリティや認証の検査を満している限り). </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If no BREAK was preformed, SSH_MSG_CHANNEL_FAILURE MUST be
    sent.</seg>
       </tuv>
@@ -8159,6 +8493,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>サーバが侵害されていると, あらゆる端末セッション, ポート転送, ホストにアクセスするシステムが, 侵害される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the &quot;subsystem&quot; attribute is not
+   specified, no restrictions are placed on which subsystems may be
+   started when authenticated using this key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T053927Z" changeid="haruyama">
+        <seg>&quot;subsystem&quot; 属性が指定されていなければ, この鍵を用いて認証した際に開始できるサブシステムに制限はない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8361,6 +8705,48 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the client wishes to add a public key, the client sends:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T053528Z" changeid="haruyama">
+        <seg>クライアントが公開鍵を追加したい場合, クライアントは以下を送る:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the client wishes to know which key attributes the server
+   supports, it sends:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T060931Z" changeid="haruyama">
+        <seg>クライアントがサーバのサポートする鍵の属性を知りたい場合, 以下を送る:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the client wishes to list the known public keys, the client sends:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T060502Z" changeid="haruyama">
+        <seg>クライアントが既知の公開鍵の一覧を取得したい場合, クライアントは以下を送る:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the client wishes to remove a public key, the client sends:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T060121Z" changeid="haruyama">
+        <seg>クライアントが公開鍵を削除したい場合, クライアントは以下を送る:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the command string is empty, both &quot;exec&quot;
+   and &quot;shell&quot; requests should be denied.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T053410Z" changeid="haruyama">
+        <seg>このコマンド文字列が空なら, &quot;exec&quot; と &quot;shell&quot; の要求は禁止される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the current block is not a stored block, one or more
    empty blocks are added after the current block to ensure that there
    are at least 8 bits, counting from the start of the end-of-block code
@@ -8449,6 +8835,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110620T040340Z" changeid="haruyama">
         <seg>オーダーが p - 1 のとき, 指数は, pの法の範囲を均等に分布し小さいサブセットを巡回することがない, 可能なすべての公開値を生成する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the overwrite field is false and the
+   specified key already exists, the server MUST return
+   SSH_PUBLICKEY_KEY_ALREADY_PRESENT.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T053705Z" changeid="haruyama">
+        <seg>overwrite フィールドが false で指定された鍵がすでに存在したら, サーバは SSH_PUBLICKEY_KEY_ALREADY_PRESENT を返さなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8555,12 +8951,32 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the server does not implement a critical
+   attribute, it MUST fail the add, with the status code
+   SSH_PUBLICKEY_ATTRIBUTE_NOT_SUPPORTED.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T054239Z" changeid="haruyama">
+        <seg>サーバが criticalな属性をサポートしない場合は, 状態コード SSH_PUBLICKEY_ATTRIBUTE_NOT_SUPPORTED で追加に失敗しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the server does not know a
    group that is larger than the client request, then it SHOULD return
    the largest group it knows.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110616T235027Z" changeid="haruyama">
         <seg>もしクライアントが要求するよりも大きな群をサーバが持っていなければ, 持っている一番大きな群を返す必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the server does not support
+   administrative settings of this nature, it MUST return false in the
+   compulsory field.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T061225Z" changeid="haruyama">
+        <seg>サーバがこの管理の設定をサポートしていないなら, compulsory フィールドは false を返さなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8658,6 +9074,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>サーバがサービスの要求を拒否するなら, 適切な SSH_MSG_DISCONNECT メッセージを送る必要がある. そして 切断しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the server returns this, the
+   client SHOULD provide an option to the user to overwrite the key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T053735Z" changeid="haruyama">
+        <seg>サーバがこれを返したら, クライアントはユーザに鍵を上書きするかの選択を提供する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8785,6 +9210,35 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the value is empty, no
+   subsystems may be started.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T053857Z" changeid="haruyama">
+        <seg>この値が空なら, どんなサブシステムも開始できない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the value of this
+   attribute is empty, all &quot;direct-tcpip&quot; requests should be refused
+   when using this key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T055725Z" changeid="haruyama">
+        <seg>この属性の値が空なら, この鍵を用いるすべての &quot;direct-tcpip&quot; 要求は拒否される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the value of this
+   attribute is empty, all &quot;tcpip-forward&quot; requests should be refused
+   when using this key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T055756Z" changeid="haruyama">
+        <seg>この属性の値が空なら, この鍵を用いるすべての &quot;tcpip-forward&quot; 要求は拒否される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If there
          are no language preferences, this name-list SHOULD be empty as
          defined in Section 5 of [SSH-ARCH].</seg>
@@ -8800,6 +9254,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>未送信パケットがない場合, SSH_MSG_IGNOREを含むパケットが送られる必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If there is
+   data in response to the request, the status packet is sent after all
+   data has been sent.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T050322Z" changeid="haruyama">
+        <seg>要求に対するデータが送られる場合は, すべてのデータが送られたあとで状態パケットが送られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8849,6 +9313,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>こうなると, クライアントはクライアント-攻撃者のセッションを作り, 攻撃者は攻撃者-サーバのセッションを作る. そして, 攻撃者はクライアントと正当なサーバのトラフィックを監視したり操作したりできるようになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If this attribute is specified, it MUST immediately follow a
+   &quot;comment&quot; attribute and specify the language for that attribute [6].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T052238Z" changeid="haruyama">
+        <seg>この属性が指定されているなら, &quot;comment&quot; 属性がすぐ次に続かなければならない. また, その &quot;comment&quot; 属性の言語を指定しなければならない [6].</seg>
       </tuv>
     </tu>
     <tu>
@@ -8947,6 +9420,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If want reply is TRUE, the server MUST respond with
+   SSH_MSG_CHANNEL_SUCCESS if the Public Key Subsystem was successfully
+   started, or SSH_MSG_CHANNEL_FAILURE if the server failed to start or
+   does not support the Public Key Subsystem.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T032313Z" changeid="haruyama">
+        <seg>want reply が TRUE の場合, 公開鍵サブシステムの開始に成功したら SSH_MSG_CHANNEL_SUCCESS をサーバは返さなければならない. 公開鍵サブシステムの開始に失敗したりサポートしていなければ SSH_MSG_CHANNEL_FAILURE サーバは返さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If we make the reasonable assumption that the underlying
    components (such as AES and HMAC-SHA1) are secure, then the attacker
    against the symmetric portion of the SSH protocol cannot be very
@@ -9012,6 +9496,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Implementation errors in the server could cause clients to authorize
+   keys for access they were not intended to have, or to apply fewer
+   restrictions than were intended.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063423Z" changeid="haruyama">
+        <seg>サーバの実装エラーにより, クライアントが意図していないアクセスに対して鍵を認証に利用したり, 意図したものよりも少ない制限を適用する可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Implementation of this specification requires familiarity with both
    SSH [RFC4251] [RFC4253] [RFC4250] and ECC [SEC1] (additional
    information on ECC available in [HMV04], [ANSI-X9.62], and
@@ -9047,6 +9541,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110426T083643Z" changeid="haruyama">
         <seg>実装は, 楕円曲線ドメインパラメータの集合を定義する ASN.1 オブジェクトツリーのすべての ASN.1 オブジェクト識別子(OID)をサポートしてもよい.[ASN1].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementations MAY use the first 15 bytes of the version packet as a
+   &quot;magic cookie&quot; to avoid processing spurious output from the user's
+   shell (as described in Section 6.5 of [4]).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T052717Z" changeid="haruyama">
+        <seg>実装は, ([4] の6.5 節で記述しているように) ユーザのシェルからの誤った出力を処理するのを避けるために, バージョンパケットの最初の15バイトに &quot;magic cookie&quot; を利用してもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9132,6 +9636,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110718T034102Z" changeid="haruyama">
         <seg>鍵ファイルを操作する際は, そのような認識できないヘッダを実装は保存する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementations SHOULD support this request.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T060739Z" changeid="haruyama">
+        <seg>実装は, この要求をサポートする必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9518,6 +10030,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In addition to the attributes specified by the client, the server MAY
+   provide a method for administrators to enforce certain attributes
+   compulsorily.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T060108Z" changeid="haruyama">
+        <seg>クライアントで指定された属性に加えて特定の属性を強制するための, 管理者用の方法をサーバは提供してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In addition,
    deleg_req_flag MAY be set to &quot;true&quot; to request access delegation, if
    requested by the user.</seg>
@@ -9810,6 +10332,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110425T080421Z" changeid="haruyama">
         <seg>特に ホスト鍵のサイズとハッシュアルゴリズムとバルク(任意長)暗号化アルゴリズムは, 適切に選択しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In particular, it is
+   possible for users to overwrite an existing key on the server with
+   this protocol, whilst at the same time specifying fewer restrictions
+   for the new key than were previously present.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T062934Z" changeid="haruyama">
+        <seg>特に, このプロトコルを用いて, 以前の制限よりも小さい制限を指定してサーバ上の既存の鍵をユーザが上書きできる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10139,8 +10672,16 @@
         <seg>In the following sections, the values for the name spaces are
    textual.</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>以降の節で, 名前空間に対する値をに表記する.</seg>
+      <tuv lang="JA" changedate="20110722T063558Z" changeid="haruyama">
+        <seg>以下の節では, 名前空間の値はテキストだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In the following sections, the values for the namespaces are textual.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063527Z" changeid="haruyama">
+        <seg>以下の節では, 名前空間の値はテキストだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10928,6 +11469,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It has been noted that these names resemble STD 11 [9]
+   email addresses.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063750Z" changeid="haruyama">
+        <seg>この名前が, STD 11 [9]のメールアドレスと似ていることを明記しておく.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It is
       assumed that practitioners will first attempt to use the IANA-
       assigned 'reason code' values and then document their locally
@@ -11024,6 +11574,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>可能ならば, このメッセージの前に送られたすべてのデータが正しい送り先に伝達されることが推奨される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is RECOMMENDED that clients request and check the reply for this
+   request.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T032553Z" changeid="haruyama">
+        <seg>クライアントがこの要求で応答を要求し検査するのを推奨する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11324,6 +11883,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>実装はこの遅延を設定可能にするかもしれない. 推奨されるデフォルトは 2秒だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is the responsibility of the
+   server implementation to enforce any access controls that may be
+   required to limit the access allowed for any particular user (the
+   user being authenticated externally to this protocol, typically using
+   the SSH User Authentication Protocol [3]).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T062747Z" changeid="haruyama">
+        <seg>(このプロトコルの外部, 特に SSHユーザ認証プロトコル [3] を用いてユーザを認証して) 特定のユーザにアクセスを制限するために必要なアクセス制御を実施するのはサーバの実装の責任だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11955,18 +12526,34 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Listing Public Keys</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T060426Z" changeid="haruyama">
+        <seg>公開鍵の一覧の取得</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Listing Public Keys  .</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110720T125554Z" changeid="haruyama">
-        <seg>公開鍵の一覧  .</seg>
+      <tuv lang="JA" changedate="20110721T030509Z" changeid="haruyama">
+        <seg>公開鍵の一覧の取得  .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Listing Server Capabilities</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T060816Z" changeid="haruyama">
+        <seg>サーバ機能の一覧の取得</seg>
       </tuv>
     </tu>
     <tu>
       <tuv lang="EN-US">
         <seg>Listing Server Capabilities  .</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110720T125621Z" changeid="haruyama">
-        <seg>サーバの機能の表示  .</seg>
+      <tuv lang="JA" changedate="20110722T060854Z" changeid="haruyama">
+        <seg>サーバ機能の一覧の取得  .</seg>
       </tuv>
     </tu>
     <tu>
@@ -12447,10 +13034,28 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Names are case-sensitive, and MUST NOT be
+   longer than 64 characters.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063712Z" changeid="haruyama">
+        <seg>名前は大文字小文字が区別され, 64文字以下でなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Names are case-sensitive, and MUST NOT be longer
    than 64 characters.</seg>
       </tuv>
       <tuv lang="JA">
+        <seg>名前は大文字小文字が区別され, 64文字以下でなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Names are case-sensitive, and MUST NOT be longer than 64
+   characters.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063739Z" changeid="haruyama">
         <seg>名前は大文字小文字が区別され, 64文字以下でなければならない.</seg>
       </tuv>
     </tu>
@@ -13113,6 +13718,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Note that, normally, status messages are only sent
+   by the server (in response to requests from the client).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T052144Z" changeid="haruyama">
+        <seg>注意: 通常状態メッセージは(クライアントからの要求への応答として)サーバからのみ送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Note, however, that during a key re-exchange, after sending a
    SSH_MSG_KEXINIT message, each party MUST be prepared to process an
    arbitrary number of messages that may be in-flight before receiving a
@@ -13166,6 +13780,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>もちろん, クライアントやサーバのDHの秘密のパラメータが漏れたら, セッション鍵が漏れる. しかし, これらのパラメータは鍵交換が終わると捨てられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Of these, the range 192 to 255 is
+   reserved for use by local, private extensions.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T064058Z" changeid="haruyama">
+        <seg>このうち, 192から 255 はローカルでプライベートな拡張での利用のため予約されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13464,6 +14087,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>セッションの開始</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Opening the Public Key Subsystem</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T030912Z" changeid="haruyama">
+        <seg>公開鍵サブシステムの開始</seg>
       </tuv>
     </tu>
     <tu>
@@ -14163,10 +14794,26 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Public Key Subsystem Attribute Names</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063900Z" changeid="haruyama">
+        <seg>公開鍵サブシステムの属性名</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Public Key Subsystem Attribute Names .</seg>
       </tuv>
       <tuv lang="JA" changedate="20110720T125747Z" changeid="haruyama">
         <seg>公開鍵サブシステムの属性名 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Public Key Subsystem Operations</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T053315Z" changeid="haruyama">
+        <seg>公開鍵サブシステムの操作</seg>
       </tuv>
     </tu>
     <tu>
@@ -14195,6 +14842,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Public Key Subsystem Request Names</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063827Z" changeid="haruyama">
+        <seg>公開鍵サブシステムの要求名</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Public Key Subsystem Request Names .</seg>
       </tuv>
       <tuv lang="JA" changedate="20110720T125723Z" changeid="haruyama">
@@ -14203,10 +14858,26 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Public Key Subsystem Response Names</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063848Z" changeid="haruyama">
+        <seg>公開鍵サブシステムの応答名</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Public Key Subsystem Response Names  .</seg>
       </tuv>
       <tuv lang="JA" changedate="20110720T125734Z" changeid="haruyama">
         <seg>公開鍵サブシステムの応答名  .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Public Key Subsystem Status Codes</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063933Z" changeid="haruyama">
+        <seg>公開鍵サブシステムの状態コード</seg>
       </tuv>
     </tu>
     <tu>
@@ -14343,6 +15014,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Registrations</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063429Z" changeid="haruyama">
+        <seg>登録</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Registrations  .</seg>
       </tuv>
       <tuv lang="JA" changedate="20110720T125645Z" changeid="haruyama">
@@ -14395,6 +15074,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110620T040831Z" changeid="haruyama">
         <seg>これに関連して, Waldvogel と Massey は主張している : プライベート指数が{0,...,p-2}で独立に一様にランダムに選択されるなら, 鍵のエントロピーは最大値である lg(p-1)から2bit未満しか小さくならない [WALDVOGEL].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Removing a Public Key</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T060111Z" changeid="haruyama">
+        <seg>公開鍵の削除</seg>
       </tuv>
     </tu>
     <tu>
@@ -14493,6 +15180,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Requests and Responses</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T045727Z" changeid="haruyama">
+        <seg>要求と応答</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Requests and Responses .</seg>
       </tuv>
       <tuv lang="JA" changedate="20110720T125451Z" changeid="haruyama">
@@ -14569,6 +15264,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Requests for assignments of new Names MUST be done through the IETF
+   Consensus method as described in [11].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063823Z" changeid="haruyama">
+        <seg>新しい名前の割り当ての要求は, [11] に記述されている IETF CONSENSUS によってされなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Requests for assignments of new SSH_MSG_CHANNEL_OPEN 'reason code'
    values (and associated 'description' text) in the range of 0x00000005
    to 0xFDFFFFFF MUST be done through the IETF CONSENSUS method, as
@@ -14615,6 +15319,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>新しいオペコードと関連する引数の割り当ての要求は, [RFC2434] に記述されている IETF CONSENSUS によってされなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Requests for assignments of new status codes in the range of 0 to 191
+   MUST be done through the Standards Action method as described in
+   [11].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T064213Z" changeid="haruyama">
+        <seg>0から191の範囲に新たな状態コードを割り当てる要求は, [11] に記述されている IETF CONSENSUS によってされなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15394,6 +16108,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Servers should take
+   care that when doing this, clients are not able to override presets
+   from the server's administrator.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063017Z" changeid="haruyama">
+        <seg>これを行なう際サーバは注意する必要がある. クライアントはサーバの管理者の事前設定を上書きできない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Service Names</seg>
       </tuv>
       <tuv lang="JA">
@@ -15919,6 +16643,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Status Codes</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T050427Z" changeid="haruyama">
+        <seg>状態コード</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Status Codes .</seg>
       </tuv>
       <tuv lang="JA" changedate="20110720T125504Z" changeid="haruyama">
@@ -15931,6 +16663,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>このメモの位置づけ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Status responses have status codes in the range 0 to 255.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T064013Z" changeid="haruyama">
+        <seg>状態の応答は 0から255までの状態コードを持つ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16371,6 +17111,15 @@
     <tu>
       <tuv lang="EN-US">
         <seg>The
+   &quot;version&quot; packet MUST NOT be sent again after this initial exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T052302Z" changeid="haruyama">
+        <seg>この &quot;version&quot; パケットは, 最初の交換の後で再び送ってはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
    'message' may consist of multiple lines, with line breaks indicated
    by CRLF pairs.</seg>
       </tuv>
@@ -16621,6 +17370,26 @@
     <tu>
       <tuv lang="EN-US">
         <seg>The
+   server SHOULD attempt to store each comment with its language
+   attribute.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T052640Z" changeid="haruyama">
+        <seg>サーバは, その言語属性付きでコメントを保存するように試みる必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   server sends response packets that indicate success or failure as
+   well as provide specific response data.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T030706Z" changeid="haruyama">
+        <seg>サーバは応答パケットを送信して, 成功か失敗を示し応答に特有のデータを提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
    transformation between elliptic curve points and octet strings is
    specified in Sections 2.3.3 and 2.3.4 of [SEC1]; point compression
    MAY be used.</seg>
@@ -16815,6 +17584,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110603T135424Z" changeid="haruyama">
         <seg>&quot;cast128-ctr&quot; は 128-bit 鍵を用いる CAST-128 暗号を使う [RFC2144].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The &quot;compulsory&quot; field indicates whether this attribute will be
+   compulsorily applied to any added keys (irrespective of whether the
+   attribute has been specified by the client) due to administrative
+   settings on the server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T061127Z" changeid="haruyama">
+        <seg>&quot;compulsory&quot; フィールドは, サーバの管理の設定のため, 追加されるどの鍵にも(クライアントがこの属性を指定しているかに関係なく)この属性が強制的に追加されることを示している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17652,6 +18432,15 @@
     <tu>
       <tuv lang="EN-US">
         <seg>The IANA will
+   not register and will not control names with the at-sign in them.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063720Z" changeid="haruyama">
+        <seg>IANAは,  アットマークを含む名前を登録しないし管理しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The IANA will
    not register, and will not control, names with the at-sign in them.</seg>
       </tuv>
       <tuv lang="JA">
@@ -17706,6 +18495,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The IANA will not control the status code range of 192 through 255.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T064155Z" changeid="haruyama">
+        <seg>IANAは, 192 から 255 の範囲のメッセージ番号は制御しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The IESG is considered to be the owner of all
    such key exchange methods; this does NOT imply that the IESG is
    considered to be the owner of the underlying GSS-API mechanism.</seg>
@@ -17752,6 +18549,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The Public Key Subsystem currently defines four operations: add,
+   remove, list, and listattributes.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T054144Z" changeid="haruyama">
+        <seg>公開鍵サブシステムは4つの操作を現在定義している: 追加, 削除, 一覧の取得, サーバの属性の取得だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The Public Key Subsystem is started by a client sending an
+   SSH_MSG_CHANNEL_REQUEST over an existing session's channel.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T031003Z" changeid="haruyama">
+        <seg>公開鍵サブシステムは, すでに開始されているセッションチャンネル上で SSH_MSG_CHANNEL_REQUEST をクライアントが送ることで開始される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Public Key Subsystem protocol is designed for extreme simplicity
    in implementation.</seg>
       </tuv>
@@ -17765,8 +18580,8 @@
    clients to add public keys, remove public keys, and list the current
    public keys known by the server.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110720T125251Z" changeid="haruyama">
-        <seg>この公開鍵サブシステムは, 公開鍵を追加したり削除したりサーバが知っている現在の公開鍵の一覧を出す, サーバに依存しないメカニズムをクライアントに提供する.</seg>
+      <tuv lang="JA" changedate="20110721T030455Z" changeid="haruyama">
+        <seg>この公開鍵サブシステムは, 公開鍵を追加したり削除したりサーバが知っている現在の公開鍵の一覧を取得する, サーバに依存しないメカニズムをクライアントに提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18130,6 +18945,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The SSH_PUBLICKEY_VERSION_NOT_SUPPORTED status code must not be sent
+   in response to any other request.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T052329Z" changeid="haruyama">
+        <seg>SSH_PUBLICKEY_VERSION_NOT_SUPPORTED 状態コードは, 他の要求への応答として送られてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Secure Shell
    protocol provides negotiation mechanisms for public key algorithms
    and key exchange methods: any implementations that do not recognize
@@ -18273,6 +19097,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The Status Message</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T050216Z" changeid="haruyama">
+        <seg>状態メッセージ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Status Message .</seg>
       </tuv>
       <tuv lang="JA" changedate="20110720T125458Z" changeid="haruyama">
@@ -18291,10 +19123,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The Version Packet</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T050915Z" changeid="haruyama">
+        <seg>バージョンパケット</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Version Packet .</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110720T125512Z" changeid="haruyama">
-        <seg>バージョンのパケット .</seg>
+      <tuv lang="JA" changedate="20110721T050917Z" changeid="haruyama">
+        <seg>バージョンパケット .</seg>
       </tuv>
     </tu>
     <tu>
@@ -18429,6 +19269,42 @@
       </tuv>
       <tuv lang="JA">
         <seg>攻撃用のデバイスは, これと同時に, 正当なサーバへのセッションを開始する. このとき, デバイスはクライアントのふりをする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The attribute-value field
+   SHOULD be empty for this attribute.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T054214Z" changeid="haruyama">
+        <seg>この属性の値は, 空の必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The attribute-value field SHOULD be
+   empty for this attribute.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T054134Z" changeid="haruyama">
+        <seg>この属性の値は, 空の必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The attribute-value field SHOULD be empty
+   for this attribute.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T054234Z" changeid="haruyama">
+        <seg>この属性の値は, 空の必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The attribute-value field SHOULD be empty for this
+   attribute.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T054044Z" changeid="haruyama">
+        <seg>この属性の値は, 空の必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18719,6 +19595,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client MAY specify more than one comment if it additionally
+   specifies a different language for each of those comments.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T052432Z" changeid="haruyama">
+        <seg>クライアントは, それぞれのコメントに異なる言語を指定するなら, 1つ以上のコメントを指定してよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The client MUST receive acknowledgement of
+   each request prior to sending a new request.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T050209Z" changeid="haruyama">
+        <seg>クライアントは, 新しい要求を送る前にそれぞれの要求の確認応答(状態メッセージ)を受け取らなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client SHOULD attempt to use this method if it is advertised by
    the server, initial key exchange was performed using a GSS-API-based
    key exchange method, and this method has not already been tried.</seg>
@@ -18890,11 +19784,40 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The command should be executed by the server when it
+   receives an &quot;exec&quot; or &quot;shell&quot; request from the client, in place of
+   the command or shell which would otherwise have been executed as a
+   result of that request.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T053343Z" changeid="haruyama">
+        <seg>クライアントから &quot;exec&quot; か &quot;shell&quot; の要求があった場合に,  その要求の結果として他では実行される(要求で指定された)コマンドやシェルの変わりに, (&quot;command-override&quot; で)指定されたコマンドはサーバで実行される必要がある. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The comment
    SHOULD be displayed when using the key.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110718T034432Z" changeid="haruyama">
         <seg>このコメントは, 鍵の利用時に表示される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The comment attribute must
+   be specified in UTF-8 format [7].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T052002Z" changeid="haruyama">
+        <seg>comment 属性は UTF-8 形式 [7] で指定しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The comment field is useful so the user can identify the key without
+   resorting to comparing its fingerprint.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T052113Z" changeid="haruyama">
+        <seg>comment は, 指紋の比較を頼らずにユーザが鍵を特定するのに有効だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19011,6 +19934,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The conventions and instructions to the IANA for future assignments
+   are given in this section.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063630Z" changeid="haruyama">
+        <seg>この節には, 規約と, 将来の割り当てについてのIANAへの指示がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The conversion between a field element and an
    integer is specified in Section 2.3.9 of [SEC1].</seg>
       </tuv>
@@ -19079,6 +20011,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>定義済みのタイプは以下の通り:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The details of how a session is opened are described in the SSH
+   Connection Protocol document [4] in the section &quot;Opening a Session&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T031723Z" changeid="haruyama">
+        <seg>どのようにセッションを開始するかの詳細は, SSH コネクションプロトコル文書 [4] の 「セッションの開始」 節に記述されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19387,6 +20328,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The following attributes are currently defined:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T054456Z" changeid="haruyama">
+        <seg>現在次の属性が定義されている:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The following channel-specific request can be sent over a session
    channel (as described in [4]) to request that the remote host perform
    a BREAK operation.</seg>
@@ -19587,6 +20536,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The following table identifies the initial assignments of the Public
+   Key Subsystem status code values.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T064124Z" changeid="haruyama">
+        <seg>次の表で, 公開鍵サブシステムの状態コードの値の初期の割り当てを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The following table identifies the initial assignments of the key
    exchange methods.</seg>
       </tuv>
@@ -19601,6 +20559,33 @@
       </tuv>
       <tuv lang="JA">
         <seg>次の表で, 'encoded terminal modes' の値に使われるオペコードの値の初期の割り当てを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The following table lists the initial assignments of Public
+   Key Subsystem Attribute names.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063930Z" changeid="haruyama">
+        <seg>次の表で, 公開鍵サブシステムの属性名の初期の割り当てを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The following table lists the initial assignments of Public Key
+   Subsystem Request names.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063844Z" changeid="haruyama">
+        <seg>次の表で, 公開鍵サブシステムの要求名の初期の割り当てを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The following table lists the initial assignments of Public Key
+   Subsystem Response names.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063857Z" changeid="haruyama">
+        <seg>次の表で, 公開鍵サブシステムの応答名の初期の割り当てを示す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19667,6 +20652,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The format of public key blobs are detailed in Section 6.6, &quot;Public
+   Key Algorithms&quot; of the SSH Transport Protocol document [2].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T031731Z" changeid="haruyama">
+        <seg>公開鍵ブロブの形式は SSH トランスポートプロトコル文書 [2] の 6.6 節 「公開鍵アルゴリズム」 に詳述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The format of the SSH_MSG_USERAUTH_INFO_RESPONSE message is as
    follows:</seg>
       </tuv>
@@ -19684,6 +20678,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>アットマークの前の部分の形式は指定されていない; しかし, 表示可能な US-ASCIIの文字列で, コンマ (&quot;,&quot;), スペース, 制御文字(ASCIIコード 32以下), ASCIIコードの127 (DEL)を含んではならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The format of the part preceding
+   the at-sign is not specified; however, these names MUST be printable
+   US-ASCII strings, and MUST NOT contain the comma character (&quot;,&quot;), or
+   whitespace, or control characters (ASCII codes 32 or less).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063729Z" changeid="haruyama">
+        <seg>アットマークの前の部分の形式は指定されていない; しかし, 表示可能な US-ASCIIの文字列で, コンマ (&quot;,&quot;), スペース, 制御文字(ASCIIコード 32以下) を含んではならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19872,6 +20877,15 @@
    given in their respective sections.</seg>
       </tuv>
       <tuv lang="JA">
+        <seg>初期の割り当ては, それぞれの節で与えられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The initial assignments are given in
+   their respective sections.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063632Z" changeid="haruyama">
         <seg>初期の割り当ては, それぞれの節で与えられる.</seg>
       </tuv>
     </tu>
@@ -20201,6 +21215,25 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The length field describes the length of the name field and of the
+   request/response-specific data, but does not include the length of
+   the length field itself.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T045933Z" changeid="haruyama">
+        <seg>length フィールドは name フィールドと request/response-specific data の長さを表す. length フィールド自体の長さは含まない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The lower
+   of the version numbers is the version of the protocol to use.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T051852Z" changeid="haruyama">
+        <seg>低いほうのバージョン番号が, 利用されるプロトコルのバージョンとなる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The main purpose of sending this request is to get the
    list of supported methods from the server.</seg>
       </tuv>
@@ -20272,6 +21305,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>最大のパケットサイズはそれぞれのチャンネルで独立に取り決められる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The meaning of the failure codes is as
+   implied by their names.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T050647Z" changeid="haruyama">
+        <seg>失敗のコードの意味は, それらの名前に示されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20616,6 +21658,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The operations to add, remove, and list the authenticated user's
+   public keys are performed as request packets sent to the server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T030629Z" changeid="haruyama">
+        <seg>認証されたユーザの公開鍵の追加や削除, 一覧の取得の操作は, サーバに送られる要求パケットで実行される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The order of the names in a name-list may or may not be
       significant.</seg>
       </tuv>
@@ -20698,6 +21749,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>FALSEならパラメータを0に, TRUE なら 1 にする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The part
+   following the at-sign MUST be a valid, fully qualified Internet
+   domain name [10] controlled by the person or organization defining
+   the name.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063737Z" changeid="haruyama">
+        <seg>アットマークに続く部分は, 名前を定義する個人ないし組織で管理されている有効な完全に記述したドメイン名 [10]でなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20923,6 +21985,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110719T031654Z" changeid="haruyama">
         <seg>この文書で提示した公開鍵の指紋は MD5 一方向関数に依存している. MD5 はその衝突耐性に関する弱点があることで知られている; しかし, この公開鍵指紋での MD5 の利用は単に 2次原像耐性に依存しており, 衝突耐性には依存していない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The public keys added, removed, and listed using this protocol are
+   specific and limited to those of the authenticated user.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T030601Z" changeid="haruyama">
+        <seg>このプロトコルを用いて公開鍵を追加, 削除, 一覧の取得をするのは, 認証されたユーザの公開鍵に特定され制限される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21176,6 +22247,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The server MAY
+   provide a method for administrators to disallow the appearance of a
+   host in this list.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T055016Z" changeid="haruyama">
+        <seg>サーバは, このリスト中に特定のホストの出現を認めないための管理者用の方法を提供してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The server MAY fail the
    otherwise valid gssapi-with-mic authentication if per-message
    integrity protection is not supported.</seg>
@@ -21226,12 +22307,41 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The server MUST NOT attempt to interpret or act upon the
+   content of the comment field in any way.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T051937Z" changeid="haruyama">
+        <seg>サーバは, comment フィールドの内容について, どのようなやり方でも解釈しようとしてはいけないし, またどのようなやり方でも内容に基づいて行動しようとしてはいけない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The server MUST NOT send
    another SSH_MSG_USERAUTH_INFO_REQUEST before it has received the
    answer from the client.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>クライアントからの返答を受け取る前に, サーバは別の SSH_MSG_USERAUTH_INFO_REQUEST を送ってはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The server MUST attempt to remove the public key for the user from
+   the appropriate location, so that the public key cannot be used for
+   subsequent authentications.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T060158Z" changeid="haruyama">
+        <seg>サーバは, 以降の公開鍵認証で公開鍵が利用不可能になるよう適切な場所からユーザの公開鍵を削除しようと試みなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The server MUST attempt to store the public key for the user in the
+   appropriate location so the public key can be used for subsequent
+   public key authentications.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T053622Z" changeid="haruyama">
+        <seg>サーバは, 以降の公開鍵認証で公開鍵が利用可能になる適切な場所にユーザの公開鍵を保存しようと試みなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21325,6 +22435,36 @@
       </tuv>
       <tuv lang="JA" changedate="20110712T032105Z" changeid="haruyama">
         <seg>GSS-API ベースの鍵交換法を用いて最初の鍵交換が行なわれ, 鍵交換によりユーザの識別情報がサーバで利用可能である場合, (SSH_MSG_USERAUTH_FAILURE での) 継続可能な認証法リストに このユーザ認証法を含める必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The server SHOULD make a log entry regarding this.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T054802Z" changeid="haruyama">
+        <seg>サーバは, これに関するログを残す必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The server SHOULD make every effort to preserve this
+   value and return it with the key during any subsequent list
+   operation.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T051816Z" changeid="haruyama">
+        <seg>サーバは, この値を保持しその後の一覧取得操作で鍵とともに返すためにあらゆる努力をする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The server SHOULD respond with SSH_MSG_CHANNEL_FAILURE if the user is
+   not allowed access to the Public Key Subsystem (for example, because
+   the user authenticated with a restricted public key).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T032508Z" changeid="haruyama">
+        <seg>(例えば制限された公開鍵でユーザが認証したため) 公開鍵サブシステムにアクセスをユーザが許されていない場合も, SSH_MSG_CHANNEL_FAILUREをサーバは返す必要がある.The server SHOULD respond with SSH_MSG_CHANNEL_FAILURE if the user is
+   not allowed access to the Public Key Subsystem (for example, because
+   the user authenticated with a restricted public key).</seg>
       </tuv>
     </tu>
     <tu>
@@ -21498,6 +22638,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The server should use whatever method is
+   appropriate for its platform to identify the host -- e.g., for IP-
+   based networks, checking the IP address or performing a reverse DNS
+   lookup.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T055451Z" changeid="haruyama">
+        <seg>例えば, IPベースのネットワークでIPアドレスをチェックしたり DNS逆引きを実行するなど, その環境に適したホストを特定する方法をサーバは利用する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The server then requests
    authentication information from the client with an
    SSH_MSG_USERAUTH_INFO_REQUEST message.</seg>
@@ -21512,6 +22663,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>サーバは次のメッセージで応答する:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The server will respond with zero or more of the following responses:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T060538Z" changeid="haruyama">
+        <seg>サーバは, 0以上の以下の応答を返す:</seg>
       </tuv>
     </tu>
     <tu>
@@ -21605,6 +22764,23 @@
       </tuv>
       <tuv lang="JA" changedate="20110613T033859Z" changeid="haruyama">
         <seg>しかし, 4節のステートフル-復号 カウンターモード法が[RFC4253]の危険な方法の好ましい代替だ. ステートフル-復号カウンターモードが(ネットワーク消費とパケットごとに必要な暗号操作の数の両方で)もっとも効率的だからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The status code gives the status in a more machine-readable format
+   (suitable for localization), and can have the following values:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T050541Z" changeid="haruyama">
+        <seg>状態コードは, より機械可読な形式(ローカライズに適している)で状態を与える. 以下の値を取りうる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The status code is a byte value, describing the status of a request.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063954Z" changeid="haruyama">
+        <seg>状態コードはバイトの値で, 要求の状態を記述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21942,6 +23118,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The value of the comment attribute contains user-specified text about
+   the public key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T051646Z" changeid="haruyama">
+        <seg>comment 属性の値は, 公開鍵についてユーザが指定したテキストだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The value zero MUST be stored as a string with zero
       bytes of data.</seg>
       </tuv>
@@ -21956,6 +23141,25 @@
       </tuv>
       <tuv lang="JA">
         <seg>'request type' の値は それぞれの channel type に局所的だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The version number was
+   incremented after changes in the handling of status packets.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T051126Z" changeid="haruyama">
+        <seg>状態パケットの処理に変更があったのでバージョン番号が増えた.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The version packet, as well as all requests and responses described
+   in Section 4, are a description of the 'name' field and the data part
+   of the packet.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T050657Z" changeid="haruyama">
+        <seg>(3.4節で記述する)バージョンパケットと4節で記述する要求と応答では, 'name' フィールドとパケットのデータ部を記述している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22146,6 +23350,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>There is no requirement that the responses be in any particular
+   order.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T060604Z" changeid="haruyama">
+        <seg>応答は, 特定の順序である必要はない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>There is no solid
    estimate as to when this may occur, but it is widely believed to be
    at least 20 years from the present.)</seg>
@@ -22224,6 +23437,15 @@
     <tu>
       <tuv lang="EN-US">
         <seg>These
+   numbers are allocated as follows.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T064033Z" changeid="haruyama">
+        <seg>以下のように番号が割り当てられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These
    numbers are allocated as follows:</seg>
       </tuv>
       <tuv lang="JA">
@@ -22272,6 +23494,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>以下が, 認証法に依存しない認証メッセージの番号だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These bytes will always
+   be:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T052728Z" changeid="haruyama">
+        <seg>このバイト列は常に以下だ:</seg>
       </tuv>
     </tu>
     <tu>
@@ -22615,6 +23846,40 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This attribute SHOULD NOT be
+   critical.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T052126Z" changeid="haruyama">
+        <seg>この属性は critical にしないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This attribute SHOULD NOT be critical.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T052644Z" changeid="haruyama">
+        <seg>この属性は critical にしないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This attribute SHOULD be
+   critical.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T054216Z" changeid="haruyama">
+        <seg>この属性は critical にする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This attribute SHOULD be critical.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T053515Z" changeid="haruyama">
+        <seg>この属性は critical にする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This call is made exactly as described above.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110623T034624Z" changeid="haruyama">
@@ -22881,6 +24146,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110621T013054Z" changeid="haruyama">
         <seg>この文書は, GSS-APIを用いてセキュアシェルプロトコルで鍵交換とユーザ認証を行なう方法を記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document describes version 2 of the protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T051036Z" changeid="haruyama">
+        <seg>この文書はプロトコルバージョン 2 を記述している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23349,6 +24622,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This is purely coincidental and actually has
+   nothing to do with STD 11 [9].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063758Z" changeid="haruyama">
+        <seg>これは, 単なる偶然でありSTD 11 [9]とは関係ない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This is purely coincidental and has
    nothing to do with STD 11 [RFC0822].</seg>
       </tuv>
@@ -23363,6 +24645,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>これは, 単なる偶然でありSTD 11 [RFC0822]とは関係ない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This is the
+   only occasion on which the client sends a status message.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T052208Z" changeid="haruyama">
+        <seg>これは, クライアントが状態メッセージを送る唯一の場合だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23784,6 +25075,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This protocol assumes that it is run over a secure channel and that
+   the endpoints of the channel have been authenticated.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T062434Z" changeid="haruyama">
+        <seg>このプロトコルは, 安全なチャンネル上で動作することとそのチャンネルの末端が認証されていることを前提としている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This protocol assumes that the
    underlying protocols provide integrity and confidentiality
    protection.</seg>
@@ -23867,6 +25167,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This protocol provides a mechanism that allows client authentication
+   data to be uploaded and manipulated.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T062538Z" changeid="haruyama">
+        <seg>このプロトコルは, クライアントの認証データをアップロードし操作できるメカニズムを提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This protocol provides a secure encrypted channel over an insecure
    network.</seg>
       </tuv>
@@ -23881,6 +25190,23 @@
       </tuv>
       <tuv lang="JA" changedate="20110720T132015Z" changeid="haruyama">
         <seg>このプロトコルは, ユーザが利用する前に何らかの形でユーザを認証できる必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This protocol requires the client to assume that the server will
+   correctly implement and observe attributes applied to keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T063113Z" changeid="haruyama">
+        <seg>このプロトコルは, サーバが正しく実装され鍵に適用された属性を観測できるという前提をクライアントに要求している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This range is for private use.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T064231Z" changeid="haruyama">
+        <seg>この範囲は, プライベートな利用用だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24226,6 +25552,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Thus, this
+   protocol assumes that it is externally protected from network-level
+   attacks.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T062502Z" changeid="haruyama">
+        <seg>つまり, このプロトコルは, ネットワークレベルの攻撃からは非常に保護されていることを前提としている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>To
    minimize delays in screen updates, one does not want excessively
    large packets for interactive sessions.</seg>
@@ -24301,6 +25637,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>要求を開始した側がどの要求を参照してるかを識別するのを可能にするために,SSH_MSG_GLOBAL_REQUESTS の返答は, 関連する要求のメッセージと同じ順番で送られなければならないことが要求されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To open the Public Key Subsystem, the client sends:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T031916Z" changeid="haruyama">
+        <seg>公開鍵サブシステムを開始するためにクライアントは以下を送る:</seg>
       </tuv>
     </tu>
     <tu>
@@ -24629,6 +25973,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Version 1 was
+   used by an early draft of this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T051055Z" changeid="haruyama">
+        <seg>この文書の初期のドラフトで, バージョン1が使われていた.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>We believe that the protocol will evolve over time, and some
    organizations will want to use their own encryption, authentication,
    and/or key exchange methods.</seg>
@@ -24692,6 +26045,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110614T030944Z" changeid="haruyama">
         <seg>弱い識別者による攻撃は鍵ストリームの任意の部分を操作する. [FMcG]や[MANTIN05]で記述された最良の攻撃では, 複数の異なる鍵ストリームからデータを識別できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whatever
+   attributes the user subsequently asked the server to apply to their
+   key, the server would also apply the &quot;shell&quot; attribute, rendering it
+   impossible for the user to use a shell.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T061806Z" changeid="haruyama">
+        <seg>ユーザがその後鍵をサーバに適用する際に要求する属性がどのようなものでも, ユーザのシェルの利用を禁止するため &quot;shell&quot; 属性もサーバは適用する</seg>
       </tuv>
     </tu>
     <tu>
@@ -25103,6 +26467,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>これはある意味プロトコルの仕様外の話だ. しかし, このプロトコルはユーザインタファイスの問題に基いて仕様が設計されている面がありまたこの情報を除くと互換性がなかったり不恰好な実装を埋むかもしれないので, ここで記述することになった. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Whilst some server implementations may send the responses in
+   some order, client implementations should not rely on responses being
+   in any order.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T060659Z" changeid="haruyama">
+        <seg>実装はそれぞれ特定のオーダーで応答を返すだろうが, クライアントの実装は特定のオーダーの応答に依存しないほうがよい.</seg>
       </tuv>
     </tu>
     <tu>
