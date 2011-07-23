@@ -1354,6 +1354,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A previous version of the SSH protocol,
+   described in [SSH1], uses a key-exchange method based on
+   Rivest-Shamir-Adleman (RSA) public-key encryption, which consumes an
+   order of magnitude less CPU time on the client, and hence is
+   particularly suitable for slow client systems such as mobile devices.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110723T013837Z" changeid="haruyama">
+        <seg>[SSH1] で記述されているSSHプロトコルの以前のバージョンでは, Rivest-Shamir-Adleman (RSA) 公開鍵暗号をベースとする鍵交換法を利用している. これは, クライアントでのCPU時間の消費が1ケタ少なく, モバイルデバイスのような遅いクライアントシステムに特に適している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A prime p is safe if p = 2q + 1 and q is
    prime.</seg>
       </tuv>
@@ -12152,6 +12164,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It uses much less client CPU time than the Diffie-Hellman algorithm
+   specified as part of the core protocol, and hence is particularly
+   suitable for slow client systems.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110723T013121Z" changeid="haruyama">
+        <seg>コアプロトコルの一部として指定されている Diffie-Hellman アルゴリズムよりもクライアントのCPU時間の消費がかなり小さいので, 遅いクライアントのシステムに特に適している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It would be
    considered good form for an implementation to politely and
    unobtrusively notify a user that a stronger cipher is available and
@@ -13839,6 +13861,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>On slow CPUs, this
+   key exchange can take tens of seconds to complete, which can be
+   irritating for the user.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110723T013621Z" changeid="haruyama">
+        <seg>遅いCPUでは, この鍵交換は計算に数十秒かかることがあり, ユーザをいらいらさせてしまうだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>On the other hand, having no central registration leads to conflicts
    in method identifiers, making interoperability difficult.</seg>
       </tuv>
@@ -14167,6 +14199,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>将来, LDAPや他のデータベースに指紋を保存する他の方法が定義されるだろう. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Other terminology and symbols have the same meaning as in [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110723T014222Z" changeid="haruyama">
+        <seg>他の用語とシンボルは, [RFC4253]のものと同じ意味を持つ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14924,6 +14964,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110321T125540Z" changeid="haruyama">
         <seg>Q は, [SEC1] の 2.3.3節で定義されているように, 楕円曲線上の点をオクテット文字列にエンコードした公開鍵だ; ポイント圧縮が利用されてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>RSA Key Exchange for the Secure Shell (SSH)
+                        Transport Layer Protocol</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110723T012922Z" changeid="haruyama">
+        <seg>セキュア シェル (SSH) トランスポート層プロトコルのための RSA 鍵交換</seg>
       </tuv>
     </tu>
     <tu>
@@ -17183,6 +17232,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110712T032346Z" changeid="haruyama">
         <seg>クライアントは1セッションに2回以上この方法を試さないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   core protocol uses Diffie-Hellman key exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110723T013141Z" changeid="haruyama">
+        <seg>コアプロトコルでは, Diffie-Hellman 鍵交換を利用している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19970,6 +20028,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The data types &quot;byte&quot;, &quot;string&quot;, and &quot;mpint&quot; are defined in Section 5
+   of [RFC4251].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110723T014201Z" changeid="haruyama">
+        <seg>データ型 byte, string, mpint は, [RFC4251] で記述されているように解釈される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The data types boolean, byte, uint32, uint64, string, and mpint are
    to be interpreted in this document as described in [RFC4251].</seg>
       </tuv>
@@ -21072,6 +21139,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>鍵の種類は, (アルゴリズムの取り決めや他のソースによって)常に明示的に知られてなければならない</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The key words &quot;MUST&quot; and &quot;SHOULD&quot; in this document are to be
+   interpreted as described in [RFC2119].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110723T014143Z" changeid="haruyama">
+        <seg>この文書でのキーワード &quot;MUST&quot;, &quot;SHOULD&quot; は, [RFC-2119] で記述されているように解釈される. </seg>
       </tuv>
     </tu>
     <tu>
@@ -24778,6 +24854,26 @@
       </tuv>
       <tuv lang="JA" changedate="20110621T012858Z" changeid="haruyama">
         <seg>このメモは, ホスト公開鍵の利用になにも操作が必要ではない新しいホスト公開鍵アルゴリズムも定義する. さらに, GSS-APIベースの鍵交換の副作用として生じたどの認証に対しても連携して利用できる新しいユーザ認証法も定義する. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This memo describes a key-exchange mechanism for the version of SSH
+   described in [RFC4251] that is similar to that used by the older
+   version, and about as fast, while retaining the security advantages
+   of the newer protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110723T014115Z" changeid="haruyama">
+        <seg>このメモは, [RFC4251]で記述されているSSHのバージョンのための鍵交換法を記述している. これは古いバージョンで利用しているものと似ていて, 新しいプロトコルのセキュリティの長所を保持しながらも古いバージョンと同じくらい速い.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This memo describes a key-exchange method for the Secure Shell (SSH)
+   protocol based on Rivest-Shamir-Adleman (RSA) public-key encryption.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110723T013023Z" changeid="haruyama">
+        <seg>このメモは, Rivest-Shamir-Adleman (RSA) 公開鍵暗号に基づくセキュア シェル (SSH) プロトコルのための鍵交換法を記述している.</seg>
       </tuv>
     </tu>
     <tu>
