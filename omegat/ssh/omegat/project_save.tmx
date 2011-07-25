@@ -12089,6 +12089,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It requires a signature-capable host key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110725T080923Z" changeid="haruyama">
+        <seg>この方法には, 署名ができるホスト鍵が必要だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It runs over the transport layer
       protocol.</seg>
       </tuv>
@@ -14301,6 +14309,14 @@
       <tuv lang="JA">
         <seg>鍵交換からの出力................................20
       7.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Overview</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110725T075901Z" changeid="haruyama">
+        <seg>概要</seg>
       </tuv>
     </tu>
     <tu>
@@ -17237,6 +17253,18 @@
     <tu>
       <tuv lang="EN-US">
         <seg>The
+   client and server each hash K, K_T, and the various key-exchange
+   parameters to generate the exchange hash, H, which is used to
+   generate the encryption keys for the session, and the server signs H
+   with its host key and sends the signature to the client.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110725T080459Z" changeid="haruyama">
+        <seg>クライアントとサーバはそれぞれ, Kや K_T いくつかの鍵交換のパラメータをハッシュ化して交換ハッシュ H を生成する. 交換ハッシュ H はセッションのための暗号化鍵を生成するのに使われる. サーバはそのホスト鍵でHに署名し, 署名をクライアントに送る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
    core protocol uses Diffie-Hellman key exchange.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110723T013141Z" changeid="haruyama">
@@ -18708,6 +18736,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The RSA key-exchange method consists of three messages.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110725T075917Z" changeid="haruyama">
+        <seg>RSA 鍵交換法は3つのメッセージで構成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The SHA2 family
    consists of four variants -- SHA-224, SHA-256, SHA-384, and SHA-521
    -- named after their digest lengths.</seg>
@@ -19568,6 +19604,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client
+   then verifies the host key as described in Section 8 of [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110725T080820Z" changeid="haruyama">
+        <seg>そして, [RFC4253] の 8節に記述されているように, クライアントはホスト鍵を検証する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client MAY accept the host key without verification, but
          doing so will render the protocol insecure against active
          attacks.</seg>
@@ -19721,6 +19766,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>クライアントとサーバのユーザ名は, 本質的にサーバが受け入れられるものに制限される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The client generates a string of random bytes, K, encrypts it using
+   K_T, and sends the result back to the server, which decrypts it.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110725T080253Z" changeid="haruyama">
+        <seg>クライアントはランダムなbyte列 K を生成し, K_T を用いて暗号化する. そしてサーバに暗号文を送り, サーバはそれを復号する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22323,6 +22377,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The server
+   sends to the client an RSA public key, K_T, to which the server holds
+   the private key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110725T080109Z" changeid="haruyama">
+        <seg>サーバはクライアントに サーバが秘密鍵を保持しているRSA 公開鍵 K_T を送る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The server MAY
    provide a method for administrators to disallow the appearance of a
    host in this list.</seg>
@@ -24836,6 +24900,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This may be a transient key generated solely for
+   this SSH connection, or it may be re-used for several connections.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110725T080136Z" changeid="haruyama">
+        <seg>このSSH接続のためのみに生成される一時的な鍵でもよいし, いくつかの接続で再利用されてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This means that an adversary may be able to
    convince the receiver to accept the same message more than once or to
    accept messages out of order.</seg>
@@ -25064,6 +25137,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110712T024005Z" changeid="haruyama">
         <seg>この方法は, 鍵交換で確立された既存の GSS-API コンテキストを利用してユーザ認証を行なう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This method provides explicit server identification as defined in
+   Section 7 of [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110725T080900Z" changeid="haruyama">
+        <seg>[RFC4253] の7節で定義されているように, この方法は明示的なサーバの認証を提供する.</seg>
       </tuv>
     </tu>
     <tu>
