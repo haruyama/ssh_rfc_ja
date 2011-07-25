@@ -1,0 +1,389 @@
+
+
+
+
+
+
+Network Working Group                                          B. Harris
+Request for Comments: 4432                                    March 2006
+Category: Standards Track
+
+
+              セキュア シェル (SSH) トランスポート層プロトコルのための RSA 鍵交換
+
+このメモの位置づけ
+
+   この文書は, インターネットコミュニティに対するインターネットの標準トラックプロトコルを定義している. また, 改善のための議論と示唆を求めているこのプロトコルの標準化の状態と状況は "Internet
+   Official Protocol Standards" (STD 1) の現在の版を参照してほしい.  このメモの配布は制限しない.
+
+Copyright Notice
+
+   Copyright (C) The Internet Society (2006). 訳者: 春山 征吾 <haruyama@unixuser.org> 
+
+概要
+
+   このメモは, Rivest-Shamir-Adleman (RSA) 公開鍵暗号に基づくセキュア シェル (SSH) プロトコルのための鍵交換法を記述している.
+   コアプロトコルの一部として指定されている Diffie-Hellman アルゴリズムよりもクライアントのCPU時間の消費がかなり小さいので, 遅いクライアントのシステムに特に適している.
+
+1.  イントロダクション
+
+   セキュア シェル(SSH) [RFC4251] は 安全なロモートログインプロトコルだ.  コアプロトコルでは, Diffie-Hellman 鍵交換を利用している.  遅いCPUでは, この鍵交換は計算に数十秒かかることがあり, ユーザをいらいらさせてしまうだろう.  [SSH1] で記述されているSSHプロトコルの以前のバージョンでは, Rivest-Shamir-Adleman (RSA) 公開鍵暗号をベースとする鍵交換法を利用している. これは, クライアントでのCPU時間の消費が1ケタ少なく, モバイルデバイスのような遅いクライアントシステムに特に適している.
+   このメモは, [RFC4251]で記述されているSSHのバージョンのための鍵交換法を記述している. これは古いバージョンで利用しているものと似ていて, 新しいプロトコルのセキュリティの長所を保持しながらも古いバージョンと同じくらい速い.
+
+
+
+
+
+
+
+
+
+Harris                      Standards Track                     [Page 1]
+ 
+RFC 4432                  SSH RSA Key Exchange                March 2006
+
+
+2.  この文書で用いる表記
+
+   この文書でのキーワード "MUST", "SHOULD" は, [RFC-2119] で記述されているように解釈される. 
+
+   データ型 byte, string, mpint は, [RFC4251] で記述されているように解釈される.
+
+   他の用語とシンボルは, [RFC4253]のものと同じ意味を持つ.
+
+3.  概要
+
+   RSA 鍵交換法は3つのメッセージで構成される.  サーバはクライアントに サーバが秘密鍵を保持しているRSA 公開鍵 K_T を送る.  このSSH接続のためのみに生成される一時的な鍵でもよいし, いくつかの接続で再利用されてもよい.
+   クライアントはランダムなbyte列 K を生成し, K_T を用いて暗号化する. そしてサーバに暗号文を送り, サーバはそれを復号する.  クライアントとサーバはそれぞれ, Kや K_T いくつかの鍵交換のパラメータをハッシュ化して交換ハッシュ H を生成する. 交換ハッシュ H はセッションのための暗号化鍵を生成するのに使われる. サーバはそのホスト鍵でHに署名し, 署名をクライアントに送る.  そして, [RFC4253] の 8節に記述されているように, クライアントはホスト鍵を検証する.
+
+   [RFC4253] の7節で定義されているように, この方法は明示的なサーバの認証を提供する.  この方法には, 署名ができるホスト鍵が必要だ.
+
+4.  詳細
+
+   RSA 鍵交換法は, 以下のパラメータを持つ.
+
+       HASH     交換ハッシュなどを計算するハッシュアルゴリズム.
+       HLEN     ビットでのハッシュの出力の長さ
+       MINKLEN  ビットでの一時RSAモジュラスの長さの最小値
+
+   これらの値は, この文書で定義する2つの方法のために, 5節と6節で定義される.
+
+   この方法は以下のメッセージを用いる.
+
+   サーバは最初に以下を送信する:
+
+       byte      SSH_MSG_KEXRSA_PUBKEY
+       string    server public host key and certificates (K_S)
+       string    K_T, transient RSA public key
+
+
+
+
+
+
+Harris                      Standards Track                     [Page 2]
+ 
+RFC 4432                  SSH RSA Key Exchange                March 2006
+
+
+   鍵 K_T は, [RFC4253]の 6.6 節で記述されている "ssh-rsa" 方式に従ってエンコードされる.  注意: "ssh-rsa" ホスト鍵と異なり, K_T は暗号化のみに利用される. 署名には利用されない.  K_T のモジュラスは, 少なくとも MINKLEN ビットの長さでなければならない.
+
+   クライアントは乱数 K を生成する. K は以下の範囲の数だ: 0 <= K < 2^(KLEN-2*HLEN-49). KLEN は K_Tのモジュラスのビットでの長さだ.  そしてクライアントはK_Tを以下を暗号化するのに用いる.
+
+       mpint     K, the shared secret
+
+   [RFC3447]の (mask generation function として MGF1-with-HASH を, ハッシュとして HASH を そして空のラベルを用いる) RSAES-OAEP 方式(に従って暗号化は実行されるK のエンコーディングが暗号化する上で常に十分短い長さになることの証明が付録 A にある.  暗号化を行なったら, クライアントは以下を送る:
+
+       byte      SSH_MSG_KEXRSA_SECRET
+       string    RSAES-OAEP-ENCRYPT(K_T, K)
+
+   注意: RSAES-OAEP-ENCRYPT の最終段階は, [RFC3447] の I2OSP プリミティブを用いてオクテット文字列として整数をエンコードする.
+   これをSSHの "string" としてエンコードすると, SSHの "mpint" エンコーディングをこの整数に適用するのと似ているが異なる結果を生成する.  [RFC4253] の "ssh-rsa" 署名で用いられているのと同じエンコーディングだ.
+
+   サーバは K を復号する. 復号エラーが起きたら, サーバは reason code が SSH_DISCONNECT_KEY_EXCHANGE_FAILED の SSH_MESSAGE_DISCONNECT を送る必要があり, 接続を切断しなければならない.  そうでなければ, サーバは以下で応答する:
+
+       byte      SSH_MSG_KEXRSA_DONE
+       string    signature of H with host key
+
+   ハッシュ H は, 次の連結に対する HASH の結果だ:
+
+       string    V_C, the client's identification string
+                 (CR and LF excluded)
+       string    V_S, the server's identification string
+                 (CR and LF excluded)
+       string    I_C, the payload of the client's SSH_MSG_KEXINIT
+       string    I_S, the payload of the server's SSH_MSG_KEXINIT
+       string    K_S, the host key
+       string    K_T, the transient RSA key
+       string    RSAES_OAEP_ENCRYPT(K_T, K), the encrypted secret
+       mpint     K, the shared secret
+
+
+
+Harris                      Standards Track                     [Page 3]
+ 
+RFC 4432                  SSH RSA Key Exchange                March 2006
+
+
+   この値は交換ハッシュと呼ばれる. 鍵交換を認証するのに用いられる.  交換ハッシュは秘密にする必要がある.
+
+   元データではなく H に対して署名のアルゴリズムが適用されなければならない.  殆どの署名のアルゴリズムは, ハッシュと追加のパディングを含んでいるたとえば, 'ssh-dss' は SHA-1 ハッシュを指定する.  この場合, データはまず H を計算するために HASH でハッシュされる. そして H は署名の計算の一部分として再度ハッシュされる.
+
+5.  rsa1024-sha1
+
+   "rsa1024-sha1" 法は, 次のパラメータで以上で記述した RSA 鍵交換を指定する.
+
+       HASH     SHA-1, as defined in [RFC3174]
+       HLEN     160
+       MINKLEN  1024
+
+6.  rsa2048-sha256
+
+   "rsa2048-sha256" 法は, 次のパラメータで以上で記述した RSA 鍵交換を指定する.
+
+       HASH     SHA-256, as defined in [FIPS-180-2]
+       HLEN     256
+       MINKLEN  2048
+
+7.  メッセージ番号
+
+   以下のメッセージ番号が定義されている:
+
+       SSH_MSG_KEXRSA_PUBKEY  30
+       SSH_MSG_KEXRSA_SECRET  31
+       SSH_MSG_KEXRSA_DONE    32
+
+8.  セキュリティの考察
+
+   [RFC4251]のセキュリティの考察が適用される.
+
+   サーバで生成された RSA 秘密鍵が漏れたら, セッション鍵も漏れる.  サーバは, 必要でなくなったらすぐにメモリーからRSA秘密鍵を消す用意をする必要がある.  複数の SSH 接続で 同じ RSA 鍵を用いると, (公開鍵の素因数分解やその他の方法で)秘密鍵を見つけることができる攻撃者がその鍵を用いるセッションのすべてにアクセスできる.  このため, サーバは可能な限り少ない鍵交換に対してそれぞれの RSA 鍵を用いる必要がある.
+
+
+
+Harris                      Standards Track                     [Page 4]
+ 
+RFC 4432                  SSH RSA Key Exchange                March 2006
+
+
+   [RFC3447] は, RSAES-OAEP で 用いる RSA 鍵が 他の方式で用いられていない, また, 異なるハッシュ関数を用いた recommends that RSA keys used with RSAES-OAEP not be used
+   with other schemes, or with RSAES-OAEP using a different hash
+   function.  In particular, this means that K_T should not be used as a
+   host key, or as a server key in earlier versions of the SSH protocol.
+
+   Like all key-exchange mechanisms, this one depends for its security
+   on the randomness of the secrets generated by the client (the random
+   number K) and the server (the transient RSA private key).  In
+   particular, it is essential that the client use a high-quality
+   cryptographic pseudo-random number generator to generate K.  Using a
+   bad random number generator will allow an attacker to break all the
+   encryption and integrity protection of the Secure Shell transport
+   layer.  See [RFC4086] for recommendations on random number
+   generation.
+
+   The size of transient key used should be sufficient to protect the
+   encryption and integrity keys generated by the key-exchange method.
+   For recommendations on this, see [RFC3766].  The strength of
+   RSAES-OAEP is in part dependent on the hash function it uses.
+   [RFC3447] suggests using a hash with an output length of twice the
+   security level required, so SHA-1 is appropriate for applications
+   requiring up to 80 bits of security, and SHA-256 for those requiring
+   up to 128 bits.
+
+   Unlike the Diffie-Hellman key-exchange method defined by [RFC4253],
+   this method allows the client to fully determine the shared secret,
+   K.  This is believed not to be significant, since K is only ever used
+   when hashed with data provided in part by the server (usually in the
+   form of the exchange hash, H).  If an extension to SSH were to use K
+   directly and to assume that it had been generated by Diffie-Hellman
+   key exchange, this could produce a security weakness.  Protocol
+   extensions using K directly should be viewed with extreme suspicion.
+
+   This key-exchange method is designed to be resistant to collision
+   attacks on the exchange hash, by ensuring that neither side is able
+   to freely choose its input to the hash after seeing all of the other
+   side's input.  The server's last input is in SSH_MSG_KEXRSA_PUBKEY,
+   before it has seen the client's choice of K.  The client's last input
+   is K and its RSA encryption, and the one-way nature of RSA encryption
+   should ensure that the client cannot choose K so as to cause a
+   collision.
+
+9.  IANA の考慮
+
+   IANA has assigned the names "rsa1024-sha1" and "rsa2048-sha256" as
+   Key Exchange Method Names in accordance with [RFC4250].
+
+
+
+
+
+Harris                      Standards Track                     [Page 5]
+ 
+RFC 4432                  SSH RSA Key Exchange                March 2006
+
+
+10.  Acknowledgements
+
+   The author acknowledges the assistance of Simon Tatham with the
+   design of this key exchange method.
+
+   The text of this document is derived in part from [RFC4253].
+
+11.  References
+
+11.1.  Normative References
+
+   [RFC2119]     Bradner, S., "Key words for use in RFCs to Indicate
+                 Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC3174]     Eastlake, D. and P. Jones, "US Secure Hash Algorithm 1
+                 (SHA1)", RFC 3174, September 2001.
+
+   [RFC3447]     Jonsson, J. and B. Kaliski, "Public-Key Cryptography
+                 Standards (PKCS) #1: RSA Cryptography Specifications
+                 Version 2.1", RFC 3447, February 2003.
+
+   [RFC4251]     Ylonen, T. and C. Lonvick, "The Secure Shell (SSH)
+                 Protocol Architecture", RFC 4251, January 2006.
+
+   [RFC4253]     Ylonen, T. and C. Lonvick, "The Secure Shell (SSH)
+                 Transport Layer Protocol", RFC 4253, January 2006.
+
+   [RFC4250]     Lehtinen, S. and C. Lonvick, "The Secure Shell (SSH)
+                 Protocol Assigned Numbers", RFC 4250, January 2006.
+
+   [FIPS-180-2]  National Institute of Standards and Technology (NIST),
+                 "Secure Hash Standard (SHS)", FIPS PUB 180-2,
+                 August 2002.
+
+11.2.  Informative References
+
+   [SSH1]        Ylonen, T., "SSH -- Secure Login Connections over the
+                 Internet", 6th USENIX Security Symposium, pp. 37-42,
+                 July 1996.
+
+   [RFC3766]     Orman, H. and P. Hoffman, "Determining Strengths For
+                 Public Keys Used For Exchanging Symmetric Keys",
+                 BCP 86, RFC 3766, April 2004.
+
+   [RFC4086]     Eastlake, D., Schiller, J., and S. Crocker, "Randomness
+                 Requirements for Security", BCP 106, RFC 4086,
+                 June 2005.
+
+
+
+
+Harris                      Standards Track                     [Page 6]
+ 
+RFC 4432                  SSH RSA Key Exchange                March 2006
+
+
+Appendix A.  On the Size of K
+
+   The requirements on the size of K are intended to ensure that it is
+   always possible to encrypt it under K_T.  The mpint encoding of K
+   requires a leading zero bit, padding to a whole number of bytes, and
+   a four-byte length field, giving a maximum length in bytes,
+   B = (KLEN-2*HLEN-49+1+7)/8 + 4 = (KLEN-2*HLEN-9)/8 (where "/" denotes
+   integer division rounding down).
+
+   The maximum length of message that can be encrypted using RSAEP-OAEP
+   is defined by [RFC3447] in terms of the key length in bytes, which is
+   (KLEN+7)/8.  The maximum length is thus L = (KLEN+7-2*HLEN-16)/8 =
+   (KLEN-2*HLEN-9)/8.  Thus, the encoded version of K is always small
+   enough to be encrypted under K_T.
+
+Author's Address
+
+   Ben Harris
+   2a Eachard Road
+   CAMBRIDGE
+   CB4 1XA
+   UNITED KINGDOM
+
+   EMail: bjh21@bjh21.me.uk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Harris                      Standards Track                     [Page 7]
+ 
+RFC 4432                  SSH RSA Key Exchange                March 2006
+
+
+Full Copyright Statement
+
+   Copyright (C) The Internet Society (2006). 訳者: 春山 征吾 <haruyama@unixuser.org> 
+
+   This document is subject to the rights, licenses and restrictions
+   contained in BCP 78, and except as set forth therein, the authors
+   retain all their rights.
+
+   This document and the information contained herein are provided on an
+   "AS IS" basis and THE CONTRIBUTOR, THE ORGANIZATION HE/SHE REPRESENTS
+   OR IS SPONSORED BY (IF ANY), THE INTERNET SOCIETY AND THE INTERNET
+   ENGINEERING TASK FORCE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED,
+   INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE
+   INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED
+   WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+Intellectual Property
+
+   The IETF takes no position regarding the validity or scope of any
+   Intellectual Property Rights or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; nor does it represent that it has
+   made any independent effort to identify any such rights.  Information
+   on the procedures with respect to rights in RFC documents can be
+   found in BCP 78 and BCP 79.
+
+   Copies of IPR disclosures made to the IETF Secretariat and any
+   assurances of licenses to be made available, or the result of an
+   attempt made to obtain a general license or permission for the use of
+   such proprietary rights by implementers or users of this
+   specification can be obtained from the IETF on-line IPR repository at
+   http://www.ietf.org/ipr.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights that may cover technology that may be required to implement
+   this standard.  Please address the information to the IETF at
+   ietf-ipr@ietf.org.
+
+Acknowledgement
+
+   Funding for the RFC Editor function is provided by the IETF
+   Administrative Support Activity (IASA).
+
+
+
+
+
+
+
+Harris                      Standards Track                     [Page 8]
+
