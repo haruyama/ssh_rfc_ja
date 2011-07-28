@@ -1081,6 +1081,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A NETCONF over SSH session consists of the manager and agent
+   exchanging complete XML documents.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T100022Z" changeid="haruyama">
+        <seg>SSHセッション上の NETCONF は, マネージャとエージェントの完全な XML 文書の交換で構成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A SSH_MSG_USERAUTH_FAILURE message MUST NOT be
    sent for an aborted method.</seg>
       </tuv>
@@ -2450,6 +2459,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>この例として, インタラクティブなセッションからの stderr データがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An agent will process RPC messages from the manager in the order in
+   which they are received.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T100925Z" changeid="haruyama">
+        <seg>エージェントは, マネージャから送られる RPC メッセージを受け取った順に処理する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6079,6 +6097,22 @@
       </tuv>
       <tuv lang="JA">
         <seg>一般に時代遅れとみなされている1つの歴史的なアルゴリズムを除いて, この文書は,[SSH-ARCH], [SSH-TRANS], [SSH-USERAUTH], [SSH-CONNECT] で定義されていない新しいプロトコルや番号の範囲を定義していない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Exiting NETCONF is accomplished using the &lt;close-session&gt; operation.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T100730Z" changeid="haruyama">
+        <seg>NETCONF の終了は, &lt;close-session&gt; 操作を用いて行なわれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Exiting the NETCONF Subsystem</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T100706Z" changeid="haruyama">
+        <seg>NETCONF サブシステムの終了</seg>
       </tuv>
     </tu>
     <tu>
@@ -14268,6 +14302,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Once the session has been
+   established and capabilities have been exchanged, the manager will
+   send complete XML documents containing &lt;rpc&gt; elements to the server,
+   and the agent will respond with complete XML documents containing
+   &lt;rpc-reply&gt; elements.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T100141Z" changeid="haruyama">
+        <seg>セッションが確立され機能が交換されたら, マネージャは &lt;rpc&gt; 要素を含む 完全な XML 文書をサーバに送る. そして エージェントは &lt;rpc-reply&gt; 要素を含む完全な XML 文書で応答する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Once the session has been set up, a program is started at the remote
    end.</seg>
       </tuv>
@@ -19773,6 +19819,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110701T023213Z" changeid="haruyama">
         <seg>交換されるパケットの実際の数は， 基底のGSS-API メカニズムで決定される．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The agent MUST NOT process any RPC commands received on the current
+   session after the &lt;close-session&gt; command.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T100944Z" changeid="haruyama">
+        <seg>エージェントは, &lt;close-session&gt; コマンドの後で現在のセッションで受け取ったすべての RPC コマンドを処理してはならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26594,6 +26649,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>To continue the example given above, an NETCONF over SSH session to
+   retrieve a set of configuration information might look like this:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T100238Z" changeid="haruyama">
+        <seg>上記の例に続いて, 設定情報の集合を取得する SSH セッション上の NETCONF は次のようになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To continue the example used in previous sections, an existing
+   NETCONF subsystem session could be closed as follows:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T101113Z" changeid="haruyama">
+        <seg>前の節で利用した例に続いて, 既存の NETCONF サブシステムを終了する例は以下だ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>To decrypt a ciphertext C=C1||C2||...||Cn, the decryptor (who also
    maintains its own copy of X) first encrypts its copy of &lt;X&gt; with
    &lt;cipher&gt; to generate a block B1 and then XORs B1 to C1 to get P1.</seg>
@@ -26943,6 +27016,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>DNSを利用したセキュア シェル (SSH) の鍵の指紋の安全な配布</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Using NETCONF over SSH</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T095948Z" changeid="haruyama">
+        <seg>SSH 上での NETCONF の利用</seg>
       </tuv>
     </tu>
     <tu>
@@ -27311,6 +27392,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>現在, これらのメッセージは典型的にはエラーやデバッグ情報, その他の外部で設定されるデータに関連している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When the agent processes a &lt;close-session&gt;
+   command, the agent shall respond and close the SSH session channel.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T100853Z" changeid="haruyama">
+        <seg>エージェントが &lt;close-session&gt; コマンドを処理する場合は, エージェントは応答し SSH のセッションチャンネルを終了する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
