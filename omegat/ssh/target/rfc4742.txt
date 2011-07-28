@@ -66,27 +66,15 @@ RFC 4742                    NETCONF over SSH               December 2006
    この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, RFC 2119 [RFC2119] で記述されているように解釈される. 
 
-3.  Starting NETCONF over SSH
+3.  SSH 上での NETCONF の起動
 
-   To run NETCONF over SSH, the client will first establish an SSH
-   transport connection using the SSH transport protocol, and the client
-   and server will exchange keys for message integrity and encryption.
-   The client will then invoke the "ssh-userauth" service to
-   authenticate the user, as described in the SSH authentication
-   protocol [RFC4252].  Once the user has been successfully
-   authenticated, the client will invoke the "ssh-connection" service,
-   also known as the SSH connection protocol.
+   SSH上でNETCONFを実行するのに, クライアントはまずSSHトランスポート接続をSSHトランスポートプロトコルを用いて確立し, クライアントとサーバはメッセージ完全性と暗号化のための鍵を交換する.
+   クライアントは SSH 認証プロトコル [RFC4252] に記述されているようにユーザを認証するため "ssh-userauth" サービスを起動する.  ユーザが認証に成功したら, クライアントは SSHコネクションプロトコルとして知られている "ssh-connection" サービスを起動する.
 
-   After the ssh-connection service is established, the client will open
-   a channel of type "session", which will result in an SSH session.
+   ssh-connection サービスが確立したら, クライアントは SSHのセッションとなる "session" タイプのチャンネルを開始する.
 
-   Once the SSH session has been established, the user (or application)
-   will invoke NETCONF as an SSH subsystem called "netconf".  Subsystem
-   support is a feature of SSH version 2 (SSHv2) and is not included in
-   SSHv1.  Running NETCONF as an SSH subsystem avoids the need for the
-   script to recognize shell prompts or skip over extraneous
-   information, such as a system message that is sent at shell start-up.
-   However, even when a subsystem is used, some extraneous messages may
+   SSHのセッションが確立したら, ユーザ(ないしアプリケーション)は, "netconf" SSHサブシステムとして NETCONF を起動する.  サブシステムのサポートは,SSH バージョン 2 (SSHV2) の機能で, SSHv1 には含まれていない.  SSHのサブシステムとして NETCONFを実行すると, シェルプロンプトをスクリプトが認識する必要や (シェルの起動時に送られるシステムメッセージのような)余計な情報をスクリプトがスキップする必要がなくなる.
+   しかし, サブシステムを用いても, いくつかの余計なメッセージがユーザの起動スクリプトによって表示される可能性はある.
 
 
 
@@ -95,41 +83,23 @@ Wasserman & Goddard         Standards Track                     [Page 2]
 RFC 4742                    NETCONF over SSH               December 2006
 
 
-   be printed by the user's start-up scripts.  Implementations MUST skip
-   over these messages by searching for an 'xml' start directive, which
-   MUST be followed by a <hello> element in the 'NETCONF' namespace.
+    実装は, 'xml' の開始ディレクティブを探してこれらのメッセージをスキップしなければならない. この後には 'NETCONF' 名前空間の <hello> 要素が続いていなければならない.
 
-   In order to allow NETCONF traffic to be easily identified and
-   filtered by firewalls and other network devices, NETCONF servers MUST
-   default to providing access to the "netconf" SSH subsystem only when
-   the SSH session is established using the IANA-assigned TCP port
-   <830>.  Servers SHOULD be configurable to allow access to the netconf
-   SSH subsystem over other ports.
+   NETCONF のトラフィックを容易に識別しファイアウォールや他のネットワークデバイスでフィルタするために, NETCONF サーバは, IANA に割り当てられた TCP ポートを用いて SSH のセッションが確立された場合のみ "netconf" SSH サブシステムへのアクセスを提供するのをデフォルトとしなければならない.  サーバは, 他のポート上の netconf SSH サブシステムへのアクセス許可を設定可能にする必要がある.
 
-   A user (or application) could use the following command line to
-   invoke NETCONF as an SSH subsystem on the IANA-assigned port:
+   ユーザ(やアプリケーション)は, IANAに割り当てられたポート上の SSH サブシステムとして NETCONF を, 以下のコマンドラインを用いて起動できる.
 
    [user@client]$ ssh -s server.example.org -p <830> netconf
 
-   Note that the -s option causes the command ("netconf") to be invoked
-   as an SSH subsystem.
+   注意: -s オプションは, SSHのサブシステムとしてコマンド("netconf")を起動させる.
 
-3.1.  Capabilities Exchange
+3.1.  機能の交換
 
-   The server MUST indicate its capabilities by sending an XML document
-   containing a <hello> element as soon as the NETCONF session is
-   established.  The user (or application) can parse this message to
-   determine which NETCONF capabilities are supported by the server.
+   サーバは, NETCONFのセッションが確立したらすぐに <hello> 要素を含む XML 文書を送ってその機能を示さなければならない.  ユーザ(もしくはアプリケーション)はこのメッセージをパースして, どの NETCONF 機能がサーバでサポートされているかを判断できる.
 
-   The client must also send an XML document containing a <hello>
-   element to indicate the client's capabilities to the server.  The
-   document containing the <hello> element MUST be the first XML
-   document that the client sends after the NETCONF session is
-   established.
+   クライアントも サーバにクライアントの機能を示すために <hello> 要素を含む XML 文書を送らなければならない.  <hello> 要素を含む文書は, NETCONF セッションが確立したあとにクライアントが送る最初の XML 文書でなければならない.
 
-   The following example shows a capability exchange.  Messages sent by
-   the client are marked with "C:", and messages sent by the server are
-   marked with "S:".
+   以下で機能の交換の例を示す.  クライアントから送られるメッセージには "C:" を, サーバから送られるメッセージには "S:" を付けている.
 
 
 
@@ -175,17 +145,9 @@ RFC 4742                    NETCONF over SSH               December 2006
    C: </hello>
    C: ]]>]]>
 
-   Although the example shows the server sending a <hello> message
-   followed by the client's message, both sides will send the message as
-   soon as the NETCONF subsystem is initialized, perhaps simultaneously.
+   例では <hello> メッセージのサーバの送信に続いてクライアントのメッセージが続いているが, NETCONF サブシステムが開始されたらすぐに, おそらく同時に, どちらの側からもメッセージが送られる.
 
-   As the previous example illustrates, a special character sequence,
-   ]]>]]>, MUST be sent by both the client and the server after each XML
-   document in the NETCONF exchange.  This character sequence cannot
-   legally appear in an XML document, so it can be unambiguously used to
-   identify the end of the current document, allowing resynchronization
-   of the NETCONF exchange in the event of an XML syntax or parsing
-   error.
+   前出の例が示すように, 特殊な文字列, ]]>]]> を NETCONF 交換でのそれぞれの XML文書の後で クライアントもサーバも送らなければならない.  この文字列は, XML 文書で正当に現われることはないので, 現在の文書の終端を識別するのに間違いなく利用できる. これにより XML の文法やパースのエラー時に NETCONF 交換を再実行できる.
 
 
 
@@ -207,17 +169,11 @@ Wasserman & Goddard         Standards Track                     [Page 4]
 RFC 4742                    NETCONF over SSH               December 2006
 
 
-4.  Using NETCONF over SSH
+4.  SSH 上での NETCONF の利用
 
-   A NETCONF over SSH session consists of the manager and agent
-   exchanging complete XML documents.  Once the session has been
-   established and capabilities have been exchanged, the manager will
-   send complete XML documents containing <rpc> elements to the server,
-   and the agent will respond with complete XML documents containing
-   <rpc-reply> elements.
+   SSHセッション上の NETCONF は, マネージャとエージェントの完全な XML 文書の交換で構成される.  セッションが確立され機能が交換されたら, マネージャは <rpc> 要素を含む 完全な XML 文書をサーバに送る. そして エージェントは <rpc-reply> 要素を含む完全な XML 文書で応答する.
 
-   To continue the example given above, an NETCONF over SSH session to
-   retrieve a set of configuration information might look like this:
+   上記の例に続いて, 設定情報の集合を取得する SSH セッション上の NETCONF は次のようになる.
 
    C: <?xml version="1.0" encoding="UTF-8"?>
    C: <rpc message-id="105"
@@ -263,17 +219,13 @@ Wasserman & Goddard         Standards Track                     [Page 5]
 RFC 4742                    NETCONF over SSH               December 2006
 
 
-5.  Exiting the NETCONF Subsystem
+5.  NETCONF サブシステムの終了
 
-   Exiting NETCONF is accomplished using the <close-session> operation.
-   An agent will process RPC messages from the manager in the order in
-   which they are received.  When the agent processes a <close-session>
-   command, the agent shall respond and close the SSH session channel.
-   The agent MUST NOT process any RPC commands received on the current
-   session after the <close-session> command.
+   NETCONF の終了は, <close-session> 操作を用いて行なわれる.
+   エージェントは, マネージャから送られる RPC メッセージを受け取った順に処理する.  エージェントが <close-session> コマンドを処理する場合は, エージェントは応答し SSH のセッションチャンネルを終了する必要がある.
+   エージェントは, <close-session> コマンドの後で現在のセッションで受け取ったすべての RPC コマンドを処理してはならない.
 
-   To continue the example used in previous sections, an existing
-   NETCONF subsystem session could be closed as follows:
+   前の節で利用した例に続いて, 既存の NETCONF サブシステムを終了する例は以下だ:
 
    C: <?xml version="1.0" encoding="UTF-8"?>
    C: <rpc message-id="106"
@@ -291,25 +243,11 @@ RFC 4742                    NETCONF over SSH               December 2006
 
 6.  セキュリティの考察
 
-   NETCONF is used to access configuration and state information and to
-   modify configuration information, so the ability to access this
-   protocol should be limited to users and systems that are authorized
-   to view the agent's configuration and state or to modify the agent's
-   configuration.
+   NETCONF は, 設定や状態の情報にアクセスし, 設定情報を変更する. このため, このプロトコルにアクセスする能力は, エージェントの設定や状態を閲覧したりエージェントの設定を変更する権限のあるユーザやシステムに制限される必要がある.
 
-   The identity of the server MUST be verified and authenticated by the
-   client according to local policy before password-based authentication
-   data or any configuration or state data is sent to or received from
-   the server.  The identity of the client MUST also be verified and
-   authenticated by the server according to local policy to ensure that
-   the incoming client request is legitimate before any configuration or
-   state data is sent to or received from the client.  Neither side
-   should establish a NETCONF over SSH connection with an unknown,
-   unexpected, or incorrect identity on the opposite side.
+   サーバの識別情報は, パスワードベースの認証データや設定や状態のデータをサーバに送ったりサーバから受け取ったりする前に, ローカルなポリシーに基づいてクライアントが検証し認証されなければならない.  クライアントの識別情報も, 設定や状態の情報をクライアントに送ったりクライアントから受け取ったりする前に, 受け取ったクライアントの要求が正当なものであることを保証するために, ローカルなポリシーに基づいて, サーバにより検証し認証されなければならない.  クライアントもサーバも, 未知の, もしくは, 予期しない, 不正解な相手側の識別情報による SSH 接続上の NETCOF を確立してはならない.
 
-   Configuration or state data may include sensitive information, such
-   as usernames or security keys.  So, NETCONF should only be used over
-   communications channels that provide strong encryption for data
+   設定や状態のデータは, ユーザ名やセキュリティ鍵などの重要な情報を含む場合がある.  それゆえ, NETCONF は, データの秘密性に対して強い暗号化を提供するチ通信チャンネル上でのみ利用されなければならない.
 
 
 
@@ -319,32 +257,19 @@ Wasserman & Goddard         Standards Track                     [Page 6]
 RFC 4742                    NETCONF over SSH               December 2006
 
 
-   privacy.  This document defines a NETCONF over SSH mapping that
-   provides for support of strong encryption and authentication.
+    この文書は, 強い暗号化と認証のサポートを提供する SSH マッピング上の NETCONF を定義する.
 
-   This document requires that servers default to allowing access to the
-   "netconf" SSH subsystem only when using a specific TCP port assigned
-   by IANA for this purpose.  This will allow NETCONF over SSH traffic
-   to be easily identified and filtered by firewalls and other network
-   nodes.  However, it will also allow NETCONF over SSH traffic to be
-   more easily identified by attackers.
+   この文書は, この目的のために IANA に割り当てられた特定の TCP ポートのみで "netconf" SSH サブシステムへのアクセスを許すのをデフォルトとするようサーバに要求する.  これは, SSH トラフィック上の NETCONF を, ファイアウォールや他のネットワークノードで容易の識別しフィルタするのを可能にする.  しかし, SSH トラフィック上の NETCONFを攻撃者もより容易に識別できるようになる.
 
-   This document also recommends that servers be configurable to allow
-   access to the "netconf" SSH subsystem over other ports.  Use of that
-   configuration option without corresponding changes to firewall or
-   network device configuration may unintentionally result in the
-   ability for nodes outside the firewall or other administrative
-   boundary to gain access to "netconf" SSH subsystem.
+   この文書は, 他のポートでの "netconf" SSH サブシステムへのアクセスをサーバが設定可能にすることも推奨する.  ファイアウォールやネットワークデバイスの設定を対応して変更することなしにこの設定項目を利用すると, "netconf" SSH サブシステムへのアクセスを得ようとする ファイアウォールや他の管理境界の外にあるノードの接続に意図しない影響を与える可能性がある.
 
 7.  IANA の考慮
 
-   IANA assigned a TCP port number that is the default port for NETCONF
-   over SSH sessions as defined in this document.
+   IANA は, この文書で定義する SSH セッション上の NETCONF のデフォルトポートとして TCP ポート番号を割り当てる.
 
-   IANA assigned port <830> for this purpose.
+   IANA は, この目的のためにポート <830> を割り当てた.
 
-   IANA is also requested to assign "netconf" as an SSH Service Name as
-   defined in [RFC4250], as follows:
+   IANA は, [RFC4250] で定義された SSH Service Name として, 以下のように "netconf" を割り当てるよう要求された. 
 
             Service Name                  Reference
             -------------                 ---------

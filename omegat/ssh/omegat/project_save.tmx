@@ -4412,6 +4412,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Configuration or state data may include sensitive information, such
+   as usernames or security keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T102846Z" changeid="haruyama">
+        <seg>設定や状態のデータは, ユーザ名やセキュリティ鍵などの重要な情報を含む場合がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Connection Protocol</seg>
       </tuv>
       <tuv lang="JA">
@@ -7682,6 +7691,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>However, it will also allow NETCONF over SSH traffic to be
+   more easily identified by attackers.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T103506Z" changeid="haruyama">
+        <seg>しかし, SSH トラフィック上の NETCONFを攻撃者もより容易に識別できるようになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>However, key exchange methods with implicit server
    authentication MAY be used with this protocol.</seg>
       </tuv>
@@ -7943,6 +7961,23 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>IANA assigned a TCP port number that is the default port for NETCONF
+   over SSH sessions as defined in this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T103838Z" changeid="haruyama">
+        <seg>IANA は, この文書で定義する SSH セッション上の NETCONF のデフォルトポートとして TCP ポート番号を割り当てる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>IANA assigned port &lt;830&gt; for this purpose.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T103900Z" changeid="haruyama">
+        <seg>IANA は, この目的のためにポート &lt;830&gt; を割り当てた.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>IANA has allocated the RR type code 44 for SSHFP from the standard RR
    type space.</seg>
       </tuv>
@@ -7992,6 +8027,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>IANA は, 公開鍵アルゴリズムのための SSHFP RR タイプの新しいレジストリを開いた.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>IANA is also requested to assign &quot;netconf&quot; as an SSH Service Name as
+   defined in [RFC4250], as follows:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T103959Z" changeid="haruyama">
+        <seg>IANA は, [RFC4250] で定義された SSH Service Name として, 以下のように &quot;netconf&quot; を割り当てるよう要求された. </seg>
       </tuv>
     </tu>
     <tu>
@@ -13314,6 +13358,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>NETCONF is used to access configuration and state information and to
+   modify configuration information, so the ability to access this
+   protocol should be limited to users and systems that are authorized
+   to view the agent's configuration and state or to modify the agent's
+   configuration.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T102241Z" changeid="haruyama">
+        <seg>NETCONF は, 設定や状態の情報にアクセスし, 設定情報を変更する. このため, このプロトコルにアクセスする能力は, エージェントの設定や状態を閲覧したりエージェントの設定を変更する権限のあるユーザやシステムに制限される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Named Elliptic Curve Domain Parameters</seg>
       </tuv>
       <tuv lang="JA" changedate="20110426T083649Z" changeid="haruyama">
@@ -13513,6 +13569,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>負の数は, データパーティションの最初のバイトの最上位ビットに1を持つ. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Neither side
+   should establish a NETCONF over SSH connection with an unknown,
+   unexpected, or incorrect identity on the opposite side.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T102819Z" changeid="haruyama">
+        <seg>クライアントもサーバも, 未知の, もしくは, 予期しない, 不正解な相手側の識別情報による SSH 接続上の NETCOF を確立してはならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16996,6 +17062,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>&quot;none&quot; MAC が利用されない限り, このプロトコルはデータの完全性を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>So, NETCONF should only be used over
+   communications channels that provide strong encryption for data</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T103027Z" changeid="haruyama">
+        <seg>それゆえ, NETCONF は, データの秘密性に対して強い暗号化を提供するチ通信チャンネル上でのみ利用されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21592,6 +21667,28 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The identity of the client MUST also be verified and
+   authenticated by the server according to local policy to ensure that
+   the incoming client request is legitimate before any configuration or
+   state data is sent to or received from the client.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T102659Z" changeid="haruyama">
+        <seg>クライアントの識別情報も, 設定や状態の情報をクライアントに送ったりクライアントから受け取ったりする前に, 受け取ったクライアントの要求が正当なものであることを保証するために, ローカルなポリシーに基づいて, サーバにより検証し認証されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The identity of the server MUST be verified and authenticated by the
+   client according to local policy before password-based authentication
+   data or any configuration or state data is sent to or received from
+   the server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T102642Z" changeid="haruyama">
+        <seg>サーバの識別情報は, パスワードベースの認証データや設定や状態のデータをサーバに送ったりサーバから受け取ったりする前に, ローカルなポリシーに基づいてクライアントが検証し認証されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The implementation of the
    SSH connection layer</seg>
       </tuv>
@@ -24947,10 +25044,28 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document also recommends that servers be configurable to allow
+   access to the &quot;netconf&quot; SSH subsystem over other ports.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T103548Z" changeid="haruyama">
+        <seg>この文書は, 他のポートでの &quot;netconf&quot; SSH サブシステムへのアクセスをサーバが設定可能にすることも推奨する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document creates no new registries.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110426T085937Z" changeid="haruyama">
         <seg>この文書は新しいレジストリは作成しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document defines a NETCONF over SSH mapping that
+   provides for support of strong encryption and authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T103110Z" changeid="haruyama">
+        <seg>この文書は, 強い暗号化と認証のサポートを提供する SSH マッピング上の NETCONF を定義する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -25228,6 +25343,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110714T060807Z" changeid="haruyama">
         <seg>コンテキストの確立の間呼出でチャンネルの束縛を指定しないほうがよいと, この文書は推奨する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document requires that servers default to allowing access to the
+   &quot;netconf&quot; SSH subsystem only when using a specific TCP port assigned
+   by IANA for this purpose.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T103237Z" changeid="haruyama">
+        <seg>この文書は, この目的のために IANA に割り当てられた特定の TCP ポートのみで &quot;netconf&quot; SSH サブシステムへのアクセスを許すのをデフォルトとするようサーバに要求する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26446,6 +26571,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This will allow NETCONF over SSH traffic
+   to be easily identified and filtered by firewalls and other network
+   nodes.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T103427Z" changeid="haruyama">
+        <seg>これは, SSH トラフィック上の NETCONF を, ファイアウォールや他のネットワークノードで容易の識別しフィルタするのを可能にする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This will allow administrators to determine how much
    trust they want to place in the different methods.</seg>
       </tuv>
@@ -26946,6 +27081,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>まだこのメッセージを送信していないのにこのメッセージを受信した側は, SSH_MSG_CHANNEL_CLOSE を送り返さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Use of that
+   configuration option without corresponding changes to firewall or
+   network device configuration may unintentionally result in the
+   ability for nodes outside the firewall or other administrative
+   boundary to gain access to &quot;netconf&quot; SSH subsystem.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T103800Z" changeid="haruyama">
+        <seg>ファイアウォールやネットワークデバイスの設定を対応して変更することなしにこの設定項目を利用すると, &quot;netconf&quot; SSH サブシステムへのアクセスを得ようとする ファイアウォールや他の管理境界の外にあるノードの接続に意図しない影響を与える可能性がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28659,6 +28806,14 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       <tuv lang="JA" changedate="20110708T073011Z" changeid="haruyama">
         <seg>payload
          パケットの有用な中身.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>privacy.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T103030Z" changeid="haruyama">
+        <seg> </seg>
       </tuv>
     </tu>
     <tu>
