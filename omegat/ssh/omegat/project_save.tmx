@@ -1508,6 +1508,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A user (or application) could use the following command line to
+   invoke NETCONF as an SSH subsystem on the IANA-assigned port:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110726T031255Z" changeid="haruyama">
+        <seg>ユーザ(やアプリケーション)は, IANAに割り当てられたポート上の SSH サブシステムとして NETCONF を, 以下のコマンドラインを用いて起動できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A zero
    'exit_status' usually means that the command terminated successfully.</seg>
       </tuv>
@@ -1897,6 +1906,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>鍵交換の後で, クライアントはサービスを要求する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>After the ssh-connection service is established, the client will open
+   a channel of type &quot;session&quot;, which will result in an SSH session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110726T030307Z" changeid="haruyama">
+        <seg>ssh-connection サービスが確立したら, クライアントは SSHのセッションとなる &quot;session&quot; タイプのチャンネルを開始する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2402,6 +2420,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110613T032105Z" changeid="haruyama">
         <seg>パディングしないメッセージがプロトコルのネットワークの消費を抑えうるにもかかわらず, この文書はブロック暗号のブロック長の倍数のパディングを要求する. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Although the example shows the server sending a &lt;hello&gt; message
+   followed by the client's message, both sides will send the message as
+   soon as the NETCONF subsystem is initialized, perhaps simultaneously.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T093915Z" changeid="haruyama">
+        <seg>例では &lt;hello&gt; メッセージのサーバの送信に続いてクライアントのメッセージが続いているが, NETCONF サブシステムが開始されたらすぐに, おそらく同時に, どちらの側からもメッセージが送られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2980,6 +3008,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110715T061444Z" changeid="haruyama">
         <seg>このため, セキュリティの考慮事項は全体にわたって議論されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As the previous example illustrates, a special character sequence,
+   ]]&gt;]]&gt;, MUST be sent by both the client and the server after each XML
+   document in the NETCONF exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T094023Z" changeid="haruyama">
+        <seg>前出の例が示すように, 特殊な文字列, ]]&gt;]]&gt; を NETCONF 交換でのそれぞれの XML文書の後で クライアントもサーバも送らなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3756,6 +3794,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>C は, K_S が本当に S のホスト鍵かを検証する(例えば, 証明書やローカルなデータベースを用いて).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Capabilities Exchange</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T093145Z" changeid="haruyama">
+        <seg>機能の交換</seg>
       </tuv>
     </tu>
     <tu>
@@ -7451,6 +7497,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>However, even when a subsystem is used, some extraneous messages may</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110726T030650Z" changeid="haruyama">
+        <seg>しかし, サブシステムを用いても, いくつかの余計なメッセージがユーザの起動スクリプトによって表示される可能性はある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>However, following
    the rekeying recommendations should prevent this attack.</seg>
       </tuv>
@@ -9753,6 +9807,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Implementations MUST skip
+   over these messages by searching for an 'xml' start directive, which
+   MUST be followed by a &lt;hello&gt; element in the 'NETCONF' namespace.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110726T030822Z" changeid="haruyama">
+        <seg>実装は, 'xml' の開始ディレクティブを探してこれらのメッセージをスキップしなければならない. この後には 'NETCONF' 名前空間の &lt;hello&gt; 要素が続いていなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Implementations SHOULD
    decrypt the length after receiving the first 8 (or cipher block size,
    whichever is larger) bytes of a packet.</seg>
@@ -10415,6 +10479,18 @@
       </tuv>
       <tuv lang="JA" changedate="20110715T062103Z" changeid="haruyama">
         <seg>&quot;external-keyx&quot; ユーザ認証法を利用するためには, 鍵交換の副作用として得られたユーザ認証情報にアクセスしなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In order to allow NETCONF traffic to be easily identified and
+   filtered by firewalls and other network devices, NETCONF servers MUST
+   default to providing access to the &quot;netconf&quot; SSH subsystem only when
+   the SSH session is established using the IANA-assigned TCP port
+   &lt;830&gt;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110726T031057Z" changeid="haruyama">
+        <seg>NETCONF のトラフィックを容易に識別しファイアウォールや他のネットワークデバイスでフィルタするために, NETCONF サーバは, IANA に割り当てられた TCP ポートを用いて SSH のセッションが確立された場合のみ &quot;netconf&quot; SSH サブシステムへのアクセスを提供するのをデフォルトとしなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13075,6 +13151,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Messages sent by
+   the client are marked with &quot;C:&quot;, and messages sent by the server are
+   marked with &quot;S:&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T093720Z" changeid="haruyama">
+        <seg>クライアントから送られるメッセージには &quot;C:&quot; を, サーバから送られるメッセージには &quot;S:&quot; を付けている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Method</seg>
       </tuv>
       <tuv lang="JA">
@@ -13776,6 +13862,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Note that the -s option causes the command (&quot;netconf&quot;) to be invoked
+   as an SSH subsystem.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110726T031324Z" changeid="haruyama">
+        <seg>注意: -s オプションは, SSHのサブシステムとしてコマンド(&quot;netconf&quot;)を起動させる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Note that the channel remains open after this message, and
    more data may still be sent in the other direction.</seg>
       </tuv>
@@ -14143,6 +14238,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Once the SSH session has been established, the user (or application)
+   will invoke NETCONF as an SSH subsystem called &quot;netconf&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110726T030347Z" changeid="haruyama">
+        <seg>SSHのセッションが確立したら, ユーザ(ないしアプリケーション)は, &quot;netconf&quot; SSHサブシステムとして NETCONF を起動する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Once the client host's identity is established,
    authorization (but no further authentication) is performed based on
    the user names on the server and the client, and the client host
@@ -14169,6 +14273,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>セッションが設定されると, プログラムがリモート側で起動される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Once the user has been successfully
+   authenticated, the client will invoke the &quot;ssh-connection&quot; service,
+   also known as the SSH connection protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110726T030214Z" changeid="haruyama">
+        <seg>ユーザが認証に成功したら, クライアントは SSHコネクションプロトコルとして知られている &quot;ssh-connection&quot; サービスを起動する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15818,6 +15932,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Running NETCONF as an SSH subsystem avoids the need for the
+   script to recognize shell prompts or skip over extraneous
+   information, such as a system message that is sent at shell start-up.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110726T030617Z" changeid="haruyama">
+        <seg>SSHのサブシステムとして NETCONFを実行すると, シェルプロンプトをスクリプトが認識する必要や (シェルの起動時に送られるシステムメッセージのような)余計な情報をスクリプトがスキップする必要がなくなる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>S calls GSS_Accept_sec_context(), using the token received from
        C.</seg>
       </tuv>
@@ -16455,6 +16579,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Servers SHOULD be configurable to allow access to the netconf
+   SSH subsystem over other ports.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110726T031155Z" changeid="haruyama">
+        <seg>サーバは, 他のポート上の netconf SSH サブシステムへのアクセス許可を設定可能にする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Servers and clients SHOULD support groups with a modulus length of k
    bits, where 1024 &lt;= k &lt;= 8192.</seg>
       </tuv>
@@ -16991,6 +17124,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Starting NETCONF over SSH</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110726T025934Z" changeid="haruyama">
+        <seg>SSH 上での NETCONF の起動</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Starting NETCONF over SSH .......................................2
       3.1.</seg>
       </tuv>
@@ -17109,6 +17250,16 @@
       <tuv lang="JA" changedate="20110715T063334Z" changeid="haruyama">
         <seg>Subject ヘッダ ......................................3
            3.3.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Subsystem
+   support is a feature of SSH version 2 (SSHv2) and is not included in
+   SSHv1.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110726T030412Z" changeid="haruyama">
+        <seg>サブシステムのサポートは,SSH バージョン 2 (SSHV2) の機能で, SSHv1 には含まれていない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17570,6 +17721,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110723T013141Z" changeid="haruyama">
         <seg>コアプロトコルでは, Diffie-Hellman 鍵交換を利用している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   document containing the &lt;hello&gt; element MUST be the first XML
+   document that the client sends after the NETCONF session is
+   established.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T093620Z" changeid="haruyama">
+        <seg>&lt;hello&gt; 要素を含む文書は, NETCONF セッションが確立したあとにクライアントが送る最初の XML 文書でなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20180,6 +20342,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client must also send an XML document containing a &lt;hello&gt;
+   element to indicate the client's capabilities to the server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T093551Z" changeid="haruyama">
+        <seg>クライアントも サーバにクライアントの機能を示すために &lt;hello&gt; 要素を含む XML 文書を送らなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client obtains the
    information from the user and then responds with an
    SSM_MSG_USERAUTH_INFO_RESPONSE message.</seg>
@@ -20266,6 +20437,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110725T085133Z" changeid="haruyama">
         <seg>そしてクライアントはK_Tを以下を暗号化するのに用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The client will then invoke the &quot;ssh-userauth&quot; service to
+   authenticate the user, as described in the SSH authentication
+   protocol [RFC4252].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110726T030125Z" changeid="haruyama">
+        <seg>クライアントは SSH 認証プロトコル [RFC4252] に記述されているようにユーザを認証するため &quot;ssh-userauth&quot; サービスを起動する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20863,6 +21044,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>次の圧縮アルゴリズムが現在定義されている:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The following example shows a capability exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T093637Z" changeid="haruyama">
+        <seg>以下で機能の交換の例を示す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22965,6 +23154,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The server MUST indicate its capabilities by sending an XML document
+   containing a &lt;hello&gt; element as soon as the NETCONF session is
+   established.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T093304Z" changeid="haruyama">
+        <seg>サーバは, NETCONFのセッションが確立したらすぐに &lt;hello&gt; 要素を含む XML 文書を送ってその機能を示さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The server MUST process each
    request completely and acknowledge any failed requests with a
    SSH_MSG_USERAUTH_FAILURE message before processing the next request.</seg>
@@ -23689,6 +23888,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110527T142445Z" changeid="haruyama">
         <seg>利用しているデータのタイプと用語は, アーキテクチャ文書 [RFC4251] で定義されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The user (or application) can parse this message to
+   determine which NETCONF capabilities are supported by the server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T093503Z" changeid="haruyama">
+        <seg>ユーザ(もしくはアプリケーション)はこのメッセージをパースして, どの NETCONF 機能がサーバでサポートされているかを判断できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24580,6 +24788,18 @@
       </tuv>
       <tuv lang="JA" changedate="20110411T134749Z" changeid="haruyama">
         <seg>[RFC4253]の 7.1 節での 暗号化/署名可能な公開鍵アルゴリズムを必要とする鍵交換法が扱われるのと同じように, この場合も扱われる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This character sequence cannot
+   legally appear in an XML document, so it can be unambiguously used to
+   identify the end of the current document, allowing resynchronization
+   of the NETCONF exchange in the event of an XML syntax or parsing
+   error.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110728T094251Z" changeid="haruyama">
+        <seg>この文字列は, XML 文書で正当に現われることはないので, 現在の文書の終端を識別するのに間違いなく利用できる. これにより XML の文法やパースのエラー時に NETCONF 交換を再実行できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26481,6 +26701,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>To run NETCONF over SSH, the client will first establish an SSH
+   transport connection using the SSH transport protocol, and the client
+   and server will exchange keys for message integrity and encryption.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110726T030043Z" changeid="haruyama">
+        <seg>SSH上でNETCONFを実行するのに, クライアントはまずSSHトランスポート接続をSSHトランスポートプロトコルを用いて確立し, クライアントとサーバはメッセージ完全性と暗号化のための鍵を交換する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Traffic Analysis</seg>
       </tuv>
       <tuv lang="JA">
@@ -27583,6 +27813,14 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
    cryptographic keys in cleartext to an unprotected file).</seg>
       </tuv>
       <tuv lang="JA" changedate="20110607T081335Z" changeid="haruyama">
+        <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>be printed by the user's start-up scripts.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110726T030653Z" changeid="haruyama">
         <seg> </seg>
       </tuv>
     </tu>
