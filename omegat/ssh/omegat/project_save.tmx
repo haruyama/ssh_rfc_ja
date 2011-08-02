@@ -1109,6 +1109,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A Transport Model SHOULD NOT require changes to the SNMP
+       architecture.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T020912Z" changeid="haruyama">
+        <seg>トランスポートモデルは, SNMP アーキテクチャに変更を求めないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A Transport Model SHOULD NOT require changes to the underlying
+       security protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T020942Z" changeid="haruyama">
+        <seg>トランスポートモデルは基底のセキュリティプロトコルに変更を求めないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A boolean value is stored as a single byte.</seg>
       </tuv>
       <tuv lang="JA">
@@ -1472,6 +1490,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>このメッセージに対しては返答を送らないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A second service request is sent
+   after client authentication is complete.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T021631Z" changeid="haruyama">
+        <seg>2番目のサービスの要求は, クライアント認証が完了してから送られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4683,11 +4710,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Constraints</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T020350Z" changeid="haruyama">
+        <seg>制約</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Constraints ................................................6
    2.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110729T033725Z" changeid="haruyama">
-        <seg>製薬 ................................................6
+      <tuv lang="JA" changedate="20110801T112024Z" changeid="haruyama">
+        <seg>制約 ................................................6
    2.</seg>
       </tuv>
     </tu>
@@ -11389,6 +11424,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In times of network stress, the transport protocol and its
+       underlying security mechanisms SHOULD NOT depend upon the ready
+       availability of other network services (e.g., Network Time
+       Protocol (NTP) or AAA protocols).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T020748Z" changeid="haruyama">
+        <seg>ネットワークに負荷がかかっている時に, トランスポートプロトコルとその基底のセキュリティメカニズムは, (例えば ネットワークタイムプロトコル (NTP) や AAA プロトコルのような)他のネットワークサービスがすぐに利用できるかどうかに依存しないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In traditional SSH deployments, host keys are normally expected to
    change infrequently, and there is often no mechanism for validating
    host keys not already known to the client.</seg>
@@ -11984,12 +12030,33 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It consists of three major
+   protocol components and add-on methods for user authentication:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T021156Z" changeid="haruyama">
+        <seg>3つの主要なプロトコル要素とユーザ認証のための追加の方法で構成されている:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It defines an SSH user authentication
    method that uses a specified GSS-API mechanism to authenticate a
    user, and a family of SSH key exchange methods that use GSS-API to
    authenticate a Diffie-Hellman key exchange.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110621T011428Z" changeid="haruyama">
+        <seg>ユーザを認証する特定のGSS-APIメカニズムを用いるSSHユーザ認証法と Diffie-Hellman 鍵交換を認証するためにGSS-APIを用いるSSHの鍵交換法のファミリを定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It defines an SSH user-
+      authentication method that uses a specified GSS-API mechanism to
+      authenticate a user; it also defines a family of SSH key-exchange
+      methods that use GSS-API to authenticate a Diffie-Hellman key
+      exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T021611Z" changeid="haruyama">
         <seg>ユーザを認証する特定のGSS-APIメカニズムを用いるSSHユーザ認証法と Diffie-Hellman 鍵交換を認証するためにGSS-APIを用いるSSHの鍵交換法のファミリを定義する.</seg>
       </tuv>
     </tu>
@@ -12542,6 +12609,15 @@
     <tu>
       <tuv lang="EN-US">
         <seg>It may
+      optionally also provide compression.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T021229Z" changeid="haruyama">
+        <seg>このプロトコルは, オプションで圧縮も提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It may
    also provide compression.</seg>
       </tuv>
       <tuv lang="JA">
@@ -12559,11 +12635,20 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It may not be possible for the Transport Model to determine when
+       the network is under stress.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T020848Z" changeid="haruyama">
+        <seg>ネットワークに負荷がかかっているかどうかトランスポートモデルが判断可能でない場合がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It may optionally
       also provide compression.</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>このプロトコルは, オプションで圧縮も提供する</seg>
+      <tuv lang="JA" changedate="20110802T021234Z" changeid="haruyama">
+        <seg>このプロトコルは, オプションで圧縮も提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12656,6 +12741,24 @@
       </tuv>
       <tuv lang="JA" changedate="20110725T080923Z" changeid="haruyama">
         <seg>この方法には, 署名ができるホスト鍵が必要だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It runs over the Transport
+      Layer Protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T021312Z" changeid="haruyama">
+        <seg>このプロトコルはトランスポート層プロトコル上で動作する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It runs over the transport after
+      successfully authenticating the principal.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T021322Z" changeid="haruyama">
+        <seg>このプロトコルはトランスポート層プロトコル上で動作する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16689,6 +16792,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>SSH is a protocol for secure remote login and other secure network
+   services over an insecure network.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T021123Z" changeid="haruyama">
+        <seg>SSH は, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>SSH is increasingly being used to
    replace Telnet for terminal access applications.</seg>
       </tuv>
@@ -20371,6 +20483,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The Secure Shell Protocol</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T020946Z" changeid="haruyama">
+        <seg>セキュアシェルプロトコル</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Secure Shell Protocol (SSH) is a protocol for secure remote login
    and other secure network services over an insecure network.</seg>
       </tuv>
@@ -21175,6 +21295,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client sends a service request once a secure, transport-layer
+   connection has been established.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T021624Z" changeid="haruyama">
+        <seg>安全なトランスポート層の接続が確立した時点で, クライアントはサービスの要求を送る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client sends:</seg>
       </tuv>
       <tuv lang="JA" changedate="20110409T094529Z" changeid="haruyama">
@@ -21446,6 +21575,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>定義済みのタイプは以下の通り:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The design of this SNMP Transport Model is influenced by the
+   following constraints:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T020409Z" changeid="haruyama">
+        <seg>この SNMP トランスポートモデルの設計は, 以下の製薬に影響されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24595,6 +24733,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The transport layer will
+      typically be run over a TCP/IP connection but might also be used
+      on top of any other reliable data stream.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T021258Z" changeid="haruyama">
+        <seg>トランスポート層は, 典型的には TCP/IP接続の上で動くことを想定しているが, 他の信頼できるデータストリームの上で使ってもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The transport layer will typically be
       run over a TCP/IP connection, but might also be used on top of any
       other reliable data stream.</seg>
@@ -25596,6 +25744,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>この選択肢を利用すると, あらかじめホスト鍵や信用についてやりとりせずに通信できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This allows new protocols
+   to be defined and coexist with the protocols listed above.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T021639Z" changeid="haruyama">
+        <seg>これは, 上に挙げたプロトコルと共存する, 新しいプロトコルが定義されることを許している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28487,6 +28644,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>When the network is not under stress, the Transport Model and its
+       underlying security mechanisms MAY depend upon the ready
+       availability of other network services.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T020811Z" changeid="haruyama">
+        <seg>ネットワークに負荷がかかっていない時に, トランスポートモデルとその基底のセキュリティメカニズムは, 他のネットワークサービスがすぐに利用できるかどうかに依存してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>When the server accepts authentication, it MUST respond with the
    following:</seg>
       </tuv>
@@ -29188,6 +29355,17 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  &quot;Generic Security Service Application Program Interface (GSS-API)
+      Authentication and Key Exchange for the Secure Shell (SSH)
+      Protocol&quot; [RFC4462] describes methods for using the GSS-API for
+      authentication and key exchange in SSH.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T021544Z" changeid="haruyama">
+        <seg>o  &quot;セキュア シェル (SSH) プロトコルのための汎用セキュリティサービスアプリケーションプログラムインタフェイス(GSS-API) 認証と鍵交換&quot; [RFC4462] は, SSHで認証と鍵交換のためにGSS-APIを使う方法を記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>o  &quot;localhost&quot; means to listen on all protocol families supported by
       the SSH implementation on loopback addresses only ([RFC3330] and
       [RFC3513]).</seg>
@@ -29299,6 +29477,17 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>o  通信の方向のそれぞれに対する暗号化や完全性, 圧縮のアルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  Generic Message Exchange Authentication [RFC4256] is a general
+      purpose authentication method for the SSH protocol, suitable for
+      interactive authentications where the authentication data should
+      be entered via a keyboard.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T021448Z" changeid="haruyama">
+        <seg>o  一般メッセージ交換認証 [RFC4256] は, SSHプロトコルのための汎用の認証法だ.  この認証法は, 認証データをキーボードで入力する状況でインタラクティブな認証を行なうのに適している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -29474,6 +29663,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  The Connection Protocol [RFC4254] multiplexes the encrypted tunnel
+      into several logical channels.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T021320Z" changeid="haruyama">
+        <seg>o  コネクションプロトコル [RFC4254] は暗号化されたトンネルをいくつかの論理的なチャンネルに多重化する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>o  The Connection Protocol [SSH-CONNECT] multiplexes the encrypted
       tunnel into several logical channels.</seg>
       </tuv>
@@ -29483,11 +29681,29 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  The Transport Layer Protocol [RFC4253] provides server
+      authentication and message confidentiality and integrity.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T021221Z" changeid="haruyama">
+        <seg>o  トランスポート層プロトコル[RFC4253] は, サーバの認証, メッセージの機密性, 完全性を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>o  The Transport Layer Protocol [SSH-TRANS] provides server
       authentication, confidentiality, and integrity.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>o  トランスポート層プロトコル[SSH-TRANS] は, サーバの認証, 機密性, 完全性を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  The User Authentication Protocol [RFC4252] authenticates the
+      client-side principal to the server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110802T021310Z" changeid="haruyama">
+        <seg>o  ユーザ認証プロトコル [RFC4252] は, クライアント側のユーザをサーバに認証する.</seg>
       </tuv>
     </tu>
     <tu>
