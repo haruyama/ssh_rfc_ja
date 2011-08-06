@@ -381,6 +381,30 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>- with authentication and with privacy (authPriv)</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110806T120902Z" changeid="haruyama">
+        <seg>- 認証あり, プライバシーあり (authPriv)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>- with authentication but without privacy (authNoPriv)</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110806T120853Z" changeid="haruyama">
+        <seg>- 認証あり, プライバシーなし (authNoPriv)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>- without authentication and without privacy (noAuthNoPriv)</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110806T120842Z" changeid="haruyama">
+        <seg>- 認証なし, プライバシーなし (noAuthNoPriv)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>1     VINTR       Interrupt character; 255 if none.</seg>
       </tuv>
       <tuv lang="JA">
@@ -2545,6 +2569,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>この例として, インタラクティブなセッションからの stderr データがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An SSH Transport-Model-compliant implementation MUST use an SSH
+   connection that provides authentication, data integrity, and
+   encryption that meets the highest level of SNMP security (authPriv).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110806T122301Z" changeid="haruyama">
+        <seg>SSH トランスポートモデルに準拠する実装は, SNMP セキュリティのもっとも高いレベル (authPriv) を満たす認証とデータの完全性, 暗号化を提供する SSH 接続を用いなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7986,6 +8020,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>しかし, チャンネルの相手側が終了したときに, アプリケーションが EOF を送るかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>However, the procedures allow for new authentication and privacy
+   methods to be specified at a future time if the need arises.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110806T122658Z" changeid="haruyama">
+        <seg>しかし, 必要が生じたら, この手順は将来指定される新しい認証とプライバシーの方法を許可する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13634,6 +13677,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Message Authentication</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110806T120806Z" changeid="haruyama">
+        <seg>メッセージ認証</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Message Authentication ..............................9
            3.1.3.</seg>
       </tuv>
@@ -15341,6 +15392,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110621T023401Z" changeid="haruyama">
         <seg>もしくは, クライアントがそのアイデンティティを隠そうとする場合にこのフラグを true に設定してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Outgoing messages specified with a securityLevel of noAuthNoPriv or
+   authNoPriv are actually sent by the SSH Transport Model with
+   authPriv-level protection.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110806T122356Z" changeid="haruyama">
+        <seg>noAuthNoPriv や authNoPriv のセキュリティレベルで指定された送信メッセージは, 実際には authPriv レベルの保護で SSH トランスポートモデルから送られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18131,8 +18192,8 @@
         <seg>Structure of the MIB Module ...............................21
       6.2.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110729T034133Z" changeid="haruyama">
-        <seg>MIBモジュールん構造 ...............................21
+      <tuv lang="JA" changedate="20110806T120756Z" changeid="haruyama">
+        <seg>MIBモジュールの構造 ...............................21
       6.2.</seg>
       </tuv>
     </tu>
@@ -20163,6 +20224,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The RFC 3411 architecture recognizes three levels of security:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110806T120828Z" changeid="haruyama">
+        <seg>RFC 3411 のアーキテクチャは3つのセキュリティレベルを認識する:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The RR type code for the SSHFP RR is 44.</seg>
       </tuv>
       <tuv lang="JA">
@@ -20193,6 +20262,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110425T075336Z" changeid="haruyama">
         <seg>SHA2 ファミリは4つのバリエーションで構成されている. SHA-224 と SHA-256, SHA-384, SHA-521 だ. そのダイジェストの長さによって命名された.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SNMPv3 WG deliberately avoided
+   this and settled for an assertion by the Security Model that the
+   requirements of securityLevel were met.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110806T121940Z" changeid="haruyama">
+        <seg>SNMPv3 WG は, 意図的にこれを避け, セキュリティレベルの要件を満たす セキュリティモデル からの警告で妥協した.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20241,6 +20320,29 @@
       </tuv>
       <tuv lang="JA" changedate="20110801T110412Z" changeid="haruyama">
         <seg>SSH トランスポートモデルは, X.509 証明書を利用するもののような, 将来定義される ssh-userauth 法を活用できるようにする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH Transport Model determines from SSH the identity of the
+   authenticated principal and the type and address associated with an
+   incoming message, and provides this information to SSH for an
+   outgoing message.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110806T121522Z" changeid="haruyama">
+        <seg>SSH トランスポートモデルは, 認証されたプリンシパルの識別情報と受信メッセージに関連するタイプとアドレスを SSH から決定する. また, 送信メッセージにこの情報を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH Transport Model has
+   no mechanisms by which it can test whether an underlying SSH
+   connection provides auth or priv, so the SSH Transport Model trusts
+   that the underlying SSH connection has been properly configured to
+   support authPriv security characteristics.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110806T121933Z" changeid="haruyama">
+        <seg>SSH Transport Model は, 基底の SSH 接続が認証やプライバシーを提供するかどうかをテストできるメカニズムを持たない. よって, SSH トランスポートモデルは, 基底の SSH 接続が authPriv セキュリティ特性をサポートするよう適切に設定されていることを信用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20406,6 +20508,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110514T023003Z" changeid="haruyama">
         <seg>SSH トランスポート層は, 安全で低レベルなトランスポートプロトコルだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH transport-layer algorithms used to provide
+   authentication, data integrity, and encryption SHOULD NOT be exposed
+   to the SSH Transport Model layer.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110806T121628Z" changeid="haruyama">
+        <seg>認証とデータの完全性, 暗号化を提供するのに用いられる SSH トランスポート層アルゴリズムは, SSH トランスポートモデル層に公開しないほうがよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20697,6 +20809,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110621T011151Z" changeid="haruyama">
         <seg>セキュア シェル (SSH) プロトコルは, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The Secure Shell protocol provides support for encryption and data
+   integrity.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110806T120921Z" changeid="haruyama">
+        <seg>セキュアシェルプロトコルは, 暗号化とデータの完全性のサポートを提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24126,6 +24247,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110719T024958Z" changeid="haruyama">
         <seg>SSHプロトコルのセキュリティは, 公開ホスト鍵の検証に依存している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The security protocols used in the Secure Shell Authentication
+   Protocol [RFC4252] and the Secure Shell Transport Layer Protocol
+   [RFC4253] are considered acceptably secure at the time of writing.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110806T122540Z" changeid="haruyama">
+        <seg>セキュアシェル認証プロトコル [RFC4252] と セキュアシェルトランスポート層プロトコル [RFC4253] を用いるセキュリティプロトコルは, 執筆時点では許容できるレベルで安全だと考えられている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -29017,6 +29148,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110719T031349Z" changeid="haruyama">
         <seg>多くの環境ではこのヘッダデータに格納される情報は無害な公開情報だと考えられるが, 意図的またはその他の方法で開示されうるユーザや鍵や鍵の利用についての情報を通すチャンネルを構築するかもしれない. (例, &quot;Comment: Mary E. Jones, 123 Main St(住所), 自宅の電話番号:...&quot;).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>While it is technically possible to support no
+   authentication and no encryption in SSH, it is NOT RECOMMENDED by
+   [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110806T121002Z" changeid="haruyama">
+        <seg>技術的にはSSHで認証や暗号化をサポートしないのは可能だが, [RFC4253]で推奨されていない.</seg>
       </tuv>
     </tu>
     <tu>
