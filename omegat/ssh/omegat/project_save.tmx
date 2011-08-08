@@ -3,7 +3,7 @@
 <tmx version="1.1">
   <header
     creationtool="OmegaT"
-    creationtoolversion="2.2.3_4"
+    creationtoolversion="2.3.0_1"
     segtype="sentence"
     o-tmf="OmegaT TMX"
     adminlang="EN-US"
@@ -1742,6 +1742,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Additional authentication mechanisms, such as one that supports X.509
+   certificates, may be added to SSH in the future.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T095853Z" changeid="haruyama">
+        <seg>X.509 証明書をサポートするものなど, 追加の認証メカニズムが将来SSHに追加されることがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Additional authentication methods are described in separate
    documents.</seg>
       </tuv>
@@ -3281,6 +3290,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>At some point in the
+   processing, these mechanisms require the password to be made
+   available as cleartext on the device that is authenticating the
+   password, which might introduce threats to the authentication
+   infrastructure.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T095401Z" changeid="haruyama">
+        <seg>処理のある時点で, これらのメカニズムは, パスワードを認証するためにパスワードをデバイス上で平文で利用する必要がある.  これは認証基盤への脅威を招くかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>At the
    discretion of the implementers, this default policy may be along the
    lines of anything-goes where there are no restrictions placed upon
@@ -3426,6 +3447,14 @@
       <tuv lang="JA">
         <seg>認証プロトコルのメッセージ番号.........................8
    7.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Authentication Protocol Support</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T094438Z" changeid="haruyama">
+        <seg>認証プロトコルのサポート</seg>
       </tuv>
     </tu>
     <tu>
@@ -7419,6 +7448,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110630T021428Z" changeid="haruyama">
         <seg>GSS-API 認証はコンテキストを維持しなければならない．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>GSS-API key exchange [RFC4462] provides a framework for the addition
+   of client-authentication mechanisms that support different security
+   infrastructures and provide different security properties.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T095817Z" changeid="haruyama">
+        <seg>GSS-API 鍵交換 [RFC4462] は, 異なるセキュリティ基盤のサポートと異なるセキュリティ特性を提供するクライアント認証メカニズムの追加のためのフレームワークを提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12366,6 +12405,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It is also possible to use a different
+   password-validation protocol such as the Challenge Handshake
+   Authentication Protocol (CHAP) [RFC1994] or digest authentication
+   [RFC5090] to integrate with RADIUS or Diameter.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T095227Z" changeid="haruyama">
+        <seg>RADIUS や Diameter と統合するためにチャレンジハンドシェイク認証プロトコル (CHAP) [RFC1994] や ダイジェスト認証 [RFC5090] のような別のパスワード検証プロトコルを利用することも可能だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It is assumed that practitioners will first attempt to use
       the IANA assigned 'reason code' values and then document their
       locally assigned 'reason code' values.</seg>
@@ -12566,6 +12616,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>この斯うを数えるだけで意味のある情報を得られる観察者がいるかもしれない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is possible to hand a
+   password to a service such as RADIUS [RFC2865] or Diameter [RFC3588]
+   for validation.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T094731Z" changeid="haruyama">
+        <seg>検証のために, RADIUS [RFC2864] や Diameter [RFC3588] のようなサービスにパスワードを渡すことが可能だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20357,6 +20417,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The SSH Transport Model should support any server- or client-
+   authentication mechanism supported by SSH.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T094519Z" changeid="haruyama">
+        <seg>SSH トランスポートモデルは SSH でサポートされる 任意のサーバ/クライアント 認証メカニズムをサポートする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The SSH Transport Model thus fits
    between the underlying SSH transport layer and the Message Dispatcher
    [RFC3411].</seg>
@@ -23805,6 +23874,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The password-authentication mechanism allows for integration with
+   deployed password-based infrastructure.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T094654Z" changeid="haruyama">
+        <seg>パスワード認証メカニズムは, 配置されたパスワードベースの基盤と統合できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The policy MUST specify which is the preferred
       algorithm (e.g., the first algorithm listed in each category).</seg>
       </tuv>
@@ -25213,6 +25291,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>userauth のタイプ &quot;keyboard-interactive&quot; がこの認証法のために使われる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The validation could be done using the user name and
+   user password attributes.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T094758Z" changeid="haruyama">
+        <seg>この検証は, ユーザ名とユーザパスワードの属性を用いて行なえる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26815,6 +26902,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>これは, パディング, バイトオーダー, データフォーマットを含んでいる. それ以外のものも含まれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This includes the three
+   authentication methods described in the SSH Authentication Protocol
+   document [RFC4252] (publickey, password, and host-based), keyboard
+   interactive, and others.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T094629Z" changeid="haruyama">
+        <seg>これには, SSH 認証プロトコル [RFC4252] に記述された3つの認証法 (publickey, password, host-based) や, keyboard-interactive, それ以外の方法が含まれる.</seg>
       </tuv>
     </tu>
     <tu>
