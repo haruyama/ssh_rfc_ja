@@ -2582,6 +2582,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>An SSH Subsystem of type &quot;snmp&quot; is opened by the SSH Transport Model
+   during the elements of procedure for an outgoing SNMP message.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T100734Z" changeid="haruyama">
+        <seg>タイプ &quot;snmp&quot; の SSH サブシステムは, 送信 SNMP メッセージのための手順の要素の中で, SSH トランスポートモデルによって開始される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>An SSH Transport-Model-compliant implementation MUST use an SSH
    connection that provides authentication, data integrity, and
    encryption that meets the highest level of SNMP security (authPriv).</seg>
@@ -3620,6 +3629,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>MACは32bitのシーケンス番号を利用するので, 2**32のパケットが送られたあとでは情報を漏らしはじめる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Because naming policies might differ between administrative domains,
+   many SSH client software packages support a user@hostname:port
+   addressing syntax that operators can use to align non-equivalent
+   account names.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T101914Z" changeid="haruyama">
+        <seg>命名のポリシーは管理ドメイン間で異なる可能性があるので, 運用者が等価でないアカウント名を整理するのに利用できるように多くの SSH クライアントソフトウェアパッケージは, user@hostname:port アドレスシンタックスをサポートしている. </seg>
       </tuv>
     </tu>
     <tu>
@@ -5326,6 +5346,17 @@
       <tuv lang="JA" changedate="20110715T063411Z" changeid="haruyama">
         <seg>RFC 1421 PEM 形式との違い ......................4
       3.6.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Different
+   SnmpSSHAddress values (with different hostnames, &quot;user@&quot; prefix
+   names, and/or port numbers) will each result in individual SSH
+   sessions.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T102843Z" changeid="haruyama">
+        <seg>(ホスト名やユーザ名, ポート番号のそれぞれないしすべてが)異なる SnmpSSHAddress の値 は, それぞれ 別々の SSH セッションとなる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8972,6 +9003,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If no &quot;user@&quot; portion is specified
+   in the SnmpSSHAddress, then the SSH connection should be established
+   using the tmSecurityName as the SSH user name when establishing a
+   session with the remote SSH server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T102640Z" changeid="haruyama">
+        <seg>&quot;user@&quot; 部分が SnmpSSHAddress で指定されていなければ, リモートの SSH サーバとセッションを確立する際に SSH のユーザ名として tmSecurityName を用いて SSH 接続を確立する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If no BREAK was preformed, SSH_MSG_CHANNEL_FAILURE MUST be
    sent.</seg>
       </tuv>
@@ -10316,6 +10358,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>実装は, このようなメカニズムをさらに設定することを許してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementations may choose to instantiate SSH sessions in
+   anticipation of outgoing messages.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T101234Z" changeid="haruyama">
+        <seg>実装は, 送信メッセージを予想して SSH のセッションを開始することを選んでもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14915,6 +14966,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Of course, there is no guarantee that a pre-established session will
+   still be valid when needed.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T101453Z" changeid="haruyama">
+        <seg>もちろん, 事前に確立されたセッションが 必要な際にまだ有効化どうかの保証はない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Of these, the range 192 to 255 is
    reserved for use by local, private extensions.</seg>
       </tuv>
@@ -16916,6 +16976,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>SSH Subsystem</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T100258Z" changeid="haruyama">
+        <seg>SSH サブシステム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>SSH Subsystem ......................................11
       3.2.</seg>
       </tuv>
@@ -17076,6 +17144,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110802T031236Z" changeid="haruyama">
         <seg>SSH は, SSH トランスポートプロトコルのサーバ認証 [RFC4253] を通じて SSH サーバの識別情報の検証を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH sessions are uniquely identified within the SSH Transport Model
+   by the combination of tmTransportAddress and tmSecurityName
+   associated with each session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T101731Z" changeid="haruyama">
+        <seg>それぞれのセッションに関連する tmTransportAddress と tmSecurityName の組合せで SSH トランスポートモデルの中で SSH のセッションはユニークに識別される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17760,6 +17838,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>リプレイされたパケットは, 期待されるシーケンス番号を利用していないので(リプレイされたパケットのシーケンス番号はすでに受け取り手に渡されている), 計算されたMACはパケットに含まれるMACと一致しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Since
+   the sender of a message initiates the creation of an SSH session if
+   needed, the SSH session will already exist for an incoming message;
+   otherwise, the incoming message would never reach the SSH Transport
+   Model.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T101155Z" changeid="haruyama">
+        <seg>メッセージの送り手が必要に応じて SSH のセッションの作成を開始するので, SSH のセッションは, 入力メッセージに対してすでに存在している. そうでなければ, 受信メッセージは SSH トランスポートモデルに到達しない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19485,6 +19575,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The &quot;user&quot; portion may or may not match the tmSecurityName parameter
+   passed from the Security Model.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T102544Z" changeid="haruyama">
+        <seg>&quot;user&quot; 部分は, セキュリティモデルから渡される tmSecurityName パラメータと一致してもしなくてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The &quot;zlib&quot; compression is described in [RFC1950] and in [RFC1951].</seg>
       </tuv>
       <tuv lang="JA">
@@ -20896,6 +20995,24 @@
       </tuv>
       <tuv lang="JA">
         <seg>セッションチャンネルBreak拡張は, セキュアシェル(SSH)のターミナルセッションで BREAK シグナルを送る手段を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SnmpSSHAddress Textual Convention echos this
+   common SSH notation.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T102024Z" changeid="haruyama">
+        <seg>SnmpSSHAddress テキスト表記法は, この共通のSSH 表記法を利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SnmpSSHAddress and tmSecurityName associated with an SSH session
+   MUST remain constant during the life of the session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T102742Z" changeid="haruyama">
+        <seg>SSH に関連する SnmpSSHAddress と tmSecurityName は, セッションの有効期間中一定でなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -25286,6 +25403,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The user name must be encoded in UTF-8 (per [RFC4252]).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T102515Z" changeid="haruyama">
+        <seg>ユーザ名は UTF-8 でエンコードされなければならない ([RFC4252] による).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The userauth type &quot;keyboard-interactive&quot; is used for this
    authentication method.</seg>
       </tuv>
@@ -26216,6 +26341,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This approach might be useful to
+   ensure that an SSH session to a given target can be established
+   before it becomes important to send a message over the SSH session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T101419Z" changeid="haruyama">
+        <seg>このアプローチは, SSH セッション越しにメッセージを送信するのが重要になる前に 特定のターゲットへの SSH セッションが確立されるのを保証するのに役立つだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This attribute SHOULD NOT be
    critical.</seg>
       </tuv>
@@ -26587,6 +26722,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110621T013054Z" changeid="haruyama">
         <seg>この文書は, GSS-APIを用いてセキュアシェルプロトコルで鍵交換とユーザ認証を行なう方法を記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document describes the use of an SSH Subsystem for SNMP to make
+   SNMP usage distinct from other usages.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T100631Z" changeid="haruyama">
+        <seg>この文書は, 他のシステムの利用と SNMP の利用を区別する SNMP のための SSH サブシステムの利用を記述している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -29175,6 +29319,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>このメッセージを受け取ったら, 新しい鍵とアルゴリズムを受信に利用しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When this notation is used in an SnmpSSHAddress, the SSH connection
+   should be established with an SSH user name matching the &quot;user&quot;
+   portion of the notation when establishing a session with the remote
+   SSH server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T102145Z" changeid="haruyama">
+        <seg>この表記法を SnmpSSHAddress で用いる場合, リモートのSSHサーバとセッションを確立する際に 表記の &quot;user&quot; 部分と一致する SSH ユーザ名を用いて SSH 接続を確立する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
