@@ -2712,6 +2712,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>An important characteristic of
+   this is that authorization is done prior to determining if the
+   connection can succeed.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T083816Z" changeid="haruyama">
+        <seg>接続が成功するかを決定するより前に, 認可が終わるのがこれの重要な特性だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Another alternative to recommendation
    (1) would be to switch from basic HMAC to a another MAC, such as a</seg>
       </tuv>
@@ -2985,6 +2995,18 @@
       </tuv>
       <tuv lang="JA" changedate="20110715T052833Z" changeid="haruyama">
         <seg>結果として, SPENGO を利用するものと利用しないものの両方を GSS-API メカニズムとして許可するのは望ましくない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As a result, it may be necessary to provision
+   authentication credentials on the SNMP engine containing the
+   notification originator or to use a third-party key provider, such as
+   Kerberos, so the engine can successfully authenticate to an engine
+   containing a notification receiver.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T082733Z" changeid="haruyama">
+        <seg>結果として, SNMP エンジンが通知の受信者を含むエンジンへの認証を成功するために, 通知の発信者を含む SNMP エンジンに認証の情報を渡す必要があるか, Kerberos のような 第三者鍵プロバイダを用いる必要がある. </seg>
       </tuv>
     </tu>
     <tu>
@@ -4394,6 +4416,16 @@
       <tuv lang="JA" changedate="20110729T034118Z" changeid="haruyama">
         <seg>セッションの終了 .........................................20
    6.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Command generators are frequently operated
+   by a human, but notification originators are usually unmanned
+   automated processes.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T082524Z" changeid="haruyama">
+        <seg>コマンド生成器は人間によって頻繁に操作される. しかし, 通知の発信者は, 通常人手を介さない自動のプロセスだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7045,6 +7077,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For incoming messages, SSH-specific security parameters are
+   translated by the Transport Model into security parameters
+   independent of the Transport and Security Models.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T080637Z" changeid="haruyama">
+        <seg>受信メッセージに対して, SSH特有のセキュリティパラメータは, トランスポートとセキュリティモデルに独立なセキュリティパラメータへとトランスポートモデルによって翻訳される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For interoperability reasons, as few fingerprint types as possible
    should be reserved.</seg>
       </tuv>
@@ -7072,6 +7114,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For outgoing messages, the Transport Model takes input provided by
+   the Dispatcher in the sendMessage() ASI.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T081052Z" changeid="haruyama">
+        <seg>送信メッセージに対して, トランスポートモデルは, sendMessage() ASI で Dispatcher が提供する入力を取得する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For recommendations on this, see [RFC3766].</seg>
       </tuv>
       <tuv lang="JA" changedate="20110725T094814Z" changeid="haruyama">
@@ -7086,6 +7137,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110419T112549Z" changeid="haruyama">
         <seg>必須の楕円曲線として, nistp256 と nistp384, nistp521 がある. 楕円曲線ドメインパラメータの識別子は, 文字列 &quot;nistp256&quot; と  &quot;nistp384&quot;, &quot;nistp521&quot; だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For the SSH Transport Model, transport type and address are
+   configured in the snmpTargetAddrTable, and the securityName and
+   securityLevel parameters are configured in the snmpTargetParamsTable.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T083304Z" changeid="haruyama">
+        <seg>SSH トランスポートモデルに対して, トランスポートのタイプとアドレスは, snmpTargetAddrTable で設定される. そして, securityName と securityLevel パラメータは snmpTargetParamsTable で設定される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12826,6 +12887,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It may be
+   necessary to provide additional implementation-specific configuration
+   of SSH parameters.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T084358Z" changeid="haruyama">
+        <seg>追加の設定として, SSHのパラメータの実装特有の設定の提供が必要となるだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It may involve several packet exchanges, as
    specified by the key exchange method.</seg>
       </tuv>
@@ -14915,6 +14986,14 @@
       <tuv lang="JA" changedate="20110729T034255Z" changeid="haruyama">
         <seg>通知の許可の考察 .................31
       9.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Notifications and Proxy</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T082129Z" changeid="haruyama">
+        <seg>通知とプロキシ</seg>
       </tuv>
     </tu>
     <tu>
@@ -17029,6 +17108,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>SSH connections may be initiated by command generators or by
+   notification originators.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T082519Z" changeid="haruyama">
+        <seg>SSH 接続は, コマンド生成器 (command generator) や通知の発信者 (notification originator) によって開始されることがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>SSH implementations SHOULD also attempt to rekey before receiving
    more than 2**32 packets since the last rekey operation.</seg>
       </tuv>
@@ -17509,6 +17597,14 @@
       <tuv lang="JA">
         <seg>セキュリティの考察......................................28
    15.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Security Parameter Passing</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T080428Z" changeid="haruyama">
+        <seg>セキュリティパラメータの転送</seg>
       </tuv>
     </tu>
     <tu>
@@ -18775,6 +18871,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>'packet_length' と 'mac' は, 圧縮された payload から計算される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   SNMP-NOTIFICATION-MIB contains a list of targets to which
+   notifications should be sent.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T083506Z" changeid="haruyama">
+        <seg>SNMP-NOTIFICATION-MIB は, 通知が送られるべきターゲットのリストを含む.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20425,6 +20531,27 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The SNMP-TARGET-MIB and NOTIFICATION-MIB MIB modules may be
+   configured using SNMP or other implementation-dependent mechanisms,
+   such as CLI scripting or loading a configuration file.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T084316Z" changeid="haruyama">
+        <seg>SNMP-TARGET-MIB と NOTIFICATION-MIB MIB モジュールは, SNMP や (CLI スクリプトや設定ファイルの読み込みのような)他の実装に独立なメカニズムを用いて設定されるだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SNMP-TARGET-MIB module [RFC3413]
+   contains objects for defining these management targets, including
+   transport domains and addresses and security parameters, for
+   applications such as notification generators and proxy forwarders.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T083510Z" changeid="haruyama">
+        <seg>SNMP-TARGET-MIB モジュール [RFC3413] は, 通知の発信者やプロキシの転送者のようなアプリケーションのために, トランスポートのドメインとアドレスとセキュリティパラメータを含む, これらの管理のターゲットを定義するオブジェクトを含んでいる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The SNMPv3 WG deliberately avoided
    this and settled for an assertion by the Security Model that the
    requirements of securityLevel were met.</seg>
@@ -20469,6 +20596,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110419T120409Z" changeid="haruyama">
         <seg>SSH楕円曲線公開鍵アルゴリズムは, 公開鍵フォーマット識別子のファミリで指定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH Transport Model
+   converts that information into suitable security parameters for SSH,
+   establishes sessions as needed, and passes messages to the SSH
+   Subsystem for sending.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T082119Z" changeid="haruyama">
+        <seg>SSH トランスポートモデルは, SSHにとって適切なセキュリティパラメータに情報を変換し, 必要に応じてセッションを確立し, 送信のために SSH サブシステムにメッセージを渡す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21039,6 +21177,19 @@
       </tuv>
       <tuv lang="JA">
         <seg>Telnet プロトコルは, &quot;BREAK&quot; 信号を送る方法を提供している. RFC 854[1]で以下のように定義している &quot;多くのシステムで現在ローカルな意味を与えられているUSASCIIの集合の外部にある信号&quot;. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The Transport
+   Model accepts messages from the SSH Subsystem, records the transport-
+   related and SSH-security-related information, including the
+   authenticated identity, in a cache referenced by tmStateReference,
+   and passes the WholeMsg and the tmStateReference to the Dispatcher
+   using the receiveMessage() ASI (Abstract Service Interface).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T081010Z" changeid="haruyama">
+        <seg>トランスポートモデルは, SSH サブシステムからメッセージを受信し, tmStateReference によって参照されるキャッシュ中の認証された識別情報を含むトランスポートに関連する情報と SSHのセキュリティに関連する情報を記録する. そして,  receiveMessage() ASI (Abstract Service Interface) を用いて. WholeMsg と tmStateReference を Dispatcher に渡す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22037,6 +22188,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110531T082415Z" changeid="haruyama">
         <seg>復号器はカウンタ Ｘ のコピーをインクリメントする. 以上のプロセスをそれぞれのブロックに繰り返して 平文パケットP=P1||P2||...||Pn を得る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The default approach is for an administrator to statically
+   preconfigure this information to identify the targets authorized to
+   receive notifications or received proxied messages.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T083607Z" changeid="haruyama">
+        <seg>デフォルトのアプローチでは, 通知を受け取る権限があるターゲットかプロキシされたメッセージを受け取るターゲットかを識別する情報を管理者が事前に静的に設定する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -25161,6 +25322,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110425T073245Z" changeid="haruyama">
         <seg>1 節の表は, 楕円曲線フィールドサイズと対称鍵サイズの等しさの見積りだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The targets to whom notifications or proxy requests should be sent is
+   typically determined and configured by a network administrator.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T083459Z" changeid="haruyama">
+        <seg>通知やプロキシのリクエストが送られるべきターゲットは, ネットワークの管理者によって典型的に決定され設定される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28372,6 +28542,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Thus, the locally configured securityName is
+   entirely trusted within the notification originator.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T084209Z" changeid="haruyama">
+        <seg>したがって, ローカルに設定された securityName が 通知の発信者が完全に信頼される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Thus, the setting of replay_det_req_flag and
    sequence_req_flag are not needed for this process.</seg>
       </tuv>
@@ -29825,6 +30004,16 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>設定可能なポリシーによって, どの方法を使ってほしいかやどの方法が優先されるべきかの順番を管理者が決められるようになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>control processing needs to be performed by a notification originator
+   before notifications are actually sent, and this processing is done
+   using the configured securityName.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110809T083718Z" changeid="haruyama">
+        <seg>通知が実際に送られる前に, 通知の発信者によって制御の処理が行なわれる必要がある. 設定された securityName を用いてこの処理が行なわれる.</seg>
       </tuv>
     </tu>
     <tu>
