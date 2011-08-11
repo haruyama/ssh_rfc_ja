@@ -1663,6 +1663,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Abstract Service Interfaces have been defined by [RFC3411] and
+   further augmented by [RFC5590] to describe the conceptual data flows
+   between the various subsystems within an SNMP entity.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110811T104924Z" changeid="haruyama">
+        <seg>抽象サービスインタフェイス (Abstract Service Interfaces) は SNMP エンティティの中で様々なサブシステム間の概念的なデータフローを記述するために [RFC3411] で定義され [RFC5590] で増補されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Adding a Public Key</seg>
       </tuv>
       <tuv lang="JA" changedate="20110721T053513Z" changeid="haruyama">
@@ -1819,6 +1829,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110607T072318Z" changeid="haruyama">
         <seg>さらなる動機と議論, セキュリティの証明は, 研究論文 [BKN1,BKN2] にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Additional session/connection state information might also be stored
+   in a Local Configuration Datastore.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110811T104722Z" changeid="haruyama">
+        <seg>追加のセッション/接続状態の情報が ローカル設定データストアに保持されるかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2638,6 +2657,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>An error indication in statusInformation will typically include the
+   Object Identifier (OID) and value for an incremented error counter.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110811T105704Z" changeid="haruyama">
+        <seg>statusInfomation のエラー表示は, 典型的に オブジェクト識別子 (OID) と 増加されるエラーカウンタのための値を典型的に含む.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>An example is a
    request to start TCP/IP forwarding for a specific port.</seg>
       </tuv>
@@ -2975,6 +3003,18 @@
       </tuv>
       <tuv lang="JA" changedate="20110614T024310Z" changeid="haruyama">
         <seg>しかし, [RFC4253] では, &quot;Arcfour (と RC4) は弱い鍵の問題がある. 注意して利用しなければならない&quot; となっている. [MANTIN01]にこれらの問題はより詳細に記述されている. [MANTIN01]では暗号の内部状態が完全に混合されるのを保証するために 鍵ストリームの最初の 1536 バイトを破棄するよう推奨している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As a general rule,
+   if state information is available when a message gets discarded, the
+   message-state information should also be released, and if state
+   information is available when a session is closed, the session-state
+   information should also be released.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110811T105315Z" changeid="haruyama">
+        <seg>一般的なルールとして, メッセージが破棄される際に状態情報が利用可能なら, メッセージの状態情報も開放される必要がある. セッションが閉じる際に状態情報が利用可能なら, セッションの状態情報も開放される必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6003,6 +6043,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>どちらの側からもチャンネルを開ける.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Elements of Procedure</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110811T104734Z" changeid="haruyama">
+        <seg>手順の要素</seg>
       </tuv>
     </tu>
     <tu>
@@ -15798,6 +15846,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Per-message context information is not accessible
+   to Transport Models, so for the returned counter OID and value,
+   contextEngine would be set to the local value of snmpEngineID and
+   contextName to the default context for error counters.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110811T110042Z" changeid="haruyama">
+        <seg>メッセージ単位のコンテキスト情報は, トランスポートモデルに対してアクセスできない. 返却されるカウンタ OID と値のために, contextEngine に対して snmpEngineID と contextName のローカルな値に エラーカウンタに対するデフォルトの context が設定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Pixel dimensions refer
    to the drawable area of the window.</seg>
       </tuv>
@@ -17878,6 +17937,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>セッションのデータ転送</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Session State</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110811T104557Z" changeid="haruyama">
+        <seg>セッション状態</seg>
       </tuv>
     </tu>
     <tu>
@@ -21048,6 +21115,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110721T052329Z" changeid="haruyama">
         <seg>SSH_PUBLICKEY_VERSION_NOT_SUPPORTED 状態コードは, 他の要求への応答として送られてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The Secure
+   Shell Transport Model uses some of these conceptual data flows when
+   communicating between subsystems.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110811T104953Z" changeid="haruyama">
+        <seg>セキュアシェルトランスポートモデルは, サブシステム間の通信にこれらの概念的なデータフローのいくつかを利用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24264,6 +24341,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The per-session state that is referenced by tmStateReference may be
+   saved across multiple messages in a Local Configuration Datastore.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110811T104727Z" changeid="haruyama">
+        <seg>tmStateReference で参照されるセッションごとの状態は, ローカル設定データストア (Local Configuration Datastore) に複数のメッセージにまたがって保存されるかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The policy MUST specify which is the preferred
       algorithm (e.g., the first algorithm listed in each category).</seg>
       </tuv>
@@ -25529,6 +25615,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110810T062245Z" changeid="haruyama">
         <seg>tmSecurityName は SSHのユーザ名である必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The tmSessionID MUST be recorded per message at the time of receipt.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110811T104351Z" changeid="haruyama">
+        <seg>tmSessionID は受信時にメッセージ単位で記録されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27744,6 +27838,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This may be accompanied by the requested securityLevel and the
+   tmStateReference.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110811T105549Z" changeid="haruyama">
+        <seg>これは, 要求される securityLevel と tmStateReference を伴なう可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This means that an adversary may be able to
    convince the receiver to accept the same message more than once or to
    accept messages out of order.</seg>
@@ -28884,6 +28987,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>To simplify the elements of procedure, the release of state
+   information is not always explicitly specified.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110811T105119Z" changeid="haruyama">
+        <seg>手順の要素を単純にするため, 状態情報の開放は常に明示的に指定されていない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Traffic Analysis</seg>
       </tuv>
       <tuv lang="JA">
@@ -29699,6 +29811,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>このプロトコルが開始すると, プロトコルは下層のプロトコルからセッション識別子(最初の鍵交換の再の交換ハッシュ H)を受け取る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When tmSameSecurity is set, the recorded tmSessionID can be used to
+   determine whether the SSH session available for sending a
+   corresponding outgoing message is the same SSH session as was used
+   when receiving the incoming message (e.g., a response to a request).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110811T104552Z" changeid="haruyama">
+        <seg>tmSameSecurity が設定されている場合, 記録された tmSessionID は, 関連する送信メッセージを送信するに利用可能な SSH のセッションが, 受信メッセージ (例えば要求への応答)を受信する際に用いられたのと同じセッションかどうかを判定するのに用いることができる.</seg>
       </tuv>
     </tu>
     <tu>
