@@ -617,6 +617,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>2.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T070431Z" changeid="haruyama">
+        <seg>.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>3     VERASE      Erase the character to left of the cursor.</seg>
       </tuv>
       <tuv lang="JA">
@@ -5146,6 +5154,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Create a tmStateReference cache for subsequent reference to the
+       information.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T072553Z" changeid="haruyama">
+        <seg>情報を後で参照できるように tmStateReference のキャッシュを作成する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Currently defined authentication methods for SSH are tightly coupled
    with the underlying authentication mechanism.</seg>
       </tuv>
@@ -5396,6 +5413,24 @@
       </tuv>
       <tuv lang="JA">
         <seg>これらのプロトコルの詳細は別々の文書に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Determine the tmSecurityName to be associated with the incoming
+       message:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T071823Z" changeid="haruyama">
+        <seg>受信メッセージに関連した tmSecurityName を決定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Determine the tmTransportAddress to be associated with the
+       incoming message:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T070450Z" changeid="haruyama">
+        <seg>受信メッセージに関連する tmTransportAddress を決定する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7943,6 +7978,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>How the SSH user name is extracted
+           from the SSH layer is implementation-dependent.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T072308Z" changeid="haruyama">
+        <seg>SSHのユーザ名をSSH層からどう抽出するかは実装依存だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>However,
    implementations SHOULD check that the packet length is reasonable in
    order for the implementation to avoid denial of service and/or buffer
@@ -10165,6 +10209,72 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If this is a client-side SSH session, then the
+           tmTransportAddress is set to the tmTransportAddress used to
+           establish the session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T070730Z" changeid="haruyama">
+        <seg>クライアント側の SSH のセッションの場合は, この tmTransportAddress は セッションを確立するために用いられた tmTransportAddress に設定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If this is a client-side SSH session, then the tmSecurityName
+           MUST be set to the tmSecurityName used to establish the
+           session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T072221Z" changeid="haruyama">
+        <seg>クライアント側の SSH のセッションの場合は, この tmSecurityName は セッションを確立するために用いられた tmSecurityName に設定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If this is a server-side SSH session and this is not the
+           first message received over the session, then the
+           tmSecurityName is set to the previously established
+           tmSecurityName for the session (the value from step B,
+           determined from a previous incoming message).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T072338Z" changeid="haruyama">
+        <seg>サーバ側のSSHセッションで, セッションを介して受信したメッセージでなければ, セッションに以前設定した tmSecurityName (ステップ Bからの値で, 以前受信したメッセージから決定されている) に tmSecurityName は設定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If this is a server-side SSH session and this is not the
+           first message received over the session, then the
+           tmTransportAddress is set to the previously established
+           tmTransportAddress for the session (the value from step B,
+           determined from a previous incoming message).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T071647Z" changeid="haruyama">
+        <seg>サーバ側のSSHセッションで, セッションを介して受信したメッセージでなければ, セッションに以前設定した tmTransportAddress (ステップ Bからの値で, 以前受信したメッセージから決定されている) に tmTransportAddress は設定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If this is a server-side SSH session and this is the first
+           message received over the session, then the
+           tmTransportAddress is set to the address the message
+           originated from, determined in an implementation-dependent
+           way.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T070838Z" changeid="haruyama">
+        <seg>サーバ側のSSHのセッションの場合でこれがセッションを介して受信した最初のメッセージならば, tmTransportAddress は, 実装依存の方法で決定されたメッセージの送り元のアドレスに設定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If this is a server-side SSH session and this is the first
+           message received over the session, then the tmSecurityName is
+           set to the SSH user name.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T072243Z" changeid="haruyama">
+        <seg>サーバ側のSSHのセッションの場合でこれがセッションを介して受信した最初のメッセージならば, tmSecurityName は, SSHのユーザ名に設定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If this is done, the client
    software should take the precautions discussed in [SSH-ARCH].</seg>
       </tuv>
@@ -12213,6 +12323,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>アルゴリズムは, 公開鍵アルゴリズム名から決められなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It MUST exactly include any &quot;user@&quot;
+           prefix associated with the address provided to the
+           openSession() ASI.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T070701Z" changeid="haruyama">
+        <seg>これは, openSession() ASI で提供されたアドレスに関連する &quot;user@&quot; プレフィックスを必ず含んでいなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15995,9 +16115,17 @@
         <seg>Procedures for Sending an Outgoing Message ................17
       5.3.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110729T034059Z" changeid="haruyama">
-        <seg>メッセージ送信のための手順 ................17
+      <tuv lang="JA" changedate="20110812T063520Z" changeid="haruyama">
+        <seg>送信メッセージのための手順 ................17
       5.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Procedures for an Incoming Message</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T063507Z" changeid="haruyama">
+        <seg>受信メッセージのための手順</seg>
       </tuv>
     </tu>
     <tu>
@@ -16005,8 +16133,8 @@
         <seg>Procedures for an Incoming Message ........................15
       5.2.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110729T034105Z" changeid="haruyama">
-        <seg>メッセージ受信のための手順 ........................15
+      <tuv lang="JA" changedate="20110812T063516Z" changeid="haruyama">
+        <seg>受信メッセージのための手順 ........................15
       5.2.</seg>
       </tuv>
     </tu>
@@ -20799,6 +20927,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110802T023222Z" changeid="haruyama">
         <seg>SNMP エンジンの SSH トランスポートモデルは, SSH 特有のセキュリティパラメータと SNMP 特有のモデルには独立なパラメータとの変換を行なう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH Transport Model queries the SSH engine, in an
+       implementation-dependent manner, to determine the address the
+       message originated from, the user name authenticated by SSH, and
+       a session identifier.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T070431Z" changeid="haruyama">
+        <seg>SSH トランスポートモデルは, SSHとセッション識別子を用いてメッセージの送り元のアドレスと認証されたユーザ名を決定するために, 実装に依存する方式で,  SSH エンジンを照会する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -25872,6 +26011,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The value in tmStateReference MUST uniquely
+          identify the session over which the message was received.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T072948Z" changeid="haruyama">
+        <seg>tmStateReference 中のこの値は, メッセージを受信するセッションを一意に識別できなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The value of 'mac' resulting from the MAC algorithm MUST be
    transmitted without encryption as the last part of the packet.</seg>
       </tuv>
@@ -26012,6 +26160,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110725T084129Z" changeid="haruyama">
         <seg>これらの値は, この文書で定義する2つの方法のために, 5節と6節で定義される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Then the Transport Model passes the message to the Dispatcher using
+   the following ASI:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T073113Z" changeid="haruyama">
+        <seg>そして, トランスポートモデルは, 次のASI を用いて Dispatcher にメッセージを渡す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28565,6 +28722,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This session identifier MUST NOT be reused until there are no
+          references to it remaining.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T073040Z" changeid="haruyama">
+        <seg>このセッション識別子は, 参照がなくなるまで再利用してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This step is performed only (1) if the server's final call to
        GSS_Accept_sec_context() produced a non-zero-length final reply
        token to be sent to the client and (2) if no previous call by the
@@ -28573,6 +28739,27 @@
       </tuv>
       <tuv lang="JA" changedate="20110623T034505Z" changeid="haruyama">
         <seg>(1) サーバの最後の GSS_Accept_sec_context() 呼び出しが, クライアントに送られる0でない最終応答トークンを生成し, (2) クライアントの GSS_Init_sec_context() のそれまでの呼び出しが major_status が GSS_S_COMPLETE である結果を生成しなかった場合にのみ, このステップは実行される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This value
+           MUST be constant for the entire SSH session, and future
+           messages received MUST result in the tmSecurityName being set
+           to the same value.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T072321Z" changeid="haruyama">
+        <seg>この値は, 全体の SSH のセッションで定数でなければならない. 将来受信するメッセージは, tmSecurityNameが同じ値に設定されていなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This value MUST be constant for the entire SSH session,
+           and future messages received MUST result in the
+           tmTransportAddress being set to the same value.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T071333Z" changeid="haruyama">
+        <seg>この値は, 全体の SSH のセッションで定数でなければならない. 将来受信するメッセージは, tmTransportAddress が同じ値に設定されていなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -31148,6 +31335,28 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>statusInformation =
+   receiveMessage(
+   IN   transportDomain       -- snmpSSHDomain
+   IN   transportAddress      -- the tmTransportAddress for the message
+   IN   wholeMessage          -- the whole SNMP message from SSH
+   IN   wholeMessageLength    -- the length of the SNMP message
+   IN   tmStateReference      -- (NEW) transport info
+    )</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T073255Z" changeid="haruyama">
+        <seg>statusInformation =
+   receiveMessage(
+   IN   transportDomain       -- snmpSSHDomain
+   IN   transportAddress      -- メッセージの tmTransportAddress
+   IN   wholeMessage          -- SSHからの SNMP メッセージ全体
+   IN   wholeMessageLength    -- SNMP の長さ
+   IN   tmStateReference      -- (NEW) トランスポートの情報
+    )</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>subject defined in Section 3.3.1</seg>
       </tuv>
       <tuv lang="JA" changedate="20110719T030120Z" changeid="haruyama">
@@ -31204,6 +31413,43 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>tmSecurityName = the derived tmSecurityName from step 3.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T072625Z" changeid="haruyama">
+        <seg>tmSecurityName = ステップ 3 から導出された tmSecurityName</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>tmSessionID = an implementation-dependent value that can be
+          used to detect when a session has closed and been replaced by
+          another session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T072910Z" changeid="haruyama">
+        <seg>tmSessionID = セッションが閉じたり別のセッションで置き換えられた場合を検出するの用いられる実装依存の値</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>tmTransportAddress = the derived tmTransportAddress from step
+          2.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T072614Z" changeid="haruyama">
+        <seg>tmTransportAddress = ステップ2から導出された tmTransportAddress</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>tmTransportSecurityLevel = &quot;authPriv&quot; (authentication and
+          confidentiality MUST be used to comply with this Transport
+          Model.)</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110812T072831Z" changeid="haruyama">
+        <seg>tmTransportSecurityLevel = &quot;authPriv&quot; (認証と機密性は, このトランスポートモデルに従って用いられなければならない)</seg>
       </tuv>
     </tu>
     <tu>
