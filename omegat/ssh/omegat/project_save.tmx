@@ -361,6 +361,26 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>+  If openSession fails, then discard the message, release
+              tmStateReference, and pass the error indication returned
+              by openSession back to the calling module.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T080112Z" changeid="haruyama">
+        <seg>+  openSession が失敗したら, メッセージを捨て, tmStateReference を開放し, openSession から返されたエラー表示を呼び出し元モジュールに渡す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>+  If openSession succeeds, then record the
+              destTransportDomain, destTransportAddress, tmSecurityname,
+              and tmSessionID in an implementation-dependent manner.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T080147Z" changeid="haruyama">
+        <seg>+  openSession が成功したら, destTransportDomain, destTransportAddress, tmSecurityname, tmSessionID を実装依存の形式で記録する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>+  if the algorithm requires a signature-capable host key,
             there is a signature-capable algorithm on the server's
             server_host_key_algorithms that is also supported by the
@@ -613,14 +633,6 @@
       </tuv>
       <tuv lang="JA" changedate="20110620T033604Z" changeid="haruyama">
         <seg>2   p (mod 24) = 11 のとき.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>2.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110812T070431Z" changeid="haruyama">
-        <seg>.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2828,6 +2840,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110702T030809Z" changeid="haruyama">
         <seg>GSS_S_COMPLETE と GSS_S_CONTINUE_NEEDED 以外の major status コードは失敗とする必要がある．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Any necessary
+       additional SSH-specific parameters should be provided in an
+       implementation-dependent manner.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T080337Z" changeid="haruyama">
+        <seg>実装依存の方法で, 必要な追加のSSH特有のパラメータも提供される必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6630,6 +6652,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Extract the tmTransportDomain, tmTransportAddress,
+       tmSecurityName, tmRequestedSecurityLevel, tmSameSecurity, and
+       tmSessionID from the tmStateReference.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T075556Z" changeid="haruyama">
+        <seg>tmTransportDomain, tmTransportAddress, tmSecurityName, tmRequestedSecurityLevel, tmSameSecurity, tmSessionID をtmStateReference から抽出する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Failure 'reason code' values in the range of 0xFE000000 to
    0xFFFFFFFF.</seg>
       </tuv>
@@ -8593,6 +8625,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Identify an SSH session over which to send the messages:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T075628Z" changeid="haruyama">
+        <seg>メッセージを送るSSHセッションを識別する:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If
          both sides make the same guess, that algorithm MUST be used.</seg>
       </tuv>
@@ -9454,6 +9494,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the above steps failed to select a session to use, then
+           call openSession() with the tmStateReference as a parameter.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T080029Z" changeid="haruyama">
+        <seg>利用するセッションを選ぶ上記のステップが失敗したら, tmStateReference をパラメータとする openSession() を呼ぶ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the application receiving this request can control the BREAK
    length, the following suggestions are made regarding BREAK duration.</seg>
       </tuv>
@@ -10124,6 +10173,25 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If there is a session that matches the tmTransportAddress and
+           tmSecurityName, then select that session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T075821Z" changeid="haruyama">
+        <seg>tmTransportAddress と tmSecurityName に一致するセッションがあれば, そのセッションを選択する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If there is a session with a matching tmSessionID,
+           tmTransportAddress, and tmSecurityName, then select that
+           session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T075752Z" changeid="haruyama">
+        <seg>tmSessionID, tmTransportAddress, tmSecurityName に一致するセッションがあれば, そのセッションを選択する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If there is no
    confidentiality or no MAC, password change SHOULD be disabled.</seg>
       </tuv>
@@ -10329,6 +10397,30 @@
       </tuv>
       <tuv lang="JA" changedate="20110624T042648Z" changeid="haruyama">
         <seg>このメッセージが送られる場合, このメッセージ中のサーバホスト鍵 と/もしくは 証明書は, 利用している公開鍵タイプで指定されたフォーマットで単一の文字列としてエンコードされる([SSH-TRANSPORT]の6.6節を参照)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If tmSameSecurity is true and there is no existing session
+           with a matching tmSessionID, tmSecurityName, and
+           tmTransportAddress, then increment the
+           snmpSshtmSessionNoSessions counter, discard the message, and
+           return the error indication in the statusInformation.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T075716Z" changeid="haruyama">
+        <seg>tmSameSecurity が true で tmSessionID, tmSecurityName, tmTransportAddress に一致する既存のセッションがなければ, snmpSshtmSessionInvalidCaches カウンタをインクリメントし, メッセージを捨て,statusInformation の中のエラー表示を返す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If tmStateReference does not refer to a cache containing values
+       for tmTransportDomain, tmTransportAddress, tmSecurityName,
+       tmRequestedSecurityLevel, and tmSameSecurity, then increment the
+       snmpSshtmSessionInvalidCaches counter, discard the message, and
+       return the error indication in the statusInformation.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T075525Z" changeid="haruyama">
+        <seg>tmStateReference が,  キャッシュに含まれる tmTransportDomain と tmTransportAddress, tmSecurityName,tmRequestedSecurityLevel, tmSameSecurity の値を参照していない場合,  snmpSshtmSessionInvalidCaches カウンタをインクリメントし, メッセージを捨て,statusInformation の中のエラー表示を返す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15901,6 +15993,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Pass the wholeMessage to SSH for encapsulation as data in an SSH
+       message over the identified SSH session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T080308Z" changeid="haruyama">
+        <seg>識別された SSH セッションの SSH メッセージのデータとしてカプセル化のため, メッセージ全体をSSHに渡す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Passive monitoring of any protocol may give an attacker some
    information about the session, the user, or protocol specific
    information that they would otherwise not be able to garner.</seg>
@@ -16112,6 +16213,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Procedures for Sending an Outgoing Message</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T074814Z" changeid="haruyama">
+        <seg>送信メッセージのための手順</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Procedures for Sending an Outgoing Message ................17
       5.3.</seg>
       </tuv>
@@ -16136,6 +16245,32 @@
       <tuv lang="JA" changedate="20110812T063516Z" changeid="haruyama">
         <seg>受信メッセージのための手順 ........................15
       5.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Processing
+       of this message stops.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T075455Z" changeid="haruyama">
+        <seg>このメッセージの処理は停止する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Processing of
+              this message stops.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T080114Z" changeid="haruyama">
+        <seg>このメッセージの処理は停止する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Processing of this message stops.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T075720Z" changeid="haruyama">
+        <seg>このメッセージの処理は停止する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20367,6 +20502,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The Dispatcher passes the information to the Transport Model using
+   the ASI defined in the Transport Subsystem:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T074906Z" changeid="haruyama">
+        <seg>Dispatcher は, トランスポートサブシステムで定義された ASI を用いてトランスポートモデルに情報を渡す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The ECMQV key
    exchange method is OPTIONAL.</seg>
       </tuv>
@@ -20927,6 +21071,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110802T023222Z" changeid="haruyama">
         <seg>SNMP エンジンの SSH トランスポートモデルは, SSH 特有のセキュリティパラメータと SNMP 特有のモデルには独立なパラメータとの変換を行なう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH Transport Model performs the following tasks.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T075017Z" changeid="haruyama">
+        <seg>SSH トランスポートモデルは次のタスクを実行する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28828,6 +28980,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This will be needed when processing an incoming message.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T080201Z" changeid="haruyama">
+        <seg>受信メッセージの処理に必要となる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This would help prevent an attacker
    from injecting a DNS search path into the local resolver and forcing
    the client to connect to a different host.</seg>
@@ -31353,6 +31513,28 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
    IN   wholeMessageLength    -- SNMP の長さ
    IN   tmStateReference      -- (NEW) トランスポートの情報
     )</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>statusInformation =
+   sendMessage(
+   IN   destTransportDomain           -- transport domain to be used
+   IN   destTransportAddress          -- transport address to be used
+   IN   outgoingMessage               -- the message to send
+   IN   outgoingMessageLength         -- its length
+   IN   tmStateReference              -- (NEW) transport info
+   )</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T075000Z" changeid="haruyama">
+        <seg>statusInformation =
+   sendMessage(
+   IN   destTransportDomain           -- 利用されるトランスポートドメイン
+   IN   destTransportAddress          -- 利用されるトランスポートアドレス
+   IN   outgoingMessage               -- 送信するメッセージ
+   IN   outgoingMessageLength         -- その長さ
+   IN   tmStateReference              -- (NEW) トランスポートの情報
+   )</seg>
       </tuv>
     </tu>
     <tu>
