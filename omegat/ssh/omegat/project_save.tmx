@@ -6457,6 +6457,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Establishing a Session</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T022457Z" changeid="haruyama">
+        <seg>セッションの確立</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Establishing a Session ....................................18
       5.4.</seg>
       </tuv>
@@ -8019,6 +8027,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>How this is accomplished is implementation-dependent.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T030637Z" changeid="haruyama">
+        <seg>これをどう達成するかは実装依存だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>However,
    implementations SHOULD check that the packet length is reasonable in
    order for the implementation to avoid denial of service and/or buffer
@@ -9523,6 +9539,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the attempt to establish a connection is unsuccessful or
+           if server-authentication fails, then
+           snmpSshtmSessionOpenErrors is incremented, an openSession
+           error indication is returned, and openSession processing
+           stops.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T024820Z" changeid="haruyama">
+        <seg>接続の確立に失敗したりサーバ認証に失敗したら, snmpSshtmSessionOpenErrors がインクリメントされ, openSession エラー表示が返され, openSession の処理が停止する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the authentication succeeds and a non-empty user name is presented
    by the client, the SSH server implementation verifies that the user
    name is authorized based on the credentials exchanged in the GSS-API
@@ -10052,6 +10080,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the tmTransportAddress field contains a user name followed
+           by an '@' character (US-ASCII 0x40), that user name string
+           should be presented to the SSH server as the &quot;user name&quot; for
+           user-authentication purposes.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T025224Z" changeid="haruyama">
+        <seg>tmTransportAddress フィールドが ユーザ名に続く '@'  (US-ASCII 0x40) 文字を含んでいたら, ユーザ認証目的の &quot;ユーザ名&quot; として そのユーザ名がSSHサーバに示される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the transport layer does not provide confidentiality,
    authentication methods that rely on secret data SHOULD be disabled.</seg>
       </tuv>
@@ -10070,6 +10109,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>ユーザが, (セッションの開始時に提供された公開鍵ではなく) 保持していたサーバ公開鍵を用いてセッションを継続することを選択すると, 攻撃者とサーバの間のセッション固有のデータは,クライアントと攻撃者のセッションや(前述したランダム性のために)その他の攻撃者とサーバの間のセッションと異なる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the user authentication is unsuccessful, then the
+           transport connection is closed, the
+           snmpSshtmSessionUserAuthFailures counter is incremented, an
+           error indication is returned to the calling module, and
+           processing stops for this message.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T025844Z" changeid="haruyama">
+        <seg>ユーザ認証が失敗したら, トランスポート接続は閉じられ,  snmpSshtmSessionUserAuthFailures カウンタがインクリメントされ, エラー表示が呼び出し元モジュールに返されて, このメッセージに対する処理が停止する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10215,6 +10266,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>そのようなアルゴリズムがなければ, 両方の側が切断しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If there is no user name in
+           the tmTransportAddress, then the tmSecurityName should be
+           used as the user name.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T025249Z" changeid="haruyama">
+        <seg>tmTransportAddress に ユーザ名がなければ, tmSecurityName がユーザ名として用いられる必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10430,6 +10491,28 @@
       </tuv>
       <tuv lang="JA">
         <seg>2つのセッションが同じセッション識別子(鍵交換のハッシュ)を持った場合, 一方からのパケットはもう一方に対してリプレイされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If unsuccessful, the transport
+       connection is closed, the snmpSshtmSessionNoSubsystems counter is
+       incremented, an error indication is returned to the calling
+       module, and processing stops for this message.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T030002Z" changeid="haruyama">
+        <seg>ユーザ認証が失敗したら, トランスポート接続は閉じられ,  snmpSshtmSessionNoSubsystems カウンタがインクリメントされ, エラー表示が呼び出し元モジュールに返されて, このメッセージに対する処理が停止する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If unsuccessful, the transport connection is
+       closed, the snmpSshtmSessionNoChannels counter is incremented, an
+       error indication is returned to the calling module, and
+       processing stops for this message.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T025839Z" changeid="haruyama">
+        <seg>ユーザ認証が失敗したら, トランスポート接続は閉じられ,  snmpSshtmSessionNoChannels カウンタがインクリメントされ, エラー表示が呼び出し元モジュールに返されて, このメッセージに対する処理が停止する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10705,6 +10788,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110808T101234Z" changeid="haruyama">
         <seg>実装は, 送信メッセージを予想して SSH のセッションを開始することを選んでもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementations may need to cache the transportAddress passed to
+       the openSession API for later use when performing incoming
+       message processing (see Section 5.1).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T024308Z" changeid="haruyama">
+        <seg>実装は, (5.1節の) 受信メッセージ処理の実行の時に後で使うため, openSession API に渡す transportAddress をキャッシュする必要があるだろう.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11164,6 +11257,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In an implementation-specific manner, invoke the SSH user-
+           authentication service using the calculated user name.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T025446Z" changeid="haruyama">
+        <seg>実装依存の方法で, 算出されたユーザ名を用いて SSH ユーザ認証サービスを起動する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In any case, if
    the user does not exist, the authentication request MUST NOT be
    accepted.</seg>
@@ -11320,6 +11422,19 @@
       </tuv>
       <tuv lang="JA" changedate="20110726T031057Z" changeid="haruyama">
         <seg>NETCONF のトラフィックを容易に識別しファイアウォールや他のネットワークデバイスでフィルタするために, NETCONF サーバは, IANA に割り当てられた TCP ポートを用いて SSH のセッションが確立された場合のみ &quot;netconf&quot; SSH サブシステムへのアクセスを提供するのをデフォルトとしなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In order to allow SNMP traffic to be easily identified and
+       filtered by firewalls and other network devices, servers
+       associated with SNMP entities using the Secure Shell Transport
+       Model MUST default to providing access to the &quot;snmp&quot; SSH
+       Subsystem if the SSH session is established using the IANA-
+       assigned TCP ports (5161 and 5162).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T030422Z" changeid="haruyama">
+        <seg>SNMP のトラフィックを容易に識別しファイアウォールや他のネットワークデバイスでフィルタするために, セキュアシェルトランスポートモデルを用いるSNMP エンティティに関連するサーバは, IANA に割り当てられた TCP ポート (5161 と 5162) を用いてSSHのセッションが確立された婆に &quot;snmp&quot; SSH サブシステムへのアクセスを提供するのをデフォルトとしなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11969,6 +12084,23 @@
       </tuv>
       <tuv lang="JA" changedate="20110624T042802Z" changeid="haruyama">
         <seg>伝統的なSSHの配置では, ホスト鍵は通常めったに変更されず, クライアントが事前に知らないホスト鍵を検証するためのメカニズムはないことが多い.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Incoming messages for
+       the session MUST be associated with this tmSecurityName value.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T030629Z" changeid="haruyama">
+        <seg>セッションの受信メッセージは, この tmSecurityName の値に関連していなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Increment the snmpSshtmSessionOpens counter.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T023806Z" changeid="haruyama">
+        <seg>snmpSshtmSessionOpens カウンタをインクリメントする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12822,6 +12954,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110808T095227Z" changeid="haruyama">
         <seg>RADIUS や Diameter と統合するためにチャレンジハンドシェイク認証プロトコル (CHAP) [RFC1994] や ダイジェスト認証 [RFC5090] のような別のパスワード検証プロトコルを利用することも可能だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is an implementation
+   decision how such data is passed.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T022615Z" changeid="haruyama">
+        <seg>どのようなデータを渡すかは実装の判断だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18132,6 +18273,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Servers SHOULD be
+       configurable to allow access to the SNMP SSH Subsystem over other
+       ports.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T030432Z" changeid="haruyama">
+        <seg>サーバは, 他のポート上の SNMP SSH サブシステムへのアクセス許可を設定可能にする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Servers SHOULD be configurable to allow access to the netconf
    SSH subsystem over other ports.</seg>
       </tuv>
@@ -18218,6 +18369,15 @@
       <tuv lang="JA" changedate="20110729T034008Z" changeid="haruyama">
         <seg>セッション状態 ......................................14
    5.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Set tmSessionID in the tmStateReference cache to an
+       implementation-dependent value to identify the session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T030512Z" changeid="haruyama">
+        <seg>セッションを識別するために実装依存の値を tmSessionID として tmStateReference キャッシュに設定する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21581,6 +21741,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The Secure Shell Transport Model provides the following Abstract
+   Service Interface (ASI) to describe the data passed between the SSH
+   Transport Model and the SSH service.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T022558Z" changeid="haruyama">
+        <seg>セキュアシェルトランスポートモデルは, SSH トランスポートモデルとSSHサービスの間で渡されるデータを記述するために, 次の Abstract Service Interface (ASI) を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Secure Shell protocol (SSH) is a protocol for secure remote login
    and other secure network services over an insecure network.</seg>
       </tuv>
@@ -22313,6 +22483,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client invokes &quot;snmp&quot; as an SSH Subsystem, as indicated in
+       the &quot;subsystem&quot; parameter.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T025954Z" changeid="haruyama">
+        <seg>クライアントは, SSH のサブシステムとして, &quot;subsystem&quot; のパラメータとして指定して, &quot;snmp&quot; を起動する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client is allowed to send further messages without waiting for
    the response to the request.</seg>
       </tuv>
@@ -22413,6 +22592,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client should invoke the &quot;ssh-connection&quot; service (also known
+       as the SSH connection protocol [RFC4254]), and request a channel
+       of type &quot;session&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T025641Z" changeid="haruyama">
+        <seg>クライアントは, &quot;ssh-connection&quot; サービス (SSH コネクションプロトコル [RFC4254] としても知られる) を起動し, &quot;session&quot; タイプのチャンネルを要求する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client software MAY
    display this message to the user.</seg>
       </tuv>
@@ -22426,6 +22615,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110725T085133Z" changeid="haruyama">
         <seg>そしてクライアントはK_Tを以下を暗号化するのに用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The client will then invoke an SSH authentication service to
+       authenticate the principal, such as that described in the SSH
+       authentication protocol [RFC4252].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T024908Z" changeid="haruyama">
+        <seg>クライアントは, SSH認証プロトコル [RFC4252] に記述されているように, プリンシパルを認証するためSSH認証サービスを起動する. </seg>
       </tuv>
     </tu>
     <tu>
@@ -22622,6 +22821,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110531T081739Z" changeid="haruyama">
         <seg>そして カウンタ X をインクリメントする. パケット P に対応する全暗号文 C=C1||C2||...||Cn を生成するために, 後続のブロックに対してこのプロセスが繰替えされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The credentials used to authenticate the SSH principal are
+           determined in an implementation-dependent manner.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T025319Z" changeid="haruyama">
+        <seg>SSH プリンシパルを認証するのに用いられる資格情報は, 実装依存の方法で決定される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23052,6 +23260,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>次の圧縮アルゴリズムが現在定義されている:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The following describes the procedure to follow to establish a
+   session between a client and server to run SNMP over SSH.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T023527Z" changeid="haruyama">
+        <seg>SSH上のSNMP を実行する クライアントとサーバの間でセッションを確立する手順を以下で記述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24493,6 +24710,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The other parameters of the transport connection are provided
+           in an implementation-dependent manner.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T024722Z" changeid="haruyama">
+        <seg>トランスポート接続の他のパラメータは, 実装依存の方法で提供される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The output of shared key generation
    is a field element xp.</seg>
       </tuv>
@@ -25910,6 +26136,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The tmSecurityName used to establish the SSH session must be the
+       only tmSecurityName used with the session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T030606Z" changeid="haruyama">
+        <seg>SSH セッションを確立するのに用いた tmSecurityName は, セッションで用いる唯一の tmSecurityName でなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The tmSessionID MUST be recorded per message at the time of receipt.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110811T104351Z" changeid="haruyama">
@@ -25982,6 +26217,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>トランスポートプロトコル [SSH-TRANS] は, 安全でないネットワーク上で秘密のチャンネルを提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The transportAddress associated with a session
+       MUST remain constant during the lifetime of the SSH session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T024214Z" changeid="haruyama">
+        <seg>セッションに関連する transportAddress は, SSHのセッションの生存中一定でなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26917,6 +27161,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>これは, 不正なホスト鍵を利用した攻撃をより難しくする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This
+   process is used by any SNMP engine establishing a session for
+   subsequent use.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T023609Z" changeid="haruyama">
+        <seg>このプロセスは, その後の利用のためにセッションを確立するどのSNMP エンジンでも利用される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28980,6 +29234,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This will be done automatically for an SNMP application that
+   initiates a transaction, such as a command generator, a notification
+   originator, or a proxy forwarder.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T023751Z" changeid="haruyama">
+        <seg>コマンド生成器, 通知の発信者, プロキシの転送者のような, トランザクションを開始する SNMP アプリケーションによって 自動的に行なわれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This will be needed when processing an incoming message.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110815T080201Z" changeid="haruyama">
@@ -29185,6 +29449,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>画面の更新の遅れを最小にするため, インタラクティブなセッションで過剰な大きなパケットは求められない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To authenticate the server, the client usually stores pairs
+           (tmTransportAddress, server host public key) in an
+           implementation-dependent manner.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T024701Z" changeid="haruyama">
+        <seg>サーバを認証するため, クライアントは実装依存の方法で (tmTransportAddress, サーバホスト公開鍵) のペアを通常保持する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -29642,6 +29916,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>上の例を用いると, 'data' の取り得る値には, &quot;foo&quot; や &quot;bar&quot; がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Using tmTransportAddress, the client will establish an SSH
+       transport connection using the SSH transport protocol,
+       authenticate the server, and exchange keys for message integrity
+       and encryption.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T024033Z" changeid="haruyama">
+        <seg>tmTransportAddress を用いて, クライアントは SSHトランスポートプロトコルを用いてトランスポート接続を確立し, サーバを認証し, メッセージ完全性と暗号化のための鍵を交換する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -31491,6 +31776,24 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110425T072228Z" changeid="haruyama">
         <seg>(量子計算機での Shorのアルゴリズムは多項式時間で ECDLP を解ける. しかし, 現在大規模な量子計算機は構築されておらず, その構築には, 非常の実験的な物理やエンジニアリングの作業がなされなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>statusInformation =
+   openSession(
+   IN   tmStateReference       -- transport information to be used
+   OUT  tmStateReference       -- transport information to be used
+   IN   maxMessageSize         -- of the sending SNMP entity
+    )</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110816T022713Z" changeid="haruyama">
+        <seg>statusInformation =
+   openSession(
+   IN   tmStateReference       -- 利用されるトランスポート情報
+   OUT  tmStateReference       -- 利用されるトランスポート情報
+   IN   maxMessageSize         -- 送信するSNMP エントリの最大メッセージ長
+    )</seg>
       </tuv>
     </tu>
     <tu>
