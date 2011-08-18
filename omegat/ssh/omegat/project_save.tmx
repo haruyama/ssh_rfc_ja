@@ -4498,6 +4498,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Closing a Session</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T004704Z" changeid="haruyama">
+        <seg>セッションの終了</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Closing a Session .........................................20
    6.</seg>
       </tuv>
@@ -6009,6 +6017,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>それぞれの側が, それぞれのカテゴリについて優先するアルゴリズムがある. そして, ほとんどの実装で, 常に同じ優先のアルゴリズムを用いると仮定できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Each subtree
+   is organized as a set of related objects.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T005920Z" changeid="haruyama">
+        <seg>それぞれの部分木は, 関連するオブジェクトの集合で構成される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7782,6 +7799,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Generic and Common Textual Conventions used in this document can be
+   found summarized at http://www.ops.ietf.org/mib-common-tcs.html</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T010054Z" changeid="haruyama">
+        <seg>この文書で用いる Generic and Common Textual Conventions は, http://www.ops.ietf.org/mib-common-tcs.html で要約されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Given some elliptic curve domain parameters, an ECC key pair
    can be generated containing a private key (an integer d), and a
    public key (an elliptic curve point Q).</seg>
@@ -7846,6 +7872,14 @@
         <seg>HASH     交換ハッシュなどを計算するハッシュアルゴリズム.
        HLEN     ビットでのハッシュの出力の長さ
        MINKLEN  ビットでの一時RSAモジュラスの長さの最小値</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Have SSH close the session associated with tmSessionID.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T005111Z" changeid="haruyama">
+        <seg>tmSessionID に関連するセッションを SSH に終了させる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10252,6 +10286,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If there is no session corresponding to tmSessionID, then
+       closeSession processing is complete.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T005048Z" changeid="haruyama">
+        <seg>tmSessionID に対応するセッションがなければ, closeSession() 処理は完了する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If there is no such algorithm, both
          sides MUST disconnect.</seg>
       </tuv>
@@ -11540,6 +11583,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In particular, it
+   is assumed that an entity implementing the SNMP-SSH-TM-MIB will
+   implement the SNMPv2-MIB [RFC3418] and the SNMP-FRAMEWORK-MIB
+   [RFC3411].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T010351Z" changeid="haruyama">
+        <seg>特に, SNMP-SSH-TM-MIB を実装するエンティティは,  SNMPv2-MIB [RFC3418] と SNMP-FRAMEWORK-MIB [RFC3411] を実装することが仮定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In particular, it defines objects for monitoring and
    managing the Secure Shell Transport Model for SNMP.</seg>
       </tuv>
@@ -12093,6 +12147,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110816T030629Z" changeid="haruyama">
         <seg>セッションの受信メッセージは, この tmSecurityName の値に関連していなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Increment the snmpSshtmSessionCloses counter.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T005015Z" changeid="haruyama">
+        <seg>snmpSshtmSessionCloses カウンタをインクリメントする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12709,6 +12771,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It defines an OID to identify the SNMP-over-SSH transport
+   domain, a Textual Convention for SSH Addresses, and several
+   statistics counters.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T005734Z" changeid="haruyama">
+        <seg>SSH上の SNMP トランスポートドメインを識別する OID, SSHアドレスのテキスト表記, いくつかの統計カウンタを定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It defines an SSH user authentication
    method that uses a specified GSS-API mechanism to authenticate a
    user, and a family of SSH key exchange methods that use GSS-API to
@@ -13027,6 +13099,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It is expected that an entity implementing this MIB will
+   also support the Transport Security Model [RFC5591] and, therefore,
+   implement the SNMP-TSM-MIB.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T010536Z" changeid="haruyama">
+        <seg>この MIB を実装する エンティティは, Transport Security Model [RFC5591] もサポートし, そのために SNMP-TSM-MIB を実装することが期待される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It is expected that in most environments, only 2
    round-trips will be needed for full key exchange, server
    authentication, service request, and acceptance notification of
@@ -13044,6 +13126,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>場合によっては, サーバホスト鍵とサーバホスト名の関係を最初に検証すうことなしにこのプロトコルが利用されることが, 期待される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is implementation-dependent when
+   a session should be closed.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T005001Z" changeid="haruyama">
+        <seg>いつセッションが終了される必要があるかは, 実装依存だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14108,6 +14199,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>MIB Module Overview</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T005619Z" changeid="haruyama">
+        <seg>MIB モジュールの概要</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>MIB Module Overview ............................................21
       6.1.</seg>
       </tuv>
@@ -14124,6 +14223,14 @@
       <tuv lang="JA" changedate="20110729T034346Z" changeid="haruyama">
         <seg>MIB モジュールのセキュリティ .......................................32
    10.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>MIB Modules Required for IMPORTS</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T010643Z" changeid="haruyama">
+        <seg>IMPORTS に必要な MIB モジュール</seg>
       </tuv>
     </tu>
     <tu>
@@ -15480,6 +15587,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110729T071147Z" changeid="haruyama">
         <seg>MIBのオブジェクトは, Structure of Management Informantion (SMI) で定義されたメカニズムを用いて定義される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Objects in this MIB module are arranged into subtrees.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T005803Z" changeid="haruyama">
+        <seg>この MIB モジュールのオブジェクトは, 部分木中に配置される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17005,6 +17120,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110620T040831Z" changeid="haruyama">
         <seg>これに関連して, Waldvogel と Massey は主張している : プライベート指数が{0,...,p-2}で独立に一様にランダムに選択されるなら, 鍵のエントロピーは最大値である lg(p-1)から2bit未満しか小さくならない [WALDVOGEL].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Relationship to Other MIB Modules</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T010100Z" changeid="haruyama">
+        <seg>他のMIB モジュールとの関係</seg>
       </tuv>
     </tu>
     <tu>
@@ -18775,6 +18898,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Some management objects defined in other MIB modules are applicable
+   to an entity implementing the SSH Transport Model.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T010445Z" changeid="haruyama">
+        <seg>他の MIB モジュール内で定義されたいくつかの管理オブジェクトは, SSHトランスポートモデルを実装するエンティティに適用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Some readers will worry about the increase in packet size due to new
    headers, padding, and the Message Authentication Code (MAC).</seg>
       </tuv>
@@ -19003,6 +19135,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110614T031713Z" changeid="haruyama">
         <seg>強い識別者による攻撃では, Arcfourの鍵ストリームからストリームと最初の乱数を識別する. この文書で定義したアルゴリズムで防御される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Structure of the MIB Module</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T005739Z" changeid="haruyama">
+        <seg>MIBモジュールの構造</seg>
       </tuv>
     </tu>
     <tu>
@@ -19368,6 +19508,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110720T125428Z" changeid="haruyama">
         <seg>用語  .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Textual Conventions</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T010024Z" changeid="haruyama">
+        <seg>テキスト表記法</seg>
       </tuv>
     </tu>
     <tu>
@@ -21741,6 +21889,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The Secure Shell Transport Model provides the following ASI to close
+   a session:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T004731Z" changeid="haruyama">
+        <seg>セキュアシェルトランスポートモデルは, セッションを終了するため次の ASI を提供する:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Secure Shell Transport Model provides the following Abstract
    Service Interface (ASI) to describe the data passed between the SSH
    Transport Model and the SSH service.</seg>
@@ -22173,6 +22330,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110718T035627Z" changeid="haruyama">
         <seg>公開鍵ファイルの本体は, [RFC4253]の6.6節で指定された公開鍵データを base64 エンコード ([RFC2045]) したものだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The calling code should release the
+   associated tmStateReference.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T004950Z" changeid="haruyama">
+        <seg>呼び出し元のコードは, 関連すう tmStateReference 開放する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23220,6 +23386,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The following MIB module imports items from [RFC2578], [RFC2579], and
+   [RFC2580].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T010732Z" changeid="haruyama">
+        <seg>以下の MIB モジュールは, [RFC2578], [RFC2579], [RFC2580] から項目をインポートする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The following are some examples of public key files that are
    compliant (note that the examples all wrap before 72 bytes to meet
    IETF document requirements; however, they are still compliant.)</seg>
@@ -23260,6 +23435,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>次の圧縮アルゴリズムが現在定義されている:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The following describes the procedure to follow to close a session
+   between a client and server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T004811Z" changeid="haruyama">
+        <seg>以下で, クライアントとサーバの間のセッションを終了する手続を記述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24755,6 +24939,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>SSHのホスト鍵の検証に SSHFP を使う場合の総合的なセキュリティは, SSH のホスト管理者と (指紋を転送する) ＤＮＳ ゾーンの管理者のセキュリティポリシーや SSHの実装でどのように検証が行なわれるかの詳細, DNSに安全な方法でアクセスするクライアントの努力の詳細に依存している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The overall structure and
+   assignment of objects to their subtrees, and the intended purpose of
+   each subtree, is shown below.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T010019Z" changeid="haruyama">
+        <seg>全体的な構造と部分木へのオブジェクトの割り当て, それぞれの部分木の目的は後述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27194,6 +27388,32 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This MIB module also references [RFC1033], [RFC4252], [RFC3490], and
+   [RFC3986].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T010748Z" changeid="haruyama">
+        <seg>この MIB モジュールは, [RFC1033], [RFC4252], [RFC3490], [RFC3986] も参照する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This MIB module is for monitoring SSH Transport Model information.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T010554Z" changeid="haruyama">
+        <seg>この MIB モジュールは SSH トランスポートモデルの情報をモニタするのが目的だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This MIB module provides management of the Secure Shell Transport
+   Model.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T005635Z" changeid="haruyama">
+        <seg>この MIB モジュールは セキュアシェルトランスポートモデルの管理を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This Transport Model is designed to meet the security and operational
    needs of network administrators, maximize usability in operational
    environments to achieve high deployment success, and at the same time
@@ -27914,6 +28134,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110614T023647Z" changeid="haruyama">
         <seg>この文書は, セキュア シェル (SSH) プロトコルで Arcfour 暗号を利用する方法を指定する. この方法はArcfourの鍵スケジュールアルゴリズムの弱点を軽減する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document uses TDomain Textual Conventions for the SNMP-internal
+   MIB modules defined here for compatibility with the RFC 3413 MIB
+   modules and the RFC 3411 Abstract Service Interfaces.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T010902Z" changeid="haruyama">
+        <seg>この文書は RFC 3413 MIB modules と RFC 3411 Abstract Service Interfaces との互換性のために, ここで定義した Domain Textual Conventions for the SNMP-internal MIB modules を用いる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28802,6 +29032,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>これは, ([SSH-USERAUTH] で定義されている) &quot;password&quot;  方式のような他の方法に対して非常に有利である. 新しい(おそらくより強固な)方法が &quot;思いのままに&quot; 追加できるので, システムのセキュリティは透過的に強化できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This process is followed by any SNMP
+   engine to close an SSH session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T004843Z" changeid="haruyama">
+        <seg>このプロセスは, SSH のセッションを終了するすべての SNMP エンジンが従う.</seg>
       </tuv>
     </tu>
     <tu>
@@ -31776,6 +32015,20 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110425T072228Z" changeid="haruyama">
         <seg>(量子計算機での Shorのアルゴリズムは多項式時間で ECDLP を解ける. しかし, 現在大規模な量子計算機は構築されておらず, その構築には, 非常の実験的な物理やエンジニアリングの作業がなされなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>statusInformation =
+   closeSession(
+   IN   tmSessionID     -- session ID of session to be closed
+   )</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110818T004746Z" changeid="haruyama">
+        <seg>statusInformation =
+   closeSession(
+   IN   tmSessionID     -- 終了するセッションのID
+   )</seg>
       </tuv>
     </tu>
     <tu>
