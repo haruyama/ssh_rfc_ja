@@ -6801,6 +6801,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Failures in either node, death of the
+   deamon serving the communication, routing problems in the network
+   between, firewalls that block the traffic, and other problems can
+   prevent the SSH Transport Model from working.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T034418Z" changeid="haruyama">
+        <seg>どちらのノードでの失敗や, 接続を提供するデーモンの死, ネットワーク間のルーティング問題, トラフィックをブロックするファイアウォール, またその他の問題は, SSH トランスポートモデルが正常に動作するのを妨げる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Fingerprint</seg>
       </tuv>
       <tuv lang="JA">
@@ -8153,6 +8164,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110812T072308Z" changeid="haruyama">
         <seg>SSHのユーザ名をSSH層からどう抽出するかは実装依存だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>How this credential configuration is done is implementation-
+   and deployment-specific.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T041426Z" changeid="haruyama">
+        <seg>この資格情報の設定をどう行なうかは, 実装と配置に依存する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9643,6 +9663,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110725T091456Z" changeid="haruyama">
         <seg>サーバで生成された RSA 秘密鍵が漏れたら, セッション鍵も漏れる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the SSH Transport Model is configured to utilize AAA services,
+   operators should consider configuring support for local
+   authentication mechanisms, such as local passwords, so SNMP can
+   continue operating during times of network stress.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T035325Z" changeid="haruyama">
+        <seg>SSH トランスポートモデルが AAA サービスを利用するように設定されている場合は, 運用者は, ローカルパスワードのようなローカルの認証メカニズムのサポートの設定を考慮すべきだ. こうすると, SNMP はネットワークに負荷が掛っている時間帯に運用を続けることができる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11801,6 +11832,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>しかしながら実際上は, どちらの方向でも同じアルゴリズムを用いることが推奨される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In situations where
+   management access has to be very reliable, operators should consider
+   mitigating measures.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T034757Z" changeid="haruyama">
+        <seg>管理のアクセスが非常に信頼できるようにしなければならない状況では, 運用者は軽減策を考慮すべきだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16154,6 +16195,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Operational Considerations</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T033700Z" changeid="haruyama">
+        <seg>運用上の考察</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Operational Considerations .....................................29
    9.</seg>
       </tuv>
@@ -16188,6 +16237,16 @@
       <tuv lang="JA">
         <seg>鍵交換法の注文 ...................20
            9.3.9.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Other
+   transport security protocols such as TLS support a session-resumption
+   feature that allows reusing a cached session key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T041025Z" changeid="haruyama">
+        <seg>TLSのような他のトランスポートセキュリティプロトコルは, キャッシュされたセッション鍵を再利用することでセッション再開機能をサポートしている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19377,6 +19436,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Such a mechanism
+   does not exist for SSH and thus SNMP applications should keep SSH
+   sessions for longer time periods.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T041104Z" changeid="haruyama">
+        <seg>このようなメカニズムは SSH には存在しないので, SNMP アプリケーションは SSH のセッションをより長い期間保持するべきだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Such data
    can be passed with SSH_MSG_CHANNEL_EXTENDED_DATA messages, where a
    separate integer specifies the type of data.</seg>
@@ -21496,6 +21565,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The SSH Transport
+   Model assumes that TCP and IP continue to operate correctly between
+   the communicating nodes.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T033837Z" changeid="haruyama">
+        <seg>SSH トランスポートモデルは, 通信ノード間で TCP と IP が正しく動作し続けることを仮定している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The SSH Transport Model
    converts that information into suitable security parameters for SSH,
    establishes sessions as needed, and passes messages to the SSH
@@ -21593,6 +21672,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110802T022454Z" changeid="haruyama">
         <seg>SSH トランスポートモデルは, 別の SNMP エンジンの SSH トランスポートモデルと自分自身の間にチャンネルを確立する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH Transport Model will likely not work in conditions where
+   remote access to the CLI has stopped working.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T033754Z" changeid="haruyama">
+        <seg>SSH トランスポートモデルは, CLI へのリモートアクセスの動作が停止された状態では動作しないだろう.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21697,6 +21785,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The SSH protocol has its own window mechanism, defined in RFC 4254.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T035352Z" changeid="haruyama">
+        <seg>SSH は 独自の window メカニズムを持っており, RFC 4254 で定義されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The SSH protocol is not always clear on whether the user name
       field must be filled in, so for some implementations, such as
       those using GSSAPI authentication, it may be necessary to use a
@@ -21705,6 +21801,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110810T063353Z" changeid="haruyama">
         <seg>SSH プロトコルでは, ユーザ名のフィールドが埋められているかどうか常には明確ではない. GSSAPI 認証を用いる実装などのそのような実装のため, SSHの情報と tmSecurityName を変換する, もしくは tmSecurityName を SSHの識別情報に変換するマップアルゴリズムが必要なことがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH protocol requires the execution of CPU-intensive calculations
+   to establish a session key during session establishment.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T040805Z" changeid="haruyama">
+        <seg>SSH プロトコルは, セッションの確立時にセッション鍵を作成するのにCPUをたくさん利用する計算の実行を必要とする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21733,6 +21838,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>SSHのサーバも, 認証プロトコルが開始してから認証が完了するまでのいつでも, SSH_MSG_USERAUTH_BANNER メッセージを送信できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH specifications leave it open when window adjustment messages
+   should be created, and some implementations send these whenever
+   received data has been passed to the application.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T040357Z" changeid="haruyama">
+        <seg>window 調整メッセージが作られるべき際に, SSH の仕様は, window メカニズムを開放したままにする. いくつかの実装は, アプリケーションに渡されるデータを受信する度に window 調整メッセージを送る.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27042,6 +27157,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>There are
+   noticeable bandwidth and processing overheads to handling such window
+   adjustment messages, which can be avoided by sending them less
+   frequently.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T040553Z" changeid="haruyama">
+        <seg>そのような window 調整メッセージを扱うには, 広い帯域と処理のオーバヘッドがある. あまり頻繁にメッセージを送らないようにしてこれらを避けることができる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>There are a number of challenges to be addressed to map Secure Shell
    authentication method parameters into the SNMP architecture so that
    SNMP continues to work without any surprises.</seg>
@@ -27391,6 +27517,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110802T025903Z" changeid="haruyama">
         <seg>これらに 公開鍵, パスワード, ホストベースメカニズムが含まれている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These measures may include dedicated
+   management-only networks, point-to-point links, and the ability to
+   use alternate protocols and transports.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T034840Z" changeid="haruyama">
+        <seg>この軽減策には, 専用の管理専用のネットワーク,  ポイント-トゥ-ポイントのリンク, 代替のプロトコルやトランスポートを利用する能力が含まれるだろう.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28903,6 +29039,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This means
+   that short-lived sessions become computationally expensive compared
+   to USM, which does not have a notion of a session key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T040907Z" changeid="haruyama">
+        <seg>これは, セッション鍵の概念のない USM 比べて, 短寿命のセッションが計算の負荷を生じることを意味している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This means that an adversary may be able to
    convince the receiver to accept the same message more than once or to
    accept messages out of order.</seg>
@@ -30034,6 +30180,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>To have SNMP properly utilize the security services provided by SSH,
+   the SSH Transport Model MUST be used with a Security Model that knows
+   how to process a tmStateReference, such as the Transport Security
+   Model for SNMP [RFC5591].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T035045Z" changeid="haruyama">
+        <seg>SSHで提供されるセキュリティサービスを SNMP に利用させるために, SSH トランスポートモデルは,Transport Security Model for SNMP [RFC5591] のような tmStateReference の処理方法を知っている Security Model と共に利用されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>To implement CBC mode, outer
    chaining MUST be used (i.e., there is only one initialization
    vector).</seg>
@@ -30049,6 +30206,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110620T034258Z" changeid="haruyama">
         <seg>鍵交換のスピードを増すため, クライアントとサーバがそれぞれのプライベート指数のサイズを減らすことができる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To initiate SSH connections, an entity must be configured with SSH
+   client credentials plus information to authenticate the server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T041404Z" changeid="haruyama">
+        <seg>SSH 接続を開始するには, エンティティが, SSH のクライアント資格情報とサーバを認証する情報を持って設定されていなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30118,6 +30284,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110726T030043Z" changeid="haruyama">
         <seg>SSH上でNETCONFを実行するのに, クライアントはまずSSHトランスポート接続をSSHトランスポートプロトコルを用いて確立し, クライアントとサーバはメッセージ完全性と暗号化のための鍵を交換する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To send notifications over SSHTM,
+   the internetworking device will need to be configured as an SSH
+   client.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T041343Z" changeid="haruyama">
+        <seg>SSHTM 越しに通知を送るには, インターネットで動作するデバイスは, SSHクライアントとして設定されている必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -31050,6 +31226,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>While hosts are often configured to be SSH clients, most</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T041303Z" changeid="haruyama">
+        <seg>ホストは頻繁にSSHクライアントとなるよう設定されているが, 多くのインターネットで動作するデバイスはそうではない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>While in many environments the
    information conveyed by this header data may be considered innocuous
    public information, it may constitute a channel through which
@@ -31542,6 +31726,14 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>認証の状態を消去できない場合に, 'user_name' か 'service_name' が変更されたらサーバの実装は切断しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>internetworking devices are not.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T041307Z" changeid="haruyama">
+        <seg> </seg>
       </tuv>
     </tu>
     <tu>
