@@ -14,6 +14,16 @@
   <body>
     <tu>
       <tuv lang="EN-US">
+        <seg>&quot;
+    ::= { snmpSshtmSession 7 }</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T033149Z" changeid="haruyama">
+        <seg>&quot;
+    ::= { snmpSshtmSession 7 }tm</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>&quot;A&quot; means the single character A, ASCII 65).</seg>
       </tuv>
       <tuv lang="JA">
@@ -431,6 +441,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110806T120842Z" changeid="haruyama">
         <seg>- 認証なし, プライバシーなし (noAuthNoPriv)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>-- The snmpSshtmSession Group</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T032234Z" changeid="haruyama">
+        <seg>-- snmpSshtmSession グループ</seg>
       </tuv>
     </tu>
     <tu>
@@ -5307,6 +5325,31 @@
       <tuv lang="JA" changedate="20110819T070751Z" changeid="haruyama">
         <seg>DESCRIPTION
         &quot;ポート番号とオプションのユーザ名と共に, ホスト名かIPアドレスを表す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>DESCRIPTION &quot;The compliance statement for SNMP engines that
+                 support the SNMP-SSH-TM-MIB.&quot;
+    MODULE
+        MANDATORY-GROUPS { snmpSshtmGroup }
+    ::= { snmpSshtmCompliances 1 }</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T033431Z" changeid="haruyama">
+        <seg>DESCRIPTION &quot;SNMP-SSH-TM-MIB をサポートする SNMP エンジンとための準拠の宣言.&quot;
+    MODULE
+        MANDATORY-GROUPS { snmpSshtmGroup }
+    ::= { snmpSshtmCompliances 1 }</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>DESCRIPTION &quot;The number of times an openSession() request
+                 failed to open a transport connection or failed to
+                 authenticate the server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T032608Z" changeid="haruyama">
+        <seg>DESCRIPTION &quot;トランスポート接続の開始に失敗した ないし サーバの認証に失敗した openSession() 要求の回数</seg>
       </tuv>
     </tu>
     <tu>
@@ -14269,6 +14312,19 @@
       </tuv>
       <tuv lang="JA" changedate="20110610T071014Z" changeid="haruyama">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION &quot;The number of outgoing messages dropped because the
+                 tmStateReference referred to an invalid cache.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T033220Z" changeid="haruyama">
+        <seg>MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION &quot;tmStateReference が不正なキャッシュを参照していたため送信メッセージがドロップされた回数.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32253,6 +32309,148 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110425T080636Z" changeid="haruyama">
         <seg>特に, ECDSAを署名アルゴリズムとしてかつECDHを鍵交換法として利用する際, 異なるサイズの曲線を利用していると, SHA2ファミリの異なるハッシュ関数が利用される可能性があることに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>snmpSshtmGroup OBJECT-GROUP
+    OBJECTS {
+      snmpSshtmSessionOpens,
+      snmpSshtmSessionCloses,
+      snmpSshtmSessionOpenErrors,
+      snmpSshtmSessionUserAuthFailures,
+      snmpSshtmSessionNoChannels,
+      snmpSshtmSessionNoSubsystems,
+      snmpSshtmSessionNoSessions,
+      snmpSshtmSessionInvalidCaches
+    }
+    STATUS      current
+    DESCRIPTION &quot;A collection of objects for maintaining information
+                 of an SNMP engine that implements the SNMP Secure
+                 Shell Transport Model.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T033523Z" changeid="haruyama">
+        <seg>snmpSshtmGroup OBJECT-GROUP
+    OBJECTS {
+      snmpSshtmSessionOpens,
+      snmpSshtmSessionCloses,
+      snmpSshtmSessionOpenErrors,
+      snmpSshtmSessionUserAuthFailures,
+      snmpSshtmSessionNoChannels,
+      snmpSshtmSessionNoSubsystems,
+      snmpSshtmSessionNoSessions,
+      snmpSshtmSessionInvalidCaches
+    }
+    STATUS      current
+    DESCRIPTION &quot;SNMP セキュアシェルトランスポートモデルを実装する SNMP エンジンの情報を維持するオブジェクトの集合.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>snmpSshtmSessionCloses  OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION &quot;The number of times a closeSession() request has been
+                 executed as an SSH client, whether it succeeded or
+                 failed.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T032513Z" changeid="haruyama">
+        <seg>snmpSshtmSessionCloses  OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION &quot;成功/失敗に関わらず, SSH クライアントとして closeSession() 要求が実行された回数</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>snmpSshtmSessionNoChannels  OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION &quot;The number of times an openSession() request
+                 failed to open a session as an SSH client due to
+                 channel-open failures.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T033020Z" changeid="haruyama">
+        <seg>snmpSshtmSessionNoChannels  OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION &quot;チャンネル開始失敗のため SSH クライアントとしてセッションの開始に失敗した openSession() 要求の回数.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>snmpSshtmSessionNoSessions  OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION &quot;The number of times an outgoing message was
+                 dropped because the same session was no longer
+                 available.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T033142Z" changeid="haruyama">
+        <seg>snmpSshtmSessionNoSessions  OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION &quot;同一のセッションがもはや利用不能のため, 送信メッセージがドロップされた回数.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>snmpSshtmSessionNoSubsystems OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION &quot;The number of times an openSession() request
+                 failed to open a session as an SSH client due to
+                 inability to connect to the requested subsystem.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T033105Z" changeid="haruyama">
+        <seg>snmpSshtmSessionNoSubsystems OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION &quot;要求されたサブシステムへの接続が不能なため SSH クライアントとしてセッションの開始に失敗した openSession() 要求の回数.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>snmpSshtmSessionOpens  OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION &quot;The number of times an openSession() request has been
+                 executed as an SSH client, whether it succeeded or
+                 failed.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T032448Z" changeid="haruyama">
+        <seg>snmpSshtmSessionOpens  OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION &quot;成功/失敗に関わらず, SSH クライアントとして openSession() 要求が実行された回数</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>snmpSshtmSessionUserAuthFailures  OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION &quot;The number of times an openSession() request
+                 failed to open a session as an SSH client due to
+                 user-authentication failures.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T032953Z" changeid="haruyama">
+        <seg>snmpSshtmSessionUserAuthFailures  OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION &quot;ユーザ認証の失敗のため SSH クライアントとしてセッションの開始に失敗した openSession() 要求の回数.</seg>
       </tuv>
     </tu>
     <tu>
