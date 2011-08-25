@@ -25,7 +25,7 @@ Copyright Notice
 
    このメモは, セキュア シェル （ＳＳＨ） プロトコルのための 新しい鍵交換法を記述している.  SSHのサーバとクライアントが Diffie-Hellman 鍵交換をするための新しい群を提案します.  この提案された群は固定される必要はなく時間とともに変化できます.
 
-1.  概要と原理
+1概要と原理
 
    SSH [RFC4251] は, インターネットでの安全なリモートログインのための非常に一般的なプロトコルだ.  現在, SSHは "diffie-hellman-group1-sha1" 法 [RFC4253] を用いて最初の鍵交換をしている.  この方法は, すべての操作を固定された群の上で実行するよう規定しています.
 
@@ -38,7 +38,7 @@ Copyright Notice
 
 
 Friedl, et al.              Standards Track                     [Page 1]
- 
+
 RFC 4419                 SSH DH Group Exchange                March 2006
 
 
@@ -57,7 +57,7 @@ RFC 4419                 SSH DH Group Exchange                March 2006
 
    クライアントは, 適切なサイズを指定するサーバから法(modulus)を要求する.  以下の記述では, C はクライアント, S はサーバ, 法 p は大きく安全な素数, g は GF([)の部分群の生成器, min は クライアントが受容できる p のbitでの最小サイズ, n はクライアントがサーバから受け取りたい pのbitでの最小サイズ, max はクライアントが受容できるpのbitでの最大サイズ. V_S はＳのバージョン文字列, V_C は Cのバージョン文字列, K_S はホスト公開鍵, I_C は CのKEXINITメッセージ, Ｉ_S は SのKEXINITメッセージ (VS以降はこの部分が始まる前に交換されたもの)とする:
 
-   1.  C は S に "min || n || max" を送り, 群のサイズの最小受容値と希望値, 最大値をbitで示す.
+   1C は S に "min || n || max" を送り, 群のサイズの最小受容値と希望値, 最大値をbitで示す.
 
    2.  S はクライアントの要求に一番一致する群を見つけ C に "p || g" を送る.
 
@@ -69,7 +69,7 @@ RFC 4419                 SSH DH Group Exchange                March 2006
 
 
 Friedl, et al.              Standards Track                     [Page 2]
- 
+
 RFC 4419                 SSH DH Group Exchange                March 2006
 
 
@@ -100,7 +100,7 @@ RFC 4419                 SSH DH Group Exchange                March 2006
 
 
 Friedl, et al.              Standards Track                     [Page 3]
- 
+
 RFC 4419                 SSH DH Group Exchange                March 2006
 
 
@@ -152,7 +152,7 @@ RFC 4419                 SSH DH Group Exchange                March 2006
 
 
 Friedl, et al.              Standards Track                     [Page 4]
- 
+
 RFC 4419                 SSH DH Group Exchange                March 2006
 
 
@@ -196,7 +196,7 @@ RFC 4419                 SSH DH Group Exchange                March 2006
 
 
 Friedl, et al.              Standards Track                     [Page 5]
- 
+
 RFC 4419                 SSH DH Group Exchange                March 2006
 
 
@@ -224,7 +224,7 @@ RFC 4419                 SSH DH Group Exchange                March 2006
 
 
 Friedl, et al.              Standards Track                     [Page 6]
- 
+
 RFC 4419                 SSH DH Group Exchange                March 2006
 
 
@@ -280,7 +280,7 @@ RFC 4419                 SSH DH Group Exchange                March 2006
 
 
 Friedl, et al.              Standards Track                     [Page 7]
- 
+
 RFC 4419                 SSH DH Group Exchange                March 2006
 
 
@@ -288,9 +288,9 @@ RFC 4419                 SSH DH Group Exchange                March 2006
 
    "Handbook of Applied Cryptography" [MENEZES] は, k-bitの安全な素数の生成のために次のアルゴリズムを示している.  pを法とする乗法群 (multiplicative group mod p) に対して2が生成器になるよう修正した.
 
-   1.  以下の手順を実行:
+   1以下の手順を実行:
 
-       1.  ランダムな (k-1)-bit の素数 q を選択. このとき q mod 12 = 5.
+       1ランダムな (k-1)-bit の素数 q を選択. このとき q mod 12 = 5.
 
        2.  p := 2q + 1 を計算し, p が素数かテスト (たとえば除算の試行とRabin-Millerテストを用いて)
 
@@ -331,7 +331,7 @@ Informative References
 
 
 Friedl, et al.              Standards Track                     [Page 8]
- 
+
 RFC 4419                 SSH DH Group Exchange                March 2006
 
 
@@ -387,7 +387,7 @@ Authors' Addresses
 
 
 Friedl, et al.              Standards Track                     [Page 9]
- 
+
 RFC 4419                 SSH DH Group Exchange                March 2006
 
 

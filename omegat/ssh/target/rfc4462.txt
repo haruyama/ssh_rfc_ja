@@ -41,13 +41,13 @@ Copyright Notice
 
 
 Hutzelman, et al.           Standards Track                     [Page 1]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 目次
 
-   1. イントロダクション ....................................................3
+   1イントロダクション ....................................................3
       1.1. SSH の用語 ............................................3
       1.2. キーワード ..................................................3
    2. GSS-API に認証された Diffie-Hellman 鍵交換 ..............3
@@ -97,11 +97,11 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                     [Page 2]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
-1.  イントロダクション
+1イントロダクション
 
    この文書は, GSS-APIを用いてセキュアシェルプロトコルで鍵交換とユーザ認証を行なう方法を記述する.
    このために, 鍵交換法のファミリと2つのユーザ認証法, 新しいホスト鍵アルゴリズムを定義する.  これらの定義によって, セキュアシェルプロトコルと共に任意のGSS-APIメカニズムを利用できる.
@@ -132,7 +132,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                     [Page 3]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -148,7 +148,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
    o  I_C は C の KEXINIT メッセージ, I_S は S の KEXINIT メッセージだ.
 
-   1.  C は 乱数 x (1 < x < q) を生成し, e = g^x mod p を計算する.
+   1C は 乱数 x (1 < x < q) を生成し, e = g^x mod p を計算する.
 
    2.  C は GSS_Init_sec_context() を呼ぶ. この交換でSから最も最近受信した応答トークンがあれば, それを用いる.  この呼び出しでは, クライアントは相互認証の実行を要求するために mutual_req_flag を "true" に設定しなければならない.  また, この文脈でメッセージ単位での完全性保護のサポートを要求するため,  integ_req_flag も "true" に設定しなければならない.  加えて, ユーザが求めるならば アクセスの委譲を要求するために deleg_req_flag を "true" に設定してもよい. 鍵交換プロレスはホストのみ認証するので, anon_req_flag の設定は重要ではない.
        クライアントが 4節で記述する "gssapi-keyex" ユーザ認証をサポートしていなかったり, 鍵交換時に確立した GSS-APIコンテクストと連携した方法を使おうとしない場合は, anon_req_flag は "true" に設定する必要がある.  もしくは, クライアントがそのアイデンティティを隠そうとする場合にこのフラグを true に設定してもよい.  一度コンテクストが確立されると鍵交換プロセスは単一のトークンの交換のみ実行されるので, GSS-APIコンテクストは再送やシーケンスを外れたトークンの検出をサポートする必要はない.  このため, replay_det_req_flag と sequence_req_flag はこのプロセスでは設定する必要がない.  これらのフラグは "false" に設定する必要がある.
@@ -162,7 +162,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                     [Page 4]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -191,7 +191,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                     [Page 5]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -217,7 +217,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                     [Page 6]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -248,7 +248,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                     [Page 7]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -287,7 +287,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                     [Page 8]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -326,7 +326,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                     [Page 9]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -346,7 +346,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
    o  min と max は クライアントが許容できる p の bit での最小値と最大値
 
-   1.  C は S に "min || n || max" を送り, 群のサイズの最小受容値と希望値, 最大値をbitで示す.
+   1C は S に "min || n || max" を送り, 群のサイズの最小受容値と希望値, 最大値をbitで示す.
 
    2.  S はクライアントの要求に一番一致する群を見つけ C に "p || g" を送る.
 
@@ -359,7 +359,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 10]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -403,7 +403,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 11]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -436,7 +436,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 12]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -474,7 +474,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 13]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -499,7 +499,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 14]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -532,7 +532,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 15]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -566,7 +566,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 16]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -595,7 +595,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 17]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -627,7 +627,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 18]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -658,7 +658,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 19]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -686,7 +686,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 20]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -734,7 +734,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 21]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -764,7 +764,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 22]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -789,7 +789,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 23]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -826,7 +826,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 24]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -866,7 +866,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 25]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -922,7 +922,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 26]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -978,7 +978,7 @@ RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
 Hutzelman, et al.           Standards Track                    [Page 27]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 
@@ -1034,7 +1034,7 @@ Authors' Addresses
 
 
 Hutzelman, et al.           Standards Track                    [Page 28]
- 
+
 RFC 4462                  SSH GSS-API Methods                   May 2006
 
 

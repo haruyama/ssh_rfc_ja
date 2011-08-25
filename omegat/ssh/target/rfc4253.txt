@@ -44,13 +44,13 @@ Copyright Notice
 
 
 Ylonen &  Lonvick           Standards Track                     [Page 1]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 目次
 
-   1. イントロダクション ...............................................3
+   1イントロダクション ...............................................3
    2. Contributors ....................................................3
    3. Conventions Used in This Document ...............................3
    4. 接続のセットアップ...........................................4
@@ -100,11 +100,11 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                     [Page 2]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
-1.  イントロダクション
+1イントロダクション
 
    SSH トランスポート層は, 安全で低レベルなトランスポートプロトコルだ.
    このプロトコルは, 強力な暗号化, ホストの認証, 完全性の保護を提供する.
@@ -147,7 +147,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                     [Page 3]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -186,7 +186,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                     [Page 4]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -214,7 +214,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                     [Page 5]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -241,7 +241,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                     [Page 6]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -281,7 +281,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                     [Page 7]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -309,7 +309,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                     [Page 8]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -344,7 +344,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                     [Page 9]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -383,7 +383,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 10]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -424,7 +424,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 11]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -461,7 +461,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 12]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -544,7 +544,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 14]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -587,7 +587,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 15]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -623,7 +623,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 16]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -666,7 +666,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 17]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -694,7 +694,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 18]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -724,7 +724,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 19]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -759,7 +759,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 20]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -788,7 +788,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
    鍵を交換するために次の手順が使われる.  ここで, C はクライアント; S はサーバ; p は大きく安全な素数; g は GF(p) 部分群の生成子; q は部分群のオーダー; V_S は S の識別文字列; V_C は C の識別文字列; K_S は S のホスト公開鍵; I_C は C の SSH_MSG_KEXINIT メッセージ;  I_S は, この処理が始まる前に交換される S の SSH_MSG_KEXINIT メッセージだ.
 
-   1. C は, 乱数 x (1 < x < q) を生成し, e = g^x mod p を計算する.  C は S に e を送る.
+   1C は, 乱数 x (1 < x < q) を生成し, e = g^x mod p を計算する.  C は S に e を送る.
 
 
 
@@ -799,7 +799,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 21]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -840,7 +840,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 22]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -876,7 +876,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 23]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -911,7 +911,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 24]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -953,7 +953,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 25]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -998,7 +998,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 26]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -1040,7 +1040,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 27]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -1092,7 +1092,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 28]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -1148,7 +1148,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 29]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -1204,7 +1204,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 30]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 
@@ -1260,7 +1260,7 @@ Trademark Notice
 
 
 Ylonen &  Lonvick           Standards Track                    [Page 31]
- 
+
 RFC 4253              SSH Transport Layer Protocol          January 2006
 
 

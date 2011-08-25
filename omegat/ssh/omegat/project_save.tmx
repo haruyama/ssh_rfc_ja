@@ -126,6 +126,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>&quot;snmp&quot; as a Connection Protocol Subsystem Name in the SSH
+       Protocol Parameters registry.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T052045Z" changeid="haruyama">
+        <seg>SSH Protocol Parameters レジストリの Connection Protocol Subsystem Name として, &quot;snmp&quot;.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&quot;ssh&quot; as the corresponding prefix for the snmpSSHDomain in the
+       SNMP Transport Domains registry; defined in [RFC5590].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T052039Z" changeid="haruyama">
+        <seg>[RFC5590] で定義された SNMP Transport Domains レジストリ で snmpSSHDomein に対応するプレフィックス &quot;ssh&quot;.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>&quot;subsystem&quot; specifies a comma-separated list of subsystems that may
    be started (using a &quot;subsystem&quot; request) when this key is in use.</seg>
       </tuv>
@@ -485,6 +503,14 @@
         <seg>1 to 19    トランスポート層一般(例: 切断, 無視, デバッグなど
       20 to 29   アルゴリズムのネゴシエーション
       30 to 49   鍵交換方式ごとに特有(番号は, 異なる方式で再利用されてもよい)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>1.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T052024Z" changeid="haruyama">
+        <seg>1</seg>
       </tuv>
     </tu>
     <tu>
@@ -1711,6 +1737,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Access control decisions are therefore made
+   based on the contents of the SNMP message, rather than using the
+   authenticated identity and securityLevel provided by the SSH
+   Transport Model.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T042334Z" changeid="haruyama">
+        <seg>アクセス制御は, SSH トランスポートモデルで提供される 認証された識別情報と securityLevel を用いる代わりに, SNMP メッセージの内容に基づいて決定されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Adding a Public Key</seg>
       </tuv>
       <tuv lang="JA" changedate="20110721T053513Z" changeid="haruyama">
@@ -2680,6 +2717,23 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>An SMI number (189) under mib-2, for the MIB module in this
+       document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T052028Z" changeid="haruyama">
+        <seg>この文書の MIBモジュールのための mib-2 の下での SMI 番号 (189).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An SMI number (7) under snmpDomains, for the snmpSSHDomain.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T052033Z" changeid="haruyama">
+        <seg>snmpSSHDomein のための snmpDomeins の下での SMI 番号 (7).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>An SSH Subsystem of type &quot;snmp&quot; is opened by the SSH Transport Model
    during the elements of procedure for an outgoing SNMP message.</seg>
       </tuv>
@@ -2861,6 +2915,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>SSH アーキテクチャ [6] に別の方法が定義されている. その方法は, 鍵を保存するローカルファイルを比較のために使う.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Any authentication method
+   that meets the requirements of the SSH architecture will provide the
+   properties of mutual authentication and binding of keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T030220Z" changeid="haruyama">
+        <seg>SSH アーキテクチャの要求を満たすどの認証法も, 相互の認証と鍵の束縛の性質を提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3942,6 +4006,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Both of these and the User-based Security Model
+   typically used with SNMPv3 derive the securityName and securityLevel
+   from the SNMP message received, even when the message was received
+   over a secure transport.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T042208Z" changeid="haruyama">
+        <seg>これらと SNMPv3 で典型的に用いられる User-based Security Model のどちらも, 安全なトランスポート上でメッセージが受信された場合でも, 受信した SNMP メッセージから securityName と securityLever を導出する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Both of these describe the
    CBC mode of operation of certain ciphers and the weakness of this
    scheme.</seg>
@@ -3991,6 +4066,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110721T052242Z" changeid="haruyama">
         <seg>どちらの側も続行する前にこのバージョンを受け取るために待たなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Both sides are
+   responsible for verifying that the remote entity presents the right
+   key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T040805Z" changeid="haruyama">
+        <seg>どちらの側も, リモートのエンティティが正しい鍵を提示するか検証する責任がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4790,6 +4875,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Conceptual Differences between USM and SSHTM</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T040552Z" changeid="haruyama">
+        <seg>USM と SSHTM の概念的な違い</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Conceptual Differences between USM and SSHTM ..............31
       9.5.</seg>
       </tuv>
@@ -5414,6 +5507,17 @@
       <tuv lang="JA">
         <seg>SSH プロトコルで利用されるデータ型の表現 .............8
    6.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Data confidentiality
+   and data integrity protection to the server still exist, but these
+   are of dubious value when an attacker can insert himself between the
+   client and the real SSH server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T032549Z" changeid="haruyama">
+        <seg>サーバへのデータの機密性とデータの完全性保護は残るが, 攻撃者が自身をクライアントと本当のサーバに挿入できる場合, これらは怪しい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6588,6 +6692,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Even if the network itself is secure (for example by using IPSec or
+   SSH), even then, there is no control as to who on the secure network
+   is allowed to access and GET/SET (read/change/create/delete) the
+   objects in this MIB module.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T045918Z" changeid="haruyama">
+        <seg>(例えば IPSec や SSH を用いて) ネットワーク自体は安全であっても, この MIB モジュールのオブジェクトにアクセスし GET/SET (read/change/create/delete)  できる, 安全なネットワーク上のだれかに関しては制御がない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Even if they are not, the signing operation involves
    some expensive computation.</seg>
       </tuv>
@@ -7599,6 +7714,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Further, deployment of SNMP versions prior to SNMPv3 is NOT
+   RECOMMENDED.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T050401Z" changeid="haruyama">
+        <seg>さらに, SNMPv3 より前の SNMP バージョンの配置は推奨されない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Further, in environments in which GSS-API-based key exchange is used
    heavily, it is possible and even likely that host keys will change
    much more frequently and/or without advance warning.</seg>
@@ -8289,6 +8413,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>However, for the common case of
+   Diffie-Hellman (DH) signed by public keys, this requires the client
+   to know the host's public key a priori and to verify that the correct
+   key is being used.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T032301Z" changeid="haruyama">
+        <seg>しかし, 公開鍵で署名される Diffee-Hellman (DH) の一般的な場合では, クライアントがホスト公開鍵をすでに知っていて正しい鍵が利用されているか検証できる必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>However, having that information
    available can be invaluable for debugging purposes.</seg>
       </tuv>
@@ -8379,6 +8514,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110623T034704Z" changeid="haruyama">
         <seg>しかし, 結果の major_status が GSS_S_COMPLETE でなかったり 0でないトークンが返されたら, これはエラーで鍵交換は失敗しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>However, if you do this, then an attacker may be
+   able to modify the data in flight, which means you effectively have
+   no authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T041546Z" changeid="haruyama">
+        <seg>しかし, これを利用すると, 攻撃者が通信データを変更できる. これは, 実質的に認証がないことを意味する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8766,6 +8911,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>IANA has assigned:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T052019Z" changeid="haruyama">
+        <seg>IANA は以下を割り当てた:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>IANA has created and maintains a registry of these header-tags.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110719T030003Z" changeid="haruyama">
@@ -9038,6 +9191,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110714T060511Z" changeid="haruyama">
         <seg>クライアントシステムが, 利用する targ_name を安全に決定できないなら, このこのアルゴリズムを利用しないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If a &quot;user@&quot; prefix is used within an SnmpSSHAddress value to specify
+   an SSH user name to use for authentication, then the key presented to
+   the remote entity MUST be the key expected by the server for the
+   &quot;user&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T040413Z" changeid="haruyama">
+        <seg>&quot;user@&quot; プレフィックスが, 認証で用いる SSH ユーザ名を指定するため SnmpSSHAddress の値に含まれている場合, リモートのエンティティへ提示される鍵は, &quot;user&quot; に対してサーバが期待する鍵でなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10651,6 +10815,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If this step is skipped, then authentication of
+   the SSH server to the SSH client is not done.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T032328Z" changeid="haruyama">
+        <seg>このステップがスキップされると, SSHサーバのSSHクライアントへの認証が行なわれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If tmSameSecurity is true and there is no existing session
            with a matching tmSessionID, tmSecurityName, and
            tmTransportAddress, then increment the
@@ -11698,6 +11871,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In other cases, the user name may not be verified by the server, so
+   for these implementations, it may be necessary to obtain the user
+   name from other credentials exchanged during the SSH exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T032050Z" changeid="haruyama">
+        <seg>別の場合として, ユーザ名がサーバによって検証されない可能性がある. そのような実装のため, SSHの交換の間に交換される他の資格情報からユーザ名を得る必要があるかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In other words:</seg>
       </tuv>
       <tuv lang="JA">
@@ -12619,6 +12802,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Instead, it is RECOMMENDED to deploy SNMPv3 and to
+   enable cryptographic security.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T050419Z" changeid="haruyama">
+        <seg>かわりに SNMPv3 を配置し 暗号のセキュリティを有効にするのを推奨する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Interactive Sessions</seg>
       </tuv>
       <tuv lang="JA">
@@ -13126,6 +13318,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It is RECOMMENDED that implementers consider the security features as
+   provided by the SNMPv3 framework (see [RFC3410], Section 8),
+   including full support for cryptographic mechanisms for
+   authentication and privacy, such as those found in the User-based
+   Security Model [RFC3414], the Transport Security Model [RFC5591], and
+   the SSH Transport Model described in this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T050341Z" changeid="haruyama">
+        <seg>SNMPv3 フレームワーク ([RFC3410], 8 節を参照) で提供されるセキュリティの特徴を実装者が考慮するのを推奨する. このフレームワークは,たとえばUser-based Security Model [RFC3414] や  Transport Security Model [RFC5591], この文書で記述した SSH トランスポートモデルによって提供される, 認証と機密性の暗号メカニズムを完全に含んでいる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It is RECOMMENDED that servers only include those 'method name'
    values in the name-list that are actually useful.</seg>
       </tuv>
@@ -13504,6 +13709,29 @@
       </tuv>
       <tuv lang="JA" changedate="20110722T062747Z" changeid="haruyama">
         <seg>(このプロトコルの外部, 特に SSHユーザ認証プロトコル [3] を用いてユーザを認証して) 特定のユーザにアクセスを制限するために必要なアクセス制御を実施するのはサーバの実装の責任だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is then a customer/operator
+   responsibility to ensure that the SNMP entity giving access to an
+   instance of this MIB module is properly configured to give access to
+   the objects only to those principals (users) that have legitimate
+   rights to indeed GET or SET (change/create/delete) them.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T051025Z" changeid="haruyama">
+        <seg>この MIB モジュールのインスタンスへのアクセスを提供するSNMP エンティティが, 実際にオブジェクトに GET や SET (change/create/delete) する正当な権限を持っている プリンシパル(ユーザ)にのみオブジェクトへのアクセスを提供するように適切に設定されているかを保証するのは, 顧客/運用者の責任だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is thus important to
+   control even GET and/or NOTIFY access to these objects and possibly
+   to even encrypt the values of these objects when sending them over
+   the network via SNMP.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T044127Z" changeid="haruyama">
+        <seg>このため, これらのオブジェクトへのGET および/また NOTIFY アクセスを制御したり, これらのオブジェクトを SNMP でネットワーク越しに送る場合に場合によってはこれらの値を暗号化することが重要だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14414,6 +14642,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>MIB Module Security</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T043054Z" changeid="haruyama">
+        <seg>MIB モジュールのセキュリティ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>MIB Module Security .......................................32
    10.</seg>
       </tuv>
@@ -14798,6 +15034,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110411T132909Z" changeid="haruyama">
         <seg>認証法の名前とHMACについてのさらなる情報は, 6.4節にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Most key-exchange algorithms are able to authenticate the SSH
+   server's identity to the client.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T032133Z" changeid="haruyama">
+        <seg>ほとんどの鍵交換アルゴリズムは, SSHサーバの識別情報をクライアントに認証することができる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15430,6 +15675,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Note that some userauth methods may
+   defend against this situation, but many of the common ones (including
+   password and keyboard-interactive) do not and, in fact, depend on the
+   fact that the server's identity has been verified (so passwords are
+   not disclosed to an attacker).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T032853Z" changeid="haruyama">
+        <seg>いくつかのユーザ認証法はこの状況と防御するが, (パスワード認証やキーボードインタラクティブ認証を含む)一般的な認証法の多くは防御しない. 実際, これらはサーバの識別情報が検証される(つまり, パスワードは攻撃者に漏れない)ことに依存している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Note that the
    'packet_length' field is also encrypted, and processing it requires
    special care when sending or receiving packets.</seg>
@@ -15733,11 +15990,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Notification Authorization Considerations</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T035900Z" changeid="haruyama">
+        <seg>通知の認可の考察</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Notification Authorization Considerations .................31
       9.3.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110729T034255Z" changeid="haruyama">
-        <seg>通知の許可の考察 .................31
+      <tuv lang="JA" changedate="20110825T035907Z" changeid="haruyama">
+        <seg>通知の認可の考察 .................31
       9.3.</seg>
       </tuv>
     </tu>
@@ -16430,6 +16695,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110615T053356Z" changeid="haruyama">
         <seg>概要と原理</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>PFS is a major design goal of SSH, and any well-designed key-exchange
+   algorithm will provide it.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T030318Z" changeid="haruyama">
+        <seg>PFS は SSH の主な設計目標で, うまく設計された鍵交換アルゴリズムは PFS を提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17884,6 +18158,23 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>SNMP Notifications are authorized to be sent to a receiver based on
+   the securityName used by the notification originator's SNMP engine.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T035943Z" changeid="haruyama">
+        <seg>SNMP の通知は, 通知の発信者の SNMP エンジンで用いられている securityName に基づいて受信者に対して送信する権限を与えられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SNMP versions prior to SNMPv3 did not include adequate security.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T044644Z" changeid="haruyama">
+        <seg>SNMPv3 より前の SNMP バージョンは, 適切なセキュリティを含んでいなかった.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>SSH ECC Public Key Algorithm</seg>
       </tuv>
       <tuv lang="JA" changedate="20110321T122010Z" changeid="haruyama">
@@ -17916,6 +18207,24 @@
       <tuv lang="JA">
         <seg>SSH ホスト鍵の検証 .......................................2
       2.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH MUST NOT be configured to skip public-key verification for use
+   with the SSH Transport Model.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T032935Z" changeid="haruyama">
+        <seg>SSH を SSH トランスポートモデルで利用する際に 公開鍵の検証をスキップするように設定してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH MUST NOT be configured using the &quot;none&quot; MAC algorithm for use
+   with the SSH Transport Model.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T041611Z" changeid="haruyama">
+        <seg>SSH を SSH トランスポートモデルで利用する際に &quot;none&quot; MAC アルゴリズムを利用するように設定してはならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17956,10 +18265,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>SSH User and Key Selection</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T040215Z" changeid="haruyama">
+        <seg>SSH のユーザと鍵の選択</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>SSH User and Key Selection ................................31</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110729T034303Z" changeid="haruyama">
-        <seg>SSH ユーザと鍵の選択 ................................31</seg>
+      <tuv lang="JA" changedate="20110825T040226Z" changeid="haruyama">
+        <seg>SSH のユーザと鍵の選択 ................................31</seg>
       </tuv>
     </tu>
     <tu>
@@ -17978,6 +18295,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110809T082519Z" changeid="haruyama">
         <seg>SSH 接続は, コマンド生成器 (command generator) や通知の発信者 (notification originator) によって開始されることがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH employs an asymmetric
+   cryptography and naming model.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T040713Z" changeid="haruyama">
+        <seg>SSH は 非対称な暗号と命名モデルを採用している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18101,6 +18427,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>SSH provides the &quot;none&quot; Message Authentication Code (MAC) algorithm,
+   which would allow you to turn off data integrity while maintaining
+   confidentiality.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T041451Z" changeid="haruyama">
+        <seg>SSH は, 機密性を維持しつつデータの完全性保護を無効にする &quot;none&quot; メッセージ認証コード (MAC) を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH provides the &quot;none&quot; userauth method.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T030759Z" changeid="haruyama">
+        <seg>SSH は &quot;none&quot; ユーザ認証法を提供している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>SSH sessions are uniquely identified within the SSH Transport Model
    by the combination of tmTransportAddress and tmSecurityName
    associated with each session.</seg>
@@ -18189,6 +18533,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>SSH_MSG_USERAUTH_SUCCESS は1回のみ送られなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSHv2 provides perfect forward secrecy (PFS) for encryption keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T030236Z" changeid="haruyama">
+        <seg>SSHv2は、暗号鍵に対する完全転送秘密（PFS）を提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19026,6 +19378,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Skipping Public Key Verification</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T032055Z" changeid="haruyama">
+        <seg>公開鍵検証のスキップ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Skipping Public Key Verification ..........................31
       9.2.</seg>
       </tuv>
@@ -19059,6 +19419,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>よって, PFSの定義から, SSHはPFSという性質を持っている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>So, if this
+   MIB module is implemented correctly, then there is no risk that an
+   intruder can alter or create any management objects of this MIB
+   module via direct SNMP SET operations.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T043341Z" changeid="haruyama">
+        <seg>つまり, この MIB モジュールが正しく実装されたら, 直接の SNMP SET 操作によってこの MIB モジュールの管理オブジェクトを侵入者が変更したり作成するリスクはない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19118,6 +19489,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110818T010445Z" changeid="haruyama">
         <seg>他の MIB モジュール内で定義されたいくつかの管理オブジェクトは, SSHトランスポートモデルを実装するエンティティに適用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Some of the readable objects in this MIB module (i.e., objects with a
+   MAX-ACCESS other than not-accessible) may be considered sensitive or
+   vulnerable in some network environments.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T043933Z" changeid="haruyama">
+        <seg>この MIB モジュールの読み込み可能なオブジェクト (つまり, アクセス不能以外の MAX-ACCESS を持つオブジェクト) のいくつかは, ネットワーク環境に敏感か脆弱だと考えられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20772,6 +21153,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The 'none' MAC Algorithm</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T041410Z" changeid="haruyama">
+        <seg>'none' MAC アルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The 'none' MAC Algorithm ..................................32
       9.6.</seg>
       </tuv>
@@ -21517,12 +21906,32 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The SNMPv1 and SNMPv2c message processing described in [RFC3584] (BCP
+   74) always selects the SNMPv1 or SNMPv2c Security Models,
+   respectively.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T041841Z" changeid="haruyama">
+        <seg> [RFC3584] (BCP74) で定義されているSNMPv1 と SNMPv2c メッセージ処理は, それぞれ SNMPv1 か SNMPv2c セキュリティモデルを常に選択する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The SNMPv3 WG deliberately avoided
    this and settled for an assertion by the Security Model that the
    requirements of securityLevel were met.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110806T121940Z" changeid="haruyama">
         <seg>SNMPv3 WG は, 意図的にこれを避け, セキュリティレベルの要件を満たす セキュリティモデル からの警告で妥協した.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH
+   Transport Model simply trusts that these are properly configured by
+   the implementer and deployer.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T030741Z" changeid="haruyama">
+        <seg>SSH トランスポートモデルは, 実装者と配置者によって適切に設定されていることを単純に信じる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21576,6 +21985,16 @@
     <tu>
       <tuv lang="EN-US">
         <seg>The SSH Transport Model
+   MUST NOT be used with an SSH connection with the &quot;none&quot; userauth
+   method.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T030823Z" changeid="haruyama">
+        <seg>SSH トランスポートモデルは, &quot;none&quot; ユーザ認証法を SSH の接続で用いてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH Transport Model
    converts that information into suitable security parameters for SSH,
    establishes sessions as needed, and passes messages to the SSH
    Subsystem for sending.</seg>
@@ -21619,6 +22038,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The SSH Transport Model has no way to verify that server
+   authentication was performed, to learn the host's public key in
+   advance, or to verify that the correct key is being used.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T030707Z" changeid="haruyama">
+        <seg>SSH トランスポートモデルは, サーバ認証が行なわれたかを検証したり, 事前にホスト公開鍵を取得したり, 正しい鍵が利用されているかを検証する方法を持っていない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The SSH Transport Model of an SNMP engine will perform the
    translation between SSH-specific security parameters and SNMP-
    specific, model-independent parameters.</seg>
@@ -21644,6 +22073,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110812T070431Z" changeid="haruyama">
         <seg>SSH トランスポートモデルは, SSHとセッション識別子を用いてメッセージの送り元のアドレスと認証されたユーザ名を決定するために, 実装に依存する方式で,  SSH エンジンを照会する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH Transport Model relies on SSH mutual authentication, binding
+   of keys, confidentiality, and integrity.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T030202Z" changeid="haruyama">
+        <seg>SSH トランスポートモデルは, SSHの相互認証, 鍵の束縛, 機密性, 完全性に依存する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21800,6 +22238,18 @@
       or to transform a tmSecurityName to an SSH identity.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110810T063353Z" changeid="haruyama">
+        <seg>SSH プロトコルでは, ユーザ名のフィールドが埋められているかどうか常には明確ではない. GSSAPI 認証を用いる実装などのそのような実装のため, SSHの情報と tmSecurityName を変換する, もしくは tmSecurityName を SSHの識別情報に変換するマップアルゴリズムが必要なことがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH protocol is not always clear on whether the user name field
+   must be filled in, so for some implementations, such as those using
+   GSSAPI authentication, it may be necessary to use a mapping algorithm
+   to transform an SSH identity to a tmSecurityName or to transform a
+   tmSecurityName to an SSH identity.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T032045Z" changeid="haruyama">
         <seg>SSH プロトコルでは, ユーザ名のフィールドが埋められているかどうか常には明確ではない. GSSAPI 認証を用いる実装などのそのような実装のため, SSHの情報と tmSecurityName を変換する, もしくは tmSecurityName を SSHの識別情報に変換するマップアルゴリズムが必要なことがある.</seg>
       </tuv>
     </tu>
@@ -22305,6 +22755,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The User-based Security Model [RFC3414] employed symmetric
+   cryptography and user-naming conventions.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T040651Z" changeid="haruyama">
+        <seg>User-based Security Model [RFC3414] は, 対称鍵暗号とユーザの命名規則を採用している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Version Packet</seg>
       </tuv>
       <tuv lang="JA" changedate="20110721T050915Z" changeid="haruyama">
@@ -22430,6 +22889,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>クライアントやサーバで利用できるエントロピーの量が, 必要よりも少ないことがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The assigned
+       keywords and port numbers are &quot;snmpssh&quot; (5161) and &quot;snmpssh-trap&quot;
+       (5162).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T051445Z" changeid="haruyama">
+        <seg>割り当てられたキーワードとポート番号は &quot;snmpssh&quot; (5161) と &quot;snmpssh-trap&quot;  (5162) だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -25206,6 +25675,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The optional &quot;user@&quot; prefix component of the SnmpSSHAddress
+   Textual Convention allows the client SNMP stack to associate the
+   connection with a securityName that may be different than the SSH
+   user name presented to the SSH server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T041345Z" changeid="haruyama">
+        <seg>SnmpSSHAddress のテキスト規約のオプションの &quot;user@&quot; プレフィックス部分は, SSH サーバに提示される SSH のユーザ名と異なる securityName と接続を関連付けることを クライアントのSNMP スタックができるようにする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The order of the names in a name-list may or may not be
       significant.</seg>
       </tuv>
@@ -25808,6 +26288,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The security implications of using SSH are covered in [RFC4251].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T030521Z" changeid="haruyama">
+        <seg>SSH の利用におけるセキュリティに関する考察は, [RFC4251] で説明されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The security of the
    connection relies on the server authenticating itself to the client
    as well as the user authenticating itself to the server.</seg>
@@ -25842,6 +26330,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110806T122540Z" changeid="haruyama">
         <seg>セキュアシェル認証プロトコル [RFC4252] と セキュアシェルトランスポート層プロトコル [RFC4253] を用いるセキュリティプロトコルは, 執筆時点では許容できるレベルで安全だと考えられている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The security threats and how the SSH
+   Transport Model mitigates those threats is covered in detail
+   throughout this memo.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T025926Z" changeid="haruyama">
+        <seg>セキュリティの脅威と SSH トランスポートモデルがそれらの脅威をどのように軽減するかは, このメモ全体を通して詳細に記述されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27213,6 +27711,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>There are no management objects defined in this MIB module that have
+   a MAX-ACCESS clause of read-write and/or read-create.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T043407Z" changeid="haruyama">
+        <seg>read-write および/または read-create の MAX-ACCESS 条項を持つ, このMIB モジュールで定義された管理オブジェクトはない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>There are no mitigating strategies, other than to use
    host-based authentication in combination with another authentication
    method.</seg>
@@ -27426,6 +27933,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>以下が, 認証法に依存しない認証メッセージの番号だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These are the tables and objects and their
+   sensitivity/vulnerability:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T044234Z" changeid="haruyama">
+        <seg>以下は, テーブルとオブジェクトとそれらの敏感さ/脆弱性だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27966,6 +28482,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110722T053515Z" changeid="haruyama">
         <seg>この属性は critical にする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This authorization is performed before the message is actually sent
+   and before the credentials of the remote receiver have been verified.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T040026Z" changeid="haruyama">
+        <seg>この認可は, メッセージが実際に送られる前, また, リモートの受信者の資格情報が検証される前に実行される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28665,6 +29190,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This information
+      can reflect the configured capabilities of a remote SSH server,
+      which could be helpful to an attacker for focusing an attack.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T044624Z" changeid="haruyama">
+        <seg>この情報は, リモートの SSH サーバの設定された情報を反映する. 攻撃者が攻撃に集中するために有益な可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This is
    consistent with the IESG decision to not require the SNMPv3
    terminology be modified to match the usage of other non-SNMP
@@ -29028,6 +29563,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This may be different than a locally cached key identified
+   by the securityName value.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T040443Z" changeid="haruyama">
+        <seg>これは, securityName の値で識別されるローカルにキャッシュされた鍵とは異なるかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This may be done either by including SIZE constraints on
          the index components or by specifying applicable
          constraints in the conceptual row DESCRIPTION clause or
@@ -29096,6 +29640,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110729T034541Z" changeid="haruyama">
         <seg>このメモは, トランスポートサブシステム [RFC5590] を セキュアシェル (SSH) プロトコル [RFC4251] で用いる, シンプルネットワークマネジメントプロトコルのためのトランスポートモデルを記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This memo describes a Transport Model that permits SNMP to utilize
+   SSH security services.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T025825Z" changeid="haruyama">
+        <seg>このメモは SSH セキュリティサービスの利用を SNMP に許すトランスポートモデルを記述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30058,6 +30611,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Thus, the credentials presented by a notification receiver MUST match
+   the expected value(s) for a given transport address, and ownership of
+   the credentials MUST be properly cryptographically verified.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T040159Z" changeid="haruyama">
+        <seg>このため, 通知の受信者から提示された視覚情報は, 与えられたトランスポートアドレスに対して予測される値と一致しなければならない. また, 資格情報の所有権は, 暗号学的に適切に検証されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Thus, the encoded version of K is always small
    enough to be encrypted under K_T.</seg>
       </tuv>
@@ -30369,6 +30932,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Two TCP port numbers in the Port Numbers registry that will be
+       the default ports for the SNMP-over-SSH Transport Model as
+       defined in this document, and the SNMP-over-SSH Transport Model
+       for notifications as defined in this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T051417Z" changeid="haruyama">
+        <seg>ポート番号レジストリの 2つの TCP ポート番号が, この文書で定義された SNMP オーバー SSH トランスポートモデルとこの文書で定義された通知のSNMP オーバー SSH トランスポートモデルのデフォルトのポートとなる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Two different trust models can be used:</seg>
       </tuv>
       <tuv lang="JA">
@@ -30399,6 +30973,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110623T034514Z" changeid="haruyama">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Unlike USM, cryptographic keys will
+   be different on both sides of the SSH connection.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T040738Z" changeid="haruyama">
+        <seg>USM と違い, SSH の接続の両側で暗号鍵が異なる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30509,6 +31092,14 @@
       <tuv lang="JA">
         <seg>TCP/IP上での利用.......................................4
       4.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Use with SNMPv1/v2c Messages</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T041735Z" changeid="haruyama">
+        <seg>SNMPv1/v2c メッセージの利用</seg>
       </tuv>
     </tu>
     <tu>
@@ -31222,6 +31813,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110729T070656Z" changeid="haruyama">
         <seg>区別が必要な場合は, 以下のアプリケーション名を用いる: コマンドジェネレータ, コマンドレスポンダー, 通知オリジネータ, 通知レシーバ, プロキシフォワーダ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>While SSH does support turning off confidentiality and
+   integrity, they MUST NOT be turned off when used with the SSH
+   Transport Model.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110822T031619Z" changeid="haruyama">
+        <seg>SSH は機密性と完全性を無効にすることをサポートしているが, SSHトランスポートモデルで利用する場合はこれらを無効にしてはならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32225,6 +32826,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>o  ホストの名前と鍵との関連を, 信頼された認証局(CA)が保証する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  The information in the snmpSshtmSession group is generated locally
+      when a client session is being opened or closed.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110825T044536Z" changeid="haruyama">
+        <seg>o  snmpSshtmSession グループの情報は, クライアントのセッションが開いているか閉じている場合にローカルに生成される.</seg>
       </tuv>
     </tu>
     <tu>

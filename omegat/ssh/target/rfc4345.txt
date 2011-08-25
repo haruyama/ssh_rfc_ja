@@ -24,7 +24,7 @@ Copyright Notice
 
    この文書は, セキュア シェル (SSH) プロトコルで Arcfour 暗号を利用する方法を指定する. この方法はArcfourの鍵スケジュールアルゴリズムの弱点を軽減する.
 
-1.  イントロダクション
+1イントロダクション
 
    セキュア シェル(SSH) [RFC4251] は 安全なロモートログインプロトコルだ.  転送中のデータの機密性を提供するため, 対称暗号アルゴリズムを拡張して利用できる.  基底のプロトコルで指定されたアルゴリズムの1つが "arcfour" で, 高速なストリーム暗号である Arcfour (RC4としても知られる) を利用するよう指定されている.  しかし, [RFC4253] では, "Arcfour (と RC4) は弱い鍵の問題がある. 注意して利用しなければならない" となっている. [MANTIN01]にこれらの問題はより詳細に記述されている. [MANTIN01]では暗号の内部状態が完全に混合されるのを保証するために 鍵ストリームの最初の 1536 バイトを破棄するよう推奨している.  この文書では, この推奨に従う新しい暗号アルゴリズムをSSHに定義する.
 
@@ -39,7 +39,7 @@ Copyright Notice
 
 
 Harris                      Standards Track                     [Page 1]
- 
+
 RFC 4345             Improved Arcfour Modes for SSH         January 2006
 
 
@@ -73,7 +73,7 @@ RFC 4345             Improved Arcfour Modes for SSH         January 2006
 
 
 Harris                      Standards Track                     [Page 2]
- 
+
 RFC 4345             Improved Arcfour Modes for SSH         January 2006
 
 
@@ -129,7 +129,7 @@ RFC 4345             Improved Arcfour Modes for SSH         January 2006
 
 
 Harris                      Standards Track                     [Page 3]
- 
+
 RFC 4345             Improved Arcfour Modes for SSH         January 2006
 
 
@@ -185,7 +185,7 @@ Trademark Notice
 
 
 Harris                      Standards Track                     [Page 4]
- 
+
 RFC 4345             Improved Arcfour Modes for SSH         January 2006
 
 
