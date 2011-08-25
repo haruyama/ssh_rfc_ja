@@ -1,0 +1,1345 @@
+
+
+
+
+
+
+Network Working Group                                      D. Harrington
+Request for Comments: 5592                     Huawei Technologies (USA)
+Category: Standards Track                                     J. Salowey
+                                                           Cisco Systems
+                                                             W. Hardaker
+                                               Cobham Analytic Solutions
+                                                               June 2009
+
+
+                  シンプルネットワークマネジメントプロトコル (SNMP) のための セキュアシェルトランスポートモデル
+
+このメモの位置づけ
+
+   この文書は, インターネットコミュニティに対するインターネットの標準トラックプロトコルを定義している. また, 改善のための議論と示唆を求めているこのプロトコルの標準化の状態と状況は "Internet
+   Official Protocol Standards" (STD 1) の現在の版を参照してほしい.  このメモの配布は制限しない.
+
+Copyright Notice
+
+   Copyright (c) 2009 IETF Trust and the persons identified as the
+   document authors. 訳者: 春山征吾 <haruyama@unixuser.org>All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents in effect on the date of
+   publication of this document (http://trustee.ietf.org/license-info).
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.
+
+   This document may contain material from IETF Documents or IETF
+   Contributions published or made publicly available before November
+   10, 2008.  The person(s) controlling the copyright in some of this
+   material may not have granted the IETF Trust the right to allow
+   modifications of such material outside the IETF Standards Process.
+   Without obtaining an adequate license from the person(s) controlling
+   the copyright in such materials, this document may not be modified
+   outside the IETF Standards Process, and derivative works of it may
+   not be created outside the IETF Standards Process, except to format
+   it for publication as an RFC or to translate it into languages other
+   than English.
+
+
+
+
+
+
+
+
+
+Harrington, et al.          Standards Track                     [Page 1]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+概要
+
+   このメモは, セキュアシェル (SSH) を用いる シンプルネットワークマネジメントプロトコル (SNMP) のためのトランスポートモデルを記述する.
+
+   このメモは, TCP/IPベースのインターネットでネットワークマネジメントプロトコルと共に用いる管理情報ベース (MIB) の部分も定義する.  具体的には, SNMP のためのセキュアシェルトランスポートモデルを監視し管理するオブジェクトを定義する.
+
+目次
+
+   1イントロダクション ....................................................3
+      1.1. The Internet-Standard Management Framework .................3
+      1.2. 規約 ................................................3
+      1.3. モジュール方式 .................................................5
+      1.4. 動機 .................................................5
+      1.5. 制約 ................................................6
+   2. セキュアシェルプロトコル .......................................7
+   3. どのように SSHTM はトランスポートサブシステムに適合するか .....................8
+      3.1. このモデルのセキュリティ機能 ........................8
+           3.1.1. 脅威 .............................................8
+           3.1.2. メッセージ認証 ..............................9
+           3.1.3. 認証プロトコルのサポート ....................10
+           3.1.4. SSH サブシステム ......................................11
+      3.2. セキュリティパラメータの転送 ................................12
+      3.3. 通知とプロキシ ...................................12
+   4. キャッシュされる情報とリファレンス ..............................13
+      4.1. セキュアシェルトランスポートモデルのキャッシュされる情報 ...........13
+           4.1.1. tmSecurityName .....................................13
+           4.1.2. tmSessionID ........................................14
+           4.1.3. セッション状態 ......................................14
+   5. 手順の要素 ..........................................14
+      5.1. 受信メッセージのための手順 ........................15
+      5.2. 送信メッセージのための手順 ................17
+      5.3. セッションの確立 ....................................18
+      5.4. セッションの終了 .........................................20
+   6. MIB モジュールの概要 ............................................21
+      6.1. MIBモジュールの構造 ...............................21
+      6.2. テキスト表記法 .......................................21
+      6.3. 他のMIB モジュールとの関係 .........................21
+           6.3.1. IMPORTS に必要な MIB モジュール ...................21
+   7. MIB Module の定義 ..........................................22
+   8. 運用上の考察 .....................................29
+   9. セキュリティの考察 ........................................30
+      9.1. 公開鍵検証のスキップ ..........................31
+      9.2. 通知の認可の考察 .................31
+      9.3. SSH のユーザと鍵の選択 ................................31
+
+
+
+Harrington, et al.          Standards Track                     [Page 2]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+      9.4. USM と SSHTM の概念的な違い ..............31
+      9.5. 'none' MAC アルゴリズム ..................................32
+      9.6. SNMPv1/v2c メッセージの利用 ..............................32
+      9.7. MIB モジュールのセキュリティ .......................................32
+   10. IANA の考慮 ...........................................33
+   11. Acknowledgments ...............................................33
+   12. References ....................................................34
+      12.1. Normative References .....................................34
+      12.2. Informative References ...................................35
+
+1イントロダクション
+
+   このメモは, トランスポートサブシステム [RFC5590] を セキュアシェル (SSH) プロトコル [RFC4251] で用いる, シンプルネットワークマネジメントプロトコルのためのトランスポートモデルを記述する.  このメモで指定するトランスポートモデルは, セキュアシェルトランスポートモデル (SSHTM) と呼ばれる.
+
+   このメモは, TCP/IPベースのインターネットでネットワークマネジメントプロトコルと共に用いる管理情報ベース (MIB) の部分も定義する.  具体的には, SNMP のためのセキュアシェルトランスポートモデルを監視し管理するオブジェクトを定義する.
+
+   このメモで記述するトランスポートモデルがアーキテクチャに適合しアーキテクチャの中で他のサブシステムと相互作用するのがどこで行なわれるか理解するために, SNMP アーキテクチャ [RFC3441] と アーキテクチャの用語を理解するのが重要だ.
+
+1.1.  The Internet-Standard Management Framework
+
+   現在の Internet-Standard Management Framework を記述する文書の詳細な概要は, RFC 3410 [RFC3410] の7節を参照せよ.
+
+   仮想情報ストアによる管理オブジェクトへのアクセスは, 管理情報ベースないしMIBを名付けられた.  MIB オブジェクトは, シンプルネットワークマネジメントプロトコル(SNMP) により一般にアクセスされる.
+   MIBのオブジェクトは, Structure of Management Informantion (SMI) で定義されたメカニズムを用いて定義される.  このメモは, STD 58, RFC 2578 [RFC2578], STD 58, RFC 2579 [RFC2579], STD 58, RFC 2580 [RFC2580] に記述されている SMIv2 に従って MIB モジュールを指定する.
+
+1.2.  規約
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, [RFC-2119] で記述されているように解釈される. 
+
+
+
+Harrington, et al.          Standards Track                     [Page 3]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   これらのキーワードの小文字のバージョンは, 通常の英語の意味で読まれるべきだ.  これらは, RFC 3411 アーキテクチャやこの文書で定義するサブシステムと互換性を持つが通信の互換性になにも影響を与えない文脈で通常用いられるが, 必ずしもそうとは限らない.  これらの用語は, RFC 3411 のサブシステムや Abstract Service Interfaces (ASIs) と互換性を持つ設計をするために提案されたIETF モデルの設計者へのガイドとして用いられる.  実装者は異なった実装をする自由がある.  これらの小文字の用語のいくつかの用法は, 単に普通の英語の用法だ.
+
+   SNMPに関係する仕様との一貫性のために, この文書は SNMP でない仕様と一貫した用語を利用するよりも STD 62 で定義された用語を優先する.  SNMPv3 が完全な標準になる際に SNMP でない仕様の用法と一致するよう SNMPv3の用語を変更するのを求めないというと一貫している.
+
+   この文書での "認証"は, データソースの認証やピアの識別情報の認証ではなく, メッセージの '正真性の証明を提供" という英語の意味を典型的に差す.
+
+   "manager" と "agent" という用語はこの文書では用いない. RFC3411 アーキテクチャで, すべての SNMP エンティティは, 実装でサポートされるSNMPアプリケーションの種類依存して マネージャやエージェント, その両方の機能を持つ, となっているからだ.  区別が必要な場合は, 以下のアプリケーション名を用いる: コマンドジェネレータ, コマンドレスポンダー, 通知オリジネータ, 通知レシーバ, プロキシフォワーダ.  さらなる情報は, "SNMP Applications" [RFC3413] を見よ.
+
+   User-based Security Model (USM) [RFC3414] は STD62 のセキュリティモデルを実装することが義務付けられている.  SSH と USM の仕様は頻繁にユーザという用語を参照するが, [RFC3411] とこのメモで好む用語は "principal" だ.  principal は, "誰か" に代わってサービスを提供されたりサービスを実行を処理したりする, その "誰か" のことだ.  principal は,特定の役割を行なう個人や, 特定の役割を行なう個人の集合, アプリケーションやアプリケーションの集合, 管理ドメイン内でのそれらの組合せ, を特に意味する.
+
+   この文書を通して, 用語"クライアント" と "サーバ" は SSH トランスポート接続の両端を差すのに用いる.  クライアントが能動的にSSHの接続を開き, サーバは受動的にSSHの接続を待ち受ける.  SNMP エンティティが, 以下で議論するように, クライアントないしサーバの役割を果すことがある.
+
+
+
+
+
+
+Harrington, et al.          Standards Track                     [Page 4]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+1.3.  モジュール
+
+   読者は, [RFC3411]で定義された SNMP アーキテクチャの詳細を読み理解していることが期待されている. また, "Transport Subsystem
+   for the Simple Network Management Protocol (SNMP)" [RFC5590] で指定されたトランスポートサブシステムアーキテクチャ拡張についても読み理解していることが期待されている.
+
+   このメモは, SNMP のためのセキュアシェルトランスポートモデル, すなわち, SNMPメッセージの認証や暗号化,完全性検査を提供する SNMP トランスポートサブシステムの中で利用されるSNMPトランスポートモデルについて記述している.
+
+   自己完結する文書を用いるという RFC3411 の設計の決定に従い, この文書は, SNMP のためのセキュアシェルトランスポートモデルを処理するのに必要な手順の要素と関連する MIB モジュールオブジェクトを定義する.
+
+   仕様のこのモジュール性は, 実装上特定の要件を課すように解釈されることを意図していない.
+
+1.4.  動機
+
+   シンプルネットワークマネジメントプロトコルのバージョン3 (SNMPv3) はプロトコルにセキュリティを追加した.  ユーザベースセキュリティモデル (USM) [RFC3414] は, ネットワークが切断した場合のような第三者の認証サービスが利用できない場合でも機能することを保証するよう, 既存の他のセキィリティ基盤に依存しないよう設計された.  結果として, USM は独立したユーザと鍵管理基盤を利用する.  SNMPv3 を配置しない理由として, SNMPv3 を利用するには既存のものとは別のユーザと鍵管理基盤を配置する必要があるという報告が運用者からされている.
+
+   このメモは, 既存で広く配置されているセキュアシェルセキュリティ基盤を用いるトランスポートモデルを記述する.
+   このトランスポートモデルは, ネットワークの管理者のセキュリティと運用上のニーズを満たし, 配置の成功を達成する運用環境の使い勝手を最大化し, 同時に 配置時間を最小にするため実装と配置のコストを最小限にするよう設計された.
+
+   この文書は, SSHクライアントがSSHサーバを認証しSSHサーバがSSHクライアントを認証する要件を説明し, 特定のアクセスコントロールモデルに依存しない方式で, データアクセスのための認証ポリシーを用いて認証された識別情報をどのようにSNMPが用いることができるかを記述する.
+
+
+
+
+
+
+Harrington, et al.          Standards Track                     [Page 5]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   この文書は, 異なるセキュリティ基盤をサポートし異なるセキュリティの特性を提供するクライアント認証と鍵交換法の利用の要件を説明する.
+   この文書は, "The Secure Shell (SSH) Authentication Protocol" [RFC4252] で記述されている, クライアント認証を利用する方法を記述する.  SSH のトランスポートモデルは, "publickey" や "password", "hostbased", "none", "keyboard-interactive", "gssapi-with-mic", ."gssapi-keyex", "gssapi","external-keyx" を含む ssh-userauth の方法のどれとでも動作する. ( IANA が管理する SSH プロトコルパラメータレジストリを参照)この文書のセキュリティの考察で記述するように, "none" 認証法の利用は推奨されない.  ローカルアカウントは, 公開鍵, ホストベース, パスワードといった方法の利用によってサポートされるだろう.  パスワード法は, 例えば RADIUS プロトコル [RFC2865] を用いる 認証, 認可, 課金 (AAA) サーバのような, 配置済みのパスワード基盤と統合できる.  SSH トランスポートモデルは, X.509 証明書を利用するもののような, 将来定義される ssh-userauth 法を活用できるようにする必要がある.
+
+   SNMPv3 とコマンドラインインターフェイス(CLI), 他の管理のインターフェイス のためのセキュリティを管理するアプローチを統合するメカニズムを利用するのが望ましい.  セキュアシェルで提供されるセキュリティサービスの利用は, NETCONF[RFC4742] を利用するのに採用された広く用いられているCLIのアプローチがある.
+   このメモは, セキュアシェル (SSH) のサブシステムとして SSH セッション中で SNMP プロトコルを起動し実行する方法を記述する.
+
+   このメモは, SSH トランスポートプロトコル上のSSHコネクションプロトコル [RFC4254] を用いて, また, 認証に ssh-userauth [RFC4252] を用いて, セキュアシェル (SSH) のセッション中でどのように SNMP を利用するかを記述する.
+
+   SNMP を以前と変らない形で利用し続けるために, セキュアシェル認証法のパラメータを SNMP アーキテクチャにマップするために取り組む課題がいくつかある.  これらは以下で詳細に議論する.
+
+1.5.  制約
+
+   この SNMP トランスポートモデルの設計は, 以下の製薬に影響されている.
+
+   1ネットワークに負荷がかかっている時に, トランスポートプロトコルとその基底のセキュリティメカニズムは, (例えば ネットワークタイムプロトコル (NTP) や AAA プロトコルのような)他のネットワークサービスがすぐに利用できるかどうかに依存しないほうがよい.
+
+
+
+
+
+Harrington, et al.          Standards Track                     [Page 6]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   2.  ネットワークに負荷がかかっていない時に, トランスポートモデルとその基底のセキュリティメカニズムは, 他のネットワークサービスがすぐに利用できるかどうかに依存してもよい.
+
+   3.  ネットワークに負荷がかかっているかどうかトランスポートモデルが判断可能でない場合がある.
+
+   4.  トランスポートモデルは, SNMP アーキテクチャに変更を求めないほうがよい.
+
+   5.  トランスポートモデルは基底のセキュリティプロトコルに変更を求めないほうがよい.
+
+2.  セキュアシェルプロトコル
+
+   SSH は, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.  3つの主要なプロトコル要素とユーザ認証のための追加の方法で構成されている:
+
+   o  トランスポート層プロトコル[RFC4253] は, サーバの認証, メッセージの機密性, 完全性を提供する.  このプロトコルは, オプションで圧縮も提供する.  トランスポート層は, 典型的には TCP/IP接続の上で動くことを想定しているが, 他の信頼できるデータストリームの上で使ってもよい.
+
+   o  ユーザ認証プロトコル [RFC4252] は, クライアント側のユーザをサーバに認証する.  このプロトコルはトランスポート層プロトコル上で動作する.
+
+   o  コネクションプロトコル [RFC4254] は暗号化されたトンネルをいくつかの論理的なチャンネルに多重化する.  このプロトコルはトランスポート層プロトコル上で動作する.
+
+   o  一般メッセージ交換認証 [RFC4256] は, SSHプロトコルのための汎用の認証法だ.  この認証法は, 認証データをキーボードで入力する状況でインタラクティブな認証を行なうのに適している.
+
+   o  "セキュア シェル (SSH) プロトコルのための汎用セキュリティサービスアプリケーションプログラムインタフェイス(GSS-API) 認証と鍵交換" [RFC4462] は, SSHで認証と鍵交換のためにGSS-APIを使う方法を記述する.  ユーザを認証する特定のGSS-APIメカニズムを用いるSSHユーザ認証法と Diffie-Hellman 鍵交換を認証するためにGSS-APIを用いるSSHの鍵交換法のファミリを定義する.
+
+
+
+
+
+Harrington, et al.          Standards Track                     [Page 7]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   安全なトランスポート層の接続が確立した時点で, クライアントはサービスの要求を送る.  2番目のサービスの要求は, クライアント認証が完了してから送られる.  これは, 上に挙げたプロトコルと共存する, 新しいプロトコルが定義されることを許している.
+
+   コネクションプロトコルは, 広い範囲の目的に利用できるチャンネルを提供する安全なインタラクティブなシェルのセッションを設定したり任意の TCP/IPポートやX11接続を転送(トンネリング)する標準的な方法が提供されている.
+
+3.  どのように SSHTM はトランスポートサブシステムに適合するか
+
+   トランスポートモデルは, SNMP アーキテクチャの中の トランスポートサブシステム [RFC5590] の構成要素だ.  すなわち, SSH トランスポートモデルは, 基底のSSHトランスポート層と メッセージディスパッチャ [RFC3411] の間に適合する.
+
+   SSH トランスポートモデルは, 別の SNMP エンジンの SSH トランスポートモデルと自分自身の間にチャンネルを確立する.  送信トランスポートモデルは, ディスパッチャから SSH に暗号化していないメッセージを送って暗号化させ, 受信トランスポートモデルは, SSH を用いて復号した受信メッセージを受け取りディスパッチャに渡す.
+
+   SSH トランスポートチャンネルが確立した後では, 概念的には, SNMP メッセージディスパッチャから別の SNMP メッセージディスパッチャに SNMP メッセージはこのチャンネルを通して送られる.  複数の SNMP メッセージが同じチャンネルを通して送られてもよい.
+
+   SNMP エンジンの SSH トランスポートモデルは, SSH 特有のセキュリティパラメータと SNMP 特有のモデルには独立なパラメータとの変換を行なう.
+
+3.1.  このモデルのセキュリティ機能
+
+3.1.1.  脅威
+
+   セキュアシェルトランスポートモデルは, RFC3411 アーキテクチャ [RFC3411] で確認された脅威に対する保護を提供する:
+
+   1情報の改竄 - SSH は, SSH パケットそれぞれに電子的に署名してネットワーク越しの転送の間にそれぞれのメッセージの内容が改竄されていないかの検証を提供する.
+
+   2.  なりしまし - SSH は, SSH サーバ/クライアントの識別情報の確認を提供する.
+
+
+
+
+Harrington, et al.          Standards Track                     [Page 8]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+       SSH は, SSH トランスポートプロトコルのサーバ認証 [RFC4253] を通じて SSH サーバの識別情報の検証を提供する.  これにより, MIB データを提供する SNMP エンジンの信頼性を運用者や管理ステーションが確保できる.
+
+       SSH は セキュアシェル認証プロトコル [RFC4252] を用いて SSH のクライアント側の識別情報を検証する多数のメカニズムを提供している.  これらに 公開鍵, パスワード, ホストベースメカニズムが含まれている.  これにより, 認証されたもののみが機密の可能性のあるデータへのアクセスをすることを SNMP アクセス制御サブシステムが保証できる.
+
+       クライアントの識別情報の検証は, 認証されたもののみが機密の可能性のあるデータへのアクセスをすることを保証することはSNMP アクセス制御サブシステムの利用で重要だ.
+
+       SSH ユーザの識別情報はトランスポートモデルに提供され, SNMP アクセス制御と通知設定で利用する SNMP モデルに独立な securityName へマップするにに利用できる.
+       (識別情報は, securityName へのマップの前に様々な変換を受ける可能性がある.)
+
+   3.  メッセージストリームの改竄 - SSH は, シーケンス番号と完全性の検査により 単一の SSH セッションでの悪意のあるメッセージの並び換えや再送に対する保護を行なう.  SSH は, それぞれのセッションに対して暗号化と完全性検査の暗号鍵を新たに生成することを保証することで, SSH のセッションにまたがったメッセージの再送に対して保護を行なう.
+
+   4.  開示 - SSH は SNMP エンジン間のすべての通信を暗号化することで, 権限のない受信者や盗聴者に対して情報を開示しないよう保護を提供する.
+
+3.1.2.  メッセージ認証
+
+   RFC 3411 のアーキテクチャは3つのセキュリティレベルを認識する:
+
+      - 認証なし, プライバシーなし (noAuthNoPriv)
+
+      - 認証あり, プライバシーなし (authNoPriv)
+
+      - 認証あり, プライバシーあり (authPriv)
+
+   セキュアシェルプロトコルは, 暗号化とデータの完全性のサポートを提供する.  技術的にはSSHで認証や暗号化をサポートしないのは可能だが, [RFC4253]で推奨されていない.
+
+
+
+Harrington, et al.          Standards Track                     [Page 9]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   SSH トランスポートモデルは, 認証されたプリンシパルの識別情報と受信メッセージに関連するタイプとアドレスを SSH から決定する. また, 送信メッセージにこの情報を提供する.  認証とデータの完全性, 暗号化を提供するのに用いられる SSH トランスポート層アルゴリズムは, SSH トランスポートモデル層に公開しないほうがよい.  SNMPv3 WG は, 意図的にこれを避け, セキュリティレベルの要件を満たす セキュリティモデル からの警告で妥協した.  SSH Transport Model は, 基底の SSH 接続が認証やプライバシーを提供するかどうかをテストできるメカニズムを持たない. よって, SSH トランスポートモデルは, 基底の SSH 接続が authPriv セキュリティ特性をサポートするよう適切に設定されていることを信用する.
+
+   SSH トランスポートモデルに準拠する実装は, SNMP セキュリティのもっとも高いレベル (authPriv) を満たす認証とデータの完全性, 暗号化を提供する SSH 接続を用いなければならない.
+   noAuthNoPriv や authNoPriv のセキュリティレベルで指定された送信メッセージは, 実際には authPriv レベルの保護で SSH トランスポートモデルから送られる.
+
+   セキュアシェル認証プロトコル [RFC4252] と セキュアシェルトランスポート層プロトコル [RFC4253] を用いるセキュリティプロトコルは, 執筆時点では許容できるレベルで安全だと考えられている.
+   しかし, 必要が生じたら, この手順は将来指定される新しい認証とプライバシーの方法を許可する.
+
+3.1.3.  認証プロトコルのサポート
+
+   SSH トランスポートモデルは SSH でサポートされる 任意のサーバ/クライアント 認証メカニズムをサポートする必要がある.  これには, SSH 認証プロトコル [RFC4252] に記述された3つの認証法 (publickey, password, host-based) や, keyboard-interactive, それ以外の方法が含まれる.
+
+   パスワード認証メカニズムは, 配置されたパスワードベースの基盤と統合できる.  検証のために, RADIUS [RFC2864] や Diameter [RFC3588] のようなサービスにパスワードを渡すことが可能だ.  この検証は, ユーザ名とユーザパスワードの属性を用いて行なえる.  RADIUS や Diameter と統合するためにチャレンジハンドシェイク認証プロトコル (CHAP) [RFC1994] や ダイジェスト認証 [RFC5090] のような別のパスワード検証プロトコルを利用することも可能だ.  処理のある時点で, これらのメカニズムは, パスワードを認証するためにパスワードをデバイス上で平文で利用する必要がある.  これは認証基盤への脅威を招くかもしれない.
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 10]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   GSS-API 鍵交換 [RFC4462] は, 異なるセキュリティ基盤のサポートと異なるセキュリティ特性を提供するクライアント認証メカニズムの追加のためのフレームワークを提供する.
+   X.509 証明書をサポートするものなど, 追加の認証メカニズムが将来SSHに追加されることがある.
+
+3.1.4.  SSH サブシステム
+
+   この文書は, 他のシステムの利用と SNMP の利用を区別する SNMP のための SSH サブシステムの利用を記述している.
+
+   タイプ "snmp" の SSH サブシステムは, 送信 SNMP メッセージのための手順の要素の中で, SSH トランスポートモデルによって開始される.  メッセージの送り手が必要に応じて SSH のセッションの作成を開始するので, SSH のセッションは, 入力メッセージに対してすでに存在している. そうでなければ, 受信メッセージは SSH トランスポートモデルに到達しない.
+
+   実装は, 送信メッセージを予想して SSH のセッションを開始することを選んでもよい.  このアプローチは, SSH セッション越しにメッセージを送信するのが重要になる前に 特定のターゲットへの SSH セッションが確立されるのを保証するのに役立つだろう.
+   もちろん, 事前に確立されたセッションが 必要な際にまだ有効化どうかの保証はない.
+
+   それぞれのセッションに関連する tmTransportAddress と tmSecurityName の組合せで SSH トランスポートモデルの中で SSH のセッションはユニークに識別される.
+
+   命名のポリシーは管理ドメイン間で異なる可能性があるので, 運用者が等価でないアカウント名を整理するのに利用できるように多くの SSH クライアントソフトウェアパッケージは, user@hostname:port アドレスシンタックスをサポートしている. SnmpSSHAddress テキスト表記法は, この共通のSSH 表記法を利用する.
+
+   この表記法を SnmpSSHAddress で用いる場合, リモートのSSHサーバとセッションを確立する際に 表記の "user" 部分と一致する SSH ユーザ名を用いて SSH 接続を確立する必要がある.  ユーザ名は UTF-8 でエンコードされなければならない ([RFC4252] による).
+   "user" 部分は, セキュリティモデルから渡される tmSecurityName パラメータと一致してもしなくてもよい.  "user@" 部分が SnmpSSHAddress で指定されていなければ, リモートの SSH サーバとセッションを確立する際に SSH のユーザ名として tmSecurityName を用いて SSH 接続を確立する必要がある.
+
+
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 11]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   SSH に関連する SnmpSSHAddress と tmSecurityName は, セッションの有効期間中一定でなければならない.  (ホスト名やユーザ名, ポート番号のそれぞれないしすべてが)異なる SnmpSSHAddress の値 は, それぞれ 別々の SSH セッションとなる.
+
+3.2.  セキュリティパラメータの転送
+
+   受信メッセージに対して, SSH特有のセキュリティパラメータは, トランスポートとセキュリティモデルに独立なセキュリティパラメータへとトランスポートモデルによって翻訳される.  トランスポートモデルは, SSH サブシステムからメッセージを受信し, tmStateReference によって参照されるキャッシュ中の認証された識別情報を含むトランスポートに関連する情報と SSHのセキュリティに関連する情報を記録する. そして,  receiveMessage() ASI (Abstract Service Interface) を用いて. WholeMsg と tmStateReference を Dispatcher に渡す.
+
+   送信メッセージに対して, トランスポートモデルは, sendMessage() ASI で Dispatcher が提供する入力を取得する.  SSH トランスポートモデルは, SSHにとって適切なセキュリティパラメータに情報を変換し, 必要に応じてセッションを確立し, 送信のために SSH サブシステムにメッセージを渡す.
+
+3.3.  通知とプロキシ
+
+   SSH 接続は, コマンド生成器 (command generator) や通知の発信者 (notification originator) によって開始されることがある.  コマンド生成器は人間によって頻繁に操作される. しかし, 通知の発信者は, 通常人手を介さない自動のプロセスだ.  結果として, SNMP エンジンが通知の受信者を含むエンジンへの認証を成功するために, 通知の発信者を含む SNMP エンジンに認証の情報を渡す必要があるか, Kerberos のような 第三者鍵プロバイダを用いる必要がある. 
+
+   通知やプロキシのリクエストが送られるべきターゲットは, ネットワークの管理者によって典型的に決定され設定される.  SNMP-NOTIFICATION-MIB は, 通知が送られるべきターゲットのリストを含む.  SNMP-TARGET-MIB モジュール [RFC3413] は, 通知の発信者やプロキシの転送者のようなアプリケーションのために, トランスポートのドメインとアドレスとセキュリティパラメータを含む, これらの管理のターゲットを定義するオブジェクトを含んでいる.
+
+   SSH トランスポートモデルに対して, トランスポートのタイプとアドレスは, snmpTargetAddrTable で設定される. そして, securityName と securityLevel パラメータは snmpTargetParamsTable で設定される.
+   デフォルトのアプローチでは, 通知を受け取る権限があるターゲットかプロキシされたメッセージを受け取るターゲットかを識別する情報を管理者が事前に静的に設定する.  Local access-
+
+
+
+Harrington, et al.          Standards Track                    [Page 12]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   通知が実際に送られる前に, 通知の発信者によって制御の処理が行なわれる必要がある. 設定された securityName を用いてこの処理が行なわれる.  接続が成功するかを決定するより前に, 認可が終わるのがこれの重要な特性だ.  したがって, ローカルに設定された securityName が 通知の発信者が完全に信頼される.
+
+   SNMP-TARGET-MIB と NOTIFICATION-MIB MIB モジュールは, SNMP や (CLI スクリプトや設定ファイルの読み込みのような)他の実装に独立なメカニズムを用いて設定されるだろう.  追加の設定として, SSHのパラメータの実装特有の設定の提供が必要となるだろう.
+
+4.  キャッシュされる情報とリファレンス
+
+   SNMP の処理を実行する際, 保持される必要がある状態の情報には2つのレベルがある. リクエスト-レスポンスのペアにリンクする即時の状態と, トランスポートとセキュリティに関連する長期間保持される可能性のある情報だ.  "Transport Subsystem for the Simple Network Management Protocol" [RFC5590] は, キャッシュとリファレンスについての一般的な要求を定義している.
+
+   この文書は, セキュアシェルトランスポートモデルに関連するキャッシュの追加の要求を定義する.
+
+4.1.  セキュアシェルトランスポートモデルのキャッシュされる情報
+
+   セキュアシェルトランスポートモデルは, キャッシュされる情報に関する特定の責任を持っている.  SSH トランスポートモデルによる tmStateReference の利用の上での詳細な処理の手順については, 5節の 処理の手順を参照せよ.
+
+4.1.1.  tmSecurityName
+
+   tmSecurityName は 5節の手順に従って設定される識別情報を表す (snmpAdminString 形式の)人間に可読な名前でなければならない.  tmSecurityName は, SSHTM セッションを流れるすべてのトラフィックで一定でなければならない.  異なる tmSecruityName を用いて確立された既存の SSH セッションを通してメッセージを送ってはならない.
+
+   接続のSSHサーバ側では：
+
+      tmSecurityName は SSHのユーザ名である必要がある.  SSH ユーザ名を SSHの層からどのように抽出するかは実装依存だ.
+
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 13]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+      SSH プロトコルでは, ユーザ名のフィールドが埋められているかどうか常には明確ではない. GSSAPI 認証を用いる実装などのそのような実装のため, SSHの情報と tmSecurityName を変換する, もしくは tmSecurityName を SSHの識別情報に変換するマップアルゴリズムが必要なことがある.
+
+      別の場合として, ユーザ名がサーバによって検証されない可能性がある. そのような実装のため, SSHの交換の間に交換される他の資格情報からユーザ名を得る必要があるかもしれない.
+
+   接続のSSHサーバ側では：
+
+      tmSecurityName は アプリケーションによって SSH トランスポートモデルに示される (おそらく SNMP-TARGET-MIB で指定される設定より).
+
+   securityName は, セキュリティモデルによって tmSecurityName から導出されてもよいし, MIB モジュールで通知とアクセス制御を設定するのに用いられてもよい.  トランスポートモデルは, tmSecurityName から導出される securityName を用いる MIBモジュールを設定する際にオペレータが何を用いるか知ることができるよう, 予測可能な tmSecurityName を生成する必要がある.
+
+4.1.2.  tmSessionID
+
+   tmSessionID は受信時にメッセージ単位で記録されなければならない.
+   tmSameSecurity が設定されている場合, 記録された tmSessionID は, 関連する送信メッセージを送信するに利用可能な SSH のセッションが, 受信メッセージ (例えば要求への応答)を受信する際に用いられたのと同じセッションかどうかを判定するのに用いることができる.
+
+4.1.3.  セッション状態
+
+   tmStateReference で参照されるセッションごとの状態は, ローカル設定データストア (Local Configuration Datastore) に複数のメッセージにまたがって保存されるかもしれない.
+   追加のセッション/接続状態の情報が ローカル設定データストアに保持されるかもしれない.
+
+5.  手順の要素
+
+   抽象サービスインタフェイス (Abstract Service Interfaces) は SNMP エンティティの中で様々なサブシステム間の概念的なデータフローを記述するために [RFC3411] で定義され [RFC5590] で増補されている.  セキュアシェルトランスポートモデルは, サブシステム間の通信にこれらの概念的なデータフローのいくつかを利用する.
+
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 14]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   手順の要素を単純にするため, 状態情報の開放は常に明示的に指定されていない.  一般的なルールとして, メッセージが破棄される際に状態情報が利用可能なら, メッセージの状態情報も開放される必要がある. セッションが閉じる際に状態情報が利用可能なら, セッションの状態情報も開放される必要がある.
+
+   statusInfomation のエラー表示は, 典型的に オブジェクト識別子 (OID) と 増加されるエラーカウンタのための値を典型的に含む.
+   これは, 要求される securityLevel と tmStateReference を伴なう可能性がある.  メッセージ単位のコンテキスト情報は, トランスポートモデルに対してアクセスできない. 返却されるカウンタ OID と値のために, contextEngine に対して snmpEngineID と contextName のローカルな値に エラーカウンタに対するデフォルトの context が設定される.
+
+5.1.  受信メッセージのための手順
+
+   1SSH トランスポートモデルは, SSHとセッション識別子を用いてメッセージの送り元のアドレスと認証されたユーザ名を決定するために, 実装に依存する方式で,  SSH エンジンを照会する.
+
+   2.  受信メッセージに関連する tmTransportAddress を決定する.
+
+       A.  クライアント側の SSH のセッションの場合は, この tmTransportAddress は セッションを確立するために用いられた tmTransportAddress に設定される.  これは, openSession() ASI で提供されたアドレスに関連する "user@" プレフィックスを必ず含んでいなければならない.
+
+       B.  サーバ側のSSHのセッションの場合でこれがセッションを介して受信した最初のメッセージならば, tmTransportAddress は, 実装依存の方法で決定されたメッセージの送り元のアドレスに設定される.  この値は, 全体の SSH のセッションで定数でなければならない. 将来受信するメッセージは, tmTransportAddress が同じ値に設定されていなければならない.
+
+       C.  サーバ側のSSHセッションで, セッションを介して受信したメッセージでなければ, セッションに以前設定した tmTransportAddress (ステップ Bからの値で, 以前受信したメッセージから決定されている) に tmTransportAddress は設定される.
+
+
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 15]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   3.  受信メッセージに関連した tmSecurityName を決定する.
+
+       A.  クライアント側の SSH のセッションの場合は, この tmSecurityName は セッションを確立するために用いられた tmSecurityName に設定される.
+
+       B.  サーバ側のSSHのセッションの場合でこれがセッションを介して受信した最初のメッセージならば, tmSecurityName は, SSHのユーザ名に設定される.  SSHのユーザ名をSSH層からどう抽出するかは実装依存だ.  この値は, 全体の SSH のセッションで定数でなければならない. 将来受信するメッセージは, tmSecurityNameが同じ値に設定されていなければならない.
+
+       C.  サーバ側のSSHセッションで, セッションを介して受信したメッセージでなければ, セッションに以前設定した tmSecurityName (ステップ Bからの値で, 以前受信したメッセージから決定されている) に tmSecurityName は設定される.
+
+   4.  情報を後で参照できるように tmStateReference のキャッシュを作成する.
+
+          tmTransportDomain = snmpSSHDomain
+
+          tmTransportAddress = ステップ2から導出された tmTransportAddress
+
+          tmSecurityName = ステップ 3 から導出された tmSecurityName
+
+          tmTransportSecurityLevel = "authPriv" (認証と機密性は, このトランスポートモデルに従って用いられなければならない)
+
+          tmSessionID = セッションが閉じたり別のセッションで置き換えられた場合を検出するの用いられる実装依存の値tmStateReference 中のこの値は, メッセージを受信するセッションを一意に識別できなければならない.
+          このセッション識別子は, 参照がなくなるまで再利用してはならない.
+
+   そして, トランスポートモデルは, 次のASI を用いて Dispatcher にメッセージを渡す.
+
+
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 16]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   statusInformation =
+   receiveMessage(
+   IN   transportDomain       -- snmpSSHDomain
+   IN   transportAddress      -- メッセージの tmTransportAddress
+   IN   wholeMessage          -- SSHからの SNMP メッセージ全体
+   IN   wholeMessageLength    -- SNMP の長さ
+   IN   tmStateReference      -- (NEW) トランスポートの情報
+    )
+
+5.2.  送信メッセージのための手順
+
+   Dispatcher は, トランスポートサブシステムで定義された ASI を用いてトランスポートモデルに情報を渡す.
+
+   statusInformation =
+   sendMessage(
+   IN   destTransportDomain           -- 利用されるトランスポートドメイン
+   IN   destTransportAddress          -- 利用されるトランスポートアドレス
+   IN   outgoingMessage               -- 送信するメッセージ
+   IN   outgoingMessageLength         -- その長さ
+   IN   tmStateReference              -- (NEW) トランスポートの情報
+   )
+
+   SSH トランスポートモデルは次のタスクを実行する.
+
+   1tmStateReference が,  キャッシュに含まれる tmTransportDomain と tmTransportAddress, tmSecurityName,tmRequestedSecurityLevel, tmSameSecurity の値を参照していない場合,  snmpSshtmSessionInvalidCaches カウンタをインクリメントし, メッセージを捨て,statusInformation の中のエラー表示を返す.  このメッセージの処理は停止する.
+
+   2.  tmTransportDomain, tmTransportAddress, tmSecurityName, tmRequestedSecurityLevel, tmSameSecurity, tmSessionID をtmStateReference から抽出する.
+
+   3.  メッセージを送るSSHセッションを識別する:
+
+       A.  tmSameSecurity が true で tmSessionID, tmSecurityName, tmTransportAddress に一致する既存のセッションがなければ, snmpSshtmSessionInvalidCaches カウンタをインクリメントし, メッセージを捨て,statusInformation の中のエラー表示を返す.
+           このメッセージの処理は停止する.
+
+       B.  tmSessionID, tmTransportAddress, tmSecurityName に一致するセッションがあれば, そのセッションを選択する.
+
+
+
+Harrington, et al.          Standards Track                    [Page 17]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+       C.  tmTransportAddress と tmSecurityName に一致するセッションがあれば, そのセッションを選択する.
+
+       D.  利用するセッションを選ぶ上記のステップが失敗したら, tmStateReference をパラメータとする openSession() を呼ぶ.
+
+           +  openSession が失敗したら, メッセージを捨て, tmStateReference を開放し, openSession から返されたエラー表示を呼び出し元モジュールに渡す.  このメッセージの処理は停止する.
+
+           +  openSession が成功したら, destTransportDomain, destTransportAddress, tmSecurityname, tmSessionID を実装依存の形式で記録する.
+              受信メッセージの処理に必要となる.
+
+   4.  識別された SSH セッションの SSH メッセージのデータとしてカプセル化のため, メッセージ全体をSSHに渡す.  実装依存の方法で, 必要な追加のSSH特有のパラメータも提供される必要がある.
+
+5.3.  セッションの確立
+
+   セキュアシェルトランスポートモデルは, SSH トランスポートモデルとSSHサービスの間で渡されるデータを記述するために, 次の Abstract Service Interface (ASI) を提供する.  どのようなデータを渡すかは実装の判断だ.
+
+   statusInformation =
+   openSession(
+   IN   tmStateReference       -- 利用されるトランスポート情報
+   OUT  tmStateReference       -- 利用されるトランスポート情報
+   IN   maxMessageSize         -- 送信するSNMP エントリの最大メッセージ長
+    )
+
+   SSH上のSNMP を実行する クライアントとサーバの間でセッションを確立する手順を以下で記述する.  このプロセスは, その後の利用のためにセッションを確立するどのSNMP エンジンでも利用される.
+
+   コマンド生成器, 通知の発信者, プロキシの転送者のような, トランザクションを開始する SNMP アプリケーションによって 自動的に行なわれる.
+
+
+
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 18]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   1snmpSshtmSessionOpens カウンタをインクリメントする.
+
+   2.  tmTransportAddress を用いて, クライアントは SSHトランスポートプロトコルを用いてトランスポート接続を確立し, サーバを認証し, メッセージ完全性と暗号化のための鍵を交換する.  セッションに関連する transportAddress は, SSHのセッションの生存中一定でなければならない.
+       実装は, (5.1節の) 受信メッセージ処理の実行の時に後で使うため, openSession API に渡す transportAddress をキャッシュする必要があるだろう.
+
+       1サーバを認証するため, クライアントは実装依存の方法で (tmTransportAddress, サーバホスト公開鍵) のペアを通常保持する.
+
+       2.  トランスポート接続の他のパラメータは, 実装依存の方法で提供される.
+
+       3.  接続の確立に失敗したりサーバ認証に失敗したら, snmpSshtmSessionOpenErrors がインクリメントされ, openSession エラー表示が返され, openSession の処理が停止する.
+
+   3.  クライアントは, SSH認証プロトコル [RFC4252] に記述されているように, プリンシパルを認証するためSSH認証サービスを起動する. 
+
+       1tmTransportAddress フィールドが ユーザ名に続く '@'  (US-ASCII 0x40) 文字を含んでいたら, ユーザ認証目的の "ユーザ名" として そのユーザ名がSSHサーバに示される必要がある.  tmTransportAddress に ユーザ名がなければ, tmSecurityName がユーザ名として用いられる必要がある.
+
+       2.  SSH プリンシパルを認証するのに用いられる資格情報は, 実装依存の方法で決定される.
+
+       3.  実装依存の方法で, 算出されたユーザ名を用いて SSH ユーザ認証サービスを起動する.
+
+       4.  ユーザ認証が失敗したら, トランスポート接続は閉じられ,  snmpSshtmSessionUserAuthFailures カウンタがインクリメントされ, エラー表示が呼び出し元モジュールに返されて, このメッセージに対する処理が停止する.
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 19]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   4.  クライアントは, "ssh-connection" サービス (SSH コネクションプロトコル [RFC4254] としても知られる) を起動し, "session" タイプのチャンネルを要求する.  ユーザ認証が失敗したら, トランスポート接続は閉じられ,  snmpSshtmSessionNoChannels カウンタがインクリメントされ, エラー表示が呼び出し元モジュールに返されて, このメッセージに対する処理が停止する.
+
+   5.  クライアントは, SSH のサブシステムとして, "subsystem" のパラメータとして指定して, "snmp" を起動する.  ユーザ認証が失敗したら, トランスポート接続は閉じられ,  snmpSshtmSessionNoSubsystems カウンタがインクリメントされ, エラー表示が呼び出し元モジュールに返されて, このメッセージに対する処理が停止する.
+
+       SNMP のトラフィックを容易に識別しファイアウォールや他のネットワークデバイスでフィルタするために, セキュアシェルトランスポートモデルを用いるSNMP エンティティに関連するサーバは, IANA に割り当てられた TCP ポート (5161 と 5162) を用いてSSHのセッションが確立された婆に "snmp" SSH サブシステムへのアクセスを提供するのをデフォルトとしなければならない.  サーバは, 他のポート上の SNMP SSH サブシステムへのアクセス許可を設定可能にする必要がある.
+
+   6.  セッションを識別するために実装依存の値を tmSessionID として tmStateReference キャッシュに設定する.
+
+   7.  SSH セッションを確立するのに用いた tmSecurityName は, セッションで用いる唯一の tmSecurityName でなければならない.  セッションの受信メッセージは, この tmSecurityName の値に関連していなければならない.
+       これをどう達成するかは実装依存だ.
+
+5.4.  セッションの終了
+
+   セキュアシェルトランスポートモデルは, セッションを終了するため次の ASI を提供する:
+
+   statusInformation =
+   closeSession(
+   IN   tmSessionID     -- 終了するセッションのID
+   )
+
+   以下で, クライアントとサーバの間のセッションを終了する手続を記述する.  このプロセスは, SSH のセッションを終了するすべての SNMP エンジンが従う.  いつセッションが終了される必要があるかは, 実装依存だ.  呼び出し元のコードは, 関連すう tmStateReference 開放する必要がある.
+
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 20]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   1snmpSshtmSessionCloses カウンタをインクリメントする.
+
+   2.  tmSessionID に対応するセッションがなければ, closeSession() 処理は完了する.
+
+   3.  tmSessionID に関連するセッションを SSH に終了させる.
+
+6.  MIB モジュールの概要
+
+   この MIB モジュールは セキュアシェルトランスポートモデルの管理を提供する.  SSH上の SNMP トランスポートドメインを識別する OID, SSHアドレスのテキスト表記, いくつかの統計カウンタを定義する.
+
+6.1.  MIBモジュールの構造
+
+   この MIB モジュールのオブジェクトは, 部分木中に配置される.  それぞれの部分木は, 関連するオブジェクトの集合で構成される.  全体的な構造と部分木へのオブジェクトの割り当て, それぞれの部分木の目的は後述する.
+
+6.2.  テキスト表記法
+
+   この文書で用いる Generic and Common Textual Conventions は, http://www.ops.ietf.org/mib-common-tcs.html で要約されている.
+
+6.3.  他のMIB モジュールとの関係
+
+   他の MIB モジュール内で定義されたいくつかの管理オブジェクトは, SSHトランスポートモデルを実装するエンティティに適用できる.  特に, SNMP-SSH-TM-MIB を実装するエンティティは,  SNMPv2-MIB [RFC3418] と SNMP-FRAMEWORK-MIB [RFC3411] を実装することが仮定される.  この MIB を実装する エンティティは, Transport Security Model [RFC5591] もサポートし, そのために SNMP-TSM-MIB を実装することが期待される.
+
+   この MIB モジュールは SSH トランスポートモデルの情報をモニタするのが目的だ.
+
+6.3.1.  IMPORTS に必要な MIB モジュール
+
+   以下の MIB モジュールは, [RFC2578], [RFC2579], [RFC2580] から項目をインポートする.
+
+   この MIB モジュールは, [RFC1033], [RFC4252], [RFC3490], [RFC3986] も参照する.
+
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 21]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   この文書は RFC 3413 MIB modules と RFC 3411 Abstract Service Interfaces との互換性のために, ここで定義した Domain Textual Conventions for the SNMP-internal MIB modules を用いる.
+
+7.  MIB Module の定義
+
+SNMP-SSH-TM-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+    MODULE-IDENTITY, OBJECT-TYPE,
+    OBJECT-IDENTITY, mib-2, snmpDomains,
+    Counter32
+      FROM SNMPv2-SMI -- RFC 2578
+    TEXTUAL-CONVENTION
+      FROM SNMPv2-TC -- RFC 2579
+    MODULE-COMPLIANCE, OBJECT-GROUP
+      FROM SNMPv2-CONF -- RFC 2580
+    ;
+
+snmpSshtmMIB MODULE-IDENTITY
+    LAST-UPDATED "200906090000Z"
+    ORGANIZATION "ISMS Working Group"
+    CONTACT-INFO "WG-EMail:   isms@lists.ietf.org
+                  Subscribe:  isms-request@lists.ietf.org
+
+                  Chairs:
+                    Juergen Quittek
+                    NEC Europe Ltd.
+                    Network Laboratories
+                    Kurfuersten-Anlage 36
+                    69115 Heidelberg
+                    Germany
+                    +49 6221 90511-15
+                    quittek@netlab.nec.de
+
+                    Juergen Schoenwaelder
+                    Jacobs University Bremen
+                    Campus Ring 1
+                    28725 Bremen
+                    Germany
+                    +49 421 200-3587
+                    j.schoenwaelder@jacobs-university.de
+
+                  Co-editors:
+                    David Harrington
+                    Huawei Technologies USA
+                    1700 Alma Drive
+                    Plano Texas 75075
+
+
+
+Harrington, et al.          Standards Track                    [Page 22]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+                    USA
+                    +1 603-436-8634
+                    ietfdbh@comcast.net
+
+                    Joseph Salowey
+                    Cisco Systems
+                    2901 3rd Ave
+                    Seattle, WA 98121
+                    USA
+                    jsalowey@cisco.com
+
+                    Wes Hardaker
+                    Cobham Analytic Solutions
+                    P.O. Box 382
+                    Davis, CA  95617
+                    USA
+                    +1 530 792 1913
+                    ietf@hardakers.net
+                 "
+    DESCRIPTION
+       "The Secure Shell Transport Model MIB.
+
+        Copyright (c) 2009 IETF Trust and the persons
+        identified as authors of the code.  All rights reserved.
+
+        Redistribution and use in source and binary forms, with or
+        without modification, are permitted provided that the
+        following conditions are met:
+
+        - Redistributions of source code must retain the above copyright
+          notice, this list of conditions and the following disclaimer.
+
+        - Redistributions in binary form must reproduce the above
+          copyright notice, this list of conditions and the following
+          disclaimer in the documentation and/or other materials
+          provided with the distribution.
+
+        - Neither the name of Internet Society, IETF or IETF Trust,
+          nor the names of specific contributors, may be used to endorse
+          or promote products derived from this software without
+          specific prior written permission.
+
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
+        CONTRIBUTORS 'AS IS' AND ANY EXPRESS OR IMPLIED WARRANTIES,
+        INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+        MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+        DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+        CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+
+
+
+Harrington, et al.          Standards Track                    [Page 23]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+        SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+        NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+        LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+        HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+        CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+        OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+        EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+        This version of this MIB module is part of RFC 5592;
+        see the RFC itself for full legal notices."
+
+    REVISION     "200906090000Z"
+    DESCRIPTION  "The initial version, published in RFC 5592."
+
+    ::= { mib-2 189 }
+
+-- ---------------------------------------------------------- --
+-- subtrees in the SNMP-SSH-TM-MIB
+-- ---------------------------------------------------------- --
+
+snmpSshtmNotifications    OBJECT IDENTIFIER ::= { snmpSshtmMIB 0 }
+snmpSshtmObjects          OBJECT IDENTIFIER ::= { snmpSshtmMIB 1 }
+snmpSshtmConformance      OBJECT IDENTIFIER ::= { snmpSshtmMIB 2 }
+
+-- -------------------------------------------------------------
+-- Objects
+-- -------------------------------------------------------------
+
+snmpSSHDomain OBJECT-IDENTITY
+    STATUS      current
+    DESCRIPTION
+        "The SNMP-over-SSH transport domain.  対応する トランスポートアドレスは, タイプ SnmpSSHAddress  だ.
+
+         SNMP エンティティが snmpSSHDomain トランスポートモデルを使う場合, サイズ 8192 オクテットまでのメッセージを受け取る能力がなければならない.  可能な限り大きな値で実装することが推奨される.
+
+         snmpSSHDomain に関連する securityName 接頭辞は 'ssh' だ.  この接頭辞は, どの安全なトランスポート基盤が securityName を認証したかを識別するために Security Model や 他のコンポーネントから用いられる.
+    ::= { snmpDomains 7 }
+
+SnmpSSHAddress ::= TEXTUAL-CONVENTION
+    DISPLAY-HINT "1a"
+    STATUS      current
+
+
+
+Harrington, et al.          Standards Track                    [Page 24]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+    DESCRIPTION
+        "ポート番号とオプションのユーザ名と共に, ホスト名かIPアドレスを表す.
+
+         このアドレス指定の最初に, '@' (US-ASCII 文字 0x40) が後に続くユーザ名を含めることができる.  アドレスのこの部分は, SSH サーバに認証する際に用いられるユーザ名を指定する.  ユーザ名は UTF-8 でエンコードされなければならない ([RFC4252] による).  なければ, SNMP securityName が用いられる.  オプションのユーザ名フィールド と '@' 文字の後で, ホスト名かIPアドレスが続く.
+
+         ホスト名は常に US-ASCII (RFC1033 のように) だ; 国際化されたホスト名は RFC 3490 で指定されているように US-ASCII でエンコードされる.  ホスト名の後に コロン ':' (US-ASCII 文字 0x3A) と US-ASCII の10進のポート番号が続く.  名前は, 可能な限り完全修飾されている必要がある.
+
+         IPv4 アドレスは, ドット区切りの10進形式で後に コロン ':' (US-ASCII 文字 0x3A) と US-ASCIIの10進のポート番号が続かなければならない.
+
+         IPv6 アドレスは, コロン区切り形式で, 角括弧 ('[', US-ASCII 文字 と ']', US-ASCII 文字 0x5D) で囲まれ, コロン ':' (US-ASCII 文字 0x3A) と US-ASCIIの10進のポート番号が続かなければならない.
+
+         このテキスト表記の値は, トランスポート層のアドレス情報として直接利用できない場合があり, 実行時の解決が必要な可能性がある.  このため, この値を書き込むアプリケーションは, これらの値がサポートされていなかったり(管理の運用時に解決が発生する場合に)解決されない場合のエラーを処理する準備がされていなければならない.
+
+         snmpAddress の値を持つことがある TransportAddress オブジェクトの DESCRIPTION 項は, それらの名前は IPアドレスにどのように(またいつ)解決されたか, またその逆の解決について完全に記述しなければならない.
+
+         このテキスト表記は, アドレスを特定の形式に制限するので, オブジェクト定義で直接利用しないほうがよい.  しかし, これが用いられる場合, それ自身ないし TransportAddressType や TransportDomain とペアとして組み合わされて利用されてもよい.
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 25]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+         このテキスト表記がインデックスオブジェクトの構文として用いられる場合, SMIv2 (STD 58) で指定されている 128 のサブ識別子の制限の問題がある場合がある.  このテキスト表記を用いる MIB 文書は, 管理ソフトウェアが遵守しなければならないインデックスコンポーネントの制限を明示的に行なうことを推奨する.
+         インデックスコンポーネントに SIZE 制限を含めるか, DESCRIPTION 項目か周辺の文書に適用可能な制約を指定するかで, これを行なうことができる.
+        "
+    REFERENCE
+      "RFC 1033: DOMAIN ADMINISTRATORS OPERATIONS GUIDE
+       RFC 3490: Internationalizing Domain Names in Applications
+       RFC 3986: Uniform Resource Identifier (URI): Generic Syntax
+       RFC 4252: The Secure Shell (SSH) Authentication Protocol"
+    SYNTAX      OCTET STRING (SIZE (1..255))
+
+-- snmpSshtmSession グループ
+
+snmpSshtmSession       OBJECT IDENTIFIER ::= { snmpSshtmObjects 1 }
+
+snmpSshtmSessionOpens  OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION "成功/失敗に関わらず, SSH クライアントとして openSession() 要求が実行された回数"
+    ::= { snmpSshtmSession 1 }
+
+snmpSshtmSessionCloses  OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION "成功/失敗に関わらず, SSH クライアントとして closeSession() 要求が実行された回数"
+    ::= { snmpSshtmSession 2 }
+
+snmpSshtmSessionOpenErrors  OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 26]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+    DESCRIPTION "トランスポート接続の開始に失敗した ないし サーバの認証に失敗した openSession() 要求の回数"
+    ::= { snmpSshtmSession 3 }
+
+snmpSshtmSessionUserAuthFailures  OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION "ユーザ認証の失敗のため SSH クライアントとしてセッションの開始に失敗した openSession() 要求の回数.
+                "
+    ::= { snmpSshtmSession 4 }
+
+snmpSshtmSessionNoChannels  OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION "チャンネル開始失敗のため SSH クライアントとしてセッションの開始に失敗した openSession() 要求の回数.
+                "
+    ::= { snmpSshtmSession 5 }
+
+snmpSshtmSessionNoSubsystems OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION "要求されたサブシステムへの接続が不能なため SSH クライアントとしてセッションの開始に失敗した openSession() 要求の回数.
+                "
+    ::= { snmpSshtmSession 6 }
+
+snmpSshtmSessionNoSessions  OBJECT-TYPE
+    SYNTAX       Counter32
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION "同一のセッションがもはや利用不能のため, 送信メッセージがドロップされた回数.
+                "
+    ::= { snmpSshtmSession 7 }tm
+
+snmpSshtmSessionInvalidCaches OBJECT-TYPE
+    SYNTAX       Counter32
+
+
+
+Harrington, et al.          Standards Track                    [Page 27]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+    MAX-ACCESS   read-only
+    STATUS       current
+    DESCRIPTION "tmStateReference が不正なキャッシュを参照していたため送信メッセージがドロップされた回数.
+                "
+    ::= { snmpSshtmSession 8 }
+
+-- ************************************************
+-- snmpSshtmMIB - Conformance Information
+-- ************************************************
+
+snmpSshtmCompliances OBJECT IDENTIFIER ::= { snmpSshtmConformance 1 }
+
+snmpSshtmGroups      OBJECT IDENTIFIER ::= { snmpSshtmConformance 2 }
+
+-- ************************************************
+-- Compliance statements
+-- ************************************************
+
+snmpSshtmCompliance MODULE-COMPLIANCE
+    STATUS      current
+
+    DESCRIPTION "SNMP-SSH-TM-MIB をサポートする SNMP エンジンとための準拠の宣言."
+    MODULE
+        MANDATORY-GROUPS { snmpSshtmGroup }
+    ::= { snmpSshtmCompliances 1 }
+
+-- ************************************************
+-- Units of conformance
+-- ************************************************
+
+snmpSshtmGroup OBJECT-GROUP
+    OBJECTS {
+      snmpSshtmSessionOpens,
+      snmpSshtmSessionCloses,
+      snmpSshtmSessionOpenErrors,
+      snmpSshtmSessionUserAuthFailures,
+      snmpSshtmSessionNoChannels,
+      snmpSshtmSessionNoSubsystems,
+      snmpSshtmSessionNoSessions,
+      snmpSshtmSessionInvalidCaches
+    }
+    STATUS      current
+    DESCRIPTION "SNMP セキュアシェルトランスポートモデルを実装する SNMP エンジンの情報を維持するオブジェクトの集合.
+                "
+
+
+
+Harrington, et al.          Standards Track                    [Page 28]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+    ::= { snmpSshtmGroups 2 }
+
+END
+
+8.  運用上の考察
+
+   SSH トランスポートモデルは, CLI へのリモートアクセスの動作が停止された状態では動作しないだろう.  SSH トランスポートモデルは, 通信ノード間で TCP と IP が正しく動作し続けることを仮定している.  どちらのノードでの失敗や, 接続を提供するデーモンの死, ネットワーク間のルーティング問題, トラフィックをブロックするファイアウォール, またその他の問題は, SSH トランスポートモデルが正常に動作するのを妨げる.  管理のアクセスが非常に信頼できるようにしなければならない状況では, 運用者は軽減策を考慮すべきだ.  この軽減策には, 専用の管理専用のネットワーク,  ポイント-トゥ-ポイントのリンク, 代替のプロトコルやトランスポートを利用する能力が含まれるだろう.
+
+   SSHで提供されるセキュリティサービスを SNMP に利用させるために, SSH トランスポートモデルは,Transport Security Model for SNMP [RFC5591] のような tmStateReference の処理方法を知っている Security Model と共に利用されなければならない.
+
+   SSH トランスポートモデルが AAA サービスを利用するように設定されている場合は, 運用者は, ローカルパスワードのようなローカルの認証メカニズムのサポートの設定を考慮すべきだ. こうすると, SNMP はネットワークに負荷が掛っている時間帯に運用を続けることができる.
+
+   SSH は 独自の window メカニズムを持っており, RFC 4254 で定義されている.
+   window 調整メッセージが作られるべき際に, SSH の仕様は, window メカニズムを開放したままにする. いくつかの実装は, アプリケーションに渡されるデータを受信する度に window 調整メッセージを送る.  そのような window 調整メッセージを扱うには, 広い帯域と処理のオーバヘッドがある. あまり頻繁にメッセージを送らないようにしてこれらを避けることができる.
+
+   SSH プロトコルは, セッションの確立時にセッション鍵を作成するのにCPUをたくさん利用する計算の実行を必要とする.  これは, セッション鍵の概念のない USM 比べて, 短寿命のセッションが計算の負荷を生じることを意味している.  TLSのような他のトランスポートセキュリティプロトコルは, キャッシュされたセッション鍵を再利用することでセッション再開機能をサポートしている.  このようなメカニズムは SSH には存在しないので, SNMP アプリケーションは SSH のセッションをより長い期間保持するべきだ.
+
+   SSH 接続を開始するには, エンティティが, SSH のクライアント資格情報とサーバを認証する情報を持って設定されていなければならない.
+   ホストは頻繁にSSHクライアントとなるよう設定されているが, 多くのインターネットで動作するデバイスはそうではない.
+
+
+
+Harrington, et al.          Standards Track                    [Page 29]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+    SSHTM 越しに通知を送るには, インターネットで動作するデバイスは, SSHクライアントとして設定されている必要がある.  この資格情報の設定をどう行なうかは, 実装と配置に依存する.
+
+9.  セキュリティの考察
+
+   このメモは SSH セキュリティサービスの利用を SNMP に許すトランスポートモデルを記述する.  セキュリティの脅威と SSH トランスポートモデルがそれらの脅威をどのように軽減するかは, このメモ全体を通して詳細に記述されている.
+
+   SSH トランスポートモデルは, SSHの相互認証, 鍵の束縛, 機密性, 完全性に依存する.  SSH アーキテクチャの要求を満たすどの認証法も, 相互の認証と鍵の束縛の性質を提供する.
+
+   SSHv2は、暗号鍵に対する完全転送秘密（PFS）を提供する.
+   PFS は SSH の主な設計目標で, うまく設計された鍵交換アルゴリズムは PFS を提供する.
+
+   SSH の利用におけるセキュリティに関する考察は, [RFC4251] で説明されている.
+
+   SSH トランスポートモデルは, サーバ認証が行なわれたかを検証したり, 事前にホスト公開鍵を取得したり, 正しい鍵が利用されているかを検証する方法を持っていない.  SSH トランスポートモデルは, 実装者と配置者によって適切に設定されていることを単純に信じる.
+
+   SSH は "none" ユーザ認証法を提供している.  SSH トランスポートモデルは, "none" ユーザ認証法を SSH の接続で用いてはならない.  SSH は機密性と完全性を無効にすることをサポートしているが, SSHトランスポートモデルで利用する場合はこれらを無効にしてはならない.
+
+   SSH プロトコルでは, ユーザ名のフィールドが埋められているかどうか常には明確ではない. GSSAPI 認証を用いる実装などのそのような実装のため, SSHの情報と tmSecurityName を変換する, もしくは tmSecurityName を SSHの識別情報に変換するマップアルゴリズムが必要なことがある.
+
+   別の場合として, ユーザ名がサーバによって検証されない可能性がある. そのような実装のため, SSHの交換の間に交換される他の資格情報からユーザ名を得る必要があるかもしれない.
+
+
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 30]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+9.1.  公開鍵検証のスキップ
+
+   ほとんどの鍵交換アルゴリズムは, SSHサーバの識別情報をクライアントに認証することができる.  しかし, 公開鍵で署名される Diffee-Hellman (DH) の一般的な場合では, クライアントがホスト公開鍵をすでに知っていて正しい鍵が利用されているか検証できる必要がある.  このステップがスキップされると, SSHサーバのSSHクライアントへの認証が行なわれない.  サーバへのデータの機密性とデータの完全性保護は残るが, 攻撃者が自身をクライアントと本当のサーバに挿入できる場合, これらは怪しい.  いくつかのユーザ認証法はこの状況と防御するが, (パスワード認証やキーボードインタラクティブ認証を含む)一般的な認証法の多くは防御しない. 実際, これらはサーバの識別情報が検証される(つまり, パスワードは攻撃者に漏れない)ことに依存している.
+
+   SSH を SSH トランスポートモデルで利用する際に 公開鍵の検証をスキップするように設定してはならない.
+
+9.2.  通知の認可の考察
+
+   SNMP の通知は, 通知の発信者の SNMP エンジンで用いられている securityName に基づいて受信者に対して送信する権限を与えられる.
+   この認可は, メッセージが実際に送られる前, また, リモートの受信者の資格情報が検証される前に実行される.
+   このため, 通知の受信者から提示された視覚情報は, 与えられたトランスポートアドレスに対して予測される値と一致しなければならない. また, 資格情報の所有権は, 暗号学的に適切に検証されなければならない.
+
+9.3.  SSH のユーザと鍵の選択
+
+   "user@" プレフィックスが, 認証で用いる SSH ユーザ名を指定するため SnmpSSHAddress の値に含まれている場合, リモートのエンティティへ提示される鍵は, "user" に対してサーバが期待する鍵でなければならない.  これは, securityName の値で識別されるローカルにキャッシュされた鍵とは異なるかもしれない.
+
+9.4.  USM と SSHTM の概念的な違い
+
+   User-based Security Model [RFC3414] は, 対称鍵暗号とユーザの命名規則を採用している.  SSH は 非対称な暗号と命名モデルを採用している.  USM と違い, SSH の接続の両側で暗号鍵が異なる.  どちらの側も, リモートのエンティティが正しい鍵を提示するか検証する責任がある.  SnmpSSHAddress のテキスト規約のオプションの "user@" プレフィックス部分は, SSH サーバに提示される SSH のユーザ名と異なる securityName と接続を関連付けることを クライアントのSNMP スタックができるようにする.
+
+
+
+Harrington, et al.          Standards Track                    [Page 31]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+9.5.  'none' MAC アルゴリズム
+
+   SSH は, 機密性を維持しつつデータの完全性保護を無効にする "none" メッセージ認証コード (MAC) を提供する.  しかし, これを利用すると, 攻撃者が通信データを変更できる. これは, 実質的に認証がないことを意味する.
+
+   SSH を SSH トランスポートモデルで利用する際に "none" MAC アルゴリズムを利用するように設定してはならない.
+
+9.6.  SNMPv1/v2c メッセージの利用
+
+    [RFC3584] (BCP74) で定義されているSNMPv1 と SNMPv2c メッセージ処理は, それぞれ SNMPv1 か SNMPv2c セキュリティモデルを常に選択する.  これらと SNMPv3 で典型的に用いられる User-based Security Model のどちらも, 安全なトランスポート上でメッセージが受信された場合でも, 受信した SNMP メッセージから securityName と securityLever を導出する.  アクセス制御は, SSH トランスポートモデルで提供される 認証された識別情報と securityLevel を用いる代わりに, SNMP メッセージの内容に基づいて決定されなければならない.
+
+9.7.  MIB モジュールのセキュリティ
+
+   read-write および/または read-create の MAX-ACCESS 条項を持つ, このMIB モジュールで定義された管理オブジェクトはない.  つまり, この MIB モジュールが正しく実装されたら, 直接の SNMP SET 操作によってこの MIB モジュールの管理オブジェクトを侵入者が変更したり作成するリスクはない.
+
+   この MIB モジュールの読み込み可能なオブジェクト (つまり, アクセス不能以外の MAX-ACCESS を持つオブジェクト) のいくつかは, ネットワーク環境に敏感か脆弱だと考えられる.  このため, これらのオブジェクトへのGET および/また NOTIFY アクセスを制御したり, これらのオブジェクトを SNMP でネットワーク越しに送る場合に場合によってはこれらの値を暗号化することが重要だ.  以下は, テーブルとオブジェクトとそれらの敏感さ/脆弱性だ.
+
+   o  snmpSshtmSession グループの情報は, クライアントのセッションが開いているか閉じている場合にローカルに生成される.  この情報は, リモートの SSH サーバの設定された情報を反映する. 攻撃者が攻撃に集中するために有益な可能性がある.
+
+
+
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 32]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   SNMPv3 より前の SNMP バージョンは, 適切なセキュリティを含んでいなかった.
+   (例えば IPSec や SSH を用いて) ネットワーク自体は安全であっても, この MIB モジュールのオブジェクトにアクセスし GET/SET (read/change/create/delete)  できる, 安全なネットワーク上のだれかに関しては制御がない.
+
+   SNMPv3 フレームワーク ([RFC3410], 8 節を参照) で提供されるセキュリティの特徴を実装者が考慮するのを推奨する. このフレームワークは,たとえばUser-based Security Model [RFC3414] や  Transport Security Model [RFC5591], この文書で記述した SSH トランスポートモデルによって提供される, 認証と機密性の暗号メカニズムを完全に含んでいる. 
+
+   さらに, SNMPv3 より前の SNMP バージョンの配置は推奨されない.  かわりに SNMPv3 を配置し 暗号のセキュリティを有効にするのを推奨する.  この MIB モジュールのインスタンスへのアクセスを提供するSNMP エンティティが, 実際にオブジェクトに GET や SET (change/create/delete) する正当な権限を持っている プリンシパル(ユーザ)にのみオブジェクトへのアクセスを提供するように適切に設定されているかを保証するのは, 顧客/運用者の責任だ.
+
+10.  IANA の考慮
+
+   IANA は以下を割り当てた:
+
+   1ポート番号レジストリの 2つの TCP ポート番号が, この文書で定義された SNMP オーバー SSH トランスポートモデルとこの文書で定義された通知のSNMP オーバー SSH トランスポートモデルのデフォルトのポートとなる.  割り当てられたキーワードとポート番号は "snmpssh" (5161) と "snmpssh-trap"  (5162) だ.
+
+   2.  この文書の MIBモジュールのための mib-2 の下での SMI 番号 (189).
+
+   3.  snmpSSHDomein のための snmpDomeins の下での SMI 番号 (7).
+
+   4.  [RFC5590] で定義された SNMP Transport Domains レジストリ で snmpSSHDomein に対応するプレフィックス "ssh".
+
+   5.  SSH Protocol Parameters レジストリの Connection Protocol Subsystem Name として, "snmp".
+
+11.  Acknowledgments
+
+   The editors would like to thank Jeffrey Hutzelman for sharing his SSH
+   insights, and Dave Shield for an outstanding job wordsmithing the
+   existing document to improve organization and clarity.
+
+
+
+Harrington, et al.          Standards Track                    [Page 33]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   Additionally, helpful document reviews were received from Juergen
+   Schoenwaelder.
+
+12.  References
+
+12.1.  Normative References
+
+   [RFC1033]  Lottor, M., "Domain administrators operations guide",
+              RFC 1033, November 1987.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC2578]  McCloghrie, K., Ed., Perkins, D., Ed., and J.
+              Schoenwaelder, Ed., "Structure of Management Information
+              Version 2 (SMIv2)", STD 58, RFC 2578, April 1999.
+
+   [RFC2579]  McCloghrie, K., Ed., Perkins, D., Ed., and J.
+              Schoenwaelder, Ed., "Textual Conventions for SMIv2",
+              STD 58, RFC 2579, April 1999.
+
+   [RFC2580]  McCloghrie, K., Perkins, D., and J. Schoenwaelder,
+              "Conformance Statements for SMIv2", STD 58, RFC 2580,
+              April 1999.
+
+   [RFC3411]  Harrington, D., Presuhn, R., and B. Wijnen, "An
+              Architecture for Describing Simple Network Management
+              Protocol (SNMP) Management Frameworks", STD 62, RFC 3411,
+              December 2002.
+
+   [RFC3413]  Levi, D., Meyer, P., and B. Stewart, "Simple Network
+              Management Protocol (SNMP) Applications", STD 62,
+              RFC 3413, December 2002.
+
+   [RFC3414]  Blumenthal, U. and B. Wijnen, "User-based Security Model
+              (USM) for version 3 of the Simple Network Management
+              Protocol (SNMPv3)", STD 62, RFC 3414, December 2002.
+
+   [RFC3418]  Presuhn, R., "Management Information Base (MIB) for the
+              Simple Network Management Protocol (SNMP)", STD 62,
+              RFC 3418, December 2002.
+
+   [RFC3490]  Faltstrom, P., Hoffman, P., and A. Costello,
+              "Internationalizing Domain Names in Applications (IDNA)",
+              RFC 3490, March 2003.
+
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 34]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   [RFC3584]  Frye, R., Levi, D., Routhier, S., and B. Wijnen,
+              "Coexistence between Version 1, Version 2, and Version 3
+              of the Internet-standard Network Management Framework",
+              BCP 74, RFC 3584, August 2003.
+
+   [RFC4251]  Ylonen, T. and C. Lonvick, "The Secure Shell (SSH)
+              Protocol Architecture", RFC 4251, January 2006.
+
+   [RFC4252]  Ylonen, T. and C. Lonvick, "The Secure Shell (SSH)
+              Authentication Protocol", RFC 4252, January 2006.
+
+   [RFC4253]  Ylonen, T. and C. Lonvick, "The Secure Shell (SSH)
+              Transport Layer Protocol", RFC 4253, January 2006.
+
+   [RFC4254]  Ylonen, T. and C. Lonvick, "The Secure Shell (SSH)
+              Connection Protocol", RFC 4254, January 2006.
+
+   [RFC5590]  Harrington, D. and J. Schoenwaelder, "Transport Subsystem
+              for the Simple Network Management Protocol (SNMP)",
+              RFC 5590, June 2009.
+
+12.2.  Informative References
+
+   [RFC1994]  Simpson, W., "PPP Challenge Handshake Authentication
+              Protocol (CHAP)", RFC 1994, August 1996.
+
+   [RFC2865]  Rigney, C., Willens, S., Rubens, A., and W. Simpson,
+              "Remote Authentication Dial In User Service (RADIUS)",
+              RFC 2865, June 2000.
+
+   [RFC3410]  Case, J., Mundy, R., Partain, D., and B. Stewart,
+              "Introduction and Applicability Statements for Internet-
+              Standard Management Framework", RFC 3410, December 2002.
+
+   [RFC3588]  Calhoun, P., Loughney, J., Guttman, E., Zorn, G., and J.
+              Arkko, "Diameter Base Protocol", RFC 3588, September 2003.
+
+   [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
+              Resource Identifier (URI): Generic Syntax", STD 66,
+              RFC 3986, January 2005.
+
+   [RFC4256]  Cusack, F. and M. Forssen, "Generic Message Exchange
+              Authentication for the Secure Shell Protocol (SSH)",
+              RFC 4256, January 2006.
+
+
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 35]
+
+RFC 5592         Secure Shell Transport Model for SNMP         June 2009
+
+
+   [RFC4462]  Hutzelman, J., Salowey, J., Galbraith, J., and V. Welch,
+              "Generic Security Service Application Program Interface
+              (GSS-API) Authentication and Key Exchange for the Secure
+              Shell (SSH) Protocol", RFC 4462, May 2006.
+
+   [RFC4742]  Wasserman, M. and T. Goddard, "Using the NETCONF
+              Configuration Protocol over Secure SHell (SSH)", RFC 4742,
+              December 2006.
+
+   [RFC5090]  Sterman, B., Sadolevsky, D., Schwartz, D., Williams, D.,
+              and W. Beck, "RADIUS Extension for Digest Authentication",
+              RFC 5090, February 2008.
+
+   [RFC5591]  Harrington, D. and W. Hardaker, "Transport Security Model
+              for the Simple Network Management Protocol (SNMP)",
+              RFC 5591, June 2009.
+
+Authors' Addresses
+
+   David Harrington
+   Huawei Technologies (USA)
+   1700 Alma Dr. Suite 100
+   Plano, TX 75075
+   USA
+
+   Phone: +1 603 436 8634
+   EMail: ietfdbh@comcast.net
+
+
+   Joseph Salowey
+   Cisco Systems
+   2901 3rd Ave
+   Seattle, WA 98121
+   USA
+
+   EMail: jsalowey@cisco.com
+
+
+   Wes Hardaker
+   Cobham Analytic Solutions
+   P.O. Box 382
+   Davis, CA  95617
+   US
+
+   Phone: +1 530 792 1913
+   EMail: ietf@hardakers.net
+
+
+
+
+
+Harrington, et al.          Standards Track                    [Page 36]
+
