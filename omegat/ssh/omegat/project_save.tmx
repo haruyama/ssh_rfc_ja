@@ -1719,12 +1719,28 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>AES GCM Authenticated Decryption</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T035010Z" changeid="haruyama">
+        <seg>AES GCM の認証付き復号</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>AES GCM Authenticated Decryption ...........................3
    5.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110826T040940Z" changeid="haruyama">
-        <seg>AES GCM の認証された復号 ...........................3
+      <tuv lang="JA" changedate="20110828T033510Z" changeid="haruyama">
+        <seg>AES GCM の認証付き復号 ...........................3
    5.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>AES GCM Authenticated Encryption</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T033443Z" changeid="haruyama">
+        <seg>AES GCM の認証付き暗号化</seg>
       </tuv>
     </tu>
     <tu>
@@ -1732,8 +1748,8 @@
         <seg>AES GCM Authenticated Encryption ...........................3
       4.2.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110826T040926Z" changeid="haruyama">
-        <seg>AES GCM の認証された暗号化 ...........................3
+      <tuv lang="JA" changedate="20110828T033506Z" changeid="haruyama">
+        <seg>AES GCM の認証付き暗号化 ...........................3
       4.2.</seg>
       </tuv>
     </tu>
@@ -1754,6 +1770,25 @@
       </tuv>
       <tuv lang="JA">
         <seg>AESは US Federal Information Processing Standards as [FIPS-197] として公開され, また暗号学のコミュニティも同様にAESを受け入れた.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>AES-GCM is an
+   example of an &quot;algorithm for authenticated encryption with associated
+   data&quot; (AEAD algorithm) as described in [RFC5116].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T033456Z" changeid="haruyama">
+        <seg>AES-GCM は, [RFC5116] で記述された &quot;algorithm for authenticated encryption with associated data&quot; (関連するデータの認証付き暗号化を行なうアルゴリズム, AEAD アルゴリズム) の例だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>AES-GCM is prohibited from returning any portion of the plaintext
+   until the authentication tag has been validated.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T035315Z" changeid="haruyama">
+        <seg>AES-GCM は, 認証タグが検証されるまで平文を一部でも返すことを禁じられている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2922,6 +2957,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>An invocation of AES GCM to perform an authenticated decryption has
+   the following inputs and outputs:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T035021Z" changeid="haruyama">
+        <seg>認証付きの復号を実行する AES GCM の実行は, 次の入力と出力を持つ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An invocation of AES GCM to perform an authenticated encryption has
+   the following inputs and outputs:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T033551Z" changeid="haruyama">
+        <seg>認証付きの暗号化を実行する AES GCM の実行は, 次の入力と出力を持つ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Another alternative to recommendation
    (1) would be to switch from basic HMAC to a another MAC, such as a</seg>
       </tuv>
@@ -3339,6 +3392,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As described in Section 7.2 of [RFC4253], a hash-based key derivation
+   function (KDF) is applied to the shared secret value K to generate
+   the required symmetric keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T043750Z" changeid="haruyama">
+        <seg>[RFC4253] の 7.2 節で記述されているように, ハッシュベースの鍵導出関数 (KDF) が, 必要な対称鍵を生成するために 共有の秘密の値 K に適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As described in Section 9.3.3, a successful attack
    of this nature is very improbable.</seg>
       </tuv>
@@ -3512,6 +3575,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>name のリストであるので, すべての含まれる要素は name だ. また US-ASCIIでなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As we shall see below, SSH AES-GCM requires a 12-octet Initial IV and
+   an encryption key of either 16 or 32 octets.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T044049Z" changeid="haruyama">
+        <seg>以下で見るように, SSH AES-GCM  12-オクテットの初期 IV と 16 か 32 オクテットの暗号鍵を必要とする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3904,6 +3976,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>MACは32bitのシーケンス番号を利用するので, 2**32のパケットが送られたあとでは情報を漏らしはじめる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Because an AEAD
+   algorithm such as AES-GCM uses the encryption key to provide both
+   confidentiality and data integrity, the integrity key is not used
+   with AES-GCM.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T044131Z" changeid="haruyama">
+        <seg>AES-GCM のような AEAD アルゴリズムは機密性とデータの完全性を提供するのに暗号鍵を用いるので, 完全性鍵は AES-GCM では利用されない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5342,6 +5425,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Conversely, if AES-GCM is selected as the MAC
+   algorithm, it MUST also be selected as the encryption algorithm.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T043619Z" changeid="haruyama">
+        <seg>逆に, AES-GCM が MAC アルゴリズムとして選択されたら, 暗号化アルゴリズムとしても選択されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Copyright (C) The IETF Trust (2006).</seg>
       </tuv>
       <tuv lang="JA" changedate="20110725T114542Z" changeid="haruyama">
@@ -6307,6 +6399,23 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Each tunnel gets a distinct set of</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T043835Z" changeid="haruyama">
+        <seg>それぞれのチャンネルは, 対称鍵の独立の集合を持つ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Each tunnel is encrypted, and a message
+   authentication code is used to ensure data integrity.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T042214Z" changeid="haruyama">
+        <seg>どちらのチャンネルも, 暗号化され, データ完全性を保証するためにメッセージ認証コードが用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Earlier versions of this protocol have not been formally
    documented, but it is widely known that they use 'protoversion' of
    &quot;1.x&quot; (e.g., &quot;1.5&quot; or &quot;1.3&quot;).</seg>
@@ -6366,6 +6475,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>どちらの側からもチャンネルを開ける.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Either the server or client may at any time request that the secure
+   shell session be rekeyed.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T044346Z" changeid="haruyama">
+        <seg>サーバもクライアントも, セキュアシェルセッションで鍵の再生成の要求をいつでも行う可能性がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6976,6 +7094,22 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Figure 1: Key Derivation in Secure Shell</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T043934Z" changeid="haruyama">
+        <seg>図 1: セキュアシェルの鍵導出</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Figure 2: Structure of a Secure Shell Binary Packet</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T045234Z" changeid="haruyama">
+        <seg>図 2: セキュアシェルのバイナリパケットの構造</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Fingerprint</seg>
       </tuv>
       <tuv lang="JA">
@@ -7184,6 +7318,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110729T070950Z" changeid="haruyama">
         <seg>現在の Internet-Standard Management Framework を記述する文書の詳細な概要は, RFC 3410 [RFC3410] の7節を参照せよ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For a given block-cipher key BK, it is critical that no IV be used
+   more than once.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T033837Z" changeid="haruyama">
+        <seg>与えられたブロック暗号鍵 BK に対して, 複数回同じ IV を利用しないことが重要だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7924,6 +8067,22 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>GCM Authenticated Decryption</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T035024Z" changeid="haruyama">
+        <seg>AES GCM の認証付き復号</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>GCM Authenticated Encryption</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T033555Z" changeid="haruyama">
+        <seg>AES GCM の認証付き暗号化</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>GCM uses
    counter mode to encrypt the data, an operation that can be
    efficiently pipelined.</seg>
@@ -8047,6 +8206,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110826T041341Z" changeid="haruyama">
         <seg>Galois カウンタモード (GCM) は, 機密性とデータ完全性サービスの両方を提供する操作のブロック暗号モードだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Galois Counter Mode (GCM) is a mode of operation for block ciphers
+   that provides both confidentiality and data integrity.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T033157Z" changeid="haruyama">
+        <seg>Galois カウンタモード (GCM) は, 機密性とデータ完全性の両方を提供するブロック暗号の操作のモードだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9187,6 +9355,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>'want reply' が FALSE なら, 要求に対する返答は送られない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If AES-GCM is selected as the encryption algorithm for a given
+   tunnel, AES-GCM MUST also be selected as the Message Authentication
+   Code (MAC) algorithm.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T043550Z" changeid="haruyama">
+        <seg>AES-GCM がトンネルの暗号化アルゴリズムとして選択されたら, AES-GCMは, メッセージ認証コード (MAC) アルゴリズムとしても選択されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12518,6 +12696,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In this document, we shall focus on AES GCM, the use of the Advanced
+   Encryption Algorithm (AES) in Galois Counter Mode.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T033312Z" changeid="haruyama">
+        <seg>この文書では, Galois カウンタモードを Advanced Encryption Algorithm (AES) と用いる場合である, AES GCM に焦点を当てる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In this mode, the server SHOULD NOT send the Carriage Return
    character (ASCII 13) after the identification string.</seg>
       </tuv>
@@ -12871,6 +13058,44 @@
       <tuv lang="JA" changedate="20110621T012504Z" changeid="haruyama">
         <seg>GSS-API 認証の開始 .........................13
       3.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Inputs:
+            octet_string CT ;   // Cipher text, to be both
+                                //    authenticated and decrypted
+            octet_string AAD;   // Additional Authenticated Data,
+                                //    authenticated only
+            octet_string AT;    // Authentication Tag
+            octet_string IV;    // Initialization Vector
+            octet_string BK;    // Block Cipher Key</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T035138Z" changeid="haruyama">
+        <seg>Inputs:
+            octet_string CT ;   // 認証と復号の両方の暗号文
+            octet_string AAD;   // 追加の認証されるデータ. 認証されるが暗号化されない
+            octet_string AT;    // 認証タグ
+            octet_string IV;    // 初期化ベクトル
+            octet_string BK;    // ブロック暗号の鍵</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Inputs:
+            octet_string PT ;   // Plain Text, to be both
+                                //    authenticated and encrypted
+            octet_string AAD;   // Additional Authenticated Data,
+                                //    authenticated but not encrypted
+            octet_string IV;    // Initialization Vector
+            octet_string BK;    // Block Cipher Key</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T035127Z" changeid="haruyama">
+        <seg>Inputs:
+            octet_string PT ;   // 認証と暗号化の両方の平文
+            octet_string AAD;   // 追加の認証されるデータ. 認証されるが暗号化されない
+            octet_string IV;    // 初期化ベクトル
+            octet_string BK;    // ブロック暗号の鍵</seg>
       </tuv>
     </tu>
     <tu>
@@ -15420,6 +15645,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>National
+   Institute of Standards and Technology (NIST) Special Publication SP
+   800 38D [GCM] gives an excellent explanation of Galois Counter Mode.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T033230Z" changeid="haruyama">
+        <seg>National Institute of Standards and Technology (NIST) Special Publication SP 800 38D [GCM] が, Galois カウンタモードの素晴しい説明をしている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Naturally, if an attacker does attempt
    to replay a captured packet before the peers have rekeyed, then the
    receiver of the duplicate packet will not be able to validate the MAC
@@ -16102,6 +16337,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Note: in [RFC5116], the IV is called the nonce.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T033748Z" changeid="haruyama">
+        <seg>注意: [RFC5116] では IV はナンスと呼ばれている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Notes about the PRIVATE USE Range</seg>
       </tuv>
       <tuv lang="JA">
@@ -16513,6 +16756,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Only the
+   session_id will remain unchanged.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T044432Z" changeid="haruyama">
+        <seg>session_id のみは変更されない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Only the first few fields are defined; the remaining fields depend on
    the authentication method.</seg>
       </tuv>
@@ -16809,6 +17061,32 @@
       <tuv lang="JA">
         <seg>鍵交換からの出力................................20
       7.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Output:
+            Failure_Indicator;  // Returned if the authentication tag
+                                //   is invalid
+            octet_string  PT;   // Plain Text, returned if and only if
+                                //    the authentication tag is valid</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T035231Z" changeid="haruyama">
+        <seg>Output:
+            Failure_Indicator;  // 認証タグが不正の場合に返す.
+            octet_string  PT;   // 平文. 認証タグが正当な場合にのみ返る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Outputs:
+            octet_string  CT;   // Cipher Text
+            octet_string  AT;   // Authentication Tag</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T033729Z" changeid="haruyama">
+        <seg>Outputs:
+            octet_string  CT;   // 暗号文
+            octet_string  AT;   // 認証タグ</seg>
       </tuv>
     </tu>
     <tu>
@@ -17156,6 +17434,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110815T075720Z" changeid="haruyama">
         <seg>このメッセージの処理は停止する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Properties of Galois Counter Mode</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T033113Z" changeid="haruyama">
+        <seg>Galois カウンタモードの特性</seg>
       </tuv>
     </tu>
     <tu>
@@ -18190,10 +18476,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Review of Secure Shell</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T043955Z" changeid="haruyama">
+        <seg>セキュアシェルの復習</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Review of Secure Shell ..........................................4
       5.1.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110826T040952Z" changeid="haruyama">
+      <tuv lang="JA" changedate="20110828T044004Z" changeid="haruyama">
         <seg>セキュアシェルの復習 ..........................................4
       5.1.</seg>
       </tuv>
@@ -18762,6 +19056,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Section 7.1 addresses how this goal is to be
+   achieved in secure shell.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T033859Z" changeid="haruyama">
+        <seg>7.1節で, セキュアシェルでこの目標をどう達成するかを説明する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Section 9 of [RFC4253] suggests that SSH implementations rekey after
    every gigabyte of transmitted data.</seg>
       </tuv>
@@ -18794,6 +19097,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110720T130532Z" changeid="haruyama">
         <seg>セキュアシェル (SSH) は, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Secure Shell Binary Packets</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T044944Z" changeid="haruyama">
+        <seg>セキュアシェルのバイナリパケット</seg>
       </tuv>
     </tu>
     <tu>
@@ -20720,6 +21031,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110721T030706Z" changeid="haruyama">
         <seg>サーバは応答パケットを送信して, 成功か失敗を示し応答に特有のデータを提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   sizes of these keys varies depending upon which cryptographic
+   algorithms are being used.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T043921Z" changeid="haruyama">
+        <seg>これらの鍵のサイズは, 利用される暗号アルゴリズムに依存して変わる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23232,6 +23553,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The authentication tag produced by AES-GCM authenticated encryption
+   will be placed in the MAC field at the end of the secure shell binary
+   packet.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T045311Z" changeid="haruyama">
+        <seg>AES-GCM 認証付き暗号化で生成される認証タグは, セキュアシェルのバイナリパケットの末尾の MAC フィールドに配置される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The available types and
    their interpretation depend on the type of channel.</seg>
       </tuv>
@@ -24821,6 +25152,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The goal of secure shell is to establish two secure tunnels between a
+   client and a server, one tunnel carrying client-to-server
+   communications and the other carrying server-to-client
+   communications.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T042125Z" changeid="haruyama">
+        <seg>セキュアシェルの目標は, クライアントとサーバの間に2つの安全なトンネルを確立することだ. 1つのトンネルは, クアイアントからサーバへの通信を運び, もう1つはサーバからクライアントへの通信を運ぶ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The group used for Diffie-Hellman key exchange and the
    underlying GSS-API mechanism are also defined by the method name.</seg>
       </tuv>
@@ -25043,6 +25385,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110719T030109Z" changeid="haruyama">
         <seg>レジルトリの最初の内容は以下だ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The initial value of H is saved for use as
+   the session_id.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T043502Z" changeid="haruyama">
+        <seg>H の初期値は session_id として用いられるために保存される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -25307,6 +25658,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110419T122651Z" changeid="haruyama">
         <seg>サーバの同定と通信の検証に用いられる鍵付きハッシュのメッセージ認証コードは, 上で選ばれたハッシュを元にする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The keys are generated as shown in Figure 1.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T043856Z" changeid="haruyama">
+        <seg>鍵は, 図1のように生成される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27130,6 +27489,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The shared secret value K, the exchange
+   hash H, and all the above symmetric keys will be updated.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T044418Z" changeid="haruyama">
+        <seg>共有の秘密の値 K と交換ハッシュ H, 上記のすべての対称鍵が更新される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The signature algorithm MUST be applied over H, not the original
    data.</seg>
       </tuv>
@@ -28329,6 +28697,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110729T063518Z" changeid="haruyama">
         <seg>これらの用語は, RFC 3411 のサブシステムや Abstract Service Interfaces (ASIs) と互換性を持つ設計をするために提案されたIETF モデルの設計者へのガイドとして用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These tunnels are initialized using the secure shell key exchange
+   protocol as described in Section 7 of [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T043249Z" changeid="haruyama">
+        <seg>これらのトンネルは, [RFC4253] の7節で記述されているセキュアシェル鍵交換プロトコルを用いて初期化される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30267,6 +30644,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This protocol
+   negotiates a mutually acceptable set of cryptographic algorithms and
+   produces a secret value K and an exchange hash H that are shared by
+   the client and server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T043359Z" changeid="haruyama">
+        <seg>このプロトコルは, 相互に受け入れ可能な暗号アルゴリズムの集合を交渉し, クライアントとサーバで共有される秘密の値 K と交換ハッシュ H を生成する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This protocol aims to be simple and uses only well-understood
    primitives.</seg>
       </tuv>
@@ -30720,6 +31108,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110725T090445Z" changeid="haruyama">
         <seg>これをSSHの &quot;string&quot; としてエンコードすると, SSHの &quot;mpint&quot; エンコーディングをこの整数に適用するのと似ているが異なる結果を生成する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Though this feature
+   greatly simplifies the security analysis of any system using AES-GCM,
+   this creates an incompatibility with the requirements of secure
+   shell, as we shall see in Section 7.3.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T035420Z" changeid="haruyama">
+        <seg>この特徴は AES-GCM を用いるシステムのセキュリティ解析を非常に単純にするが, セキュアシェルの要件との不整合を生む. 7.3 節でこの点に触れる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -31253,6 +31652,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>0 か 255 の値の必要のない先行バイトは含めてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Upon completion of the key exchange protocol, all further secure
+   shell traffic is parsed into a data structure known as a secure shell
+   binary packet as shown below in Figure 2 (see also Section 6 of
+   [RFC4253]).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T045214Z" changeid="haruyama">
+        <seg>鍵交換プロトコルが完了すると, それ以後のセキュアシェルの通信は, 以下の図2で示す (また [RFC4253] の6節を参照) セキュアシェルバイナリパケットとして知られるデータ構造に構文解析される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33607,6 +34017,14 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110719T030120Z" changeid="haruyama">
         <seg>subject は 3.3.1 節で定義されている</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>symmetric keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T043843Z" changeid="haruyama">
+        <seg> </seg>
       </tuv>
     </tu>
     <tu>
