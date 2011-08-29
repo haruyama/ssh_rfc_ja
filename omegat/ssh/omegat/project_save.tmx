@@ -507,6 +507,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>1) The tag cannot be verified until we parse the binary packet.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T041441Z" changeid="haruyama">
+        <seg>1) バイナリパケットをパースするまでタグが検証できない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>1.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110825T052024Z" changeid="haruyama">
@@ -681,10 +689,28 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>2) The packet cannot be parsed until the packet_length has been
+      decrypted.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T041503Z" changeid="haruyama">
+        <seg>2) packet_length が復号されるまでパケットがパースできない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>3     VERASE      Erase the character to left of the cursor.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>3     VERASE      カーソルの左側の文字を消す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>3) The packet_length cannot be decrypted until the tag has been
+      verified.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T041527Z" changeid="haruyama">
+        <seg>3) タグが検証されるまで packet_length が復号できない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1709,6 +1735,30 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>AEAD_AES_128_GCM is specified in Section 5.1 of [RFC5116].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T033238Z" changeid="haruyama">
+        <seg>AEAD_AES_128_GCM は, [RFC5116] の5.1節で指定されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>AEAD_AES_256_GCM is specified in Section 5.2 of [RFC5116].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T033704Z" changeid="haruyama">
+        <seg>AEAD_AES_256_GCM は, [RFC5116] の5.2節で指定されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>AES GCM Algorithms for Secure Shell</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T033220Z" changeid="haruyama">
+        <seg>セキュアシェルのための AES GCM アルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>AES GCM Algorithms for Secure Shell .............................6
       6.1.</seg>
       </tuv>
@@ -1789,6 +1839,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110828T035315Z" changeid="haruyama">
         <seg>AES-GCM は, 認証タグが検証されるまで平文を一部でも返すことを禁じられている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>AES-GCM produces a keystream in blocks of 16-octets that is used to
+   encrypt the plaintext.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T035421Z" changeid="haruyama">
+        <seg>AES-GCM は, 平文を暗号化するのに使われる再, 16-オクテットのブロックで鍵ストリームを生成する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2341,6 +2400,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>すべての実装は, パスワード認証をサポートする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>All
+   implementations of AES-GCM secure shell MUST use the full 16-octet
+   Authentication Tag.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T034139Z" changeid="haruyama">
+        <seg>AES-GCM のすべての実装は, 完全な 16-オクテットの認証タグを用いなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3460,6 +3529,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As required in [RFC4253], the random_padding MUST be at least 4
+   octets in length but no more than 255 octets.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T040317Z" changeid="haruyama">
+        <seg>[RFC4253] で要求されているように, random_padding は 最低 4 オクテット長なければならない. また 255 オクテットを越えてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As stated earlier, the 'protoversion' specified for this protocol is
    &quot;2.0&quot;.</seg>
       </tuv>
@@ -3897,6 +3975,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>BK (Block Cipher Key)
+        The appropriate Encryption Key formed during the Key Exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T040200Z" changeid="haruyama">
+        <seg>BK (Block Cipher Key)
+        鍵交換時に生成された適切な暗号鍵.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Banner Message</seg>
       </tuv>
       <tuv lang="JA">
@@ -4134,6 +4222,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>サーバとクライアントは, 基盤となっているトランスポート層が機密性を提供するかどうか(すなわち, 暗号化が使われているかどうか)をチェックしなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Both AEAD_AES_128_GCM and AEAD_AES_256_GCM produce a 16-octet
+   Authentication Tag ([RFC5116] calls this a &quot;Message Authentication
+   Code&quot;).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T034026Z" changeid="haruyama">
+        <seg>AEAD_AES_128_GCM と AEAD_AES_256_GCM の両方とも 16-オクテットの認証タグを生成する ([RFC5116] は &quot;Message Authentication Code&quot; とこれを呼ぶ).</seg>
       </tuv>
     </tu>
     <tu>
@@ -6018,6 +6116,28 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Due to
+   the format of secure shell binary packets, the buffer sizes needed
+   to implement AEAD_AES_256_GCM are smaller than those required in
+   [RFC5116].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T033751Z" changeid="haruyama">
+        <seg>セキュアシェルのバイナリパケットの形式のために, AEAD_AES_256_GCM を実装するのに必要なバッファサイズは [RFC5116] で要求されているものよりも小さい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Due to
+   the format of secure shell binary packets, the buffer sizes needed to
+   implement AEAD_AES_128_GCM are smaller than those required in
+   [RFC5116].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T033744Z" changeid="haruyama">
+        <seg>セキュアシェルのバイナリパケットの形式のために, AEAD_AES_128_GCM を実装するのに必要なバッファサイズは [RFC5116] で要求されているものよりも小さい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Due to its small key sizes and its inclusion in the National Security
    Agency's Suite B, Elliptic Curve Cryptography (ECC) is becoming a
    widely utilized and attractive public-key cryptosystem.</seg>
@@ -7110,6 +7230,22 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Figure 3: Structure of an SSH AES-GCM Nonce</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T035351Z" changeid="haruyama">
+        <seg>図3: SSH AES-GCM のナンスの構造</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Figure 4: Structure of an AES Input for SSH AES-GCM</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T035610Z" changeid="haruyama">
+        <seg>図 4: SSH AES-GCM への AES の入力の構造</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Fingerprint</seg>
       </tuv>
       <tuv lang="JA">
@@ -7810,6 +7946,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>興味のある者のために紹介しておくと, 1.x プロトコルについての唯一の文書は, ソースコード [ssh-1.2.30] と共にリリースされた README ファイルに含まれている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Formation of the Binary Packet</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T035947Z" changeid="haruyama">
+        <seg>バイナリパケットの形成</seg>
       </tuv>
     </tu>
     <tu>
@@ -9218,6 +9362,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110728T103959Z" changeid="haruyama">
         <seg>IANA は, [RFC4250] で定義された SSH Service Name として, 以下のように &quot;netconf&quot; を割り当てるよう要求された. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>IV and Counter Management</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T035202Z" changeid="haruyama">
+        <seg>IV とカウンタの管理</seg>
       </tuv>
     </tu>
     <tu>
@@ -11776,6 +11928,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110623T035519Z" changeid="haruyama">
         <seg>この時, [SSH-TRANSPORT] によって 接続を終了する前に必要に応じて相手にエラー情報を伝えるいくつかのメカニズムが提供されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In AES-GCM secure shell, the inputs to the authenticated encryption
+   are:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T040054Z" changeid="haruyama">
+        <seg>AES-GCM セキュアシェルで, 認証付き暗号化の入力は以下だ:</seg>
       </tuv>
     </tu>
     <tu>
@@ -17128,6 +17289,28 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>PT (Plain Text)
+        byte      padding_length; // 4 &lt;= padding_length &lt; 256
+        byte[n1]  payload;        // n1 = packet_length-padding_length-1
+        byte[n2]  random_padding; // n2 = padding_length
+     AAD (Additional Authenticated Data)
+        uint32    packet_length;  // 0 &lt;= packet_length &lt; 2^32
+     IV (Initialization Vector)
+        As described in section 7.1.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T040203Z" changeid="haruyama">
+        <seg>PT (Plain Text)
+        byte      padding_length; // 4 &lt;= padding_length &lt; 256
+        byte[n1]  payload;        // n1 = packet_length-padding_length-1
+        byte[n2]  random_padding; // n2 = padding_length
+     AAD (Additional Authenticated Data)
+        uint32    packet_length;  // 0 &lt;= packet_length &lt; 2^32
+     IV (Initialization Vector)
+        7.1節で 記述したもの.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Packet Size and Overhead</seg>
       </tuv>
       <tuv lang="JA">
@@ -17407,6 +17590,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110815T075455Z" changeid="haruyama">
         <seg>このメッセージの処理は停止する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Processing Binary Packets in AES-GCM Secure Shell</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T035156Z" changeid="haruyama">
+        <seg>AES-GCM セキュアシェルのバイナリパケットの処理</seg>
       </tuv>
     </tu>
     <tu>
@@ -19056,6 +19247,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Section 6.3 of [RFC4253] requires that the packet length, padding
+   length, payload, and padding fields of each binary packet be
+   encrypted.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T041413Z" changeid="haruyama">
+        <seg>[RFC4253] の 6.3 節は, それぞれのパケットをの packet length と padding length, payload, and padding fields を暗号化するよう要求している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Section 7.1 addresses how this goal is to be
    achieved in secure shell.</seg>
       </tuv>
@@ -19877,6 +20078,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Size of the Authentication Tag</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T033914Z" changeid="haruyama">
+        <seg>認証タグのサイズ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Size of the Authentication Tag .............................6
    7.</seg>
       </tuv>
@@ -19958,6 +20167,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>さらなる助言が [RFC3766]で与えられている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Some applications allow use of a truncated version of this
+   tag.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T034114Z" changeid="haruyama">
+        <seg>アプリケーションは, このタグの切り詰められたバーンを使うことができる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20778,6 +20996,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>関連する切断メッセージの 'description' は, 切断の理由を示す人間が解読できるメッセージだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   binary packet is the concatenation of the 4-octet packet_length, the
+   cipher text (CT), and the 16-octet authentication tag (AT).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T040513Z" changeid="haruyama">
+        <seg>バイナリパケットは, 4オクテットの 4-octet packet_length と cipher text (CT, 暗号テキスト), 16-オクテットの authentication tag (AT, 認証タグ) を連結したものだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23624,6 +23852,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The block_counter is initially set to one (1) and incremented as each
+   block of key is produced.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T035657Z" changeid="haruyama">
+        <seg>block_counter は, 最初 1 に設定され, ブロック鍵が生成される度にインクリメントされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The body of a public key file is the base64 encoded ([RFC2045])
    public key data as specified by [RFC4253], Section 6.6:</seg>
       </tuv>
@@ -25444,6 +25681,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The invocation
+   field is treated as a 64-bit integer and is incremented after each
+   invocation of AES-GCM to process a binary packet.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T035337Z" changeid="haruyama">
+        <seg>呼び出しフィールドは, 64-ビットの整数として扱われ, バイナリパケットを処理する AES-GCM の呼び出しの後でインクリメントされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The key K_T is encoded according to the &quot;ssh-rsa&quot; scheme described in
    Section 6.6 of [RFC4253].</seg>
       </tuv>
@@ -26684,6 +26931,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The reader is reminded that SSH requires that the data to be
+   encrypted MUST be padded out to a multiple of the block size
+   (16-octets for AES-GCM).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T035941Z" changeid="haruyama">
+        <seg>読者は, 暗号化されるデータはブロックサイズ (AES-GCM では 16-オクテット)の倍数にパディングされなければならないことをSSHが要求していることに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The reason that the MAC will fail is
    because the receiver will formulate a MAC based upon the packet
    contents, the shared secret, and the expected sequence number.</seg>
@@ -26763,6 +27020,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>リモート側はチャンネルを開始するかどうかを決定する. そして SSH_MSG_CHANNEL_OPEN_CONFIRMATION か SSH_MSG_CHANNEL_OPEN_FAILURE で返答する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The repercussions of this
+   decision are discussed in the following Security Considerations
+   section.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T041818Z" changeid="haruyama">
+        <seg>この決定の影響は, 次のセキュリティの考察の節で議論する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27776,6 +28043,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110811T104351Z" changeid="haruyama">
         <seg>tmSessionID は受信時にメッセージ単位で記録されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The total length of
+   the PT MUST be a multiple of 16 octets (the block size of AES).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T040356Z" changeid="haruyama">
+        <seg>PT の合計の長さは, 16 オクテット (AES のブロックサイズ)の倍数でなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28876,6 +29152,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110527T140531Z" changeid="haruyama">
         <seg>この予防手段は, 理不尽に長い BREAK 要求が BREAKを実行する間に49.7日の間ポートを利用不能にするのを防ぐ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This
+   violates the requirements of [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T041738Z" changeid="haruyama">
+        <seg>これは [RFC4253] の要件に違反している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -29984,6 +30269,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This is not allowed in AES-GCM secure shell.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T034102Z" changeid="haruyama">
+        <seg>これは AES-GCM セキュアシェルでは許可されない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This is purely coincidental and actually has
    nothing to do with STD 11 [9].</seg>
       </tuv>
@@ -30082,6 +30375,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110725T095626Z" changeid="haruyama">
         <seg>この鍵交換法は, 交換ハッシュの衝突攻撃に耐性があるように設計されている. クライアントもサーバももう一方の側の入力をすべて見たあとで, ハッシュへの入力を自由に選ぶことができないことが保証されているからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This keystream is produced by encrypting the
+   following 16-octet data structure:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T035501Z" changeid="haruyama">
+        <seg>この鍵ストリームは, 以下の 16-オクテットのデータ構造を暗号化して生成される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30601,6 +30903,14 @@
       <tuv lang="JA" changedate="20110819T070237Z" changeid="haruyama">
         <seg>この接頭辞は, どの安全なトランスポート基盤が securityName を認証したかを識別するために Security Model や 他のコンポーネントから用いられる.
     ::= { snmpDomains 7 }</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This presents a problem for SSH AES-GCM because:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T041424Z" changeid="haruyama">
+        <seg>これは, SSH AES-GCM では問題となる:</seg>
       </tuv>
     </tu>
     <tu>
@@ -31552,6 +31862,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Treatment of the Packet Length Field</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T041324Z" changeid="haruyama">
+        <seg>Packet Length フィールドの扱い</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Treatment of the Packet Length Field .......................8
    8.</seg>
       </tuv>
@@ -31866,6 +32184,24 @@
       </tuv>
       <tuv lang="JA">
         <seg>上の例を用いると, 'data' の取り得る値には, &quot;foo&quot; や &quot;bar&quot; がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Using the notation defined in [RFC5116], the input and
+   output lengths for AEAD_AES_128_GCM in secure shell are as follows:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T033808Z" changeid="haruyama">
+        <seg>[RFC5116] で定義された表記法を用いると, セキュアシェルでの AEAD_AES_128_GCMの入力長と出力長は以下となる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Using the notation defined in [RFC5116], the input and
+   output lengths for AEAD_AES_256_GCM in secure shell are as follows:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T033816Z" changeid="haruyama">
+        <seg>[RFC5116] で定義された表記法を用いると, セキュアシェルでの AEAD_AES_256_GCMの入力長と出力長は以下となる:</seg>
       </tuv>
     </tu>
     <tu>
@@ -32456,6 +32792,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>When using AES-GCM with secure shell, the packet_length field is to
+   be treated as additional authenticated data, not as plaintext.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T041727Z" changeid="haruyama">
+        <seg>セキュアシェルと共に AES-GCM を用いる場合, packet_length フィールドは 追加の認証されるデータ (additional authenticated data) として扱い平文としては扱われないようにする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>When values to fill those fields are
    referenced, they will appear within double quotes.</seg>
       </tuv>
@@ -32604,6 +32949,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>ウィンドウ容量変更メッセージ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>With AES-GCM, the 12-octet IV is broken into two fields: a 4-octet
+   fixed field and an 8-octet invocation counter field.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T035254Z" changeid="haruyama">
+        <seg>AES-GCM では, 12-オクテットの IVが2つのフィールドに分けられる: 4-octet の固定のフィールドと, 8-octet の呼び出しカウンタフィールドだ.</seg>
       </tuv>
     </tu>
     <tu>
