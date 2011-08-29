@@ -1,0 +1,438 @@
+
+
+
+
+
+
+Network Working Group                                            K. Igoe
+Request for Comments: 5647                                    J. Solinas
+Category: Informational                         National Security Agency
+                                                             August 2009
+
+
+                      セキュアシェルトランスポート層プロトコルのための AES Galois (ガロア) カウンタモード
+
+概要
+
+   セキュア シェル(SSH) は 安全なロモートログインプロトコルだ.  SSH は, 認証, 鍵の合意, 機密性, データ完全性サービスを提供するアルゴリズムを提供する.  この文書の目的は, AES Galois (ガロア) カウンタモードがSSH トランスポート層プロトコルに機密性とデータ完全性の両方を提供するためにどのように用いられるかを示すことだ.
+
+このメモの位置づけ
+
+   This memo provides information for the Internet community.  It does
+   not specify an Internet standard of any kind.  Distribution of this
+   memo is unlimited.
+
+Copyright Notice
+
+   Copyright (c) 2009 IETF Trust and the persons identified as the
+   document authors. 訳者: 春山征吾 <haruyama@unixuser.org>All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents in effect on the date of
+   publication of this document (http://trustee.ietf.org/license-info).
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Igoe & Solinas               Informational                      [Page 1]
+
+RFC 5647                AES-GCM for Secure Shell             August 2009
+
+
+目次
+
+   1イントロダクション ..........................................2
+   2. 要件に関する用語 ........................................2
+   3. 適用性についての意見 .........................................3
+   4. Galois カウンタモードの特性 ...............................3
+      4.1. AES GCM の認証付き暗号化 ...........................3
+      4.2. AES GCM の認証付き復号 ...........................3
+   5. セキュアシェルの復習 ..........................................4
+      5.1. 鍵交換 ...............................................4
+      5.2. セキュアシェルのバイナリパケット ................................5
+   6. セキュアシェルのための AES GCM アルゴリズム .............................6
+      6.1. AEAD_AES_128_GCM ...........................................6
+      6.2. AEAD_AES_256_GCM ...........................................6
+      6.3. 認証タグのサイズ .............................6
+   7. AES-GCM セキュアシェルのバイナリパケットの処理 ...............7
+      7.1. IV とカウンタの管理 ..................................7
+      7.2. バイナリパケットの形成 .............................7
+      7.3. Packet Length フィールドの扱い .......................8
+   8. セキュリティの考察 .........................................8
+      8.1. AT でのパケットシーケンス番号の利用 ................8
+      8.2. Packet Length の非暗号化 ............................8
+   9. IANA の考慮 .............................................9
+   10. References ....................................................10
+      10.1. Normative References .....................................10
+
+1イントロダクション
+
+   Galois カウンタモード (GCM) は, 機密性とデータ完全性サービスの両方を提供する操作のブロック暗号モードだ.  GCM は, データを暗号化するのカウンタモードを利用する. これは効率的にパイプライン化できる操作だ.  さらに, GCM 認証は, ハードウェアでの高速な実装に特に良く適した操作を用いる. 非常に高速な実装や効率的でコンパクトな回路での実装にとって魅力的だ.  この文書の目的は, AES-128 もしくは AES-256 と GCM の組合せを, セキュアシェルトランスポート層プロトコル [RFC4253] に統合する方法を示すことだ.
+
+2.  要件に関する用語
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, [RFC-2119] で記述されているように解釈される. 
+
+
+
+
+
+
+
+Igoe & Solinas               Informational                      [Page 2]
+
+RFC 5647                AES-GCM for Secure Shell             August 2009
+
+
+3.  適用性についての意見
+
+   機密性とデータ完全性の両方を提供するために AES-GCM を利用することは, これらのセキュリティサービスを提供するために 2つの別のアルゴリズムを用いるよりも一般的に効率的だ.
+
+4.  Galois カウンタモードの特性
+
+   Galois カウンタモード (GCM) は, 機密性とデータ完全性の両方を提供するブロック暗号の操作のモードだ.  National Institute of Standards and Technology (NIST) Special Publication SP 800 38D [GCM] が, Galois カウンタモードの素晴しい説明をしている.
+   この文書では, Galois カウンタモードを Advanced Encryption Algorithm (AES) と用いる場合である, AES GCM に焦点を当てる.  AES-GCM は, [RFC5116] で記述された "algorithm for authenticated encryption with associated data" (関連するデータの認証付き暗号化を行なうアルゴリズム, AEAD アルゴリズム) の例だ.
+
+4.1.  AES GCM の認証付き暗号化
+
+   認証付きの暗号化を実行する AES GCM の実行は, 次の入力と出力を持つ:
+
+     AES GCM の認証付き暗号化
+
+         Inputs:
+            octet_string PT ;   // 認証と暗号化の両方の平文
+            octet_string AAD;   // 追加の認証されるデータ. 認証されるが暗号化されない
+            octet_string IV;    // 初期化ベクトル
+            octet_string BK;    // ブロック暗号の鍵
+
+         Outputs:
+            octet_string  CT;   // 暗号文
+            octet_string  AT;   // 認証タグ
+
+   注意: [RFC5116] では IV はナンスと呼ばれている.
+
+   与えられたブロック暗号鍵 BK に対して, 複数回同じ IV を利用しないことが重要だ.  7.1節で, セキュアシェルでこの目標をどう達成するかを説明する.
+
+4.2.  AES GCM の認証付き復号
+
+   認証付きの復号を実行する AES GCM の実行は, 次の入力と出力を持つ:
+
+
+
+
+
+Igoe & Solinas               Informational                      [Page 3]
+
+RFC 5647                AES-GCM for Secure Shell             August 2009
+
+
+     AES GCM の認証付き復号
+
+         Inputs:
+            octet_string CT ;   // 認証と復号の両方の暗号文
+            octet_string AAD;   // 追加の認証されるデータ. 認証されるが暗号化されない
+            octet_string AT;    // 認証タグ
+            octet_string IV;    // 初期化ベクトル
+            octet_string BK;    // ブロック暗号の鍵
+
+         Output:
+            Failure_Indicator;  // 認証タグが不正の場合に返す.
+            octet_string  PT;   // 平文. 認証タグが正当な場合にのみ返る.
+
+   AES-GCM は, 認証タグが検証されるまで平文を一部でも返すことを禁じられている.  この特徴は AES-GCM を用いるシステムのセキュリティ解析を非常に単純にするが, セキュアシェルの要件との不整合を生む. 7.3 節でこの点に触れる.
+
+5.  セキュアシェルの復習
+
+   セキュアシェルの目標は, クライアントとサーバの間に2つの安全なトンネルを確立することだ. 1つのトンネルは, クアイアントからサーバへの通信を運び, もう1つはサーバからクライアントへの通信を運ぶ.  どちらのチャンネルも, 暗号化され, データ完全性を保証するためにメッセージ認証コードが用いられる.
+
+5.1.  鍵交換
+
+   これらのトンネルは, [RFC4253] の7節で記述されているセキュアシェル鍵交換プロトコルを用いて初期化される.  このプロトコルは, 相互に受け入れ可能な暗号アルゴリズムの集合を交渉し, クライアントとサーバで共有される秘密の値 K と交換ハッシュ H を生成する.  H の初期値は session_id として用いられるために保存される.
+
+   AES-GCM がトンネルの暗号化アルゴリズムとして選択されたら, AES-GCMは, メッセージ認証コード (MAC) アルゴリズムとしても選択されなければならない.  逆に, AES-GCM が MAC アルゴリズムとして選択されたら, 暗号化アルゴリズムとしても選択されなければならない.
+
+   [RFC4253] の 7.2 節で記述されているように, ハッシュベースの鍵導出関数 (KDF) が, 必要な対称鍵を生成するために 共有の秘密の値 K に適用される.  それぞれのチャンネルは, 対称鍵の独立の集合を持つ.
+
+
+
+Igoe & Solinas               Informational                      [Page 4]
+
+RFC 5647                AES-GCM for Secure Shell             August 2009
+
+
+    鍵は, 図1のように生成される.  これらの鍵のサイズは, 利用される暗号アルゴリズムに依存して変わる.
+
+      Initial IV
+         Client-to-Server     HASH( K || H ||"A"|| session_id)
+         Server-to-Client     HASH( K || H ||"B"|| session_id)
+      Encryption Key
+         Client-to-Server     HASH( K || H ||"C"|| session_id)
+         Server-to-Client     HASH( K || H ||"D"|| session_id)
+      Integrity Key
+         Client-to-Server     HASH( K || H ||"E"|| session_id)
+         Server-to-Client     HASH( K || H ||"F"|| session_id)
+
+             図 1: セキュアシェルの鍵導出
+
+   以下で見るように, SSH AES-GCM  12-オクテットの初期 IV と 16 か 32 オクテットの暗号鍵を必要とする.  AES-GCM のような AEAD アルゴリズムは機密性とデータの完全性を提供するのに暗号鍵を用いるので, 完全性鍵は AES-GCM では利用されない.
+
+   サーバもクライアントも, セキュアシェルセッションで鍵の再生成の要求をいつでも行う可能性がある.  共有の秘密の値 K と交換ハッシュ H, 上記のすべての対称鍵が更新される.  session_id のみは変更されない.
+
+5.2.  セキュアシェルのバイナリパケット
+
+   鍵交換プロトコルが完了すると, それ以後のセキュアシェルの通信は, 以下の図2で示す (また [RFC4253] の6節を参照) セキュアシェルバイナリパケットとして知られるデータ構造に構文解析される.
+
+     uint32    packet_length;  // 0 <= packet_length < 2^32
+     byte      padding_length; // 4 <= padding_length < 256
+     byte[n1]  payload;        // n1 = packet_length-padding_length-1
+     byte[n2]  random_padding; // n2 = padding_length
+     byte[m]   mac;            // m  = mac_length
+
+         図 2: セキュアシェルのバイナリパケットの構造
+
+   AES-GCM 認証付き暗号化で生成される認証タグは, セキュアシェルのバイナリパケットの末尾の MAC フィールドに配置される.
+
+
+
+
+
+
+Igoe & Solinas               Informational                      [Page 5]
+
+RFC 5647                AES-GCM for Secure Shell             August 2009
+
+
+6.  セキュアシェルのための AES GCM アルゴリズム
+
+6.1.  AEAD_AES_128_GCM
+
+   AEAD_AES_128_GCM は, [RFC5116] の5.1節で指定されている.  セキュアシェルのバイナリパケットの形式のために, AEAD_AES_128_GCM を実装するのに必要なバッファサイズは [RFC5116] で要求されているものよりも小さい.  [RFC5116] で定義された表記法を用いると, セキュアシェルでの AEAD_AES_128_GCMの入力長と出力長は以下となる:
+
+      PARAMETER   Meaning                          Value
+
+      K_LEN       AES key length                   16 octets
+      P_MAX       maximum plaintext length         2^32 - 32 octets
+      A_MAX       maximum additional               4 octets
+                  authenticated data length
+      N_MIN       minimum nonce (IV) length        12 octets
+      N_MAX       maximum nonce (IV) length        12 octets
+      C_MAX       maximum cipher length            2^32 octets
+
+6.2.  AEAD_AES_256_GCM
+
+   AEAD_AES_256_GCM は, [RFC5116] の5.2節で指定されている.  セキュアシェルのバイナリパケットの形式のために, AEAD_AES_256_GCM を実装するのに必要なバッファサイズは [RFC5116] で要求されているものよりも小さい.  [RFC5116] で定義された表記法を用いると, セキュアシェルでの AEAD_AES_256_GCMの入力長と出力長は以下となる:
+
+      PARAMETER   Meaning                          Value
+
+      K_LEN       AES key length                   32 octets
+      P_MAX       maximum plaintext length         2^32 - 32 octets
+      A_MAX       maximum additional               4 octets
+                  authenticated data length
+      N_MIN       minimum nonce (IV) length        12 octets
+      N_MAX       maximum nonce (IV) length        12 octets
+      C_MAX       maximum cipher length            2^32 octets
+
+6.3.  認証タグのサイズ
+
+   AEAD_AES_128_GCM と AEAD_AES_256_GCM の両方とも 16-オクテットの認証タグを生成する ([RFC5116] は "Message Authentication Code" とこれを呼ぶ).  アプリケーションは, このタグの切り詰められたバーンを使うことができる.  これは AES-GCM セキュアシェルでは許可されない.  AES-GCM のすべての実装は, 完全な 16-オクテットの認証タグを用いなければならない.
+
+
+
+
+
+Igoe & Solinas               Informational                      [Page 6]
+
+RFC 5647                AES-GCM for Secure Shell             August 2009
+
+
+7.  AES-GCM セキュアシェルのバイナリパケットの処理
+
+7.1.  IV とカウンタの管理
+
+   AES-GCM では, 12-オクテットの IVが2つのフィールドに分けられる: 4-octet の固定のフィールドと, 8-octet の呼び出しカウンタフィールドだ.  呼び出しフィールドは, 64-ビットの整数として扱われ, バイナリパケットを処理する AES-GCM の呼び出しの後でインクリメントされる.
+
+         uint32  fixed;                  // 4 octets
+         uint64  invocation_counter;     // 8 octets
+
+           図3: SSH AES-GCM のナンスの構造
+
+   AES-GCM は, 平文を暗号化するのに使われる再, 16-オクテットのブロックで鍵ストリームを生成する.  この鍵ストリームは, 以下の 16-オクテットのデータ構造を暗号化して生成される.
+
+         uint32  fixed;                  // 4 octets
+         uint64  invocation_counter;     // 8 octets
+         uint32  block_counter;          // 4 octets
+
+           図 4: SSH AES-GCM への AES の入力の構造
+
+   block_counter は, 最初 1 に設定され, ブロック鍵が生成される度にインクリメントされる.
+
+   読者は, 暗号化されるデータはブロックサイズ (AES-GCM では 16-オクテット)の倍数にパディングされなければならないことをSSHが要求していることに注意.
+
+7.2.  バイナリパケットの形成
+
+   AES-GCM セキュアシェルで, 認証付き暗号化の入力は以下だ:
+
+     PT (Plain Text)
+        byte      padding_length; // 4 <= padding_length < 256
+        byte[n1]  payload;        // n1 = packet_length-padding_length-1
+        byte[n2]  random_padding; // n2 = padding_length
+     AAD (Additional Authenticated Data)
+        uint32    packet_length;  // 0 <= packet_length < 2^32
+     IV (Initialization Vector)
+        7.1節で 記述したもの.
+     BK (Block Cipher Key)
+        鍵交換時に生成された適切な暗号鍵.
+
+
+
+
+
+Igoe & Solinas               Informational                      [Page 7]
+
+RFC 5647                AES-GCM for Secure Shell             August 2009
+
+
+   [RFC4253] で要求されているように, random_padding は 最低 4 オクテット長なければならない. また 255 オクテットを越えてはならない.  PT の合計の長さは, 16 オクテット (AES のブロックサイズ)の倍数でなければならない.  バイナリパケットは, 4オクテットの 4-octet packet_length と cipher text (CT, 暗号テキスト), 16-オクテットの authentication tag (AT, 認証タグ) を連結したものだ.
+
+7.3.  Packet Length フィールドの扱い
+
+   [RFC4253] の 6.3 節は, それぞれのパケットをの packet length と padding length, payload, and padding fields を暗号化するよう要求している.  これは, SSH AES-GCM では問題となる:
+
+   1) バイナリパケットをパースするまでタグが検証できない.
+
+   2) packet_length が復号されるまでパケットがパースできない.
+
+   3) タグが検証されるまで packet_length が復号できない.
+
+   セキュアシェルと共に AES-GCM を用いる場合, packet_length フィールドは 追加の認証されるデータ (additional authenticated data) として扱い平文としては扱われないようにする.  これは [RFC4253] の要件に違反している.  この決定の影響は, 次のセキュリティの考察の節で議論する.
+
+8.  セキュリティの考察
+
+   [RFC4251]のセキュリティの考察が適用される.
+
+8.1.  AT でのパケットシーケンス番号の利用
+
+   [RFC4253] は, ATの形成に パケットの sequence_number, SSH トンネルで送られたバイナリパケットの数を数える32-ビットの値, を含むことを要求している.  sequence_number は, 追加の定数次第で, invocation_counter の丁度下位 32 ビットなので, invocation_counter フィールドがIVに存在していることは, sequence_number 自体が完全性タグの形成に実際に関与していることになる. この関与は, [RFC4253] の 6.4節の要件と少し異なっている.
+
+8.2.  Packet Length の非暗号化
+
+   7.3 節で議論したように, 認証タグが検証されるまで平文を返さない GCM の要件と, packet length が暗号化され認証タグの位置を知るために packet length フィールドを復号する必要のあるセキュアシェルの要件は, 互換していない.   
+
+
+
+Igoe & Solinas               Informational                      [Page 8]
+
+RFC 5647                AES-GCM for Secure Shell             August 2009
+
+
+   この文書は, AES-GCM で packet length フィールドを暗号化せず変わりに追加の認証データとして処理することで要求することで, このジレンマを解決する.
+
+   理論的には, 全バイナリパケットの暗号化が, セキュアシェルデータフローを特徴のないオクテットストリームにすることを意味していると主張するものがいる.  しかし実際には, セキュアシェルのデータフローは, 基底のバイナリパケットの長さに強く関連する長さを持つ塊ごとに流れる.  packet length の暗号化は, 基底のバイナリパケットの長さをごまかすのにほとんど効果がない.  セキュアシェルは別の2つのメカニズムを提供している. ランダムパディングと SSH_MSG_IGNORE メッセージだ. これらは, バイナリパケットの長さによって解明される可能性がある基底の平文ストリームの構造をマスクする packet length の暗号化よりもよっぽど効果的だ.
+
+9.  IANA の考慮
+
+   IANA は, [RFC4250] で記述された secure shell Encryption Algorithm Names registry に以下の2つのエントリを追加した.
+
+                   +--------------------+-------------+
+                   |                    |             |
+                   | Name               |  Reference  |
+                   +--------------------+-------------+
+                   | AEAD_AES_128_GCM   | Section 6.1 |
+                   |                    |             |
+                   | AEAD_AES_256_GCM   | Section 6.2 |
+                   +--------------------+-------------+
+
+   IANA は, [RFC4250] で記述された secure shell MAC Algorithm Names registry に以下の2つのエントリを追加した.
+
+                   +--------------------+-------------+
+                   |                    |             |
+                   | Name               |  Reference  |
+                   +--------------------+-------------+
+                   | AEAD_AES_128_GCM   | Section 6.1 |
+                   |                    |             |
+                   | AEAD_AES_256_GCM   | Section 6.2 |
+                   +--------------------+-------------+
+
+
+
+
+
+
+
+
+
+
+Igoe & Solinas               Informational                      [Page 9]
+
+RFC 5647                AES-GCM for Secure Shell             August 2009
+
+
+10.  References
+
+10.1.  Normative References
+
+   [GCM]      Dworkin, M, "Recommendation for Block Cipher Modes of
+              Operation: Galois/Counter Mode (GCM) and GMAC", NIST
+              Special Publication 800-30D, November 2007.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC4250]  Lehtinen, S. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Assigned Numbers", RFC 4250, January 2006.
+
+   [RFC4251]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Architecture", RFC 4251, January 2006.
+
+   [RFC4253]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Transport Layer Protocol", RFC 4253, January 2006.
+
+   [RFC5116]  McGrew, D., "An Interface and Algorithms for Authenticated
+              Encryption", RFC 5116, January 2008.
+
+Authors' Addresses
+
+   Kevin M. Igoe
+   NSA/CSS Commercial Solutions Center
+   National Security Agency
+   USA
+
+   EMail: kmigoe@nsa.gov
+
+
+   Jerome A. Solinas
+   National Information Assurance Research Laboratory
+   National Security Agency
+   USA
+
+   EMail: jasolin@orion.ncsc.mil
+
+
+
+
+
+
+
+
+
+
+
+
+Igoe & Solinas               Informational                     [Page 10]
+

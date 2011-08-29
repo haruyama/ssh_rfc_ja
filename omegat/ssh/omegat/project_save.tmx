@@ -3480,6 +3480,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As discussed in Section 7.3, there is an incompatibility between
+   GCM's requirement that no plaintext be returned until the
+   authentication tag has been verified, secure shell's requirement that
+   the packet length be encrypted, and the necessity of decrypting the
+   packet length field to locate the authentication tag.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T123336Z" changeid="haruyama">
+        <seg>7.3 節で議論したように, 認証タグが検証されるまで平文を返さない GCM の要件と, packet length が暗号化され認証タグの位置を知るために packet length フィールドを復号する必要のあるセキュアシェルの要件は, 互換していない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As in Section 9.3.3, this
    reasoning does assume that the MAC is secure and that it is
    infeasible to construct inputs to a MAC algorithm to give a known
@@ -4335,6 +4347,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110609T052006Z" changeid="haruyama">
         <seg>簡潔に言うと, (1) は SSHプロトコルの基底にあるMACからの情報漏洩を防ぐために設計されている. そして (2) はSSHプロトコルの基底にある暗号方式からの情報漏洩を防ぐために設計されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>But in practice, the secure shell dataflow will come
+   in bursts, with the length of each burst strongly correlated to the
+   length of the underlying binary packets.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T123744Z" changeid="haruyama">
+        <seg>しかし実際には, セキュアシェルのデータフローは, 基底のバイナリパケットの長さに強く関連する長さを持つ塊ごとに流れる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6816,6 +6838,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Encryption of the packet
+   length does little in and of itself to disguise the length of the
+   underlying binary packets.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T124102Z" changeid="haruyama">
+        <seg>packet length の暗号化は, 基底のバイナリパケットの長さをごまかすのにほとんど効果がない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Encryption will be done after compression.</seg>
       </tuv>
       <tuv lang="JA">
@@ -9275,6 +9307,24 @@
       <tuv lang="JA" changedate="20110729T034352Z" changeid="haruyama">
         <seg>IANA の考慮 ...........................................33
    11.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>IANA added the following two entries to the secure shell Encryption
+   Algorithm Names registry described in [RFC4250]:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T124808Z" changeid="haruyama">
+        <seg>IANA は, [RFC4250] で記述された secure shell Encryption Algorithm Names registry に以下の2つのエントリを追加した.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>IANA added the following two entries to the secure shell MAC
+   Algorithm Names registry described in [RFC4250]:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T124823Z" changeid="haruyama">
+        <seg>IANA は, [RFC4250] で記述された secure shell MAC Algorithm Names registry に以下の2つのエントリを追加した.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12789,6 +12839,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In theory, one could argue that encryption of the entire binary
+   packet means that the secure shell dataflow becomes a featureless
+   octet stream.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T123552Z" changeid="haruyama">
+        <seg>理論的には, 全バイナリパケットの暗号化が, セキュアシェルデータフローを特徴のないオクテットストリームにすることを意味していると主張するものがいる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In this
       case, different key types SHOULD be defined for the different
       policy alternatives.</seg>
@@ -15960,6 +16020,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>このメッセージには応答は送られない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Non-Encryption of Packet Length</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T123146Z" changeid="haruyama">
+        <seg>Packet Length の非暗号化</seg>
       </tuv>
     </tu>
     <tu>
@@ -19372,6 +19440,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Secure shell provides two other
+   mechanisms, random padding and SSH_MSG_IGNORE messages, that are far
+   more effective than encrypting the packet length in masking any
+   structure in the underlying plaintext stream that might be revealed
+   by the length of the binary packets.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T124407Z" changeid="haruyama">
+        <seg>セキュアシェルは別の2つのメカニズムを提供している. ランダムパディングと SSH_MSG_IGNORE メッセージだ. これらは, バイナリパケットの長さによって解明される可能性がある基底の平文ストリームの構造をマスクする packet length の暗号化よりもよっぽど効果的だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Security Capabilities of this Model</seg>
       </tuv>
       <tuv lang="JA" changedate="20110802T023227Z" changeid="haruyama">
@@ -19970,6 +20050,19 @@
       </tuv>
       <tuv lang="JA" changedate="20110411T135722Z" changeid="haruyama">
         <seg>ホスト鍵が共有の秘密の生成に用いられるため, 暗黙的なサーバの認証を考慮すると, ホスト鍵に関連するドメインパラメータはこの節の間中用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Since the
+   sequence_number is, up to an additive constant, just the low 32 bits
+   of the invocation_counter, the presence of the invocation_counter
+   field in the IV ensures that the sequence_number is indeed involved
+   in the formation of the integrity tag, though this involvement
+   differs slightly from the requirements in Section 6.4 of [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T122133Z" changeid="haruyama">
+        <seg>sequence_number は, 追加の定数次第で, invocation_counter の丁度下位 32 ビットなので, invocation_counter フィールドがIVに存在していることは, sequence_number 自体が完全性タグの形成に実際に関与していることになる. この関与は, [RFC4253] の 6.4節の要件と少し異なっている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -29452,6 +29545,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T123347Z" changeid="haruyama">
+        <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document
    defines one method: Fingerprint storage in DNS.</seg>
       </tuv>
@@ -32045,6 +32146,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Use of the Packet Sequence Number in the AT</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T121310Z" changeid="haruyama">
+        <seg>AT でのパケットシーケンス番号の利用</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Use of the Packet Sequence Number in the AT ................8
       8.2.</seg>
       </tuv>
@@ -33202,11 +33311,31 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>[RFC4253] requires that the formation of the AT involve the packet
+   sequence_number, a 32-bit value that counts the number of binary
+   packets that have been sent on a given SSH tunnel.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T121453Z" changeid="haruyama">
+        <seg>[RFC4253] は, ATの形成に パケットの sequence_number, SSH トンネルで送られたバイナリパケットの数を数える32-ビットの値, を含むことを要求している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>additional call to GSS_Init_sec_context() to process the final
        reply token.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110623T034609Z" changeid="haruyama">
         <seg>この状態の時, クライアントは, 最終の応答トークンの処理に, GSS_Init_sec_context() を追加で呼び出す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>addresses this dilemma by requiring that, in AES-GCM, the packet
+   length field will not be encrypted but will instead be processed as
+   additional authenticated data.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T123444Z" changeid="haruyama">
+        <seg>この文書は, AES-GCM で packet length フィールドを暗号化せず変わりに追加の認証データとして処理することで要求することで, このジレンマを解決する.</seg>
       </tuv>
     </tu>
     <tu>
