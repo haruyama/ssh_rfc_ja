@@ -2143,6 +2143,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Additionally, the following constraints apply:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T064937Z" changeid="haruyama">
+        <seg>さらに, 以下の制限が適用される:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Additionally, the key exchange methods defined in this document rely
    on the SHA2 family of hash functions, defined in [FIPS-180-3].</seg>
       </tuv>
@@ -2670,6 +2678,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>All other intermediate certificates in the chain leading
+      to a root authority MUST be included.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T070237Z" changeid="haruyama">
+        <seg>ルート認証局につながる他の中間証明書はすべて含まれなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>All packets following the identification string SHALL use the binary
    packet protocol, which is described in Section 6.</seg>
       </tuv>
@@ -3015,6 +3032,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110409T091905Z" changeid="haruyama">
         <seg>検証アルゴリズムの例は, [SEC1]の 3.2.1節にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An example of an SSH
+   key exchange involving one of these public key algorithms is given in
+   Appendix A.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T064924Z" changeid="haruyama">
+        <seg>これらの公開鍵アルゴリズムの1つでSSHの鍵交換をする例を, 付録Aで示す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3725,6 +3752,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110718T035715Z" changeid="haruyama">
         <seg>他の行と同様に, 本体の各行も行終端文字を除いて 72 8-bit バイトを越えてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As with any use of OCSP data,
+   implementations SHOULD check that the production time of the OCSP
+   response is acceptable.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T060650Z" changeid="haruyama">
+        <seg>OCSP データを利用する場合は, 実装は, OCSP 応答の生成時間が受け入れられるかを検査する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6417,6 +6454,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Each certificate and ocsp-response MUST be encoded as a string of
+   octets using the Distinguished Encoding Rules (DER) encoding of
+   Abstract Syntax Notation One (ASN.1) [ASN1].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T064846Z" changeid="haruyama">
+        <seg>それぞれの certificate と ocsp-response は,  Abstract Syntax Notation One (ASN.1) [ASN1] の Distinguished Encoding Rules(DER) エンコーディングを用いてオクテット文字列としてエンコードされなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Each field is a line of the following format:</seg>
       </tuv>
       <tuv lang="JA" changedate="20110718T033603Z" changeid="haruyama">
@@ -7567,6 +7614,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For all of the public key algorithms specified in this document, the
+   key format consists of a sequence of one or more X.509v3 certificates
+   followed by a sequence of 0 or more Online Certificate Status
+   Protocol (OCSP) responses as in Section 4.2 of [RFC2560].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T060139Z" changeid="haruyama">
+        <seg>この文書で指定される公開鍵アルゴリズムのすべてで, [RFC2560] の 4.2節にある Online Certificate Status Protocol (OCSP) 応答が 0 以上後に続く X.509v3 証明書の 1つ以上のシーケンスによって, 鍵のフォーマットは構成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For all other elliptic curves, including all other NIST curves and
    all other RECOMMENDED curves, the elliptic curve domain parameter
    identifier is the ASCII period-separated decimal representation of
@@ -7985,6 +8043,19 @@
       </tuv>
       <tuv lang="JA" changedate="20110721T054440Z" changeid="haruyama">
         <seg>critical な属性の目的を充たすためには, 単なる属性の保存では十分ではない. サーバは属性の意図を理解し実装していなけばならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For the purposes of this document, it
+   suffices to know that in X.509 a chain or sequence of certificates
+   (possibly of length one) allows a trusted root certificate authority
+   and its intermediate certificate authorities to cryptographically
+   bind a given public key to a given digital identity using public key
+   signatures.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T055902Z" changeid="haruyama">
+        <seg>この文書の目的は, X.509 で 証明書の(おそらく長さ1の)チェーンないしシーケンスによって, 信頼されるルート認証局とその中間認証局が暗号学的に公開鍵署名を用いる電子IDと公開鍵が束縛できることを知ることだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8888,6 +8959,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>However, compliant implementations MUST comply with [RFC5280].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T072449Z" changeid="haruyama">
+        <seg>しかし, 準拠する実装は [RFC5280] に従わなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>However, during the authentication protocol, it
    is not known whether the user will be accessing files, attempting to
    use an interactive shell, or even both.</seg>
@@ -9001,6 +9080,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>However, if the id-ad-ocsp access description indicates
+   that the certificate authority employs OCSP, and no OCSP response
+   information is available, it is RECOMMENDED that the certificate be
+   rejected.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T073704Z" changeid="haruyama">
+        <seg>しかし, 認証局が OCSP を採用するよう id-ad-ocsp access description が指定したが OCSP 情報がない場合は, 証明書を拒否することが推奨される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>However, if the password has expired, the server SHOULD
    indicate this by responding with SSH_MSG_USERAUTH_PASSWD_CHANGEREQ.</seg>
       </tuv>
@@ -9094,6 +9184,26 @@
       </tuv>
       <tuv lang="JA">
         <seg>しかし, 暗黙のサーバ認証を用いる鍵交換法をこのプロトコルで用いてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>However, other algorithms MAY be
+      used.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T070756Z" changeid="haruyama">
+        <seg>しかし, 他のアルゴリズムが利用されるかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>However, peers sending such chains should recognize
+      that such chains are more likely to be unverifiable than chains
+      that use only algorithms listed in the server_host_key_algorithms
+      field.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T071632Z" changeid="haruyama">
+        <seg>しかし, そのようなチェーンを送るピアは,  server_host_key_algorithmsに挙げられているアルゴリズムのみを用いたチェーンにくらべてそのようなチェーンが検証されにくいことを認識する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11760,6 +11870,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Implementations providing and processing OCSP responses MUST comply
+   with [RFC2560].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T072515Z" changeid="haruyama">
+        <seg>OCSP 応答を提供/処理する実装は, [RFC2560]に従わなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Implementations should only allow forwarding privileged ports if the
    user has been authenticated as a privileged user.</seg>
       </tuv>
@@ -12885,6 +13004,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In the figure above, the string [identifier] is the identifier of the
+   elliptic curve domain parameters.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T062338Z" changeid="haruyama">
+        <seg>上の図で, 文字列 [identifier] は, 楕円曲線ドメインパラメータの識別子だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In the following description (C is the client, S is
    the server, the modulus p is a large safe prime, and g is a generator
    for a subgroup of GF(p), min is the minimal size of p in bits that is
@@ -12944,6 +13072,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110829T123552Z" changeid="haruyama">
         <seg>理論的には, 全バイナリパケットの暗号化が, セキュアシェルデータフローを特徴のないオクテットストリームにすることを意味していると主張するものがいる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In these algorithms, a public key is stored in
+   an X.509v3 certificate.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110831T012750Z" changeid="haruyama">
+        <seg>これらのアルゴリズムでは, 公開鍵は X.509v3 証明書に格納される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13177,6 +13314,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>この節では, SSH バージョン 1.x との互換性をサポートする実装にのみ関係する情報を記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Information on the REQUIRED
+   and RECOMMENDED sets of elliptic curve domain parameters for use with
+   this algorithm can be found in Section 10 of [RFC5656].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T062444Z" changeid="haruyama">
+        <seg>このアルゴリズムと共に用いる楕円曲線ドメインパラメータの要求されている集合と推奨される集合の情報は, [RFC5656] の 10節にある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13525,6 +13672,16 @@
       <tuv lang="JA">
         <seg>イントロダクション ...............................................3
    2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Issues associated with the use of certificates (such as expiration of
+   certificates and revocation of compromised certificates) are
+   addressed in [RFC5280] and are outside the scope of this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T072426Z" changeid="haruyama">
+        <seg>証明書を利用する上での問題 (証明書の有効期限や信用できない証明書の失効)は [RFC5280] で述べられており, この文書の範囲外だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14024,6 +14181,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It is RECOMMENDED, but not REQUIRED, that
+   implementations reject certificates for which the certificate status
+   is revoked.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T060739Z" changeid="haruyama">
+        <seg>実装は, 証明書状態が取り消されている証明書を拒否することが推奨されるが, 要求はされていない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It is a comma-separated list of
    authentication submethods (software or hardware) that the user
    prefers.</seg>
@@ -14482,6 +14649,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110809T084358Z" changeid="haruyama">
         <seg>追加の設定として, SSHのパラメータの実装特有の設定の提供が必要となるだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It may be possible for the implementation to retrieve
+   OCSP responses based on the id-ad-ocsp access description in the
+   certificate's Authority Information Access data (Section 4.2.2.1 of
+   [RFC5280]).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T073451Z" changeid="haruyama">
+        <seg>証明書の Authority Information Access データ ([RFC5280] の 4.2.2.1 節) の id-ad-ocsp access description に基いて OCSP 応答を実装が取得してもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17942,6 +18120,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Providing
+   OCSP responses directly in this data structure can reduce the number
+   of communication rounds required (saving the implementation from
+   needing to perform OCSP checking out-of-band) and can also allow a
+   client outside of a private network to receive OCSP responses from a
+   server behind a firewall.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T060655Z" changeid="haruyama">
+        <seg>このデータ構造の中で直接 OCSP 応答を提供することで,  必要な通信のラウンド数を減らすことができ (帯域外の OCSP 検査を実行する必要が実装でなくなる) ファイアウォールの背後のサーバから プライベートなネットワークの外側のクライアントが OCSP 応答を受けとれるようになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Proxy Forwarding</seg>
       </tuv>
       <tuv lang="JA">
@@ -18050,6 +18241,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Public Key Algorithms Using X.509 Version 3 Certificates</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110831T012615Z" changeid="haruyama">
+        <seg>X.509 バージョン 3 証明書を用いる公開鍵アルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Public Key Algorithms Using X.509 Version 3 Certificates .</seg>
       </tuv>
       <tuv lang="JA" changedate="20110830T004957Z" changeid="haruyama">
@@ -18118,6 +18317,14 @@
       <tuv lang="JA" changedate="20110719T024933Z" changeid="haruyama">
         <seg>公開鍵の指紋 .........................................6
    5.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Public Key Format</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110831T012941Z" changeid="haruyama">
+        <seg>公開鍵の形式</seg>
       </tuv>
     </tu>
     <tu>
@@ -21145,6 +21352,16 @@
     <tu>
       <tuv lang="EN-US">
         <seg>The
+      number of OCSP responses MUST NOT exceed the number of
+      certificates.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T071704Z" changeid="haruyama">
+        <seg>OCSP 応答の数は, 証明書の数を越えてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
    &quot;version&quot; packet MUST NOT be sent again after this initial exchange.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110721T052302Z" changeid="haruyama">
@@ -21934,16 +22151,16 @@
       <tuv lang="EN-US">
         <seg>The &quot;ssh-dss&quot; key format has the following specific encoding:</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>&quot;ssh-dss&quot; 鍵フォーマットは次のような特有のエンコーディングを持つ:</seg>
+      <tuv lang="JA" changedate="20110901T062122Z" changeid="haruyama">
+        <seg>&quot;ssh-dss&quot; 鍵フォーマットは次のエンコーディングを持つ:</seg>
       </tuv>
     </tu>
     <tu>
       <tuv lang="EN-US">
         <seg>The &quot;ssh-rsa&quot; key format has the following specific encoding:</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>&quot;ssh-rsa&quot; 鍵フォーマットは次のような特有のエンコーディングを持つ:</seg>
+      <tuv lang="JA" changedate="20110901T062111Z" changeid="haruyama">
+        <seg>&quot;ssh-rsa&quot; 鍵フォーマットは次のエンコーディングを持つ:</seg>
       </tuv>
     </tu>
     <tu>
@@ -24171,6 +24388,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The choice of signature algorithm used by any given
+      certificate or OCSP response is independent of the signature
+      algorithms chosen by other elements in the chain.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T070842Z" changeid="haruyama">
+        <seg>証明書や OCSP 応答で用いられる署名アルゴリズムの選択は, チェーンの他の要素で選択された署名アルゴリズムと独立だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The chosen
          encryption algorithm to each direction MUST be the first
          algorithm on the client's name-list that is also on the
@@ -24920,16 +25147,16 @@
       <tuv lang="EN-US">
         <seg>The ecc_key_blob value has the following specific encoding:</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110321T122437Z" changeid="haruyama">
-        <seg>ecc_key_blob の値は, 次のような特有のエンコーディングを持つ:</seg>
+      <tuv lang="JA" changedate="20110901T062153Z" changeid="haruyama">
+        <seg>ecc_key_blob の値は, 次のエンコーディングを持つ:</seg>
       </tuv>
     </tu>
     <tu>
       <tuv lang="EN-US">
         <seg>The ecdsa_signature_blob value has the following specific encoding:</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110321T131217Z" changeid="haruyama">
-        <seg>ecdsa_signature_blob の値は, 次のような特有のエンコーディングを持つ:</seg>
+      <tuv lang="JA" changedate="20110901T062135Z" changeid="haruyama">
+        <seg>ecdsa_signature_blob の値は, 次のエンコーディングを持つ:</seg>
       </tuv>
     </tu>
     <tu>
@@ -25615,6 +25842,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The format of this string is
+   specified in Section 6.1 of [RFC5656].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T062405Z" changeid="haruyama">
+        <seg>この文字列のフォーマットは, [RFC5656] の 6.1 節で指定されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The format of this string is specified in
    Section 6.1.</seg>
       </tuv>
@@ -26055,6 +26291,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110718T033548Z" changeid="haruyama">
         <seg>鍵ファイルのヘッダ部は, 複数の RFC822 スタイルのヘッダフィールドから構成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The key format has the following specific encoding:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T062144Z" changeid="haruyama">
+        <seg>鍵フォーマットは次のエンコーディングを持つ:</seg>
       </tuv>
     </tu>
     <tu>
@@ -27182,6 +27426,15 @@
       <tuv lang="JA" changedate="20110801T103641Z" changeid="haruyama">
         <seg>読者は, [RFC3411]で定義された SNMP アーキテクチャの詳細を読み理解していることが期待されている. また, &quot;Transport Subsystem
    for the Simple Network Management Protocol (SNMP)&quot; [RFC5590] で指定されたトランスポートサブシステムアーキテクチャ拡張についても読み理解していることが期待されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The reader is referred to [RFC5280] for a general description of
+   X.509 version 3 certificates.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T055432Z" changeid="haruyama">
+        <seg>X.509 バージョン 3 証明書の一般的な説明は [RFC5280] にある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -29678,6 +29931,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This certificate, a chain of certificates
+   leading to a trusted certificate authority, and optional messages
+   giving the revocation status of the certificates are sent as the
+   public key data in the Secure Shell protocol according to the format
+   in this section.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110831T012938Z" changeid="haruyama">
+        <seg>この証明書と, 信用される認証局につながる証明書のチェーン, 証明書の失効状態を与えるオプションのメッセージは, セキュアシェルプロトコルでこの節で述べる形式に従って公開鍵データとして送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This character sequence cannot
    legally appear in an XML document, so it can be unambiguously used to
    identify the end of the current document, allowing resynchronization
@@ -29849,6 +30114,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110810T061337Z" changeid="haruyama">
         <seg>この文書は, セキュアシェルトランスポートモデルに関連するキャッシュの追加の要求を定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document defines the following new public key algorithms for use
+   in the Secure Shell protocol: x509v3-ssh-dss, x509v3-ssh-rsa,
+   x509v3-rsa2048-sha256, and the family of algorithms given by
+   x509v3-ecdsa-sha2-*.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110831T012724Z" changeid="haruyama">
+        <seg>この文書は, セキュアシェルプロトコルで利用するための以下の新しい公開鍵アルゴリズムを定義する: x509v3-ssh-dss, x509v3-ssh-rsa, x509v3-rsa2048-sha256,  x509v3-ecdsa-sha2-* で与えられるアルゴリズムのファミリー.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32297,6 +32573,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Upon receipt of a certificate chain, implementations MUST verify the
+   certificate chain according to Section 6.1 of [RFC5280] based on a
+   root of trust configured by the system administrator or user.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T072305Z" changeid="haruyama">
+        <seg>証明書チェーンを受け取ったら, システム管理者やユーザに設定された 信頼のルートに基いて [RFC5280] の 6.1 節に従い証明書チェーンを実装は検証しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Upon receiving a request message, the client SHOULD prompt the user
    as follows:</seg>
       </tuv>
@@ -32906,6 +33192,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>When no OCSP responses are provided, it is up to the implementation
+   and system administrator to decide whether or not to accept the
+   certificate.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T072834Z" changeid="haruyama">
+        <seg>OCSP 応答が提供されない場合, 証明書を受け入れるかどうかの決定は実装とシステム管理者次第だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>When performing SNMP processing, there are two levels of state
    information that may need to be retained: the immediate state linking
    a request-response pair and a potentially longer-term state relating
@@ -33499,6 +33795,16 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>[RFC3279] and [RFC5280] describe the
+   structure of X.509v3 certificates to be used with RSA and Digital
+   Signature Algorithm (DSA) public keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T073840Z" changeid="haruyama">
+        <seg>[RFC3279] と  [RFC5280] は, RSA と デジタル署名アルゴリズム (DSA) 公開鍵で利用する X.509v3 証明書の構造を記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>[RFC3447] recommends that RSA keys used with RSAES-OAEP not be used
    with other schemes, or with RSAES-OAEP using a different hash
    function.</seg>
@@ -33545,6 +33851,26 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110829T121453Z" changeid="haruyama">
         <seg>[RFC4253] は, ATの形成に パケットの sequence_number, SSH トンネルで送られたバイナリパケットの数を数える32-ビットの値, を含むことを要求している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>[RFC5480] and [RFC5758] describe the structure of X.509v3
+   certificates to be used with Elliptic Curve Digital Signature
+   Algorithm (ECDSA) public keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T073801Z" changeid="haruyama">
+        <seg>[RFC5480] と [RFC5758] は, 楕円曲線デジタル署名アルゴリズム （ＥＣＤＳＡ) 公開鍵で利用する X.509v3 証明書の構造を記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>[RFC5759] provides additional
+   guidance for ECDSA keys in Suite B X.509v3 certificate and
+   certificate revocation list profiles.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T074057Z" changeid="haruyama">
+        <seg>[RFC5759] は, Suite B X.509v3 証明書での ECDSA と証明書失効リストプロファイルに対して追加のガイダンスを提供している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33679,6 +34005,14 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       <tuv lang="JA">
         <seg>encryption_algorithms
          受け入れ可能な対称暗号化アルゴリズム( cipher としても知られる) の優先度順の名前リスト.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>equivalent.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T071355Z" changeid="haruyama">
+        <seg> </seg>
       </tuv>
     </tu>
     <tu>
@@ -33910,6 +34244,14 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110621T022204Z" changeid="haruyama">
         <seg>o  C はクライアントでSはサーバだ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  Each following certificate MUST certify the one preceding it.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T065949Z" changeid="haruyama">
+        <seg>o  2番目以降の証明書は, 1つ前のものを証明しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34263,6 +34605,26 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  The self-signed certificate specifying the root authority MAY be
+      omitted.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T070013Z" changeid="haruyama">
+        <seg>o  ルート認証局を指定する自己署名証明書は, 省略してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  The sender's certificate MUST be the first certificate and the
+      public key conveyed by this certificate MUST be consistent with
+      the public key algorithm being employed to authenticate the
+      sender.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T065631Z" changeid="haruyama">
+        <seg>o  送信者の証明書は, 最初の証明書でなければならない. この証明書で運ばれる公開鍵は, 送信者を認証するのに採用された公開鍵アルゴリズムのものでなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>o  The total fraction of telnet-type data in the Internet is
       negligible, even with increased packet sizes.</seg>
       </tuv>
@@ -34299,6 +34661,27 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  There is no requirement on the ordering of OCSP responses.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T071647Z" changeid="haruyama">
+        <seg>o  OCSP 応答の順序に要件はない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  To improve the chances that a peer can verify certificate chains
+      and OCSP responses, individual certificates and OCSP responses
+      SHOULD be signed using only signature algorithms corresponding to
+      public key algorithms supported by the peer, as indicated in the
+      server_host_key_algorithms field of the SSH_MSG_KEXINIT packet
+      (see Section 7.1 of [RFC4253]).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T070736Z" changeid="haruyama">
+        <seg>o  ピアがチェーンと OCSP 応答を検証できやすくするため, それぞれの証明書と OCSP 応答は ピアがサポートする公開鍵アルゴリズムに関連する署名アルゴリズムでのみ署名される必要がある. このアルゴリズムは, SSH_MSG_KEXINIT パケット の server_host_key_algorithms ([RFC4253] の 7 .1節)で示される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>o  Transport layer generic messages (1 to 19) (but
       SSH_MSG_SERVICE_REQUEST and SSH_MSG_SERVICE_ACCEPT MUST NOT be
       sent);</seg>
@@ -34313,6 +34696,17 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110621T022257Z" changeid="haruyama">
         <seg>o  V_S は Sのバージョン文字列, V_C は Cのバージョン文字列だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  Verifiers MUST be prepared to receive certificate chains and OCSP
+      responses that use algorithms not listed in the
+      server_host_key_algorithms field of the SSH_MSG_KEXINIT packet,
+      including algorithms that potentially have no Secure Shell</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T071352Z" changeid="haruyama">
+        <seg>o  検証者は, セキュアシェルに同等なものがないアルゴリズムも含めて, SSH_MSG_KEXINIT パケットの server_host_key_algorithms フィールドに挙がっていないアルゴリズムを用いた 証明書チェーンや OCSP 応答を受けとる準備をしなければならない.</seg>
       </tuv>
     </tu>
     <tu>
