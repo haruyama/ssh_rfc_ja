@@ -4634,10 +4634,28 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Certificate Extensions</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T042304Z" changeid="haruyama">
+        <seg>証明書の拡張</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Certificate Extensions .</seg>
       </tuv>
       <tuv lang="JA" changedate="20110830T005018Z" changeid="haruyama">
         <seg>証明書の拡張 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Certificate extensions allow for the specification of additional
+   attributes associated with a public key in an X.509v3 certificate
+   (see Section 4.2 of [RFC5280]).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T042412Z" changeid="haruyama">
+        <seg>証明書の拡張で, X.509v3 証明書の公開鍵に関連する追加の属性を指定できる ([RFC5280] の 4.2 節を参照).</seg>
       </tuv>
     </tu>
     <tu>
@@ -7660,6 +7678,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For concreteness, we specify this explicitly below.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T045443Z" changeid="haruyama">
+        <seg>以下で具体的に指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For consistency with SNMP-related specifications, this document
    favors terminology as defined in STD 62, rather than favoring
    terminology that is consistent with non-SNMP specifications.</seg>
@@ -8056,6 +8082,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110901T055902Z" changeid="haruyama">
         <seg>この文書の目的は, X.509 で 証明書の(おそらく長さ1の)チェーンないしシーケンスによって, 信頼されるルート認証局とその中間認証局が暗号学的に公開鍵署名を用いる電子IDと公開鍵が束縛できることを知ることだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For the remaining certificates in the certificate chain,
+   implementations MUST comply with existing conventions on KeyUsage
+   identifiers and certificates as in Section 4.2.1.3 of [RFC5280].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T043547Z" changeid="haruyama">
+        <seg>証明書チェーンの残りの証明書のために, [RFC5280] の 4.2.1.3 節にあるように KeyUsage 識別子と証明書の既存の規約に実装は従わなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12222,6 +12258,26 @@
       </tuv>
       <tuv lang="JA">
         <seg>SSHの接続が別の接続にカスケードされている場合は, BREAKはカスケードされた接続に渡される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In accordance with Section 4.2.1.12 of
+   [RFC5280], if the ExtendedKeyUsage extension is present, then the
+   certificate MUST be used only for one of the purposes indicated.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T044210Z" changeid="haruyama">
+        <seg>ExtendedKeyUsage 拡張が存在するなら, [RFC5280] の 4.2.1.12 節に従い,  証明書は, 指定された目的の1つにのみ利用されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In accordance with Section 4.2.1.3 of [RFC5280], if the KeyUsage
+   extension is present, then the certificate MUST be used only for one
+   of the purposes indicated.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T043040Z" changeid="haruyama">
+        <seg>KeyUsage 拡張が存在するなら, [RFC5280] の 4.2.1.3 節に従い,  証明書は, 指定された目的の1つにのみ利用されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20271,6 +20327,41 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Signing and verifying using the X.509v3-based public key algorithms
+   specified in this document (x509v3-ssh-dss, x509v3-ssh-rsa,
+   x509v3-ecdsa-sha2-*) is done in the analogous way for the
+   corresponding non-X.509v3-based public key algorithms (ssh-dss,
+   ssh-rsa, ecdsa-sha2-*, respectively); the x509v3-rsa2048-sha256
+   public key algorithm provides a new mechanism, similar to ssh-rsa,
+   but has a different hash function and additional key size
+   constraints.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T045411Z" changeid="haruyama">
+        <seg>この文書で指定するX.509v3 ベースの公開鍵アルゴリズム (x509v3-ssh-dss, x509v3-ssh-rsa, x509v3-ecdsa-sha2-*) は, 対応する非 X.509v3 ベースの公開鍵アルゴリズム (それぞれ ssh-dss, ssh-rsa, ecdsa-sha2-*) と似たやり方で署名と検証を行なう. 509v3-rsa2048-sha256 公開鍵アルゴリズムは新しいメカニズムを提供するが, ssh-rsa と似ている. ただし, 異なるハッシュ関数と追加の鍵サイズの制約を持っている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Signing and verifying using the x509v3-ssh-dss key format is done
+   according to the Digital Signature Standard [FIPS-186-3] using the
+   SHA-1 hash [FIPS-180-2].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T045508Z" changeid="haruyama">
+        <seg>x509v3-ssh-dss 鍵フォーマットでの署名と検証は, SHA-1 ハッシュ [FIPS-180-2] を用いるDigital Signature Standard [FIPS-186-2] に従って行なわれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Signing and verifying using the x509v3-ssh-rsa key format is
+   performed according to the RSASSA-PKCS1-v1_5 scheme in [RFC3447]
+   using the SHA-1 hash [FIPS-180-2].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T045623Z" changeid="haruyama">
+        <seg>x509v3-ssh-rsa 鍵フォーマットでの署名と検証は, SHA-1 ハッシュを用いる RSASSA-PKCS1-v1_5 scheme in [RFC3447] に従って行なわれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Signing and verifying using this key format is done according to the
    Digital Signature Standard [FIPS-186-2] using the SHA-1 hash
    [FIPS-180-2].</seg>
@@ -21646,6 +21737,16 @@
     <tu>
       <tuv lang="EN-US">
         <seg>The
+   object identifiers of the two key purpose IDs defined in this
+   document are as follows:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T044313Z" changeid="haruyama">
+        <seg>この文書で定義される 2つの鍵目的 ID のオブジェクト識別子は以下の通りだ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
    part following the at-sign MUST be a valid, fully qualified internet
    domain name [RFC1034] controlled by the person or organization
    defining the name.</seg>
@@ -22910,6 +23011,25 @@
       </tuv>
       <tuv lang="JA" changedate="20110628T022815Z" changeid="haruyama">
         <seg>IESG はこのすべての鍵交換法のオーナーと見なされる． これは， IESG が基底の GSS-API メカニズムのオーナーであることを意味しないことに注意．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The KeyUsage and ExtendedKeyUsage
+   extensions may be used to restrict the use of X.509v3 certificates in
+   the context of the Secure Shell protocol as specified in the
+   following sections.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T042622Z" changeid="haruyama">
+        <seg>KeyUsage と ExtendedKeyUsage 拡張は, 以下の節で指定されるように, セキュアシェルの文脈で X.509v3 証明書の利用を制限するのに利用されることがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The KeyUsage extension MAY be used to restrict a certificate's use.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T042948Z" changeid="haruyama">
+        <seg>KeyUsage 拡張は, 証明書の利用を制限するの用いられてもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28827,6 +28947,26 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The value for dss_signature_blob is encoded as a string containing r,
+   followed by s (which are fixed-length 160-bit integers, without
+   lengths or padding, unsigned, and in network byte order).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T045531Z" changeid="haruyama">
+        <seg>dss_signature_blob の値は, (それぞれ長さやパディングがない符号無しのネットワークバイトオーダーの160-bitの整数である) r とそれに続く s を含む文字列としてエンコードされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The value for rsa_signature_blob is encoded as a string containing s
+   (which is an integer, without lengths or padding, unsigned, and in
+   network byte order).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T045633Z" changeid="haruyama">
+        <seg>rsa_signature_blob の値は,(長さやパディングがない符号無しのネットワークバイトオーダーの160-bitの整数である) s を含む文字列としてエンコードされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The value in tmStateReference MUST uniquely
           identify the session over which the message was received.</seg>
       </tuv>
@@ -29157,6 +29297,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>アルゴリズムと方式の名前には2つの形式がある:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>There are two relevant keyUsage
+   identifiers for the certificate corresponding to the public key
+   algorithm in use:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T043118Z" changeid="haruyama">
+        <seg>利用中の公開鍵アルゴリズムに対応する証明書への2つの関連する keyUsage 識別子がある:</seg>
       </tuv>
     </tu>
     <tu>
@@ -30139,6 +30289,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document defines two ExtendedKeyUsage key purpose IDs that MAY
+   be used to restrict a certificate's use: id-kp-secureShellClient,
+   which indicates that the key can be used for a Secure Shell client,
+   and id-kp-secureShellServer, which indicates that the key can be used
+   for a Secure Shell server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T044156Z" changeid="haruyama">
+        <seg>この文書は, 証明書の利用を制限するために利用されてもよい 2つの ExtendedKeyUsage 鍵目的 ID を定義する: id-kp-secureShellClient, 鍵が利用されるセキュアシェルクライアントを指定, と id-kp-secureShellServer, 鍵が利用されるセキュアシェルサーバを指定, だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document defines two new key exchange methods:
    &quot;diffie-hellman-group-exchange-sha1&quot; and
    &quot;diffie-hellman-group-exchange-sha256&quot;.</seg>
@@ -30592,6 +30754,24 @@
       </tuv>
       <tuv lang="JA">
         <seg>この認証法は選択できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This format is the same as for ssh-dss signatures in Section 6.6 of
+   [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T045609Z" changeid="haruyama">
+        <seg>[RFC4253] の 6.6 節の ssh-dss 署名とこのフォーマットは同一だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This format is the same as for ssh-rsa signatures in Section 6.6 of
+   [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T045639Z" changeid="haruyama">
+        <seg>[RFC4253] の 6.6 節の ssh-rsa 署名とこのフォーマットは同一だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34313,6 +34493,27 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110621T022339Z" changeid="haruyama">
         <seg>o  I_C は C の KEXINIT メッセージ, I_S は S の KEXINIT メッセージだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  If the KeyUsage extension is present in a certificate for the
+      ecmqv-sha2 key exchange method, then the keyAgreement bit MUST be
+      set.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T043447Z" changeid="haruyama">
+        <seg>o ecmqv-sha2 鍵交換法のための証明書に KeyUsage 拡張が存在したら, keyAgreement ビットが設定されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  If the KeyUsage extension is present in a certificate for the
+      x509v3-ssh-dss, x509v3-ssh-rsa, x509v3-rsa2048-sha256, or x509v3-
+      ecdsa-sha2-* public key algorithms, then the digitalSignature bit
+      MUST be set.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T043409Z" changeid="haruyama">
+        <seg>o  x509v3-ssh-dss ないし, x509v3-ssh-rsa, x509v3-rsa2048-sha256, x509v3-ecdsa-sha2-* 公開鍵アルゴリズムのための証明書に KeyUsage 拡張が存在したら, digitalSignature ビットは設定されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
