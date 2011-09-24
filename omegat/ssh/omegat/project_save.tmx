@@ -7715,6 +7715,21 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For example,
+   National Institute of Standards and Technology's (NIST's) draft
+   recommendations on cryptographic algorithms and key lengths
+   [SP-800-131] specify that digital signature generation using an RSA
+   key with modulus less than 2048 bits or with the SHA-1 hash function
+   is acceptable through 2010 and deprecated from 2011 through 2013,
+   whereas an RSA key with modulus at least 2048 bits and SHA-256 is
+   acceptable for the indefinite future.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T122649Z" changeid="haruyama">
+        <seg>例えば, National Institute of Standards and Technology (NIST) の暗号アルゴリズムと鍵長の勧告案 [SP-800-131] は, 2048 ビットよりも小さいモジュラスを持つ RSA 鍵や SHA-1 ハッシュ関数を用いる RSA 鍵を用いた電子署名生成は, 2010 年まで受け入れられ 2011年から2013年まで非推奨と指定している. 一方, 少なくとも 2048 ビットのモジュラスを持ち SHA-256 を用いる RSA 鍵は, 無期限で受け入れられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For example, &quot;ssh-dss&quot; specifies SHA-1 hashing.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110725T091036Z" changeid="haruyama">
@@ -20342,6 +20357,27 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Signing and verifying using the x509v3-ecdsa-sha2-* key formats is
+   performed according to the ECDSA algorithm in [FIPS-186-3] using the
+   SHA2 hash function family [FIPS-180-3].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T123442Z" changeid="haruyama">
+        <seg>x509v3-ecdsa-sha2-* 鍵フォーマットでの署名と検証は, SHA-2 ハッシュ関数ファミリ [FIPS-180-3] を用いる [FIPS-186-3] の ECDSA アルゴリズムに従って行なわれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Signing and verifying using the x509v3-rsa2048-sha256 key format is
+   performed according to the RSASSA-PKCS1-v1_5 scheme in [RFC3447]
+   using the SHA-256 hash [FIPS-180-3]; RSA keys conveyed using this
+   format MUST have a modulus of at least 2048 bits.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T121158Z" changeid="haruyama">
+        <seg>x509v3-ssh-rsa2048-sha256 鍵フォーマットでの署名と検証は, SHA-256 ハッシュ [FIPS-180-3] を用いる RSASSA-PKCS1-v1_5 scheme in [RFC3447] に従って行なわれる; この形式で運ばれる RSA 鍵は, 少なくとも 2048 ビットのモジュラスを持たなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Signing and verifying using the x509v3-ssh-dss key format is done
    according to the Digital Signature Standard [FIPS-186-3] using the
    SHA-1 hash [FIPS-180-2].</seg>
@@ -24508,6 +24544,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The choice of hash function
+   from the SHA2 hash function family is based on the key size of the
+   ECDSA key as specified in Section 6.2.1 of [RFC5656].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T123537Z" changeid="haruyama">
+        <seg>SHA2 ハッシュ関数ファミリからのハッシュ関数の選択は, [RFC5656] の 6.2.1 節で指定されているように ECDSA 鍵の鍵サイズの基づく.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The choice of signature algorithm used by any given
       certificate or OCSP response is independent of the signature
       algorithms chosen by other elements in the chain.</seg>
@@ -25980,6 +26026,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The format of this string is specified in Section
+   6.1 of [RFC5656].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T123546Z" changeid="haruyama">
+        <seg>この文字列のフォーマットは, [RFC5656] の 6.1 節で指定されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The generator g should be chosen such that the order of the generated
    subgroup does not factor into small primes; that is, with p = 2q + 1,
    the order has to be either q or p - 1.</seg>
@@ -26288,6 +26343,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110628T024727Z" changeid="haruyama">
         <seg>すべての将来の方法の名前が， 2．3節で用いられたものと同じように定義されることを意図している．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The introduction of other non-
+   certificate-based SSH public key formats compatible with the above
+   recommendations is outside the scope of this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T122757Z" changeid="haruyama">
+        <seg>以上の勧告と互換する非証明書ベースの SSH 公開鍵形式の導入は, この文書の範囲外だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26614,6 +26679,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110721T051852Z" changeid="haruyama">
         <seg>低いほうのバージョン番号が, 利用されるプロトコルのバージョンとなる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The main
+   purpose of introducing this public key format is to provide an RSA-
+   based public key format that is compatible with current
+   recommendations on key size and hash functions.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T122729Z" changeid="haruyama">
+        <seg>この鍵形式を導入する主な目的は, 鍵サイズとハッシュ関数の現在の勧告と互換する RSA ベースの公開鍵形式を提供することだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30758,11 +30834,20 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This format is the same as for ecdsa-sha2-* signatures in Section
+   3.1.2 of [RFC5656].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T123622Z" changeid="haruyama">
+        <seg>[RFC5656] の 3.1.2 節の ecdsa-sha2-* 署名と, このフォーマットは同一だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This format is the same as for ssh-dss signatures in Section 6.6 of
    [RFC4253].</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110902T045609Z" changeid="haruyama">
-        <seg>[RFC4253] の 6.6 節の ssh-dss 署名とこのフォーマットは同一だ.</seg>
+      <tuv lang="JA" changedate="20110924T123633Z" changeid="haruyama">
+        <seg>[RFC4253] の 6.6 節の ssh-dss 署名と, このフォーマットは同一だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30770,8 +30855,8 @@
         <seg>This format is the same as for ssh-rsa signatures in Section 6.6 of
    [RFC4253].</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110902T045639Z" changeid="haruyama">
-        <seg>[RFC4253] の 6.6 節の ssh-rsa 署名とこのフォーマットは同一だ.</seg>
+      <tuv lang="JA" changedate="20110924T123641Z" changeid="haruyama">
+        <seg>[RFC4253] の 6.6 節の ssh-rsa 署名と, このフォーマットは同一だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32720,6 +32805,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110419T122328Z" changeid="haruyama">
         <seg>ECDH 鍵交換とは異なり, ECMQV は楕円曲線鍵を用いる公開鍵アルゴリズムに依存している: 方法の名前のファミリは必要ない. 曲線の情報は公開鍵アルゴリズムから入手できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Unlike the other public key formats specified in this document, the
+   x509v3-rsa2048-sha256 public key format does not correspond to any
+   previously existing SSH non-certificate public key format.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T121309Z" changeid="haruyama">
+        <seg>この文書で指定されている他の公開鍵形式と異なり, x509v3-rsa2048-sha256 公開鍵形式は, 既存の SSH 非証明書公開鍵形式と対応しない. </seg>
       </tuv>
     </tu>
     <tu>
