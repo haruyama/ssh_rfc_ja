@@ -169,7 +169,7 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
       string   "ecdsa-sha2-[identifier]"
       byte[n]  ecc_key_blob
 
-   ecc_key_blob の値は, 次のような特有のエンコーディングを持つ:
+   ecc_key_blob の値は, 次のエンコーディングを持つ:
 
       string   [identifier]
       string   Q
@@ -200,7 +200,7 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
 
    文字列 [identifier] は, 楕円曲線のドメインパラメータの識別子だ.  この文字列のフォーマットは, 6.1節で指定する.  このアルゴリズムと共に用いる楕円曲線ドメインパラメータの要求されている集合と推奨される集合の情報は, 10節で示す.
 
-   ecdsa_signature_blob の値は, 次のような特有のエンコーディングを持つ:
+   ecdsa_signature_blob の値は, 次のエンコーディングを持つ:
 
       mpint    r
       mpint    s

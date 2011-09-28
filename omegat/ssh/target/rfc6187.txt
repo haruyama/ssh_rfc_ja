@@ -1,0 +1,656 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                           K. Igoe
+Request for Comments: 6187                      National Security Agency
+Category: Standards Track                                     D. Stebila
+ISSN: 2070-1721                      Queensland University of Technology
+                                                              March 2011
+
+
+          セキュアシェル認証のための X.509v3 証明書
+
+概要
+
+   X.509 公開鍵証明書は, 公開鍵を電子IDに束縛するため信頼される認証局による署名を用いる.  この文書は, セキュアシェルの公開鍵アルゴリズムで X.509 バージョン 3 公開鍵証明書を使う方法を指定する.
+
+このメモの位置づけ
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in Section 2 of RFC 5741.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   http://www.rfc-editor.org/info/rfc6187.
+
+Copyright Notice
+
+   Copyright (c) 2011 IETF Trust and the persons identified as the
+   document authors. 訳者: 春山征吾 <haruyama@unixuser.org>All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+
+
+Igoe & Stebila               Standards Track                    [Page 1]
+
+RFC 6187              X.509v3 Certificates for SSH            March 2011
+
+
+目次
+
+   1導入 . . . . . . . . . . . . . . . . . . . . . . . . .  2
+   2.  X.509 バージョン 3 証明書を用いる公開鍵アルゴリズム . . .  4
+     2.1.  公開鍵の形式  . . . . . . . . . . . . . . . . . . . .  4
+     2.2.  証明書の拡張 . . . . . . . . . . . . . . . . . .  6
+       2.2.1.  KeyUsage . . . . . . . . . . . . . . . . . . . . . . .  7
+       2.2.2.  ExtendedKeyUsage . . . . . . . . . . . . . . . . . . .  7
+   3.  署名のエンコーディング . . . . . . . . . . . . . . . . . . . . . .  8
+     3.1.  x509v3-ssh-dss . . . . . . . . . . . . . . . . . . . . . .  8
+     3.2.  x509v3-ssh-rsa . . . . . . . . . . . . . . . . . . . . . .  8
+     3.3.  x509v3-rsa2048-sha256  . . . . . . . . . . . . . . . . . .  9
+     3.4.  x509v3-ecdsa-sha2-*  . . . . . . . . . . . . . . . . . . .  9
+   4.  公開鍵アルゴリズムでの利用 . . . . . . . . . . . . . . . . . 10
+   5.  セキュリティの考察  . . . . . . . . . . . . . . . . . . . 11
+   6.  IANA の考察  . . . . . . . . . . . . . . . . . . . . . 12
+   7.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+     7.1.  Normative References . . . . . . . . . . . . . . . . . . . 12
+     7.2.  Informative References . . . . . . . . . . . . . . . . . . 14
+   Appendix A.  例 . . . . . . . . . . . . . . . . . . . . . . . 15
+   Appendix B.  Acknowledgements  . . . . . . . . . . . . . . . . . . 15
+
+1イントロダクション
+
+   認証に公開鍵暗号を用いる 2つのセキュアシェル (SSH) プロトコルがある.  [RFC4253] に記述されているトランスポート層プロトコルは, クライアントにサーバを認証するために("public key algorithm" と呼ばれる) 電子署名アルゴリズムを用いなければならないことを要求している.  また, [RFC4252] に記述されているユーザ認証プロトコルでは, サーバにクライアントを認証するために電子署名を利用できる ("publickey" 認証).
+
+   どちらの場合も, 認証の有効性は, 公開署名鍵と署名者のIDとの関連の強さに依存する.  電子証明書(例えば X.509 バージョン 3 (X.509v3) 形式 [RFC5280]のもの)は, ID管理を提供する多くの会社や政府の環境で利用されている.  これらの環境では, 信頼できるルート認証機関による署名の連鎖と公開署名鍵と電子IDを束縛する中間認証局を用いる.
+
+
+
+
+
+
+
+
+
+
+
+Igoe & Stebila               Standards Track                    [Page 2]
+
+RFC 6187              X.509v3 Certificates for SSH            March 2011
+
+
+   現在 SSH で利用できる 公開鍵アルゴリズムは以下だ.
+
+                       +--------------+-----------+
+                       |   Algorithm  | Reference |
+                       +--------------+-----------+
+                       |    ssh-dss   | [RFC4253] |
+                       |              |           |
+                       |    ssh-rsa   | [RFC4253] |
+                       |              |           |
+                       | pgp-sign-dss | [RFC4253] |
+                       |              |           |
+                       | pgp-sign-rsa | [RFC4253] |
+                       |              |           |
+                       | ecdsa-sha2-* | [RFC5656] |
+                       +--------------+-----------+
+
+   Pretty Good Privacy (PGP) は公開鍵と電子IDを束縛する独自の方法を持っているので, この文書では非PGPな方法のみに集中する.  特に, この文書は以下の公開鍵アルゴリズムを定義する. 上の表のものとは署名者の公開鍵を伝達するのに X.509v3 証明書を用いるところのみが異なっている.
+
+                         +-----------------------+
+                         |       Algorithm       |
+                         +-----------------------+
+                         |     x509v3-ssh-dss    |
+                         |                       |
+                         |     x509v3-ssh-rsa    |
+                         |                       |
+                         | x509v3-rsa2048-sha256 |
+                         |                       |
+                         |  x509v3-ecdsa-sha2-*  |
+                         +-----------------------+
+
+   x509v3-ecdsa-sha2-* 公開鍵アルゴリズムで伝達される公開鍵は, ecmqv-sha2 鍵交換メソッドで利用できる.
+
+   この仕様の実装は, セキュアシェルプロトコル [RFC4251] [RFC4253] と X.509v3 証明書 [RFC5280] に精通している必要がある.  プロトコルメッセージを記述するのに用いるデータタイプは, [RFC4251]の 5節で定義されている.
+
+   この文書はSSH実装の詳細に関連している; 基底の暗号アルゴリズムの仕様や X.509v3 証明書の操作や構造は他の標準文書に委ねられている. 特に [RFC3447], [FIPS-186-3],[FIPS-180-2], [FIPS-180-3], [SEC1], [RFC5280] だ.
+
+
+
+
+Igoe & Stebila               Standards Track                    [Page 3]
+
+RFC 6187              X.509v3 Certificates for SSH            March 2011
+
+
+    
+
+   セキュアシェルプロトコルでの X.509v3 証明書の利用の以前の提案は, O. Saarenmaa と J. Galbraith によって導入された. この文書は以前の提案から一部を引き継いでいるが, 完全な互換性は維持していない.
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, RFC 2119 [RFC2119] で記述されているように解釈される. 
+
+2.  X.509 バージョン 3 証明書を用いる公開鍵アルゴリズム
+
+   この文書は, セキュアシェルプロトコルで利用するための以下の新しい公開鍵アルゴリズムを定義する: x509v3-ssh-dss, x509v3-ssh-rsa, x509v3-rsa2048-sha256,  x509v3-ecdsa-sha2-* で与えられるアルゴリズムのファミリー.  これらのアルゴリズムでは, 公開鍵は X.509v3 証明書に格納される.  この証明書と, 信用される認証局につながる証明書のチェーン, 証明書の失効状態を与えるオプションのメッセージは, セキュアシェルプロトコルでこの節で述べる形式に従って公開鍵データとして送られる.
+
+2.1.  公開鍵の形式
+
+   X.509 バージョン 3 証明書の一般的な説明は [RFC5280] にある.  この文書の目的は, X.509 で 証明書の(おそらく長さ1の)チェーンないしシーケンスによって, 信頼されるルート認証局とその中間認証局が暗号学的に公開鍵署名を用いる電子IDと公開鍵が束縛できることを知ることだ.
+
+   この文書で指定される公開鍵アルゴリズムのすべてで, [RFC2560] の 4.2節にある Online Certificate Status Protocol (OCSP) 応答が 0 以上後に続く X.509v3 証明書の 1つ以上のシーケンスによって, 鍵のフォーマットは構成される.  このデータ構造の中で直接 OCSP 応答を提供することで,  必要な通信のラウンド数を減らすことができ (帯域外の OCSP 検査を実行する必要が実装でなくなる) ファイアウォールの背後のサーバから プライベートなネットワークの外側のクライアントが OCSP 応答を受けとれるようになる.  OCSP データを利用する場合は, 実装は, OCSP 応答の生成時間が受け入れられるかを検査する必要がある.  実装は, 証明書状態が取り消されている証明書を拒否することが推奨されるが, 要求はされていない.
+
+
+
+
+Igoe & Stebila               Standards Track                    [Page 4]
+
+RFC 6187              X.509v3 Certificates for SSH            March 2011
+
+
+   鍵フォーマットは次のエンコーディングを持つ:
+
+     string  "x509v3-ssh-dss" / "x509v3-ssh-rsa" /
+             "x509v3-rsa2048-sha256" / "x509v3-ecdsa-sha2-[identifier]"
+     uint32  certificate-count
+     string  certificate[1..certificate-count]
+     uint32  ocsp-response-count
+     string  ocsp-response[0..ocsp-response-count]
+
+   上の図で, 文字列 [identifier] は, 楕円曲線ドメインパラメータの識別子だ.  この文字列のフォーマットは, [RFC5656] の 6.1 節で指定されている.  このアルゴリズムと共に用いる楕円曲線ドメインパラメータの要求されている集合と推奨される集合の情報は, [RFC5656] の 10節にある.
+
+   それぞれの certificate と ocsp-response は,  Abstract Syntax Notation One (ASN.1) [ASN1] の Distinguished Encoding Rules(DER) エンコーディングを用いてオクテット文字列としてエンコードされなければならない.  これらの公開鍵アルゴリズムの1つでSSHの鍵交換をする例を, 付録Aで示す.
+
+   さらに, 以下の制限が適用される:
+
+   o  送信者の証明書は, 最初の証明書でなければならない. この証明書で運ばれる公開鍵は, 送信者を認証するのに採用された公開鍵アルゴリズムのものでなければならない.
+
+   o  2番目以降の証明書は, 1つ前のものを証明しなければならない.
+
+   o  ルート認証局を指定する自己署名証明書は, 省略してもよい.  ルート認証局につながる他の中間証明書はすべて含まれなければならない.
+
+   o  ピアがチェーンと OCSP 応答を検証できやすくするため, それぞれの証明書と OCSP 応答は ピアがサポートする公開鍵アルゴリズムに関連する署名アルゴリズムでのみ署名される必要がある. このアルゴリズムは, SSH_MSG_KEXINIT パケット の server_host_key_algorithms ([RFC4253] の 7 .1節)で示される.  しかし, 他のアルゴリズムが利用されるかもしれない.  証明書や OCSP 応答で用いられる署名アルゴリズムの選択は, チェーンの他の要素で選択された署名アルゴリズムと独立だ.
+
+   o  検証者は, セキュアシェルに同等なものがないアルゴリズムも含めて, SSH_MSG_KEXINIT パケットの server_host_key_algorithms フィールドに挙がっていないアルゴリズムを用いた 証明書チェーンや OCSP 応答を受けとる準備をしなければならない.
+
+
+
+Igoe & Stebila               Standards Track                    [Page 5]
+
+RFC 6187              X.509v3 Certificates for SSH            March 2011
+
+
+       しかし, そのようなチェーンを送るピアは,  server_host_key_algorithmsに挙げられているアルゴリズムのみを用いたチェーンにくらべてそのようなチェーンが検証されにくいことを認識する必要がある.
+
+   o  OCSP 応答の順序に要件はない.  OCSP 応答の数は, 証明書の数を越えてはならない.
+
+   証明書チェーンを受け取ったら, システム管理者やユーザに設定された 信頼のルートに基いて [RFC5280] の 6.1 節に従い証明書チェーンを実装は検証しなければならない.
+
+   証明書を利用する上での問題 (証明書の有効期限や信用できない証明書の失効)は [RFC5280] で述べられており, この文書の範囲外だ.
+   しかし, 準拠する実装は [RFC5280] に従わなければならない.
+   OCSP 応答を提供/処理する実装は, [RFC2560]に従わなければならない.
+
+   OCSP 応答が提供されない場合, 証明書を受け入れるかどうかの決定は実装とシステム管理者次第だ.  証明書の Authority Information Access データ ([RFC5280] の 4.2.2.1 節) の id-ad-ocsp access description に基いて OCSP 応答を実装が取得してもよい.  しかし, 認証局が OCSP を採用するよう id-ad-ocsp access description が指定したが OCSP 情報がない場合は, 証明書を拒否することが推奨される.
+
+   [RFC5480] と [RFC5758] は, 楕円曲線デジタル署名アルゴリズム （ＥＣＤＳＡ) 公開鍵で利用する X.509v3 証明書の構造を記述している.  [RFC3279] と  [RFC5280] は, RSA と デジタル署名アルゴリズム (DSA) 公開鍵で利用する X.509v3 証明書の構造を記述している.  [RFC5759] は, Suite B X.509v3 証明書での ECDSA と証明書失効リストプロファイルに対して追加のガイダンスを提供している.
+
+2.2.  証明書の拡張
+
+   証明書の拡張で, X.509v3 証明書の公開鍵に関連する追加の属性を指定できる ([RFC5280] の 4.2 節を参照).  KeyUsage と ExtendedKeyUsage 拡張は, 以下の節で指定されるように, セキュアシェルの文脈で X.509v3 証明書の利用を制限するのに利用されることがある.
+
+
+
+
+
+Igoe & Stebila               Standards Track                    [Page 6]
+
+RFC 6187              X.509v3 Certificates for SSH            March 2011
+
+
+2.2.1.  KeyUsage
+
+   KeyUsage 拡張は, 証明書の利用を制限するの用いられてもよい.
+   KeyUsage 拡張が存在するなら, [RFC5280] の 4.2.1.3 節に従い,  証明書は, 指定された目的の1つにのみ利用されなければならない.  利用中の公開鍵アルゴリズムに対応する証明書への2つの関連する keyUsage 識別子がある:
+
+   o  x509v3-ssh-dss ないし, x509v3-ssh-rsa, x509v3-rsa2048-sha256, x509v3-ecdsa-sha2-* 公開鍵アルゴリズムのための証明書に KeyUsage 拡張が存在したら, digitalSignature ビットは設定されなければならない.
+
+   o ecmqv-sha2 鍵交換法のための証明書に KeyUsage 拡張が存在したら, keyAgreement ビットが設定されなければならない.
+
+   証明書チェーンの残りの証明書のために, [RFC5280] の 4.2.1.3 節にあるように KeyUsage 識別子と証明書の既存の規約に実装は従わなければならない.
+
+2.2.2.  ExtendedKeyUsage
+
+   この文書は, 証明書の利用を制限するために利用されてもよい 2つの ExtendedKeyUsage 鍵目的 ID を定義する: id-kp-secureShellClient, 鍵が利用されるセキュアシェルクライアントを指定, と id-kp-secureShellServer, 鍵が利用されるセキュアシェルサーバを指定, だ.  ExtendedKeyUsage 拡張が存在するなら, [RFC5280] の 4.2.1.12 節に従い,  証明書は, 指定された目的の1つにのみ利用されなければならない.  この文書で定義される 2つの鍵目的 ID のオブジェクト識別子は以下の通りだ:
+
+   o  id-pkix OBJECT IDENTIFIER ::= { iso(1) identified-organization(3)
+      dod(6) internet(1) security(5) mechanisms(5) pkix(7) }
+
+   o  id-kp OBJECT IDENTIFIER ::= { id-pkix 3 } -- extended key purpose
+      identifiers
+
+   o  id-kp-secureShellClient OBJECT IDENTIFIER ::= { id-kp 21 }
+
+   o  id-kp-secureShellServer OBJECT IDENTIFIER ::= { id-kp 22 }
+
+
+
+
+
+
+
+
+Igoe & Stebila               Standards Track                    [Page 7]
+
+RFC 6187              X.509v3 Certificates for SSH            March 2011
+
+
+3.  署名のエンコーディング
+
+   この文書で指定するX.509v3 ベースの公開鍵アルゴリズム (x509v3-ssh-dss, x509v3-ssh-rsa, x509v3-ecdsa-sha2-*) は, 対応する非 X.509v3 ベースの公開鍵アルゴリズム (それぞれ ssh-dss, ssh-rsa, ecdsa-sha2-*) と似たやり方で署名と検証を行なう. 509v3-rsa2048-sha256 公開鍵アルゴリズムは新しいメカニズムを提供するが, ssh-rsa と似ている. ただし, 異なるハッシュ関数と追加の鍵サイズの制約を持っている.  以下で具体的に指定する.
+
+3.1.  x509v3-ssh-dss
+
+   x509v3-ssh-dss 鍵フォーマットでの署名と検証は, SHA-1 ハッシュ [FIPS-180-2] を用いるDigital Signature Standard [FIPS-186-2] に従って行なわれる.
+
+   署名の結果次のようにエンコードされる:
+
+     string  "ssh-dss"
+     string  dss_signature_blob
+
+   dss_signature_blob の値は, (それぞれ長さやパディングがない符号無しのネットワークバイトオーダーの160-bitの整数である) r とそれに続く s を含む文字列としてエンコードされる.
+
+   [RFC4253] の 6.6 節の ssh-dss 署名と, このフォーマットは同一だ.
+
+3.2.  x509v3-ssh-rsa
+
+   x509v3-ssh-rsa 鍵フォーマットでの署名と検証は, SHA-1 ハッシュを用いる RSASSA-PKCS1-v1_5 scheme in [RFC3447] に従って行なわれる.
+
+   署名の結果次のようにエンコードされる:
+
+     string  "ssh-rsa"
+     string  rsa_signature_blob
+
+   rsa_signature_blob の値は,(長さやパディングがない符号無しのネットワークバイトオーダーの160-bitの整数である) s を含む文字列としてエンコードされる.
+
+   [RFC4253] の 6.6 節の ssh-rsa 署名と, このフォーマットは同一だ.
+
+
+
+
+
+Igoe & Stebila               Standards Track                    [Page 8]
+
+RFC 6187              X.509v3 Certificates for SSH            March 2011
+
+
+3.3.  x509v3-rsa2048-sha256
+
+   x509v3-ssh-rsa2048-sha256 鍵フォーマットでの署名と検証は, SHA-256 ハッシュ [FIPS-180-3] を用いる RSASSA-PKCS1-v1_5 scheme in [RFC3447] に従って行なわれる; この形式で運ばれる RSA 鍵は, 少なくとも 2048 ビットのモジュラスを持たなければならない.
+
+   署名の結果次のようにエンコードされる:
+
+     string  "rsa2048-sha256"
+     string  rsa_signature_blob
+
+   rsa_signature_blob の値は,(長さやパディングがない符号無しのネットワークバイトオーダーの160-bitの整数である) s を含む文字列としてエンコードされる.
+
+   この文書で指定されている他の公開鍵形式と異なり, x509v3-rsa2048-sha256 公開鍵形式は, 既存の SSH 非証明書公開鍵形式と対応しない. この鍵形式を導入する主な目的は, 鍵サイズとハッシュ関数の現在の勧告と互換する RSA ベースの公開鍵形式を提供することだ.  例えば, National Institute of Standards and Technology (NIST) の暗号アルゴリズムと鍵長の勧告案 [SP-800-131] は, 2048 ビットよりも小さいモジュラスを持つ RSA 鍵や SHA-1 ハッシュ関数を用いる RSA 鍵を用いた電子署名生成は, 2010 年まで受け入れられ 2011年から2013年まで非推奨と指定している. 一方, 少なくとも 2048 ビットのモジュラスを持ち SHA-256 を用いる RSA 鍵は, 無期限で受け入れられる.  以上の勧告と互換する非証明書ベースの SSH 公開鍵形式の導入は, この文書の範囲外だ.
+
+3.4.  x509v3-ecdsa-sha2-*
+
+   x509v3-ecdsa-sha2-* 鍵フォーマットでの署名と検証は, SHA-2 ハッシュ関数ファミリ [FIPS-180-3] を用いる [FIPS-186-3] の ECDSA アルゴリズムに従って行なわれる.  SHA2 ハッシュ関数ファミリからのハッシュ関数の選択は, [RFC5656] の 6.2.1 節で指定されているように ECDSA 鍵の鍵サイズの基づく.
+
+   署名の結果次のようにエンコードされる:
+
+     string  "ecdsa-sha2-[identifier]"
+     string  ecdsa_signature_blob
+
+   文字列 [identifier] は, 楕円曲線のドメインパラメータの識別子だ.  この文字列のフォーマットは, [RFC5656] の 6.1 節で指定されている.
+
+
+
+Igoe & Stebila               Standards Track                    [Page 9]
+
+RFC 6187              X.509v3 Certificates for SSH            March 2011
+
+
+   ecdsa_signature_blob の値は, 次のエンコーディングを持つ:
+
+     mpint   r
+     mpint   s
+
+   整数 r と s は ECDSA アルゴリズムの出力だ.
+
+   [RFC5656] の 3.1.2 節の ecdsa-sha2-* 署名と, このフォーマットは同一だ.
+
+4.  公開鍵アルゴリズムでの利用
+
+   この文書の公開鍵アルゴリズムとエンコーディングは, サーバの認証とユーザの認証のための次のプロトコルメッセージを含む(ただし, これだけに限定されない)公開鍵が利用されるセキュアシェルプロトコルスイートの任意の場所で受け入れられる必要がある.
+
+   o  "publicky" 認証が用いられる SSH_MSG_USERAUTH_REQUEST メッセージ内 [RFC4252]
+
+   o   "hostbased" 認証が用いられる SSH_MSG_USERAUTH_REQUEST メッセージ内 [RFC4252]
+
+   o  SSH_MSG_KEXDH_REPLY メッセージ内 [RFC4253]
+
+   o  SSH_MSG_KEXRSA_PUBKEY メッセージ内 [RFC4432]
+
+   o  SSH_MSG_KEXGSS_HOSTKEY メッセージ内 [RFC4462]
+
+   o  SSH_MSG_KEX_ECDH_REPLY メッセージ内 [RFC5656]
+
+   o  SSH_MSG_KEX_ECMQV_REPLY メッセージ内 [RFC5656]
+
+   この仕様の公開鍵がハッシュアルゴリズムの入力に含まれる場合, 通信で転送された正確なバイト列をハッシュ関数の入力として用いなければならない.  特に, 実装は, 通信に含まれた チェーン証明書や OCSP 応答のいずれかを省略してはならないし, 証明書は OCSP データのエンコーディングを変化してはならない.  そうしないと, それぞれの側で並列に計算されるハッシュが異なる値を持つことになる.
+
+   ユーザ認証のための証明書とユーザ名とのマッピングは, 実装者とシステム管理者に対して実装と設定の問題として残されている.
+
+   サーバの認証のために, ホスト名と証明書のマッピングをする次のメカニズムを実装がサポートすることが推奨される.  しかし, ローカルなポリシーがこのメカニズムを無効にしてもよいし, マッチングが成功したとみなす前に追加の制約を課してもよい.
+
+
+
+Igoe & Stebila               Standards Track                   [Page 10]
+
+RFC 6187              X.509v3 Certificates for SSH            March 2011
+
+
+    さらに, ホスト名と証明書をマッピングする追加のメカニズムが利用されてもよい. 実装者とシステム管理者に対して実装と設定の問題として残されている.
+
+   推奨されるサーバの認証メカニズムは以下だ.  [RFC5280] の 4.2.1.6 節で記述されている subjectAlternativeName X.509v3 拡張 を, 必要に応じてドメイン名かIPアドレスを伝えるために dNSName エントリか iPAddress エントリを用いて, サーバホスト名を伝えるために利用される必要がある.  複数のエントリが指定されてもよい.  以下の規則が適用される:
+
+   o  クライアントの参照識別子(例えば, クライアントで入力されたホスト名) が DNS ドメイン名なら, サーバの ID は [RFC6125] に指定されているルールを用いて検査される必要がある.  DNS-ID 識別子型のサポートが クライアントとサーバのソフトウェア実装で推奨される.  セキュアシェルサーバで用いられる証明書を発行する認証局は, DNS-ID 識別子型をサポートする必要がある.  サービスプロバイダは, 証明書の要求で DNS-ID 識別子型を含む必要がある.  DNS-ID は, 識別子内の 完全最左ラベルとして ワイルドカード文字 '＊" を含んでもよい.
+
+   o  クライアントの参照識別子が [RFC0791] ないし [RFC2460] で定義された IP アドレスならば, クライアントはそのアドレスを"ネットワークバイトオーダー" オクテット文字列表現に変換し iPAddress タイプの subjectAltName エントリに対して比較する必要がある.  参照識別子と提示された識別子がオクテット文字列で同一ならば, 一致している.
+
+5.  セキュリティの考察
+
+   この文書は, X.509v3 証明書を用いて証明書を伝達するセキュアシェルプロトコルのための新しい公開鍵アルゴリズムを提供する.  この文書で導入されるすべての公開鍵アルゴリズムは、セキュアシェルプロトコルの既存のアルゴリズムに基づいているため, ほとんどの部分についてはセキュアシェルプロトコル利用上のセキュリティの考察が適用される.  しかし, 期限切れの証明書や証明書失効リストに関連する考察を含む, 公開鍵基盤での X.509v3 証明書の利用に特有のセキュリティの考察に実装者は注意しなければならない.
+
+   X.509v3 証明書の利用について [RFC5280], OCSP 応答について [RFC2560], サーバ認証について [RFC4253], ユーザ認証について [RFC4252] のセキュリティの考察の節を参照せよ.  実装は失効した証明書を利用しないほうがよい. 証明書失効の多くの原因は, 必要とされる重要な認証の性質がもはや真ではないことを意味しているからだ.
+
+
+
+Igoe & Stebila               Standards Track                   [Page 11]
+
+RFC 6187              X.509v3 Certificates for SSH            March 2011
+
+
+   例えば, 証明書の秘密鍵の漏洩や間違った相手への証明書の発行が, 証明書を失効させる一般的な理由だ.
+
+   失効された X.509v3 証明書を用いて SSH の交換を試行する者がいたら, システムの監査ログかシステムの一般イベントログにセキュリティイベントとしてその試行に関連する日時, 証明書のid, みかけの試行元 IPアドレスが記録される必要がある.  同様に, 証明書が OCSP が利用されることを示していて OCSP クエリへの応答がない場合, 試行に用いられた証明書の利用の詳細(前述)とともに応答がないことが記録される必要がある.
+
+   暗号アルゴリズムを含むすべての仕様と同様に, この仕様で提供されるセキュリティの品質は, 利用する暗号アルゴリズムの強度や, 鍵のセキュリティ, 実装の正しさ, 公開鍵基盤と認証局のセキュリティに依存する.
+   従って, この仕様とセキュアシェルプロトコルスイートの他の部分を実装する際に, 高い品質の保証の方法を用いることが実装者に推奨される.
+
+6.  IANA の考慮
+
+   [RFC4251] の 8節と [RFC4250] の4.6節と整合するため, この文書は次の登録を行なう.
+
+   公開鍵アルゴリズム名レジストリ内に:
+
+   o  SSH 公開鍵アルゴリズム "x509v3-ssh-dss".
+
+   o  SSH 公開鍵アルゴリズム "x509v3-ssh-rsa".
+
+   o  SSH 公開鍵アルゴリズム "x509v3-ssh-rsa2048-sha256".
+
+   o  "x509v3-ecdsa-sha2-" で始まり アットマーク ('@') を含まない SSH 公開鍵アルゴリズム名ファミリ.
+
+   2.2.2 節で用いられる 2つのオブジェクト識別子は, IANA から PKIX ワーキンググループに委任された arc から割り当てられた.
+
+7.  References
+
+7.1.  Normative References
+
+   [ASN1]        International Telecommunications Union, "Abstract
+                 Syntax Notation One (ASN.1): Specification of basic
+                 notation",  X.680, July 2002.
+
+
+
+Igoe & Stebila               Standards Track                   [Page 12]
+
+RFC 6187              X.509v3 Certificates for SSH            March 2011
+
+
+   [FIPS-180-2]  National Institute of Standards and Technology, "Secure
+                 Hash Standard", FIPS 180-2, August 2002.
+
+   [FIPS-180-3]  National Institute of Standards and Technology, "Secure
+                 Hash Standard", FIPS 180-3, October 2008.
+
+   [FIPS-186-3]  National Institute of Standards and Technology,
+                 "Digital Signature Standard (DSS)", FIPS 186-3,
+                 June 2009.
+
+   [RFC0791]     Postel, J., "Internet Protocol", STD 5, RFC 791,
+                 September 1981.
+
+   [RFC2119]     Bradner, S., "Key words for use in RFCs to Indicate
+                 Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC2460]     Deering, S. and R. Hinden, "Internet Protocol, Version
+                 6 (IPv6) Specification", RFC 2460, December 1998.
+
+   [RFC2560]     Myers, M., Ankney, R., Malpani, A., Galperin, S., and
+                 C. Adams, "X.509 Internet Public Key Infrastructure
+                 Online Certificate Status Protocol - OCSP", RFC 2560,
+                 June 1999.
+
+   [RFC3279]     Bassham, L., Polk, W., and R. Housley, "Algorithms and
+                 Identifiers for the Internet X.509 Public Key
+                 Infrastructure Certificate and Certificate Revocation
+                 List (CRL) Profile", RFC 3279, April 2002.
+
+   [RFC3447]     Jonsson, J. and B. Kaliski, "Public-Key Cryptography
+                 Standards (PKCS) #1: RSA Cryptography Specifications
+                 Version 2.1", RFC 3447, February 2003.
+
+   [RFC4250]     Lehtinen, S. and C. Lonvick, "The Secure Shell (SSH)
+                 Protocol Assigned Numbers", RFC 4250, January 2006.
+
+   [RFC4251]     Ylonen, T. and C. Lonvick, "The Secure Shell (SSH)
+                 Protocol Architecture", RFC 4251, January 2006.
+
+   [RFC4252]     Ylonen, T. and C. Lonvick, "The Secure Shell (SSH)
+                 Authentication Protocol", RFC 4252, January 2006.
+
+   [RFC4253]     Ylonen, T. and C. Lonvick, "The Secure Shell (SSH)
+                 Transport Layer Protocol", RFC 4253, January 2006.
+
+
+
+
+
+
+
+Igoe & Stebila               Standards Track                   [Page 13]
+
+RFC 6187              X.509v3 Certificates for SSH            March 2011
+
+
+   [RFC5280]     Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
+                 Housley, R., and W. Polk, "Internet X.509 Public Key
+                 Infrastructure Certificate and Certificate Revocation
+                 List (CRL) Profile", RFC 5280, May 2008.
+
+   [RFC5480]     Turner, S., Brown, D., Yiu, K., Housley, R., and T.
+                 Polk, "Elliptic Curve Cryptography Subject Public Key
+                 Information", RFC 5480, March 2009.
+
+   [RFC5656]     Stebila, D. and J. Green, "Elliptic Curve Algorithm
+                 Integration in the Secure Shell Transport Layer",
+                 RFC 5656, December 2009.
+
+   [RFC5758]     Dang, Q., Santesson, S., Moriarty, K., Brown, D., and
+                 T. Polk, "Internet X.509 Public Key Infrastructure:
+                 Additional Algorithms and Identifiers for DSA and
+                 ECDSA", RFC 5758, January 2010.
+
+   [RFC6125]     Saint-Andre, P. and J. Hodges, "Representation and
+                 Verification of Domain-Based Application Service
+                 Identity within Internet Public Key Infrastructure
+                 Using X.509 (PKIX) Certificates in the Context of
+                 Transport Layer Security (TLS)", RFC 6125, March 2011.
+
+   [SEC1]        Standards for Efficient Cryptography Group, "Elliptic
+                 Curve Cryptography", SEC 1, September 2000,
+                 <http://www.secg.org/download/aid-780/sec1-v2.pdf>.
+
+7.2.  Informative References
+
+   [RFC4432]     Harris, B., "RSA Key Exchange for the Secure Shell
+                 (SSH) Transport Layer Protocol", RFC 4432, March 2006.
+
+   [RFC4462]     Hutzelman, J., Salowey, J., Galbraith, J., and V.
+                 Welch, "Generic Security Service Application Program
+                 Interface (GSS-API) Authentication and Key Exchange for
+                 the Secure Shell (SSH) Protocol", RFC 4462, May 2006.
+
+   [RFC5759]     Solinas, J. and L. Zieglar, "Suite B Certificate and
+                 Certificate Revocation List (CRL) Profile", RFC 5759,
+                 January 2010.
+
+   [SP-800-131]  Barker, E. and A. Roginsky, "DRAFT Recommendation for
+                 the Transitioning of Cryptographic Algorithms and Key
+                 Lengths", NIST Special Publication 800-131, June 2010.
+
+
+
+
+
+
+Igoe & Stebila               Standards Track                   [Page 14]
+
+RFC 6187              X.509v3 Certificates for SSH            March 2011
+
+
+Appendix A.  Example
+
+   The following example illustrates the use of an X.509v3 certificate
+   for a public key for the Digital Signature Algorithm when used in a
+   Diffie-Hellman key exchange method.  In the example, there is a chain
+   of certificates of length 2, and a single OCSP response is provided.
+
+     byte    SSH_MSG_KEXDH_REPLY
+     string  0x00 0x00 0xXX 0xXX  -- length of the remaining data in
+                                     this string
+             0x00 0x00 0x00 0x0D  -- length of string "x509v3-ssh-dss"
+             "x509v3-ssh-dss"
+             0x00 0x00 0x00 0x02  -- there are 2 certificates
+             0x00 0x00 0xXX 0xXX  -- length of sender certificate
+             DER-encoded sender certificate
+             0x00 0x00 0xXX 0xXX  -- length of issuer certificate
+             DER-encoded issuer certificate
+             0x00 0x00 0x00 0x01  -- there is 1 OCSP response
+             0x00 0x00 0xXX 0xXX  -- length of OCSP response
+             DER-encoded OCSP response
+     mpint   f
+     string  signature of H
+
+Appendix B.  Acknowledgements
+
+   The authors gratefully acknowledge helpful comments from Ran
+   Atkinson, Samuel Edoho-Eket, Joseph Galbraith, Russ Housley, Jeffrey
+   Hutzelman, Jan Pechanec, Peter Saint-Andre, Sean Turner, and Nicolas
+   Williams.
+
+   O. Saarenmaa and J. Galbraith previously drafted a document on a
+   similar topic.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Igoe & Stebila               Standards Track                   [Page 15]
+
+RFC 6187              X.509v3 Certificates for SSH            March 2011
+
+
+Authors' Addresses
+
+   Kevin M. Igoe
+   National Security Agency
+   NSA/CSS Commercial Solutions Center
+   United States of America
+
+   EMail: kmigoe@nsa.gov
+
+
+   Douglas Stebila
+   Queensland University of Technology
+   Information Security Institute
+   Level 7, 126 Margaret St
+   Brisbane, Queensland  4000
+   Australia
+
+   EMail: douglas@stebila.ca
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Igoe & Stebila               Standards Track                   [Page 16]
+

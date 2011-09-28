@@ -528,7 +528,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
                 public key/certificate format)
       byte[n]   signature blob in format specific encoding.
 
-   "ssh-dss" 鍵フォーマットは次のような特有のエンコーディングを持つ:
+   "ssh-dss" 鍵フォーマットは次のエンコーディングを持つ:
 
       string    "ssh-dss"
       mpint     p
@@ -557,7 +557,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
    'dss_signature_blob' の値は, (それぞれ長さやパディングがない符号無しのネットワークバイトオーダーの160-bitの整数である) r とそれに続く s を含む文字列としてエンコードされる.
 
-   "ssh-rsa" 鍵フォーマットは次のような特有のエンコーディングを持つ:
+   "ssh-rsa" 鍵フォーマットは次のエンコーディングを持つ:
 
       string    "ssh-rsa"
       mpint     e

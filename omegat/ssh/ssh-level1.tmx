@@ -159,6 +159,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Information on the REQUIRED
+   and RECOMMENDED sets of elliptic curve domain parameters for use with
+   this algorithm can be found in Section 10 of [RFC5656].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T062444Z" changeid="haruyama">
+        <seg>このアルゴリズムと共に用いる楕円曲線ドメインパラメータの要求されている集合と推奨される集合の情報は, [RFC5656] の 10節にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This includes but
       is not limited to padding, byte order, and data formats.</seg>
       </tuv>
@@ -193,6 +203,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>このプロセスは, 鍵の素材が十分な長さになるまで繰替えされる; そして鍵はこの素材の最初から取得される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Signing and verifying using the x509v3-rsa2048-sha256 key format is
+   performed according to the RSASSA-PKCS1-v1_5 scheme in [RFC3447]
+   using the SHA-256 hash [FIPS-180-3]; RSA keys conveyed using this
+   format MUST have a modulus of at least 2048 bits.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T121158Z" changeid="haruyama">
+        <seg>x509v3-ssh-rsa2048-sha256 鍵フォーマットでの署名と検証は, SHA-256 ハッシュ [FIPS-180-3] を用いる RSASSA-PKCS1-v1_5 scheme in [RFC3447] に従って行なわれる; この形式で運ばれる RSA 鍵は, 少なくとも 2048 ビットのモジュラスを持たなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -254,11 +275,12 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The presence and use of this header data
-   SHOULD be reviewed by sites that deploy this file format.</seg>
+        <seg>[RFC3279] and [RFC5280] describe the
+   structure of X.509v3 certificates to be used with RSA and Digital
+   Signature Algorithm (DSA) public keys.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110719T031444Z" changeid="haruyama">
-        <seg>このヘッダフィールドの有無と利用は, このファイル形式を配置するサイトによって精査される必要がある.</seg>
+      <tuv lang="JA" changedate="20110901T073840Z" changeid="haruyama">
+        <seg>[RFC3279] と  [RFC5280] は, RSA と デジタル署名アルゴリズム (DSA) 公開鍵で利用する X.509v3 証明書の構造を記述している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -269,6 +291,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>'rsa_signature_blob' の値は,(長さやパディングがない符号無しのネットワークバイトオーダーの160-bitの整数である) s を含む文字列としてエンコードされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The presence and use of this header data
+   SHOULD be reviewed by sites that deploy this file format.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110719T031444Z" changeid="haruyama">
+        <seg>このヘッダフィールドの有無と利用は, このファイル形式を配置するサイトによって精査される必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -559,6 +590,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document is concerned with SSH implementation details;
+   specification of the underlying cryptographic algorithms and the
+   handling and structure of X.509v3 certificates is left to other</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T011323Z" changeid="haruyama">
+        <seg>この文書はSSH実装の詳細に関連している; 基底の暗号アルゴリズムの仕様や X.509v3 証明書の操作や構造は他の標準文書に委ねられている. 特に [RFC3447], [FIPS-186-3],[FIPS-180-2], [FIPS-180-3], [SEC1], [RFC5280] だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Host-Based Authentication: &quot;hostbased&quot;</seg>
       </tuv>
       <tuv lang="JA">
@@ -602,6 +643,16 @@
       <tuv lang="JA">
         <seg>初期の割り当て..................................7
            4.2.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Signing and verifying using the x509v3-ssh-rsa key format is
+   performed according to the RSASSA-PKCS1-v1_5 scheme in [RFC3447]
+   using the SHA-1 hash [FIPS-180-2].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T045623Z" changeid="haruyama">
+        <seg>x509v3-ssh-rsa 鍵フォーマットでの署名と検証は, SHA-1 ハッシュを用いる RSASSA-PKCS1-v1_5 scheme in [RFC3447] に従って行なわれる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1052,6 +1103,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Additionally, the User Authentication Protocol
+   described in [RFC4252] allows for the use of a digital signature to
+   authenticate the client to the server (&quot;publickey&quot; authentication).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T005554Z" changeid="haruyama">
+        <seg>また, [RFC4252] に記述されているユーザ認証プロトコルでは, サーバにクライアントを認証するために電子署名を利用できる (&quot;publickey&quot; 認証).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This allows an operator or management station to
        ensure the authenticity of the SNMP engine that provides MIB
        data.</seg>
@@ -1093,6 +1154,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110722T052432Z" changeid="haruyama">
         <seg>クライアントは, それぞれのコメントに異なる言語を指定するなら, 1つ以上のコメントを指定してよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Upon receipt of a certificate chain, implementations MUST verify the
+   certificate chain according to Section 6.1 of [RFC5280] based on a
+   root of trust configured by the system administrator or user.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T072305Z" changeid="haruyama">
+        <seg>証明書チェーンを受け取ったら, システム管理者やユーザに設定された 信頼のルートに基いて [RFC5280] の 6.1 節に従い証明書チェーンを実装は検証しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1218,19 +1289,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Method</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>方法</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The value of 'mac' resulting from the MAC algorithm MUST be
    transmitted without encryption as the last part of the packet.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>MAC アルゴリズムによって計算された 'mac' の値は, パケットの最後の部分に暗号化なしで転送されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Method</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>方法</seg>
       </tuv>
     </tu>
     <tu>
@@ -1297,6 +1368,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110409T092509Z" changeid="haruyama">
         <seg>転送される楕円曲線公開鍵(点)は, 転送前に8bit文字列にエンコードする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The Transport Layer Protocol,
+   described in [RFC4253], requires that a digital signature algorithm
+   (called the &quot;public key algorithm&quot;) MUST be used to authenticate the
+   server to the client.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T005451Z" changeid="haruyama">
+        <seg>[RFC4253] に記述されているトランスポート層プロトコルは, クライアントにサーバを認証するために(&quot;public key algorithm&quot; と呼ばれる) 電子署名アルゴリズムを用いなければならないことを要求している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1373,6 +1455,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>殆どの署名のアルゴリズムは, ハッシュと追加のパディングを含んでいる(たとえば, 'ssh-dss' は SHA-1 ハッシュを指定する).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Digital certificates, such as those in X.509
+   version 3 (X.509v3) format [RFC5280], are used in many corporate and
+   government environments to provide identity management.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T010256Z" changeid="haruyama">
+        <seg>電子証明書(例えば X.509 バージョン 3 (X.509v3) 形式 [RFC5280]のもの)は, ID管理を提供する多くの会社や政府の環境で利用されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1480,22 +1572,22 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Note that the
-   values for the 'reason code' are given in decimal format for
-   readability, but they are actually uint32 values.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>'reason code' は読み易いように10進のフォーマットで書かれているが, 実際にはuint32の値であることに注意.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The value for 'dss_signature_blob' is encoded as a string containing
    r, followed by s (which are 160-bit integers, without lengths or
    padding, unsigned, and in network byte order).</seg>
       </tuv>
       <tuv lang="JA">
         <seg>'dss_signature_blob' の値は, (それぞれ長さやパディングがない符号無しのネットワークバイトオーダーの160-bitの整数である) r とそれに続く s を含む文字列としてエンコードされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Note that the
+   values for the 'reason code' are given in decimal format for
+   readability, but they are actually uint32 values.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>'reason code' は読み易いように10進のフォーマットで書かれているが, 実際にはuint32の値であることに注意.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1549,6 +1641,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110808T101155Z" changeid="haruyama">
         <seg>メッセージの送り手が必要に応じて SSH のセッションの作成を開始するので, SSH のセッションは, 入力メッセージに対してすでに存在している. そうでなければ, 受信メッセージは SSH トランスポートモデルに到達しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  If the client's reference identifier is an IP address as defined
+      by [RFC0791] or [RFC2460], the client SHOULD convert that address
+      to the &quot;network byte order&quot; octet string representation and
+      compare it against a subjectAltName entry of type iPAddress.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T070714Z" changeid="haruyama">
+        <seg>o  クライアントの参照識別子が [RFC0791] ないし [RFC2460] で定義された IP アドレスならば, クライアントはそのアドレスを&quot;ネットワークバイトオーダー&quot; オクテット文字列表現に変換し iPAddress タイプの subjectAltName エントリに対して比較する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1669,6 +1772,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
          SSH_OPEN_CONNECT_FAILED                             2
          SSH_OPEN_UNKNOWN_CHANNEL_TYPE                       3
          SSH_OPEN_RESOURCE_SHORTAGE                          4</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In particular, this document defines the
+   following public key algorithms, which differ from the above solely
+   in their use of X.509v3 certificates to convey the signer's public
+   key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T010837Z" changeid="haruyama">
+        <seg>特に, この文書は以下の公開鍵アルゴリズムを定義する. 上の表のものとは署名者の公開鍵を伝達するのに X.509v3 証明書を用いるところのみが異なっている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2027,6 +2141,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Issues associated with the use of certificates (such as expiration of
+   certificates and revocation of compromised certificates) are
+   addressed in [RFC5280] and are outside the scope of this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T072426Z" changeid="haruyama">
+        <seg>証明書を利用する上での問題 (証明書の有効期限や信用できない証明書の失効)は [RFC5280] で述べられており, この文書の範囲外だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>o  MUST NOT advertise a maximum packet size that would result in
       transport packets larger than its transport layer is willing to
       receive.</seg>
@@ -2282,6 +2406,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>SSHFP リソースレコード (RR) は, DNS名に関連した SSH 公開鍵の指紋を保存するのに用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementations SHOULD NOT use revoked
+   certificates because many causes of certificate revocation mean that
+   the critical authentication properties needed are no longer true.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T073513Z" changeid="haruyama">
+        <seg>実装は失効した証明書を利用しないほうがよい. 証明書失効の多くの原因は, 必要とされる重要な認証の性質がもはや真ではないことを意味しているからだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2632,6 +2766,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>However, implementers should be aware of
+   security considerations specific to the use of X.509v3 certificates
+   in a public key infrastructure, including considerations related to
+   expired certificates and certificate revocation lists.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T073145Z" changeid="haruyama">
+        <seg>しかし, 期限切れの証明書や証明書失効リストに関連する考察を含む, 公開鍵基盤での X.509v3 証明書の利用に特有のセキュリティの考察に実装者は注意しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The REQUIRED and RECOMMENDED curves in this document are at present
    believed to offer security at the levels indicated in this section
    and as specified with the table in Section 1.</seg>
@@ -2704,6 +2849,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document describes a general purpose authentication method for
+   the SSH authentication protocol.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この文書は, SSH認証プロトコルのための汎用の認証法を記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Clients that do validate the DNSSEC signatures themselves SHOULD use
    standard DNSSEC validation procedures.</seg>
       </tuv>
@@ -2718,15 +2872,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110802T023333Z" changeid="haruyama">
         <seg>セキュアシェルトランスポートモデルは, RFC3411 アーキテクチャ [RFC3411] で確認された脅威に対する保護を提供する:</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>This document describes a general purpose authentication method for
-   the SSH authentication protocol.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>この文書は, SSH認証プロトコルのための汎用の認証法を記述している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2871,8 +3016,8 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv lang="EN-US">
         <seg>The ecdsa_signature_blob value has the following specific encoding:</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110321T131217Z" changeid="haruyama">
-        <seg>ecdsa_signature_blob の値は, 次のような特有のエンコーディングを持つ:</seg>
+      <tuv lang="JA" changedate="20110901T062135Z" changeid="haruyama">
+        <seg>ecdsa_signature_blob の値は, 次のエンコーディングを持つ:</seg>
       </tuv>
     </tu>
     <tu>
@@ -3027,6 +3172,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For example,
+   National Institute of Standards and Technology's (NIST's) draft
+   recommendations on cryptographic algorithms and key lengths
+   [SP-800-131] specify that digital signature generation using an RSA
+   key with modulus less than 2048 bits or with the SHA-1 hash function
+   is acceptable through 2010 and deprecated from 2011 through 2013,
+   whereas an RSA key with modulus at least 2048 bits and SHA-256 is
+   acceptable for the indefinite future.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T122649Z" changeid="haruyama">
+        <seg>例えば, National Institute of Standards and Technology (NIST) の暗号アルゴリズムと鍵長の勧告案 [SP-800-131] は, 2048 ビットよりも小さいモジュラスを持つ RSA 鍵や SHA-1 ハッシュ関数を用いる RSA 鍵を用いた電子署名生成は, 2010 年まで受け入れられ 2011年から2013年まで非推奨と指定している. 一方, 少なくとも 2048 ビットのモジュラスを持ち SHA-256 を用いる RSA 鍵は, 無期限で受け入れられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For channel requests, replies
    that relate to the same channel MUST also be replied to in the right
    order.</seg>
@@ -3054,6 +3214,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv lang="JA">
         <seg>この文書でのキーワード &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
    &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;,  &quot;OPTIONAL&quot; は, RFC 2119 [3] で記述されているように解釈される. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>[RFC5759] provides additional
+   guidance for ECDSA keys in Suite B X.509v3 certificate and
+   certificate revocation list profiles.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T074057Z" changeid="haruyama">
+        <seg>[RFC5759] は, Suite B X.509v3 証明書での ECDSA と証明書失効リストプロファイルに対して追加のガイダンスを提供している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3209,13 +3379,11 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Due to
-   the format of secure shell binary packets, the buffer sizes needed
-   to implement AEAD_AES_256_GCM are smaller than those required in
-   [RFC5116].</seg>
+        <seg>The value of the comment attribute contains user-specified text about
+   the public key.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110829T033751Z" changeid="haruyama">
-        <seg>セキュアシェルのバイナリパケットの形式のために, AEAD_AES_256_GCM を実装するのに必要なバッファサイズは [RFC5116] で要求されているものよりも小さい.</seg>
+      <tuv lang="JA" changedate="20110722T051646Z" changeid="haruyama">
+        <seg>comment 属性の値は, 公開鍵についてユーザが指定したテキストだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3232,11 +3400,13 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The value of the comment attribute contains user-specified text about
-   the public key.</seg>
+        <seg>Due to
+   the format of secure shell binary packets, the buffer sizes needed
+   to implement AEAD_AES_256_GCM are smaller than those required in
+   [RFC5116].</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110722T051646Z" changeid="haruyama">
-        <seg>comment 属性の値は, 公開鍵についてユーザが指定したテキストだ.</seg>
+      <tuv lang="JA" changedate="20110829T033751Z" changeid="haruyama">
+        <seg>セキュアシェルのバイナリパケットの形式のために, AEAD_AES_256_GCM を実装するのに必要なバッファサイズは [RFC5116] で要求されているものよりも小さい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3391,15 +3561,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The shared secret value K, the exchange
-   hash H, and all the above symmetric keys will be updated.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110828T044418Z" changeid="haruyama">
-        <seg>共有の秘密の値 K と交換ハッシュ H, 上記のすべての対称鍵が更新される.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Even in the cases of authentication where no
    user credentials are divulged, an attacker may still gain information
    they shouldn't have by capturing key-strokes in much the same way
@@ -3407,6 +3568,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>ユーザの認証資格を漏らさない認証の場合でも, 攻撃者はハニーポットと同様の働きにおりキーストロークをキャプチャし得られるべきではない情報を取得するかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The shared secret value K, the exchange
+   hash H, and all the above symmetric keys will be updated.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T044418Z" changeid="haruyama">
+        <seg>共有の秘密の値 K と交換ハッシュ H, 上記のすべての対称鍵が更新される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3639,12 +3809,36 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For the purposes of this document, it
+   suffices to know that in X.509 a chain or sequence of certificates
+   (possibly of length one) allows a trusted root certificate authority
+   and its intermediate certificate authorities to cryptographically
+   bind a given public key to a given digital identity using public key
+   signatures.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T055902Z" changeid="haruyama">
+        <seg>この文書の目的は, X.509 で 証明書の(おそらく長さ1の)チェーンないしシーケンスによって, 信頼されるルート認証局とその中間認証局が暗号学的に公開鍵署名を用いる電子IDと公開鍵が束縛できることを知ることだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Presentation Format of the SSHFP RR ........................5
    4.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>SSHFP RR の 表示形式 ........................5
    4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>However, if the id-ad-ocsp access description indicates
+   that the certificate authority employs OCSP, and no OCSP response
+   information is available, it is RECOMMENDED that the certificate be
+   rejected.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T073704Z" changeid="haruyama">
+        <seg>しかし, 認証局が OCSP を採用するよう id-ad-ocsp access description が指定したが OCSP 情報がない場合は, 証明書を拒否することが推奨される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3811,6 +4005,33 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>可能な場合, 言語タグのためのフィールドも提供される. [RFC3066].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This format is the same as for ssh-dss signatures in Section 6.6 of
+   [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T123633Z" changeid="haruyama">
+        <seg>[RFC4253] の 6.6 節の ssh-dss 署名と, このフォーマットは同一だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A
+      match occurs if the octet strings are identical for the reference
+      identifier and any presented identifier.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T070710Z" changeid="haruyama">
+        <seg>参照識別子と提示された識別子がオクテット文字列で同一ならば, 一致している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Public Key Algorithms Using X.509 Version 3 Certificates .</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T004957Z" changeid="haruyama">
+        <seg>X.509 バージョン 3 証明書を用いる公開鍵アルゴリズム .</seg>
       </tuv>
     </tu>
     <tu>
@@ -4054,20 +4275,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>An example of a locally defined
-   name is &quot;ourcipher-cbc@example.com&quot; (without the double quotes).</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>ローカルに定義される名前の例の1つは, &quot;ourcipher-cbc@example.com&quot; (ダブルクォーテーションを除く) だ.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>These are the tables and objects and their
    sensitivity/vulnerability:</seg>
       </tuv>
       <tuv lang="JA" changedate="20110825T044234Z" changeid="haruyama">
         <seg>以下は, テーブルとオブジェクトとそれらの敏感さ/脆弱性だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An example of a locally defined
+   name is &quot;ourcipher-cbc@example.com&quot; (without the double quotes).</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>ローカルに定義される名前の例の1つは, &quot;ourcipher-cbc@example.com&quot; (ダブルクォーテーションを除く) だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4127,6 +4348,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The introduction of other non-
+   certificate-based SSH public key formats compatible with the above
+   recommendations is outside the scope of this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T122757Z" changeid="haruyama">
+        <seg>以上の勧告と互換する非証明書ベースの SSH 公開鍵形式の導入は, この文書の範囲外だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Secure Shell Public Key Subsystem has been designed to run on top
    of the Secure Shell transport layer [2] and user authentication
    protocols [3].</seg>
@@ -4157,22 +4388,22 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>For example, the authentication
-   protocol ([SSH-USERAUTH]) uses this to prevent replay of signatures
-   from previous sessions.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>例えば, 認証プロトコル ([SSH-USERAUTH]) は, セッション識別子を以前のセッションからの署名のリプレイの防止に利用する.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This document also describes the Diffie-Hellman key exchange method
    and the minimal set of algorithms that are needed to implement the
    SSH transport layer protocol.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>さらに, この文書は, Diffie-Hellman 鍵交換法とSSHトランスポート層プロトコルの実装に必要な最低限のアルゴリズムの集合についても記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For example, the authentication
+   protocol ([SSH-USERAUTH]) uses this to prevent replay of signatures
+   from previous sessions.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>例えば, 認証プロトコル ([SSH-USERAUTH]) は, セッション識別子を以前のセッションからの署名のリプレイの防止に利用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4354,6 +4585,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In particular,
+   implementations MUST NOT omit any of the chain certificates or OCSP
+   responses that were included on the wire, nor change encoding of the
+   certificate or OCSP data.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T063053Z" changeid="haruyama">
+        <seg>特に, 実装は, 通信に含まれた チェーン証明書や OCSP 応答のいずれかを省略してはならないし, 証明書は OCSP データのエンコーディングを変化してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This memo describes a key-exchange mechanism for the version of SSH
    described in [RFC4251] that is similar to that used by the older
    version, and about as fast, while retaining the security advantages
@@ -4529,6 +4771,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This call is made exactly as described above.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110623T034624Z" changeid="haruyama">
+        <seg>この呼び出しは, 前述の通りに行なわれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In such a
    configuration, the server implementation supports the &quot;ssh-dss&quot; key
    algorithm (as required by [SSH-TRANSPORT]), but could be prohibited
@@ -4536,14 +4786,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110714T050638Z" changeid="haruyama">
         <seg>このような設定では, サーバの実装は &quot;ssh-dss&quot; 鍵アルゴリズムをサポートしている ([SSH-TRANSPORT] で要求されている). しかし, 設定で利用を禁止できる.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>This call is made exactly as described above.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110623T034624Z" changeid="haruyama">
-        <seg>この呼び出しは, 前述の通りに行なわれる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4674,12 +4916,13 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Note that the length of the concatenation of 'packet_length',
-   'padding_length', 'payload', and 'random padding' MUST be a multiple
-   of the cipher block size or 8, whichever is larger.</seg>
+        <seg>o  Verifiers MUST be prepared to receive certificate chains and OCSP
+      responses that use algorithms not listed in the
+      server_host_key_algorithms field of the SSH_MSG_KEXINIT packet,
+      including algorithms that potentially have no Secure Shell</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>'packet_length', 'padding_length', 'payload', 'random padding を連結した長さが, 暗号のブロックサイズか8のどちらか大きいほうの倍数になっていなければならないことに注意.</seg>
+      <tuv lang="JA" changedate="20110901T071352Z" changeid="haruyama">
+        <seg>o  検証者は, セキュアシェルに同等なものがないアルゴリズムも含めて, SSH_MSG_KEXINIT パケットの server_host_key_algorithms フィールドに挙がっていないアルゴリズムを用いた 証明書チェーンや OCSP 応答を受けとる準備をしなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4690,6 +4933,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>この文書は, セキュアシェル(SSH)プロトコルについてのIANAへの指示とIANAで割当てられる番号の初期状態を定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Note that the length of the concatenation of 'packet_length',
+   'padding_length', 'payload', and 'random padding' MUST be a multiple
+   of the cipher block size or 8, whichever is larger.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>'packet_length', 'padding_length', 'payload', 'random padding を連結した長さが, 暗号のブロックサイズか8のどちらか大きいほうの倍数になっていなければならないことに注意.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4957,6 +5210,23 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Public Key Algorithms Using X.509 Version 3 Certificates</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110831T012615Z" changeid="haruyama">
+        <seg>X.509 バージョン 3 証明書を用いる公開鍵アルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>&quot;agent&quot; specifies that session channel &quot;auth-agent-req&quot; requests
+   should be denied when this key is in use.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T054211Z" changeid="haruyama">
+        <seg>&quot;agent&quot; は, この鍵を用いるとセッションチャンネルの &quot;auth-agent-req&quot; 要求が拒否されることを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>PT (Plain Text)
         byte      padding_length; // 4 &lt;= padding_length &lt; 256
         byte[n1]  payload;        // n1 = packet_length-padding_length-1
@@ -4975,15 +5245,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
         uint32    packet_length;  // 0 &lt;= packet_length &lt; 2^32
      IV (Initialization Vector)
         7.1節で 記述したもの.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>&quot;agent&quot; specifies that session channel &quot;auth-agent-req&quot; requests
-   should be denied when this key is in use.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110722T054211Z" changeid="haruyama">
-        <seg>&quot;agent&quot; は, この鍵を用いるとセッションチャンネルの &quot;auth-agent-req&quot; 要求が拒否されることを指定する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5203,20 +5464,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Consistent with Section 8 of [RFC4251] and Section 4.6 of [RFC4250],
-   this document makes the following registrations:</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110426T084553Z" changeid="haruyama">
-        <seg>[RFC4251] の 8節と [RFC4250] の4.6節と整合するため, この文書は次の登録を行なう.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>There are no initial assignments of the Connection Protocol Subsystem
    Names.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>コネクションプロトコルのサブシステムの名前には初期の割り当てはない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Consistent with Section 8 of [RFC4251] and Section 4.6 of [RFC4250],
+   this document makes the following registrations:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110426T084553Z" changeid="haruyama">
+        <seg>[RFC4251] の 8節と [RFC4250] の4.6節と整合するため, この文書は次の登録を行なう.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5391,6 +5652,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>They use a
+   chain of signatures by a trusted root certification authority and its
+   intermediate certificate authorities to bind a given public signing
+   key to a given digital identity.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T010517Z" changeid="haruyama">
+        <seg>これらの環境では, 信頼できるルート認証機関による署名の連鎖と公開署名鍵と電子IDを束縛する中間認証局を用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The exchange then
    proceeds as described in Section 2.1 above.</seg>
       </tuv>
@@ -5444,10 +5716,29 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>However, other algorithms MAY be
+      used.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T070756Z" changeid="haruyama">
+        <seg>しかし, 他のアルゴリズムが利用されるかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Elliptic Curve Algorithm Integration in the Secure Shell Transport Layer</seg>
       </tuv>
       <tuv lang="JA" changedate="20110306T083721Z" changeid="haruyama">
         <seg>SSH トランスポート層での楕円曲線アルゴリズムの統合</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>[RFC5480] and [RFC5758] describe the structure of X.509v3
+   certificates to be used with Elliptic Curve Digital Signature
+   Algorithm (ECDSA) public keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T073801Z" changeid="haruyama">
+        <seg>[RFC5480] と [RFC5758] は, 楕円曲線デジタル署名アルゴリズム （ＥＣＤＳＡ) 公開鍵で利用する X.509v3 証明書の構造を記述している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5476,20 +5767,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The beginning of the address specification may contain a
-         user name followed by an '@' (US-ASCII character 0x40).</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110819T070508Z" changeid="haruyama">
-        <seg>このアドレス指定の最初に, '@' (US-ASCII 文字 0x40) が後に続くユーザ名を含めることができる.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This document describes new encryption methods for use with the SSH
    Transport Protocol.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110531T072751Z" changeid="haruyama">
         <seg>この文書は, SSHトランスポートプロトコルで利用する新しい暗号法を記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The beginning of the address specification may contain a
+         user name followed by an '@' (US-ASCII character 0x40).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110819T070508Z" changeid="haruyama">
+        <seg>このアドレス指定の最初に, '@' (US-ASCII 文字 0x40) が後に続くユーザ名を含めることができる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5720,19 +6011,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Adding a Public Key</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T053513Z" changeid="haruyama">
+        <seg>公開鍵の追加</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>(This is the same
    data that is base64 encoded to form the body of the public key file.)</seg>
       </tuv>
       <tuv lang="JA" changedate="20110719T025555Z" changeid="haruyama">
         <seg>(公開鍵ファイルの本体を構成するために base64 エンコードされるデータと同じものだ.)</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Adding a Public Key</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110721T053513Z" changeid="haruyama">
-        <seg>公開鍵の追加</seg>
       </tuv>
     </tu>
     <tu>
@@ -5812,6 +6103,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110720T131904Z" changeid="haruyama">
         <seg>このプロトコルは, セキュアシェルコネクションプロトコル [4] の, &quot;「シェルまたはコマンドの開始」 節に記述されている, サブシステムから利用されることを意図している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When no OCSP responses are provided, it is up to the implementation
+   and system administrator to decide whether or not to accept the
+   certificate.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T072834Z" changeid="haruyama">
+        <seg>OCSP 応答が提供されない場合, 証明書を受け入れるかどうかの決定は実装とシステム管理者次第だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6045,6 +6346,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>X.509 public key certificates use a signature by a trusted
+   certification authority to bind a given public key to a given digital
+   identity.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T004817Z" changeid="haruyama">
+        <seg>X.509 公開鍵証明書は, 公開鍵を電子IDに束縛するため信頼される認証局による署名を用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Compression and encryption contexts
    are reset.</seg>
       </tuv>
@@ -6128,6 +6439,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>All implementations SHOULD provide an option not to accept host keys
+   that cannot be verified.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>すべての実装は, 検証できないホスト鍵を受け入れない選択を提供する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It would be
    considered good form for an implementation to politely and
    unobtrusively notify a user that a stronger cipher is available and
@@ -6135,15 +6455,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>より弱い暗号があえて選択されている場合に, より強い暗号が利用できかつ利用されるべきであることをていねいにでしゃばらずにユーザに知らせるのが, 実装としてよいあり方だろう.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>All implementations SHOULD provide an option not to accept host keys
-   that cannot be verified.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>すべての実装は, 検証できないホスト鍵を受け入れない選択を提供する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6158,21 +6469,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The 'public key blob' may contain
-   certificates.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>'public key blob' は, 証明書を含むかもしれない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This document specifies methods of using the Arcfour cipher in the
    Secure Shell (SSH) protocol that mitigate the weakness of the
    cipher's key-scheduling algorithm.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110614T023647Z" changeid="haruyama">
         <seg>この文書は, セキュア シェル (SSH) プロトコルで Arcfour 暗号を利用する方法を指定する. この方法はArcfourの鍵スケジュールアルゴリズムの弱点を軽減する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The 'public key blob' may contain
+   certificates.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>'public key blob' は, 証明書を含むかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6220,6 +6531,18 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110722T055725Z" changeid="haruyama">
         <seg>この属性の値が空なら, この鍵を用いるすべての &quot;direct-tcpip&quot; 要求は拒否される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As with all specifications involving cryptographic algorithms, the
+   quality of security provided by this specification depends on the
+   strength of the cryptographic algorithms in use, the security of the
+   keys, the correctness of the implementation, and the security of the
+   public key infrastructure and the certificate authorities.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T074601Z" changeid="haruyama">
+        <seg>暗号アルゴリズムを含むすべての仕様と同様に, この仕様で提供されるセキュリティの品質は, 利用する暗号アルゴリズムの強度や, 鍵のセキュリティ, 実装の正しさ, 公開鍵基盤と認証局のセキュリティに依存する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6552,6 +6875,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document describes additional encryption methods and
+   recommendations for the SSH Transport Protocol [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110607T071616Z" changeid="haruyama">
+        <seg>この文書は, SSH トランスポートプロトコル [RFC4253] への新しい暗号法と推薦を記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In addition to stateful-decryption counter mode, [BKN1,BKN2] describe
    other provably secure encryption methods for use with the SSH
    Transport Protocol.</seg>
@@ -6566,15 +6898,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110728T100706Z" changeid="haruyama">
         <seg>NETCONF サブシステムの終了</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>This document describes additional encryption methods and
-   recommendations for the SSH Transport Protocol [RFC4253].</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110607T071616Z" changeid="haruyama">
-        <seg>この文書は, SSH トランスポートプロトコル [RFC4253] への新しい暗号法と推薦を記述している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6595,6 +6918,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110820T035325Z" changeid="haruyama">
         <seg>SSH トランスポートモデルが AAA サービスを利用するように設定されている場合は, 運用者は, ローカルパスワードのようなローカルの認証メカニズムのサポートの設定を考慮すべきだ. こうすると, SNMP はネットワークに負荷が掛っている時間帯に運用を続けることができる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document defines the following new public key algorithms for use
+   in the Secure Shell protocol: x509v3-ssh-dss, x509v3-ssh-rsa,
+   x509v3-rsa2048-sha256, and the family of algorithms given by
+   x509v3-ecdsa-sha2-*.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110831T012724Z" changeid="haruyama">
+        <seg>この文書は, セキュアシェルプロトコルで利用するための以下の新しい公開鍵アルゴリズムを定義する: x509v3-ssh-dss, x509v3-ssh-rsa, x509v3-rsa2048-sha256,  x509v3-ecdsa-sha2-* で与えられるアルゴリズムのファミリー.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6808,22 +7142,22 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>It is up to the server's local policy
-   to decide which methods (or combinations of methods) it is willing to
-   accept for each user.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>それぞれのユーザに対して受け入れる方法(ないし方法の組合せ)を決定するのは, サーバのローカルなポリシーに委ねられている.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Authentication Method Names ...............................14
       4.9.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>認証法の名前 ...............................14
       4.9.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is up to the server's local policy
+   to decide which methods (or combinations of methods) it is willing to
+   accept for each user.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>それぞれのユーザに対して受け入れる方法(ないし方法の組合せ)を決定するのは, サーバのローカルなポリシーに委ねられている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6872,6 +7206,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv lang="JA">
         <seg>プロトコルのフィールドと値..............................4
    4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In accordance with Section 4.2.1.12 of
+   [RFC5280], if the ExtendedKeyUsage extension is present, then the
+   certificate MUST be used only for one of the purposes indicated.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T044210Z" changeid="haruyama">
+        <seg>ExtendedKeyUsage 拡張が存在するなら, [RFC5280] の 4.2.1.12 節に従い,  証明書は, 指定された目的の1つにのみ利用されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7135,20 +7479,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Key re-exchange is started by sending an SSH_MSG_KEXINIT packet when
-   not already doing a key exchange (as described in Section 7.1).</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>鍵の再交換は, (7.1 節で記述した) 鍵交換をまだ行なっていない場合にも送られる SSH_MSG_KEXINIT パケットの送信によって始められる. </seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>5     VEOF        End-of-file character (sends EOF from the
                              terminal).</seg>
       </tuv>
       <tuv lang="JA">
         <seg>5     VEOF        End-of-file 文字 (ターミナルからEOFを送る).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Key re-exchange is started by sending an SSH_MSG_KEXINIT packet when
+   not already doing a key exchange (as described in Section 7.1).</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>鍵の再交換は, (7.1 節で記述した) 鍵交換をまだ行なっていない場合にも送られる SSH_MSG_KEXINIT パケットの送信によって始められる. </seg>
       </tuv>
     </tu>
     <tu>
@@ -7447,6 +7791,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>An earlier proposal for the use of X.509v3 certificates in the Secure
+   Shell protocol was introduced by O. Saarenmaa and J. Galbraith; while
+   this document is informed in part by that earlier proposal, it does
+   not maintain strict compatibility.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T011549Z" changeid="haruyama">
+        <seg>セキュアシェルプロトコルでの X.509v3 証明書の利用の以前の提案は, O. Saarenmaa と J. Galbraith によって導入された. この文書は以前の提案から一部を引き継いでいるが, 完全な互換性は維持していない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Note that the -s option causes the command (&quot;netconf&quot;) to be invoked
    as an SSH subsystem.</seg>
       </tuv>
@@ -7511,6 +7866,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In the figure above, the string [identifier] is the identifier of the
+   elliptic curve domain parameters.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T062338Z" changeid="haruyama">
+        <seg>上の図で, 文字列 [identifier] は, 楕円曲線ドメインパラメータの識別子だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The password method
    allows for integration with a deployed password infrastructure, such
    as Authentication, Authorization, and Accounting (AAA) servers using
@@ -7531,6 +7895,18 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For the
+   most part, the security considerations involved in using the Secure
+   Shell protocol apply, since all of the public key algorithms
+   introduced in this document are based on existing algorithms in the
+   Secure Shell protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T073037Z" changeid="haruyama">
+        <seg>この文書で導入されるすべての公開鍵アルゴリズムは、セキュアシェルプロトコルの既存のアルゴリズムに基づいているため, ほとんどの部分についてはセキュアシェルプロトコル利用上のセキュリティの考察が適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the requested service is not available, the
    server MAY disconnect immediately or at any later time.</seg>
       </tuv>
@@ -7545,6 +7921,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>特権を持つプロセスで環境変数の設定を制御しないと, セキュリティの危険となりうる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Signing and verifying using the x509v3-ecdsa-sha2-* key formats is
+   performed according to the ECDSA algorithm in [FIPS-186-3] using the
+   SHA2 hash function family [FIPS-180-3].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T123442Z" changeid="haruyama">
+        <seg>x509v3-ecdsa-sha2-* 鍵フォーマットでの署名と検証は, SHA-2 ハッシュ関数ファミリ [FIPS-180-3] を用いる [FIPS-186-3] の ECDSA アルゴリズムに従って行なわれる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7632,6 +8018,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110806T121628Z" changeid="haruyama">
         <seg>認証とデータの完全性, 暗号化を提供するのに用いられる SSH トランスポート層アルゴリズムは, SSH トランスポートモデル層に公開しないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Similarly, if a certificate indicates that OCSP
+   is used and there is no response to the OCSP query, the absence of a
+   response along with the details of the attempted certificate use (as
+   before) SHOULD be logged.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T074358Z" changeid="haruyama">
+        <seg>同様に, 証明書が OCSP が利用されることを示していて OCSP クエリへの応答がない場合, 試行に用いられた証明書の利用の詳細(前述)とともに応答がないことが記録される必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7791,19 +8188,11 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Processing
-       of this message stops.</seg>
+        <seg>This constraint
+   MUST be enforced, even when using stream ciphers.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110815T075455Z" changeid="haruyama">
-        <seg>このメッセージの処理は停止する.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>The block size is 16 bytes.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110603T134334Z" changeid="haruyama">
-        <seg>ブロックサイズは  16 byte だ.</seg>
+      <tuv lang="JA">
+        <seg>この制限は, たとえストリーム暗号を用いる場合にも実施されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7818,11 +8207,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>This constraint
-   MUST be enforced, even when using stream ciphers.</seg>
+        <seg>Processing
+       of this message stops.</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>この制限は, たとえストリーム暗号を用いる場合にも実施されなければならない.</seg>
+      <tuv lang="JA" changedate="20110815T075455Z" changeid="haruyama">
+        <seg>このメッセージの処理は停止する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The block size is 16 bytes.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110603T134334Z" changeid="haruyama">
+        <seg>ブロックサイズは  16 byte だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7867,6 +8264,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document provides new public key algorithms for the Secure Shell
+   protocol that convey public keys using X.509v3 certificates.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T072747Z" changeid="haruyama">
+        <seg>この文書は, X.509v3 証明書を用いて証明書を伝達するセキュアシェルプロトコルのための新しい公開鍵アルゴリズムを提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Environment Variable Passing</seg>
       </tuv>
       <tuv lang="JA">
@@ -7885,20 +8291,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document creates no new registries.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110426T085937Z" changeid="haruyama">
+        <seg>この文書は新しいレジストリは作成しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Encryption of the packet
    length does little in and of itself to disguise the length of the
    underlying binary packets.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110829T124102Z" changeid="haruyama">
         <seg>packet length の暗号化は, 基底のバイナリパケットの長さをごまかすのにほとんど効果がない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>This document creates no new registries.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110426T085937Z" changeid="haruyama">
-        <seg>この文書は新しいレジストリは作成しない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8116,6 +8522,23 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For concreteness, we specify this explicitly below.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T045443Z" changeid="haruyama">
+        <seg>以下で具体的に指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  in the SSH_MSG_USERAUTH_REQUEST message when &quot;publickey&quot;
+      authentication is used [RFC4252]</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062659Z" changeid="haruyama">
+        <seg>o  &quot;publicky&quot; 認証が用いられる SSH_MSG_USERAUTH_REQUEST メッセージ内 [RFC4252]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Such a condition can be indicated by the following message.</seg>
       </tuv>
       <tuv lang="JA">
@@ -8310,6 +8733,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  The SSH public key algorithm &quot;x509v3-rsa2048-sha256&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T075006Z" changeid="haruyama">
+        <seg>o  SSH 公開鍵アルゴリズム &quot;x509v3-ssh-rsa2048-sha256&quot;.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>(The identity may undergo various transforms before it maps to
        the securityName.)</seg>
       </tuv>
@@ -8474,6 +8905,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>o  ホストの名前と鍵との関連を, 信頼された認証局(CA)が保証する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Additionally, the following constraints apply:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T064937Z" changeid="haruyama">
+        <seg>さらに, 以下の制限が適用される:</seg>
       </tuv>
     </tu>
     <tu>
@@ -8674,6 +9113,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv lang="JA">
         <seg>公開鍵アルゴリズム..................................13
    7.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Public keys conveyed using the x509v3-ecdsa-sha2-* public key
+   algorithms can be used with the ecmqv-sha2 key exchange method.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T010912Z" changeid="haruyama">
+        <seg>x509v3-ecdsa-sha2-* 公開鍵アルゴリズムで伝達される公開鍵は, ecmqv-sha2 鍵交換メソッドで利用できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9124,6 +9572,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The reader is referred to [RFC5280] for a general description of
+   X.509 version 3 certificates.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T055432Z" changeid="haruyama">
+        <seg>X.509 バージョン 3 証明書の一般的な説明は [RFC5280] にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>GSS-API Authentication Overview</seg>
       </tuv>
       <tuv lang="JA" changedate="20110630T021406Z" changeid="haruyama">
@@ -9166,6 +9623,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>このメッセージの目的は, 鍵交換で何か問題があったかどうかを相手側が理解できるように SSH_MSG_DISCONNECT メッセージを返信できることを保証することだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  If the KeyUsage extension is present in a certificate for the
+      x509v3-ssh-dss, x509v3-ssh-rsa, x509v3-rsa2048-sha256, or x509v3-
+      ecdsa-sha2-* public key algorithms, then the digitalSignature bit
+      MUST be set.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T043409Z" changeid="haruyama">
+        <seg>o  x509v3-ssh-dss ないし, x509v3-ssh-rsa, x509v3-rsa2048-sha256, x509v3-ecdsa-sha2-* 公開鍵アルゴリズムのための証明書に KeyUsage 拡張が存在したら, digitalSignature ビットは設定されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9578,6 +10046,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110630T024925Z" changeid="haruyama">
         <seg>クライアントは 非 GSS-API な認証法と同じ優先度の GSS-API メカニズム OID のみを送信する必要がある．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Certificate Extensions .</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T005018Z" changeid="haruyama">
+        <seg>証明書の拡張 .</seg>
       </tuv>
     </tu>
     <tu>
@@ -10094,21 +10570,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>IANA added the following two entries to the secure shell Encryption
-   Algorithm Names registry described in [RFC4250]:</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110829T124808Z" changeid="haruyama">
-        <seg>IANA は, [RFC4250] で記述された secure shell Encryption Algorithm Names registry に以下の2つのエントリを追加した.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>While it is understood that the IANA will have no control over the
    range of 0xFE000000 to 0xFFFFFFFF, this range will be split in two
    parts and administered by the following conventions.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>0xFE000000 to 0xFFFFFFFF の範囲についてはIANAはなんの制御もしないが, この範囲は次の規約に従って2つの部分に分割されて管理される. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>IANA added the following two entries to the secure shell Encryption
+   Algorithm Names registry described in [RFC4250]:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T124808Z" changeid="haruyama">
+        <seg>IANA は, [RFC4250] で記述された secure shell Encryption Algorithm Names registry に以下の2つのエントリを追加した.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10208,6 +10684,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110802T021611Z" changeid="haruyama">
         <seg>ユーザを認証する特定のGSS-APIメカニズムを用いるSSHユーザ認証法と Diffie-Hellman 鍵交換を認証するためにGSS-APIを用いるSSHの鍵交換法のファミリを定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>However, peers sending such chains should recognize
+      that such chains are more likely to be unverifiable than chains
+      that use only algorithms listed in the server_host_key_algorithms
+      field.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T071632Z" changeid="haruyama">
+        <seg>しかし, そのようなチェーンを送るピアは,  server_host_key_algorithmsに挙げられているアルゴリズムのみを用いたチェーンにくらべてそのようなチェーンが検証されにくいことを認識する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10813,22 +11300,22 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Local Security Policy ..............................22
-           9.4.4.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>ローカルなセキュリティポリシー ...................22
-           9.4.4.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>ECMQV Key Exchange ..............................................8
    6.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110306T084320Z" changeid="haruyama">
         <seg>ECMQV 鍵交換 ..............................................8
    6.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Local Security Policy ..............................22
+           9.4.4.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>ローカルなセキュリティポリシー ...................22
+           9.4.4.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10882,6 +11369,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>These flags SHOULD be set to &quot;false&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110621T023848Z" changeid="haruyama">
+        <seg>これらのフラグは &quot;false&quot; に設定する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Note
    that channel open requests may be received until a reply to this
    message is received.</seg>
@@ -10897,14 +11392,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110321T125333Z" changeid="haruyama">
         <seg>ECC 鍵生成のアルゴリズムは, [SEC1]の 3.2節にある.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>These flags SHOULD be set to &quot;false&quot;.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110621T023848Z" changeid="haruyama">
-        <seg>これらのフラグは &quot;false&quot; に設定する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10939,6 +11426,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>These curves are defined in [SEC2].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110426T084111Z" changeid="haruyama">
+        <seg>これらの曲線は [SEC2] で定義されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>50 to 59   User authentication generic
       60 to 79   User authentication method specific (numbers can be
                  reused for different authentication methods)</seg>
@@ -10954,14 +11449,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>最大パケット長</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>These curves are defined in [SEC2].</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110426T084111Z" changeid="haruyama">
-        <seg>これらの曲線は [SEC2] で定義されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11547,6 +12034,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The value for rsa_signature_blob is encoded as a string containing s
+   (which is an integer, without lengths or padding, unsigned, and in
+   network byte order).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T045633Z" changeid="haruyama">
+        <seg>rsa_signature_blob の値は,(長さやパディングがない符号無しのネットワークバイトオーダーの160-bitの整数である) s を含む文字列としてエンコードされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client must also send an XML document containing a &lt;hello&gt;
    element to indicate the client's capabilities to the server.</seg>
       </tuv>
@@ -11711,20 +12208,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>All implementations MUST understand this message, but they are
-   allowed to ignore it.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>すべての実装はこのメッセージを理解しなければならない. しかし無視してもよい.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This discussion is
    formalized with proofs of security in [BKN1,BKN2].</seg>
       </tuv>
       <tuv lang="JA" changedate="20110613T031651Z" changeid="haruyama">
         <seg>この議論は, [BKN1,BKN2}のセキュリティの照明で定式化されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>All implementations MUST understand this message, but they are
+   allowed to ignore it.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>すべての実装はこのメッセージを理解しなければならない. しかし無視してもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11858,6 +12355,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  The family of SSH public key algorithm names beginning with
+      &quot;x509v3-ecdsa-sha2-&quot; and not containing the at-sign ('@').</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T075046Z" changeid="haruyama">
+        <seg>o  &quot;x509v3-ecdsa-sha2-&quot; で始まり アットマーク ('@') を含まない SSH 公開鍵アルゴリズム名ファミリ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client sends a service request once a secure, transport-layer
    connection has been established.</seg>
       </tuv>
@@ -11966,6 +12472,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv lang="JA" changedate="20110726T025233Z" changeid="haruyama">
         <seg>この文書でのキーワード &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;,
    &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;,  &quot;OPTIONAL&quot; は, RFC 2119 [RFC2119] で記述されているように解釈される. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   object identifiers of the two key purpose IDs defined in this
+   document are as follows:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T044313Z" changeid="haruyama">
+        <seg>この文書で定義される 2つの鍵目的 ID のオブジェクト識別子は以下の通りだ:</seg>
       </tuv>
     </tu>
     <tu>
@@ -12254,21 +12770,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>These
+   numbers have been allocated as follows:</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この番号は次のように割当てられる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Denial of Service ..................................19
            9.3.6.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>サービス妨害 ..................................19
            9.3.6.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>These
-   numbers have been allocated as follows:</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>この番号は次のように割当てられる:</seg>
       </tuv>
     </tu>
     <tu>
@@ -12662,6 +13178,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Certificate extensions allow for the specification of additional
+   attributes associated with a public key in an X.509v3 certificate
+   (see Section 4.2 of [RFC5280]).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T042412Z" changeid="haruyama">
+        <seg>証明書の拡張で, X.509v3 証明書の公開鍵に関連する追加の属性を指定できる ([RFC5280] の 4.2 節を参照).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>&quot;exec&quot; specifies that session channel &quot;exec&quot; requests should be
    denied when this key is in use.</seg>
       </tuv>
@@ -12984,22 +13510,22 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>System administrators and implementers should take careful
-   consideration of the security issues when enabling curves other than
-   the REQUIRED or RECOMMENDED curves in this document.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110425T080840Z" changeid="haruyama">
-        <seg>システムの管理者と実装者は, この文書での必須や推奨でない曲線を有効にする際にセキュリティ問題について注意深く考察する必要がある.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>There is no solid
    estimate as to when this may occur, but it is widely believed to be
    at least 20 years from the present.)</seg>
       </tuv>
       <tuv lang="JA" changedate="20110425T072223Z" changeid="haruyama">
         <seg>いつ達成されるかのしっかりした見積りはないが, 現在より少なくとも20年はかかると広く信じられている.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>System administrators and implementers should take careful
+   consideration of the security issues when enabling curves other than
+   the REQUIRED or RECOMMENDED curves in this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110425T080840Z" changeid="haruyama">
+        <seg>システムの管理者と実装者は, この文書での必須や推奨でない曲線を有効にする際にセキュリティ問題について注意深く考察する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13093,6 +13619,27 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>There are two relevant keyUsage
+   identifiers for the certificate corresponding to the public key
+   algorithm in use:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T043118Z" changeid="haruyama">
+        <seg>利用中の公開鍵アルゴリズムに対応する証明書への2つの関連する keyUsage 識別子がある:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The public key algorithms and encodings defined in this document
+   SHOULD be accepted any place in the Secure Shell protocol suite where
+   public keys are used, including, but not limited to, the following
+   protocol messages for server authentication and user authentication:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062627Z" changeid="haruyama">
+        <seg>この文書の公開鍵アルゴリズムとエンコーディングは, サーバの認証とユーザの認証のための次のプロトコルメッセージを含む(ただし, これだけに限定されない)公開鍵が利用されるセキュアシェルプロトコルスイートの任意の場所で受け入れられる必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Each of these methods specifies GSS-API-authenticated Diffie-Hellman
    key exchange as described in Section 2.2 with SHA-1 as HASH.</seg>
       </tuv>
@@ -13177,6 +13724,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110802T021544Z" changeid="haruyama">
         <seg>o  &quot;セキュア シェル (SSH) プロトコルのための汎用セキュリティサービスアプリケーションプログラムインタフェイス(GSS-API) 認証と鍵交換&quot; [RFC4462] は, SSHで認証と鍵交換のためにGSS-APIを使う方法を記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The format of this string is
+   specified in Section 6.1 of [RFC5656].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T062405Z" changeid="haruyama">
+        <seg>この文字列のフォーマットは, [RFC5656] の 6.1 節で指定されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13445,6 +14001,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document should be read only after reading the documents
+   describing the SSH protocol architecture [SSH-ARCH], transport layer
+   protocol [SSH-TRANSPORT], and user authentication protocol
+   [SSH-USERAUTH].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110621T013336Z" changeid="haruyama">
+        <seg>この文書は SSHプロトコルアーキテクチャ [SSH-ARCH], トランスポート層プロトコル [SSH-TRANSPORT], ユーザ認証プロトコル [SSH-USERAUTH] を読んでからのみ読むべきだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The format of the part preceding
    the at-sign is not specified; however, these names MUST be printable
    US-ASCII strings, and MUST NOT contain the comma character (&quot;,&quot;),
@@ -13453,17 +14020,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>アットマークの前の部分の形式は指定されていない; しかし, 表示可能な US-ASCIIの文字列で, コンマ (&quot;,&quot;), スペース, 制御文字(ASCIIコード 32以下), ASCIIコードの127 (DEL)を含んではならない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>This document should be read only after reading the documents
-   describing the SSH protocol architecture [SSH-ARCH], transport layer
-   protocol [SSH-TRANSPORT], and user authentication protocol
-   [SSH-USERAUTH].</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110621T013336Z" changeid="haruyama">
-        <seg>この文書は SSHプロトコルアーキテクチャ [SSH-ARCH], トランスポート層プロトコル [SSH-TRANSPORT], ユーザ認証プロトコル [SSH-USERAUTH] を読んでからのみ読むべきだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13862,21 +14418,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Of course, there is no guarantee that a pre-established session will
+   still be valid when needed.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110808T101453Z" changeid="haruyama">
+        <seg>もちろん, 事前に確立されたセッションが 必要な際にまだ有効化どうかの保証はない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The repercussions of this
    decision are discussed in the following Security Considerations
    section.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110829T041818Z" changeid="haruyama">
         <seg>この決定の影響は, 次のセキュリティの考察の節で議論する.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Of course, there is no guarantee that a pre-established session will
-   still be valid when needed.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110808T101453Z" changeid="haruyama">
-        <seg>もちろん, 事前に確立されたセッションが 必要な際にまだ有効化どうかの保証はない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13993,22 +14549,22 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Each method name is the concatenation of the
-   string &quot;ecdh-sha2-&quot; with the elliptic curve domain parameter
-   identifier as defined in Section 6.1.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110419T121446Z" changeid="haruyama">
-        <seg>それぞれの方法の名前は, 文字列 &quot;ecdh-sha2-&quot; と 6.1節で定義した楕円曲線ドメインパラメータ識別子の連結だ.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This allows some
    degree of machine-independence, at least between systems that use a
    POSIX-like tty interface.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>少なくともPOSIX風のttyインタフェイスを利用するシステム間では, マシンに依存する部分があってよい. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Each method name is the concatenation of the
+   string &quot;ecdh-sha2-&quot; with the elliptic curve domain parameter
+   identifier as defined in Section 6.1.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110419T121446Z" changeid="haruyama">
+        <seg>それぞれの方法の名前は, 文字列 &quot;ecdh-sha2-&quot; と 6.1節で定義した楕円曲線ドメインパラメータ識別子の連結だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14046,6 +14602,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>SSHは, Oakley [RFC2412] や IKE と論理的に異なる, 自身の群識別子を維持している. しかし, 追加の群として, ワーキンググループは[RFC3526] で割当てられた数を採用した. この2つ目の群の名前として, &quot;diffie-hellman-group14-sha1&quot; を用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This format is the same as for ssh-rsa signatures in Section 6.6 of
+   [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T123641Z" changeid="haruyama">
+        <seg>[RFC4253] の 6.6 節の ssh-rsa 署名と, このフォーマットは同一だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14253,6 +14818,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  The sender's certificate MUST be the first certificate and the
+      public key conveyed by this certificate MUST be consistent with
+      the public key algorithm being employed to authenticate the
+      sender.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T065631Z" changeid="haruyama">
+        <seg>o  送信者の証明書は, 最初の証明書でなければならない. この証明書で運ばれる公開鍵は, 送信者を認証するのに採用された公開鍵アルゴリズムのものでなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14490,6 +15066,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>An example of an SSH
+   key exchange involving one of these public key algorithms is given in
+   Appendix A.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T064924Z" changeid="haruyama">
+        <seg>これらの公開鍵アルゴリズムの1つでSSHの鍵交換をする例を, 付録Aで示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Encryption Algorithm Name                   Reference
          -------------------------                   ---------
          3des-cbc                           [SSH-TRANS, Section 6.3]
@@ -14651,6 +15237,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Extract the tmTransportDomain, tmTransportAddress,
+       tmSecurityName, tmRequestedSecurityLevel, tmSameSecurity, and
+       tmSessionID from the tmStateReference.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110815T075556Z" changeid="haruyama">
+        <seg>tmTransportDomain, tmTransportAddress, tmSecurityName, tmRequestedSecurityLevel, tmSameSecurity, tmSessionID をtmStateReference から抽出する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>MAX-ACCESS   read-only
     STATUS       current
     DESCRIPTION &quot;The number of outgoing messages dropped because the
@@ -14660,16 +15256,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
         <seg>MAX-ACCESS   read-only
     STATUS       current
     DESCRIPTION &quot;tmStateReference が不正なキャッシュを参照していたため送信メッセージがドロップされた回数.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Extract the tmTransportDomain, tmTransportAddress,
-       tmSecurityName, tmRequestedSecurityLevel, tmSameSecurity, and
-       tmSessionID from the tmStateReference.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110815T075556Z" changeid="haruyama">
-        <seg>tmTransportDomain, tmTransportAddress, tmSecurityName, tmRequestedSecurityLevel, tmSameSecurity, tmSessionID をtmStateReference から抽出する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14845,14 +15431,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The protocol was not designed to eliminate covert channels.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>プロトコルは, コバートチャンネルを除去するようには設計されてない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This
    document describes a general purpose authentication method for the
    SSH protocol, suitable for interactive authentications where the
@@ -14861,6 +15439,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>この文書は, SSHプロトコルのための汎用の認証法を記述している.  この認証法は, 認証データをキーボード(や同様の英数入力デバイス)で入力する状況でインタラクティブな認証を行なうのに適している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The protocol was not designed to eliminate covert channels.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>プロトコルは, コバートチャンネルを除去するようには設計されてない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15113,6 +15699,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Unlike the other public key formats specified in this document, the
+   x509v3-rsa2048-sha256 public key format does not correspond to any
+   previously existing SSH non-certificate public key format.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T121309Z" changeid="haruyama">
+        <seg>この文書で指定されている他の公開鍵形式と異なり, x509v3-rsa2048-sha256 公開鍵形式は, 既存の SSH 非証明書公開鍵形式と対応しない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Let L be the block length (in bits) of an SSH encryption method's
    block cipher (e.g., 128 for AES).</seg>
       </tuv>
@@ -15160,6 +15756,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The worst case is 3 round-trips.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110514T023417Z" changeid="haruyama">
+        <seg>最悪の場合は3回の往復が必要となる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If no authentication is needed for the user, the server MUST return
    SSH_MSG_USERAUTH_SUCCESS.</seg>
       </tuv>
@@ -15178,10 +15782,10 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The worst case is 3 round-trips.</seg>
+        <seg>The following rules apply:</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110514T023417Z" changeid="haruyama">
-        <seg>最悪の場合は3回の往復が必要となる.</seg>
+      <tuv lang="JA" changedate="20110928T064608Z" changeid="haruyama">
+        <seg>以下の規則が適用される:</seg>
       </tuv>
     </tu>
     <tu>
@@ -15477,16 +16081,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Key Exchange ...............................................4
-      5.2.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110826T040957Z" changeid="haruyama">
-        <seg>鍵交換 ...............................................4
-      5.2.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This is all the
    more true when specifying larger hash function outputs and DH
    parameters.</seg>
@@ -15501,6 +16095,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110718T034353Z" changeid="haruyama">
         <seg>例:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Key Exchange ...............................................4
+      5.2.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110826T040957Z" changeid="haruyama">
+        <seg>鍵交換 ...............................................4
+      5.2.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15824,6 +16428,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>次のポリシーの問題を, それぞれの実装の設定メカニズムで扱う必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  The self-signed certificate specifying the root authority MAY be
+      omitted.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T070013Z" changeid="haruyama">
+        <seg>o  ルート認証局を指定する自己署名証明書は, 省略してもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16299,6 +16912,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The reader is directed to the security considerations sections of
+   [RFC5280] for the use of X.509v3 certificates, [RFC2560] for the use
+   of OCSP response, [RFC4253] for server authentication, and [RFC4252]
+   for user authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T073405Z" changeid="haruyama">
+        <seg>X.509v3 証明書の利用について [RFC5280], OCSP 応答について [RFC2560], サーバ認証について [RFC4253], ユーザ認証について [RFC4252] のセキュリティの考察の節を参照せよ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client invokes &quot;snmp&quot; as an SSH Subsystem, as indicated in
        the &quot;subsystem&quot; parameter.</seg>
       </tuv>
@@ -16314,6 +16938,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>次の表で, service_name の初期の割り当てを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The format of this string is specified in Section
+   6.1 of [RFC5656].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T123546Z" changeid="haruyama">
+        <seg>この文字列のフォーマットは, [RFC5656] の 6.1 節で指定されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16433,20 +17066,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>IANA has created and maintains a registry of these header-tags.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110719T030003Z" changeid="haruyama">
+        <seg>IANA は これらの header-tags のレジストリを作成し管理している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The purpose of this document is to show how GCM with either
    AES-128 or AES-256 can be integrated into the Secure Shell Transport
    Layer Protocol [RFC4253].</seg>
       </tuv>
       <tuv lang="JA" changedate="20110826T041410Z" changeid="haruyama">
         <seg>この文書の目的は, AES-128 もしくは AES-256 と GCM の組合せを, セキュアシェルトランスポート層プロトコル [RFC4253] に統合する方法を示すことだ.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>IANA has created and maintains a registry of these header-tags.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110719T030003Z" changeid="haruyama">
-        <seg>IANA は これらの header-tags のレジストリを作成し管理している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16728,6 +17361,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This attribute SHOULD be
+   critical.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110722T054216Z" changeid="haruyama">
+        <seg>この属性は critical にする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The guess is considered wrong if:</seg>
       </tuv>
       <tuv lang="JA">
@@ -16740,15 +17382,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>リモートのコマンドは, シグナルによって強制的に終了されるかもしれない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>This attribute SHOULD be
-   critical.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110722T054216Z" changeid="haruyama">
-        <seg>この属性は critical にする必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16921,20 +17554,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>One alternative to recommendation (1) would be to make the SSH
-   Transport Protocol's sequence number more than 32 bits long.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110610T070803Z" changeid="haruyama">
-        <seg>推薦 (1) の代替手段の1つに, SSHトランスポートプロトコルのシーケンス番号を 32bitよりも長くすることがある.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>The width of the integer fields is determined by the curve being
    used.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110321T131301Z" changeid="haruyama">
         <seg>整数のフィールドの大きさは, 利用する曲線によって決定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>One alternative to recommendation (1) would be to make the SSH
+   Transport Protocol's sequence number more than 32 bits long.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110610T070803Z" changeid="haruyama">
+        <seg>推薦 (1) の代替手段の1つに, SSHトランスポートプロトコルのシーケンス番号を 32bitよりも長くすることがある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17047,21 +17680,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>These
+   numbers are allocated as follows:</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この番号は次のように割当てられる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If L is at least 128, then, after
    rekeying, an SSH implementation SHOULD NOT encrypt more than 2**(L/4)
    blocks before rekeying again.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110531T070704Z" changeid="haruyama">
         <seg>L が128以上の場合, 鍵の再発行の後でもう一度再発行するまでの間にSSHの実装は 2**(L/4)ブロック以上の暗号化をしないほうがよい.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>These
-   numbers are allocated as follows:</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>この番号は次のように割当てられる:</seg>
       </tuv>
     </tu>
     <tu>
@@ -17129,21 +17762,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This allows new protocols to
+   be defined and coexist with the protocols listed above.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>これは, 上に挙げたプロトコルと共存する, 新しいプロトコルが定義されることを許している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Operators have reported that having to
    deploy another user and key-management infrastructure in order to use
    SNMPv3 is a reason for not deploying SNMPv3.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110801T104833Z" changeid="haruyama">
         <seg>SNMPv3 を配置しない理由として, SNMPv3 を利用するには既存のものとは別のユーザと鍵管理基盤を配置する必要があるという報告が運用者からされている.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>This allows new protocols to
-   be defined and coexist with the protocols listed above.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>これは, 上に挙げたプロトコルと共存する, 新しいプロトコルが定義されることを許している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17185,8 +17818,8 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv lang="EN-US">
         <seg>The &quot;ssh-rsa&quot; key format has the following specific encoding:</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>&quot;ssh-rsa&quot; 鍵フォーマットは次のような特有のエンコーディングを持つ:</seg>
+      <tuv lang="JA" changedate="20110901T062111Z" changeid="haruyama">
+        <seg>&quot;ssh-rsa&quot; 鍵フォーマットは次のエンコーディングを持つ:</seg>
       </tuv>
     </tu>
     <tu>
@@ -17371,16 +18004,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>If the server does
-   not support the requested language, the language to be used is
-   implementation-dependent.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>サーバが要求された言語をサポートしてないなら, 利用される言語は実装依存だ.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This document adds the following elliptic curve cryptography
    algorithms to the Secure Shell arsenal: Elliptic Curve Diffie-Hellman
    (ECDH) and Elliptic Curve Digital Signature Algorithm (ECDSA), as
@@ -17389,6 +18012,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv lang="JA" changedate="20110306T085150Z" changeid="haruyama">
         <seg>この文書は, 次の楕円曲線アルゴリズムを セキュアシェルの機能に加える: 楕円曲線 Diffie-Hellman
    (ECDH) , 楕円曲線 Digital Signature Algorithm (ECDSA). また, 安全なハッシュアルゴリズムのSHA2ファミリの利用も加える.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the server does
+   not support the requested language, the language to be used is
+   implementation-dependent.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>サーバが要求された言語をサポートしてないなら, 利用される言語は実装依存だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17472,21 +18105,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Additional methods may be defined, as specified in [SSH-ARCH] and in
+   [SSH-NUMBERS].</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>追加の方法が, [SSH-ARCH] や [SSH-NUMBERS] で定義されるかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As this document provides new functionality within the Secure Shell
    protocol architecture, the only impact on network operations is the
    impact on existing Secure Shell implementations.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110420T053839Z" changeid="haruyama">
         <seg>この文書はセキュアシェルプロトコルアーキテクチャに新しい機能を追加しているので, ネットワーク操作への影響は, 既存のセキュアシェル実装の影響と同一だ.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Additional methods may be defined, as specified in [SSH-ARCH] and in
-   [SSH-NUMBERS].</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>追加の方法が, [SSH-ARCH] や [SSH-NUMBERS] で定義されるかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17518,21 +18151,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The value of 'request name' follows the DNS extensibility naming
+   convention outlined in [SSH-ARCH].</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>'request name' の値は, [SSH-ARCH] で説明されているDNS 拡張命名規則に従う.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Connection Protocol Assigned Names ........................14
            4.9.1.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>コネクションプロトコルに割り当てられる名前............14
            4.9.1.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>The value of 'request name' follows the DNS extensibility naming
-   convention outlined in [SSH-ARCH].</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>'request name' の値は, [SSH-ARCH] で説明されているDNS 拡張命名規則に従う.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17704,16 +18337,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The output of the algorithm is presented to the user as a sequence of
-   16 octets printed as hexadecimal with lowercase letters and separated
-   by colons.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110719T025656Z" changeid="haruyama">
-        <seg>アルゴリズムの出力は, 小文字でコロンで区切られた16進数で表示される 16 オクテットの並びとして, ユーザに提示される.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This document should be read only after reading the SSH architecture
    document [SSH-ARCH] and the SSH authentication document
    [SSH-USERAUTH].</seg>
@@ -17724,10 +18347,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The output of the algorithm is presented to the user as a sequence of
+   16 octets printed as hexadecimal with lowercase letters and separated
+   by colons.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110719T025656Z" changeid="haruyama">
+        <seg>アルゴリズムの出力は, 小文字でコロンで区切られた16進数で表示される 16 オクテットの並びとして, ユーザに提示される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The ecc_key_blob value has the following specific encoding:</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110321T122437Z" changeid="haruyama">
-        <seg>ecc_key_blob の値は, 次のような特有のエンコーディングを持つ:</seg>
+      <tuv lang="JA" changedate="20110901T062153Z" changeid="haruyama">
+        <seg>ecc_key_blob の値は, 次のエンコーディングを持つ:</seg>
       </tuv>
     </tu>
     <tu>
@@ -17988,6 +18621,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Signature Encoding .</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T005137Z" changeid="haruyama">
+        <seg>署名のエンコーディング .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If there is no
    confidentiality or no MAC, password change SHOULD be disabled.</seg>
       </tuv>
@@ -18201,19 +18842,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>First Rekeying Recommendation</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110531T064231Z" changeid="haruyama">
-        <seg>鍵の再生成についての1番目の推奨</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This document defines a NETCONF over SSH mapping that
    provides for support of strong encryption and authentication.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110728T103110Z" changeid="haruyama">
         <seg>この文書は, 強い暗号化と認証のサポートを提供する SSH マッピング上の NETCONF を定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>First Rekeying Recommendation</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110531T064231Z" changeid="haruyama">
+        <seg>鍵の再生成についての1番目の推奨</seg>
       </tuv>
     </tu>
     <tu>
@@ -18347,6 +18988,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It is RECOMMENDED, but not REQUIRED, that
+   implementations reject certificates for which the certificate status
+   is revoked.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T060739Z" changeid="haruyama">
+        <seg>実装は, 証明書状態が取り消されている証明書を拒否することが推奨されるが, 要求はされていない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The major goal of this method is to
    allow the SSH client to support a whole class of authentication
    mechanism(s) without knowing the specifics of the actual
@@ -18471,6 +19122,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv lang="JA" changedate="20110621T012404Z" changeid="haruyama">
         <seg>GSS-API に認証された Diffie-Hellman 鍵交換 ..............3
       2.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Signing and verifying using the x509v3-ssh-dss key format is done
+   according to the Digital Signature Standard [FIPS-186-3] using the
+   SHA-1 hash [FIPS-180-2].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T045508Z" changeid="haruyama">
+        <seg>x509v3-ssh-dss 鍵フォーマットでの署名と検証は, SHA-1 ハッシュ [FIPS-180-2] を用いるDigital Signature Standard [FIPS-186-2] に従って行なわれる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18619,20 +19280,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The userauth type &quot;keyboard-interactive&quot; is used for this
-   authentication method.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>userauth のタイプ &quot;keyboard-interactive&quot; がこの認証法のために使われる.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This document recommends that channel bindings SHOULD NOT be
    specified in the calls during context establishment.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110714T060807Z" changeid="haruyama">
         <seg>コンテキストの確立の間呼出でチャンネルの束縛を指定しないほうがよいと, この文書は推奨する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The userauth type &quot;keyboard-interactive&quot; is used for this
+   authentication method.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>userauth のタイプ &quot;keyboard-interactive&quot; がこの認証法のために使われる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18751,20 +19412,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Pixel dimensions refer
-   to the drawable area of the window.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>pixel 次元は, ウィンドウの描画可能領域を参照する.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This allows new protocols
    to be defined and coexist with the protocols listed above.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110802T021639Z" changeid="haruyama">
         <seg>これは, 上に挙げたプロトコルと共存する, 新しいプロトコルが定義されることを許している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Pixel dimensions refer
+   to the drawable area of the window.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>pixel 次元は, ウィンドウの描画可能領域を参照する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18925,6 +19586,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The main
+   purpose of introducing this public key format is to provide an RSA-
+   based public key format that is compatible with current
+   recommendations on key size and hash functions.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T122729Z" changeid="haruyama">
+        <seg>この鍵形式を導入する主な目的は, 鍵サイズとハッシュ関数の現在の勧告と互換する RSA ベースの公開鍵形式を提供することだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the user name is not authorized, then the
    authentication MUST fail.</seg>
       </tuv>
@@ -18991,6 +19663,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110811T105315Z" changeid="haruyama">
         <seg>一般的なルールとして, メッセージが破棄される際に状態情報が利用可能なら, メッセージの状態情報も開放される必要がある. セッションが閉じる際に状態情報が利用可能なら, セッションの状態情報も開放される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>14
+   Appendix A.  Example .</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T005248Z" changeid="haruyama">
+        <seg>14
+   Appendix A.  例 .</seg>
       </tuv>
     </tu>
     <tu>
@@ -19510,6 +20192,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  in the SSH_MSG_KEX_ECMQV_REPLY message [RFC5656]</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062830Z" changeid="haruyama">
+        <seg>o  SSH_MSG_KEX_ECMQV_REPLY メッセージ内 [RFC5656]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Authentication Protocol Message Numbers .........................8
    7.</seg>
       </tuv>
@@ -19567,6 +20257,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The two object identifiers used in Section 2.2.2 were assigned from
+   an arc delegated by IANA to the PKIX Working Group.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T075238Z" changeid="haruyama">
+        <seg>2.2.2 節で用いられる 2つのオブジェクト識別子は, IANA から PKIX ワーキンググループに委任された arc から割り当てられた.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Secure Shell (SSH) Session Channel Break Extension</seg>
       </tuv>
       <tuv lang="JA">
@@ -19603,6 +20302,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The version number was
+   incremented after changes in the handling of status packets.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T051126Z" changeid="haruyama">
+        <seg>状態パケットの処理に変更があったのでバージョン番号が増えた.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Further, GCM authentication uses operations
    that are particularly well suited to efficient implementation in
    hardware, making it especially appealing for high-speed
@@ -19611,15 +20319,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110826T040502Z" changeid="haruyama">
         <seg>さらに, GCM 認証は, ハードウェアでの高速な実装に特に良く適した操作を用いる. 非常に高速な実装や効率的でコンパクトな回路での実装にとって魅力的だ.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>The version number was
-   incremented after changes in the handling of status packets.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110721T051126Z" changeid="haruyama">
-        <seg>状態パケットの処理に変更があったのでバージョン番号が増えた.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19653,19 +20352,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Each server host SHOULD have a host key.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>サーバホストは, ホスト鍵を持つ必要がある.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This document instantiates the
    recommendations described in [BKN1,BKN2].</seg>
       </tuv>
       <tuv lang="JA" changedate="20110527T142356Z" changeid="haruyama">
         <seg>この文書は, [BKN1,BKN2] に記述された推奨を具体的に記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Each server host SHOULD have a host key.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>サーバホストは, ホスト鍵を持つ必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19755,6 +20454,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For example, compromise of a certificate's private key or issuance of
+   a certificate to the wrong party are common reasons to revoke a
+   certificate.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T073556Z" changeid="haruyama">
+        <seg>例えば, 証明書の秘密鍵の漏洩や間違った相手への証明書の発行が, 証明書を失効させる一般的な理由だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Skipping Public Key Verification</seg>
       </tuv>
       <tuv lang="JA" changedate="20110822T032055Z" changeid="haruyama">
@@ -19824,6 +20533,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>公開鍵認証の利用では, クライアントのホストが侵害されてないことを前提とする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  Each following certificate MUST certify the one preceding it.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T065949Z" changeid="haruyama">
+        <seg>o  2番目以降の証明書は, 1つ前のものを証明しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20060,6 +20777,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document freely uses terminology and notation
+   from the architecture document without reference or further
+   explanation.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110621T013344Z" changeid="haruyama">
+        <seg>この文書は, 参照や説明なしにアーキテクチャ文書から用語や表記法を自由に利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>However, X11
    display forwarding in SSH (or other secure protocols), combined with
    actual and pseudo-displays that accept connections only over local
@@ -20122,22 +20849,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>This document freely uses terminology and notation
-   from the architecture document without reference or further
-   explanation.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110621T013344Z" changeid="haruyama">
-        <seg>この文書は, 参照や説明なしにアーキテクチャ文書から用語や表記法を自由に利用する.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>In
    addition, the hash is calculated using only &quot;n&quot; instead of &quot;min || n
    || max&quot;.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110620T033022Z" changeid="haruyama">
         <seg>さらに, &quot;min || n || max&quot; の代わりに &quot;n&quot; のみを用いてハッシュが計算される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The following public key authentication algorithms are currently
+   available for use in SSH:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T010537Z" changeid="haruyama">
+        <seg>現在 SSH で利用できる 公開鍵アルゴリズムは以下だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20256,17 +20982,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The purpose of this
-   document is to show how the AES Galois Counter Mode can be used to
-   provide both confidentiality and data integrity to the SSH Transport
-   Layer Protocol.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110826T041440Z" changeid="haruyama">
-        <seg>この文書の目的は, AES Galois (ガロア) カウンタモードがSSH トランスポート層プロトコルに機密性とデータ完全性の両方を提供するためにどのように用いられるかを示すことだ.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>IANA Considerations .............................................7
    8.</seg>
       </tuv>
@@ -20281,6 +20996,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>以下の MAC アルゴリズムが現在定義されている:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The purpose of this
+   document is to show how the AES Galois Counter Mode can be used to
+   provide both confidentiality and data integrity to the SSH Transport
+   Layer Protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110826T041440Z" changeid="haruyama">
+        <seg>この文書の目的は, AES Galois (ガロア) カウンタモードがSSH トランスポート層プロトコルに機密性とデータ完全性の両方を提供するためにどのように用いられるかを示すことだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20328,6 +21054,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Their values are defined in Section 5 and Section 6 for the two
+   methods defined by this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110725T084129Z" changeid="haruyama">
+        <seg>これらの値は, この文書で定義する2つの方法のために, 5節と6節で定義される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>All such messages depend on the authentication 'method
    name' used, and the client MAY at any time continue with a new
    SSH_MSG_USERAUTH_REQUEST message, in which case the server MUST
@@ -20344,15 +21079,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110822T030759Z" changeid="haruyama">
         <seg>SSH は &quot;none&quot; ユーザ認証法を提供している.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Their values are defined in Section 5 and Section 6 for the two
-   methods defined by this document.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110725T084129Z" changeid="haruyama">
-        <seg>これらの値は, この文書で定義する2つの方法のために, 5節と6節で定義される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20675,6 +21401,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Providing
+   OCSP responses directly in this data structure can reduce the number
+   of communication rounds required (saving the implementation from
+   needing to perform OCSP checking out-of-band) and can also allow a
+   client outside of a private network to receive OCSP responses from a
+   server behind a firewall.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T060655Z" changeid="haruyama">
+        <seg>このデータ構造の中で直接 OCSP 応答を提供することで,  必要な通信のラウンド数を減らすことができ (帯域外の OCSP 検査を実行する必要が実装でなくなる) ファイアウォールの背後のサーバから プライベートなネットワークの外側のクライアントが OCSP 応答を受けとれるようになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It is also possible to use a different
    password-validation protocol such as the Challenge Handshake
    Authentication Protocol (CHAP) [RFC1994] or digest authentication
@@ -20836,6 +21575,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  in the SSH_MSG_KEXGSS_HOSTKEY message [RFC4462]</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062812Z" changeid="haruyama">
+        <seg>o  SSH_MSG_KEXGSS_HOSTKEY メッセージ内 [RFC4462]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The runtime of general attacks depends on
    the algorithm used.</seg>
       </tuv>
@@ -20866,6 +21613,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>しかし, これはクライアント側から送られてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  If the client's reference identifier (e.g., the host name typed by
+      the client) is a DNS domain name, the server's identity SHOULD be
+      checked using the rules specified in [RFC6125].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T064752Z" changeid="haruyama">
+        <seg>o  クライアントの参照識別子(例えば, クライアントで入力されたホスト名) が DNS ドメイン名なら, サーバの ID は [RFC6125] に指定されているルールを用いて検査される必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21045,6 +21802,18 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If a party to the SSH exchange attempts to use a revoked X.509v3
+   certificate, this attempt along with the date, time, certificate
+   identity, and apparent origin IP address of the attempt SHOULD be
+   logged as a security event in the system's audit logs or the system's
+   general event logs.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T074227Z" changeid="haruyama">
+        <seg>失効された X.509v3 証明書を用いて SSH の交換を試行する者がいたら, システムの監査ログかシステムの一般イベントログにセキュリティイベントとしてその試行に関連する日時, 証明書のid, みかけの試行元 IPアドレスが記録される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In this scenario, the implementation SHOULD verify the host key
    against a local database before verifying the key via the fingerprint
    returned from DNS.</seg>
@@ -21122,17 +21891,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Failures in either node, death of the
-   deamon serving the communication, routing problems in the network
-   between, firewalls that block the traffic, and other problems can
-   prevent the SSH Transport Model from working.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110820T034418Z" changeid="haruyama">
-        <seg>どちらのノードでの失敗や, 接続を提供するデーモンの死, ネットワーク間のルーティング問題, トラフィックをブロックするファイアウォール, またその他の問題は, SSH トランスポートモデルが正常に動作するのを妨げる.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Therefore, when a new key for an already-known host is received via
    the SSH_MSG_KEXGSS_HOSTKEY message, clients SHOULD NOT issue strong
    warnings or abort the connection, provided the GSS-API-based key
@@ -21140,6 +21898,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110624T043720Z" changeid="haruyama">
         <seg>このため, SSH_MSG_KEXGSS_HOSTKEY メッセージで既知のホストから新しい鍵を受け取っても, GSS-APIベースの鍵交換が成功するならば, クライアントは強い警告の発行や接続の中断をしないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Failures in either node, death of the
+   deamon serving the communication, routing problems in the network
+   between, firewalls that block the traffic, and other problems can
+   prevent the SSH Transport Model from working.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110820T034418Z" changeid="haruyama">
+        <seg>どちらのノードでの失敗や, 接続を提供するデーモンの死, ネットワーク間のルーティング問題, トラフィックをブロックするファイアウォール, またその他の問題は, SSH トランスポートモデルが正常に動作するのを妨げる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21372,6 +22141,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>When a public key from this specification is included in the input to
+   a hash algorithm, the exact bytes that are transmitted on the wire
+   must be used as input to the hash functions.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062940Z" changeid="haruyama">
+        <seg>この仕様の公開鍵がハッシュアルゴリズムの入力に含まれる場合, 通信で転送された正確なバイト列をハッシュ関数の入力として用いなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the transport layer does not provide confidentiality,
    authentication methods that rely on secret data SHOULD be disabled.</seg>
       </tuv>
@@ -21522,6 +22301,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  in the SSH_MSG_KEXDH_REPLY message [RFC4253]</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062753Z" changeid="haruyama">
+        <seg>o  SSH_MSG_KEXDH_REPLY メッセージ内 [RFC4253]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>12    VREPRINT    Reprints the current input line.</seg>
       </tuv>
       <tuv lang="JA">
@@ -21598,6 +22385,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110801T104910Z" changeid="haruyama">
         <seg>このメモは, 既存で広く配置されているセキュアシェルセキュリティ基盤を用いるトランスポートモデルを記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>However, local policy MAY disable the mechanism or MAY</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T063435Z" changeid="haruyama">
+        <seg>しかし, ローカルなポリシーがこのメカニズムを無効にしてもよいし, マッチングが成功したとみなす前に追加の制約を課してもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21952,18 +22747,18 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Key Re-Exchange</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>鍵の再交換</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Generate and sign exchange hash.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110409T093650Z" changeid="haruyama">
         <seg>交換ハッシュの生成と署名</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Key Re-Exchange</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>鍵の再交換</seg>
       </tuv>
     </tu>
     <tu>
@@ -22109,11 +22904,31 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Implementation of this specification requires familiarity with the
+   Secure Shell protocol [RFC4251] [RFC4253] and X.509v3 certificates
+   [RFC5280].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T010956Z" changeid="haruyama">
+        <seg>この仕様の実装は, セキュアシェルプロトコル [RFC4251] [RFC4253] と X.509v3 証明書 [RFC5280] に精通している必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A public key may also be associated with various restrictions,
    including a mandatory command or subsystem.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110720T125356Z" changeid="haruyama">
         <seg>公開鍵を, コマンドやサブシステムの強制を含む様々な制限に関連付けることができる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document specifies an Internet standards track protocol for the
+   Internet community, and requests discussion and suggestions for
+   improvements.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>この文書は, インターネットコミュニティに対するインターネットの標準トラックプロトコルを定義している. また, 改善のための議論と示唆を求めている</seg>
       </tuv>
     </tu>
     <tu>
@@ -22132,16 +22947,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>この鍵交換は, ホスト認証を提供するホスト鍵による署名と結合している.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>This document specifies an Internet standards track protocol for the
-   Internet community, and requests discussion and suggestions for
-   improvements.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>この文書は, インターネットコミュニティに対するインターネットの標準トラックプロトコルを定義している. また, 改善のための議論と示唆を求めている</seg>
       </tuv>
     </tu>
     <tu>
@@ -22222,14 +23027,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Local extensions:</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>ローカルな拡張:</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Any server sending this message MUST ignore
    any SSH_MSG_UNIMPLEMENTED sent by the client in response.</seg>
       </tuv>
@@ -22243,6 +23040,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>91    CS8         8 bit モード.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Local extensions:</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>ローカルな拡張:</seg>
       </tuv>
     </tu>
     <tu>
@@ -22743,6 +23548,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Public Key Format</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110831T012941Z" changeid="haruyama">
+        <seg>公開鍵の形式</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Even if the network itself is secure (for example by using IPSec or
    SSH), even then, there is no control as to who on the secure network
    is allowed to access and GET/SET (read/change/create/delete) the
@@ -22758,6 +23571,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110531T064825Z" changeid="haruyama">
         <seg>鍵の再生成についての2番目の推奨 </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  To improve the chances that a peer can verify certificate chains
+      and OCSP responses, individual certificates and OCSP responses
+      SHOULD be signed using only signature algorithms corresponding to
+      public key algorithms supported by the peer, as indicated in the
+      server_host_key_algorithms field of the SSH_MSG_KEXINIT packet
+      (see Section 7.1 of [RFC4253]).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T070736Z" changeid="haruyama">
+        <seg>o  ピアがチェーンと OCSP 応答を検証できやすくするため, それぞれの証明書と OCSP 応答は ピアがサポートする公開鍵アルゴリズムに関連する署名アルゴリズムでのみ署名される必要がある. このアルゴリズムは, SSH_MSG_KEXINIT パケット の server_host_key_algorithms ([RFC4253] の 7 .1節)で示される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22815,16 +23641,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Size of the Authentication Tag .............................6
-   7.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110826T041253Z" changeid="haruyama">
-        <seg>認証タグのサイズ .............................6
-   7.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>'signal name' values will be encoded as discussed in the passage
    describing SSH_MSG_CHANNEL_REQUEST messages using &quot;exit-signal&quot; in
    this section.</seg>
@@ -22835,10 +23651,12 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Requirements Terminology</seg>
+        <seg>Size of the Authentication Tag .............................6
+   7.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110726T025220Z" changeid="haruyama">
-        <seg>要件に関する用語</seg>
+      <tuv lang="JA" changedate="20110826T041253Z" changeid="haruyama">
+        <seg>認証タグのサイズ .............................6
+   7.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22850,6 +23668,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110527T140531Z" changeid="haruyama">
         <seg>この予防手段は, 理不尽に長い BREAK 要求が BREAKを実行する間に49.7日の間ポートを利用不能にするのを防ぐ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Requirements Terminology</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110726T025220Z" changeid="haruyama">
+        <seg>要件に関する用語</seg>
       </tuv>
     </tu>
     <tu>
@@ -23034,6 +23860,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For the purposes of user authentication, the mapping between
+   certificates and user names is left as an implementation and
+   configuration issue for implementers and system administrators.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T063352Z" changeid="haruyama">
+        <seg>ユーザ認証のための証明書とユーザ名とのマッピングは, 実装者とシステム管理者に対して実装と設定の問題として残されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The following table identifies the initial assignments of the key
    exchange methods.</seg>
       </tuv>
@@ -23202,19 +24038,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The Version Packet .</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110721T050917Z" changeid="haruyama">
-        <seg>バージョンパケット .</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>There are also algorithms and methods that are defined
    in the protocol specification, but are OPTIONAL.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>さらに, プロトコルの仕様で定義されるアルゴリズムや実装がある. これらは選択できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The Version Packet .</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T050917Z" changeid="haruyama">
+        <seg>バージョンパケット .</seg>
       </tuv>
     </tu>
     <tu>
@@ -23630,21 +24466,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This description uses the following symbols, in addition to those
+   defined above:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110628T021431Z" changeid="haruyama">
+        <seg>上記で定義したものに加えて， 以下のシンボルをこの記述では用いる．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The decryptor then increments its copy of the counter X and repeats
    the above process for each block to obtain the plaintext packet
    P=P1||P2||...||Pn.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110531T082415Z" changeid="haruyama">
         <seg>復号器はカウンタ Ｘ のコピーをインクリメントする. 以上のプロセスをそれぞれのブロックに繰り返して 平文パケットP=P1||P2||...||Pn を得る.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>This description uses the following symbols, in addition to those
-   defined above:</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110628T021431Z" changeid="haruyama">
-        <seg>上記で定義したものに加えて， 以下のシンボルをこの記述では用いる．</seg>
       </tuv>
     </tu>
     <tu>
@@ -23795,22 +24631,22 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Localization and Character Set Support .....................7
-   5.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>地域化と文字セットのサポート .....................7
-   5.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Fingerprint Type Specification ......................4
            3.1.3.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>指紋のタイプの仕様 ......................4
            3.1.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Localization and Character Set Support .....................7
+   5.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>地域化と文字セットのサポート .....................7
+   5.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24000,20 +24836,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>90    CS7         7 bit mode.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>90    CS7         7 bit モード.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Assigned Algorithm Names .................................16
            4.11.1.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>割り当て済みのアルゴリズム名.........................16
            4.11.1.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>90    CS7         7 bit mode.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>90    CS7         7 bit モード.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24028,19 +24864,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>AES GCM Authenticated Decryption</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110828T035010Z" changeid="haruyama">
-        <seg>AES GCM の認証付き復号</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>If there is no such algorithm, both
          sides MUST disconnect.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>そのようなアルゴリズムがなければ, 両方の側が切断しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>AES GCM Authenticated Decryption</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110828T035010Z" changeid="haruyama">
+        <seg>AES GCM の認証付き復号</seg>
       </tuv>
     </tu>
     <tu>
@@ -24366,6 +25202,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Environment variables may be passed to the shell/command to be
+   started later.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>後で開始されるシェルやコマンドに, 環境変数を転送することができる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It then sends the following:</seg>
       </tuv>
       <tuv lang="JA" changedate="20110624T044537Z" changeid="haruyama">
@@ -24374,11 +25219,11 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Environment variables may be passed to the shell/command to be
-   started later.</seg>
+        <seg>All other intermediate certificates in the chain leading
+      to a root authority MUST be included.</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>後で開始されるシェルやコマンドに, 環境変数を転送することができる.</seg>
+      <tuv lang="JA" changedate="20110901T070237Z" changeid="haruyama">
+        <seg>ルート認証局につながる他の中間証明書はすべて含まれなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24466,20 +25311,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>It performs server host authentication,
-   key exchange, encryption, and integrity protection.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>サーバの認証, 鍵の交換, 暗号化, 完全性の保護を行なう.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>As this is a list of names, all of the
       elements contained are names and MUST be in US-ASCII.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>name のリストであるので, すべての含まれる要素は name だ. また US-ASCIIでなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It performs server host authentication,
+   key exchange, encryption, and integrity protection.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>サーバの認証, 鍵の交換, 暗号化, 完全性の保護を行なう.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24787,6 +25632,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>このプロトコルは今後も発展していくし, また, いくつかの組織が彼らが作成した暗号化や認証や鍵交換法を利用したいと考えるだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Public Key Format  .</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T005007Z" changeid="haruyama">
+        <seg>公開鍵の形式  .</seg>
       </tuv>
     </tu>
     <tu>
@@ -25377,6 +26230,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  The SSH public key algorithm &quot;x509v3-ssh-rsa&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T074958Z" changeid="haruyama">
+        <seg>o  SSH 公開鍵アルゴリズム &quot;x509v3-ssh-rsa&quot;.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document defines a new family of key exchange method names, a
    new key exchange method name, and a new family of public key
    algorithm names in the SSH name registry.</seg>
@@ -25694,6 +26555,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In the Public Key Algorithm Names registry:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T074943Z" changeid="haruyama">
+        <seg>公開鍵アルゴリズム名レジストリ内に:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In any case, if the
    service does not exist, authentication MUST NOT be accepted.</seg>
       </tuv>
@@ -25753,6 +26622,18 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110829T041727Z" changeid="haruyama">
         <seg>セキュアシェルと共に AES-GCM を用いる場合, packet_length フィールドは 追加の認証されるデータ (additional authenticated data) として扱い平文としては扱われないようにする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This certificate, a chain of certificates
+   leading to a trusted certificate authority, and optional messages
+   giving the revocation status of the certificates are sent as the
+   public key data in the Secure Shell protocol according to the format
+   in this section.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110831T012938Z" changeid="haruyama">
+        <seg>この証明書と, 信用される認証局につながる証明書のチェーン, 証明書の失効状態を与えるオプションのメッセージは, セキュアシェルプロトコルでこの節で述べる形式に従って公開鍵データとして送られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26011,6 +26892,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The RECOMMENDED server authentication mechanism is as follows.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T063536Z" changeid="haruyama">
+        <seg>推奨されるサーバの認証メカニズムは以下だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As before, the keystream can be pre-computed, and
    decryption is parallelizable.</seg>
       </tuv>
@@ -26054,6 +26943,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110729T034823Z" changeid="haruyama">
         <seg>このメモで記述するトランスポートモデルがアーキテクチャに適合しアーキテクチャの中で他のサブシステムと相互作用するのがどこで行なわれるか理解するために, SNMP アーキテクチャ [RFC3441] と アーキテクチャの用語を理解するのが重要だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Otherwise, hashes that are meant to be
+   computed in parallel by both peers will have differing values.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T063133Z" changeid="haruyama">
+        <seg>そうしないと, それぞれの側で並列に計算されるハッシュが異なる値を持つことになる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26317,6 +27215,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>impose additional constraints before considering a matching
+   successful.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T063440Z" changeid="haruyama">
+        <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Messages MUST NOT be sent
    through an existing SSH session that was established using a
    different tmSecurityName.</seg>
@@ -26363,6 +27270,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>They are in a name space private to this document and not assigned by
+   IANA.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110620T032906Z" changeid="haruyama">
+        <seg>これらはこの文書で閉じた名前空間の中にあり, IANAによって割り当てられていない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The tmSecurityName MUST be a human-readable name (in snmpAdminString
    format) representing the identity that has been set according to the
    procedures in Section 5.</seg>
@@ -26373,11 +27289,10 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>They are in a name space private to this document and not assigned by
-   IANA.</seg>
+        <seg>There are several aspects that define a public key type:</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110620T032906Z" changeid="haruyama">
-        <seg>これらはこの文書で閉じた名前空間の中にあり, IANAによって割り当てられていない.</seg>
+      <tuv lang="JA">
+        <seg>公開鍵の種類を定義するいくつかの側面がある:</seg>
       </tuv>
     </tu>
     <tu>
@@ -26387,14 +27302,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>公開鍵のアルゴリズムと SSHFP のアルゴリズム番号は, 一致しなければならない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>There are several aspects that define a public key type:</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>公開鍵の種類を定義するいくつかの側面がある:</seg>
       </tuv>
     </tu>
     <tu>
@@ -26493,6 +27400,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>There MAY be multiple host keys for a host, possibly
+         with different algorithms.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>ホストに対して, 場合によっては異なるアルゴリズムを用いる, 複数のホスト鍵があってもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If tmSameSecurity is true and there is no existing session
            with a matching tmSessionID, tmSecurityName, and
            tmTransportAddress, then increment the
@@ -26501,15 +27417,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110815T075716Z" changeid="haruyama">
         <seg>tmSameSecurity が true で tmSessionID, tmSecurityName, tmTransportAddress に一致する既存のセッションがなければ, snmpSshtmSessionInvalidCaches カウンタをインクリメントし, メッセージを捨て,statusInformation の中のエラー表示を返す.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>There MAY be multiple host keys for a host, possibly
-         with different algorithms.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>ホストに対して, 場合によっては異なるアルゴリズムを用いる, 複数のホスト鍵があってもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26548,6 +27455,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110829T035657Z" changeid="haruyama">
         <seg>block_counter は, 最初 1 に設定され, ブロック鍵が生成される度にインクリメントされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In these algorithms, a public key is stored in
+   an X.509v3 certificate.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110831T012750Z" changeid="haruyama">
+        <seg>これらのアルゴリズムでは, 公開鍵は X.509v3 証明書に格納される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27134,6 +28050,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The choice of signature algorithm used by any given
+      certificate or OCSP response is independent of the signature
+      algorithms chosen by other elements in the chain.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T070842Z" changeid="haruyama">
+        <seg>証明書や OCSP 応答で用いられる署名アルゴリズムの選択は, チェーンの他の要素で選択された署名アルゴリズムと独立だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If more than 2**32 packets are
    encrypted and MACed by the SSH Transport Protocol between rekeyings,
    then the SSH Transport Protocol may become vulnerable to replay and
@@ -27158,6 +28084,18 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110725T075917Z" changeid="haruyama">
         <seg>RSA 鍵交換法は3つのメッセージで構成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   subjectAlternativeName X.509v3 extension, as described in Section
+   4.2.1.6 of [RFC5280], SHOULD be used to convey the server host name,
+   using either dNSName entries or iPAddress entries to convey domain
+   names or IP addresses as appropriate.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T064549Z" changeid="haruyama">
+        <seg>[RFC5280] の 4.2.1.6 節で記述されている subjectAlternativeName X.509v3 拡張 を, 必要に応じてドメイン名かIPアドレスを伝えるために dNSName エントリか iPAddress エントリを用いて, サーバホスト名を伝えるために利用される必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27214,6 +28152,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>SSH_MSG_USERAUTH_SUCCESS を送ったら, その後に受け取った認証の要求は静かに無視する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Certificate Extensions</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T042304Z" changeid="haruyama">
+        <seg>証明書の拡張</seg>
       </tuv>
     </tu>
     <tu>
@@ -27291,6 +28237,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Support for the
+      DNS-ID identifier type is RECOMMENDED in client and server
+      software implementations.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T064824Z" changeid="haruyama">
+        <seg>DNS-ID 識別子型のサポートが クライアントとサーバのソフトウェア実装で推奨される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>After the client receives SSH_MSG_USERAUTH_GSSAPI_RESPONSE, the
    client and server exchange SSH_MSG_USERAUTH_GSSAPI_TOKEN packets
    until the authentication mechanism either succeeds or fails.</seg>
@@ -27332,20 +28288,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The name &quot;diffie-hellman-group1-sha1&quot; is used for a key exchange
-   method using an Oakley group, as defined in [RFC2409].</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg> 名前 &quot;diffie-hellman-group1-sha1&quot; は, [RFC2409]で定義されている Oakley群を用いる鍵交換法のために用いられる.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This document describes how to use client authentication as described
    in &quot;The Secure Shell (SSH) Authentication Protocol&quot; [RFC4252].</seg>
       </tuv>
       <tuv lang="JA" changedate="20110801T105708Z" changeid="haruyama">
         <seg>この文書は, &quot;The Secure Shell (SSH) Authentication Protocol&quot; [RFC4252] で記述されている, クライアント認証を利用する方法を記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The name &quot;diffie-hellman-group1-sha1&quot; is used for a key exchange
+   method using an Oakley group, as defined in [RFC2409].</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg> 名前 &quot;diffie-hellman-group1-sha1&quot; は, [RFC2409]で定義されている Oakley群を用いる鍵交換法のために用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27458,6 +28414,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The value for dss_signature_blob is encoded as a string containing r,
+   followed by s (which are fixed-length 160-bit integers, without
+   lengths or padding, unsigned, and in network byte order).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T045531Z" changeid="haruyama">
+        <seg>dss_signature_blob の値は, (それぞれ長さやパディングがない符号無しのネットワークバイトオーダーの160-bitの整数である) r とそれに続く s を含む文字列としてエンコードされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A NETCONF over SSH session consists of the manager and agent
    exchanging complete XML documents.</seg>
       </tuv>
@@ -27513,15 +28479,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Extended Channel Data Transfer 'data_type_code' values MUST be
-   assigned sequentially.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>拡張チャンネルデータ転送の 'data_type_code' の値は, 連続して割り当てられなければならない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This document addresses the requirement for the SSH client to
    authenticate the SSH server and for the SSH server to authenticate
    the SSH client, and describes how SNMP can make use of the
@@ -27534,11 +28491,28 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Extended Channel Data Transfer 'data_type_code' values MUST be
+   assigned sequentially.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>拡張チャンネルデータ転送の 'data_type_code' の値は, 連続して割り当てられなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Either side MUST NOT send or accept e or f values that are not in the
    range [1, p-1].</seg>
       </tuv>
       <tuv lang="JA" changedate="20110616T234327Z" changeid="haruyama">
         <seg>どちらの側も [1, p-1]の範囲にない e や f の値を送ったり受け入れたりしてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>X.509v3 Certificates for Secure Shell Authentication</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T004603Z" changeid="haruyama">
+        <seg>セキュアシェル認証のための X.509v3 証明書</seg>
       </tuv>
     </tu>
     <tu>
@@ -27683,6 +28657,31 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Signing and verifying using the X.509v3-based public key algorithms
+   specified in this document (x509v3-ssh-dss, x509v3-ssh-rsa,
+   x509v3-ecdsa-sha2-*) is done in the analogous way for the
+   corresponding non-X.509v3-based public key algorithms (ssh-dss,
+   ssh-rsa, ecdsa-sha2-*, respectively); the x509v3-rsa2048-sha256
+   public key algorithm provides a new mechanism, similar to ssh-rsa,
+   but has a different hash function and additional key size
+   constraints.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T045411Z" changeid="haruyama">
+        <seg>この文書で指定するX.509v3 ベースの公開鍵アルゴリズム (x509v3-ssh-dss, x509v3-ssh-rsa, x509v3-ecdsa-sha2-*) は, 対応する非 X.509v3 ベースの公開鍵アルゴリズム (それぞれ ssh-dss, ssh-rsa, ecdsa-sha2-*) と似たやり方で署名と検証を行なう. 509v3-rsa2048-sha256 公開鍵アルゴリズムは新しいメカニズムを提供するが, ssh-rsa と似ている. ただし, 異なるハッシュ関数と追加の鍵サイズの制約を持っている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  If the KeyUsage extension is present in a certificate for the
+      ecmqv-sha2 key exchange method, then the keyAgreement bit MUST be
+      set.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T043447Z" changeid="haruyama">
+        <seg>o ecmqv-sha2 鍵交換法のための証明書に KeyUsage 拡張が存在したら, keyAgreement ビットが設定されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Assigned Algorithm Names</seg>
       </tuv>
       <tuv lang="JA">
@@ -27762,6 +28761,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Accordingly, implementers are encouraged to use high-assurance
+   methods when implementing this specification and other parts of the
+   Secure Shell protocol suite.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T074922Z" changeid="haruyama">
+        <seg>従って, この仕様とセキュアシェルプロトコルスイートの他の部分を実装する際に, 高い品質の保証の方法を用いることが実装者に推奨される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The securityName MAY be derived from the tmSecurityName by a Security
    Model and MAY be used to configure notifications and access controls
    in MIB modules.</seg>
@@ -27772,20 +28781,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>L is the field size and N
-   is the sub-field size.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110306T090918Z" changeid="haruyama">
-        <seg>L はフィールドサイズで, Nは サブフィールドのサイズだ.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>It MUST be possible to determine this from the public key
          algorithm name.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>アルゴリズムは, 公開鍵アルゴリズム名から決められなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>L is the field size and N
+   is the sub-field size.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110306T090918Z" changeid="haruyama">
+        <seg>L はフィールドサイズで, Nは サブフィールドのサイズだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27861,6 +28870,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv lang="JA" changedate="20110306T084538Z" changeid="haruyama">
         <seg>楕円曲線ドメインパラメータ識別子 ...............10
       6.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>However, compliant implementations MUST comply with [RFC5280].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T072449Z" changeid="haruyama">
+        <seg>しかし, 準拠する実装は [RFC5280] に従わなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27989,21 +29006,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>These are chosen as described in Section 3
+   of [GROUP-EXCHANGE].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110628T021113Z" changeid="haruyama">
+        <seg>これらは， [GROUP-EXCHANGE]の3節で記述されているように選ばれる．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The chosen compression algorithm MUST be the first
          algorithm on the client's name-list that is also on the
          server's name-list.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>選択される圧縮アルゴリズムは, サーバの名前リストに存在するものの中でクライアントの名前リストの最初にあるアルゴリズムでなければならない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>These are chosen as described in Section 3
-   of [GROUP-EXCHANGE].</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110628T021113Z" changeid="haruyama">
-        <seg>これらは， [GROUP-EXCHANGE]の3節で記述されているように選ばれる．</seg>
       </tuv>
     </tu>
     <tu>
@@ -28117,6 +29134,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>チャンネルの終了</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This format is the same as for ecdsa-sha2-* signatures in Section
+   3.1.2 of [RFC5656].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T123622Z" changeid="haruyama">
+        <seg>[RFC5656] の 3.1.2 節の ecdsa-sha2-* 署名と, このフォーマットは同一だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28420,21 +29446,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Base64
-   encoding is described in Section 6.8 of [MIME].</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110628T022857Z" changeid="haruyama">
-        <seg>Base64 エンコーディングは， [MIME] の 6．8節に記述されている．</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Extensibility ..............................................6
       4.3.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>拡張性 ..............................................6
       4.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Base64
+   encoding is described in Section 6.8 of [MIME].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110628T022857Z" changeid="haruyama">
+        <seg>Base64 エンコーディングは， [MIME] の 6．8節に記述されている．</seg>
       </tuv>
     </tu>
     <tu>
@@ -28462,6 +29488,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110822T030823Z" changeid="haruyama">
         <seg>SSH トランスポートモデルは, &quot;none&quot; ユーザ認証法を SSH の接続で用いてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The window size specifies how many bytes the other party can send
+   before it must wait for the window to be adjusted.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>window size は, windowが調整されるまでに相手側が送ることのできるバイト数を指定する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28501,15 +29536,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>クライアントは, 前の要求の応答を待つことなしに複数の認証の要求を送ってよい.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>The window size specifies how many bytes the other party can send
-   before it must wait for the window to be adjusted.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>window size は, windowが調整されるまでに相手側が送ることのできるバイト数を指定する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28738,20 +29764,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Once the session has been set up, a program is started at the remote
-   end.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>セッションが設定されると, プログラムがリモート側で起動される.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>There may be several different authenticated
    services provided.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>いくつかの異なる認証されたサービスが提供されることがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Once the session has been set up, a program is started at the remote
+   end.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>セッションが設定されると, プログラムがリモート側で起動される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28770,6 +29796,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110603T135347Z" changeid="haruyama">
         <seg>&quot;serpent128-ctr&quot; は 128-bit 鍵を用いる Serpent ブロック暗号 [SERPENT] を使う,</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In both cases, the validity of the authentication depends upon the
+   strength of the linkage between the public signing key and the
+   identity of the signer.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T010026Z" changeid="haruyama">
+        <seg>どちらの場合も, 認証の有効性は, 公開署名鍵と署名者のIDとの関連の強さに依存する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28838,6 +29874,24 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110704T024901Z" changeid="haruyama">
         <seg>交渉済みの GSS-API コンテキストが メッセージ単位の完全性保護とサポートしている場合,  つまり  GSS_Init_sec_context() かGSS_Accept_sec_context() の呼び出しが成功し integ_avail フラグが設定されている場合, この追加の保護が有効になる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The choice of hash function
+   from the SHA2 hash function family is based on the key size of the
+   ECDSA key as specified in Section 6.2.1 of [RFC5656].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110924T123537Z" changeid="haruyama">
+        <seg>SHA2 ハッシュ関数ファミリからのハッシュ関数の選択は, [RFC5656] の 6.2.1 節で指定されているように ECDSA 鍵の鍵サイズの基づく.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Use in Public Key Algorithms</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062333Z" changeid="haruyama">
+        <seg>公開鍵アルゴリズムでの利用</seg>
       </tuv>
     </tu>
     <tu>
@@ -29353,12 +30407,12 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Like all key-exchange mechanisms, this one depends for its security
-   on the randomness of the secrets generated by the client (the random
-   number K) and the server (the transient RSA private key).</seg>
+        <seg>The DNS-ID MAY
+      contain the wildcard character '*' as the complete left-most label
+      within the identifier.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110725T092718Z" changeid="haruyama">
-        <seg>すべての鍵交換メカニズムと同様, この方法も, クライアントとサーバが生成する秘密のランダム性(乱数K と 一時RSA秘密鍵) にそのセキュリティを依存している.</seg>
+      <tuv lang="JA" changedate="20110928T070428Z" changeid="haruyama">
+        <seg>DNS-ID は, 識別子内の 完全最左ラベルとして ワイルドカード文字 '＊&quot; を含んでもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -29369,6 +30423,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110822T032050Z" changeid="haruyama">
         <seg>別の場合として, ユーザ名がサーバによって検証されない可能性がある. そのような実装のため, SSHの交換の間に交換される他の資格情報からユーザ名を得る必要があるかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Like all key-exchange mechanisms, this one depends for its security
+   on the randomness of the secrets generated by the client (the random
+   number K) and the server (the transient RSA private key).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110725T092718Z" changeid="haruyama">
+        <seg>すべての鍵交換メカニズムと同様, この方法も, クライアントとサーバが生成する秘密のランダム性(乱数K と 一時RSA秘密鍵) にそのセキュリティを依存している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -29633,6 +30697,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>61    ECHOKE      行の削除を視覚的に行なう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The KeyUsage and ExtendedKeyUsage
+   extensions may be used to restrict the use of X.509v3 certificates in
+   the context of the Secure Shell protocol as specified in the
+   following sections.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T042622Z" changeid="haruyama">
+        <seg>KeyUsage と ExtendedKeyUsage 拡張は, 以下の節で指定されるように, セキュアシェルの文脈で X.509v3 証明書の利用を制限するのに利用されることがある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30007,6 +31082,18 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>どちらの側も, 鍵の再交換を始めてもよい. ただし, 役割を変更してはならない (すなわち, サーバはサーバのままでクライアントはクライアントのままでなければならない).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document defines two ExtendedKeyUsage key purpose IDs that MAY
+   be used to restrict a certificate's use: id-kp-secureShellClient,
+   which indicates that the key can be used for a Secure Shell client,
+   and id-kp-secureShellServer, which indicates that the key can be used
+   for a Secure Shell server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T044156Z" changeid="haruyama">
+        <seg>この文書は, 証明書の利用を制限するために利用されてもよい 2つの ExtendedKeyUsage 鍵目的 ID を定義する: id-kp-secureShellClient, 鍵が利用されるセキュアシェルクライアントを指定, と id-kp-secureShellServer, 鍵が利用されるセキュアシェルサーバを指定, だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30405,6 +31492,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Each certificate and ocsp-response MUST be encoded as a string of
+   octets using the Distinguished Encoding Rules (DER) encoding of
+   Abstract Syntax Notation One (ASN.1) [ASN1].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T064846Z" changeid="haruyama">
+        <seg>それぞれの certificate と ocsp-response は,  Abstract Syntax Notation One (ASN.1) [ASN1] の Distinguished Encoding Rules(DER) エンコーディングを用いてオクテット文字列としてエンコードされなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Comment Header</seg>
       </tuv>
       <tuv lang="JA" changedate="20110718T034400Z" changeid="haruyama">
@@ -30708,21 +31805,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Authentication in this protocol level is host-based; this protocol
+   does not perform user authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110514T023051Z" changeid="haruyama">
+        <seg>このプロトコルレベルでの認証は, ホストベースだ. このプロトコルはユーザ認証を実施しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>MIB Module Definition ..........................................22
    8.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110729T034217Z" changeid="haruyama">
         <seg>MIB Module の定義 ..........................................22
    8.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Authentication in this protocol level is host-based; this protocol
-   does not perform user authentication.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110514T023051Z" changeid="haruyama">
-        <seg>このプロトコルレベルでの認証は, ホストベースだ. このプロトコルはユーザ認証を実施しない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30867,6 +31964,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  There is no requirement on the ordering of OCSP responses.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T071647Z" changeid="haruyama">
+        <seg>o  OCSP 応答の順序に要件はない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document describes algorithms based on Elliptic Curve
    Cryptography (ECC) for use within the Secure Shell (SSH) transport
    protocol.</seg>
@@ -30877,19 +31982,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Multiple sessions can be active simultaneously.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>複数のセッションが同時に有効になりうる.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>There is no requirement that the responses be in any particular
    order.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110722T060604Z" changeid="haruyama">
         <seg>応答は, 特定の順序である必要はない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Multiple sessions can be active simultaneously.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>複数のセッションが同時に有効になりうる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30954,20 +32059,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>SSH ECC Public Key Algorithm</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110321T122010Z" changeid="haruyama">
-        <seg>SSH 楕円曲線暗号公開鍵アルゴリズム</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>These are
    US-ASCII strings of maximum length 64 characters and are
    case-insensitive.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110719T025939Z" changeid="haruyama">
         <seg>最大 64文字で大文字小文字を区別しない US-ASCII 文字列だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH ECC Public Key Algorithm</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110321T122010Z" changeid="haruyama">
+        <seg>SSH 楕円曲線暗号公開鍵アルゴリズム</seg>
       </tuv>
     </tu>
     <tu>
@@ -30987,6 +32092,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110725T080253Z" changeid="haruyama">
         <seg>クライアントはランダムなbyte列 K を生成し, K_T を用いて暗号化する. そしてサーバに暗号文を送り, サーバはそれを復号する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Data types used in describing protocol messages are
+   defined in Section 5 of [RFC4251].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T011023Z" changeid="haruyama">
+        <seg>プロトコルメッセージを記述するのに用いるデータタイプは, [RFC4251]の 5節で定義されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -31241,6 +32355,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>standards documents, particularly [RFC3447], [FIPS-186-3],
+   [FIPS-180-2], [FIPS-180-3], [SEC1], and [RFC5280].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T011329Z" changeid="haruyama">
+        <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If it
    were to offer the public key of the server, then it would not be able
    to decrypt or sign the transmissions between the legitimate server
@@ -31349,6 +32472,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>There are two Secure Shell (SSH) protocols that use public key
+   cryptography for authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T005325Z" changeid="haruyama">
+        <seg>認証に公開鍵暗号を用いる 2つのセキュアシェル (SSH) プロトコルがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Packet Size and Overhead ...................................6
    6.</seg>
       </tuv>
@@ -31412,20 +32544,20 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>The details of how a session is opened are described in the SSH
-   Connection Protocol document [4] in the section &quot;Opening a Session&quot;.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110721T031723Z" changeid="haruyama">
-        <seg>どのようにセッションを開始するかの詳細は, SSH コネクションプロトコル文書 [4] の 「セッションの開始」 節に記述されている.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Therefore,
    rekeying SHOULD happen after 2**28 packets at the very most.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>このため, 鍵の再作成は最も多くても2**28パケットごとに行なわれる必要がある. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The details of how a session is opened are described in the SSH
+   Connection Protocol document [4] in the section &quot;Opening a Session&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110721T031723Z" changeid="haruyama">
+        <seg>どのようにセッションを開始するかの詳細は, SSH コネクションプロトコル文書 [4] の 「セッションの開始」 節に記述されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -31445,6 +32577,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv lang="JA">
         <seg>packet_length
          byte単位のパケットの長さ. 'mac' と 'packet_length' 自体の長さは含まない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Use in Public Key Algorithms .</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T005205Z" changeid="haruyama">
+        <seg>公開鍵アルゴリズムでの利用 .</seg>
       </tuv>
     </tu>
     <tu>
@@ -31520,6 +32660,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For all of the public key algorithms specified in this document, the
+   key format consists of a sequence of one or more X.509v3 certificates
+   followed by a sequence of 0 or more Online Certificate Status
+   Protocol (OCSP) responses as in Section 4.2 of [RFC2560].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T060139Z" changeid="haruyama">
+        <seg>この文書で指定される公開鍵アルゴリズムのすべてで, [RFC2560] の 4.2節にある Online Certificate Status Protocol (OCSP) 応答が 0 以上後に続く X.509v3 証明書の 1つ以上のシーケンスによって, 鍵のフォーマットは構成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Since the
    sequence_number is, up to an additive constant, just the low 32 bits
    of the invocation_counter, the presence of the invocation_counter
@@ -31550,6 +32701,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>あるいは, 攻撃者はキャプチャしたパケットのMACを吟味して共有の秘密を探すのにアルゴリズムの脆弱性や弱点を利用できるかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  in the SSH_MSG_KEXRSA_PUBKEY message [RFC4432]</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062803Z" changeid="haruyama">
+        <seg>o  SSH_MSG_KEXRSA_PUBKEY メッセージ内 [RFC4432]</seg>
       </tuv>
     </tu>
     <tu>
@@ -31643,6 +32802,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>この範囲の拡張チャンネルデータ転送の 'data_type_code'の値は,  [RFC2434]に記述されている プライベートな利用 (PRIVATE USE) に予約されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Furthermore, additional mechanisms mapping host names to
+   certificates MAY be used and are left as implementation and
+   configuration issues for implementers and system administrators.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T063522Z" changeid="haruyama">
+        <seg>さらに, ホスト名と証明書をマッピングする追加のメカニズムが利用されてもよい. 実装者とシステム管理者に対して実装と設定の問題として残されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -31972,6 +33141,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document describes new symmetric encryption methods for the
+   Secure Shell (SSH) Transport Protocol and gives specific
+   recommendations on how frequently SSH implementations should rekey.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110527T140934Z" changeid="haruyama">
+        <seg>この文書では, セキュアシェル (SSH) トランスポートプロトコルのための新しい対称暗号法を記述する. また, SSHの実装がどのくらいの頻度で鍵の再発行(rekey)すべきかの具体的な推奨を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It may or may not have a tty, and may or may not involve X11
    forwarding.</seg>
       </tuv>
@@ -31986,16 +33165,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>0以外の character/row 次元パラメータは, pixel 次元を上書きする.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>This document describes new symmetric encryption methods for the
-   Secure Shell (SSH) Transport Protocol and gives specific
-   recommendations on how frequently SSH implementations should rekey.</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110527T140934Z" changeid="haruyama">
-        <seg>この文書では, セキュアシェル (SSH) トランスポートプロトコルのための新しい対称暗号法を記述する. また, SSHの実装がどのくらいの頻度で鍵の再発行(rekey)すべきかの具体的な推奨を提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32195,6 +33364,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As with any use of OCSP data,
+   implementations SHOULD check that the production time of the OCSP
+   response is acceptable.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T060650Z" changeid="haruyama">
+        <seg>OCSP データを利用する場合は, 実装は, OCSP 応答の生成時間が受け入れられるかを検査する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In the case of user authentication, the protection is not
    needed because the negotiation occurs over a secure channel, and the
    host's identity has already been proved to the user.</seg>
@@ -32242,6 +33421,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>They MUST have only a single at-sign in them.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>1つのアットマークだけが含まれなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If
    either side can't support the lower version, it should close the
    subsystem and notify the other side by sending an
@@ -32249,14 +33436,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110721T051951Z" changeid="haruyama">
         <seg>もう一方が低いバージョンをサポートしていなければ, サブシステムを終了させ, SSH_MSG_CHANNEL_CLOSE を送って相手側に通知しなければならない.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>They MUST have only a single at-sign in them.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>1つのアットマークだけが含まれなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32317,6 +33496,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It may be possible for the implementation to retrieve
+   OCSP responses based on the id-ad-ocsp access description in the
+   certificate's Authority Information Access data (Section 4.2.2.1 of
+   [RFC5280]).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T073451Z" changeid="haruyama">
+        <seg>証明書の Authority Information Access データ ([RFC5280] の 4.2.2.1 節) の id-ad-ocsp access description に基いて OCSP 応答を実装が取得してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>However, having that information
    available can be invaluable for debugging purposes.</seg>
       </tuv>
@@ -32355,6 +33545,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The
+      number of OCSP responses MUST NOT exceed the number of
+      certificates.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T071704Z" changeid="haruyama">
+        <seg>OCSP 応答の数は, 証明書の数を越えてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Additionally, some channels can transfer several types of data.</seg>
       </tuv>
       <tuv lang="JA">
@@ -32382,21 +33582,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>For localization purposes, the protocol attempts to minimize the
-   number of textual messages transmitted.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>地域化の目的のために , プロトコルは転送されるテキストメッセージの数を最小にするようにしている.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>This document is concerned with SSH implementation details;
    specification of the underlying cryptographic algorithms is left to
    other standards documents.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110306T091302Z" changeid="haruyama">
         <seg>この文書は, SSHの実装の詳細に関係している. 基底の暗号アルゴリズムの仕様は, 他の標準文書に任されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For localization purposes, the protocol attempts to minimize the
+   number of textual messages transmitted.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>地域化の目的のために , プロトコルは転送されるテキストメッセージの数を最小にするようにしている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32471,6 +33671,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  in the SSH_MSG_KEX_ECDH_REPLY message [RFC5656]</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062821Z" changeid="haruyama">
+        <seg>o  SSH_MSG_KEX_ECDH_REPLY メッセージ内 [RFC5656]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Attributes are used to define properties or restrictions for public
    keys.</seg>
       </tuv>
@@ -32519,14 +33727,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>MAC Algorithm Names</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>MACアルゴリズム名</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>If the threshold is exceeded, the server
    SHOULD disconnect.</seg>
       </tuv>
@@ -32540,6 +33740,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>すべての認証の要求は, 次のメッセージの形式を利用しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>MAC Algorithm Names</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>MACアルゴリズム名</seg>
       </tuv>
     </tu>
     <tu>
@@ -32831,16 +34039,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Language tags SHOULD NOT
-         be present unless they are known to be needed by the sending
-         party.</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>送り手側で必要だとされていなければ, 言語タグは存在しないほうがよい.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>Implementers should note the importance
    of entropy and the well-meant, anecdotal warning about the difficulty
    in properly implementing pseudo-random number generating functions.</seg>
@@ -32857,6 +34055,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110425T052631Z" changeid="haruyama">
         <seg> セキュアシェルプロトコル利用上のセキュリティの考察が大部分適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Language tags SHOULD NOT
+         be present unless they are known to be needed by the sending
+         party.</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>送り手側で必要だとされていなければ, 言語タグは存在しないほうがよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33121,6 +34329,32 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Service providers SHOULD include the
+      DNS-ID identifier type in certificate requests.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T064928Z" changeid="haruyama">
+        <seg>サービスプロバイダは, 証明書の要求で DNS-ID 識別子型を含む必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Multiple entries MAY be
+   specified.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T064600Z" changeid="haruyama">
+        <seg>複数のエントリが指定されてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  The SSH public key algorithm &quot;x509v3-ssh-dss&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T074952Z" changeid="haruyama">
+        <seg>o  SSH 公開鍵アルゴリズム &quot;x509v3-ssh-dss&quot;.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Modularity</seg>
       </tuv>
       <tuv lang="JA" changedate="20110801T103316Z" changeid="haruyama">
@@ -33145,6 +34379,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110715T060035Z" changeid="haruyama">
         <seg>SSH ユーザ認証法名 &quot;external-keyx&quot; は予約される. この実装の以前のバージョンをサポートする実装との衝突を避けるためだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  in the SSH_MSG_USERAUTH_REQUEST message when &quot;hostbased&quot;
+      authentication is used [RFC4252]</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062740Z" changeid="haruyama">
+        <seg>o   &quot;hostbased&quot; 認証が用いられる SSH_MSG_USERAUTH_REQUEST メッセージ内 [RFC4252]</seg>
       </tuv>
     </tu>
     <tu>
@@ -33550,21 +34793,21 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This case is handled the same way that key exchange methods
+   requiring encryption/signature capable public key algorithms are</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110411T134749Z" changeid="haruyama">
+        <seg>[RFC4253]の 7.1 節での 暗号化/署名可能な公開鍵アルゴリズムを必要とする鍵交換法が扱われるのと同じように, この場合も扱われる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Channel Bindings ..........................................22
       7.3.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110621T012944Z" changeid="haruyama">
         <seg>チャンネルの束縛 ..........................................22
       7.3.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>This case is handled the same way that key exchange methods
-   requiring encryption/signature capable public key algorithms are</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110411T134749Z" changeid="haruyama">
-        <seg>[RFC4253]の 7.1 節での 暗号化/署名可能な公開鍵アルゴリズムを必要とする鍵交換法が扱われるのと同じように, この場合も扱われる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33586,6 +34829,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110723T013837Z" changeid="haruyama">
         <seg>[SSH1] で記述されているSSHプロトコルの以前のバージョンでは, Rivest-Shamir-Adleman (RSA) 公開鍵暗号をベースとする鍵交換法を利用している. これは, クライアントでのCPU時間の消費が1ケタ少なく, モバイルデバイスのような遅いクライアントシステムに特に適している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In accordance with Section 4.2.1.3 of [RFC5280], if the KeyUsage
+   extension is present, then the certificate MUST be used only for one
+   of the purposes indicated.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T043040Z" changeid="haruyama">
+        <seg>KeyUsage 拡張が存在するなら, [RFC5280] の 4.2.1.3 節に従い,  証明書は, 指定された目的の1つにのみ利用されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33852,10 +35105,10 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>AEAD_AES_128_GCM is specified in Section 5.1 of [RFC5116].</seg>
+        <seg>equivalent.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110829T033238Z" changeid="haruyama">
-        <seg>AEAD_AES_128_GCM は, [RFC5116] の5.1節で指定されている.</seg>
+      <tuv lang="JA" changedate="20110901T071355Z" changeid="haruyama">
+        <seg> </seg>
       </tuv>
     </tu>
     <tu>
@@ -33866,6 +35119,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv lang="JA" changedate="20110607T071148Z" changeid="haruyama">
         <seg>first_kex_packet_follows
          (鍵交換法を事前に)推測した鍵交換パケットが後に続くかどうかを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>AEAD_AES_128_GCM is specified in Section 5.1 of [RFC5116].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T033238Z" changeid="haruyama">
+        <seg>AEAD_AES_128_GCM は, [RFC5116] の5.1節で指定されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33929,6 +35190,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Copyright (c) 2011 IETF Trust and the persons identified as the
+   document authors.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T004917Z" changeid="haruyama">
+        <seg>Copyright (c) 2011 IETF Trust and the persons identified as the
+   document authors. 訳者: 春山征吾 &lt;haruyama@unixuser.org&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>SNMP versions prior to SNMPv3 did not include adequate security.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110825T044644Z" changeid="haruyama">
@@ -33939,8 +35210,28 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv lang="EN-US">
         <seg>The &quot;ssh-dss&quot; key format has the following specific encoding:</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>&quot;ssh-dss&quot; 鍵フォーマットは次のような特有のエンコーディングを持つ:</seg>
+      <tuv lang="JA" changedate="20110901T062122Z" changeid="haruyama">
+        <seg>&quot;ssh-dss&quot; 鍵フォーマットは次のエンコーディングを持つ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For the purposes of server authentication, it is RECOMMENDED that
+   implementations support the following mechanism mapping host names to
+   certificates.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T063347Z" changeid="haruyama">
+        <seg>サーバの認証のために, ホスト名と証明書のマッピングをする次のメカニズムを実装がサポートすることが推奨される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Certification authorities that issue
+      certificates for use by Secure Shell servers SHOULD support the
+      DNS-ID identifier type.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T064903Z" changeid="haruyama">
+        <seg>セキュアシェルサーバで用いられる証明書を発行する認証局は, DNS-ID 識別子型をサポートする必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34045,6 +35336,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Connection protocol:</seg>
+      </tuv>
+      <tuv lang="JA">
+        <seg>コネクション プロトコル:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Secure shell provides two other
    mechanisms, random padding and SSH_MSG_IGNORE messages, that are far
    more effective than encrypting the packet length in masking any
@@ -34053,14 +35352,6 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110829T124407Z" changeid="haruyama">
         <seg>セキュアシェルは別の2つのメカニズムを提供している. ランダムパディングと SSH_MSG_IGNORE メッセージだ. これらは, バイナリパケットの長さによって解明される可能性がある基底の平文ストリームの構造をマスクする packet length の暗号化よりもよっぽど効果的だ.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
-        <seg>Connection protocol:</seg>
-      </tuv>
-      <tuv lang="JA">
-        <seg>コネクション プロトコル:</seg>
       </tuv>
     </tu>
     <tu>
@@ -34156,12 +35447,30 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Since Pretty Good Privacy (PGP) has its own method for binding a
+   public key to a digital identity, this document focuses solely upon
+   the non-PGP methods.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T010729Z" changeid="haruyama">
+        <seg>Pretty Good Privacy (PGP) は公開鍵と電子IDを束縛する独自の方法を持っているので, この文書では非PGPな方法のみに集中する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The key exchange produces two values: a shared secret K, and an
    exchange hash H.  Encryption and authentication keys are derived from
    these.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110514T024415Z" changeid="haruyama">
         <seg>鍵交換は2つの値を生成する: 共有の秘密 K と 交換ハッシュ H だ. 暗号化と認証の鍵はこれらから導出される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The key format has the following specific encoding:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T062144Z" changeid="haruyama">
+        <seg>鍵フォーマットは次のエンコーディングを持つ:</seg>
       </tuv>
     </tu>
     <tu>
@@ -34193,6 +35502,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>次の表で, メッセージIDの値の初期の割り当てを示す</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The KeyUsage extension MAY be used to restrict a certificate's use.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T042948Z" changeid="haruyama">
+        <seg>KeyUsage 拡張は, 証明書の利用を制限するの用いられてもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34274,6 +35591,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110624T042454Z" changeid="haruyama">
         <seg>5節で記述する &quot;null&quot; ホスト鍵アルゴリズムを利用する場合は, このメッセージを送ってはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementations providing and processing OCSP responses MUST comply
+   with [RFC2560].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110901T072515Z" changeid="haruyama">
+        <seg>OCSP 応答を提供/処理する実装は, [RFC2560]に従わなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34402,19 +35728,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
-        <seg>Non-Encryption of Packet Length</seg>
-      </tuv>
-      <tuv lang="JA" changedate="20110829T123146Z" changeid="haruyama">
-        <seg>Packet Length の非暗号化</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="EN-US">
         <seg>To perform actual authentication, the client MAY then send a
    signature generated using the private key.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>それから, 実際の認証を行なうために, クライアントは, 秘密鍵を用いて生成した署名を送ってもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Non-Encryption of Packet Length</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110829T123146Z" changeid="haruyama">
+        <seg>Packet Length の非暗号化</seg>
       </tuv>
     </tu>
     <tu>
@@ -34474,6 +35800,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document specifies how to use X.509 version 3 public
+   key certificates in public key algorithms in the Secure Shell
+   protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110830T004934Z" changeid="haruyama">
+        <seg>この文書は, セキュアシェルの公開鍵アルゴリズムで X.509 バージョン 3 公開鍵証明書を使う方法を指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It is intended only for the initialization of the IANA
    registries referenced in the set of SSH documents.</seg>
       </tuv>
@@ -34490,6 +35826,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>実装者は, 転送待ちの未送信パケットがあるかどうかチェックしたいだろうが, カーネルやバッファの情報を知るには通常容易ではない</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For the remaining certificates in the certificate chain,
+   implementations MUST comply with existing conventions on KeyUsage
+   identifiers and certificates as in Section 4.2.1.3 of [RFC5280].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110902T043547Z" changeid="haruyama">
+        <seg>証明書チェーンの残りの証明書のために, [RFC5280] の 4.2.1.3 節にあるように KeyUsage 識別子と証明書の既存の規約に実装は従わなければならない.</seg>
       </tuv>
     </tu>
     <tu>
