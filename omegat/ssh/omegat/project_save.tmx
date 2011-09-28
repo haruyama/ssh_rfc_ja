@@ -1206,6 +1206,16 @@
     <tu>
       <tuv lang="EN-US">
         <seg>A
+      match occurs if the octet strings are identical for the reference
+      identifier and any presented identifier.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T070710Z" changeid="haruyama">
+        <seg>参照識別子と提示された識別子がオクテット文字列で同一ならば, 一致している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A
    consequence of this is that encrypting the same data (for instance, a
    password) sufficiently many times in separate Arcfour keystreams can
    be sufficient to leak information about it to an adversary.</seg>
@@ -4668,6 +4678,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Certification authorities that issue
+      certificates for use by Secure Shell servers SHOULD support the
+      DNS-ID identifier type.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T064903Z" changeid="haruyama">
+        <seg>セキュアシェルサーバで用いられる証明書を発行する認証局は, DNS-ID 識別子型をサポートする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Challenge-response and One Time Password mechanisms are also easily
    supported with this authentication method.</seg>
       </tuv>
@@ -8088,6 +8108,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For the purposes of server authentication, it is RECOMMENDED that
+   implementations support the following mechanism mapping host names to
+   certificates.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T063347Z" changeid="haruyama">
+        <seg>サーバの認証のために, ホスト名と証明書のマッピングをする次のメカニズムを実装がサポートすることが推奨される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For the purposes of this document, it
    suffices to know that in X.509 a chain or sequence of certificates
    (possibly of length one) allows a trusted root certificate authority
@@ -8097,6 +8127,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110901T055902Z" changeid="haruyama">
         <seg>この文書の目的は, X.509 で 証明書の(おそらく長さ1の)チェーンないしシーケンスによって, 信頼されるルート認証局とその中間認証局が暗号学的に公開鍵署名を用いる電子IDと公開鍵が束縛できることを知ることだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For the purposes of user authentication, the mapping between
+   certificates and user names is left as an implementation and
+   configuration issue for implementers and system administrators.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T063352Z" changeid="haruyama">
+        <seg>ユーザ認証のための証明書とユーザ名とのマッピングは, 実装者とシステム管理者に対して実装と設定の問題として残されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8309,6 +8349,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110624T043552Z" changeid="haruyama">
         <seg>さらに, GSS-API ベースの鍵交換がよく利用される環境では, ホスト鍵は非常に頻繁に かつ/もしくは 事前の警告なしに変わる可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Furthermore, additional mechanisms mapping host names to
+   certificates MAY be used and are left as implementation and
+   configuration issues for implementers and system administrators.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T063522Z" changeid="haruyama">
+        <seg>さらに, ホスト名と証明書をマッピングする追加のメカニズムが利用されてもよい. 実装者とシステム管理者に対して実装と設定の問題として残されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9235,6 +9285,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>しかし, 暗黙のサーバ認証を用いる鍵交換法をこのプロトコルで用いてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>However, local policy MAY disable the mechanism or MAY</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T063435Z" changeid="haruyama">
+        <seg>しかし, ローカルなポリシーがこのメカニズムを無効にしてもよいし, マッチングが成功したとみなす前に追加の制約を課してもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12666,6 +12724,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In particular,
+   implementations MUST NOT omit any of the chain certificates or OCSP
+   responses that were included on the wire, nor change encoding of the
+   certificate or OCSP data.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T063053Z" changeid="haruyama">
+        <seg>特に, 実装は, 通信に含まれた チェーン証明書や OCSP 応答のいずれかを省略してはならないし, 証明書は OCSP データのエンコーディングを変化してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In particular, attacks are not
    impossible, just extremely improbable (unless the building blocks,
    like AES, are insecure).</seg>
@@ -16015,6 +16084,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Multiple entries MAY be
+   specified.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T064600Z" changeid="haruyama">
+        <seg>複数のエントリが指定されてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Multiple hosts MAY
    share the same host key.</seg>
       </tuv>
@@ -17552,6 +17630,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110630T024959Z" changeid="haruyama">
         <seg>そうでなければ， 認証法は順不同で実行されるかもしれない．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Otherwise, hashes that are meant to be
+   computed in parallel by both peers will have differing values.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T063133Z" changeid="haruyama">
+        <seg>そうしないと, それぞれの側で並列に計算されるハッシュが異なる値を持つことになる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20229,6 +20316,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Service providers SHOULD include the
+      DNS-ID identifier type in certificate requests.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T064928Z" changeid="haruyama">
+        <seg>サービスプロバイダは, 証明書の要求で DNS-ID 識別子型を含む必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Session Data Transfer</seg>
       </tuv>
       <tuv lang="JA">
@@ -21215,6 +21311,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Support for the
+      DNS-ID identifier type is RECOMMENDED in client and server
+      software implementations.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T064824Z" changeid="haruyama">
+        <seg>DNS-ID 識別子型のサポートが クライアントとサーバのソフトウェア実装で推奨される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Symbolic Name                                  reason code
          -------------                                  -----------
          SSH_DISCONNECT_HOST_NOT_ALLOWED_TO_CONNECT          1
@@ -21858,6 +21964,18 @@
       </tuv>
       <tuv lang="JA" changedate="20110828T043921Z" changeid="haruyama">
         <seg>これらの鍵のサイズは, 利用される暗号アルゴリズムに依存して変わる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   subjectAlternativeName X.509v3 extension, as described in Section
+   4.2.1.6 of [RFC5280], SHOULD be used to convey the server host name,
+   using either dNSName entries or iPAddress entries to convey domain
+   names or IP addresses as appropriate.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T064549Z" changeid="haruyama">
+        <seg>[RFC5280] の 4.2.1.6 節で記述されている subjectAlternativeName X.509v3 拡張 を, 必要に応じてドメイン名かIPアドレスを伝えるために dNSName エントリか iPAddress エントリを用いて, サーバホスト名を伝えるために利用される必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22725,6 +22843,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The DNS-ID MAY
+      contain the wildcard character '*' as the complete left-most label
+      within the identifier.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T070428Z" changeid="haruyama">
+        <seg>DNS-ID は, 識別子内の 完全最左ラベルとして ワイルドカード文字 '＊&quot; を含んでもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Diffie-Hellman (DH) key exchange provides a shared secret that
    cannot be determined by either party alone.</seg>
       </tuv>
@@ -23167,6 +23295,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>SSHFP リソースレコードの RDATA の表示形式は次のように構成される. まず, アルゴリズムと指紋の種類を表す2つの番号, 続いて16進文字列で表現された指紋自身が来る. 例えば以下のようになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The RECOMMENDED server authentication mechanism is as follows.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T063536Z" changeid="haruyama">
+        <seg>推奨されるサーバの認証メカニズムは以下だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -25770,6 +25906,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The following rules apply:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T064608Z" changeid="haruyama">
+        <seg>以下の規則が適用される:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The following steps are used to exchange a key.</seg>
       </tuv>
       <tuv lang="JA">
@@ -27540,6 +27684,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>署名に用いる公開鍵アルゴリズムは, SSH_MSG_KEXINIT メッセージで取り決める.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The public key algorithms and encodings defined in this document
+   SHOULD be accepted any place in the Secure Shell protocol suite where
+   public keys are used, including, but not limited to, the following
+   protocol messages for server authentication and user authentication:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062627Z" changeid="haruyama">
+        <seg>この文書の公開鍵アルゴリズムとエンコーディングは, サーバの認証とユーザの認証のための次のプロトコルメッセージを含む(ただし, これだけに限定されない)公開鍵が利用されるセキュアシェルプロトコルスイートの任意の場所で受け入れられる必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32897,6 +33052,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Use in Public Key Algorithms</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062333Z" changeid="haruyama">
+        <seg>公開鍵アルゴリズムでの利用</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Use in Public Key Algorithms .</seg>
       </tuv>
       <tuv lang="JA" changedate="20110830T005205Z" changeid="haruyama">
@@ -33356,6 +33519,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>チャンネルにもうこれ以上データを送らないなら, SSH_MSG_CHANNEL_EOF を送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When a public key from this specification is included in the input to
+   a hash algorithm, the exact bytes that are transmitted on the wire
+   must be used as input to the hash functions.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062940Z" changeid="haruyama">
+        <seg>この仕様の公開鍵がハッシュアルゴリズムの入力に含まれる場合, 通信で転送された正確なバイト列をハッシュ関数の入力として用いなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34320,6 +34493,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>impose additional constraints before considering a matching
+   successful.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T063440Z" changeid="haruyama">
+        <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>internetworking devices are not.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110820T041307Z" changeid="haruyama">
@@ -34609,6 +34791,27 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110902T043409Z" changeid="haruyama">
         <seg>o  x509v3-ssh-dss ないし, x509v3-ssh-rsa, x509v3-rsa2048-sha256, x509v3-ecdsa-sha2-* 公開鍵アルゴリズムのための証明書に KeyUsage 拡張が存在したら, digitalSignature ビットは設定されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  If the client's reference identifier (e.g., the host name typed by
+      the client) is a DNS domain name, the server's identity SHOULD be
+      checked using the rules specified in [RFC6125].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T064752Z" changeid="haruyama">
+        <seg>o  クライアントの参照識別子(例えば, クライアントで入力されたホスト名) が DNS ドメイン名なら, サーバの ID は [RFC6125] に指定されているルールを用いて検査される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  If the client's reference identifier is an IP address as defined
+      by [RFC0791] or [RFC2460], the client SHOULD convert that address
+      to the &quot;network byte order&quot; octet string representation and
+      compare it against a subjectAltName entry of type iPAddress.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T070714Z" changeid="haruyama">
+        <seg>o  クライアントの参照識別子が [RFC0791] ないし [RFC2460] で定義された IP アドレスならば, クライアントはそのアドレスを&quot;ネットワークバイトオーダー&quot; オクテット文字列表現に変換し iPAddress タイプの subjectAltName エントリに対して比較する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35012,6 +35215,64 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>o  どのアルゴリズムでの同意できなかった(この同意の手順は 7.1 節で後述する).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  in the SSH_MSG_KEXDH_REPLY message [RFC4253]</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062753Z" changeid="haruyama">
+        <seg>o  SSH_MSG_KEXDH_REPLY メッセージ内 [RFC4253]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  in the SSH_MSG_KEXGSS_HOSTKEY message [RFC4462]</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062812Z" changeid="haruyama">
+        <seg>o  SSH_MSG_KEXGSS_HOSTKEY メッセージ内 [RFC4462]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  in the SSH_MSG_KEXRSA_PUBKEY message [RFC4432]</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062803Z" changeid="haruyama">
+        <seg>o  SSH_MSG_KEXRSA_PUBKEY メッセージ内 [RFC4432]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  in the SSH_MSG_KEX_ECDH_REPLY message [RFC5656]</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062821Z" changeid="haruyama">
+        <seg>o  SSH_MSG_KEX_ECDH_REPLY メッセージ内 [RFC5656]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  in the SSH_MSG_KEX_ECMQV_REPLY message [RFC5656]</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062830Z" changeid="haruyama">
+        <seg>o  SSH_MSG_KEX_ECMQV_REPLY メッセージ内 [RFC5656]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  in the SSH_MSG_USERAUTH_REQUEST message when &quot;hostbased&quot;
+      authentication is used [RFC4252]</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062740Z" changeid="haruyama">
+        <seg>o   &quot;hostbased&quot; 認証が用いられる SSH_MSG_USERAUTH_REQUEST メッセージ内 [RFC4252]</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  in the SSH_MSG_USERAUTH_REQUEST message when &quot;publickey&quot;
+      authentication is used [RFC4252]</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110928T062659Z" changeid="haruyama">
+        <seg>o  &quot;publicky&quot; 認証が用いられる SSH_MSG_USERAUTH_REQUEST メッセージ内 [RFC4252]</seg>
       </tuv>
     </tu>
     <tu>
