@@ -545,12 +545,9 @@ Igoe & Stebila               Standards Track                   [Page 14]
 RFC 6187              X.509v3 Certificates for SSH            March 2011
 
 
-Appendix A.  Example
+Appendix A.  例
 
-   The following example illustrates the use of an X.509v3 certificate
-   for a public key for the Digital Signature Algorithm when used in a
-   Diffie-Hellman key exchange method.  In the example, there is a chain
-   of certificates of length 2, and a single OCSP response is provided.
+   以下の例で, Diffie-Hellman 鍵交換法が用いられる場合のデジタル署名アルゴルズムの公開鍵として X.509v3 証明書が用いられる場合を示す.  例では, 証明書のチェーンの長さは 2 で, 1つの OCSP 応答が提供されている.
 
      byte    SSH_MSG_KEXDH_REPLY
      string  0x00 0x00 0xXX 0xXX  -- length of the remaining data in
