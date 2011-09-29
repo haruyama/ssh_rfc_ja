@@ -507,6 +507,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>1) The server MUST share its public key with the host using an
+      X.509v3 certificate as described in [SSH-X509].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T081053Z" changeid="haruyama">
+        <seg>1) サーバは, [SSH-X509] に記述されている X.509v3 証明書を用いてホストにその公開鍵を共有しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>1) The tag cannot be verified until we parse the binary packet.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110829T041441Z" changeid="haruyama">
@@ -708,10 +717,28 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>2) User authentication MUST begin with public key authentication
+      using ECDSA-256/384 with X.509v3 certificates (see Section 4).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T081320Z" changeid="haruyama">
+        <seg>2) ユーザ認証は, X.509v3 証明書で ECDSA-256/384 を用いる 公開鍵認証で始められなければならない (4節を参照).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>3     VERASE      Erase the character to left of the cursor.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>3     VERASE      カーソルの左側の文字を消す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>3) The X.509v3 certificates MUST use only the two Suite B digital
+      signatures, ECDSA-256 and ECDSA-384.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T081716Z" changeid="haruyama">
+        <seg>3) X.509v3 証明書は, 2つの Suite B 電子署名(アルゴリズム), ECDSA-256 と ECDSA-384 のみを用いなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -823,6 +850,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>4) ECDSA-256 MUST NOT be used to sign an ECDSA-384 public key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T081800Z" changeid="haruyama">
+        <seg>4) ECDSA-256 は, ECDSA-384 公開鍵を署名するのに用いられてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>40    IXOFF       Enable input flow control.</seg>
       </tuv>
       <tuv lang="JA">
@@ -861,6 +896,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110620T033612Z" changeid="haruyama">
         <seg>5   p (mod 10) = 3 or 7 のとき.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>5) ECDSA-384 MAY be used to sign an ECDSA-256 public key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T081752Z" changeid="haruyama">
+        <seg>5) ECDSA-384 は, ECDSA-256 公開鍵を署名するのに用いられてもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1001,6 +1044,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>6) At minLOS_192, all SecSh-B implementations MUST be able to verify
+      ECDSA-384 signatures.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T081828Z" changeid="haruyama">
+        <seg>6) minLOS_192 の場合, すべての SecSh-B 実装は, ECDSA-384 署名を検証できなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>60    ECHOCTL     Echo control characters as ^(Char).</seg>
       </tuv>
       <tuv lang="JA">
@@ -1029,6 +1081,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>7     VEOL2       追加の end-of-line 文字.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>7) At minLOS_128, all SecSh-B implementations MUST be able to verify
+      ECDSA-256 signatures and SHOULD be able to verify ECDSA-384
+      signatures, unless it is absolutely certain that the
+      implementation will never need to verify certificates originating
+      from an authority that uses an ECDSA-384 signing key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T082031Z" changeid="haruyama">
+        <seg>7) minLOS_128 の場合, すべての SecSh-B 実装は ECDSA-256 署名を検証できなければならない. また, ECDSA-384 署名鍵を用いる認証局で発行される証明書を検証する必要が決して生じないと実装が完全に確認できない場合は, ECDSA-384 署名を検証できる必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1129,6 +1193,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>8) At minLOS_128, each SecSh-B server and each SecSh-B user MUST have
+      either an ECDSA-256 signing key with a corresponding X.509v3
+      certificate, an ECDSA-384 signing key with a corresponding X.509v3
+      certificate, or both.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T082518Z" changeid="haruyama">
+        <seg>8) minLOS_128 の場合, それぞれの SecSh-B サーバとそれぞれの SecSh-B ユーザは, 対応する X.509v3 証明書で ECDSA-256 署名鍵を持つか, 対応する X.509v3 証明書で ECDSA-384 鍵を持つか, その両方を持たなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>80 to 89   Connection protocol generic
         90 to 127  Channel related messages</seg>
       </tuv>
@@ -1153,6 +1228,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>9     VSTOP       出力を中断する. (通常は control-S).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>9) At minLOS_192, each SecSh-B server and each SecSh-B user MUST have
+      an ECDSA-384 signing key with a corresponding X.509v3 certificate.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T082600Z" changeid="haruyama">
+        <seg>9) minLOS_192 の場合, それぞれの SecSh-B サーバとそれぞれの SecSh-B ユーザは,対応する X.509v3 証明書で ECDSA-384 鍵を持たなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2093,6 +2177,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>認証のタイムアウトと再試行についてのさらなる考察が [ssh-1.2.30] にある..</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Additional user authentication methods MAY be used, but only after
+      the certificate-based ECDSA authentication has been successfully
+      completed.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T081403Z" changeid="haruyama">
+        <seg>追加のユーザ認証法が用いられてもよい. しかし, 証明書ベースの ECDSA 認証が正常に完了した後でのみ用いられなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3913,6 +4007,22 @@
       </tuv>
       <tuv lang="JA">
         <seg>執筆時点では, 広く利用されている暗号には, 3DES, ARCFOUR, twofish, serpent, blowfish がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>At the 128-bit minimum level of security:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T084507Z" changeid="haruyama">
+        <seg>128ビットのセキュリティ最小レベルの場合:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>At the 192-bit minimum level of security:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T084704Z" changeid="haruyama">
+        <seg>192ビットのセキュリティ最小レベルの場合:</seg>
       </tuv>
     </tu>
     <tu>
@@ -6263,6 +6373,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Digital Signatures and Certificates</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T080800Z" changeid="haruyama">
+        <seg>電子署名と証明書</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Digital Signatures and Certificates ........................4
       2.3.</seg>
       </tuv>
@@ -7495,6 +7613,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110820T034418Z" changeid="haruyama">
         <seg>どちらのノードでの失敗や, 接続を提供するデーモンの死, ネットワーク間のルーティング問題, トラフィックをブロックするファイアウォール, またその他の問題は, SSH トランスポートモデルが正常に動作するのを妨げる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Families of Non-Signature Algorithms in SecSh-B</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T084425Z" changeid="haruyama">
+        <seg>SecSh-B の署名以外のアルゴリズムのファミリ</seg>
       </tuv>
     </tu>
     <tu>
@@ -16301,6 +16427,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Most of the constraints described in this section can be achieved by
+   severely restricting the kex_algorithm, encryption_algorithm, and
+   mac_algorithm name lists offered in the SSH_MSG_KEXINIT packet.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T085129Z" changeid="haruyama">
+        <seg>この節で記述した制約のほとんどは, SSH_MSG_KEXINIT パケットで提供される kex_algorithm, encryption_algorithm, mac_algorithm name-list を厳しく制限することで達成可能だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Most signature algorithms include hashing and additional
    padding (e.g., &quot;ssh-dss&quot; specifies SHA-1 hashing).</seg>
       </tuv>
@@ -20067,6 +20203,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>SecSh-B uses ECDSA-256/384 for server authentication, user
+   authentication, and in X.509 certificates.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T080825Z" changeid="haruyama">
+        <seg>SecSh-B は, サーバ認証, ユーザ認証, X.509 証明書に ECDSA-256/384 を用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Second Rekeying Recommendation</seg>
       </tuv>
       <tuv lang="JA" changedate="20110531T064825Z" changeid="haruyama">
@@ -20435,6 +20580,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Security Mechanism Negotiation and Initialization</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T085145Z" changeid="haruyama">
+        <seg>セキュリティメカニズムの交渉と初期化</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Security Mechanism Negotiation and Initialization ...............6
       3.1.</seg>
       </tuv>
@@ -20477,6 +20630,15 @@
       <tuv lang="JA">
         <seg>セキュリティの特性 ........................................7
       4.5.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>See
+   Section 3.1 for details.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T085138Z" changeid="haruyama">
+        <seg>詳細は 3.1 節を参照.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21879,6 +22041,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Table 1.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T084408Z" changeid="haruyama">
+        <seg>表 1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Table of Contents</seg>
       </tuv>
       <tuv lang="JA">
@@ -22170,6 +22340,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>1つ目は,  セッション開始前にクライアントとサーバの間に攻撃者がデバイスを置いた場合だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   following conditions must be met:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T080917Z" changeid="haruyama">
+        <seg>以下の条件を満たす必要がある:</seg>
       </tuv>
     </tu>
     <tu>
@@ -26930,6 +27109,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The key
+   exchange and server authentication are performed by the
+   SSH_MSG_KEXECDH_REPLY packets (see Section 4).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T082835Z" changeid="haruyama">
+        <seg>鍵交換とサーバ認証は, SSH_MSG_KEXECDH_REPLY パケットにより実施される (4 節を参照).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The key K_T is encoded according to the &quot;ssh-rsa&quot; scheme described in
    Section 6.6 of [RFC4253].</seg>
       </tuv>
@@ -28513,6 +28702,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110819T070047Z" changeid="haruyama">
         <seg>snmpSSHDomain に関連する securityName 接頭辞は 'ssh' だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The selection of the signature algorithm to be used for server
+   authentication is governed by the server_host_key_algorithms name-
+   list in the SSH_MSG_KEXINIT packet (see Section 3.1).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T082737Z" changeid="haruyama">
+        <seg>サーバ認証で用いられる署名アルゴリズムの選択は, SSH_MSG_KEXINIT パケット内の server_host_key_algorithms name-list で管理される (3.1 節を参照).</seg>
       </tuv>
     </tu>
     <tu>
@@ -32587,6 +32786,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This public key
+      MUST be used to authenticate the server to the host using
+      ECDSA-256 or ECDSA-384 as appropriate (see Section 3).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T081224Z" changeid="haruyama">
+        <seg>この公開鍵は, 必要に応じて ECDSA-256 か ECDSA-384 を用いるホストへサーバを認証するのに用いられなければならない(3節を参照).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This range is for private use.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110722T064231Z" changeid="haruyama">
@@ -32637,6 +32846,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>この節は, 名前空間を命名規約や, レジストリの初期状態, 将来の割り当てに対する指示を含んでいる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This section covers the constraints that the choice of minimum
+   security level imposes upon the selection of a key agreement protocol
+   (kex algorithm), encryption algorithm, and data integrity algorithm
+   (MAC algorithm).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T084452Z" changeid="haruyama">
+        <seg>この節は, 鍵合意プロトコル (kex アルゴリズム), 暗号化アルゴリズム, データ完全性アルゴリズム (MACアルゴリズム)にセキュリティ最小レベルの選択が課す制約をカバーする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33629,6 +33849,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>User authentication
+   is done via the SSH_MSG_USERAUTH_REQUEST messages (see Section 5).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T082851Z" changeid="haruyama">
+        <seg>ユーザ認証は, SSH_MSG_USERAUTH_REQUEST メッセージにより実施される (5 節を参照).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>User authentication and protection against network-level
    attacks are assumed to be provided by the underlying protocols.</seg>
       </tuv>
@@ -33842,6 +34071,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>このプロトコルは今後も発展していくし, また, いくつかの組織が彼らが作成した暗号化や認証や鍵交換法を利用したいと考えるだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>We divide the non-signature algorithms into two
+   families, as shown in Table 1.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T084358Z" changeid="haruyama">
+        <seg>署名以外のアルゴリズムを表1に示すように2つのファミリに分割する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34810,6 +35048,16 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>[SSH-X509] defines two
+   methods, x509v3-ecdsa-sha2-nistp256 and x509v3-ecdsa-sha2-nistp384,
+   that are to be used for server and user authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T080902Z" changeid="haruyama">
+        <seg>[SSH-X509] は 2つの方法x509v3-ecdsa-sha2-nistp256 と x509v3-ecdsa-sha2-nistp384 を定義している. これらはサーバとユーザの認証に利用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>additional call to GSS_Init_sec_context() to process the final
        reply token.</seg>
       </tuv>
@@ -35621,6 +35869,23 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  The non-signature algorithms MUST all come from Family 2.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T084721Z" changeid="haruyama">
+        <seg>o  署名以外のアルゴリズムは, すべて Family 2 から取得しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  The non-signature algorithms MUST either come exclusively from
+      Family 1 or exclusively from Family 2.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T084652Z" changeid="haruyama">
+        <seg>o  署名以外のアルゴリズムは, Family 1 から排他的にか Family 2 から排他的にか, どちらかで取得しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>o  The operations that the user is allowed to perform using the
       connection protocol.</seg>
       </tuv>
@@ -35644,6 +35909,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>o  0xFE000000 から 0xFEFFFFFF の範囲は, ローカルに割り当てられたチャンネルと共に利用されるためにある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  The selection of Family 1 versus Family 2 is independent of the
+      choice of server host key algorithm.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T084626Z" changeid="haruyama">
+        <seg>o  Family 1 か Family 2 の選択は, サーバのホスト鍵アルゴリズムの選択とは独立だ.</seg>
       </tuv>
     </tu>
     <tu>
