@@ -2574,6 +2574,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>All
+   packets exchanged during the re-exchange are encrypted and
+   authenticated using the current keys until the conclusion of the
+   re-exchange, at which point an SSH_MSG_NEWKEYS initiates a change to
+   the newly established keys.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T091232Z" changeid="haruyama">
+        <seg>再交換で交換されるすべてのパケットは, 再交換が終わるまで現在の鍵を用いて暗号化され認証される. 再交換が終わると SSH_MSG_NEWKEYS が 新しく確立した鍵への変更を開始する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>All 'encoded terminal modes' (as passed in a pty request) are encoded
    into a byte stream.</seg>
       </tuv>
@@ -3684,6 +3696,17 @@
       </tuv>
       <tuv lang="JA">
         <seg> 9.3.3節で述べたように, この手の攻撃が成功するのはほとんどありえない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As described in [SSH-Tran], the exchange of SSH_MSG_KEXINIT between
+   the server and the client establishes which key agreement algorithm,
+   MAC algorithm, host key algorithm (server authentication algorithm),
+   and encryption algorithm are to be used.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T085855Z" changeid="haruyama">
+        <seg>[SSH-Tran] で記述されているように, サーバとクライアント間での SSH_MSG_KEXINIT の交換が, 鍵合意アルゴリズムや, MAC アルゴリズム, ホスト鍵アルゴリズム (サーバ認証アルゴリズム), 暗号化アルゴリズムのそれぞれで何が用いられるかを確立する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16752,6 +16775,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Negotiation and initialization of a Suite B Secure Shell connection
+   involves the following Secure Shell messages (where C-&gt;S denotes a
+   message from the client to the server, and S-&gt;C denotes a server-to-
+   client message):</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T090153Z" changeid="haruyama">
+        <seg>Suite B セキュアシェル接続の交渉と初期化は, 次のセキュアシェルメッセージで行なわれる (C-&gt;S はクライアントからサーバへのメッセージ, S-&gt;C はサーバからクライアントへのメッセージを意味する):</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Neither side
    should establish a NETCONF over SSH connection with an unknown,
    unexpected, or incorrect identity on the opposite side.</seg>
@@ -18104,6 +18138,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>さもなければ, 推測が正しいと考え, 楽観的に送られたパケットは最初の鍵交換パケットとして扱われなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Otherwise, the re-exchange protocol is
+   identical to the initial key exchange protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T091300Z" changeid="haruyama">
+        <seg>それ以外は, 再交換プロトコルは最初の鍵交換プロトコルと同一だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20143,6 +20186,46 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>SSH_MSG_KEXECDH_INIT      C-&gt;S  Contains the client's ephemeral
+                                      elliptic curve Diffie-Hellman key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T090257Z" changeid="haruyama">
+        <seg>SSH_MSG_KEXECDH_INIT      C-&gt;S  クライアントの一時楕円曲線 Diffie-Hellman 鍵を含む.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH_MSG_KEXECDH_REPLY     S-&gt;C  Contains a certificate with the
+                                      server's ECDSA public signature
+                                      key, the server's ephemeral ECDH
+                                      contribution, and an ECDSA digital
+                                      signature of the newly formed
+                                      exchange hash value.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T090817Z" changeid="haruyama">
+        <seg>SSH_MSG_KEXECDH_REPLY     S-&gt;C  サーバの ECDSA 公開署名鍵を持つ証明書, サーバの一時 ECDH contribution, 交換ハッシュ値で新しく作成されたECDSA 電子署名を含む.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH_MSG_KEXINIT           C-&gt;S  Contains lists of algorithms
+                                      acceptable to the client.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T090311Z" changeid="haruyama">
+        <seg>SSH_MSG_KEXINIT           C-&gt;S  クライアントが受け入れられるアルゴリズムのリストを含む.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH_MSG_KEXINIT           S-&gt;C  Contains lists of algorithms
+                                      acceptable to the server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T090302Z" changeid="haruyama">
+        <seg>SSH_MSG_KEXINIT           S-&gt;C  サーバが受け入れられるアルゴリズムのリストを含む.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>SSH_MSG_KEX_DH_GEX_REQUEST_OLD is used for backward compatibility.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110620T032922Z" changeid="haruyama">
@@ -20174,6 +20257,19 @@
       </tuv>
       <tuv lang="JA">
         <seg>SSH_MSG_USERAUTH_FAILURE without partial success - パスワードは変更されなかった.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH_MSG_USERAUTH_REQUEST  C-&gt;S  Contains the user's name, the
+                                      name of the service the user is
+                                      requesting, the name of the
+                                      authentication method the client
+                                      wishes to use, and method-specific
+                                      fields.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T090956Z" changeid="haruyama">
+        <seg>SSH_MSG_USERAUTH_REQUEST  C-&gt;S  ユーザ名と, ユーザが要求するサービス名, クライアントが利用を望む認証法の名前, メソッド固有のフィールドを含む.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20666,6 +20762,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>「セクション 6. アルゴリズムの命名」にさらなる情報がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>See Section 9 of
+   [SSH-Tran].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T091321Z" changeid="haruyama">
+        <seg>[SSH-Tran] の 9節を参照.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32909,6 +33014,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This section describes how
+   the Suite B components are to be used in the Secure Shell algorithm
+   negotiation, key agreement, server authentication, and user
+   authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T090000Z" changeid="haruyama">
+        <seg>この節は, セキュアシェルアルゴリズム交渉や, 鍵合意, サーバ認証, ユーザ認証で Suite B 構成要素がどのように用いられるかを記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This section describes this and encourages administrators</seg>
       </tuv>
       <tuv lang="JA">
@@ -34371,6 +34487,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110901T072834Z" changeid="haruyama">
         <seg>OCSP 応答が提供されない場合, 証明書を受け入れるかどうかの決定は実装とシステム管理者次第だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When not in the midst of processing a key exchange, either party may
+   initiate a key re-exchange by sending an SSH_MSG_KEXINIT packet.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110929T091042Z" changeid="haruyama">
+        <seg>鍵交換を処理する途中でなければ, どちらの側も SSH_MSG_KEXINIT パケットを送ることで鍵の再交換を開始できる.</seg>
       </tuv>
     </tu>
     <tu>
