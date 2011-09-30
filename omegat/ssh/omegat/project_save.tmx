@@ -2479,6 +2479,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Algorithm Negotiation: SSH_MSG_KEXINIT</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T143541Z" changeid="haruyama">
+        <seg>アルゴリズムの交渉: SSH_MSG_KEXINIT</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Algorithm Negotiation: SSH_MSG_KEXINIT .....................7
    4.</seg>
       </tuv>
@@ -2878,6 +2886,22 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Allowed Non-Signature Algorithm Name Lists</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T143940Z" changeid="haruyama">
+        <seg>受け入れられる署名以外アルゴリズムの name-list</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Allowed Server Host Key Algorithm Name Lists</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T144028Z" changeid="haruyama">
+        <seg>受け入れられるサーバホスト鍵アルゴリズムの name-list</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Already successfully completed authentications SHOULD NOT be included
    in the name-list, unless they should be performed again for some
    reason.</seg>
@@ -3073,6 +3097,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110806T122301Z" changeid="haruyama">
         <seg>SSH トランスポートモデルに準拠する実装は, SNMP セキュリティのもっとも高いレベル (authPriv) を満たす認証とデータの完全性, 暗号化を提供する SSH 接続を用いなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An X.509v3 certificate containing the
+   server's public signing ECDSA key and an ECDSA signature on the
+   exchange hash value derived from the newly established shared secret
+   value are used to authenticate the server to the client.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T144624Z" changeid="haruyama">
+        <seg>サーバ公開署名 ECDSA 鍵を含む X.509v3 証明書と, 新しく確立した共有秘密値から導出される交換ハッシュに対する ECDSA 署名が, クライアントに対してサーバを認証するのに用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3700,6 +3735,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As described in [SSH-Tran], the SSH_MSG_KEXINIT packet has the
+   following structure:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T143655Z" changeid="haruyama">
+        <seg>[SSH-Tran] で記述されているように, SSH_MSG_KEXINIT パケットは次の構造を持つ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As described in [SSH-Tran], the exchange of SSH_MSG_KEXINIT between
    the server and the client establishes which key agreement algorithm,
    MAC algorithm, host key algorithm (server authentication algorithm),
@@ -3781,6 +3825,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As specified in [SSH-Tran], the encryption keys and initialization
+   vectors needed by Secure Shell are derived directly from the SSV
+   using the hash function specified by the key agreement algorithm
+   (SHA-256 for ecdh-sha2-nistp256 and SHA-384 for ecdh-sha2-nistp384).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T150513Z" changeid="haruyama">
+        <seg>[SSH-Tran] で指定されているように, セキュアシェルで必要な暗号化鍵と初期化ベクトルは, 鍵合意アルゴリズムで指定されたハッシュ関数 (ecdh-sha2-nistp256 では SHA-256, ecdh-sha2-nistp384 では SHA-384) を用いて SSV から直接導出される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As stated earlier, the 'protoversion' specified for this protocol is
    &quot;2.0&quot;.</seg>
       </tuv>
@@ -3796,6 +3851,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>2.2節で述べたように, SSHの実装者がホスト鍵の検証法の順番を制御するポリシー機構を提供することを推奨する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As stated in Section 3.1, in SecSh-B, the server host
+   key algorithm MUST be either x509v3-ecdsa-sha2-nistp256 or
+   x509v3-ecdsa-sha2-nistp384.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T145357Z" changeid="haruyama">
+        <seg>3.1 節で述べたように, SecSh-B では, サーバのホスト鍵アルゴリズムは, x509v3-ecdsa-sha2-nistp256 か x509v3-ecdsa-sha2-nistp384 でなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6264,6 +6329,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Details on the structure and encoding of the X.509v3 certificate can
+   be found in Section 2 of [SSH-X509].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T145956Z" changeid="haruyama">
+        <seg>X.509v3 証明書の構造とエンコーディングの詳細は, [SSH-X509] の 2節にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Determine the tmSecurityName to be associated with the incoming
        message:</seg>
       </tuv>
@@ -6648,6 +6722,44 @@
       </tuv>
       <tuv lang="JA" changedate="20110321T131022Z" changeid="haruyama">
         <seg>ECDSA は [SEC1] で指定されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>ECDSA-256 only (min_LOS 128):
+               server_host_key_algorithms name_list :=
+                                { x509v3-ecdsa-sha2-nistp256 }</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T144003Z" changeid="haruyama">
+        <seg>ECDSA-256 のみ (min_LOS 128):
+               server_host_key_algorithms name_list :=
+                                { x509v3-ecdsa-sha2-nistp256 }</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>ECDSA-256 or ECDSA-384 (min_LOS 128):
+               server_host_key_algorithms name_list :=
+                                { x509v3-ecdsa-sha2-nistp256,
+                                  x509v3-ecdsa-sha2-nistp384 }</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T144012Z" changeid="haruyama">
+        <seg>ECDSA-256 もしくは ECDSA-384 (min_LOS 128):
+               server_host_key_algorithms name_list :=
+                                { x509v3-ecdsa-sha2-nistp256,
+                                  x509v3-ecdsa-sha2-nistp384 }</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>ECDSA-384 only (min_LOS 128 or 192):
+               server_host_key_algorithms name_list :=
+                                { x509v3-ecdsa-sha2-nistp384 }</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T144007Z" changeid="haruyama">
+        <seg>ECDSA-384 のみ (min_LOS 128 or 192):
+               server_host_key_algorithms name_list :=
+                                { x509v3-ecdsa-sha2-nistp384 }</seg>
       </tuv>
     </tu>
     <tu>
@@ -7644,6 +7756,54 @@
       </tuv>
       <tuv lang="JA" changedate="20110929T084425Z" changeid="haruyama">
         <seg>SecSh-B の署名以外のアルゴリズムのファミリ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Family 1 only (min_LOS 128):
+          kex_algorithm name_list         := { ecdh_sha2_nistp256 }
+          encryption_algorithm name_list  := { AEAD_AES_128_GCM   }
+          mac_algorithm name_list         := { AEAD_AES_128_GCM   }</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T143856Z" changeid="haruyama">
+        <seg>ファミリー 1 のみ (min_LOS 128):
+          kex_algorithm name_list         := { ecdh_sha2_nistp256 }
+          encryption_algorithm name_list  := { AEAD_AES_128_GCM   }
+          mac_algorithm name_list         := { AEAD_AES_128_GCM   }</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Family 1 or Family 2 (min_LOS 128):
+          kex_algorithm name_list         := { ecdh_sha2_nistp256,
+                                               ecdh_sha2_nistp384 }
+          encryption_algorithm name_list  := { AEAD_AES_128_GCM,
+                                               AEAD_AES_256_GCM   }
+          mac_algorithm name_list         := { AEAD_AES_128_GCM,
+                                               AEAD_AES_256_GCM   }</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T143916Z" changeid="haruyama">
+        <seg>ファミリー 1 もしくはファミリー 2 (min_LOS 128):
+          kex_algorithm name_list         := { ecdh_sha2_nistp256,
+                                               ecdh_sha2_nistp384 }
+          encryption_algorithm name_list  := { AEAD_AES_128_GCM,
+                                               AEAD_AES_256_GCM   }
+          mac_algorithm name_list         := { AEAD_AES_128_GCM,
+                                               AEAD_AES_256_GCM   }</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Family 2 only (min_LOS 128 or 192):
+          kex_algorithm name_list         := { ecdh_sha2_nistp384 }
+          encryption_algorithm name_list  := { AEAD_AES_256_GCM   }
+          mac_algorithm name_list         := { AEAD_AES_256_GCM   }</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T143904Z" changeid="haruyama">
+        <seg>ファミリー 2 のみ (min_LOS 128 or 192):
+          kex_algorithm name_list         := { ecdh_sha2_nistp384 }
+          encryption_algorithm name_list  := { AEAD_AES_256_GCM   }
+          mac_algorithm name_list         := { AEAD_AES_256_GCM   }</seg>
       </tuv>
     </tu>
     <tu>
@@ -12658,6 +12818,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In Suite B, one of
+   the following key agreement methods MUST be used to generate a shared
+   secret value (SSV):</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T144754Z" changeid="haruyama">
+        <seg>Suite B では, 次の鍵交換法のうち1つが, 共有秘密値 (SSV) を生成するのに用いられなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In Suite B, public key certificates used to verify signatures MUST be
    compliant with the Suite B Certificate Profile specified in RFC 5759
    [SUITEBCERT].</seg>
@@ -15528,6 +15698,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Key Exchange and Server Authentication</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T144427Z" changeid="haruyama">
+        <seg>鍵交換とサーバ認証</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Key Exchange and Server Authentication ..........................8
       4.1.</seg>
       </tuv>
@@ -15624,6 +15802,14 @@
       <tuv lang="JA" changedate="20110621T012347Z" changeid="haruyama">
         <seg>キーワード ..................................................3
    2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Key and Initialization Vector Derivation</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T150344Z" changeid="haruyama">
+        <seg>鍵と初期化ベクトルの導出</seg>
       </tuv>
     </tu>
     <tu>
@@ -17802,6 +17988,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110614T024039Z" changeid="haruyama">
         <seg>基底のプロトコルで指定されたアルゴリズムの1つが &quot;arcfour&quot; で, 高速なストリーム暗号である Arcfour (RC4としても知られる) を利用するよう指定されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>One of these options MUST be used.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T143845Z" changeid="haruyama">
+        <seg>これらのオプションの1つが利用されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20299,6 +20493,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>SecSh-B uses ECDH to establish a shared secret value between the
+   client and the server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T144450Z" changeid="haruyama">
+        <seg>SecSh-B は, クライアントとサーバの間で共有の秘密の値を確立するのに ECDH を用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>SecSh-B uses ECDSA-256/384 for server authentication, user
    authentication, and in X.509 certificates.</seg>
       </tuv>
@@ -22150,6 +22353,40 @@
       </tuv>
       <tuv lang="JA" changedate="20110929T084408Z" changeid="haruyama">
         <seg>表 1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Table 2 lists three allowable name lists for the
+   non-signature algorithms.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T143831Z" changeid="haruyama">
+        <seg>表 2 は, 署名以外のアルゴリズムの3つの受け入れられる name-list を示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Table 2.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T143919Z" changeid="haruyama">
+        <seg>表 2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Table 3 lists three allowable name lists for the server host key
+   algorithms.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T143957Z" changeid="haruyama">
+        <seg>表 3 は, サーバホスト鍵アルゴリズムの3つの受け入れられる name-list を示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Table 3.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T144018Z" changeid="haruyama">
+        <seg>表 3.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24617,6 +24854,27 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The SSH_MSG_KEXECDH_REPLY contains the server's contribution to the
+   ECDH exchange, the server's public signature key, and a signature of
+   the exchange hash value formed from the newly established shared
+   secret value.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T145320Z" changeid="haruyama">
+        <seg>SSH_MSG_KEXECDH_REPLY は, ECDH に対するサーバの contribution や サーバの公開署名鍵,  新しく確立した共有秘密値から導出される交換ハッシュに対する ECDSA 署名が含まれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH_MSG_KEXINIT name lists can be used to constrain the choice of
+   non-signature and host key algorithms in accordance with the guidance
+   given in Section 2.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T143757Z" changeid="haruyama">
+        <seg>SSH_MSG_KEXINIT の name-list は, 2節で与えガイダンスに従って, 署名以外のアルゴリズムとホスト鍵アルゴリズムの選択を制限するのに利用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The SSH_MSG_USERAUTH_INFO_REQUEST message is defined as follows:</seg>
       </tuv>
       <tuv lang="JA">
@@ -25373,6 +25631,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The choice of all but the user authentication methods are determined
+   by the exchange of SSH_MSG_KEXINIT between the client and the server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T143631Z" changeid="haruyama">
+        <seg>ユーザ認証法をのぞくすべての(アルゴリズムの)選択は, クライアントとサーバ間での SSH_MSG_KEXINIT の交換で決定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The choice of hash function
    from the SHA2 hash function family is based on the key size of the
    ECDSA key as specified in Section 6.2.1 of [RFC5656].</seg>
@@ -25809,6 +26076,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client-to-server channel and the server-to-client channel will
+   have independent keys and initialization vectors.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T150538Z" changeid="haruyama">
+        <seg>クライアントからサーバへのチャンネルとサーバからクライアントへのチャンネルは, 独立した鍵と初期化ベクトルを持つ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The command should be executed by the server when it
    receives an &quot;exec&quot; or &quot;shell&quot; request from the client, in place of
    the command or shell which would otherwise have been executed as a
@@ -26171,6 +26447,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110409T092509Z" changeid="haruyama">
         <seg>転送される楕円曲線公開鍵(点)は, 転送前に8bit文字列にエンコードする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The encoding of the elliptic
+   curve point Q_C as an octet string is as specified in Section 2.3.3
+   of [SEC1], and the encoding of the ECDSA signature Sig_S as an octet
+   string is as described in Section 3.1.2 of [SSH-ECC].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T150202Z" changeid="haruyama">
+        <seg>楕円曲線のポイント Q_C のオクテット文字列としてのエンコーディングは [SEC1] の 2.3.3 節で指定されている. ECDSA 署名 Sig_S のオクテット文字列としてのエンコーディングは, [SSH-ECC] の 3.1.2 節に記述されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26812,6 +27099,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The format of the SSH_MSG_KEXECDH_REPLY is:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T145407Z" changeid="haruyama">
+        <seg>SSH_MSG_KEXECDH_REPLY の形式は以下だ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The format of the SSH_MSG_USERAUTH_INFO_RESPONSE message is as
    follows:</seg>
       </tuv>
@@ -27324,6 +27619,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110514T024415Z" changeid="haruyama">
         <seg>鍵交換は2つの値を生成する: 共有の秘密 K と 交換ハッシュ H だ. 暗号化と認証の鍵はこれらから導出される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The key exchange to be used in Secure Shell is determined by the name
+   lists exchanged in the SSH_MSG_KEXINIT packets.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T144716Z" changeid="haruyama">
+        <seg>セキュアシェルで用いられる鍵交換は, SSH_MSG_KEXINIT パケットで交換される name-list で決定される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30566,6 +30870,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110802T025903Z" changeid="haruyama">
         <seg>これらに 公開鍵, パスワード, ホストベースメカニズムが含まれている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These keys will
+   remain constant until a re-exchange results in the formation of a
+   new SSV.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T150607Z" changeid="haruyama">
+        <seg>これらの鍵は, 新しい SSV を生成する再交換が行なわれるまでは一定の保持される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35202,6 +35516,14 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>and the format of the SSH_MSG_KEXECDH_INIT message is:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T145003Z" changeid="haruyama">
+        <seg>また, SSH_MSG_KEXECDH_INIT メッセージの形式は以下だ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>and users to understand the importance of verifying this association
    before any session is initiated.</seg>
       </tuv>
@@ -35302,6 +35624,24 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       <tuv lang="JA">
         <seg>cookie
          'cookie' は, 送り手が生成するランダムな値でなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>ecdh-sha2-nistp256      ephemeral-ephemeral elliptic curve
+                              Diffie-Hellman on nistp256 with SHA-256</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T144853Z" changeid="haruyama">
+        <seg>ecdh-sha2-nistp256      SHA-256 を用いる nistp256 の一時-一時楕円曲線 Diffie-Hellman</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>ecdh-sha2-nistp384      ephemeral-ephemeral elliptic curve
+                              Diffie-Hellman on nistp384 with SHA-384</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T144925Z" changeid="haruyama">
+        <seg>ecdh-sha2-nistp384      SHA-384 を用いる nistp384 の一時-一時楕円曲線 Diffie-Hellman</seg>
       </tuv>
     </tu>
     <tu>
@@ -36639,6 +36979,43 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>string    K_S    // a string encoding an X.509v3 certificate
+                       // containing the server's ECDSA public host key</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T145737Z" changeid="haruyama">
+        <seg>string    K_S    // サーバの ECDSA 公開ホスト鍵を含む X.509v3 証明書をエンコードした文字列</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>string    Q_C    // the client's ephemeral contribution to the
+                       // ECDH exchange, encoded as an octet string</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T145131Z" changeid="haruyama">
+        <seg>string    Q_C    // ECDH 交換に対するクライアントの一時 contribution. オクテット文字列としてエンコードされる</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>string    Q_S    // the server's ephemeral contribution to the
+                       // ECDH exchange, encoded as an octet string</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T145813Z" changeid="haruyama">
+        <seg>string    Q_S    // ECDH 交換に対するサーバの一時 contribution. オクテット文字列としてエンコードされる</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>string    Sig_S  // an octet string containing the server's
+                       // signature of the newly established exchange
+                       // hash value</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T145928Z" changeid="haruyama">
+        <seg>string    Sig_S  // 新しく確立された交換ハッシュのサーバの署名を含むオクテット文字列</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>subject defined in Section 3.3.1</seg>
       </tuv>
       <tuv lang="JA" changedate="20110719T030120Z" changeid="haruyama">
@@ -36812,6 +37189,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>where the encoding of the elliptic curve point Q_C as an octet string
+   is as specified in Section 2.3.3 of [SEC1].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20110930T145225Z" changeid="haruyama">
+        <seg>楕円曲線のポイント Q_C のオクテット文字列としてのエンコーディングは, [SEC1] の 2.3.3 節で指定されている.</seg>
       </tuv>
     </tu>
     <tu>
