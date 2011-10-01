@@ -1917,6 +1917,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>AES GCM will both encrypt the packet and form a
+   16-octet authentication tag to ensure data integrity.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T030247Z" changeid="haruyama">
+        <seg>AES GCM は, パケットの暗号化とデータ完全性を保証する 16-オクテットの認証タグの形成の両方を行なう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>AES Galois Counter Mode for
                the Secure Shell Transport Layer Protocol</seg>
       </tuv>
@@ -4046,6 +4055,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>At minLOS 128, either one of
+   these methods may be used, but at minLOS 192,
+   x509v3-ecdsa-sha2-nistp384 MUST be used.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T024625Z" changeid="haruyama">
+        <seg>minLOS 128 の場合, これらのどちらかが利用できる. minLOS 192 の場合, x509v3-ecdsa-sha2-nistp384 が利用されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>At present, the best known algorithm is the
    Pollard-rho method.</seg>
       </tuv>
@@ -4569,6 +4588,16 @@
       <tuv lang="JA" changedate="20110621T012528Z" changeid="haruyama">
         <seg>暗号鍵の束縛 ...................................16
       3.6.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Block Counter: A 32-bit integer, set to one at the start of each
+      new SSH binary packet and incremented as each 16-octet block of
+      data is processed.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T030749Z" changeid="haruyama">
+        <seg>ブロックカウンタ: 32-ビット整数. 新しい SSH バイナリパケットの開始字に 1 に設定され, データの16-オクテットのブロックが処理されるごとに増加.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5541,6 +5570,14 @@
       <tuv lang="JA">
         <seg>機密性....................................14
            9.3.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Confidentiality and Data Integrity of SSH Binary Packets</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T025437Z" changeid="haruyama">
+        <seg>SSH バイナリパケットの機密性とデータ完全性</seg>
       </tuv>
     </tu>
     <tu>
@@ -7407,6 +7444,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Ensuring that these counters are properly implemented is crucial to
+   the security of the system.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T030814Z" changeid="haruyama">
+        <seg>これらのカウンタが適切に実装されていることの保証は, システムのセキュリティにとって重大だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Environment Variable Passing</seg>
       </tuv>
       <tuv lang="JA">
@@ -7908,6 +7954,14 @@
       <tuv lang="JA" changedate="20110530T071149Z" changeid="haruyama">
         <seg>鍵の再生成についての1番目の推奨 ..............................3
       3.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>First SSH_MSG_USERAUTH_REQUEST Message</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T024630Z" changeid="haruyama">
+        <seg>最初の SSH_MSG_USERAUTH_REQUEST メッセージ</seg>
       </tuv>
     </tu>
     <tu>
@@ -8642,6 +8696,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For this reason, condition (2) of Section 2.2 requires
+   that all users of SecSh-B MUST be authenticated using ECDSA-256/384
+   signatures and X.509v3 certificates.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T024426Z" changeid="haruyama">
+        <seg>この理由から, 2.2 節の 条件 (2) は, ECDSA-256/384 署名と X.509v3 証明書を用いて SecSh-B のすべてのユーザが認証されなければならないことを要求する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For this reason, it is RECOMMENDED that debug messages be
    initially disabled at the time of deployment and require an active
    decision by an administrator to allow them to be enabled.</seg>
@@ -9095,11 +9159,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Galois/Counter Mode</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T030528Z" changeid="haruyama">
+        <seg>Galois(ガロア)/カウンタモード</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Galois/Counter Mode .......................................12
       6.2.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110929T005349Z" changeid="haruyama">
-        <seg>Galois(ガロア)/カウンターモード .......................................12
+      <tuv lang="JA" changedate="20111001T030530Z" changeid="haruyama">
+        <seg>Galois(ガロア)/カウンタモード .......................................12
       6.2.</seg>
       </tuv>
     </tu>
@@ -14356,6 +14428,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Invocation Counter: A 64-bit integer, incremented after each call
+      to AES-GCM to process an SSH binary packet.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T030626Z" changeid="haruyama">
+        <seg>呼び出し(Invocation) カウンタ: 64-ビット整数. SSH バイナリパケットの処理のために AES-GCM が呼び出されるたびに増加.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Issues associated with the use of certificates (such as expiration of
    certificates and revocation of compromised certificates) are
    addressed in [RFC5280] and are outside the scope of this document.</seg>
@@ -17069,6 +17150,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>No other confidentiality
+   or data integrity algorithms are permitted.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T030441Z" changeid="haruyama">
+        <seg>他の機密性やデータ完全性アルゴリズムは許可されない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>No response is sent to this message.</seg>
       </tuv>
       <tuv lang="JA">
@@ -17908,6 +17998,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110701T023119Z" changeid="haruyama">
         <seg>メカニズムのOIDが選択されたら， SSH_MSG_USERAUTH_GSSAPI_TOKEN パケットの1つないしそれ以上のペアをクライアントは交換しはじめる．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Once the server has responded to the request message with an
+   SSH_MSG_USERAUTH_PK_OK message, the client uses a second
+   SSH_MSG_USERAUTH_REQUEST message to perform the actual
+   authentication:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T024947Z" changeid="haruyama">
+        <seg>サーバが, SSH_MSG_USERAUTH_PK_OK メッセージで要求メッセージに対して応答したら, クライアントは2番目の SSH_MSG_USERAUTH_REQUEST を用いて実際の認証を行なう.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20529,11 +20630,19 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Second SSH_MSG_USERAUTH_REQUEST Message</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T024903Z" changeid="haruyama">
+        <seg>2 番目の SSH_MSG_USERAUTH_REQUEST メッセージ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Second SSH_MSG_USERAUTH_REQUEST Message ...................11
    6.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110929T005306Z" changeid="haruyama">
-        <seg>2 番目の Second SSH_MSG_USERAUTH_REQUEST メッセージ ...................11
+      <tuv lang="JA" changedate="20111001T024909Z" changeid="haruyama">
+        <seg>2 番目の SSH_MSG_USERAUTH_REQUEST メッセージ ...................11
    6.</seg>
       </tuv>
     </tu>
@@ -20676,11 +20785,29 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Secure Shell allows either the server or client to request that the
+   Secure Shell connection be rekeyed.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T031655Z" changeid="haruyama">
+        <seg>セキュアシェルは, サーバとクライアントのどちらもがセキュアシェル接続の鍵の再生成を要求できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Secure Shell defines a user authentication mechanism that is based on
    public keys, but does not define any mechanism for key distribution.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110720T124855Z" changeid="haruyama">
         <seg>セキュアシェルは公開鍵の基づくユーザ認証アルゴリズムを定義しているが, 鍵配布のメカニズムは定義していない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Secure Shell transfers data between the client and the server using
+   its own binary packet structure.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T030018Z" changeid="haruyama">
+        <seg>セキュアシェルは, 独自のバイナリパケット構造を用いてクライアントとサーバの間でデータを転送する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21366,6 +21493,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110928T074358Z" changeid="haruyama">
         <seg>同様に, 証明書が OCSP が利用されることを示していて OCSP クエリへの応答がない場合, 試行に用いられた証明書の利用の詳細(前述)とともに応答がないことが記録される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Similarly, when using
+   ecdh_sha2_nistp384, each exponent used in the key exchange must have
+   384 bits of entropy.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T031856Z" changeid="haruyama">
+        <seg>ecdh_sha2_nistp384 を用いる場合, 鍵交換時に利用するそれぞれの指数は 384 ビットのエントロピーを持たなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22121,6 +22258,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Suite B SSH implementations MUST support
+   AEAD_AES_GCM_128 and SHOULD support AEAD_AES_GCM_256 to both provide
+   confidentiality and ensure data integrity.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T030417Z" changeid="haruyama">
+        <seg>Suite B SSH 実装は, 機密性を提供しデータ完全性を保証するため, AEAD_AES_GCM_128 をサポートしなければならない. また, AEAD_AES_GCM_256 をサポートする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Suite B Secure Shell makes use
    of the elliptic curve Diffie-Hellman (ECDH) key agreement, the
    elliptic curve digital signature algorithm (ECDSA), the Advanced
@@ -22148,6 +22295,16 @@
       <tuv lang="JA" changedate="20110929T005117Z" changeid="haruyama">
         <seg>Suite B とセキュアシェル ........................................3
       2.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Suite B places no constraints on
+   how frequently this is to be done, but it does require that the
+   cipher suite being employed MUST NOT be changed when a rekey occurs.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T031809Z" changeid="haruyama">
+        <seg>Suite B は, この鍵の再生成がどれくらい頻繁に行なわれるかの制限を設けていない. しかし鍵の再生成時に採用される暗号スイートを変更してはならないことを要求する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24600,6 +24757,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The SSH binary packet structure is
+   independent of any packet structure on the underlying data channel.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T030041Z" changeid="haruyama">
+        <seg>SSH バイナリパケット構造は, 基底のデータチャンネルのパケットの構造から独立だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The SSH connection protocol allows for proxy forwarding of other
    protocols such as SMTP, POP3, and HTTP.</seg>
       </tuv>
@@ -25051,6 +25217,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110720T131636Z" changeid="haruyama">
         <seg>セキュアシェル公開鍵サブシステムは, セキュアシェルトランスポート層 [2] と ユーザ認証 [3] プロトコルの上で動作するように設計されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The Secure Shell Transport Layer Protocol authenticates the server to
+   the host but does not authenticate the user (or the user's host) to
+   the server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T024324Z" changeid="haruyama">
+        <seg>セキュアシェルトランスポート層プロトコルはサーバをホストに認証するが, ユーザ(ないしユーザのホスト)をサーバに認証しない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26197,6 +26373,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The contents of each binary packet and portions of the header are
+   encrypted, and each packet is authenticated with its own message
+   authentication code.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T030211Z" changeid="haruyama">
+        <seg>各バイナリパケットの内容とそのヘッダの一部は暗号化され, それぞれのパケットは独自のメッセージ認証コードで認証される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The contents of the MIC field are obtained by calling GSS_GetMIC over
    the following, using the GSS-API context that was established during
    initial key exchange:</seg>
@@ -26447,6 +26633,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110409T092509Z" changeid="haruyama">
         <seg>転送される楕円曲線公開鍵(点)は, 転送前に8bit文字列にエンコードする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The encoding of the ECDSA
+   signature Sig_U as an octet string is as described in Section 3.1.2
+   of [SSH-ECC].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T025425Z" changeid="haruyama">
+        <seg>ECDSA 署名 Sib_U のオクテット文字列としてのエンコーディングは, [SSH-ECC] の 3.1.2 節で記述されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27430,6 +27626,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110719T030109Z" changeid="haruyama">
         <seg>レジルトリの最初の内容は以下だ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The initial value of
+      the invocation counter is determined by the SSH initialization
+      vector.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T030646Z" changeid="haruyama">
+        <seg>呼び出しカウンタの初期値は, SSH 初期化ベクトルで決定される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28828,12 +29034,32 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The reader is referred to [SSH-GCM] for
+   details on the format, initialization, and usage of these counters
+   and their relationship to the initialization vector and the SSV.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T030912Z" changeid="haruyama">
+        <seg>フォーマットや初期化, これらのカウンタの利用法, 初期化ベクトルと SSV との関係についての詳細は [SSH-GCM] を参照.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The reader is reminded that SSH requires that the data to be
    encrypted MUST be padded out to a multiple of the block size
    (16-octets for AES-GCM).</seg>
       </tuv>
       <tuv lang="JA" changedate="20110829T035941Z" changeid="haruyama">
         <seg>読者は, 暗号化されるデータはブロックサイズ (AES-GCM では 16-オクテット)の倍数にパディングされなければならないことをSSHが要求していることに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The reader is reminded that, as specified in [SSH-GCM], Suite B
+   requires that all 16 octets of the authentication tag MUST be used as
+   the SSH data integrity value of the SSH binary packet.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T031607Z" changeid="haruyama">
+        <seg>[SSH-GCM] で指定されているように, 認証タグの 16 オクテットすべてが SSH バイナリパケットの SSH データ完全性の値として用いられなければならないことを Suite B が要求することに注意すること.</seg>
       </tuv>
     </tu>
     <tu>
@@ -29036,6 +29262,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110614T025721Z" changeid="haruyama">
         <seg>[RFC4251]のセキュリティの考察が適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The security considerations of [SSH-Arch]
+   apply.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T031904Z" changeid="haruyama">
+        <seg>[SSH-Arch]のセキュリティの考察が適用される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -29310,6 +29545,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>サーバは, このメッセージに対して SSH_MSG_USERAUTH_FAILURE か 次のメッセージを返さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The server MUST respond with either SSH_MSG_USERAUTH_SUCCESS (if no
+   more authentications are needed) or SSH_MSG_USERAUTH_FAILURE (if the
+   request failed, or more authentications are needed).</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T025432Z" changeid="haruyama">
+        <seg>サーバは, 追加の認証が必要なければ SSH_MSG_USERAUTH_SUCCESS で, 認証要求が失敗したり追加の認証が必要な場合は SSH_MSG_USERAUTH_FAILURE で応答しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -29677,6 +29922,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>元データではなく H に対して署名のアルゴリズムが適用されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The signature field Sig_U is an ECDSA signature of the concatenation
+   of several values, including the session identifier, user name,
+   service name, public key algorithm name, and the user's public
+   signing key.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T025050Z" changeid="haruyama">
+        <seg>署名のフィールド Sig_U は, セッション識別子やユーザ名, サービス名, 公開鍵アルゴリズム名, ユーザの公開署名鍵を含むいくつかの値の連結の ECDSA 署名だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30193,6 +30449,25 @@
       </tuv>
       <tuv lang="JA" changedate="20110808T102515Z" changeid="haruyama">
         <seg>ユーザ名は UTF-8 でエンコードされなければならない ([RFC4252] による).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The user's public key is sent to the server using an
+   SSH_MSG_USERAUTH_REQUEST message.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T024657Z" changeid="haruyama">
+        <seg>ユーザの公開鍵は, SSH_MSG_USERAUTH_REQUEST メッセージを用いてサーバに送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The user's public signing key MUST be the signing key
+   conveyed in the X.509v3 certificate sent in the first
+   SSH_MSG_USERAUTH_REQUEST message.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T025353Z" changeid="haruyama">
+        <seg>ユーザの公開署名鍵は, 最初の SSH_MSG_USERAUTH_REQUEST メッセージで送られる X.509v3 証明書で伝達される署名鍵でなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30726,6 +31001,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>この番号は次のように割当てられる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These algorithms rely on two counters:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T030519Z" changeid="haruyama">
+        <seg>これらのアルゴリズムは2つのカウンタに依存する:</seg>
       </tuv>
     </tu>
     <tu>
@@ -34261,6 +34544,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>User Authentication</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T024237Z" changeid="haruyama">
+        <seg>ユーザ認証</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>User Authentication ............................................10
       5.1.</seg>
       </tuv>
@@ -34708,6 +34999,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>When an x509v3-ecdsa-sha2-* user
+   authentication method is being used, the structure of the
+   SSH_MSG_USERAUTH_REQUEST message should be:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T024739Z" changeid="haruyama">
+        <seg>x509v3-ecdsa-sha2-* ユーザ認証法を用いる場合, SSH_MSG_USERAUTH_REQUEST メッセージの構造は次のようでなければならない:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>When applicable, a field is also
    provided for a language tag [RFC3066].</seg>
       </tuv>
@@ -35024,6 +35325,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110829T041727Z" changeid="haruyama">
         <seg>セキュアシェルと共に AES-GCM を用いる場合, packet_length フィールドは 追加の認証されるデータ (additional authenticated data) として扱い平文としては扱われないようにする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When using ecdh_sha2_nistp256, each exponent used in the key exchange
+   must have 256 bits of entropy.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T031847Z" changeid="haruyama">
+        <seg>ecdh_sha2_nistp256 を用いる場合, 鍵交換時に利用するそれぞれの指数は 256 ビットのエントロピーを持たなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35487,12 +35797,31 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>[SSH-GCM] describes how AES Galois/Counter Mode is to be used in
+   Secure Shell.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T030523Z" changeid="haruyama">
+        <seg>[SSH-GCM] は, セキュアシェルでAES Galois/カウンタモードがどのように用いられるかを記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>[SSH-X509] defines two
    methods, x509v3-ecdsa-sha2-nistp256 and x509v3-ecdsa-sha2-nistp384,
    that are to be used for server and user authentication.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110929T080902Z" changeid="haruyama">
-        <seg>[SSH-X509] は 2つの方法x509v3-ecdsa-sha2-nistp256 と x509v3-ecdsa-sha2-nistp384 を定義している. これらはサーバとユーザの認証に利用できる.</seg>
+      <tuv lang="JA" changedate="20111001T024529Z" changeid="haruyama">
+        <seg>[SSH-X509] は 2つの方法 x509v3-ecdsa-sha2-nistp256 と x509v3-ecdsa-sha2-nistp384 を定義している. これらはサーバとユーザの認証に利用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>[SSH-X509] provides two
+   methods, x509v3-ecdsa-sha2-nistp256 and x509v3-ecdsa-sha2-nistp384,
+   that MUST be used to achieve this goal.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T024552Z" changeid="haruyama">
+        <seg>[SSH-X509] は2つの方法 x509v3-ecdsa-sha2-nistp256 と x509v3-ecdsa-sha2-nistp384 を提供しており, この目的を達成するためにこれらが用いられなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37012,6 +37341,40 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changedate="20110930T145928Z" changeid="haruyama">
         <seg>string    Sig_S  // 新しく確立された交換ハッシュのサーバの署名を含むオクテット文字列</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>string    public_key_algorithm_name  // x509v3-ecdsa-sha2-nistp256
+                                        // or x509v3-ecdsa-sha2-nistp384</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T024809Z" changeid="haruyama">
+        <seg>string    public_key_algorithm_name  // x509v3-ecdsa-sha2-nistp256
+                                        // ないし x509v3-ecdsa-sha2-nistp384</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>string    public_key_blob // X.509v3 certificate</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T024815Z" changeid="haruyama">
+        <seg>string    public_key_blob // X.509v3 証明書</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>string    service_name   // service name in US-ASCII</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T024759Z" changeid="haruyama">
+        <seg>string    service_name   // US-ASCII でのサービス名</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>string    user_name      // in ISO-10646 UTF-8 encoding</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T024751Z" changeid="haruyama">
+        <seg>string    user_name      // ISO-10646 UTF-8 エンコーディング</seg>
       </tuv>
     </tu>
     <tu>

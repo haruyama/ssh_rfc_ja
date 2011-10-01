@@ -1,0 +1,603 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                           K. Igoe
+Request for Comments: 6239                      National Security Agency
+Category: Informational                                         May 2011
+ISSN: 2070-1721
+
+
+          セキュアシェル (SSH) のための Suite B 暗号スイーツ
+
+概要
+
+   この文書は, セキュアシェルトランスポートプロトコルとセキュアシェル認証プロトコルの Suite B 準拠実装のアーキテクチャを記述する.  Suite B セキュアシェルは, 楕円曲線 Diffie-Hellman (ECDH) 鍵合意や, 楕円曲線デジタル署名アルゴリズム (ECDSA), Galios(ガロア)/カウンダーモードでの Advanced  Encryption Standard (AES-GCM), SHA-2 ファミリのハッシュの2つのメンバ (SHA-256 and SHA-384), X.509 証明書を利用する.
+
+このメモの位置づけ
+
+   This document is not an Internet Standards Track specification; it is
+   published for informational purposes.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Not all documents
+   approved by the IESG are a candidate for any level of Internet
+   Standard; see Section 2 of RFC 5741.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   http://www.rfc-editor.org/info/rfc6239.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Igoe                          Informational                     [Page 1]
+
+RFC 6239              Suite B Crypto Suites for SSH             May 2011
+
+
+Copyright Notice
+
+   Copyright (c) 2011 IETF Trust and the persons identified as the
+   document authors. 訳者: 春山征吾 <haruyama@unixuser.org>All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+目次
+
+   1イントロダクション ...............................................3
+   2. Suite B とセキュアシェル ........................................3
+      2.1. セキュリティ最小レベル (minLOS) ........................4
+      2.2. 電子署名と証明書 ........................4
+      2.3. 署名以外のプリミティブ ...................................5
+   3. セキュリティメカニズムの交渉と初期化 ...............6
+      3.1. アルゴリズムの交渉: SSH_MSG_KEXINIT .....................7
+   4. 鍵交換とサーバ認証 ..........................8
+      4.1. SSH_MSG_KEXECDH_INIT .......................................9
+      4.2. SSH_MSG_KEXECDH_REPLY ......................................9
+      4.3. 鍵と初期化ベクトルの導出 ..................10
+   5. ユーザ認証 ............................................10
+      5.1. 最初の SSH_MSG_USERAUTH_REQUEST メッセージ ....................10
+      5.2. 2 番目の SSH_MSG_USERAUTH_REQUEST メッセージ ...................11
+   6. SSH バイナリパケットの機密性とデータ完全性 .......12
+      6.1. Galois(ガロア)/カウンタモード .......................................12
+      6.2. データ完全性 ............................................12
+   7. 鍵の再生成 .......................................................12
+   8. セキュリティの考察 ........................................13
+   9. References .....................................................13
+      9.1. Normative References ......................................13
+      9.2. Informative References ....................................13
+
+
+
+
+
+
+
+
+
+
+
+
+Igoe                          Informational                     [Page 2]
+
+RFC 6239              Suite B Crypto Suites for SSH             May 2011
+
+
+1イントロダクション
+
+   この文書は, セキュアシェルトランスポートプロトコルとセキュアシェル認証プロトコルの Suite B 準拠実装のアーキテクチャを記述する.  Suite B セキュアシェルは, 楕円曲線 Diffie-Hellman (ECDH) 鍵合意や, 楕円曲線デジタル署名アルゴリズム (ECDSA), Galios(ガロア)/カウンダーモードでの Advanced  Encryption Standard (AES-GCM), SHA-2 ファミリのハッシュの2つのメンバ (SHA-256 and SHA-384), X.509 証明書を利用する.
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, RFC 2119 [RFC2119] で記述されているように解釈される. 
+
+2.  Suite B とセキュアシェル
+
+   Suite B の構成要素のそれぞれをセキュアシェル (SSH) にどのように統合するかについていくつかのRFCが記述された:
+
+     鍵交換アルゴリズム
+           ecdh-sha2-nistp256           [SSH-ECC]
+           ecdh-sha2-nistp384           [SSH-ECC]
+
+     サーバホスト鍵アルゴリズム
+           x509v3-ecdsa-sha2-nistp256   [SSH-X509]
+           x509v3-ecdsa-sha2-nistp384   [SSH-X509]
+
+     暗号化アルゴリズム (client_to_server と server_to_client の両方)
+           AEAD_AES_128_GCM             [SSH-GCM]
+           AEAD_AES_256_GCM             [SSH-GCM]
+
+     MAC アルゴリズム (client_to_server と server_to_client の両方)
+           AEAD_AES_128_GCM             [SSH-GCM]
+           AEAD_AES_256_GCM             [SSH-GCM]
+
+   Suite B では, 署名を検証するのに用いられる公開鍵証明書は, RFC5759 [SUITEBCERT] で指定された Suite B 公開鍵プロファイルに準拠していなければならない..
+
+   この文書の目的は, セキュアシェルの Suite B 準拠実装 (以後 "SecSh-B" と呼ばれる) へのガイダンスを提供するために, これらの文書のすべてを活用することだ.  SecSh-B はこの文書のガイダンスに従わなければならないが, この要求自体は, セキュアシェルの特定の実装が機密情報を保護する目的に適しているかを意味していないことに注意.  SecSh-B の実装は, そのような利用が許可される前に適切な機関によって検証されなければならない.
+
+
+
+Igoe                          Informational                     [Page 3]
+
+RFC 6239              Suite B Crypto Suites for SSH             May 2011
+
+
+   Suite B で利用される2つの楕円曲線は, それぞれ異なる2つの名前で文献に登場する.  わかりやすくするため, 以下に両方の名前を挙げる.
+
+      Curve        NIST name        SECG name     OID [SEC2]
+      ---------------------------------------------------------------
+      P-256        nistp256         secp256r1     1.2.840.10045.3.1.7
+      P-384        nistp384         secp384r1     1.3.132.0.34
+
+   これらの曲線の説明は, [NIST] や [SEC2] にある.
+
+   簡潔にするため, SHA-256 を用いる P-256 上の ECDSA を示すのに ECDSA-256 を利用する. また,  SHA-384 を用いる P-384 上の ECDSA を示すのに ECDSA-384 を利用する.
+
+2.1.  セキュリティ最小レベル (minLOS)
+
+   Suite B は 2つのレベルの暗号学的セキュリティを提供する. すなわち, 128-bit セキュリティ最小レベル (minLOS_128) と 192-bit セキュリティ最小レベル (minLOS_192) だ.  以下で見るように, ECDSA-256/384 署名アルゴリズムと対応する X.509v3 証明書は, 署名以外のプリミティブ(セキュアシェルの用語では, 鍵交換アルゴリズム, 暗号化アルゴリズム, メッセージ認証コード (MAC) アルゴリズム) とはいくぶん異なった取り扱いをされる.
+
+2.2.  電子署名と証明書
+
+   SecSh-B は, サーバ認証, ユーザ認証, X.509 証明書に ECDSA-256/384 を用いる.  [SSH-X509] は 2つの方法 x509v3-ecdsa-sha2-nistp256 と x509v3-ecdsa-sha2-nistp384 を定義している. これらはサーバとユーザの認証に利用できる.  以下の条件を満たす必要がある:
+
+   1) サーバは, [SSH-X509] に記述されている X.509v3 証明書を用いてホストにその公開鍵を共有しなければならない.  この公開鍵は, 必要に応じて ECDSA-256 か ECDSA-384 を用いるホストへサーバを認証するのに用いられなければならない(3節を参照).
+
+   2) ユーザ認証は, X.509v3 証明書で ECDSA-256/384 を用いる 公開鍵認証で始められなければならない (4節を参照).
+      追加のユーザ認証法が用いられてもよい. しかし, 証明書ベースの ECDSA 認証が正常に完了した後でのみ用いられなければならない.
+
+   3) X.509v3 証明書は, 2つの Suite B 電子署名(アルゴリズム), ECDSA-256 と ECDSA-384 のみを用いなければならない.
+
+   4) ECDSA-256 は, ECDSA-384 公開鍵を署名するのに用いられてはならない.
+
+
+
+Igoe                          Informational                     [Page 4]
+
+RFC 6239              Suite B Crypto Suites for SSH             May 2011
+
+
+   5) ECDSA-384 は, ECDSA-256 公開鍵を署名するのに用いられてもよい.
+
+   6) minLOS_192 の場合, すべての SecSh-B 実装は, ECDSA-384 署名を検証できなければならない.
+
+   7) minLOS_128 の場合, すべての SecSh-B 実装は ECDSA-256 署名を検証できなければならない. また, ECDSA-384 署名鍵を用いる認証局で発行される証明書を検証する必要が決して生じないと実装が完全に確認できない場合は, ECDSA-384 署名を検証できる必要がある.
+
+   8) minLOS_128 の場合, それぞれの SecSh-B サーバとそれぞれの SecSh-B ユーザは, 対応する X.509v3 証明書で ECDSA-256 署名鍵を持つか, 対応する X.509v3 証明書で ECDSA-384 鍵を持つか, その両方を持たなければならない.
+
+   9) minLOS_192 の場合, それぞれの SecSh-B サーバとそれぞれの SecSh-B ユーザは,対応する X.509v3 証明書で ECDSA-384 鍵を持たなければならない.
+
+   サーバ認証で用いられる署名アルゴリズムの選択は, SSH_MSG_KEXINIT パケット内の server_host_key_algorithms name-list で管理される (3.1 節を参照).  鍵交換とサーバ認証は, SSH_MSG_KEXECDH_REPLY パケットにより実施される (4 節を参照).  ユーザ認証は, SSH_MSG_USERAUTH_REQUEST メッセージにより実施される (5 節を参照).
+
+2.3.  署名以外のプリミティブ
+
+   この節は, 鍵合意プロトコル (kex アルゴリズム), 暗号化アルゴリズム, データ完全性アルゴリズム (MACアルゴリズム)にセキュリティ最小レベルの選択が課す制約をカバーする.  署名以外のアルゴリズムを表1に示すように2つのファミリに分割する.
+
+      +--------------+----------------------+----------------------+
+      |  Algorithm   |  Family 1            |  Family 2            |
+      +==============+======================+======================+
+      |  kex         |  ecdh-sha2-nistp256  |  ecdh-sha2-nistp384  |
+      +--------------+----------------------+----------------------+
+      |  encryption  |  AEAD_AES_128_GCM    |  AEAD_AES_256_GCM    |
+      +--------------+----------------------+----------------------+
+      |  MAC         |  AEAD_AES_128_GCM    |  AEAD_AES_256_GCM    |
+      +--------------+-----------------------+---------------------+
+
+        表 1.  SecSh-B の署名以外のアルゴリズムのファミリ
+
+
+
+
+
+
+Igoe                          Informational                     [Page 5]
+
+RFC 6239              Suite B Crypto Suites for SSH             May 2011
+
+
+   128ビットのセキュリティ最小レベルの場合:
+
+   o  署名以外のアルゴリズムは, Family 1 から排他的にか Family 2 から排他的にか, どちらかで取得しなければならない.
+
+   o  Family 1 か Family 2 の選択は, サーバのホスト鍵アルゴリズムの選択とは独立だ.
+
+   192ビットのセキュリティ最小レベルの場合:
+
+   o  署名以外のアルゴリズムは, すべて Family 2 から取得しなければならない.
+
+   この節で記述した制約のほとんどは, SSH_MSG_KEXINIT パケットで提供される kex_algorithm, encryption_algorithm, mac_algorithm name-list を厳しく制限することで達成可能だ.  詳細は 3.1 節を参照.
+
+3.  セキュリティメカニズムの交渉と初期化
+
+   [SSH-Tran] で記述されているように, サーバとクライアント間での SSH_MSG_KEXINIT の交換が, 鍵合意アルゴリズムや, MAC アルゴリズム, ホスト鍵アルゴリズム (サーバ認証アルゴリズム), 暗号化アルゴリズムのそれぞれで何が用いられるかを確立する.  この節は, セキュアシェルアルゴリズム交渉や, 鍵合意, サーバ認証, ユーザ認証で Suite B 構成要素がどのように用いられるかを記述する.
+
+   Suite B セキュアシェル接続の交渉と初期化は, 次のセキュアシェルメッセージで行なわれる (C->S はクライアントからサーバへのメッセージ, S->C はサーバからクライアントへのメッセージを意味する):
+
+      SSH_MSG_KEXINIT           C->S  クライアントが受け入れられるアルゴリズムのリストを含む.
+
+      SSH_MSG_KEXINIT           S->C  サーバが受け入れられるアルゴリズムのリストを含む.
+
+      SSH_MSG_KEXECDH_INIT      C->S  クライアントの一時楕円曲線 Diffie-Hellman 鍵を含む.
+
+      SSH_MSG_KEXECDH_REPLY     S->C  サーバの ECDSA 公開署名鍵を持つ証明書, サーバの一時 ECDH contribution, 交換ハッシュ値で新しく作成されたECDSA 電子署名を含む.
+
+
+
+
+Igoe                          Informational                     [Page 6]
+
+RFC 6239              Suite B Crypto Suites for SSH             May 2011
+
+
+      SSH_MSG_USERAUTH_REQUEST  C->S  ユーザ名と, ユーザが要求するサービス名, クライアントが利用を望む認証法の名前, メソッド固有のフィールドを含む.
+
+   鍵交換を処理する途中でなければ, どちらの側も SSH_MSG_KEXINIT パケットを送ることで鍵の再交換を開始できる.  再交換で交換されるすべてのパケットは, 再交換が終わるまで現在の鍵を用いて暗号化され認証される. 再交換が終わると SSH_MSG_NEWKEYS が 新しく確立した鍵への変更を開始する.  それ以外は, 再交換プロトコルは最初の鍵交換プロトコルと同一だ.  [SSH-Tran] の 9節を参照.
+
+3.1.  アルゴリズムの交渉: SSH_MSG_KEXINIT
+
+   ユーザ認証法をのぞくすべての(アルゴリズムの)選択は, クライアントとサーバ間での SSH_MSG_KEXINIT の交換で決定される.
+   [SSH-Tran] で記述されているように, SSH_MSG_KEXINIT パケットは次の構造を持つ.
+
+      byte         SSH_MSG_KEXINIT
+      byte[16]     cookie (random bytes)
+      name-list    kex_algorithms
+      name-list    server_host_key_algorithms
+      name-list    encryption_algorithms_client_to_server
+      name-list    encryption_algorithms_server_to_client
+      name-list    mac_algorithms_client_to_server
+      name-list    mac_algorithms_server_to_client
+      name-list    compression_algorithms_client_to_server
+      name-list    compression_algorithms_server_to_client
+      name-list    languages_client_to_server
+      name-list    languages_server_to_client
+      boolean      first_kex_packet_follows
+      uint32       0 (reserved for future extension)
+
+   SSH_MSG_KEXINIT の name-list は, 2節で与えガイダンスに従って, 署名以外のアルゴリズムとホスト鍵アルゴリズムの選択を制限するのに利用できる.  表 2 は, 署名以外のアルゴリズムの3つの受け入れられる name-list を示す.  これらのオプションの1つが利用されなければならない.
+
+
+
+
+
+
+
+
+
+Igoe                          Informational                     [Page 7]
+
+RFC 6239              Suite B Crypto Suites for SSH             May 2011
+
+
+       ファミリー 1 のみ (min_LOS 128):
+          kex_algorithm name_list         := { ecdh_sha2_nistp256 }
+          encryption_algorithm name_list  := { AEAD_AES_128_GCM   }
+          mac_algorithm name_list         := { AEAD_AES_128_GCM   }
+
+       ファミリー 2 のみ (min_LOS 128 or 192):
+          kex_algorithm name_list         := { ecdh_sha2_nistp384 }
+          encryption_algorithm name_list  := { AEAD_AES_256_GCM   }
+          mac_algorithm name_list         := { AEAD_AES_256_GCM   }
+
+       ファミリー 1 もしくはファミリー 2 (min_LOS 128):
+          kex_algorithm name_list         := { ecdh_sha2_nistp256,
+                                               ecdh_sha2_nistp384 }
+          encryption_algorithm name_list  := { AEAD_AES_128_GCM,
+                                               AEAD_AES_256_GCM   }
+          mac_algorithm name_list         := { AEAD_AES_128_GCM,
+                                               AEAD_AES_256_GCM   }
+
+           表 2.  受け入れられる署名以外アルゴリズムの name-list
+
+   表 3 は, サーバホスト鍵アルゴリズムの3つの受け入れられる name-list を示す.  これらのオプションの1つが利用されなければならない.
+
+            ECDSA-256 のみ (min_LOS 128):
+               server_host_key_algorithms name_list :=
+                                { x509v3-ecdsa-sha2-nistp256 }
+
+            ECDSA-384 のみ (min_LOS 128 or 192):
+               server_host_key_algorithms name_list :=
+                                { x509v3-ecdsa-sha2-nistp384 }
+
+            ECDSA-256 もしくは ECDSA-384 (min_LOS 128):
+               server_host_key_algorithms name_list :=
+                                { x509v3-ecdsa-sha2-nistp256,
+                                  x509v3-ecdsa-sha2-nistp384 }
+
+          表 3.  受け入れられるサーバホスト鍵アルゴリズムの name-list
+
+4.  鍵交換とサーバ認証
+
+   SecSh-B は, クライアントとサーバの間で共有の秘密の値を確立するのに ECDH を用いる.  サーバ公開署名 ECDSA 鍵を含む X.509v3 証明書と, 新しく確立した共有秘密値から導出される交換ハッシュに対する ECDSA 署名が, クライアントに対してサーバを認証するのに用いられる.
+
+
+
+
+
+
+Igoe                          Informational                     [Page 8]
+
+RFC 6239              Suite B Crypto Suites for SSH             May 2011
+
+
+4.1.  SSH_MSG_KEXECDH_INIT
+
+   セキュアシェルで用いられる鍵交換は, SSH_MSG_KEXINIT パケットで交換される name-list で決定される.  Suite B では, 次の鍵交換法のうち1つが, 共有秘密値 (SSV) を生成するのに用いられなければならない.
+
+      ecdh-sha2-nistp256      SHA-256 を用いる nistp256 の一時-一時楕円曲線 Diffie-Hellman
+
+      ecdh-sha2-nistp384      SHA-384 を用いる nistp384 の一時-一時楕円曲線 Diffie-Hellman
+
+   また, SSH_MSG_KEXECDH_INIT メッセージの形式は以下だ:
+
+      byte      SSH_MSG_KEXDH_INIT
+
+      string    Q_C    // ECDH 交換に対するクライアントの一時 contribution. オクテット文字列としてエンコードされる
+
+   楕円曲線のポイント Q_C のオクテット文字列としてのエンコーディングは, [SEC1] の 2.3.3 節で指定されている.
+
+4.2.  SSH_MSG_KEXECDH_REPLY
+
+   SSH_MSG_KEXECDH_REPLY は, ECDH に対するサーバの contribution や サーバの公開署名鍵,  新しく確立した共有秘密値から導出される交換ハッシュに対する ECDSA 署名が含まれる.  3.1 節で述べたように, SecSh-B では, サーバのホスト鍵アルゴリズムは, x509v3-ecdsa-sha2-nistp256 か x509v3-ecdsa-sha2-nistp384 でなければならない.
+
+   SSH_MSG_KEXECDH_REPLY の形式は以下だ:
+
+      byte      SSH_MSG_KEXECDH_REPLY
+
+      string    K_S    // サーバの ECDSA 公開ホスト鍵を含む X.509v3 証明書をエンコードした文字列
+
+      string    Q_S    // ECDH 交換に対するサーバの一時 contribution. オクテット文字列としてエンコードされる
+
+      string    Sig_S  // 新しく確立された交換ハッシュのサーバの署名を含むオクテット文字列
+
+
+
+
+
+
+Igoe                          Informational                     [Page 9]
+
+RFC 6239              Suite B Crypto Suites for SSH             May 2011
+
+
+   X.509v3 証明書の構造とエンコーディングの詳細は, [SSH-X509] の 2節にある.  楕円曲線のポイント Q_C のオクテット文字列としてのエンコーディングは [SEC1] の 2.3.3 節で指定されている. ECDSA 署名 Sig_S のオクテット文字列としてのエンコーディングは, [SSH-ECC] の 3.1.2 節に記述されている.
+
+4.3.  鍵と初期化ベクトルの導出
+
+   [SSH-Tran] で指定されているように, セキュアシェルで必要な暗号化鍵と初期化ベクトルは, 鍵合意アルゴリズムで指定されたハッシュ関数 (ecdh-sha2-nistp256 では SHA-256, ecdh-sha2-nistp384 では SHA-384) を用いて SSV から直接導出される.
+   クライアントからサーバへのチャンネルとサーバからクライアントへのチャンネルは, 独立した鍵と初期化ベクトルを持つ.  これらの鍵は, 新しい SSV を生成する再交換が行なわれるまでは一定の保持される.
+
+5.  ユーザ認証
+
+   セキュアシェルトランスポート層プロトコルはサーバをホストに認証するが, ユーザ(ないしユーザのホスト)をサーバに認証しない.  この理由から, 2.2 節の 条件 (2) は, ECDSA-256/384 署名と X.509v3 証明書を用いて SecSh-B のすべてのユーザが認証されなければならないことを要求する.  [SSH-X509] は2つの方法 x509v3-ecdsa-sha2-nistp256 と x509v3-ecdsa-sha2-nistp384 を提供しており, この目的を達成するためにこれらが用いられなければならない.  minLOS 128 の場合, これらのどちらかが利用できる. minLOS 192 の場合, x509v3-ecdsa-sha2-nistp384 が利用されなければならない.
+
+5.1.  最初の SSH_MSG_USERAUTH_REQUEST メッセージ
+
+   ユーザの公開鍵は, SSH_MSG_USERAUTH_REQUEST メッセージを用いてサーバに送られる.  x509v3-ecdsa-sha2-* ユーザ認証法を用いる場合, SSH_MSG_USERAUTH_REQUEST メッセージの構造は次のようでなければならない:
+
+      byte      SSH_MSG_USERAUTH_REQUEST
+
+      string    user_name      // ISO-10646 UTF-8 エンコーディング
+
+      string    service_name   // US-ASCII でのサービス名
+
+      string    "publickey"
+
+      boolean   FALSE
+
+
+
+
+
+
+Igoe                          Informational                    [Page 10]
+
+RFC 6239              Suite B Crypto Suites for SSH             May 2011
+
+
+      string    public_key_algorithm_name  // x509v3-ecdsa-sha2-nistp256
+                                        // ないし x509v3-ecdsa-sha2-nistp384
+
+      string    public_key_blob // X.509v3 証明書
+
+   X.509v3 証明書の構造とエンコーディングの詳細は, [SSH-X509] の 2節にある.
+
+5.2.  2 番目の SSH_MSG_USERAUTH_REQUEST メッセージ
+
+   サーバが, SSH_MSG_USERAUTH_PK_OK メッセージで要求メッセージに対して応答したら, クライアントは2番目の SSH_MSG_USERAUTH_REQUEST を用いて実際の認証を行なう.
+
+      byte      SSH_MSG_USERAUTH_REQUEST
+
+      string    user_name      // ISO-10646 UTF-8 エンコーディング
+
+      string    service_name   // US-ASCII でのサービス名
+
+      string    "publickey"
+
+      boolean   TRUE
+
+      string    public_key_algorithm_name  // x509v3-ecdsa-sha2-nistp256
+                                        // ないし x509v3-ecdsa-sha2-nistp384
+
+      string    Sig_U
+
+   署名のフィールド Sig_U は, セッション識別子やユーザ名, サービス名, 公開鍵アルゴリズム名, ユーザの公開署名鍵を含むいくつかの値の連結の ECDSA 署名だ.  ユーザの公開署名鍵は, 最初の SSH_MSG_USERAUTH_REQUEST メッセージで送られる X.509v3 証明書で伝達される署名鍵でなければならない.  ECDSA 署名 Sib_U のオクテット文字列としてのエンコーディングは, [SSH-ECC] の 3.1.2 節で記述されている.
+
+   サーバは, 追加の認証が必要なければ SSH_MSG_USERAUTH_SUCCESS で, 認証要求が失敗したり追加の認証が必要な場合は SSH_MSG_USERAUTH_FAILURE で応答しなければならない.
+
+
+
+
+
+
+
+
+
+Igoe                          Informational                    [Page 11]
+
+RFC 6239              Suite B Crypto Suites for SSH             May 2011
+
+
+6.  SSH バイナリパケットの機密性とデータ完全性
+
+   セキュアシェルは, 独自のバイナリパケット構造を用いてクライアントとサーバの間でデータを転送する.  SSH バイナリパケット構造は, 基底のデータチャンネルのパケットの構造から独立だ.
+   各バイナリパケットの内容とそのヘッダの一部は暗号化され, それぞれのパケットは独自のメッセージ認証コードで認証される.  AES GCM は, パケットの暗号化とデータ完全性を保証する 16-オクテットの認証タグの形成の両方を行なう.
+
+6.1.  Galois(ガロア)/カウンタモード
+
+   [SSH-GCM] は, セキュアシェルでAES Galois/カウンタモードがどのように用いられるかを記述している.  Suite B SSH 実装は, 機密性を提供しデータ完全性を保証するため, AEAD_AES_GCM_128 をサポートしなければならない. また, AEAD_AES_GCM_256 をサポートする必要がある.  他の機密性やデータ完全性アルゴリズムは許可されない.
+
+   これらのアルゴリズムは2つのカウンタに依存する:
+
+      呼び出し(Invocation) カウンタ: 64-ビット整数. SSH バイナリパケットの処理のために AES-GCM が呼び出されるたびに増加.  呼び出しカウンタの初期値は, SSH 初期化ベクトルで決定される.
+
+      ブロックカウンタ: 32-ビット整数. 新しい SSH バイナリパケットの開始字に 1 に設定され, データの16-オクテットのブロックが処理されるごとに増加.
+
+   これらのカウンタが適切に実装されていることの保証は, システムのセキュリティにとって重大だ.  フォーマットや初期化, これらのカウンタの利用法, 初期化ベクトルと SSV との関係についての詳細は [SSH-GCM] を参照.
+
+6.2.  データの完全性
+
+   [SSH-GCM] で指定されているように, 認証タグの 16 オクテットすべてが SSH バイナリパケットの SSH データ完全性の値として用いられなければならないことを Suite B が要求することに注意すること.
+
+7.  鍵の再生成
+
+   セキュアシェルは, サーバとクライアントのどちらもがセキュアシェル接続の鍵の再生成を要求できる.  Suite B は, この鍵の再生成がどれくらい頻繁に行なわれるかの制限を設けていない. しかし鍵の再生成時に採用される暗号スイートを変更してはならないことを要求する.
+
+
+
+
+
+Igoe                          Informational                    [Page 12]
+
+RFC 6239              Suite B Crypto Suites for SSH             May 2011
+
+
+8.  セキュリティの考察
+
+   ecdh_sha2_nistp256 を用いる場合, 鍵交換時に利用するそれぞれの指数は 256 ビットのエントロピーを持たなければならない.  ecdh_sha2_nistp384 を用いる場合, 鍵交換時に利用するそれぞれの指数は 384 ビットのエントロピーを持たなければならない.  [SSH-Arch]のセキュリティの考察が適用される.
+
+9.  References
+
+9.1.  Normative References
+
+   [RFC2119]    Bradner, S., "Key words for use in RFCs to Indicate
+                Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [SUITEBCERT] Solinas, J. and L. Zieglar, "Suite B Certificate and
+                Certificate Revocation List (CRL) Profile", RFC 5759,
+                January 2010.
+
+   [SSH-Arch]   Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+                Protocol Architecture", RFC 4251, January 2006.
+
+   [SSH-Tran]   Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+                Transport Layer Protocol", RFC 4253, January 2006.
+
+   [SSH-ECC]    Stebila, D. and J. Green, "Elliptic Curve Algorithm
+                Integration in the Secure Shell Transport Layer", RFC
+                5656, December 2009.
+
+   [SSH-GCM]    Igoe, K. and J. Solinas, "AES Galois Counter Mode for
+                the Secure Shell Transport Layer Protocol", RFC 5647,
+                August 2009.
+
+   [SSH-X509]   Igoe, K. and D. Stebila, "X.509v3 Certificates for
+                Secure Shell Authentication", RFC 6187, March 2011.
+
+9.2.  Informative References
+
+   [NIST]       National Institute of Standards and Technology, "Digital
+                Signature Standard (DSS)", Federal Information
+                Processing Standards Publication 186-3.
+
+   [SEC1]       Standards for Efficient Cryptography Group, "Elliptic
+                Curve Cryptography", SEC 1 v2.0, May 2009,
+                <http://www.secg.org/download/aid-780/sec1-v2.pdf>.
+
+
+
+
+
+
+Igoe                          Informational                    [Page 13]
+
+RFC 6239              Suite B Crypto Suites for SSH             May 2011
+
+
+   [SEC2]       Standards for Efficient Cryptography Group, "Recommended
+                Elliptic Curve Domain Parameters", SEC 2 v1.0, September
+                2000.  <http://www.secg.org/download/aid-386/
+                sec2_final.pdf>.
+
+Author's Address
+
+   Kevin M. Igoe
+   NSA/CSS Commercial Solutions Center
+   National Security Agency
+
+   EMail: kmigoe@nsa.gov
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Igoe                          Informational                    [Page 14]
+
