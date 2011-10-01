@@ -1,0 +1,468 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                      M. Wasserman
+Request for Comments: 6242                        Painless Security, LLC
+Obsoletes: 4742                                                June 2011
+Category: Standards Track
+ISSN: 2070-1721
+
+
+           Using the NETCONF Protocol over Secure Shell (SSH)
+
+概要
+
+   この文書は, セキュアシェル (SSH)のサブシステムとして SSH のセッション内で Network Configuration Protocol (NETCONF) を呼び出し実行する方法を記述する.  この文書は RFC 4742 を廃止する.
+
+このメモの位置づけ
+
+   This is an Internet Standards Track document.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in Section 2 of RFC 5741.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   http://www.rfc-editor.org/info/rfc6242.
+
+Copyright Notice
+
+   Copyright (c) 2011 IETF Trust and the persons identified as the
+   document authors. 訳者: 春山征吾 <haruyama@unixuser.org>All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+
+
+
+
+Wasserman                    Standards Track                    [Page 1]
+
+RFC 6242                    NETCONF over SSH                   June 2011
+
+
+目次
+
+   1導入 . . . . . . . . . . . . . . . . . . . . . . . . .  2
+   2.  要件に関する用語 . . . . . . . . . . . . . . . . . . .  2
+   3.  SSH 上での NETCONF の起動 . . . . . . . . . . . . . . . . . .  2
+     3.1.  機能の交換 . . . . . . . . . . . . . . . . . .  3
+   4.  SSH 上での NETCONF の利用 . . . . . . . . . . . . . . . . . . . .  4
+     4.1.  フレーミングプロトコル . . . . . . . . . . . . . . . . . . . . .  5
+     4.2.  チャンクされたフレーミングメカニズム . . . . . . . . . . . . . . . .  5
+     4.3.  メッセージ終了文字列を用いるフレーミングメカニズム . . . . . . . . . . . . .  7
+   5.  NETCONF サブシステムの終了 . . . . . . . . . . . . . . . .  8
+   6.  セキュリティの考察  . . . . . . . . . . . . . . . . . . .  8
+   7.  IANA の考察  . . . . . . . . . . . . . . . . . . . . .  9
+   8.  Acknowledgements . . . . . . . . . . . . . . . . . . . . . . . 10
+   9.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+     9.1.  Normative References . . . . . . . . . . . . . . . . . . . 10
+     9.2.  Informative References . . . . . . . . . . . . . . . . . . 10
+   Appendix A.  RFC 4742 からの変更点 . . . . . . . . . . . . . . . . 11
+
+1イントロダクション
+
+   NETCONF プロトコル [RFC6241] は, ネットワーク機器の設定を管理するのに使われる XML ベースのプロトコルだ.  NETCONF は セッション層とトランスポート独立に定義されており, 複数のセッション層とトランスポートプロトコルへのマッピングが可能だ.  この文書は, SSH トランスポートプロトコル [RFC4253] 上のSSH コネクションプロトコル [RFC4254] を用いてセキュアシェル (SSH) のセッション中で NETCONFをどのように利用できるかを定義する. このマッピングで, ユーザやアプリケーションによるSSHセッションから NETCONF を実行できるようになる.
+
+   この文書は NETCONF メッセージが SSH 接続上でどのように送られるかの具体例を与えるが, このトランスポートの利用は以下の例で示すメッセージに制限されない.  このトランスポートは, 任意の NETCONF メッセージに利用できる.
+
+2.  要件に関する用語
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, RFC 2119 [RFC2119] で記述されているように解釈される. 
+
+3.  SSH 上での NETCONF の起動
+
+   SSH上でNETCONFを実行するのに, クライアントはまずSSHトランスポート接続をSSHトランスポートプロトコルを用いて確立し, SSH クライアントと SSH サーバはメッセージ完全性と暗号化のための鍵を交換する.  クライアントは SSH 認証プロトコル [RFC4252] に記述されているようにユーザを認証するため "ssh-userauth" サービスを起動する.
+
+
+
+Wasserman                    Standards Track                    [Page 2]
+
+RFC 6242                    NETCONF over SSH                   June 2011
+
+
+    ユーザが認証に成功したら, クライアントは SSHコネクションプロトコルとして知られている "ssh-connection" サービスを起動する.
+
+   SSH 実装から提供されるユーザ名は, NETCONF ユーザ名として変更なしで NETCONF メッセージに利用できる.  このユーザ名が, NETCONF のユーザ名に対する要件 [RFC6241] を満していない, つまり ユーザ名が XML で表現できない場合は, SSH のセッションは中止されなければならない.  SSH サーバで行なわれる SSH クライアントの認証された識別情報に対して適用される変換 (例えば, 認証サービスによるものやシステムアカウントに対するマッピング)は, この文書の範囲外だ.
+
+   ssh-connection サービスが確立したら, クライアントは SSHのセッションとなる "session" タイプのチャンネルを開始する.
+
+   SSHのセッションが確立したら, NETCONF クライアントは, "netconf" SSHサブシステムとして NETCONF を起動する.  サブシステムのサポートは,SSH バージョン 2 (SSHV2) の機能で, SSHv1 には含まれていない.  SSHのサブシステムとして NETCONFを実行すると, シェルプロンプトをスクリプトが認識する必要や (シェルの起動時に送られるシステムメッセージのような)余計な情報をスクリプトがスキップする必要がなくなる.
+
+   NETCONF のトラフィックを容易に識別しファイアウォールや他のネットワークデバイスでフィルタするために, NETCONF サーバは, IANA に割り当てられた TCP ポート 830 を用いて SSH のセッションが確立された場合のみ "netconf" SSH サブシステムへのアクセスを提供するのをデフォルトとしなければならない.
+   サーバは, 他のポート上の netconf SSH サブシステムへのアクセス許可を設定可能にする必要がある.
+
+   ユーザ(やアプリケーション)は, IANAに割り当てられたポート上の SSH サブシステムとして NETCONF を, 以下のコマンドラインを用いて起動できる.
+
+   [user@client]$ ssh -s server.example.org -p 830 netconf
+
+   注意: -s オプションは, SSHのサブシステムとしてコマンド("netconf")を起動させる.
+
+3.1.  機能の交換
+
+   [RFC6241] で指定されているように, NETCONF サーバは, NETCONFのセッションが確立したらすぐに <hello> 要素を含む XML 文書を送ってその機能を示さなければならない.  NETCONF クライアントはこのメッセージをパースして, どの NETCONF 機能がサーバでサポートされているかを判断できる.
+
+
+
+
+
+Wasserman                    Standards Track                    [Page 3]
+
+RFC 6242                    NETCONF over SSH                   June 2011
+
+
+   [RFC6241] で述べられているように, NETCONF クライアントも NETCONF サーバに NETCONF クライアントの機能を示すために <hello> 要素を含む XML 文書を送らなければならない.  <hello> 要素を含む文書は, NETCONF セッションが確立したあとに NETCONF クライアントが送る最初の XML 文書でなければならない.
+
+   以下で機能の交換の例を示す.  NETCONF クライアントから送られるメッセージには "C:" を, NETCONF サーバから送られるメッセージには "S:" を付けている.
+
+   S: <?xml version="1.0" encoding="UTF-8"?>
+   S: <hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   S:   <capabilities>
+   S:     <capability>
+   S:       urn:ietf:params:netconf:base:1.1
+   S:     </capability>
+   S:     <capability>
+   S:       urn:ietf:params:ns:netconf:capability:startup:1.0
+   S:     </capability>
+   S:   </capabilities>
+   S:   <session-id>4</session-id>
+   S: </hello>
+   S: ]]>]]>
+
+   C: <?xml version="1.0" encoding="UTF-8"?>
+   C: <hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   C:   <capabilities>
+   C:     <capability>
+   C:       urn:ietf:params:netconf:base:1.1
+   C:     </capability>
+   C:   </capabilities>
+   C: </hello>
+   C: ]]>]]>
+
+   例では <hello> メッセージの NETCONF サーバの送信に続いて NETCONF クライアントのメッセージが続いているが, NETCONF サブシステムが開始されたらすぐに, おそらく同時に, どちらの側からもメッセージが送られる.
+
+4.  SSH 上での NETCONF の利用
+
+   SSHセッション上の NETCONF は, NETCONF クライアントと NETCONF サーバの完全な XML 文書の交換で構成される.  セッションが確立され機能が交換されたら, NETCONF クライアントは <rpc> 要素を含む 完全な XML 文書をサーバに送る. そして NETCONF サーバは <rpc-reply> 要素を含む完全な XML 文書で応答する.
+
+
+
+
+Wasserman                    Standards Track                    [Page 4]
+
+RFC 6242                    NETCONF over SSH                   June 2011
+
+
+4.1.  フレーミングプロトコル
+
+   この文書の以前のバージョンは, メッセージの分割子として文字列 "]]>]]>" を用いていた. これは整形された XML 文書では出てこないという仮定に基づいていた.  しかし, この仮定は正しくなかった.  これは, 正当に XML 属性やコメントや処理命令に出現する可能性がある.  この問題を解決し同時に既存の実装と互換するため, この文書は次のフレーミングプロトコルを定義する.
+
+   <hello>  メッセージは, 文字列 ]]>]]> が後に続かなければならない.  <hello> メッセージを受信したら, 受け取ったピアの SSH トランスポート層は Messages 層に <hello> メッセージを概念的に渡す.  :base:1.1 機能が両方のピアで告知されていたら, チャンクされたフレーミングメカニズム (4.2 節参照) が残りの NETCONF セッションで用いられる.  そうでなければ, 古いメッセージ終了ベースのメカニズム (4.3 節参照) が用いられる.
+
+4.2.  チャンクされたフレーミングメカニズム
+
+   このメカニズムは, チャンクされたフレーミングを用いてすべての NETCONF メッセージをエンコードする.
+   具体的には, メッセージは ABNF [RFC5234] の rule Chunked-Message に従う:
+
+        Chunked-Message = 1*chunk
+                          end-of-chunks
+
+        chunk           = LF HASH chunk-size LF
+                          chunk-data
+        chunk-size      = 1*DIGIT1 0*DIGIT
+        chunk-data      = 1*OCTET
+
+        end-of-chunks   = LF HASH HASH LF
+
+        DIGIT1          = %x31-39
+        DIGIT           = %x30-39
+        HASH            = %x23
+        LF              = %x0A
+        OCTET           = %x00-FF
+
+   chunk-size フィールドは, chunk-data のオクテット数を示す10進数の文字列だ.  先頭のゼロは禁止されている. また 許可される最大の chunk-size の値は, 4294967295 だ.
+
+
+
+
+
+
+
+
+Wasserman                    Standards Track                    [Page 5]
+
+RFC 6242                    NETCONF over SSH                   June 2011
+
+
+   例として, メッセージ:
+
+       <rpc message-id="102"
+            xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+         <close-session/>
+       </rpc>
+
+   は, 以下のようにエンコードされる ('\n' はラインフィード文字の可視表現として用いる):
+
+   C:  \n#4\n
+   C:  <rpc
+   C:  \n#18\n
+   C:   message-id="102"\n
+   C:  \n#79\n
+   C:       xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">\n
+   C:    <close-session/>\n
+   C:  </rpc>
+   C:  \n##\n
+
+   概念的には, SSH トランスポート層は, Messages 層から送られたメッセージをエンコードし, SSH チャンエルから受信したメッセージを Messages 層に送る前にデコードする.
+
+   チャンクされたフレーミングメカニズムの例ではすべてのラインフィードを示している. ただし, フレーミングメカニズムの一部としてはラインフィードは利用されていない.  SSH のトランスポートは XML の内容を解釈しないので, XML 特有のオウプションのラインフィードについて関知しないことに注意.
+
+   上記で引用した2番目と3番目のチャンクでは, それぞれの行はラインフィードで終端されている.  (最終行を覗く)すべての XML の行で, この例ではラインフィードを chunk-data の一部分として扱い chunk-size に含めている.
+
+   このメッセージの <rpc> の終了タグの後にラインフィード文字がないことに注意.  end-of-chunks の最初に必要なラインフィードが, メッセージの最後の '>' 文字にすぐに続いている.
+
+   chunk-size と chunk-size の値がそれぞれ不正だったり, デコードの処理でエラーが起きたら, 対応する SSH チャンネルを閉じて NETCONF セッションをピアは終了させなければならない.  実装は, バッファオーバーランに対して脆弱でないよう保証しなければならない.
+
+
+
+
+
+
+
+Wasserman                    Standards Track                    [Page 6]
+
+RFC 6242                    NETCONF over SSH                   June 2011
+
+
+4.3.  メッセージ終了文字列を用いるフレーミングメカニズム
+
+   このメカニズムは, この文書の以前のバージョンの実装との後方互換性のために存在する.  リモートのピアがチャンクされたエンコーディングをサポートするベースプロトコルを告知しない場合, つまり NETCONF 実装が :base:1.0 のみをサポートする場合にのみ用いられる.
+
+   このメカニズムが利用される場合, 特殊な文字列, ]]>]]> を NETCONF 交換でのそれぞれの XML文書の後で NETCONF クライアントも NETCONF サーバも送らなければならない.  概念的には, SSH トランスポート層は, Messages 層に ]]>]]> の間のすべてのデータを渡す.
+
+   後方互換なメッセージ終了フレーミングを用いて設定情報の集合を取得する SSH セッション上の NETCONF は次のようになる:
+
+   C: <?xml version="1.0" encoding="UTF-8"?>
+   C: <rpc message-id="105"
+   C: xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   C:   <get-config>
+   C:     <source><running/></source>
+   C:     <config xmlns="http://example.com/schema/1.2/config">
+   C:      <users/>
+   C:     </config>
+   C:   </get-config>
+   C: </rpc>
+   C: ]]>]]>
+
+   S: <?xml version="1.0" encoding="UTF-8"?>
+   S: <rpc-reply message-id="105"
+   S: xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+   S:   <config xmlns="http://example.com/schema/1.2/config">
+   S:     <users>
+   S:       <user><name>root</name><type>superuser</type></user>
+   S:       <user><name>fred</name><type>admin</type></user>
+   S:       <user><name>barney</name><type>admin</type></user>
+   S:     </users>
+   S:   </config>
+   S: </rpc-reply>
+   S: ]]>]]>
+
+
+
+
+
+
+
+
+
+Wasserman                    Standards Track                    [Page 7]
+
+RFC 6242                    NETCONF over SSH                   June 2011
+
+
+5.  NETCONF サブシステムの終了
+
+   NETCONF の終了は, <close-session> 操作を用いて行なわれる.
+   NETCONF サーバは,  NETCONF クライアントからのメッセージを受け取った順に処理する.  NETCONF サーバが <close-session> 操作を処理する場合は, NETCONF サーバは応答し SSH のセッションチャンネルを終了することになる.  NETCONF サーバは, <close-session> 操作の後で受け取ったすべての NETCONF メッセージを処理してはならない.
+
+   4.2 節で利用した例に続いて, 既存の NETCONF サブシステムを終了する例は以下だ:
+
+   C: \n#140\n
+   C: <?xml version="1.0" encoding="UTF-8"?>\n
+   C: <rpc message-id="106"\n
+   C:      xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">\n
+   C:   <close-session/>\n
+   C: </rpc>
+   C: \n##\n
+
+   S: \n#139\n
+   S: <?xml version="1.0" encoding="UTF-8"?>\n
+   S: <rpc-reply id="106"\n
+   S:            xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">\n
+   S:   <ok/>\n
+   S: </rpc-reply>
+   S: \n##\n
+
+6.  セキュリティの考察
+
+   NETCONF は, 設定や状態の情報にアクセスし, 設定情報を変更する. このため, このプロトコルにアクセスする能力は, NETCONF サーバの設定や状態を閲覧したり NETCONF サーバの設定を変更する権限のあるユーザやシステムに制限される必要がある.
+
+   SSH サーバの識別情報は, パスワードベースの認証データや設定や状態のデータを SSH サーバに送ったり SSH サーバから受け取ったりする前に, ローカルなポリシーに基づいて SSH クライアントが検証し認証されなければならない.  SSH クライアントの識別情報も, 設定や状態の情報を SSH クライアントに送ったり SSH クライアントから受け取ったりする前に, 受け取った SSH クライアントの要求が正当なものであることを保証するために, ローカルなポリシーに基づいて, SSH サーバにより検証し認証されなければならない.  クライアントもサーバも, 未知の, もしくは, 予期しない, 不正解な相手側の識別情報による SSH 接続上の NETCONF を確立してはならない.
+
+
+
+
+Wasserman                    Standards Track                    [Page 8]
+
+RFC 6242                    NETCONF over SSH                   June 2011
+
+
+   設定や状態のデータは, ユーザ名やセキュリティ鍵などの重要な情報を含む場合がある.  それゆえ, NETCONF は, データの秘密性に対して強い暗号化を提供する通信チャンネルを要求する.  この文書は, 強い暗号化と認証のサポートを提供する SSH マッピング上の NETCONF を定義する.
+
+   この文書は, この目的のために IANA に割り当てられた特定の TCP ポートのみで "netconf" SSH サブシステムへのアクセスを許すのをデフォルトとするよう SSH サーバに要求する.  これは, SSH トラフィック上の NETCONF を, ファイアウォールや他のネットワークノードで容易の識別しフィルタするのを可能にする.  しかし, SSH トラフィック上の NETCONFを攻撃者もより容易に識別できるようになる.
+
+   この文書は, 他のポートでの "netconf" SSH サブシステムへのアクセスを SSH サーバが設定可能にすることも推奨する.  ファイアウォールやネットワークデバイスの設定を対応して変更することなしにこの設定項目を利用すると, "netconf" SSH サブシステムへのアクセスを得ようとする ファイアウォールや他の管理境界の外にあるノードの接続に意図しない影響を与える可能性がある.
+
+   RFC 4742 は, メッセージ終了 (EOM) 文字列, ]]>]]>, が整形された XML 文書に出てこないことを仮定していたが, これは間違いだった.  EOM 文字列は, 操作の問題を引き起す可能性がある. また, 意図的に送信さらた RPC メッセージよって攻撃を受ける可能性がある.  しかし, 関連する脅威は非常に高くはないと信じられている.  この文書は, 既存の実装との非互換を避けるために, 最初の <hello> メッセージで EOM 文字列をまだ利用している.  両方のピアが base:1.1 機能を実装していれば, インジェクション攻撃を避けるために, 残りの NETCONF セッションでは適切なフレーミングプロトコル (チャンクされたフレーミングメカニズム; 4.2 節参照) が用いられる.
+
+7.  IANA の考慮
+
+   この文書の以前のバージョン, RFC 4742 に基づき, IANA は SSH セッション上の NETCONF のデフォルトのポートとして TCP ポート 830 番を割り当てた.
+
+   IANA は [RFC4250] で定義された SSH Subsystem Name として "netconf" を以下のように割り当てた:
+
+              Subsystem Name                  Reference
+              --------------                  ---------
+              netconf                         RFC 4742
+
+   IANA はこの文書を差すようにこれらの割り当てを更新した.
+
+
+
+
+
+
+Wasserman                    Standards Track                    [Page 9]
+
+RFC 6242                    NETCONF over SSH                   June 2011
+
+
+8.  Acknowledgements
+
+   Ted Goddard was a co-author on earlier versions of this document.
+
+   This document was written using the xml2rfc tool described in RFC
+   2629 [RFC2629].
+
+   Extensive input was received from the other members of the NETCONF
+   design team, including: Andy Bierman, Weijing Chen, Rob Enns, Wes
+   Hardaker, David Harrington, Eliot Lear, Simon Leinen, Phil Shafer,
+   Juergen Schoenwaelder, and Steve Waldbusser.  The following people
+   have also reviewed this document and provided valuable input: Olafur
+   Gudmundsson, Sam Hartman, Scott Hollenbeck, Bill Sommerfeld, Balazs
+   Lengyel, Bert Wijnen, Mehmet Ersue, Martin Bjorklund, Lada Lothka,
+   Kent Watsen, and Tom Petch.
+
+9.  References
+
+9.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC4250]  Lehtinen, S. and C. Lonvick, "The Secure Shell (SSH)
+              Protocol Assigned Numbers", RFC 4250, January 2006.
+
+   [RFC4252]  Ylonen, T. and C. Lonvick, "The Secure Shell (SSH)
+              Authentication Protocol", RFC 4252, January 2006.
+
+   [RFC4253]  Ylonen, T. and C. Lonvick, "The Secure Shell (SSH)
+              Transport Layer Protocol", RFC 4253, January 2006.
+
+   [RFC4254]  Ylonen, T. and C. Lonvick, "The Secure Shell (SSH)
+              Connection Protocol", RFC 4254, January 2006.
+
+   [RFC5234]  Crocker, D. and P. Overell, "Augmented BNF for Syntax
+              Specifications: ABNF", STD 68, RFC 5234, January 2008.
+
+   [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
+              and A.  Bierman, Ed., "Network Configuration Protocol
+              (NETCONF)", RFC 6241, June 2011.
+
+9.2.  Informative References
+
+   [RFC2629]  Rose, M., "Writing I-Ds and RFCs using XML", RFC 2629,
+              June 1999.
+
+
+
+
+
+Wasserman                    Standards Track                   [Page 10]
+
+RFC 6242                    NETCONF over SSH                   June 2011
+
+
+Appendix A.  RFC 4742 からの変更点
+
+   この節は, この文書と RFC 4742 の主な変更点を挙げる.
+
+   o  EOM フレーミングの既知のセキュリティ問題を解決するため, 新しいチャンクされたフレーミングメカニズムを導入した.
+
+   o  セキュリティの考察を拡張した; EOM 問題について追記した.
+
+   o  新しいチャンクされたエンコーディングを適切に示す例を追加した; 改行の位置を強調した.
+
+   o  [RFC6241] のユーザ名の要件に従う NETCONF ユーザ名の扱いについて追記した.
+
+   o  "クライアント/サーバ" と "マネージャ/エージェント"という用語法を "SSH クライアント/サーバ" と "NETCONF クライアント/サーバ" に変更した.
+
+   o  "コマンド" や "メッセージ" の変わりに 用語 "操作" を一貫して利用するようにした.
+
+   o  この文書の発行日現在の RFC 4742 に対して検証された正誤表を統合した.  http://www.rfc-editor.org で RFC 4742 の正誤表を参照せよ.
+
+Author's Address
+
+   Margaret Wasserman
+   Painless Security, LLC
+   356 Abbott Street
+   North Andover, MA  01845
+   USA
+
+   Phone: +1 781 405-7464
+   EMail: mrw@painless-security.com
+   URI:   http://www.painless-security.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Wasserman                    Standards Track                   [Page 11]
+

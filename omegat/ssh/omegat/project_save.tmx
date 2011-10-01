@@ -532,6 +532,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>10
+   Appendix A.  Changes from RFC 4742 .</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T032922Z" changeid="haruyama">
+        <seg>10
+   Appendix A.  RFC 4742 からの変更点 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>10    VSUSP       Suspends the current program.</seg>
       </tuv>
       <tuv lang="JA">
@@ -1328,11 +1338,39 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A NETCONF over SSH session consists of a NETCONF client and NETCONF
+   server exchanging complete XML documents.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034110Z" changeid="haruyama">
+        <seg>SSHセッション上の NETCONF は, NETCONF クライアントと NETCONF サーバの完全な XML 文書の交換で構成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A NETCONF over SSH session consists of the manager and agent
    exchanging complete XML documents.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110728T100022Z" changeid="haruyama">
         <seg>SSHセッション上の NETCONF は, マネージャとエージェントの完全な XML 文書の交換で構成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A NETCONF over SSH session, using the backwards-compatible end-of-
+   message framing to retrieve a set of configuration information, might
+   look like this:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T042821Z" changeid="haruyama">
+        <seg>後方互換なメッセージ終了フレーミングを用いて設定情報の集合を取得する SSH セッション上の NETCONF は次のようになる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A NETCONF server will process NETCONF messages from the NETCONF
+   client in the order in which they are received.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T042916Z" changeid="haruyama">
+        <seg>NETCONF サーバは,  NETCONF クライアントからのメッセージを受け取った順に処理する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2444,6 +2482,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>After the ssh-connection service is established, the SSH client will
+   open a channel of type &quot;session&quot;, which will result in an SSH
+   session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T033730Z" changeid="haruyama">
+        <seg>ssh-connection サービスが確立したら, クライアントは SSHのセッションとなる &quot;session&quot; タイプのチャンネルを開始する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>After the ssh-connection service is established, the client will open
    a channel of type &quot;session&quot;, which will result in an SSH session.</seg>
       </tuv>
@@ -3023,12 +3071,33 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Although the example shows the NETCONF server sending a &lt;hello&gt;
+   message followed by the NETCONF client's &lt;hello&gt; message, both sides
+   will send the message as soon as the NETCONF subsystem is
+   initialized, perhaps simultaneously.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034041Z" changeid="haruyama">
+        <seg>例では &lt;hello&gt; メッセージの NETCONF サーバの送信に続いて NETCONF クライアントのメッセージが続いているが, NETCONF サブシステムが開始されたらすぐに, おそらく同時に, どちらの側からもメッセージが送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Although the example shows the server sending a &lt;hello&gt; message
    followed by the client's message, both sides will send the message as
    soon as the NETCONF subsystem is initialized, perhaps simultaneously.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110728T093915Z" changeid="haruyama">
         <seg>例では &lt;hello&gt; メッセージのサーバの送信に続いてクライアントのメッセージが続いているが, NETCONF サブシステムが開始されたらすぐに, おそらく同時に, どちらの側からもメッセージが送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Although this document gives specific examples of how NETCONF
+   messages are sent over an SSH connection, use of this transport is
+   not restricted to the messages shown in the examples below.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T033109Z" changeid="haruyama">
+        <seg>この文書は NETCONF メッセージが SSH 接続上でどのように送られるかの具体例を与えるが, このトランスポートの利用は以下の例で示すメッセージに制限されない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3336,6 +3405,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Any
+   transformations applied to the authenticated identity of the SSH
+   client made by the SSH server (e.g., via authentication services or
+   mappings to system accounts) are outside the scope of this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T033719Z" changeid="haruyama">
+        <seg>SSH サーバで行なわれる SSH クライアントの認証された識別情報に対して適用される変換 (例えば, 認証サービスによるものやシステムアカウントに対するマッピング)は, この文書の範囲外だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Any authentication method
    that meets the requirements of the SSH architecture will provide the
    properties of mutual authentication and binding of keys.</seg>
@@ -3440,6 +3520,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Appendix A.  Changes from RFC 4742</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T044847Z" changeid="haruyama">
+        <seg>Appendix A.  RFC 4742 からの変更点</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Appendix A.  Example</seg>
       </tuv>
       <tuv lang="JA" changedate="20110928T075438Z" changeid="haruyama">
@@ -3458,8 +3546,8 @@
       <tuv lang="EN-US">
         <seg>Appendix A:  Generation of Safe Primes</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110620T040858Z" changeid="haruyama">
-        <seg>付録A：安全な素数の生成</seg>
+      <tuv lang="JA" changedate="20111001T032931Z" changeid="haruyama">
+        <seg>Appendix A：安全な素数の生成</seg>
       </tuv>
     </tu>
     <tu>
@@ -3585,6 +3673,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As [RFC6241] states, the NETCONF client also sends an XML document
+   containing a &lt;hello&gt; element to indicate the NETCONF client's
+   capabilities to the NETCONF server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T033953Z" changeid="haruyama">
+        <seg>[RFC6241] で述べられているように, NETCONF クライアントも NETCONF サーバに NETCONF クライアントの機能を示すために &lt;hello&gt; 要素を含む XML 文書を送らなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As a general rule,
    if state information is available when a message gets discarded, the
    message-state information should also be released, and if state
@@ -3703,6 +3801,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>例として 次の場合を考える:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As an example, the message:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T035128Z" changeid="haruyama">
+        <seg>例として, メッセージ:</seg>
       </tuv>
     </tu>
     <tu>
@@ -3830,6 +3936,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110829T040317Z" changeid="haruyama">
         <seg>[RFC4253] で要求されているように, random_padding は 最低 4 オクテット長なければならない. また 255 オクテットを越えてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As specified in [RFC6241], the NETCONF server indicates its
+   capabilities by sending an XML document containing a &lt;hello&gt; element
+   as soon as the NETCONF session is established.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T033905Z" changeid="haruyama">
+        <seg>[RFC6241] で指定されているように, NETCONF サーバは, NETCONFのセッションが確立したらすぐに &lt;hello&gt; 要素を含む XML 文書を送ってその機能を示さなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4416,6 +4532,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Based on the previous version of this document, RFC 4742, IANA
+   assigned the TCP port 830 as the default port for NETCONF over SSH
+   sessions.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T044713Z" changeid="haruyama">
+        <seg>この文書の以前のバージョン, RFC 4742 に基づき, IANA は SSH セッション上の NETCONF のデフォルトのポートとして TCP ポート 830 番を割り当てた.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Basic understanding of the DNS system [1][2] and the DNS security
    extensions [5] is assumed by this document.</seg>
       </tuv>
@@ -4904,6 +5030,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Capabilities Exchange  .</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T032724Z" changeid="haruyama">
+        <seg>機能の交換 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Capabilities Exchange ......................................3
    4.</seg>
       </tuv>
@@ -5093,6 +5227,22 @@
       </tuv>
       <tuv lang="JA">
         <seg>次の条件を満たす最初のアルゴリズムを選択する:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Chunked Framing Mechanism</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034727Z" changeid="haruyama">
+        <seg>チャンクされたフレーミングメカニズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Chunked Framing Mechanism  .</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T032816Z" changeid="haruyama">
+        <seg>チャンクされたフレーミングメカニズム .</seg>
       </tuv>
     </tu>
     <tu>
@@ -5552,6 +5702,26 @@
       <tuv lang="JA" changedate="20110729T034320Z" changeid="haruyama">
         <seg>USM と SSHTM の概念的な違い ..............31
       9.5.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Conceptually,
+   the SSH Transport layer passes any data found in between the ]]&gt;]]&gt;
+   characters to the Messages layer.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T042700Z" changeid="haruyama">
+        <seg>概念的には, SSH トランスポート層は, Messages 層に ]]&gt;]]&gt; の間のすべてのデータを渡す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Conceptually, the SSH Transport layer encodes messages sent by the
+   Messages layer, and decodes messages received on the SSH channel
+   before passing them to the Messages layer.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T040108Z" changeid="haruyama">
+        <seg>概念的には, SSH トランスポート層は, Messages 層から送られたメッセージをエンコードし, SSH チャンエルから受信したメッセージを Messages 層に送る前にデコードする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6238,6 +6408,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>それぞれのパケットにMACが含まれるとによりデータの完全性が保護される. MACは, 共有の秘密, パケットのシーケンス番号, パケットの中身から計算される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Data sent by the
+   NETCONF client are marked with &quot;C:&quot;, and data sent by the NETCONF
+   server are marked with &quot;S:&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034019Z" changeid="haruyama">
+        <seg>NETCONF クライアントから送られるメッセージには &quot;C:&quot; を, NETCONF サーバから送られるメッセージには &quot;S:&quot; を付けている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7444,6 +7624,22 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>End-of-Message Framing Mechanism</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T040837Z" changeid="haruyama">
+        <seg>メッセージ終了文字列を用いるフレーミングメカニズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>End-of-Message Framing Mechanism .</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T040841Z" changeid="haruyama">
+        <seg>メッセージ終了文字列を用いるフレーミングメカニズム .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Ensuring that these counters are properly implemented is crucial to
    the security of the system.</seg>
       </tuv>
@@ -7690,6 +7886,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110728T100706Z" changeid="haruyama">
         <seg>NETCONF サブシステムの終了</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Exiting the NETCONF Subsystem  .</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T032850Z" changeid="haruyama">
+        <seg>NETCONF サブシステムの終了 .</seg>
       </tuv>
     </tu>
     <tu>
@@ -8145,6 +8349,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110419T115112Z" changeid="haruyama">
         <seg>他のすべてのNISTの曲線と他のすべての推奨される曲線を含む他のすべての楕円曲線のために, 楕円曲線ドメインパラメータ識別子は, サーバの楕円曲線ホスト鍵に関連付いて指定された曲線ドメインパラメータのASN.1[ASN1]オブジェクト識別子(OID)のASCIIでピリオドで分割された10進表現で表現される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For all the XML lines (except the last one), this
+   example treats the LineFeed as part of the chunk-data and so
+   contributing to the chunk-size.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T040451Z" changeid="haruyama">
+        <seg>(最終行を覗く)すべての XML の行で, この例ではラインフィードを chunk-data の一部分として扱い chunk-size に含めている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8789,6 +9003,22 @@
       </tuv>
       <tuv lang="JA">
         <seg>転送されたTCP/IPチャンネルは他のセッションとは独立だ. またセッションチャンネルが終了しても, 転送された接続が閉じられることを意味しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Framing Protocol</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034152Z" changeid="haruyama">
+        <seg>フレーミングプロトコル</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Framing Protocol .</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034143Z" changeid="haruyama">
+        <seg>フレーミングプロトコル .</seg>
       </tuv>
     </tu>
     <tu>
@@ -9824,6 +10054,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>However, it will also allow NETCONF over SSH traffic
+   to be more easily identified by attackers.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T043355Z" changeid="haruyama">
+        <seg>しかし, SSH トラフィック上の NETCONFを攻撃者もより容易に識別できるようになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>However, it will also allow NETCONF over SSH traffic to be
    more easily identified by attackers.</seg>
       </tuv>
@@ -9954,6 +10193,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>しかし, このアルゴリズムは歴史的な理由により依然要求されている; 実質的な面から見て, 執筆時点でのすべての知られた実装はこのアルゴリズムを実装しており, 基本的な相互運用可能なアルゴリズムであるという理由で広く用いられているからだ. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>However, this assumption
+   is not correct.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034312Z" changeid="haruyama">
+        <seg>しかし, この仮定は正しくなかった.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10186,6 +10434,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>IANA had also assigned &quot;netconf&quot; as an SSH Subsystem Name, as defined
+   in [RFC4250], as follows:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T044801Z" changeid="haruyama">
+        <seg>IANA は [RFC4250] で定義された SSH Subsystem Name として &quot;netconf&quot; を以下のように割り当てた:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>IANA has allocated the RR type code 44 for SSHFP from the standard RR
    type space.</seg>
       </tuv>
@@ -10252,6 +10509,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110728T103959Z" changeid="haruyama">
         <seg>IANA は, [RFC4250] で定義された SSH Service Name として, 以下のように &quot;netconf&quot; を割り当てるよう要求された. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>IANA updated these allocations to refer to this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T044822Z" changeid="haruyama">
+        <seg>IANA はこの文書を差すようにこれらの割り当てを更新した.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11122,6 +11387,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the :base:1.1 capability is advertised by both
+   peers, the chunked framing mechanism (see Section 4.2) is used for
+   the remainder of the NETCONF session.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034754Z" changeid="haruyama">
+        <seg>:base:1.1 機能が両方のピアで告知されていたら, チャンクされたフレーミングメカニズム (4.2 節参照) が残りの NETCONF セッションで用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the BREAK length cannot be controlled by the application receiving
    this request, the BREAK length parameter SHOULD be ignored and the
    default BREAK signal length of the chipset or underlying chipset
@@ -11244,6 +11519,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110630T022614Z" changeid="haruyama">
         <seg>認証が成功され空でないユーザ名がクライアントから提示されたら， SSHのサーバ実装は， GSS-API交換で交換した認証情報に基づいてユーザ名が認可されるか確認する．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the chunk-size and the chunk-size value respectively are invalid
+   or if an error occurs during the decoding process, the peer MUST
+   terminate the NETCONF session by closing the corresponding SSH
+   channel.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T040759Z" changeid="haruyama">
+        <seg>chunk-size と chunk-size の値がそれぞれ不正だったり, デコードの処理でエラーが起きたら, 対応する SSH チャンネルを閉じて NETCONF セッションをピアは終了させなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11852,6 +12138,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the username does not comply to the NETCONF
+   requirements on usernames [RFC6241], i.e., the username is not
+   representable in XML, the SSH session MUST be dropped.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T033533Z" changeid="haruyama">
+        <seg>このユーザ名が, NETCONF のユーザ名に対する要件 [RFC6241] を満していない, つまり ユーザ名が XML で表現できない場合は, SSH のセッションは中止されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the value is empty, no
    subsystems may be started.</seg>
       </tuv>
@@ -12390,6 +12686,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>実装は, 2^32 -1 byteまでのwindow size を正しく扱えなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementations MUST ensure they are not vulnerable for a
+   buffer overrun.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T040816Z" changeid="haruyama">
+        <seg>実装は, バッファオーバーランに対して脆弱でないよう保証しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13221,8 +13526,19 @@
    the SSH session is established using the IANA-assigned TCP port
    &lt;830&gt;.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110726T031057Z" changeid="haruyama">
-        <seg>NETCONF のトラフィックを容易に識別しファイアウォールや他のネットワークデバイスでフィルタするために, NETCONF サーバは, IANA に割り当てられた TCP ポートを用いて SSH のセッションが確立された場合のみ &quot;netconf&quot; SSH サブシステムへのアクセスを提供するのをデフォルトとしなければならない.</seg>
+      <tuv lang="JA" changedate="20111001T033820Z" changeid="haruyama">
+        <seg>NETCONF のトラフィックを容易に識別しファイアウォールや他のネットワークデバイスでフィルタするために, NETCONF サーバは, IANA に割り当てられた TCP ポート &lt;830&gt; を用いて SSH のセッションが確立された場合のみ &quot;netconf&quot; SSH サブシステムへのアクセスを提供するのをデフォルトとしなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In order to allow NETCONF traffic to be easily identified and
+   filtered by firewalls and other network devices, NETCONF servers MUST
+   default to providing access to the &quot;netconf&quot; SSH subsystem only when
+   the SSH session is established using the IANA-assigned TCP port 830.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T033813Z" changeid="haruyama">
+        <seg>NETCONF のトラフィックを容易に識別しファイアウォールや他のネットワークデバイスでフィルタするために, NETCONF サーバは, IANA に割り当てられた TCP ポート 830 を用いて SSH のセッションが確立された場合のみ &quot;netconf&quot; SSH サブシステムへのアクセスを提供するのをデフォルトとしなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13286,6 +13602,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>セキュリティに関する考察のすべての部分によりアクセスしやすくするため, トランスポート, 認証, コネクションの文書のセキュリティの考察をここに集約した</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In order to solve this problem, and at
+   the same time be compatible with existing implementations, this
+   document defines the following framing protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034408Z" changeid="haruyama">
+        <seg>この問題を解決し同時に既存の実装と互換するため, この文書は次のフレーミングプロトコルを定義する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13804,6 +14130,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>もっともよい対処法が, パケットがネットワーク上に送信されさらなる転送パケットがない場合に, 実装者は別のパケットを追加することだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In the second and third chunks quoted above, each line is terminated
+   by a LineFeed.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T040338Z" changeid="haruyama">
+        <seg>上記で引用した2番目と3番目のチャンクでは, それぞれの行はラインフィードで終端されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14662,6 +14997,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It can legally appear in XML attributes, comments,
+   and processing instructions.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034336Z" changeid="haruyama">
+        <seg>これは, 正当に XML 属性やコメントや処理命令に出現する可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It computes K = e ^ y mod p, and H = hash(V_C || V_S ||
        I_C || I_S || K_S || e || f || K).</seg>
       </tuv>
@@ -14809,6 +15153,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>この認証方式は, 典型的には [PAM] によって支援されるのでこのような選択は可能ではないことも予想される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is
+   however believed that the associated threat is not very high.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T044311Z" changeid="haruyama">
+        <seg>しかし, 関連する脅威は非常に高くはないと信じられている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15194,6 +15547,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>通常, key blob には含まれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is only
+   used when the remote peer does not advertise a base protocol version
+   supporting chunked encoding, i.e., a NETCONF implementation only
+   supporting :base:1.0.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T042524Z" changeid="haruyama">
+        <seg>リモートのピアがチャンクされたエンコーディングをサポートするベースプロトコルを告知しない場合, つまり NETCONF 実装が :base:1.0 のみをサポートする場合にのみ用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16031,6 +16395,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Leading zeros are prohibited, and
+   the maximum allowed chunk-size value is 4294967295.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T035114Z" changeid="haruyama">
+        <seg>先頭のゼロは禁止されている. また 許可される最大の chunk-size の値は, 4294967295 だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Let L be the
    block length of &lt;cipher&gt; in bits.</seg>
       </tuv>
@@ -16820,6 +17193,18 @@
         <seg>NETCONF is used to access configuration and state information and to
    modify configuration information, so the ability to access this
    protocol should be limited to users and systems that are authorized
+   to view the NETCONF server's configuration and state or to modify the
+   NETCONF server's configuration.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T043116Z" changeid="haruyama">
+        <seg>NETCONF は, 設定や状態の情報にアクセスし, 設定情報を変更する. このため, このプロトコルにアクセスする能力は, NETCONF サーバの設定や状態を閲覧したり NETCONF サーバの設定を変更する権限のあるユーザやシステムに制限される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>NETCONF is used to access configuration and state information and to
+   modify configuration information, so the ability to access this
+   protocol should be limited to users and systems that are authorized
    to view the agent's configuration and state or to modify the agent's
    configuration.</seg>
       </tuv>
@@ -17057,8 +17442,18 @@
    should establish a NETCONF over SSH connection with an unknown,
    unexpected, or incorrect identity on the opposite side.</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110728T102819Z" changeid="haruyama">
-        <seg>クライアントもサーバも, 未知の, もしくは, 予期しない, 不正解な相手側の識別情報による SSH 接続上の NETCOF を確立してはならない.</seg>
+      <tuv lang="JA" changedate="20111001T043232Z" changeid="haruyama">
+        <seg>クライアントもサーバも, 未知の, もしくは, 予期しない, 不正解な相手側の識別情報による SSH 接続上の NETCONF を確立してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Neither side should establish a
+   NETCONF over SSH connection with an unknown, unexpected, or incorrect
+   identity on the opposite side.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T043229Z" changeid="haruyama">
+        <seg>クライアントもサーバも, 未知の, もしくは, 予期しない, 不正解な相手側の識別情報による SSH 接続上の NETCONF を確立してはならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17284,6 +17679,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>チャンネルの開始の要求がこのメッセージが受信されるより前に受信されるかもしれないことに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Note
+   that the SSH transport does not interpret the XML content; thus, it
+   does not care about any optional XML-specific LineFeeds.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T040305Z" changeid="haruyama">
+        <seg>SSH のトランスポートは XML の内容を解釈しないので, XML 特有のオウプションのラインフィードについて関知しないことに注意.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17642,6 +18047,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Note that there is no LineFeed character after the &lt;rpc&gt; end tag in
+   this message.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T040557Z" changeid="haruyama">
+        <seg>このメッセージの &lt;rpc&gt; の終了タグの後にラインフィード文字がないことに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Note that these messages
    MAY also be sent for ports for which no forwarding has been
    explicitly requested.</seg>
@@ -17972,6 +18386,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Once the SSH session has been established, the NETCONF client will
+   invoke NETCONF as an SSH subsystem called &quot;netconf&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T033751Z" changeid="haruyama">
+        <seg>SSHのセッションが確立したら, NETCONF クライアントは, &quot;netconf&quot; SSHサブシステムとして NETCONF を起動する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Once the SSH session has been established, the user (or application)
    will invoke NETCONF as an SSH subsystem called &quot;netconf&quot;.</seg>
       </tuv>
@@ -18014,6 +18437,18 @@
     <tu>
       <tuv lang="EN-US">
         <seg>Once the session has been
+   established and capabilities have been exchanged, the NETCONF client
+   will send complete XML documents containing &lt;rpc&gt; elements to the
+   server, and the NETCONF server will respond with complete XML
+   documents containing &lt;rpc-reply&gt; elements.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034130Z" changeid="haruyama">
+        <seg>セッションが確立され機能が交換されたら, NETCONF クライアントは &lt;rpc&gt; 要素を含む 完全な XML 文書をサーバに送る. そして NETCONF サーバは &lt;rpc-reply&gt; 要素を含む完全な XML 文書で応答する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Once the session has been
    established and capabilities have been exchanged, the manager will
    send complete XML documents containing &lt;rpc&gt; elements to the server,
    and the agent will respond with complete XML documents containing
@@ -18030,6 +18465,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>セッションが設定されると, プログラムがリモート側で起動される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Once the user has been
+   successfully authenticated, the SSH client will invoke the
+   &quot;ssh-connection&quot; service, also known as the SSH connection protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T033333Z" changeid="haruyama">
+        <seg>ユーザが認証に成功したら, クライアントは SSHコネクションプロトコルとして知られている &quot;ssh-connection&quot; サービスを起動する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18433,6 +18878,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>さもなければ, 推測が正しいと考え, 楽観的に送られたパケットは最初の鍵交換パケットとして扱われなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Otherwise, the old end-of-
+   message-based mechanism (see Section 4.3) is used.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034820Z" changeid="haruyama">
+        <seg>そうでなければ, 古いメッセージ終了ベースのメカニズム (4.3 節参照) が用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19412,6 +19866,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>RFC 4742 assumes that the end-of-message (EOM) sequence, ]]&gt;]]&gt;,
+   cannot appear in any well-formed XML document, which turned out to be
+   mistaken.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T044147Z" changeid="haruyama">
+        <seg>RFC 4742 は, メッセージ終了 (EOM) 文字列, ]]&gt;]]&gt;, が整形された XML 文書に出てこないことを仮定していたが, これは間違いだった.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>RSA Key Exchange for the Secure Shell (SSH)
                         Transport Layer Protocol</seg>
       </tuv>
@@ -19885,6 +20349,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110726T025220Z" changeid="haruyama">
         <seg>要件に関する用語</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Requirements Terminology .</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T032715Z" changeid="haruyama">
+        <seg>要件に関する用語 .</seg>
       </tuv>
     </tu>
     <tu>
@@ -21114,6 +21586,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>See errata for RFC 4742 at
+      http://www.rfc-editor.org.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T045421Z" changeid="haruyama">
+        <seg>http://www.rfc-editor.org で RFC 4742 の正誤表を参照せよ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>See the Elements of Procedure in
    Section 5 for detailed processing instructions on the use of the
    tmStateReference fields by the SSH Transport Model.</seg>
@@ -21193,6 +21674,15 @@
    SSH subsystem over other ports.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110726T031155Z" changeid="haruyama">
+        <seg>サーバは, 他のポート上の netconf SSH サブシステムへのアクセス許可を設定可能にする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Servers SHOULD be configurable to allow access to the netconf SSH
+   subsystem over other ports.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T033828Z" changeid="haruyama">
         <seg>サーバは, 他のポート上の netconf SSH サブシステムへのアクセス許可を設定可能にする必要がある.</seg>
       </tuv>
     </tu>
@@ -21765,11 +22255,20 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>So, NETCONF requires communications
+   channels that provide strong encryption for data privacy.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T043306Z" changeid="haruyama">
+        <seg>それゆえ, NETCONF は, データの秘密性に対して強い暗号化を提供する通信チャンネルを要求する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>So, NETCONF should only be used over
    communications channels that provide strong encryption for data</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110728T103027Z" changeid="haruyama">
-        <seg>それゆえ, NETCONF は, データの秘密性に対して強い暗号化を提供するチ通信チャンネル上でのみ利用されなければならない.</seg>
+      <tuv lang="JA" changedate="20111001T043315Z" changeid="haruyama">
+        <seg>それゆえ, NETCONF は, データの秘密性に対して強い暗号化を提供する通信チャンネル上でのみ利用されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21973,6 +22472,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Specifically, the message follows the ABNF [RFC5234] rule Chunked-
+   Message:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034932Z" changeid="haruyama">
+        <seg>具体的には, メッセージは ABNF [RFC5234] の rule Chunked-Message に従う:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Specification of the message numbers SSH_MSG_KEX_ECDH_INIT and
    SSH_MSG_KEX_ECDH_REPLY is found in Section 7.</seg>
       </tuv>
@@ -21996,6 +22504,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110726T025934Z" changeid="haruyama">
         <seg>SSH 上での NETCONF の起動</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Starting NETCONF over SSH  .</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T032720Z" changeid="haruyama">
+        <seg>SSH 上での NETCONF の起動 .</seg>
       </tuv>
     </tu>
     <tu>
@@ -23848,6 +24364,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The &lt;hello&gt; message MUST be followed by the character sequence
+   ]]&gt;]]&gt;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034555Z" changeid="haruyama">
+        <seg>&lt;hello&gt;  メッセージは, 文字列 ]]&gt;]]&gt; が後に続かなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Arcfour cipher is believed to be compatible with the RC4 cipher
    [SCHNEIER].</seg>
       </tuv>
@@ -24010,6 +24535,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110411T132618Z" changeid="haruyama">
         <seg>ECMQV 鍵交換法は選択できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The EOM sequence can cause operational problems and open
+   space for attacks if sent deliberately in RPC messages.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T044253Z" changeid="haruyama">
+        <seg>EOM 文字列は, 操作の問題を引き起す可能性がある. また, 意図的に送信さらた RPC メッセージよって攻撃を受ける可能性がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24285,6 +24819,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The LineFeed required by the start of the end-of-
+   chunks block immediately follows the last '&gt;' character in the
+   message.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T040652Z" changeid="haruyama">
+        <seg>end-of-chunks の最初に必要なラインフィードが, メッセージの最後の '&gt;' 文字にすぐに続いている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The MAC algorithm names are listed in Section 6.4.</seg>
       </tuv>
       <tuv lang="JA">
@@ -24312,11 +24856,40 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The NETCONF client
+   can parse this message to determine which NETCONF capabilities are
+   supported by the NETCONF server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T033919Z" changeid="haruyama">
+        <seg>NETCONF クライアントはこのメッセージをパースして, どの NETCONF 機能がサーバでサポートされているかを判断できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The NETCONF protocol [RFC4721] is an XML-based protocol used to
    manage the configuration of networking equipment.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110726T024417Z" changeid="haruyama">
         <seg>NETCONF プロトコル [RFC4721] は, ネットワーク機器の設定を管理するのに使われる XML ベースのプロトコルだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The NETCONF protocol [RFC6241] is an XML-based protocol used to
+   manage the configuration of networking equipment.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T032959Z" changeid="haruyama">
+        <seg>NETCONF プロトコル [RFC6241] は, ネットワーク機器の設定を管理するのに使われる XML ベースのプロトコルだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The NETCONF server
+   MUST NOT process any NETCONF messages received after the
+   &lt;close-session&gt; operation.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T043040Z" changeid="haruyama">
+        <seg>NETCONF サーバは, &lt;close-session&gt; 操作の後で受け取ったすべての NETCONF メッセージを処理してはならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24762,6 +25335,15 @@
       </tuv>
       <tuv lang="JA" changedate="20111001T030041Z" changeid="haruyama">
         <seg>SSH バイナリパケット構造は, 基底のデータチャンネルのパケットの構造から独立だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH client will then invoke the &quot;ssh-userauth&quot;
+   service to authenticate the user, as described in the SSH</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T033311Z" changeid="haruyama">
+        <seg>クライアントは SSH 認証プロトコル [RFC4252] に記述されているようにユーザを認証するため &quot;ssh-userauth&quot; サービスを起動する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -25867,6 +26449,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The chunk-size field is a string of decimal digits indicating the
+   number of octets in chunk-data.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T035045Z" changeid="haruyama">
+        <seg>chunk-size フィールドは, chunk-data のオクテット数を示す10進数の文字列だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The ciphers in each direction MUST run independently of each other.</seg>
       </tuv>
       <tuv lang="JA">
@@ -26593,6 +27184,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The document containing the
+   &lt;hello&gt; element is the first XML document that the NETCONF client
+   sends after the NETCONF session is established.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034004Z" changeid="haruyama">
+        <seg>&lt;hello&gt; 要素を含む文書は, NETCONF セッションが確立したあとに NETCONF クライアントが送る最初の XML 文書でなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The downside is that the database of
       name-to-key associations may become burdensome to maintain.</seg>
       </tuv>
@@ -26673,6 +27274,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110725T085430Z" changeid="haruyama">
         <seg>[RFC3447]の (mask generation function として MGF1-with-HASH を, ハッシュとして HASH を そして空のラベルを用いる) RSAES-OAEP 方式(に従って暗号化は実行される</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The examples for the chunked framing mechanism show all LineFeeds,
+   even those that are not used as part of the framing mechanism.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T040222Z" changeid="haruyama">
+        <seg>チャンクされたフレーミングメカニズムの例ではすべてのラインフィードを示している. ただし, フレーミングメカニズムの一部としてはラインフィードは利用されていない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27522,6 +28132,29 @@
       </tuv>
       <tuv lang="JA">
         <seg>この識別文字列は, 単一のキャリッジリターン (CR) と単一のラインフィード （LF) (それぞれ ASCII の 13 と 10) で終了されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The identity of the SSH client MUST
+   also be verified and authenticated by the SSH server according to
+   local policy to ensure that the incoming SSH client request is
+   legitimate before any configuration or state data is sent to or
+   received from the SSH client.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T043213Z" changeid="haruyama">
+        <seg>SSH クライアントの識別情報も, 設定や状態の情報を SSH クライアントに送ったり SSH クライアントから受け取ったりする前に, 受け取った SSH クライアントの要求が正当なものであることを保証するために, ローカルなポリシーに基づいて, SSH サーバにより検証し認証されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The identity of the SSH server MUST be verified and authenticated by
+   the SSH client according to local policy before password-based
+   authentication data or any configuration or state data is sent to or
+   received from the SSH server.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T043146Z" changeid="haruyama">
+        <seg>SSH サーバの識別情報は, パスワードベースの認証データや設定や状態のデータを SSH サーバに送ったり SSH サーバから受け取ったりする前に, ローカルなポリシーに基づいて SSH クライアントが検証し認証されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28760,6 +29393,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110719T031444Z" changeid="haruyama">
         <seg>このヘッダフィールドの有無と利用は, このファイル形式を配置するサイトによって精査される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The previous version of this document defined the character sequence
+   &quot;]]&gt;]]&gt;&quot; as a message separator, under the assumption that it could
+   not be found in well-formed XML documents.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034305Z" changeid="haruyama">
+        <seg>この文書の以前のバージョンは, メッセージの分割子として文字列 &quot;]]&gt;]]&gt;&quot; を用いていた. これは整形された XML 文書では出てこないという仮定に基づいていた.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30481,6 +31124,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The username provided by the SSH implementation will be made
+   available to the NETCONF message layer as the NETCONF username
+   without modification.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T033417Z" changeid="haruyama">
+        <seg>SSH 実装から提供されるユーザ名は, NETCONF ユーザ名として変更なしで NETCONF メッセージに利用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The validation could be done using the user name and
    user password attributes.</seg>
       </tuv>
@@ -31331,6 +31984,16 @@
     <tu>
       <tuv lang="EN-US">
         <seg>This
+   document defines a NETCONF over SSH mapping that provides for support
+   of strong encryption and authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T043333Z" changeid="haruyama">
+        <seg>この文書は, 強い暗号化と認証のサポートを提供する SSH マッピング上の NETCONF を定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This
    document defines how NETCONF can be used within a Secure Shell (SSH)
    session, using the SSH connection protocol [RFC4254] over the SSH
    transport protocol [RFC4253].</seg>
@@ -31385,6 +32048,16 @@
     <tu>
       <tuv lang="EN-US">
         <seg>This
+   document still uses the EOM sequence for the initial &lt;hello&gt; message
+   to avoid incompatibility with existing implementations.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T044344Z" changeid="haruyama">
+        <seg>この文書は, 既存の実装との非互換を避けるために, 最初の &lt;hello&gt; メッセージで EOM 文字列をまだ利用している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This
    is especially important if SSHFP is to be used as a basis for host
    key rollover and/or revocation, as described above.</seg>
       </tuv>
@@ -31420,6 +32093,15 @@
       </tuv>
       <tuv lang="JA" changedate="20110527T140531Z" changeid="haruyama">
         <seg>この予防手段は, 理不尽に長い BREAK 要求が BREAKを実行する間に49.7日の間ポートを利用不能にするのを防ぐ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This
+   transport can be used for any NETCONF message.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T033125Z" changeid="haruyama">
+        <seg>このトランスポートは, 任意の NETCONF メッセージに利用できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -31813,6 +32495,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document also recommends that SSH servers be configurable to
+   allow access to the &quot;netconf&quot; SSH subsystem over other ports.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T043410Z" changeid="haruyama">
+        <seg>この文書は, 他のポートでの &quot;netconf&quot; SSH サブシステムへのアクセスを SSH サーバが設定可能にすることも推奨する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document also recommends that servers be configurable to allow
    access to the &quot;netconf&quot; SSH subsystem over other ports.</seg>
       </tuv>
@@ -32168,6 +32859,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document obsoletes RFC 4742.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T032608Z" changeid="haruyama">
+        <seg>この文書は RFC 4742 を廃止する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document provides new public key algorithms and new key
    agreement methods for the Secure Shell protocol.</seg>
       </tuv>
@@ -32191,6 +32890,16 @@
       </tuv>
       <tuv lang="JA" changedate="20110714T060807Z" changeid="haruyama">
         <seg>コンテキストの確立の間呼出でチャンネルの束縛を指定しないほうがよいと, この文書は推奨する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document requires that SSH servers default to allowing access to
+   the &quot;netconf&quot; SSH subsystem only when using a specific TCP port
+   assigned by IANA for this purpose.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T043350Z" changeid="haruyama">
+        <seg>この文書は, この目的のために IANA に割り当てられた特定の TCP ポートのみで &quot;netconf&quot; SSH サブシステムへのアクセスを許すのをデフォルトとするよう SSH サーバに要求する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32884,6 +33593,23 @@
       </tuv>
       <tuv lang="JA" changedate="20110609T052753Z" changeid="haruyama">
         <seg>同じメッセージを1回より多く受け取ったり順番がおかしいメッセージを受け取るのを受信者に納得させることが攻撃者ができる, ということを意味する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This mechanism encodes all NETCONF messages with a chunked framing.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T034850Z" changeid="haruyama">
+        <seg>このメカニズムは, チャンクされたフレーミングを用いてすべての NETCONF メッセージをエンコードする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This mechanism exists for backwards compatibility with
+   implementations of previous versions of this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T042429Z" changeid="haruyama">
+        <seg>このメカニズムは, この文書の以前のバージョンの実装との後方互換性のために存在する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33650,6 +34376,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This section lists major changes between this document and RFC 4742.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T044911Z" changeid="haruyama">
+        <seg>この節は, この文書と RFC 4742 の主な変更点を挙げる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This section makes two recommendations.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110530T071020Z" changeid="haruyama">
@@ -33750,6 +34484,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>この弱点は, 別の認証法を利用することで緩和できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This will allow NETCONF over SSH
+   traffic to be easily identified and filtered by firewalls and other
+   network nodes.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T043353Z" changeid="haruyama">
+        <seg>これは, SSH トラフィック上の NETCONF を, ファイアウォールや他のネットワークノードで容易の識別しフィルタするのを可能にする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34046,8 +34790,17 @@
         <seg>To continue the example given above, an NETCONF over SSH session to
    retrieve a set of configuration information might look like this:</seg>
       </tuv>
-      <tuv lang="JA" changedate="20110728T100238Z" changeid="haruyama">
-        <seg>上記の例に続いて, 設定情報の集合を取得する SSH セッション上の NETCONF は次のようになる.</seg>
+      <tuv lang="JA" changedate="20111001T042825Z" changeid="haruyama">
+        <seg>上記の例に続いて, 設定情報の集合を取得する SSH セッション上の NETCONF は次のようになる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To continue the example used in Section 4.2, an existing NETCONF
+   subsystem session could be closed as follows:</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T043055Z" changeid="haruyama">
+        <seg>4.2 節で利用した例に続いて, 既存の NETCONF サブシステムを終了する例は以下だ:</seg>
       </tuv>
     </tu>
     <tu>
@@ -34184,6 +34937,17 @@
       </tuv>
       <tuv lang="JA" changedate="20110704T030343Z" changeid="haruyama">
         <seg>これを防ぐため, クライアントは認証が完了した事を示す最後のメッセージを送る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To run NETCONF over SSH, the SSH client will first establish an SSH
+   transport connection using the SSH transport protocol, and the SSH
+   client and SSH server will exchange keys for message integrity and
+   encryption.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T033301Z" changeid="haruyama">
+        <seg>SSH上でNETCONFを実行するのに, クライアントはまずSSHトランスポート接続をSSHトランスポートプロトコルを用いて確立し, SSH クライアントと SSH サーバはメッセージ完全性と暗号化のための鍵を交換する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34462,6 +35226,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Upon reception of the &lt;hello&gt; message, the receiving peer's
+   SSH Transport layer conceptually passes the &lt;hello&gt; message to the
+   Messages layer.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T035232Z" changeid="haruyama">
+        <seg>&lt;hello&gt; メッセージを受信したら, 受け取ったピアの SSH トランスポート層は Messages 層に &lt;hello&gt; メッセージを概念的に渡す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Use in Public Key Algorithms</seg>
       </tuv>
       <tuv lang="JA" changedate="20110928T062333Z" changeid="haruyama">
@@ -34474,6 +35248,18 @@
       </tuv>
       <tuv lang="JA" changedate="20110830T005205Z" changeid="haruyama">
         <seg>公開鍵アルゴリズムでの利用 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Use of
+   that configuration option without corresponding changes to firewall
+   or network device configuration may unintentionally result in the
+   ability for nodes outside of the firewall or other administrative
+   boundaries to gain access to the &quot;netconf&quot; SSH subsystem.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T043422Z" changeid="haruyama">
+        <seg>ファイアウォールやネットワークデバイスの設定を対応して変更することなしにこの設定項目を利用すると, &quot;netconf&quot; SSH サブシステムへのアクセスを得ようとする ファイアウォールや他の管理境界の外にあるノードの接続に意図しない影響を与える可能性がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34637,6 +35423,14 @@
       </tuv>
       <tuv lang="JA" changedate="20110728T095948Z" changeid="haruyama">
         <seg>SSH 上での NETCONF の利用</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Using NETCONF over SSH .</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T032730Z" changeid="haruyama">
+        <seg>SSH 上での NETCONF の利用 .</seg>
       </tuv>
     </tu>
     <tu>
@@ -35026,6 +35820,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>When both
+   peers implement base:1.1 capability, a proper framing protocol
+   (chunked framing mechanism; see Section 4.2) is used for the rest of
+   the NETCONF session, to avoid injection attacks.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T044453Z" changeid="haruyama">
+        <seg>両方のピアが base:1.1 機能を実装していれば, インジェクション攻撃を避けるために, 残りの NETCONF セッションでは適切なフレーミングプロトコル (チャンクされたフレーミングメカニズム; 4.2 節参照) が用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>When calling GSS_Init_sec_context(), the client MUST set
    integ_req_flag to &quot;true&quot; to request that per-message integrity
    protection be supported for this context.</seg>
@@ -35132,6 +35937,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>現在, これらのメッセージは典型的にはエラーやデバッグ情報, その他の外部で設定されるデータに関連している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When the NETCONF
+   server processes a &lt;close-session&gt; operation, the NETCONF server
+   SHALL respond and close the SSH session channel.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T042958Z" changeid="haruyama">
+        <seg>NETCONF サーバが &lt;close-session&gt; 操作を処理する場合は, NETCONF サーバは応答し SSH のセッションチャンネルを終了することになる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35257,6 +36072,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>このときは, クライアントはサーバとの接続を切断し古いプロトコルを利用して再接続する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When this mechanism is used, the special character sequence ]]&gt;]]&gt;,
+   MUST be sent by both the NETCONF client and the NETCONF server after
+   each message (XML document) in the NETCONF exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T042612Z" changeid="haruyama">
+        <seg>このメカニズムが利用される場合, 特殊な文字列, ]]&gt;]]&gt; を NETCONF 交換でのそれぞれの XML文書の後で NETCONF クライアントも NETCONF サーバも送らなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35862,6 +36687,14 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>authentication protocol [RFC4252].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T033315Z" changeid="haruyama">
+        <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>based attacks (as an egregious example, an application might save
    cryptographic keys in cleartext to an unprotected file).</seg>
       </tuv>
@@ -35953,6 +36786,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       <tuv lang="JA">
         <seg>cookie
          'cookie' は, 送り手が生成するランダムな値でなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>could be encoded as (using '\n' as a visible representation of the
+   LineFeed character):</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T035206Z" changeid="haruyama">
+        <seg>は, 以下のようにエンコードされる ('\n' はラインフィード文字の可視表現として用いる):</seg>
       </tuv>
     </tu>
     <tu>
@@ -36187,6 +37029,24 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  Added examples to show new chunked encoding properly; highlighted
+      the location of new lines.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T045041Z" changeid="haruyama">
+        <seg>o  新しいチャンクされたエンコーディングを適切に示す例を追加した; 改行の位置を強調した.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  Added text for NETCONF username handling following the
+      requirements on usernames in [RFC6241].</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T045105Z" changeid="haruyama">
+        <seg>o  [RFC6241] のユーザ名の要件に従う NETCONF ユーザ名の扱いについて追記した.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>o  Algorithm negotiation messages (20 to 29) (but further
       SSH_MSG_KEXINIT messages MUST NOT be sent);</seg>
       </tuv>
@@ -36258,6 +37118,24 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  Changed use of the terms &quot;client/server&quot; and &quot;manager/agent&quot; to
+      &quot;SSH client/server&quot; and &quot;NETCONF client/server&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T045155Z" changeid="haruyama">
+        <seg>o  &quot;クライアント/サーバ&quot; と &quot;マネージャ/エージェント&quot;という用語法を &quot;SSH クライアント/サーバ&quot; と &quot;NETCONF クライアント/サーバ&quot; に変更した.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  Consistently used the term &quot;operation&quot;, instead of &quot;command&quot; or
+      &quot;message&quot;.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T045233Z" changeid="haruyama">
+        <seg>o  &quot;コマンド&quot; や &quot;メッセージ&quot; の変わりに 用語 &quot;操作&quot; を一貫して利用するようにした.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>o  Each following certificate MUST certify the one preceding it.</seg>
       </tuv>
       <tuv lang="JA" changedate="20110901T065949Z" changeid="haruyama">
@@ -36295,6 +37173,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>o  通信の方向のそれぞれに対する暗号化や完全性, 圧縮のアルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  Extended text in Security Considerations; added text on EOM
+      issues.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T045010Z" changeid="haruyama">
+        <seg>o  セキュリティの考察を拡張した; EOM 問題について追記した.</seg>
       </tuv>
     </tu>
     <tu>
@@ -36420,6 +37307,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  Integrated errata verified for RFC 4742 as of the date of
+      publication of this document.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T045610Z" changeid="haruyama">
+        <seg>o  この文書の発行日現在の RFC 4742 に対して検証された正誤表を統合した.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>o  Integrity key client to server: HASH(K || H || &quot;E&quot; || session_id)</seg>
       </tuv>
       <tuv lang="JA">
@@ -36432,6 +37328,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>o  サーバからクライアントへの完全性のための(MACの)鍵: HASH(K || H || &quot;F&quot; || session_id)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  Introduced the new chunked framing mechanism to solve known
+      security issues with the EOM framing.</seg>
+      </tuv>
+      <tuv lang="JA" changedate="20111001T044946Z" changeid="haruyama">
+        <seg>o  EOM フレーミングの既知のセキュリティ問題を解決するため, 新しいチャンクされたフレーミングメカニズムを導入した.</seg>
       </tuv>
     </tu>
     <tu>
