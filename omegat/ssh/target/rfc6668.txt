@@ -1,0 +1,249 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                          D. Bider
+Request for Comments: 6668                               Bitvise Limited
+Updates: 4253                                                 M. Baushke
+Category: Standards Track                         Juniper Networks, Inc.
+ISSN: 2070-1721                                                July 2012
+
+
+                 セキュア シェル (SSH) トランスポート層プロトコルのための SHA-2 データ完全性検証
+
+概要
+
+   このメモは, セキュア シェル (SSH) プロトコルのデータ完全性検証のために SHA-2 ファミリの安全なハッシュアルゴリズムの一部を利用する場合におけるアルゴリズム名とパラメータを記述する.  このメモは, 新しい推奨(RECOMMENDED)のデータ完全性アルゴリズムを定義してRFC 4253 を更新する.
+
+このメモの位置づけ
+
+   これは, インターネット標準化課程文書だ.
+
+   この文書は, Internet Engineering Task Force (IETF) の成果物だ.  IETF コミュニティの合意を表わしている.  公開のレビューを受けており, Internet Engineering Steering Group (IESG) によって発行が認められた.  インターネット標準についてのさらなる情報は, RFC 5741 の 2節にある.
+
+   この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc6668 で得られる. 
+
+著作権情報
+
+   Copyright (c) 2012 IETF Trust and the persons identified as the
+   document authors. 訳者: 春山征吾 <haruyama@unixuser.org> All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+
+
+Bider & Baushke              Standards Track                    [Page 1]
+
+RFC 6668              Sha2-Transport Layer Protocol            July 2012
+
+
+1概要と原理
+
+   セキュア シェル (SSH) [RFC4251] は, インターネットでの安全なリモートログインのための非常に一般的なプロトコルだ.  現在, SSH は SHA-1 と MD5 アルゴリズムを利用するデータ完全性検証を定義している [RFC4253].  これらの2つのアルゴリズムについての最近のセキュリティの懸念 (それぞれ [RFC6194] と [RFC6151])から, 実装者とユーザは安全なハッシュアルゴリズムの SHA-2 ファミリの一部を利用するデータ完全性検証のサポートを要求している.
+
+1.1.  要件に関する用語
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, [RFC-2119] で記述されているように解釈される. 
+
+2.  データ完全性アルゴリズム
+
+   このメモは, 新しいデータ完全性アルゴリズムの利用をSSHの中でどのように表明するかを指定するのに, [RFC4253] スタイルと命名規則を採用する.
+
+   以下の新しいデータ完全性アルゴリズムが定義される:
+
+   hmac-sha2-256     RECOMMENDED   HMAC-SHA2-256
+                                   (digest length = 32 bytes,
+                                    key length    = 32 bytes)
+
+   hmac-sha2-512     OPTIONAL      HMAC-SHA2-512
+                                   (digest length = 64 bytes,
+                                    key length    = 64 bytes)
+
+                          Figure 1
+
+   Hashed Message Authentication Code (HMAC) メカニズムは, 元々 [RFC2104] で定義され, [RFC6151] で更新された.
+
+   安全なハッシュアルゴリズムの SHA-2 ファミリは [FIPS-180-3] で定義されている.
+
+   SHA ベースの HMAC アルゴリズムのサンプルコードは [RFC6234] にある.  変形である HMAC-SHA2-224 と HMAC-SHA2-384 アルゴリズムも考慮された. しかし, これらは, それぞれ HMAC-SHA2-256, HMAC-SHA2-512 と同じ計算上の要件を持っていてかつ実際にはそれほど使われてないようにみえるので, このリストには追加されなかった.
+
+
+
+
+
+
+
+Bider & Baushke              Standards Track                    [Page 2]
+
+RFC 6668              Sha2-Transport Layer Protocol            July 2012
+
+
+   SHA-2 で HMAC を用いる場合のテストベクタは, [RFC4231] で提供されている.
+   ユーザと実装者, 管理者は, これらの新しいMACが最初に交渉されるように, [RFC4253]で定義され要求されている(REQUIRED) hmac-sha1 アルゴリズムより前に提案に入れることができる.
+
+3.  IANA の考慮
+
+   この文書は [RFC4253] と [RFC4250] の MAC アルゴリズム名を増やす.
+
+   IANA は "Secure Shell (SSH) Protocol Parameters" レジストリを次のエントリで更新した.
+
+   MAC Algorithm Name      Reference       Note
+   hmac-sha2-256           RFC 6668        Section 2
+   hmac-sha2-512           RFC 6668        Section 2
+
+                        Figure 2
+
+4.  セキュリティの考察
+
+   RFC 4253 [RFC4253] のセキュリティの考察がこの文書に適用される.
+
+   National Institute of Standards and Technology (NIST) の出版物: NIST Special Publication (SP) 800-107 [800-107] と NIST SP 800-131A [800-131A] は, HMAC-SHA1 と HMAC-SHA2-256 はそれぞれ 128 bit と 256 bit のセキュリティの強さを持つと示唆している (訳者注: HMAC-SHA2-256 と HMAC-SHA2-512 の間違い?). これらは許容できる鍵の長さだと考えられている.
+
+   多くのユーザは, SHA2-ベースのアルゴリズムをハッシュに用いる実感できる安全性に興味があるようだ.
+
+5.  References
+
+5.1.  Normative References
+
+   [FIPS-180-3]
+              National Institute of Standards and Technology (NIST),
+              United States of America, "Secure Hash Standard (SHS)",
+              FIPS PUB 180-3, October 2008, <http://csrc.nist.gov/
+              publications/fips/fips180-3/fips180-3_final.pdf>.
+
+   [RFC2104]  Krawczyk, H., Bellare, M., and R. Canetti, "HMAC: Keyed-
+              Hashing for Message Authentication", RFC 2104, February
+              1997.
+
+
+
+
+
+Bider & Baushke              Standards Track                    [Page 3]
+
+RFC 6668              Sha2-Transport Layer Protocol            July 2012
+
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC4231]  Nystrom, M., "Identifiers and Test Vectors for HMAC-
+              SHA-224, HMAC-SHA-256, HMAC-SHA-384, and HMAC-SHA-512",
+              RFC 4231, December 2005.
+
+   [RFC4253]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Transport Layer Protocol", RFC 4253, January 2006.
+
+5.2.  Informative References
+
+   [800-107]  National Institute of Standards and Technology (NIST),
+              "Recommendation for Applications Using Approved Hash
+              Algorithms", NIST Special Publication 800-107, February
+              2009, <http://csrc.nist.gov/publications/
+              nistpubs/800-107/NIST-SP-800-107.pdf>.
+
+   [800-131A] National Institute of Standards and Technology (NIST),
+              "Transitions: Recommendation for the Transitioning of the
+              Use of Cryptographic Algorithms and Key Lengths", DRAFT
+              NIST Special Publication 800-131A, January 2011,
+              <http://csrc.nist.gov/publications/nistpubs/800-131A/
+              sp800-131A.pdf>.
+
+   [RFC4250]  Lehtinen, S. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Assigned Numbers", RFC 4250, January 2006.
+
+   [RFC4251]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Architecture", RFC 4251, January 2006.
+
+   [RFC6151]  Turner, S. and L. Chen, "Updated Security Considerations
+              for the MD5 Message-Digest and the HMAC-MD5 Algorithms",
+              RFC 6151, March 2011.
+
+   [RFC6194]  Polk, T., Chen, L., Turner, S., and P. Hoffman, "Security
+              Considerations for the SHA-0 and SHA-1 Message-Digest
+              Algorithms", RFC 6194, March 2011.
+
+   [RFC6234]  Eastlake 3rd, D. and T. Hansen, "US Secure Hash Algorithms
+              (SHA and SHA-based HMAC and HKDF)", RFC 6234, May 2011.
+
+
+
+
+
+
+
+
+
+
+Bider & Baushke              Standards Track                    [Page 4]
+
+RFC 6668              Sha2-Transport Layer Protocol            July 2012
+
+
+Authors' Addresses
+
+   Denis Bider
+   Bitvise Limited
+   Suites 41/42, Victoria House
+   26 Main Street
+   GI
+
+   Phone: +1 869 762 1410
+   EMail: ietf-ssh2@denisbider.com
+   URI:   http://www.bitvise.com/
+
+
+   Mark D. Baushke
+   Juniper Networks, Inc.
+   1194 N Mathilda Av
+   Sunnyvale, CA 94089-1206
+   US
+
+   Phone: +1 408 745 2952
+   EMail: mdb@juniper.net
+   URI:   http://www.juniper.net/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bider & Baushke              Standards Track                    [Page 5]
+
