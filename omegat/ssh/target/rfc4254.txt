@@ -777,7 +777,8 @@ RFC 4254                SSH Connection Protocol             January 2006
           3     VERASE      カーソルの左側の文字を消す.
           4     VKILL       現在の入力行を消す.
           5     VEOF        End-of-file 文字 (ターミナルからEOFを送る).
-          6     VEOL        キャリッジリターンと/もしくはラインフィードに追加される End-of-line 文字7     VEOL2       追加の end-of-line 文字.
+          6     VEOL        キャリッジリターンと/もしくはラインフィードに追加される End-of-line 文字
+          7     VEOL2       追加の end-of-line 文字.
           8     VSTART      中断した出力を再開する(通常は control-Q).
           9     VSTOP       出力を中断する. (通常は control-S).
           10    VSUSP       現在のプログラムを中断する.
@@ -793,7 +794,8 @@ RFC 4254                SSH Connection Protocol             January 2006
           12    VREPRINT    現在の入力行を再表示する.
           13    VWERASE     カーソルの左の word を消す.
           14    VLNEXT      次に入力される文字が特別な文字だったとしてもその通りに入力する.
-         15    VFLUSH      出力を flush する文字16    VSWTCH      別の shell layer に切り替える.
+         15    VFLUSH      出力を flush する文字
+          16    VSWTCH      別の shell layer に切り替える.
           17    VSTATUS     システムのステータス行(負荷, コマンド, pidなど)を表示する.
           18    VDISCARD    端末の出力をflushするかを切り替える.
           30    IGNPAR      パリティ無視フラグ.  FALSEならパラメータを0に, TRUE なら 1 にする必要がある.
@@ -801,7 +803,8 @@ RFC 4254                SSH Connection Protocol             January 2006
           32    INPCK       パリティエラーのチェックを有効にする.
           33    ISTRIP      文字の8bit目を落す.
           34    INLCR       入力でNLをCRに置き換える.
-          35    IGNCR       入力でCRを無視する. (36    ICRNL       入力でCRをNLに置き換える.
+          35    IGNCR       入力でCRを無視する. (
+          36    ICRNL       入力でCRをNLに置き換える.
           37    IUCLC       大文字を小文字に変換する.
           38    IXON        出力のフロー制御を有効にする.
           39    IXANY       どの文字でもストップ後の再開を行なう.
@@ -813,7 +816,9 @@ RFC 4254                SSH Connection Protocol             January 2006
                             characters by preceding their lowercase
                             equivalents with "\".
           53    ECHO        エコーを有効にする.
-          54    ECHOE       視覚的なerase文字55    ECHOK       現在の行を捨てる Kill 文字56    ECHONL      ECHO が無効でも NL をエコーする.
+          54    ECHOE       視覚的なerase文字
+          55    ECHOK       現在の行を捨てる Kill 文字
+          56    ECHONL      ECHO が無効でも NL をエコーする.
           57    NOFLSH      割り込みの後でflushしない.
           58    TOSTOP      バックグラウンドのジョブから出力があったらジョブを止める.
           59    IEXTEN      拡張を有効にする.
@@ -836,7 +841,8 @@ RFC 4254                SSH Connection Protocol             January 2006
 
           90    CS7         7 bit モード.
           91    CS8         8 bit モード.
-          92    PARENB      パリティ有効93    PARODD      設定されると奇数パリティ. もしくは 偶数パリティ
+          92    PARENB      パリティ有効
+          93    PARODD      設定されると奇数パリティ. もしくは 偶数パリティ
 
           128 TTY_OP_ISPEED  bit/秒単位で入力バンドレートを指定する.
           129 TTY_OP_OSPEED  bit/秒単位で出力バンドレートを指定する.

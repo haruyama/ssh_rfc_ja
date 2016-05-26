@@ -907,14 +907,16 @@ snmpSshtmSessionOpens  OBJECT-TYPE
     SYNTAX       Counter32
     MAX-ACCESS   read-only
     STATUS       current
-    DESCRIPTION "成功/失敗に関わらず, SSH クライアントとして openSession() 要求が実行された回数"
+    DESCRIPTION "成功/失敗に関わらず, SSH クライアントとして openSession() 要求が実行された回数
+                "
     ::= { snmpSshtmSession 1 }
 
 snmpSshtmSessionCloses  OBJECT-TYPE
     SYNTAX       Counter32
     MAX-ACCESS   read-only
     STATUS       current
-    DESCRIPTION "成功/失敗に関わらず, SSH クライアントとして closeSession() 要求が実行された回数"
+    DESCRIPTION "成功/失敗に関わらず, SSH クライアントとして closeSession() 要求が実行された回数
+                "
     ::= { snmpSshtmSession 2 }
 
 snmpSshtmSessionOpenErrors  OBJECT-TYPE
@@ -931,7 +933,8 @@ Harrington, et al.          Standards Track                    [Page 26]
 RFC 5592         Secure Shell Transport Model for SNMP         June 2009
 
 
-    DESCRIPTION "トランスポート接続の開始に失敗した ないし サーバの認証に失敗した openSession() 要求の回数"
+    DESCRIPTION "トランスポート接続の開始に失敗した ないし サーバの認証に失敗した openSession() 要求の回数
+                "
     ::= { snmpSshtmSession 3 }
 
 snmpSshtmSessionUserAuthFailures  OBJECT-TYPE

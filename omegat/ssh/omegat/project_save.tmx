@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tmx SYSTEM "tmx11.dtd">
 <tmx version="1.1">
-  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="3.0.7" segtype="sentence" srclang="EN-US"/>
+  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="3.5.4_0_r8496:8556M" segtype="sentence" srclang="EN-US"/>
   <body>
 <!-- Default translations -->
     <tu>
@@ -4173,6 +4173,48 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>At minLOS_128, all SecSh-B implementations MUST be able to verify
+      ECDSA-256 signatures and SHOULD be able to verify ECDSA-384
+      signatures, unless it is absolutely certain that the
+      implementation will never need to verify certificates originating
+      from an authority that uses an ECDSA-384 signing key.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T112303Z" creationid="haruyama" creationdate="20160526T112156Z">
+        <seg>minLOS_128 の場合, すべての SecSh-B 実装は ECDSA-256 署名を検証できなければならない. また, ECDSA-384 署名鍵を用いる認証局で発行される証明書を検証する必要が決して生じないと実装が完全に確認できない場合は, ECDSA-384 署名を検証できる必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>At minLOS_128, each SecSh-B server and each SecSh-B user MUST have
+      either an ECDSA-256 signing key with a corresponding X.509v3
+      certificate, an ECDSA-384 signing key with a corresponding X.509v3
+      certificate, or both.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T112259Z" creationid="haruyama" creationdate="20160526T112206Z">
+        <seg>minLOS_128 の場合, それぞれの SecSh-B サーバとそれぞれの SecSh-B ユーザは, 対応する X.509v3 証明書で ECDSA-256 署名鍵を持つか, 対応する X.509v3 証明書で ECDSA-384 鍵を持つか, その両方を持たなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>At minLOS_192, all SecSh-B implementations MUST be able to verify
+      ECDSA-384 signatures.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T112306Z" creationid="haruyama" creationdate="20160526T112145Z">
+        <seg>minLOS_192 の場合, すべての SecSh-B 実装は, ECDSA-384 署名を検証できなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>At minLOS_192, each SecSh-B server and each SecSh-B user MUST have
+      an ECDSA-384 signing key with a corresponding X.509v3 certificate.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T112216Z" creationid="haruyama" creationdate="20160526T112216Z">
+        <seg>minLOS_192 の場合, それぞれの SecSh-B サーバとそれぞれの SecSh-B ユーザは,対
+応する X.509v3 証明書で ECDSA-384 鍵を持たなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>At present, the best known algorithm is the
    Pollard-rho method.</seg>
       </tuv>
@@ -4992,6 +5034,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>C は, K_S が本当に S のホスト鍵かを検証する(例えば, 証明書やローカルなデータベースを用いて).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>CS7         7 bit mode.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T111712Z" creationid="haruyama" creationdate="20160526T111712Z">
+        <seg>CS7         7 bit モード.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6982,6 +7032,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>ECDSA-256 MUST NOT be used to sign an ECDSA-384 public key.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T112348Z" creationid="haruyama" creationdate="20160526T112348Z">
+        <seg>ECDSA-256 は, ECDSA-384 公開鍵を署名するのに用いられてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>ECDSA-256 only (min_LOS 128):
                server_host_key_algorithms name_list :=
                                 { x509v3-ecdsa-sha2-nistp256 }</seg>
@@ -7004,6 +7062,14 @@
                server_host_key_algorithms name_list :=
                                 { x509v3-ecdsa-sha2-nistp256,
                                   x509v3-ecdsa-sha2-nistp384 }</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>ECDSA-384 MAY be used to sign an ECDSA-256 public key.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T112135Z" creationid="haruyama" creationdate="20160526T112135Z">
+        <seg>ECDSA-384 は, ECDSA-256 公開鍵を署名するのに用いられてもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14766,6 +14832,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T110622Z" creationid="haruyama" creationdate="20160526T110622Z">
+        <seg>qInternet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Introduction</seg>
       </tuv>
       <tuv lang="JA">
@@ -20727,6 +20803,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>SSH Agent Protocol</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T095732Z" creationid="haruyama" creationdate="20160526T095732Z">
+        <seg>SSH エージェントプロトコル</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>SSH ECC Public Key Algorithm</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110321T122010Z">
@@ -23121,6 +23205,24 @@
       </tuv>
       <tuv lang="JA">
         <seg>TCP/IP ポート転送</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>TTY_OP_ISPEED  Specifies the input baud rate in
+                              bits per second.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T111657Z" creationid="haruyama" creationdate="20160526T111657Z">
+        <seg>TTY_OP_ISPEED  bit/秒単位で入力バンドレートを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>TTY_OP_ISPEED  Specifies the input baud rate in
+                             bits per second.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T111457Z" creationid="haruyama" creationdate="20160526T111457Z">
+        <seg>TTY_OP_ISPEED  bit/秒単位で入力バンドレートを指定する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26155,6 +26257,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>X のプロトコルは, [SCHEIFLER] に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The X.509v3 certificates MUST use only the two Suite B digital
+      signatures, ECDSA-256 and ECDSA-384.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T112119Z" creationid="haruyama" creationdate="20160526T112119Z">
+        <seg>X.509v3 証明書は, 2つの Suite B 電子署名(アルゴリズム), ECDSA-256 と ECDSA-384 のみを用いなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -29429,11 +29540,29 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The packet cannot be parsed until the packet_length has been
+      decrypted.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T111945Z" creationid="haruyama" creationdate="20160526T111945Z">
+        <seg>packet_length が復号されるまでパケットがパースできない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The packet sequence_number itself is not included in the
    packet sent over the wire.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>パケットの sequence_number 自体は, 通信で送られるパケットには含まれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The packet_length cannot be decrypted until the tag has been
+      verified.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T111953Z" creationid="haruyama" creationdate="20160526T111953Z">
+        <seg>タグが検証されるまで packet_length が復号できない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30369,6 +30498,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The server MUST share its public key with the host using an
+      X.509v3 certificate as described in [SSH-X509].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T112050Z" creationid="haruyama" creationdate="20160526T112050Z">
+        <seg>サーバは, [SSH-X509] に記述されている X.509v3 証明書を用いてホストにその公開鍵を共有しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The server MUST verify that the host key actually belongs to the
    client host named in the message, that the given user on that host is
    allowed to log in, and that the 'signature' value is a valid
@@ -30905,6 +31043,14 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110425T073245Z">
         <seg>1 節の表は, 楕円曲線フィールドサイズと対称鍵サイズの等しさの見積りだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The tag cannot be verified until we parse the binary packet.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T111933Z" creationid="haruyama" creationdate="20160526T111933Z">
+        <seg>バイナリパケットをパースするまでタグが検証できない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35588,6 +35734,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>User authentication MUST begin with public key authentication
+      using ECDSA-256/384 with X.509v3 certificates (see Section 4).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T112108Z" creationid="haruyama" creationdate="20160526T112108Z">
+        <seg>ユーザ認証は, X.509v3 証明書で ECDSA-256/384 を用いる 公開鍵認証で始められなければならない (4節を参照).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>User authentication and protection against network-level
    attacks are assumed to be provided by the underlying protocols.</seg>
       </tuv>
@@ -36710,6 +36865,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>X11の転送は, セッションに SSH_MSG_CHANNEL_REQUEST メッセージを送ることで要求される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>XCASE       Enable input and output of uppercase
+                            characters by preceding their lowercase
+                            equivalents with "\".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160526T111435Z" creationid="haruyama" creationdate="20160526T111435Z">
+        <seg>XCASE       (訳注: 小文字のみ有効な場合に)小文字の前に "\" を付けることで大文字の入出力を有効にする.</seg>
       </tuv>
     </tu>
     <tu>
