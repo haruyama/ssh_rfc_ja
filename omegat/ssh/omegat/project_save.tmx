@@ -62,6 +62,26 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>"comment" is
+   an optional human-readable key name or comment as a UTF-8 string that
+   may serve to identify the key in user-visible messages.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T110300Z" creationid="haruyama" creationdate="20160527T110020Z">
+        <seg>"comment" は, UTF8 の文字列の, ユーザに表示されるメッセージで鍵を特定するために提供される人間に解読可能な鍵の名前やコメントだ. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>"contents" consists of the public
+   and private components of the key and vary by key type, they are
+   listed below for standard and commonly used key types.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T105921Z" creationid="haruyama" creationdate="20160527T105921Z">
+        <seg>"contents" は, 鍵の公開と非公開の部分から構成され, 鍵の種類によって異なる. 標準の鍵の種類と一般に用いられている鍵の種類についてはあとで列挙する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>"env" specifies that session channel "env" requests should be denied
    when this key is in use.</seg>
       </tuv>
@@ -2084,6 +2104,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Adding keys to the agent</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T105309Z" creationid="haruyama" creationdate="20160527T105309Z">
+        <seg>エージェントへの鍵の追加</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Adding keys to the agent  .</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160526T114117Z" creationid="haruyama" creationdate="20160526T114117Z">
@@ -2960,6 +2988,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>All values in the agent protocol are encoded using the SSH wire
+   representations specified by [RFC4251].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T000753Z" creationid="haruyama" creationdate="20160527T000753Z">
+        <seg>エージェントプロトコルのすべての値は, [RFC4251] で指定された SSH 通信表現を用いてエンコードされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Allocation of the following types of names in the SSH protocols is
    assigned by IETF consensus:</seg>
       </tuv>
@@ -3212,6 +3249,16 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110930T144624Z">
         <seg>サーバ公開署名 ECDSA 鍵を含む X.509v3 証明書と, 新しく確立した共有秘密値から導出される交換ハッシュに対する ECDSA 署名が, クライアントに対してサーバを認証するのに用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An agent should reply with SSH_AGENT_SUCCESS if the key was
+   successfully loaded as a result of one of these messages, or
+   SSH_AGENT_FAILURE otherwise.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T110523Z" creationid="haruyama" creationdate="20160527T110523Z">
+        <seg>エージェントは, これらのメッセージのうちの1つの結果として鍵が正常にロードされたならば SSH_AGENT_SUCCESS で応答しなければならない. そうでなければ SSH_AGENT_FAILURE で応答しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4245,6 +4292,15 @@
       <tuv lang="JA" changeid="haruyama" changedate="20160526T112216Z" creationid="haruyama" creationdate="20160526T112216Z">
         <seg>minLOS_192 の場合, それぞれの SecSh-B サーバとそれぞれの SecSh-B ユーザは,対
 応する X.509v3 証明書で ECDSA-384 鍵を持たなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>At no time does the server send messages except in
+   response to a client request.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T000658Z" creationid="haruyama" creationdate="20160527T000658Z">
+        <seg>クライアントの要求に対する応答以外に, サーバがメッセージを送信することは決してない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6069,6 +6125,14 @@
       <tuv lang="JA" changeid="haruyama" changedate="20110801T112024Z">
         <seg>制約 ................................................6
    2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Constraints are used to place limits on the validity or use of keys.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T110400Z" creationid="haruyama" creationdate="20160527T110400Z">
+        <seg>Constraints は, 鍵の有効性や利用に関する制限を配置するのに用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9673,9 +9737,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Generic server responses</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T104910Z" creationid="haruyama" creationdate="20160527T104910Z">
+        <seg>一般的なサーバの応答</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Generic server responses  .</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20160526T114106Z" creationid="haruyama" creationdate="20160526T114106Z">
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T105028Z" creationid="haruyama" creationdate="20160526T114106Z">
         <seg>一般的なサーバの応答  .</seg>
       </tuv>
     </tu>
@@ -9780,6 +9852,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110718T035059Z">
         <seg>"x-" で始まる header-tag を持つヘッダは私的利用のために予約されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Here "type" is the specified key type name, for example "ssh-rsa" for
+   a RSA key as defined by [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T105744Z" creationid="haruyama" creationdate="20160527T105744Z">
+        <seg>ここで, "type" は鍵特有の種類の名前だ. 例えば [RFC4253] で定義されている "ssh-rsa" は RSA 鍵を指す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15296,6 +15377,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It consists of a number of requests sent from
+   the client to the server and a set of reply messages that are sent in
+   response.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T000546Z" creationid="haruyama" creationdate="20160527T000455Z">
+        <seg>クライアントからサーバに送られるいくつかのリクエストと応答中で送られる返信メッセージの集合で構成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It consists of three major
    protocol components and add-on methods for user authentication:</seg>
       </tuv>
@@ -16659,6 +16750,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Keys may be added to the agent using the SSH_AGENTC_ADD_IDENTITY or
+   SSH_AGENTC_ADD_ID_CONSTRAINED messages.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T105345Z" creationid="haruyama" creationdate="20160527T105345Z">
+        <seg>SSH_AGENTC_ADD_IDENTITY ないし SSH_AGENTC_ADD_ID_CONSTRAINED メッセージを用いて, エージェントに鍵は追加される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>L is the field size and N
    is the sub-field size.</seg>
       </tuv>
@@ -17280,6 +17380,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110810T062212Z">
         <seg>異なる tmSecruityName を用いて確立された既存の SSH セッションを通してメッセージを送ってはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Messages consist of a length
+   and contents.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T000942Z" creationid="haruyama" creationdate="20160527T000942Z">
+        <seg>メッセージはメッセージ長と内容から構成される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18672,6 +18781,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>On failure, the agent may
+   reply with:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T105229Z" creationid="haruyama" creationdate="20160527T105210Z">
+        <seg>失敗の場合, エージェントは次のメッセージで応答する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>On many systems, it is possible to determine if a pseudo-terminal is
    using control-S/control-Q flow control.</seg>
       </tuv>
@@ -18696,6 +18814,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110723T013621Z">
         <seg>遅いCPUでは, この鍵交換は計算に数十秒かかることがあり, ユーザをいらいらさせてしまうだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>On success the agent may reply either
+   with:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T105136Z" creationid="haruyama" creationdate="20160527T105136Z">
+        <seg>成功の場合, エージェントは次のメッセージで応答するか,</seg>
       </tuv>
     </tu>
     <tu>
@@ -19788,6 +19915,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Protocol Messages</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T001032Z" creationid="haruyama" creationdate="20160527T001032Z">
+        <seg>プロトコルのメッセージ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Protocol Messages .</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160526T114049Z" creationid="haruyama" creationdate="20160526T114049Z">
@@ -19796,10 +19931,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Protocol Overview</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T000135Z" creationid="haruyama" creationdate="20160527T000135Z">
+        <seg>プロトコルの概要</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Protocol Overview .</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20160526T114037Z" creationid="haruyama" creationdate="20160526T114037Z">
-        <seg>プロトコル概要 .</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T000145Z" creationid="haruyama" creationdate="20160526T114037Z">
+        <seg>プロトコルの概要 .</seg>
       </tuv>
     </tu>
     <tu>
@@ -20535,6 +20678,14 @@
       <tuv lang="JA">
         <seg>MACや場合によってはHMACへの入力に単調に増加するシーケンス番号を用いるリプレイ検知は以下に記述されている. [RFC2085],
    [RFC2246], [RFC2743], [RFC1964], [RFC2025], [RFC4120].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Replies are sent in order.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T000715Z" creationid="haruyama" creationdate="20160527T000715Z">
+        <seg>返信は順番を守って送られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21416,6 +21567,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>SSH_AGENT_FAILURE messages are also sent in reply to requests with
+   unknown types.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T105259Z" creationid="haruyama" creationdate="20160527T105259Z">
+        <seg>SSH_AGENT_FAILURE は, 未知の種類の要求に対する応答としても送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>SSH_MSG_CHANNEL_REQUEST messages with a "pty-req" string MUST contain
    'encoded terminal modes'.</seg>
       </tuv>
@@ -21626,6 +21786,14 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110719T025911Z">
         <seg>3.3 節で新しい名前空間 "Header-tags" を定義している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Section 4.2.6 details constraint types and their format.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T110420Z" creationid="haruyama" creationdate="20160527T110420Z">
+        <seg>4.2.6 節で 制約の種類やそれらの形式を詳述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26155,6 +26323,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The SSH_AGENTC_ADD_ID_CONSTRAINED is similar, but adds a extra field:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T110320Z" creationid="haruyama" creationdate="20160527T110320Z">
+        <seg>SSH_AGENTC_ADD_ID_CONSTRAINED は似ているが, 追加のフィールドがある:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The SSH_MSG_CHANNEL_OPEN_FAILURE 'reason code' values are defined in
    the following table.</seg>
       </tuv>
@@ -26622,6 +26798,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110728T100944Z">
         <seg>エージェントは, &lt;close-session&gt; コマンドの後で現在のセッションで受け取ったすべての RPC コマンドを処理してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The agent protocol is a packetised request-response protocol, solely
+   driven by the client.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T000507Z" creationid="haruyama" creationdate="20160527T000409Z">
+        <seg>エージェントプロトコルは, クライアントからのみ起動される, パケット化された要求-応答プロトコルだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28028,6 +28213,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The first byte of the contents always indicates the
+   type of the message.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T001007Z" creationid="haruyama" creationdate="20160527T001007Z">
+        <seg>内容の最初のバイトは, 常にメッセージのタイプを指す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The first line of a conforming key file MUST be a begin marker, which
    is the literal text:</seg>
       </tuv>
@@ -28157,6 +28351,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110728T093637Z">
         <seg>以下で機能の交換の例を示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The following generic messages may be sent by the server in response
+   to requests from the client.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T105101Z" creationid="haruyama" creationdate="20160527T105101Z">
+        <seg>次に一般的なメッセージが, クライアントからの要求への応答としてサーバから送られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28577,6 +28780,14 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110616T230329Z">
         <seg>生成器 g は生成される部分群のオーダーが小さい素数に因数分解できないように選ぶ必要がある. つまり p = 2q + 1 のとき, オーダーは q か p-1 のどちらかでなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The generic format for the key SSH_AGENTC_ADD_IDENTITY message is:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T105624Z" creationid="haruyama" creationdate="20160527T105624Z">
+        <seg>SSH_AGENTC_ADD_IDENTITY メッセージの一般的な形式は以下だ:</seg>
       </tuv>
     </tu>
     <tu>
@@ -29239,6 +29450,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>後者のほうが好ましい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The latter variant allows
+   adding keys with optional constraints on their usage.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T105558Z" creationid="haruyama" creationdate="20160527T105558Z">
+        <seg>後者は, 鍵の利用における任意の制約付きで鍵を追加できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -38608,6 +38828,14 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>or a request-specific success message.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T105156Z" creationid="haruyama" creationdate="20160527T105156Z">
+        <seg>要求に特有の成功のメッセージで応答する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>packet_length
          The length of the packet in bytes, not including 'mac' or the
          'packet_length' field itself.</seg>
@@ -39156,6 +39384,16 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>タイプに特有のデータが続く.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>uint32                   message length
+      byte[message length]     message contents</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160527T001022Z" creationid="haruyama" creationdate="20160527T001022Z">
+        <seg>uint32                   メッセージ長
+      byte[message length]     メッセージの内容</seg>
       </tuv>
     </tu>
     <tu>
