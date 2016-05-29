@@ -2139,6 +2139,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Adding keys from a token</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160529T114030Z" creationid="haruyama" creationdate="20160529T114030Z">
+        <seg>トークンからの鍵の追加</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Adding keys from a token  .</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160526T114159Z" creationid="haruyama" creationdate="20160526T114159Z">
@@ -3305,12 +3313,22 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>An agent should reply with SSH_AGENT_SUCCESS if one or more keys were
+   successfully loaded as a result of one of these messages, or
+   SSH_AGENT_FAILURE if no keys were found.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160529T114954Z" creationid="haruyama" creationdate="20160529T114739Z">
+        <seg>メッセージの結果として1つ以上の鍵が正常にロードされたなら, エージェントは SSH_AGENT_SUCCESS で応答する必要がある. どの鍵もロードされなかったら, SSH_AGENT_FAILURE を用いる必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>An agent should reply with SSH_AGENT_SUCCESS if the key was
    successfully loaded as a result of one of these messages, or
    SSH_AGENT_FAILURE otherwise.</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20160527T110523Z" creationid="haruyama" creationdate="20160527T110523Z">
-        <seg>エージェントは, これらのメッセージのうちの1つの結果として鍵が正常にロードされたならば SSH_AGENT_SUCCESS で応答しなければならない. そうでなければ SSH_AGENT_FAILURE で応答しなければならない.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20160529T115025Z" creationid="haruyama" creationdate="20160527T110523Z">
+        <seg>エージェントは, これらのメッセージのうちの1つの結果として鍵が正常にロードされたならば SSH_AGENT_SUCCESS で応答する必要がある そうでなければ SSH_AGENT_FAILURE で応答する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9962,6 +9980,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110718T035059Z">
         <seg>"x-" で始まる header-tag を持つヘッダは私的利用のために予約されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Here "id" is an opaque identifier for the hardware token and "PIN" is
+   an optional password on PIN to unlock the key.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160529T114316Z" creationid="haruyama" creationdate="20160529T114316Z">
+        <seg>ここで, "id" は ハードウェアトークンの内部識別子で, PIN は 鍵を開錠するための任意のパスワードだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16860,6 +16887,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Keys hosted on smart-cards or other hardware tokens may be added
+   using the SSH_AGENTC_ADD_SMARTCARD_KEY and
+   SSH_AGENTC_ADD_SMARTCARD_KEY_CONSTRAINED requests.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160529T114117Z" creationid="haruyama" creationdate="20160529T114117Z">
+        <seg>スマートカードや他のハードウェアトークンにホストされている鍵を, SSH_AGENTC_ADD_SMARTCARD_KEY ないし SSH_AGENTC_ADD_SMARTCARD_KEY_CONSTRAINED 要求を用いて追加できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Keys may be added to the agent using the SSH_AGENTC_ADD_IDENTITY or
    SSH_AGENTC_ADD_ID_CONSTRAINED messages.</seg>
       </tuv>
@@ -18284,6 +18321,16 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110607T080157Z">
         <seg>注意: アプリケーション全体のセキュリティでは, 暗号はしばしば小さい(しかし重大な)役割のみを果している. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Note that
+   "constraints" field is only included for the
+   SSH_AGENTC_ADD_SMARTCARD_KEY_CONSTRAINED variant of this message.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160529T114146Z" creationid="haruyama" creationdate="20160529T114146Z">
+        <seg>"constraints" フィールドは, SSH_AGENTC_ADD_SMARTCARD_KEY_CONSTRAINED メッセージのみに存在する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26993,6 +27040,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The agent should also
+   return SSH_AGENT_FAILURE if the token "id" was not recognised or if
+   the agent doesn't support token-hosted keys at all.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160529T114941Z" creationid="haruyama" creationdate="20160529T114941Z">
+        <seg>"id" を認識しない場合, エージェントがトークンにホストされた鍵をまったくサポートしない場合も, SSH_AGENT_FAILURE をエージェンノは返す必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The algorithm for ECC key generation can be found in Section 3.2 of
    [SEC1].</seg>
       </tuv>
@@ -29322,6 +29379,16 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110628T024727Z">
         <seg>すべての将来の方法の名前が， 2．3節で用いられたものと同じように定義されることを意図している．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The interpretation of
+   "id" is not defined by the protocol but is left solely up to the
+   agent.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160529T114415Z" creationid="haruyama" creationdate="20160529T114415Z">
+        <seg>"id" の解釈はこのプロコルでは定義しない. エージェントにのみ依存する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -36266,6 +36333,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>この件で情報を提供してくれる2つの文献が [SCHNEIER] と [KAUFMAN] だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Typically only the public components of any keys supported on a
+   hardware token will be loaded into an agent so, strictly speaking,
+   this message really arranges future private key operations to be
+   delegated to the hardware token in question.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160529T114709Z" creationid="haruyama" creationdate="20160529T114709Z">
+        <seg>典型的には, ハードウェアトークン上でサポートされる任意の鍵の公開の部分のみが, エージェントにロードされる. 厳密に言うと, このメッセージは, ハードウェアトークンに今後の秘密鍵の操作を移譲するよう準備する.</seg>
       </tuv>
     </tu>
     <tu>
