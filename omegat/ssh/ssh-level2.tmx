@@ -76,8 +76,8 @@
    and private components of the key and vary by key type, they are
    listed below for standard and commonly used key types.</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20160527T105921Z" creationid="haruyama" creationdate="20160527T105921Z">
-        <seg>"contents" は, 鍵の公開と非公開の部分から構成され, 鍵の種類によって異なる. 標準の鍵の種類と一般に用いられている鍵の種類についてはあとで列挙する.</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160529T110953Z" creationid="haruyama" creationdate="20160527T105921Z">
+        <seg>"contents" は, 鍵の公開と非公開の部分から構成され, 鍵の種類によって異なる. 標準の鍵のタイプと一般に用いられている鍵のタイプについてはあとで列挙する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6470,10 +6470,26 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>DSA keys</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160529T110857Z" creationid="haruyama" creationdate="20160529T110857Z">
+        <seg>DSA 鍵</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>DSA keys  .</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160526T114127Z" creationid="haruyama" creationdate="20160526T114127Z">
         <seg>DSA 鍵  .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>DSA keys have key type "ssh-dss" and are defined in [RFC4253].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160529T111010Z" creationid="haruyama" creationdate="20160529T110937Z">
+        <seg>DSA 鍵は, "ssh-dss" 鍵たいぷを持つ. [RFC4253] で定義されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9784,8 +9800,8 @@
         <seg>Here "type" is the specified key type name, for example "ssh-rsa" for
    a RSA key as defined by [RFC4253].</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20160527T105744Z" creationid="haruyama" creationdate="20160527T105744Z">
-        <seg>ここで, "type" は鍵特有の種類の名前だ. 例えば [RFC4253] で定義されている "ssh-rsa" は RSA 鍵を指す.</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160529T111002Z" creationid="haruyama" creationdate="20160527T105744Z">
+        <seg>ここで, "type" は鍵特有のタイプの名前だ. 例えば [RFC4253] で定義されている "ssh-rsa" は RSA 鍵を指す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23779,6 +23795,16 @@
     <tu>
       <tuv xml:lang="EN-US">
         <seg>The
+   "constraints" field is only present for the
+   SSH_AGENTC_ADD_ID_CONSTRAINED message.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160529T111055Z" creationid="haruyama" creationdate="20160529T111055Z">
+        <seg>"constraints" フィールドは SSH_AGENTC_ADD_ID_CONSTRAINED のみに存在する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The
    "version" packet MUST NOT be sent again after this initial exchange.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110721T052302Z">
@@ -24504,6 +24530,14 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110714T050810Z">
         <seg>"null" ホスト鍵アルゴリズムは, 関連するホスト鍵素材を持たず, 署名や暗号化のアルゴリムを提供しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The "p", "q", "g" values are the DSA domain parameters.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160529T111103Z" creationid="haruyama" creationdate="20160529T111103Z">
+        <seg> "p", "q", "g" values are the DSA domain parameters.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32592,6 +32626,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110828T043249Z">
         <seg>これらのトンネルは, [RFC4253] の7節で記述されているセキュアシェル鍵交換プロトコルを用いて初期化される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>They
+   may be added to the agent using the following message.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160529T111034Z" creationid="haruyama" creationdate="20160529T111034Z">
+        <seg>DSA 鍵は次のメッセージを用いてエージェントに追加される.</seg>
       </tuv>
     </tu>
     <tu>
