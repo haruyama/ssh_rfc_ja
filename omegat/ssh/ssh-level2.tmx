@@ -1711,6 +1711,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>A number of constraints and may be used in the constrained variants
+   of the key add messages.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160530T065751Z" creationid="haruyama" creationdate="20160530T065751Z">
+        <seg>制約を含む鍵の追加メッセージを用いて鍵に制約を付けられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>A partial flush means
    that the current compressed block is ended and all data will be
    output.</seg>
@@ -2615,6 +2624,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Agents may implement experimental or private-use constraints through
+   a extension constraint that supports named constraints.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160530T080615Z" creationid="haruyama" creationdate="20160530T080615Z">
+        <seg>エージェントは, 名前付きの制約をサポートする拡張制約によって実験的ないし非公式な利用用の制約を実装できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Algorithm Definitions</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110614T025403Z">
@@ -3317,10 +3335,8 @@
    successfully loaded as a result of one of these messages, or
    SSH_AGENT_FAILURE if no keys were found.</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20160529T114739Z" creationid="haruyama" creationdate="20160529T114739Z">
-        <seg>これらのメッセージAn agent should reply with SSH_AGENT_SUCCESS if one or more keys were
-   successfully loaded as a result of one of these messages, or
-   SSH_AGENT_FAILURE if no keys were found.</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160529T114954Z" creationid="haruyama" creationdate="20160529T114739Z">
+        <seg>メッセージの結果として1つ以上の鍵が正常にロードされたなら, エージェントは SSH_AGENT_SUCCESS で応答する必要がある. どの鍵もロードされなかったら, SSH_AGENT_FAILURE を用いる必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3329,8 +3345,8 @@
    successfully loaded as a result of one of these messages, or
    SSH_AGENT_FAILURE otherwise.</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20160527T110523Z" creationid="haruyama" creationdate="20160527T110523Z">
-        <seg>エージェントは, これらのメッセージのうちの1つの結果として鍵が正常にロードされたならば SSH_AGENT_SUCCESS で応答しなければならない. そうでなければ SSH_AGENT_FAILURE で応答しなければならない.</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160529T115025Z" creationid="haruyama" creationdate="20160527T110523Z">
+        <seg>エージェントは, これらのメッセージのうちの1つの結果として鍵が正常にロードされたならば SSH_AGENT_SUCCESS で応答する必要がある そうでなければ SSH_AGENT_FAILURE で応答する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6125,6 +6141,14 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Constraint extensions</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160530T080444Z" creationid="haruyama" creationdate="20160530T080444Z">
+        <seg>制約の拡張</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Constraint extensions .</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160526T114930Z" creationid="haruyama" creationdate="20160526T114930Z">
@@ -7380,6 +7404,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Each constraint is represented by a type
+   byte followed by zero or more value bytes.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160530T065828Z" creationid="haruyama" creationdate="20160530T065828Z">
+        <seg>それぞれの制約は, タイプのバイトとそれに続く0以上の値のバイトで表現される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Each field is a line of the following format:</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110718T033603Z">
@@ -8590,6 +8623,16 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110714T060243Z">
         <seg>例えば, 攻撃者がマッピングを変更したりサーバになりすますことができるので, ホストエイリアスをサーバのプライマリ名にマップしたりIPアドレスをホスト名にマップする保護されていない DNS レコードに依存してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>For
+   example, the agent could present a confirmation dialog before
+   completing a signature operation.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160530T080437Z" creationid="haruyama" creationdate="20160530T080437Z">
+        <seg>例えば, 署名の操作を完了する前にエージェントは確認のダイアログを出す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11341,6 +11384,16 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>安全なチャンネルから得た公開鍵の指紋を検証しないでユーザが鍵を受け入れると, その接続は中間者攻撃に対して脆弱だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If an agent does not recognise or support a requested constraint it
+   MUST refuse the request and return a SSH_AGENT_FAILURE message to the
+   client.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160530T070048Z" creationid="haruyama" creationdate="20160530T070048Z">
+        <seg>要求された制約をエージェントが認識しない場合やサポートしない場合は, 要求を拒否しクリアントに SSH_AGENT_FAILURE メッセージを返却しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16492,6 +16545,14 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Key Constraints</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160530T065658Z" creationid="haruyama" creationdate="20160530T065658Z">
+        <seg>鍵の制約</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Key Constraints .</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160526T114208Z" creationid="haruyama" creationdate="20160526T114208Z">
@@ -16708,6 +16769,14 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Key confirmation constraint</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160530T080125Z" creationid="haruyama" creationdate="20160530T080125Z">
+        <seg>鍵の確認の制約</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Key confirmation constraint .</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160526T114923Z" creationid="haruyama" creationdate="20160526T114923Z">
@@ -16775,6 +16844,14 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>この識別子を送ったらすぐに鍵交換が始まる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Key lifetime constraint</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160530T070303Z" creationid="haruyama" creationdate="20160530T070303Z">
+        <seg>鍵の有効期間の制約</seg>
       </tuv>
     </tu>
     <tu>
@@ -17668,6 +17745,15 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>複数のチャンネルは, 単一の接続に多重化される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Multiple constraints are appended
+   consecutively to the end of the request:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160530T065944Z" creationid="haruyama" creationdate="20160530T065930Z">
+        <seg>複数の制約は, 以下のように要求の最後に連続して追加される:</seg>
       </tuv>
     </tu>
     <tu>
@@ -26923,6 +27009,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The agent should also
+   return SSH_AGENT_FAILURE if the token "id" was not recognised or if
+   the agent doesn't support token-hosted keys at all.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160529T114941Z" creationid="haruyama" creationdate="20160529T114941Z">
+        <seg>"id" を認識しない場合, エージェントがトークンにホストされた鍵をまったくサポートしない場合も, SSH_AGENT_FAILURE をエージェンノは返す必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The algorithm for ECC key generation can be found in Section 3.2 of
    [SEC1].</seg>
       </tuv>
@@ -28444,6 +28540,14 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>次の圧縮アルゴリズムが現在定義されている:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The following constraints are defined.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160530T070055Z" creationid="haruyama" creationdate="20160530T070055Z">
+        <seg>以下の制約が定義されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33399,6 +33503,25 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This constraint requests that the agent limit the key's lifetime by
+   deleting it after the specified duration (in seconds) has elapsed
+   from the time the key was added to the agent.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160530T070448Z" creationid="haruyama" creationdate="20160530T070448Z">
+        <seg>この制約は, エージェントに鍵が追加された時間から(秒で)指定された期間が経過したら鍵を削除することで, エージェントに鍵の寿命を制限することを要求する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This constraint requests that the agent require explicit user
+   confirmation for each private key operation using the key.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160530T080409Z" creationid="haruyama" creationdate="20160530T080409Z">
+        <seg>この制約は, その鍵の秘密鍵の操作のたびに明示的なユーザ確認をエージェントが必要とするよう要求する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This could be done manually between the
    administrators or automatically using secure DNS dynamic update [11]
    between the SSH server and the nameserver.</seg>
@@ -37596,6 +37719,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>次元パラメータが0の場合は無視されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Zero or more constraints may be specified when adding a key with one
+   of the *_CONSTRAINED requests.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160530T065855Z" creationid="haruyama" creationdate="20160530T065855Z">
+        <seg>1つの *_CONSTRAINED 要求で, 0以上の制約を指定できる.</seg>
       </tuv>
     </tu>
     <tu>

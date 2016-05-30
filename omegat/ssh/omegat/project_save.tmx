@@ -1511,6 +1511,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A client may request that an agent remove all keys that it stores:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T080907Z" creationid="haruyama" creationdate="20160530T080907Z">
+        <seg>クライアントは, エージェントが保持しているすべての鍵をエージェントから削除するよう要求できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A client receiving this
    message SHOULD wait for the following SSH_MSG_USERAUTH_FAILURE
    message before beginning another authentication attempt.</seg>
@@ -1707,6 +1715,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>多数のメジャーな計算機機器ベンダーが, 非同期シリアルポートを通じた高レベルの管理機能を提供している. そして, 接続されたターミナルに BREAK シグナルを送る能力があることを一般的に期待している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A number of constraints and may be used in the constrained variants
+   of the key add messages.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T065751Z" creationid="haruyama" creationdate="20160530T065751Z">
+        <seg>制約を含む鍵の追加メッセージを用いて鍵に制約を付けられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2615,6 +2632,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Agents may implement experimental or private-use constraints through
+   a extension constraint that supports named constraints.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T080615Z" creationid="haruyama" creationdate="20160530T080615Z">
+        <seg>エージェントは, 名前付きの制約をサポートする拡張制約によって実験的ないし非公式な利用用の制約を実装できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Algorithm Definitions</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110614T025403Z">
@@ -3309,6 +3335,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110930T144624Z">
         <seg>サーバ公開署名 ECDSA 鍵を含む X.509v3 証明書と, 新しく確立した共有秘密値から導出される交換ハッシュに対する ECDSA 署名が, クライアントに対してサーバを認証するのに用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An agent shall reply with SSH_AGENT_SUCCESS if the key was deleted or
+   SSH_AGENT_FAILURE if it was not found.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T081218Z" creationid="haruyama" creationdate="20160530T081218Z">
+        <seg>エージェントは, 鍵を削除したら SSH_AGENT_SUCCESS で応答する. 鍵が見つからなかったら SSH_AGENT_FAILURE で応答する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6173,6 +6208,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Constraint extensions</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T080444Z" creationid="haruyama" creationdate="20160530T080444Z">
+        <seg>制約の拡張</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Constraint extensions .</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160526T114930Z" creationid="haruyama" creationdate="20160526T114930Z">
@@ -7444,6 +7487,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Each constraint is represented by a type
+   byte followed by zero or more value bytes.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T065828Z" creationid="haruyama" creationdate="20160530T065828Z">
+        <seg>それぞれの制約は, タイプのバイトとそれに続く0以上の値のバイトで表現される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Each field is a line of the following format:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110718T033603Z">
@@ -8663,6 +8715,16 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110714T060243Z">
         <seg>例えば, 攻撃者がマッピングを変更したりサーバになりすますことができるので, ホストエイリアスをサーバのプライマリ名にマップしたりIPアドレスをホスト名にマップする保護されていない DNS レコードに依存してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For
+   example, the agent could present a confirmation dialog before
+   completing a signature operation.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T080437Z" creationid="haruyama" creationdate="20160530T080437Z">
+        <seg>例えば, 署名の操作を完了する前にエージェントは確認のダイアログを出す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11414,6 +11476,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>安全なチャンネルから得た公開鍵の指紋を検証しないでユーザが鍵を受け入れると, その接続は中間者攻撃に対して脆弱だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If an agent does not recognise or support a requested constraint it
+   MUST refuse the request and return a SSH_AGENT_FAILURE message to the
+   client.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T070048Z" creationid="haruyama" creationdate="20160530T070048Z">
+        <seg>要求された制約をエージェントが認識しない場合やサポートしない場合は, 要求を拒否しクリアントに SSH_AGENT_FAILURE メッセージを返却しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16565,6 +16637,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Key Constraints</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T065658Z" creationid="haruyama" creationdate="20160530T065658Z">
+        <seg>鍵の制約</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Key Constraints .</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160526T114208Z" creationid="haruyama" creationdate="20160526T114208Z">
@@ -16781,6 +16861,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Key confirmation constraint</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T080125Z" creationid="haruyama" creationdate="20160530T080125Z">
+        <seg>鍵の確認の制約</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Key confirmation constraint .</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160526T114923Z" creationid="haruyama" creationdate="20160526T114923Z">
@@ -16848,6 +16936,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>この識別子を送ったらすぐに鍵交換が始まる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Key lifetime constraint</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T070303Z" creationid="haruyama" creationdate="20160530T070303Z">
+        <seg>鍵の有効期間の制約</seg>
       </tuv>
     </tu>
     <tu>
@@ -17741,6 +17837,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>複数のチャンネルは, 単一の接続に多重化される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Multiple constraints are appended
+   consecutively to the end of the request:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T065944Z" creationid="haruyama" creationdate="20160530T065930Z">
+        <seg>複数の制約は, 以下のように要求の最後に連続して追加される:</seg>
       </tuv>
     </tu>
     <tu>
@@ -18952,6 +19057,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>多くのシステムで, 擬似ターミナルがControl-S/Control-Qのフロー制御を使うかどうかを決めることができる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>On receipt of such a message, an agent shall delete all keys that it
+   is holding and reply with SSH_AGENT_SUCCESS.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T080940Z" creationid="haruyama" creationdate="20160530T080940Z">
+        <seg>このメッセージを受信したら, エージェントは保持しているすべての鍵を削除し SSH_AGENT_SUCCESS で応答することになる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20810,6 +20924,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Removing keys from the agent</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T080840Z" creationid="haruyama" creationdate="20160530T080840Z">
+        <seg>エージェントからの鍵の削除</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Removing keys from the agent  .</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160526T114944Z" creationid="haruyama" creationdate="20160526T114944Z">
@@ -20916,6 +21038,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160526T114955Z" creationid="haruyama" creationdate="20160526T114955Z">
         <seg>鍵の一覧の要求 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Requesting deletion of smartcard-hosted keys will cause the agent to
+   remove all keys loaded from that smartcard.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T081507Z" creationid="haruyama" creationdate="20160530T081507Z">
+        <seg>スマートカードに保持されている鍵の削除の要求で, スマートカードからロードされたすべての鍵をエージェントは削除する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21657,6 +21788,16 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110802T031647Z">
         <seg>SSH は, それぞれのセッションに対して暗号化と完全性検査の暗号鍵を新たに生成することを保証することで, SSH のセッションにまたがったメッセージの再送に対して保護を行なう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH protocol key encodings are defined in [RFC4253] for
+   "ssh-rsa" and "ssh-dss" keys, in [RFC5656] for "ecdsa-sha2-*" keys
+   and in [I-D.ietf-curdle-ssh-ed25519] for "ssh-ed25519" keys.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T081141Z" creationid="haruyama" creationdate="20160530T081141Z">
+        <seg>SSH プロトコルの鍵エンコーディングは, "ssh--rsa" と "ssh-dss" 鍵については [RFC4253] で "ecdsa-sha2-*" 鍵は [RFC5656] で, "ssh-ed25519" 鍵は [I-D.ietf-curdle-ssh-ed25519] で定義されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23093,6 +23234,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Smartcard keys may be removed using:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T081232Z" creationid="haruyama" creationdate="20160530T081232Z">
+        <seg>スマートカードの鍵は, 以下で削除される:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>So long as the "none" MAC is not used, this protocol provides data
    integrity.</seg>
       </tuv>
@@ -23295,6 +23444,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>広くすばやい配置を容易にするため, 仕様における妥協がおこなわれている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Specific keys may also be removed:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T080949Z" creationid="haruyama" creationdate="20160530T080949Z">
+        <seg>特定の鍵も削除できる:</seg>
       </tuv>
     </tu>
     <tu>
@@ -28356,6 +28513,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The extension name MUST consist of a UTF-8 string suffixed by the
+   implementation domain following the naming scheme defined in
+   Section 4.2 of [RFC4251], e.g.  "foo@example.com".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T080831Z" creationid="haruyama" creationdate="20160530T080831Z">
+        <seg>extension name は, [RFC4251] の 4.2 節で定義された名前方式に従い, 実装ドメインが後に続く UTF-8 文字列で構成されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The family of SSH key exchange method names beginning with "gss-
       gex-sha1-" and not containing the at-sign ('@'), to name the key
       exchange methods defined in Section 2.5.</seg>
@@ -28571,6 +28738,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>次の圧縮アルゴリズムが現在定義されている:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The following constraints are defined.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T070055Z" creationid="haruyama" creationdate="20160530T070055Z">
+        <seg>以下の制約が定義されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33579,6 +33754,25 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This constraint requests that the agent limit the key's lifetime by
+   deleting it after the specified duration (in seconds) has elapsed
+   from the time the key was added to the agent.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T070448Z" creationid="haruyama" creationdate="20160530T070448Z">
+        <seg>この制約は, エージェントに鍵が追加された時間から(秒で)指定された期間が経過したら鍵を削除することで, エージェントに鍵の寿命を制限することを要求する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This constraint requests that the agent require explicit user
+   confirmation for each private key operation using the key.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T080409Z" creationid="haruyama" creationdate="20160530T080409Z">
+        <seg>この制約は, その鍵の秘密鍵の操作のたびに明示的なユーザ確認をエージェントが必要とするよう要求する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This could be done manually between the
    administrators or automatically using secure DNS dynamic update [11]
    between the SSH server and the nameserver.</seg>
@@ -37468,6 +37662,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Where "key blob" is the standard public key encoding of the key to be
+   removed.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T081022Z" creationid="haruyama" creationdate="20160530T081022Z">
+        <seg>"key blob" は削除される鍵の 標準的な公開鍵エンコーディングだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Where "reader id" is an opaque identifier for the smartcard reader
+   and "PIN" is an optional password or PIN (not typically used).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T081318Z" creationid="haruyama" creationdate="20160530T081318Z">
+        <seg>"reader id" はスマートカードリーダの内部識別子で, "PIN" はオプションのパスワードないしPIN(一般的には利用されない)だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Where distinction
    is required, the application names of command generator, command
    responder, notification originator, notification receiver, and proxy
@@ -37807,6 +38019,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>次元パラメータが0の場合は無視されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Zero or more constraints may be specified when adding a key with one
+   of the *_CONSTRAINED requests.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20160530T065855Z" creationid="haruyama" creationdate="20160530T065855Z">
+        <seg>1つの *_CONSTRAINED 要求で, 0以上の制約を指定できる.</seg>
       </tuv>
     </tu>
     <tu>
