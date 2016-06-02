@@ -1,0 +1,773 @@
+
+
+
+
+Internet Engineering Task Force                                D. Miller
+Internet-Draft                                                   OpenSSH
+Intended status: Informational                              May 24, 2016
+Expires: November 25, 2016
+
+
+                           SSH Agent Protocol
+                       draft-miller-ssh-agent-00
+
+概要
+
+   This document describes a key agent protocol for use in the Secure
+   Shell (SSH) protocol.
+
+このメモの位置づけ
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on November 25, 2016.
+
+著作権情報
+
+   Copyright (c) 2016 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+
+
+Miller                  Expires November 25, 2016               [Page 1]
+
+Internet-Draft              Abbreviated Title                   May 2016
+
+
+目次
+
+   1イントロダクション  . . . . . . . . . . . . . . . . . . . . . . . .   2
+   2.  要件に関する用語 . . . . . . . . . . . . . . . . . . . .   3
+   3.  プロトコルの概要 . . . . . . . . . . . . . . . . . . . . . .   3
+   4.  プロトコルのメッセージ . . . . . . . . . . . . . . . . . . . . . .   3
+     4.1.  一般的なサーバの応答  . . . . . . . . . . . . . . . .   3
+     4.2.  エージェントへの鍵の追加  . . . . . . . . . . . . . . . .   4
+       4.2.1.  DSA 鍵  . . . . . . . . . . . . . . . . . . . . . .   4
+       4.2.2.  ECDSA 鍵  . . . . . . . . . . . . . . . . . . . . .   5
+       4.2.3.  ED25519 鍵  . . . . . . . . . . . . . . . . . . . .   5
+       4.2.4.  RSA 鍵  . . . . . . . . . . . . . . . . . . . . . .   6
+       4.2.5.  トークンからの鍵の追加  . . . . . . . . . . . . . .   6
+       4.2.6.  鍵の制約 . . . . . . . . . . . . . . . . . . .   7
+         4.2.6.1.  鍵の有効期間の制約 . . . . . . . . . . . . .   7
+         4.2.6.2.  鍵の確認の制約 . . . . . . . . . . .   8
+         4.2.6.3.  制約の拡張 . . . . . . . . . . . . . .   8
+     4.3.  エージェントからの鍵の削除  . . . . . . . . . . . . . .   8
+     4.4.  鍵の一覧の要求 . . . . . . . . . . . . . . . .   9
+     4.5.  秘密鍵の操作  . . . . . . . . . . . . . . . . .   9
+       4.5.1.  署名フラグ . . . . . . . . . . . . . . . . . . .  10
+     4.6.  エージェントのロックとアンロック  . . . . . . . . . . . . .  10
+     4.7.  拡張メカニズム . . . . . . . . . . . . . . . . . . .  11
+       4.7.1.  Query 拡張 . . . . . . . . . . . . . . . . . . .  11
+   5.  プロトコルの番号  . . . . . . . . . . . . . . . . . . . . . .  11
+     5.1.  メッセージ番号 . . . . . . . . . . . . . . . . . . . . .  12
+       5.1.1.  予約されているメッセージ番号  . . . . . . . . . . . . . .  12
+     5.2.  制約の識別子  . . . . . . . . . . . . . . . . .  12
+     5.3.  署名フラグ . . . . . . . . . . . . . . . . . . . . .  13
+   6.  謝辞  . . . . . . . . . . . . . . . . . . . . . .  13
+   7.  IANA の考察 . . . . . . . . . . . . . . . . . . . . .  13
+     7.1.  新しいレジストリ: SSH agent protocol numbers  . . . . . . . .  13
+     7.2.  新しいレジストリ: SSH agent key constraint numbers  . . . . .  14
+     7.3.  新しいレジストリ: SSH agent signature flags  . . . . . . . . .  15
+   8.  セキュリティの考察 . . . . . . . . . . . . . . . . . . .  15
+   9.  標準のリファレンス  . . . . . . . . . . . . . . . . . . . .  16
+   著者のアドレス  . . . . . . . . . . . . . . . . . . . . . . . .  17
+
+1イントロダクション
+
+   セキュアシェル (SSH) は信頼されないネットワーク上での安全なリモート接続ログインのためのプロトコルだ.  公開鍵認証を含む複数の認証メカニズムをサポートしている.  この文書は, 秘密鍵を保持するエージェントとやりとりのプロトコルを記述する.  クライアント (ともしかしたらサーバ)は, このプロトコルを利用して, エージェントが保持する公開鍵と秘密鍵を用いる操作の実行をエージェントに求めることができる.
+
+
+
+
+Miller                  Expires November 25, 2016               [Page 2]
+
+Internet-Draft              Abbreviated Title                   May 2016
+
+
+   エージェントに保持された鍵は, 利用の度にそれらをロードし開封する利便性とセキュリティの利点を提供する.  さらに, エージェントはシンプルなプロトコルを実装し, フルな SSH サーバやクライアントにロードされた鍵よりも攻撃を受ける箇所が小さい.
+
+   このエージェントプロトコルは, すでに広く使われデファクトスタンダードで. 長年多数の著名な SSH クライアントとサーバに実装されている.  この文書の目的は, 実装されているプロトコルを記述することだ.
+
+2.  要件に関する用語
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, [RFC-2119] で記述されているように解釈される. 
+
+3.  プロトコルの概要
+
+   エージェントプロトコルは, クライアントからのみ起動される, パケット化された要求-応答プロトコルだ.  クライアントからサーバに送られるいくつかのリクエストと応答中で送られる返信メッセージの集合で構成される.  クライアントの要求に対する応答以外に, サーバがメッセージを送信することは決してない.  返信は順番を守って送られる.
+
+   エージェントプロトコルのすべての値は, [RFC4251] で指定された SSH 通信表現を用いてエンコードされる.  メッセージはメッセージ長と内容から構成される.  内容の最初のバイトは, 常にメッセージのタイプを指す.
+
+      uint32                   メッセージ長
+      byte[message length]     メッセージの内容
+
+4.  プロトコルのメッセージ
+
+4.1.  一般的なサーバの応答
+
+   次に一般的なメッセージが, クライアントからの要求への応答としてサーバから送られる.  成功の場合, エージェントは次のメッセージで応答するか,
+
+      byte                     SSH_AGENT_SUCCESS
+
+   要求に特有の成功のメッセージで応答する.  失敗の場合, エージェントは次のメッセージで応答する.
+
+      byte                     SSH_AGENT_FAILURE
+
+
+
+
+
+Miller                  Expires November 25, 2016               [Page 3]
+
+Internet-Draft              Abbreviated Title                   May 2016
+
+
+   SSH_AGENT_FAILURE は, 未知の種類の要求に対する応答としても送られる.
+
+4.2.  エージェントへの鍵の追加
+
+   SSH_AGENTC_ADD_IDENTITY ないし SSH_AGENTC_ADD_ID_CONSTRAINED メッセージを用いて, エージェントに鍵は追加される.  後者は, 鍵の利用における任意の制約付きで鍵を追加できる.
+
+   SSH_AGENTC_ADD_IDENTITY メッセージの一般的な形式は以下だ:
+
+       byte                    SSH_AGENTC_ADD_IDENTITY
+       string                  key type
+       byte[]                  key contents
+       string                  key comment
+
+   ここで, "type" は鍵特有のタイプの名前だ. 例えば [RFC4253] で定義されている "ssh-rsa" は RSA 鍵を指す. "contents" は, 鍵の公開と非公開の部分から構成され, 鍵の種類によって異なる. 標準の鍵のタイプと一般に用いられている鍵のタイプについてはあとで列挙する. "comment" は, UTF8 の文字列の, ユーザに表示されるメッセージで鍵を特定するために提供される人間に解読可能な鍵の名前やコメントだ. 
+
+   SSH_AGENTC_ADD_ID_CONSTRAINED は似ているが, 追加のフィールドがある:
+
+       byte                    SSH_AGENTC_ADD_ID_CONSTRAINED
+       string                  type
+       byte[]                  contents
+       string                  comment
+       constraint[]            constraints
+
+   Constraints は, 鍵の有効性や利用に関する制限を配置するのに用いられる.
+   4.2.6 節で 制約の種類やそれらの形式を詳述する.
+
+   エージェントは, これらのメッセージのうちの1つの結果として鍵が正常にロードされたならば SSH_AGENT_SUCCESS で応答する必要がある そうでなければ SSH_AGENT_FAILURE で応答する必要がある.
+
+4.2.1.  DSA 鍵
+
+   DSA 鍵は, "ssh-dss" 鍵タイプを持つ. [RFC4253] で定義されている.  鍵は次のメッセージを用いてエージェントに追加される.  "constraints" フィールドは SSH_AGENTC_ADD_ID_CONSTRAINED のみに存在する.
+
+
+
+
+
+
+
+Miller                  Expires November 25, 2016               [Page 4]
+
+Internet-Draft              Abbreviated Title                   May 2016
+
+
+       byte                    SSH_AGENTC_ADD_IDENTITY or
+                               SSH_AGENTC_ADD_ID_CONSTRAINED
+       string                  "ssh-dss"
+       mpint                   p
+       mpint                   q
+       mpint                   g
+       mpint                   y
+       mpint                   x
+       string                  comment
+       constraint[]            constraints
+
+   "p", "q", "g" の値は DSA の domain parameter だ. "y" と "x" は, それぞれ公開鍵と秘密鍵だ.  これらの値は [FIPS.184-4] で定義されている.
+
+4.2.2.  ECDSA 鍵
+
+   ECDSA 鍵は "ecdsa-sha2-" で始まる 鍵タイプを持つ. [RFC5656] で定義されている.  鍵は 次のメッセージを用いてエージェントに追加される.  "constraints" フィールドは SSH_AGENTC_ADD_ID_CONSTRAINED のみに存在する.
+
+       byte                    SSH_AGENTC_ADD_IDENTITY or
+                               SSH_AGENTC_ADD_ID_CONSTRAINED
+       string                  key type
+       string                  ecdsa_curve_name
+       string                  Q
+       mpint                   d
+       string                  comment
+       constraint[]            constraints
+
+   "Q" と "d" は, それぞれ ECDSA の公開鍵と秘密鍵だ.  どちらも [FIPS.186-4] で定義されている.
+
+4.2.3.  ED25519 鍵
+
+   Ed25519 鍵は "ssh-ed25519" 鍵タイプを持つ. [I-D.ietf-curdle-ssh-ed25519] で定義されている.  鍵は 次のメッセージを用いてエージェントに追加される.  "constraints" フィールドは SSH_AGENTC_ADD_ID_CONSTRAINED のみに存在する.
+
+       byte                    SSH_AGENTC_ADD_IDENTITY or
+                               SSH_AGENTC_ADD_ID_CONSTRAINED
+       string                  "ssh-ed25519"
+       string                  ENC(A)
+       string                  k || ENC(A)
+       string                  comment
+       constraint[]            constraints
+
+
+
+Miller                  Expires November 25, 2016               [Page 5]
+
+Internet-Draft              Abbreviated Title                   May 2016
+
+
+   最初の値は, 32 byte の Ed25519 公開鍵 "ENC(A)" だ.  次の値は, 32 byte の秘密鍵 "k" と 32 byte の公開鍵 "ENC(A)" を連接したものだ.  "ENC(A)" と "k" の値の内容と解釈は, [I-D.irtf-cfrg-eddsa] で定義されている.
+
+4.2.4.  RSA 鍵
+
+   RSA 鍵は, "ssh-rsa" 鍵タイプを持つ. [RFC4253] で定義されている.  鍵は次のメッセージを用いてエージェントに追加される.  "constraints" フィールドは SSH_AGENTC_ADD_ID_CONSTRAINED のみに存在する.
+
+       byte                    SSH_AGENTC_ADD_IDENTITY or
+                               SSH_AGENTC_ADD_ID_CONSTRAINED
+       string                  "ssh-rsa"
+       mpint                   n
+       mpint                   e
+       mpint                   d
+       mpint                   iqmp
+       mpint                   p
+       mpint                   q
+       string                  comment
+       constraint[]            constraints
+
+   "n" は公開の合成モジュラスだ.  "p" と "q" は モジュラスを構成する秘密の素数だ. "e" は公開の指数だ.  "iqmp" は "q" modulo "p" 逆数だ..  "iqmp" を除くすべての値 ("iqmp" は他の値から計算できる) は, [FIPS.186-4] で定義されている.
+
+4.2.5.  トークンからの鍵の追加
+
+   スマートカードや他のハードウェアトークンにホストされている鍵を, SSH_AGENTC_ADD_SMARTCARD_KEY ないし SSH_AGENTC_ADD_SMARTCARD_KEY_CONSTRAINED 要求を用いて追加できる.  "constraints" フィールドは, SSH_AGENTC_ADD_SMARTCARD_KEY_CONSTRAINED メッセージのみに存在する.
+
+       byte                    SSH_AGENTC_ADD_SMARTCARD_KEY or
+                               SSH_AGENTC_ADD_SMARTCARD_KEY_CONSTRAINED
+       string                  id
+       string                  PIN
+       constraint[]            constraints
+
+   ここで, "id" は ハードウェアトークンの内部識別子で, PIN は 鍵を開錠するための任意のパスワードだ.  "id" の解釈はこのプロコルでは定義しない. エージェントにのみ依存する.
+
+
+
+
+Miller                  Expires November 25, 2016               [Page 6]
+
+Internet-Draft              Abbreviated Title                   May 2016
+
+
+   典型的には, ハードウェアトークン上でサポートされる任意の鍵の公開の部分のみが, エージェントにロードされる. 厳密に言うと, このメッセージは, ハードウェアトークンに今後の秘密鍵の操作を移譲するよう準備する.
+
+   メッセージの結果として1つ以上の鍵が正常にロードされたなら, エージェントは SSH_AGENT_SUCCESS で応答する必要がある. どの鍵もロードされなかったら, SSH_AGENT_FAILURE を用いる必要がある.  "id" を認識しない場合, エージェントがトークンにホストされた鍵をまったくサポートしない場合も, SSH_AGENT_FAILURE をエージェンノは返す必要がある.
+
+4.2.6.  鍵の制約
+
+   制約を含む鍵の追加メッセージを用いて鍵に制約を付けられる.  それぞれの制約は, タイプのバイトとそれに続く0以上の値のバイトで表現される.
+
+   1つの *_CONSTRAINED 要求で, 0以上の制約を指定できる.  複数の制約は, 以下のように要求の最後に連続して追加される:
+
+       byte                    constraint1_type
+       byte[]                  constraint1_data
+       byte                    constraint2_type
+       byte[]                  constraint2_data
+       ....
+       byte                    constraintN_type
+       byte[]                  constraintN_data
+
+   要求された制約をエージェントが認識しない場合やサポートしない場合は, 要求を拒否しクリアントに SSH_AGENT_FAILURE メッセージを返却しなければならない.
+
+   以下の制約が定義されている.
+
+4.2.6.1.  鍵の有効期間の制約
+
+   この制約は, エージェントに鍵が追加された時間から(秒で)指定された期間が経過したら鍵を削除することで, エージェントに鍵の寿命を制限することを要求する.
+
+       byte                    SSH_AGENT_CONSTRAIN_LIFETIME
+       uint32                  seconds
+
+
+
+
+
+
+
+
+Miller                  Expires November 25, 2016               [Page 7]
+
+Internet-Draft              Abbreviated Title                   May 2016
+
+
+4.2.6.2.  鍵の確認の制約
+
+   この制約は, その鍵の秘密鍵の操作のたびに明示的なユーザ確認をエージェントが必要とするよう要求する.  例えば, 署名の操作を完了する前にエージェントは確認のダイアログを出す.
+
+       byte                    SSH_AGENT_CONSTRAIN_CONFIRM
+
+4.2.6.3.  制約の拡張
+
+   エージェントは, 名前付きの制約をサポートする拡張制約によって実験的ないし非公式な利用用の制約を実装できる.
+
+       byte                    SSH_AGENT_CONSTRAIN_EXTENSION
+       string                  extension name
+       byte[]                  extension-specific details
+
+   extension name は, [RFC4251] の 4.2 節で定義された名前方式に従い, たとえば "foo@example.com" のように実装ドメインが後に続く UTF-8 文字列で構成される必要がある.
+
+4.3.  エージェントからの鍵の削除
+
+   クライアントは, エージェントが保持しているすべての鍵をエージェントから削除するよう要求できる.
+
+       byte                    SSH_AGENTC_REMOVE_ALL_IDENTITIES
+
+   このメッセージを受信したら, エージェントは保持しているすべての鍵を削除し SSH_AGENT_SUCCESS で応答することになる.
+
+   特定の鍵も削除できる:
+
+       byte                    SSH_AGENTC_REMOVE_IDENTITY
+       string                  key blob
+
+   "key blob" は削除される鍵の 標準的な公開鍵エンコーディングだ.  SSH プロトコルの鍵エンコーディングは, "ssh--rsa" と "ssh-dss" 鍵については [RFC4253] で "ecdsa-sha2-*" 鍵は [RFC5656] で, "ssh-ed25519" 鍵は [I-D.ietf-curdle-ssh-ed25519] で定義されている.
+
+   エージェントは, 鍵を削除したら SSH_AGENT_SUCCESS で応答する必要がある. 鍵が見つからなかったら SSH_AGENT_FAILURE で応答する必要がある.
+
+   スマートカードの鍵は, 以下で削除される:
+
+
+
+
+
+
+Miller                  Expires November 25, 2016               [Page 8]
+
+Internet-Draft              Abbreviated Title                   May 2016
+
+
+       byte                    SSH_AGENTC_REMOVE_SMARTCARD_KEY
+       string                  reader id
+       string                  PIN
+
+   "reader id" はスマートカードリーダの内部識別子で, "PIN" はオプションのパスワードないしPIN(一般的には利用されない)だ.
+   スマートカードに保持されている鍵の削除の要求で, スマートカードからロードされたすべての鍵をエージェントは削除する.
+
+   エージェントは, 鍵を削除したら SSH_AGENT_SUCCESS で応答する必要がある. 鍵が見つからなかったら SSH_AGENT_FAILURE で応答する必要がある.
+
+4.4.  鍵の一覧の要求
+
+   クライアントは次のメッセージを用いてエージェントに鍵の一覧を要求できる:
+
+       byte                    SSH_AGENTC_REQUEST_IDENTITIES
+
+   エージェントは次の前置きから始まるメッセージを返す必要がある.
+
+       byte                    SSH_AGENT_IDENTITIES_ANSWER
+       uint32                  nkeys
+
+   "nkeys" は続く鍵の数を指す.  この前置きに, 0個以上の鍵が続く. それぞれ次のようにエンコードされる:
+
+       string                  key blob
+       string                  comment
+
+   "key blob" は公開鍵のエンコーディングで, "comment" は UTF8 文字列にエンコードされた人間が読めるコメントだ.
+
+4.5.  秘密鍵の操作
+
+   クライアントは次のメッセージを用いて秘密鍵の署名操作をエージェントに要求する.
+
+       byte                    SSH_AGENTC_SIGN_REQUEST
+       string                  key blob
+       string                  data
+       uint32                  flags
+
+   "key blob" は署名を実行するよう要求する鍵で, "data" は 署名されるデータ. "flags" は (以下で説明する) 0以上の署名フラグのビット単位での OR を含むビットフィールドだ.
+
+
+
+
+
+Miller                  Expires November 25, 2016               [Page 9]
+
+Internet-Draft              Abbreviated Title                   May 2016
+
+
+   エージェントが署名を作成できない/したくない(たとえば指定された鍵がなかったり, 制約付きの鍵でユーザが確認を拒否した)場合, エージェントは SSH_AGENT_FAILURE で応答しなければならない.
+
+   成功したら, エージェントは以下を返す:
+
+       byte                    SSH_AGENT_SIGN_RESPONSE
+       string                  signature
+
+   署名の形式は, 利用している鍵タイプのアルゴリズムに固有だ.  SSH プロトコル署名形式は, "ssh-rsa" と "ssh-dss" 鍵に対しては [RFC4253] で, "ecdsa-sha2-*" 鍵は [RFC5656] で, "ssh-ed25519" 鍵は [I-D.ietf-curdle-ssh-ed25519] で定義されている.
+
+4.5.1.  署名フラグ
+
+   署名要求のメッセージで2つのフラグが現在定義されている.: SSH_AGENT_RSA_SHA2_256 と SSH_AGENT_RSA_SHA2_512.  これらの2つのフラグは, "ssh-rsa" 鍵でのみ有効だ. これらは, それぞれ "rsa-sha2-256" か "rsa-sha2-515" の署名方式を用いてエージェントが署名を返すように要求する.  これらの署名方式は [I-D.ietf-curdle-rsa-sha2] で定義されている..
+
+4.6.  エージェントのロックとアンロック
+
+   このエージェントプロトコルは, エージェント自身のパスフレーズによる一時的なロックの要求をサポートしている.  ロックされたエージェントは, 同じパスフレーズでアンロックされるまでは, 機密性の高い操作(少なくとも秘密鍵の操作)の処理を中断する必要がある.
+
+   次のメッセージでエージェントのロックを要求する.
+
+       byte                    SSH_AGENTC_LOCK
+       string                  passphrase
+
+   ロックが成功したら, エージェントは SSH_AGENT_SUCCESS で応答する必要がある.. そうでなければ(例えばエージェントがすでにロックされている) SSH_AGENT_FAILURE で応答する必要がある.
+
+   次のメッセージでエージェントのアンロックを要求する.
+
+       byte                    SSH_AGENTC_UNLOCK
+       string                  passphrase
+
+   エージェントがすでにロックされておりパスフレーズがロックの際に使われたものと一致したら, エージェントはアンロックし SSH_AGENT_SUCCESS で応答する必要がある.  エージェントがアンロックされていたり パスフレーズが一致しなかったら. SSH_AGENT_FAILURE で応答する必要がある.
+
+
+
+Miller                  Expires November 25, 2016              [Page 10]
+
+Internet-Draft              Abbreviated Title                   May 2016
+
+
+    エージェントは, パスフレーズに対するブルートフォース推測攻撃の対策を講じる必要がある.
+
+4.7.  拡張メカニズム
+
+   このエージェントプロトコルは, プロトコルで送られるベンダ特有のメッセージや実験的なメッセージを許すオプションの拡張メカニズムを含んでいる.  クライアントからの拡張の要求は以下で構成される:
+
+       byte                    SSH_AGENTC_EXTENSION
+       string                  extension type
+       byte[]                  extension contents
+
+   extension type は, UTF-8文字列で拡張メッセージのタイプを示す.  実装特有の拡張は, [RFC4251] の 4.2 節で定義された名前方式に従い, たとえば "foo@example.com" のように実装ドメインが後に続く UTF-8 文字列で構成される必要がある.
+
+   指定されたタイプの拡張をサポートしないエージェントは, 空の SSH_AGENT_FAILURE メッセージで応答しなければならない.  この応答は, 拡張メカニズムをまったくサポートしないエージェントからも送られる.
+
+   拡張に成功した場合の応答メッセージの内容は, extension type に特有だ.  拡張リクエストは 成功として SSH_AGENT_SUCCESS を返してもよいし, 他の拡張特有のメッセージを返してもよい.
+
+   拡張の失敗, SSH_AGENT_EXAENTION_FAILURE コードを用いて報せられる必要がある - 拡張は標準の SSH_AGENT_FAILURE コードを使わないほうがよい.  これにより, 要求が失敗したのと拡張がサポートされていないのを区別できる.
+
+4.7.1.  Query 拡張
+
+   エージェントにサポートされている拡張をクライアントが検索できる, 1つのオプションの拡張要求 "query" が定義されている
+
+   "query" 拡張をサポートするエージェントは, サポートする拡張名のリストを応答する必要がある.
+
+       byte                    SSH_AGENT_SUCCESS
+       string[]                extension type
+
+5.  プロトコルの番号
+
+
+
+
+
+
+
+Miller                  Expires November 25, 2016              [Page 11]
+
+Internet-Draft              Abbreviated Title                   May 2016
+
+
+5.1.  メッセージ番号
+
+   以下の番号が, クライアントからエージェントへの要求に用いられる.
+
+       SSH_AGENTC_REQUEST_IDENTITIES                  11
+       SSH_AGENTC_SIGN_REQUEST                        13
+       SSH_AGENTC_ADD_IDENTITY                        17
+       SSH_AGENTC_REMOVE_IDENTITY                     18
+       SSH_AGENTC_REMOVE_ALL_IDENTITIES               19
+       SSH_AGENTC_ADD_ID_CONSTRAINED                  25
+       SSH_AGENTC_ADD_SMARTCARD_KEY                   20
+       SSH_AGENTC_REMOVE_SMARTCARD_KEY                21
+       SSH_AGENTC_LOCK                                22
+       SSH_AGENTC_UNLOCK                              23
+       SSH_AGENTC_ADD_SMARTCARD_KEY_CONSTRAINED       26
+       SSH_AGENTC_EXTENSION                           27
+
+   以下の番号がエージェントからクライアントへの応答に用いられる.
+
+       SSH_AGENT_FAILURE                               5
+       SSH_AGENT_SUCCESS                               6
+       SSH_AGENT_EXTENSION_FAILURE                     28
+       SSH_AGENT_IDENTITIES_ANSWER                     12
+       SSH_AGENT_SIGN_RESPONSE                         14
+
+5.1.1.  予約されているメッセージ番号
+
+   以下のメッセージ番号が, レガシーな SSH プロトコルバージョン 1 のサポートする実装のために予約されている: 1-4, 7-9, 24 (のすべて).  これらのメッセージ番号は, レガシーなプロトコルをサポートする実装によっと用いられてもよい. しかし, 再利用されてはならない.
+
+5.2.  制約の識別子
+
+   以下の番号は, 鍵の制約を指定するのに用いられる..  これらは鍵の制約でのみ用いられ, メッセージ番号としては送られない.
+
+       SSH_AGENT_CONSTRAIN_LIFETIME                    1
+       SSH_AGENT_CONSTRAIN_CONFIRM                     2
+       SSH_AGENT_CONSTRAIN_EXTENSION                   3
+
+
+
+
+
+
+
+
+Miller                  Expires November 25, 2016              [Page 12]
+
+Internet-Draft              Abbreviated Title                   May 2016
+
+
+5.3.  署名フラグ
+
+   以下の番号が, 署名の要求 (SSH_AGENTC_SIGN_REQUEST) メッセージで出現する.  これらのフラグは, 0以上のフラグの論理ORを取ったビットフィールドで構成される.
+
+       SSH_AGENT_RSA_SHA2_256                          2
+       SSH_AGENT_RSA_SHA2_512                          4
+
+   歴史的な実装のために フラグの値 1 は予約されている.
+
+6.  謝辞
+
+   このプロトコルは Markus Friedl によって設計され最初に実装された. Tatu Ylonen によるレガシーな SSH バージョン 1 をサポートするエージェントのための似たプロトコルを基としている.
+
+   この文書をレビューし改善するのを手伝ってくれた Simon Tatham に感謝する.
+
+7.  IANA の考慮
+
+   このプロトコルは, 3つのレジストリが確立されるのを要求する. 1つはメッセージ番号, 1つは制約, もう1つは署名の要求フラグだ.
+
+7.1.  新しいレジストリ: SSH agent protocol numbers
+
+   "SSH agent protocol numbers" という名のこのレジストリはクライアントの要求とエージェントの応答のメッセージ番号を記録する.  最初の状態は, 次の番号と予約で構成する必要がある必要がある.
+   将来のメッセージ番号の割り当ては, RFC ([RFC5226] に従って RFC REQUIRED) の形式で仕様を要求する必要がある.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Miller                  Expires November 25, 2016              [Page 13]
+
+Internet-Draft              Abbreviated Title                   May 2016
+
+
+        Number Identifier                               Reference
+        ------ ---------------------------------------- -----------
+             1 reserved                                 Section 5.1
+             2 reserved                                 Section 5.1
+             3 reserved                                 Section 5.1
+             4 reserved                                 Section 5.1
+             5 SSH_AGENT_FAILURE                        Section 5.1
+             6 SSH_AGENT_SUCCESS                        Section 5.1
+             7 reserved                                 Section 5.1
+             8 reserved                                 Section 5.1
+             9 reserved                                 Section 5.1
+            10 reserved                                 Section 5.1
+            11 SSH_AGENTC_REQUEST_IDENTITIES            Section 5.1
+            12 SSH_AGENT_IDENTITIES_ANSWER              Section 5.1
+            13 SSH_AGENTC_SIGN_REQUEST                  Section 5.1
+            14 SSH_AGENT_SIGN_RESPONSE                  Section 5.1
+            15 reserved                                 Section 5.1
+            16 reserved                                 Section 5.1
+            17 SSH_AGENTC_ADD_IDENTITY                  Section 5.1
+            18 SSH_AGENTC_REMOVE_IDENTITY               Section 5.1
+            19 SSH_AGENTC_REMOVE_ALL_IDENTITIES         Section 5.1
+            20 SSH_AGENTC_ADD_SMARTCARD_KEY             Section 5.1
+            21 SSH_AGENTC_REMOVE_SMARTCARD_KEY          Section 5.1
+            22 SSH_AGENTC_LOCK                          Section 5.1
+            23 SSH_AGENTC_UNLOCK                        Section 5.1
+            24 reserved                                 Section 5.1
+            25 SSH_AGENTC_ADD_ID_CONSTRAINED            Section 5.1
+            26 SSH_AGENTC_ADD_SMARTCARD_KEY_CONSTRAINED Section 5.1
+            27 SSH_AGENTC_EXTENSION                     Section 5.1
+            28 SSH_AGENT_EXTENSION_FAILURE              Section 5.1
+
+            レジストリの初期状態: SSH agent protocol numbers
+
+7.2.  新しいレジストリ: SSH agent key constraint numbers
+
+   "SSH agent key constraint numbers" という名のこのレジストリは, 鍵の利用の制約のメッセージ番号を記録する.  最初の状態は, 次の番号で構成する必要がある必要がある.  将来の制約番号の割り当ては, RFC ([RFC5226] に従って RFC REQUIRED) の形式で仕様を要求する必要がある.
+
+             Number Identifier                    Reference
+             ------ ----------------------------- -----------
+                  1 SSH_AGENT_CONSTRAIN_LIFETIME  Section 5.2
+                  2 SSH_AGENT_CONSTRAIN_CONFIRM   Section 5.2
+                  3 SSH_AGENT_CONSTRAIN_EXTENSION Section 5.2
+
+         レジストリの初期状態: SSH agent key constraint numbers
+
+
+
+Miller                  Expires November 25, 2016              [Page 14]
+
+Internet-Draft              Abbreviated Title                   May 2016
+
+
+7.3.  新しいレジストリ: SSH agent signature flags
+
+   "SSH agent signature flags" という名のこのレジストリは, 署名要求 (SSH_AGENTC_SIGN_REQUEST) のフラグの値を記録する.  最初の状態は, 次の番号で構成する必要がある必要がある.  注意: フラグはビット単位のORで組合され, すべてのフラグの値は2の累乗でなければならない. また最大のフラグの値は 0x80000000 だ.
+
+   将来の制約番号 (原文が間違いでフラグの値)の割り当ては, RFC ([RFC5226] に従って RFC REQUIRED) の形式で仕様を要求する必要がある.
+
+                 Number Identifier             Reference
+                 ------ ---------------------- -----------
+                   0x01 reserved               Section 5.3
+                   0x02 SSH_AGENT_RSA_SHA2_256 Section 5.3
+                   0x04 SSH_AGENT_RSA_SHA2_512 Section 5.3
+
+             レジストリの初期状態: SSH agent signature flags
+
+8.  セキュリティの考察
+
+   エージェントは, 典型的に長寿命のログイン認証情報を持つものへの制限されたアクセスを維持し提供するサービスだ.  当然, 機密で信頼されたソフトウェア部品だ.  さらに言えば, エージェントプロトコル自体は認証やトランスポートの安全を含んでいない. エージェントとやりとりできたら, 秘密鍵の操作をエージェントに実行させることが通常できる.
+
+   エージェントへのアクセスができたら秘密鍵の操作ができるということは, エージェントがその持ち主にのみ公開されることが非常に重要となる.
+
+   エージェントの主な設計意図は, エージェントに権限のないアクセスをする攻撃者がエージェントにロードされているすべての鍵についてそのコピーを得るのを阻むことだ.  これは, 鍵の利用を盗む(例えば確認の制約なしにロードされた鍵を利用する)攻撃者を排除できないかもしれない.
+
+   これを考えると, エージェントは, 可能な限り, ロードした鍵を直接盗難しようとする他のプロセスからエージェントのメモリを読まれないようにする必要がある.  典型的には, デバッグインタフェイスの無効や異常終了時のプロセスメモリダンプの抑止が含まれる.
+
+   より巧みな別の方法に, 暗号学的なサイドチャンネルを利用して鍵を盗難する, というものがある.  秘密鍵の操作は, タイミングの違いや電力の利用量, エージェントを走らせるホストのメモリサブシテム(例えばCPUキャッシュ) の副作用によって鍵の内容を漏らす可能性がある.
+
+
+
+Miller                  Expires November 25, 2016              [Page 15]
+
+Internet-Draft              Abbreviated Title                   May 2016
+
+
+    ローカルな攻撃者がいてエージェントが制約のない鍵を保持している場合, 攻撃者が観測しうる秘密鍵の操作の回数の制限だけが, 署名を実施するCPUの利用率だ.(訳注: 原文が変?)これは, サイドチャンネル攻撃のほぼ理想的な神託を攻撃者に与えます.
+   サイドチャンネル攻撃に対する完全な対処は, この仕様の範囲外だ. しかし, エージェントはサイドチャンネル攻撃に耐性がある暗号学的な実装を使う必要がある.
+
+9.  Normative References
+
+   [FIPS.186-4]
+              National Institute of Standards and Technology, "Digital
+              Signature Standard (DSS)", FIPS PUB 186-4, July 2013.
+
+   [I-D.ietf-curdle-rsa-sha2]
+              bider, d., "Use of RSA Keys with SHA-2 256 and 512 in
+              Secure Shell (SSH)", draft-ietf-curdle-rsa-sha2-00 (work
+              in progress), March 2016.
+
+   [I-D.ietf-curdle-ssh-ed25519]
+              Harris, B., "Ed25519 public key algorithm for the Secure
+              Shell (SSH) protocol", draft-ietf-curdle-ssh-ed25519-00
+              (work in progress), May 2016.
+
+   [I-D.irtf-cfrg-eddsa]
+              Josefsson, S. and I. Liusvaara, "Edwards-curve Digital
+              Signature Algorithm (EdDSA)", draft-irtf-cfrg-eddsa-05
+              (work in progress), March 2016.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
+              RFC2119, March 1997,
+              <http://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC4251]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Architecture", RFC 4251, DOI 10.17487/RFC4251,
+              January 2006, <http://www.rfc-editor.org/info/rfc4251>.
+
+   [RFC4253]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Transport Layer Protocol", RFC 4253, DOI 10.17487/RFC4253,
+              January 2006, <http://www.rfc-editor.org/info/rfc4253>.
+
+   [RFC5226]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
+              IANA Considerations Section in RFCs", BCP 26, RFC 5226,
+              DOI 10.17487/RFC5226, May 2008,
+              <http://www.rfc-editor.org/info/rfc5226>.
+
+
+
+
+Miller                  Expires November 25, 2016              [Page 16]
+
+Internet-Draft              Abbreviated Title                   May 2016
+
+
+   [RFC5656]  Stebila, D. and J. Green, "Elliptic Curve Algorithm
+              Integration in the Secure Shell Transport Layer", RFC
+              5656, DOI 10.17487/RFC5656, December 2009,
+              <http://www.rfc-editor.org/info/rfc5656>.
+
+Author's Address
+
+   Damien Miller
+   OpenSSH
+
+   Email: djm@openssh.com
+   URI:   http://www.openssh.com/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Miller                  Expires November 25, 2016              [Page 17]
