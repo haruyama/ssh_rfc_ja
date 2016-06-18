@@ -87,7 +87,7 @@ RFC 4742                    NETCONF over SSH               December 2006
 
    NETCONF のトラフィックを容易に識別しファイアウォールや他のネットワークデバイスでフィルタするために, NETCONF サーバは, IANA に割り当てられた TCP ポート <830> を用いて SSH のセッションが確立された場合のみ "netconf" SSH サブシステムへのアクセスを提供するのをデフォルトとしなければならない.  サーバは, 他のポート上の netconf SSH サブシステムへのアクセス許可を設定可能にする必要がある.
 
-   ユーザ(やアプリケーション)は, IANAに割り当てられたポート上の SSH サブシステムとして NETCONF を, 以下のコマンドラインを用いて起動できる.
+   ユーザ(やアプリケーション)は, IANAに割り当てられたポート上の SSH サブシステムとして NETCONF を, 次のコマンドラインを用いて起動できる.
 
    [user@client]$ ssh -s server.example.org -p <830> netconf
 
@@ -269,7 +269,7 @@ RFC 4742                    NETCONF over SSH               December 2006
 
    IANA は, この目的のためにポート <830> を割り当てた.
 
-   IANA は, [RFC4250] で定義された SSH Service Name として, 以下のように "netconf" を割り当てるよう要求された. 
+   IANA は, [RFC4250] で定義された SSH Service Name として, 次のように "netconf" を割り当てるよう要求された. 
 
             Service Name                  Reference
             -------------                 ---------

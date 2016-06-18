@@ -261,9 +261,9 @@ RFC 4252              SSH Authentication Protocol           January 2006
 
 5.4.  バナー メッセージ
 
-   法的な事情によっては, 認証の前に警告メッセージを送ることで, 法律上な保護が得られる場合がある.  例えば, 多くのUNIXマシンは, ログインプロンプトを表示する前に, 通常 /etc/issue からのテキストを表示したり, TCP wrappers や似たソフトウェアを用いてバナーを表示する.
+   法的な事情によっては, 認証の前に警告メッセージを送ることで, 法律上な保護が得られる場合がある.  たとえば, 多くのUNIXマシンは, ログインプロンプトを表示する前に, 通常 /etc/issue からのテキストを表示したり, TCP wrappers や似たソフトウェアを用いてバナーを表示する.
 
-   SSHのサーバも, 認証プロトコルが開始してから認証が完了するまでのいつでも, SSH_MSG_USERAUTH_BANNER メッセージを送信できる.  このメッセージは, 認証が試みられる前にユーザに表示されるテキストを含んでいる.  形式は以下の通り:
+   SSHのサーバも, 認証プロトコルが開始してから認証が完了するまでのいつでも, SSH_MSG_USERAUTH_BANNER メッセージを送信できる.  このメッセージは, 認証が試みられる前にユーザに表示されるテキストを含んでいる.  形式は次のとおり:
 
       byte      SSH_MSG_USERAUTH_BANNER
       string    message in ISO-10646 UTF-8 encoding [RFC3629]
@@ -314,7 +314,7 @@ Ylonen & Lonvick            Standards Track                     [Page 8]
 RFC 4252              SSH Authentication Protocol           January 2006
 
 
-   秘密鍵は, しばしばクライアントのホストに暗号化されて保持される. ユーザは, 署名が生成される前にパスフレーズを提供しなければならない.  もしそれがなくても, 署名の計算は多くの演算能力を必要とする.  不必要な処理とユーザとの対話を避けるため, "publickey" 認証法を用いた認証が受け入れられるかどうかを尋ねるために, 以下のメッセージが提供されている.
+   秘密鍵は, しばしばクライアントのホストに暗号化されて保持される. ユーザは, 署名が生成される前にパスフレーズを提供しなければならない.  もしそれがなくても, 署名の計算は多くの演算能力を必要とする.  不必要な処理とユーザとの対話を避けるため, "publickey" 認証法を用いた認証が受け入れられるかどうかを尋ねるために, 次のメッセージが提供されている.
 
       byte      SSH_MSG_USERAUTH_REQUEST
       string    user name in ISO-10646 UTF-8 encoding [RFC3629]
@@ -433,7 +433,7 @@ Ylonen & Lonvick            Standards Track                    [Page 11]
 RFC 4252              SSH Authentication Protocol           January 2006
 
 
-   サーバは, それぞれの要求のメッセージに SSH_MSG_USERAUTH_SUCCESS, SSH_MSG_USERAUTH_FAILURE, もしくは SSH_MSG_USERAUTH_PASSWD_CHANGEREQ で応答しなければならない.  これらの意味は以下の通り:
+   サーバは, それぞれの要求のメッセージに SSH_MSG_USERAUTH_SUCCESS, SSH_MSG_USERAUTH_FAILURE, もしくは SSH_MSG_USERAUTH_PASSWD_CHANGEREQ で応答しなければならない.  これらの意味は次のとおり:
 
       SSH_MSG_USERAUTH_SUCCESS - パスワードは変更された. また認証も成功し完了した.
 

@@ -196,7 +196,7 @@ RFC 5647                AES-GCM for Secure Shell             August 2009
 
 5.2.  セキュアシェルのバイナリパケット
 
-   鍵交換プロトコルが完了すると, それ以後のセキュアシェルの通信は, 以下の図2で示す (また [RFC4253] の6節を参照) セキュアシェルバイナリパケットとして知られるデータ構造に構文解析される.
+   鍵交換プロトコルが完了すると, それ以後のセキュアシェルの通信は, 次の図2で示す (また [RFC4253] の6節を参照) セキュアシェルバイナリパケットとして知られるデータ構造に構文解析される.
 
      uint32    packet_length;  // 0 <= packet_length < 2^32
      byte      padding_length; // 4 <= padding_length < 256
@@ -272,7 +272,7 @@ RFC 5647                AES-GCM for Secure Shell             August 2009
 
            図3: SSH AES-GCM のナンスの構造
 
-   AES-GCM は, 平文を暗号化するのに使われる再, 16-オクテットのブロックで鍵ストリームを生成する.  この鍵ストリームは, 以下の 16-オクテットのデータ構造を暗号化して生成される.
+   AES-GCM は, 平文を暗号化するのに使われる再, 16-オクテットのブロックで鍵ストリームを生成する.  この鍵ストリームは, 次の 16-オクテットのデータ構造を暗号化して生成される.
 
          uint32  fixed;                  // 4 octets
          uint64  invocation_counter;     // 8 octets
@@ -347,7 +347,7 @@ RFC 5647                AES-GCM for Secure Shell             August 2009
 
 9.  IANA の考慮
 
-   IANA は, [RFC4250] で記述された secure shell Encryption Algorithm Names registry に以下の2つのエントリを追加した.
+   IANA は, [RFC4250] で記述された secure shell Encryption Algorithm Names registry に次の2つのエントリを追加した.
 
                    +--------------------+-------------+
                    |                    |             |
@@ -358,7 +358,7 @@ RFC 5647                AES-GCM for Secure Shell             August 2009
                    | AEAD_AES_256_GCM   | Section 6.2 |
                    +--------------------+-------------+
 
-   IANA は, [RFC4250] で記述された secure shell MAC Algorithm Names registry に以下の2つのエントリを追加した.
+   IANA は, [RFC4250] で記述された secure shell MAC Algorithm Names registry に次の2つのエントリを追加した.
 
                    +--------------------+-------------+
                    |                    |             |
