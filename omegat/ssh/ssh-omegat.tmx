@@ -3902,6 +3902,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As [RFC4253] says, though, "Arcfour (and RC4) has problems
+   with weak keys, and should be used with caution."  These problems are
+   described in more detail in [MANTIN01], along with a recommendation
+   to discard the first 1536 bytes of keystream so as to ensure that the
+   cipher's internal state is thoroughly mixed.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20110614T024310Z">
+        <seg>しかし, [RFC4253] では, "Arcfour (と RC4) は弱い鍵の問題がある. 注意して利用しなければならない" となっている. [MANTIN01]にこれらの問題はより詳細に記述されている. [MANTIN01]では暗号の内部状態が完全に混合されるのを保証するために 鍵ストリームの最初の 1536 バイトを破棄するよう推奨している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As [RFC6241] states, the NETCONF client also sends an XML document
    containing a &lt;hello&gt; element to indicate the NETCONF client's
    capabilities to the NETCONF server.</seg>
@@ -6611,6 +6623,21 @@
       <tuv lang="JA" changeid="haruyama" changedate="20110819T070751Z">
         <seg>DESCRIPTION
         "ポート番号とオプションのユーザ名と共に, ホスト名かIPアドレスを表す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>DESCRIPTION "The compliance statement for SNMP engines that
+                 support the SNMP-SSH-TM-MIB."
+    MODULE
+        MANDATORY-GROUPS { snmpSshtmGroup }
+    ::= { snmpSshtmCompliances 1 }</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20110820T033431Z">
+        <seg>DESCRIPTION "SNMP-SSH-TM-MIB をサポートする SNMP エンジンとための準拠の宣言."
+    MODULE
+        MANDATORY-GROUPS { snmpSshtmGroup }
+    ::= { snmpSshtmCompliances 1 }</seg>
       </tuv>
     </tu>
     <tu>
@@ -11307,6 +11334,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>SSHFP が最初に検査されるなら, 新しいSSHホスト鍵は, DNS上の関連する SSHFP を置き換えることで配布されるだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If X=(2**L)-1, then
+   "increment X" has the traditional semantics of "set X to 0."  We use
+   the notation &lt;X&gt; to mean "convert X to an L-bit string in network-
+   byte-order."  Naturally, implementations may differ in how the
+   internal value X is stored.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20110531T074217Z">
+        <seg>X=(2**L)-1 のとき, "increment X" は "set X to 0" という伝統的な意味を持つ.  表記 &lt;X&gt; を "XをL-bitのネットワークバイトオーダー文字列に変換する" という意味で用いる. 当然, 実装は, 内部的な値であるXを保持する方法で別の表現をしてもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35890,6 +35929,18 @@
       </tuv>
       <tuv lang="JA">
         <seg>このポート番号は IANA によって登録されている. また, SSHに対して正式に割り当てられている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This prefix may be used by Security
+         Models or other components to identify which secure transport
+         infrastructure authenticated a securityName."
+    ::= { snmpDomains 7 }</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20110819T070237Z">
+        <seg>この接頭辞は, どの安全なトランスポート基盤が securityName を認証したかを識別するために Security Model や 他のコンポーネントから用いられる.
+    ::= { snmpDomains 7 }</seg>
       </tuv>
     </tu>
     <tu>

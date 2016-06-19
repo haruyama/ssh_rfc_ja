@@ -134,11 +134,7 @@ RFC 4344          SSH Transport Layer Encryption Modes      January 2006
      cast128-ctr      OPTIONAL          CAST-128 in SDCTR mode,
                                         with 128-bit key
 
-   ラベル <cipher>-ctr は, ブロック暗号 <cipher> を "stateful-decryption counter" (SDCTR) モードで利用することを示している.  L を <cipher>のビットでのブロック長とするstateful-decryption counter モードでは, 送信側と受信側の両方が内部のL-bitなカウンタ X を保持する. Xの初期値は([RFC4253]の7.2節で計算される) 初期IV である必要がある. 初期IVは L-bitのネットワークバイトオーダー符号無し整数として解釈される.  If X=(2**L)-1, then
-   "increment X" has the traditional semantics of "set X to 0."We use
-   the notation <X> to mean "convert X to an L-bit string in network-
-   byte-order."Naturally, implementations may differ in how the
-   internal value X is stored.  たとえば, 実装は複数の符号なし32-bitカウンタとしてXを保持してよい.
+   ラベル <cipher>-ctr は, ブロック暗号 <cipher> を "stateful-decryption counter" (SDCTR) モードで利用することを示している.  L を <cipher>のビットでのブロック長とするstateful-decryption counter モードでは, 送信側と受信側の両方が内部のL-bitなカウンタ X を保持する. Xの初期値は([RFC4253]の7.2節で計算される) 初期IV である必要がある. 初期IVは L-bitのネットワークバイトオーダー符号無し整数として解釈される.  X=(2**L)-1 のとき, "increment X" は "set X to 0" という伝統的な意味を持つ.  表記 <X> を "XをL-bitのネットワークバイトオーダー文字列に変換する" という意味で用いる. 当然, 実装は, 内部的な値であるXを保持する方法で別の表現をしてもよい.  たとえば, 実装は複数の符号なし32-bitカウンタとしてXを保持してよい.
 
    パケット P=P1||P2||...||Pn (P1, P2, ..., Pn はそれぞれ長さ L のブロック) を暗号化するため, 暗号化器は まず <X>を <cipher> で暗号化しブロック B1を得る.  次にブロック B1 を P1 と XORし 暗号文ブロック C1 を生成する.rtext block C1.  そして カウンタ X をインクリメントする. パケット P に対応する全暗号文 C=C1||C2||...||Cn を生成するために, 後続のブロックに対してこのプロセスが繰替えされる.
 

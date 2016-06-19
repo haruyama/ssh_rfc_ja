@@ -849,9 +849,7 @@ snmpSSHDomain OBJECT-IDENTITY
 
          SNMP エンティティが snmpSSHDomain トランスポートモデルを使う場合, サイズ 8192 オクテットまでのメッセージを受け取る能力がなければならない.  可能な限り大きな値で実装することが推奨される.
 
-         snmpSSHDomain に関連する securityName 接頭辞は 'ssh' だ.  This prefix may be used by Security
-         Models or other components to identify which secure transport
-         infrastructure authenticated a securityName."
+         snmpSSHDomain に関連する securityName 接頭辞は 'ssh' だ.  この接頭辞は, どの安全なトランスポート基盤が securityName を認証したかを識別するために Security Model や 他のコンポーネントから用いられる.
     ::= { snmpDomains 7 }
 
 SnmpSSHAddress ::= TEXTUAL-CONVENTION
@@ -1002,8 +1000,7 @@ snmpSshtmGroups      OBJECT IDENTIFIER ::= { snmpSshtmConformance 2 }
 snmpSshtmCompliance MODULE-COMPLIANCE
     STATUS      current
 
-    DESCRIPTION "The compliance statement for SNMP engines that
-                 support the SNMP-SSH-TM-MIB."
+    DESCRIPTION "SNMP-SSH-TM-MIB をサポートする SNMP エンジンとための準拠の宣言."
     MODULE
         MANDATORY-GROUPS { snmpSshtmGroup }
     ::= { snmpSshtmCompliances 1 }
