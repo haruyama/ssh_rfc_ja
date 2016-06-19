@@ -263,7 +263,7 @@ RFC 5592         Secure Shell Transport Model for SNMP         June 2009
 
    SSH トランスポートモデルは, 別の SNMP エンジンの SSH トランスポートモデルと自分自身の間にチャンネルを確立する.  送信トランスポートモデルは, ディスパッチャから SSH に暗号化していないメッセージを送って暗号化させ, 受信トランスポートモデルは, SSH を用いて復号した受信メッセージを受け取りディスパッチャに渡す.
 
-   SSH トランスポートチャンネルが確立した後では, 概念的には, SNMP メッセージディスパッチャから別の SNMP メッセージディスパッチャに SNMP メッセージはこのチャンネルを通して送られる.  複数の SNMP メッセージが同じチャンネルを通して送られてもよい.
+   SSH トランスポートチャンネルが確立したあとでは, 概念的には, SNMP メッセージディスパッチャから別の SNMP メッセージディスパッチャに SNMP メッセージはこのチャンネルを通して送られる.  複数の SNMP メッセージが同じチャンネルを通して送られてもよい.
 
    SNMP エンジンの SSH トランスポートモデルは, SSH 特有のセキュリティパラメータと SNMP 特有のモデルには独立なパラメータとの変換を行なう.
 
@@ -849,7 +849,9 @@ snmpSSHDomain OBJECT-IDENTITY
 
          SNMP エンティティが snmpSSHDomain トランスポートモデルを使う場合, サイズ 8192 オクテットまでのメッセージを受け取る能力がなければならない.  可能な限り大きな値で実装することが推奨される.
 
-         snmpSSHDomain に関連する securityName 接頭辞は 'ssh' だ.  この接頭辞は, どの安全なトランスポート基盤が securityName を認証したかを識別するために Security Model や 他のコンポーネントから用いられる.
+         snmpSSHDomain に関連する securityName 接頭辞は 'ssh' だ.  This prefix may be used by Security
+         Models or other components to identify which secure transport
+         infrastructure authenticated a securityName."
     ::= { snmpDomains 7 }
 
 SnmpSSHAddress ::= TEXTUAL-CONVENTION
@@ -1000,7 +1002,8 @@ snmpSshtmGroups      OBJECT IDENTIFIER ::= { snmpSshtmConformance 2 }
 snmpSshtmCompliance MODULE-COMPLIANCE
     STATUS      current
 
-    DESCRIPTION "SNMP-SSH-TM-MIB をサポートする SNMP エンジンとための準拠の宣言."
+    DESCRIPTION "The compliance statement for SNMP engines that
+                 support the SNMP-SSH-TM-MIB."
     MODULE
         MANDATORY-GROUPS { snmpSshtmGroup }
     ::= { snmpSshtmCompliances 1 }

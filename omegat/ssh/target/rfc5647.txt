@@ -328,7 +328,7 @@ RFC 5647                AES-GCM for Secure Shell             August 2009
 
 8.1.  AT でのパケットシーケンス番号の利用
 
-   [RFC4253] は, ATの形成に パケットの sequence_number, SSH トンネルで送られたバイナリパケットの数を数える32-ビットの値, を含むことを要求している.  sequence_number は, 追加の定数次第で, invocation_counter の丁度下位 32 ビットなので, invocation_counter フィールドがIVに存在していることは, sequence_number 自体が完全性タグの形成に実際に関与していることになる. この関与は, [RFC4253] の 6.4節の要件と少し異なっている.
+   [RFC4253] は, ATの形成に パケットの sequence_number, SSH トンネルで送られたバイナリパケットの数を数える32-ビットの値, を含むことを要求している.  sequence_number は, 追加の定数次第で, invocation_counter のちょうど下位 32 ビットなので, invocation_counter フィールドがIVに存在していることは, sequence_number 自体が完全性タグの形成に実際に関与していることになる. この関与は, [RFC4253] の 6.4節の要件と少し異なっている.
 
 8.2.  Packet Length の非暗号化
 

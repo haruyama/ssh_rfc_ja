@@ -26,7 +26,11 @@ Category: Standards Track
 
 1イントロダクション
 
-   セキュア シェル(SSH) [RFC4251] は 安全なロモートログインプロトコルだ.  転送中のデータの機密性を提供するため, 対称暗号アルゴリズムを拡張して利用できる.  基底のプロトコルで指定されたアルゴリズムの1つが "arcfour" で, 高速なストリーム暗号である Arcfour (RC4としても知られる) を利用するよう指定されている.  しかし, [RFC4253] では, "Arcfour (と RC4) は弱い鍵の問題がある. 注意して利用しなければならない" となっている. [MANTIN01]にこれらの問題はより詳細に記述されている. [MANTIN01]では暗号の内部状態が完全に混合されるのを保証するために 鍵ストリームの最初の 1536 バイトを破棄するよう推奨している.  この文書では, この推奨に従う新しい暗号アルゴリズムをSSHに定義する.
+   セキュア シェル(SSH) [RFC4251] は 安全なロモートログインプロトコルだ.  転送中のデータの機密性を提供するため, 対称暗号アルゴリズムを拡張して利用できる.  基底のプロトコルで指定されたアルゴリズムの1つが "arcfour" で, 高速なストリーム暗号である Arcfour (RC4としても知られる) を利用するよう指定されている.  As [RFC4253] says, though, "Arcfour (and RC4) has problems
+   with weak keys, and should be used with caution."These problems are
+   described in more detail in [MANTIN01], along with a recommendation
+   to discard the first 1536 bytes of keystream so as to ensure that the
+   cipher's internal state is thoroughly mixed.  この文書では, この推奨に従う新しい暗号アルゴリズムをSSHに定義する.
 
 2.  この文書で用いる表記
 

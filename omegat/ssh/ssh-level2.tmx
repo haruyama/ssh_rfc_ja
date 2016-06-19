@@ -2389,8 +2389,8 @@
       the certificate-based ECDSA authentication has been successfully
       completed.</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20110929T081403Z">
-        <seg>追加のユーザ認証法が用いられてもよい. しかし, 証明書ベースの ECDSA 認証が正常に完了した後でのみ用いられなければならない.</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160619T042910Z">
+        <seg>追加のユーザ認証法が用いられてもよい. しかし, 証明書ベースの ECDSA 認証が正常に完了したあとでのみ用いられなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2520,8 +2520,8 @@
    messages can conceptually be sent through the channel from one SNMP
    Message Dispatcher to another SNMP Message Dispatcher.</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20110802T023011Z">
-        <seg>SSH トランスポートチャンネルが確立した後では, 概念的には, SNMP メッセージディスパッチャから別の SNMP メッセージディスパッチャに SNMP メッセージはこのチャンネルを通して送られる.</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160619T042910Z">
+        <seg>SSH トランスポートチャンネルが確立したあとでは, 概念的には, SNMP メッセージディスパッチャから別の SNMP メッセージディスパッチャに SNMP メッセージはこのチャンネルを通して送られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3898,18 +3898,6 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>2.4節で述べたように, 検索に安全な方法を使われ, SSHFP RRが信頼できる SIG RR で認証されることが要求される.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>As [RFC4253] says, though, "Arcfour (and RC4) has problems
-   with weak keys, and should be used with caution."  These problems are
-   described in more detail in [MANTIN01], along with a recommendation
-   to discard the first 1536 bytes of keystream so as to ensure that the
-   cipher's internal state is thoroughly mixed.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20110614T024310Z">
-        <seg>しかし, [RFC4253] では, "Arcfour (と RC4) は弱い鍵の問題がある. 注意して利用しなければならない" となっている. [MANTIN01]にこれらの問題はより詳細に記述されている. [MANTIN01]では暗号の内部状態が完全に混合されるのを保証するために 鍵ストリームの最初の 1536 バイトを破棄するよう推奨している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6623,21 +6611,6 @@
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110819T070751Z">
         <seg>DESCRIPTION
         "ポート番号とオプションのユーザ名と共に, ホスト名かIPアドレスを表す.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>DESCRIPTION "The compliance statement for SNMP engines that
-                 support the SNMP-SSH-TM-MIB."
-    MODULE
-        MANDATORY-GROUPS { snmpSshtmGroup }
-    ::= { snmpSshtmCompliances 1 }</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20110820T033431Z">
-        <seg>DESCRIPTION "SNMP-SSH-TM-MIB をサポートする SNMP エンジンとための準拠の宣言."
-    MODULE
-        MANDATORY-GROUPS { snmpSshtmGroup }
-    ::= { snmpSshtmCompliances 1 }</seg>
       </tuv>
     </tu>
     <tu>
@@ -9623,8 +9596,8 @@
         <seg>Furthermore, the shared secret
    is known only to the participant parties.</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20110615T053909Z">
-        <seg>さらに, 共有の秘密は参加している当事者のみがわかる.</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160619T042655Z">
+        <seg>さらに, 共有の秘密は参加している当事者のみが分かる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11334,18 +11307,6 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>SSHFP が最初に検査されるなら, 新しいSSHホスト鍵は, DNS上の関連する SSHFP を置き換えることで配布されるだろう.</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
-        <seg>If X=(2**L)-1, then
-   "increment X" has the traditional semantics of "set X to 0."  We use
-   the notation &lt;X&gt; to mean "convert X to an L-bit string in network-
-   byte-order."  Naturally, implementations may differ in how the
-   internal value X is stored.</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20110531T074217Z">
-        <seg>X=(2**L)-1 のとき, "increment X" は "set X to 0" という伝統的な意味を持つ.  表記 &lt;X&gt; を "XをL-bitのネットワークバイトオーダー文字列に変換する" という意味で用いる. 当然, 実装は, 内部的な値であるXを保持する方法で別の表現をしてもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23404,8 +23365,8 @@
    in the formation of the integrity tag, though this involvement
    differs slightly from the requirements in Section 6.4 of [RFC4253].</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20110829T122133Z">
-        <seg>sequence_number は, 追加の定数次第で, invocation_counter の丁度下位 32 ビットなので, invocation_counter フィールドがIVに存在していることは, sequence_number 自体が完全性タグの形成に実際に関与していることになる. この関与は, [RFC4253] の 6.4節の要件と少し異なっている.</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160619T042939Z">
+        <seg>sequence_number は, 追加の定数次第で, invocation_counter のちょうど下位 32 ビットなので, invocation_counter フィールドがIVに存在していることは, sequence_number 自体が完全性タグの形成に実際に関与していることになる. この関与は, [RFC4253] の 6.4節の要件と少し異なっている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23487,8 +23448,8 @@
    from a trusted source, the entire client system would need to be
    configured with this trusted DNS search path.</seg>
       </tuv>
-      <tuv xml:lang="JA">
-        <seg>どのサーチパスが信頼できるソースから得られたものかわかる ＤＮＳ 検索 API は現在ないので, クライアントシステム全体が信頼できるDNSサーチパスによって設定されている必要があるだろう. </seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160619T042655Z">
+        <seg>どのサーチパスが信頼できるソースから得られたものか分かる ＤＮＳ 検索 API は現在ないので, クライアントシステム全体が信頼できるDNSサーチパスによって設定されている必要があるだろう. </seg>
       </tuv>
     </tu>
     <tu>
@@ -35933,18 +35894,6 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
-        <seg>This prefix may be used by Security
-         Models or other components to identify which secure transport
-         infrastructure authenticated a securityName."
-    ::= { snmpDomains 7 }</seg>
-      </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20110819T070237Z">
-        <seg>この接頭辞は, どの安全なトランスポート基盤が securityName を認証したかを識別するために Security Model や 他のコンポーネントから用いられる.
-    ::= { snmpDomains 7 }</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv xml:lang="EN-US">
         <seg>This presents a problem for SSH AES-GCM because:</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110829T041424Z">
@@ -38015,8 +37964,8 @@
    conclude the user authentication exchange by sending the following
    message:</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20110704T030459Z">
-        <seg>GSS_Init_sec_context() のクライアントの呼び出し結果が GSS_S_COMPLETE で integ_avail フラグが設定されているなら、 クライアントは 次のメッセージを送ってユーザ認証の交換を成立させなければらならない. </seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160619T043121Z">
+        <seg>GSS_Init_sec_context() のクライアントの呼び出し結果が GSS_S_COMPLETE で integ_avail フラグが設定されているなら, クライアントは 次のメッセージを送ってユーザ認証の交換を成立させなければらならない. </seg>
       </tuv>
     </tu>
     <tu>
@@ -38445,8 +38394,8 @@
    between the real client and server, thus gaining access to the real
    server.</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20110704T022503Z">
-        <seg>この追加のレベルの保護で、 クライアントにその信頼性を確信させた"中間者攻撃"の攻撃者が、 本物のクライアントとサーバの間でユーザ認証メッセージを中継して本物のサーバのアクセス権限を得ようとすることができなくなる.</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20160619T043113Z">
+        <seg>この追加のレベルの保護で, クライアントにその信頼性を確信させた"中間者攻撃"の攻撃者が, 本物のクライアントとサーバの間でユーザ認証メッセージを中継して本物のサーバのアクセス権限を得ようとすることができなくなる.</seg>
       </tuv>
     </tu>
     <tu>
