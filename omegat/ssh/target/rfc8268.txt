@@ -1,0 +1,361 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                        M. Baushke
+Request for Comments: 8268                        Juniper Networks, Inc.
+Updates: 4250, 4253                                        December 2017
+Category: Standards Track
+ISSN: 2070-1721
+
+
+         セキュア シェルのための 追加のモジュラー指数 (MODP) Diffie-Hellman (DH) 鍵交換 (KEX) 群
+
+概要
+
+   この文書は, SHA-2 ハッシュを用いる セキュア シェル (SSH) プロトコルのための, 追加のモジュラー指数(MODP) 群を定義する.  この文書は RFC 4250 を更新する.  この文書は, ピアの DH 公開鍵の検査に関する誤りを修正することで, RFC 4253 を更新する.
+
+このメモの位置づけ
+
+   これは, インターネット標準化課程文書だ.
+
+   この文書は, Internet Engineering Task Force (IETF) の成果物だ.  IETF コミュニティの合意を表わしている.  公開のレビューを受けており, Internet Engineering Steering Group (IESG) によって発行が認められた.  インターネット標準についてさらなる情報は RFC 7841 の 2節にある.
+
+   この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8268 で得られる.
+
+著作権情報
+
+   Copyright (c) 2017 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+
+
+Baushke                      Standards Track                    [Page 1]
+
+RFC 8268             More MODP DH KEX Groups for SSH       December 2017
+
+
+目次
+
+   1概要と原理. . . . . . . . . . . . . . . . . .   2
+   2.  要件に関する用語 . . . . . . . . . . . . . . . . . . . .   4
+   3.  鍵交換アルゴリズム . . . . . . . . . . . . . . . . . . .   4
+   4.  ピアの DH 公開鍵の検査 . . . . . . . . . . . . . .   5
+   5.  IANA の考察 . . . . . . . . . . . . . . . . . . . . .   5
+   6.  セキュリティの考察 . . . . . . . . . . . . . . . . . . .   6
+   7.  リファレンス  . . . . . . . . . . . . . . . . . . . . . . . . .   6
+     7.1.  標準のリファレンス  . . . . . . . . . . . . . . . . . .   6
+     7.2.  情報のリファレンス . . . . . . . . . . . . . . . . .   7
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .   8
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   8
+
+1概要と原理
+
+   セキュア シェル (SSH) は, インターネットでの安全な通信のための一般的なプロトコルだ.  セキュリティプロトコルと基本様相は研究が活発な領域で, SSH の更新の示唆に役立つ.
+
+   [RFC4253] の 8 節には, ピアの DH 公開鍵の検査に関してポイント3に小さな誤りが含まれている.  この文書の 4 節で, 修正を提供する.
+
+   SHA-1 [RFC6194] と 2048bit より小さい MODP 群 [NIST-SP-800-131Ar1],のセキュリティの懸念により, 実装者と利用者は SHA-2 ファミリの安全なハッシアルゴリズムを用いたデータ完全性検証を持ち MODP 群がより強固なセキュリティを提供する Diffie-Hellman (DH) MODP 群のより大きなサイズのサポートが要求されている.  MODP のより大きな群の利用と SHA-2 ファミリのハッシュへの移行は, SSH クライアントとサーバで利用可能な鍵交換アルゴリズムを強める重要な機能だ.
+
+   この文書で採用する DH 素数は, すべて「安全な素数」で, つまり p = 2q +1 で q も 素数だ.  新しい MODP 群は, MODP 3072-bit group15 から導入される.  すべて, SHA512 ハッシュアルゴリズムを利用する.
+
+   DH 2048-bit MODP group14 は, 多くのSSH実装で実装されており, ほとんどの実装が SHA256 の実装を持っている. なので容易に実装できる "diffie-hellman-group14-sha256" が提供される.
+
+   SHA-2 ベースのハッシュを利用する新しい MODP 群は, [RFC4253] の 6.4節と [RFC4250] の 4.10 節を更新する.
+
+
+
+
+
+
+Baushke                      Standards Track                    [Page 2]
+
+RFC 8268             More MODP DH KEX Groups for SSH       December 2017
+
+
+   国家安全保障局のアメリカ合州国情報保障局は, 「商業国家セキュリティアルゴリズムスイートと量子コンピューティングでのよくある質問」を公開している.  [MFQ-U-OO-815099-15] は, 機密のもしくは機密でない国家安全システム(NSS)を運営する組織と NSS の中で用いられる製品を作成するベンダーに向けての文書だ.
+
+   このよくある質問文書は, NSS は以下を使うべきでないと示している:
+
+   o  NIST P-256 を用いる 楕円曲線 Diffie-Hellman (ECDH) と 楕円曲線 Digital Signature Algorithm (ECDSA).  (SSH では, [RFC5656] の鍵交換アルゴリズム "ecdh-sha2-nistp256" と公開鍵アルゴリズム "ecdsa-sha2-nistp256"を避けることを示唆する.)
+
+   o  SHA-256 (SSH では, SHA1, SHA224, SHA256 を用いる鍵交換方を避けて SHA384 ないし SHA512 を利用することを示唆する.)
+
+   o  AES-128 (SSH では, [RFC4253] "aes128-cbc" と [RFC4344] "aes128-ctr" 暗号アリゴリズムを避けることを示唆する.)
+
+   o  2048-bit 鍵を用いる RSA (SSH では, [RFC4253] SHA1 を利用する RSA "ssh-rsa" と [RFC6187] "x509v3-rsa2048-sha256", また 3072-bit より小さい鍵を用いる RSA のすべてと SHA384 よりも弱いハッシュを用いる RSA すべてを避けることを示唆する.)
+
+   o  2048-bit 鍵を用いる Diffie-Hellman (SSH では, [RFC4253] "diffie-hellman-group1-sha1" と "diffie-hellman-group14-sha1", この文書で追加される "diffie-hellman-group14-sha256" を避けることを示唆する.)
+
+   このよくある質問は, 最小の必要なサイズに準拠しているよく確率され検証されたパラメータセットをベースにした DH 群を NSS のユーザは選択する必要があると記述している.  具体的な例を挙げると:
+
+   o  楕円曲線は, NIST と 国家情報保障パートナーシップ(NIAP) 標準に従って ECDH と ECDSA に対してのみ NIST P-384 グループに現在限定されている.  (SSH では, [RFC5656] "ecdh-sha2-nistp384" を鍵交換に "ecdsa-sha2-nistp384" を公開鍵アルゴリズムに利用することを意味する.)
+
+   o  RSA モジュラスは, (有名なPKIの例外を除いて) 最小で 3072 bit のサイズを持つ必要がある. また, 鍵は すべての関連する NIST 標準に従って生成される必要がある.
+
+
+
+
+
+Baushke                      Standards Track                    [Page 3]
+
+RFC 8268             More MODP DH KEX Groups for SSH       December 2017
+
+
+   o  Diffie-Hellman では , 少なくとも 3072 bit の Diffie-Hellman の素数モジュラスを用いる.  ([RFC3526] で指定されているビットサイズでは, group15, group16, group17, group18 で使われているもののすべてが利用できる.)
+
+   SSH は 常にトップシークレットの通信に利用されるわけではないが, この文書では, このよくある質問の例として提供されている DH 群の利用を採用する. また, 新しい DH 群に対して SHA256 ではなく SHA512 の利用を採用する.
+
+2.  要件に関する用語
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, ここで示しているようにすべて大文字で出現した場合のみ, BCP 16 [RFC2119] [RFC8174] で記述されているように解釈される. 
+
+3.  鍵交換アルゴリズム
+
+   この文書は, いくつかの鍵交換アルゴリズム名を元々 [RFC4253] と [RFC4250] に登場していたものに加える.
+
+   この文書は, 新しいデータ鍵交換の利用を SSH の中でどのように表明するかを指定するのに, [RFC4253] スタイルと命名規則を採用する.
+
+   次の新しい鍵交換法アルゴリズムが定義される:
+
+   o  diffie-hellman-group14-sha256
+
+   o  diffie-hellman-group15-sha512
+
+   o  diffie-hellman-group16-sha512
+
+   o  diffie-hellman-group17-sha512
+
+   o  diffie-hellman-group18-sha512
+
+   安全なハッシュアルゴリズムの SHA-2 ファミリは [RFC6234] で定義されている.
+
+   "diffie-hellman-group14-sha256" という名で利用される鍵交換の方法は, "diffie-hellman-group14-sha1" と同じだが SHA256 ハッシュアルゴリズムを利用する点が異なる.  "diffie-hellman-group14-sha256" は, より新しい群のサイズへの移行を滑らかにするためにサポートされる必要があることを推奨する.
+
+   group15 から group18 の名前は, [RFC3526] で指定されているものと同じだ: 3072-bit MODP group15, 4096-bit MODP group16, 6144-bit MODP group17, and 8192-bit MODP group18.
+
+
+
+Baushke                      Standards Track                    [Page 4]
+
+RFC 8268             More MODP DH KEX Groups for SSH       December 2017
+
+
+   SHA512 アルゴリズムは, 鍵交換法の名前の一部として "sha512" と指定されて用いられる.
+
+4.  ピアの DH 公開鍵の検査
+
+   [RFC4253] の 8節には, ポイント 3 に小さな誤りが含まれている.  e (クライアント公開鍵) と f (サーバ公開鍵) の値を検査する際に, 不正な範囲が提供されている.  エラーのあるテキストは以下だ:
+
+      [1, p-1] の範囲ではない'e' や 'f' の値は, どちらの側も送ったり受け取ったりしてはならない.  この条件に違反したら, 鍵交換は失敗する.
+
+   境界値を除くオープンな区間が範囲であるべきなのが問題だ. (すなわち, "(1, p-1)").  この文書はで, 文書のテキストを以下のように修正する:
+
+      DH 公開鍵の値は, 検査されなければならない. 以下の2つの条件:
+
+         1 < e < p-1
+
+         1 < f < p-1
+
+      が真でなければならない.  この境界にない値は,どちらの側も送ったり受け取ったりしてはならない.  これらの条件のうち 1 つでも違反していたら, 鍵交換は失敗する.
+
+   この単純な検査は以下を保証する:
+
+   o  リモートのピアが正しく動作している.
+
+   o  ローカルのシステムが, 2要素のサブ群に強制されていない.
+
+5.  IANA の考慮
+
+   IANA は  "Key Exchange Method Names" レジストリ [IANA-KEX] に以下のエントリを追加します:
+
+                  Method Name                   Reference
+                  ----------------------------- ---------
+                  diffie-hellman-group14-sha256 RFC 8268
+                  diffie-hellman-group15-sha512 RFC 8268
+                  diffie-hellman-group16-sha512 RFC 8268
+                  diffie-hellman-group17-sha512 RFC 8268
+                  diffie-hellman-group18-sha512 RFC 8268
+
+
+
+
+
+
+Baushke                      Standards Track                    [Page 5]
+
+RFC 8268             More MODP DH KEX Groups for SSH       December 2017
+
+
+6.  セキュリティの考察
+
+   [RFC4253] のセキュリティの考察がこの文書に適用される.
+
+   [RFC3526] のセキュリティの考察は, MODP group14 からgroup18 は 110 bits から 310 bits の範囲のセキュリティの強度を持つと示唆している.  "Determining Strengths For Public Keys Used For Exchanging Symmetric Keys" [RFC3766] をこの示唆はベースにしている.  選択した鍵交換と暗号の本当のセキュリティ強度を最大化するには, 十分なエントリピーの利用 と/もしくは 決定論的な乱数生成器 (DRBG) を利用することに注意を払う必要がある.
+
+   Diffie-Hellman パラメータの固定のセットの利用は, 事前計算によりパラメータを最重要目標とする.  利用する素数の追加のセットの生成やより大きな値の利用がこの問題を軽減する.
+
+7.  References
+
+7.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC3526]  Kivinen, T. and M. Kojo, "More Modular Exponential (MODP)
+              Diffie-Hellman groups for Internet Key Exchange (IKE)",
+              RFC 3526, DOI 10.17487/RFC3526, May 2003,
+              <https://www.rfc-editor.org/info/rfc3526>.
+
+   [RFC4250]  Lehtinen, S. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Assigned Numbers", RFC 4250,
+              DOI 10.17487/RFC4250, January 2006,
+              <https://www.rfc-editor.org/info/rfc4250>.
+
+   [RFC4253]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Transport Layer Protocol", RFC 4253, DOI 10.17487/RFC4253,
+              January 2006, <https://www.rfc-editor.org/info/rfc4253>.
+
+   [RFC6234]  Eastlake 3rd, D. and T. Hansen, "US Secure Hash Algorithms
+              (SHA and SHA-based HMAC and HKDF)", RFC 6234,
+              DOI 10.17487/RFC6234, May 2011,
+              <https://www.rfc-editor.org/info/rfc6234>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+
+
+
+Baushke                      Standards Track                    [Page 6]
+
+RFC 8268             More MODP DH KEX Groups for SSH       December 2017
+
+
+7.2.  Informative References
+
+   [IANA-KEX] IANA, "Secure Shell (SSH) Protocol Parameters",
+              <http://www.iana.org/assignments/ssh-parameters/>
+
+   [MFQ-U-OO-815099-15]
+              National Security Agency / Central Security Service,
+              "Commerical National Security Algorithm Suite and Quantum
+              Computing FAQ", MFQ U/OO/815099-15 , January 2016,
+              <https://www.iad.gov/iad/library/ia-guidance/
+              ia-solutions-for-classified/algorithm-
+              guidance/assets/public/upload/
+              CNSA-Suite-and-Quantum-Computing-FAQ.pdf>.
+
+   [NIST-SP-800-131Ar1]
+              Barker and Roginsky, "Transitions: Recommendation for the
+              Transitioning of the Use of Cryptographic Algorithms and
+              Key Lengths", NIST Special Publication 800-131A,
+              Revision 1, DOI 10.6028/NIST.SP.800-131Ar1, November 2015,
+              <http://dx.doi.org/10.6028/NIST.SP.800-131Ar1>.
+
+   [RFC3766]  Orman, H. and P. Hoffman, "Determining Strengths For
+              Public Keys Used For Exchanging Symmetric Keys", BCP 86,
+              RFC 3766, DOI 10.17487/RFC3766, April 2004,
+              <https://www.rfc-editor.org/info/rfc3766>.
+
+   [RFC4344]  Bellare, M., Kohno, T., and C. Namprempre, "The Secure
+              Shell (SSH) Transport Layer Encryption Modes", RFC 4344,
+              DOI 10.17487/RFC4344, January 2006,
+              <https://www.rfc-editor.org/info/rfc4344>.
+
+   [RFC5656]  Stebila, D. and J. Green, "Elliptic Curve Algorithm
+              Integration in the Secure Shell Transport Layer",
+              RFC 5656, DOI 10.17487/RFC5656, December 2009,
+              <https://www.rfc-editor.org/info/rfc5656>.
+
+   [RFC6187]  Igoe, K. and D. Stebila, "X.509v3 Certificates for Secure
+              Shell Authentication", RFC 6187, DOI 10.17487/RFC6187,
+              March 2011, <https://www.rfc-editor.org/info/rfc6187>.
+
+   [RFC6194]  Polk, T., Chen, L., Turner, S., and P. Hoffman, "Security
+              Considerations for the SHA-0 and SHA-1 Message-Digest
+              Algorithms", RFC 6194, DOI 10.17487/RFC6194, March 2011,
+              <https://www.rfc-editor.org/info/rfc6194>.
+
+
+
+
+
+
+
+Baushke                      Standards Track                    [Page 7]
+
+RFC 8268             More MODP DH KEX Groups for SSH       December 2017
+
+
+謝辞
+
+   Thanks to the following people for review and comments: Denis Bider,
+   Peter Gutmann, Damien Miller, Niels Moller, Matt Johnston, Iwamoto
+   Kouichi, Dave Dugal, Daniel Migault, Anna Johnston, Ron Frederick,
+   Rich Salz, Travis Finkenauer, and Eric Rescorla.
+
+Author's Address
+
+   Mark D. Baushke
+   Juniper Networks, Inc.
+   1133 Innovation Way
+   Sunnyvale, CA  94089-1228
+   United States of America
+
+   Phone: +1 408 745 2952
+   Email: mdb@juniper.net
+   URI:   http://www.juniper.net/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Baushke                      Standards Track                    [Page 8]
+

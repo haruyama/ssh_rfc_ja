@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tmx SYSTEM "tmx14.dtd">
 <tmx version="1.4">
-  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="3.5.4_0_r8496:8556M" segtype="sentence" srclang="EN-US"/>
+  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="3.6.0_8_r10247" segtype="sentence" srclang="EN-US"/>
   <body>
 <!-- Default translations -->
     <tu>
@@ -247,6 +247,37 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>(For
+      SSH, this means using [RFC5656] "ecdh-sha2-nistp384" for key
+      exchange and "ecdsa-sha2-nistp384" for Public Key Algorithm
+      Names.)</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T113803Z" creationid="haruyama" creationdate="20180125T113803Z">
+        <seg>(SSH では, [RFC5656] "ecdh-sha2-nistp384" を鍵交換に "ecdsa-sha2-nistp384" を公開鍵アルゴリズムに利用することを意味する.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>(For SSH, this would
+      suggest avoiding [RFC5656] Key Exchange Algorithm
+      "ecdh-sha2-nistp256" and Public Key Algorithm
+      "ecdsa-sha2-nistp256".)</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T112037Z" creationid="haruyama" creationdate="20180125T112037Z">
+        <seg>(SSH では, [RFC5656] の鍵交換アルゴリズム "ecdh-sha2-nistp256" と公開鍵アルゴリズム "ecdsa-sha2-nistp256"を避けることを示唆する.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>(For bit sizes as specified in [RFC3526], this would
+      allow for any of group15, group16, group17, group18 to be used.)</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T122154Z" creationid="haruyama" creationdate="20180125T122154Z">
+        <seg>([RFC3526] で指定されているビットサイズでは, group15, group16, group17, group18 で使われているもののすべてが利用できる.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>(Here, again, client means the side originating the
    session, and server means the other side.)</seg>
       </tuv>
@@ -312,6 +343,14 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110719T025555Z">
         <seg>(公開鍵ファイルの本体を構成するために base64 エンコードされるデータと同じものだ.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>(i.e., "(1, p-1)").</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T061905Z" creationid="haruyama" creationdate="20180127T061905Z">
+        <seg>(すなわち, "(1, p-1)").</seg>
       </tuv>
     </tu>
     <tu>
@@ -3109,6 +3148,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>All use SHA512
+   as the hash algorithm.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T124347Z" creationid="haruyama" creationdate="20180124T124347Z">
+        <seg>すべて, SHA512 ハッシュアルゴリズムを利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>All values in the agent protocol are encoded using the SSH wire
    representations specified by [RFC4251].</seg>
       </tuv>
@@ -3241,6 +3289,17 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110425T075030Z">
         <seg>先祖であるSHA-1にはいくつかの弱点が見つかっているが, SHA2ファミリには現在弱点は知られていない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Although SSH may not always be used to protect Top Secret
+   communications, this document adopts the use of the DH groups
+   provided as an example in the FAQ as well as the use of SHA512 rather
+   than SHA256 for the new DH groups.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T122329Z" creationid="haruyama" creationdate="20180125T122329Z">
+        <seg>SSH は 常にトップシークレットの通信に利用されるわけではないが, この文書では, このよくある質問の例として提供されている DH 群の利用を採用する. また, 新しい DH 群に対して SHA256 ではなく SHA512 の利用を採用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5315,6 +5374,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Care should be taken to use sufficient entropy and/
+   or deterministic random-bit generator (DRBG) algorithms to maximize
+   the true security strength of the key exchange and ciphers selected.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T063147Z" creationid="haruyama" creationdate="20180127T063147Z">
+        <seg>選択した鍵交換と暗号の本当のセキュリティ強度を最大化するには, 十分なエントリピーの利用 と/もしくは 決定論的な乱数生成器 (DRBG) を利用することに注意を払う必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Central registration of all extensions
    is cumbersome, especially for experimental or classified features.</seg>
       </tuv>
@@ -5468,6 +5537,22 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>チャンネルは両方の側で番号によって識別される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Checking the Peer's DH Public Key</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T061145Z" creationid="haruyama" creationdate="20180127T061145Z">
+        <seg>ピアの DH 公開鍵の検査</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Checking the Peer's DH Public Key .</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T070508Z" creationid="haruyama" creationdate="20180124T070508Z">
+        <seg>ピアの DH 公開鍵の検査 .</seg>
       </tuv>
     </tu>
     <tu>
@@ -6652,6 +6737,23 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>DH Public Key values MUST be checked and both conditions:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T062129Z" creationid="haruyama" creationdate="20180127T062129Z">
+        <seg>DH 公開鍵の値は, 検査されなければならない. 以下の2つの条件:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>DH primes being adopted by this document are all "safe primes" such
+   that p = 2q + 1 where q is also a prime.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T124249Z" creationid="haruyama" creationdate="20180124T124249Z">
+        <seg>この文書で採用する DH 素数は, すべて「安全な素数」で, つまり p = 2q +1 で q も 素数だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>DNS names are used to create local namespaces where experimental or
    classified extensions can be defined without fear of conflicts with
    other implementations.</seg>
@@ -7220,6 +7322,19 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20131203T022009Z" creationid="haruyama" creationdate="20131203T022009Z">
         <seg>これらの2つのアルゴリズムについての最近のセキュリティの懸念 (それぞれ [RFC6194] と [RFC6151])から, 実装者とユーザは安全なハッシュアルゴリズムの SHA-2 ファミリの一部を利用するデータ完全性検証のサポートを要求している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Due to security concerns with SHA-1 [RFC6194] and with MODP groups
+   with less than 2048 bits [NIST-SP-800-131Ar1], implementers and users
+   should request support for larger Diffie-Hellman (DH) MODP group
+   sizes with data-integrity verification by using the SHA-2 family of
+   secure hash algorithms and by having MODP groups provide more
+   security.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T124018Z" creationid="haruyama" creationdate="20180124T123622Z">
+        <seg>SHA-1 [RFC6194] と 2048bit より小さい MODP 群 [NIST-SP-800-131Ar1],のセキュリティの懸念により, 実装者と利用者は SHA-2 ファミリの安全なハッシアルゴリズムを用いたデータ完全性検証を持ち MODP 群がより強固なセキュリティを提供する Diffie-Hellman (DH) MODP 群のより大きなサイズのサポートが要求されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9557,6 +9672,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Further information on
+   Internet Standards is available in Section 2 of RFC 7841.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T070332Z" creationid="haruyama" creationdate="20180124T070321Z">
+        <seg>インターネット標準についてさらなる情報は RFC 7841 の 2節にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Further recall that the total length of the
    concatenation of the packet length, padding length, payload, and
    padding MUST be a multiple of the cipher's block size when the
@@ -9957,6 +10081,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110409T093713Z">
         <seg>交換ハッシュの生成</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Generating additional sets of
+   primes to be used, or moving to larger values mitigates this issue.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T063618Z" creationid="haruyama" creationdate="20180127T063618Z">
+        <seg>利用する素数の追加のセットの生成やより大きな値の利用がこの問題を軽減する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11024,6 +11157,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>IANA has added the following entries to the "Key Exchange Method
+   Names" registry [IANA-KEX]:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T062754Z" creationid="haruyama" creationdate="20180127T062727Z">
+        <seg>IANA は  "Key Exchange Method Names" レジストリ [IANA-KEX] に以下のエントリを追加します:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>IANA has allocated the RR type code 44 for SSHFP from the standard RR
    type space.</seg>
       </tuv>
@@ -11690,6 +11832,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110715T061728Z">
         <seg>特定の GSS-API メカニズムで もしくは 特定の GSS-API メカニズムの実装で, これらの特徴のどちらかがサポートされていなかったら, 鍵交換は安全ではなく失敗しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If either one of these conditions is
+      violated, then the key exchange fails.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T062247Z" creationid="haruyama" creationdate="20180127T062247Z">
+        <seg>これらの条件のうち 1 つでも違反していたら, 鍵交換は失敗する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12936,6 +13087,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110722T052238Z">
         <seg>この属性が指定されているなら, "comment" 属性がすぐ次に続かなければならない. また, その "comment" 属性の言語を指定しなければならない [6].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If this condition is
+      violated, the key exchange fails.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T061733Z" creationid="haruyama" creationdate="20180127T061733Z">
+        <seg>この条件に違反したら, 鍵交換は失敗する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15053,6 +15213,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc8268.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T070404Z" creationid="haruyama" creationdate="20180124T070404Z">
+        <seg>この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8268 で得られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Information in this
    section is only relevant for implementations supporting compatibility
    with SSH versions 1.x.</seg>
@@ -15108,6 +15278,14 @@
       <tuv xml:lang="JA">
         <seg>情報のリファレンス ........................................7
    8.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Informative References  .</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T070537Z" creationid="haruyama" creationdate="20180124T070537Z">
+        <seg>情報のリファレンス .</seg>
       </tuv>
     </tu>
     <tu>
@@ -16234,6 +16412,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>It is intended that these new MODP groups with SHA-2-based hashes
+   update Section 6.4 of [RFC4253] and Section 4.10 of [RFC4250].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T124750Z" creationid="haruyama" creationdate="20180124T124601Z">
+        <seg>SHA-2 ベースのハッシュを利用する新しい MODP 群は, [RFC4253] の 6.4節と [RFC4250] の 4.10 節を更新する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>It is intended to be run over the SSH
    transport layer protocol [SSH-TRANS].</seg>
       </tuv>
@@ -16324,6 +16511,16 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110808T094731Z">
         <seg>検証のために, RADIUS [RFC2864] や Diameter [RFC3588] のようなサービスにパスワードを渡すことが可能だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>It is recommended
+   that "diffie-hellman-group14-sha256" SHOULD be supported to smooth
+   the transition to newer group sizes.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T060959Z" creationid="haruyama" creationdate="20180127T060959Z">
+        <seg>"diffie-hellman-group14-sha256" は, より新しい群のサイズへの移行を滑らかにするためにサポートされる必要があることを推奨する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16873,6 +17070,22 @@
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110826T040957Z">
         <seg>鍵交換 ...............................................4
       5.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Key Exchange Algorithms</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T060242Z" creationid="haruyama" creationdate="20180127T060242Z">
+        <seg>鍵交換アルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Key Exchange Algorithms .</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T070440Z" creationid="haruyama" creationdate="20180124T070440Z">
+        <seg>鍵交換アルゴリズム .</seg>
       </tuv>
     </tu>
     <tu>
@@ -17567,6 +17780,14 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>MUST be true.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T062143Z" creationid="haruyama" creationdate="20180127T062143Z">
+        <seg>が真でなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Man-in-the-middle</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -17937,6 +18158,15 @@
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110729T033717Z">
         <seg>モジュール方式 .................................................5
       1.4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>More Modular Exponentiation (MODP) Diffie-Hellman (DH)
+            Key Exchange (KEX) Groups for Secure Shell (SSH)</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T070053Z" creationid="haruyama" creationdate="20180124T065957Z">
+        <seg>セキュア シェルのための 追加のモジュラー指数 (MODP) Diffie-Hellman (DH) 鍵交換 (KEX) 群</seg>
       </tuv>
     </tu>
     <tu>
@@ -18391,6 +18621,15 @@
       <tuv xml:lang="JA">
         <seg>新しいクライアントで古いサーバ.........................6
       5.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>New MODP groups are being
+   introduced starting with the MODP 3072-bit group15.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T124705Z" creationid="haruyama" creationdate="20180124T124332Z">
+        <seg>新しい MODP 群は, MODP 3072-bit group15 から導入される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20029,6 +20268,14 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Overview and Rationale  .</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T070423Z" creationid="haruyama" creationdate="20180124T070423Z">
+        <seg>概要と原理</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>PFS is a major design goal of SSH, and any well-designed key-exchange
    algorithm will provide it.</seg>
       </tuv>
@@ -21101,6 +21348,14 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>Record 2 は, TCPセグメントの先頭ではなく今後も先頭にはならない. ACKが受け取られたからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>References  .</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T070527Z" creationid="haruyama" creationdate="20180124T070527Z">
+        <seg>リファレンス  .</seg>
       </tuv>
     </tu>
     <tu>
@@ -22412,6 +22667,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Section 4 of this document
+   provides the correction.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T123536Z" creationid="haruyama" creationdate="20180124T123536Z">
+        <seg>この文書の 4 節で, 修正を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Section 4.2.6 details constraint types and their format.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160527T110420Z" creationid="haruyama" creationdate="20160527T110420Z">
@@ -22439,6 +22703,23 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Section 8 of [RFC4253] contains a small error in point 3 regarding
+   checking the Peer's DH Public Key.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T123522Z" creationid="haruyama" creationdate="20180124T123522Z">
+        <seg>[RFC4253] の 8 節には, ピアの DH 公開鍵の検査に関してポイント3に小さな誤りが含まれている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Section 8 of [RFC4253] contains a small error in point 3.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T061451Z" creationid="haruyama" creationdate="20180127T061451Z">
+        <seg>[RFC4253] の 8節には, ポイント 3 に小さな誤りが含まれている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Section 9 of [RFC4253] suggests that SSH implementations rekey after
    every gigabyte of transmitted data.</seg>
       </tuv>
@@ -22462,6 +22743,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110614T023725Z">
         <seg>セキュア シェル(SSH) [RFC4251] は 安全なロモートログインプロトコルだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Secure Shell (SSH) is a common protocol for secure communication on
+   the Internet.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T070625Z" creationid="haruyama" creationdate="20180124T070606Z">
+        <seg>セキュア シェル (SSH) は, インターネットでの安全な通信のための一般的なプロトコルだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22816,6 +23106,15 @@
       <tuv xml:lang="JA">
         <seg>セキュリティの特性 ........................................7
       4.5.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Security protocols and primitives are an active area
+   for research and help to suggest updates to SSH.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T123332Z" creationid="haruyama" creationdate="20180124T123332Z">
+        <seg>セキュリティプロトコルと基本様相は研究が活発な領域で, SSH の更新の示唆に役立つ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23717,6 +24016,14 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>ユーザがやってくるホストとリモートホストでのユーザ名をベースにした認証を行ないたいサイトもある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Some specific examples include:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T113535Z" creationid="haruyama" creationdate="20180125T113535Z">
+        <seg>具体的な例を挙げると:</seg>
       </tuv>
     </tu>
     <tu>
@@ -25857,6 +26164,17 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The DH 2048-bit MODP group14 is already present in most SSH
+   implementations and most implementations already have a SHA256
+   implementation, so "diffie-hellman-group14-sha256" is provided as
+   easy to implement.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T124723Z" creationid="haruyama" creationdate="20180124T124530Z">
+        <seg>DH 2048-bit MODP group14 は, 多くのSSH実装で実装されており, ほとんどの実装が SHA256 の実装を持っている. なので容易に実装できる "diffie-hellman-group14-sha256" が提供される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The DNS-ID MAY
       contain the wildcard character '*' as the complete left-most label
       within the identifier.</seg>
@@ -26002,6 +26320,16 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>拡張チャンネルデータ転送の 'data_type_code' は uint32の値だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The FAQ also states that NSS users should select DH groups based upon
+   well-established and validated parameter sets that comply with the
+   minimum required sizes.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T114018Z" creationid="haruyama" creationdate="20180125T113522Z">
+        <seg>このよくある質問は, 最小の必要なサイズに準拠しているよく確率され検証されたパラメータセットをベースにした DH 群を NSS のユーザは選択する必要があると記述している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26468,12 +26796,29 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The SHA-2 family of secure hash algorithms is defined in [RFC6234].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T060651Z" creationid="haruyama" creationdate="20180127T060651Z">
+        <seg>安全なハッシュアルゴリズムの SHA-2 ファミリは [RFC6234] で定義されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The SHA2 family
    consists of four variants -- SHA-224, SHA-256, SHA-384, and SHA-521
    -- named after their digest lengths.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110425T075336Z">
         <seg>SHA2 ファミリは4つのバリエーションで構成されている. SHA-224 と SHA-256, SHA-384, SHA-521 だ. そのダイジェストの長さによって命名された.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The SHA512 algorithm is to be used when "sha512" is specified as a
+   part of the key exchange method name.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T061128Z" creationid="haruyama" creationdate="20180127T061128Z">
+        <seg>SHA512 アルゴリズムは, 鍵交換法の名前の一部として "sha512" と指定されて用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27400,6 +27745,17 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110729T034608Z">
         <seg>このメモで指定するトランスポートモデルは, セキュアシェルトランスポートモデル (SSHTM) と呼ばれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The United States Information Assurance Directorate (IAD) at the
+   National Security Agency (NSA) has published "Commercial National
+   Security Algorithm Suite and Quantum Computing Frequently Asked
+   Questions".</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T111333Z" creationid="haruyama" creationdate="20180125T111114Z">
+        <seg>国家安全保障局のアメリカ合州国情報保障局は, 「商業国家セキュリティアルゴリズムスイートと量子コンピューティングでのよくある質問」を公開している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28811,6 +29167,14 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The erroneous text is:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T061557Z" creationid="haruyama" creationdate="20180127T061557Z">
+        <seg>エラーのあるテキストは以下だ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The examples for the chunked framing mechanism show all LineFeeds,
    even those that are not used as part of the framing mechanism.</seg>
       </tuv>
@@ -29295,6 +29659,14 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The following new key exchange method algorithms are defined:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T060615Z" creationid="haruyama" creationdate="20180127T060615Z">
+        <seg>次の新しい鍵交換法アルゴリズムが定義される:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The following numbers are used for replies from the agent to the
    client.</seg>
       </tuv>
@@ -29690,6 +30062,16 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110623T052014Z">
         <seg>Diffie-Hellman 鍵交換と基底にある GSS-API メカニズムで用いる群も, その方法の名前で定義される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The group15 through group18 names are the same as those specified in
+   [RFC3526]: 3072-bit MODP group15, 4096-bit MODP group16, 6144-bit
+   MODP group17, and 8192-bit MODP group18.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T061038Z" creationid="haruyama" creationdate="20180127T061038Z">
+        <seg>group15 から group18 の名前は, [RFC3526] で指定されているものと同じだ: 3072-bit MODP group15, 4096-bit MODP group16, 6144-bit MODP group17, and 8192-bit MODP group18.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30255,6 +30637,18 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T122549Z" creationid="haruyama" creationdate="20180125T122549Z">
+        <seg>この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, ここで示しているようにすべて大文字で出現した場合のみ, BCP 16 [RFC2119] [RFC8174] で記述されているように解釈される. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The keyed-hash message authentication code that is used to identify
    the server and verify communications is based on the hash chosen
    above.</seg>
@@ -30631,6 +31025,16 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110409T091359Z">
         <seg>選ばれた鍵交換の方法名は, この節の残りで用いる楕円曲線ドメインパラメータとハッシュ関数を決定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The method of key exchange used for the name "diffie-hellman-
+   group14-sha256" is the same as that for "diffie-hellman-group14-sha1"
+   except that the SHA256 hash algorithm is used.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T060916Z" creationid="haruyama" creationdate="20180127T060916Z">
+        <seg>"diffie-hellman-group14-sha256" という名で利用される鍵交換の方法は, "diffie-hellman-group14-sha1" と同じだが SHA256 ハッシュアルゴリズムを利用する点が異なる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -31126,6 +31530,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The problem is that the range should have been an open interval
+   excluding the endpoint values.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T061900Z" creationid="haruyama" creationdate="20180127T061900Z">
+        <seg>境界値を除くオープンな区間が範囲であるべきなのが問題だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The program can be a shell, an application program, or a
    subsystem with a host-independent name.</seg>
       </tuv>
@@ -31614,6 +32027,24 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20131203T030013Z" creationid="haruyama" creationdate="20131203T030013Z">
         <seg>RFC 4253 [RFC4253] のセキュリティの考察がこの文書に適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The security considerations of [RFC3526] suggest that MODP group14
+   through group18 have security strengths that range between 110 bits
+   of security through 310 bits of security.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T062926Z" creationid="haruyama" creationdate="20180127T062926Z">
+        <seg>[RFC3526] のセキュリティの考察は, MODP group14 からgroup18 は 110 bits から 310 bits の範囲のセキュリティの強度を持つと示唆している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The security considerations of [RFC4253] apply to this document.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T062817Z" creationid="haruyama" creationdate="20180127T062817Z">
+        <seg>[RFC4253] のセキュリティの考察がこの文書に適用される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32693,6 +33124,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The use of larger MODP groups and the move to the SHA-2
+   family of hashes are important features to strengthen the key
+   exchange algorithms available to the SSH client and server.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T124142Z" creationid="haruyama" creationdate="20180124T124142Z">
+        <seg>MODP のより大きな群の利用と SHA-2 ファミリのハッシュへの移行は, SSH クライアントとサーバで利用可能な鍵交換アルゴリズムを強める重要な機能だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The use of mnemonics instead of numbers is not allowed.</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -33708,6 +34149,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>They are based on
+   "Determining Strengths For Public Keys Used For Exchanging Symmetric
+   Keys" [RFC3766].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T062957Z" creationid="haruyama" creationdate="20180127T062957Z">
+        <seg>"Determining Strengths For Public Keys Used For Exchanging Symmetric Keys" [RFC3766] をこの示唆はベースにしている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>They are in a name space private to this document and not assigned by
    IANA.</seg>
       </tuv>
@@ -33951,6 +34402,14 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>サーバから送信する 'method_name' の値には, "none" を挙げてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This FAQ document indicates that NSS should no longer use:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T111629Z" creationid="haruyama" creationdate="20180125T111629Z">
+        <seg>このよくある質問文書は, NSS は以下を使うべきでないと示している:</seg>
       </tuv>
     </tu>
     <tu>
@@ -34293,6 +34752,15 @@
     <tu>
       <tuv xml:lang="EN-US">
         <seg>This document
+   amends that document text as follows:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T061937Z" creationid="haruyama" creationdate="20180127T061937Z">
+        <seg>この文書はで, 文書のテキストを以下のように修正する:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document
    defines one method: Fingerprint storage in DNS.</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -34322,6 +34790,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This document
+   updates RFC 4250.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T070148Z" creationid="haruyama" creationdate="20180124T070148Z">
+        <seg>この文書は RFC 4250 を更新する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This document addresses the requirement for the SSH client to
    authenticate the SSH server and for the SSH server to authenticate
    the SSH client, and describes how SNMP can make use of the
@@ -34344,6 +34821,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This document adds some new Key Exchange Algorithm Method Names to
+   what originally appeared in [RFC4253] and [RFC4250].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T060352Z" creationid="haruyama" creationdate="20180127T060344Z">
+        <seg>この文書は, いくつかの鍵交換アルゴリズム名を元々 [RFC4253] と [RFC4250] に登場していたものに加える.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This document adds the following elliptic curve cryptography
    algorithms to the Secure Shell arsenal: Elliptic Curve Diffie-Hellman
    (ECDH) and Elliptic Curve Digital Signature Algorithm (ECDSA), as
@@ -34352,6 +34838,15 @@
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110306T085150Z">
         <seg>この文書は, 次の楕円曲線アルゴリズムを セキュアシェルの機能に加える: 楕円曲線 Diffie-Hellman
    (ECDH) , 楕円曲線 Digital Signature Algorithm (ECDSA). また, 安全なハッシュアルゴリズムのSHA2ファミリの利用も加える.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document adopts the style and conventions of [RFC4253] in
+   specifying how the use of new data key exchange is indicated in SSH.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T060555Z" creationid="haruyama" creationdate="20180127T060528Z">
+        <seg>この文書は, 新しいデータ鍵交換の利用を SSH の中でどのように表明するかを指定するのに, [RFC4253] スタイルと命名規則を採用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34425,6 +34920,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110419T112003Z">
         <seg>この文章は, 鍵交換の方法名の新しいファミリや新しい鍵交換法の名前, 公開鍵アルゴリズムの新しいファミリを SSHの名前レジストリに定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document defines added Modular Exponentiation (MODP) groups for
+   the Secure Shell (SSH) protocol using SHA-2 hashes.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T070132Z" creationid="haruyama" creationdate="20180124T070042Z">
+        <seg>この文書は, SHA-2 ハッシュを用いる セキュア シェル (SSH) プロトコルのための, 追加のモジュラー指数(MODP) 群を定義する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34895,6 +35399,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110614T023647Z">
         <seg>この文書は, セキュア シェル (SSH) プロトコルで Arcfour 暗号を利用する方法を指定する. この方法はArcfourの鍵スケジュールアルゴリズムの弱点を軽減する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document updates RFC 4253 by correcting an
+   error regarding checking the Peer's DH Public Key.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T070236Z" creationid="haruyama" creationdate="20180124T070236Z">
+        <seg>この文書は, ピアの DH 公開鍵の検査に関する誤りを修正することで, RFC 4253 を更新する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -36411,6 +36924,14 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This simple check ensures that:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T062303Z" creationid="haruyama" creationdate="20180127T062303Z">
+        <seg>この単純な検査は以下を保証する:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This step is performed only (1) if the server's final call to
        GSS_Accept_sec_context() produced a non-zero-length final reply
        token to be sent to the client and (2) if no previous call by the
@@ -37466,6 +37987,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Using a fixed set of Diffie-Hellman parameters makes them a high
+   value target for pre-computation.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T063539Z" creationid="haruyama" creationdate="20180127T063539Z">
+        <seg>Diffie-Hellman パラメータの固定のセットの利用は, 事前計算によりパラメータを最重要目標とする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Using the NETCONF Configuration Protocol over Secure SHell (SSH)</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110726T024020Z">
@@ -37524,6 +38054,24 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>通常, 'response specific data' は存在しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Values not within these bounds MUST NOT be sent or
+      accepted by either side.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T062216Z" creationid="haruyama" creationdate="20180127T062216Z">
+        <seg>この境界にない値は,どちらの側も送ったり受け取ったりしてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Values of 'e' or 'f' that are not in the range [1, p-1] MUST NOT
+      be sent or accepted by either side.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T061721Z" creationid="haruyama" creationdate="20180127T061721Z">
+        <seg>[1, p-1] の範囲ではない'e' や 'f' の値は, どちらの側も送ったり受け取ったりしてはならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37711,6 +38259,16 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>SSH_MSG_USERAUTH_SUCCESS を送ったら, その後に受け取った認証の要求は静かに無視する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>When
+   checking e (client Public Key) and f (server Public Key) values, an
+   incorrect range is provided.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T061549Z" creationid="haruyama" creationdate="20180127T061549Z">
+        <seg>e (クライアント公開鍵) と f (サーバ公開鍵) の値を検査する際に, 不正な範囲が提供されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -38633,6 +39191,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>[MFQ-U-OO-815099-15] is addressed to organizations that
+   run classified or unclassified national security systems (NSS) and
+   vendors that build products used in NSS.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T111558Z" creationid="haruyama" creationdate="20180125T111542Z">
+        <seg>[MFQ-U-OO-815099-15] は, 機密のもしくは機密でない国家安全システム(NSS)を運営する組織と NSS の中で用いられる製品を作成するベンダーに向けての文書だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>[RFC3279] and [RFC5280] describe the
    structure of X.509v3 certificates to be used with RSA and Digital
    Signature Algorithm (DSA) public keys.</seg>
@@ -39128,6 +39696,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>o  AES-128 (For SSH, this would suggest avoiding Encryption
+      Algorithms [RFC4253] "aes128-cbc" and [RFC4344] "aes128-ctr".)</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T112356Z" creationid="haruyama" creationdate="20180125T112356Z">
+        <seg>o  AES-128 (SSH では, [RFC4253] "aes128-cbc" と [RFC4344] "aes128-ctr" 暗号アリゴリズムを避けることを示唆する.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>o  Added examples to show new chunked encoding properly; highlighted
       the location of new lines.</seg>
       </tuv>
@@ -39235,10 +39812,40 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>o  Diffie-Hellman with 2048-bit keys (For SSH, this would suggest
+      avoiding use of [RFC4253] both of "diffie-hellman-group1-sha1" and
+      "diffie-hellman-group14-sha1" as well as avoiding
+      "diffie-hellman-group14-sha256" added by this document.)</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T113405Z" creationid="haruyama" creationdate="20180125T113405Z">
+        <seg>o  2048-bit 鍵を用いる Diffie-Hellman (SSH では, [RFC4253] "diffie-hellman-group1-sha1" と "diffie-hellman-group14-sha1", この文書で追加される "diffie-hellman-group14-sha256" を避けることを示唆する.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>o  Each following certificate MUST certify the one preceding it.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110901T065949Z">
         <seg>o  2番目以降の証明書は, 1つ前のものを証明しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  Elliptic Curve Diffie-Hellman (ECDH) and Elliptic Curve Digital
+      Signature Algorithm (ECDSA) with NIST P-256.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T111933Z" creationid="haruyama" creationdate="20180125T111913Z">
+        <seg>o  NIST P-256 を用いる 楕円曲線 Diffie-Hellman (ECDH) と 楕円曲線 Digital Signature Algorithm (ECDSA).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  Elliptic Curves are currently restricted to the NIST P-384 group
+      only for both ECDH and ECDSA, in accordance with existing NIST and
+      National Information Assurance Partnership (NIAP) standards.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T113705Z" creationid="haruyama" creationdate="20180125T113705Z">
+        <seg>o  楕円曲線は, NIST と 国家情報保障パートナーシップ(NIAP) 標準に従って ECDH と ECDSA に対してのみ NIST P-384 グループに現在限定されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -39281,6 +39888,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20111001T045010Z">
         <seg>o  セキュリティの考察を拡張した; EOM 問題について追記した.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  For Diffie-Hellman, use a Diffie-Hellman prime modulus of at least
+      3072 bits.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T122104Z" creationid="haruyama" creationdate="20180125T122024Z">
+        <seg>o  Diffie-Hellman では , 少なくとも 3072 bit の Diffie-Hellman の素数モジュラスを用いる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -39495,6 +40111,37 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>o  RSA moduli should have a minimum size of 3072 bits (other than the
+      noted PKI exception), and keys should be generated in accordance
+      with all relevant NIST standards.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T114109Z" creationid="haruyama" creationdate="20180125T114010Z">
+        <seg>o  RSA モジュラスは, (有名なPKIの例外を除いて) 最小で 3072 bit のサイズを持つ必要がある. また, 鍵は すべての関連する NIST 標準に従って生成される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  RSA with 2048-bit keys (For SSH, this would suggest avoiding
+      [RFC4253] "ssh-rsa" using RSA with SHA1 as well as [RFC6187]
+      "x509v3-rsa2048-sha256" as well as any other RSA key that has a
+      length less than 3072-bits or uses a hash less than SHA384.)</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T112605Z" creationid="haruyama" creationdate="20180125T112605Z">
+        <seg>o  2048-bit 鍵を用いる RSA (SSH では, [RFC4253] SHA1 を利用する RSA "ssh-rsa" と [RFC6187] "x509v3-rsa2048-sha256", また 3072-bit より小さい鍵を用いる RSA のすべてと SHA384 よりも弱いハッシュを用いる RSA すべてを避けることを示唆する.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  SHA-256 (For SSH, this would suggest avoiding any Key Exchange
+      Method using SHA1, SHA224, or SHA256 in favor of using SHA384 or
+      SHA512.)</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T112258Z" creationid="haruyama" creationdate="20180125T112258Z">
+        <seg>o  SHA-256 (SSH では, SHA1, SHA224, SHA256 を用いる鍵交換方を避けて SHA384 ないし SHA512 を利用することを示唆する.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>o  Service Names
       *  Authentication Methods
       *  Connection Protocol Channel Names
@@ -39650,6 +40297,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>o  The local system is not forced into the two-element subgroup.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T062409Z" creationid="haruyama" creationdate="20180127T062409Z">
+        <seg>o  ローカルのシステムが, 2要素のサブ群に強制されていない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>o  The minimum size of a TCP/IP header is 32 bytes.</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -39707,6 +40362,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>o  0xFE000000 から 0xFEFFFFFF の範囲は, ローカルに割り当てられたチャンネルと共に利用されるためにある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  The remote peer behaves properly.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180127T062323Z" creationid="haruyama" creationdate="20180127T062323Z">
+        <seg>o  リモートのピアが正しく動作している.</seg>
       </tuv>
     </tu>
     <tu>

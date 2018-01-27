@@ -1,4 +1,6 @@
-DIST=/home/haruyama/work/SSH/RFC/unixuser.org
+dry-run:
+	rsync -avn . ../../ssh_rfc_ja/omegat/ssh/
 
-all:
-	cd target; for i in *; do echo $$i; rfc_fold.rb $$i > $(DIST)/`basename	$$i`; done
+run:
+	rsync -av . ../../ssh_rfc_ja/omegat/ssh/
+	rsync -av target/ ~/backup/mail.unixuser.org_public_html/RFC/ssh
