@@ -148,21 +148,21 @@ RFC 4344          SSH Transport Layer Encryption Modes      January 2006
    注意: カウンタ X は暗号文に含まれない.  さらに注意: 鍵ストリームは前処理でき, 暗号化は並列化できる.
 
    暗号文 C=C1||C2||...||Cn を復号するには, (やはりXのコピーを自身で管理している)復号器が <X>のコピーを <cipher>で暗号化し ブロック B1 を生成し, B1 と C1 を XOR して P1を得る.
-   復号器はカウンタ Ｘ のコピーをインクリメントする. 以上のプロセスをそれぞれのブロックに繰り返して 平文パケットP=P1||P2||...||Pn を得る.  同様に, 鍵ストリームは前処理でき, 復号は並列化できる.
+   復号器はカウンタ X のコピーをインクリメントする. 以上のプロセスをそれぞれのブロックに繰り返して 平文パケットP=P1||P2||...||Pn を得る.  同様に, 鍵ストリームは前処理でき, 復号は並列化できる.
 
-   "aes128-ctr" は, 128-bit 鍵を用いる AES (Advanced Encryption Standard, 以前は Rijndael) を使う[AES].  ブロックサイズは １６byte だ.
+   "aes128-ctr" は, 128-bit 鍵を用いる AES (Advanced Encryption Standard, 以前は Rijndael) を使う [AES].  ブロックサイズは 16 byte だ.
 
       この時点で, 将来の仕様では aes128-ctr を要求されている(必須である)に格付けするようだ. このアルゴリズムの実装は非常に強く推奨されている.
 
    "aes192-ctr" は 192-bit の鍵を用いる AES を使う.
 
-   "aes256-ctr" は 256-bit の鍵を用いる ＡＥＳ を使う.
+   "aes256-ctr" は 256-bit の鍵を用いる AES を使う.
 
-   "3des-ctr" は 3つの鍵を用いる トリプルDES (encrypt-decrypt-encrypt) を使う.  鍵の最初の8byteを最初の暗号化に, 次の8byteを復号に, 続く8byteを最後の暗号化に用いる.  24byteの鍵データを必要とする(このうち 168 bit が実際に用いられる).  ブロックサイズは 8byte だ.
+   "3des-ctr" は 3つの鍵を用いる トリプルDES (encrypt-decrypt-encrypt) を使う.  鍵の最初の8byteを最初の暗号化に, 次の8byteを復号に, 続く8byteを最後の暗号化に用いる.  24byteの鍵データを必要とする(このうち 168 bit が実際に用いられる).  ブロックサイズは 8 byte だ.
    このアルゴリズムは, [DES]で定義されている.
 
    "blowfish-ctr" は 256-bitの鍵を用いる Blowfish を使う [SCHNEIER].
-   ブロックサイズは 8byte だ.  (注意: [RFC4253]の "blowfish-cbc" は 128-bit鍵を用いる.)
+   ブロックサイズは 8 byte だ.  (注意: [RFC4253]の "blowfish-cbc" は 128-bit鍵を用いる.)
 
    "twofish128-ctr" は 128-bit 鍵を用いる Twofish を使う [TWOFISH].
    ブロックサイズは  16 byte だ.
@@ -187,7 +187,7 @@ RFC 4344          SSH Transport Layer Encryption Modes      January 2006
 
    "idea-ctr" は IDEA 暗号を用いる [SCHNEIER].  ブロックサイズは 8byte だ.
 
-   "cast128-ctr" は 128-bit 鍵を用いる CAST-128 暗号を使う [RFC2144].  ブロックサイズは 8byte だ.
+   "cast128-ctr" は 128-bit 鍵を用いる CAST-128 暗号を使う [RFC2144].  ブロックサイズは 8 byte だ.
 
 5.  IANA の考慮
 
