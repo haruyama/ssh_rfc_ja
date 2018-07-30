@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tmx SYSTEM "tmx14.dtd">
 <tmx version="1.4">
-  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="3.6.0_8_r10247" segtype="sentence" srclang="EN-US"/>
+  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="3.6.0_10_r10436" segtype="sentence" srclang="EN-US"/>
   <body>
 <!-- Default translations -->
     <tu>
@@ -20292,6 +20292,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>P6R's Secure Shell Public Key Subsystem</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180730T124735Z" creationid="haruyama" creationdate="20180730T124705Z">
+        <seg>P6R の セキュアシェル公開鍵サブシステム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>PFS is a major design goal of SSH, and any well-designed key-exchange
    algorithm will provide it.</seg>
       </tuv>
@@ -27523,6 +27531,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The Secure Shell (SSH) Public Key Subsystem protocol defines a key
+   distribution protocol that is limited to provisioning an SSH server
+   with a user's public keys.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180730T124909Z" creationid="haruyama" creationdate="20180730T124909Z">
+        <seg>セキュアシェル (SSH) 公開鍵サブシステムプロトコルは, ユーザの公開鍵を持つ SSH サーバへの提供に限られている鍵配布プロトコルを定義している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The Secure Shell (SSH) Session Channel Break Extension</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -31155,6 +31173,31 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The new protocol allows the calling client to organize keys and
+   certificates in different namespaces on a server.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180730T125228Z" creationid="haruyama" creationdate="20180730T125228Z">
+        <seg>この新しいプロトコルは, サーバ上で異なる名前空間の鍵と証明書を管理するための呼び出しクライアントを許す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The new protocol provides a server-independent mechanism for clients
+   to add public keys, remove public keys, add certificates, remove
+   certificates, and list the current set of keys and certificates known
+   by the server by namespace (e.g., list all public keys in the SSH
+   namespace).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180730T125612Z" creationid="haruyama" creationdate="20180730T125612Z">
+        <seg>この新しいプロトコルは, 公開鍵の追加/削除, 証明書の追加/削除, サーバによって知られている名前空間単位の現在の鍵と証明書の集合の列挙(例えば SSH 名前空間のすべての公開鍵の列挙) のための サーバに依存しない機構をクライアントに提供する.The new protocol provides a server-independent mechanism for clients
+   to add public keys, remove public keys, add certificates, remove
+   certificates, and list the current set of keys and certificates known
+   by the server by namespace (e.g., list all public keys in the SSH
+   namespace).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The new stateful-decryption counter mode encryption
    methods described in Section 4 of this document were designed to be
    secure replacements to the original encryption methods described in
@@ -34081,6 +34124,18 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>These namespaces
+   can be used by the server to allow a client to configure any
+   application running on the server (e.g., SSH, Key Management
+   Interoperability Protocol (KMIP), Simple Network Management Protocol
+   (SNMP)).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180730T125405Z" creationid="haruyama" creationdate="20180730T125405Z">
+        <seg>これらの名前空間は, サーバ上で動く任意のアプリケーション(例えば, SSH, 鍵管理相互運用性プロトコル (KMIP), シンプルネットワーク管理プロトコル (SNMP)) を設定するクライアントを許可するために, サーバによって用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>These packets contain the
    tokens produced from the 'GSS_Init_sec_context()' and
    'GSS_Accept_sec_context()' calls.</seg>
@@ -35035,6 +35090,17 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>この文書は, Domain Name System Security (DNSSEC) を使ったセキュア シェル (SSH) ホスト鍵の検証法を記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document describes a new protocol
+   that builds on the protocol defined in RFC 4819 to allow the
+   provisioning of keys and certificates to a server using the SSH
+   transport.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180730T125041Z" creationid="haruyama" creationdate="20180730T125041Z">
+        <seg>この文書は, SSH のトランスポートを用いて鍵と証明書を提供を許す RFC 4819 に定義されたプロトコルを元に作られた新しいプロトコルについて記述する.</seg>
       </tuv>
     </tu>
     <tu>
