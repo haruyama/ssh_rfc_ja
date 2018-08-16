@@ -18,16 +18,9 @@ ISSN: 2070-1721                                            November 2013
 
    この新しいプロトコルは, サーバ上で異なる名前空間の鍵と証明書を管理するための呼び出しクライアントを許す.  これらの名前空間は, サーバ上で動く任意のアプリケーション(例えば, SSH, 鍵管理相互運用性プロトコル (KMIP), シンプルネットワーク管理プロトコル (SNMP)) を設定するクライアントを許可するために, サーバによって用いられる.
 
-   この新しいプロトコルは, 公開鍵の追加/削除, 証明書の追加/削除, サーバによって知られている名前空間単位の現在の鍵と証明書の集合の列挙(例えば SSH 名前空間のすべての公開鍵の列挙) のための サーバに依存しない機構をクライアントに提供する.The new protocol provides a server-independent mechanism for clients
-   to add public keys, remove public keys, add certificates, remove
-   certificates, and list the current set of keys and certificates known
-   by the server by namespace (e.g., list all public keys in the SSH
-   namespace).
+   この新しいプロトコルは, 公開鍵の追加/削除, 証明書の追加/削除, サーバによって知られている名前空間単位の現在の鍵と証明書の集合の列挙(例えば SSH 名前空間のすべての公開鍵の列挙) のためのサーバに依存しない機構をクライアントに提供する.
 
-   Rights to manage keys and certificates in a particular namespace are
-   specific and limited to the authorized user and are defined as part
-   of the server's implementation.  The described protocol is backward
-   compatible to version 2 defined by RFC 4819.
+   特定の名前空間の鍵と証明書を管理する権限は, 認可されたユーザに特有のもので限定されており, サーバの実装の一部として定義される.  この記述されたプロトコルは, RFC 4819 で定義された バージョン 2 と後方互換性がある.
 
 このメモの位置づけ
 
@@ -69,24 +62,24 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
 目次
 
    1イントロダクション ...............................................3
-   2. Terminology .....................................................3
-   3. Overview of Extensions to the Public Key Subsystem ..............3
-      3.1. Extended Status Codes ......................................4
-      3.2. The Version Packet .........................................4
-      3.3. The Namespace Attribute ....................................4
-   4. New Operations ..................................................5
-      4.1. Adding a Certificate .......................................5
-      4.2. Removing a Certificate .....................................6
-      4.3. Listing Certificates .......................................6
-      4.4. Listing Namespaces .........................................7
-   5. Extending Public Key Operations .................................8
-      5.1. Adding a Public Key ........................................8
-      5.2. Removing a Public Key ......................................8
-      5.3. Listing Public Keys ........................................9
-   6. Security Considerations .........................................9
-   7. IANA Considerations ............................................10
-   8. References .....................................................10
-      8.1. Normative References ......................................10
+   2. 用語 .....................................................3
+   3. 公開鍵サブシステムへの拡張の概要 ..............3
+      3.1. 拡張されたステータスコード ......................................4
+      3.2. バージョンパケット .........................................4
+      3.3. 名前空間属性 ....................................4
+   4. 新しい操作 ..................................................5
+      4.1. 証明書の追加 .......................................5
+      4.2. 証明書の削除 .....................................6
+      4.3. 証明書の列挙 .......................................6
+      4.4. 名前空間の列挙 .........................................7
+   5. 公開鍵操作の拡張 .................................8
+      5.1. 公開鍵の追加 ........................................8
+      5.2. 公開鍵の削除 ......................................8
+      5.3. 公開鍵の列挙 ........................................9
+   6. セキュリティの考察 .........................................9
+   7. IANA の考慮 ............................................10
+   8. リファレンス .....................................................10
+      8.1. 標準のリファレンス ......................................10
       8.2. Informative References ....................................10
 
 
@@ -108,34 +101,16 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
 
 1イントロダクション
 
-   This document describes a new protocol that builds on the protocol
-   defined in RFC 4819 that can be used to configure public keys and
-   certificates in an implementation-independent fashion.  The concept
-   of a namespace is added to the protocol's operations; it allows the
-   client to organize keys and certificates by application or
-   organizational structure.
+   この文書は, RFC 4819 で定義されたプロトルに基づく新しいプロトコルを記述する. このプロトコルは, 実装に依存しない方法で公開鍵と証明書を設定するのに利用できる.  プロトコルの操作に名前空間の概念が追加される. これにより, クライアントがアプリケーションや組織構造によって鍵と証明書を管理できるようになる.
 
-   P6R's Secure Shell Public Key Subsystem has been designed to run on
-   top of the Secure Shell transport layer [3] and user authentication
-   protocols [4].  It provides a simple mechanism for the client to
-   manage the public keys and certificates on the server related to that
-   client.  These keys and certificates are normally used for
-   authentication of the client to a service, but they can be used for
-   encrypting results back to the client as well.  Uploaded keys and
-   certificates are meant to be able to configure all protocols running
-   on a server (e.g., SSH, SSL, KMIP [8]) that use keys and
-   certificates, as well as the applications that run on a server.
+   P6R セキュアシェル公開鍵サブシステムは, セキュアシェルのトランスポート層 [3] とユーザ認証プロトコルの上で動作するよう設計されている.  これは, クライアントに関連するサーバ上での公開鍵と証明書の管理する単純な仕組みをクライアントに提供するこれらの鍵と証明書は, サービスへのクライアントの認証に通常利用される. また, クライアントに返却する結果の暗号化にも同様に利用できる.  アップロードされた鍵と証明書は, 鍵や証明書を利用するサーバ上で実行されるすべてのプロトコル(例えば, SSH, SSL KMIP [8])とサーバ上で実行されるアプリケーションを設定できなければならない.
 
-   This document should be read only after reading the Secure Shell
-   Public Key Subsystem [1] document.  The new protocol described in
-   this document builds on and is meant to be backwards compatible with
-   the protocol described in [1].
+   この文書は, セキュアシェル公開鍵サブシステム [1] 文書を読んだあとにのみ読むべきだ.  この文書で記述する新しいプロトコルは, [1] で記述されているプロトコルに基づいていて, 後方互換性がなければならない.
 
 2.  用語
 
-   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-   document are to be interpreted as described in RFC 2119 [2].
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, RFC 2119 [2] で記述されているように解釈される. 
 
 3.  Overview of Extensions to the Public Key Subsystem
 
