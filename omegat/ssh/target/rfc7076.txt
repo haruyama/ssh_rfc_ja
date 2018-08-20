@@ -66,7 +66,7 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
    3. 公開鍵サブシステムへの拡張の概要 ..............3
       3.1. 拡張されたステータスコード ......................................4
       3.2. バージョンパケット .........................................4
-      3.3. 名前空間属性 ....................................4
+      3.3. Namespace 属性 ....................................4
    4. 新しい操作 ..................................................5
       4.1. 証明書の追加 .......................................5
       4.2. 証明書の削除 .....................................6
@@ -112,14 +112,9 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
    この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, RFC 2119 [2] で記述されているように解釈される. 
 
-3.  Overview of Extensions to the Public Key Subsystem
+3.  公開鍵サブシステムへの拡張の概要
 
-   The Public Key Subsystem provides a server-independent mechanism for
-   clients to add public keys, remove public keys, list the current
-   public keys known by the server, add certificates, remove
-   certificates, and list the current set of certificates known by the
-   server.  This secure key distribution mechanism is implemented by a
-   new SSH subsystem with the name of "publickey@p6r.com".
+   公開鍵サブシステムは, 公開鍵を追加/削除したり, サーバが知る現在の公開鍵を列挙したり, 証明書を追加/削除したり, サーバの知る現在の証明書の集合を列挙する, サーバに依存しない機構をクライアントに提供する.  この安全な鍵配布機構は, "publickey@p6r.com" という名前の新しい SSH サブシステムによって実装される.
 
 
 
@@ -137,10 +132,9 @@ Joseph & Susoy                Informational                     [Page 3]
 RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
 
 
-3.1.  Extended Status Codes
+3.1.  拡張されたステータスコード
 
-   The status code gives the status in a more machine-readable format
-   (suitable for localization) and can have the following values:
+   状態コードは, より機械可読な形式(ローカライズに適している)で状態を与える. 次の値を取りうる:
 
         SSH_PUBLICKEY_CERTIFICATE_NOT_FOUND        192
         SSH_PUBLICKEY_CERTIFICATE_NOT_SUPPORTED    193
@@ -148,9 +142,7 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
         SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED        195
         SSH_PUBLICKEY_CANNOT_CREATE_NAMESPACE      196
 
-   The meaning of the failure codes is as implied by their names.  See
-   Security Considerations for the use of the failure code:
-   SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED.
+   失敗のコードの意味は, それらの名前に示されている.  失敗コード SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED の利用ついてはセキュリティの考察を参照.
 
 3.2.  バージョンパケット
 
@@ -159,13 +151,11 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
         string "version"
         uint32 protocol-version-number
 
-   This document defines version 3 of the new protocol.  We are using
-   version 3 so that it can be backward compatible with the protocol
-   defined by RFC 4819 [1].
+   この文書で新しいプロトコルバージョン 3 を定義する.  RFC 4819 [1] で定義されたプロトコルと後方互換性を持てるように 我々ばバージョン 3 を利用する.
 
-3.3.  The Namespace Attribute
+3.3.  Namespace 属性
 
-   The "namespace" attribute is added as an extension to what was
+    "namespace" attribute is added as an extension to what was
    described in RFC 4819.  The purpose of this attribute is to be able
    to organize the uploaded keys and certificates into groups where each
    group represents an application or organization structure.  This
