@@ -155,23 +155,12 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
 
 3.3.  Namespace 属性
 
-    "namespace" attribute is added as an extension to what was
-   described in RFC 4819.  The purpose of this attribute is to be able
-   to organize the uploaded keys and certificates into groups where each
-   group represents an application or organization structure.  This
-   attribute is a string that should not be longer than 300 characters
-   and MUST be specified in UTF-8 format [5].
+   "namespace" 属性が, RFC 4819 で記述されたプロトコルに対して拡張として追加される.  この属性の目的は, それぞれのグループがアプリケーションや組織構造を表わしているグループ群へアップロードされた鍵や証明書を管理可能にすることです.  この属性は文字列で, 300文字を超えない文字で構成され UTF-8 形式 [5] で指定されなければならない.
 
-   This new protocol uses the "ssh" namespace for the manipulation of
-   public keys in an SSH server and should be considered as the default
-   namespace when none is provided.
+   この新しいプロトコルは, SSHサーバの公開鍵の操作のために "ssh" namespace を用いる. namespace として何も与えられなかった場合, "ssh" 名前空間がデフォルトの名前空間と見なす必要がある.
 
-   As a convention, namespaces used for protocols are lowercase strings
-   of the protocol's standard abbreviation.  For example, "ssl" should
-   be the namespace used for the Secure Sockets Layer protocol.
-   Namespaces for applications should contain the product and vendor's
-   name.  To help determine what namespaces already exist on a server, a
-   new operation "list-namespaces" is defined in Section 4.
+   慣例として, プトコロルに用いられる namespace は, プロトコルの標準の省略形の小文字の文字列だ.  たとえば, "ssl" は Secure Socket Layer プロトコルに用いられる名前空間である必要がある.
+   アプリケーションに対する namespace は プロダクトとベンダー名を含む必要がある.  サーバ上にどの namescpace が既に存在するか判断するのを助けるために, 4 節で新しい操作 "list-namespaces" が定義されている.
 
 
 
@@ -182,15 +171,14 @@ Joseph & Susoy                Informational                     [Page 4]
 RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
 
 
-4.  New Operations
+4.  新しい操作
 
-   P6R's Public Key Subsystem extends the functionality defined in RFC
-   4819 with the following operations: add-certificate,
+   P6R 公開鍵サブシステムは, RFC 4819 で定義された機能を次の操作で拡張する: add-certificate,
    remove-certificate, list-certificates, and list-namespaces.
 
-4.1.  Adding a Certificate
+4.1.  証明書の追加
 
-   If the client wishes to add a certificate, the client sends:
+   クライアントが証明書を追加したいなら, クライアントは次を送る:
 
         string    "add-certificate"
         string    certificate format name
@@ -202,34 +190,16 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
          bool      critical
        repeated attribute-count times
 
-   This request MUST include at least the "namespace" attribute so that
-   the server knows where to save the certificate.  Only one namespace
-   attribute can be used per an add-certificate request.  It is possible
-   for the same user to save the same certificate into multiple
-   namespaces, but this must be done with several separate
-   add-certificate requests.
+   この要求は, 少なくとも証明書をサーバがどこに保存するか知るために "namespace" 属性を含んでいる必要がある.  1つの証明書追加要求には, 1つだけの namespace 属性が利用できる.  同じユーザが同じ証明書を複数の namespace に保存することができるが, それは別々の add-certificate 要求で為されなければならない.
 
-   If the namespace appearing in an add-certificate request does not
-   already exist on a server, then it is created by this operation.
-   However, if the user is not authorized to create a namespace, the
-   server MUST return SSH_PUBLICKEY_CANNOT_CREATE_NAMESPACE.
+   add-certificate 要求に現れる namespace がまだサーバ上に存在しないなら. この操作によって namespace が作られる.
+   しかし, ユーザに namespace を作成する権限がなければ, サーバは SSH_PUBLICKEY_CANNOT_CREATE_NAMESPACE を返さなければならない.
 
-   If the overwrite field is false and the specified certificate already
-   exists in the given namespace, the server MUST return
-   SSH_PUBLICKEY_CERTIFICATE_ALREADY_PRESENT.  If the server returns
-   this, the client SHOULD provide an option to the user to overwrite
-   the certificate.  If the overwrite field is true and the specified
-   key already exists in the given namespace but cannot be overwritten,
-   the server MUST return SSH_PUBLICKEY_ACCESS_DENIED.
+   overwrite フィールドが false で指定された証明書が与えられた namespace に既に存在する場合, サーバは SSH_PUBLICKEY_CERTIFICATE_ALREADY_PRESENT を返さなければならない.  サーバがこれを返すとき, クライアントは ユーザに証明書を上書きするかどうかの選択を提供する必要がある.  overwrite フィールドが true で指定された鍵が与えられた namespace に既に存在しかつ上書きできない場合, サーバは SSH_PUBLICKEY_ACCESS_DENIED を返さなければならない.
 
-   However, a user may not be authorized to add a certificate to the
-   specified namespace.  If the user does not have permission to add a
-   certificate, then the server MUST return
-   SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED.
+   しかし, ユーザは指定された namespace に鍵を追加する権限がないかもしれない.  ユーザが 証明書を追加する権限がない場合, サーバは SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED を返さなければならない.
 
-   Examples of possible "certificate format names" are: "X509",
-   "pgp-sign-rsa", and "pgp-sign-dss".  The format of the public key and
-   certificate blobs are detailed in Section 6.6, "Public Key
+   "certificate format names" が取りうる値の例: "X509", "pgp-sign-rsa", "pgp-sign-dss".  公開鍵と証明書ブロブの形式は 6.6 節  "Public Key
 
 
 
@@ -265,8 +235,7 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
    remove the certificate, then the server MUST return
    SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED.
 
-   Examples of possible "certificate format names" are: "X509",
-   "pgp-sign-rsa", and "pgp-sign-dss".
+   "certificate format names" が取りうる値の例: "X509", "pgp-sign-rsa", "pgp-sign-dss".
 
 4.3.  Listing Certificates
 

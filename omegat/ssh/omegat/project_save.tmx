@@ -2214,6 +2214,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Adding a Certificate</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T043916Z" creationid="haruyama" creationdate="20180821T043908Z">
+        <seg>証明書の追加</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Adding a Certificate .......................................5
       4.2.</seg>
       </tuv>
@@ -2831,6 +2839,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>アルゴリズムの選択は, 選択された鍵交換アルゴリズムが署名ないし暗号化可能なホスト鍵を必要とするかどうかに依存する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Algorithms", of the SSH Transport Protocol document [3], where X.509
+   certificates are to be encoded using a DER format [6] [7] in a
+   certificate blob.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T045133Z" creationid="haruyama" creationdate="20180821T045133Z">
+        <seg>ここで, X.509 証明書は certificate blob の中で DER 形式 [6] [7] を用いてエンコードされる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8512,6 +8530,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Examples of possible "certificate format names" are: "X509",
+   "pgp-sign-rsa", and "pgp-sign-dss".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T044820Z" creationid="haruyama" creationdate="20180821T044759Z">
+        <seg>"certificate format names" が取りうる値の例: "X509", "pgp-sign-rsa", "pgp-sign-dss".</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Examples:</seg>
       </tuv>
       <tuv lang="JA">
@@ -10646,6 +10673,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>However, a user may not be authorized to add a certificate to the
+   specified namespace.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T044720Z" creationid="haruyama" creationdate="20180821T044627Z">
+        <seg>しかし, ユーザは指定された namespace に鍵を追加する権限がないかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>However, all
    implementations MUST support a minimal set of algorithms to ensure
    interoperability (this does not imply that the local policy on all
@@ -10835,6 +10871,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110623T034704Z">
         <seg>しかし, 結果の major_status が GSS_S_COMPLETE でなかったり 0でないトークンが返されたら, これはエラーで鍵交換は失敗しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>However, if the user is not authorized to create a namespace, the
+   server MUST return SSH_PUBLICKEY_CANNOT_CREATE_NAMESPACE.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T044328Z" creationid="haruyama" creationdate="20180821T044328Z">
+        <seg>しかし, ユーザに namespace を作成する権限がなければ, サーバは SSH_PUBLICKEY_CANNOT_CREATE_NAMESPACE を返さなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12547,6 +12592,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the client wishes to add a certificate, the client sends:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T043934Z" creationid="haruyama" creationdate="20180821T043934Z">
+        <seg>クライアントが証明書を追加したいなら, クライアントは次を送る:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the client wishes to add a public key, the client sends:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110721T053528Z">
@@ -12650,6 +12703,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the namespace appearing in an add-certificate request does not
+   already exist on a server, then it is created by this operation.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T044303Z" creationid="haruyama" creationdate="20180821T044303Z">
+        <seg>add-certificate 要求に現れる namespace がまだサーバ上に存在しないなら. この操作によって namespace が作られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the num-responses field does not match the num-prompts field in
    the request message, the server MUST send a failure message.</seg>
       </tuv>
@@ -12687,6 +12749,26 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110721T053705Z">
         <seg>overwrite フィールドが false で指定された鍵がすでに存在したら, サーバは SSH_PUBLICKEY_KEY_ALREADY_PRESENT を返さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the overwrite field is false and the specified certificate already
+   exists in the given namespace, the server MUST return
+   SSH_PUBLICKEY_CERTIFICATE_ALREADY_PRESENT.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T044427Z" creationid="haruyama" creationdate="20180821T044427Z">
+        <seg>overwrite フィールドが false で指定された証明書が与えられた namespace に既に存在する場合, サーバは SSH_PUBLICKEY_CERTIFICATE_ALREADY_PRESENT を返さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the overwrite field is true and the specified
+   key already exists in the given namespace but cannot be overwritten,
+   the server MUST return SSH_PUBLICKEY_ACCESS_DENIED.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T044651Z" creationid="haruyama" creationdate="20180821T044614Z">
+        <seg>overwrite フィールドが true で指定された鍵が与えられた namespace に既に存在しかつ上書きできない場合, サーバは SSH_PUBLICKEY_ACCESS_DENIED を返さなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12932,6 +13014,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the server returns
+   this, the client SHOULD provide an option to the user to overwrite
+   the certificate.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T044457Z" creationid="haruyama" creationdate="20180821T044457Z">
+        <seg>サーバがこれを返すとき, クライアントは ユーザに証明書を上書きするかどうかの選択を提供する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the server returns this, the
    client SHOULD provide an option to the user to overwrite the key.</seg>
       </tuv>
@@ -13052,6 +13144,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>指紋が正しく鍵を受け入れるとユーザが決めると, 鍵はローカルに保存され今後の接続の検証に使われる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the user does not have permission to add a
+   certificate, then the server MUST return
+   SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T044748Z" creationid="haruyama" creationdate="20180821T044748Z">
+        <seg>ユーザが 証明書を追加する権限がない場合, サーバは SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED を返さなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16656,6 +16758,17 @@
     <tu>
       <tuv lang="EN-US">
         <seg>It is possible
+   for the same user to save the same certificate into multiple
+   namespaces, but this must be done with several separate
+   add-certificate requests.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T044215Z" creationid="haruyama" creationdate="20180821T044215Z">
+        <seg>同じユーザが同じ証明書を複数の namespace に保存することができるが, それは別々の add-certificate 要求で為されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is possible
    that an observer may gain valuable information simply by counting
    that number.</seg>
       </tuv>
@@ -18859,6 +18972,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>New Operations</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T043819Z" creationid="haruyama" creationdate="20180821T043819Z">
+        <seg>新しい操作</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>New Operations ..................................................5
       4.1.</seg>
       </tuv>
@@ -20126,6 +20247,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Only one namespace
+   attribute can be used per an add-certificate request.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T044113Z" creationid="haruyama" creationdate="20180821T044113Z">
+        <seg>1つの証明書追加要求には, 1つだけの namespace 属性が利用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Only one of these requests
    can succeed per channel.</seg>
       </tuv>
@@ -20535,6 +20665,17 @@ Category: Standards Track                                     W. Griffin
       <tuv lang="JA" changeid="haruyama" changedate="20180816T071042Z" creationid="haruyama" creationdate="20180816T071042Z">
         <seg>公開鍵サブシステムへの拡張の概要 ..............3
       3.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>P6R's Public Key Subsystem extends the functionality defined in RFC
+   4819 with the following operations: add-certificate,
+   remove-certificate, list-certificates, and list-namespaces.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T043901Z" creationid="haruyama" creationdate="20180821T043901Z">
+        <seg>P6R 公開鍵サブシステムは, RFC 4819 で定義された機能を次の操作で拡張する: add-certificate,
+   remove-certificate, list-certificates, and list-namespaces.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30465,6 +30606,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The format of the public key and
+   certificate blobs are detailed in Section 6.6, "Public Key</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T044935Z" creationid="haruyama" creationdate="20180821T044844Z">
+        <seg>公開鍵と証明書ブロブの形式は SSH トランスポートプロトコル文書 [3] の6.6 節 "公開鍵アルゴリズム" で詳述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The format of this string is
    specified in Section 6.1 of [RFC5656].</seg>
       </tuv>
@@ -37426,6 +37576,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160601T001613Z" creationid="haruyama" creationdate="20160601T001613Z">
         <seg>この応答は, 拡張メカニズムをまったくサポートしないエージェントからも送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This request MUST include at least the "namespace" attribute so that
+   the server knows where to save the certificate.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T044032Z" creationid="haruyama" creationdate="20180821T044032Z">
+        <seg>この要求は, 少なくとも証明書をサーバがどこに保存するか知るために "namespace" 属性を含んでいる必要がある.</seg>
       </tuv>
     </tu>
     <tu>
