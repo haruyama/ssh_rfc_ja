@@ -2843,6 +2843,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Algorithms", of the SSH Transport Protocol document [3], where X.509
+   certificates are to be encoded using a DER format [6] [7] in a
+   certificate blob.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T045133Z" creationid="haruyama" creationdate="20180821T045133Z">
+        <seg>ここで, X.509 証明書は certificate blob の中で DER 形式 [6] [7] を用いてエンコードされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>All
    implementations MUST be able to process this message; they SHOULD be
    able to send this message.</seg>
@@ -8893,6 +8903,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Following the last "certificate" response, a status packet MUST be
+   sent.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180827T113425Z" creationid="haruyama" creationdate="20180827T113425Z">
+        <seg>最後の "certificate" 応答に続いて, 状態パケットが送られなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Following the last "publickey" response, a status packet MUST be
    sent.</seg>
       </tuv>
@@ -10584,6 +10603,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20180821T044720Z" creationid="haruyama" creationdate="20180821T044627Z">
         <seg>しかし, ユーザは指定された namespace に鍵を追加する権限がないかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>However, a user may not be authorized to remove a certificate from
+   the specified namespace.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180827T113104Z" creationid="haruyama" creationdate="20180827T113056Z">
+        <seg>しかし, ユーザは指定された namespace から鍵を削除する権限がないかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12523,10 +12551,27 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the client wishes to list the known certificates, the client
+   sends:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180827T113153Z" creationid="haruyama" creationdate="20180827T113153Z">
+        <seg>クライアントが既知の証明書の一覧を取得したい場合, クライアントは以下を送る:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the client wishes to list the known public keys, the client sends:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110722T060502Z">
         <seg>クライアントが既知の公開鍵の一覧を取得したい場合, クライアントは以下を送る:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the client wishes to remove a certificate, the client sends:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180827T112849Z" creationid="haruyama" creationdate="20180827T112849Z">
+        <seg>クライアントが証明書を削除したいなら, クライアントは次を送る:</seg>
       </tuv>
     </tu>
     <tu>
@@ -13054,12 +13099,22 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the user does not have permission to
+   remove the certificate, then the server MUST return
+   SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180827T113113Z" creationid="haruyama" creationdate="20180827T113113Z">
+        <seg>ユーザが証明書を削除する権限がない場合, サーバは SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED を返さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the user does not have permission to add a
    certificate, then the server MUST return
    SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED.</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20180821T044748Z" creationid="haruyama" creationdate="20180821T044748Z">
-        <seg>ユーザが 証明書を追加する権限がない場合, サーバは SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED を返さなければならない.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20180827T113124Z" creationid="haruyama" creationdate="20180821T044748Z">
+        <seg>ユーザが証明書を追加する権限がない場合, サーバは SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED を返さなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17691,6 +17746,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Listing Certificates</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180827T113139Z" creationid="haruyama" creationdate="20180827T113139Z">
+        <seg>証明書の列挙</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Listing Certificates .......................................6
       4.4.</seg>
       </tuv>
@@ -20153,6 +20216,24 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Only
+   one namespace attribute can be used per list-certificate request.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180827T113403Z" creationid="haruyama" creationdate="20180827T113403Z">
+        <seg>1つの証明書列挙要求には, 1つだけの namespace 属性が利用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Only one
+   namespace attribute can be used per remove-certificate request.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180827T113002Z" creationid="haruyama" creationdate="20180827T113002Z">
+        <seg>1つの証明書削除要求には, 1つだけの namespace 属性が利用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Only one namespace
    attribute can be used per an add-certificate request.</seg>
       </tuv>
@@ -21796,6 +21877,14 @@ Category: Standards Track                                     W. Griffin
       <tuv lang="JA" changeid="haruyama" changedate="20110729T034154Z">
         <seg>他のMIB モジュールとの関係 .........................21
            6.3.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Removing a Certificate</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180827T112824Z" creationid="haruyama" creationdate="20180827T112824Z">
+        <seg>証明書の削除</seg>
       </tuv>
     </tu>
     <tu>
@@ -25608,6 +25697,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>sequence_number は, 最初のパケットで 0 に初期化される. そして(暗号化やMACの使用にかかわらず) すべてのパケットごとに増加される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   server MUST attempt to remove the certificate from the appropriate
+   location.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180827T113033Z" creationid="haruyama" creationdate="20180827T113033Z">
+        <seg>サーバは, 適切な場所から証明書の削除を試みなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30471,8 +30570,8 @@ Category: Standards Track                                     W. Griffin
         <seg>The format of the public key and
    certificate blobs are detailed in Section 6.6, "Public Key</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20180821T044844Z" creationid="haruyama" creationdate="20180821T044844Z">
-        <seg>公開鍵と証明書ブロブの形式は 6.6 節  "Public Key</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20180821T044935Z" creationid="haruyama" creationdate="20180821T044844Z">
+        <seg>公開鍵と証明書ブロブの形式は SSH トランスポートプロトコル文書 [3] の6.6 節 "公開鍵アルゴリズム" で詳述されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37390,10 +37489,19 @@ Category: Standards Track                                     W. Griffin
     <tu>
       <tuv lang="EN-US">
         <seg>This request MUST include at least the "namespace" attribute so that
+   the server knows from where to delete the certificate.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180827T113336Z" creationid="haruyama" creationdate="20180827T112937Z">
+        <seg>この要求は, 証明書をサーバがどこから削除するか知るために少なくとも "namespace" 属性を含んでいなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This request MUST include at least the "namespace" attribute so that
    the server knows where to save the certificate.</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20180821T044032Z" creationid="haruyama" creationdate="20180821T044032Z">
-        <seg>この要求は, 少なくとも証明書をサーバがどこに保存するか知るために "namespace" 属性を含んでいる必要がある.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20180827T113344Z" creationid="haruyama" creationdate="20180821T044032Z">
+        <seg>この要求は, 証明書をサーバがどこに保存するか知るために少なくとも "namespace" 属性を含んでいなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37403,6 +37511,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>24byteの鍵データを必要とする(このうち 168 bit が実際に用いられる).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This response MUST include at least the "namespace" attribute so that
+   a client can tell in which namespace the certificate resides.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180827T113328Z" creationid="haruyama" creationdate="20180827T113328Z">
+        <seg>この応答は, 証明書がどの名前空間にいるのかクライアントがわかるように 少なくとも "namespace" 属性を含んでいなければならない.</seg>
       </tuv>
     </tu>
     <tu>

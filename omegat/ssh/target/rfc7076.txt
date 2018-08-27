@@ -190,16 +190,16 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
          bool      critical
        repeated attribute-count times
 
-   この要求は, 少なくとも証明書をサーバがどこに保存するか知るために "namespace" 属性を含んでいる必要がある.  1つの証明書追加要求には, 1つだけの namespace 属性が利用できる.  同じユーザが同じ証明書を複数の namespace に保存することができるが, それは別々の add-certificate 要求で為されなければならない.
+   この要求は, 証明書をサーバがどこに保存するか知るために少なくとも "namespace" 属性を含んでいなければならない.  1つの証明書追加要求には, 1つだけの namespace 属性が利用できる.  同じユーザが同じ証明書を複数の namespace に保存することができるが, それは別々の add-certificate 要求で為されなければならない.
 
    add-certificate 要求に現れる namespace がまだサーバ上に存在しないなら. この操作によって namespace が作られる.
    しかし, ユーザに namespace を作成する権限がなければ, サーバは SSH_PUBLICKEY_CANNOT_CREATE_NAMESPACE を返さなければならない.
 
    overwrite フィールドが false で指定された証明書が与えられた namespace に既に存在する場合, サーバは SSH_PUBLICKEY_CERTIFICATE_ALREADY_PRESENT を返さなければならない.  サーバがこれを返すとき, クライアントは ユーザに証明書を上書きするかどうかの選択を提供する必要がある.  overwrite フィールドが true で指定された鍵が与えられた namespace に既に存在しかつ上書きできない場合, サーバは SSH_PUBLICKEY_ACCESS_DENIED を返さなければならない.
 
-   しかし, ユーザは指定された namespace に鍵を追加する権限がないかもしれない.  ユーザが 証明書を追加する権限がない場合, サーバは SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED を返さなければならない.
+   しかし, ユーザは指定された namespace に鍵を追加する権限がないかもしれない.  ユーザが証明書を追加する権限がない場合, サーバは SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED を返さなければならない.
 
-   "certificate format names" が取りうる値の例: "X509", "pgp-sign-rsa", "pgp-sign-dss".  公開鍵と証明書ブロブの形式は 6.6 節  "Public Key
+   "certificate format names" が取りうる値の例: "X509", "pgp-sign-rsa", "pgp-sign-dss".  公開鍵と証明書ブロブの形式は SSH トランスポートプロトコル文書 [3] の6.6 節 "公開鍵アルゴリズム" で詳述されている.
 
 
 
@@ -208,13 +208,11 @@ Joseph & Susoy                Informational                     [Page 5]
 RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
 
 
-   Algorithms", of the SSH Transport Protocol document [3], where X.509
-   certificates are to be encoded using a DER format [6] [7] in a
-   certificate blob.
+   ここで, X.509 証明書は certificate blob の中で DER 形式 [6] [7] を用いてエンコードされる.
 
-4.2.  Removing a Certificate
+4.2.  証明書の削除
 
-   If the client wishes to remove a certificate, the client sends:
+   クライアントが証明書を削除したいなら, クライアントは次を送る:
 
         string    "remove-certificate"
         string    certificate format name
@@ -224,23 +222,15 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
          string    attrib-value
         repeated attribute-count times
 
-   This request MUST include at least the "namespace" attribute so that
-   the server knows from where to delete the certificate.  Only one
-   namespace attribute can be used per remove-certificate request.  The
-   server MUST attempt to remove the certificate from the appropriate
-   location.
+   この要求は, 証明書をサーバがどこから削除するか知るために少なくとも "namespace" 属性を含んでいなければならない.  1つの証明書削除要求には, 1つだけの namespace 属性が利用できる.  サーバは, 適切な場所から証明書の削除を試みなければならない.
 
-   However, a user may not be authorized to remove a certificate from
-   the specified namespace.  If the user does not have permission to
-   remove the certificate, then the server MUST return
-   SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED.
+   しかし, ユーザは指定された namespace から鍵を削除する権限がないかもしれない.  ユーザが証明書を削除する権限がない場合, サーバは SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED を返さなければならない.
 
    "certificate format names" が取りうる値の例: "X509", "pgp-sign-rsa", "pgp-sign-dss".
 
-4.3.  Listing Certificates
+4.3.  証明書の列挙
 
-   If the client wishes to list the known certificates, the client
-   sends:
+   クライアントが既知の証明書の一覧を取得したい場合, クライアントは以下を送る:
 
         string    "list-certificates"
 
@@ -265,12 +255,9 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
 
    応答は, 特定の順序である必要はない.  実装はそれぞれ特定のオーダーで応答を返すだろうが, クライアントの実装は特定のオーダーの応答に依存しないほうがよい.
 
-   This response MUST include at least the "namespace" attribute so that
-   a client can tell in which namespace the certificate resides.  Only
-   one namespace attribute can be used per list-certificate request.
+   この応答は, 証明書がどの名前空間にいるのかクライアントがわかるように 少なくとも "namespace" 属性を含んでいなければならない.  1つの証明書列挙要求には, 1つだけの namespace 属性が利用できる.
 
-   Following the last "certificate" response, a status packet MUST be
-   sent.
+   最後の "certificate" 応答に続いて, 状態パケットが送られなければならない.
 
 4.4.  Listing Namespaces
 
