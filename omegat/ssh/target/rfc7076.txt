@@ -259,10 +259,9 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
 
    最後の "certificate" 応答に続いて, 状態パケットが送られなければならない.
 
-4.4.  Listing Namespaces
+4.4.  名前空間の列挙
 
-   If the client wishes to know existing namespaces on the server, it
-   sends:
+   クライアントがサーバ上に存在する名前空間を知りたい場合, 以下を送る:
 
         string    "list-namespaces"
 
@@ -271,7 +270,7 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
         string    "namespace"
         string    namespace name
 
-   It is possible that not all namespaces will be visible to every
+   すべての認証されたユーザに対して表示しないIt is possible that not all namespaces will be visible to every
    authenticated user.  In this case, the responding server will return
    a subset of existing namespaces.  See Security Considerations below.
 
