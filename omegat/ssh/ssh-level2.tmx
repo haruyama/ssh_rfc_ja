@@ -3342,6 +3342,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Although Section 3.1 defines four new status codes, these are in the
+   'Private Use' range of IANA's Publickey Subsystem Status Codes
+   registry as defined by Section 6.6.1 ("Conventions") in [1].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180904T115406Z" creationid="haruyama" creationdate="20180904T115406Z">
+        <seg>3.1 節で 4 つの新しいステータスコードを定義したが, これらは [1] の 6.6.1 節 (規約) で定義された IANA の公開鍵サブシステムのステータスコードレジストリの 「私的利用」の範囲にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Although not padding messages can reduce the protocol's
    network consumption, this document requires that padding be a
    multiple of the block cipher's block length in order to (1) not alter</seg>
@@ -8563,6 +8573,14 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Extending Public Key Operations</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180902T013910Z" creationid="haruyama" creationdate="20180902T013910Z">
+        <seg>公開鍵操作の拡張</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Extending Public Key Operations .................................8
       5.1.</seg>
       </tuv>
@@ -8908,6 +8926,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180827T113425Z" creationid="haruyama" creationdate="20180827T113425Z">
         <seg>最後の "certificate" 応答に続いて, 状態パケットが送られなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Following the last "namespace" response, a status packet MUST be
+   sent.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180830T123121Z" creationid="haruyama" creationdate="20180830T123121Z">
+        <seg>最後の "namespace" 応答に続いて, 状態パケットが送られなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9313,6 +9340,16 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>たとえば, 遅い回線でよりよいインタラクティブな返答を得るために, インタラクティブな接続で一方の側がより小さいパケットを用いるように求める場合がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>For example, one user may be
+   allowed to list only the contents of a namespace but not add or
+   remove keys or certificates to/from it.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180904T115025Z" creationid="haruyama" creationdate="20180904T115025Z">
+        <seg>例えば, あるユーザが名前空間の内容を列挙できるが, その名前空間に対して鍵や証明書を追加したり削除したりできないという具合だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10805,6 +10842,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110623T034704Z">
         <seg>しかし, 結果の major_status が GSS_S_COMPLETE でなかったり 0でないトークンが返されたら, これはエラーで鍵交換は失敗しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>However, if the user is not authorized to create a namespace the
+   server MUST return SSH_PUBLICKEY_CANNOT_CREATE_NAMESPACE,</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180902T014304Z" creationid="haruyama" creationdate="20180902T014304Z">
+        <seg>しかし, ユーザに名前空間を作る権限がない場合, SSH_PUBLICKEY_CANNOT_CREATE_NAMESPACE をサーバは返さなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12571,8 +12617,8 @@
       <tuv xml:lang="EN-US">
         <seg>If the client wishes to list the known public keys, the client sends:</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20110722T060502Z">
-        <seg>クライアントが既知の公開鍵の一覧を取得したい場合, クライアントは以下を送る:</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180904T113737Z">
+        <seg>クライアントが既知の公開鍵の列挙をしたい場合, クライアントは以下を送る:</seg>
       </tuv>
     </tu>
     <tu>
@@ -12659,6 +12705,15 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>正の数に対して最上位ビットを設定したいならば, 0 のバイトを先行させなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If the namespace appearing in an add public key request does not
+   already exist on a server, then it is created by this operation.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180902T014226Z" creationid="haruyama" creationdate="20180902T014141Z">
+        <seg>公開鍵の追加要求に現れる名前空間がまだサーバに存在しない場合, この操作によって作られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13624,6 +13679,16 @@
     <tu>
       <tuv xml:lang="EN-US">
         <seg>Implementation errors in the server could cause clients to authorize
+   keys and certificates for access they were not intended to have, or
+   to apply fewer restrictions than were intended.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180904T115150Z" creationid="haruyama" creationdate="20180904T115150Z">
+        <seg>サーバの実装エラーにより, クライアントが意図していないアクセスに対して鍵と証明書を認証に利用したり, 意図したものよりも少ない制限を適用する可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Implementation errors in the server could cause clients to authorize
    keys for access they were not intended to have, or to apply fewer
    restrictions than were intended.</seg>
       </tuv>
@@ -14291,6 +14356,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110902T043040Z">
         <seg>KeyUsage 拡張が存在するなら, [RFC5280] の 4.2.1.3 節に従い,  証明書は, 指定された目的の1つにのみ利用されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>In addition to adding new operations, this document describes
+   extensions to the operations defined in RFC 4819.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180902T014013Z" creationid="haruyama" creationdate="20180902T014013Z">
+        <seg>新しい操作の追加に加えて, この文書は RFC 4819 で定義された操作の拡張も記述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15266,6 +15340,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110621T024846Z">
         <seg>この場合, 鍵交換は失敗しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>In this case, the responding server will return
+   a subset of existing namespaces.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180830T123031Z" creationid="haruyama" creationdate="20180830T123027Z">
+        <seg>この場合, 応答するサーバは, 既存の名前空間のサブセットを返す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16739,6 +16822,16 @@
     <tu>
       <tuv xml:lang="EN-US">
         <seg>It is possible
+   for the same user to save the same key into multiple namespaces, but
+   this requires multiple add requests.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180902T014150Z" creationid="haruyama" creationdate="20180902T014138Z">
+        <seg>同じユーザに対して複数の名前空間に同じ鍵を保存することは可能だ. その場合は, 複数の追加要求が必要だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>It is possible
    that an observer may gain valuable information simply by counting
    that number.</seg>
       </tuv>
@@ -16751,9 +16844,8 @@
         <seg>It is possible that not all namespaces will be visible to every
    authenticated user.</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20180830T122852Z" creationid="haruyama" creationdate="20180830T122852Z">
-        <seg>すべての認証されたユーザに対して表示しないIt is possible that not all namespaces will be visible to every
-   authenticated user.</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180830T123148Z" creationid="haruyama" creationdate="20180830T122852Z">
+        <seg>認証されたユーザに対して名前空間の一部のみを公開してもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16834,6 +16926,16 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110722T062747Z">
         <seg>(このプロトコルの外部, 特に SSHユーザ認証プロトコル [3] を用いてユーザを認証して) 特定のユーザにアクセスを制限するために必要なアクセス制御を実施するのはサーバの実装の責任だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>It is the responsibility of the server implementation to enforce
+   access controls that may be required to limit any particular user's
+   access to the data in a namespace.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180904T114942Z" creationid="haruyama" creationdate="20180904T114942Z">
+        <seg>名前空間内のデータに対して特定のユーザのアクセスを制限するために必要とされるアクセス制御を実施するのは, サーバの実装の責任だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17803,8 +17905,8 @@
       <tuv xml:lang="EN-US">
         <seg>Listing Public Keys</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20110722T060426Z">
-        <seg>公開鍵の一覧の取得</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180904T113722Z">
+        <seg>公開鍵の列挙</seg>
       </tuv>
     </tu>
     <tu>
@@ -19038,6 +19140,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160601T003538Z" creationid="haruyama" creationdate="20160526T115341Z">
         <seg>新しいレジストリ: SSH agent signature flags  .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>No IANA
+   actions are required for this document.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180904T115450Z" creationid="haruyama" creationdate="20180904T115450Z">
+        <seg>この文書に対して IANA の対応は要求されていない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23664,6 +23775,14 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110929T091321Z">
         <seg>[SSH-Tran] の 9節を参照.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>See Security Considerations below.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180830T123106Z" creationid="haruyama" creationdate="20180830T123106Z">
+        <seg>後述のセキュリティの考察を参照のこと.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33014,6 +33133,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The server MUST return
+   SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED when a user's action goes against
+   its defined access controls.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180904T115105Z" creationid="haruyama" creationdate="20180904T115052Z">
+        <seg>サーバは, ユーザの行為が定義されたアクセス制御に反する場合は, SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED を返さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The server MUST verify that the host key actually belongs to the
    client host named in the message, that the given user on that host is
    allowed to log in, and that the 'signature' value is a valid
@@ -35073,6 +35202,16 @@ Category: Standards Track                                     W. Griffin
     <tu>
       <tuv xml:lang="EN-US">
         <seg>This
+   request MAY include one "namespace" attribute so that a client can
+   list the public keys from a specific namespace.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180904T113858Z" creationid="haruyama" creationdate="20180904T113821Z">
+        <seg>この要求は, 特定の名前空間から公開鍵をクライアントが列挙するために, 1つの "namespace" 属性を含んでいてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This
    safeguard prevents an unreasonably long BREAK request from causing a
    port to become unavailable for as long as 49.7 days while executing
    the BREAK.</seg>
@@ -36208,6 +36347,22 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>このイベントは, 同一のシーケンス番号を持つ以前に記録したパケットを攻撃者がリプレイする機会を提供する. しかし, そのシーケンス番号の最初のパケットの転送からピアが鍵の再作成をしていない場合のみだ. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This extension allows attributes to be added to a list request.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180904T113754Z" creationid="haruyama" creationdate="20180904T113644Z">
+        <seg>この拡張は, 列挙要求に属性を追加する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This extension allows attributes to be added to a remove request.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180904T113549Z" creationid="haruyama" creationdate="20180904T113549Z">
+        <seg>この拡張は, 削除要求に属性を追加する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37396,6 +37551,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This protocol provides a mechanism that allows key and certificate
+   material to be uploaded and manipulated into a server application.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180904T114705Z" creationid="haruyama" creationdate="20180904T114705Z">
+        <seg>このプロトコルは, サーバのアプリケーションに鍵と証明書をアップロードできる また 操作できる機構を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This protocol provides a secure encrypted channel over an insecure
    network.</seg>
       </tuv>
@@ -37515,6 +37679,24 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This request MAY include one "namespace" attribute so that a client
+   can remove the public key from a specific namespace.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180904T113833Z" creationid="haruyama" creationdate="20180904T113626Z">
+        <seg>この要求は, 特定の名前空間から公開鍵をクライアントが削除するために, 1つの "namespace" 属性を含んでいてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This request MAY include one "namespace" attribute so that a client
+   can save the public key into a specific namespace.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180902T014107Z" creationid="haruyama" creationdate="20180902T014107Z">
+        <seg>この要求は, クライアントが特定の名前空間に公開鍵を保存できるように 1つの "namespace" 属性を含んでいてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This request MUST include at least the "namespace" attribute so that
    the server knows from where to delete the certificate.</seg>
       </tuv>
@@ -37538,6 +37720,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>24byteの鍵データを必要とする(このうち 168 bit が実際に用いられる).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This response MAY include the "namespace" attribute so that a client
+   can tell in which namespace the key resides.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180904T113934Z" creationid="haruyama" creationdate="20180904T113934Z">
+        <seg>この応答は, 鍵が存在する名前空間をクライアントが知るために, "namespace" 属性を含んでいてもよい.</seg>
       </tuv>
     </tu>
     <tu>

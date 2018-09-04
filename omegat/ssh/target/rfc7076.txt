@@ -270,12 +270,9 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
         string    "namespace"
         string    namespace name
 
-   すべての認証されたユーザに対して表示しないIt is possible that not all namespaces will be visible to every
-   authenticated user.  In this case, the responding server will return
-   a subset of existing namespaces.  See Security Considerations below.
+   認証されたユーザに対して名前空間の一部のみを公開してもよい.  この場合, 応答するサーバは, 既存の名前空間のサブセットを返す.  後述のセキュリティの考察を参照のこと.
 
-   Following the last "namespace" response, a status packet MUST be
-   sent.
+   最後の "namespace" 応答に続いて, 状態パケットが送られなければならない.
 
 
 
@@ -302,10 +299,9 @@ Joseph & Susoy                Informational                     [Page 7]
 RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
 
 
-5.  Extending Public Key Operations
+5.  公開鍵操作の拡張
 
-   In addition to adding new operations, this document describes
-   extensions to the operations defined in RFC 4819.
+   新しい操作の追加に加えて, この文書は RFC 4819 で定義された操作の拡張も記述する.
 
 5.1.  公開鍵の追加
 
@@ -321,15 +317,10 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
          bool      critical
         repeated attribute-count times
 
-   This request MAY include one "namespace" attribute so that a client
-   can save the public key into a specific namespace.  It is possible
-   for the same user to save the same key into multiple namespaces, but
-   this requires multiple add requests.
+   この要求は, クライアントが特定の名前空間に公開鍵を保存できるように 1つの "namespace" 属性を含んでいてもよい.  同じユーザに対して複数の名前空間に同じ鍵を保存することは可能だ. その場合は, 複数の追加要求が必要だ.
 
-   If the namespace appearing in an add public key request does not
-   already exist on a server, then it is created by this operation.
-   However, if the user is not authorized to create a namespace the
-   server MUST return SSH_PUBLICKEY_CANNOT_CREATE_NAMESPACE,
+   公開鍵の追加要求に現れる名前空間がまだサーバに存在しない場合, この操作によって作られる.
+   しかし, ユーザに名前空間を作る権限がない場合, SSH_PUBLICKEY_CANNOT_CREATE_NAMESPACE をサーバは返さなければならない.
 
 5.2.  公開鍵の削除
 
@@ -344,9 +335,8 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
          bool      critical
         repeated attribute-count times
 
-   This extension allows attributes to be added to a remove request.
-   This request MAY include one "namespace" attribute so that a client
-   can remove the public key from a specific namespace.
+   この拡張は, 削除要求に属性を追加する.
+   この要求は, 特定の名前空間から公開鍵をクライアントが削除するために, 1つの "namespace" 属性を含んでいてもよい.
 
 
 
@@ -358,9 +348,9 @@ Joseph & Susoy                Informational                     [Page 8]
 RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
 
 
-5.3.  公開鍵の一覧の取得
+5.3.  公開鍵の列挙
 
-   クライアントが既知の公開鍵の一覧を取得したい場合, クライアントは以下を送る:
+   クライアントが既知の公開鍵の列挙をしたい場合, クライアントは以下を送る:
 
         string    "list"
         uint32    attribute-count
@@ -369,9 +359,7 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
          bool      critical
         repeated attribute-count times
 
-   This extension allows attributes to be added to a list request.  This
-   request MAY include one "namespace" attribute so that a client can
-   list the public keys from a specific namespace.
+   この拡張は, 列挙要求に属性を追加する.  この要求は, 特定の名前空間から公開鍵をクライアントが列挙するために, 1つの "namespace" 属性を含んでいてもよい.
 
    サーバは, 0以上の次の応答を返す:
 
@@ -383,22 +371,14 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
          string    attrib-value
         repeated attribute-count times
 
-   This response MAY include the "namespace" attribute so that a client
-   can tell in which namespace the key resides.
+   この応答は, 鍵が存在する名前空間をクライアントが知るために, "namespace" 属性を含んでいてもよい.
 
 6.  セキュリティの考察
 
    このプロトコルは, 安全なチャンネル上で動作することとそのチャンネルの末端が認証されていることを前提としている.  つまり, このプロトコルは, ネットワークレベルの攻撃からは非常に保護されていることを前提としている.
 
-   This protocol provides a mechanism that allows key and certificate
-   material to be uploaded and manipulated into a server application.
-   It is the responsibility of the server implementation to enforce
-   access controls that may be required to limit any particular user's
-   access to the data in a namespace.  For example, one user may be
-   allowed to list only the contents of a namespace but not add or
-   remove keys or certificates to/from it.  The server MUST return
-   SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED when a user's action goes against
-   its defined access controls.
+   このプロトコルは, サーバのアプリケーションに鍵と証明書をアップロードできる また 操作できる機構を提供する.
+   名前空間内のデータに対して特定のユーザのアクセスを制限するために必要とされるアクセス制御を実施するのは, サーバの実装の責任だ.  例えば, あるユーザが名前空間の内容を列挙できるが, その名前空間に対して鍵や証明書を追加したり削除したりできないという具合だ.  サーバは, ユーザの行為が定義されたアクセス制御に反する場合は, SSH_PUBLICKEY_ACTION_NOT_AUTHORIZED を返さなければならない.
 
 
 
@@ -412,16 +392,11 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
 
 
    このプロトコルは, サーバが正しく実装され鍵に適用された属性を観測できるという前提をクライアントに要求している.
-   Implementation errors in the server could cause clients to authorize
-   keys and certificates for access they were not intended to have, or
-   to apply fewer restrictions than were intended.
+   サーバの実装エラーにより, クライアントが意図していないアクセスに対して鍵と証明書を認証に利用したり, 意図したものよりも少ない制限を適用する可能性がある.
 
 7.  IANA の考慮
 
-   Although Section 3.1 defines four new status codes, these are in the
-   'Private Use' range of IANA's Publickey Subsystem Status Codes
-   registry as defined by Section 6.6.1 ("Conventions") in [1].  No IANA
-   actions are required for this document.
+   3.1 節で 4 つの新しいステータスコードを定義したが, これらは [1] の 6.6.1 節 (規約) で定義された IANA の公開鍵サブシステムのステータスコードレジストリの 「私的利用」の範囲にある.  この文書に対して IANA の対応は要求されていない.
 
 8.  References
 
