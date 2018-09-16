@@ -1607,6 +1607,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>A commonly used terminal mode is IUTF8, which indicates that the
+   terminal driver should assume that terminal I/O uses the UTF-8
+   character encoding [RFC3629].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180910T142746Z" creationid="haruyama" creationdate="20180910T142746Z">
+        <seg>一般的に利用される端末モードに IUTF8 がある. これは, ターミナル I/O での UTF-8 文字エンコーディング [RFC3629] の利用を端末ドライバが仮定することを示す.A</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>A description of these curves can be found in [NIST] or [SEC2].</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110929T010613Z">
@@ -4297,6 +4307,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>As specified in Section 8 of [RFC4254], all opcodes in the range 1 to
+   159 have a single uint32 argument; therefore, the IUTF8 opcode is
+   followed by a single uint32 argument.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180915T013949Z" creationid="haruyama" creationdate="20180915T013949Z">
+        <seg>[RFC4254] の 8 節で指定されているように, 1〜159の範囲のすべてのオペコードは単一のuint32引数を持つ. したがって, IUTF8 オペコードの後に 1つの uint32 引数が続く.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>As specified in [RFC6241], the NETCONF server indicates its
    capabilities by sending an XML document containing a &lt;hello&gt; element
    as soon as the NETCONF session is established.</seg>
@@ -4475,6 +4495,16 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110704T031122Z">
         <seg>すべてのSSH認証法と同様に, 他の認証が必要ない場合は, 成功は SSH_MSG_USERAUTH_SUCCESS で示される. 成功したが, サーバがさらなる認証を必要とする場合は, partial success フラグが設定され たSSH_MSG_USERAUTH_FAILURE で示される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>As with all other encoded terminal modes, the client SHOULD transmit
+   a value for this mode if it knows about one, and the server MAY
+   ignore it.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180915T014615Z" creationid="haruyama" creationdate="20180915T014615Z">
+        <seg>他のすべてのエンコードされた端末モードのように, クライアントがこの端末モードについて知っていれば, クライアントは端末モードに対する値を転送する必要がある. そして, サーバはそれを無視してもよい</seg>
       </tuv>
     </tu>
     <tu>
@@ -6545,6 +6575,14 @@
         <seg>Conventions Used in This Document</seg>
       </tuv>
       <tuv xml:lang="JA">
+        <seg>この文書で用いる表記</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Conventions Used in This Document .</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180908T014314Z" creationid="haruyama" creationdate="20180908T014314Z">
         <seg>この文書で用いる表記</seg>
       </tuv>
     </tu>
@@ -11351,6 +11389,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>IANA has added the following opcode to the "Pseudo-Terminal Encoded
+   Terminal Modes" registry:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180916T045058Z" creationid="haruyama" creationdate="20180916T045058Z">
+        <seg>IANA は 次のオペコードを IANA has added the following opcode to the "Pseudo-Terminal Encoded
+   Terminal Modes" registry:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>IANA has allocated the RR type code 44 for SSHFP from the standard RR
    type space.</seg>
       </tuv>
@@ -11434,6 +11482,14 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20111001T044822Z">
         <seg>IANA はこの文書を差すようにこれらの割り当てを更新した.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>IUTF8 Terminal Mode in Secure Shell (SSH)</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180908T013920Z" creationid="haruyama" creationdate="20180908T013920Z">
+        <seg>Secure Shell (SSH) での IUTF8 端末モード</seg>
       </tuv>
     </tu>
     <tu>
@@ -15530,6 +15586,16 @@
       <tuv xml:lang="EN-US">
         <seg>Information about the current status of this document, any errata,
    and how to provide feedback on it may be obtained at
+   http://www.rfc-editor.org/info/rfc8160.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180908T014129Z" creationid="haruyama" creationdate="20180908T014129Z">
+        <seg>この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8160 で得られる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
    https://www.rfc-editor.org/info/rfc8268.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T070404Z" creationid="haruyama" creationdate="20180124T070404Z">
@@ -19057,6 +19123,22 @@ Category: Standards Track                                     W. Griffin
       <tuv xml:lang="JA">
         <seg>新しいクライアントで古いサーバ.........................6
       5.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>New IUTF8 Opcode for Terminal Mode Encoding</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180915T013812Z" creationid="haruyama" creationdate="20180915T013812Z">
+        <seg>端末モードエンコーディングのための新しい IUTF8 オペコード</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>New IUTF8 Opcode for Terminal Mode Encoding .</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180908T014350Z" creationid="haruyama" creationdate="20180908T014350Z">
+        <seg>端末モードエンコーディングのための新しい IUTF8 オペコード</seg>
       </tuv>
     </tu>
     <tu>
@@ -22828,6 +22910,14 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110809T082519Z">
         <seg>SSH 接続は, コマンド生成器 (command generator) や通知の発信者 (notification originator) によって開始されることがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>SSH does not currently provide an encoding for IUTF8.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180910T143018Z" creationid="haruyama" creationdate="20180910T143018Z">
+        <seg>SSH は 現在 IUTF8 についてのエンコーディングを提供していない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28243,6 +28333,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The Secure Shell (SSH) connection protocol [RFC4254] provides an
+   encoding for terminal modes, used in the "pty-req" channel request
+   type.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180910T142450Z" creationid="haruyama" creationdate="20180910T142450Z">
+        <seg>セキュアシェル (SSH) 接続プロトコル [RFC4254] は, "pty-req" チャンネル要求タイプの中で利用される端末モードのためにエンコーディングを提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The Secure Shell (SSH) is a protocol for secure remote login and
    other secure network services over an insecure network.</seg>
       </tuv>
@@ -31889,6 +31989,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The new opcode describes the widely used IUTF8
+   terminal mode bit, which indicates that terminal I/O uses UTF-8
+   character encoding.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180908T014111Z" creationid="haruyama" creationdate="20180908T014111Z">
+        <seg>この新しいオペコードは, 端末 I/O が UTF-8 文字エンコーディングを利用することを示す 広く利用されている IUTF8 端末モードビッドを記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The new protocol allows the calling client to organize keys and
    certificates in different namespaces on a server.</seg>
       </tuv>
@@ -32028,6 +32138,14 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>追加の認証データが必要な場合のみ, サーバは複数の要求メッセージを送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The opcode value 42 is defined for the IUTF8 terminal mode.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180915T013834Z" creationid="haruyama" creationdate="20180915T013834Z">
+        <seg>IUTF8 端末モードのために オペコードの値 42 が定義される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34112,6 +34230,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The value 0 indicates that the
+   IUTF8 mode is disabled, and the value 1 indicates that it is enabled.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180915T014247Z" creationid="haruyama" creationdate="20180915T014241Z">
+        <seg>値 0 は IUTF8 モードが無効なことを示し, 値 1 は有効なことを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The value for 'dss_signature_blob' is encoded as a string containing
    r, followed by s (which are 160-bit integers, without lengths or
    padding, unsigned, and in network byte order).</seg>
@@ -35643,6 +35770,15 @@ Category: Standards Track                                     W. Griffin
     <tu>
       <tuv xml:lang="EN-US">
         <seg>This document
+   specifies one.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180910T143034Z" creationid="haruyama" creationdate="20180910T143034Z">
+        <seg>この文書で, それを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document
    updates RFC 4250.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180124T070148Z" creationid="haruyama" creationdate="20180124T070148Z">
@@ -35745,6 +35881,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20131203T025946Z" creationid="haruyama" creationdate="20131203T025946Z">
         <seg>この文書は [RFC4253] と [RFC4250] の MAC アルゴリズム名を増やす.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document augments the list of "Pseudo-Terminal Encoded Terminal
+   Modes" defined in Section 8 of [RFC4254].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180916T045042Z" creationid="haruyama" creationdate="20180916T045042Z">
+        <seg>この文書は, [RFC4254] の 8 節で定義された "疑似端末のエンコードされた端末モード" のリストに追加する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -36254,6 +36399,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This document specifies a new opcode in the Secure Shell terminal
+   modes encoding.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180908T013951Z" creationid="haruyama" creationdate="20180908T013951Z">
+        <seg>この文書は, セキュアシェル端末モードエンコーディングに新しいオペコードを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This document specifies an Internet standards track protocol for the
    Internet community, and requests discussion and suggestions for
    improvements.</seg>
@@ -36738,6 +36892,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110725T090514Z">
         <seg>[RFC4253] の "ssh-rsa" 署名で用いられているのと同じエンコーディングだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This is typically used by the kernel's
+   terminal driver on the server to decide how many bytes of input to
+   treat as a single logical character during line editing.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180910T142929Z" creationid="haruyama" creationdate="20180910T142929Z">
+        <seg>行の編集中に入力の何バイトが単一の論理文字として扱われるかをサーバ上のカーネルの端末ドライバが決定するのにこれは通常用いられる</seg>
       </tuv>
     </tu>
     <tu>
