@@ -11392,9 +11392,8 @@
         <seg>IANA has added the following opcode to the "Pseudo-Terminal Encoded
    Terminal Modes" registry:</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20180916T045058Z" creationid="haruyama" creationdate="20180916T045058Z">
-        <seg>IANA は 次のオペコードを IANA has added the following opcode to the "Pseudo-Terminal Encoded
-   Terminal Modes" registry:</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20180916T045121Z" creationid="haruyama" creationdate="20180916T045058Z">
+        <seg>IANA は 次のオペコードを "Pseudo-Terminal Encoded Terminal Modes" レジストリに追加する:</seg>
       </tuv>
     </tu>
     <tu>
@@ -14295,6 +14294,18 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110725T092920Z">
         <seg>特に, クライアントが高品質の暗号学的議事乱数生成器を K の生成に用いることは不可欠だ. 悪い乱数生成器を用いると, セキュアシェルトランスポート層の暗号化と完全性の保護のすべてを攻撃者が破ることができるようになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In
+   particular, terminal drivers that interpret this bit as enabling
+   UTF-8-aware line-editing behavior should carefully consider how that
+   behavior will treat illegal sequences, overlong encodings, and
+   redundant representations of composed characters (see [UNICODE]).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180916T045949Z" creationid="haruyama" creationdate="20180916T045949Z">
+        <seg>特に, UTF8 対応の行編集の動作を可能とするためにこのビットを解釈する端末ドライバは, 不正なシーケンスや長すぎるエンコーディング, 組合せ文字の冗長な表現をこの動作がどのように扱うかを注意深く考慮しなければならない ([UNICODE] 参照).</seg>
       </tuv>
     </tu>
     <tu>
@@ -24433,6 +24444,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Since the IUTF8 terminal mode is intended for use in conjunction with
+   the UTF-8 character encoding, the security considerations of
+   [RFC3629] also apply to systems in which this mode is enabled.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180916T045615Z" creationid="haruyama" creationdate="20180916T045615Z">
+        <seg>IUTF8 端末モードは, UTF-8 文字エンコーディングと組合せての利用が意図されているので, [RFC3629] のセキュリティの考察もこのモードをを有効にしているシステムに適用される. S</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Since the key exchange process authenticates only the
        host, the setting of anon_req_flag is immaterial to this process.</seg>
       </tuv>
@@ -32958,6 +32979,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The security considerations of [RFC4254] apply.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180916T045213Z" creationid="haruyama" creationdate="20180916T045213Z">
+        <seg>[RFC4254] のセキュリティの考察が適用される.＼</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The security considerations of [SSH-Arch]
    apply.</seg>
       </tuv>
@@ -35437,6 +35466,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110801T105132Z">
         <seg>このトランスポートモデルは, ネットワークの管理者のセキュリティと運用上のニーズを満たし, 配置の成功を達成する運用環境の使い勝手を最大化し, 同時に 配置時間を最小にするため実装と配置のコストを最小限にするよう設計された.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This additional
+   terminal mode encoding is believed to have no security implications
+   differing from the existing set of encoded terminal modes.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180916T045450Z" creationid="haruyama" creationdate="20180916T045450Z">
+        <seg>この追加の端末モードエンコーディングは, エンコードされた端末モードの既存の集合と異なるセキュリティの意味は持たないと考えらえる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -41794,6 +41833,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
         <seg>オペコード  mnemonic       説明
          ------  --------       -----------
          0     TTY_OP_END  オプションの終りを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>opcode  mnemonic       description
+   ------  --------       -----------
+   42      IUTF8          Terminal input and output is assumed to be
+                           encoded in UTF-8.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180916T045152Z" creationid="haruyama" creationdate="20180916T045152Z">
+        <seg>opcode  mnemonic       description
+   ------  --------       -----------
+   42      IUTF8          端末の入力と出力が UTF-8 でエンコードされているとみなす.</seg>
       </tuv>
     </tu>
     <tu>

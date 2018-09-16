@@ -98,27 +98,17 @@ RFC 8160               IUTF8 Terminal Mode in SSH             April 2017
 
    この文書は, [RFC4254] の 8 節で定義された "疑似端末のエンコードされた端末モード" のリストに追加する.
 
-   IANA は 次のオペコードを IANA has added the following opcode to the "Pseudo-Terminal Encoded
-   Terminal Modes" registry:
+   IANA は 次のオペコードを "Pseudo-Terminal Encoded Terminal Modes" レジストリに追加する:
 
    opcode  mnemonic       description
    ------  --------       -----------
-   42      IUTF8          Terminal input and output is assumed to be
-                           encoded in UTF-8.
+   42      IUTF8          端末の入力と出力が UTF-8 でエンコードされているとみなす.
 
 5.  セキュリティの考察
 
-   The security considerations of [RFC4254] apply.  This additional
-   terminal mode encoding is believed to have no security implications
-   differing from the existing set of encoded terminal modes.
+   [RFC4254] のセキュリティの考察が適用される.＼この追加の端末モードエンコーディングは, エンコードされた端末モードの既存の集合と異なるセキュリティの意味は持たないと考えらえる.
 
-   Since the IUTF8 terminal mode is intended for use in conjunction with
-   the UTF-8 character encoding, the security considerations of
-   [RFC3629] also apply to systems in which this mode is enabled.  In
-   particular, terminal drivers that interpret this bit as enabling
-   UTF-8-aware line-editing behavior should carefully consider how that
-   behavior will treat illegal sequences, overlong encodings, and
-   redundant representations of composed characters (see [UNICODE]).
+   IUTF8 端末モードは, UTF-8 文字エンコーディングと組合せての利用が意図されているので, [RFC3629] のセキュリティの考察もこのモードをを有効にしているシステムに適用される. S特に, UTF8 対応の行編集の動作を可能とするためにこのビットを解釈する端末ドライバは, 不正なシーケンスや長すぎるエンコーディング, 組合せ文字の冗長な表現をこの動作がどのように扱うかを注意深く考慮しなければならない ([UNICODE] 参照).
 
 6.  References
 
