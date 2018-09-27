@@ -1,0 +1,228 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                     L. Velvindron
+Request for Comments: 8270                                    Hackers.mu
+Updates: 4419                                                 M. Baushke
+Category: Standards Track                         Juniper Networks, Inc.
+ISSN: 2070-1721                                            December 2017
+
+
+             セキュアシェルの最小推奨 Diffie-Hellman モジュラスののサイズを 2048 ビットに増やす
+
+概要
+
+   セキュアシェル (SSH) トランスポート層プロトコルのための Diffie-Hellman (DH) 群交換 は, 1024 ビットのサイズの最小のモジュラス群をサーバとクライアントがサポートする必要があることを指定している.
+   最近のセキュリティの研究で, 国家に支援された者や十分な計算資源がある組織に対して1024 ビットの最小値では保護するのに十分でないことが示されている. この RFC は 2048 ビット未満の DH モジュラスを許容していた RFC 4419 を更新する.今や, 2048 ビットが最小の許容される群のサイズだ.
+
+このメモの位置づけ
+
+   これは, インターネット標準化課程文書だ.
+
+   この文書は, Internet Engineering Task Force (IETF) の成果物だ.  IETF コミュニティの合意を表わしている.  公開のレビューを受けており, Internet Engineering Steering Group (IESG) によって発行が認められた.  インターネット標準についてさらなる情報は RFC 7841 の 2節にある.
+
+   この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8270 で得られる.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Velvindron & Baushke         Standards Track                    [Page 1]
+
+RFC 8270            Recommended Minimum Modulus Size       December 2017
+
+
+著作権情報
+
+   Copyright (c) 2017 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+目次
+
+   1イントロダクション  . . . . . . . . . . . . . . . . . . . . . . . .   2
+   2.  要件に関する用語 . . . . . . . . . . . . . . . . . . . .   2
+   3.  2048 ビットの DH 群 . . . . . . . . . . . . . . . . . . . . . .   3
+   4.  相互運用性  . . . . . . . . . . . . . . . . . . . . . .   3
+   5.  セキュリティの考察 . . . . . . . . . . . . . . . . . . .   4
+   6.  IANA の考察 . . . . . . . . . . . . . . . . . . . . .   4
+   7.  リファレンス  . . . . . . . . . . . . . . . . . . . . . . . . .   4
+     7.1.  標準のリファレンス  . . . . . . . . . . . . . . . . . .   4
+     7.2.  情報のリファレンス . . . . . . . . . . . . . . . . .   4
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   5
+
+1イントロダクション
+
+   [RFC4419] は DH モジュラス群の最小サイズの推奨として 1024 ビットを指定している.  さらに, すべての場合で群のサイズとして少なくとも 1024 ビットが必要だと提案しているこの文書は [RFC4419] を更新し, 最小の推奨サイズを 2048 ビットとする.  この推奨は DH 群の弱点にについての最近の調査 [LOGJAM] に基づいている.  この最小の DH 群サイズは, 将来のユーザに対しては 3072 に増加する必要があるかもしれない.
+
+2.  要件に関する用語
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, ここで示しているようにすべて大文字で出現した場合のみ, BCP 16 [RFC2119] [RFC8174] で記述されているように解釈される. 
+
+
+
+
+
+
+Velvindron & Baushke         Standards Track                    [Page 2]
+
+RFC 8270            Recommended Minimum Modulus Size       December 2017
+
+
+3.  2048 ビットの DH 群
+
+   最近の研究 [LOGJAM] は 1024 ビットの DH 群は 国家に支援された者や十分な計算資源がある組織に破られうることを強く示している.  筆者たちは, 768 ビットの DH 群の破り方とこの攻撃を 1024 ビットの DH 群に外挿するやり方を示した.  彼らの分析では, 1024 ビットは十分な計算資源があれば破れることを示している.  この文書は次の推奨事項を提供する: SSH のサーバとクライアントは, [RFC4419] に記述された SSH_MSG_KEY_DH_GEX_REQUEST クライアントメッセージの "min" の値として 2048 ビットを最小の受け入れ可能な群のサイズとする群をサポートする必要がある.  さらに, SSH クライアントは,SSH_MSG_KEY_DH_GEX_REQUEST メッセージの優先受け入れ群サイズ "n" に 3072 ビットを送れる必要がある.
+
+   [RFC4419] は DH 群のモジュラスの長さである k について 推奨の最小サイズを 1024 ビットに指定している.  さらに, すべての場合で群のサイズとして少なくとも 1024 ビットが必要だと提案している
+   この文書は次のように [RFC4419] を更新する:
+
+   o  3 節, 9 段落:
+      サーバとクライアントは モジュラスの長さ k  に対し 2048 <= k <= 8192 の群をサポートする必要がある.  min と max の推奨最小サイズはそれぞれ 2048 と 8192 だ.  k を 3072 に設定できる必要がある. この必要が将来出てくる可能性があるからだ.
+
+   o  3 節, 11 段落:
+      すべての場合で, 群のサイズは少なくとも 2048 ビットある必要がある.
+      群のサイズを 3072 に設定できる必要がある. この必要が将来出てくる可能性があるからだ.
+
+4.  相互運用性
+
+   この文書は [RFC4419] から次の要件を保持する:
+
+      サーバは, サーバが持っている群の中でクライアントが要求したサイズよりも大きいもののうちもっとも小さいサイズの群を返す必要がある.  もしクライアントが要求するよりも大きな群をサーバが持っていなければ, 持っている一番大きな群を返す必要がある.
+
+   また, それ以降の文を次のように更新する:
+
+      すべての場合で, 少なくとも 2048 bit のサイズの群を返す必要がある.  群のサイズを 3072 に設定できる必要がある. この必要が将来出てくる可能性があるからだ.
+
+
+
+
+
+Velvindron & Baushke         Standards Track                    [Page 3]
+
+RFC 8270            Recommended Minimum Modulus Size       December 2017
+
+
+5.  セキュリティの考察
+
+   この文書は, 1024 ビットのサイズの DH 群のセキュリティ問題を議論する. また, DH 群の最小のサイズを 2048 ビットに正式に更新する.  敵意のあるもしくは「独自の」SSHサーバ実装は, [Backdoor-DH] で記述されている方法を用いて利用されている g と p の値を提供することでバックドアのある DH 素数を潜在的に使う可能性がある.  もしくは, ある種の隠れチャンネルを通じて計算された秘密を受動的な聞き手に送るだけかもしれない.
+
+   悪意のあるクライアントは, 2048 ビット未満の接続を意図的に複数作ることでサービスの不能を引き起そうとするかもしれない.
+   それゆえ, オペレーティングシステムは, 2048ビット未満の DH 群についてログを出さないほうがよい. それにより追加の攻撃面ができるかもしれないからだ.
+
+6.  IANA の考慮
+
+   この文書は IANA の行動を必要としない.
+
+7.  References
+
+7.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC4419]  Friedl, M., Provos, N., and W. Simpson, "Diffie-Hellman
+              Group Exchange for the Secure Shell (SSH) Transport Layer
+              Protocol", RFC 4419, DOI 10.17487/RFC4419, March 2006,
+              <https://www.rfc-editor.org/info/rfc4419>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+7.2.  Informative References
+
+   [Backdoor-DH]
+              Wong, D., "How to Backdoor Diffie-Hellman", Cryptology
+              ePrint Archive Report 2016/644, June 2016,
+              <http://eprint.iacr.org/2016/644.pdf>.
+
+
+
+
+
+
+
+Velvindron & Baushke         Standards Track                    [Page 4]
+
+RFC 8270            Recommended Minimum Modulus Size       December 2017
+
+
+   [LOGJAM]   Adrian, D., Bhargavan, K., Durumeric, Z., Gaudry, P.,
+              Green, M., Halderman, J., Heninger, N., Springall, D.,
+              Thome, E., Valenta, L., VanderSloot, B., Wustrow, E.,
+              Zanella-Beguelin, S., and P. Zimmermann, "Imperfect
+              Forward Secrecy: How Diffie-Hellman Fails in Practice",
+              ACM Conference on Computer and Communications Security
+              (CCS) 2015, DOI 10.1145/2810103.2813707, 2015,
+              <https://weakdh.org/imperfect-forward-secrecy-ccs15.pdf>.
+
+Authors' Addresses
+
+   Loganaden Velvindron
+   Hackers.mu
+   88, Avenue De Plevitz
+   Roches Brunes
+   Mauritius
+
+   Phone: +230 59762817
+   Email: logan@hackers.mu
+
+
+   Mark D. Baushke
+   Juniper Networks, Inc.
+
+   Email: mdb@juniper.net
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Velvindron & Baushke         Standards Track                    [Page 5]
+
