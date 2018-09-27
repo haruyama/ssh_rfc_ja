@@ -1688,6 +1688,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A hostile or "owned" SSH server implementation could
+   potentially use backdoored DH primes using the methods described in
+   [Backdoor-DH] to provide the g and p values to be used.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180927T110243Z" creationid="haruyama" creationdate="20180927T110243Z">
+        <seg>敵意のあるもしくは「独自の」SSHサーバ実装は, [Backdoor-DH] で記述されている方法を用いて利用されている g と p の値を提供することでバックドアのある DH 素数を潜在的に使う可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A key exchange method uses explicit server authentication if the key
    exchange messages include a signature or other proof of the server's
    authenticity.</seg>
@@ -1757,6 +1767,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>ローカルなサービス名は, "servicename@domain" という PRIVATE USE な構文を使わなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A malicious client could cause a Denial of Service by intentionally
+   making multiple connections that are less than 2048 bits in size.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180927T110449Z" creationid="haruyama" creationdate="20180927T110449Z">
+        <seg>悪意のあるクライアントは, 2048 ビット未満の接続を意図的に複数作ることでサービスの不能を引き起そうとするかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3312,6 +3331,14 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110719T030737Z">
         <seg>加えて, これらのファイルの内容を転送する際は, 信頼されたチャンネル上で行なわれる必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Also, it updates the subsequent sentence as follows:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180927T105748Z" creationid="haruyama" creationdate="20180927T105748Z">
+        <seg>また, それ以降の文を次のように更新する:</seg>
       </tuv>
     </tu>
     <tu>
@@ -13067,6 +13094,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the server does not
+      know a group that is larger than the client request, then it
+      SHOULD return the largest group it knows.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180927T105718Z" creationid="haruyama" creationdate="20180927T105718Z">
+        <seg>もしクライアントが要求するよりも大きな群をサーバが持っていなければ, 持っている一番大きな群を返す必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the server does not implement a critical
    attribute, it MUST fail the add, with the status code
    SSH_PUBLICKEY_ATTRIBUTE_NOT_SUPPORTED.</seg>
@@ -14644,6 +14681,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In all cases, the size of the returned group SHOULD be at least
+      2048 bits.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180927T105758Z" creationid="haruyama" creationdate="20180927T105758Z">
+        <seg>すべての場合で, 少なくとも 2048 bit のサイズの群を返す必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In an implementation-specific manner, invoke the SSH user-
            authentication service using the calculated user name.</seg>
       </tuv>
@@ -16103,6 +16149,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>アルトリズムやプロトコルを指定するのに使われる内部名は, 通常ユーザには表示されない. またUS-ASCIIでなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Interoperability</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180927T105607Z" creationid="haruyama" creationdate="20180927T105607Z">
+        <seg>相互運用性</seg>
       </tuv>
     </tu>
     <tu>
@@ -20761,6 +20815,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Or, it could
+   just send the calculated secret through a covert channel of some sort
+   to a passive listener.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180927T110402Z" creationid="haruyama" creationdate="20180927T110402Z">
+        <seg>もしくは, ある種の隠れチャンネルを通じて計算された秘密を受動的な聞き手に送るだけかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Ordering of Key Exchange Methods</seg>
       </tuv>
       <tuv lang="JA">
@@ -24305,6 +24369,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20180925T113948Z" creationid="haruyama" creationdate="20180925T113834Z">
         <seg>k を 3072 に設定できる必要がある. この必要が将来出てくる可能性があるからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Setting the group size to 3072 SHOULD be possible, as
+      the need may arise in the coming years.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180927T105804Z" creationid="haruyama" creationdate="20180927T105804Z">
+        <seg>群のサイズを 3072 に設定できる必要がある. この必要が将来出てくる可能性があるからだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33856,6 +33929,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The server should return the smallest group it knows that is
+      larger than the size the client requested.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180927T105714Z" creationid="haruyama" creationdate="20180927T105714Z">
+        <seg>サーバは, サーバが持っている群の中でクライアントが要求したサイズよりも大きいもののうちもっとも小さいサイズの群を返す必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The server should return the smallest group it knows that is larger
    than the size the client requested.</seg>
       </tuv>
@@ -35052,6 +35134,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110411T133716Z">
         <seg>したがって, 1つの一時的鍵を生成し, それをあたかも2つのクライアント鍵のように利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Therefore, operating systems SHOULD NOT log DH groups that are less
+   than 2048 bits in size, as it would create an additional attack
+   surface.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180927T110539Z" creationid="haruyama" creationdate="20180927T110539Z">
+        <seg>それゆえ, オペレーティングシステムは, 2048ビット未満の DH 群についてログを出さないほうがよい. それにより追加の攻撃面ができるかもしれないからだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -36584,10 +36676,28 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document discusses security issues of DH groups that are 1024
+   bits in size, and formally updates the minimum size of DH groups to
+   be 2048 bits.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180927T105927Z" creationid="haruyama" creationdate="20180927T105921Z">
+        <seg>この文書は, 1024 ビットのサイズの DH 群のセキュリティ問題を議論する. また, DH 群の最小のサイズを 2048 ビットに正式に更新する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document does not define any new protocols.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>この文書は, 新しいプロトコルは定義していない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document does not require any IANA actions.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180927T105828Z" creationid="haruyama" creationdate="20180927T105828Z">
+        <seg>この文書は IANA の行動を必要としない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -36683,6 +36793,14 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>この文書は, (訳注: プロトコルを定義する文書の)集合の一部分だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document keeps the following requirement from [RFC4419]:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20180927T105647Z" creationid="haruyama" creationdate="20180927T105647Z">
+        <seg>この文書は [RFC4419] から次の要件を保持する:</seg>
       </tuv>
     </tu>
     <tu>

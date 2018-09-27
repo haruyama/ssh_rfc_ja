@@ -107,20 +107,15 @@ RFC 8270            Recommended Minimum Modulus Size       December 2017
       すべての場合で, 群のサイズは少なくとも 2048 ビットある必要がある.
       群のサイズを 3072 に設定できる必要がある. この必要が将来出てくる可能性があるからだ.
 
-4.  Interoperability
+4.  相互運用性
 
-   This document keeps the following requirement from [RFC4419]:
+   この文書は [RFC4419] から次の要件を保持する:
 
-      The server should return the smallest group it knows that is
-      larger than the size the client requested.  If the server does not
-      know a group that is larger than the client request, then it
-      SHOULD return the largest group it knows.
+      サーバは, サーバが持っている群の中でクライアントが要求したサイズよりも大きいもののうちもっとも小さいサイズの群を返す必要がある.  もしクライアントが要求するよりも大きな群をサーバが持っていなければ, 持っている一番大きな群を返す必要がある.
 
-   Also, it updates the subsequent sentence as follows:
+   また, それ以降の文を次のように更新する:
 
-      In all cases, the size of the returned group SHOULD be at least
-      2048 bits.  Setting the group size to 3072 SHOULD be possible, as
-      the need may arise in the coming years.
+      すべての場合で, 少なくとも 2048 bit のサイズの群を返す必要がある.  群のサイズを 3072 に設定できる必要がある. この必要が将来出てくる可能性があるからだ.
 
 
 
@@ -133,23 +128,14 @@ RFC 8270            Recommended Minimum Modulus Size       December 2017
 
 5.  セキュリティの考察
 
-   This document discusses security issues of DH groups that are 1024
-   bits in size, and formally updates the minimum size of DH groups to
-   be 2048 bits.  A hostile or "owned" SSH server implementation could
-   potentially use backdoored DH primes using the methods described in
-   [Backdoor-DH] to provide the g and p values to be used.  Or, it could
-   just send the calculated secret through a covert channel of some sort
-   to a passive listener.
+   この文書は, 1024 ビットのサイズの DH 群のセキュリティ問題を議論する. また, DH 群の最小のサイズを 2048 ビットに正式に更新する.  敵意のあるもしくは「独自の」SSHサーバ実装は, [Backdoor-DH] で記述されている方法を用いて利用されている g と p の値を提供することでバックドアのある DH 素数を潜在的に使う可能性がある.  もしくは, ある種の隠れチャンネルを通じて計算された秘密を受動的な聞き手に送るだけかもしれない.
 
-   A malicious client could cause a Denial of Service by intentionally
-   making multiple connections that are less than 2048 bits in size.
-   Therefore, operating systems SHOULD NOT log DH groups that are less
-   than 2048 bits in size, as it would create an additional attack
-   surface.
+   悪意のあるクライアントは, 2048 ビット未満の接続を意図的に複数作ることでサービスの不能を引き起そうとするかもしれない.
+   それゆえ, オペレーティングシステムは, 2048ビット未満の DH 群についてログを出さないほうがよい. それにより追加の攻撃面ができるかもしれないからだ.
 
 6.  IANA の考慮
 
-   This document does not require any IANA actions.
+   この文書は IANA の行動を必要としない.
 
 7.  References
 
