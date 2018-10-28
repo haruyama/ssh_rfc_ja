@@ -148,30 +148,19 @@ RFC 8308              Extension Negotiation in SSH            March 2018
 
    文字通りの指標名を含めるのは, この機構を発見する手がかりを実装者に提供するためだ.
 
-2.2.  Enabling Criteria
+2.2.  有効化基準
 
-   If a client or server offers "ext-info-c" or "ext-info-s"
-   respectively, it MUST be prepared to accept an SSH_MSG_EXT_INFO
-   message from the peer.
+   クライアントかサーバが "ext-info-c" か "ext-info-s" をそれぞれ提供するなら, 相手からの SSH_MSG_EXT_INFO メッセージを受け入れる備えをしなければならない.
 
-   A server only needs to send "ext-info-s" if it intends to process
-   SSH_MSG_EXT_INFO from the client.  A client only needs to send
-   "ext-info-c" if it plans to process SSH_MSG_EXT_INFO from the server.
+   クライアントからの SSH_MSG_EXT_INFO を処理する意思がある場合にのみサーバは "ext-info-s" を送る必要がある.  サーバからの SSH_MSG_EXT_INFO を処理する意思がある場合にのみクライアントは "ext-info-c" を送る必要がある.
 
-   If a server receives an "ext-info-c", or a client receives an
-   "ext-info-s", it MAY send an SSH_MSG_EXT_INFO message but is not
-   required to do so.
+   サーバが "ext-info-c" を受け取った, もしくはクライアントが "ext-info-s" を受け取った場合, SSH_MSG_EXT_INFO メッセージを送信してもよいが, その必要はない.
 
-   Neither party needs to wait for the other's SSH_MSG_KEXINIT in order
-   to decide whether to send the appropriate indicator in its own
-   SSH_MSG_KEXINIT.
+   どちらの側も自分の SSH_MSG_KEYINT 中の適切な指標を送るかどうかを決定するために, 相手の SSH_MSG_KEYINIT を待つ必要がある. 
 
-   Implementations MUST NOT send an incorrect indicator name for their
-   role.  Implementations MAY disconnect if the counterparty sends an
-   incorrect indicator.  If "ext-info-c" or "ext-info-s" ends up being
-   negotiated as a key exchange method, the parties MUST disconnect.
+   実装は, 役割に応じていない指標名を送ってはならない.  実装は相手が不正な指標を送ってきた場合に切断してもよい.  "ext-info-c" か "ext-info-s" が鍵交換法の交渉の結果となった場合, それぞれの側は切断しなければならない.
 
-2.3.  SSH_MSG_EXT_INFO Message
+2.3.  SSH_MSG_EXT_INFO メッセージ
 
    A party that received the "ext-info-c" or "ext-info-s" indicator MAY
    send the following message:

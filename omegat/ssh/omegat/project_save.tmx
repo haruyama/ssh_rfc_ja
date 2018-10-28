@@ -1592,6 +1592,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A client only needs to send
+   "ext-info-c" if it plans to process SSH_MSG_EXT_INFO from the server.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181022T112801Z" creationid="haruyama" creationdate="20181022T112801Z">
+        <seg>サーバからの SSH_MSG_EXT_INFO を処理する意思がある場合にのみクライアントは "ext-info-c" を送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A client receiving this
    message SHOULD wait for the following SSH_MSG_USERAUTH_FAILURE
    message before beginning another authentication attempt.</seg>
@@ -1859,6 +1868,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A party that received the "ext-info-c" or "ext-info-s" indicator MAY
+   send the following message:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181028T030752Z" creationid="haruyama" creationdate="20181028T030752Z">
+        <seg>"ext-info-c" か "ext-info-s" 指標を受け取った側は, 次のメッセージを送ってもよい:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A port forwarding can be canceled with the following message.</seg>
       </tuv>
       <tuv lang="JA">
@@ -1995,6 +2013,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110707T032513Z">
         <seg>メッセージを受けとったサーバは, SSH_MSG_USERAUTH_FAILURE を応答として送ってはならない. 次の認証シーケンスに対する応答だとクライアントが解釈してしまう可能性があるからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A server only needs to send "ext-info-s" if it intends to process
+   SSH_MSG_EXT_INFO from the client.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181022T112742Z" creationid="haruyama" creationdate="20181022T112742Z">
+        <seg>クライアントからの SSH_MSG_EXT_INFO を処理する意思がある場合にのみサーバは "ext-info-s" を送る必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8222,6 +8249,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Enabling Criteria</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181022T112513Z" creationid="haruyama" creationdate="20181022T112513Z">
+        <seg>有効化基準</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Enabling Criteria ..........................................4
       2.3.</seg>
       </tuv>
@@ -11837,6 +11872,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If "ext-info-c" or "ext-info-s" ends up being
+   negotiated as a key exchange method, the parties MUST disconnect.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181022T113326Z" creationid="haruyama" creationdate="20181022T113326Z">
+        <seg>"ext-info-c" か "ext-info-s" が鍵交換法の交渉の結果となった場合, それぞれの側は切断しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If 'always_display' is TRUE, the message
    SHOULD be displayed.</seg>
       </tuv>
@@ -12026,6 +12070,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If a client or server offers "ext-info-c" or "ext-info-s"
+   respectively, it MUST be prepared to accept an SSH_MSG_EXT_INFO
+   message from the peer.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181022T112654Z" creationid="haruyama" creationdate="20181022T112521Z">
+        <seg>クライアントかサーバが "ext-info-c" か "ext-info-s" をそれぞれ提供するなら, 相手からの SSH_MSG_EXT_INFO メッセージを受け入れる備えをしなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If a client passes 0 as port number to bind and has 'want reply' as
    TRUE, then the server allocates the next available unprivileged port
    number and replies with the following message; otherwise, there is no
@@ -12138,6 +12192,16 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110712T035449Z">
         <seg>2 節に従って定義された GSS-API ベースの鍵交換法を用いずに最初の鍵交換が行なわれた際に この認証法の要求をサーバが受け取ったら, SSH_MSG_USERAUTH_FAILURE を返さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If a server receives an "ext-info-c", or a client receives an
+   "ext-info-s", it MAY send an SSH_MSG_EXT_INFO message but is not
+   required to do so.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181022T112904Z" creationid="haruyama" creationdate="20181022T112904Z">
+        <seg>サーバが "ext-info-c" を受け取った, もしくはクライアントが "ext-info-s" を受け取った場合, SSH_MSG_EXT_INFO メッセージを送信してもよいが, その必要はない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14037,6 +14101,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Implementations MAY disconnect if the counterparty sends an
+   incorrect indicator.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181022T113240Z" creationid="haruyama" creationdate="20181022T113240Z">
+        <seg>実装は相手が不正な指標を送ってきた場合に切断してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Implementations MAY include the quotation marks.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110718T034826Z">
@@ -14071,6 +14144,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110721T052717Z">
         <seg>実装は, ([4] の6.5 節で記述しているように) ユーザのシェルからの誤った出力を処理するのを避けるために, バージョンパケットの最初の15バイトに "magic cookie" を利用してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementations MUST NOT send an incorrect indicator name for their
+   role.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181022T113127Z" creationid="haruyama" creationdate="20181022T113127Z">
+        <seg>実装は, 役割に応じていない指標名を送ってはならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14438,6 +14520,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>実装者は, エントロピーの重要性を注記する必要がある. また, 疑似乱数生成関数の正しい実装の難しさをわかりやすく事例付きで警告する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementers should pay careful attention to Section 2.5, in
+   particular to the requirement to tolerate any sequence of bytes
+   (including null bytes at any position) in an unknown extension's
+   extension-value.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181028T031046Z" creationid="haruyama" creationdate="20181028T031046Z">
+        <seg>実装者は, セクション 2.5 に注意を払う必要がある. 未知の拡張の拡張値で (任意の場所に null バイトを含む) 任意のバイト列を許容する要求については特にだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19449,6 +19542,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Neither party needs to wait for the other's SSH_MSG_KEXINIT in order
+   to decide whether to send the appropriate indicator in its own
+   SSH_MSG_KEXINIT.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181022T113218Z" creationid="haruyama" creationdate="20181022T112954Z">
+        <seg>どちらの側も自分の SSH_MSG_KEYINT 中の適切な指標を送るかどうかを決定するために, 相手の SSH_MSG_KEYINIT を待つ必要がある. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Neither side
    should establish a NETCONF over SSH connection with an unknown,
    unexpected, or incorrect identity on the opposite side.</seg>
@@ -23606,6 +23709,14 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>"ptr-req" string を含む SSH_MSG_CHANNEL_REQUEST メッセージは,  'encoded terminal modes' を含まなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH_MSG_EXT_INFO Message</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181022T113337Z" creationid="haruyama" creationdate="20181022T113337Z">
+        <seg>SSH_MSG_EXT_INFO メッセージ</seg>
       </tuv>
     </tu>
     <tu>
