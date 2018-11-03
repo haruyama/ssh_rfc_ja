@@ -1868,6 +1868,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A party that received the "ext-info-c" or "ext-info-s" indicator MAY
+   send the following message:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181028T030752Z" creationid="haruyama" creationdate="20181028T030752Z">
+        <seg>"ext-info-c" か "ext-info-s" 指標を受け取った側は, 次のメッセージを送ってもよい:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A port forwarding can be canceled with the following message.</seg>
       </tuv>
       <tuv lang="JA">
@@ -11999,6 +12008,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If a client sends SSH_MSG_EXT_INFO, it MUST send it as the next
+   packet following the client's first SSH_MSG_NEWKEYS message to the
+   server.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181101T113530Z" creationid="haruyama" creationdate="20181101T113530Z">
+        <seg>クライアントが If a client sends SSH_MSG_EXT_INFO, it MUST send it as the next
+   packet following the client's first SSH_MSG_NEWKEYS message to the
+   server.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If a client's policy is to first prefer GSS-API-based key exchange
    method X, then non-GSS-API method Y, then GSS-API-based method Z, and
    if a server supports mechanisms Y and Z but not X, then an attempt to
@@ -14427,6 +14448,17 @@
       </tuv>
       <tuv lang="JA">
         <seg>実装者は, エントロピーの重要性を注記する必要がある. また, 疑似乱数生成関数の正しい実装の難しさをわかりやすく事例付きで警告する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementers should pay careful attention to Section 2.5, in
+   particular to the requirement to tolerate any sequence of bytes
+   (including null bytes at any position) in an unknown extension's
+   extension-value.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181028T031046Z" creationid="haruyama" creationdate="20181028T031046Z">
+        <seg>実装者は, セクション 2.5 に注意を払う必要がある. 未知の拡張の拡張値で (任意の場所に null バイトを含む) 任意のバイト列を許容する要求については特にだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18822,6 +18854,14 @@
       <tuv lang="JA">
         <seg>メッセージ番号 .........................................5
            4.1.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Message Order</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181101T113526Z" creationid="haruyama" creationdate="20181101T113526Z">
+        <seg>メッセージの順序</seg>
       </tuv>
     </tu>
     <tu>

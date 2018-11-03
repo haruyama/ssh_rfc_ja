@@ -162,8 +162,7 @@ RFC 8308              Extension Negotiation in SSH            March 2018
 
 2.3.  SSH_MSG_EXT_INFO メッセージ
 
-   A party that received the "ext-info-c" or "ext-info-s" indicator MAY
-   send the following message:
+   "ext-info-c" か "ext-info-s" 指標を受け取った側は, 次のメッセージを送ってもよい:
 
      byte       SSH_MSG_EXT_INFO (value 7)
      uint32     nr-extensions
@@ -182,14 +181,11 @@ Bider                        Standards Track                    [Page 4]
 RFC 8308              Extension Negotiation in SSH            March 2018
 
 
-   Implementers should pay careful attention to Section 2.5, in
-   particular to the requirement to tolerate any sequence of bytes
-   (including null bytes at any position) in an unknown extension's
-   extension-value.
+   実装者は, セクション 2.5 に注意を払う必要がある. 未知の拡張の拡張値で (任意の場所に null バイトを含む) 任意のバイト列を許容する要求については特にだ.
 
-2.4.  Message Order
+2.4.  メッセージの順序
 
-   If a client sends SSH_MSG_EXT_INFO, it MUST send it as the next
+   クライアントが If a client sends SSH_MSG_EXT_INFO, it MUST send it as the next
    packet following the client's first SSH_MSG_NEWKEYS message to the
    server.
 

@@ -1611,6 +1611,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A client that sent
+      "ext-info-c" MUST accept a server's SSH_MSG_EXT_INFO at both
+      opportunities but MUST NOT require it.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181103T133912Z" creationid="haruyama" creationdate="20181103T133912Z">
+        <seg>"ext-info-c" を送ったクライアントは, サーバの両方の機会の SSH_MSG_EXT_INFO を受けいれなければならない. しかし, サーバが SSH_MSG_EXT_INFO を送ることを要求してはならない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A command line interface (CLI) client SHOULD print the name and
    instruction (if non-empty), adding newlines.</seg>
       </tuv>
@@ -6006,6 +6016,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>[SSH-ARCH} で議論されているように, 表示されるフィールドに端末制御文字が含まれる攻撃を防ぐために, クライアントは制御文字のフィルタリングをする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Clients cannot rely on this because the server is not required to
+      send the message at this time; if sent, it may be delayed by the
+      network.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181101T114140Z" creationid="haruyama" creationdate="20181101T114140Z">
+        <seg>クライアントは, これに頼ることはできない. なぜなら, サーバはこの時にメッセージを送ることを要求されていないからだ. 送られたとしても, ネットワークにより遅延するかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11047,6 +11067,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>However, if a timely SSH_MSG_EXT_INFO is received, a
+      client can pipeline an authentication request after its
+      SSH_MSG_SERVICE_REQUEST, even when it needs extension information.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181101T114637Z" creationid="haruyama" creationdate="20181101T114637Z">
+        <seg>しかし, 折良く SSH_MSG_EXT_INFO を受け取ったなら, クライアントは, 拡張の情報が必要な場合であっても, その SSH_MSG_SERVICE_REQUEST の後に認証の要求を送れる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>However, if it is used, it MAY be used
          either on its own or in conjunction with
          TransportAddressType or TransportDomain as a pair.</seg>
@@ -11808,6 +11838,17 @@
     <tu>
       <tuv lang="EN-US">
         <seg>If
+      a server sends a second SSH_MSG_EXT_INFO, this replaces any
+      initial one, and both the client and the server re-evaluate
+      extensions in effect.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181103T134249Z" creationid="haruyama" creationdate="20181103T134249Z">
+        <seg>サーバが第2の SSH_MSG_EXT_INFO を送る場合, これは最初のものを置き換える. クライアントとサーバは, 有効な拡張を再評価する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If
    an SSH implementation uses a block cipher with a larger block size
    (e.g., Rijndael with 256-bit blocks), then the recommendations in
    Section 3.1 may supersede the recommendations in this subsection
@@ -12092,6 +12133,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If a client sends SSH_MSG_EXT_INFO, it MUST send it as the next
+   packet following the client's first SSH_MSG_NEWKEYS message to the
+   server.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181101T113702Z" creationid="haruyama" creationdate="20181101T113530Z">
+        <seg>クライアントが SSH_MSG_EXT_INFO を送る場合, クライアントはクライアントの最初のサーバに送る SSH_MSG_NEWKEYS メッセージに続く次のパケットとしてSSH_MSG_EXT_INFO を送らなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If a client's policy is to first prefer GSS-API-based key exchange
    method X, then non-GSS-API method Y, then GSS-API-based method Z, and
    if a server supports mechanisms Y and Z but not X, then an attempt to
@@ -12202,6 +12253,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181022T112904Z" creationid="haruyama" creationdate="20181022T112904Z">
         <seg>サーバが "ext-info-c" を受け取った, もしくはクライアントが "ext-info-s" を受け取った場合, SSH_MSG_EXT_INFO メッセージを送信してもよいが, その必要はない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If a server sends SSH_MSG_EXT_INFO, it MAY send it at zero, one, or
+   both of the following opportunities:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181103T133528Z" creationid="haruyama" creationdate="20181101T113800Z">
+        <seg>サーバが SSH_MSG_EXT_INFO を次の機会のうち まったく送らなくてもよいし, 片方もしくは両方で送ってもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12433,6 +12493,16 @@
       </tuv>
       <tuv lang="JA">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If it was sent later, a client that needs information from the
+      second SSH_MSG_EXT_INFO immediately after it authenticates would
+      have no way to reliably know whether to expect the message.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181103T134624Z" creationid="haruyama" creationdate="20181103T134425Z">
+        <seg>このメッセージがより後に送られたなら, 第2の SSH_MSG_EXT_INFO の情報を認証後すぐに必要とするクライアントが, このメッセージが送られるかどうかを確実に知る方法がない. </seg>
       </tuv>
     </tu>
     <tu>
@@ -13049,6 +13119,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>最後のパケットがネットワークに送られる(すなわち攻撃者がアクセスできる)と, 攻撃者は攻撃を利用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the message was sent earlier, it would not allow the
+      server to withhold information until the client has authenticated.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181103T134420Z" creationid="haruyama" creationdate="20181103T134420Z">
+        <seg>このメッセージがより先に送られたなら, クライアントが認証されるまでサーバが情報を保持できない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18926,6 +19005,14 @@
       <tuv lang="JA">
         <seg>メッセージ番号 .........................................5
            4.1.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Message Order</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181101T113526Z" creationid="haruyama" creationdate="20181101T113526Z">
+        <seg>メッセージの順序</seg>
       </tuv>
     </tu>
     <tu>
@@ -33921,6 +34008,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The server MAY send SSH_MSG_EXT_INFO at this second opportunity,
+      whether or not it sent it at the first.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181103T133617Z" creationid="haruyama" creationdate="20181103T133617Z">
+        <seg>サーバは, 第一の機会で SSH_MSG_EXT_INFO を送っていようといまいと, この第2の機会で SSH_MSG_EXT_INFO を送ってもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The server MAY send other lines of data before sending the version
    string.</seg>
       </tuv>
@@ -34408,6 +34504,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The server's second SSH_MSG_EXT_INFO is
+      matched against the client's original.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181103T134317Z" creationid="haruyama" creationdate="20181103T134317Z">
+        <seg>サーバの第2の SSH_MSG_EXT_INFO は クライアントのオリジナルのものと照合される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The service
    is identified by a name.</seg>
       </tuv>
@@ -34697,6 +34802,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110603T135524Z">
         <seg>4節で定義された13の暗号アルゴリズムモードは, [RFC4250] の 4.11.1 節で確立された Secure Shell Encryption Algorithm Name registry に追加されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The timing of the second opportunity is chosen for the following
+      reasons.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181103T134430Z" creationid="haruyama" creationdate="20181103T134336Z">
+        <seg>第2の機会のタイミングは次の理由で選ばれている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -36389,6 +36503,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>アルゴリズム番号のオクテットは, 公開鍵のアルゴリズムを記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This allows a server to reveal support for additional extensions
+      that it was unwilling to reveal to an unauthenticated client.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181103T134200Z" creationid="haruyama" creationdate="20181103T134200Z">
+        <seg>これにより, 認証されていないクライアントに漏らしたくない追加の拡張機能のサポートをサーバは(特定のクライアントに)明らかにすることができる. </seg>
       </tuv>
     </tu>
     <tu>
@@ -41022,6 +41145,17 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Where clients need information in the server's SSH_MSG_EXT_INFO to
+      authenticate, it is helpful if the server sends its
+      SSH_MSG_EXT_INFO not only as the next packet after
+      SSH_MSG_NEWKEYS, but without delay.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181101T114054Z" creationid="haruyama" creationdate="20181101T113930Z">
+        <seg>クライアントが認証のために サーバの SSH_MSG_EXT_INFO の情報が必要ならば, サーバがその SSH_MSG_EXT_INFO を SSH_MSG_NEWKEYS に続けて次のパケットとして送るだけでなく遅延なしで送ることがクライアントの助けとなる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Where distinction
    is required, the application names of command generator, command
    responder, notification originator, notification receiver, and proxy
@@ -42026,6 +42160,14 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  As the next packet following the server's first SSH_MSG_NEWKEYS.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181101T113828Z" creationid="haruyama" creationdate="20181101T113828Z">
+        <seg>o  サーバの最初の SSH_MSG_NEWKEYS に続く次のパケットとして.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>o  Assigned Algorithm Names
       *  Encryption Algorithm Names
       *  MAC Algorithm Names
@@ -42256,6 +42398,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110623T041823Z">
         <seg>o  (GSS_Accept_sec_context() によって返されるエラーを含む) サーバ側の GSS-API のエラーのために鍵交換が失敗する場合は, エラーの詳細をクライアントに知らせるメッセージをサーバは送ってもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  Immediately preceding the server's SSH_MSG_USERAUTH_SUCCESS, as
+      defined in [RFC4252].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181103T133444Z" creationid="haruyama" creationdate="20181103T133444Z">
+        <seg>o  [RFC4252] で定義されている, サーバの SSH_MSG_USERAUTH_SUCCESS の直前</seg>
       </tuv>
     </tu>
     <tu>
