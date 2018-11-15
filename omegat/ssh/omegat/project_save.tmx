@@ -1621,6 +1621,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A client that wishes to proceed with public key authentication MAY
+   wait for the server's SSH_MSG_EXT_INFO so it can send a "publickey"
+   authentication request with an appropriate public key algorithm,
+   rather than resorting to trial and error.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181115T140053Z" creationid="haruyama" creationdate="20181115T140053Z">
+        <seg>公開鍵認証を用いて続行を希望するクリアントは, サーバの SSH_MSG_EXT_INFO を待ってもよい. そうすると, 試行錯誤を行なうことなく "pulblicky" 認証要求を適切な公開鍵アルゴリズムを用いて送れる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A command line interface (CLI) client SHOULD print the name and
    instruction (if non-empty), adding newlines.</seg>
       </tuv>
@@ -4027,6 +4038,23 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Applications MUST ignore unrecognized extension-names.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181107T122947Z" creationid="haruyama" creationdate="20181107T122549Z">
+        <seg>アプリケーションは認識できない extension-name を無視しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Applications MUST tolerate any sequence of bytes -- including null
+   bytes at any position -- in an unknown extension's extension-value.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181110T002648Z" creationid="haruyama" creationdate="20181110T002648Z">
+        <seg>アプリケーションは未知の拡張の extension-value 中のどんなバイト列も容認しなければならない -- 任意の場所に null バイトが含まれているかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Applications implementing this mechanism MUST add one of the
    following indicator names to the field kex_algorithms in the
    SSH_MSG_KEXINIT message sent by the application in the first key
@@ -4043,6 +4071,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>より短い BREAKを必要とするアプリケーションは, この示唆を無視してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Applications that do not implement or recognize an extension MUST
+   ignore its extension-value, regardless of its size or content.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181110T002540Z" creationid="haruyama" creationdate="20181110T002540Z">
+        <seg>拡張を実装していないないし認識しないアプリケーションは, その拡張の extension-value をサイズな内容に依らず無視しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5003,6 +5040,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>認証法は, [SSH-ARCH]で定義されているように, その名前で識別される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Authentication penalties are applied by servers to deter brute-force
+   password guessing, username enumeration, and other types of behavior
+   deemed suspicious by server administrators or implementers.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181115T140651Z" creationid="haruyama" creationdate="20181115T140651Z">
+        <seg>認証の罰則は, ブルートフォースなパスワード推測や, ユーザ名の列挙,  サーバの管理者や実装者にとって疑わしく思えるその他の行動を妨げるためにサーバによって実施される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7917,6 +7964,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Each extension is identified by its extension-name and defines the
+   conditions under which the extension is considered to be in effect.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181107T122940Z" creationid="haruyama" creationdate="20181107T122344Z">
+        <seg>それぞれの拡張はその extension-name で識別される. また, 拡張が有効だと見なせる条件を定義する</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Each field is a line of the following format:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160618T032715Z">
@@ -8949,6 +9005,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Extension-value fields are interpreted as defined by their respective
+   extension.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181110T002436Z" creationid="haruyama" creationdate="20181110T002436Z">
+        <seg>extension-value フィールドは, それぞれの拡張で定義されているように解釈される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Extract the tmTransportDomain, tmTransportAddress,
        tmSecurityName, tmRequestedSecurityLevel, tmSameSecurity, and
        tmSessionID from the tmStateReference.</seg>
@@ -9963,6 +10028,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For this reason, a client MAY send a user authentication
+   request using a public key algorithm not included in "server-sig-
+   algs".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181115T135859Z" creationid="haruyama" creationdate="20181115T135859Z">
+        <seg>この理由のため, クライアントは, "server-sig-algs" に含まれない公開鍵アルゴリズムを用いてユーザ認証要求を送ってもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For this reason, condition (2) of Section 2.2 requires
    that all users of SecSh-B MUST be authenticated using ECDSA-256/384
    signatures and X.509v3 certificates.</seg>
@@ -10928,6 +11003,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>However,
+   other rules MAY be specified.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181107T123137Z" creationid="haruyama" creationdate="20181107T123137Z">
+        <seg>しかし, 他の規則が指定されてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>However, X11
    display forwarding in SSH (or other secure protocols), combined with
    actual and pseudo-displays that accept connections only over local
@@ -11026,6 +11110,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>しかし, ユーザがファイルにアクセスするかインタラクティブなシェルを使うか, その両方かは, 認証プロトコルの間にはわからない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>However, early server
+   implementations that do not enumerate all accepted algorithms do</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181114T140209Z" creationid="haruyama" creationdate="20181114T140209Z">
+        <seg>しかし, すべての許容するアルゴリズムを列挙をしない初期のサーバ実装が</seg>
       </tuv>
     </tu>
     <tu>
@@ -12143,6 +12236,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If a client sends this
+   extension, the server MAY ignore it and MAY disconnect.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181114T140045Z" creationid="haruyama" creationdate="20181114T140045Z">
+        <seg>この拡張をクライアントが送信したら, サーバはそれを無視してもよいし, 切断してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If a client's policy is to first prefer GSS-API-based key exchange
    method X, then non-GSS-API method Y, then GSS-API-based method Z, and
    if a server supports mechanisms Y and Z but not X, then an attempt to
@@ -12232,6 +12334,16 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110721T050626Z">
         <seg>要求が正常に完了したら, 状態コード SSH_PUBLICKEY_SUCCESS をサーバは送らなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If a server does not send this extension, a client MUST NOT make any
+   assumptions about the server's public key algorithm support, and MAY
+   proceed with authentication requests using trial and error.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181115T140328Z" creationid="haruyama" creationdate="20181115T140328Z">
+        <seg>サーバがこの拡張を送らない場合, クライアントはサーバの公開鍵アルゴリズムのサポートについてどのような仮定を持ってはならないし, 試行錯誤して認証要求を続行してもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14236,6 +14348,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Implementations MUST accept well-formed
+   SSH_MSG_EXT_INFO messages up to the maximum packet length they
+   accept.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181110T002922Z" creationid="haruyama" creationdate="20181110T002922Z">
+        <seg>実装は, それらが受け入れる最大パケット長までの適切な形式の SSH_MSG_EXT_INFO メッセージを受け入れる必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Implementations MUST allow the algorithm for each direction to be
    independently selected, if multiple algorithms are allowed by local
    policy.</seg>
@@ -15873,6 +15995,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In this extension, a server MUST enumerate all public key algorithms
+   it might accept during user authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181114T140128Z" creationid="haruyama" creationdate="20181114T140128Z">
+        <seg>この拡張で, サーバはユーザ認証中に受け入れることができるすべての公開鍵アルゴリズムを列挙しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In this mode, the server SHOULD NOT send the Carriage Return
    character (ASCII 13) after the identification string.</seg>
       </tuv>
@@ -16277,6 +16408,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Initially Defined Extensions</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181114T135604Z" creationid="haruyama" creationdate="20181114T135604Z">
+        <seg>最初に定義された拡張機能</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Initially Defined Extensions ....................................6
       3.1.</seg>
       </tuv>
@@ -16454,6 +16593,14 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20180925T111136Z" creationid="haruyama" creationdate="20180925T111136Z">
         <seg>相互運用性  .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Interpretation of Extension Names and Values</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181107T122353Z" creationid="haruyama" creationdate="20181107T122323Z">
+        <seg>拡張機能の名前と値の解釈</seg>
       </tuv>
     </tu>
     <tu>
@@ -20029,6 +20176,17 @@ Category: Standards Track                                     W. Griffin
     <tu>
       <tuv lang="EN-US">
         <seg>Note
+   that implementations are known to exist that apply authentication
+   penalties if the client attempts to use an unexpected public key
+   algorithm.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181115T140453Z" creationid="haruyama" creationdate="20181115T140453Z">
+        <seg>クライアントがサーバの予期しない公開鍵アルゴリズムを用いようとすると認証に罰則を課す実装が存在することが知られているのに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Note
    that the SSH transport does not interpret the XML content; thus, it
    does not care about any optional XML-specific LineFeeds.</seg>
       </tuv>
@@ -21621,6 +21779,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>パスワード認証は次のパケットを利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Penalties may include automatic IP address throttling or blocking,
+   and they may trigger email alerts or auditing.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181115T140815Z" creationid="haruyama" creationdate="20181115T140815Z">
+        <seg>罰則は, IP アドレスに対する自動的な帯域の調整やブロックを含むかもしれない. また, 罰則はメールのアラートや監査を引き起すかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24567,6 +24734,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>See [RFC4251] for more
+   information.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181114T135914Z" creationid="haruyama" creationdate="20181114T135904Z">
+        <seg>詳細は [RFC4251] を参照.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>See errata for RFC 4742 at
       http://www.rfc-editor.org.</seg>
       </tuv>
@@ -24684,6 +24860,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110722T063017Z">
         <seg>これを行なう際サーバは注意する必要がある. クライアントはサーバの管理者の事前設定を上書きできない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Servers that implement public key authentication SHOULD implement
+   this extension.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181115T140113Z" creationid="haruyama" creationdate="20181115T140113Z">
+        <seg>公開鍵認証を実装するサーバは, この拡張を実装する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30562,6 +30747,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The cumulative size of an SSH_MSG_EXT_INFO message is limited only by
+   the maximum packet length that an implementation may apply in
+   accordance with [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181110T002804Z" creationid="haruyama" creationdate="20181110T002804Z">
+        <seg>SSH_MEG_EXT_INFO メッセージの累積あいずハ， [RFC4253] に従って実装が適用する最大パケット長によってのみ制限される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The data types "byte", "string", and "mpint" are defined in Section 5
    of [RFC4251].</seg>
       </tuv>
@@ -32812,6 +33007,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The name-list type is a strict subset of the string type and is thus
+   permissible as an extension-value.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181114T135855Z" creationid="haruyama" creationdate="20181114T135855Z">
+        <seg>name-list 型は, 文字列型の厳密なサブセットで, それゆえ extension-value として許容される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The names are added to the kex_algorithms field because this is one
    of two name-list fields in SSH_MSG_KEXINIT that do not have a
    separate copy for each data direction.</seg>
@@ -33659,6 +33863,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>暗号ごとの相対的なメリットについては最近の文献に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The relative order in which extensions
+   appear in an SSH_MSG_EXT_INFO message MUST be ignored.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181107T123224Z" creationid="haruyama" creationdate="20181107T123224Z">
+        <seg>SSH_MSG_EXT_INFO メッセージ内に現われる拡張の相対的な順番は, 無視されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37583,12 +37796,38 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This extension is sent by the server and contains a list of public
+   key algorithms that the server is able to process as part of a
+   "publickey" authentication request.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181114T140020Z" creationid="haruyama" creationdate="20181114T140020Z">
+        <seg>この拡張は, サーバによって送られる. サーバが "publickey" 認証要求の一部で処理できる公開鍵アルゴリズムのリストを含んでいる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This extension is sent with the following extension name and value:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181114T135648Z" creationid="haruyama" creationdate="20181114T135648Z">
+        <seg>この拡張機能は, 次の extension-name と extension-value 付きで送られる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This extension mechanism permits
    this discovery.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181013T104132Z" creationid="haruyama" creationdate="20181013T104132Z">
         <seg>この拡張機能機構はこの発見を可能にする.
    this discovery.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This field MAY be empty if permitted by the extension.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181110T002454Z" creationid="haruyama" creationdate="20181110T002454Z">
+        <seg>このフィールドは, その拡張が許可するなら空でもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40809,6 +41048,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>When it is specified, an extension MAY dictate that, in order to take
+   effect, both parties must include it in their SSH_MSG_EXT_INFO or
+   that it is sufficient for only one party to include it.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181107T123151Z" creationid="haruyama" creationdate="20181107T122920Z">
+        <seg>extension-name が指定された場合, 拡張を有効にするために, 両方の側でそれらの SSH_MSG_EXT_INFO に extension-name を含めるように拡張が指定してもよい. もしくは, 1つの側にだけ含まれていれば十分と指定してもよい..</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>When locked an agent should suspend
    processing of sensitive operations (private key operations at the
    very least) until it has been unlocked with the same pass-phrase.</seg>
@@ -41910,6 +42159,14 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>実装者は, その実装で利用できる最良の仕組みへの推奨を提供する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>exist.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181114T140217Z" creationid="haruyama" creationdate="20181114T140217Z">
+        <seg>存在する.</seg>
       </tuv>
     </tu>
     <tu>

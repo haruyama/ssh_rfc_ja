@@ -185,47 +185,24 @@ RFC 8308              Extension Negotiation in SSH            March 2018
 
 2.4.  メッセージの順序
 
-   クライアントが If a client sends SSH_MSG_EXT_INFO, it MUST send it as the next
-   packet following the client's first SSH_MSG_NEWKEYS message to the
-   server.
+   クライアントが SSH_MSG_EXT_INFO を送る場合, クライアントはクライアントの最初のサーバに送る SSH_MSG_NEWKEYS メッセージに続く次のパケットとしてSSH_MSG_EXT_INFO を送らなければならない.
 
-   If a server sends SSH_MSG_EXT_INFO, it MAY send it at zero, one, or
-   both of the following opportunities:
+   サーバが SSH_MSG_EXT_INFO を次の機会のうち まったく送らなくてもよいし, 片方もしくは両方で送ってもよい.
 
-   o  As the next packet following the server's first SSH_MSG_NEWKEYS.
+   o  サーバの最初の SSH_MSG_NEWKEYS に続く次のパケットとして.
 
-      Where clients need information in the server's SSH_MSG_EXT_INFO to
-      authenticate, it is helpful if the server sends its
-      SSH_MSG_EXT_INFO not only as the next packet after
-      SSH_MSG_NEWKEYS, but without delay.
+      クライアントが認証のために サーバの SSH_MSG_EXT_INFO の情報が必要ならば, サーバがその SSH_MSG_EXT_INFO を SSH_MSG_NEWKEYS に続けて次のパケットとして送るだけでなく遅延なしで送ることがクライアントの助けとなる. 
 
-      Clients cannot rely on this because the server is not required to
-      send the message at this time; if sent, it may be delayed by the
-      network.  However, if a timely SSH_MSG_EXT_INFO is received, a
-      client can pipeline an authentication request after its
-      SSH_MSG_SERVICE_REQUEST, even when it needs extension information.
+      クライアントは, これに頼ることはできない. なぜなら, サーバはこの時にメッセージを送ることを要求されていないからだ. 送られたとしても, ネットワークにより遅延するかもしれない.  しかし, 折良く SSH_MSG_EXT_INFO を受け取ったなら, クライアントは, 拡張の情報が必要な場合であっても, その SSH_MSG_SERVICE_REQUEST の後に認証の要求を送れる.
 
-   o  Immediately preceding the server's SSH_MSG_USERAUTH_SUCCESS, as
-      defined in [RFC4252].
+   o  [RFC4252] で定義されている, サーバの SSH_MSG_USERAUTH_SUCCESS の直前
 
-      The server MAY send SSH_MSG_EXT_INFO at this second opportunity,
-      whether or not it sent it at the first.  A client that sent
-      "ext-info-c" MUST accept a server's SSH_MSG_EXT_INFO at both
-      opportunities but MUST NOT require it.
+      サーバは, 第一の機会で SSH_MSG_EXT_INFO を送っていようといまいと, この第2の機会で SSH_MSG_EXT_INFO を送ってもよい.  "ext-info-c" を送ったクライアントは, サーバの両方の機会の SSH_MSG_EXT_INFO を受けいれなければならない. しかし, サーバが SSH_MSG_EXT_INFO を送ることを要求してはならない. 
 
-      This allows a server to reveal support for additional extensions
-      that it was unwilling to reveal to an unauthenticated client.  If
-      a server sends a second SSH_MSG_EXT_INFO, this replaces any
-      initial one, and both the client and the server re-evaluate
-      extensions in effect.  The server's second SSH_MSG_EXT_INFO is
-      matched against the client's original.
+      これにより, 認証されていないクライアントに漏らしたくない追加の拡張機能のサポートをサーバは(特定のクライアントに)明らかにすることができる. サーバが第2の SSH_MSG_EXT_INFO を送る場合, これは最初のものを置き換える. クライアントとサーバは, 有効な拡張を再評価する.  サーバの第2の SSH_MSG_EXT_INFO は クライアントのオリジナルのものと照合される.
 
-      The timing of the second opportunity is chosen for the following
-      reasons.  If the message was sent earlier, it would not allow the
-      server to withhold information until the client has authenticated.
-      If it was sent later, a client that needs information from the
-      second SSH_MSG_EXT_INFO immediately after it authenticates would
-      have no way to reliably know whether to expect the message.
+      第2の機会のタイミングは次の理由で選ばれている.  このメッセージがより先に送られたなら, クライアントが認証されるまでサーバが情報を保持できない.
+      このメッセージがより後に送られたなら, 第2の SSH_MSG_EXT_INFO の情報を認証後すぐに必要とするクライアントが, このメッセージが送られるかどうかを確実に知る方法がない. 
 
 
 
@@ -234,42 +211,29 @@ Bider                        Standards Track                    [Page 5]
 RFC 8308              Extension Negotiation in SSH            March 2018
 
 
-2.5.  Interpretation of Extension Names and Values
+2.5.  拡張機能の名前と値の解釈
 
-   Each extension is identified by its extension-name and defines the
-   conditions under which the extension is considered to be in effect.
-   Applications MUST ignore unrecognized extension-names.
+   それぞれの拡張はその extension-name で識別される. また, 拡張が有効だと見なせる条件を定義する
+   アプリケーションは認識できない extension-name を無視しなければならない.
 
-   When it is specified, an extension MAY dictate that, in order to take
-   effect, both parties must include it in their SSH_MSG_EXT_INFO or
-   that it is sufficient for only one party to include it.  However,
-   other rules MAY be specified.  The relative order in which extensions
-   appear in an SSH_MSG_EXT_INFO message MUST be ignored.
+   extension-name が指定された場合, 拡張を有効にするために, 両方の側でそれらの SSH_MSG_EXT_INFO に extension-name を含めるように拡張が指定してもよい. もしくは, 1つの側にだけ含まれていれば十分と指定してもよい..  しかし, 他の規則が指定されてもよい.  SSH_MSG_EXT_INFO メッセージ内に現われる拡張の相対的な順番は, 無視されなければならない.
 
-   Extension-value fields are interpreted as defined by their respective
-   extension.  This field MAY be empty if permitted by the extension.
-   Applications that do not implement or recognize an extension MUST
-   ignore its extension-value, regardless of its size or content.
-   Applications MUST tolerate any sequence of bytes -- including null
-   bytes at any position -- in an unknown extension's extension-value.
+   extension-value フィールドは, それぞれの拡張で定義されているように解釈される.  このフィールドは, その拡張が許可するなら空でもよい.
+   拡張を実装していないないし認識しないアプリケーションは, その拡張の extension-value をサイズな内容に依らず無視しなければならない.
+   アプリケーションは未知の拡張の extension-value 中のどんなバイト列も容認しなければならない -- 任意の場所に null バイトが含まれているかもしれない.
 
-   The cumulative size of an SSH_MSG_EXT_INFO message is limited only by
-   the maximum packet length that an implementation may apply in
-   accordance with [RFC4253].  Implementations MUST accept well-formed
-   SSH_MSG_EXT_INFO messages up to the maximum packet length they
-   accept.
+   SSH_MEG_EXT_INFO メッセージの累積あいずハ， [RFC4253] に従って実装が適用する最大パケット長によってのみ制限される.  実装は, それらが受け入れる最大パケット長までの適切な形式の SSH_MSG_EXT_INFO メッセージを受け入れる必要がある.
 
-3.  Initially Defined Extensions
+3.  最初に定義された拡張機能
 
 3.1.  "server-sig-algs"
 
-   This extension is sent with the following extension name and value:
+   この拡張機能は, 次の extension-name と extension-value 付きで送られる:
 
      string      "server-sig-algs"
      name-list   public-key-algorithms-accepted
 
-   The name-list type is a strict subset of the string type and is thus
-   permissible as an extension-value.  See [RFC4251] for more
+   name-list 型は, 文字列型の厳密なサブセットで, それゆえ extension-value として許容される.  詳細は See [RFC4251] for more
    information.
 
    This extension is sent by the server and contains a list of public
@@ -460,7 +424,7 @@ RFC 8308              Extension Negotiation in SSH            March 2018
 
 3.3.  "no-flow-control"
 
-   This extension is sent with the following extension name and value:
+   この拡張機能は, 次の extension-name と extension-value 付きで送られる:
 
      string      "no-flow-control"
      string      choice of: "p" for preferred | "s" for supported
