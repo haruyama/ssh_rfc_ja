@@ -233,17 +233,11 @@ RFC 8308              Extension Negotiation in SSH            March 2018
      string      "server-sig-algs"
      name-list   public-key-algorithms-accepted
 
-   name-list 型は, 文字列型の厳密なサブセットで, それゆえ extension-value として許容される.  詳細は See [RFC4251] for more
-   information.
+   name-list 型は, 文字列型の厳密なサブセットで, それゆえ extension-value として許容される.  詳細は [RFC4251] を参照.
 
-   This extension is sent by the server and contains a list of public
-   key algorithms that the server is able to process as part of a
-   "publickey" authentication request.  If a client sends this
-   extension, the server MAY ignore it and MAY disconnect.
+   この拡張は, サーバによって送られる. サーバが "publickey" 認証要求の一部で処理できる公開鍵アルゴリズムのリストを含んでいる.  この拡張をクライアントが送信したら, サーバはそれを無視してもよいし, 切断してもよい.
 
-   In this extension, a server MUST enumerate all public key algorithms
-   it might accept during user authentication.  However, early server
-   implementations that do not enumerate all accepted algorithms do
+   この拡張で, サーバはユーザ認証中に受け入れることができるすべての公開鍵アルゴリズムを列挙しなければならない.  しかし, すべての許容するアルゴリズムを列挙をしない初期のサーバ実装が
 
 
 
@@ -254,34 +248,20 @@ Bider                        Standards Track                    [Page 6]
 RFC 8308              Extension Negotiation in SSH            March 2018
 
 
-   exist.  For this reason, a client MAY send a user authentication
-   request using a public key algorithm not included in "server-sig-
-   algs".
+   存在する.  この理由のため, クライアントは, "server-sig-algs" に含まれない公開鍵アルゴリズムを用いてユーザ認証要求を送ってもよい.
 
-   A client that wishes to proceed with public key authentication MAY
-   wait for the server's SSH_MSG_EXT_INFO so it can send a "publickey"
-   authentication request with an appropriate public key algorithm,
-   rather than resorting to trial and error.
+   公開鍵認証を用いて続行を希望するクリアントは, サーバの SSH_MSG_EXT_INFO を待ってもよい. そうすると, 試行錯誤を行なうことなく "pulblicky" 認証要求を適切な公開鍵アルゴリズムを用いて送れる.
 
-   Servers that implement public key authentication SHOULD implement
-   this extension.
+   公開鍵認証を実装するサーバは, この拡張を実装する必要がある.
 
-   If a server does not send this extension, a client MUST NOT make any
-   assumptions about the server's public key algorithm support, and MAY
-   proceed with authentication requests using trial and error.  Note
-   that implementations are known to exist that apply authentication
-   penalties if the client attempts to use an unexpected public key
-   algorithm.
+   サーバがこの拡張を送らない場合, クライアントはサーバの公開鍵アルゴリズムのサポートについてどのような仮定を持ってはならないし, 試行錯誤して認証要求を続行してもよい.  クライアントがサーバの予期しない公開鍵アルゴリズムを用いようとすると認証に罰則を課す実装が存在することが知られているのに注意.
 
-   Authentication penalties are applied by servers to deter brute-force
-   password guessing, username enumeration, and other types of behavior
-   deemed suspicious by server administrators or implementers.
-   Penalties may include automatic IP address throttling or blocking,
-   and they may trigger email alerts or auditing.
+   認証の罰則は, ブルートフォースなパスワード推測や, ユーザ名の列挙,  サーバの管理者や実装者にとって疑わしく思えるその他の行動を妨げるためにサーバによって実施される.
+   罰則は, IP アドレスに対する自動的な帯域の調整やブロックを含むかもしれない. また, 罰則はメールのアラートや監査を引き起すかもしれない.
 
 3.2.  "delay-compression"
 
-   This extension MAY be sent by both parties as follows:
+   この拡張は, 次のように, どちらの側から送られてもよい:
 
      string         "delay-compression"
      string:
