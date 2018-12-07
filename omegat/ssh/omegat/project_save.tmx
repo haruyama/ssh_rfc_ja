@@ -1889,6 +1889,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A party that has signaled, or intends to signal, support for this
+   extension in an SSH session MUST NOT initiate key re-exchange in that
+   session until either of the following occurs:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181205T085544Z" creationid="haruyama" creationdate="20181205T085247Z">
+        <seg>SSH のセッションの中で シグナルを受けたり, シグナルを発しようとしたり, この拡張をサポートするサーバ/クライアントは, 次のどちらかの場合が発生するまではそのセッションで鍵の再交換を始めてはならない</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A party that received the "ext-info-c" or "ext-info-s" indicator MAY
    send the following message:</seg>
       </tuv>
@@ -2671,6 +2681,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>ホストの管理者は, すべてのイベント通知メッセージを区分けしメッセージを不当な監視から守るためにあらゆる試みを行なうべきだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Affected
+   versions do not implement this extension, so there is no harm in
+   omitting it.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181207T111329Z" creationid="haruyama" creationdate="20181207T111329Z">
+        <seg>影響を受けるバージョンがこの拡張を実装していないので, 省略にはなんの害もない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5064,6 +5084,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Awkwardly Timed Key Re-Exchange</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181205T085140Z" creationid="haruyama" creationdate="20181205T085140Z">
+        <seg>不器用な定期的鍵再交換</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Awkwardly Timed Key Re-Exchange .....................9
            3.2.2.</seg>
       </tuv>
@@ -6186,6 +6214,14 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110306T090231Z">
         <seg>RSAや Digital Signature Algorithm (DSA), Diffie-Hellman (DH) 鍵交換のような暗号システムに比べて, これらの方式のECCでのバリエーションは, より小さい鍵サイズで同等のセキュリティを提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Compatibility Note: OpenSSH up to Version 7.5</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181207T110817Z" creationid="haruyama" creationdate="20181207T110817Z">
+        <seg>互換性ノート: バージョン 7.5 までの OpenSSH</seg>
       </tuv>
     </tu>
     <tu>
@@ -12359,6 +12395,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If a party violates this rule, the other party MAY disconnect.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181205T090020Z" creationid="haruyama" creationdate="20181205T090020Z">
+        <seg>一方の側がこのルールを破ったら, もう一方の側は切断してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If a request completed successfully, the server MUST send the status
    code SSH_PUBLICKEY_SUCCESS.</seg>
       </tuv>
@@ -14669,6 +14713,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Implementations that wish to interoperate with OpenSSH 7.5 and
+   earlier are advised to check the remote party's SSH version string
+   and omit this extension if an affected version is detected.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181207T111223Z" creationid="haruyama" creationdate="20181207T111223Z">
+        <seg>OpenSSH 7.5 以前と相互運用したい実装は, 接続先の SSH バージョン文字列をチェックし 影響を受けるバージョンが検出されたこの拡張を省略したほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Implementers SHOULD allow system
    administrators to disable some curves, including REQUIRED or
    RECOMMENDED curves, to meet local security policy.</seg>
@@ -15251,6 +15305,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In general, parties SHOULD NOT start key re-exchange before
+   successful user authentication but MAY tolerate it if not using this
+   extension.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181205T090108Z" creationid="haruyama" creationdate="20181205T090108Z">
+        <seg>一般に, サーバ/クライアントはユーザ認証が成功する前に鍵の再交換を開始しないほうがよいが, この拡張を用いない場合はそれを緩和してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In general, the ECMQV key exchange is performed using the ephemeral
    and long-term key pair of both the client and server, which is a
    total of 4 keys.</seg>
@@ -15637,6 +15701,17 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110531T074058Z">
         <seg>stateful-decryption counter モードでは, 送信側と受信側の両方が内部のL-bitなカウンタ X を保持する. Xの初期値は([RFC4253]の7.2節で計算される) 初期IV である必要がある. 初期IVは L-bitのネットワークバイトオーダー符号無し整数として解釈される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In subsequent key re-exchanges that unambiguously begin after the
+   compression trigger messages, the compression algorithms negotiated
+   in re-exchange override the algorithms negotiated with this
+   extension.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181207T110805Z" creationid="haruyama" creationdate="20181207T110805Z">
+        <seg>圧縮トリガーメッセージの後で明確に始まる次の鍵再交換では, 再交換で交渉された圧縮アルゴリズムがこの拡張で交渉されたアルゴリズムを上書きする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21345,6 +21420,17 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>OpenSSH
+   clients up to and including version 7.5 advertise support to receive
+   SSH_MSG_EXT_INFO but disconnect on receipt of an extension-value
+   containing null bytes.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181207T111021Z" creationid="haruyama" creationdate="20181207T111021Z">
+        <seg>バージョン 7.5 までの OpenSSH クラアイアントは, SSH_MSG_EXT_INFO の受信をサポートするとしていたが, extension-value に ヌルバイトを含む場合受信すると切断する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Opening a Channel</seg>
       </tuv>
       <tuv lang="JA">
@@ -26009,6 +26095,14 @@ Category: Standards Track                                     W. Griffin
       <tuv lang="JA" changeid="haruyama" changedate="20110715T063334Z">
         <seg>Subject ヘッダ ......................................3
            3.3.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Subsequent Re-Exchange</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181207T110620Z" creationid="haruyama" creationdate="20181207T110620Z">
+        <seg>次の再交換</seg>
       </tuv>
     </tu>
     <tu>
@@ -31141,6 +31235,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>異なる公開鍵アルゴリズムを持つ複数の信頼されたホスト鍵が存在する場合もこの選択に影響する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The extension SHOULD NOT be omitted if the detected
+   OpenSSH version is 7.6 or higher.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181207T111359Z" creationid="haruyama" creationdate="20181207T111359Z">
+        <seg>この拡張は, OpenSSH 7.6 以上を検出したならば省略しないほうがよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -36837,8 +36940,8 @@ Category: Standards Track                                     W. Griffin
    the server to avoid advertising compression until the client has
    authenticated.</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20181201T085215Z" creationid="haruyama" creationdate="20181201T085215Z">
-        <seg>これにより, クアイアントが認証されるまで告知した圧縮をサーバが避けれる.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20181205T085000Z" creationid="haruyama" creationdate="20181201T085215Z">
+        <seg>これにより, クライアントが認証されるまで告知した圧縮をサーバが避けれる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37974,6 +38077,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This extension uses a binary extension-value encoding.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181207T110839Z" creationid="haruyama" creationdate="20181207T110839Z">
+        <seg>この拡張は, バイナリ値の extension-value エンコーディングを用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This field MAY be empty if permitted by the extension.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181110T002454Z" creationid="haruyama" creationdate="20181110T002454Z">
@@ -38160,6 +38271,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>これは, 他の認証法では不可能な認証だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This is an error fixed in OpenSSH
+   version 7.6.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181207T111038Z" creationid="haruyama" creationdate="20181207T111038Z">
+        <seg>このエラーは OpenSSH バージョン 7.6 で修正された.</seg>
       </tuv>
     </tu>
     <tu>
@@ -39751,6 +39871,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>これにより, ローカルなリゾルバにDNS検索パスを挿入して他のホストにクライアントを接続させようとする攻撃を防ぐ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This would make it harder for the
+   OpenSSH project to implement this extension in a higher version.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181207T111506Z" creationid="haruyama" creationdate="20181207T111506Z">
+        <seg>省略するとより上位のバージョンでこの拡張を OpenSSH プロジェクトが実装するのを難しくしてしまうかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -43226,6 +43355,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  The party has sent (if server) or received (if client) the message
+      SSH_MSG_USERAUTH_SUCCESS, and this extension was not negotiated.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181205T085914Z" creationid="haruyama" creationdate="20181205T085841Z">
+        <seg>o   SSH_MSG_USERAUTH_SUCCESSを(サーバなら)送ってもしくは(クライアントなら)受け取って この拡張が交渉されなかった.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>o  The range of 0xFE000000 to 0xFEFFFFFF is to be used in conjunction
       with locally assigned channels.</seg>
       </tuv>
@@ -43312,6 +43450,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110901T071647Z">
         <seg>o  OCSP 応答の順序に要件はない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  This extension was negotiated, and the party that's about to start
+      key re-exchange already sent its trigger message for compression.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181205T085720Z" creationid="haruyama" creationdate="20181205T085533Z">
+        <seg>o  この拡張が交渉されて, 圧縮のトリガーメッセージがすでに送られて鍵の再交換が開始できる.</seg>
       </tuv>
     </tu>
     <tu>

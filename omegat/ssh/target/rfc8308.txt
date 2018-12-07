@@ -268,20 +268,13 @@ RFC 8308              Extension Negotiation in SSH            March 2018
        name-list    compression_algorithms_client_to_server
        name-list    compression_algorithms_server_to_client
 
-   The extension-value is a string that encodes two name-lists.  The
-   name-lists themselves have the encoding of strings.  For example, to
-   indicate a preference for algorithms "foo,bar" in the client-to-
-   server direction and "bar,baz" in the server-to-client direction, a
-   sender encodes the extension-value as follows (including its length):
+   この extension-value は2つの name-list を符号化した string だ.  name-list 自体は, string で符号化される.  たとえば, クライアントからサーバの方向にアルゴリズムの優先順位を "foo,bar", サーバからクライアントの方向に "bar,baz" を示すには, サーバは extension-valu を  (長さを含めて) 次のように符号化する:
 
      00000016 00000007 666f6f2c626172 00000007 6261722c62617a
 
-   This same encoding could be sent by either party -- client or server.
+   これと同じ符号化での値が, クライアントかサーバのどちらかの側により送られる.
 
-   This extension allows the server and client to renegotiate
-   compression algorithm support without having to conduct a key
-   re-exchange, which puts new algorithms into effect immediately upon
-   successful authentication.
+   この拡張は, サーバとクライアントに鍵交換を行なわずに圧縮アルゴリズムのサポートを再交渉することを許す. 認証が成功すると直ちに新しいアルゴリズムが有効となる.
 
 
 
@@ -290,50 +283,25 @@ Bider                        Standards Track                    [Page 7]
 RFC 8308              Extension Negotiation in SSH            March 2018
 
 
-   This extension takes effect only if both parties send it.  Name-lists
-   MAY include any compression algorithm that could have been negotiated
-   in SSH_MSG_KEXINIT, except algorithms that define their own delayed
-   compression semantics.  This means "zlib,none" is a valid algorithm
-   list in this context, but "zlib@openssh.com" is not.
+   この拡張は, 両方の側が送った場合にのみ有効だ.  name-list には, それら自身で遅延した圧縮方式を定義するアルゴリズムを除いて, SSH_MSG_KEXINIT で交渉された任意の圧縮アルゴリズムを含んでもよい.  これは, "zlib,none" はこの文脈で正当なアルゴリズムだが, "zlib@openssh.com" は正当でないという意味だ.
 
-   If both parties send this extension, but the name-lists do not
-   contain a common algorithm in either direction, the parties MUST
-   disconnect in the same way as if negotiation failed as part of
-   SSH_MSG_KEXINIT.
+   両方の側がこの拡張を送りしかし name-list がどちらかの方向で共通のアルゴリズムを含まない場合, 両方の側は SSH_MSG_KEXINIT の一部として交渉が失敗したのと同じように接続を切断しなければならない.
 
-   If this extension takes effect, the renegotiated compression
-   algorithm is activated for the very next SSH message after the
-   trigger message:
+   この拡張が有効なら, 再交渉された圧縮アルゴリズムはトリガーメッセージの後のすぐ次の SSH メッセージから有効になる.
 
-   o  Sent by the server, the trigger message is
-      SSH_MSG_USERAUTH_SUCCESS.
+   o  サーバから送られるトリガーメッセージは SSH_MSG_USERAUTH_SUCCESS だ.
 
-   o  Sent by the client, the trigger message is SSH_MSG_NEWCOMPRESS.
+   o  クライアントから送られるトリガーメッセージは SSH_MSG_NEWCOMPRES だ.
 
-   If this extension takes effect, the client MUST send the following
-   message within a reasonable number of outgoing SSH messages after
-   receiving SSH_MSG_USERAUTH_SUCCESS, but not necessarily as the first
-   such outgoing message:
+   この拡張が有効なら, クライアントは SSH_MSG_USERAUTH_SUCCESS を受け取った後に合理的な数の送信 SSH メッセージの内に次のメッセージを送信しなければならない. なお 送信メッセージの一番目である必要がない:
 
      byte       SSH_MSG_NEWCOMPRESS (value 8)
 
-   The purpose of SSH_MSG_NEWCOMPRESS is to avoid a race condition where
-   the server cannot reliably know whether a message sent by the client
-   was sent before or after receiving the server's
-   SSH_MSG_USERAUTH_SUCCESS.  For example, clients may send keep-alive
-   messages during logon processing.
+   SSH_MSG_NEWCOMPRESS の目的は, クライアントから送られるメッセージがサーバの SSH_MSG_USERAUTH_SUCCESS の受信前か後かを確信できない競合状態を避けるためだ.  たとえば, クライアントがログイン処理中に keep-alive メッセージを送るかもしれない.
 
-   As is the case for all extensions unless otherwise noted, the server
-   MAY delay including this extension until its secondary
-   SSH_MSG_EXT_INFO, sent before SSH_MSG_USERAUTH_SUCCESS.  This allows
-   the server to avoid advertising compression until the client has
-   authenticated.
+   すべての拡張について, 明記されていない限り, サーバは SSH_MSG_USERAUTH_SUCCESS の前に 2つ目の SSH_MSG_EXT_INFO を送るまで この拡張を含めるのを送らせてもよい.  これにより, クライアントが認証されるまで告知した圧縮をサーバが避けれる.
 
-   If the parties renegotiate compression using this extension in a
-   session where compression is already enabled and the renegotiated
-   algorithm is the same in one or both directions, then the internal
-   compression state MUST be reset for each direction at the time the
-   renegotiated algorithm takes effect.
+   この拡張を利用して圧縮を再交渉した際にすでに圧縮が有効で再交渉されたアルゴリズムが1方向ないし両方の方向で一致する場合, 内部の圧縮の状態は, 再交渉されたアルゴリズムが有効になる時点でそれぞれの方向でリセットされなければならない.
 
 
 
@@ -346,9 +314,9 @@ Bider                        Standards Track                    [Page 8]
 RFC 8308              Extension Negotiation in SSH            March 2018
 
 
-3.2.1.  Awkwardly Timed Key Re-Exchange
+3.2.1.  不器用な定期的鍵再交換
 
-   A party that has signaled, or intends to signal, support for this
+    SSH のセッションの中で シグナルを受けたり, シグナルを発しようとしたり, この拡張をサポートするA party that has signaled, or intends to signal, support for this
    extension in an SSH session MUST NOT initiate key re-exchange in that
    session until either of the following occurs:
 
