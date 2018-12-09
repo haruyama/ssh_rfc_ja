@@ -1880,6 +1880,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A party SHOULD send "p" if it prefers to enable
+   the extension if the other party supports it.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181209T085111Z" creationid="haruyama" creationdate="20181209T085111Z">
+        <seg>サーバ/クライアントは, この拡張を有効にしたくもう一方の側もサポートしている場合 "p" を送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A party SHOULD send "s" if it supports "no-flow-control" but does not
+   prefer to enable it.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181209T085001Z" creationid="haruyama" creationdate="20181209T085001Z">
+        <seg>サーバ/クライアントは, "no-flow-control" をサポートしているが有効にしたくない場合 "s" を送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A party need not explicitly request forwardings from its own end to
    the other direction.</seg>
       </tuv>
@@ -10084,6 +10102,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For this extension to take effect, the following must occur:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181209T085204Z" creationid="haruyama" creationdate="20181209T085204Z">
+        <seg>この拡張が有効となるには, 次の条件が満たされなければならない:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For this purpose,
    the GSS-API mechanism-independent name form for host-based services
    is used, as described in Section 4.1 of [GSSAPI].</seg>
@@ -14056,6 +14082,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If this extension takes effect, the "initial window size" fields in
+   SSH_MSG_CHANNEL_OPEN and SSH_MSG_CHANNEL_OPEN_CONFIRMATION, as
+   defined in [RFC4254], become meaningless.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181209T085604Z" creationid="haruyama" creationdate="20181209T085604Z">
+        <seg>この拡張が有効となった場合, [RFC4254] で定義された SSH_MSG_CHANNEL_OPEN と SSH_MSG_CHANNEL_OPEN_CONFIRMATION の "initial window size" フィールドは無意味になる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If this extension takes effect, the client MUST send the following
    message within a reasonable number of outgoing SSH messages after
    receiving SSH_MSG_USERAUTH_SUCCESS, but not necessarily as the first
@@ -14500,6 +14536,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20111001T040816Z">
         <seg>実装は, バッファオーバーランに対して脆弱でないよう保証しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementations MUST refuse to open more than one simultaneous
+   channel when this extension is in effect.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181209T090027Z" creationid="haruyama" creationdate="20181209T090027Z">
+        <seg>実装は, この拡張が有効な場合に 1つより多い同時チャンネルを開く事を拒否しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19956,6 +20001,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Neither side is required to send any
+   SSH_MSG_CHANNEL_WINDOW_ADJUST messages, and if received, such
+   messages MUST be ignored.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181209T085719Z" creationid="haruyama" creationdate="20181209T085719Z">
+        <seg>どちらの側も SSH_MSG_CHANNEL_WINDOW_ADJUST メッセージの送信を要求しない. もし受信したら, それらのメッセージは無視されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Neither side should establish a
    NETCONF over SSH connection with an unknown, unexpected, or incorrect
    identity on the opposite side.</seg>
@@ -19978,6 +20033,16 @@ Request for Comments: 4255                                       OpenSSH
 Category: Standards Track                                     W. Griffin
                                                                   SPARTA
                                                             January 2006</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Nevertheless, server
+   implementations SHOULD support clients opening more than one
+   non-simultaneous channel.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181209T090105Z" creationid="haruyama" creationdate="20181209T090105Z">
+        <seg>にもかかわらず, サーバの実装は, クライアントが 1つ以上の 同時でないチャンネルを開くのをサポートする必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21887,6 +21952,15 @@ Category: Standards Track                                     W. Griffin
       <tuv lang="JA">
         <seg>パケットのサイズとオーバーヘッド.......................6
    6.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Parties MAY disconnect
+   if they receive a different extension value.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181209T085134Z" creationid="haruyama" creationdate="20181209T085134Z">
+        <seg>サーバ/クライアントは, 異なる extension-value を受け取った場合切断してもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35746,6 +35820,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The values of these fields
+   MUST be ignored, and a channel behaves as if all window sizes are
+   infinite.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181209T085639Z" creationid="haruyama" creationdate="20181209T085639Z">
+        <seg>これらのフィールドの値は無視されなければならない. チャンネルはすべてのウィンドウサイズが無限であるかのように振る舞う.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The variants, HMAC-SHA2-224 and HMAC-SHA2-384 algorithms,
    were considered but not added to this list as they have the same
    computational requirements of HMAC-SHA2-256 and HMAC-SHA2-512,
@@ -38037,6 +38121,17 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181117T042847Z" creationid="haruyama" creationdate="20181117T042847Z">
         <seg>この拡張は, サーバとクライアントに鍵交換を行なわずに圧縮アルゴリズムのサポートを再交渉することを許す. 認証が成功すると直ちに新しいアルゴリズムが有効となる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This extension is intended for, but not limited to, use by file
+   transfer applications that are only going to use one channel and for
+   which the flow control provided by SSH is an impediment, rather than
+   a feature.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181209T085940Z" creationid="haruyama" creationdate="20181209T085940Z">
+        <seg>この拡張は, 1チャンネルのみを利用し SSHで提供するフリー制御がかえって障害となるファイル転送アプリケーションを対象にしているが, それだけに制限するものではない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -42737,6 +42832,14 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>o  At least one party MUST have sent the value "p" (preferred).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181209T085309Z" creationid="haruyama" creationdate="20181209T085309Z">
+        <seg>o  少なくとも1つの側が, 値 "p" (preferred) を送っていなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>o  C is the client, and S is the server</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110621T022204Z">
@@ -43450,6 +43553,14 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110901T071647Z">
         <seg>o  OCSP 応答の順序に要件はない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>o  This extension MUST be sent by both parties.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181209T085241Z" creationid="haruyama" creationdate="20181209T085241Z">
+        <seg>o  この拡張がサーバ/クライアント双方から送られなければならない.</seg>
       </tuv>
     </tu>
     <tu>

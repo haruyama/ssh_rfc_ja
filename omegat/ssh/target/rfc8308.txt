@@ -316,44 +316,25 @@ RFC 8308              Extension Negotiation in SSH            March 2018
 
 3.2.1.  不器用な定期的鍵再交換
 
-    SSH のセッションの中で シグナルを受けたり, シグナルを発しようとしたり, この拡張をサポートするA party that has signaled, or intends to signal, support for this
-   extension in an SSH session MUST NOT initiate key re-exchange in that
-   session until either of the following occurs:
+   SSH のセッションの中で シグナルを受けたり, シグナルを発しようとしたり, この拡張をサポートするサーバ/クライアントは, 次のどちらかの場合が発生するまではそのセッションで鍵の再交換を始めてはならない
 
-   o  This extension was negotiated, and the party that's about to start
-      key re-exchange already sent its trigger message for compression.
+   o  この拡張が交渉されて, 圧縮のトリガーメッセージがすでに送られて鍵の再交換が開始できる.
 
-   o  The party has sent (if server) or received (if client) the message
-      SSH_MSG_USERAUTH_SUCCESS, and this extension was not negotiated.
+   o   SSH_MSG_USERAUTH_SUCCESSを(サーバなら)送ってもしくは(クライアントなら)受け取って この拡張が交渉されなかった.
 
-   If a party violates this rule, the other party MAY disconnect.
+   一方の側がこのルールを破ったら, もう一方の側は切断してもよい.
 
-   In general, parties SHOULD NOT start key re-exchange before
-   successful user authentication but MAY tolerate it if not using this
-   extension.
+   一般に, サーバ/クライアントはユーザ認証が成功する前に鍵の再交換を開始しないほうがよいが, この拡張を用いない場合はそれを緩和してもよい.
 
-3.2.2.  Subsequent Re-Exchange
+3.2.2.  次の再交換
 
-   In subsequent key re-exchanges that unambiguously begin after the
-   compression trigger messages, the compression algorithms negotiated
-   in re-exchange override the algorithms negotiated with this
-   extension.
+   圧縮トリガーメッセージの後で明確に始まる次の鍵再交換では, 再交換で交渉された圧縮アルゴリズムがこの拡張で交渉されたアルゴリズムを上書きする.
 
-3.2.3.  Compatibility Note: OpenSSH up to Version 7.5
+3.2.3.  互換性ノート: バージョン 7.5 までの OpenSSH
 
-   This extension uses a binary extension-value encoding.  OpenSSH
-   clients up to and including version 7.5 advertise support to receive
-   SSH_MSG_EXT_INFO but disconnect on receipt of an extension-value
-   containing null bytes.  This is an error fixed in OpenSSH
-   version 7.6.
+   この拡張は, バイナリ値の extension-value エンコーディングを用いる.  バージョン 7.5 までの OpenSSH クラアイアントは, SSH_MSG_EXT_INFO の受信をサポートするとしていたが, extension-value に ヌルバイトを含む場合受信すると切断する.  このエラーは OpenSSH バージョン 7.6 で修正された.
 
-   Implementations that wish to interoperate with OpenSSH 7.5 and
-   earlier are advised to check the remote party's SSH version string
-   and omit this extension if an affected version is detected.  Affected
-   versions do not implement this extension, so there is no harm in
-   omitting it.  The extension SHOULD NOT be omitted if the detected
-   OpenSSH version is 7.6 or higher.  This would make it harder for the
-   OpenSSH project to implement this extension in a higher version.
+   OpenSSH 7.5 以前と相互運用したい実装は, 接続先の SSH バージョン文字列をチェックし 影響を受けるバージョンが検出されたこの拡張を省略したほうがよい.  影響を受けるバージョンがこの拡張を実装していないので, 省略にはなんの害もない.  この拡張は, OpenSSH 7.6 以上を検出したならば省略しないほうがよい.  省略するとより上位のバージョンでこの拡張を OpenSSH プロジェクトが実装するのを難しくしてしまうかもしれない.
 
 
 
@@ -377,34 +358,19 @@ RFC 8308              Extension Negotiation in SSH            March 2018
      string      "no-flow-control"
      string      choice of: "p" for preferred | "s" for supported
 
-   A party SHOULD send "s" if it supports "no-flow-control" but does not
-   prefer to enable it.  A party SHOULD send "p" if it prefers to enable
-   the extension if the other party supports it.  Parties MAY disconnect
-   if they receive a different extension value.
+   サーバ/クライアントは, "no-flow-control" をサポートしているが有効にしたくない場合 "s" を送る必要がある.  サーバ/クライアントは, この拡張を有効にしたくもう一方の側もサポートしている場合 "p" を送る必要がある.  サーバ/クライアントは, 異なる extension-value を受け取った場合切断してもよい.
 
-   For this extension to take effect, the following must occur:
+   この拡張が有効となるには, 次の条件が満たされなければならない:
 
-   o  This extension MUST be sent by both parties.
+   o  この拡張がサーバ/クライアント双方から送られなければならない.
 
-   o  At least one party MUST have sent the value "p" (preferred).
+   o  少なくとも1つの側が, 値 "p" (preferred) を送っていなければならない.
 
-   If this extension takes effect, the "initial window size" fields in
-   SSH_MSG_CHANNEL_OPEN and SSH_MSG_CHANNEL_OPEN_CONFIRMATION, as
-   defined in [RFC4254], become meaningless.  The values of these fields
-   MUST be ignored, and a channel behaves as if all window sizes are
-   infinite.  Neither side is required to send any
-   SSH_MSG_CHANNEL_WINDOW_ADJUST messages, and if received, such
-   messages MUST be ignored.
+   この拡張が有効となった場合, [RFC4254] で定義された SSH_MSG_CHANNEL_OPEN と SSH_MSG_CHANNEL_OPEN_CONFIRMATION の "initial window size" フィールドは無意味になる.  これらのフィールドの値は無視されなければならない. チャンネルはすべてのウィンドウサイズが無限であるかのように振る舞う.  どちらの側も SSH_MSG_CHANNEL_WINDOW_ADJUST メッセージの送信を要求しない. もし受信したら, それらのメッセージは無視されなければならない.
 
-   This extension is intended for, but not limited to, use by file
-   transfer applications that are only going to use one channel and for
-   which the flow control provided by SSH is an impediment, rather than
-   a feature.
+   この拡張は, 1チャンネルのみを利用し SSHで提供するフリー制御がかえって障害となるファイル転送アプリケーションを対象にしているが, それだけに制限するものではない.
 
-   Implementations MUST refuse to open more than one simultaneous
-   channel when this extension is in effect.  Nevertheless, server
-   implementations SHOULD support clients opening more than one
-   non-simultaneous channel.
+   実装は, この拡張が有効な場合に 1つより多い同時チャンネルを開く事を拒否しなければならない.  にもかかわらず, サーバの実装は, クライアントが 1つ以上の 同時でないチャンネルを開くのをサポートする必要がある.
 
 3.3.1.  Prior "No Flow Control" Practice
 
