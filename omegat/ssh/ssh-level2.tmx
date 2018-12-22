@@ -1592,12 +1592,52 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>A client only needs to send
+   "ext-info-c" if it plans to process SSH_MSG_EXT_INFO from the server.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181022T112801Z" creationid="haruyama" creationdate="20181022T112801Z">
+        <seg>サーバからの SSH_MSG_EXT_INFO を処理する意思がある場合にのみクライアントは "ext-info-c" を送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>A client receiving this
    message SHOULD wait for the following SSH_MSG_USERAUTH_FAILURE
    message before beginning another authentication attempt.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110707T032319Z">
         <seg>このメッセージを受け取ったクライアントは, 別の認証を試そうとする前に 次の SSH_MSG_USERAUTH_FAILURE を待つ必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>A client sends "y" to indicate its preference that the session should
+   be elevated; "n" to not be elevated; and "d" for the server to use
+   its default behavior.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181217T112119Z" creationid="haruyama" creationdate="20181217T112119Z">
+        <seg>クライアントが "y"  送信するのは, クライアントがセッションが elevated されているのを好んでいることを示す. "d" は サーバの規定の動作を用いることを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>A client that sent
+      "ext-info-c" MUST accept a server's SSH_MSG_EXT_INFO at both
+      opportunities but MUST NOT require it.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181103T133912Z" creationid="haruyama" creationdate="20181103T133912Z">
+        <seg>"ext-info-c" を送ったクライアントは, サーバの両方の機会の SSH_MSG_EXT_INFO を受けいれなければならない. しかし, サーバが SSH_MSG_EXT_INFO を送ることを要求してはならない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>A client that wishes to proceed with public key authentication MAY
+   wait for the server's SSH_MSG_EXT_INFO so it can send a "publickey"
+   authentication request with an appropriate public key algorithm,
+   rather than resorting to trial and error.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181115T140053Z" creationid="haruyama" creationdate="20181115T140053Z">
+        <seg>公開鍵認証を用いて続行を希望するクリアントは, サーバの SSH_MSG_EXT_INFO を待ってもよい. そうすると, 試行錯誤を行なうことなく "pulblicky" 認証要求を適切な公開鍵アルゴリズムを用いて送れる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1850,11 +1890,48 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>A party SHOULD send "p" if it prefers to enable
+   the extension if the other party supports it.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181209T085111Z" creationid="haruyama" creationdate="20181209T085111Z">
+        <seg>サーバ/クライアントは, この拡張を有効にしたくもう一方の側もサポートしている場合 "p" を送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>A party SHOULD send "s" if it supports "no-flow-control" but does not
+   prefer to enable it.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181209T085001Z" creationid="haruyama" creationdate="20181209T085001Z">
+        <seg>サーバ/クライアントは, "no-flow-control" をサポートしているが有効にしたくない場合 "s" を送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>A party need not explicitly request forwardings from its own end to
    the other direction.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>自身のポートを相手側に転送する場合は要求を明示的にする必要はない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>A party that has signaled, or intends to signal, support for this
+   extension in an SSH session MUST NOT initiate key re-exchange in that
+   session until either of the following occurs:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181205T085544Z" creationid="haruyama" creationdate="20181205T085247Z">
+        <seg>SSH のセッションの中で シグナルを受けたり, シグナルを発しようとしたり, この拡張をサポートするサーバ/クライアントは, 次のどちらかの場合が発生するまではそのセッションで鍵の再交換を始めてはならない</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>A party that received the "ext-info-c" or "ext-info-s" indicator MAY
+   send the following message:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181028T030752Z" creationid="haruyama" creationdate="20181028T030752Z">
+        <seg>"ext-info-c" か "ext-info-s" 指標を受け取った側は, 次のメッセージを送ってもよい:</seg>
       </tuv>
     </tu>
     <tu>
@@ -1995,6 +2072,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110707T032513Z">
         <seg>メッセージを受けとったサーバは, SSH_MSG_USERAUTH_FAILURE を応答として送ってはならない. 次の認証シーケンスに対する応答だとクライアントが解釈してしまう可能性があるからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>A server only needs to send "ext-info-s" if it intends to process
+   SSH_MSG_EXT_INFO from the client.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181022T112742Z" creationid="haruyama" creationdate="20181022T112742Z">
+        <seg>クライアントからの SSH_MSG_EXT_INFO を処理する意思がある場合にのみサーバは "ext-info-s" を送る必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2607,12 +2693,40 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Additions to Existing Registries</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181222T083023Z" creationid="haruyama" creationdate="20181222T083023Z">
+        <seg>既存のレジストリへの追加</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Additions to Existing Registries ..........................12
+      4.2.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181007T060042Z" creationid="haruyama" creationdate="20181007T060042Z">
+        <seg>既存のレジストリへの追加 ..........................12
+      4.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Administrators of host machines should make all attempts to
    compartmentalize all event notification messages and protect them
    from unwarranted observation.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>ホストの管理者は, すべてのイベント通知メッセージを区分けしメッセージを不当な監視から守るためにあらゆる試みを行なうべきだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Affected
+   versions do not implement this extension, so there is no harm in
+   omitting it.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181207T111329Z" creationid="haruyama" creationdate="20181207T111329Z">
+        <seg>影響を受けるバージョンがこの拡張を実装していないので, 省略にはなんの害もない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3980,11 +4094,56 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Applications MUST ignore unrecognized extension-names.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181107T122947Z" creationid="haruyama" creationdate="20181107T122549Z">
+        <seg>アプリケーションは認識できない extension-name を無視しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Applications MUST tolerate any sequence of bytes -- including null
+   bytes at any position -- in an unknown extension's extension-value.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181110T002648Z" creationid="haruyama" creationdate="20181110T002648Z">
+        <seg>アプリケーションは未知の拡張の extension-value 中のどんなバイト列も容認しなければならない -- 任意の場所に null バイトが含まれているかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Applications SHOULD NOT do this for the following reasons:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181215T124819Z" creationid="haruyama" creationdate="20181215T124819Z">
+        <seg>アプリケーションは次の理由からこのようにしないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Applications implementing this mechanism MUST add one of the
+   following indicator names to the field kex_algorithms in the
+   SSH_MSG_KEXINIT message sent by the application in the first key
+   exchange:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181017T130327Z" creationid="haruyama" creationdate="20181017T130327Z">
+        <seg>この機構を実装するアプリケーションは, 最初の鍵交換でアプリケーションから送られる SSH_MSG_KEXINT の kex_algorithms フィールドに次の指標名のうちの1つを加えなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Applications that
    require a shorter BREAK may choose to ignore this suggestion.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>より短い BREAKを必要とするアプリケーションは, この示唆を無視してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Applications that do not implement or recognize an extension MUST
+   ignore its extension-value, regardless of its size or content.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181110T002540Z" creationid="haruyama" creationdate="20181110T002540Z">
+        <seg>拡張を実装していないないし認識しないアプリケーションは, その拡張の extension-value をサイズな内容に依らず無視しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4317,6 +4476,16 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>IANA への実際の指示は [SSH-NUMBERS] にあることに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>As is the case for all extensions unless otherwise noted, the server
+   MAY delay including this extension until its secondary
+   SSH_MSG_EXT_INFO, sent before SSH_MSG_USERAUTH_SUCCESS.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181201T085137Z" creationid="haruyama" creationdate="20181201T085137Z">
+        <seg>すべての拡張について, 明記されていない限り, サーバは SSH_MSG_USERAUTH_SUCCESS の前に 2つ目の SSH_MSG_EXT_INFO を送るまで この拡張を含めるのを送らせてもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4907,6 +5076,34 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Authentication penalties are applied by servers to deter brute-force
+   password guessing, username enumeration, and other types of behavior
+   deemed suspicious by server administrators or implementers.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181115T140651Z" creationid="haruyama" creationdate="20181115T140651Z">
+        <seg>認証の罰則は, ブルートフォースなパスワード推測や, ユーザ名の列挙,  サーバの管理者や実装者にとって疑わしく思えるその他の行動を妨げるためにサーバによって実施される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Awkwardly Timed Key Re-Exchange</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181205T085140Z" creationid="haruyama" creationdate="20181205T085140Z">
+        <seg>不器用な定期的鍵再交換</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Awkwardly Timed Key Re-Exchange .....................9
+           3.2.2.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181003T095451Z" creationid="haruyama" creationdate="20181003T095451Z">
+        <seg>不器用な定期的鍵再交換 .....................9
+           3.2.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>BK (Block Cipher Key)
         The appropriate Encryption Key formed during the Key Exchange.</seg>
       </tuv>
@@ -5099,6 +5296,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110721T052045Z">
         <seg>サブシステムを終了する前に,状態が SSH_PUBLICKEY_VERSION_NOT_SUPPORTED な状態メッセージを送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Before this extension, some applications would simply not implement
+   SSH flow control, sending an initial channel window size of 2^32 - 1.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181215T124805Z" creationid="haruyama" creationdate="20181215T124805Z">
+        <seg>この拡張の前では, いくつかのアプリケーションは 最初のチャンネルウィンドウサイズとして 2^32 -1 を送って 単に SSH のフロー制御を実装しなかった.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5902,6 +6108,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Clients cannot rely on this because the server is not required to
+      send the message at this time; if sent, it may be delayed by the
+      network.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181101T114140Z" creationid="haruyama" creationdate="20181101T114140Z">
+        <seg>クライアントは, これに頼ることはできない. なぜなら, サーバはこの時にメッセージを送ることを要求されていないからだ. 送られたとしても, ネットワークにより遅延するかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Clients receiving this message MAY log the error details and/or
    report them to the user.</seg>
       </tuv>
@@ -5927,6 +6143,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180129T131652Z">
         <seg>DNSSECの署名を自ら検証するクライアントは, 標準の DNSSEC 検証手続きを使う必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Clients that implement this extension help reduce attack surface for
+   Windows servers that handle administrative logins.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181217T112547Z" creationid="haruyama" creationdate="20181217T112547Z">
+        <seg>この拡張を実装するクライアントは, 管理者ログインを扱う Windows サーバの攻撃される範囲を軽減する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6001,6 +6226,24 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110306T090231Z">
         <seg>RSAや Digital Signature Algorithm (DSA), Diffie-Hellman (DH) 鍵交換のような暗号システムに比べて, これらの方式のECCでのバリエーションは, より小さい鍵サイズで同等のセキュリティを提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Compatibility Note: OpenSSH up to Version 7.5</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181207T110817Z" creationid="haruyama" creationdate="20181207T110817Z">
+        <seg>互換性ノート: バージョン 7.5 までの OpenSSH</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Compatibility Note: OpenSSH up to Version 7.5 .......9
+      3.3.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181003T095536Z" creationid="haruyama" creationdate="20181003T095536Z">
+        <seg>互換性ノート: バージョン 7.5 までの OpenSSH .......9
+      3.3.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7754,6 +7997,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Each extension is identified by its extension-name and defines the
+   conditions under which the extension is considered to be in effect.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181107T122940Z" creationid="haruyama" creationdate="20181107T122344Z">
+        <seg>それぞれの拡張はその extension-name で識別される. また, 拡張が有効だと見なせる条件を定義する</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Each field is a line of the following format:</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160618T032715Z">
@@ -8102,6 +8354,24 @@
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110306T084538Z">
         <seg>楕円曲線ドメインパラメータ識別子 ...............10
       6.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Enabling Criteria</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181022T112513Z" creationid="haruyama" creationdate="20181022T112513Z">
+        <seg>有効化基準</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Enabling Criteria ..........................................4
+      2.3.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180930T082545Z" creationid="haruyama" creationdate="20180930T082545Z">
+        <seg>有効化基準 ..........................................4
+      2.3.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8690,6 +8960,32 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Extension Negotiation Mechanism</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181017T130115Z" creationid="haruyama" creationdate="20181017T130115Z">
+        <seg>拡張機能交渉メカニズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Extension Negotiation Mechanism .................................3
+      2.1.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180930T082439Z" creationid="haruyama" creationdate="20180930T082439Z">
+        <seg>拡張機能交渉メカニズム .................................3
+      2.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Extension Negotiation in the Secure Shell (SSH) Protocol</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180930T081522Z" creationid="haruyama" creationdate="20180930T081522Z">
+        <seg>セキュアシェル (SSH) プロトコルでの拡張機能交渉</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Extension failure should be signaled using the
    SSH_AGENT_EXTENSION_FAILURE code - extensions should not use the
    standard SSH_AGENT_FAILURE message.</seg>
@@ -8729,6 +9025,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160601T001748Z" creationid="haruyama" creationdate="20160601T001748Z">
         <seg>拡張リクエストは 成功として SSH_AGENT_SUCCESS を返してもよいし, 他の拡張特有のメッセージを返してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Extension-value fields are interpreted as defined by their respective
+   extension.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181110T002436Z" creationid="haruyama" creationdate="20181110T002436Z">
+        <seg>extension-value フィールドは, それぞれの拡張で定義されているように解釈される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9305,6 +9610,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>For example, clients may send keep-alive
+   messages during logon processing.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181201T084042Z" creationid="haruyama" creationdate="20181201T084042Z">
+        <seg>たとえば, クライアントがログイン処理中に keep-alive メッセージを送るかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>For example, compromise of a certificate's private key or issuance of
    a certificate to the wrong party are common reasons to revoke a
    certificate.</seg>
@@ -9502,6 +9816,17 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>For example, to
+   indicate a preference for algorithms "foo,bar" in the client-to-
+   server direction and "bar,baz" in the server-to-client direction, a
+   sender encodes the extension-value as follows (including its length):</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181117T042513Z" creationid="haruyama" creationdate="20181117T042513Z">
+        <seg>たとえば, クライアントからサーバの方向にアルゴリズムの優先順位を "foo,bar", サーバからクライアントの方向に "bar,baz" を示すには, サーバは extension-valu を  (長さを含めて) 次のように符号化する:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>For example:</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110718T034353Z">
@@ -9560,6 +9885,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110620T034415Z">
         <seg>より詳細には, van Oorschot と Wiener の論文 [VAN-OORSCHOT] を参照せよ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>For more information about
+   this mechanism on Windows, see [WINADMIN] and [WINTOKEN].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181217T111931Z" creationid="haruyama" creationdate="20181217T111931Z">
+        <seg>Windows でのこの機構の詳細は, [WINADMIN] と [WINTOKEN] を参照.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9737,12 +10071,30 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>For this extension to take effect, the following must occur:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181209T085204Z" creationid="haruyama" creationdate="20181209T085204Z">
+        <seg>この拡張が有効となるには, 次の条件が満たされなければならない:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>For this purpose,
    the GSS-API mechanism-independent name form for host-based services
    is used, as described in Section 4.1 of [GSSAPI].</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110714T053136Z">
         <seg>この目的のため, ホストベースサービスでの GSS-API メカニズムに独立な名前の形式が用いられる. [GSSAPI] の 4.1 節に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>For this reason, a client MAY send a user authentication
+   request using a public key algorithm not included in "server-sig-
+   algs".</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181115T135859Z" creationid="haruyama" creationdate="20181115T135859Z">
+        <seg>この理由のため, クライアントは, "server-sig-algs" に含まれない公開鍵アルゴリズムを用いてユーザ認証要求を送ってもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10071,6 +10423,16 @@
       <tuv xml:lang="JA">
         <seg>名前の将来の割り当て........................13
       4.7.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Future Assignments to Extension Names Registry .....12
+   5.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181007T060113Z" creationid="haruyama" creationdate="20181007T060113Z">
+        <seg>拡張機能名レジストリへの将来の割り当て .....12
+   5.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10702,6 +11064,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>However,
+   other rules MAY be specified.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181107T123137Z" creationid="haruyama" creationdate="20181107T123137Z">
+        <seg>しかし, 他の規則が指定されてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>However, X11
    display forwarding in SSH (or other secure protocols), combined with
    actual and pseudo-displays that accept connections only over local
@@ -10804,6 +11175,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>However, early server
+   implementations that do not enumerate all accepted algorithms do</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181114T140209Z" creationid="haruyama" creationdate="20181114T140209Z">
+        <seg>しかし, すべての許容するアルゴリズムを列挙をしない初期のサーバ実装が</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>However, even when a subsystem is used, some extraneous messages may</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110726T030650Z">
@@ -10837,6 +11217,16 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110715T062240Z">
         <seg>しかし, この情報は, デバッグのためには重要だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>However, if a timely SSH_MSG_EXT_INFO is received, a
+      client can pipeline an authentication request after its
+      SSH_MSG_SERVICE_REQUEST, even when it needs extension information.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181101T114637Z" creationid="haruyama" creationdate="20181101T114637Z">
+        <seg>しかし, 折良く SSH_MSG_EXT_INFO を受け取ったなら, クライアントは, 拡張の情報が必要な場合であっても, その SSH_MSG_SERVICE_REQUEST の後に認証の要求を送れる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11330,6 +11720,16 @@
     <tu>
       <tuv xml:lang="EN-US">
         <seg>IANA Considerations ............................................12
+      4.1.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181007T060027Z" creationid="haruyama" creationdate="20181007T060027Z">
+        <seg>IANA の考慮 ............................................12
+      4.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>IANA Considerations ............................................12
    9.</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -11442,6 +11842,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>IANA has added the following entries to the "Message Numbers"
+   registry [IANA-M] under the "Secure Shell (SSH) Protocol Parameters"
+   registry [RFC4250]:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181222T083129Z" creationid="haruyama" creationdate="20181222T083129Z">
+        <seg>IANA は "Secure Shell (SSH) Protocol Parameters" レジストリ [RFC4250] の "Message Numbers" レジストリ [IANA-M] に次のエントリを追加した.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>IANA has added the following opcode to the "Pseudo-Terminal Encoded
    Terminal Modes" registry:</seg>
       </tuv>
@@ -11456,6 +11866,17 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>IANA は, 標準 RR タイプ空間から SSHFP に RR タイプコード 44 を割り当てた. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>IANA has also added the following entries to the "Key Exchange Method
+   Names" registry [IANA-KE]:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181222T083143Z" creationid="haruyama" creationdate="20181222T083143Z">
+        <seg>IANA は"Key Exchange Method
+   Names" registry [IANA-KE]: IANA has also added the following entries to the "Key Exchange Method
+   Names" registry [IANA-KE]:</seg>
       </tuv>
     </tu>
     <tu>
@@ -11592,6 +12013,17 @@
     <tu>
       <tuv xml:lang="EN-US">
         <seg>If
+      a server sends a second SSH_MSG_EXT_INFO, this replaces any
+      initial one, and both the client and the server re-evaluate
+      extensions in effect.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181103T134249Z" creationid="haruyama" creationdate="20181103T134249Z">
+        <seg>サーバが第2の SSH_MSG_EXT_INFO を送る場合, これは最初のものを置き換える. クライアントとサーバは, 有効な拡張を再評価する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If
    an SSH implementation uses a block cipher with a larger block size
    (e.g., Rijndael with 256-bit blocks), then the recommendations in
    Section 3.1 may supersede the recommendations in this subsection
@@ -11652,6 +12084,15 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>転送エラーやメッセージの操作がおきると, 接続は終了される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If "ext-info-c" or "ext-info-s" ends up being
+   negotiated as a key exchange method, the parties MUST disconnect.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181022T113326Z" creationid="haruyama" creationdate="20181022T113326Z">
+        <seg>"ext-info-c" か "ext-info-s" が鍵交換法の交渉の結果となった場合, それぞれの側は切断しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11845,6 +12286,35 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>If a client does not send the "elevation"
+   extension, the server SHOULD act as if "d" was sent.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181217T112233Z" creationid="haruyama" creationdate="20181217T112233Z">
+        <seg>クライアントが "elevation" 拡張を送らない場合, サーバは "d" が送られた場合のように振る舞う必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If a client has included this extension, then after authentication, a
+   server that supports this extension SHOULD indicate to the client
+   whether elevation was done by sending the following global request:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181217T112409Z" creationid="haruyama" creationdate="20181217T112409Z">
+        <seg>クライアントがこの拡張を含む場合, 認証後に, この拡張をサポートするサーバは, 次のグローバル要求を送ることで elevation が行なわれたかどうかをクライアントに示す必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If a client or server offers "ext-info-c" or "ext-info-s"
+   respectively, it MUST be prepared to accept an SSH_MSG_EXT_INFO
+   message from the peer.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181022T112654Z" creationid="haruyama" creationdate="20181022T112521Z">
+        <seg>クライアントかサーバが "ext-info-c" か "ext-info-s" をそれぞれ提供するなら, 相手からの SSH_MSG_EXT_INFO メッセージを受け入れる備えをしなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>If a client passes 0 as port number to bind and has 'want reply' as
    TRUE, then the server allocates the next available unprivileged port
    number and replies with the following message; otherwise, there is no
@@ -11853,6 +12323,25 @@
       <tuv xml:lang="JA">
         <seg>クライアントが port number to bind として 0を 'want reply' として TRUE を指定した場合, サーバは次に利用可能な特権ポートではないポートを割り当て次のメッセージで返信する. 割り当てなければ返信しない.
    response-specific data.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If a client sends SSH_MSG_EXT_INFO, it MUST send it as the next
+   packet following the client's first SSH_MSG_NEWKEYS message to the
+   server.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181101T113702Z" creationid="haruyama" creationdate="20181101T113530Z">
+        <seg>クライアントが SSH_MSG_EXT_INFO を送る場合, クライアントはクライアントの最初のサーバに送る SSH_MSG_NEWKEYS メッセージに続く次のパケットとしてSSH_MSG_EXT_INFO を送らなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If a client sends this
+   extension, the server MAY ignore it and MAY disconnect.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181114T140045Z" creationid="haruyama" creationdate="20181114T140045Z">
+        <seg>この拡張をクライアントが送信したら, サーバはそれを無視してもよいし, 切断してもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11941,11 +12430,29 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>If a party violates this rule, the other party MAY disconnect.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181205T090020Z" creationid="haruyama" creationdate="20181205T090020Z">
+        <seg>一方の側がこのルールを破ったら, もう一方の側は切断してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>If a request completed successfully, the server MUST send the status
    code SSH_PUBLICKEY_SUCCESS.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110721T050626Z">
         <seg>要求が正常に完了したら, 状態コード SSH_PUBLICKEY_SUCCESS をサーバは送らなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If a server does not send this extension, a client MUST NOT make any
+   assumptions about the server's public key algorithm support, and MAY
+   proceed with authentication requests using trial and error.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181115T140328Z" creationid="haruyama" creationdate="20181115T140328Z">
+        <seg>サーバがこの拡張を送らない場合, クライアントはサーバの公開鍵アルゴリズムのサポートについてどのような仮定を持ってはならないし, 試行錯誤して認証要求を続行してもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11957,6 +12464,25 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110712T035449Z">
         <seg>2 節に従って定義された GSS-API ベースの鍵交換法を用いずに最初の鍵交換が行なわれた際に この認証法の要求をサーバが受け取ったら, SSH_MSG_USERAUTH_FAILURE を返さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If a server receives an "ext-info-c", or a client receives an
+   "ext-info-s", it MAY send an SSH_MSG_EXT_INFO message but is not
+   required to do so.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181022T112904Z" creationid="haruyama" creationdate="20181022T112904Z">
+        <seg>サーバが "ext-info-c" を受け取った, もしくはクライアントが "ext-info-s" を受け取った場合, SSH_MSG_EXT_INFO メッセージを送信してもよいが, その必要はない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If a server sends SSH_MSG_EXT_INFO, it MAY send it at zero, one, or
+   both of the following opportunities:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181103T133528Z" creationid="haruyama" creationdate="20181101T113800Z">
+        <seg>サーバが SSH_MSG_EXT_INFO を次の機会のうち まったく送らなくてもよいし, 片方もしくは両方で送ってもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12100,6 +12626,17 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>If both parties send this extension, but the name-lists do not
+   contain a common algorithm in either direction, the parties MUST
+   disconnect in the same way as if negotiation failed as part of
+   SSH_MSG_KEXINIT.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181126T103936Z" creationid="haruyama" creationdate="20181126T103936Z">
+        <seg>両方の側がこの拡張を送りしかし name-list がどちらかの方向で共通のアルゴリズムを含まない場合, 両方の側は SSH_MSG_KEXINIT の一部として交渉が失敗したのと同じように接続を切断しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>If compression has been
          negotiated, this field is compressed.</seg>
       </tuv>
@@ -12188,6 +12725,16 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If it was sent later, a client that needs information from the
+      second SSH_MSG_EXT_INFO immediately after it authenticates would
+      have no way to reliably know whether to expect the message.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181103T134624Z" creationid="haruyama" creationdate="20181103T134425Z">
+        <seg>このメッセージがより後に送られたなら, 第2の SSH_MSG_EXT_INFO の情報を認証後すぐに必要とするクライアントが, このメッセージが送られるかどうかを確実に知る方法がない. </seg>
       </tuv>
     </tu>
     <tu>
@@ -12808,6 +13355,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>If the message was sent earlier, it would not allow the
+      server to withhold information until the client has authenticated.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181103T134420Z" creationid="haruyama" creationdate="20181103T134420Z">
+        <seg>このメッセージがより先に送られたなら, クライアントが認証されるまでサーバが情報を保持できない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>If the most significant bit would be set for
       a positive number, the number MUST be preceded by a zero byte.</seg>
       </tuv>
@@ -12892,6 +13448,18 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180821T044651Z" creationid="haruyama" creationdate="20180821T044614Z">
         <seg>overwrite フィールドが true で指定された鍵が与えられた namespace に既に存在しかつ上書きできない場合, サーバは SSH_PUBLICKEY_ACCESS_DENIED を返さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If the parties renegotiate compression using this extension in a
+   session where compression is already enabled and the renegotiated
+   algorithm is the same in one or both directions, then the internal
+   compression state MUST be reset for each direction at the time the
+   renegotiated algorithm takes effect.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181201T085422Z" creationid="haruyama" creationdate="20181201T085413Z">
+        <seg>この拡張を利用して圧縮を再交渉した際にすでに圧縮が有効で再交渉されたアルゴリズムが1方向ないし両方の方向で一致する場合, 内部の圧縮の状態は, 再交渉されたアルゴリズムが有効になる時点でそれぞれの方向でリセットされなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13523,6 +14091,37 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>If this extension takes effect, the "initial window size" fields in
+   SSH_MSG_CHANNEL_OPEN and SSH_MSG_CHANNEL_OPEN_CONFIRMATION, as
+   defined in [RFC4254], become meaningless.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181209T085604Z" creationid="haruyama" creationdate="20181209T085604Z">
+        <seg>この拡張が有効となった場合, [RFC4254] で定義された SSH_MSG_CHANNEL_OPEN と SSH_MSG_CHANNEL_OPEN_CONFIRMATION の "initial window size" フィールドは無意味になる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If this extension takes effect, the client MUST send the following
+   message within a reasonable number of outgoing SSH messages after
+   receiving SSH_MSG_USERAUTH_SUCCESS, but not necessarily as the first
+   such outgoing message:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181201T083852Z" creationid="haruyama" creationdate="20181201T083852Z">
+        <seg>この拡張が有効なら, クライアントは SSH_MSG_USERAUTH_SUCCESS を受け取った後に合理的な数の送信 SSH メッセージの内に次のメッセージを送信しなければならない. なお 送信メッセージの一番目である必要がない:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If this extension takes effect, the renegotiated compression
+   algorithm is activated for the very next SSH message after the
+   trigger message:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181126T104546Z" creationid="haruyama" creationdate="20181126T104441Z">
+        <seg>この拡張が有効なら, 再交渉された圧縮アルゴリズムはトリガーメッセージの後のすぐ次の SSH メッセージから有効になる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>If this information is
    unavailable, the authentication MUST fail.</seg>
       </tuv>
@@ -13856,6 +14455,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Implementations MAY disconnect if the counterparty sends an
+   incorrect indicator.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181022T113240Z" creationid="haruyama" creationdate="20181022T113240Z">
+        <seg>実装は相手が不正な指標を送ってきた場合に切断してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Implementations MAY include the quotation marks.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110718T034826Z">
@@ -13894,6 +14502,25 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Implementations MUST NOT send an incorrect indicator name for their
+   role.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181022T113127Z" creationid="haruyama" creationdate="20181022T113127Z">
+        <seg>実装は, 役割に応じていない指標名を送ってはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Implementations MUST accept well-formed
+   SSH_MSG_EXT_INFO messages up to the maximum packet length they
+   accept.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181110T002922Z" creationid="haruyama" creationdate="20181110T002922Z">
+        <seg>実装は, それらが受け入れる最大パケット長までの適切な形式の SSH_MSG_EXT_INFO メッセージを受け入れる必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Implementations MUST allow the algorithm for each direction to be
    independently selected, if multiple algorithms are allowed by local
    policy.</seg>
@@ -13918,6 +14545,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20111001T040816Z">
         <seg>実装は, バッファオーバーランに対して脆弱でないよう保証しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Implementations MUST refuse to open more than one simultaneous
+   channel when this extension is in effect.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181209T090027Z" creationid="haruyama" creationdate="20181209T090027Z">
+        <seg>実装は, この拡張が有効な場合に 1つより多い同時チャンネルを開く事を拒否しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14131,6 +14767,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Implementations that wish to interoperate with OpenSSH 7.5 and
+   earlier are advised to check the remote party's SSH version string
+   and omit this extension if an affected version is detected.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181207T111223Z" creationid="haruyama" creationdate="20181207T111223Z">
+        <seg>OpenSSH 7.5 以前と相互運用したい実装は, 接続先の SSH バージョン文字列をチェックし 影響を受けるバージョンが検出されたこの拡張を省略したほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Implementers SHOULD allow system
    administrators to disable some curves, including REQUIRED or
    RECOMMENDED curves, to meet local security policy.</seg>
@@ -14257,6 +14903,17 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>実装者は, エントロピーの重要性を注記する必要がある. また, 疑似乱数生成関数の正しい実装の難しさをわかりやすく事例付きで警告する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Implementers should pay careful attention to Section 2.5, in
+   particular to the requirement to tolerate any sequence of bytes
+   (including null bytes at any position) in an unknown extension's
+   extension-value.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181028T031046Z" creationid="haruyama" creationdate="20181028T031046Z">
+        <seg>実装者は, セクション 2.5 に注意を払う必要がある. 未知の拡張の拡張値で (任意の場所に null バイトを含む) 任意のバイト列を許容する要求については特にだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14702,6 +15359,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>In general, parties SHOULD NOT start key re-exchange before
+   successful user authentication but MAY tolerate it if not using this
+   extension.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181205T090108Z" creationid="haruyama" creationdate="20181205T090108Z">
+        <seg>一般に, サーバ/クライアントはユーザ認証が成功する前に鍵の再交換を開始しないほうがよいが, この拡張を用いない場合はそれを緩和してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>In general, the ECMQV key exchange is performed using the ephemeral
    and long-term key pair of both the client and server, which is a
    total of 4 keys.</seg>
@@ -15088,6 +15755,17 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110531T074058Z">
         <seg>stateful-decryption counter モードでは, 送信側と受信側の両方が内部のL-bitなカウンタ X を保持する. Xの初期値は([RFC4253]の7.2節で計算される) 初期IV である必要がある. 初期IVは L-bitのネットワークバイトオーダー符号無し整数として解釈される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>In subsequent key re-exchanges that unambiguously begin after the
+   compression trigger messages, the compression algorithms negotiated
+   in re-exchange override the algorithms negotiated with this
+   extension.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181207T110805Z" creationid="haruyama" creationdate="20181207T110805Z">
+        <seg>圧縮トリガーメッセージの後で明確に始まる次の鍵再交換では, 再交換で交渉された圧縮アルゴリズムがこの拡張で交渉されたアルゴリズムを上書きする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15520,6 +16198,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>In this extension, a server MUST enumerate all public key algorithms
+   it might accept during user authentication.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181114T140128Z" creationid="haruyama" creationdate="20181114T140128Z">
+        <seg>この拡張で, サーバはユーザ認証中に受け入れることができるすべての公開鍵アルゴリズムを列挙しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>In this mode, the server SHOULD NOT send the Carriage Return
    character (ASCII 13) after the identification string.</seg>
       </tuv>
@@ -15711,6 +16398,16 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180925T111059Z" creationid="haruyama" creationdate="20180925T111059Z">
         <seg>この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8270 で得られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc8308.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180930T082136Z" creationid="haruyama" creationdate="20180930T082136Z">
+        <seg>この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8308 で得られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15914,6 +16611,24 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Initially Defined Extensions</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181114T135604Z" creationid="haruyama" creationdate="20181114T135604Z">
+        <seg>最初に定義された拡張機能</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Initially Defined Extensions ....................................6
+      3.1.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181003T095354Z" creationid="haruyama" creationdate="20181003T095354Z">
+        <seg>最初に定義された拡張機能....................................6
+      3.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Initially,
          the MAC algorithm MUST be "none".</seg>
       </tuv>
@@ -16081,6 +16796,24 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180925T111136Z" creationid="haruyama" creationdate="20180925T111136Z">
         <seg>相互運用性  .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Interpretation of Extension Names and Values</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181107T122353Z" creationid="haruyama" creationdate="20181107T122323Z">
+        <seg>拡張機能の名前と値の解釈</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Interpretation of Extension Names and Values ...............6
+   3.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181003T095340Z" creationid="haruyama" creationdate="20181003T095313Z">
+        <seg>拡張機能の名前と値の解釈 ...............6
+   3.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18551,6 +19284,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Meanwhile, diverse
+   implementations take steps to ensure that known message types contain
+   no unrecognized information.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181013T103736Z" creationid="haruyama" creationdate="20181013T103736Z">
+        <seg>その一方で, 既知のメッセージタイプが認識されていない情報を含まないことを補償する手順をいろいろな実装が取っている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Mechanism OIDs are encoded according to the ASN.1 Distinguished
    Encoding Rules (DER), as described in [ASN1] and in Section 3.1 of</seg>
       </tuv>
@@ -18612,6 +19355,24 @@
       <tuv xml:lang="JA">
         <seg>メッセージ番号 .........................................5
            4.1.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Message Order</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181101T113526Z" creationid="haruyama" creationdate="20181101T113526Z">
+        <seg>メッセージの順序</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Message Order ..............................................5
+      2.5.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180930T082609Z" creationid="haruyama" creationdate="20180930T082609Z">
+        <seg>メッセージの順序 ..............................................5
+      2.5.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18985,6 +19746,17 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Name-lists
+   MAY include any compression algorithm that could have been negotiated
+   in SSH_MSG_KEXINIT, except algorithms that define their own delayed
+   compression semantics.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181126T103702Z" creationid="haruyama" creationdate="20181126T103702Z">
+        <seg>name-list には, それら自身で遅延した圧縮方式を定義するアルゴリズムを除いて, SSH_MSG_KEXINIT で交渉された任意の圧縮アルゴリズムを含んでもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Named Elliptic Curve Domain Parameters</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110426T083649Z">
@@ -19218,12 +19990,32 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Neither party needs to wait for the other's SSH_MSG_KEXINIT in order
+   to decide whether to send the appropriate indicator in its own
+   SSH_MSG_KEXINIT.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181022T113218Z" creationid="haruyama" creationdate="20181022T112954Z">
+        <seg>どちらの側も自分の SSH_MSG_KEYINT 中の適切な指標を送るかどうかを決定するために, 相手の SSH_MSG_KEYINIT を待つ必要がある. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Neither side
    should establish a NETCONF over SSH connection with an unknown,
    unexpected, or incorrect identity on the opposite side.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20111001T043232Z">
         <seg>クライアントもサーバも, 未知の, もしくは, 予期しない, 不正解な相手側の識別情報による SSH 接続上の NETCONF を確立してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Neither side is required to send any
+   SSH_MSG_CHANNEL_WINDOW_ADJUST messages, and if received, such
+   messages MUST be ignored.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181209T085719Z" creationid="haruyama" creationdate="20181209T085719Z">
+        <seg>どちらの側も SSH_MSG_CHANNEL_WINDOW_ADJUST メッセージの送信を要求しない. もし受信したら, それらのメッセージは無視されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19250,6 +20042,16 @@ Request for Comments: 4255                                       OpenSSH
 Category: Standards Track                                     W. Griffin
                                                                   SPARTA
                                                             January 2006</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Nevertheless, server
+   implementations SHOULD support clients opening more than one
+   non-simultaneous channel.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181209T090105Z" creationid="haruyama" creationdate="20181209T090105Z">
+        <seg>にもかかわらず, サーバの実装は, クライアントが 1つ以上の 同時でないチャンネルを開くのをサポートする必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19311,6 +20113,16 @@ Category: Standards Track                                     W. Griffin
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180816T071129Z" creationid="haruyama" creationdate="20180816T071129Z">
         <seg>新しい操作 ..................................................5
       4.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>New Registry: Extension Names .............................12
+           4.2.1.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181007T060100Z" creationid="haruyama" creationdate="20181007T060100Z">
+        <seg>新しいレジストリ: 拡張機能名 .............................12
+           4.2.1.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19593,6 +20405,17 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>チャンネルの開始の要求がこのメッセージが受信されるより前に受信されるかもしれないことに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Note
+   that implementations are known to exist that apply authentication
+   penalties if the client attempts to use an unexpected public key
+   algorithm.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181115T140453Z" creationid="haruyama" creationdate="20181115T140453Z">
+        <seg>クライアントがサーバの予期しない公開鍵アルゴリズムを用いようとすると認証に罰則を課す実装が存在することが知られているのに注意.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20671,6 +21494,17 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>OpenSSH
+   clients up to and including version 7.5 advertise support to receive
+   SSH_MSG_EXT_INFO but disconnect on receipt of an extension-value
+   containing null bytes.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181207T111021Z" creationid="haruyama" creationdate="20181207T111021Z">
+        <seg>バージョン 7.5 までの OpenSSH クラアイアントは, SSH_MSG_EXT_INFO の受信をサポートするとしていたが, extension-value に ヌルバイトを含む場合受信すると切断する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Opening a Channel</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -21013,6 +21847,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Overview and Rationale ..........................................3
+      1.1.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180930T082228Z" creationid="haruyama" creationdate="20180930T082228Z">
+        <seg>概要と原理 ..........................................3
+      1.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Overview of Extensions to the Public Key Subsystem</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180817T064316Z" creationid="haruyama" creationdate="20180817T064312Z">
@@ -21121,6 +21965,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Parties MAY disconnect
+   if they receive a different extension value.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181209T085134Z" creationid="haruyama" creationdate="20181209T085134Z">
+        <seg>サーバ/クライアントは, 異なる extension-value を受け取った場合切断してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Pass the wholeMessage to SSH for encapsulation as data in an SSH
        message over the identified SSH session.</seg>
       </tuv>
@@ -21180,6 +22033,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>パスワード認証は次のパケットを利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Penalties may include automatic IP address throttling or blocking,
+   and they may trigger email alerts or auditing.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181115T140815Z" creationid="haruyama" creationdate="20181115T140815Z">
+        <seg>罰則は, IP アドレスに対する自動的な帯域の調整やブロックを含むかもしれない. また, 罰則はメールのアラートや監査を引き起すかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21301,6 +22163,24 @@ Category: Standards Track                                     W. Griffin
       <tuv xml:lang="JA">
         <seg>SSHFP RR の 表示形式 ........................5
    4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Prior "No Flow Control" Practice</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181215T124642Z" creationid="haruyama" creationdate="20181215T124642Z">
+        <seg>以前の "フロー制御なし" の実行</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Prior "No Flow Control" Practice ...................10
+      3.4.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181003T095632Z" creationid="haruyama" creationdate="20181003T095552Z">
+        <seg>以前の "フロー制御なし" の実行 ...................10
+      3.4.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22677,6 +23557,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Requirements Terminology ...................................3
+      1.2.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180930T082245Z" creationid="haruyama" creationdate="20180930T082245Z">
+        <seg>要件に関する用語 ...................................3
+      1.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Researchers
    ([DAI,BKN1,BKN2]) have, however, identified several security problems
    with the symmetric portion of the SSH Transport Protocol, as
@@ -23322,6 +24212,24 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>SSH_MSG_EXT_INFO Message</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181022T113337Z" creationid="haruyama" creationdate="20181022T113337Z">
+        <seg>SSH_MSG_EXT_INFO メッセージ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>SSH_MSG_EXT_INFO Message ...................................4
+      2.4.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180930T082550Z" creationid="haruyama" creationdate="20180930T082550Z">
+        <seg>SSH_MSG_EXT_INFO メッセージ ...................................4
+      2.4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>SSH_MSG_KEXECDH_INIT      C-&gt;S  Contains the client's ephemeral
                                       elliptic curve Diffie-Hellman key.</seg>
       </tuv>
@@ -23846,6 +24754,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Security Considerations ........................................12
+   6.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181007T060125Z" creationid="haruyama" creationdate="20181007T060125Z">
+        <seg>セキュリティの考慮 ........................................12
+   6.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Security Considerations ........................................13
       9.1.</seg>
       </tuv>
@@ -24061,6 +24979,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>See [RFC4251] for more
+   information.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181114T135914Z" creationid="haruyama" creationdate="20181114T135904Z">
+        <seg>詳細は [RFC4251] を参照.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>See errata for RFC 4742 at
       http://www.rfc-editor.org.</seg>
       </tuv>
@@ -24178,6 +25105,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110722T063017Z">
         <seg>これを行なう際サーバは注意する必要がある. クライアントはサーバの管理者の事前設定を上書きできない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Servers that implement public key authentication SHOULD implement
+   this extension.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181115T140113Z" creationid="haruyama" creationdate="20181115T140113Z">
+        <seg>公開鍵認証を実装するサーバは, この拡張を実装する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24304,6 +25240,24 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>異なるセキュリティの特質を持ったいくつかの認証法が許されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Signaling of Extension Negotiation in SSH_MSG_KEXINIT</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181017T130121Z" creationid="haruyama" creationdate="20181017T130121Z">
+        <seg>SSH_MSG_KEXINIT での拡張機能交渉の信号方式</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Signaling of Extension Negotiation in SSH_MSG_KEXINIT ......3
+      2.2.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180930T082530Z" creationid="haruyama" creationdate="20180930T082530Z">
+        <seg>SSH_MSG_KEXINIT での拡張機能交渉の信号方式 ......3
+      2.2.</seg>
       </tuv>
     </tu>
     <tu>
@@ -25219,6 +26173,24 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Subsequent Re-Exchange</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181207T110620Z" creationid="haruyama" creationdate="20181207T110620Z">
+        <seg>次の再交換</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Subsequent Re-Exchange ..............................9
+           3.2.3.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181003T095511Z" creationid="haruyama" creationdate="20181003T095511Z">
+        <seg>次の再交換 ..............................9
+           3.2.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Subsystem
    support is a feature of SSH version 2 (SSHv2) and is not included in
    SSHv1.</seg>
@@ -25244,6 +26216,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>このような指紋は, 電話や他の外部の通信チャンネルで容易に検証できる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Such a channel will hang if the other party implements SSH flow
+      control according to [RFC4254].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181215T124933Z" creationid="haruyama" creationdate="20181215T124933Z">
+        <seg>もう一方の側が [RFC4254] に従う SSH フロー制御を実装していたなら, そのようなチャンネルはハングする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26067,6 +27048,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg> 名前 "diffie-hellman-group1-sha1" は, [RFC2409]で定義されている Oakley群を用いる鍵交換法のために用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The
+   name-lists themselves have the encoding of strings.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181117T042533Z" creationid="haruyama" creationdate="20181117T042320Z">
+        <seg>name-list 自体は, string で符号化される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30001,6 +30991,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The cumulative size of an SSH_MSG_EXT_INFO message is limited only by
+   the maximum packet length that an implementation may apply in
+   accordance with [RFC4253].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181110T002804Z" creationid="haruyama" creationdate="20181110T002804Z">
+        <seg>SSH_MEG_EXT_INFO メッセージの累積あいずハ， [RFC4253] に従って実装が適用する最大パケット長によってのみ制限される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The data types "byte", "string", and "mpint" are defined in Section 5
    of [RFC4251].</seg>
       </tuv>
@@ -30295,6 +31295,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The extension SHOULD NOT be omitted if the detected
+   OpenSSH version is 7.6 or higher.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181207T111359Z" creationid="haruyama" creationdate="20181207T111359Z">
+        <seg>この拡張は, OpenSSH 7.6 以上を検出したならば省略しないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The extension name MUST consist of a UTF-8 string suffixed by the
    implementation domain following the naming scheme defined in
    Section 4.2 of [RFC4251], e.g.  "foo@example.com".</seg>
@@ -30310,6 +31319,14 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160601T001329Z" creationid="haruyama" creationdate="20160601T001329Z">
         <seg>extension type は, UTF-8文字列で拡張メッセージのタイプを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The extension-value is a string that encodes two name-lists.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181117T042225Z" creationid="haruyama" creationdate="20181117T042225Z">
+        <seg>この extension-value は2つの name-list を符号化した string だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -31317,12 +32334,41 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The inclusion of textual indicator names is intended to provide a
+   clue for implementers to discover this mechanism.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181017T131052Z" creationid="haruyama" creationdate="20181017T131052Z">
+        <seg>文字通りの指標名を含めるのは, この機構を発見する手がかりを実装者に提供するためだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The increase is negligible for large
    packets, but very significant for one-byte packets (telnet-type
    sessions).</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>大きなパケットについては, 増大は無視できる. しかし, (telnetタイプのセッションでの) 1バイトのパケットについては非常に大きい. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The indicator name is added without quotes and MAY be added at any
+   position in the name-list, subject to proper separation from other
+   names as per name-list conventions.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181017T130536Z" creationid="haruyama" creationdate="20181017T130528Z">
+        <seg>指標名は引用符なしで追加され, name-list の規則に従って他の名前と適切に分離されているなら name-list のどの場所に加えてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The indicator names inserted by the client and server are different
+   to ensure these names will not produce a match and therefore not
+   affect the algorithm chosen in key exchange algorithm negotiation.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181017T130934Z" creationid="haruyama" creationdate="20181017T130934Z">
+        <seg>クライアントとサーバに挿入される指標名が異なっているのは, これらの名前での一致を発生させないのを保証して鍵交換アルゴリズム交渉で選ばれるアルゴリズムに影響しないようにするためだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32213,6 +33259,25 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The name-list type is a strict subset of the string type and is thus
+   permissible as an extension-value.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181114T135855Z" creationid="haruyama" creationdate="20181114T135855Z">
+        <seg>name-list 型は, 文字列型の厳密なサブセットで, それゆえ extension-value として許容される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The names are added to the kex_algorithms field because this is one
+   of two name-list fields in SSH_MSG_KEXINIT that do not have a
+   separate copy for each data direction.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181017T130734Z" creationid="haruyama" creationdate="20181017T130734Z">
+        <seg>指標名は kex_algorithms に追加される. SSH_MSG_KEXINIT の 2つの name-list フィールドのうちの 1つで, どちらのデータの方向に対しても別のコピーを持っていないからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The naming of opcode values mostly follows the POSIX terminal mode
    flags.</seg>
       </tuv>
@@ -32425,6 +33490,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110620T043259Z">
         <seg>2で生成された部分群のオーダーは q = p -1 だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The original design of the SSH transport layer
+   [RFC4253] lacks proper extension negotiation.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181013T103447Z" creationid="haruyama" creationdate="20181013T103447Z">
+        <seg>SSH トランスポート層の元々の設計 [RFC4253] は, 適切な拡張機能の交渉を欠いている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32831,6 +33905,17 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The purpose of SSH_MSG_NEWCOMPRESS is to avoid a race condition where
+   the server cannot reliably know whether a message sent by the client
+   was sent before or after receiving the server's
+   SSH_MSG_USERAUTH_SUCCESS.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181201T084021Z" creationid="haruyama" creationdate="20181201T084021Z">
+        <seg>SSH_MSG_NEWCOMPRESS の目的は, クライアントから送られるメッセージがサーバの SSH_MSG_USERAUTH_SUCCESS の受信前か後かを確信できない競合状態を避けるためだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The purpose of this
    document is to show how the AES Galois Counter Mode can be used to
    provide both confidentiality and data integrity to the SSH Transport
@@ -33023,6 +34108,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>暗号ごとの相対的なメリットについては最近の文献に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The relative order in which extensions
+   appear in an SSH_MSG_EXT_INFO message MUST be ignored.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181107T123224Z" creationid="haruyama" creationdate="20181107T123224Z">
+        <seg>SSH_MSG_EXT_INFO メッセージ内に現われる拡張の相対的な順番は, 無視されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33353,6 +34447,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The server MAY disconnect if it receives a
+   different extension value.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181217T112146Z" creationid="haruyama" creationdate="20181217T112146Z">
+        <seg>サーバは, 異なるextension value を受け取ったら切断してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The server MAY fail the
    otherwise valid gssapi-with-mic authentication if per-message
    integrity protection is not supported.</seg>
@@ -33368,6 +34471,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>サーバは, ユーザに要求された認証がない場合に SSH_MSG_USERAUTH_SUCCESS メッセージで応答してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The server MAY send SSH_MSG_EXT_INFO at this second opportunity,
+      whether or not it sent it at the first.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181103T133617Z" creationid="haruyama" creationdate="20181103T133617Z">
+        <seg>サーバは, 第一の機会で SSH_MSG_EXT_INFO を送っていようといまいと, この第2の機会で SSH_MSG_EXT_INFO を送ってもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33850,6 +34962,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The server's second SSH_MSG_EXT_INFO is
+      matched against the client's original.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181103T134317Z" creationid="haruyama" creationdate="20181103T134317Z">
+        <seg>サーバの第2の SSH_MSG_EXT_INFO は クライアントのオリジナルのものと照合される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The service
    is identified by a name.</seg>
       </tuv>
@@ -34096,6 +35217,18 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The terms "elevation" and "elevated" refer to an operating system
+   mechanism where an administrator's logon session is associated with
+   two security contexts: one limited and one with administrative
+   rights.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181217T111808Z" creationid="haruyama" creationdate="20181217T111808Z">
+        <seg>用語 "elevation" と "elevated" は, 2つのセキュリティコンテキスト(1つは制限され1つは管理者権限を持つ)に関連する管理者のログオンセッションでのオペレーティングシステムの機構を差す.
+   rights.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The terms "manager" and "agent" are
    used to refer to the two ends of the NETCONF protocol session.</seg>
       </tuv>
@@ -34122,6 +35255,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110603T135524Z">
         <seg>4節で定義された13の暗号アルゴリズムモードは, [RFC4250] の 4.11.1 節で確立された Secure Shell Encryption Algorithm Name registry に追加されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The timing of the second opportunity is chosen for the following
+      reasons.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181103T134430Z" creationid="haruyama" creationdate="20181103T134336Z">
+        <seg>第2の機会のタイミングは次の理由で選ばれている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34628,6 +35770,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The values of these fields
+   MUST be ignored, and a channel behaves as if all window sizes are
+   infinite.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181209T085639Z" creationid="haruyama" creationdate="20181209T085639Z">
+        <seg>これらのフィールドの値は無視されなければならない. チャンネルはすべてのウィンドウサイズが無限であるかのように振る舞う.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The variants, HMAC-SHA2-224 and HMAC-SHA2-384 algorithms,
    were considered but not added to this list as they have the same
    computational requirements of HMAC-SHA2-256 and HMAC-SHA2-512,
@@ -34690,6 +35842,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>window size は, windowが調整されるまでに相手側が送ることのできるバイト数を指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The wire encoding types in this document -- "byte", "uint32",
+   "string", "boolean", "name-list" -- have meanings as described in
+   [RFC4251].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181017T130108Z" creationid="haruyama" creationdate="20181017T130108Z">
+        <seg>この文書での通信エンコーディングの種類 -- "byte", "uint32", "string", "boolean", "name-list" は [RFC4251] に記述されている意味を持つ</seg>
       </tuv>
     </tu>
     <tu>
@@ -35808,6 +36970,25 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This allows
+   the server to avoid advertising compression until the client has
+   authenticated.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181205T085000Z" creationid="haruyama" creationdate="20181201T085215Z">
+        <seg>これにより, クライアントが認証されるまで告知した圧縮をサーバが避けれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This allows a server to reveal support for additional extensions
+      that it was unwilling to reveal to an unauthenticated client.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181103T134200Z" creationid="haruyama" creationdate="20181103T134200Z">
+        <seg>これにより, 認証されていないクライアントに漏らしたくない追加の拡張機能のサポートをサーバは(特定のクライアントに)明らかにすることができる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This allows an operator or management station to
        ensure the authenticity of the SNMP engine that provides MIB
        data.</seg>
@@ -36859,6 +38040,22 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This extension MAY be sent by both parties as follows:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181117T042128Z" creationid="haruyama" creationdate="20181117T042128Z">
+        <seg>この拡張は, 次のように, どちらの側から送られてもよい:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This extension MAY be sent by the client as follows:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181217T111958Z" creationid="haruyama" creationdate="20181217T111958Z">
+        <seg>この拡張は次のようにクライアントから送信してもよい:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This extension allows attributes to be added to a list request.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180904T113754Z" creationid="haruyama" creationdate="20180904T113644Z">
@@ -36871,6 +38068,80 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180904T113549Z" creationid="haruyama" creationdate="20180904T113549Z">
         <seg>この拡張は, 削除要求に属性を追加する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This extension allows the server and client to renegotiate
+   compression algorithm support without having to conduct a key
+   re-exchange, which puts new algorithms into effect immediately upon
+   successful authentication.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181117T042847Z" creationid="haruyama" creationdate="20181117T042847Z">
+        <seg>この拡張は, サーバとクライアントに鍵交換を行なわずに圧縮アルゴリズムのサポートを再交渉することを許す. 認証が成功すると直ちに新しいアルゴリズムが有効となる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This extension is intended for, but not limited to, use by file
+   transfer applications that are only going to use one channel and for
+   which the flow control provided by SSH is an impediment, rather than
+   a feature.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181209T085940Z" creationid="haruyama" creationdate="20181209T085940Z">
+        <seg>この拡張は, 1チャンネルのみを利用し SSHで提供するフリー制御がかえって障害となるファイル転送アプリケーションを対象にしているが, それだけに制限するものではない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This extension is sent by the server and contains a list of public
+   key algorithms that the server is able to process as part of a
+   "publickey" authentication request.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181114T140020Z" creationid="haruyama" creationdate="20181114T140020Z">
+        <seg>この拡張は, サーバによって送られる. サーバが "publickey" 認証要求の一部で処理できる公開鍵アルゴリズムのリストを含んでいる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This extension is sent with the following extension name and value:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181114T135648Z" creationid="haruyama" creationdate="20181114T135648Z">
+        <seg>この拡張機能は, 次の extension-name と extension-value 付きで送られる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This extension mechanism permits
+   this discovery.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181013T104132Z" creationid="haruyama" creationdate="20181013T104132Z">
+        <seg>この拡張機能機構はこの発見を可能にする.
+   this discovery.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This extension takes effect only if both parties send it.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181117T042918Z" creationid="haruyama" creationdate="20181117T042918Z">
+        <seg>この拡張は, 両方の側が送った場合にのみ有効だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This extension uses a binary extension-value encoding.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181207T110839Z" creationid="haruyama" creationdate="20181207T110839Z">
+        <seg>この拡張は, バイナリ値の extension-value エンコーディングを用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This field MAY be empty if permitted by the extension.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181110T002454Z" creationid="haruyama" creationdate="20181110T002454Z">
+        <seg>このフィールドは, その拡張が許可するなら空でもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37053,6 +38324,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>これは, 他の認証法では不可能な認証だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This is an error fixed in OpenSSH
+   version 7.6.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181207T111038Z" creationid="haruyama" creationdate="20181207T111038Z">
+        <seg>このエラーは OpenSSH バージョン 7.6 で修正された.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37344,6 +38624,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This makes it difficult for
+   implementations to signal capabilities and negotiate extensions
+   without risking disconnection.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181013T103918Z" creationid="haruyama" creationdate="20181013T103918Z">
+        <seg>これにより, 切断のリスクなしに機能について知らせたり拡張機能を交渉するのが実装に取って難しくなっている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This makes it possible
    for the server to avoid disclosing information on which accounts
    exist.</seg>
@@ -37436,6 +38726,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110820T040907Z">
         <seg>これは, セッション鍵の概念のない USM 比べて, 短寿命のセッションが計算の負荷を生じることを意味している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This means "zlib,none" is a valid algorithm
+   list in this context, but "zlib@openssh.com" is not.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181126T103747Z" creationid="haruyama" creationdate="20181126T103747Z">
+        <seg>これは, "zlib,none" はこの文脈で正当なアルゴリズムだが, "zlib@openssh.com" は正当でないという意味だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37621,6 +38920,25 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110729T071236Z">
         <seg>このメモは, STD 58, RFC 2578 [RFC2578], STD 58, RFC 2579 [RFC2579], STD 58, RFC 2580 [RFC2580] に記述されている SMIv2 に従って MIB モジュールを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This memo updates RFCs 4251, 4252, 4253, and 4254 by defining a
+   mechanism for Secure Shell (SSH) clients and servers to exchange
+   information about supported protocol extensions confidentially after
+   SSH key exchange.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180930T082120Z" creationid="haruyama" creationdate="20180930T082120Z">
+        <seg>このメモは, セキュアシェル (SSH) のクライアントとサーバの間で SSH の鍵交換の後に秘密裏にサポートされたプロトコル拡張について情報を交換するメカニズムを定義し, RFC 4251, 4252, 4253, 4254 を更新する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This memo updates RFCs 4251, 4252, 4253, and 4254.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181013T104147Z" creationid="haruyama" creationdate="20181013T104147Z">
+        <seg>このメモは RFC 4251, 4252, 4253, 4254 を更新する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37849,6 +39167,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180820T121155Z" creationid="haruyama" creationdate="20180820T121155Z">
         <seg>この新しいプロトコルは, SSHサーバの公開鍵の操作のために "ssh" namespace を用いる. namespace として何も与えられなかった場合, "ssh" 名前空間がデフォルトの名前空間と見なす必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This obstacle has been recognized in
+   the process of updating SSH to support RSA signatures using SHA-256
+   and SHA-512 [RFC8332].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181013T104015Z" creationid="haruyama" creationdate="20181013T104015Z">
+        <seg>この障害は, SHA-256 と SHA-512 を用いた RSA 署名をサポートする SSH の更新 [RFC8332] の過程で認識された.</seg>
       </tuv>
     </tu>
     <tu>
@@ -38278,6 +39606,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This same encoding could be sent by either party -- client or server.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181117T042738Z" creationid="haruyama" creationdate="20181117T042738Z">
+        <seg>これと同じ符号化での値が, クライアントかサーバのどちらかの側により送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This section contains conventions used in naming the namespaces, the
    initial state of the registry, and instructions for future
    assignments.</seg>
@@ -38592,6 +39928,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This would make it harder for the
+   OpenSSH project to implement this extension in a higher version.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181207T111506Z" creationid="haruyama" creationdate="20181207T111506Z">
+        <seg>省略するとより上位のバージョンでこの拡張を OpenSSH プロジェクトが実装するのを難しくしてしまうかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This, combined with encoding the result as an SSH "string", gives a
    result that is similar, but not identical, to the SSH "mpint"
    encoding applied to that integer.</seg>
@@ -38794,12 +40139,31 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>To "elevate" such a session is to activate the security
+   context with full administrative rights.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181217T111845Z" creationid="haruyama" creationdate="20181217T111845Z">
+        <seg>そのようなセッションを "elevate" するとは, 完全な管理者権限を持つセキュリティコンテキストを有効にすることだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>To authenticate the server, the client usually stores pairs
            (tmTransportAddress, server host public key) in an
            implementation-dependent manner.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110816T024701Z">
         <seg>サーバを認証するため, クライアントは実装依存の方法で (tmTransportAddress, サーバホスト公開鍵) のペアを通常保持する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>To avoid trial and error as well as
+   authentication penalties, a client must be able to discover public
+   key algorithms a server accepts.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181013T104118Z" creationid="haruyama" creationdate="20181013T104118Z">
+        <seg>試行錯誤と認証のペナルティを避けるため, クライアントはサーバが受け入れる公開鍵アルゴリズムを発見できる必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40033,6 +41397,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>When it is specified, an extension MAY dictate that, in order to take
+   effect, both parties must include it in their SSH_MSG_EXT_INFO or
+   that it is sufficient for only one party to include it.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181107T123151Z" creationid="haruyama" creationdate="20181107T122920Z">
+        <seg>extension-name が指定された場合, 拡張を有効にするために, 両方の側でそれらの SSH_MSG_EXT_INFO に extension-name を含めるように拡張が指定してもよい. もしくは, 1つの側にだけ含まれていれば十分と指定してもよい..</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>When locked an agent should suspend
    processing of sensitive operations (private key operations at the
    very least) until it has been unlocked with the same pass-phrase.</seg>
@@ -40369,6 +41743,37 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Where clients do
+   not support this extension, servers must elevate sessions to allow
+   full access by administrative users always.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181217T112636Z" creationid="haruyama" creationdate="20181217T112636Z">
+        <seg>この拡張をサポートしないクライアントでは, サーバは, 常に管理者ユーザによってフルアクセスを許すセッションを elevate しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Where clients need information in the server's SSH_MSG_EXT_INFO to
+      authenticate, it is helpful if the server sends its
+      SSH_MSG_EXT_INFO not only as the next packet after
+      SSH_MSG_NEWKEYS, but without delay.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181101T114054Z" creationid="haruyama" creationdate="20181101T113930Z">
+        <seg>クライアントが認証のために サーバの SSH_MSG_EXT_INFO の情報が必要ならば, サーバがその SSH_MSG_EXT_INFO を SSH_MSG_NEWKEYS に続けて次のパケットとして送るだけでなく遅延なしで送ることがクライアントの助けとなる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Where clients support
+   this extension, sessions can be created without elevation unless
+   requested.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181217T112659Z" creationid="haruyama" creationdate="20181217T112659Z">
+        <seg>クライアントがこの拡張をサポートしているなら, 要求がない場合 elevation がなしでセッションを作ることが可能となる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Where distinction
    is required, the application names of command generator, command
    responder, notification originator, notification receiver, and proxy
@@ -40508,6 +41913,24 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>ウィンドウ容量変更メッセージ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Wire Encoding Terminology</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181017T130013Z" creationid="haruyama" creationdate="20181017T130013Z">
+        <seg>通信のエンコーディングの用語</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Wire Encoding Terminology ..................................3
+   2.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20180930T082424Z" creationid="haruyama" creationdate="20180930T082424Z">
+        <seg>通信のエンコーディングの用語 ..................................3
+   2.</seg>
       </tuv>
     </tu>
     <tu>
@@ -41087,6 +42510,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>exist.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181114T140217Z" creationid="haruyama" creationdate="20181114T140217Z">
+        <seg>存在する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>first_kex_packet_follows
          Indicates whether a guessed key exchange packet follows.</seg>
       </tuv>
@@ -41333,6 +42764,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>o  As the next packet following the server's first SSH_MSG_NEWKEYS.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181101T113828Z" creationid="haruyama" creationdate="20181101T113828Z">
+        <seg>o  サーバの最初の SSH_MSG_NEWKEYS に続く次のパケットとして.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>o  Assigned Algorithm Names
       *  Encryption Algorithm Names
       *  MAC Algorithm Names
@@ -41345,6 +42784,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       *  MACアルゴリズム名
       *  公開鍵アルゴリズム名
       *  圧縮アルゴリズム名</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  At least one party MUST have sent the value "p" (preferred).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181209T085309Z" creationid="haruyama" creationdate="20181209T085309Z">
+        <seg>o  少なくとも1つの側が, 値 "p" (preferred) を送っていなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -41567,6 +43014,25 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>o  Immediately preceding the server's SSH_MSG_USERAUTH_SUCCESS, as
+      defined in [RFC4252].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181103T133444Z" creationid="haruyama" creationdate="20181103T133444Z">
+        <seg>o  [RFC4252] で定義されている, サーバの SSH_MSG_USERAUTH_SUCCESS の直前</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  Implementations that cannot handle large channel window sizes
+      exist, and they can exhibit non-graceful behaviors, including
+      disconnect.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181215T125031Z" creationid="haruyama" creationdate="20181215T125031Z">
+        <seg>o  大きなチャンネルウィンドウサイズを扱えない実装が存在する. また, それらは, 切断を含む慈悲深くない振舞いを示すかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>o  Initial IV client to server: HASH(K || H || "A" || session_id)
       (Here K is encoded as mpint and "A" as byte and session_id as raw
       data.</seg>
@@ -41615,6 +43081,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20111001T044946Z">
         <seg>o  EOM フレーミングの既知のセキュリティ問題を解決するため, 新しいチャンクされたフレーミングメカニズムを導入した.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  It is plausible to transfer more than 2^32 bytes over a channel.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181215T124847Z" creationid="haruyama" creationdate="20181215T124847Z">
+        <seg>o 2^32 以上チャンネル用で通信する可能性がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -41722,6 +43196,23 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180925T113722Z" creationid="haruyama" creationdate="20180925T113722Z">
         <seg>o  3 節, 9 段落:
       サーバとクライアントは モジュラスの長さ k  に対し 2048 &lt;= k &lt;= 8192 の群をサポートする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  Sent by the client, the trigger message is SSH_MSG_NEWCOMPRESS.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181126T104642Z" creationid="haruyama" creationdate="20181126T104642Z">
+        <seg>o  クライアントから送られるトリガーメッセージは SSH_MSG_NEWCOMPRES だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  Sent by the server, the trigger message is
+      SSH_MSG_USERAUTH_SUCCESS.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181126T104615Z" creationid="haruyama" creationdate="20181126T104615Z">
+        <seg>o  サーバから送られるトリガーメッセージは SSH_MSG_USERAUTH_SUCCESS だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -41941,6 +43432,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>o  The party has sent (if server) or received (if client) the message
+      SSH_MSG_USERAUTH_SUCCESS, and this extension was not negotiated.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181205T085914Z" creationid="haruyama" creationdate="20181205T085841Z">
+        <seg>o   SSH_MSG_USERAUTH_SUCCESSを(サーバなら)送ってもしくは(クライアントなら)受け取って この拡張が交渉されなかった.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>o  The range of 0xFE000000 to 0xFEFFFFFF is to be used in conjunction
       with locally assigned channels.</seg>
       </tuv>
@@ -42031,6 +43531,23 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>o  This extension MUST be sent by both parties.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181209T085241Z" creationid="haruyama" creationdate="20181209T085241Z">
+        <seg>o  この拡張がサーバ/クライアント双方から送られなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  This extension was negotiated, and the party that's about to start
+      key re-exchange already sent its trigger message for compression.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181205T085720Z" creationid="haruyama" creationdate="20181205T085533Z">
+        <seg>o  この拡張が交渉されて, 圧縮のトリガーメッセージがすでに送られて鍵の再交換が開始できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>o  To improve the chances that a peer can verify certificate chains
       and OCSP responses, individual certificates and OCSP responses
       SHOULD be signed using only signature algorithms corresponding to
@@ -42069,6 +43586,22 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110901T071352Z">
         <seg>o  検証者は, セキュアシェルに同等なものがないアルゴリズムも含めて, SSH_MSG_KEXINIT パケットの server_host_key_algorithms フィールドに挙がっていないアルゴリズムを用いた 証明書チェーンや OCSP 応答を受けとる準備をしなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  When acting as client: "ext-info-c"</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181017T130412Z" creationid="haruyama" creationdate="20181017T130355Z">
+        <seg>o  クライアントとして動作する場合: "ext-info-c"</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>o  When acting as server: "ext-info-s"</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20181017T130402Z" creationid="haruyama" creationdate="20181017T130342Z">
+        <seg>o  サーバとして動作する場合: "ext-info-s"</seg>
       </tuv>
     </tu>
     <tu>

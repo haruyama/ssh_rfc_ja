@@ -1,0 +1,595 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                          D. Bider
+Request for Comments: 8308                               Bitvise Limited
+Updates: 4251, 4252, 4253, 4254                               March 2018
+Category: Standards Track
+ISSN: 2070-1721
+
+
+        セキュアシェル (SSH) プロトコルでの拡張機能交渉
+
+概要
+
+   このメモは, セキュアシェル (SSH) のクライアントとサーバの間で SSH の鍵交換の後に秘密裏にサポートされたプロトコル拡張について情報を交換するメカニズムを定義し, RFC 4251, 4252, 4253, 4254 を更新する.
+
+このメモの位置づけ
+
+   これは, インターネット標準化課程文書だ.
+
+   この文書は, Internet Engineering Task Force (IETF) の成果物だ.  IETF コミュニティの合意を表わしている.  公開のレビューを受けており, Internet Engineering Steering Group (IESG) によって発行が認められた.  インターネット標準についてさらなる情報は RFC 7841 の 2節にある.
+
+   この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8308 で得られる.
+
+著作権情報
+
+   Copyright (c) 2018 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+
+
+
+Bider                        Standards Track                    [Page 1]
+
+RFC 8308              Extension Negotiation in SSH            March 2018
+
+
+目次
+
+   1概要と原理 ..........................................3
+      1.1. 要件に関する用語 ...................................3
+      1.2. 通信のエンコーディングの用語 ..................................3
+   2. 拡張機能交渉メカニズム .................................3
+      2.1. SSH_MSG_KEXINIT での拡張機能交渉の信号方式 ......3
+      2.2. 有効化基準 ..........................................4
+      2.3. SSH_MSG_EXT_INFO メッセージ ...................................4
+      2.4. メッセージの順序 ..............................................5
+      2.5. 拡張機能の名前と値の解釈 ...............6
+   3. 最初に定義された拡張機能....................................6
+      3.1. "server-sig-algs" ..........................................6
+      3.2. "delay-compression" ........................................7
+           3.2.1. 不器用な定期的鍵再交換 .....................9
+           3.2.2. 次の再交換 ..............................9
+           3.2.3. 互換性ノート: バージョン 7.5 までの OpenSSH .......9
+      3.3. "no-flow-control" .........................................10
+           3.3.1. 以前の "フロー制御なし" の実行 ...................10
+      3.4. "elevation" ...............................................11
+   4. IANA の考慮 ............................................12
+      4.1. 既存のレジストリへの追加 ..........................12
+      4.2. 新しいレジストリ: 拡張機能名 .............................12
+           4.2.1. 拡張機能名レジストリへの将来の割り当て .....12
+   5. セキュリティの考慮 ........................................12
+   6. References .....................................................13
+      6.1. Normative References ......................................13
+      6.2. Informative References ....................................13
+   Acknowledgments ...................................................14
+   Author's Address ..................................................14
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bider                        Standards Track                    [Page 2]
+
+RFC 8308              Extension Negotiation in SSH            March 2018
+
+
+1概要と原理
+
+   セキュア シェル (SSH) は, インターネットでの安全な通信のための一般的なプロトコルだ.  SSH トランスポート層の元々の設計 [RFC4253] は, 適切な拡張機能の交渉を欠いている.  その一方で, 既知のメッセージタイプが認識されていない情報を含まないことを補償する手順をいろいろな実装が取っている.  これにより, 切断のリスクなしに機能について知らせたり拡張機能を交渉するのが実装に取って難しくなっている.  この障害は, SHA-256 と SHA-512 を用いた RSA 署名をサポートする SSH の更新 [RFC8332] の過程で認識された.  試行錯誤と認証のペナルティを避けるため, クライアントはサーバが受け入れる公開鍵アルゴリズムを発見できる必要がある.  この拡張機能機構はこの発見を可能にする.
+   this discovery.
+
+   このメモは RFC 4251, 4252, 4253, 4254 を更新する.
+
+1.1.  要件に関する用語
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, ここで示しているようにすべて大文字で出現した場合のみ, BCP 16 [RFC2119] [RFC8174] で記述されているように解釈される. 
+
+1.2.  通信のエンコーディングの用語
+
+   この文書での通信エンコーディングの種類 -- "byte", "uint32", "string", "boolean", "name-list" は [RFC4251] に記述されている意味を持つ
+
+2.  拡張機能交渉メカニズム
+
+2.1.  SSH_MSG_KEXINIT での拡張機能交渉の信号方式
+
+   この機構を実装するアプリケーションは, 最初の鍵交換でアプリケーションから送られる SSH_MSG_KEXINT の kex_algorithms フィールドに次の指標名のうちの1つを加えなければならない.
+
+   o  サーバとして動作する場合: "ext-info-s"
+
+   o  クライアントとして動作する場合: "ext-info-c"
+
+   指標名は引用符なしで追加され, name-list の規則に従って他の名前と適切に分離されているなら name-list のどの場所に加えてもよい.
+
+
+
+
+Bider                        Standards Track                    [Page 3]
+
+RFC 8308              Extension Negotiation in SSH            March 2018
+
+
+   指標名は kex_algorithms に追加される. SSH_MSG_KEXINIT の 2つの name-list フィールドのうちの 1つで, どちらのデータの方向に対しても別のコピーを持っていないからだ.
+
+   クライアントとサーバに挿入される指標名が異なっているのは, これらの名前での一致を発生させないのを保証して鍵交換アルゴリズム交渉で選ばれるアルゴリズムに影響しないようにするためだ.
+
+   文字通りの指標名を含めるのは, この機構を発見する手がかりを実装者に提供するためだ.
+
+2.2.  有効化基準
+
+   クライアントかサーバが "ext-info-c" か "ext-info-s" をそれぞれ提供するなら, 相手からの SSH_MSG_EXT_INFO メッセージを受け入れる備えをしなければならない.
+
+   クライアントからの SSH_MSG_EXT_INFO を処理する意思がある場合にのみサーバは "ext-info-s" を送る必要がある.  サーバからの SSH_MSG_EXT_INFO を処理する意思がある場合にのみクライアントは "ext-info-c" を送る必要がある.
+
+   サーバが "ext-info-c" を受け取った, もしくはクライアントが "ext-info-s" を受け取った場合, SSH_MSG_EXT_INFO メッセージを送信してもよいが, その必要はない.
+
+   どちらの側も自分の SSH_MSG_KEYINT 中の適切な指標を送るかどうかを決定するために, 相手の SSH_MSG_KEYINIT を待つ必要がある. 
+
+   実装は, 役割に応じていない指標名を送ってはならない.  実装は相手が不正な指標を送ってきた場合に切断してもよい.  "ext-info-c" か "ext-info-s" が鍵交換法の交渉の結果となった場合, それぞれの側は切断しなければならない.
+
+2.3.  SSH_MSG_EXT_INFO メッセージ
+
+   "ext-info-c" か "ext-info-s" 指標を受け取った側は, 次のメッセージを送ってもよい:
+
+     byte       SSH_MSG_EXT_INFO (value 7)
+     uint32     nr-extensions
+     repeat the following 2 fields "nr-extensions" times:
+       string   extension-name
+       string   extension-value (binary)
+
+
+
+
+
+
+
+Bider                        Standards Track                    [Page 4]
+
+RFC 8308              Extension Negotiation in SSH            March 2018
+
+
+   実装者は, セクション 2.5 に注意を払う必要がある. 未知の拡張の拡張値で (任意の場所に null バイトを含む) 任意のバイト列を許容する要求については特にだ.
+
+2.4.  メッセージの順序
+
+   クライアントが SSH_MSG_EXT_INFO を送る場合, クライアントはクライアントの最初のサーバに送る SSH_MSG_NEWKEYS メッセージに続く次のパケットとしてSSH_MSG_EXT_INFO を送らなければならない.
+
+   サーバが SSH_MSG_EXT_INFO を次の機会のうち まったく送らなくてもよいし, 片方もしくは両方で送ってもよい.
+
+   o  サーバの最初の SSH_MSG_NEWKEYS に続く次のパケットとして.
+
+      クライアントが認証のために サーバの SSH_MSG_EXT_INFO の情報が必要ならば, サーバがその SSH_MSG_EXT_INFO を SSH_MSG_NEWKEYS に続けて次のパケットとして送るだけでなく遅延なしで送ることがクライアントの助けとなる. 
+
+      クライアントは, これに頼ることはできない. なぜなら, サーバはこの時にメッセージを送ることを要求されていないからだ. 送られたとしても, ネットワークにより遅延するかもしれない.  しかし, 折良く SSH_MSG_EXT_INFO を受け取ったなら, クライアントは, 拡張の情報が必要な場合であっても, その SSH_MSG_SERVICE_REQUEST の後に認証の要求を送れる.
+
+   o  [RFC4252] で定義されている, サーバの SSH_MSG_USERAUTH_SUCCESS の直前
+
+      サーバは, 第一の機会で SSH_MSG_EXT_INFO を送っていようといまいと, この第2の機会で SSH_MSG_EXT_INFO を送ってもよい.  "ext-info-c" を送ったクライアントは, サーバの両方の機会の SSH_MSG_EXT_INFO を受けいれなければならない. しかし, サーバが SSH_MSG_EXT_INFO を送ることを要求してはならない. 
+
+      これにより, 認証されていないクライアントに漏らしたくない追加の拡張機能のサポートをサーバは(特定のクライアントに)明らかにすることができる. サーバが第2の SSH_MSG_EXT_INFO を送る場合, これは最初のものを置き換える. クライアントとサーバは, 有効な拡張を再評価する.  サーバの第2の SSH_MSG_EXT_INFO は クライアントのオリジナルのものと照合される.
+
+      第2の機会のタイミングは次の理由で選ばれている.  このメッセージがより先に送られたなら, クライアントが認証されるまでサーバが情報を保持できない.
+      このメッセージがより後に送られたなら, 第2の SSH_MSG_EXT_INFO の情報を認証後すぐに必要とするクライアントが, このメッセージが送られるかどうかを確実に知る方法がない. 
+
+
+
+Bider                        Standards Track                    [Page 5]
+
+RFC 8308              Extension Negotiation in SSH            March 2018
+
+
+2.5.  拡張機能の名前と値の解釈
+
+   それぞれの拡張はその extension-name で識別される. また, 拡張が有効だと見なせる条件を定義する
+   アプリケーションは認識できない extension-name を無視しなければならない.
+
+   extension-name が指定された場合, 拡張を有効にするために, 両方の側でそれらの SSH_MSG_EXT_INFO に extension-name を含めるように拡張が指定してもよい. もしくは, 1つの側にだけ含まれていれば十分と指定してもよい..  しかし, 他の規則が指定されてもよい.  SSH_MSG_EXT_INFO メッセージ内に現われる拡張の相対的な順番は, 無視されなければならない.
+
+   extension-value フィールドは, それぞれの拡張で定義されているように解釈される.  このフィールドは, その拡張が許可するなら空でもよい.
+   拡張を実装していないないし認識しないアプリケーションは, その拡張の extension-value をサイズな内容に依らず無視しなければならない.
+   アプリケーションは未知の拡張の extension-value 中のどんなバイト列も容認しなければならない -- 任意の場所に null バイトが含まれているかもしれない.
+
+   SSH_MEG_EXT_INFO メッセージの累積あいずハ， [RFC4253] に従って実装が適用する最大パケット長によってのみ制限される.  実装は, それらが受け入れる最大パケット長までの適切な形式の SSH_MSG_EXT_INFO メッセージを受け入れる必要がある.
+
+3.  最初に定義された拡張機能
+
+3.1.  "server-sig-algs"
+
+   この拡張機能は, 次の extension-name と extension-value 付きで送られる:
+
+     string      "server-sig-algs"
+     name-list   public-key-algorithms-accepted
+
+   name-list 型は, 文字列型の厳密なサブセットで, それゆえ extension-value として許容される.  詳細は [RFC4251] を参照.
+
+   この拡張は, サーバによって送られる. サーバが "publickey" 認証要求の一部で処理できる公開鍵アルゴリズムのリストを含んでいる.  この拡張をクライアントが送信したら, サーバはそれを無視してもよいし, 切断してもよい.
+
+   この拡張で, サーバはユーザ認証中に受け入れることができるすべての公開鍵アルゴリズムを列挙しなければならない.  しかし, すべての許容するアルゴリズムを列挙をしない初期のサーバ実装が
+
+
+
+
+
+Bider                        Standards Track                    [Page 6]
+
+RFC 8308              Extension Negotiation in SSH            March 2018
+
+
+   存在する.  この理由のため, クライアントは, "server-sig-algs" に含まれない公開鍵アルゴリズムを用いてユーザ認証要求を送ってもよい.
+
+   公開鍵認証を用いて続行を希望するクリアントは, サーバの SSH_MSG_EXT_INFO を待ってもよい. そうすると, 試行錯誤を行なうことなく "pulblicky" 認証要求を適切な公開鍵アルゴリズムを用いて送れる.
+
+   公開鍵認証を実装するサーバは, この拡張を実装する必要がある.
+
+   サーバがこの拡張を送らない場合, クライアントはサーバの公開鍵アルゴリズムのサポートについてどのような仮定を持ってはならないし, 試行錯誤して認証要求を続行してもよい.  クライアントがサーバの予期しない公開鍵アルゴリズムを用いようとすると認証に罰則を課す実装が存在することが知られているのに注意.
+
+   認証の罰則は, ブルートフォースなパスワード推測や, ユーザ名の列挙,  サーバの管理者や実装者にとって疑わしく思えるその他の行動を妨げるためにサーバによって実施される.
+   罰則は, IP アドレスに対する自動的な帯域の調整やブロックを含むかもしれない. また, 罰則はメールのアラートや監査を引き起すかもしれない.
+
+3.2.  "delay-compression"
+
+   この拡張は, 次のように, どちらの側から送られてもよい:
+
+     string         "delay-compression"
+     string:
+       name-list    compression_algorithms_client_to_server
+       name-list    compression_algorithms_server_to_client
+
+   この extension-value は2つの name-list を符号化した string だ.  name-list 自体は, string で符号化される.  たとえば, クライアントからサーバの方向にアルゴリズムの優先順位を "foo,bar", サーバからクライアントの方向に "bar,baz" を示すには, サーバは extension-valu を  (長さを含めて) 次のように符号化する:
+
+     00000016 00000007 666f6f2c626172 00000007 6261722c62617a
+
+   これと同じ符号化での値が, クライアントかサーバのどちらかの側により送られる.
+
+   この拡張は, サーバとクライアントに鍵交換を行なわずに圧縮アルゴリズムのサポートを再交渉することを許す. 認証が成功すると直ちに新しいアルゴリズムが有効となる.
+
+
+
+Bider                        Standards Track                    [Page 7]
+
+RFC 8308              Extension Negotiation in SSH            March 2018
+
+
+   この拡張は, 両方の側が送った場合にのみ有効だ.  name-list には, それら自身で遅延した圧縮方式を定義するアルゴリズムを除いて, SSH_MSG_KEXINIT で交渉された任意の圧縮アルゴリズムを含んでもよい.  これは, "zlib,none" はこの文脈で正当なアルゴリズムだが, "zlib@openssh.com" は正当でないという意味だ.
+
+   両方の側がこの拡張を送りしかし name-list がどちらかの方向で共通のアルゴリズムを含まない場合, 両方の側は SSH_MSG_KEXINIT の一部として交渉が失敗したのと同じように接続を切断しなければならない.
+
+   この拡張が有効なら, 再交渉された圧縮アルゴリズムはトリガーメッセージの後のすぐ次の SSH メッセージから有効になる.
+
+   o  サーバから送られるトリガーメッセージは SSH_MSG_USERAUTH_SUCCESS だ.
+
+   o  クライアントから送られるトリガーメッセージは SSH_MSG_NEWCOMPRES だ.
+
+   この拡張が有効なら, クライアントは SSH_MSG_USERAUTH_SUCCESS を受け取った後に合理的な数の送信 SSH メッセージの内に次のメッセージを送信しなければならない. なお 送信メッセージの一番目である必要がない:
+
+     byte       SSH_MSG_NEWCOMPRESS (value 8)
+
+   SSH_MSG_NEWCOMPRESS の目的は, クライアントから送られるメッセージがサーバの SSH_MSG_USERAUTH_SUCCESS の受信前か後かを確信できない競合状態を避けるためだ.  たとえば, クライアントがログイン処理中に keep-alive メッセージを送るかもしれない.
+
+   すべての拡張について, 明記されていない限り, サーバは SSH_MSG_USERAUTH_SUCCESS の前に 2つ目の SSH_MSG_EXT_INFO を送るまで この拡張を含めるのを送らせてもよい.  これにより, クライアントが認証されるまで告知した圧縮をサーバが避けれる.
+
+   この拡張を利用して圧縮を再交渉した際にすでに圧縮が有効で再交渉されたアルゴリズムが1方向ないし両方の方向で一致する場合, 内部の圧縮の状態は, 再交渉されたアルゴリズムが有効になる時点でそれぞれの方向でリセットされなければならない.
+
+
+
+
+
+
+
+Bider                        Standards Track                    [Page 8]
+
+RFC 8308              Extension Negotiation in SSH            March 2018
+
+
+3.2.1.  不器用な定期的鍵再交換
+
+   SSH のセッションの中で シグナルを受けたり, シグナルを発しようとしたり, この拡張をサポートするサーバ/クライアントは, 次のどちらかの場合が発生するまではそのセッションで鍵の再交換を始めてはならない
+
+   o  この拡張が交渉されて, 圧縮のトリガーメッセージがすでに送られて鍵の再交換が開始できる.
+
+   o   SSH_MSG_USERAUTH_SUCCESSを(サーバなら)送ってもしくは(クライアントなら)受け取って この拡張が交渉されなかった.
+
+   一方の側がこのルールを破ったら, もう一方の側は切断してもよい.
+
+   一般に, サーバ/クライアントはユーザ認証が成功する前に鍵の再交換を開始しないほうがよいが, この拡張を用いない場合はそれを緩和してもよい.
+
+3.2.2.  次の再交換
+
+   圧縮トリガーメッセージの後で明確に始まる次の鍵再交換では, 再交換で交渉された圧縮アルゴリズムがこの拡張で交渉されたアルゴリズムを上書きする.
+
+3.2.3.  互換性ノート: バージョン 7.5 までの OpenSSH
+
+   この拡張は, バイナリ値の extension-value エンコーディングを用いる.  バージョン 7.5 までの OpenSSH クラアイアントは, SSH_MSG_EXT_INFO の受信をサポートするとしていたが, extension-value に ヌルバイトを含む場合受信すると切断する.  このエラーは OpenSSH バージョン 7.6 で修正された.
+
+   OpenSSH 7.5 以前と相互運用したい実装は, 接続先の SSH バージョン文字列をチェックし 影響を受けるバージョンが検出されたこの拡張を省略したほうがよい.  影響を受けるバージョンがこの拡張を実装していないので, 省略にはなんの害もない.  この拡張は, OpenSSH 7.6 以上を検出したならば省略しないほうがよい.  省略するとより上位のバージョンでこの拡張を OpenSSH プロジェクトが実装するのを難しくしてしまうかもしれない.
+
+
+
+
+
+
+
+
+
+
+
+Bider                        Standards Track                    [Page 9]
+
+RFC 8308              Extension Negotiation in SSH            March 2018
+
+
+3.3.  "no-flow-control"
+
+   この拡張機能は, 次の extension-name と extension-value 付きで送られる:
+
+     string      "no-flow-control"
+     string      choice of: "p" for preferred | "s" for supported
+
+   サーバ/クライアントは, "no-flow-control" をサポートしているが有効にしたくない場合 "s" を送る必要がある.  サーバ/クライアントは, この拡張を有効にしたくもう一方の側もサポートしている場合 "p" を送る必要がある.  サーバ/クライアントは, 異なる extension-value を受け取った場合切断してもよい.
+
+   この拡張が有効となるには, 次の条件が満たされなければならない:
+
+   o  この拡張がサーバ/クライアント双方から送られなければならない.
+
+   o  少なくとも1つの側が, 値 "p" (preferred) を送っていなければならない.
+
+   この拡張が有効となった場合, [RFC4254] で定義された SSH_MSG_CHANNEL_OPEN と SSH_MSG_CHANNEL_OPEN_CONFIRMATION の "initial window size" フィールドは無意味になる.  これらのフィールドの値は無視されなければならない. チャンネルはすべてのウィンドウサイズが無限であるかのように振る舞う.  どちらの側も SSH_MSG_CHANNEL_WINDOW_ADJUST メッセージの送信を要求しない. もし受信したら, それらのメッセージは無視されなければならない.
+
+   この拡張は, 1チャンネルのみを利用し SSHで提供するフリー制御がかえって障害となるファイル転送アプリケーションを対象にしているが, それだけに制限するものではない.
+
+   実装は, この拡張が有効な場合に 1つより多い同時チャンネルを開く事を拒否しなければならない.  にもかかわらず, サーバの実装は, クライアントが 1つ以上の 同時でないチャンネルを開くのをサポートする必要がある.
+
+3.3.1.  以前の "フロー制御なし" の実行
+
+   この拡張の前では, いくつかのアプリケーションは 最初のチャンネルウィンドウサイズとして 2^32 -1 を送って 単に SSH のフロー制御を実装しなかった.
+   アプリケーションは次の理由からこのようにしないほうがよい.
+
+   o 2^32 以上チャンネル用で通信する可能性がある.
+      もう一方の側が [RFC4254] に従う SSH フロー制御を実装していたなら, そのようなチャンネルはハングする.
+
+
+
+
+
+
+Bider                        Standards Track                   [Page 10]
+
+RFC 8308              Extension Negotiation in SSH            March 2018
+
+
+   o  大きなチャンネルウィンドウサイズを扱えない実装が存在する. また, それらは, 切断を含む慈悲深くない振舞いを示すかもしれない.
+
+3.4.  "elevation"
+
+   用語 "elevation" と "elevated" は, 2つのセキュリティコンテキスト(1つは制限され1つは管理者権限を持つ)に関連する管理者のログオンセッションでのオペレーティングシステムの機構を差す.
+   rights.  そのようなセッションを "elevate" するとは, 完全な管理者権限を持つセキュリティコンテキストを有効にすることだ.  Windows でのこの機構の詳細は, [WINADMIN] と [WINTOKEN] を参照.
+
+   この拡張は次のようにクライアントから送信してもよい:
+
+     string      "elevation"
+     string      choice of: "y" | "n" | "d"
+
+   クライアントが "y"  送信するのは, クライアントがセッションが elevated されているのを好んでいることを示す. "d" は サーバの規定の動作を用いることを示す.  サーバは, 異なるextension value を受け取ったら切断してもよい.  クライアントが "elevation" 拡張を送らない場合, サーバは "d" が送られた場合のように振る舞う必要がある.
+
+   クライアントがこの拡張を含む場合, 認証後に, この拡張をサポートするサーバは, 次のグローバル要求を送ることで elevation が行なわれたかどうかをクライアントに示す必要がある.
+
+     byte        SSH_MSG_GLOBAL_REQUEST
+     string      "elevation"
+     boolean     want reply = false
+     boolean     elevation performed
+
+   この拡張を実装するクライアントは, 管理者ログインを扱う Windows サーバの攻撃される範囲を軽減する.  この拡張をサポートしないクライアントでは, サーバは, 常に管理者ユーザによってフルアクセスを許すセッションを elevate しなければならない.  クライアントがこの拡張をサポートしているなら, 要求がない場合 elevation がなしでセッションを作ることが可能となる.
+
+
+
+
+
+
+
+
+
+
+
+
+Bider                        Standards Track                   [Page 11]
+
+RFC 8308              Extension Negotiation in SSH            March 2018
+
+
+4.  IANA の考慮
+
+4.1.  既存のレジストリへの追加
+
+   IANA は "Secure Shell (SSH) Protocol Parameters" レジストリ [RFC4250] の "Message Numbers" レジストリ [IANA-M] に次のエントリを追加した.
+
+     Value    Message ID             Reference
+     -----------------------------------------
+     7        SSH_MSG_EXT_INFO       RFC 8308
+     8        SSH_MSG_NEWCOMPRESS    RFC 8308
+
+   IANA は"Key Exchange Method
+   Names" registry [IANA-KE]: IANA has also added the following entries to the "Key Exchange Method
+   Names" registry [IANA-KE]:
+
+     Method Name     Reference      Note
+     ------------------------------------------
+     ext-info-s      RFC 8308       Section 2
+     ext-info-c      RFC 8308       Section 2
+
+4.2.  New Registry: Extension Names
+
+   Also under the "Secure Shell (SSH) Protocol Parameters" registry,
+   IANA has created a new "Extension Names" registry, with the following
+   initial content:
+
+     Extension Name       Reference       Note
+     ------------------------------------------------
+     server-sig-algs      RFC 8308        Section 3.1
+     delay-compression    RFC 8308        Section 3.2
+     no-flow-control      RFC 8308        Section 3.3
+     elevation            RFC 8308        Section 3.4
+
+4.2.1.  Future Assignments to Extension Names Registry
+
+   Names in the "Extension Names" registry MUST follow the conventions
+   for names defined in [RFC4250], Section 4.6.1.
+
+   Requests for assignments of new non-local names in the "Extension
+   Names" registry (i.e., names not including the '@' character) MUST be
+   done using the IETF Review policy, as described in [RFC8126].
+
+5.  セキュリティの考察
+
+   Security considerations are discussed throughout this document.  This
+   document updates the SSH protocol as defined in [RFC4251] and related
+   documents.  The security considerations of [RFC4251] apply.
+
+
+
+Bider                        Standards Track                   [Page 12]
+
+RFC 8308              Extension Negotiation in SSH            March 2018
+
+
+6.  References
+
+6.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC4250]  Lehtinen, S. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Assigned Numbers", RFC 4250,
+              DOI 10.17487/RFC4250, January 2006,
+              <https://www.rfc-editor.org/info/rfc4250>.
+
+   [RFC4251]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Architecture", RFC 4251, DOI 10.17487/RFC4251,
+              January 2006, <https://www.rfc-editor.org/info/rfc4251>.
+
+   [RFC4252]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Authentication Protocol", RFC 4252, DOI 10.17487/RFC4252,
+              January 2006, <https://www.rfc-editor.org/info/rfc4252>.
+
+   [RFC4253]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Transport Layer Protocol", RFC 4253, DOI 10.17487/RFC4253,
+              January 2006, <https://www.rfc-editor.org/info/rfc4253>.
+
+   [RFC4254]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Connection Protocol", RFC 4254, DOI 10.17487/RFC4254,
+              January 2006, <https://www.rfc-editor.org/info/rfc4254>.
+
+   [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
+              Writing an IANA Considerations Section in RFCs", BCP 26,
+              RFC 8126, DOI 10.17487/RFC8126, June 2017,
+              <https://www.rfc-editor.org/info/rfc8126>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+6.2.  Informative References
+
+   [IANA-KE]  IANA, "Key Exchange Method Names",
+              <https://www.iana.org/assignments/ssh-parameters/>.
+
+   [IANA-M]   IANA, "Message Numbers",
+              <https://www.iana.org/assignments/ssh-parameters/>.
+
+
+
+
+
+Bider                        Standards Track                   [Page 13]
+
+RFC 8308              Extension Negotiation in SSH            March 2018
+
+
+   [RFC8332]  Bider, D., "Use of RSA Keys with SHA-256 and SHA-512 in
+              the Secure Shell (SSH) Protocol", RFC 8332,
+              DOI 10.17487/RFC8332, March 2018,
+              <https://www.rfc-editor.org/info/rfc8332>.
+
+   [WINADMIN] Microsoft, "How to launch a process as a Full
+              Administrator when UAC is enabled?", March 2013,
+              <https://blogs.msdn.microsoft.com/winsdk/2013/03/22/
+              how-to-launch-a-process-as-a-full-administrator-when-
+              uac-is-enabled/>.
+
+   [WINTOKEN] Microsoft, "TOKEN_ELEVATION_TYPE enumeration",
+              <https://msdn.microsoft.com/en-us/library/windows/desktop/
+              bb530718.aspx>.
+
+Acknowledgments
+
+   Thanks to Markus Friedl and Damien Miller for comments and initial
+   implementation.  Thanks to Peter Gutmann, Roumen Petrov, Mark D.
+   Baushke, Daniel Migault, Eric Rescorla, Matthew A. Miller, Mirja
+   Kuehlewind, Adam Roach, Spencer Dawkins, Alexey Melnikov, and Ben
+   Campbell for reviews and feedback.
+
+Author's Address
+
+   Denis Bider
+   Bitvise Limited
+   4105 Lombardy Court
+   Colleyville, TX  76034
+   United States of America
+
+   Email: ietf-ssh3@denisbider.com
+   URI:   https://www.bitvise.com/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bider                        Standards Track                   [Page 14]
+
