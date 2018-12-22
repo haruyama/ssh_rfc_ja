@@ -372,15 +372,13 @@ RFC 8308              Extension Negotiation in SSH            March 2018
 
    実装は, この拡張が有効な場合に 1つより多い同時チャンネルを開く事を拒否しなければならない.  にもかかわらず, サーバの実装は, クライアントが 1つ以上の 同時でないチャンネルを開くのをサポートする必要がある.
 
-3.3.1.  Prior "No Flow Control" Practice
+3.3.1.  以前の "フロー制御なし" の実行
 
-   Before this extension, some applications would simply not implement
-   SSH flow control, sending an initial channel window size of 2^32 - 1.
-   Applications SHOULD NOT do this for the following reasons:
+   この拡張の前では, いくつかのアプリケーションは 最初のチャンネルウィンドウサイズとして 2^32 -1 を送って 単に SSH のフロー制御を実装しなかった.
+   アプリケーションは次の理由からこのようにしないほうがよい.
 
-   o  It is plausible to transfer more than 2^32 bytes over a channel.
-      Such a channel will hang if the other party implements SSH flow
-      control according to [RFC4254].
+   o 2^32 以上チャンネル用で通信する可能性がある.
+      もう一方の側が [RFC4254] に従う SSH フロー制御を実装していたなら, そのようなチャンネルはハングする.
 
 
 
@@ -392,45 +390,28 @@ Bider                        Standards Track                   [Page 10]
 RFC 8308              Extension Negotiation in SSH            March 2018
 
 
-   o  Implementations that cannot handle large channel window sizes
-      exist, and they can exhibit non-graceful behaviors, including
-      disconnect.
+   o  大きなチャンネルウィンドウサイズを扱えない実装が存在する. また, それらは, 切断を含む慈悲深くない振舞いを示すかもしれない.
 
 3.4.  "elevation"
 
-   The terms "elevation" and "elevated" refer to an operating system
-   mechanism where an administrator's logon session is associated with
-   two security contexts: one limited and one with administrative
-   rights.  To "elevate" such a session is to activate the security
-   context with full administrative rights.  For more information about
-   this mechanism on Windows, see [WINADMIN] and [WINTOKEN].
+   用語 "elevation" と "elevated" は, 2つのセキュリティコンテキスト(1つは制限され1つは管理者権限を持つ)に関連する管理者のログオンセッションでのオペレーティングシステムの機構を差す.
+   rights.  そのようなセッションを "elevate" するとは, 完全な管理者権限を持つセキュリティコンテキストを有効にすることだ.  Windows でのこの機構の詳細は, [WINADMIN] と [WINTOKEN] を参照.
 
-   This extension MAY be sent by the client as follows:
+   この拡張は次のようにクライアントから送信してもよい:
 
      string      "elevation"
      string      choice of: "y" | "n" | "d"
 
-   A client sends "y" to indicate its preference that the session should
-   be elevated; "n" to not be elevated; and "d" for the server to use
-   its default behavior.  The server MAY disconnect if it receives a
-   different extension value.  If a client does not send the "elevation"
-   extension, the server SHOULD act as if "d" was sent.
+   クライアントが "y"  送信するのは, クライアントがセッションが elevated されているのを好んでいることを示す. "d" は サーバの規定の動作を用いることを示す.  サーバは, 異なるextension value を受け取ったら切断してもよい.  クライアントが "elevation" 拡張を送らない場合, サーバは "d" が送られた場合のように振る舞う必要がある.
 
-   If a client has included this extension, then after authentication, a
-   server that supports this extension SHOULD indicate to the client
-   whether elevation was done by sending the following global request:
+   クライアントがこの拡張を含む場合, 認証後に, この拡張をサポートするサーバは, 次のグローバル要求を送ることで elevation が行なわれたかどうかをクライアントに示す必要がある.
 
      byte        SSH_MSG_GLOBAL_REQUEST
      string      "elevation"
      boolean     want reply = false
      boolean     elevation performed
 
-   Clients that implement this extension help reduce attack surface for
-   Windows servers that handle administrative logins.  Where clients do
-   not support this extension, servers must elevate sessions to allow
-   full access by administrative users always.  Where clients support
-   this extension, sessions can be created without elevation unless
-   requested.
+   この拡張を実装するクライアントは, 管理者ログインを扱う Windows サーバの攻撃される範囲を軽減する.  この拡張をサポートしないクライアントでは, サーバは, 常に管理者ユーザによってフルアクセスを許すセッションを elevate しなければならない.  クライアントがこの拡張をサポートしているなら, 要求がない場合 elevation がなしでセッションを作ることが可能となる.
 
 
 
@@ -450,18 +431,17 @@ RFC 8308              Extension Negotiation in SSH            March 2018
 
 4.  IANA の考慮
 
-4.1.  Additions to Existing Registries
+4.1.  既存のレジストリへの追加
 
-   IANA has added the following entries to the "Message Numbers"
-   registry [IANA-M] under the "Secure Shell (SSH) Protocol Parameters"
-   registry [RFC4250]:
+   IANA は "Secure Shell (SSH) Protocol Parameters" レジストリ [RFC4250] の "Message Numbers" レジストリ [IANA-M] に次のエントリを追加した.
 
      Value    Message ID             Reference
      -----------------------------------------
      7        SSH_MSG_EXT_INFO       RFC 8308
      8        SSH_MSG_NEWCOMPRESS    RFC 8308
 
-   IANA has also added the following entries to the "Key Exchange Method
+   IANA は"Key Exchange Method
+   Names" registry [IANA-KE]: IANA has also added the following entries to the "Key Exchange Method
    Names" registry [IANA-KE]:
 
      Method Name     Reference      Note
