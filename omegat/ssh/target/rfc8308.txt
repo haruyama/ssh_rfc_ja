@@ -433,27 +433,23 @@ RFC 8308              Extension Negotiation in SSH            March 2018
 
 4.1.  既存のレジストリへの追加
 
-   IANA は "Secure Shell (SSH) Protocol Parameters" レジストリ [RFC4250] の "Message Numbers" レジストリ [IANA-M] に次のエントリを追加した.
+   IANA は "Secure Shell (SSH) Protocol Parameters" レジストリ [RFC4250] の "Message Numbers" レジストリ [IANA-M] に次のエントリを追加した:
 
      Value    Message ID             Reference
      -----------------------------------------
      7        SSH_MSG_EXT_INFO       RFC 8308
      8        SSH_MSG_NEWCOMPRESS    RFC 8308
 
-   IANA は"Key Exchange Method
-   Names" registry [IANA-KE]: IANA has also added the following entries to the "Key Exchange Method
-   Names" registry [IANA-KE]:
+   IANA は"Key Exchange Method Names" registry [IANA-KE] にも次のエントリを追加した:
 
      Method Name     Reference      Note
      ------------------------------------------
      ext-info-s      RFC 8308       Section 2
      ext-info-c      RFC 8308       Section 2
 
-4.2.  New Registry: Extension Names
+4.2.  新しいレジストリ: 拡張機能名
 
-   Also under the "Secure Shell (SSH) Protocol Parameters" registry,
-   IANA has created a new "Extension Names" registry, with the following
-   initial content:
+   さらに, "Secure Shell (SSH) Protocol Parameters" レジストリで, IANA は 新しい "Extension Names" レジストリを作成した. 最初の内容は次の通り:
 
      Extension Name       Reference       Note
      ------------------------------------------------
@@ -462,20 +458,15 @@ RFC 8308              Extension Negotiation in SSH            March 2018
      no-flow-control      RFC 8308        Section 3.3
      elevation            RFC 8308        Section 3.4
 
-4.2.1.  Future Assignments to Extension Names Registry
+4.2.1.  拡張機能名レジストリへの将来の割り当て
 
-   Names in the "Extension Names" registry MUST follow the conventions
-   for names defined in [RFC4250], Section 4.6.1.
+   "Extension Names" レジストリの名前は, [RFC4250] の 4.6.1 節で定義された命名規則に従わなければならない.
 
-   Requests for assignments of new non-local names in the "Extension
-   Names" registry (i.e., names not including the '@' character) MUST be
-   done using the IETF Review policy, as described in [RFC8126].
+   "Extension Names" レジストリの新しいローカルでない名前 (すなわち, 文字 '@' を含まない名前) の割り当ての要求は, [RFC8126] で記述されている IETR レビューポリシーを用いて行なわれなければならない.
 
 5.  セキュリティの考察
 
-   Security considerations are discussed throughout this document.  This
-   document updates the SSH protocol as defined in [RFC4251] and related
-   documents.  The security considerations of [RFC4251] apply.
+   セキュリティの考察はこの文書全体で議論されている.  この文書は [RFC4251] と 関連する文書で定義された SSH プロトコルを更新する.  [RFC4251] のセキュリティの考察が適用される.
 
 
 
