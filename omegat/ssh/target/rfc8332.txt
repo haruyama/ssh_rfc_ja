@@ -109,16 +109,9 @@ RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
 
 1概要と原理
 
-   セキュア シェル (SSH) は, インターネットでの安全な通信のための一般的なプロトコルだ.  In [RFC4253], SSH originally defined the public key
-   algorithms "ssh-rsa" for server and client authentication using RSA
-   with SHA-1, and "ssh-dss" using 1024-bit DSA and SHA-1.  These
-   algorithms are now considered deficient.  For US government use, NIST
-   has disallowed 1024-bit RSA and DSA, and use of SHA-1 for signing
-   [NIST.800-131A].
+   セキュア シェル (SSH) は, インターネットでの安全な通信のための一般的なプロトコルだ.  [RFC4253] にて, SSH はもともと RSA と SHA-1 を用いるクライアントとサーバ認証のための公開鍵アルゴリズム "ssh-rsa" と 1024-bit DSA と SHA-1 を用いる "ssh-dss" を定義した.  これらのアルゴリズムは現在欠陥があると考えられている.  アメリカ政府での利用では, NIST は 1024-bit RSA と DSA の利用と SHA-1 の署名への利用を許可していない [NIST.800-131A].
 
-   This memo updates RFCs 4252 and 4253 to define new public key
-   algorithms allowing for interoperable use of existing and new RSA
-   keys with SHA-256 and SHA-512.
+   このメモは, RFC 4252 と 4253 を更新して, SHA-256 と SHA-512 を用いる新しい RSA 鍵と既存の鍵の相互利用ができる新しい公開鍵アルゴリズムを定義する.
 
 1.1.  要件に関する用語
 
@@ -126,8 +119,7 @@ RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
 
 1.2.  通信のエンコーディングの用語
 
-   The wire encoding types in this document -- "boolean", "byte",
-   "string", "mpint" -- have meanings as described in [RFC4251].
+   この文書での通信エンコーディングの種類 -- "boolean", "byte", "string", "mpint" は [RFC4251] に記述されている意味を持つ
 
 2.  Public Key Format vs. Public Key Algorithm
 
