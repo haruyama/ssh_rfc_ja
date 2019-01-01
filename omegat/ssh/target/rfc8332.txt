@@ -83,7 +83,7 @@ RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
    1概要と原理. . . . . . . . . . . . . . . . . .   3
      1.1.  要件に関する用語 . . . . . . . . . . . . . . . .   3
      1.2.  通信のエンコーディングの用語 . . . . . . . . . . . . . . . .   3
-   2.  公開鍵の形式と公開鍵アルゴリズム  . . . . . . . . .   3
+   2.  公開鍵の形式 対 公開鍵アルゴリズム  . . . . . . . . .   3
    3.  新しい RSA 公開鍵アルゴリズム . . . . . . . . . . . . . . . .   4
      3.1.  サーバ認証への利用 . . . . . . . . . . . . . .   5
      3.2.  クライアント認証への利用 . . . . . . . . . . . . . .   5
@@ -121,19 +121,15 @@ RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
 
    この文書での通信エンコーディングの種類 -- "boolean", "byte", "string", "mpint" は [RFC4251] に記述されている意味を持つ
 
-2.  Public Key Format vs. Public Key Algorithm
+2.  公開鍵の形式 対 公開鍵アルゴリズム 
 
-   In [RFC4252], the concept "public key algorithm" is used to establish
-   a relationship between one algorithm name, and:
+   [RFC4252] で,  "public key algorithm"  の概念は, 1つのアルゴリズム名と次のものとの関係を確立するのに用いられている:
 
-   A.  procedures used to generate and validate a private/public
-       keypair;
-   B.  a format used to encode a public key; and
-   C.  procedures used to calculate, encode, and verify a signature.
+   A.  秘密/公開鍵ペアを生成し検証するのに用いられる手続き
+   B.  公開鍵を符号化するのに用いられる形式
+   C.  署名を計算し符号化し検証するのに用いられる手続き
 
-   This document uses the term "public key format" to identify only A
-   and B in isolation.  The term "public key algorithm" continues to
-   identify all three aspects -- A, B, and C.
+   この文書では, A と B だけを識別するために用語 "public key format" を用いる.  用語 "public key algorithm" は 3つすべての面, A, B, C を識別するのに用い続ける.
 
 
 
@@ -150,41 +146,31 @@ Bider                        Standards Track                    [Page 3]
 RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
 
 
-3.  New RSA Public Key Algorithms
+3.  新しい RSA 公開鍵アルゴリズム
 
-   This memo adopts the style and conventions of [RFC4253] in specifying
-   how use of a public key algorithm is indicated in SSH.
+   このメモは, 公開鍵アルゴリズムの利用をSSHの中でどのように表明するかを指定するのに, [RFC4253] スタイルと命名規則を採用する.
 
-   The following new public key algorithms are defined:
+   次の新しい公開鍵アルゴリズムが定義される:
 
      rsa-sha2-256        RECOMMENDED    sign    Raw RSA key
      rsa-sha2-512        OPTIONAL       sign    Raw RSA key
 
-   These algorithms are suitable for use both in the SSH transport layer
-   [RFC4253] for server authentication and in the authentication layer
-   [RFC4252] for client authentication.
+   これらのアルゴリズムは, サーバ認証のための SSH トランスポート層 [RFC4253] の利用にもクライアント認証のための認証層 [RFC4252] の利用にも適している.
 
-   Since RSA keys are not dependent on the choice of hash function, the
-   new public key algorithms reuse the "ssh-rsa" public key format as
-   defined in [RFC4253]:
+   RSA の鍵はハッシュ関数の選択には依存しないので, 新しい公開鍵アルゴリズムは [RFC4253] で定義された ssh-rsa 公開鍵形式を再利用する.
 
    string    "ssh-rsa"
    mpint     e
    mpint     n
 
-   All aspects of the "ssh-rsa" format are kept, including the encoded
-   string "ssh-rsa".  This allows existing RSA keys to be used with the
-   new public key algorithms, without requiring re-encoding or affecting
-   already trusted key fingerprints.
+   "ssh-rsa" というエンコードされた文字列も含めて, "ssh-rsa" 形式のすべての面が保持される.  これにより, すでに信用された鍵指紋を再エンコードしたり影響を与えたりすることなく新しい公開鍵アルゴリズムを既存の RSA 鍵と一緒に利用できる.
 
-   Signing and verifying using these algorithms is performed according
-   to the RSASSA-PKCS1-v1_5 scheme in [RFC8017] using SHA-2 [SHS] as
-   hash.
+   これらのアルゴリズムを用いる署名と検証は, SHA-2 [SHS] をハッシュとして用いる [RFC8017] の RSASSA-PKCS1-v1_5 方式に従って実行される.
 
-   For the algorithm "rsa-sha2-256", the hash used is SHA-256.
-   For the algorithm "rsa-sha2-512", the hash used is SHA-512.
+   "rsa-sha2-256" アルゴリズムには, , SHA-256 ハッシュが用いられる.
+   "rsa-sha2-512" アルゴリズムには, , SHA-512 ハッシュが用いられる.
 
-   署名の結果次のようにエンコードされる:
+   署名の結果は次のようにエンコードされる:
 
    string   "rsa-sha2-256" / "rsa-sha2-512"
    string    rsa_signature_blob

@@ -3071,6 +3071,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>All aspects of the "ssh-rsa" format are kept, including the encoded
+   string "ssh-rsa".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190101T113102Z" creationid="haruyama" creationdate="20190101T112500Z">
+        <seg>"ssh-rsa" というエンコードされた文字列も含めて, "ssh-rsa" 形式のすべての面が保持される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>All authentication related messages
    received after sending this message SHOULD be silently ignored.</seg>
       </tuv>
@@ -9975,6 +9984,22 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For the algorithm "rsa-sha2-256", the hash used is SHA-256.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190101T112930Z" creationid="haruyama" creationdate="20190101T112930Z">
+        <seg>"rsa-sha2-256" アルゴリズムには, , SHA-256 ハッシュが用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For the algorithm "rsa-sha2-512", the hash used is SHA-512.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190101T112954Z" creationid="haruyama" creationdate="20190101T112954Z">
+        <seg>"rsa-sha2-512" アルゴリズムには, , SHA-512 ハッシュが用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For the case of a local
    attacker and an agent holding unconstrained keys, the only limit on
    the number of private key operations the attacker may be able to
@@ -15152,6 +15177,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In [RFC4252], the concept "public key algorithm" is used to establish
+   a relationship between one algorithm name, and:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181231T034701Z" creationid="haruyama" creationdate="20181231T034701Z">
+        <seg>[RFC4252] で,  "public key algorithm"  の概念は, 1つのアルゴリズム名と次のものとの関係を確立するのに用いられている:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In [RFC4253], SSH originally defined the public key
    algorithms "ssh-rsa" for server and client authentication using RSA
    with SHA-1, and "ssh-dss" using 1024-bit DSA and SHA-1.</seg>
@@ -20188,6 +20222,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>New RSA Public Key Algorithms</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190101T111915Z" creationid="haruyama" creationdate="20190101T111915Z">
+        <seg>新しい RSA 公開鍵アルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>New RSA Public Key Algorithms .</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181227T102445Z" creationid="haruyama" creationdate="20181227T102445Z">
@@ -22833,10 +22875,18 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Public Key Format vs. Public Key Algorithm</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181231T034548Z" creationid="haruyama" creationdate="20181231T034529Z">
+        <seg>公開鍵の形式 対 公開鍵アルゴリズム </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Public Key Format vs. Public Key Algorithm  .</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20181227T102428Z" creationid="haruyama" creationdate="20181227T102428Z">
-        <seg>公開鍵の形式と公開鍵アルゴリズム  .</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20181231T034539Z" creationid="haruyama" creationdate="20181227T102428Z">
+        <seg>公開鍵の形式 対 公開鍵アルゴリズム  .</seg>
       </tuv>
     </tu>
     <tu>
@@ -25532,6 +25582,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Signing and verifying using these algorithms is performed according
+   to the RSASSA-PKCS1-v1_5 scheme in [RFC8017] using SHA-2 [SHS] as
+   hash.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190101T112849Z" creationid="haruyama" creationdate="20190101T112849Z">
+        <seg>これらのアルゴリズムを用いる署名と検証は, SHA-2 [SHS] をハッシュとして用いる [RFC8017] の RSASSA-PKCS1-v1_5 方式に従って実行される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Signing and verifying using this key format is done according to the
    Digital Signature Standard [FIPS-186-2] using the SHA-1 hash
    [FIPS-180-2].</seg>
@@ -25651,6 +25711,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110830T010729Z">
         <seg>Pretty Good Privacy (PGP) は公開鍵と電子IDを束縛する独自の方法を持っているので, この文書では非PGPな方法のみに集中する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Since RSA keys are not dependent on the choice of hash function, the
+   new public key algorithms reuse the "ssh-rsa" public key format as
+   defined in [RFC4253]:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190101T112344Z" creationid="haruyama" creationdate="20190101T112344Z">
+        <seg>RSA の鍵はハッシュ関数の選択には依存しないので, 新しい公開鍵アルゴリズムは [RFC4253] で定義された ssh-rsa 公開鍵形式を再利用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -31868,6 +31938,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The following new public key algorithms are defined:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190101T112143Z" creationid="haruyama" creationdate="20190101T112143Z">
+        <seg>次の新しい公開鍵アルゴリズムが定義される:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The following numbers are used for replies from the agent to the
    client.</seg>
       </tuv>
@@ -34326,8 +34404,8 @@ Category: Standards Track                                     W. Griffin
       <tuv lang="EN-US">
         <seg>The resulting signature is encoded as follows:</seg>
       </tuv>
-      <tuv lang="JA">
-        <seg>署名の結果次のようにエンコードされる:</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20190101T113005Z">
+        <seg>署名の結果は次のようにエンコードされる:</seg>
       </tuv>
     </tu>
     <tu>
@@ -35332,6 +35410,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110809T083459Z">
         <seg>通知やプロキシのリクエストが送られるべきターゲットは, ネットワークの管理者によって典型的に決定され設定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The term "public key algorithm" continues to
+   identify all three aspects -- A, B, and C.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181231T035148Z" creationid="haruyama" creationdate="20181231T035148Z">
+        <seg>用語 "public key algorithm" は 3つすべての面, A, B, C を識別するのに用い続ける.</seg>
       </tuv>
     </tu>
     <tu>
@@ -36360,6 +36447,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>These algorithms are suitable for use both in the SSH transport layer
+   [RFC4253] for server authentication and in the authentication layer
+   [RFC4252] for client authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190101T112240Z" creationid="haruyama" creationdate="20190101T112240Z">
+        <seg>これらのアルゴリズムは, サーバ認証のための SSH トランスポート層 [RFC4253] の利用にもクライアント認証のための認証層 [RFC4252] の利用にも適している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>These algorithms rely on two counters:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20111001T030519Z">
@@ -37169,6 +37266,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>この選択肢を利用すると, あらかじめホスト鍵や信用についてやりとりせずに通信できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This allows existing RSA keys to be used with the
+   new public key algorithms, without requiring re-encoding or affecting
+   already trusted key fingerprints.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190101T113110Z" creationid="haruyama" creationdate="20190101T112554Z">
+        <seg>これにより, すでに信用された鍵指紋を再エンコードしたり影響を与えたりすることなく新しい公開鍵アルゴリズムを既存の RSA 鍵と一緒に利用できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -38166,6 +38273,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document uses the term "public key format" to identify only A
+   and B in isolation.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181231T035040Z" creationid="haruyama" creationdate="20181231T035040Z">
+        <seg>この文書では, A と B だけを識別するために用語 "public key format" を用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This eliminates the need to generate
    cryptographically secure pseudorandom bytes for each packet.</seg>
       </tuv>
@@ -38936,6 +39052,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20131203T022054Z" creationid="haruyama" creationdate="20131203T022054Z">
         <seg>このメモは, 新しいデータ完全性アルゴリズムの利用をSSHの中でどのように表明するかを指定するのに, [RFC4253] スタイルと命名規則を採用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This memo adopts the style and conventions of [RFC4253] in specifying
+   how use of a public key algorithm is indicated in SSH.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190101T112127Z" creationid="haruyama" creationdate="20190101T112127Z">
+        <seg>このメモは, 公開鍵アルゴリズムの利用をSSHの中でどのように表明するかを指定するのに, [RFC4253] スタイルと命名規則を採用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -44032,6 +44157,19 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>procedures used to generate and validate a private/public
+       keypair;
+   B.  a format used to encode a public key; and
+   C.  procedures used to calculate, encode, and verify a signature.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20181231T034853Z" creationid="haruyama" creationdate="20181231T034748Z">
+        <seg>秘密/公開鍵ペアを生成し検証するのに用いられる手続き
+   B.  公開鍵を符号化するのに用いられる形式
+   C.  署名を計算し符号化し検証するのに用いられる手続き</seg>
       </tuv>
     </tu>
     <tu>
