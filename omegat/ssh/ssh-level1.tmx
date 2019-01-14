@@ -533,6 +533,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>-  Immediately following the existing entry for "ssh-rsa", two
+      sibling entries have been added:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190106T055459Z" creationid="haruyama" creationdate="20190106T055459Z">
+        <seg>-  既存の "ssh-rsa" エントリのすぐ次に, 2つの兄弟エントリを追加する:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>-  To the immediate right of the column "Public Key Algorithm Name",
+      a new column has been added, titled "Public Key Format".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190106T055343Z" creationid="haruyama" creationdate="20190106T055343Z">
+        <seg>-  "Public Key Algorithm Name" カラムのすぐ右に "Public Key Format" カラムを追加する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>- with authentication and with privacy (authPriv)</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110806T120902Z">
@@ -2076,6 +2094,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A server MAY, but is
+   not required to, accept this variant or another variant that
+   corresponds to a good-faith implementation and is considered safe to
+   accept.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190104T074047Z" creationid="haruyama" creationdate="20190104T074047Z">
+        <seg>サーバは, その必要がなくても, 誠実な実装によるものと思われ受け入れても安全と考えらえれるこのような変種を受け入れてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A server only needs to send "ext-info-s" if it intends to process
    SSH_MSG_EXT_INFO from the client.</seg>
       </tuv>
@@ -2151,6 +2180,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160618T032715Z">
         <seg>ユーザ(やアプリケーション)は, IANAに割り当てられたポート上の SSH サブシステムとして NETCONF を, 次のコマンドラインを用いて起動できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A verifier MAY accept shorter
+   encodings of S with one or more leading zeros omitted.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190102T030521Z" creationid="haruyama" creationdate="20190102T030521Z">
+        <seg>検証器は, 1つ以上の先頭の0が省略されたより短い S のエンコード結果を受け入れてもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7648,6 +7686,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Discovery of Public Key Algorithms Supported by Servers</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190105T022604Z" creationid="haruyama" creationdate="20190105T022604Z">
+        <seg>サーバでサポートされている公開鍵アルゴリズムの発見</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Discovery of Public Key Algorithms Supported by Servers .</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181227T102539Z" creationid="haruyama" creationdate="20181227T102539Z">
@@ -9372,6 +9418,16 @@
     <tu>
       <tuv lang="EN-US">
         <seg>For
+      existing entries, the column "Public Key Format" has been assigned
+      the same value as under "Public Key Algorithm Name".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190106T055414Z" creationid="haruyama" creationdate="20190106T055414Z">
+        <seg>既存のエントリには,"Public Key Format" カラムには "Public Key Algorithm Name" と同じ値を割り当てる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For
    example, instead of an instruction field of "Enter Password" and a
    prompt field of "Password for user23@host.domain: ", a better choice
    might be an instruction field of "Password authentication for
@@ -9643,6 +9699,16 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160618T032849Z">
         <seg>たとえば, 観察者は, ユーザのパスワードが期限切れかどうか推測できるかもしれない. さらなる観察により, サーバのパスワード期限ポリシーで決められたパスワードの生存期間を決定できるかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For example, as defined in [RFC4252] and [RFC4253], an SSH
+   "publickey" authentication request using an "rsa-sha2-512" signature
+   would be properly encoded as follows:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190104T073330Z" creationid="haruyama" creationdate="20190104T073330Z">
+        <seg>たとえば, [RFC4252] と [RFC4253] で定義されているように, "rsa-sha2-512" 署名を用いた SSH "publickey" 認証リクエストは, 次のように正しくエンコードされるだろう:</seg>
       </tuv>
     </tu>
     <tu>
@@ -12001,6 +12067,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>IANA has updated the "Secure Shell (SSH) Protocol Parameters"
+   registry, established with [RFC4250], to extend the table "Public Key
+   Algorithm Names" [IANA-PKA] as follows.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190106T055230Z" creationid="haruyama" creationdate="20190106T055230Z">
+        <seg>IANA は [RFC4250] で確立された "Secure Shell (SSH) Protocol Parameters" レジストリを更新し, "Public Key Algorithm Names" テーブル [IANA-PKA] を次のように拡張する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>IANA is also requested to assign "netconf" as an SSH Service Name as
    defined in [RFC4250], as follows:</seg>
       </tuv>
@@ -12516,6 +12592,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If a server receives a mismatching request, it MAY apply arbitrary
+   authentication penalties, including but not limited to authentication
+   failure or disconnect.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190104T073524Z" creationid="haruyama" creationdate="20190104T073524Z">
+        <seg>サーバが一致しないリクエストを受け取ったなら, サーバは,  認証の失敗や切断に限らない任意の認証ペナルティを課してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If a server receives a request for this method when initial key
    exchange was not performed using a GSS-API-based key exchange method
    defined in accordance with Section 2, it MUST return
@@ -12913,6 +12999,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If one of the two host key algorithms is
+   negotiated, the server sends an "ssh-rsa" public key as part of the
+   negotiated key exchange method (e.g., in SSH_MSG_KEXDH_REPLY) and
+   encodes a signature with the appropriate signature algorithm name --
+   either "rsa-sha2-256" or "rsa-sha2-512".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190102T031730Z" creationid="haruyama" creationdate="20190102T031730Z">
+        <seg>2つのホスト鍵アルゴリズムのうちの1つが交渉されると, サーバは 交渉された鍵交換法の一部として (SSH_MSG_KEXDH_REPLY など) "ssh-rsa" 公開鍵を送る. また サーバは適切な署名アルゴリズム名 --"rsa-sha2-256" ないし "rsa-sha2-512" を用いて署名をエンコードする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If password authentication is used,
    servers SHOULD provide a configuration option to disable the use of
    password authentication after the first public key is added.</seg>
@@ -13260,6 +13358,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>設定などからクライアントがユーザの好む submethod について知っているなら, サーバにその情報を渡すために submethods フィールドを利用してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the client includes the signature field, the client MUST encode
+   the same algorithm name in the signature as in
+   SSH_MSG_USERAUTH_REQUEST -- either "rsa-sha2-256" or "rsa-sha2-512".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190104T073443Z" creationid="haruyama" creationdate="20190104T073443Z">
+        <seg>クライアントが signature フィールドを含めるなら, クライアントは SSH_MSG_USERAUTH_REQUEST での署名と同じアルゴリズム名を含める必要がある. "rsa-sha2-256" か "rsa-sha2-512" だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14470,6 +14578,16 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110722T063423Z">
         <seg>サーバの実装エラーにより, クライアントが意図していないアクセスに対して鍵を認証に利用したり, 意図したものよりも少ない制限を適用する可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementation experience has shown that there are servers that apply
+   authentication penalties to clients attempting public key algorithms
+   that the SSH server does not support.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190105T022712Z" creationid="haruyama" creationdate="20190105T022712Z">
+        <seg>SSH サーバがサポートしていない公開鍵アルゴリズムを試行しようとするクライアントに対して認証ペナルティを課すサーバが存在することが実装の経験から示されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16257,6 +16375,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In this case, the signature
+   does actually use either SHA-256 or SHA-512.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190104T073758Z" creationid="haruyama" creationdate="20190104T073758Z">
+        <seg>この場合， 署名は実際には SHA-256 か SHA-512 を利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In this case, we recommend that SSH implementations check the host
    key against a local database before verifying the key via the
    fingerprint returned from DNS.</seg>
@@ -17096,6 +17223,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It advises that SSH implementations add support for
+   new RSA public key algorithms along with SSH_MSG_EXT_INFO and the
+   "server-sig-algs" extension to allow coexistence of new deployments
+   with older versions that support only "ssh-rsa".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190114T014446Z" creationid="haruyama" creationdate="20190114T014255Z">
+        <seg>SSH の実装はあたらしい構成とより "ssh-rsa" のみをサポートするより古いバージョンが共存できるよう, 新しい RSA 公開鍵アルゴリズムのサポートを  SSH_MSG_EXT_INFO と "server-slg-slgs" 拡張に一緒に追加するよう助言する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It allows the SSH server to propose new groups on
    which to perform the Diffie-Hellman key exchange to the client.</seg>
       </tuv>
@@ -17892,6 +18030,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It is prudent to follow this advice also outside of US government
+   use.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190113T124342Z" creationid="haruyama" creationdate="20190113T124342Z">
+        <seg>アメリカ政府向けでない場合もこの助言に従うのが賢明だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It is recommended
    that "diffie-hellman-group14-sha256" SHOULD be supported to smooth
    the transition to newer group sizes.</seg>
@@ -18627,6 +18774,14 @@
       <tuv lang="JA">
         <seg>鍵の再交換.............................................23
    10.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Key Size and Signature Hash</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190113T124049Z" creationid="haruyama" creationdate="20190113T124049Z">
+        <seg>鍵サイズと署名ハッシュ</seg>
       </tuv>
     </tu>
     <tu>
@@ -20151,6 +20306,17 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Nevertheless,
+   implementations SHOULD start to disable "ssh-rsa" in their default
+   configurations as soon as the implementers believe that new RSA
+   signature algorithms have been widely adopted.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190114T014551Z" creationid="haruyama" creationdate="20190114T014304Z">
+        <seg>にもかかわらず, 実装は, 新しい RSA 署名アルゴリズムが広く採用されたと実装者が信じたらすぐに "ssh-rsa" をデフォルトの設定で無効にし始める必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Nevertheless, server
    implementations SHOULD support clients opening more than one
    non-simultaneous channel.</seg>
@@ -21630,6 +21796,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181207T111021Z" creationid="haruyama" creationdate="20181207T111021Z">
         <seg>バージョン 7.5 までの OpenSSH クラアイアントは, SSH_MSG_EXT_INFO の受信をサポートするとしていたが, extension-value に ヌルバイトを含む場合受信すると切断する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH 7.2 (but not 7.2p2) incorrectly encodes the algorithm in the
+   signature as "ssh-rsa" when the algorithm in SSH_MSG_USERAUTH_REQUEST
+   is "rsa-sha2-256" or "rsa-sha2-512".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190104T073734Z" creationid="haruyama" creationdate="20190104T073734Z">
+        <seg>OpenSSH 7.2 (7.2p2 は除く) は,  SSH_MSG_USERAUTH_REQUEST のアルゴリズムが "rsa-sha2-256" か "rsa-sha2-512" の場合に "ssh-rsa" ののように署名の中のアルゴリズムを間違えてエンコードする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -25288,6 +25464,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Servers that accept rsa-sha2-* signatures for client authentication
+   SHOULD implement the extension negotiation mechanism defined in
+   [RFC8308], including especially the "server-sig-algs" extension.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190105T022828Z" creationid="haruyama" creationdate="20190105T022828Z">
+        <seg>rsa-sha2-* 署名をクライアント認証で受け付けるサーバは, [RFC8308] で定義された拡張交渉メカニズムを "server-sig-algs" 拡張を特に含んで実装する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Servers that implement public key authentication SHOULD implement
    this extension.</seg>
       </tuv>
@@ -26963,6 +27149,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160529T111055Z" creationid="haruyama" creationdate="20160529T111055Z">
         <seg>"constraints" フィールドは SSH_AGENTC_ADD_ID_CONSTRAINED のみに存在する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   "public key blob" field encodes the RSA public key using the
+   "ssh-rsa" public key format.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190104T073225Z" creationid="haruyama" creationdate="20190104T073225Z">
+        <seg>"public key blob" フィールドは, "ssh-rsa" 公開鍵形式を用いて RSA 公開鍵をエンコードする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28822,6 +29018,17 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20131203T030046Z" creationid="haruyama" creationdate="20131203T030046Z">
         <seg>National Institute of Standards and Technology (NIST) の出版物: NIST Special Publication (SP) 800-107 [800-107] と NIST SP 800-131A [800-131A] は, HMAC-SHA1 と HMAC-SHA2-256 はそれぞれ 128 bit と 256 bit のセキュリティの強さを持つと示唆している (訳者注: HMAC-SHA2-256 と HMAC-SHA2-512 の間違い?). これらは許容できる鍵の長さだと考えられている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The National Institute of Standards and Technology (NIST) Special
+   Publication 800-131A, Revision 1 [NIST.800-131A] disallows RSA and
+   DSA keys shorter than 2048 bits for US government use.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190113T124220Z" creationid="haruyama" creationdate="20190113T124220Z">
+        <seg>National Institute of Standards and Technology (NIST) Special
+   Publication 800-131A, Revision 1 [NIST.800-131A] は, アメリカ政府向けの用途には 2048 ビットよりも小さい RSA と DSA 鍵を許可していない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34419,6 +34626,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The same
+   document disallows the SHA-1 hash function for digital signature
+   generation, except under NIST's protocol-specific guidance.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190113T124302Z" creationid="haruyama" creationdate="20190113T124302Z">
+        <seg>同じ文書で, NIST のプロトコル特有のガイダンスがある場合を除いて, 電子署名の生成に SHA-1 ハッシュ関数を許可していない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The same hash algorithm MUST be used in key
    derivation.</seg>
       </tuv>
@@ -34489,6 +34706,14 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20180127T062926Z" creationid="haruyama" creationdate="20180127T062926Z">
         <seg>[RFC3526] のセキュリティの考察は, MODP group14 からgroup18 は 110 bits から 310 bits の範囲のセキュリティの強度を持つと示唆している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The security considerations of [RFC4251] apply to this document.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190113T124042Z" creationid="haruyama" creationdate="20190113T124042Z">
+        <seg>[RFC4251] のセキュリティの考察がこの文書に適用される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35880,6 +36105,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>'rsa_signature_blob' の値は,(長さやパディングがない符号無しのネットワークバイトオーダーの160-bitの整数である) s を含む文字列としてエンコードされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The value for 'rsa_signature_blob' is encoded as a string that
+   contains an octet string S (which is the output of RSASSA-PKCS1-v1_5)
+   and that has the same length (in octets) as the RSA modulus.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190102T030236Z" creationid="haruyama" creationdate="20190102T030236Z">
+        <seg>'rsa_signature_blob' の値は, (RSASSA-PKCS1-v1_5 の出力の) オクテット文字列 S と含む文字列としてエンコードされる. またそれは, RSA モジュラスとして(オクテットで)同じ長さの文字列となる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -38037,6 +38272,17 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20131203T021729Z" creationid="haruyama" creationdate="20131203T021729Z">
         <seg>この文書は, Internet Engineering Task Force (IETF) の成果物だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document is based on the premise that RSA is used in
+   environments where a gradual, compatible transition to improved
+   algorithms will be better received than one that is abrupt and
+   incompatible.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190114T014145Z" creationid="haruyama" creationdate="20190114T014145Z">
+        <seg>この文書は, 改善されたアルゴリズムへのゆるやかで互換性のある以降のほうが突然で非互換の以降よりもよく受け入れられるだろうという前提に基づく.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40544,6 +40790,18 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>To express support and preference for one or both of these algorithms
+   for server authentication, the SSH client or server includes one or
+   both algorithm names, "rsa-sha2-256" and/or "rsa-sha2-512", in the
+   name-list field "server_host_key_algorithms" in the SSH_MSG_KEXINIT
+   packet [RFC4253].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190102T031120Z" creationid="haruyama" creationdate="20190102T031109Z">
+        <seg>これらのアルゴリズムの1つないし両方をサーバ認証でサポートや優先順位を示すのに, SSH のクライアントやサーバは, 1つないし両方のアルゴリズムの名前, "rsa-sha2-256" と "rsa-sha2-512", を SSH_MSG_KEXINT パケット [RFC4253] の server_host_key_algorithms name-list フィールドに含める.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>To have SNMP properly utilize the security services provided by SSH,
    the SSH Transport Model MUST be used with a Security Model that knows
    how to process a tmStateReference, such as the Transport Security
@@ -40691,6 +40949,17 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>To use this algorithm for client authentication, the SSH client sends
+   an SSH_MSG_USERAUTH_REQUEST message [RFC4252] encoding the
+   "publickey" method and encoding the string field "public key
+   algorithm name" with the value "rsa-sha2-256" or "rsa-sha2-512".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190104T073155Z" creationid="haruyama" creationdate="20190104T073155Z">
+        <seg>このアルゴリズムをクライアント認証で利用するには, SSH のクライアントは "rsa-sha2-256" ないし "rsa-sha2-512 の値で "pubkey" メソッドと "public key algorithm name" をエンコードした SSH_MSG_USERAUTH_REQUEST メッセージ [RFC4252] を送る .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Traffic Analysis</seg>
       </tuv>
       <tuv lang="JA">
@@ -40705,6 +40974,14 @@ Category: Standards Track                                     W. Griffin
       <tuv lang="JA">
         <seg>トラフィック解析 ...................................21
       9.4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Transition</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190114T014012Z" creationid="haruyama" creationdate="20190114T014012Z">
+        <seg>移行</seg>
       </tuv>
     </tu>
     <tu>
@@ -40985,10 +41262,26 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Use for Client Authentication</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190104T072918Z" creationid="haruyama" creationdate="20190104T072918Z">
+        <seg>クライアント認証への利用</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Use for Client Authentication .</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181227T102513Z" creationid="haruyama" creationdate="20181227T102513Z">
         <seg>クライアント認証への利用 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Use for Server Authentication</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190102T030907Z" creationid="haruyama" creationdate="20190102T030907Z">
+        <seg>サーバ認証への利用</seg>
       </tuv>
     </tu>
     <tu>
@@ -41555,6 +41848,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>When S
+   contains leading zeros, there exist signers that will send a shorter
+   encoding of S that omits them.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190102T030424Z" creationid="haruyama" creationdate="20190102T030424Z">
+        <seg>S が先頭に0が続く場合, それらを除いて S のより短いエンコード結果を送ってしまう既存の署名器が存在する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>When a call results in a
    major_status code of GSS_S_COMPLETE, it sends one of two final
    messages.</seg>
@@ -41655,6 +41958,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>可能な場合は, データの文字セットは明示的に指定されなけばならない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When authenticating with an RSA key against a server that does not
+   implement the "server-sig-algs" extension, clients MAY default to an
+   "ssh-rsa" signature to avoid authentication penalties.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190105T023100Z" creationid="haruyama" creationdate="20190105T023100Z">
+        <seg>"server-sig-algs" を実装していないサーバに対して RSA 鍵で認証をする際, クライアントは認証ペナルティを避けるため "ssh-rsa" 署名をデフォルトとしてもよい. </seg>
       </tuv>
     </tu>
     <tu>
@@ -41865,6 +42178,17 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110802T020811Z">
         <seg>ネットワークに負荷がかかっていない時に, トランスポートモデルとその基底のセキュリティメカニズムは, 他のネットワークサービスがすぐに利用できるかどうかに依存してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When the new
+   rsa-sha2-* algorithms have been sufficiently widely adopted to
+   warrant disabling "ssh-rsa", clients MAY default to one of the new
+   algorithms.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20190105T023221Z" creationid="haruyama" creationdate="20190105T023221Z">
+        <seg>"ssh-rsa" を無効にできる保証が得られるほど新しい rsa-sha2-* アルゴリズムが十分に広く普及したなら, クライアントは新しいアルゴリズムのうちの1つをデフォルトとしてもよい.</seg>
       </tuv>
     </tu>
     <tu>

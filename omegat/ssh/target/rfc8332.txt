@@ -175,12 +175,7 @@ RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
    string   "rsa-sha2-256" / "rsa-sha2-512"
    string    rsa_signature_blob
 
-   The value for 'rsa_signature_blob' is encoded as a string that
-   contains an octet string S (which is the output of RSASSA-PKCS1-v1_5)
-   and that has the same length (in octets) as the RSA modulus.  When S
-   contains leading zeros, there exist signers that will send a shorter
-   encoding of S that omits them.  A verifier MAY accept shorter
-   encodings of S with one or more leading zeros omitted.
+   'rsa_signature_blob' の値は, (RSASSA-PKCS1-v1_5 の出力の) オクテット文字列 S と含む文字列としてエンコードされる. またそれは, RSA モジュラスとして(オクテットで)同じ長さの文字列となる.  S が先頭に0が続く場合, それらを除いて S のより短いエンコード結果を送ってしまう既存の署名器が存在する.  検証器は, 1つ以上の先頭の0が省略されたより短い S のエンコード結果を受け入れてもよい.
 
 
 
@@ -192,30 +187,15 @@ Bider                        Standards Track                    [Page 4]
 RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
 
 
-3.1.  Use for Server Authentication
+3.1.  サーバ認証への利用
 
-   To express support and preference for one or both of these algorithms
-   for server authentication, the SSH client or server includes one or
-   both algorithm names, "rsa-sha2-256" and/or "rsa-sha2-512", in the
-   name-list field "server_host_key_algorithms" in the SSH_MSG_KEXINIT
-   packet [RFC4253].  If one of the two host key algorithms is
-   negotiated, the server sends an "ssh-rsa" public key as part of the
-   negotiated key exchange method (e.g., in SSH_MSG_KEXDH_REPLY) and
-   encodes a signature with the appropriate signature algorithm name --
-   either "rsa-sha2-256" or "rsa-sha2-512".
+   これらのアルゴリズムの1つないし両方をサーバ認証でサポートや優先順位を示すのに, SSH のクライアントやサーバは, 1つないし両方のアルゴリズムの名前, "rsa-sha2-256" と "rsa-sha2-512", を SSH_MSG_KEXINT パケット [RFC4253] の server_host_key_algorithms name-list フィールドに含める.  2つのホスト鍵アルゴリズムのうちの1つが交渉されると, サーバは 交渉された鍵交換法の一部として (SSH_MSG_KEXDH_REPLY など) "ssh-rsa" 公開鍵を送る. また サーバは適切な署名アルゴリズム名 --"rsa-sha2-256" ないし "rsa-sha2-512" を用いて署名をエンコードする.
 
-3.2.  Use for Client Authentication
+3.2.  クライアント認証への利用
 
-   To use this algorithm for client authentication, the SSH client sends
-   an SSH_MSG_USERAUTH_REQUEST message [RFC4252] encoding the
-   "publickey" method and encoding the string field "public key
-   algorithm name" with the value "rsa-sha2-256" or "rsa-sha2-512".  The
-   "public key blob" field encodes the RSA public key using the
-   "ssh-rsa" public key format.
+   このアルゴリズムをクライアント認証で利用するには, SSH のクライアントは "rsa-sha2-256" ないし "rsa-sha2-512 の値で "pubkey" メソッドと "public key algorithm name" をエンコードした SSH_MSG_USERAUTH_REQUEST メッセージ [RFC4252] を送る .  "public key blob" フィールドは, "ssh-rsa" 公開鍵形式を用いて RSA 公開鍵をエンコードする.
 
-   For example, as defined in [RFC4252] and [RFC4253], an SSH
-   "publickey" authentication request using an "rsa-sha2-512" signature
-   would be properly encoded as follows:
+   たとえば, [RFC4252] と [RFC4253] で定義されているように, "rsa-sha2-512" 署名を用いた SSH "publickey" 認証リクエストは, 次のように正しくエンコードされるだろう:
 
      byte      SSH_MSG_USERAUTH_REQUEST
      string    user name
@@ -231,12 +211,8 @@ RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
          string    "rsa-sha2-512"
          string    rsa_signature_blob
 
-   If the client includes the signature field, the client MUST encode
-   the same algorithm name in the signature as in
-   SSH_MSG_USERAUTH_REQUEST -- either "rsa-sha2-256" or "rsa-sha2-512".
-   If a server receives a mismatching request, it MAY apply arbitrary
-   authentication penalties, including but not limited to authentication
-   failure or disconnect.
+   クライアントが signature フィールドを含めるなら, クライアントは SSH_MSG_USERAUTH_REQUEST での署名と同じアルゴリズム名を含める必要がある. "rsa-sha2-256" か "rsa-sha2-512" だ.
+   サーバが一致しないリクエストを受け取ったなら, サーバは,  認証の失敗や切断に限らない任意の認証ペナルティを課してもよい.
 
 
 
@@ -248,44 +224,23 @@ Bider                        Standards Track                    [Page 5]
 RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
 
 
-   OpenSSH 7.2 (but not 7.2p2) incorrectly encodes the algorithm in the
-   signature as "ssh-rsa" when the algorithm in SSH_MSG_USERAUTH_REQUEST
-   is "rsa-sha2-256" or "rsa-sha2-512".  In this case, the signature
-   does actually use either SHA-256 or SHA-512.  A server MAY, but is
-   not required to, accept this variant or another variant that
-   corresponds to a good-faith implementation and is considered safe to
-   accept.
+   OpenSSH 7.2 (7.2p2 は除く) は,  SSH_MSG_USERAUTH_REQUEST のアルゴリズムが "rsa-sha2-256" か "rsa-sha2-512" の場合に "ssh-rsa" ののように署名の中のアルゴリズムを間違えてエンコードする.  この場合， 署名は実際には SHA-256 か SHA-512 を利用する.  サーバは, その必要がなくても, 誠実な実装によるものと思われ受け入れても安全と考えらえれるこのような変種を受け入れてもよい.
 
-3.3.  Discovery of Public Key Algorithms Supported by Servers
+3.3.  サーバでサポートされている公開鍵アルゴリズムの発見
 
-   Implementation experience has shown that there are servers that apply
-   authentication penalties to clients attempting public key algorithms
-   that the SSH server does not support.
+   SSH サーバがサポートしていない公開鍵アルゴリズムを試行しようとするクライアントに対して認証ペナルティを課すサーバが存在することが実装の経験から示されている.
 
-   Servers that accept rsa-sha2-* signatures for client authentication
-   SHOULD implement the extension negotiation mechanism defined in
-   [RFC8308], including especially the "server-sig-algs" extension.
+   rsa-sha2-* 署名をクライアント認証で受け付けるサーバは, [RFC8308] で定義された拡張交渉メカニズムを "server-sig-algs" 拡張を特に含んで実装する必要がある.
 
-   When authenticating with an RSA key against a server that does not
-   implement the "server-sig-algs" extension, clients MAY default to an
-   "ssh-rsa" signature to avoid authentication penalties.  When the new
-   rsa-sha2-* algorithms have been sufficiently widely adopted to
-   warrant disabling "ssh-rsa", clients MAY default to one of the new
-   algorithms.
+   "server-sig-algs" を実装していないサーバに対して RSA 鍵で認証をする際, クライアントは認証ペナルティを避けるため "ssh-rsa" 署名をデフォルトとしてもよい. "ssh-rsa" を無効にできる保証が得られるほど新しい rsa-sha2-* アルゴリズムが十分に広く普及したなら, クライアントは新しいアルゴリズムのうちの1つをデフォルトとしてもよい.
 
 4.  IANA の考慮
 
-   IANA has updated the "Secure Shell (SSH) Protocol Parameters"
-   registry, established with [RFC4250], to extend the table "Public Key
-   Algorithm Names" [IANA-PKA] as follows.
+   IANA は [RFC4250] で確立された "Secure Shell (SSH) Protocol Parameters" レジストリを更新し, "Public Key Algorithm Names" テーブル [IANA-PKA] を次のように拡張する.
 
-   -  To the immediate right of the column "Public Key Algorithm Name",
-      a new column has been added, titled "Public Key Format".  For
-      existing entries, the column "Public Key Format" has been assigned
-      the same value as under "Public Key Algorithm Name".
+   -  "Public Key Algorithm Name" カラムのすぐ右に "Public Key Format" カラムを追加する.  既存のエントリには,"Public Key Format" カラムには "Public Key Algorithm Name" と同じ値を割り当てる.
 
-   -  Immediately following the existing entry for "ssh-rsa", two
-      sibling entries have been added:
+   -  既存の "ssh-rsa" エントリのすぐ次に, 2つの兄弟エントリを追加する:
 
       P. K. Alg. Name    P. K. Format      Reference   Note
       rsa-sha2-256       ssh-rsa           RFC 8332    Section 3
@@ -306,31 +261,18 @@ RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
 
 5.  セキュリティの考察
 
-   The security considerations of [RFC4251] apply to this document.
+   [RFC4251] のセキュリティの考察がこの文書に適用される.
 
-5.1.  Key Size and Signature Hash
+5.1.  鍵サイズと署名ハッシュ
 
-   The National Institute of Standards and Technology (NIST) Special
-   Publication 800-131A, Revision 1 [NIST.800-131A] disallows RSA and
-   DSA keys shorter than 2048 bits for US government use.  The same
-   document disallows the SHA-1 hash function for digital signature
-   generation, except under NIST's protocol-specific guidance.
+   National Institute of Standards and Technology (NIST) Special
+   Publication 800-131A, Revision 1 [NIST.800-131A] は, アメリカ政府向けの用途には 2048 ビットよりも小さい RSA と DSA 鍵を許可していない.  同じ文書で, NIST のプロトコル特有のガイダンスがある場合を除いて, 電子署名の生成に SHA-1 ハッシュ関数を許可していない. 
 
-   It is prudent to follow this advice also outside of US government
-   use.
+   アメリカ政府向けでない場合もこの助言に従うのが賢明だ.
 
-5.2.  Transition
+5.2.  移行
 
-   This document is based on the premise that RSA is used in
-   environments where a gradual, compatible transition to improved
-   algorithms will be better received than one that is abrupt and
-   incompatible.  It advises that SSH implementations add support for
-   new RSA public key algorithms along with SSH_MSG_EXT_INFO and the
-   "server-sig-algs" extension to allow coexistence of new deployments
-   with older versions that support only "ssh-rsa".  Nevertheless,
-   implementations SHOULD start to disable "ssh-rsa" in their default
-   configurations as soon as the implementers believe that new RSA
-   signature algorithms have been widely adopted.
+   この文書は, 改善されたアルゴリズムへのゆるやかで互換性のある以降のほうが突然で非互換の以降よりもよく受け入れられるだろうという前提に基づく.  SSH の実装はあたらしい構成とより "ssh-rsa" のみをサポートするより古いバージョンが共存できるよう, 新しい RSA 公開鍵アルゴリズムのサポートを  SSH_MSG_EXT_INFO と "server-slg-slgs" 拡張に一緒に追加するよう助言する.  にもかかわらず, 実装は, 新しい RSA 署名アルゴリズムが広く採用されたと実装者が信じたらすぐに "ssh-rsa" をデフォルトの設定で無効にし始める必要がある.
 
 5.3.  PKCS #1 v1.5 Padding and Signature Verification
 
