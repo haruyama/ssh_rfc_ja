@@ -236,6 +236,19 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>(1)  RSASSA-PSS is not universally available to all implementations;
+   (2)  PKCS #1 v1.5 is widely supported in existing SSH
+        implementations;
+   (3)  PKCS #1 v1.5 is not known to be insecure for use in this scheme.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20190120T103109Z" creationid="haruyama" creationdate="20190120T102927Z">
+        <seg>(1)  RSASSA-PSS はすべての実装で普遍的に利用可能ではない;
+   (2)  PKCS #1 v1.5 は既存の SSH の実装で広くサポートされている;
+   (3)  PKCS #1 v1.5 は この方式での利用で安全ではないとは知られていない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>(Although
    there may be some network savings from padding to only 8-bytes even
    if the block cipher uses 16-byte blocks, because of (1) we do not
@@ -15024,6 +15037,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Implementers are advised that a signature with RSASSA-PKCS1-v1_5
+   padding MUST NOT be verified by applying the RSA key to the
+   signature, and then parsing the output to extract the hash.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20190120T103650Z" creationid="haruyama" creationdate="20190120T103522Z">
+        <seg>実装者は RSASSA-PKCS1-v1_5 パディングを用いた署名は, RSA 鍵を署名に適用したり またハッシュを抽出するために出力をパースするために検証されてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Implementers are encouraged to provide a default local policy and
    make its parameters known to administrators and users.</seg>
       </tuv>
@@ -22226,6 +22249,14 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>PFS は, 鍵確立プロトコルの暗号学的な性質として本来定義される. 鍵確立プロトコルにおいて, あるセッションでセッション鍵ないし長期間の秘密鍵が漏れても, それより前のセッションの情報は危険とならないという性質だ. [ANSI-T1.523-2001].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>PKCS #1 v1.5 Padding and Signature Verification</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20190120T102714Z" creationid="haruyama" creationdate="20190120T102714Z">
+        <seg>PKCS #1 v1.5 パディングと署名の検証 </seg>
       </tuv>
     </tu>
     <tu>
@@ -38331,6 +38362,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This document prescribes RSASSA-PKCS1-v1_5 signature padding because:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20190120T102816Z" creationid="haruyama" creationdate="20190120T102816Z">
+        <seg>この文書は RSASSA-PKCS1-v1_5 署名パディングを指定している. なぜならば:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This document provides new public key algorithms and new key
    agreement methods for the Secure Shell protocol.</seg>
       </tuv>
@@ -39185,6 +39224,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110726T024843Z">
         <seg>このマッピングで, ユーザやアプリケーションによるSSHセッションから NETCONF を実行できるようになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This may
+   give an attacker opportunities to exploit flaws in the parsing and
+   vary the encoding.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20190120T103755Z" creationid="haruyama" creationdate="20190120T103755Z">
+        <seg>エンコーディングをパースしたり変えたりすることで欠陥を悪用する機会を攻撃者に与える可能性がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -41646,6 +41695,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110802T031250Z">
         <seg>クライアントの識別情報の検証は, 認証されたもののみが機密の可能性のあるデータへのアクセスをすることを保証することはSNMP アクセス制御サブシステムの利用で重要だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Verifiers MUST instead apply RSASSA-PKCS1-v1_5
+   padding to the expected hash, then compare the encoded bytes with the
+   output of the RSA operation.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20190120T103947Z" creationid="haruyama" creationdate="20190120T103947Z">
+        <seg>検証者は, 代わりに RSASSA-PKCS1-v1_5 パディングを期待されるハッシュに適用し, RSA の操作による出力とエンコードされたバイト列を比較する必要がある.</seg>
       </tuv>
     </tu>
     <tu>

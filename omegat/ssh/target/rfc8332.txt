@@ -274,22 +274,15 @@ RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
 
    この文書は, 改善されたアルゴリズムへのゆるやかで互換性のある以降のほうが突然で非互換の以降よりもよく受け入れられるだろうという前提に基づく.  SSH の実装はあたらしい構成とより "ssh-rsa" のみをサポートするより古いバージョンが共存できるよう, 新しい RSA 公開鍵アルゴリズムのサポートを  SSH_MSG_EXT_INFO と "server-slg-slgs" 拡張に一緒に追加するよう助言する.  にもかかわらず, 実装は, 新しい RSA 署名アルゴリズムが広く採用されたと実装者が信じたらすぐに "ssh-rsa" をデフォルトの設定で無効にし始める必要がある.
 
-5.3.  PKCS #1 v1.5 Padding and Signature Verification
+5.3.  PKCS #1 v1.5 パディングと署名の検証 
 
-   This document prescribes RSASSA-PKCS1-v1_5 signature padding because:
+   この文書は RSASSA-PKCS1-v1_5 署名パディングを指定している. なぜならば:
 
-   (1)  RSASSA-PSS is not universally available to all implementations;
-   (2)  PKCS #1 v1.5 is widely supported in existing SSH
-        implementations;
-   (3)  PKCS #1 v1.5 is not known to be insecure for use in this scheme.
+   (1)  RSASSA-PSS はすべての実装で普遍的に利用可能ではない;
+   (2)  PKCS #1 v1.5 は既存の SSH の実装で広くサポートされている;
+   (3)  PKCS #1 v1.5 は この方式での利用で安全ではないとは知られていない.
 
-   Implementers are advised that a signature with RSASSA-PKCS1-v1_5
-   padding MUST NOT be verified by applying the RSA key to the
-   signature, and then parsing the output to extract the hash.  This may
-   give an attacker opportunities to exploit flaws in the parsing and
-   vary the encoding.  Verifiers MUST instead apply RSASSA-PKCS1-v1_5
-   padding to the expected hash, then compare the encoded bytes with the
-   output of the RSA operation.
+   実装者は RSASSA-PKCS1-v1_5 パディングを用いた署名は, RSA 鍵を署名に適用したり またハッシュを抽出するために出力をパースするために検証されてはならない.  エンコーディングをパースしたり変えたりすることで欠陥を悪用する機会を攻撃者に与える可能性がある.  検証者は, 代わりに RSASSA-PKCS1-v1_5 パディングを期待されるハッシュに適用し, RSA の操作による出力とエンコードされたバイト列を比較する必要がある.
 
 
 
