@@ -268,7 +268,7 @@ RFC 6187              X.509v3 Certificates for SSH            March 2011
 
    x509v3-ssh-dss 鍵フォーマットでの署名と検証は, SHA-1 ハッシュ [FIPS-180-2] を用いるDigital Signature Standard [FIPS-186-2] に従って行なわれる.
 
-   署名の結果次のようにエンコードされる:
+   署名の結果は次のようにエンコードされる:
 
      string  "ssh-dss"
      string  dss_signature_blob
@@ -281,7 +281,7 @@ RFC 6187              X.509v3 Certificates for SSH            March 2011
 
    x509v3-ssh-rsa 鍵フォーマットでの署名と検証は, SHA-1 ハッシュを用いる RSASSA-PKCS1-v1_5 scheme in [RFC3447] に従って行なわれる.
 
-   署名の結果次のようにエンコードされる:
+   署名の結果は次のようにエンコードされる:
 
      string  "ssh-rsa"
      string  rsa_signature_blob
@@ -303,7 +303,7 @@ RFC 6187              X.509v3 Certificates for SSH            March 2011
 
    x509v3-ssh-rsa2048-sha256 鍵フォーマットでの署名と検証は, SHA-256 ハッシュ [FIPS-180-3] を用いる RSASSA-PKCS1-v1_5 scheme in [RFC3447] に従って行なわれる; この形式で運ばれる RSA 鍵は, 少なくとも 2048 ビットのモジュラスを持たなければならない.
 
-   署名の結果次のようにエンコードされる:
+   署名の結果は次のようにエンコードされる:
 
      string  "rsa2048-sha256"
      string  rsa_signature_blob
@@ -316,7 +316,7 @@ RFC 6187              X.509v3 Certificates for SSH            March 2011
 
    x509v3-ecdsa-sha2-* 鍵フォーマットでの署名と検証は, SHA-2 ハッシュ関数ファミリ [FIPS-180-3] を用いる [FIPS-186-3] の ECDSA アルゴリズムに従って行なわれる.  SHA2 ハッシュ関数ファミリからのハッシュ関数の選択は, [RFC5656] の 6.2.1 節で指定されているように ECDSA 鍵の鍵サイズの基づく.
 
-   署名の結果次のようにエンコードされる:
+   署名の結果は次のようにエンコードされる:
 
      string  "ecdsa-sha2-[identifier]"
      string  ecdsa_signature_blob

@@ -1,0 +1,406 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                          D. Bider
+Request for Comments: 8332                               Bitvise Limited
+Updates: 4252, 4253                                           March 2018
+Category: Standards Track
+ISSN: 2070-1721
+
+
+                Secure Shell (SSH) プロトコルでの SHA-256 と SHA-512 を用いたRSA鍵の利用
+
+概要
+
+   このメモは, RFC 4252 と 4253 を更新して, SSH の接続でのサーバとクライアントの認証に SHA-256 と SHA-512 を用いる RSA 鍵を利用する新しい公開鍵アルゴリズムを定義する.
+
+このメモの位置づけ
+
+   これは, インターネット標準化課程文書だ.
+
+   この文書は, Internet Engineering Task Force (IETF) の成果物だ.  IETF コミュニティの合意を表わしている.  公開のレビューを受けており, Internet Engineering Steering Group (IESG) によって発行が認められた.  インターネット標準についてさらなる情報は RFC 7841 の 2節にある.
+
+   この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8332 で得られる.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bider                        Standards Track                    [Page 1]
+
+RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
+
+
+著作権情報
+
+   Copyright (c) 2018 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+   This document may contain material from IETF Documents or IETF
+   Contributions published or made publicly available before November
+   10, 2008.  The person(s) controlling the copyright in some of this
+   material may not have granted the IETF Trust the right to allow
+   modifications of such material outside the IETF Standards Process.
+   Without obtaining an adequate license from the person(s) controlling
+   the copyright in such materials, this document may not be modified
+   outside the IETF Standards Process, and derivative works of it may
+   not be created outside the IETF Standards Process, except to format
+   it for publication as an RFC or to translate it into languages other
+   than English.
+
+目次
+
+   1概要と原理. . . . . . . . . . . . . . . . . .   3
+     1.1.  要件に関する用語 . . . . . . . . . . . . . . . .   3
+     1.2.  通信のエンコーディングの用語 . . . . . . . . . . . . . . . .   3
+   2.  公開鍵の形式 対 公開鍵アルゴリズム  . . . . . . . . .   3
+   3.  新しい RSA 公開鍵アルゴリズム . . . . . . . . . . . . . . . .   4
+     3.1.  サーバ認証への利用 . . . . . . . . . . . . . .   5
+     3.2.  クライアント認証への利用 . . . . . . . . . . . . . .   5
+     3.3.  サーバでサポートされている公開鍵アルゴリズムの発見 .   6
+   4.  IANA の考察 . . . . . . . . . . . . . . . . . . . . .   6
+   5.  セキュリティの考察 . . . . . . . . . . . . . . . . . . .   7
+     5.1.  鍵サイズと署名ハッシュ . . . . . . . . . . . . . . .   7
+     5.2.  移行  . . . . . . . . . . . . . . . . . . . . . . .   7
+     5.3.  PKCS #1 v1.5 パディングと署名の検証  . . . . .   7
+   6.  リファレンス  . . . . . . . . . . . . . . . . . . . . . . . . .   8
+     6.1.  標準のリファレンス  . . . . . . . . . . . . . . . . . .   8
+     6.2.  情報のリファレンス . . . . . . . . . . . . . . . . .   8
+   Acknowledgments . . . . . . . . . . . . . . . . . . . . . . . . .   9
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   9
+
+
+
+
+Bider                        Standards Track                    [Page 2]
+
+RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
+
+
+1概要と原理
+
+   セキュア シェル (SSH) は, インターネットでの安全な通信のための一般的なプロトコルだ.  [RFC4253] にて, SSH はもともと RSA と SHA-1 を用いるクライアントとサーバ認証のための公開鍵アルゴリズム "ssh-rsa" と 1024-bit DSA と SHA-1 を用いる "ssh-dss" を定義した.  これらのアルゴリズムは現在欠陥があると考えられている.  アメリカ政府での利用では, NIST は 1024-bit RSA と DSA の利用と SHA-1 の署名への利用を許可していない [NIST.800-131A].
+
+   このメモは, RFC 4252 と 4253 を更新して, SHA-256 と SHA-512 を用いる新しい RSA 鍵と既存の鍵の相互利用ができる新しい公開鍵アルゴリズムを定義する.
+
+1.1.  要件に関する用語
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, ここで示しているようにすべて大文字で出現した場合のみ, BCP 16 [RFC2119] [RFC8174] で記述されているように解釈される. 
+
+1.2.  通信のエンコーディングの用語
+
+   この文書での通信エンコーディングの種類 -- "boolean", "byte", "string", "mpint" は [RFC4251] に記述されている意味を持つ
+
+2.  公開鍵の形式 対 公開鍵アルゴリズム 
+
+   [RFC4252] で,  "public key algorithm"  の概念は, 1つのアルゴリズム名と次のものとの関係を確立するのに用いられている:
+
+   A.  秘密/公開鍵ペアを生成し検証するのに用いられる手続き
+   B.  公開鍵を符号化するのに用いられる形式
+   C.  署名を計算し符号化し検証するのに用いられる手続き
+
+   この文書では, A と B だけを識別するために用語 "public key format" を用いる.  用語 "public key algorithm" は 3つすべての面, A, B, C を識別するのに用い続ける.
+
+
+
+
+
+
+
+
+
+
+
+Bider                        Standards Track                    [Page 3]
+
+RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
+
+
+3.  新しい RSA 公開鍵アルゴリズム
+
+   このメモは, 公開鍵アルゴリズムの利用をSSHの中でどのように表明するかを指定するのに, [RFC4253] スタイルと命名規則を採用する.
+
+   次の新しい公開鍵アルゴリズムが定義される:
+
+     rsa-sha2-256        RECOMMENDED    sign    Raw RSA key
+     rsa-sha2-512        OPTIONAL       sign    Raw RSA key
+
+   これらのアルゴリズムは, サーバ認証のための SSH トランスポート層 [RFC4253] の利用にもクライアント認証のための認証層 [RFC4252] の利用にも適している.
+
+   RSA の鍵はハッシュ関数の選択には依存しないので, 新しい公開鍵アルゴリズムは [RFC4253] で定義された ssh-rsa 公開鍵形式を再利用する.
+
+   string    "ssh-rsa"
+   mpint     e
+   mpint     n
+
+   "ssh-rsa" というエンコードされた文字列も含めて, "ssh-rsa" 形式のすべての面が保持される.  これにより, すでに信用された鍵指紋を再エンコードしたり影響を与えたりすることなく新しい公開鍵アルゴリズムを既存の RSA 鍵と一緒に利用できる.
+
+   これらのアルゴリズムを用いる署名と検証は, SHA-2 [SHS] をハッシュとして用いる [RFC8017] の RSASSA-PKCS1-v1_5 方式に従って実行される.
+
+   "rsa-sha2-256" アルゴリズムには, , SHA-256 ハッシュが用いられる.
+   "rsa-sha2-512" アルゴリズムには, , SHA-512 ハッシュが用いられる.
+
+   署名の結果は次のようにエンコードされる:
+
+   string   "rsa-sha2-256" / "rsa-sha2-512"
+   string    rsa_signature_blob
+
+   'rsa_signature_blob' の値は, (RSASSA-PKCS1-v1_5 の出力の) オクテット文字列 S と含む文字列としてエンコードされる. またそれは, RSA モジュラスとして(オクテットで)同じ長さの文字列となる.  S が先頭に0が続く場合, それらを除いて S のより短いエンコード結果を送ってしまう既存の署名器が存在する.  検証器は, 1つ以上の先頭の0が省略されたより短い S のエンコード結果を受け入れてもよい.
+
+
+
+
+
+
+Bider                        Standards Track                    [Page 4]
+
+RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
+
+
+3.1.  サーバ認証への利用
+
+   これらのアルゴリズムの1つないし両方をサーバ認証でサポートや優先順位を示すのに, SSH のクライアントやサーバは, 1つないし両方のアルゴリズムの名前, "rsa-sha2-256" と "rsa-sha2-512", を SSH_MSG_KEXINT パケット [RFC4253] の server_host_key_algorithms name-list フィールドに含める.  2つのホスト鍵アルゴリズムのうちの1つが交渉されると, サーバは 交渉された鍵交換法の一部として (SSH_MSG_KEXDH_REPLY など) "ssh-rsa" 公開鍵を送る. また サーバは適切な署名アルゴリズム名 --"rsa-sha2-256" ないし "rsa-sha2-512" を用いて署名をエンコードする.
+
+3.2.  クライアント認証への利用
+
+   このアルゴリズムをクライアント認証で利用するには, SSH のクライアントは "rsa-sha2-256" ないし "rsa-sha2-512 の値で "pubkey" メソッドと "public key algorithm name" をエンコードした SSH_MSG_USERAUTH_REQUEST メッセージ [RFC4252] を送る .  "public key blob" フィールドは, "ssh-rsa" 公開鍵形式を用いて RSA 公開鍵をエンコードする.
+
+   たとえば, [RFC4252] と [RFC4253] で定義されているように, "rsa-sha2-512" 署名を用いた SSH "publickey" 認証リクエストは, 次のように正しくエンコードされるだろう:
+
+     byte      SSH_MSG_USERAUTH_REQUEST
+     string    user name
+     string    service name
+     string    "publickey"
+     boolean   TRUE
+     string    "rsa-sha2-512"
+     string    public key blob:
+         string    "ssh-rsa"
+         mpint     e
+         mpint     n
+     string    signature:
+         string    "rsa-sha2-512"
+         string    rsa_signature_blob
+
+   クライアントが signature フィールドを含めるなら, クライアントは SSH_MSG_USERAUTH_REQUEST での署名と同じアルゴリズム名を含める必要がある. "rsa-sha2-256" か "rsa-sha2-512" だ.
+   サーバが一致しないリクエストを受け取ったなら, サーバは,  認証の失敗や切断に限らない任意の認証ペナルティを課してもよい.
+
+
+
+
+
+
+Bider                        Standards Track                    [Page 5]
+
+RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
+
+
+   OpenSSH 7.2 (7.2p2 は除く) は,  SSH_MSG_USERAUTH_REQUEST のアルゴリズムが "rsa-sha2-256" か "rsa-sha2-512" の場合に "ssh-rsa" ののように署名の中のアルゴリズムを間違えてエンコードする.  この場合， 署名は実際には SHA-256 か SHA-512 を利用する.  サーバは, その必要がなくても, 誠実な実装によるものと思われ受け入れても安全と考えらえれるこのような変種を受け入れてもよい.
+
+3.3.  サーバでサポートされている公開鍵アルゴリズムの発見
+
+   SSH サーバがサポートしていない公開鍵アルゴリズムを試行しようとするクライアントに対して認証ペナルティを課すサーバが存在することが実装の経験から示されている.
+
+   rsa-sha2-* 署名をクライアント認証で受け付けるサーバは, [RFC8308] で定義された拡張交渉メカニズムを "server-sig-algs" 拡張を特に含んで実装する必要がある.
+
+   "server-sig-algs" を実装していないサーバに対して RSA 鍵で認証をする際, クライアントは認証ペナルティを避けるため "ssh-rsa" 署名をデフォルトとしてもよい. "ssh-rsa" を無効にできる保証が得られるほど新しい rsa-sha2-* アルゴリズムが十分に広く普及したなら, クライアントは新しいアルゴリズムのうちの1つをデフォルトとしてもよい.
+
+4.  IANA の考慮
+
+   IANA は [RFC4250] で確立された "Secure Shell (SSH) Protocol Parameters" レジストリを更新し, "Public Key Algorithm Names" テーブル [IANA-PKA] を次のように拡張する.
+
+   -  "Public Key Algorithm Name" カラムのすぐ右に "Public Key Format" カラムを追加する.  既存のエントリには,"Public Key Format" カラムには "Public Key Algorithm Name" と同じ値を割り当てる.
+
+   -  既存の "ssh-rsa" エントリのすぐ次に, 2つの兄弟エントリを追加する:
+
+      P. K. Alg. Name    P. K. Format      Reference   Note
+      rsa-sha2-256       ssh-rsa           RFC 8332    Section 3
+      rsa-sha2-512       ssh-rsa           RFC 8332    Section 3
+
+
+
+
+
+
+
+
+
+Bider                        Standards Track                    [Page 6]
+
+RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
+
+
+5.  セキュリティの考察
+
+   [RFC4251] のセキュリティの考察がこの文書に適用される.
+
+5.1.  鍵サイズと署名ハッシュ
+
+   National Institute of Standards and Technology (NIST) Special
+   Publication 800-131A, Revision 1 [NIST.800-131A] は, アメリカ政府向けの用途には 2048 ビットよりも小さい RSA と DSA 鍵を許可していない.  同じ文書で, NIST のプロトコル特有のガイダンスがある場合を除いて, 電子署名の生成に SHA-1 ハッシュ関数を許可していない. 
+
+   アメリカ政府向けでない場合もこの助言に従うのが賢明だ.
+
+5.2.  移行
+
+   この文書は, 改善されたアルゴリズムへのゆるやかで互換性のある以降のほうが突然で非互換の以降よりもよく受け入れられるだろうという前提に基づく.  SSH の実装はあたらしい構成とより "ssh-rsa" のみをサポートするより古いバージョンが共存できるよう, 新しい RSA 公開鍵アルゴリズムのサポートを  SSH_MSG_EXT_INFO と "server-slg-slgs" 拡張に一緒に追加するよう助言する.  にもかかわらず, 実装は, 新しい RSA 署名アルゴリズムが広く採用されたと実装者が信じたらすぐに "ssh-rsa" をデフォルトの設定で無効にし始める必要がある.
+
+5.3.  PKCS #1 v1.5 パディングと署名の検証 
+
+   この文書は RSASSA-PKCS1-v1_5 署名パディングを指定している. なぜならば:
+
+   (1)  RSASSA-PSS はすべての実装で普遍的に利用可能ではない;
+   (2)  PKCS #1 v1.5 は既存の SSH の実装で広くサポートされている;
+   (3)  PKCS #1 v1.5 は この方式での利用で安全ではないとは知られていない.
+
+   実装者は RSASSA-PKCS1-v1_5 パディングを用いた署名は, RSA 鍵を署名に適用したり またハッシュを抽出するために出力をパースするために検証されてはならない.  エンコーディングをパースしたり変えたりすることで欠陥を悪用する機会を攻撃者に与える可能性がある.  検証者は, 代わりに RSASSA-PKCS1-v1_5 パディングを期待されるハッシュに適用し, RSA の操作による出力とエンコードされたバイト列を比較する必要がある.
+
+
+
+
+
+
+
+Bider                        Standards Track                    [Page 7]
+
+RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
+
+
+6.  References
+
+6.1.  Normative References
+
+   [SHS]      NIST, "Secure Hash Standard (SHS)", FIPS Publication
+              180-4, August 2015,
+              <http://dx.doi.org/10.6028/NIST.FIPS.180-4>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC4251]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Architecture", RFC 4251, DOI 10.17487/RFC4251,
+              January 2006, <https://www.rfc-editor.org/info/rfc4251>.
+
+   [RFC4252]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Authentication Protocol", RFC 4252, DOI 10.17487/RFC4252,
+              January 2006, <https://www.rfc-editor.org/info/rfc4252>.
+
+   [RFC4253]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Transport Layer Protocol", RFC 4253, DOI 10.17487/RFC4253,
+              January 2006, <https://www.rfc-editor.org/info/rfc4253>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+   [RFC8308]  Bider, D., "Extension Negotiation in the Secure Shell
+              (SSH) Protocol", RFC 8308, DOI 10.17487/RFC8308, March
+              2018, <https://www.rfc-editor.org/info/rfc8308>.
+
+6.2.  Informative References
+
+   [NIST.800-131A]
+              NIST, "Transitions: Recommendation for Transitioning the
+              Use of Cryptographic Algorithms and Key Lengths", NIST
+              Special Publication 800-131A, Revision 1,
+              DOI 10.6028/NIST.SP.800-131Ar1, November 2015,
+              <http://nvlpubs.nist.gov/nistpubs/SpecialPublications/
+              NIST.SP.800-131Ar1.pdf>.
+
+   [RFC4250]  Lehtinen, S. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Assigned Numbers", RFC 4250,
+              DOI 10.17487/RFC4250, January 2006,
+              <https://www.rfc-editor.org/info/rfc4250>.
+
+
+
+
+Bider                        Standards Track                    [Page 8]
+
+RFC 8332        Use of RSA Keys with SHA-256 and SHA-512      March 2018
+
+
+   [RFC8017]  Moriarty, K., Ed., Kaliski, B., Jonsson, J., and A. Rusch,
+              "PKCS #1: RSA Cryptography Specifications Version 2.2",
+              RFC 8017, DOI 10.17487/RFC8017, November 2016,
+              <https://www.rfc-editor.org/info/rfc8017>.
+
+   [IANA-PKA]
+              IANA, "Secure Shell (SSH) Protocol Parameters",
+              <https://www.iana.org/assignments/ssh-parameters/>.
+
+Acknowledgments
+
+   Thanks to Jon Bright, Niels Moeller, Stephen Farrell, Mark D.
+   Baushke, Jeffrey Hutzelman, Hanno Boeck, Peter Gutmann, Damien
+   Miller, Mat Berchtold, Roumen Petrov, Daniel Migault, Eric Rescorla,
+   Russ Housley, Alissa Cooper, Adam Roach, and Ben Campbell for
+   reviews, comments, and suggestions.
+
+Author's Address
+
+   Denis Bider
+   Bitvise Limited
+   4105 Lombardy Court
+   Colleyville, Texas  76034
+   United States of America
+
+   Email: ietf-ssh3@denisbider.com
+   URI:   https://www.bitvise.com/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Bider                        Standards Track                    [Page 9]
+

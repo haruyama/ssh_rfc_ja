@@ -550,7 +550,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
    この鍵フォーマットでの署名と検証は, SHA-1 ハッシュ [FIPS-180-2] を用いるDigital Signature Standard [FIPS-186-2] に従って行なわれる.
 
-   署名の結果次のようにエンコードされる:
+   署名の結果は次のようにエンコードされる:
 
       string    "ssh-dss"
       string    dss_signature_blob
@@ -567,7 +567,7 @@ RFC 4253              SSH Transport Layer Protocol          January 2006
 
    この鍵フォーマットでの署名と検証は, SHA-1 ハッシュを用いる RSASSA-PKCS1-v1_5 scheme in [RFC3447] に従って行なわれる.
 
-   署名の結果次のようにエンコードされる:
+   署名の結果は次のようにエンコードされる:
 
       string    "ssh-rsa"
       string    rsa_signature_blob
