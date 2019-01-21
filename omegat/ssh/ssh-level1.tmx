@@ -6182,8 +6182,8 @@
       send the message at this time; if sent, it may be delayed by the
       network.</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20181101T114140Z" creationid="haruyama" creationdate="20181101T114140Z">
-        <seg>クライアントは, これに頼ることはできない. なぜなら, サーバはこの時にメッセージを送ることを要求されていないからだ. 送られたとしても, ネットワークにより遅延するかもしれない.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20190121T115256Z" creationid="haruyama" creationdate="20181101T114140Z">
+        <seg>クライアントは, これに頼ることはできない. なぜなら, サーバはこのときにメッセージを送ることを要求されていないからだ. 送られたとしても, ネットワークにより遅延するかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9859,8 +9859,8 @@
    allowed to list only the contents of a namespace but not add or
    remove keys or certificates to/from it.</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20180904T115025Z" creationid="haruyama" creationdate="20180904T115025Z">
-        <seg>例えば, あるユーザが名前空間の内容を列挙できるが, その名前空間に対して鍵や証明書を追加したり削除したりできないという具合だ.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20190121T115352Z" creationid="haruyama" creationdate="20180904T115025Z">
+        <seg>たとえば, あるユーザが名前空間の内容を列挙できるが, その名前空間に対して鍵や証明書を追加したり削除したりできないという具合だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13616,8 +13616,8 @@
    exists in the given namespace, the server MUST return
    SSH_PUBLICKEY_CERTIFICATE_ALREADY_PRESENT.</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20180821T044427Z" creationid="haruyama" creationdate="20180821T044427Z">
-        <seg>overwrite フィールドが false で指定された証明書が与えられた namespace に既に存在する場合, サーバは SSH_PUBLICKEY_CERTIFICATE_ALREADY_PRESENT を返さなければならない.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20190121T115413Z" creationid="haruyama" creationdate="20180821T044427Z">
+        <seg>overwrite フィールドが false で指定された証明書が与えられた namespace にすでに存在する場合, サーバは SSH_PUBLICKEY_CERTIFICATE_ALREADY_PRESENT を返さなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13626,8 +13626,8 @@
    key already exists in the given namespace but cannot be overwritten,
    the server MUST return SSH_PUBLICKEY_ACCESS_DENIED.</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20180821T044651Z" creationid="haruyama" creationdate="20180821T044614Z">
-        <seg>overwrite フィールドが true で指定された鍵が与えられた namespace に既に存在しかつ上書きできない場合, サーバは SSH_PUBLICKEY_ACCESS_DENIED を返さなければならない.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20190121T115416Z" creationid="haruyama" creationdate="20180821T044614Z">
+        <seg>overwrite フィールドが true で指定された鍵が与えられた namespace にすでに存在しかつ上書きできない場合, サーバは SSH_PUBLICKEY_ACCESS_DENIED を返さなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14286,8 +14286,8 @@
    receiving SSH_MSG_USERAUTH_SUCCESS, but not necessarily as the first
    such outgoing message:</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20181201T083852Z" creationid="haruyama" creationdate="20181201T083852Z">
-        <seg>この拡張が有効なら, クライアントは SSH_MSG_USERAUTH_SUCCESS を受け取った後に合理的な数の送信 SSH メッセージの内に次のメッセージを送信しなければならない. なお 送信メッセージの一番目である必要がない:</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20190121T115205Z" creationid="haruyama" creationdate="20181201T083852Z">
+        <seg>この拡張が有効なら, クライアントは SSH_MSG_USERAUTH_SUCCESS を受け取った後に合理的な数の送信 SSH メッセージの内に次のメッセージを送信しなければならない. なお 送信メッセージの1番目である必要がない:</seg>
       </tuv>
     </tu>
     <tu>
@@ -18008,8 +18008,8 @@
    namespaces, but this must be done with several separate
    add-certificate requests.</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20180821T044215Z" creationid="haruyama" creationdate="20180821T044215Z">
-        <seg>同じユーザが同じ証明書を複数の namespace に保存することができるが, それは別々の add-certificate 要求で為されなければならない.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20190121T115224Z" creationid="haruyama" creationdate="20180821T044215Z">
+        <seg>同じユーザが同じ証明書を複数の namespace に保存できるが, それは別々の add-certificate 要求で為されなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33767,8 +33767,8 @@ Category: Standards Track                                     W. Griffin
    by the server by namespace (e.g., list all public keys in the SSH
    namespace).</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20180730T125623Z" creationid="haruyama" creationdate="20180730T125612Z">
-        <seg>この新しいプロトコルは, 公開鍵の追加/削除, 証明書の追加/削除, サーバによって知られている名前空間単位の現在の鍵と証明書の集合の列挙(例えば SSH 名前空間のすべての公開鍵の列挙) のためのサーバに依存しない機構をクライアントに提供する.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20190121T115332Z" creationid="haruyama" creationdate="20180730T125612Z">
+        <seg>この新しいプロトコルは, 公開鍵の追加/削除, 証明書の追加/削除, サーバによって知られている名前空間単位の現在の鍵と証明書の集合の列挙(たとえば SSH 名前空間のすべての公開鍵の列挙) のためのサーバに依存しない機構をクライアントに提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -36967,8 +36967,8 @@ Category: Standards Track                                     W. Griffin
    Interoperability Protocol (KMIP), Simple Network Management Protocol
    (SNMP)).</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20180730T125405Z" creationid="haruyama" creationdate="20180730T125405Z">
-        <seg>これらの名前空間は, サーバ上で動く任意のアプリケーション(例えば, SSH, 鍵管理相互運用性プロトコル (KMIP), シンプルネットワーク管理プロトコル (SNMP)) を設定するクライアントを許可するために, サーバによって用いられる.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20190121T115316Z" creationid="haruyama" creationdate="20180730T125405Z">
+        <seg>これらの名前空間は, サーバ上で動く任意のアプリケーション(たとえば, SSH, 鍵管理相互運用性プロトコル (KMIP), シンプルネットワーク管理プロトコル (SNMP)) を設定するクライアントを許可するために, サーバによって用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37511,8 +37511,8 @@ Category: Standards Track                                     W. Griffin
         <seg>This allows a server to reveal support for additional extensions
       that it was unwilling to reveal to an unauthenticated client.</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20181103T134200Z" creationid="haruyama" creationdate="20181103T134200Z">
-        <seg>これにより, 認証されていないクライアントに漏らしたくない追加の拡張機能のサポートをサーバは(特定のクライアントに)明らかにすることができる. </seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20190121T115233Z" creationid="haruyama" creationdate="20181103T134200Z">
+        <seg>これにより, 認証されていないクライアントに漏らしたくない追加の拡張機能のサポートをサーバは(特定のクライアントに)明らかにできる. </seg>
       </tuv>
     </tu>
     <tu>
@@ -40196,8 +40196,8 @@ Category: Standards Track                                     W. Griffin
         <seg>This response MUST include at least the "namespace" attribute so that
    a client can tell in which namespace the certificate resides.</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20180827T113328Z" creationid="haruyama" creationdate="20180827T113328Z">
-        <seg>この応答は, 証明書がどの名前空間にいるのかクライアントがわかるように 少なくとも "namespace" 属性を含んでいなければならない.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20190121T115428Z" creationid="haruyama" creationdate="20180827T113328Z">
+        <seg>この応答は, 証明書がどの名前空間にいるのかクライアントが分かるように 少なくとも "namespace" 属性を含んでいなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40865,8 +40865,8 @@ Category: Standards Track                                     W. Griffin
         <seg>To help determine what namespaces already exist on a server, a
    new operation "list-namespaces" is defined in Section 4.</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20180820T121629Z" creationid="haruyama" creationdate="20180820T121629Z">
-        <seg>サーバ上にどの namescpace が既に存在するか判断するのを助けるために, 4 節で新しい操作 "list-namespaces" が定義されている.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20190121T115407Z" creationid="haruyama" creationdate="20180820T121629Z">
+        <seg>サーバ上にどの namescpace がすでに存在するか判断するのを助けるために, 4 節で新しい操作 "list-namespaces" が定義されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -41226,8 +41226,8 @@ Category: Standards Track                                     W. Griffin
    on a server (e.g., SSH, SSL, KMIP [8]) that use keys and
    certificates, as well as the applications that run on a server.</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20180816T072232Z" creationid="haruyama" creationdate="20180816T072039Z">
-        <seg>アップロードされた鍵と証明書は, 鍵や証明書を利用するサーバ上で実行されるすべてのプロトコル(例えば, SSH, SSL KMIP [8])とサーバ上で実行されるアプリケーションを設定できなければならない.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20190121T115344Z" creationid="haruyama" creationdate="20180816T072039Z">
+        <seg>アップロードされた鍵と証明書は, 鍵や証明書を利用するサーバ上で実行されるすべてのプロトコル(たとえば, SSH, SSL KMIP [8])とサーバ上で実行されるアプリケーションを設定できなければならない.</seg>
       </tuv>
     </tu>
     <tu>
