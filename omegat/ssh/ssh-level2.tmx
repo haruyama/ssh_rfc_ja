@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tmx SYSTEM "tmx14.dtd">
 <tmx version="1.4">
-  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="3.6.0_10_r10436" segtype="sentence" srclang="EN-US"/>
+  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="4.3.2_0_6a661c5e" segtype="sentence" srclang="EN-US"/>
   <body>
 <!-- Default translations -->
     <tu>
@@ -1111,10 +1111,8 @@
                              characters by preceding their lowercase
                              equivalents with "\".</seg>
       </tuv>
-      <tuv xml:lang="JA">
-        <seg>52    XCASE       (訳注: 小文字のみ有効な場合に)小文字の前に "\" を付けることで大文字の入出力を有効にする.Enable input and output of uppercase
-                            characters by preceding their lowercase
-                            equivalents with "\".</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T031528Z">
+        <seg>52    XCASE       (訳注: 小文字のみ有効な場合に)小文字の前に "\" を付けることで大文字の入出力を有効にする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1123,7 +1121,7 @@
                             characters by preceding their lowercase
                             equivalents with "\".</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20190203T114733Z">
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T031845Z">
         <seg>52    XCASE       (訳注: 小文字のみ有効な場合に)小文字の前に "\" を付けることで大文字の入出力を有効にする.</seg>
       </tuv>
     </tu>
@@ -1131,7 +1129,7 @@
       <tuv xml:lang="EN-US">
         <seg>53    ECHO        Enable echoing.</seg>
       </tuv>
-      <tuv xml:lang="JA">
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T031811Z">
         <seg>53    ECHO        エコーを有効にする.</seg>
       </tuv>
     </tu>
@@ -2368,12 +2366,30 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Accordingly, [RFC4253] is updated to note the
+   deprecation of the RC4 ciphers, and [RFC4345] is moved to Historic
+   status, as all ciphers it specifies MUST NOT be used.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062840Z" creationid="haruyama" creationdate="20200513T062840Z">
+        <seg>したがって, [RFC4253] は RC4 暗号の非推奨を注釈することで更新され, [RFC4345] は, 歴史的状態に移動される. ([RFC4345] で) 指定されたすべての暗号は利用してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Accordingly, implementers are encouraged to use high-assurance
    methods when implementing this specification and other parts of the
    Secure Shell protocol suite.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110928T074922Z">
         <seg>従って, この仕様とセキュアシェルプロトコルスイートの他の部分を実装する際に, 高い品質の保証の方法を用いることが実装者に推奨される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Accordingly, this RFC updates RFC 4253.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T025619Z" creationid="haruyama" creationdate="20200511T025619Z">
+        <seg>したがって, この RFC は RFC 4253 を更新する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2738,6 +2754,24 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110609T052829Z">
         <seg>さらに, 基底のMACがプロトコルのペイロードのデータについての情報を漏らしはじめる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Additionally, this
+   document describes the use of Ed448 and formalizes the use of the
+   name "ssh-ed448".</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T051129Z" creationid="haruyama" creationdate="20200511T051129Z">
+        <seg>加えて, この文書では Ed448 の利用についても記述し, "ssh-ed448" の名前の利用も規定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Additionally, this document describes another public key algorithm.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T051425Z" creationid="haruyama" creationdate="20200511T051420Z">
+        <seg>加えて, この文書はもう1つ公開鍵アルゴリズムを記述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3525,6 +3559,17 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Alternative implementations of these
+   functions SHOULD abort when either the client or the server input
+   forces the shared secret to one of a small set of values, as
+   described in Sections 6 and 7 of [RFC7748].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T050111Z" creationid="haruyama" creationdate="20200513T050051Z">
+        <seg>これらの関数の代替の実装は, クライアントかサーバの入力が共有の秘密に値の小さな集合の1つを強制するならば, [RFC7748] に記述されているように, 中止する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Alternatively,
    it may be some attempt at providing something practical and
    immediately useful to the administrators of the system so they don't
@@ -3722,6 +3767,17 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110930T144624Z">
         <seg>サーバ公開署名 ECDSA 鍵を含む X.509v3 証明書と, 新しく確立した共有秘密値から導出される交換ハッシュに対する ECDSA 署名が, クライアントに対してサーバを認証するのに用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>An abort for these purposes is defined as a
+   disconnect (SSH_MSG_DISCONNECT) of the session and SHOULD use the
+   SSH_DISCONNECT_KEY_EXCHANGE_FAILED reason for the message
+   [IANA-REASON].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T050306Z" creationid="haruyama" creationdate="20200513T050306Z">
+        <seg>これらの目的での中止は, セッションの切断 (SSH_MSG_DISCONNECT) で定義され, メッセージに対して理由 SSH_DISCONNECT_KEY_EXCHANGE_FAILED を用いる必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4239,6 +4295,24 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110707T074356Z">
         <seg>任意の長さのバイナリ文字列. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Arcfour (and RC4) has known weaknesses [RFC7465]
+   |  [RFC8429] and MUST NOT be used.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T063545Z" creationid="haruyama" creationdate="20200513T063545Z">
+        <seg>Arcfour (と RC4)は既知の弱点 [RFC7465]  [RFC8429] があり, 利用してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Arcfour (and RC4) has problems with weak
+   |  keys, and should be used with caution.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T063350Z" creationid="haruyama" creationdate="20200513T063350Z">
+        <seg>Arcfour (と RC4) は弱い鍵の問題があり, 注意して利用されるべきだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6176,6 +6250,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Clients and servers MUST
+   also abort if the length of the received public keys are not the
+   expected lengths.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T050145Z" creationid="haruyama" creationdate="20200513T050145Z">
+        <seg>クライアントとサーバは, 受信した公開鍵の長さが期待した長さでない場合も中止しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Clients cannot rely on this because the server is not required to
       send the message at this time; if sent, it may be delayed by the
       network.</seg>
@@ -6934,6 +7018,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Conventions Used in This Document
+     2.1.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T030419Z" creationid="haruyama" creationdate="20200511T030419Z">
+        <seg>この文書で用いる表記
+     2.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Conventions Used in This Document .</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180908T014314Z" creationid="haruyama" creationdate="20180908T014314Z">
@@ -7146,6 +7240,37 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110621T013726Z">
         <seg>現在, (この場面で)唯一定義されたサービス名は "ssh-connection" で, SSH コネクションプロトコル [SSH-CONNECT] を参照する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Curve25519 with SHA-256 provides strong (~128 bits) security, is
+   efficient on a wide range of architectures, and has characteristics
+   that allow for better implementation properties compared to
+   traditional elliptic curves.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T054424Z" creationid="haruyama" creationdate="20200513T054424Z">
+        <seg>SHA-256 を利用する Curve25519 は, 強い (~128 ビット) のセキュリティを提供する.  広い範囲のアーキテクチャで効率的で, 伝統的な楕円曲線と比較してよりよい実装の性質を可能にする性質を持っている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Curve25519/448 outputs a binary string X, which is the 32- or 56-byte
+   point obtained by scalar multiplication of the other side's public
+   key and the local private key scalar.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T051022Z" creationid="haruyama" creationdate="20200513T051022Z">
+        <seg>Curve25519/448 は, バイナリ文字列 X を出力する. もう一方の側の公開鍵とローカルの秘密鍵スカラのスカラ乗算によって得られた 32 ないし 56 バイトの点だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Curve448 with SHA-512 provides stronger
+   (~224 bits) security with similar implementation properties; however,
+   it has not received the same cryptographic review as Curve25519.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T054545Z" creationid="haruyama" creationdate="20200513T054433Z">
+        <seg>SHA-512 を 利用する Curve448 は,  同様の実装の性質を持ちより強い (~224 ビット) セキュリティを提供する. しかし, Curve25519 ど同様の暗号学レビューを受けていない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7443,6 +7568,14 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>この種のサービス妨害攻撃(ワイヤカッター)はほぼ避けられない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Deprecating RC4 in Secure Shell (SSH)</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062118Z" creationid="haruyama" creationdate="20200513T062106Z">
+        <seg>セキュアシェル (SSH) での RC4 の非推奨</seg>
       </tuv>
     </tu>
     <tu>
@@ -8309,11 +8442,65 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Ed25519 Public Key with SHA-256 Fingerprint</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T061656Z" creationid="haruyama" creationdate="20200511T061656Z">
+        <seg>SHA-256 指紋を利用する Ed25519 公開鍵 </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Ed25519 Public Key with SHA-256 Fingerprint .....................2
+   3.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T061046Z" creationid="haruyama" creationdate="20200511T060924Z">
+        <seg>SHA-256 指紋を利用する Ed25519 公開鍵  .....................2
+   3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Ed25519 [RFC8032] is a
+   digital signature system.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T050814Z" creationid="haruyama" creationdate="20200511T050814Z">
+        <seg>Ed25519 [RFC8032] は電子署名のシステムだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Ed25519 and Ed448 Public Key Algorithms for the Secure Shell (SSH)
+                                Protocol</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T025446Z" creationid="haruyama" creationdate="20200511T025435Z">
+        <seg>セキュアシェル (SSH) プロトコルのための Ed25519 と Ed448 公開鍵アルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Ed25519 keys have key type "ssh-ed25519" and are defined in
    [I-D.ietf-curdle-ssh-ed25519].</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160529T111655Z" creationid="haruyama" creationdate="20160529T111648Z">
         <seg>Ed25519 鍵は "ssh-ed25519" 鍵タイプを持つ. [I-D.ietf-curdle-ssh-ed25519] で定義されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Ed25519 signatures are verified according to the procedure in
+   [RFC8032], Section 5.1.7.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T053525Z" creationid="haruyama" creationdate="20200511T053501Z">
+        <seg>Ed25519 署名は,  [RFC8032] 5.1.7 節の手順に従って検証される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Ed448 signatures are verified according to the procedure in
+   [RFC8032], Section 5.2.7.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T053546Z" creationid="haruyama" creationdate="20200511T053546Z">
+        <seg>Ed448 署名は [RFC8032] 5.2.7 節の手順に従って検証される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9506,6 +9693,18 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>For Curve25519 with
+   SHA-256 [RFC6234][SHS], the algorithm described is equivalent to the
+   privately defined algorithm "curve25519-sha256@libssh.org", which at
+   the time of publication was implemented and widely deployed in libssh
+   [libssh] and OpenSSH [OpenSSH].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T131238Z" creationid="haruyama" creationdate="20200511T131238Z">
+        <seg>SHA-256 [RFC6234][SHS] を利用する Curve25519 について, 記述されるアルゴリズムは,  私的に定義されたアルゴリズム "curve25519-sha256@libssh.org" と同等だ. この文書の発行の時点で, libssh [libssh] と OpenSSH [OpenSSH] によって実装され広く配置されている</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>For IP-based networks, it is anticipated that each element
    of the "from" parameter will take the form of a specific IP address
    or hostname.</seg>
@@ -9587,6 +9786,15 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110425T052921Z">
         <seg>この文書で追加された3つのクラス(ECDSAに関連する公開鍵アルゴリズムと, ECDHに関連する鍵交換, ECMQVに関連する認証付き鍵交換)のすべてについて, 暗号系を破る現在もっともよく知られた技術は, 楕円曲線離散対数問題(ECDLP)を解くことだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>For backwards-compatibility reasons, it
+   was decided not to address this potential problem.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T055120Z" creationid="haruyama" creationdate="20200513T055120Z">
+        <seg>後方互換性のため, この潜在的な問題には対処しないことが決定された.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10366,6 +10574,15 @@
     <tu>
       <tuv xml:lang="EN-US">
         <seg>Further information on
+   BCPs is available in Section 2 of RFC 7841.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062304Z" creationid="haruyama" creationdate="20200513T062304Z">
+        <seg>BCPs (Best Current Practices) についてさらなる情報は RFC 7841 の 2節にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Further information on
    Internet Standards is available in Section 2 of RFC 5741.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20131203T021810Z" creationid="haruyama" creationdate="20131203T021810Z">
@@ -11027,6 +11244,42 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>ここで, パラメータ 'e', 'n' は署名のkey blob を生成する</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Here, 'key' is the 32-octet public key described in [RFC8032],
+   Section 5.1.5.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T051726Z" creationid="haruyama" creationdate="20200511T051726Z">
+        <seg>ここで, 'key' は [RFC8032] 5.1.5 節で記述された 32-オクテットの公開鍵だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Here, 'key' is the 57-octet public key described in [RFC8032],
+   Section 5.2.5.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T051829Z" creationid="haruyama" creationdate="20200511T051829Z">
+        <seg>ここで, 'key' は [RFC8032] 5.1.5 節で記述された 57-オクテットの公開鍵だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Here, 'signature' is the 114-octet signature produced in accordance
+   with [RFC8032], Section 5.2.6.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T053249Z" creationid="haruyama" creationdate="20200511T053249Z">
+        <seg>ここで, 'signature' は  [RFC8032] 5.2.6 節に従って生成される 114-オクテットの署名だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Here, 'signature' is the 64-octet signature produced in accordance
+   with [RFC8032], Section 5.1.6.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T052954Z" creationid="haruyama" creationdate="20200511T052954Z">
+        <seg>ここで, 'signature' は [RFC8032] 5.1.6 節に従って生成される 64-オクテットの署名だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11781,6 +12034,36 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>IANA Considerations
+   10.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T030531Z" creationid="haruyama" creationdate="20200511T030531Z">
+        <seg>IANA の考察
+   10.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>IANA Considerations
+   4.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062348Z" creationid="haruyama" creationdate="20200513T062348Z">
+        <seg>IANA の考察
+   4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>IANA Considerations
+   6.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T130334Z" creationid="haruyama" creationdate="20200511T130334Z">
+        <seg>IANA の考察
+   6.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>IANA Considerations  .</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110720T125636Z">
@@ -11793,6 +12076,16 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160526T115348Z" creationid="haruyama" creationdate="20160526T115246Z">
         <seg>IANA の考察 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>IANA Considerations .............................................3
+   5.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T060941Z" creationid="haruyama" creationdate="20200511T060941Z">
+        <seg>IANA の考察  .............................................3
+   5.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11971,6 +12264,16 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>IANA has added "curve25519-sha256" and "curve448-sha512" to the "Key
+   Exchange Method Names" registry for SSH [IANA-KEX] that was created
+   in Section 4.10 of [RFC4250].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T055625Z" creationid="haruyama" creationdate="20200513T055539Z">
+        <seg>IANA は "curve25519-sha256" と "curve448-sha512" を [RFC4250] の 4.10 節で作成された SSH のための "Key Exchange Method Names" レジストリ [IANA-KEX] に追加した.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>IANA has added the following entries to the "Key Exchange Method
    Names" registry [IANA-KEX]:</seg>
       </tuv>
@@ -11986,6 +12289,34 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20181222T083207Z" creationid="haruyama" creationdate="20181222T083129Z">
         <seg>IANA は "Secure Shell (SSH) Protocol Parameters" レジストリ [RFC4250] の "Message Numbers" レジストリ [IANA-M] に次のエントリを追加した:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>IANA has added the following entry to "Public Key Algorithm Names" in
+   the "Secure Shell (SSH) Protocol Parameters" registry [IANA-SSH]:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T055053Z" creationid="haruyama" creationdate="20200511T055020Z">
+        <seg>IANA は "Secure Shell (SSH) Protocol Parameters" レジストリ [IANA-SSH] の"Public Key Algorithm Names" に次のエントリを追加した: </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>IANA has added the following entry to "SSHFP RR Types for public key
+   algorithms" in the "DNS SSHFP Resource Record Parameters" registry
+   [IANA-SSHFP]:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T055119Z" creationid="haruyama" creationdate="20200511T055045Z">
+        <seg>IANA は"DNS SSHFP Resource Record Parameters" レジストリ [IANA-SSHFP] の"SSHFP RR Types for public key algorithms"  に次のエントリを追加した: </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>IANA has added the following entry to the "SSHFP RR Types for public
+   key algorithms" registry:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T084610Z" creationid="haruyama" creationdate="20200511T084610Z">
+        <seg>IANA は "SSHFP RR Types for public  key algorithms" レジストリに次のエントリを追加した:</seg>
       </tuv>
     </tu>
     <tu>
@@ -14814,6 +15145,15 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Implementations SHOULD compute these functions
+   using the algorithms described in [RFC7748].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T045527Z" creationid="haruyama" creationdate="20200513T045527Z">
+        <seg>実装は, [RFC7748] に記述されているアルゴリズムを用いてこれらの関数を計算する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Implementations SHOULD generate public key files using their system's
    local text file representation.</seg>
       </tuv>
@@ -15204,6 +15544,17 @@
     <tu>
       <tuv xml:lang="EN-US">
         <seg>In
+   brief, an Ed25519 public key is a 32-octet value representing a
+   255-bit y-coordinate of an elliptic curve point, and a sign bit
+   indicating the corresponding x-coordinate.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T061818Z" creationid="haruyama" creationdate="20200511T061818Z">
+        <seg>簡単に述べると, Ed25519 の公開鍵は 32-オクテットの値で 255-ビットの 楕円曲線の y 軸の値を表しており, 署名のビットは対応する x軸の値を示している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>In
    particular, it is essential that the client use a high-quality
    cryptographic pseudo-random number generator to generate K.  Using a
    bad random number generator will allow an attacker to break all the
@@ -15542,6 +15893,17 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110830T010026Z">
         <seg>どちらの場合も, 認証の有効性は, 公開署名鍵と署名者のIDとの関連の強さに依存する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>In brief,
+   an Ed448 public key is a 57-octet value representing a 455-bit
+   y-coordinate of an elliptic curve point, and a sign bit indicating
+   the corresponding x-coordinate.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T054535Z" creationid="haruyama" creationdate="20200511T054535Z">
+        <seg>簡単に述べると, Ed448 の公開鍵は 57-オクテットの値で 455-ビットの 楕円曲線の y 軸の値を表しており, 署名のビットは対応する x軸の値を示している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16600,6 +16962,16 @@
       <tuv xml:lang="EN-US">
         <seg>Information about the current status of this document, any errata,
    and how to provide feedback on it may be obtained at
+   http://www.rfc-editor.org/info/rfc7479.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T060852Z" creationid="haruyama" creationdate="20200511T060852Z">
+        <seg>この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc7479 で得られる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
    http://www.rfc-editor.org/info/rfc8160.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180908T014129Z" creationid="haruyama" creationdate="20180908T014129Z">
@@ -16644,6 +17016,36 @@
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20181227T102322Z" creationid="haruyama" creationdate="20181227T102322Z">
         <seg>この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8332 で得られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc8709.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T052018Z" creationid="haruyama" creationdate="20200511T030107Z">
+        <seg>この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8709 で得られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc8731.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T130249Z" creationid="haruyama" creationdate="20200511T130249Z">
+        <seg>この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8731 で得られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc8758.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062312Z" creationid="haruyama" creationdate="20200513T062312Z">
+        <seg>この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8758 で得られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17062,6 +17464,26 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Introduction
+     1.1.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062321Z" creationid="haruyama" creationdate="20200513T062321Z">
+        <seg>イントロダクション
+     1.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Introduction
+   2.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T030408Z" creationid="haruyama" creationdate="20200511T030408Z">
+        <seg>イントロダクション
+   2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Introduction  .</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160526T113309Z" creationid="haruyama" creationdate="20160526T113309Z">
@@ -17188,6 +17610,18 @@
     <tu>
       <tuv xml:lang="EN-US">
         <seg>It
+   is also slower (larger key material and larger secure hash
+   algorithm), but it is provided as a hedge to combat unforeseen
+   analytical advances against Curve25519 and SHA-256 due to the larger
+   number of security bits.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T054753Z" creationid="haruyama" creationdate="20200513T054753Z">
+        <seg>また, (より大きい鍵素材とより大きいハッシュアルゴリズムのため) より低速だ. しかし, より大きなセキュリティビットのため, Curve25519 と SHA-256 に対する予測できない分析の進歩に対する防止さくとして提供される. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>It
    is up to the server to decide how to map user names to accepted user
    names.</seg>
       </tuv>
@@ -17202,6 +17636,16 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>この仕様の将来のバージョンでは, 削除されるだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>It
+   provides for an extensible variety of public key algorithms for
+   identifying servers and users to one another.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T030159Z" creationid="haruyama" creationdate="20200511T030159Z">
+        <seg>サーバとユーザを相互に識別するために, 拡張可能なさまざまな公開鍵アルゴリズムを提供している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17983,6 +18427,19 @@
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>It is only later
+   when these byte strings are then passed to the ECDH function in SSH
+   that the bytes are reinterpreted as a fixed-length unsigned big-
+   endian integer value K, and then later that K value is encoded as a
+   variable-length signed "mpint" before being fed to the hash algorithm
+   used for key generation.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T051948Z" creationid="haruyama" creationdate="20200513T051948Z">
+        <seg>これらのバイト文字列が後で SSH の ECDH 関数に渡される時にのみ, それらのバイトは固定長符号なしビッグエンディアン整数値 K として解釈される. そしてその後で,  K の値は, 鍵導出に用いられるハッシュアルゴリズムに供給される前に,  可変長符号あり "mpint" としてエンコードされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>It is particularly important to
    note the definition of string allows binary content.</seg>
       </tuv>
@@ -18695,6 +19152,16 @@
       </tuv>
       <tuv xml:lang="JA">
         <seg>鍵交換法</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Key Exchange Methods
+     3.1.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T130308Z" creationid="haruyama" creationdate="20200511T130308Z">
+        <seg>鍵交換法
+     3.1.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20542,6 +21009,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>No further validation is required beyond what is
+   described in [RFC7748].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T050327Z" creationid="haruyama" creationdate="20200513T050327Z">
+        <seg>[RFC7748] で記述されている範囲を越えた検証は必要ない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>No implementation
    is required to send them.</seg>
       </tuv>
@@ -20650,6 +21126,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Normative References
+     11.2.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T050752Z" creationid="haruyama" creationdate="20200511T050752Z">
+        <seg>標準のリファレンス
+     11.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Normative References  .</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160526T115408Z" creationid="haruyama" creationdate="20160526T115408Z">
@@ -20683,6 +21169,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110425T080903Z">
         <seg>すべての楕円曲線は安全ではない. たとえ大きなフィールド上のものだったとしてもだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Not all documents
+   approved by the IESG are a candidate for any level of Internet
+   Standard; see Section 2 of RFC 5741.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T060759Z" creationid="haruyama" creationdate="20200511T060759Z">
+        <seg>IESG が認めたすべての文書が, インターネット標準のなんらかの水準の候補というわけではない. RFC5741 の 2節を参照.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21821,6 +22317,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>OpenSSH 6.5 [OpenSSH-6.5] introduced
+   support for using Ed25519 for server and user authentication and was
+   then followed by other SSH implementations.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T050900Z" creationid="haruyama" creationdate="20200511T050900Z">
+        <seg>OpenSSH 6.5 [OpenSSH-6.5] は, サーバとユーザの認証のために Ed25519 を用いるサポートを導入し, 他の SSH の実装も続いている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>OpenSSH 7.2 (but not 7.2p2) incorrectly encodes the algorithm in the
    signature as "ssh-rsa" when the algorithm in SSH_MSG_USERAUTH_REQUEST
    is "rsa-sha2-256" or "rsa-sha2-512".</seg>
@@ -21915,6 +22421,17 @@ Category: Standards Track                                     W. Griffin
       <tuv xml:lang="JA">
         <seg>鍵交換法の注文 ...................20
            9.3.9.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Other
+   parts of [RFC5656], such as Elliptic Curve Menezes-Qu-Vanstone
+   (ECMQV) key agreement and Elliptic Curve Digital Signature Algorithm
+   (ECDSA), are not considered in this document.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T130922Z" creationid="haruyama" creationdate="20200511T130827Z">
+        <seg>楕円曲線 Menezes-Qu-Vanstone (ECMQV) 鍵同意や 楕円曲線 Digital Signature Algorithm (ECDSA) といった [RFC5656] の他の部分は, この文書では考慮されない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22453,6 +22970,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Please refer to RFC 4255 [RFC4255] for a discussion of the security
+   considerations.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T062552Z" creationid="haruyama" creationdate="20200511T062552Z">
+        <seg>セキュリティの考察の議論のため RFC 4255 [RFC4255] を参照してほしい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Please refer to the current edition of the "Internet
    Official Protocol Standards" (STD 1) for the standardization state
    and status of this protocol.</seg>
@@ -22549,6 +23075,15 @@ Category: Standards Track                                     W. Griffin
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110718T035109Z">
         <seg>私的利用のヘッダ .................................4
       3.4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Private and public keys
+   are generated as described therein.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T045330Z" creationid="haruyama" creationdate="20200513T045302Z">
+        <seg>秘密/公開鍵は, そこに記述されているように生成される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22930,6 +23465,24 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Public Key Algorithm</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T051252Z" creationid="haruyama" creationdate="20200511T051252Z">
+        <seg>公開鍵アルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Public Key Algorithm
+   4.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T030447Z" creationid="haruyama" creationdate="20200511T030447Z">
+        <seg>公開鍵アルゴリズム
+   4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Public Key Algorithm Name                 Reference
          -------------------------                 ---------
          ssh-dss                            [SSH-TRANS, Section 6.6]
@@ -23072,6 +23625,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Public Key Format
+   5.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T030455Z" creationid="haruyama" creationdate="20200511T030455Z">
+        <seg>公開鍵の形式
+   5.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Public Key Format  .</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110830T005007Z">
@@ -23192,6 +23755,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Public ephemeral keys
+   are encoded for transmission as standard SSH strings.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T045040Z" creationid="haruyama" creationdate="20200513T045040Z">
+        <seg>公開の一時鍵は, 標準の SSH 文字列として転送時にエンコードされる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Public key algorithm names for use in 'public key algorithm for host
    key' are defined in the transport layer specification [SSH-TRANS].</seg>
       </tuv>
@@ -23216,6 +23788,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>明示的に署名のフォーマット識別子が指定されていない公開鍵/証明書のフォーマットは, 署名の識別子として鍵/証明書フォーマット識別子を利用しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Public keys are defined as
+   strings of 32 bytes for Curve25519 and 56 bytes for Curve448.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T045355Z" creationid="haruyama" creationdate="20200513T045355Z">
+        <seg>公開鍵は, Curve25519 では 32バイト, Curve448 では 56 バイトの文字列として定義される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23251,6 +23832,27 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160601T002336Z" creationid="haruyama" creationdate="20160526T115114Z">
         <seg>Query 拡張 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>RC4
+   encryption has known weaknesses [RFC7465] [RFC8429]; therefore, this
+   document starts the deprecation process for their use in Secure Shell
+   (SSH) [RFC4253].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062711Z" creationid="haruyama" creationdate="20200513T062711Z">
+        <seg>RC4 暗号は 既知の弱点 [RFC7465] [RFC8429] がある. それゆえ, この文書は, セキュアシェル (SSH) [RFC4253] での RC4 の利用について非推奨の処置を開始する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>RFC 4255 [RFC4255]
+   defines a DNS resource record, "SSHFP", which can be used to publish
+   a fingerprint of the SSH server public key in the DNS.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T061347Z" creationid="haruyama" creationdate="20200511T061347Z">
+        <seg>RFC 4255 [RFC4255] は DNS での SSH サーバ公開鍵の指紋の発行に用いられる "SSHFP" DNS リソースレコードを定義している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23390,6 +23992,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>Record 2 は, TCPセグメントの先頭ではなく今後も先頭にはならない. ACKが受け取られたからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>References
+     11.1.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T050742Z" creationid="haruyama" creationdate="20200511T050742Z">
+        <seg>リファレンス
+     11.1.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23887,6 +24499,26 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160526T120612Z" creationid="haruyama" creationdate="20160526T120612Z">
         <seg>要件に関する用語</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Requirements Language
+   2.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062331Z" creationid="haruyama" creationdate="20200513T062331Z">
+        <seg>要件に関する用語
+   2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Requirements Language
+   3.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T030439Z" creationid="haruyama" creationdate="20200511T030439Z">
+        <seg>要件に関する用語
+   3.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24570,6 +25202,24 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>SSHFP DNS Resource Records</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T053857Z" creationid="haruyama" creationdate="20200511T053857Z">
+        <seg>SSHFP DNS リソースレコード</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>SSHFP DNS Resource Records
+   9.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T030525Z" creationid="haruyama" creationdate="20200511T030525Z">
+        <seg>SSHFP DNS リソースレコード
+   9.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>SSH_AGENT_FAILURE messages are also sent in reply to requests with
    unknown types.</seg>
       </tuv>
@@ -24883,10 +25533,26 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Secure Shell (SSH) Key Exchange Method Using Curve25519 and Curve448</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T130113Z" creationid="haruyama" creationdate="20200511T130113Z">
+        <seg>Curve25519 と Curve448 を用いる セキュアシェル (SSH) 鍵交換法</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Secure Shell (SSH) [RFC4251] is a secure remote login protocol.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T130347Z" creationid="haruyama" creationdate="20200511T130347Z">
+        <seg>セキュア シェル(SSH) [RFC4251] は 安全なリモートログインプロトコルだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Secure Shell (SSH) [RFC4251] is a secure remote-login protocol.</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20110614T023725Z">
-        <seg>セキュア シェル(SSH) [RFC4251] は 安全なロモートログインプロトコルだ.</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T030205Z">
+        <seg>セキュア シェル(SSH) [RFC4251] は 安全なリモートログインプロトコルだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -25000,8 +25666,8 @@ Category: Standards Track                                     W. Griffin
       <tuv xml:lang="EN-US">
         <seg>Secure shell (SSH) is a secure remote-login protocol.</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20110826T035910Z">
-        <seg>セキュア シェル(SSH) は 安全なロモートログインプロトコルだ.</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T030342Z">
+        <seg>セキュア シェル(SSH) は 安全なリモートログインプロトコルだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -25044,6 +25710,26 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Security Considerations
+   11.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T030538Z" creationid="haruyama" creationdate="20200511T030538Z">
+        <seg>セキュリティの考察
+   11.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Security Considerations
+   5.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T130316Z" creationid="haruyama" creationdate="20200511T130316Z">
+        <seg>セキュリティの考察
+   5.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Security Considerations  .</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110720T125630Z">
@@ -25056,6 +25742,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160526T115358Z" creationid="haruyama" creationdate="20160526T115358Z">
         <seg>セキュリティの考察 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Security Considerations .........................................3
+   4.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T060931Z" creationid="haruyama" creationdate="20200511T060931Z">
+        <seg>セキュリティの考察 .........................................3
+   4.</seg>
       </tuv>
     </tu>
     <tu>
@@ -25638,6 +26334,24 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Shared Secret Encoding</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T050541Z" creationid="haruyama" creationdate="20200513T050541Z">
+        <seg>共有の秘密のエンコーディング</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Shared Secret Encoding
+   4.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T130326Z" creationid="haruyama" creationdate="20200511T130326Z">
+        <seg>共有の秘密のエンコーディング
+   4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Signaling of Extension Negotiation in SSH_MSG_KEXINIT</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20181017T130121Z" creationid="haruyama" creationdate="20181017T130121Z">
@@ -25668,6 +26382,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110321T125611Z">
         <seg>署名アルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Signature Algorithm
+   6.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T030501Z" creationid="haruyama" creationdate="20200511T030501Z">
+        <seg>署名アルゴリズム
+   6.</seg>
       </tuv>
     </tu>
     <tu>
@@ -25708,6 +26432,24 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Signature Format</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T052916Z" creationid="haruyama" creationdate="20200511T051915Z">
+        <seg>署名の形式 (訳注: 原文が key format なのでそのままとしているが おかしいと思うので https://www.rfc-editor.org/errata/eid6164 で報告した)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Signature Format
+   7.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T030510Z" creationid="haruyama" creationdate="20200511T030510Z">
+        <seg>署名の形式
+   7.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Signature flags</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160531T123258Z" creationid="haruyama" creationdate="20160531T123258Z">
@@ -25728,6 +26470,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>署名は次のようにエンコードされる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Signatures are generated according to the procedure in Sections 5.1.6
+   and 5.2.6 of [RFC8032].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T051908Z" creationid="haruyama" creationdate="20200511T051908Z">
+        <seg>[RFC8032] の 5.1.6 節と 5.2.6 節の手順に従って, 署名は生成される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26417,6 +27168,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110409T092939Z">
         <seg>SSH_MSG_KEX_ECDH_INIT と SSH_MSG_KEX_ECDH_REPLY のメッセージ番号の定義は, 7節にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Standard implementations of SSH SHOULD implement these signature
+   algorithms.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T051556Z" creationid="haruyama" creationdate="20200511T051556Z">
+        <seg>SSH の標準実装は, これらの署名アルゴリズムを実装する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27403,6 +28163,26 @@ Category: Standards Track                                     W. Griffin
     <tu>
       <tuv xml:lang="EN-US">
         <seg>The
+   hash used is SHA-256 for "curve25519-sha256" and SHA-512 for
+   "curve448-sha512".</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T050531Z" creationid="haruyama" creationdate="20200513T050531Z">
+        <seg>ハッシュとして "curve25519-sha256"  には SHA-256,  "curve448-sha512" には SHA-512 が利用される..</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The
+   key exchange protocol described in [RFC4253] supports an extensible
+   set of methods.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T130539Z" creationid="haruyama" creationdate="20200511T130407Z">
+        <seg>[RFC4253] で記述された鍵交換プロトコルは, 鍵交換法の集合を拡張することをサポートとしている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The
    manager issues NETCONF remote procedure call (RPC) commands, and the
    agent replies to those commands.</seg>
       </tuv>
@@ -27530,6 +28310,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110615T053218Z">
         <seg>この提案された群は固定される必要はなく時間とともに変化できます.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The
+   registration procedure is IETF review, which is achieved by this
+   document.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T063712Z" creationid="haruyama" creationdate="20200513T063712Z">
+        <seg>この登録手順は, IETF のレビューで, この文書で実現している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28093,6 +28883,22 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The "ssh-ed25519" key format has the following encoding:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T051650Z" creationid="haruyama" creationdate="20200511T051645Z">
+        <seg>"ssh-ed25519" 鍵フォーマットは次のエンコーディングを持つ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The "ssh-ed448" key format has the following encoding:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T051806Z" creationid="haruyama" creationdate="20200511T051806Z">
+        <seg>"ssh-ed448" 鍵フォーマットは次のエンコーディングを持つ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The "ssh-rsa" key format has the following specific encoding:</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110901T062111Z">
@@ -28165,6 +28971,14 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg> "zlib" 圧縮は, [RFC1950] と [RFC1951] に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The '2' here indicates SHA-256 [RFC6594].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T054641Z" creationid="haruyama" creationdate="20200511T054641Z">
+        <seg>'2' は SHA-256 [RFC6594] を示している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28442,6 +29256,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The 32 or 56 bytes of X are
+   converted into K by interpreting the octets as an unsigned fixed-
+   length integer encoded in network byte order.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T051238Z" creationid="haruyama" creationdate="20200513T051238Z">
+        <seg>X の 32 ないし 56 バイトは, そのオクテットをネットワークバイトオーダーでエンコードされた符号なし固定長整数として解釈することで K に変換される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The &lt;hello&gt; message MUST be followed by the character sequence
    ]]&gt;]]&gt;.</seg>
       </tuv>
@@ -28451,11 +29275,29 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The Arcfour cipher is believed to be compatible with the
+   |  RC4 cipher [SCHNEIER].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T063326Z" creationid="haruyama" creationdate="20200513T063326Z">
+        <seg>Arcfour 暗号は, RC4 暗号と互換性があると信じられている [SCHNEIER].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The Arcfour cipher is believed to be compatible with the RC4 cipher
    [SCHNEIER].</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>Arcfour 暗号は, RC4 暗号 [SCHNEIER] と互換すると考えられている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The Arcfour cipher is compatible with the RC4 cipher
+   |  [SCHNEIER].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T063502Z" creationid="haruyama" creationdate="20200513T063502Z">
+        <seg>Arcfour 暗号は RC4 暗号と互換性がある [SCHNEIER].</seg>
       </tuv>
     </tu>
     <tu>
@@ -28518,6 +29360,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>コネクションプロトコルは暗号化されたトンネルをいくつかの論理的なチャンネルに多重化する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The Curve448 key exchange method is
+   similar but uses SHA-512 [RFC6234][SHS].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T131307Z" creationid="haruyama" creationdate="20200511T131307Z">
+        <seg>Curve448 鍵交換法も同様だが, SHA-512 [RFC6234][SHS] を利用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28643,6 +29494,23 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20111001T044253Z">
         <seg>EOM 文字列は, 操作の問題を引き起す可能性がある. また, 意図的に送信さらた RPC メッセージよって攻撃を受ける可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The Ed25519 [Ed25519] signature algorithm, specifically
+   Ed25519-SHA-512, has been implemented in OpenSSH.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T061233Z" creationid="haruyama" creationdate="20200511T061233Z">
+        <seg>Ed25519 [Ed25519] 署名アルゴリズム, 具体的に Ed25519-SHA-512 は, OpenSSH で実装されている. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The Ed25519 signature algorithm has been implemented in OpenSSH.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T060431Z" creationid="haruyama" creationdate="20200511T060431Z">
+        <seg>Ed25519 署名アルゴリズムは OpenSSH で実装されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28832,6 +29700,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110614T031248Z">
         <seg>IANA は 暗号アルゴリズム名(Encryption Algorithm Names) に "arcfour128" と "arcfour256"  を [RFC4250] に従って割り当てた.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The IANA has updated the "Encryption Algorithm Names" subregistry in
+   the "Secure Shell (SSH) Protocol Parameters" registry [IANA].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T063614Z" creationid="haruyama" creationdate="20200513T063614Z">
+        <seg>IANA は "Secure Shell (SSH) Protocol Parameters" レジストリ内の  "Encryption Algorithm Names" サブレジストリを更新した.</seg>
       </tuv>
     </tu>
     <tu>
@@ -29776,6 +30653,24 @@ Category: Standards Track                                     W. Griffin
       <tuv xml:lang="JA">
         <seg>SSHFP リソースレコード .......................................3
       3.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The SSHFP Resource Record for the Ed25519 public key with SHA-256
+   fingerprint [FIPS180-4] would, for example, be:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T063843Z" creationid="haruyama" creationdate="20200511T061846Z">
+        <seg>SHA-256 指紋を利用する Ed25519 公開鍵 [FIPS180-4] の SSHFP リソースレコードは, たとえば次のようになるだろう:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The SSHFP Resource Record for the Ed448 public key with SHA-256
+   fingerprint would, for example, be:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T063848Z" creationid="haruyama" creationdate="20200511T054615Z">
+        <seg>SHA-256 指紋を利用する Ed448 公開鍵の SSHFP リソースレコードは, たとえば次のようになるだろう:</seg>
       </tuv>
     </tu>
     <tu>
@@ -31500,11 +32395,31 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The derived shared secret is 32 bytes when
+   "curve25519-sha256" is used and 56 bytes when "curve448-sha512" is
+   used.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T050549Z" creationid="haruyama" creationdate="20200513T050415Z">
+        <seg>道術された共有の秘密は,  "curve25519-sha256" が利用される場合 32 バイト,  "curve448-sha512" の場合 56 バイトだ. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The described protocol is backward
    compatible to version 2 defined by RFC 4819.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180730T125756Z" creationid="haruyama" creationdate="20180730T125756Z">
         <seg>この記述されたプロトコルは, RFC 4819 で定義された バージョン 2 と後方互換性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The descriptions of key and signature formats use the notation
+   introduced in [RFC4251], Section 3 and the string data type from
+   [RFC4251], Section 5.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T051243Z" creationid="haruyama" creationdate="20200511T051243Z">
+        <seg>鍵と署名の形式の記述には, [RFC4251] の 3節で導入された表記と [RFC4251] の 5節の 文字列データタイプを利用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -31617,6 +32532,22 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The encoding of Ed25519 public keys is described in [Ed25519].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T061751Z" creationid="haruyama" creationdate="20200511T061751Z">
+        <seg>Ed25519 公開鍵のエンコーディングは [Ed25519] に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The encoding of Ed448 public keys is described in [ED448].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T054337Z" creationid="haruyama" creationdate="20200511T054337Z">
+        <seg>Ed448 公開鍵のエンコーディングは [ED448] に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The encoding of the ECDSA
    signature Sig_U as an octet string is as described in Section 3.1.2
    of [SSH-ECC].</seg>
@@ -31634,6 +32565,14 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110930T150202Z">
         <seg>楕円曲線のポイント Q_C のオクテット文字列としてのエンコーディングは [SEC1] の 2.3.3 節で指定されている. ECDSA 署名 Sig_S のオクテット文字列としてのエンコーディングは, [SSH-ECC] の 3.1.2 節に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The encodings of all values are defined in [RFC7748].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T050437Z" creationid="haruyama" creationdate="20200513T050437Z">
+        <seg>すべての値のエンコーディングは, [RFC7748] に定義されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -31967,6 +32906,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The following body of the public key file was used as input to
+   generate the above fingerprint:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T061940Z" creationid="haruyama" creationdate="20200511T061940Z">
+        <seg>上記の署名の生成の入力として, 次の 公開鍵ファイルを利用した.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The following channel-specific request can be sent over a session
    channel (as described in [4]) to request that the remote host perform
    a BREAK operation.</seg>
@@ -32260,6 +33208,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The following step differs from [RFC5656], which uses a different
+   conversion.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T050648Z" creationid="haruyama" creationdate="20200513T050648Z">
+        <seg>次の手順は, 異なる変換を用いていて [RFC5656] と異なっている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The following steps are used to exchange a key.</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -32538,6 +33495,24 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110924T123546Z">
         <seg>この文字列のフォーマットは, [RFC5656] の 6.1 節で指定されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The generation of SSHFP resource records for "ssh-
+   ed25519" keys is described in [RFC7479].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T054010Z" creationid="haruyama" creationdate="20200511T054010Z">
+        <seg>"ssh-ed25519" 鍵に対する SSHFP リソースレコードの世代については,  [RFC4749] に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The generation of SSHFP resource records for "ssh-ed448" keys is
+   described as follows.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T054319Z" creationid="haruyama" creationdate="20200511T054319Z">
+        <seg>"ssh-ed448" 鍵に対するSSHFP リソースレコードの世代は次のように記述される:</seg>
       </tuv>
     </tu>
     <tu>
@@ -33059,6 +34034,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The key exchange procedure is similar to the ECDH method described in
+   Section 4 of [RFC5656], though with a different wire encoding used
+   for public values and the final shared secret.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T044958Z" creationid="haruyama" creationdate="20200513T044958Z">
+        <seg>この鍵交換手順は, [RFC5656] の 4節で記述された ECDH 法と似ている. ただし, 公開の値と最後の共有秘密では異なる wire encoding が利用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The key exchange produces two values: a shared secret K, and an
    exchange hash H.  Encryption and authentication keys are derived from
    these.</seg>
@@ -33209,6 +34194,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180125T122549Z" creationid="haruyama" creationdate="20180125T122549Z">
         <seg>この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, ここで示しているようにすべて大文字で出現した場合のみ, BCP 16 [RFC2119] [RFC8174] で記述されているように解釈される. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The key-agreement schemes "curve25519-sha256" and "curve448-sha512"
+   perform the Diffie-Hellman protocol using the functions X25519 and
+   X448, respectively.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T045500Z" creationid="haruyama" creationdate="20200513T045500Z">
+        <seg>鍵同意スキーム "curve25519-sha256" と "curve448-sha512" は,  それぞれ関数 X25519 と X448 を用いた Diffie-Hellman プロトコルを実行する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33552,8 +34547,8 @@ Category: Standards Track                                     W. Griffin
         <seg>The message-digest algorithm is presumed to produce an opaque octet
    string output, which is placed as-is in the RDATA fingerprint field.</seg>
       </tuv>
-      <tuv xml:lang="JA">
-        <seg>メッセージダイジェストアルゴリズムは, 不透明な(バイナリの?)オクテット文字列の出力をすると仮定される. これは, そのまま RDATA の指紋のフィールドに配置される.</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T062332Z">
+        <seg>メッセージダイジェストアルゴリズムは, 形式の定まっていないオクテット文字列の出力をすると仮定される. これは, そのまま RDATA の指紋のフィールドに配置される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33601,6 +34596,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The method names registered by this document are "curve25519-sha256"
+   and "curve448-sha512".</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T045202Z" creationid="haruyama" creationdate="20200513T045202Z">
+        <seg>この文書によって登録される方法の名前は, "curve25519-sha256" と "curve448-sha512" だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The method of key exchange used for the name "diffie-hellman-
    group14-sha256" is the same as that for "diffie-hellman-group14-sha1"
    except that the SHA256 hash algorithm is used.</seg>
@@ -33615,6 +34619,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160618T032715Z">
         <seg>この方法は次のメッセージを用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The methods are based on Curve25519 and Curve448 scalar
+   multiplication, as described in [RFC7748].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T045236Z" creationid="haruyama" creationdate="20200513T045236Z">
+        <seg>[RFC7748] に記述されている, Curve25519 と Curve448 スカラ乗算をベースにしている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33651,6 +34664,27 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110609T051647Z">
         <seg>推奨(1)と(2)の動機は異なるので, それぞれの推奨について順番に考察する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The mpint K is then encoded using the process described in Section 5
+   of [RFC4251], and the resulting bytes are fed as described in
+   [RFC4253] to the key exchange method's hash function to generate
+   encryption keys.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T051512Z" creationid="haruyama" creationdate="20200513T051512Z">
+        <seg>そして mpint K は [RFC4251] の 5 節で記述された手順を用いてエンコードされる. そして, [RFC4253] で記述されているように, 暗号化鍵を生成するための鍵交換法のハッシュ関数に結果のバイトが供給される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The mpint K is then fed along with other
+   data to the key exchange method's hash function to generate
+   encryption keys.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T052029Z" creationid="haruyama" creationdate="20200513T052029Z">
+        <seg>そして mpint K は, 暗号化鍵生成のために 他のデータと一緒に 鍵交換法のハッシュ関数に供給される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33698,6 +34732,23 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>この認証法の名前は, "keyboard-interactive" だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The name of the algorithm is "ssh-
+   ed25519".</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T051349Z" creationid="haruyama" creationdate="20200511T051349Z">
+        <seg>アルゴリズム名は "ssh-ed25519" だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The name of the algorithm is "ssh-ed448".</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T051503Z" creationid="haruyama" creationdate="20200511T051503Z">
+        <seg>アルゴリズム名は "ssh-ed448" だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33879,6 +34930,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>追加の認証データが必要な場合のみ, サーバは複数の要求メッセージを送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The opaque octet string output produced is placed as is in the RDATA
+   fingerprint field.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T062437Z" creationid="haruyama" creationdate="20200511T062437Z">
+        <seg>生成された形式が定まっていない文字列の出力は, RDATA 署名フィールドの中にそのまま配置される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34245,6 +35305,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The protocol flow, the SSH_MSG_KEX_ECDH_INIT and
+   SSH_MSG_KEX_ECDH_REPLY messages, and the structure of the exchange
+   hash are identical to Section 4 of [RFC5656].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T045136Z" creationid="haruyama" creationdate="20200513T045136Z">
+        <seg>プロトコルフロー, SSH_MSG_KEX_ECDH_INIT と SSH_MSG_KEX_ECDH_REPLY メッセージ, 交換ハッシュの構造は, [RFC5656] の 4節と同じだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The protocol has been designed to be simple and flexible to allow
    parameter negotiation, and to minimize the number of round-trips.</seg>
       </tuv>
@@ -34546,6 +35616,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The registry has been updated as follows:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T063721Z" creationid="haruyama" creationdate="20200513T063721Z">
+        <seg>レジストリは次のように更新された:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The relative merits of these and other ciphers may also be found in
    current literature.</seg>
       </tuv>
@@ -34720,6 +35798,25 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The security considerations in [RFC4251], Section 9 apply to all SSH
+   implementations, including those using Ed25519 and Ed448.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T055850Z" creationid="haruyama" creationdate="20200511T055405Z">
+        <seg>[RFC4251] 9 節のセキュリティの考察は, Ed25519 と Ed448 を用いる実装を含めて, すべての SSH の実装に適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The security considerations in [RFC8032], Section 8 and [RFC7479],
+   Section 3 apply to all uses of Ed25519 and Ed448, including those in
+   SSH.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T055843Z" creationid="haruyama" creationdate="20200511T055711Z">
+        <seg>[RFC8032] の 8節と [RFC7479] の 3節のセキュリティの考察は, SSH での Ed25519 と Ed448 の利用を含め, すべての Ed25519 と Ed448 の利用に適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The security considerations of RFC 4253 [RFC4253] apply to this
    document.</seg>
       </tuv>
@@ -34751,6 +35848,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20181222T083731Z" creationid="haruyama" creationdate="20181222T083731Z">
         <seg>[RFC4251] のセキュリティの考察が適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The security considerations of [RFC4251], [RFC5656], and [RFC7748]
+   are inherited.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T054221Z" creationid="haruyama" creationdate="20200513T054221Z">
+        <seg>[RFC4251] と [RFC5656] ,  [RFC7748] のセキュリティの考察は継承される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35468,6 +36574,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The shared secret, K, is defined in [RFC4253] and [RFC5656] as an
+   integer encoded as a multiple precision integer (mpint).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T050903Z" creationid="haruyama" creationdate="20200513T050903Z">
+        <seg>[RFC4253] と [RFC5656] で定義されている共有の秘密 K は, 多精度整数(mpint) でエンコードされた整数だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The signature algorithm MUST be applied over H, not the original
    data.</seg>
       </tuv>
@@ -35904,6 +37019,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The usage of RC4 suites (also designated as "arcfour") for SSH is
+   specified in [RFC4253] and [RFC4345].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062443Z" creationid="haruyama" creationdate="20200513T062443Z">
+        <seg>SSH での RC4 ("arcfour と指定されることもある) の利用は, [RFC4253] と [RFC4345] で指定されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The use of SPNEGO combined with GSS-API mechanisms used without
    SPNEGO can lead to interoperability problems.</seg>
       </tuv>
@@ -36298,6 +37422,17 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The way the derived mpint binary secret string is encoded before it
+   is hashed (i.e., adding or removing zero bytes for encoding) raises
+   the potential for a side-channel attack, which could determine the
+   length of what is hashed.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T054958Z" creationid="haruyama" creationdate="20200513T054958Z">
+        <seg>ハッシュ化される前に導出したバイナリ秘密文字列をエンコードする方法 (つまり, エンコーディングのために 0 バイトを追加したり削除したりする) は, ハッシュされたものの長さを決定できるので, サイドチャンネル攻撃の可能性がある. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The width of the integer fields is determined by the curve being
    used.</seg>
       </tuv>
@@ -36622,6 +37757,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180927T110539Z" creationid="haruyama" creationdate="20180927T110539Z">
         <seg>それゆえ, オペレーティングシステムは, 2048ビット未満の DH 群についてログを出さないほうがよい. それにより追加の攻撃面ができるかもしれないからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Therefore, this
+   document formally moves RFC 4345 to Historic status.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062200Z" creationid="haruyama" creationdate="20200513T062200Z">
+        <seg>それゆえ, この文書は RFC4345 を 歴史的状態へ移動する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37496,6 +38640,23 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This algorithm only
+   supports signing and not encryption.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T051535Z" creationid="haruyama" creationdate="20200511T051535Z">
+        <seg>このアルゴリズムは署名のみサポートしている. 暗号化はサポートしていない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This algorithm only supports signing and not encryption.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T051422Z" creationid="haruyama" creationdate="20200511T051404Z">
+        <seg>このアルゴリズムは署名のみサポートしている. 暗号化はサポートしていない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This allows
    the server to avoid advertising compression until the client has
    authenticated.</seg>
@@ -37815,6 +38976,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This document
+   updates the IANA "SSHFP RR Types for public key algorithms" registry
+   by adding an algorithm number for Ed25519 [Ed25519].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T061429Z" creationid="haruyama" creationdate="20200511T061429Z">
+        <seg>この文書は,  Ed25519 [Ed25519] の アルゴリズム番号を追加して IANA の "SSHFP RR Types for public key algorithms" レジストリを更新する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This document addresses the requirement for the SSH client to
    authenticate the SSH server and for the SSH server to authenticate
    the SSH client, and describes how SNMP can make use of the
@@ -37909,6 +39080,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20131203T025946Z" creationid="haruyama" creationdate="20131203T025946Z">
         <seg>この文書は [RFC4253] と [RFC4250] の MAC アルゴリズム名を増やす.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document augments the Public Key Algorithm Names in [RFC4250],
+   Section 4.11.3.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T054929Z" creationid="haruyama" creationdate="20200511T054929Z">
+        <seg>この文書は, [RFC4250] 4.11.3 節の 公開鍵アルゴリズム名に追加する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -38018,6 +39198,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This document deprecates RC4 in Secure Shell (SSH).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062137Z" creationid="haruyama" creationdate="20200513T062137Z">
+        <seg>この文書は セキュアシェル (SSH) での RC4 を非推奨とする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This document describes a general purpose authentication method for
    the SSH authentication protocol.</seg>
       </tuv>
@@ -38087,6 +39275,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This document describes a public key algorithm for use with SSH, as
+   per [RFC4253], Section 6.6.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T051334Z" creationid="haruyama" creationdate="20200511T051334Z">
+        <seg>この文書は [RFC4253] の 6.6節に従って, SSH で利用する公開鍵アルゴリズムを記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This document describes a subsystem that can be used to configure
    public keys in an implementation-independent fashion.</seg>
       </tuv>
@@ -38119,6 +39316,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110715T061221Z">
         <seg>この文書は認証と鍵交換プロトコルを記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document describes how to implement key exchange based on
+   Curve25519 and Curve448 [RFC7748] in SSH.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T131030Z" creationid="haruyama" creationdate="20200511T131030Z">
+        <seg>この文書は，Curve25519 と Curve448 [RFC7748] に基づく鍵交換法を SSH でどのように実装するかを記述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -38186,6 +39392,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This document describes the method implemented by OpenSSH and others
+   and formalizes the use of the name "ssh-ed25519".</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T051053Z" creationid="haruyama" creationdate="20200511T051053Z">
+        <seg>この文書は OpenSSH などに実装された方法を記述し,  "ssh-ed25519" の名前の利用を規定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This document describes the methods used to perform key exchange and
    user authentication in the Secure Shell protocol using the GSS-API.</seg>
       </tuv>
@@ -38195,11 +39410,29 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This document describes the specification for using Curve25519 and
+   Curve448 key exchange methods in the Secure Shell (SSH) protocol.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T130236Z" creationid="haruyama" creationdate="20200511T130151Z">
+        <seg>この文書は, セキュアシェル (SSH) プロトコルで Curve25519 と Curve448 鍵交換法を利用するための仕様を記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This document describes the use of an SSH Subsystem for SNMP to make
    SNMP usage distinct from other usages.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110808T100631Z">
         <seg>この文書は, 他のシステムの利用と SNMP の利用を区別する SNMP のための SSH サブシステムの利用を記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document describes the use of the Ed25519 and Ed448 digital
+   signature algorithms in the Secure Shell (SSH) protocol.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T025602Z" creationid="haruyama" creationdate="20200511T025503Z">
+        <seg>この文書は, セキュアシェル (SSH) プロトコルでの Ed25519 および Ed448 デジタル署名アルゴリズムの利用について説明する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -38336,6 +39569,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This document is not an Internet Standards Track specification; it is
+   published for informational purposes.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T060643Z" creationid="haruyama" creationdate="20200511T060643Z">
+        <seg>この文書は, インターネット標準課程仕様ではない. 情報共有目的で発行される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This document is part of a set.</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -38360,10 +39602,30 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This document only prohibits the use of RC4 in SSH; it introduces no
+   new security considerations.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T063749Z" creationid="haruyama" creationdate="20200513T063749Z">
+        <seg>この文書は SSH での RC4 の利用を禁止しただけだ; 新しいセキュリティの考察は導入していない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This document prescribes RSASSA-PKCS1-v1_5 signature padding because:</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20190120T102816Z" creationid="haruyama" creationdate="20190120T102816Z">
         <seg>この文書は RSASSA-PKCS1-v1_5 署名パディングを指定している. なぜならば:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document provides "curve25519-sha256" as the preferred choice
+   but suggests that the "curve448-sha512" be implemented to provide
+   more than 128 bits of security strength should that become a
+   requirement.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T055522Z" creationid="haruyama" creationdate="20200513T055503Z">
+        <seg>この文書は, "curve25519-sha256" をより好ましい選択として提供する. しかし 128 ビットを越えるセキュリティを提供する必要が生じた場合に "curve448-sha512" を実装することを提案する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -38529,6 +39791,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This document updates [RFC4253], Section 6.3 by replacing the text
+   above with the following text:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T063444Z" creationid="haruyama" creationdate="20200513T063411Z">
+        <seg>この文書は [RFC4253] の 6.3 節を, 前記のテキストを次のものに置き換えることで更新する:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This document updates [RFC4419] as described below:</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180925T113624Z" creationid="haruyama" creationdate="20180925T113624Z">
@@ -38542,6 +39813,25 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180925T111406Z" creationid="haruyama" creationdate="20180925T111406Z">
         <seg>この文書は [RFC4419] を更新し, 最小の推奨サイズを 2048 ビットとする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document updates the IANA "SSHFP RR Types for public key
+   algorithms" registry by adding an algorithm number for Ed25519.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T060555Z" creationid="haruyama" creationdate="20200511T060507Z">
+        <seg>この文書は, Ed25519 のためのアルゴリズム番号を追加して IANA の "SSHFP RR Types for public key algorithms" レジストリを更新する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document updates the status of the "arcfour" ciphers in the list
+   found in [RFC4253], Section 6.3 by moving it from OPTIONAL to MUST
+   NOT.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T063209Z" creationid="haruyama" creationdate="20200513T063209Z">
+        <seg>この文書は, [RFC4253] のリストの "arcfour" 暗号の 状態を, OPTIONAL から MUST NOT に移動して更新する. </seg>
       </tuv>
     </tu>
     <tu>
@@ -39040,6 +40330,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This is not intended to modify that text generally, but
+   only to be applicable to the scope of the mechanism described in this
+   document.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T050733Z" creationid="haruyama" creationdate="20200513T050733Z">
+        <seg>これは一般的にテキストを変更する意図があるものではなく, この文書で記述されるメカニズムのスコープにのみ適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This is purely coincidental and actually has
    nothing to do with STD 11 [9].</seg>
       </tuv>
@@ -39492,6 +40792,14 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110801T103827Z">
         <seg>このメモは, SNMP のためのセキュアシェルトランスポートモデル, すなわち, SNMPメッセージの認証や暗号化,完全性検査を提供する SNMP トランスポートサブシステムの中で利用されるSNMPトランスポートモデルについて記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This memo documents an Internet Best Current Practice.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062228Z" creationid="haruyama" creationdate="20200513T062216Z">
+        <seg>このメモは,  Internet Best Current Practice を文書化する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40314,6 +41622,18 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This section illustrates
+   the generation of SSHFP resource records for "ssh-ed448" keys, and
+   this document also specifies the corresponding Ed448 code point to
+   "SSHFP RR Types for public key algorithms" in the "DNS SSHFP Resource
+   Record Parameters" IANA registry [IANA-SSHFP].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T054238Z" creationid="haruyama" creationdate="20200511T054143Z">
+        <seg>この節では, "ssh-ed448" 鍵に対する SSHFP リソースレコードの世代について説明する. また, この文書は "DNS SSHFP Resource Record Parameters" IANA レジストリ[IANA-SSHFP] の "SSHFP RR Types for public key algorithms" への Ed448 コードポイントの対応も指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This section is designed to help implementors understand the
    security-related motivations for, as well as possible consequences of
    deviating from, the methods and recommendations described in this
@@ -40527,6 +41847,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>これにより, ローカルなリゾルバにDNS検索パスを挿入して他のホストにクライアントを接続させようとする攻撃を防ぐ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This would leak the most significant bit
+   of the derived secret and/or allow detection of when the most
+   significant bytes are zero.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T055052Z" creationid="haruyama" creationdate="20200513T055052Z">
+        <seg>これは, 導出された秘密の最上位ビットを漏らしたり, かつ/もしくは 最上位ビットが0かどうかの検出を許すかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -41219,6 +42549,24 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Updates to RFC 4253</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062856Z" creationid="haruyama" creationdate="20200513T062856Z">
+        <seg>RFC 4253 の更新</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Updates to RFC 4253
+   3.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062344Z" creationid="haruyama" creationdate="20200513T062344Z">
+        <seg>RFC 4253 の更新
+   3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Uploaded keys and
    certificates are meant to be able to configure all protocols running
    on a server (e.g., SSH, SSL, KMIP [8]) that use keys and
@@ -41305,6 +42653,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20111001T035232Z">
         <seg>&lt;hello&gt; メッセージを受信したら, 受け取ったピアの SSH トランスポート層は Messages 層に &lt;hello&gt; メッセージを概念的に渡す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Usage and generation of the SSHFP DNS resource record is described in
+   [RFC4255].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T053934Z" creationid="haruyama" creationdate="20200511T053934Z">
+        <seg>SSHFP DNS イソースレコードの利用法と世代については, [RFC4255] に記述されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -41543,6 +42900,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Using Ed25519 in SSHFP Resource Records</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T060407Z" creationid="haruyama" creationdate="20200511T060407Z">
+        <seg>SSHFP リソースレコードでの Ed25519 の利用</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Using NETCONF over SSH</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110728T095948Z">
@@ -41683,6 +43048,24 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110620T040448Z">
         <seg>Van Oorshot と Wiener note は ランダムな素数法(modulus) p で小さいプライベート指数を使うと 離散対数の計算を簡単にできることを示した [VAN-OORSCHOT].</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Verification Algorithm</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T053444Z" creationid="haruyama" creationdate="20200511T053444Z">
+        <seg>検証アルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Verification Algorithm
+   8.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T030516Z" creationid="haruyama" creationdate="20200511T030516Z">
+        <seg>検証アルゴリズム
+   8.</seg>
       </tuv>
     </tu>
     <tu>
@@ -42160,6 +43543,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>When performing the X25519 or X448 operations, the integer values
+   there will be encoded into byte strings by doing a fixed-length
+   unsigned little-endian conversion, per [RFC7748].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T051641Z" creationid="haruyama" creationdate="20200513T051641Z">
+        <seg>X25519 ないし X448 の操作の実行の際, [RFC7748] に従って, 整数値は, 固定長符号なしリトルエンディアン変換を用いてバイト文字列にエンコードされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>When present, such messages
    typically relate to errors, debugging information, or some externally
    configured data.</seg>
@@ -42283,6 +43676,17 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv xml:lang="JA">
         <seg>ウィンドウ (ターミナル) サイズがクライアント側で変更する場合, 新しい容量を相手側に知らせるために次のメッセージを送ってもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>When they do so,
+   implementations MUST check whether the computed Diffie-Hellman shared
+   secret is the all-zero value and abort if so, as described in
+   Section 6 of [RFC7748].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T050058Z" creationid="haruyama" creationdate="20200513T045704Z">
+        <seg>そのように計算する際, [RFC7748] の 6節に記述されているように 実装は計算された Diffie-Hellman 共有秘密がすべて 0 値でないか検査しなればならない. また, もしそうならば中止しなければならない. </seg>
       </tuv>
     </tu>
     <tu>
@@ -42941,6 +44345,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>[RFC4253] defines the "arcfour" ciphers with the following text:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T063415Z" creationid="haruyama" creationdate="20200513T063226Z">
+        <seg>[RFC4253] は "arcfour" 暗号を次のテキストで定義している:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>[RFC4253] does not, however,
    discuss all the problems that could arise if an SSH implementation
    does not rekey frequently enough.</seg>
@@ -42951,12 +44363,49 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>[RFC4253] is updated to prohibit arcfour's use in SSH.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062911Z" creationid="haruyama" creationdate="20200513T062911Z">
+        <seg>[RFC4253] は SSH での arcfour の利用を禁止することで更新される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>[RFC4253] requires that the formation of the AT involve the packet
    sequence_number, a 32-bit value that counts the number of binary
    packets that have been sent on a given SSH tunnel.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110829T121453Z">
         <seg>[RFC4253] は, ATの形成に パケットの sequence_number, SSH トンネルで送られたバイナリパケットの数を数える32-ビットの値, を含むことを要求している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>[RFC4253] specifies the
+   allocation of the "arcfour" cipher for SSH.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062509Z" creationid="haruyama" creationdate="20200513T062509Z">
+        <seg>[RFC4253] は, SSH に対して "arcfour" 暗号の割り当てを指定している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>[RFC4253],
+   Section 6.3 allocates the "arcfour" cipher by defining a list of
+   defined ciphers in which the "arcfour" cipher appears as optional, as
+   shown in Table 1.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T063124Z" creationid="haruyama" creationdate="20200513T063124Z">
+        <seg>[RFC4253] 6.3 節は, Table 1 に示されているように, "arcfour" 暗号を optional として現れる暗号のリストを定義して, "arcforur" 暗号を割り当てている. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>[RFC4345] specifies and
+   allocates the "arcfour128" and "arcfour256" ciphers for SSH.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062544Z" creationid="haruyama" creationdate="20200513T062544Z">
+        <seg>[RFC4345] は, SSH に対して "arcfour128" と "arcfour256" 暗号の指定と割り当てをしている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -42985,6 +44434,17 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180129T130614Z">
         <seg>[RFC5480] と [RFC5758] は, 楕円曲線デジタル署名アルゴリズム （ECDSA) 公開鍵で利用する X.509v3 証明書の構造を記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>[RFC5656] defines how elliptic curves are integrated
+   into this extensible SSH framework, and this document reuses the
+   Elliptic Curve Diffie-Hellman (ECDH) key exchange protocol messages
+   defined in Section 7.1 (ECDH Message Numbers) of [RFC5656].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T130838Z" creationid="haruyama" creationdate="20200511T130747Z">
+        <seg>[RFC5656] は拡張可能な SSH のフレームワークに楕円曲線をどのように統合するかを定義する. そしてこの文書は, [RFC5656] の 7.1 節 (ECDH メッセージ番号)で定義された楕円曲線 Diffie-Hellman (ECDH) 鍵交換プロトコルメッセージを再利用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -45159,6 +46619,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>後者の場合, 管理者は要件に添うようにデフォルトのパラメータを能動的に変更しなければならないだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>|  The "arcfour" cipher is the Arcfour stream cipher with 128-bit
+   |  keys.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T063300Z" creationid="haruyama" creationdate="20200513T063300Z">
+        <seg>|   "arcfour" 暗号は 128-ビット鍵のArcfour ストリーム暗号だ.</seg>
       </tuv>
     </tu>
 <!-- Alternative translations -->

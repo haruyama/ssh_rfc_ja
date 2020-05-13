@@ -1,0 +1,266 @@
+
+
+
+
+Internet Engineering Task Force (IETF)                         B. Harris
+Request for Comments: 8709                                              
+Updates: 4253                                              L. Velvindron
+Category: Standards Track                                  cyberstorm.mu
+ISSN: 2070-1721                                            February 2020
+
+
+   セキュアシェル (SSH) プロトコルのための Ed25519 と Ed448 公開鍵アルゴリズム
+
+概要
+
+   この文書は, セキュアシェル (SSH) プロトコルでの Ed25519 および Ed448 デジタル署名アルゴリズムの利用について説明する.
+   したがって, この RFC は RFC 4253 を更新する.
+
+このメモの位置づけ
+
+   これは, インターネット標準化課程文書だ.
+
+   この文書は, Internet Engineering Task Force (IETF) の成果物だ.  IETF コミュニティの合意を表わしている.  公開のレビューを受けており, Internet Engineering Steering Group (IESG) によって発行が認められた.  インターネット標準についてさらなる情報は RFC 7841 の 2節にある.
+
+   この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8709 で得られる.
+
+著作権情報
+
+   Copyright (c) 2020 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+目次
+
+   1イントロダクション
+   2.  この文書で用いる表記
+     2.1.  要件に関する用語
+   3.  公開鍵アルゴリズム
+   4.  公開鍵の形式
+   5.  署名アルゴリズム
+   6.  署名の形式
+   7.  検証アルゴリズム
+   8.  SSHFP DNS リソースレコード
+   9.  IANA の考察
+   10. セキュリティの考察
+   11. リファレンス
+     11.1.  標準のリファレンス
+     11.2.  Informative References
+   Acknowledgements
+   Authors' Addresses
+
+1イントロダクション
+
+   セキュア シェル(SSH) [RFC4251] は 安全なリモートログインプロトコルだ.  サーバとユーザを相互に識別するために, 拡張可能なさまざまな公開鍵アルゴリズムを提供している.  Ed25519 [RFC8032] は電子署名のシステムだ.  OpenSSH 6.5 [OpenSSH-6.5] は, サーバとユーザの認証のために Ed25519 を用いるサポートを導入し, 他の SSH の実装も続いている.
+
+   この文書は OpenSSH などに実装された方法を記述し,  "ssh-ed25519" の名前の利用を規定する.  加えて, この文書では Ed448 の利用についても記述し, "ssh-ed448" の名前の利用も規定する.
+
+2.  この文書で用いる表記
+
+   鍵と署名の形式の記述には, [RFC4251] の 3節で導入された表記と [RFC4251] の 5節の 文字列データタイプを利用する.
+
+2.1.  要件に関する用語
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, ここで示しているようにすべて大文字で出現した場合のみ, BCP 16 [RFC2119] [RFC8174] で記述されているように解釈される. 
+
+3.  公開鍵アルゴリズム
+
+   この文書は [RFC4253] の 6.6節に従って, SSH で利用する公開鍵アルゴリズムを記述する.  アルゴリズム名は "ssh-ed25519" だ.  このアルゴリズムは署名のみサポートしている. 暗号化はサポートしていない.
+
+   加えて, この文書はもう1つ公開鍵アルゴリズムを記述する.
+   アルゴリズム名は "ssh-ed448" だ.  このアルゴリズムは署名のみサポートしている. 暗号化はサポートしていない.
+
+   SSH の標準実装は, これらの署名アルゴリズムを実装する必要がある.
+
+4.  公開鍵の形式
+
+   "ssh-ed25519" 鍵フォーマットは次のエンコーディングを持つ:
+
+   string  "ssh-ed25519"
+
+   string  key
+
+   ここで, 'key' は [RFC8032] 5.1.5 節で記述された 32-オクテットの公開鍵だ.
+
+   "ssh-ed448" 鍵フォーマットは次のエンコーディングを持つ:
+
+   string  "ssh-ed448"
+
+   string  key
+
+   ここで, 'key' は [RFC8032] 5.1.5 節で記述された 57-オクテットの公開鍵だ.
+
+5.  署名アルゴリズム
+
+   [RFC8032] の 5.1.6 節と 5.2.6 節の手順に従って, 署名は生成される.
+
+6.  署名の形式 (訳注: 原文が key format なのでそのままとしているが おかしいと思うので https://www.rfc-editor.org/errata/eid6164 で報告した)
+
+   "ssh-ed25519" 鍵フォーマットは次のエンコーディングを持つ:
+
+   string  "ssh-ed25519"
+
+   string  signature
+
+   ここで, 'signature' は [RFC8032] 5.1.6 節に従って生成される 64-オクテットの署名だ.
+
+   "ssh-ed448" 鍵フォーマットは次のエンコーディングを持つ:
+
+   string  "ssh-ed448"
+
+   string  signature
+
+   ここで, 'signature' は  [RFC8032] 5.2.6 節に従って生成される 114-オクテットの署名だ.
+
+7.  検証アルゴリズム
+
+   Ed25519 署名は,  [RFC8032] 5.1.7 節の手順に従って検証される.
+
+   Ed448 署名は [RFC8032] 5.2.7 節の手順に従って検証される.
+
+8.  SSHFP DNS リソースレコード
+
+   SSHFP DNS イソースレコードの利用法と世代については, [RFC4255] に記述されている.  "ssh-ed25519" 鍵に対する SSHFP リソースレコードの世代については,  [RFC4749] に記述されている.  この節では, "ssh-ed448" 鍵に対する SSHFP リソースレコードの世代について説明する. また, この文書は "DNS SSHFP Resource Record Parameters" IANA レジストリ[IANA-SSHFP] の "SSHFP RR Types for public key algorithms" への Ed448 コードポイントの対応も指定する.
+
+   "ssh-ed448" 鍵に対するSSHFP リソースレコードの世代は次のように記述される:
+
+   Ed448 公開鍵のエンコーディングは [ED448] に記述されている.  簡単に述べると, Ed448 の公開鍵は 57-オクテットの値で 455-ビットの 楕円曲線の y 軸の値を表しており, 署名のビットは対応する x軸の値を示している.
+
+   SHA-256 指紋を利用する Ed448 公開鍵の SSHFP リソースレコードは, たとえば次のようになるだろう:
+
+   example.com. IN SSHFP 6 2 ( a87f1b687ac0e57d2a081a2f2826723
+                               34d90ed316d2b818ca9580ea384d924
+                               01 )
+
+   '2' は SHA-256 [RFC6594] を示している.
+
+9.  IANA の考慮
+
+   この文書は, [RFC4250] 4.11.3 節の 公開鍵アルゴリズム名に追加する.
+
+   IANA は "Secure Shell (SSH) Protocol Parameters" レジストリ [IANA-SSH] の"Public Key Algorithm Names" に次のエントリを追加した: 
+
+                 +---------------------------+-----------+
+                 | Public Key Algorithm Name | Reference |
+                 +===========================+===========+
+                 | ssh-ed25519               | RFC 8709  |
+                 +---------------------------+-----------+
+                 | ssh-ed448                 | RFC 8709  |
+                 +---------------------------+-----------+
+
+                                  Table 1
+
+   IANA は"DNS SSHFP Resource Record Parameters" レジストリ [IANA-SSHFP] の"SSHFP RR Types for public key algorithms"  に次のエントリを追加した: 
+
+                    +-------+-------------+-----------+
+                    | Value | Description | Reference |
+                    +=======+=============+===========+
+                    | 6     | Ed448       | RFC 8709  |
+                    +-------+-------------+-----------+
+
+                                  Table 2
+
+10.  セキュリティの考察
+
+   [RFC4251] 9 節のセキュリティの考察は, Ed25519 と Ed448 を用いる実装を含めて, すべての SSH の実装に適用される.
+
+   [RFC8032] の 8節と [RFC7479] の 3節のセキュリティの考察は, SSH での Ed25519 と Ed448 の利用を含め, すべての Ed25519 と Ed448 の利用に適用される.
+
+11.  References
+
+11.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC4250]  Lehtinen, S. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Assigned Numbers", RFC 4250,
+              DOI 10.17487/RFC4250, January 2006,
+              <https://www.rfc-editor.org/info/rfc4250>.
+
+   [RFC4251]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Architecture", RFC 4251, DOI 10.17487/RFC4251,
+              January 2006, <https://www.rfc-editor.org/info/rfc4251>.
+
+   [RFC4253]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Transport Layer Protocol", RFC 4253, DOI 10.17487/RFC4253,
+              January 2006, <https://www.rfc-editor.org/info/rfc4253>.
+
+   [RFC4255]  Schlyter, J. and W. Griffin, "Using DNS to Securely
+              Publish Secure Shell (SSH) Key Fingerprints", RFC 4255,
+              DOI 10.17487/RFC4255, January 2006,
+              <https://www.rfc-editor.org/info/rfc4255>.
+
+   [RFC6594]  Sury, O., "Use of the SHA-256 Algorithm with RSA, Digital
+              Signature Algorithm (DSA), and Elliptic Curve DSA (ECDSA)
+              in SSHFP Resource Records", RFC 6594,
+              DOI 10.17487/RFC6594, April 2012,
+              <https://www.rfc-editor.org/info/rfc6594>.
+
+   [RFC8032]  Josefsson, S. and I. Liusvaara, "Edwards-Curve Digital
+              Signature Algorithm (EdDSA)", RFC 8032,
+              DOI 10.17487/RFC8032, January 2017,
+              <https://www.rfc-editor.org/info/rfc8032>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+11.2.  Informative References
+
+   [ED448]    Hamburg, M., "Ed448-Goldilocks, a new elliptic curve",
+              January 2015, <https://eprint.iacr.org/2015/625.pdf>.
+
+   [IANA-SSH] IANA, "Secure Shell (SSH) Protocol Parameters",
+              <https://www.iana.org/assignments/ssh-parameters>.
+
+   [IANA-SSHFP]
+              IANA, "DNS SSHFP Resource Record Parameters",
+              <https://www.iana.org/assignments/dns-sshfp-rr-
+              parameters>.
+
+   [OpenSSH-6.5]
+              Friedl, M., Provos, N., de Raadt, T., Steves, K., Miller,
+              D., Tucker, D., McIntyre, J., Rice, T., and B. Lindstrom,
+              "OpenSSH 6.5 release notes", January 2014,
+              <http://www.openssh.com/txt/release-6.5>.
+
+   [RFC7479]  Moonesamy, S., "Using Ed25519 in SSHFP Resource Records",
+              RFC 7479, DOI 10.17487/RFC7479, March 2015,
+              <https://www.rfc-editor.org/info/rfc7479>.
+
+謝辞
+
+   The OpenSSH implementation of Ed25519 in SSH was written by Markus
+   Friedl.  We are also grateful to Mark Baushke, Benjamin Kaduk, and
+   Daniel Migault for their comments.
+
+Authors' Addresses
+
+   Ben Harris
+   2A Eachard Road
+   Cambridge
+   CB3 0HY
+   United Kingdom
+
+   Email: bjh21@bjh21.me.uk
+
+
+   Loganaden Velvindron
+   cyberstorm.mu
+   88, Avenue De Plevitz
+   Roches Brunes
+   Mauritius
+
+   Email: logan@cyberstorm.mu

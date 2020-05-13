@@ -1,0 +1,201 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                      S. Moonesamy
+Request for Comments: 7479                                    March 2015
+Category: Informational
+ISSN: 2070-1721
+
+
+                SSHFP リソースレコードでの Ed25519 の利用
+
+概要
+
+   Ed25519 署名アルゴリズムは OpenSSH で実装されている.
+   この文書は, Ed25519 のためのアルゴリズム番号を追加して IANA の "SSHFP RR Types for public key algorithms" レジストリを更新する.
+
+このメモの位置づけ
+
+   この文書は, インターネット標準課程仕様ではない. 情報共有目的で発行される.
+
+   この文書は, Internet Engineering Task Force (IETF) の成果物だ.  IETF コミュニティの合意を表わしている.  公開のレビューを受けており, Internet Engineering Steering Group (IESG) によって発行が認められた.  IESG が認めたすべての文書が, インターネット標準のなんらかの水準の候補というわけではない. RFC5741 の 2節を参照.
+
+   この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc7479 で得られる. 
+
+著作権情報
+
+   Copyright (c) 2015 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+
+
+
+Moonesamy                     Informational                     [Page 1]
+
+RFC 7479               Using Ed25519 in SSHFP RRs             March 2015
+
+
+目次
+
+   1イントロダクション ..........................................2
+   2. SHA-256 指紋を利用する Ed25519 公開鍵  .....................2
+   3. セキュリティの考察 .........................................3
+   4. IANA の考察  .............................................3
+   5. References ......................................................3
+      5.1. Normative References .......................................3
+      5.2. Informative References .....................................3
+   Acknowledgements ...................................................4
+   Author's Address ...................................................4
+
+1イントロダクション
+
+   Ed25519 [Ed25519] 署名アルゴリズム, 具体的に Ed25519-SHA-512 は, OpenSSH で実装されている. RFC 4255 [RFC4255] は DNS での SSH サーバ公開鍵の指紋の発行に用いられる "SSHFP" DNS リソースレコードを定義している.  この文書は,  Ed25519 [Ed25519] の アルゴリズム番号を追加して IANA の "SSHFP RR Types for public key algorithms" レジストリを更新する.
+
+2.  SHA-256 指紋を利用する Ed25519 公開鍵 
+
+   Ed25519 公開鍵のエンコーディングは [Ed25519] に記述されている.  簡単に述べると, Ed25519 の公開鍵は 32-オクテットの値で 255-ビットの 楕円曲線の y 軸の値を表しており, 署名のビットは対応する x軸の値を示している.
+
+   SHA-256 指紋を利用する Ed25519 公開鍵 [FIPS180-4] の SSHFP リソースレコードは, たとえば次のようになるだろう:
+
+      ssh.example.com IN SSHFP 4 2 ( a87f1b687ac0e57d2a081a2f2826723
+                                     34d90ed316d2b818ca9580ea384d924
+                                     01 )
+
+   上記の署名の生成の入力として, 次の 公開鍵ファイルを利用した.
+
+    ssh-ed25519
+    AAAAC3NzaC1lZDI1NTE5AAAAIGPKSUTyz1HwHReFVvD5obVsALAgJRNarH4TRpNePnAS
+
+   生成された形式が定まっていない文字列の出力は, RDATA 署名フィールドの中にそのまま配置される.
+
+
+
+
+
+
+
+
+Moonesamy                     Informational                     [Page 2]
+
+RFC 7479               Using Ed25519 in SSHFP RRs             March 2015
+
+
+3.  セキュリティの考察
+
+   SSHのホスト鍵の検証に SSHFP を使う場合の総合的なセキュリティは, SSH のホスト管理者と (指紋を転送する) DNS ゾーンの管理者のセキュリティポリシーや SSHの実装でどのように検証が行なわれるかの詳細, DNSに安全な方法でアクセスするクライアントの努力の詳細に依存している.
+   セキュリティの考察の議論のため RFC 4255 [RFC4255] を参照してほしい.
+
+4.  IANA の考慮
+
+   IANA は "SSHFP RR Types for public  key algorithms" レジストリに次のエントリを追加した:
+
+      +--------+-------------+------------+
+      | Value  | Description |  Reference |
+      +--------+-------------+------------+
+      |   4    |    Ed25519  | [RFC7479]  |
+      +--------+-------------+------------+
+
+5.  References
+
+5.1.  Normative References
+
+   [Ed25519]    Bernstein, D. J., Lange T., Schwabe P., and B-Y. Yang,
+                "High-Speed High-Security Signatures", Journal of
+                Cryptographic Engineering, Vol. 2, September 26, 2011.
+
+   [RFC4255]    Schlyter, J. and W. Griffin, "Using DNS to Securely
+                Publish Secure Shell (SSH) Key Fingerprints", RFC 4255,
+                January 2006, <http://www.rfc-editor.org/info/rfc4255>.
+
+5.2.  Informative References
+
+   [FIPS180-4]  National Institute of Standards and Technology, "Secure
+                Hash Standard (SHS)", FIPS PUB 180-4, March 2012,
+                <http://csrc.nist.gov/publications/fips/fips180-4/
+                fips-180-4.pdf>.
+
+
+
+
+
+
+
+
+
+
+
+
+Moonesamy                     Informational                     [Page 3]
+
+RFC 7479               Using Ed25519 in SSHFP RRs             March 2015
+
+
+謝辞
+
+   Some of the text in this document was written by Ondrej Sury.  The
+   author would like to thank Richard Barnes, Damien Miller, Yoav Nir,
+   and Paul Wouters for their feedback.  Rene Struik provided advice
+   about the usage of Ed25519.  Stephen Farrell, as Security Area
+   Director, reviewed the code point request.
+
+Author's Address
+
+   S. Moonesamy
+   76, Ylang Ylang Avenue
+   Quatres Bornes
+   Mauritius
+
+   EMail: sm+ietf@elandsys.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Moonesamy                     Informational                     [Page 4]
+
