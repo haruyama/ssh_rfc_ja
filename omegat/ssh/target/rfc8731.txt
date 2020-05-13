@@ -11,12 +11,11 @@ ISSN: 2070-1721                                                   SJD AB
                                                            February 2020
 
 
-  Secure Shell (SSH) Key Exchange Method Using Curve25519 and Curve448
+  Curve25519 と Curve448 を用いる セキュアシェル (SSH) 鍵交換法
 
 概要
 
-   This document describes the specification for using Curve25519 and
-   Curve448 key exchange methods in the Secure Shell (SSH) protocol.
+   この文書は, セキュアシェル (SSH) プロトコルで Curve25519 と Curve448 鍵交換法を利用するための仕様を記述する.
 
 このメモの位置づけ
 
@@ -24,9 +23,7 @@ ISSN: 2070-1721                                                   SJD AB
 
    この文書は, Internet Engineering Task Force (IETF) の成果物だ.  IETF コミュニティの合意を表わしている.  公開のレビューを受けており, Internet Engineering Steering Group (IESG) によって発行が認められた.  インターネット標準についてさらなる情報は RFC 7841 の 2節にある.
 
-   Information about the current status of this document, any errata,
-   and how to provide feedback on it may be obtained at
-   https://www.rfc-editor.org/info/rfc8731.
+   この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8731 で得られる.
 
 著作権情報
 
@@ -47,10 +44,10 @@ ISSN: 2070-1721                                                   SJD AB
 
    1イントロダクション
    2.  要件に関する用語
-   3.  Key Exchange Methods
-     3.1.  Shared Secret Encoding
-   4.  Security Considerations
-   5.  IANA Considerations
+   3.  鍵交換法
+     3.1.  共有の秘密のエンコーディング
+   4.  セキュリティの考察
+   5.  IANA の考察
    6.  References
      6.1.  Normative References
      6.2.  Informative References
@@ -59,23 +56,9 @@ ISSN: 2070-1721                                                   SJD AB
 
 1イントロダクション
 
-   Secure Shell (SSH) [RFC4251] is a secure remote login protocol.  The
-   key exchange protocol described in [RFC4253] supports an extensible
-   set of methods.  [RFC5656] defines how elliptic curves are integrated
-   into this extensible SSH framework, and this document reuses the
-   Elliptic Curve Diffie-Hellman (ECDH) key exchange protocol messages
-   defined in Section 7.1 (ECDH Message Numbers) of [RFC5656].  Other
-   parts of [RFC5656], such as Elliptic Curve Menezes-Qu-Vanstone
-   (ECMQV) key agreement and Elliptic Curve Digital Signature Algorithm
-   (ECDSA), are not considered in this document.
+   セキュア シェル(SSH) [RFC4251] は 安全なリモートログインプロトコルだ.  [RFC4253] で記述された鍵交換プロトコルは, 鍵交換法の集合を拡張することをサポートとしている.  [RFC5656] は拡張可能な SSH のフレームワークに楕円曲線をどのように統合するかを定義する. そしてこの文書は, [RFC5656] の 7.1 節 (ECDH メッセージ番号)で定義された楕円曲線 Diffie-Hellman (ECDH) 鍵交換プロトコルメッセージを再利用する.  楕円曲線 Menezes-Qu-Vanstone (ECMQV) 鍵同意や 楕円曲線 Digital Signature Algorithm (ECDSA) といった [RFC5656] の他の部分は, この文書では考慮されない.
 
-   This document describes how to implement key exchange based on
-   Curve25519 and Curve448 [RFC7748] in SSH.  For Curve25519 with
-   SHA-256 [RFC6234][SHS], the algorithm described is equivalent to the
-   privately defined algorithm "curve25519-sha256@libssh.org", which at
-   the time of publication was implemented and widely deployed in libssh
-   [libssh] and OpenSSH [OpenSSH].  The Curve448 key exchange method is
-   similar but uses SHA-512 [RFC6234][SHS].
+   この文書は，Curve25519 と Curve448 [RFC7748] に基づく鍵交換法を SSH でどのように実装するかを記述する.  SHA-256 [RFC6234][SHS] を利用する Curve25519 について, 記述されるアルゴリズムは,  私的に定義されたアルゴリズム "curve25519-sha256@libssh.org" と同等だ. この文書の発行の時点で, libssh [libssh] と OpenSSH [OpenSSH] によって実装され広く配置されているCurve448 鍵交換法も同様だが, SHA-512 [RFC6234][SHS] を利用する.
 
 2.  要件に関する用語
 
@@ -83,109 +66,40 @@ ISSN: 2070-1721                                                   SJD AB
 
 3.  鍵交換法
 
-   The key exchange procedure is similar to the ECDH method described in
-   Section 4 of [RFC5656], though with a different wire encoding used
-   for public values and the final shared secret.  Public ephemeral keys
-   are encoded for transmission as standard SSH strings.
+   この鍵交換手順は, [RFC5656] の 4節で記述された ECDH 法と似ている. ただし, 公開の値と最後の共有秘密では異なる wire encoding が利用される.  公開の一時鍵は, 標準の SSH 文字列として転送時にエンコードされる. 
 
-   The protocol flow, the SSH_MSG_KEX_ECDH_INIT and
-   SSH_MSG_KEX_ECDH_REPLY messages, and the structure of the exchange
-   hash are identical to Section 4 of [RFC5656].
+   プロトコルフロー, SSH_MSG_KEX_ECDH_INIT と SSH_MSG_KEX_ECDH_REPLY メッセージ, 交換ハッシュの構造は, [RFC5656] の 4節と同じだ.
 
-   The method names registered by this document are "curve25519-sha256"
-   and "curve448-sha512".
+   この文書によって登録される方法の名前は, "curve25519-sha256" と "curve448-sha512" だ.
 
-   The methods are based on Curve25519 and Curve448 scalar
-   multiplication, as described in [RFC7748].  Private and public keys
-   are generated as described therein.  Public keys are defined as
-   strings of 32 bytes for Curve25519 and 56 bytes for Curve448.
+   [RFC7748] に記述されている, Curve25519 と Curve448 スカラ乗算をベースにしている.  秘密/公開鍵は, そこに記述されているように生成される.  公開鍵は, Curve25519 では 32バイト, Curve448 では 56 バイトの文字列として定義される.
 
-   The key-agreement schemes "curve25519-sha256" and "curve448-sha512"
-   perform the Diffie-Hellman protocol using the functions X25519 and
-   X448, respectively.  Implementations SHOULD compute these functions
-   using the algorithms described in [RFC7748].  When they do so,
-   implementations MUST check whether the computed Diffie-Hellman shared
-   secret is the all-zero value and abort if so, as described in
-   Section 6 of [RFC7748].  Alternative implementations of these
-   functions SHOULD abort when either the client or the server input
-   forces the shared secret to one of a small set of values, as
-   described in Sections 6 and 7 of [RFC7748].  Clients and servers MUST
-   also abort if the length of the received public keys are not the
-   expected lengths.  An abort for these purposes is defined as a
-   disconnect (SSH_MSG_DISCONNECT) of the session and SHOULD use the
-   SSH_DISCONNECT_KEY_EXCHANGE_FAILED reason for the message
-   [IANA-REASON].  No further validation is required beyond what is
-   described in [RFC7748].  The derived shared secret is 32 bytes when
-   "curve25519-sha256" is used and 56 bytes when "curve448-sha512" is
-   used.  The encodings of all values are defined in [RFC7748].  The
-   hash used is SHA-256 for "curve25519-sha256" and SHA-512 for
-   "curve448-sha512".
+   鍵同意スキーム "curve25519-sha256" と "curve448-sha512" は,  それぞれ関数 X25519 と X448 を用いた Diffie-Hellman プロトコルを実行する.  実装は, [RFC7748] に記述されているアルゴリズムを用いてこれらの関数を計算する必要がある.  そのように計算する際, [RFC7748] の 6節に記述されているように 実装は計算された Diffie-Hellman 共有秘密がすべて 0 値でないか検査しなればならない. また, もしそうならば中止しなければならない. これらの関数の代替の実装は, クライアントかサーバの入力が共有の秘密に値の小さな集合の1つを強制するならば, [RFC7748] に記述されているように, 中止する必要がある.  クライアントとサーバは, 受信した公開鍵の長さが期待した長さでない場合も中止しなければならない.  これらの目的での中止は, セッションの切断 (SSH_MSG_DISCONNECT) で定義され, メッセージに対して理由 SSH_DISCONNECT_KEY_EXCHANGE_FAILED を用いる必要がある.  [RFC7748] で記述されている範囲を越えた検証は必要ない.  道術された共有の秘密は,  "curve25519-sha256" が利用される場合 32 バイト,  "curve448-sha512" の場合 56 バイトだ. すべての値のエンコーディングは, [RFC7748] に定義されている.  ハッシュとして "curve25519-sha256"  には SHA-256,  "curve448-sha512" には SHA-512 が利用される..
 
-3.1.  Shared Secret Encoding
+3.1.  共有の秘密のエンコーディング
 
-   The following step differs from [RFC5656], which uses a different
-   conversion.  This is not intended to modify that text generally, but
-   only to be applicable to the scope of the mechanism described in this
-   document.
+   次の手順は, 異なる変換を用いていて [RFC5656] と異なっている.  これは一般的にテキストを変更する意図があるものではなく, この文書で記述されるメカニズムのスコープにのみ適用される.
 
-   The shared secret, K, is defined in [RFC4253] and [RFC5656] as an
-   integer encoded as a multiple precision integer (mpint).
-   Curve25519/448 outputs a binary string X, which is the 32- or 56-byte
-   point obtained by scalar multiplication of the other side's public
-   key and the local private key scalar.  The 32 or 56 bytes of X are
-   converted into K by interpreting the octets as an unsigned fixed-
-   length integer encoded in network byte order.
+   [RFC4253] と [RFC5656] で定義されている共有の秘密 K は, 多精度整数(mpint) でエンコードされた整数だ.
+   Curve25519/448 は, バイナリ文字列 X を出力する. もう一方の側の公開鍵とローカルの秘密鍵スカラのスカラ乗算によって得られた 32 ないし 56 バイトの点だ.  X の 32 ないし 56 バイトは, そのオクテットをネットワークバイトオーダーでエンコードされた符号なし固定長整数として解釈することで K に変換される.
 
-   The mpint K is then encoded using the process described in Section 5
-   of [RFC4251], and the resulting bytes are fed as described in
-   [RFC4253] to the key exchange method's hash function to generate
-   encryption keys.
+   そして mpint K は [RFC4251] の 5 節で記述された手順を用いてエンコードされる. そして, [RFC4253] で記述されているように, 暗号化鍵を生成するための鍵交換法のハッシュ関数に結果のバイトが供給される.
 
-   When performing the X25519 or X448 operations, the integer values
-   there will be encoded into byte strings by doing a fixed-length
-   unsigned little-endian conversion, per [RFC7748].  It is only later
-   when these byte strings are then passed to the ECDH function in SSH
-   that the bytes are reinterpreted as a fixed-length unsigned big-
-   endian integer value K, and then later that K value is encoded as a
-   variable-length signed "mpint" before being fed to the hash algorithm
-   used for key generation.  The mpint K is then fed along with other
-   data to the key exchange method's hash function to generate
-   encryption keys.
+   X25519 ないし X448 の操作の実行の際, [RFC7748] に従って, 整数値は, 固定長符号なしリトルエンディアン変換を用いてバイト文字列にエンコードされる.  これらのバイト文字列が後で SSH の ECDH 関数に渡される時にのみ, それらのバイトは固定長符号なしビッグエンディアン整数値 K として解釈される. そしてその後で,  K の値は, 鍵導出に用いられるハッシュアルゴリズムに供給される前に,  可変長符号あり "mpint" としてエンコードされる.  そして mpint K は, 暗号化鍵生成のために 他のデータと一緒に 鍵交換法のハッシュ関数に供給される.
 
 4.  セキュリティの考察
 
-   The security considerations of [RFC4251], [RFC5656], and [RFC7748]
-   are inherited.
+   [RFC4251] と [RFC5656] ,  [RFC7748] のセキュリティの考察は継承される.
 
-   Curve25519 with SHA-256 provides strong (~128 bits) security, is
-   efficient on a wide range of architectures, and has characteristics
-   that allow for better implementation properties compared to
-   traditional elliptic curves.  Curve448 with SHA-512 provides stronger
-   (~224 bits) security with similar implementation properties; however,
-   it has not received the same cryptographic review as Curve25519.  It
-   is also slower (larger key material and larger secure hash
-   algorithm), but it is provided as a hedge to combat unforeseen
-   analytical advances against Curve25519 and SHA-256 due to the larger
-   number of security bits.
+   SHA-256 を利用する Curve25519 は, 強い (~128 ビット) のセキュリティを提供する.  広い範囲のアーキテクチャで効率的で, 伝統的な楕円曲線と比較してよりよい実装の性質を可能にする性質を持っている.  SHA-512 を 利用する Curve448 は,  同様の実装の性質を持ちより強い (~224 ビット) セキュリティを提供する. しかし, Curve25519 ど同様の暗号学レビューを受けていない.  また, (より大きい鍵素材とより大きいハッシュアルゴリズムのため) より低速だ. しかし, より大きなセキュリティビットのため, Curve25519 と SHA-256 に対する予測できない分析の進歩に対する防止さくとして提供される. 
 
-   The way the derived mpint binary secret string is encoded before it
-   is hashed (i.e., adding or removing zero bytes for encoding) raises
-   the potential for a side-channel attack, which could determine the
-   length of what is hashed.  This would leak the most significant bit
-   of the derived secret and/or allow detection of when the most
-   significant bytes are zero.  For backwards-compatibility reasons, it
-   was decided not to address this potential problem.
+   ハッシュ化される前に導出したバイナリ秘密文字列をエンコードする方法 (つまり, エンコーディングのために 0 バイトを追加したり削除したりする) は, ハッシュされたものの長さを決定できるので, サイドチャンネル攻撃の可能性がある. これは, 導出された秘密の最上位ビットを漏らしたり, かつ/もしくは 最上位ビットが0かどうかの検出を許すかもしれない.  後方互換性のため, この潜在的な問題には対処しないことが決定された.
 
-   This document provides "curve25519-sha256" as the preferred choice
-   but suggests that the "curve448-sha512" be implemented to provide
-   more than 128 bits of security strength should that become a
-   requirement.
+   この文書は, "curve25519-sha256" をより好ましい選択として提供する. しかし 128 ビットを越えるセキュリティを提供する必要が生じた場合に "curve448-sha512" を実装することを提案する.
 
 5.  IANA の考慮
 
-   IANA has added "curve25519-sha256" and "curve448-sha512" to the "Key
-   Exchange Method Names" registry for SSH [IANA-KEX] that was created
-   in Section 4.10 of [RFC4250].
+   IANA は "curve25519-sha256" と "curve448-sha512" を [RFC4250] の 4.10 節で作成された SSH のための "Key Exchange Method Names" レジストリ [IANA-KEX] に追加した.
 
 6.  References
 
