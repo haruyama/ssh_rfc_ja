@@ -10,23 +10,19 @@ Category: Best Current Practice
 ISSN: 2070-1721
 
 
-                 Deprecating RC4 in Secure Shell (SSH)
+                 セキュアシェル (SSH) での RC4 の非推奨
 
 概要
 
-   This document deprecates RC4 in Secure Shell (SSH).  Therefore, this
-   document formally moves RFC 4345 to Historic status.
+   この文書は セキュアシェル (SSH) での RC4 を非推奨とする.  それゆえ, この文書は RFC4345 を 歴史的状態へ移動する.
 
 このメモの位置づけ
 
-   This memo documents an Internet Best Current Practice.
+   このメモは,  Internet Best Current Practice を文書化する.
 
-   この文書は, Internet Engineering Task Force (IETF) の成果物だ.  IETF コミュニティの合意を表わしている.  公開のレビューを受けており, Internet Engineering Steering Group (IESG) によって発行が認められた.  Further information on
-   BCPs is available in Section 2 of RFC 7841.
+   この文書は, Internet Engineering Task Force (IETF) の成果物だ.  IETF コミュニティの合意を表わしている.  公開のレビューを受けており, Internet Engineering Steering Group (IESG) によって発行が認められた.  BCPs (Best Current Practices) についてさらなる情報は RFC 7841 の 2節にある.
 
-   Information about the current status of this document, any errata,
-   and how to provide feedback on it may be obtained at
-   https://www.rfc-editor.org/info/rfc8758.
+   この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8758 で得られる.
 
 著作権情報
 
@@ -45,10 +41,10 @@ ISSN: 2070-1721
 
 目次
 
-   1Introduction
-     1.1.  Requirements Language
-   2.  Updates to RFC 4253
-   3.  IANA Considerations
+   1イントロダクション
+     1.1.  要件に関する用語
+   2.  RFC 4253 の更新
+   3.  IANA の考察
    4.  セキュリティの考察
    5.  References
      5.1.  Normative References
@@ -58,26 +54,15 @@ ISSN: 2070-1721
 
 1イントロダクション
 
-   The usage of RC4 suites (also designated as "arcfour") for SSH is
-   specified in [RFC4253] and [RFC4345].  [RFC4253] specifies the
-   allocation of the "arcfour" cipher for SSH.  [RFC4345] specifies and
-   allocates the "arcfour128" and "arcfour256" ciphers for SSH.  RC4
-   encryption has known weaknesses [RFC7465] [RFC8429]; therefore, this
-   document starts the deprecation process for their use in Secure Shell
-   (SSH) [RFC4253].  Accordingly, [RFC4253] is updated to note the
-   deprecation of the RC4 ciphers, and [RFC4345] is moved to Historic
-   status, as all ciphers it specifies MUST NOT be used.
+   SSH での RC4 ("arcfour と指定されることもある) の利用は, [RFC4253] と [RFC4345] で指定されている.  [RFC4253] は, SSH に対して "arcfour" 暗号の割り当てを指定している.  [RFC4345] は, SSH に対して "arcfour128" と "arcfour256" 暗号の指定と割り当てをしている.  RC4 暗号は 既知の弱点 [RFC7465] [RFC8429] がある. それゆえ, この文書は, セキュアシェル (SSH) [RFC4253] での RC4 の利用について非推奨の処置を開始する.  したがって, [RFC4253] は RC4 暗号の非推奨を注釈することで更新され, [RFC4345] は, 歴史的状態に移動される. ([RFC4345] で) 指定されたすべての暗号は利用してはならない.
 
 1.1.  要件に関する用語
 
    この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, ここで示しているようにすべて大文字で出現した場合のみ, BCP 16 [RFC2119] [RFC8174] で記述されているように解釈される. 
 
-2.  Updates to RFC 4253
+2.  RFC 4253 の更新
 
-   [RFC4253] is updated to prohibit arcfour's use in SSH.  [RFC4253],
-   Section 6.3 allocates the "arcfour" cipher by defining a list of
-   defined ciphers in which the "arcfour" cipher appears as optional, as
-   shown in Table 1.
+   [RFC4253] は SSH での arcfour の利用を禁止することで更新される.  [RFC4253] 6.3 節は, Table 1 に示されているように, "arcfour" 暗号を optional として現れる暗号のリストを定義して, "arcforur" 暗号を割り当てている. 
 
    +---------+----------+----------------------------------------------+
    | arcfour | OPTIONAL | the ARCFOUR stream cipher                    |
@@ -86,9 +71,7 @@ ISSN: 2070-1721
 
                                   Table 1
 
-   This document updates the status of the "arcfour" ciphers in the list
-   found in [RFC4253], Section 6.3 by moving it from OPTIONAL to MUST
-   NOT.
+   この文書は, [RFC4253] のリストの "arcfour" 暗号の 状態を, OPTIONAL から MUST NOT に移動して更新する. 
 
    +---------+----------+----------------------------------------------+
    | arcfour | MUST NOT | the ARCFOUR stream cipher                    |
@@ -97,27 +80,17 @@ ISSN: 2070-1721
 
                                   Table 2
 
-   [RFC4253] defines the "arcfour" ciphers with the following text:
+   [RFC4253] は "arcfour" 暗号を次のテキストで定義している:
 
-   |  The "arcfour" cipher is the Arcfour stream cipher with 128-bit
-   |  keys.  The Arcfour cipher is believed to be compatible with the
-   |  RC4 cipher [SCHNEIER].  Arcfour (and RC4) has problems with weak
-   |  keys, and should be used with caution.
+   |   "arcfour" 暗号は 128-ビット鍵のArcfour ストリーム暗号だ.  Arcfour 暗号は, RC4 暗号と互換性があると信じられている [SCHNEIER].  Arcfour (と RC4) は弱い鍵の問題があり, 注意して利用されるべきだ.
 
-   This document updates [RFC4253], Section 6.3 by replacing the text
-   above with the following text:
+   この文書は [RFC4253] の 6.3 節を, 前記のテキストを次のものに置き換えることで更新する:
 
-   |  The "arcfour" cipher is the Arcfour stream cipher with 128-bit
-   |  keys.  The Arcfour cipher is compatible with the RC4 cipher
-   |  [SCHNEIER].  Arcfour (and RC4) has known weaknesses [RFC7465]
-   |  [RFC8429] and MUST NOT be used.
+   |   "arcfour" 暗号は 128-ビット鍵のArcfour ストリーム暗号だ.  Arcfour 暗号は RC4 暗号と互換性がある [SCHNEIER].  Arcfour (と RC4)は既知の弱点 [RFC7465]  [RFC8429] があり, 利用してはならない.
 
 3.  IANA の考慮
 
-   The IANA has updated the "Encryption Algorithm Names" subregistry in
-   the "Secure Shell (SSH) Protocol Parameters" registry [IANA].  The
-   registration procedure is IETF review, which is achieved by this
-   document.  The registry has been updated as follows:
+   IANA は "Secure Shell (SSH) Protocol Parameters" レジストリ内の  "Encryption Algorithm Names" サブレジストリを更新した.  この登録手順は, IETF のレビューで, この文書で実現している.  レジストリは次のように更新された:
 
            +---------------------------+-----------+----------+
            | Encryption Algorithm Name | Reference | Note     |
@@ -133,8 +106,7 @@ ISSN: 2070-1721
 
 4.  セキュリティの考察
 
-   This document only prohibits the use of RC4 in SSH; it introduces no
-   new security considerations.
+   この文書は SSH での RC4 の利用を禁止しただけだ; 新しいセキュリティの考察は導入していない.
 
 5.  References
 
