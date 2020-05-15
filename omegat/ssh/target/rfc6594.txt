@@ -1,0 +1,440 @@
+
+
+
+
+
+
+Internet Engineering Task Force (IETF)                           O. Sury
+Request for Comments: 6594                                        CZ.NIC
+Category: Standards Track                                     April 2012
+ISSN: 2070-1721
+
+
+                 SSHFP リソースレコードでの RSA と Digital Signature Algorithm (DSA), 楕円曲線 DSA (ECDSA) との SHA-256 アルゴリズムの利用
+
+概要
+
+   この文書は, DNS リソースレコード (RR) の1つである SSHFP を定義している RFC4255 の IANA レジストリを更新する. SSHFP はDNS セキュリティ拡張 (DNSSEC) を用いて SSH ホスト鍵を検証するために 標準セキュアシェル (SSH) の鍵の指紋を含んでいる. この文書は, 楕円曲線 DSA (ECDSA) を利用する SSH 公開鍵をサポートする追加のオプションを定義し, SSHFP リソースレコードで SHA-256 メッセージダイシェストアルゴリズムを用いて計算される指紋の実装方法を定義する.
+
+このメモの位置づけ
+
+   これは, インターネット標準化課程文書だ.
+
+   この文書は, Internet Engineering Task Force (IETF) の成果物だ.  IETF コミュニティの合意を表わしている.  公開のレビューを受けており, Internet Engineering Steering Group (IESG) によって発行が認められた.  インターネット標準についてのさらなる情報は, RFC 5741 の 2節にある.
+
+   この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc6594 で得られる. 
+
+著作権情報
+
+   Copyright (c) 2012 IETF Trust and the persons identified as the
+   document authors. 訳者: 春山征吾 <haruyama@unixuser.org> All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+
+
+
+
+
+Sury                         Standards Track                    [Page 1]
+
+RFC 6594         ECDSA and SHA-256 Algorithms for SSHFP       April 2012
+
+
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+目次
+
+   1イントロダクション ...............................................3
+   2. 要件に関する用語 ...........................................4
+   3. SSHFP リソースレコード ..........................................4
+      3.1. SSHFP 指紋タイプ仕様  .......................4
+           3.1.1. SHA-256 SSHFP 指紋タイプ仕様 ........4
+      3.2. SSHFP アルゴリズム番号仕様 .......................4
+           3.2.1. ECDSA SSHFPアルゴリズム番号仕様  ..........4
+   4. 実装上の考察  ...................................4
+      4.1. SHA-256 指紋のサポート ...........................4
+      4.2. ECDSAのサポート  ..........................................4
+   5. 例  ........................................................5
+      5.1. RSA 公開鍵 .............................................5
+           5.1.1. SHA1 指紋付き RSA 公開鍵 ................5
+           5.1.2. SHA-256 指紋付き RSA 公開鍵 .............5
+      5.2. DSA 公開鍵 .............................................6
+           5.2.1. SHA1 指紋付き DSA 公開鍵 ................6
+           5.2.2. SHA-256 指紋付き DSA 公開鍵 .............6
+      5.3. ECDSA 公開鍵  ...........................................6
+           5.3.1. SHA1 指紋付き ECDSA 公開鍵  ..............7
+           5.3.2. SHA-256 指紋付き ECDSA 公開鍵 ...........7
+   6. IANA の考察 .............................................7
+      6.1. SSHFP RR Types for Public Key Algorithms ...................7
+      6.2. SSHFP RR Types for Fingerprint Types .......................7
+   7. セキュリティの考察 .........................................8
+   8. References ......................................................8
+      8.1. Normative References .......................................8
+      8.2. Informative References .....................................9
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sury                         Standards Track                    [Page 2]
+
+RFC 6594         ECDSA and SHA-256 Algorithms for SSHFP       April 2012
+
+
+1イントロダクション
+
+   ドメインネームシステム (DNS) は, インターネットでの名前解決のためのグローバルで階層化された分散データベースだ.  セキュア シェル (SSH) は, 安全ではないネットワーク上での安全なリモートログインや他の安全なネットワークサービスのためのプロトコルだ.  RFC 4253 [RFC4253] は, セキュアシェルサーバ公開鍵のための公開鍵アルゴリズムを定義している.
+
+   DNS [RFC1034][RFC1035] 上でサーバの秘密鍵の指紋を検索し  Domain Name System Security Extensions (DNSSEC) SSHFP [RFC4033][RFC4034][RFC4035] を用いてその検索を検証することで, 帯域外の検証を提供する, SSHFP と名付けられた DNS リソースレコード [RFC4255] に指紋を保存するにように DNS は拡張された. T
+
+   RFC 4255 [RFC4255] は SSHFP リソースレコードに SSH 公開鍵の暗号学的指紋をどのように保存するかを記述している.  SSHFP リソースレコードは, 指紋と, 利用している暗号学的アルゴリズムを識別する2つのインデックス番号を含んでいる:
+
+   1指紋化された公開鍵と対応する秘密鍵とをリンクするため (訳注: 鍵のアルゴリズム)
+
+   2.  レコードでの指紋のように保存されたメッセージダイジェストを導出するため (訳注: メッセージダイジェストアルゴリズム)
+
+   RFC 4255 [RFC4255] は, 暗号学的アルゴリズムのリストとSSHFP リソースレコードでそれらを識別するために用いられる関連するインデックス番号を指定している.
+
+   この文書は  IANA レジストリ "SSHFP RR Types for public key algorithms" と "SSHFP RR types for fingerprint types" [SSHFPVALS] それぞれに新しい選択肢を追加して更新する:
+
+   o  Elliptic Curve Digital Signature Algorithm (ECDSA) [RFC6090],  public key algorithms のリストで [RFC5656] にて Secure Shell Public Key リストに追加されている. 
+
+   o  the SHA-256 アルゴリズム [FIPS.180-3.2008], SSHFP fingerprint type のリスト.
+
+   DNSSEC に加え , SSHプロトコル [RFC4251][RFC4253][RFC4250], SSHFP [RFC4255], SHA-2 [FIPS.180-3.2008] アルゴリズムファミリーをこの文書では前提とする.
+
+
+
+
+
+
+
+
+Sury                         Standards Track                    [Page 3]
+
+RFC 6594         ECDSA and SHA-256 Algorithms for SSHFP       April 2012
+
+
+2.  要件に関する用語
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, RFC 2119 [RFC2119] で記述されているように解釈される. 
+
+3.  SSHFP リソースレコード
+
+   SSHFP RR の形式は RFC 4255 [RFC4255] に記載されている.
+
+3.1.  SSHFP 指紋タイプ仕様
+
+   指紋のタイプのオクテットは, 公開鍵の指紋を計算するのに使われるメッセージダイジェストアルゴリズムを識別する.
+
+3.1.1.  SHA-256 SSHFP 指紋タイプ仕様
+
+   公開鍵の SHA-256 指紋は, SSH FP リソースレコードに 指紋タイプ 2 とともに格納される.
+
+3.2.  SSHFP アルゴリズム番号仕様
+
+   The SSHFP リソースレコードアルゴリズム番号オクテットは, 公開鍵のアルゴリズムを記述する.
+
+
+3.2.1.  ECDSA SSHFP アルゴリズム番号仕様
+
+   ECDSA 公開鍵は, SSHFP リソースレコードにアルゴリズム番号 3 とともに格納される.
+
+4.  実装上の考察
+
+4.1.  SHA-256 指紋のサポート
+
+   SSHFP をサポートするセキュアシェル実装は,  公開鍵の検証のために SHA-256 指紋をサポートする必要がある.  SHA-256 指紋をサポートするセキュアシェル実装は, サーバで SHA-256 と SHA-1 が利用できる場合に .SHA-1 よりも SHA-256 を優先しなければならない.  もし, SHA-256 指紋がテストされSSHサーバから送られた SSH 公開鍵と一致しないなら, SHA-1 指紋を代わりにテストするのではなく, その鍵は拒否されなければならない.
+
+4.2.  ECDSA のサポート
+
+   SSHFP をサポートし ECDSA を実装するセキュアシェル実装は, ECDSA 公開鍵の SSHFP 指紋をサポートする必要がある.
+
+
+
+
+Sury                         Standards Track                    [Page 4]
+
+RFC 6594         ECDSA and SHA-256 Algorithms for SSHFP       April 2012
+
+
+5.  例
+
+   次の例は, ECDSA のために新しく定義された値と SHA-256 指紋の利用の両方のために新規と既存のアルトリズム番号を組み合わせたリファレンスを提供する.
+
+5.1.  RSA 公開鍵
+
+   OpenSSH 形式 [RFC4716] の次の値の公開鍵を用いる:
+
+       ---- BEGIN SSH2 PUBLIC KEY ----
+       AAAAB3NzaC1yc2EAAAADAQABAAABAQDCUR4JOhxTinzq7QO3bQXW4jmPCCulFsnh
+       8Yi7MKwpMnd96+T7uV7nEwy+6+GWYu98IxFJByIjFXX/a6BXDp3878wezH1DZ2tN
+       D/tu/eudz6ErpTFYmnVLyEDARYSzVBNQuIK1UDqvvB6KffJcyt78FpwW27euGkqE
+       kam7GaurPRAgwXehDB/gMwRtXVRZ+13zYWkAmAY+5OAWVmdXuQVm5kjlvcNzto2H
+       3m3nqJtD4J9L1lKPuSVVqwJr4/6hibXJkQEvWpUvdOAUw3frKpNwa932fXFk3ke4
+       rsDjQ/W8GyleMtK3Tx8tE4z1wuowXtYe6Ba8q3LAPs/m2S4pUscx
+       ---- END SSH2 PUBLIC KEY ----
+
+5.1.1.  SHA1 指紋付き RSA 公開鍵
+
+   この鍵の SSHリソースレコードは次のようになる:
+
+       server.example.net IN SSHFP 1 1 ( dd465c09cfa51fb45020cc83316fff
+                                         21b9ec74ac )
+
+5.1.2.  SHA-256 指紋付き RSA 公開鍵
+
+   この鍵の SSHリソースレコードは次のようになる:
+
+       server.example.net IN SSHFP 1 2 ( b049f950d1397b8fee6a61e4d14a9a
+                                         cdc4721e084eff5460bbed80cfaa2c
+                                         e2cb )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sury                         Standards Track                    [Page 5]
+
+RFC 6594         ECDSA and SHA-256 Algorithms for SSHFP       April 2012
+
+
+5.2.  DSA 公開鍵
+
+   OpenSSH 形式の次の値の公開鍵を用いる:
+
+       ---- BEGIN SSH2 PUBLIC KEY ----
+       AAAAB3NzaC1kc3MAAACBAPVFrc0U36gWaywbfJzjcv8ef13qAX4EJl8Na6xqvXh1
+       t+aCJEdS7soRjtvK4KsNhk78DjdtnfhEhyFKHHNz3i6/c/s9lP0UjV7mRAo6nA7A
+       3Gs6iQElb6O9Fqm6iVSC6bYWilTSB0tYencEEJUoaAua8YQF/uxRzPrReXxGqHnj
+       AAAAFQDC9M/pli8VIVmEGOO0wC1TeUTN4wAAAIEAgA2Fbkbbeo0+u/qw8mQFOFWZ
+       pTaqNo7d7jov3majbh5LqEVD7yT3MS1GSGhjgvvhus/ehMTqzYbjTc0szUM9JnwT
+       7xq15P2ZYDK98IVxrw31jMtsUUEmBqB4DUjTurtcaWmJ9LNaP1/k4bMo0/hotnOc
+       OVnIPsTLBFWVvdNRxUAAAACAOZcDcK01NTM1qIIYbBqCffrwjQ+9PmsuSKI6nUzf
+       S4NysXHkdbW5u5VxeXLcwWj5PGbRfoS2P3vwYAmakqgq502wigam18u9nAczUYl+
+       2kOeOiIRrtSmLfpV7thLOAb8k1ESjIlkbn35jKmTcoMFRXbFmkKRTK8OEnWQ8AVg
+       6w8=
+       ---- END SSH2 PUBLIC KEY ----
+
+5.2.1.  SHA1 指紋付き DSA 公開鍵
+
+   この鍵の SSHリソースレコードは次のようになる:
+
+       server.example.net IN SSHFP 2 1 ( 3b6ba6110f5ffcd29469fc1ec2ee25
+                                         d61718badd )
+
+5.2.2.  SHA-256 指紋付き DSA 公開鍵
+
+   この鍵の SSHリソースレコードは次のようになる:
+
+       server.example.net IN SSHFP 2 2 ( f9b8a6a460639306f1b38910456a6a
+                                         e1018a253c47ecec12db77d7a0878b
+                                         4d83 )
+
+5.3.  ECDSA 公開鍵
+
+   OpenSSH 形式の次の値の公開鍵を用いる:
+
+       ---- BEGIN SSH2 PUBLIC KEY ----
+       AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBAD+9COUiX7W
+       YgcvIOdI8+djdoFDVUTxNrcog8sSYdbIzeG+bYdsssvcyy/nRfVhXC5QBCk8IThq
+       s7D4/lFxX5g=
+       ---- END SSH2 PUBLIC KEY ----
+
+
+
+
+
+
+
+
+Sury                         Standards Track                    [Page 6]
+
+RFC 6594         ECDSA and SHA-256 Algorithms for SSHFP       April 2012
+
+
+5.3.1.  SHA1 指紋付き ECDSA 公開鍵
+
+   この鍵の SSHリソースレコードは次のようになる:
+
+       server.example.net IN SSHFP 3 1 ( c64607a28c5300fec1180b6e417b92
+                                         2943cffcdd )
+
+5.3.2.  SHA-256 指紋付き ECDSA 公開鍵
+
+   この鍵の SSHリソースレコードは次のようになる:
+
+       server.example.net IN SSHFP 3 2 ( 821eb6c1c98d9cc827ab7f456304c0
+                                         f14785b7008d9e8646a8519de80849
+                                         afc7 )
+
+6.  IANA の考慮
+
+   この文書は IANA レジストリ "SSHFP RR Types for public key algorithms" と "SSHFP RR types for fingerprint types" [SSHFPVALS] を更新する.
+
+6.1.  SSHFP RR Types for Public Key Algorithms
+
+   次のエントリが  "SSHFP RR Types for public key algorithms" レジストリに追加された:
+
+                   +-------+-------------+------------+
+                   | Value | Description |  Reference |
+                   +-------+-------------+------------+
+                   |   3   |    ECDSA    | [This doc] |
+                   +-------+-------------+------------+
+
+6.2.  SSHFP RR Types for Fingerprint Types
+
+   次のエントリが "SSHFP RR types for fingerprint types" レジストリに追加された:
+
+                   +-------+-------------+------------+
+                   | Value | Description |  Reference |
+                   +-------+-------------+------------+
+                   |   2   |   SHA-256   | [This doc] |
+                   +-------+-------------+------------+
+
+
+
+
+
+
+
+
+
+Sury                         Standards Track                    [Page 7]
+
+RFC 6594         ECDSA and SHA-256 Algorithms for SSHFP       April 2012
+
+
+7.  セキュリティの考察
+
+   SSHFP リソースレコードのために [RFC4255] の, ECDSA のために [RFC5656] のセキュリティの考察を参照してほしい.
+
+   実装がサポートしたら, SSHFP のユーザには SHA-256 を利用するのを推奨する.  SHA-2 アルゴリズムファミリーは, SHA-1 よりも攻撃に耐性があると広く信じられている. SHA-1 の強さへの信頼は, 最近発表された攻撃  [IACR2007/474] により侵食されている.  SHA-1 への攻撃が SSHFP に影響するかにかかわらず, (執筆時において) SSHFP レコードのために SHA-256 を利用するのがよりよい選択だ.
+
+   SHA-256 は当面十分な強さを持つと考えられる. 暗号学と暗号分析の将来の発展の予測は, この文書の範囲を越える.
+
+8.  References
+
+8.1.  Normative References
+
+   [FIPS.180-3.2008]
+               National Institute of Standards and Technology, "Secure
+               Hash Standard (SHS)", FIPS PUB 180-3, October 2008,
+               <http://csrc.nist.gov/publications/fips/fips180-3/
+               fips180-3_final.pdf>.
+
+   [RFC1034]   Mockapetris, P., "Domain names - concepts and
+               facilities", STD 13, RFC 1034, November 1987.
+
+   [RFC1035]   Mockapetris, P., "Domain names - implementation and
+               specification", STD 13, RFC 1035, November 1987.
+
+   [RFC2119]   Bradner, S., "Key words for use in RFCs to Indicate
+               Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC4250]   Lehtinen, S. and C. Lonvick, "The Secure Shell (SSH)
+               Protocol Assigned Numbers", RFC 4250, January 2006.
+
+   [RFC4251]   Ylonen, T. and C. Lonvick, "The Secure Shell (SSH)
+               Protocol Architecture", RFC 4251, January 2006.
+
+   [RFC4253]   Ylonen, T. and C. Lonvick, "The Secure Shell (SSH)
+               Transport Layer Protocol", RFC 4253, January 2006.
+
+   [RFC4255]   Schlyter, J. and W. Griffin, "Using DNS to Securely
+               Publish Secure Shell (SSH) Key Fingerprints", RFC 4255,
+               January 2006.
+
+
+
+Sury                         Standards Track                    [Page 8]
+
+RFC 6594         ECDSA and SHA-256 Algorithms for SSHFP       April 2012
+
+
+   [RFC5656]   Stebila, D. and J. Green, "Elliptic Curve Algorithm
+               Integration in the Secure Shell Transport Layer",
+               RFC 5656, December 2009.
+
+8.2.  Informative References
+
+   [IACR2007/474]
+               Cochran, M., "Notes on the Wang et al. 2^63 SHA-1
+               Differential Path", IACR 2007/474,
+               <http://eprint.iacr.org/2007/474.pdf>.
+
+   [RFC4033]   Arends, R., Austein, R., Larson, M., Massey, D., and S.
+               Rose, "DNS Security Introduction and Requirements",
+               RFC 4033, March 2005.
+
+   [RFC4034]   Arends, R., Austein, R., Larson, M., Massey, D., and S.
+               Rose, "Resource Records for the DNS Security Extensions",
+               RFC 4034, March 2005.
+
+   [RFC4035]   Arends, R., Austein, R., Larson, M., Massey, D., and S.
+               Rose, "Protocol Modifications for the DNS Security
+               Extensions", RFC 4035, March 2005.
+
+   [RFC4716]   Galbraith, J. and R. Thayer, "The Secure Shell (SSH)
+               Public Key File Format", RFC 4716, November 2006.
+
+   [RFC6090]   McGrew, D., Igoe, K., and M. Salter, "Fundamental
+               Elliptic Curve Cryptography Algorithms", RFC 6090,
+               February 2011.
+
+   [SSHFPVALS] IANA, "DNS SSHFP Resource Records Parameters",
+               <http://www.iana.org/assignments/
+               dns-sshfp-rr-parameters>.
+
+Author's Address
+
+   Ondrej Sury
+   CZ.NIC
+   Americka 23
+   120 00 Praha 2
+   Czech Republic
+
+   Phone: +420 222 745 110
+   EMail: ondrej.sury@nic.cz
+
+
+
+
+
+
+
+Sury                         Standards Track                    [Page 9]
+
