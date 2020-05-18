@@ -1522,6 +1522,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A GSS context is established according to Section 4 of [RFC5656]; the
+   client initiates the establishment using GSS_Init_sec_context(), and
+   the server responds to it using GSS_Accept_sec_context().</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T054730Z" creationid="haruyama" creationdate="20200518T054730Z">
+        <seg>GSS のコンテキストは [RFC5656] の 4節に従って確立される; クライアントは GSS_Init_sec_context() を用いて確立を始め, サーバは GSS_Accept_sec_context() を用いてそれに応答する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A GUI client might like to have a checkbox toggling
    echo/mask.</seg>
       </tuv>
@@ -2875,6 +2885,26 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Additionally, we add support for key exchange based on
+   Elliptic Curve Diffie-Hellman with the NIST P-256, P-384, and P-521
+   [SEC2v2], as well as the X25519 and X448 [RFC7748] curves.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T050435Z" creationid="haruyama" creationdate="20200518T050435Z">
+        <seg>さらに,NIST P-256 と P-384,  P-521 [SEC2v2],  X25519 と X448 [RFC7748] 曲線を用いる楕円曲線 Diffle-Hellman を基にする鍵交換のサポートも追加する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Additionally, we also utilize the curves defined in [RFC8731] to
+   complement the three classic NIST-defined curves required by
+   [RFC5656].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T052514Z" creationid="haruyama" creationdate="20200518T052404Z">
+        <seg>さらに, [RFC5656] で要求されている古典的な NIST が定義する 3つの曲線を補完する [RFC8731] で定義された曲線を利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Additions to Existing Registries</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181222T083023Z" creationid="haruyama" creationdate="20181222T083023Z">
@@ -3536,6 +3566,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>All security considerations described in [RFC7546] apply
+   here, too.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T054256Z" creationid="haruyama" creationdate="20200518T054251Z">
+        <seg>[RFC7546] で記述されたすべてのセキュリティの考察が, ここでも適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>All such messages depend on the authentication 'method
    name' used, and the client MAY at any time continue with a new
    SSH_MSG_USERAUTH_REQUEST message, in which case the server MUST
@@ -3776,6 +3815,17 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20180904T115406Z" creationid="haruyama" creationdate="20180904T115406Z">
         <seg>3.1 節で 4 つの新しいステータスコードを定義したが, これらは [1] の 6.6.1 節 (規約) で定義された IANA の公開鍵サブシステムのステータスコードレジストリの 「私的利用」の範囲にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Although a new cryptographic primitive is used with these methods,
+   the actual key exchange closely follows the key exchange defined in
+   [RFC5656]; therefore, all the original security considerations, as
+   well as those expressed in [RFC5656], apply.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T064530Z" creationid="haruyama" creationdate="20200518T064530Z">
+        <seg>これらの方法で新しい暗号基本操作が用いられているが, 実際の鍵交換は [RFC5656] で定義された鍵交換に密接に従っている; それゆえ, もともとのセキュリティの考察と[RFC5656] で表現されたセキュリティの考察とが適用される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4905,6 +4955,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As the final message, the server sends the following if an
+   output_token is produced:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061122Z" creationid="haruyama" creationdate="20200518T061122Z">
+        <seg>最後のメッセージとして, ouput_token が生成されたならサーバは次を送る:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As the previous example illustrates, a special character sequence,
    ]]&gt;]]&gt;, MUST be sent by both the client and the server after each XML
    document in the NETCONF exchange.</seg>
@@ -5501,6 +5560,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Base64 encoding is described in Section 4 of [RFC4648].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T052107Z" creationid="haruyama" creationdate="20200518T052107Z">
+        <seg>Base64 エンコーディングは [RFC4648] の 4節に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Base64 encoding is described in Section 6.8 of [MIME].</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110628T023947Z">
@@ -5637,6 +5704,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>プロトコルは拡張可能なので, プロトコルの将来の拡張で, 接続前にサーバのホスト鍵を知る必要性を取り扱うよりより仕組みが提供されるかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Because they have small key lengths and are no longer strong in the
+   face of brute-force attacks, the algorithms in the following table
+   are considered deprecated and SHOULD NOT be used.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T062612Z" creationid="haruyama" creationdate="20200518T062612Z">
+        <seg>鍵の長さが小さくブルートフォース攻撃に対してもはや強くないので, 次のテーブルのアルゴリズムは非推奨と考えられ利用しないようにする必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6046,6 +6123,22 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Calls GSS_Accept_sec_context().</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060718Z" creationid="haruyama" creationdate="20200518T060718Z">
+        <seg>GSS_Accept_sec_context() を呼び出す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Calls GSS_Init_sec_context().</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060639Z" creationid="haruyama" creationdate="20200518T060639Z">
+        <seg>GSS_Init_sec_context() を呼び出す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Capabilities Exchange</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110728T093145Z">
@@ -6321,6 +6414,18 @@
       ------                                                  ------
       TCP(seq=x, len=500)             ----&gt;
         Record 1 を含む</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Client                                                Server
+       ------                                                ------
+       Generates ephemeral key pair.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060738Z" creationid="haruyama" creationdate="20200518T060628Z">
+        <seg>Client                                                Server
+       ------                                                ------
+       一時鍵ペアを作成する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6791,6 +6896,34 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110409T093639Z">
         <seg>共有の秘密の計算</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Computes hash H.
+                                        Calls GSS_GetMIC( H ) = MIC.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060829Z" creationid="haruyama" creationdate="20200518T060829Z">
+        <seg>ハッシュ値 H を計算する.
+                                        GSS_GetMIC( H ) を呼び出し 結果を MIC とする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Computes hash H.
+       Calls GSS_VerifyMIC( MIC, H ).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060855Z" creationid="haruyama" creationdate="20200518T060855Z">
+        <seg>ハッシュ値 H を計算する.
+       GSS_VerifyMIC( MIC, H ) を呼び出す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Computes shared secret.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060750Z" creationid="haruyama" creationdate="20200518T060750Z">
+        <seg>共有の秘密を計算する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7864,6 +7997,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Deprecated Algorithms</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061943Z" creationid="haruyama" creationdate="20200518T061943Z">
+        <seg>非推奨のアルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Deprecated Algorithms
+   7.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T044506Z" creationid="haruyama" creationdate="20200518T044506Z">
+        <seg>非推奨のアルゴリズム
+   7.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Deprecating RC4 in Secure Shell (SSH)</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200513T062118Z" creationid="haruyama" creationdate="20200513T062106Z">
@@ -8163,6 +8314,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Document Conventions</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T050737Z" creationid="haruyama" creationdate="20200518T050737Z">
+        <seg>文書の規約</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Document Conventions
+   4.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T050743Z" creationid="haruyama" creationdate="20200518T044410Z">
+        <seg>文書の規約
+   4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Doing
    so requires normalization.</seg>
       </tuv>
@@ -8238,6 +8407,27 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Due to security concerns with SHA-1 [RFC6194] and with modular
+   exponentiation (MODP) groups with less than 2048 bits
+   [NIST-SP-800-131Ar2], we propose the use of hashes based on SHA-2
+   [RFC6234] with DH group14, group15, group16, group17, and group18
+   [RFC3526].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T050326Z" creationid="haruyama" creationdate="20200518T050326Z">
+        <seg>SHA-1 と [RFC6194] と2048 ビットよりも小さい羃剰余 (MODP) 群 [NIST-SP-800-131Ar2] のセキュリティの懸念により, DH group14 と group15, group16, group17, group18 [RFC3526] と SHA-2 [RFC6234] を基にするハッシュの利用を提案する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>During GSS context establishment, multiple tokens may be exchanged by
+   the client and the server.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T055321Z" creationid="haruyama" creationdate="20200518T055321Z">
+        <seg>GSS のコンテキストの確立の間に, クライアントとサーバの間に複数のトーケンが交換されるかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>During algorithm negotiation with the SSH_MSG_KEXINIT messages, the
    ECMQV key exchange method can only be chosen if a public key
    algorithm supporting ECC host keys can also be chosen.</seg>
@@ -8306,6 +8496,24 @@
       <tuv lang="JA" changeid="haruyama" changedate="20110306T084621Z">
         <seg>ECDH 鍵公開法の名前 (ecdh-sha2-*) ..............12
       6.4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>ECDH Key Exchange Methods</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061829Z" creationid="haruyama" creationdate="20200518T061829Z">
+        <seg>ECDH 鍵交換法</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>ECDH Key Exchange Methods
+   6.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T044500Z" creationid="haruyama" creationdate="20200518T044500Z">
+        <seg>ECDH 鍵交換法
+   6.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8639,6 +8847,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Each key exchange method prefix is registered by this document.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T051213Z" creationid="haruyama" creationdate="20200518T051213Z">
+        <seg>それぞれの鍵交換法の接頭辞は, この文書で登録される</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Each key exchange method specifies a hash function that is used in
    the key exchange.</seg>
       </tuv>
@@ -8671,6 +8887,26 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110718T033701Z">
         <seg>ヘッダの各行は 72 8-bit バイトを越えてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Each method in any family of methods (Table 2) specifies GSS-API-
+   authenticated Diffie-Hellman key exchanges as described in
+   Section 2.1 of [RFC4462].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T051847Z" creationid="haruyama" creationdate="20200518T051847Z">
+        <seg>方法のファミリーのどのメソッド (Table 2) も [RFC4462] 2.1 節で記述されているように GSS-APIで認証された Diffle-Hellman 鍵交換を指定している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Each method in any family of methods (Table 4) specifies GSS-API-
+   authenticated Elliptic Curve Diffie-Hellman key exchanges as
+   described in Section 5.1.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061913Z" creationid="haruyama" creationdate="20200518T061913Z">
+        <seg>方法のファミリーのどのメソッド (Table 4) も 5.1 節で記述されているように GSS-APIで認証された Diffle-Hellman 鍵交換を指定している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9523,6 +9759,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Except for the use of a different secure hash function and larger DH
+   groups, no significant changes have been made to the protocol
+   described by [RFC4462]; therefore, all the original security
+   considerations apply.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T064223Z" creationid="haruyama" creationdate="20200518T064217Z">
+        <seg>異なる安全なハッシュ関数とより大きな DH 群を利用しているのを除けば, [RFC4462] で記述されたプロトコルに重大な変更は行なっていない; それゆえ, もともとのセキュリティの考察のすべてが適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Exiting NETCONF is accomplished using the &lt;close-session&gt; operation.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110728T100730Z">
@@ -9987,6 +10234,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Following
+   the practice of [RFC8268], only SHA-256 and SHA-512 hashes are used
+   for DH groups.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T050632Z" creationid="haruyama" creationdate="20200518T050632Z">
+        <seg>[RFC8268] の経験に従って, SHA-256 と SHA-512 ハッシュのみが DH 群に対して用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Following the
    preamble are zero or more keys, each encoded as:</seg>
       </tuv>
@@ -10151,6 +10408,25 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For NIST curves, the keys use the uncompressed point representation
+   and MUST be converted using the algorithm in Section 2.3.4 of
+   [SEC1v2].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T054600Z" creationid="haruyama" creationdate="20200518T054600Z">
+        <seg>NIST の曲線に対して, 鍵は圧縮されていない点の表現を用い, [SEC1v2] の 2.3.4 節のアルゴリズムを用いて変換されなければならない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For NIST curves, the same curve-to-hashing algorithm
+   pairing used in [RFC5656] is adopted for consistency.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T050726Z" creationid="haruyama" creationdate="20200518T050726Z">
+        <seg>NIST の曲線に対しては,  [RFC5656] で用いられたものと同じ曲線-ハッシュのアルゴリズムペアが, 一貫性のために採用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For US government use, NIST
    has disallowed 1024-bit RSA and DSA, and use of SHA-1 for signing
    [NIST.800-131A].</seg>
@@ -10259,6 +10535,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110729T064849Z">
         <seg>SNMPに関係する仕様との一貫性のために, この文書は SNMP でない仕様と一貫した用語を利用するよりも STD 62 で定義された用語を優先する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For curve25519 and curve448, the algorithms in
+   Section 6 of [RFC7748] are used instead.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060220Z" creationid="haruyama" creationdate="20200518T060220Z">
+        <seg>curve25519 と curve448 に対しては, 代わりに [RFC7748] の 6節のアルゴリズムが用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10711,6 +10996,16 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110928T073037Z">
         <seg>この文書で導入されるすべての公開鍵アルゴリズムは、セキュアシェルプロトコルの既存のアルゴリズムに基づいているため, ほとんどの部分についてはセキュアシェルプロトコル利用上のセキュリティの考察が適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For the
+   negotiation, the client MUST set mutual_req_flag and integ_req_flag
+   to "true".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T054807Z" creationid="haruyama" creationdate="20200518T054807Z">
+        <seg>加えて, クライアントは mutual_req_flag と integ_req_flag を "true" に設定しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11368,6 +11663,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>GSS-API Delegation</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T064550Z" creationid="haruyama" creationdate="20200518T064550Z">
+        <seg>GSS-API 委任</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>GSS-API Delegation
+   9.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T045718Z" creationid="haruyama" creationdate="20200518T045718Z">
+        <seg>GSS-API 委任
+   9.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>GSS-API Session</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110701T022952Z">
@@ -11509,6 +11822,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Generates ephemeral key pair.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060732Z" creationid="haruyama" creationdate="20200518T060732Z">
+        <seg>一時鍵ペアを作成する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Generating additional sets of
    primes to be used, or moving to larger values mitigates this issue.</seg>
       </tuv>
@@ -11536,6 +11857,24 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Generic GSS-API Key Exchange with ECDH</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T052520Z" creationid="haruyama" creationdate="20200518T052520Z">
+        <seg>ECDH を用いる汎用 GSS-API 鍵交換</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Generic GSS-API Key Exchange with ECDH
+     5.2.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T044454Z" creationid="haruyama" creationdate="20200518T044454Z">
+        <seg>ECDH を用いる汎用 GSS-API 鍵交換
+     5.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Generic Message Exchange Authentication for
                     the Secure Shell Protocol (SSH)</seg>
       </tuv>
@@ -11550,6 +11889,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110621T011143Z">
         <seg>セキュア シェル (SSH) プロトコルのための汎用セキュリティサービスアプリケーションプログラムインタフェイス(GSS-API) 認証と鍵交換 </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Generic Security Service Application Program Interface (GSS-API) Key
+                          Exchange with SHA-2</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T044044Z" creationid="haruyama" creationdate="20200518T044038Z">
+        <seg>SHA-2 を用いる 汎用セキュリティサービスアプリケーションプログラムインタフェイス (GSS-API) 鍵交換</seg>
       </tuv>
     </tu>
     <tu>
@@ -11640,6 +11988,14 @@
       <tuv lang="JA" changeid="haruyama" changedate="20110621T012420Z">
         <seg>群の交換 ............................................10
       2.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>H = hash(V_C || V_S || I_C || I_S || K_S || Q_C || Q_S || K).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060308Z" creationid="haruyama" creationdate="20200518T060308Z">
+        <seg>H = hash(V_C || V_S || I_C || I_S || K_S || Q_C || Q_S || K).</seg>
       </tuv>
     </tu>
     <tu>
@@ -12567,6 +12923,16 @@
       <tuv lang="JA" changeid="haruyama" changedate="20200511T130334Z" creationid="haruyama" creationdate="20200511T130334Z">
         <seg>IANA の考察
    6.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>IANA Considerations
+   8.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T044511Z" creationid="haruyama" creationdate="20200518T044511Z">
+        <seg>IANA の考察
+   8.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13620,6 +13986,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If any GSS_Init_sec_context() or GSS_Accept_sec_context() returns a
+   major_status other than GSS_S_COMPLETE or GSS_S_CONTINUE_NEEDED, or
+   any other GSS-API call returns a major_status other than
+   GSS_S_COMPLETE, the key exchange MUST fail.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060505Z" creationid="haruyama" creationdate="20200518T060505Z">
+        <seg>GSS_Init_sec_context() や GSS_Accept_sec_context() の呼び出しで GSS_S_COMPLETE か GSS_S_CONTINUE_NEEDED 以外の major_status コードが返ったり, 他の GSS-APIの呼び出しで GSS_S_COMPLETE 以外の major_status コードが返ったら, 鍵交換は失敗しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If any call to GSS_Init_sec_context() or GSS_Accept_sec_context()
    returns a major_status other than GSS_S_COMPLETE or
    GSS_S_CONTINUE_NEEDED, or any other GSS-API call returns a
@@ -13887,6 +14264,22 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If no output_token is produced, the server sends:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061207Z" creationid="haruyama" creationdate="20200518T061207Z">
+        <seg>output_token が生成されなかったら, サーバは次を送る:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If not, the key exchange MUST fail.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T055504Z" creationid="haruyama" creationdate="20200518T055504Z">
+        <seg>そうでなければ, 鍵交換は失敗しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If one of the two host key algorithms is
    negotiated, the server sends an "ssh-rsa" public key as part of the
    negotiated key exchange method (e.g., in SSH_MSG_KEXDH_REPLY) and
@@ -13969,6 +14362,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>サーバが侵害されていると, あらゆる端末セッション, ポート転送, ホストにアクセスするシステムが, 侵害される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the "null" host key algorithm described in
+   Section 5 of [RFC4462] is used, this message MUST NOT be sent.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061455Z" creationid="haruyama" creationdate="20200518T061455Z">
+        <seg>[RFC4462] の 5節で記述する "null" ホスト鍵アルゴリズムを利用する場合は, このメッセージを送ってはならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14208,6 +14610,18 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the client does not
+   support the "gssapi-keyex" user authentication method described in
+   Section 4 of [RFC4462], or does not intend to use that method in
+   conjunction with the GSS-API context established during key exchange,
+   then anon_req_flag SHOULD be set to "true".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T054849Z" creationid="haruyama" creationdate="20200518T054849Z">
+        <seg>クライアントが 4節で記述する "gssapi-keyex" ユーザ認証をサポートしていなかったり, 鍵交換時に確立した GSS-APIコンテクストと連携した方法を使おうとしない場合は, anon_req_flag は "true" に設定する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the client does not support the "gssapi-keyex" user
        authentication method described in Section 4, or does not intend
        to use that method in conjunction with the GSS-API context
@@ -14256,6 +14670,28 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20190104T073443Z" creationid="haruyama" creationdate="20190104T073443Z">
         <seg>クライアントが signature フィールドを含めるなら, クライアントは SSH_MSG_USERAUTH_REQUEST での署名と同じアルゴリズム名を含める必要がある. "rsa-sha2-256" か "rsa-sha2-512" だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the client receives an SSH_MSG_KEXGSS_COMPLETE message and a call
+   to GSS_Init_sec_context() does not result in a major_status code of
+   GSS_S_COMPLETE, a protocol error has occurred, and the key exchange
+   MUST fail.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061821Z" creationid="haruyama" creationdate="20200518T061821Z">
+        <seg>SSH_MSG_KEXGSS_CONTINUE メッセージをクライアントが受けとり GSS_Init_sec_context() の呼び出しの結果が GSS_S_COMPLETE の major_status コードにならなかった場合, プロトコルエラーが起きており鍵交換は失敗しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the client receives an SSH_MSG_KEXGSS_CONTINUE message after a
+   call to GSS_Init_sec_context() has returned a major_status code of
+   GSS_S_COMPLETE, a protocol error has occurred, and the key exchange
+   MUST fail.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061519Z" creationid="haruyama" creationdate="20200518T061519Z">
+        <seg>GSS_Init_sec_context() が major_status コードとして GSS_S_COMPLETE を返したあとで SSH_MSG_KEXGSS_CONTINUE メッセージをクライアントが受けとったならば, プロトコルエラーが起きており鍵交換は失敗しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14354,6 +14790,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110722T053410Z">
         <seg>このコマンド文字列が空なら, "exec" と "shell" の要求は禁止される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the conversion fails or the point is transmitted using
+   the compressed representation, the key exchange MUST fail.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T054631Z" creationid="haruyama" creationdate="20200518T054631Z">
+        <seg>この変換が失敗したり, 点が圧縮された表現を用いて転送されたら, 鍵交換は失敗しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15614,6 +16059,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Implementations MUST compute these functions
+   using the algorithms described in [RFC7748].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T052818Z" creationid="haruyama" creationdate="20200518T052818Z">
+        <seg>実装は [RFC7748] に記述されたアルゴリズムを用いてこれらの関数を計算しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Implementations MUST correctly handle window sizes
    of up to 2^32 - 1 bytes.</seg>
       </tuv>
@@ -16250,6 +16704,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In [RFC5656], new SSH key exchange algorithms based on elliptic curve
+   cryptography are introduced.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T052205Z" creationid="haruyama" creationdate="20200518T052205Z">
+        <seg>[RFC5656] で, 楕円曲線暗号に基づく新しい SSH 鍵交換アルゴリズムが導入されている. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In a case where an SSH connection cascades to another connection, the
    BREAK SHOULD be passed along the cascaded connection.</seg>
       </tuv>
@@ -16327,6 +16790,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In addition, IANA has updated the registry to include the SSH key
+   exchange message names described in Sections 4 and 5.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T062847Z" creationid="haruyama" creationdate="20200518T062847Z">
+        <seg>さらに, IANA は 4, 5節に記述された SSH 鍵交換メッセージ名を含むようレジストリを更新する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In addition, a reverse proxy forwarding functionality is available,
    which, again, can be used to bypass firewall controls.</seg>
       </tuv>
@@ -16342,6 +16814,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110621T022723Z">
         <seg>加えて, ユーザが求めるならば アクセスの委譲を要求するために deleg_req_flag を "true" に設定してもよい. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In addition, deleg_req_flag MAY be set to "true" to
+   request access delegation, if requested by the user.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T054819Z" creationid="haruyama" creationdate="20200518T054819Z">
+        <seg>加えて， ユーザが要求したら， アクセスの以上を要求するために  deleg_req_flag を true に設定してもよい．</seg>
       </tuv>
     </tu>
     <tu>
@@ -17274,6 +17755,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In this case,
+   extra care must be taken to ensure that the acceptor being
+   authenticated matches the target the user intended.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T064805Z" creationid="haruyama" creationdate="20200518T064805Z">
+        <seg>この場合, 認証される acceptor がユーザが意図するターゲットと一致するかどうかを保証するために, 特別な注意が必要となる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In this case, if an error token is also sent (see
       below), then this message MUST be sent before the error token.</seg>
       </tuv>
@@ -17619,6 +18110,16 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200511T130249Z" creationid="haruyama" creationdate="20200511T130249Z">
         <seg>この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8731 で得られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc8732.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T044344Z" creationid="haruyama" creationdate="20200518T044344Z">
+        <seg>この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8732 で得られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18188,6 +18689,16 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110614T023920Z">
         <seg>転送中のデータの機密性を提供するため, 対称暗号アルゴリズムを拡張して利用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It
+   defines a new key exchange method that uses SHA-2 for integrity and
+   deprecates weak Diffie-Hellman (DH) groups.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T044225Z" creationid="haruyama" creationdate="20200518T044225Z">
+        <seg>完全性のために SHA-2 を用いる新しい鍵交換法を定義し, 弱い Diffie-Hellman (DH) 群を非推奨とする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20052,6 +20563,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Keys are verified upon receipt by the
+   parties according to Section 3.2.3.1 of [SEC1v2].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T054511Z" creationid="haruyama" creationdate="20200518T054511Z">
+        <seg>[SEC1v2] の 3.2.3.1 節に従って, パーティにより鍵は受信時に検証される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Keys hosted on smart-cards or other hardware tokens may be added
    using the SSH_AGENTC_ADD_SMARTCARD_KEY and
    SSH_AGENTC_ADD_SMARTCARD_KEY_CONSTRAINED requests.</seg>
@@ -21445,6 +21965,78 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>New Diffie-Hellman Key Exchange Methods</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T050758Z" creationid="haruyama" creationdate="20200518T050758Z">
+        <seg>新しい Diffie-Hellman Key 鍵交換法</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>New Diffie-Hellman Key Exchange Methods
+   5.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T044423Z" creationid="haruyama" creationdate="20200518T044413Z">
+        <seg>新しい Diffie-Hellman Key 鍵交換法
+   5.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>New Elliptic Curve DH Mechanisms</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T064304Z" creationid="haruyama" creationdate="20200518T064304Z">
+        <seg>新しい楕円曲線 DH メカニズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>New Elliptic Curve DH Mechanisms
+     8.3.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T044629Z" creationid="haruyama" creationdate="20200518T044544Z">
+        <seg>新しい楕円曲線 DH メカニズム
+     8.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>New Elliptic Curve Diffie-Hellman Key Exchange Methods</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T052132Z" creationid="haruyama" creationdate="20200518T052132Z">
+        <seg>新しい楕円曲線 Diffle-Hellman 鍵交換法</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>New Elliptic Curve Diffie-Hellman Key Exchange Methods
+     5.1.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T044439Z" creationid="haruyama" creationdate="20200518T044414Z">
+        <seg>新しい楕円曲線 Diffle-Hellman 鍵交換法
+     5.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>New Finite Field DH Mechanisms</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T064104Z" creationid="haruyama" creationdate="20200518T064104Z">
+        <seg>新しい有限フィールド DH メカニズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>New Finite Field DH Mechanisms
+     8.2.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T044615Z" creationid="haruyama" creationdate="20200518T044530Z">
+        <seg>新しい有限フィールド DH メカニズム
+     8.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>New IUTF8 Opcode for Terminal Mode Encoding</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20180915T013812Z" creationid="haruyama" creationdate="20180915T013812Z">
@@ -21744,6 +22336,16 @@ Category: Standards Track                                     W. Griffin
       <tuv lang="JA" changeid="haruyama" changedate="20200511T050752Z" creationid="haruyama" creationdate="20200511T050752Z">
         <seg>標準のリファレンス
      11.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Normative References
+     9.2.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T045719Z" creationid="haruyama" creationdate="20200518T045719Z">
+        <seg>」Normative References
+     9.2.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22604,6 +23206,18 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Once a party receives the peer's public key, it proceeds to compute a
+   shared secret K.  For NIST curves, the computation is done according
+   to Section 3.3.1 of [SEC1v2], and the resulting value z is converted
+   to the octet string K using the conversion defined in Section 2.3.5
+   of [SEC1v2].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060150Z" creationid="haruyama" creationdate="20200518T060150Z">
+        <seg>パーティが相手方の公開鍵を受け取ったら, 共有の秘密 K を計算を進める. NIST の曲線に対しては, [SEC1v2] の 3.3.1 節に従って計算は行なわれる. 結果の値 z は, [SEC1v2] の 2.3.5 節に定義された変更を用いて オクテット文字列 K へ変換される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Once computed, the session identifier is not changed,
    even if keys are later re-exchanged.</seg>
       </tuv>
@@ -23232,6 +23846,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>さもなければ, サーバは, SSH_MSG_USERAUTH_FAILURE を返さなければならない. また, サーバは, 認証を続行する 'authentications that can continue' の値のリストに "none" を含めてもよい. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Otherwise, this flag MAY
+   be set to "true" if the client wishes to hide its identity.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T054857Z" creationid="haruyama" creationdate="20200518T054857Z">
+        <seg>もしくは, クライアントがそのアイデンティティを隠そうとする場合にこのフラグを true に設定してもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24662,6 +25285,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110615T053405Z">
         <seg>原理</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Rationale
+   3.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T044353Z" creationid="haruyama" creationdate="20200518T044353Z">
+        <seg>原理
+   3.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26488,6 +27121,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Secure Shell (SSH) Generic Security Service Application Program
+   Interface (GSS-API) methods [RFC4462] allow the use of GSS-API
+   [RFC2743] for authentication and key exchange in SSH.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T045847Z" creationid="haruyama" creationdate="20200518T045847Z">
+        <seg>セキュアシェル (SSH) の汎用セキュリティサービスアプリケーションプログラムインタフェイス (GSS-API) 法 [RFC4462] は, SSH の認証と鍵交換に GSS-API [RFC2743] を利用できるようにする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Secure Shell (SSH) Key Exchange Method Using Curve25519 and Curve448</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200511T130113Z" creationid="haruyama" creationdate="20200511T130113Z">
@@ -26661,6 +27304,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>セキュリティの考察</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Security Considerations
+     8.1.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T044515Z" creationid="haruyama" creationdate="20200518T044515Z">
+        <seg>Security の考察
+     8.1.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27740,6 +28393,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Since the key
+   exchange process authenticates only the host, the setting of
+   anon_req_flag is immaterial to this process.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T054833Z" creationid="haruyama" creationdate="20200518T054833Z">
+        <seg>鍵交換プロレスはホストのみ認証するので, anon_req_flag の設定は重要ではない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Since the key exchange process authenticates only the
        host, the setting of anon_req_flag is immaterial to this process.</seg>
       </tuv>
@@ -27808,6 +28471,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20180129T131750Z">
         <seg>どのサーチパスが信頼できるソースから得られたものか分かる DNS 検索 API は現在ないので, クライアントシステム全体が信頼できる DNS サーチパスによって設定されている必要があるだろう. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Since this key exchange method does not require the host key to be
+   used for any encryption operations, the SSH_MSG_KEXGSS_HOSTKEY
+   message is OPTIONAL.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061438Z" creationid="haruyama" creationdate="20200518T061438Z">
+        <seg>この鍵交換法は暗号の操作でホスト鍵を利用しないので, SSH_MSG_KEXGSS_HOSTKEY メッセージは選択できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27945,6 +28618,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Some GSS-API mechanisms can act on a request to delegate credentials
+   to the target host when the deleg_req_flag is set.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T064653Z" creationid="haruyama" creationdate="20200518T064653Z">
+        <seg>いくつかの GSS-API メカニズムは, deleg_req_flag を設定するとターゲットのホストに対し認証情報を委任するような要求を行なうことができる</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Some additional guidance for this is given in
    [RFC3766].</seg>
       </tuv>
@@ -28009,6 +28691,19 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110818T010445Z">
         <seg>他の MIB モジュール内で定義されたいくつかの管理オブジェクトは, SSHトランスポートモデルを実装するエンティティに適用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Some mechanism
+   implementations (such as commonly used krb5 libraries) may use
+   insecure DNS resolution to canonicalize the target name; in these
+   cases, spoofing a DNS response that points to an attacker-controlled
+   machine may result in the user silently delegating credentials to the
+   attacker, who can then impersonate the user at will.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T065220Z" creationid="haruyama" creationdate="20200518T065102Z">
+        <seg>(広く利用されている krb5 ライブラリのような) いくつかのメカニズム実装では, ターゲット名の正規化に安全ではない DNS 解決を用いる場合がある; この場合 攻撃者が管理するマシンを指すように DNS の応答を改竄することで, ユーザに気付かれることなく攻撃者に認証情報を委任し, 攻撃者が意のままにユーザになりすますことができるようになるかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28780,6 +29475,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Table 1: New Key Exchange Algorithms</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T051141Z" creationid="haruyama" creationdate="20200518T051141Z">
+        <seg>Table 1: 新しい鍵交換アルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Table 2 lists three allowable name lists for the
    non-signature algorithms.</seg>
       </tuv>
@@ -28797,6 +29500,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Table 2: Family Method References</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T052123Z" creationid="haruyama" creationdate="20200518T052123Z">
+        <seg>Table 2: メソッドのファミリーのリファレンス</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Table 3 lists three allowable name lists for the server host key
    algorithms.</seg>
       </tuv>
@@ -28810,6 +29521,39 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110930T144018Z">
         <seg>表 3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Table 3: New Key Exchange Methods</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061845Z" creationid="haruyama" creationdate="20200518T061845Z">
+        <seg>Table 3: 新しい鍵交換アルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Table 4: Family Method References</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061938Z" creationid="haruyama" creationdate="20200518T061938Z">
+        <seg>Table 4: メッソッドのファミリーのリファレンス</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Table 5: Deprecated Algorithms</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T062622Z" creationid="haruyama" creationdate="20200518T062622Z">
+        <seg>Table 5: 非推奨のアルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Table 6: Additions/Changes to the
+                    Key Exchange Method Names Registry</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T062911Z" creationid="haruyama" creationdate="20200518T062911Z">
+        <seg>Table 6: Key Exchange Method Names レジストリへの追加/変更</seg>
       </tuv>
     </tu>
     <tu>
@@ -29027,6 +29771,17 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>'packet_length' と 'mac' は, 圧縮された payload から計算される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   IESG is the change controller of all these key exchange methods; this
+   does NOT imply that the IESG is considered to be in control of the
+   corresponding GSS-API mechanism.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T051313Z" creationid="haruyama" creationdate="20200518T051313Z">
+        <seg>IESGは, これらすべての鍵交換法の変更管理者だ. これは, IESG が関連する GSS-API メカニズムを管理していると考えられていることを意味しない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30675,6 +31430,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110625T005607Z">
         <seg>GSS_GetMIC の呼び出しは 元データではなく Hに対して適用されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The GSS_VerifyMIC() call is
+   used by the client to verify the MIC.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060430Z" creationid="haruyama" creationdate="20200518T060430Z">
+        <seg>クライアントが MIC を検証するのに, GSS_VerifyMIC() 呼び出しが用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32932,6 +33696,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client MUST include its public key with the first message it
+   sends to the server during this process; if the server receives more
+   than one key or none at all, the key exchange MUST fail.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T055250Z" creationid="haruyama" creationdate="20200518T055250Z">
+        <seg>クラアイントは, このプロセスでサーバに送信する最初のメッセージに公開鍵を含めなければならない; サーバが1つより多い鍵を受け取ったりまったく鍵を受け取らなかったら, 鍵交換は失敗しなけばならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client MUST receive acknowledgement of
    each request prior to sending a new request.</seg>
       </tuv>
@@ -33143,8 +33917,8 @@ Category: Standards Track                                     W. Griffin
       <tuv lang="EN-US">
         <seg>The client sends:</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20110409T094529Z">
-        <seg>クライアントは以下を送る.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061027Z">
+        <seg>クライアントは次を送る:</seg>
       </tuv>
     </tu>
     <tu>
@@ -35553,6 +36327,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The key-agreement schemes "ECDHE-Curve25519" and "ECDHE-Curve448"
+   perform the Diffie-Hellman protocol using the functions X25519 and
+   X448, respectively.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T052743Z" creationid="haruyama" creationdate="20200518T052743Z">
+        <seg>鍵同意方式  "ECDHE-Curve25519" と "ECDHE-Curve448" は, それぞれ 関数 X25519 と X448 を利用する Diffle-Hellman プロトコルを実行する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The key-agreement schemes "curve25519-sha256" and "curve448-sha512"
    perform the Diffie-Hellman protocol using the functions X25519 and
    X448, respectively.</seg>
@@ -35937,6 +36721,28 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110628T023912Z">
         <seg>各方法の方法名は， 文字列 "gss-group14-sha1-" と，  基底のGSS-API の OID の ASN.1 DER エンコーディング [ASN1] の MD5 ハッシュの Base64  エンコーディングの連結だ．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The method name for each method (Table 1)
+   is the concatenation of the family name prefix with the base64
+   encoding of the MD5 hash [RFC1321] of the ASN.1 DER encoding
+   [ISO-IEC-8825-1] of the corresponding GSS-API mechanism's OID.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T052043Z" creationid="haruyama" creationdate="20200518T052043Z">
+        <seg>それぞれの方法の方法名 (Table 1) は, 対応する GSS-API メカニズムの OID の  ASN.1 DER エンコーディング [ISO-IEC-8825-1] の MD5 ハッシュ [RFC1321] の base64 エンコーディングとファミリーの名前の接頭辞を連結されたものだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The method name for each method (Table 3)
+   is the concatenation of the family method name with the base64
+   encoding of the MD5 hash [RFC1321] of the ASN.1 DER encoding
+   [ISO-IEC-8825-1] of the corresponding GSS-API mechanism's OID.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061925Z" creationid="haruyama" creationdate="20200518T061925Z">
+        <seg>それぞれの方法の方法名 (Table 3) は, 対応する GSS-API メカニズムの OID の  ASN.1 DER エンコーディング [ISO-IEC-8825-1] の MD5 ハッシュ [RFC1321] の base64 エンコーディングとファミリーの名前の接頭辞を連結されたものだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -36508,6 +37314,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The parties each generate an ephemeral key pair, according to
+   Section 3.2.1 of [SEC1v2].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T054406Z" creationid="haruyama" creationdate="20200518T054406Z">
+        <seg>[SEC1v2] の 3.2.1節に従って パーティはそれぞれ一時鍵ペアを生成する..</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The password mechanism, as specified in the authentication protocol,
    assumes that the server has not been compromised.</seg>
       </tuv>
@@ -36809,6 +37624,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110826T041440Z">
         <seg>この文書の目的は, AES Galois (ガロア) カウンタモードがSSH トランスポート層プロトコルに機密性とデータ完全性の両方を提供するためにどのように用いられるかを示すことだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The purpose of this
+   specification is to modernize the cryptographic primitives used by
+   Generic Security Service (GSS) key exchanges.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T044335Z" creationid="haruyama" creationdate="20200518T044335Z">
+        <seg>この仕様の目的は, 汎用セキュリティサービス (GSS) 鍵交換で用いられる暗号基本要素を現代化することだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37132,6 +37957,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>鍵の導出にも同じハッシュアルゴリズムが用いられなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The same recommendations
+   expressed in Section 2.1 of [RFC4462] are followed with regard to
+   error reporting.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060612Z" creationid="haruyama" creationdate="20200518T060612Z">
+        <seg>エラー報告については, [RFC4462] の 2.1 節で表現されているのと同じ推奨事項に従う.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37809,6 +38644,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The server may respond with:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061018Z" creationid="haruyama" creationdate="20200518T060959Z">
+        <seg>サーバは次で応答する:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The server may send as many requests as are necessary to authenticate
    the client; the client MUST be prepared to handle multiple exchanges.</seg>
       </tuv>
@@ -37914,6 +38757,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>サーバは次のメッセージで応答する:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The server uses the GSS_GetMIC() call with H as the payload to
+   generate a Message Integrity Code (MIC).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060406Z" creationid="haruyama" creationdate="20200518T060406Z">
+        <seg>サーバは, Message Integrity Code (MIC) を生成するために, ペイロードとして H を用いて GSS_GetMIC() 呼び出しを用いる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40529,6 +41381,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document adopts the same naming convention defined in [RFC4462]
+   to define families of methods that cover any GSS-API mechanism used
+   with a specific Diffie-Hellman group and SHA-2 hash combination.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T051128Z" creationid="haruyama" creationdate="20200518T051128Z">
+        <seg>この文書は, 特定の Diffle-Hellman 群と SHA-2 ハッシュの組合せで利用される GSS-API メカニズムをカバーする方法のファミリーを定義するために, [RFC4462] で定義されたものと同じ命名規則を採用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document adopts the style and conventions of [RFC4253] in
    specifying how the use of new data key exchange is indicated in SSH.</seg>
       </tuv>
@@ -40589,6 +41451,17 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200511T054929Z" creationid="haruyama" creationdate="20200511T054929Z">
         <seg>この文書は, [RFC4250] 4.11.3 節の 公開鍵アルゴリズム名に追加する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document augments the SSH key exchange message names that were
+   defined in [RFC4462] (see and Section 6); IANA has listed this
+   document as reference for those entries in the "SSH Protocol
+   Parameters" [IANA-KEX-NAMES] registry.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T062815Z" creationid="haruyama" creationdate="20200518T062648Z">
+        <seg>この文書は, [RFC4462] (6節を参照) で定義された SSH 鍵交換メッセージ名を追加する; IANA は"SSH Protocol Parameters" [IANA-KEX-NAMES] レジストリのこれらのエントリに対してリファレンスとしてこの文書を載せる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -41277,6 +42150,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document specifies additions and amendments to RFC 4462.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T044120Z" creationid="haruyama" creationdate="20200518T044120Z">
+        <seg>この文書は, RFC4462 に対する追加と改正を定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document specifies an Internet standards track protocol for the
    Internet community, and requests discussion and suggestions for
    improvements.</seg>
@@ -41347,6 +42228,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20180925T111406Z" creationid="haruyama" creationdate="20180925T111406Z">
         <seg>この文書は [RFC4419] を更新し, 最小の推奨サイズを 2048 ビットとする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document updates [RFC4462] with new methods intended to support
+   environments that desire to use the SHA-2 cryptographic hash
+   functions.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T050022Z" creationid="haruyama" creationdate="20200518T050022Z">
+        <seg>この文書は, SHA-2 暗号ハッシュ関数を利用したいと望む環境をサポートするための新しい方法により [RFC4462] を更新する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -41856,6 +42747,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This is implemented with the following messages:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060918Z" creationid="haruyama" creationdate="20200518T060918Z">
+        <seg>これは, 次のメッセージ群で実装される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This is important because a client
    processing an error token will likely disconnect without reading any
    further messages.</seg>
@@ -41975,6 +42874,17 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110409T090316Z">
         <seg>この鍵交換法は, 交換ハッシュ(exchange hash) の署名を用いる [RFC4253] で定義された明示的なサーバ認証を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This key
+   exchange process will exchange only a single message token once the
+   context has been established; therefore, the replay_det_req_flag and
+   sequence_req_flag SHOULD be set to "false".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T055137Z" creationid="haruyama" creationdate="20200518T055137Z">
+        <seg>この鍵交換のプロセスは, コンテキストが確立されたら一度だけ単一のメッセージトークンのみを交換する; それゆえ, replay_det_req_flag とsequence_req_flag は "false" に設定される必要がある. </seg>
       </tuv>
     </tu>
     <tu>
@@ -43129,6 +44039,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This section defers to [RFC7546] as the source of information on GSS-
+   API context establishment operations, Section 3 being the most
+   relevant.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T054237Z" creationid="haruyama" creationdate="20200518T054237Z">
+        <seg>この節は, GSS-API のコンテクスト確立操作の情報源として [RFC7546] を参照する. 3節がもっとも関連している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This section defines a class of key exchange methods that combine the
    Diffie-Hellman key exchange from Section 8 of [SSH-TRANSPORT] with
    mutual authentication using GSS-API.</seg>
@@ -43244,6 +44164,17 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This section reuses much of the scheme defined in Section 2.1 of
+   [RFC4462] and combines it with the scheme defined in Section 4 of
+   [RFC5656]; in particular, all checks and verification steps
+   prescribed in Section 4 of [RFC5656] apply here as well.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T052651Z" creationid="haruyama" creationdate="20200518T052651Z">
+        <seg>この節は, [RFC4462] の 2.1 節で定義された方式の大半を再利用し, [RFC5656] の 4節で定義された方式と組合せる; 特に, [RFC5656] の 4節で規定されたチェックと検証のすべての手順はここでも同様に適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This section serves to strengthen
    the suggestion in [RFC4253] by giving firm upper bounds on the
    tolerable number of encryptions between rekeying operations.</seg>
@@ -43318,6 +44249,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110812T071333Z">
         <seg>この値は, 全体の SSH のセッションで定数でなければならない. 将来受信するメッセージは, tmTransportAddress が同じ値に設定されていなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This value is called the "exchange hash", and it is used to
+   authenticate the key exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061415Z" creationid="haruyama" creationdate="20200518T061415Z">
+        <seg>この値は交換ハッシュと呼ばれる. 鍵交換を認証するのに用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -43945,6 +44885,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20190104T073155Z" creationid="haruyama" creationdate="20190104T073155Z">
         <seg>このアルゴリズムをクライアント認証で利用するには, SSH のクライアントは "rsa-sha2-256" ないし "rsa-sha2-512 の値で "pubkey" メソッドと "public key algorithm name" をエンコードした SSH_MSG_USERAUTH_REQUEST メッセージ [RFC4252] を送る .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To verify the integrity of the handshake, peers use the hash function
+   defined by the selected key exchange method to calculate H:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060306Z" creationid="haruyama" creationdate="20200518T060306Z">
+        <seg>ハンドシェイクの完全性の検証のため, ピアは, H の計算のために選択された鍵交換法で定義されたハッシュ関数を用いる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -44839,6 +45788,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Verifies received key.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060650Z" creationid="haruyama" creationdate="20200518T060650Z">
+        <seg>受け取った鍵を検証する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Verify HMAC.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110411T135953Z">
@@ -44935,6 +45892,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>SSHFPは, ホスト鍵の最初の転送の保護に加えて, より協力なホスト鍵の保護にもなることをここで言及しておく.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>We reuse much of Section 4 of [RFC5656]
+   to define GSS-API-authenticated Elliptic Curve Diffie-Hellman (ECDH)
+   key exchanges.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T052255Z" creationid="haruyama" creationdate="20200518T052255Z">
+        <seg>[RFC5656] の 4節の大半を再利用して, GSS-API で認証された楕円曲線 Diffie-Hellman (ECDH) 鍵交換を定義する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -45330,6 +46297,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200515T043751Z" creationid="haruyama" creationdate="20200515T043751Z">
         <seg>適切なサイズの秘密鍵を利用した場合の, Diffle-Hellman 群のそれぞれの強さは, 次のテーブルで提供される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When the GSS context is established
+   (major_status is GSS_S_COMPLETE), the parties check that mutual_state
+   and integ_avail are both "true".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T055451Z" creationid="haruyama" creationdate="20200518T055451Z">
+        <seg>GSS のコンテキストが確立したら (major_status が GSS_S_COMPLETE) パーティは mutual_state と integ_avail が両方とも "true" かどうか確認する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -46239,6 +47216,15 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>[RFC4462]
+   defines three exchange methods all based on DH groups and SHA-1.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T045927Z" creationid="haruyama" creationdate="20200518T045927Z">
+        <seg>[RFC4462] は, すべてDH 群と SHA-1 に基づく 3つの交換法を定義している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>[RFC5480] and [RFC5758] describe the structure of X.509v3
    certificates to be used with Elliptic Curve Digital Signature
    Algorithm (ECDSA) public keys.</seg>
@@ -46366,6 +47352,68 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>byte      SSH_MSG_KEXGSS_COMPLETE
+       string    Q_S, server's ephemeral public key octet string
+       string    mic_token (MIC of H)
+       boolean   FALSE</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061224Z" creationid="haruyama" creationdate="20200518T061224Z">
+        <seg>byte      SSH_MSG_KEXGSS_COMPLETE
+       string    Q_S, サーバの一時公開鍵のオクテット文字列
+       string    mic_token (MIC of H)
+       boolean   FALSE</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>byte      SSH_MSG_KEXGSS_COMPLETE
+       string    Q_S, server's ephemeral public key octet string
+       string    mic_token (MIC of H)
+       boolean   TRUE
+       string    output_token (from GSS_Accept_sec_context())</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061145Z" creationid="haruyama" creationdate="20200518T061136Z">
+        <seg>byte      SSH_MSG_KEXGSS_COMPLETE
+       string    Q_S, サーバの一時公開鍵のオクテット文字列
+       string    mic_token (MIC of H)
+       boolean   TRUE
+       string    output_token (GSS_Accept_sec_context() から)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>byte      SSH_MSG_KEXGSS_CONTINUE
+       string    output_token (from GSS_Init_sec_context())</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061049Z" creationid="haruyama" creationdate="20200518T061049Z">
+        <seg>byte      SSH_MSG_KEXGSS_CONTINUE
+       string    output_token (GSS_Init_sec_context() から)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>byte      SSH_MSG_KEXGSS_INIT
+       string    output_token (from GSS_Init_sec_context())
+       string    Q_C, client's ephemeral public key octet string</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060947Z" creationid="haruyama" creationdate="20200518T060931Z">
+        <seg>byte      SSH_MSG_KEXGSS_INIT
+       string    output_token (GSS_Init_sec_context() から)
+       string    Q_C, クライアントの一時公開鍵のオクテット文字列</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>byte     SSH_MSG_KEXGSS_CONTINUE
+       string   output_token (from GSS_Accept_sec_context())</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061037Z" creationid="haruyama" creationdate="20200518T061037Z">
+        <seg>byte     SSH_MSG_KEXGSS_CONTINUE
+       string   output_token (GSS_Accept_sec_context() から)</seg>
       </tuv>
     </tu>
     <tu>
@@ -48193,6 +49241,28 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>string    V_C, the client's version string (CR, NL excluded)
+       string    V_S, server's version string (CR, NL excluded)
+       string    I_C, payload of the client's SSH_MSG_KEXINIT
+       string    I_S, payload of the server's SSH_MSG_KEXINIT
+       string    K_S, server's public host key
+       string    Q_C, client's ephemeral public key octet string
+       string    Q_S, server's ephemeral public key octet string
+       mpint     K,   shared secret</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T061408Z" creationid="haruyama" creationdate="20200518T061245Z">
+        <seg>string    V_C, クライアントのバージョン文字列 (CR, NL を除く)
+       string    V_S, サーバのバージョン文字列 (CR, NLを除く)
+       string    I_C,  クライアントの SSH_MSG_KEXINIT のペイロード
+       string    I_S, サーバの SSH_MSG_KEXINIT のペイロード
+       string    K_S, サーバのホスト公開鍵
+       string    Q_C, クライアントの一時公開鍵のオクテット文字列
+       string    Q_S, サーバの一時公開鍵のオクテット文字列
+       mpint     K,   共有の秘密</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>string    public_key_algorithm_name  // x509v3-ecdsa-sha2-nistp256
                                         // or x509v3-ecdsa-sha2-nistp384</seg>
       </tuv>
@@ -48467,6 +49537,16 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg>後者の場合, 管理者は要件に添うようにデフォルトのパラメータを能動的に変更しなければならないだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>|                           &lt;------------ SSH_MSG_KEXGSS_CONTINUE
+   |   Calls GSS_Init_sec_context().</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200518T060706Z" creationid="haruyama" creationdate="20200518T060706Z">
+        <seg>|                           &lt;------------ SSH_MSG_KEXGSS_CONTINUE
+   |   GSS_Init_sec_context() を呼び出す.</seg>
       </tuv>
     </tu>
     <tu>

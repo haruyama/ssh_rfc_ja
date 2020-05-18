@@ -1,0 +1,478 @@
+
+
+
+
+Internet Engineering Task Force (IETF)                          S. Sorce
+Request for Comments: 8732                                      H. Kario
+Updates: 4462                                              Red Hat, Inc.
+Category: Standards Track                                  February 2020
+ISSN: 2070-1721
+
+
+  SHA-2 を用いる 汎用セキュリティサービスアプリケーションプログラムインタフェイス (GSS-API) 鍵交換
+
+概要
+
+   この文書は, RFC4462 に対する追加と改正を定義する.  完全性のために SHA-2 を用いる新しい鍵交換法を定義し, 弱い Diffie-Hellman (DH) 群を非推奨とする.  この仕様の目的は, 汎用セキュリティサービス (GSS) 鍵交換で用いられる暗号基本要素を現代化することだ.
+
+このメモの位置づけ
+
+   これは, インターネット標準化課程文書だ.
+
+   この文書は, Internet Engineering Task Force (IETF) の成果物だ.  IETF コミュニティの合意を表わしている.  公開のレビューを受けており, Internet Engineering Steering Group (IESG) によって発行が認められた.  インターネット標準についてさらなる情報は RFC 7841 の 2節にある.
+
+   この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc8732 で得られる.
+
+著作権情報
+
+   Copyright (c) 2020 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+目次
+
+   1イントロダクション
+   2.  原理
+   3.  文書の規約
+   4.  新しい Diffie-Hellman Key 鍵交換法
+   5.  新しい楕円曲線 Diffle-Hellman 鍵交換法
+     5.1.  ECDH を用いる汎用 GSS-API 鍵交換
+     5.2.  ECDH 鍵交換法
+   6.  非推奨のアルゴリズム
+   7.  IANA の考察
+   8.  Security の考察
+     8.1.  新しい有限フィールド DH メカニズム
+     8.2.  新しい楕円曲線 DH メカニズム
+     8.3.  GSS-API 委任
+   9.  References
+     9.1.  」Normative References
+     9.2.  Informative References
+   Authors' Addresses
+
+1イントロダクション
+
+   セキュアシェル (SSH) の汎用セキュリティサービスアプリケーションプログラムインタフェイス (GSS-API) 法 [RFC4462] は, SSH の認証と鍵交換に GSS-API [RFC2743] を利用できるようにする.  [RFC4462] は, すべてDH 群と SHA-1 に基づく 3つの交換法を定義している.
+   この文書は, SHA-2 暗号ハッシュ関数を利用したいと望む環境をサポートするための新しい方法により [RFC4462] を更新する.
+
+2.  原理
+
+   SHA-1 と [RFC6194] と2048 ビットよりも小さい羃剰余 (MODP) 群 [NIST-SP-800-131Ar2] のセキュリティの懸念により, DH group14 と group15, group16, group17, group18 [RFC3526] と SHA-2 [RFC6234] を基にするハッシュの利用を提案する.  さらに,NIST P-256 と P-384,  P-521 [SEC2v2],  X25519 と X448 [RFC7748] 曲線を用いる楕円曲線 Diffle-Hellman を基にする鍵交換のサポートも追加する.  [RFC8268] の経験に従って, SHA-256 と SHA-512 ハッシュのみが DH 群に対して用いられる.  NIST の曲線に対しては,  [RFC5656] で用いられたものと同じ曲線-ハッシュのアルゴリズムペアが, 一貫性のために採用される.
+
+3.  文書の規約
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, ここで示しているようにすべて大文字で出現した場合のみ, BCP 16 [RFC2119] [RFC8174] で記述されているように解釈される. 
+
+4.  新しい Diffie-Hellman Key 鍵交換法
+
+   この文書は, 特定の Diffle-Hellman 群と SHA-2 ハッシュの組合せで利用される GSS-API メカニズムをカバーする方法のファミリーを定義するために, [RFC4462] で定義されたものと同じ命名規則を採用する.
+
+       +--------------------------+--------------------------------+
+       | Key Exchange Method Name | Implementation Recommendations |
+       +==========================+================================+
+       | gss-group14-sha256-*     | SHOULD/RECOMMENDED             |
+       +--------------------------+--------------------------------+
+       | gss-group15-sha512-*     | MAY/OPTIONAL                   |
+       +--------------------------+--------------------------------+
+       | gss-group16-sha512-*     | SHOULD/RECOMMENDED             |
+       +--------------------------+--------------------------------+
+       | gss-group17-sha512-*     | MAY/OPTIONAL                   |
+       +--------------------------+--------------------------------+
+       | gss-group18-sha512-*     | MAY/OPTIONAL                   |
+       +--------------------------+--------------------------------+
+
+                    Table 1: 新しい鍵交換アルゴリズム
+
+   それぞれの鍵交換法の接頭辞は, この文書で登録されるIESGは, これらすべての鍵交換法の変更管理者だ. これは, IESG が関連する GSS-API メカニズムを管理していると考えられていることを意味しない.
+
+   方法のファミリーのどのメソッド (Table 2) も [RFC4462] 2.1 節で記述されているように GSS-APIで認証された Diffle-Hellman 鍵交換を指定している.  それぞれの方法の方法名 (Table 1) は, 対応する GSS-API メカニズムの OID の  ASN.1 DER エンコーディング [ISO-IEC-8825-1] の MD5 ハッシュ [RFC1321] の base64 エンコーディングとファミリーの名前の接頭辞を連結されたものだ.
+   Base64 エンコーディングは [RFC4648] の 4節に記述されている.
+
+     +---------------------+---------------+----------+--------------+
+     | Family Name Prefix  | Hash Function | Group    | Reference    |
+     +=====================+===============+==========+==============+
+     | gss-group14-sha256- | SHA-256       | 2048-bit | Section 3 of |
+     |                     |               | MODP     | [RFC3526]    |
+     +---------------------+---------------+----------+--------------+
+     | gss-group15-sha512- | SHA-512       | 3072-bit | Section 4 of |
+     |                     |               | MODP     | [RFC3526]    |
+     +---------------------+---------------+----------+--------------+
+     | gss-group16-sha512- | SHA-512       | 4096-bit | Section 5 of |
+     |                     |               | MODP     | [RFC3526]    |
+     +---------------------+---------------+----------+--------------+
+     | gss-group17-sha512- | SHA-512       | 6144-bit | Section 6 of |
+     |                     |               | MODP     | [RFC3526]    |
+     +---------------------+---------------+----------+--------------+
+     | gss-group18-sha512- | SHA-512       | 8192-bit | Section 7 of |
+     |                     |               | MODP     | [RFC3526]    |
+     +---------------------+---------------+----------+--------------+
+
+                     Table 2: メソッドのファミリーのリファレンス
+
+5.  新しい楕円曲線 Diffle-Hellman 鍵交換法
+
+   [RFC5656] で, 楕円曲線暗号に基づく新しい SSH 鍵交換アルゴリズムが導入されている. [RFC5656] の 4節の大半を再利用して, GSS-API で認証された楕円曲線 Diffie-Hellman (ECDH) 鍵交換を定義する.
+
+   さらに, [RFC5656] で要求されている古典的な NIST が定義する 3つの曲線を補完する [RFC8731] で定義された曲線を利用する.
+
+5.1.  ECDH を用いる汎用 GSS-API 鍵交換
+
+   この節は, [RFC4462] の 2.1 節で定義された方式の大半を再利用し, [RFC5656] の 4節で定義された方式と組合せる; 特に, [RFC5656] の 4節で規定されたチェックと検証のすべての手順はここでも同様に適用される.
+
+   鍵同意方式  "ECDHE-Curve25519" と "ECDHE-Curve448" は, それぞれ 関数 X25519 と X448 を利用する Diffle-Hellman プロトコルを実行する.  実装は [RFC7748] に記述されたアルゴリズムを用いてこれらの関数を計算しなければならない.  そのように計算する際, [RFC7748] の 6節に記述されているように 実装は計算された Diffie-Hellman 共有秘密がすべて 0 値でないか検査しなればならない. また, もしそうならば中止しなければならない. これらの関数の代替の実装は, クライアントかサーバの入力が共有の秘密に値の小さな集合の1つを強制するならば, [RFC7748] に記述されているように, 中止する必要がある.
+
+   この節は, GSS-API のコンテクスト確立操作の情報源として [RFC7546] を参照する. 3節がもっとも関連している.  [RFC7546] で記述されたすべてのセキュリティの考察が, ここでも適用される.
+
+   [SEC1v2] の 3.2.1節に従って パーティはそれぞれ一時鍵ペアを生成する..  [SEC1v2] の 3.2.3.1 節に従って, パーティにより鍵は受信時に検証される.
+
+   NIST の曲線に対して, 鍵は圧縮されていない点の表現を用い, [SEC1v2] の 2.3.4 節のアルゴリズムを用いて変換されなければならない. この変換が失敗したり, 点が圧縮された表現を用いて転送されたら, 鍵交換は失敗しなければならない.
+
+   GSS のコンテキストは [RFC5656] の 4節に従って確立される; クライアントは GSS_Init_sec_context() を用いて確立を始め, サーバは GSS_Accept_sec_context() を用いてそれに応答する.  加えて, クライアントは mutual_req_flag と integ_req_flag を "true" に設定しなければならない.  加えて， ユーザが要求したら， アクセスの以上を要求するために  deleg_req_flag を true に設定してもよい．鍵交換プロレスはホストのみ認証するので, anon_req_flag の設定は重要ではない.  クライアントが 4節で記述する "gssapi-keyex" ユーザ認証をサポートしていなかったり, 鍵交換時に確立した GSS-APIコンテクストと連携した方法を使おうとしない場合は, anon_req_flag は "true" に設定する必要がある.  もしくは, クライアントがそのアイデンティティを隠そうとする場合にこのフラグを true に設定してもよい.  この鍵交換のプロセスは, コンテキストが確立されたら一度だけ単一のメッセージトークンのみを交換する; それゆえ, replay_det_req_flag とsequence_req_flag は "false" に設定される必要がある. 
+
+   クラアイントは, このプロセスでサーバに送信する最初のメッセージに公開鍵を含めなければならない; サーバが1つより多い鍵を受け取ったりまったく鍵を受け取らなかったら, 鍵交換は失敗しなけばならない.
+
+   GSS のコンテキストの確立の間に, クライアントとサーバの間に複数のトーケンが交換されるかもしれない.  GSS のコンテキストが確立したら (major_status が GSS_S_COMPLETE) パーティは mutual_state と integ_avail が両方とも "true" かどうか確認する.  そうでなければ, 鍵交換は失敗しなければならない.
+
+   パーティが相手方の公開鍵を受け取ったら, 共有の秘密 K を計算を進める. NIST の曲線に対しては, [SEC1v2] の 3.3.1 節に従って計算は行なわれる. 結果の値 z は, [SEC1v2] の 2.3.5 節に定義された変更を用いて オクテット文字列 K へ変換される.  curve25519 と curve448 に対しては, 代わりに [RFC7748] の 6節のアルゴリズムが用いられる.
+
+   ハンドシェイクの完全性の検証のため, ピアは, H の計算のために選択された鍵交換法で定義されたハッシュ関数を用いる.
+
+   H = hash(V_C || V_S || I_C || I_S || K_S || Q_C || Q_S || K).
+
+   サーバは, Message Integrity Code (MIC) を生成するために, ペイロードとして H を用いて GSS_GetMIC() 呼び出しを用いる.  クライアントが MIC を検証するのに, GSS_VerifyMIC() 呼び出しが用いられる.
+
+   GSS_Init_sec_context() や GSS_Accept_sec_context() の呼び出しで GSS_S_COMPLETE か GSS_S_CONTINUE_NEEDED 以外の major_status コードが返ったり, 他の GSS-APIの呼び出しで GSS_S_COMPLETE 以外の major_status コードが返ったら, 鍵交換は失敗しなければならない.  エラー報告については, [RFC4462] の 2.1 節で表現されているのと同じ推奨事項に従う.
+
+   鍵交換プロセスの概要を次に示す.
+
+       Client                                                Server
+       ------                                                ------
+       一時鍵ペアを作成する.
+       GSS_Init_sec_context() を呼び出す.
+       SSH_MSG_KEXGSS_INIT  --------------->
+
+                                              受け取った鍵を検証する.
+   (Optional)                  <------------- SSH_MSG_KEXGSS_HOSTKEY
+
+   (Loop)
+   |                                 Calls GSS_Accept_sec_context().
+   |                           <------------ SSH_MSG_KEXGSS_CONTINUE
+   |   GSS_Init_sec_context() を呼び出す.
+   |   SSH_MSG_KEXGSS_CONTINUE ------------>
+
+                                     GSS_Accept_sec_context() を呼び出す.
+                                       一時鍵ペアを作成する.
+                                             共有の秘密を計算する.
+                                                    ハッシュ値 H を計算する.
+                                        GSS_GetMIC( H ) を呼び出し 結果を MIC とする.
+                               <------------ SSH_MSG_KEXGSS_COMPLETE
+
+       受け取った鍵を検証する.
+       共有の秘密を計算する.
+       ハッシュ値 H を計算する.
+       GSS_VerifyMIC( MIC, H ) を呼び出す.
+
+   これは, 次のメッセージ群で実装される.
+
+   クライアントは次を送る:
+
+       byte      SSH_MSG_KEXGSS_INIT
+       string    output_token (GSS_Init_sec_context() から)
+       string    Q_C, クライアントの一時公開鍵のオクテット文字列
+
+   サーバは次で応答する:
+
+       byte     SSH_MSG_KEXGSS_HOSTKEY
+       string   server public host key and certificates (K_S)
+
+   サーバは以下を送る:
+
+       byte     SSH_MSG_KEXGSS_CONTINUE
+       string   output_token (GSS_Accept_sec_context() から)
+
+   クライアントは上記のメッセージを受け取る度に,GSS_Init_sec_context()をまた呼び出さなければならない.
+
+   クライアントは次を送る:
+
+       byte      SSH_MSG_KEXGSS_CONTINUE
+       string    output_token (GSS_Init_sec_context() から)
+
+   最後のメッセージとして, ouput_token が生成されたならサーバは次を送る:
+
+       byte      SSH_MSG_KEXGSS_COMPLETE
+       string    Q_S, サーバの一時公開鍵のオクテット文字列
+       string    mic_token (MIC of H)
+       boolean   TRUE
+       string    output_token (GSS_Accept_sec_context() から)
+
+   output_token が生成されなかったら, サーバは次を送る:
+
+       byte      SSH_MSG_KEXGSS_COMPLETE
+       string    Q_S, サーバの一時公開鍵のオクテット文字列
+       string    mic_token (MIC of H)
+       boolean   FALSE
+
+   ハッシュ H は, 次の連結に対する HASH の結果だ:
+
+       string    V_C, クライアントのバージョン文字列 (CR, NL を除く)
+       string    V_S, サーバのバージョン文字列 (CR, NLを除く)
+       string    I_C,  クライアントの SSH_MSG_KEXINIT のペイロード
+       string    I_S, サーバの SSH_MSG_KEXINIT のペイロード
+       string    K_S, サーバのホスト公開鍵
+       string    Q_C, クライアントの一時公開鍵のオクテット文字列
+       string    Q_S, サーバの一時公開鍵のオクテット文字列
+       mpint     K,   共有の秘密
+
+   この値は交換ハッシュと呼ばれる. 鍵交換を認証するのに用いられる.  交換ハッシュは秘密にする必要がある.  SSH_MSG_KEXGSS_HOSTKEY メッセージがサーバから送られたりクライアントで受け取られたりしていなければ, 交換ハッシュの計算で K_S には空文字列を利用する.
+
+   この鍵交換法は暗号の操作でホスト鍵を利用しないので, SSH_MSG_KEXGSS_HOSTKEY メッセージは選択できる.  [RFC4462] の 5節で記述する "null" ホスト鍵アルゴリズムを利用する場合は, このメッセージを送ってはならない.
+
+   GSS_Init_sec_context() が major_status コードとして GSS_S_COMPLETE を返したあとで SSH_MSG_KEXGSS_CONTINUE メッセージをクライアントが受けとったならば, プロトコルエラーが起きており鍵交換は失敗しなければならない.
+
+   SSH_MSG_KEXGSS_CONTINUE メッセージをクライアントが受けとり GSS_Init_sec_context() の呼び出しの結果が GSS_S_COMPLETE の major_status コードにならなかった場合, プロトコルエラーが起きており鍵交換は失敗しなければならない.
+
+5.2.  ECDH 鍵交換法
+
+       +--------------------------+--------------------------------+
+       | Key Exchange Method Name | Implementation Recommendations |
+       +==========================+================================+
+       | gss-nistp256-sha256-*    | SHOULD/RECOMMENDED             |
+       +--------------------------+--------------------------------+
+       | gss-nistp384-sha384-*    | MAY/OPTIONAL                   |
+       +--------------------------+--------------------------------+
+       | gss-nistp521-sha512-*    | MAY/OPTIONAL                   |
+       +--------------------------+--------------------------------+
+       | gss-curve25519-sha256-*  | SHOULD/RECOMMENDED             |
+       +--------------------------+--------------------------------+
+       | gss-curve448-sha512-*    | MAY/OPTIONAL                   |
+       +--------------------------+--------------------------------+
+
+                     Table 3: 新しい鍵交換アルゴリズム
+
+   それぞれの鍵交換法の接頭辞は, この文書で登録されるIESGは, これらすべての鍵交換法の変更管理者だ. これは, IESG が関連する GSS-API メカニズムを管理していると考えられていることを意味しない.
+
+   方法のファミリーのどのメソッド (Table 4) も 5.1 節で記述されているように GSS-APIで認証された Diffle-Hellman 鍵交換を指定している.  それぞれの方法の方法名 (Table 3) は, 対応する GSS-API メカニズムの OID の  ASN.1 DER エンコーディング [ISO-IEC-8825-1] の MD5 ハッシュ [RFC1321] の base64 エンコーディングとファミリーの名前の接頭辞を連結されたものだ.
+   Base64 エンコーディングは [RFC4648] の 4節に記述されている.
+
+   +------------------------+----------+---------------+---------------+
+   | Family Name Prefix     | Hash     | Parameters /  | Definition    |
+   |                        | Function | Function Name |               |
+   +========================+==========+===============+===============+
+   | gss-nistp256-sha256-   | SHA-256  | secp256r1     | Section       |
+   |                        |          |               | 2.4.2 of      |
+   |                        |          |               | [SEC2v2]      |
+   +------------------------+----------+---------------+---------------+
+   | gss-nistp384-sha384-   | SHA-384  | secp384r1     | Section       |
+   |                        |          |               | 2.5.1 of      |
+   |                        |          |               | [SEC2v2]      |
+   +------------------------+----------+---------------+---------------+
+   | gss-nistp521-sha512-   | SHA-512  | secp521r1     | Section       |
+   |                        |          |               | 2.6.1 of      |
+   |                        |          |               | [SEC2v2]      |
+   +------------------------+----------+---------------+---------------+
+   | gss-curve25519-sha256- | SHA-256  | X22519        | Section 5     |
+   |                        |          |               | of            |
+   |                        |          |               | [RFC7748]     |
+   +------------------------+----------+---------------+---------------+
+   | gss-curve448-sha512-   | SHA-512  | X448          | Section 5     |
+   |                        |          |               | of            |
+   |                        |          |               | [RFC7748]     |
+   +------------------------+----------+---------------+---------------+
+
+                     Table 4: メッソッドのファミリーのリファレンス
+
+6.  非推奨のアルゴリズム
+
+   鍵の長さが小さくブルートフォース攻撃に対してもはや強くないので, 次のテーブルのアルゴリズムは非推奨と考えられ利用しないようにする必要がある.
+
+       +--------------------------+--------------------------------+
+       | Key Exchange Method Name | Implementation Recommendations |
+       +==========================+================================+
+       | gss-group1-sha1-*        | SHOULD NOT                     |
+       +--------------------------+--------------------------------+
+       | gss-group14-sha1-*       | SHOULD NOT                     |
+       +--------------------------+--------------------------------+
+       | gss-gex-sha1-*           | SHOULD NOT                     |
+       +--------------------------+--------------------------------+
+
+                       Table 5: 非推奨のアルゴリズム
+
+7.  IANA の考慮
+
+   この文書は, [RFC4462] (6節を参照) で定義された SSH 鍵交換メッセージ名を追加する; IANA は"SSH Protocol Parameters" [IANA-KEX-NAMES] レジストリのこれらのエントリに対してリファレンスとしてこの文書を載せる.
+
+   さらに, IANA は 4, 5節に記述された SSH 鍵交換メッセージ名を含むようレジストリを更新する.
+
+                 +--------------------------+-----------+
+                 | Key Exchange Method Name | Reference |
+                 +==========================+===========+
+                 | gss-group1-sha1-*        | RFC 8732  |
+                 +--------------------------+-----------+
+                 | gss-group14-sha1-*       | RFC 8732  |
+                 +--------------------------+-----------+
+                 | gss-gex-sha1-*           | RFC 8732  |
+                 +--------------------------+-----------+
+                 | gss-group14-sha256-*     | RFC 8732  |
+                 +--------------------------+-----------+
+                 | gss-group15-sha512-*     | RFC 8732  |
+                 +--------------------------+-----------+
+                 | gss-group16-sha512-*     | RFC 8732  |
+                 +--------------------------+-----------+
+                 | gss-group17-sha512-*     | RFC 8732  |
+                 +--------------------------+-----------+
+                 | gss-group18-sha512-*     | RFC 8732  |
+                 +--------------------------+-----------+
+                 | gss-nistp256-sha256-*    | RFC 8732  |
+                 +--------------------------+-----------+
+                 | gss-nistp384-sha384-*    | RFC 8732  |
+                 +--------------------------+-----------+
+                 | gss-nistp521-sha512-*    | RFC 8732  |
+                 +--------------------------+-----------+
+                 | gss-curve25519-sha256-*  | RFC 8732  |
+                 +--------------------------+-----------+
+                 | gss-curve448-sha512-*    | RFC 8732  |
+                 +--------------------------+-----------+
+
+                    Table 6: Key Exchange Method Names レジストリへの追加/変更
+
+8.  セキュリティの考察
+
+8.1.  新しい有限フィールド DH メカニズム
+
+   異なる安全なハッシュ関数とより大きな DH 群を利用しているのを除けば, [RFC4462] で記述されたプロトコルに重大な変更は行なっていない; それゆえ, もともとのセキュリティの考察のすべてが適用される.
+
+8.2.  新しい楕円曲線 DH メカニズム
+
+   これらの方法で新しい暗号基本操作が用いられているが, 実際の鍵交換は [RFC5656] で定義された鍵交換に密接に従っている; それゆえ, もともとのセキュリティの考察と[RFC5656] で表現されたセキュリティの考察とが適用される.
+
+8.3.  GSS-API 委任
+
+   いくつかの GSS-API メカニズムは, deleg_req_flag を設定するとターゲットのホストに対し認証情報を委任するような要求を行なうことができるこの場合, 認証される acceptor がユーザが意図するターゲットと一致するかどうかを保証するために, 特別な注意が必要となる.  (広く利用されている krb5 ライブラリのような) いくつかのメカニズム実装では, ターゲット名の正規化に安全ではない DNS 解決を用いる場合がある; この場合 攻撃者が管理するマシンを指すように DNS の応答を改竄することで, ユーザに気付かれることなく攻撃者に認証情報を委任し, 攻撃者が意のままにユーザになりすますことができるようになるかもしれない.
+
+9.  References
+
+9.1.  Normative References
+
+   [RFC1321]  Rivest, R., "The MD5 Message-Digest Algorithm", RFC 1321,
+              DOI 10.17487/RFC1321, April 1992,
+              <https://www.rfc-editor.org/info/rfc1321>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC2743]  Linn, J., "Generic Security Service Application Program
+              Interface Version 2, Update 1", RFC 2743,
+              DOI 10.17487/RFC2743, January 2000,
+              <https://www.rfc-editor.org/info/rfc2743>.
+
+   [RFC3526]  Kivinen, T. and M. Kojo, "More Modular Exponential (MODP)
+              Diffie-Hellman groups for Internet Key Exchange (IKE)",
+              RFC 3526, DOI 10.17487/RFC3526, May 2003,
+              <https://www.rfc-editor.org/info/rfc3526>.
+
+   [RFC4462]  Hutzelman, J., Salowey, J., Galbraith, J., and V. Welch,
+              "Generic Security Service Application Program Interface
+              (GSS-API) Authentication and Key Exchange for the Secure
+              Shell (SSH) Protocol", RFC 4462, DOI 10.17487/RFC4462, May
+              2006, <https://www.rfc-editor.org/info/rfc4462>.
+
+   [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
+              Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
+              <https://www.rfc-editor.org/info/rfc4648>.
+
+   [RFC5656]  Stebila, D. and J. Green, "Elliptic Curve Algorithm
+              Integration in the Secure Shell Transport Layer",
+              RFC 5656, DOI 10.17487/RFC5656, December 2009,
+              <https://www.rfc-editor.org/info/rfc5656>.
+
+   [RFC7546]  Kaduk, B., "Structure of the Generic Security Service
+              (GSS) Negotiation Loop", RFC 7546, DOI 10.17487/RFC7546,
+              May 2015, <https://www.rfc-editor.org/info/rfc7546>.
+
+   [RFC7748]  Langley, A., Hamburg, M., and S. Turner, "Elliptic Curves
+              for Security", RFC 7748, DOI 10.17487/RFC7748, January
+              2016, <https://www.rfc-editor.org/info/rfc7748>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+   [RFC8731]  Adamantiadis, A., Josefsson, S., and M. Baushke, "Secure
+              Shell (SSH) Key Exchange Method Using Curve25519 and
+              Curve448", RFC 8731, DOI 10.17487/RFC8731, February 2020,
+              <https://www.rfc-editor.org/info/rfc8731>.
+
+   [SEC1v2]   Standards for Efficient Cryptography Group, "SEC 1:
+              Elliptic Curve Cryptography", Version 2.0, May 2009.
+
+   [SEC2v2]   Standards for Elliptic Cryptography Group, "SEC 2:
+              Recommended Elliptic Curve Domain Parameters",
+              Version 2.0, January 2010.
+
+9.2.  Informative References
+
+   [IANA-KEX-NAMES]
+              IANA, "Secure Shell (SSH) Protocol Parameters: Key
+              Exchange Method Names",
+              <https://www.iana.org/assignments/ssh-parameters/>.
+
+   [ISO-IEC-8825-1]
+              ITU-T, "Information technology -- ASN.1 encoding rules:
+              Specification of Basic Encoding Rules (BER), Canonical
+              Encoding Rules (CER) and Distinguished Encoding Rules
+              (DER)", ISO/IEC 8825-1:2015, ITU-T Recommendation X.690,
+              November 2015,
+              <http://standards.iso.org/ittf/PubliclyAvailableStandards/
+              c068345_ISO_IEC_8825-1_2015.zip>.
+
+   [NIST-SP-800-131Ar2]
+              National Institute of Standards and Technology,
+              "Transitioning of the Use of Cryptographic Algorithms and
+              Key Lengths", DOI 10.6028/NIST.SP.800-131Ar2, NIST Special
+              Publication 800-131A Revision 2, November 2015,
+              <https://nvlpubs.nist.gov/nistpubs/SpecialPublications/
+              NIST.SP.800-131Ar2.pdf>.
+
+   [RFC6194]  Polk, T., Chen, L., Turner, S., and P. Hoffman, "Security
+              Considerations for the SHA-0 and SHA-1 Message-Digest
+              Algorithms", RFC 6194, DOI 10.17487/RFC6194, March 2011,
+              <https://www.rfc-editor.org/info/rfc6194>.
+
+   [RFC6234]  Eastlake 3rd, D. and T. Hansen, "US Secure Hash Algorithms
+              (SHA and SHA-based HMAC and HKDF)", RFC 6234,
+              DOI 10.17487/RFC6234, May 2011,
+              <https://www.rfc-editor.org/info/rfc6234>.
+
+   [RFC8268]  Baushke, M., "More Modular Exponentiation (MODP) Diffie-
+              Hellman (DH) Key Exchange (KEX) Groups for Secure Shell
+              (SSH)", RFC 8268, DOI 10.17487/RFC8268, December 2017,
+              <https://www.rfc-editor.org/info/rfc8268>.
+
+Authors' Addresses
+
+   Simo Sorce
+   Red Hat, Inc.
+   140 Broadway, 24th Floor
+   New York, NY 10025
+   United States of America
+
+   Email: simo@redhat.com
+
+
+   Hubert Kario
+   Red Hat, Inc.
+   Purkynova 115
+   612 00 Brno
+   Czech Republic
+
+   Email: hkario@redhat.com
