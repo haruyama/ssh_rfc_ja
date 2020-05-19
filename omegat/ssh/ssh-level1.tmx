@@ -694,6 +694,38 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>1.5 transport: Protocol 2 Encrypt-then-MAC MAC algorithms</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T071125Z" creationid="haruyama" creationdate="20200519T071125Z">
+        <seg>1.5 トランスポート: プロトコル2 の暗号化後にMACするMAC アルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>1.6 transport: AES-GCM</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T072601Z" creationid="haruyama" creationdate="20200519T072601Z">
+        <seg>1.6トランスポート: AES-GCM</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>1.7 transport: chacha20-poly1305@openssh.com authenticated encryption</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T072913Z" creationid="haruyama" creationdate="20200519T072913Z">
+        <seg>1.7 トランスポート: chacha20-poly1305@openssh.com 認証付き暗号化</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>1.8 transport: curve25519-sha256@libssh.org key exchange algorithm</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T073058Z" creationid="haruyama" creationdate="20200519T073058Z">
+        <seg>1.8 トランスポート: curve25519-sha256@libssh.org 鍵交換アルゴリズム</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>10
    Appendix A.  Changes from RFC 4742 .</seg>
       </tuv>
@@ -1061,6 +1093,30 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110929T081800Z">
         <seg>4) ECDSA-256 は, ECDSA-384 公開鍵を署名するのに用いられてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>4.1 Public key format</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T151200Z" creationid="haruyama" creationdate="20200521T151200Z">
+        <seg>4.1 公開鍵の形式</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>4.2 Private key format</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T151608Z" creationid="haruyama" creationdate="20200521T151608Z">
+        <seg>4.2 秘密鍵の形式</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>4.4 Connection multiplexing</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T151942Z" creationid="haruyama" creationdate="20200521T151942Z">
+        <seg>4.4 接続の多重化</seg>
       </tuv>
     </tu>
     <tu>
@@ -1509,6 +1565,16 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160618T032849Z">
         <seg>この結果として, (たとえばパスワードなどの)同じデータの暗号化を異なる Arcfourの鍵ストリームで何度も行なうと, 攻撃者に情報を漏らす可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A
+server that is not willing to open a client-specified unit should refuse
+the request with a SSH_MSG_CHANNEL_OPEN_FAILURE error.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T062653Z" creationid="haruyama" creationdate="20200520T062653Z">
+        <seg>サーバがクライアントの指定したユニットの開放をしたくないならば  SSH_MSG_CHANNEL_OPEN_FAILURE エラーで要求を拒否する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2402,6 +2468,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>AES-GCM is only negotiated as the cipher algorithms
+"aes128-gcm@openssh.com" or "aes256-gcm@openssh.com" and never as
+an MAC algorithm.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T072743Z" creationid="haruyama" creationdate="20200519T072743Z">
+        <seg>AES-GCM は暗号アルゴリズム "aes128-gcm@openssh.com" ないし "aes256-gcm@openssh.com" として交渉され, MAC アルゴリズムとしては交渉されない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>AES-GCM is prohibited from returning any portion of the plaintext
    until the authentication tag has been validated.</seg>
       </tuv>
@@ -2772,6 +2848,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>さらに, SSH_MSG_IGNORE を含むパケットを挿入することで, 別種のCBCモードへの攻撃は和らげられる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Additionally, if AES-GCM is selected as the cipher
+the exchanged MAC algorithms are ignored and there doesn't have to be
+a matching MAC.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T072858Z" creationid="haruyama" creationdate="20200519T072858Z">
+        <seg>さらに, AES-GCM が暗号として選択されたら, 交渉で交換された MAC アルゴリズムは無視され MAC が一致する必要はない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4604,6 +4690,16 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As a legacy option, PEM format
+(RFC7468) private keys are also supported for RSA, DSA and ECDSA keys
+and were the default format before OpenSSH 7.8.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T151806Z" creationid="haruyama" creationdate="20200521T151802Z">
+        <seg>レガシーな選択肢として, PEM 形式 (RFC7468) 秘密鍵も ,RSA と DSA, ECDSA 鍵でサポートされている. OpenSSH 7.8 以前ではデフォルトの形式だった.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As a result,
    the use of SPNEGO could result in the subversion of the negotiation
    algorithm for key exchange methods as described in Section 7.1 of
@@ -4955,6 +5051,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As such, the MAC covers:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T072236Z" creationid="haruyama" creationdate="20200519T072236Z">
+        <seg>次のように MAC は計算される:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As the final message, the server sends the following if an
    output_token is produced:</seg>
       </tuv>
@@ -5097,6 +5201,16 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110901T060650Z">
         <seg>OCSP データを利用する場合は, 実装は, OCSP 応答の生成時間が受け入れられるかを検査する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As with the symmetric SSH_MSG_CHANNEL_EOF message, the channel does
+remain open after a "eow@openssh.com" has been sent and more data may
+still be sent in the other direction.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T053049Z" creationid="haruyama" creationdate="20200520T052029Z">
+        <seg>対称となる SSH_MSG_CHANNEL_EOF メッセージと同様に, チャンネルは "eow@openssh.com" の送信後もチャンネルは開かれた状態で残り, 逆の方向でさらなるデータが送られるかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5625,6 +5739,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Because of problems with the specification of the key exchange
+the behaviour of OpenSSH differs from the RFC as follows:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T072651Z" creationid="haruyama" creationdate="20200519T072651Z">
+        <seg>鍵交換の仕様での問題のために, OpenSSH の振舞いは RFC と次のように異なっている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Because of the 32-bit counter
    already present in the protocol, such a counter would only need to be
    incremented once every 2**32 packets.</seg>
@@ -5866,6 +5989,15 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160618T033440Z">
         <seg>クライアントもサーバも, 実装しているもっとも高いバージョンを送る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Both the "statvfs@openssh.com" and "fstatvfs@openssh.com" extensions are
+advertised in the SSH_FXP_VERSION hello with version "2".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T150751Z" creationid="haruyama" creationdate="20200521T150751Z">
+        <seg>"statvfs@openssh.com" と "fstatvfs@openssh.com" 拡張は SSH_FXP_VERSION ハローでバージョン "2" として広告される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6494,6 +6626,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Clients MUST
+check the version number before attempting to use the extension.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T073602Z" creationid="haruyama" creationdate="20200521T073602Z">
+        <seg>クライアントは, 拡張を利用する前にバージョン番号を検査しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Clients MUST also
    accept empty responses from the user and pass them on as empty
    strings.</seg>
@@ -7083,6 +7224,14 @@
       <tuv lang="JA">
         <seg>接続のセットアップ...........................................4
       4.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Connection protocol changes</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T050226Z" creationid="haruyama" creationdate="20200520T050226Z">
+        <seg>コネクションプロトコルの変更</seg>
       </tuv>
     </tu>
     <tu>
@@ -8754,6 +8903,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Each extension reports its integer version number as an ASCII encoded
+string, e.g. "1".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T073219Z" creationid="haruyama" creationdate="20200521T073219Z">
+        <seg>それぞれの拡張は, ASCII でエンコードされた文字列, たとえば "1" , で その整数バージョン番号をレポートする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Each field is a line of the following format:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160618T032715Z">
@@ -9140,6 +9298,16 @@
       <tuv lang="JA" changeid="haruyama" changedate="20110729T034019Z">
         <seg>手順の要素 ..........................................14
       5.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Elliptic
+curve points encoded using point compression are NOT accepted or
+generated.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T071043Z" creationid="haruyama" creationdate="20200519T071043Z">
+        <seg>点の圧縮を用いてエンコードされる楕円曲線の点は受け入れられもしないし, 生成されもしない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10455,6 +10623,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For correct operation, clients should send
+SSH_FXP_SYMLINK as follows:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T072957Z" creationid="haruyama" creationdate="20200521T072957Z">
+        <seg>正しい操作のために, クライアントは SSH_FXP_SYMLINK を次のように送る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For curve25519 and curve448, the algorithms in
    Section 6 of [RFC7748] are used instead.</seg>
       </tuv>
@@ -11200,6 +11377,15 @@
       </tuv>
       <tuv lang="JA">
         <seg>転送されたTCP/IPチャンネルは他のセッションとは独立だ. またセッションチャンネルが終了しても, 転送された接続が閉じられることを意味しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Forwarding is initiated as per
+TCP sockets but with a single path instead of a host and port.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T061555Z" creationid="haruyama" creationdate="20200521T061555Z">
+        <seg>転送は TCP ソケットと同様に開始されるが, ホストとポートではなく単一のパスを利用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14576,6 +14762,16 @@
       </tuv>
       <tuv lang="JA">
         <seg>設定などからクライアントがユーザの好む submethod について知っているなら, サーバにその情報を渡すために submethods フィールドを利用してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the client identifies any keys that are not present for the host,
+it should send a "hostkeys-prove@openssh.com" message to request the
+server prove ownership of the private half of the key.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T063442Z" creationid="haruyama" creationdate="20200521T063417Z">
+        <seg>クライアントがホストに対してなんらかの鍵が (known_hosts) に存在しないことを識別したら,"hostkeys-prove@openssh.com" (訳注: 原文で 00 が抜けている) メッセージを送信してサーバがその鍵の秘密鍵の所有を証明するように要求する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18794,6 +18990,17 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It also supports graceful key rotation:
+a server may offer multiple keys of the same type for a period (to
+give clients an opportunity to learn them using this extension) before
+removing the deprecated key from those offered.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T070919Z" creationid="haruyama" creationdate="20200521T070919Z">
+        <seg>また, 慈悲深い鍵ローテーションもサポートする: サーバは, 提供する鍵グループから廃止する鍵を削除する前に一定期間同じタイプの複数の鍵を提供できる (クライアントにこの拡張を利用して学習する機会を与える).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It also updates RFC
    4253 by specifying a new RECOMMENDED data integrity algorithm.</seg>
       </tuv>
@@ -19418,6 +19625,15 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It is intended to be used in the future to pass
+information about the socket file, such as ownership and mode.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T062017Z" creationid="haruyama" creationdate="20200521T062017Z">
+        <seg>将来 ソケットファイルの, オーナーやモードのような, 情報を送るのに使うことを意図している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It is never reset, even if keys/algorithms are
    renegotiated later.</seg>
       </tuv>
@@ -19754,6 +19970,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It may be one of:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T063007Z" creationid="haruyama" creationdate="20200520T063007Z">
+        <seg>次のうちの1つだ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It may be possible for the implementation to retrieve
    OCSP responses based on the id-ad-ocsp access description in the
    certificate's Authority Information Access data (Section 4.2.2.1 of
@@ -19797,6 +20021,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>このプログラムは, ttyを持つかもしれないし持たないかもしれない. また, X11の転送を起動するかもしれないししないかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It may take one of the following values:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T062458Z" creationid="haruyama" creationdate="20200520T062430Z">
+        <seg>次の値のうち1つを取る:</seg>
       </tuv>
     </tu>
     <tu>
@@ -21303,6 +21535,14 @@
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Miscellaneous changes</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T151153Z" creationid="haruyama" creationdate="20200521T151153Z">
+        <seg>雑多な変更</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Modification of Information - SSH provides for verification that
        the contents of each message have not been modified during its
        transmission through the network by digitally signing each SSH
@@ -21387,6 +21627,16 @@
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160602T031029Z" creationid="haruyama" creationdate="20160602T031029Z">
         <seg>さらに言えば, エージェントプロトコル自体は認証やトランスポートの安全を含んでいない. エージェントとやりとりできたら, 秘密鍵の操作をエージェントに実行させることが通常できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Most SSH connections will only ever request a single session, but a
+attacker may abuse a running ssh client to surreptitiously open
+additional sessions under their control.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T055713Z" creationid="haruyama" creationdate="20200520T055713Z">
+        <seg>SSH の接続の大半は, 単一のセッションのみを要求するが, 攻撃者が実行中の SSH クライアントを乱用しこっそり追加のセッションを開こうとする可能性がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21495,6 +21745,14 @@
       </tuv>
       <tuv lang="JA">
         <seg>複数のセッションが同時に有効になりうる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>NB.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T053215Z" creationid="haruyama" creationdate="20200520T053215Z">
+        <seg>注意.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22086,6 +22344,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Newer versions of the draft will not be supported, though some features
+are individually implemented as extensions described below.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T063806Z" creationid="haruyama" creationdate="20200519T063806Z">
+        <seg>以降で記述する拡張としていくつかの特徴は独立に実装されているが, このドラフトのより新しいバージョンはサポートされないだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>No IANA
    actions are required for this document.</seg>
       </tuv>
@@ -22440,6 +22707,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Note that OpenSSH's sftp and sftp-server implement revision 3 of the SSH
+filexfer protocol described in:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T063718Z" creationid="haruyama" creationdate="20200519T063718Z">
+        <seg>OpenSSH の sftp と sftp-server は 次に記述された SSH filexfer プロトコルのバージョン 3 を実装していることに注意:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Note that a
    server MAY request that a user change the password.</seg>
       </tuv>
@@ -22697,6 +22973,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Note that the server may send key types that the client does not
+support.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T063210Z" creationid="haruyama" creationdate="20200521T063210Z">
+        <seg>クライアントがサポートしていない鍵タイプをサーバが送ってくるかもしれないことに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Note that the session id can be made public without harming the
    security of the protocol.</seg>
       </tuv>
@@ -22761,6 +23046,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>このメッセージは, ポートに対する転送が明示的に要求されることなく送られてもよいことに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Note that this is not a general defence against compromised clients
+(that is impossible), but it thwarts a simple attack.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T060323Z" creationid="haruyama" creationdate="20200520T060323Z">
+        <seg>侵害されたクライアントに対する一般的な防御策ではなく(それは不可能), 単純な攻撃を阻むものであることに注意.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23033,11 +23327,49 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>On receipt of such a message, an OpenSSH server will refuse to open
+future channels of type "session" and instead immediately abort the
+connection.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T060126Z" creationid="haruyama" creationdate="20200520T055951Z">
+        <seg>このメッセージを受け取ると, OpenSSH サーバは, 将来の "session" タイプのチャンネルの開放を拒否し代わりに直ちに接続を中断する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>On receipt of such a message, an agent shall delete all keys that it
    is holding and reply with SSH_AGENT_SUCCESS.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160530T080940Z" creationid="haruyama" creationdate="20160530T080940Z">
         <seg>このメッセージを受信したら, エージェントは保持しているすべての鍵を削除し SSH_AGENT_SUCCESS で応答することになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>On receiving this message, the peer SHOULD cease sending data of
+the channel and MAY signal the process from which the channel data
+originates (e.g. by closing its read file descriptor).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T052017Z" creationid="haruyama" creationdate="20200520T051825Z">
+        <seg>このメッセージを受け取ったなら, 相手方はチャンネルのデータの送信をやめる必要がある. また相手方はチャンネルのデータを生成しているプロセスに (たとえばファイルデスクリプタを閉じることで) プロセスにシグナルを送ってもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>On receiving this request the server will perform the POSIX operation
+rename(oldpath, newpath) and will respond with a SSH_FXP_STATUS message.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T150352Z" creationid="haruyama" creationdate="20200521T150352Z">
+        <seg>この要求を受け取ると, サーバは POSIX の操作 rename(oldpath, newpath) を実施し, SSH_FXP_STATUS メッセージで応答する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>On receiving this request the server will perform the operation
+link(oldpath, newpath) and will respond with a SSH_FXP_STATUS message.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T151011Z" creationid="haruyama" creationdate="20200521T151011Z">
+        <seg>この要求を受け取ったとき, サーバは link(oldpath, newpath) 操作を実行し, SSH_FXP_STATUS メッセージで応答する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23070,10 +23402,28 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>On success they
+return the following SSH_FXP_EXTENDED_REPLY reply:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T150701Z" creationid="haruyama" creationdate="20200521T150701Z">
+        <seg>成功時は, 次の SSH_FXP_EXTENDED_REPLY 応答を返す:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>On success, the agent shall reply with:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200519T052633Z" creationid="haruyama" creationdate="20160531T123105Z">
         <seg>成功したら, エージェントは次を返す:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>On successful
+open, the server should reply with SSH_MSG_CHANNEL_OPEN_SUCCESS.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T062715Z" creationid="haruyama" creationdate="20200520T062715Z">
+        <seg>開放に成功したら, サーバは SSH_MSG_CHANNEL_OPEN_SUCCESS で応答する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23139,6 +23489,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>一度計算されたら, セッション識別子は変更されない. たとえ, あとで鍵を再交換してもだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Once established the client and server may exchange packet or frames
+over the tunnel channel by encapsulating them in SSH protocol strings
+and sending them as channel data.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T062827Z" creationid="haruyama" creationdate="20200520T062827Z">
+        <seg>一度確立したら, クライアントとサーバはパケットかフレームを, SSH プロトコル文字列でそれらをカプセル化しチャンネルデータとして送信することで, 交換できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23343,6 +23703,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>One receiving this request, a server will call fsync(handle_fd) and will
+respond with a SSH_FXP_STATUS message.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T151146Z" creationid="haruyama" creationdate="20200521T151146Z">
+        <seg>この要求を受信すると, サーバは fsync(handle_fd) を呼び出し, SSH_FXP_STATUS メッセージで応答する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>One specific scenario for having a configurable policy
    is where clients use unqualified host names to connect to servers.</seg>
       </tuv>
@@ -23424,6 +23793,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Only the ecdsa-sha2-nistp256, ecdsa-sha2-nistp384
+and ecdsa-sha2-nistp521 curves over GF(p) are supported.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T070943Z" creationid="haruyama" creationdate="20200519T070943Z">
+        <seg>GF(p) 上の ecdsa-sha2-nistp256 と ecdsa-sha2-nistp384, ecdsa-sha2-nistp521 curves over GF(p) のみがサポートされている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Only the first few fields are defined; the remaining fields depend on
    the authentication method.</seg>
       </tuv>
@@ -23496,6 +23874,165 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20190104T073734Z" creationid="haruyama" creationdate="20190104T073734Z">
         <seg>OpenSSH 7.2 (7.2p2 は除く) は,  SSH_MSG_USERAUTH_REQUEST のアルゴリズムが "rsa-sha2-256" か "rsa-sha2-512" の場合に "ssh-rsa" ののように署名の中のアルゴリズムを間違えてエンコードする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH implements a channel extension message to perform this
+signalling: "eow@openssh.com" (End Of Write).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T051521Z" creationid="haruyama" creationdate="20200520T051506Z">
+        <seg>OpenSSHはこの合図を送信するチェンネル拡張メッセージを実装する: "eow@openssh.com" (End Of Write).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH introduces new public key algorithms to support certificate
+authentication for users and host keys.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T064658Z" creationid="haruyama" creationdate="20200519T064658Z">
+        <seg>OpenSSH はユーザとホスト鍵に証明書認証をサポートする新しい公開鍵アルゴリズムを導入している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH private keys, as generated by ssh-keygen(1) use the format
+described in PROTOCOL.key by default.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T151656Z" creationid="haruyama" creationdate="20200521T151656Z">
+        <seg>OpenSSH の秘密鍵は, ssh-keygen(1) によって生成されるように, デフォルトでは PROTOCOL.key に記述されている形式を利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH provides a global
+request "no-more-sessions@openssh.com" to mitigate this attack.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T055747Z" creationid="haruyama" creationdate="20200520T055747Z">
+        <seg>OpenSSH はこの攻撃を緩和するグローバルな要求 "no-more-sessions@openssh.com" を提供する. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH public keys, as generated by ssh-keygen(1) and appearing in
+authorized_keys files, are formatted as a single line of text consisting
+of the public key algorithm name followed by a base64-encoded key blob.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T151415Z" creationid="haruyama" creationdate="20200521T151415Z">
+        <seg>OpenSSH 公開鍵は, ssh-keygen(1) で生成され authorized_keys ファイルに現れるように, 公開鍵アルゴリズム名の後に base64 エンコードされた鍵 blob が続く 1行のテキストで形式化されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH supports ECC key exchange and public key authentication as
+specified in RFC5656.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T070907Z" creationid="haruyama" creationdate="20200519T070907Z">
+        <seg>OpenSSH は RFC5656 で指定された ECC 鍵交換と公開鍵認証をサポートしている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH supports MAC algorithms, whose names contain "-etm", that
+perform the calculations in a different order to that defined in RFC
+4253.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T071218Z" creationid="haruyama" creationdate="20200519T071218Z">
+        <seg>OpenSSH は RFC 4253 で定義された順番とは異なる順番で計算する, 名前に "-etm" を含む MAC アルゴリズムをサポートする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH supports a compact format for Key Revocation Lists (KRLs).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T151920Z" creationid="haruyama" creationdate="20200521T151920Z">
+        <seg>OpenSSH は,  鍵失効リスト (KRLs) の簡潔な形式をサポートしている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH supports a protocol extension allowing a server to inform
+a client of all its protocol v.2 host keys after user-authentication
+has completed.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T063107Z" creationid="haruyama" creationdate="20200521T063107Z">
+        <seg>OpenSSH は ユーザ認証が完了した後ですべての プロトコル 2 ホスト鍵をクライアントにサーバから通知できるプロトコル拡張をサポートしている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH supports authenticated encryption using ChaCha20 and Poly1305
+as described in PROTOCOL.chacha20poly1305.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T073032Z" creationid="haruyama" creationdate="20200519T073032Z">
+        <seg>OpenSSH は, PROTOCOL.chacha20poly1305 に記述している ChaCha20 と Poly1305 を用いる認証付き暗号化をサポートしている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH supports layer 2 and layer 3 tunnelling via the "tun@openssh.com"
+channel type.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T062119Z" creationid="haruyama" creationdate="20200520T062119Z">
+        <seg>OpenSSH は "tun@openssh.com" チャンネルタイプによるレイヤ 2 とレイヤ 3 のトンネリングをサポートしている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH supports local and remote Unix domain socket forwarding
+using the "streamlocal" extension.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T061506Z" creationid="haruyama" creationdate="20200521T061506Z">
+        <seg>OpenSSH は "streamlocal" 拡張を用いた ローカル/リモートの Unix ドメインソケット転送をサポートしている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH supports one
+extension signal "INFO@openssh.com" that allows sending SIGINFO on
+BSD-derived systems.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T072416Z" creationid="haruyama" creationdate="20200521T072416Z">
+        <seg>OpenSSH は BSD派生のシステムで SIGINFO を送ることができる 拡張シグナル "INFO@openssh.com" をサポートしている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH supports the AES-GCM algorithm as specified in RFC 5647.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T072622Z" creationid="haruyama" creationdate="20200519T072622Z">
+        <seg>OpenSSH は RFC 5647 で指定された AES-GCM アルゴリズムをサポートしている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH supports the use of ECDH in Curve25519 for key exchange as
+described at:
+http://git.libssh.org/users/aris/libssh.git/plain/doc/curve25519-sha256@libssh.org.txt?h=curve25519</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T073137Z" creationid="haruyama" creationdate="20200519T073137Z">
+        <seg>OpenSSH は 次で記述されている 鍵交換のための Curve25519 での ECDH の利用をサポートしている:
+http://git.libssh.org/users/aris/libssh.git/plain/doc/curve25519-sha256@libssh.org.txt?h=curve25519</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH's connection multiplexing uses messages as described in
+PROTOCOL.mux over a Unix domain socket for communications between a
+master instance and later clients.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T152052Z" creationid="haruyama" creationdate="20200521T152052Z">
+        <seg>OpenSSH の接続の多重化は, マスターインスタンスとより後のクライアントの間での通信を Unix ドメインソケット上で行なう PROTOCOL.mux に記述されているメッセージを利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>OpenSSH's sftp-server lists the extensions it supports using the
+standard extension announcement mechanism in the SSH_FXP_VERSION server
+hello packet:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T073128Z" creationid="haruyama" creationdate="20200521T073128Z">
+        <seg>OpenSSH の sftp-server は SSH_FXP_VERSION サーバハローパケットでの標準拡張通知メカニズムを用いてサポートしている拡張を列挙する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23623,6 +24160,24 @@ Category: Standards Track                                     W. Griffin
       <tuv lang="JA" changeid="haruyama" changedate="20110621T012433Z">
         <seg>その他の GSS-API 鍵交換法 ........................12
    3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Other SSH implementations may be
+whitelisted to receive this message upon request.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T060416Z" creationid="haruyama" creationdate="20200520T060416Z">
+        <seg>他の SSH 実装については要求があったら, このメッセージを受けとるホワイトリストに載るかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Other SSH implementations may be whitelisted to receive this message
+upon request.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T053442Z" creationid="haruyama" creationdate="20200520T053442Z">
+        <seg>他の SSH 実装については要求があったら, このメッセージを受けとるホワイトリストに載るかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26176,6 +26731,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>SFTP protocol changes</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T072423Z" creationid="haruyama" creationdate="20200521T072423Z">
+        <seg>SFTP プロトコルの変更</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>SHA-1 is described in [FIPS-180-2] and MD5 is described in [RFC1321].</seg>
       </tuv>
       <tuv lang="JA">
@@ -28123,6 +28686,43 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Similar to cancel-tcpip-forward, cancel-streamlocal-forward is sent
+by the client cancel the forwarding of a Unix domain socket.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T062208Z" creationid="haruyama" creationdate="20200521T062208Z">
+        <seg>cancel-tcpip-forwardと同様に, cancel-streamlocal-forward は Unix ドメインソケットの転送をキャンセルするクライアントから送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Similar to direct-tcpip, direct-streamlocal is sent by the client
+to request that the server make a connection to a Unix domain socket.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T061722Z" creationid="haruyama" creationdate="20200521T061708Z">
+        <seg>direct-tcp と同様に, direct-streamlocal は サーバが Unix ドメイントソケットに接続するよう要求するためにクライアントから送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Similar to forwarded-tcpip, forwarded-streamlocal is sent by the
+server when the client has previously send the server a streamlocal-forward
+GLOBAL_REQUEST.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T062920Z" creationid="haruyama" creationdate="20200521T061719Z">
+        <seg>forwarded-tcpip と同様に, forwarded-streamlocal  はクライアントがその前にサーバに streamlocal-forward GLOBAL_REQUEST を送った場合にサーバから送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Similar to tcpip-forward, streamlocal-forward is sent by the client
+to request remote forwarding of a Unix domain socket.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T062116Z" creationid="haruyama" creationdate="20200521T062116Z">
+        <seg>tcpip-forward と同様に, streamlocal-forward は Unix ドメインソケットのリモート転送を要求するためにクライアントから送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Similarly
                              for the other characters.</seg>
       </tuv>
@@ -28182,6 +28782,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110808T101155Z">
         <seg>メッセージの送り手が必要に応じて SSH のセッションの作成を開始するので, SSH のセッションは, 入力メッセージに対してすでに存在している. そうでなければ, 受信メッセージは SSH トランスポートモデルに到達しない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Since
+fixing this to follow the specification would cause incompatibility, the
+current order was retained.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T072935Z" creationid="haruyama" creationdate="20200521T072935Z">
+        <seg>仕様に従う修正は非互換を引き起こしてしまうので, 現在の順番が保たれている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28740,6 +29350,25 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>特に, 認証プロトコルの場合は, クライアントが中間者攻撃用のデバイスとセッションを作るとユーザ名やパスワードといったユーザの認証資格を漏らしてしまう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Specifically, packets are transmitted using normal
+SSH_MSG_CHANNEL_DATA packets:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T062911Z" creationid="haruyama" creationdate="20200520T062911Z">
+        <seg>具体的に, パケットは 通常の SSH_MSG_CHANNEL_DATA パケットによって転送される:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Specifically, the "-etm" MAC algorithms modify the transport protocol
+to calculate the MAC over the packet ciphertext and to send the packet
+length unencrypted.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T072347Z" creationid="haruyama" creationdate="20200519T071904Z">
+        <seg>具体的には, "-etm" MAC アルゴリズムは, パケットの暗号文に対して MAC を計算し暗号化されていないパケット長を送ることでトランスポート層を変更する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30200,6 +30829,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The "address family" field identifies the type of packet in the message.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T062958Z" creationid="haruyama" creationdate="20200520T062958Z">
+        <seg>"address family" フィールドはメッセージ中のパケットのタイプを識別する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The "aes128-cbc" cipher is the same as above, but with a 128-bit key.</seg>
       </tuv>
       <tuv lang="JA">
@@ -30387,6 +31024,23 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The "frame" field contains an IEEE 802.3 Ethernet frame, including
+header.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T063136Z" creationid="haruyama" creationdate="20200520T063136Z">
+        <seg>"frame" フィールドはヘッダを含む IEEE 802.3 イーサネットフレームを含む.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The "fstatvfs@openssh.com" operates on an open file handle:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T150621Z" creationid="haruyama" creationdate="20200521T150621Z">
+        <seg>"fstatvfs@openssh.com" は, 利用中のファイルハンドルを操作する:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The "hmac-*" algorithms are described in [RFC2104].</seg>
       </tuv>
       <tuv lang="JA">
@@ -30496,6 +31150,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160529T111212Z" creationid="haruyama" creationdate="20160529T111103Z">
         <seg>"p", "q", "g" の値は DSA の domain parameter だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The "packet data" field consists of the IPv4/IPv6 datagram itself
+without any link layer header.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T063054Z" creationid="haruyama" creationdate="20200520T063054Z">
+        <seg>"packet data" フィールドは, リンクレイヤのヘッダなしの IPv4/IPv6 データグラム自体で構成される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30617,6 +31280,33 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110901T062111Z">
         <seg>"ssh-rsa" 鍵フォーマットは次のエンコーディングを持つ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The "statvfs@openssh.com" request operates on an explicit
+pathname, and is formatted as follows:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T150559Z" creationid="haruyama" creationdate="20200521T150559Z">
+        <seg>"statvfs@openssh.com" 要求は明示的な pathname について操作をし, 次のような形式だ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The "tunnel mode" parameter specifies whether the tunnel should forward
+layer 2 frames or layer 3 packets.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T062444Z" creationid="haruyama" creationdate="20200520T062427Z">
+        <seg>"tunnel mode" パラメータは トンネルがレイヤ 2 のフレームかレイヤ 3 のパケットのどちらを転送するかを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The "tunnel unit number" specifies the remote interface number, or may
+be 0x7fffffff to allow the server to automatically choose an interface.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T062549Z" creationid="haruyama" creationdate="20200520T062549Z">
+        <seg>"tunnel unit number" はリモートのインタフェイスの番号を指定する. もしくは, サーバに自動的なインタフェイスの選択を許す 0x7fffffff を指定する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32177,11 +32867,30 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The SSH channels protocol (RFC4254 section 6.9) supports sending a
+signal to a session attached to a channel.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T072328Z" creationid="haruyama" creationdate="20200521T072328Z">
+        <seg>SSH チャンネルプロトコル (RFC4254 6.9 節) はチャンネルにアタッチされたセッションにシグナルを送るのをサポートしている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The SSH client will then invoke the "ssh-userauth"
    service to authenticate the user, as described in the SSH</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20111001T033311Z">
         <seg>クライアントは SSH 認証プロトコル [RFC4252] に記述されているようにユーザを認証するため "ssh-userauth" サービスを起動する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The SSH connection protocol (rfc4254) provides the SSH_MSG_CHANNEL_EOF
+message to allow an endpoint to signal its peer that it will send no
+more data over a channel.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T052914Z" creationid="haruyama" creationdate="20200520T050434Z">
+        <seg>SSH コネクションプロトコル (rfc4252) は, エンドポイントがチャンネルを通してこれ以上のデータを送らないことを相手側に伝える SSH_MSG_CHANNEL_EOF メッセージを提供している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33669,6 +34378,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client currently sends the empty string for this field.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T062036Z" creationid="haruyama" creationdate="20200521T062036Z">
+        <seg>クライアントは現在このフィールドに空の文字列を送る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client generates a random integer, K, in the range
    0 &lt;= K &lt; 2^(KLEN-2*HLEN-49), where KLEN is the length of the modulus
    of K_T, in bits.</seg>
@@ -33819,6 +34536,14 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200518T061027Z">
         <seg>クライアントは次を送る:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The client should disregard such keys if they are received.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T063248Z" creationid="haruyama" creationdate="20200521T063248Z">
+        <seg>クライアンントはそのような鍵を受け取ったなら無視する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34026,6 +34751,22 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160601T001700Z" creationid="haruyama" creationdate="20160601T001700Z">
         <seg>拡張に成功した場合の応答メッセージの内容は, extension type に特有だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The contents of the "data" field for layer 2 packets is:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T063106Z" creationid="haruyama" creationdate="20200520T063106Z">
+        <seg>レイヤ 2 パケットでの  "data" フィールドの内容は:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The contents of the "data" field for layer 3 packets is:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T062929Z" creationid="haruyama" creationdate="20200520T062929Z">
+        <seg>レイヤ 3 パケットでの  "data" フィールドの内容は:</seg>
       </tuv>
     </tu>
     <tu>
@@ -36545,6 +37286,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The message is formatted as follows:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T051631Z" creationid="haruyama" creationdate="20200520T051631Z">
+        <seg>このメッセージの形式は次のとおり:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The message may consist of multiple lines separated
    by CRLF (Carriage Return - Line Feed) pairs.</seg>
       </tuv>
@@ -36589,6 +37338,14 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>ここに記述する方法は, DNS[1][2]でサーバの指紋を検索しその検索を DNSSEC [5] で保証する, SSHの通信の外側での検証を提供する. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The method is documented in:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T064544Z" creationid="haruyama" creationdate="20200519T064544Z">
+        <seg>この方法は次で文書化している:</seg>
       </tuv>
     </tu>
     <tu>
@@ -37395,6 +38152,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The protocol used by OpenSSH's ssh-agent is described in the file
+PROTOCOL.agent</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T063844Z" creationid="haruyama" creationdate="20200519T063844Z">
+        <seg>OpenSSH の ssh-agent で利用しているプロトコルは ファイル PROTOCOL.agent で記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The protocol was not designed to eliminate covert channels.</seg>
       </tuv>
       <tuv lang="JA">
@@ -37454,6 +38220,18 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>アルゴリズム番号と指紋を比較して, 公開鍵と SSHFP リソースレコードが一致するか調べる</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The public key blob (before base64 encoding) is the same format used for
+the encoding of public keys sent on the wire: as described in RFC4253
+section 6.6 for RSA and DSA keys, RFC5656 section 3.1 for ECDSA keys
+and the "New public key formats" section of PROTOCOL.certkeys for the
+OpenSSH certificate formats.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T151600Z" creationid="haruyama" creationdate="20200521T151600Z">
+        <seg>(base64 エンコーディング前の) 公開鍵 blob は, 通信で送る公開鍵のエンコーディングで利用されるものと同じ形式だ. RSA と DSA 鍵については RFC4253 6.6 節で, ECDSA 鍵については RFC5656 の 3.1 節で, OpenSSH 証明書形式については PROTOCOL.certkeys の "New public key formats" で定義されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37776,6 +38554,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110725T100022Z">
         <seg>Kのサイズへの必要条件は, K_Tで常に暗号化できることが保証されていることだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The reserved field is not currently defined and is ignored on the
+remote end.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T061935Z" creationid="haruyama" creationdate="20200521T061935Z">
+        <seg>reserved なフィールドは現在定義されておらず, リモートの側で無視される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -38127,6 +38914,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110722T055016Z">
         <seg>サーバは, このリスト中に特定のホストの出現を認めないための管理者用の方法を提供してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The server MAY advertise the same
+extension with multiple versions (though this is unlikely).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T073542Z" creationid="haruyama" creationdate="20200521T073542Z">
+        <seg>サーバは (通常はないことだが) 同じ拡張を複数のバージョンで通知してもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -39519,6 +40315,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The values of the f_flag bitmask are as follows:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T150723Z" creationid="haruyama" creationdate="20200521T150723Z">
+        <seg>f_flag ビットマスクの値は次だ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The values of these fields
    MUST be ignored, and a channel behaves as if all window sizes are
    infinite.</seg>
@@ -39555,6 +40359,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110721T050657Z">
         <seg>(3.4節で記述する)バージョンパケットと4節で記述する要求と応答では, 'name' フィールドとパケットのデータ部を記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The version will be incremented if the extension is
+ever changed in an incompatible way.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T073516Z" creationid="haruyama" creationdate="20200521T073516Z">
+        <seg>拡張が非互換な形で変更されたら, バージョンは上がる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40118,6 +40931,16 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>These extensions let a client learn key types that it had not previously
+encountered, thereby allowing it to potentially upgrade from weaker
+key algorithms to better ones.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T070707Z" creationid="haruyama" creationdate="20200521T070707Z">
+        <seg>これらの拡張は, クライアントにこれまでに遭遇しなかった鍵タイプを学習でき, それにより, より弱い鍵アルゴリズムからよりよいものにアップグレードできる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>These flags
    SHOULD be set to "false".</seg>
       </tuv>
@@ -40272,6 +41095,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>These methods are documented
+in the file PROTOCOL.certkeys</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T064713Z" creationid="haruyama" creationdate="20200519T064713Z">
+        <seg>この方法は ファイル PROTOCOL.certkeys で文書化している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>These names MUST be printable US-ASCII strings, and MUST NOT contain
    the characters at-sign ("@"), comma (","), whitespace, control
    characters (ASCII codes 32 or less), or the ASCII code 127 (DEL).</seg>
@@ -40304,11 +41136,37 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>These requests correspond to the statvfs and fstatvfs POSIX system
+interfaces.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T150513Z" creationid="haruyama" creationdate="20200521T150513Z">
+        <seg>これらの要求は statvfs と fstatvfs POSIX システムインタフェイスに関連している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These requests return a SSH_FXP_STATUS reply on failure.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T150646Z" creationid="haruyama" creationdate="20200521T150646Z">
+        <seg>失敗時には これらの要求は SSH_FXP_STATUS 応答を返す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>These signature schemes are defined in
    [I-D.ietf-curdle-rsa-sha2].</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160531T123517Z" creationid="haruyama" creationdate="20160531T123517Z">
         <seg>これらの署名方式は [I-D.ietf-curdle-rsa-sha2] で定義されている..</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These signatures should be included in the reply, in the order matching
+the hostkeys in the request:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T070257Z" creationid="haruyama" creationdate="20200521T065116Z">
+        <seg>これらの署名は, リクエスト中のホスト鍵の順番に一致する順番でこの応答に含まれる (訳注: 2020/05 での OpenSSH のサーバ側の実装は複数のホスト鍵に対応していないようにみえる).</seg>
       </tuv>
     </tu>
     <tu>
@@ -40348,6 +41206,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160529T111249Z" creationid="haruyama" creationdate="20160529T111249Z">
         <seg>これらの値は [FIPS.184-4] で定義されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These variants use the so-called "encrypt then MAC" ordering,
+calculating the MAC over the packet ciphertext rather than the
+plaintext.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T071306Z" creationid="haruyama" creationdate="20200519T071306Z">
+        <seg>これらの変種は, いわゆる"暗号化後MAC" の順番を用いて, 平文ではなくパケットの暗号文に対して MAC を計算する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40691,6 +41559,34 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This
+avoids exposing compression code to attacks from unauthenticated users.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T064531Z" creationid="haruyama" creationdate="20200519T064443Z">
+        <seg>認証されていないユーザからの攻撃に対して圧縮コードを公開をするのを避けることができる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This
+format is described in the PROTOCOL.krl file.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T151935Z" creationid="haruyama" creationdate="20200521T151935Z">
+        <seg>この形式は  PROTOCOL.krl ファイルに記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This
+request is implemented as a SSH_FXP_EXTENDED request with the
+following format:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T150936Z" creationid="haruyama" creationdate="20200521T150936Z">
+        <seg>この要求は 次の形式の SSH_FXP_EXTENDED 要求として実装される:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This 'method name' MUST NOT be listed as supported by the server.</seg>
       </tuv>
       <tuv lang="JA">
@@ -41030,6 +41926,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110831T012938Z">
         <seg>この証明書と, 信用される認証局につながる証明書のチェーン, 証明書の失効状態を与えるオプションのメッセージは, セキュアシェルプロトコルでこの節で述べる形式に従って公開鍵データとして送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This channel type supports forwarding of network packets
+with datagram boundaries intact between endpoints equipped with
+interfaces like the BSD tun(4) device.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T062320Z" creationid="haruyama" creationdate="20200520T062320Z">
+        <seg>このチャンネルタイプは, BSD tun(4) デバイスのようなインタフェイスを備えたエンドポイント間で, データ境界がそのままのネットワークパケットの転送をサポートする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -42158,6 +43064,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This documents OpenSSH's deviations and extensions to the published SSH
+protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T063548Z" creationid="haruyama" creationdate="20200519T063548Z">
+        <seg>公開されている SSH のプロトコルに対する OpenSSH の逸脱と拡張をここに記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This eliminates the need to generate
    cryptographically secure pseudorandom bytes for each packet.</seg>
       </tuv>
@@ -42173,6 +43088,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110620T035257Z">
         <seg>コミュニティが受け入れやすくし実装を容易にしている. これにより, うまくいけばより安全なシステムを構成できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This ensures that packet boundaries
+are kept intact.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T062846Z" creationid="haruyama" creationdate="20200520T062846Z">
+        <seg>これにより, パケットの境界がそのままに保たれることを保証する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -42236,6 +43160,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181117T042847Z" creationid="haruyama" creationdate="20181117T042847Z">
         <seg>この拡張は, サーバとクライアントに鍵交換を行なわずに圧縮アルゴリズムのサポートを再交渉することを許す. 認証が成功すると直ちに新しいアルゴリズムが有効となる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This extension is advertised in the SSH_FXP_VERSION hello with version
+"1".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T150428Z" creationid="haruyama" creationdate="20200521T150428Z">
+        <seg>この拡張は SSH_FXP_VERSION ハローでバージョン "1" として広告される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -42458,6 +43391,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This is a new transport-layer MAC method using the UMAC algorithm
+(rfc4418).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T064126Z" creationid="haruyama" creationdate="20200519T064126Z">
+        <seg>これは UMAC アルゴリズム (rfc4418) を用いる新しいトランスポート層 MAC だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This is all the
    more true when specifying larger hash function outputs and DH
    parameters.</seg>
@@ -42516,6 +43458,17 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>これは, [SSH-TRANS]で記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This is desirable, since it saves the transmission of data that would
+otherwise need to be discarded and it allows an endpoint to signal local
+processes of the condition, e.g. by closing the corresponding file
+descriptor.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T053002Z" creationid="haruyama" creationdate="20200520T051403Z">
+        <seg>もし提供されていれば, 破棄するデータの転送を抑制し, また たとえば関連するファイルデスクリプタを閉じることで, 相手方のエンドポイントが対応する状態にあるローカルのプロセスにシグナルを送ることができるので, 提供されているのが望ましい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -42618,6 +43571,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110411T133813Z">
         <seg>これは2つの一時的鍵を用いるより効率的で, セキュリティに不利に作用しない(これは, [LMQSV98] の 6.1節の one-passプロトコルに類似している.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This is necessary for the transport to obtain the
+length of the packet and location of the MAC tag so that it may be
+verified without decrypting unauthenticated data.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T072547Z" creationid="haruyama" creationdate="20200519T072025Z">
+        <seg>これは, トランスポートが, 認証されていないデータを復号することなしに検証できるようにパケットの長さとMAC タグの位置を知るのに必要だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -43229,6 +44192,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This message does not consume
+window space and may be sent even if no window space is available.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T052354Z" creationid="haruyama" creationdate="20200520T052354Z">
+        <seg>このメッセージは, window space を消費しない. window space が残っていない場合にも送ることができる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This message does not consume window space and can be sent even if no
    window space is available.</seg>
       </tuv>
@@ -43244,6 +44216,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110707T032108Z">
         <seg>このメッセージは, 認証が失敗しようとしていることを意味している. また, 同期を失なうことなしにエラートークンを通信できるよう定義されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This message is sent by
+an endpoint when the local output of a session channel is closed or
+experiences a write error.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T051615Z" creationid="haruyama" creationdate="20200520T051615Z">
+        <seg>このメッセージはセッションチャンネルのローカルの出力が閉じられているか書き込みエラーが発生している場合に, エンドポイントから送られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -43313,6 +44295,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110712T035509Z">
         <seg>この認証法は, 単一のメッセージで定義される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This method is identical to the "umac-64" method documented
+in:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T064152Z" creationid="haruyama" creationdate="20200519T064152Z">
+        <seg>この方法は, 次に文書化されている "umac-64" と同一だ:</seg>
       </tuv>
     </tu>
     <tu>
@@ -43426,6 +44417,27 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA">
         <seg>この操作を, 一般的な目的のSSHクライアントはサポートする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This operation provides a rename operation with POSIX semantics, which
+are different to those provided by the standard SSH_FXP_RENAME in
+draft-ietf-secsh-filexfer-02.txt.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T150245Z" creationid="haruyama" creationdate="20200521T150245Z">
+        <seg>この操作は, POSIX の挙動でのリネーム操作を提供する. draft-ietf-secsh-filexfer-02.txt の 標準の SSH_FXP_RENAME で提要されるものとは異なっている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This ordering closes a security flaw in the SSH transport
+protocol, where decryption of unauthenticated ciphertext provided a
+"decryption oracle" that could, in conjunction with cipher flaws, reveal
+session plaintext.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T072341Z" creationid="haruyama" creationdate="20200519T071702Z">
+        <seg>この順番は, 認証されていない暗号文の復号が "復号オラクル" を提供して 暗号の欠陥と組み合わされて セッションの平文を公開してしまう, SSH トランスポート層のセキュリティの欠陥を塞ぐ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -43811,6 +44823,31 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This request asks the server to call fsync(2) on an open file handle.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T151106Z" creationid="haruyama" creationdate="20200521T151106Z">
+        <seg>この要求は, 利用中のファイルハンドルに fsync(2) を呼ぶようにサーバに要求する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This request is for creating a hard link to a regular file.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T150912Z" creationid="haruyama" creationdate="20200521T150912Z">
+        <seg>この要求は通常のファイルへのハードリンクを作成するためのものだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This request is implemented as a
+SSH_FXP_EXTENDED request with the following format:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T150314Z" creationid="haruyama" creationdate="20200521T150314Z">
+        <seg>この要求は 次の形式の SSH_FXP_EXTENDED 要求として実装されている:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This requires 24 bytes of key data
    (of which 168 bits are actually used).</seg>
       </tuv>
@@ -44075,6 +45112,16 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110623T034505Z">
         <seg>(1) サーバの最後の GSS_Accept_sec_context() 呼び出しが, クライアントに送られる0でない最終応答トークンを生成し, (2) クライアントの GSS_Init_sec_context() のそれまでの呼び出しが major_status が GSS_S_COMPLETE である結果を生成しなかった場合にのみ, このステップは実行される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This transport-layer compression method uses the zlib compression
+algorithm (identical to the "zlib" method in rfc4253), but delays the
+start of compression until after authentication has completed.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T064600Z" creationid="haruyama" creationdate="20200519T064311Z">
+        <seg>このトランスポート層圧縮アルゴリズムは, (rfc4253 の "zlib" と同一の) zlib 圧縮アルゴリズムを用いているが, 圧縮の開始を認証が完了した後に遅らせている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -44815,6 +45862,14 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Transport protocol changes</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T063853Z" creationid="haruyama" creationdate="20200519T063853Z">
+        <seg>トランスポートプロトコルの変更</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Treatment of the Packet Length Field</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110829T041324Z">
@@ -44829,6 +45884,15 @@ Category: Standards Track                                     W. Griffin
       <tuv lang="JA" changeid="haruyama" changedate="20110826T041524Z">
         <seg>Packet Length フィールドの扱い .......................8
    8.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Tunnel forwarding channels are
+requested by the client with the following packet:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T062345Z" creationid="haruyama" creationdate="20200520T062345Z">
+        <seg>トンネル転送チャンネルは, 次のパケットでクライアントから要求される:</seg>
       </tuv>
     </tu>
     <tu>
@@ -44902,6 +45966,26 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110623T034514Z">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Unfortunately,
+the reversal was not noticed until the server was widely deployed.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T072851Z" creationid="haruyama" creationdate="20200521T072851Z">
+        <seg>残念なことに, この逆転はサーバが広く配置されるまで気付かれなかった.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Unfortunately, there is no symmetric way for
+an endpoint to request that its peer should cease sending data to it
+while still keeping the channel open for the endpoint to send data to
+the peer.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T052930Z" creationid="haruyama" creationdate="20200520T050701Z">
+        <seg>残念ながら, 相手方にデータを送るチャンネルをエンドポイントが開いたままで相手方がエンドポイントにデータを送らないように要求する対称となる方法はエンドポイントに提供されていない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -45062,6 +46146,15 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110712T035710Z">
         <seg>GSS-API ベースの鍵交換法を用いて最初の鍵交換が行なわれた場合にこのメッセージを受け取ったら, 受け取った MIC が正当化検証するために GSS_VerifyMIC() をサーバは利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Upon receiving this message, a client should check which of the
+supplied host keys are present in known_hosts.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T063142Z" creationid="haruyama" creationdate="20200521T063142Z">
+        <seg>このメッセージを受け取ったなら, クライアントは提供されたホスト鍵が known_hosts に存在するかチェックする必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -45842,6 +46935,15 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>When OpenSSH's sftp-server was implemented, the order of the arguments
+to the SSH_FXP_SYMLINK method was inadvertently reversed.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T072826Z" creationid="haruyama" creationdate="20200521T072750Z">
+        <seg>OpenSSH の sftp-server が実装された際, SSH_FXP_SYMLINK の引数の順番をうっかり逆にしてしまった.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>When S
    contains leading zeros, there exist signers that will send a shorter
    encoding of S that omits them.</seg>
@@ -45921,12 +47023,31 @@ Category: Standards Track                                     W. Griffin
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>When a server receives this message, it should generate a signature
+using each requested key over the following:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T063734Z" creationid="haruyama" creationdate="20200521T063734Z">
+        <seg>サーバはこのメッセージを受け取ったならば, 要求された鍵それぞれについて次のように署名を生成する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>When a server sends this message, it MUST be followed by an
    SSH_MSG_USERAUTH_FAILURE message, which is to be interpreted as
    applying to the same authentication request.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110707T032229Z">
         <seg>このメッセージをサーバが送るとき,  同じ認証リクエストに対して適用されるように解釈されるために, SSH_MSG_USERAUTH_FAILURE を続けて送らなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When an OpenSSH client expects that it will never open another session
+(i.e. it has been started with connection multiplexing disabled), it
+will send the following global request:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T060004Z" creationid="haruyama" creationdate="20200520T055928Z">
+        <seg>OpenSSH のクライアントは, 自分がさらなるセッションを決して開かないと期待する (すなわち, 接続の多重化を無効にして接続を始めた) 場合, 次のグローバル要求を送信する:</seg>
       </tuv>
     </tu>
     <tu>
@@ -46164,6 +47285,17 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110728T100853Z">
         <seg>エージェントが &lt;close-session&gt; コマンドを処理する場合は, エージェントは応答し SSH のセッションチャンネルを終了する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When the client receives this reply (and not a failure), it should
+validate the signatures and may update its known_hosts file, adding keys
+that it has not seen before and deleting keys for the server host that
+are no longer offered.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T070158Z" creationid="haruyama" creationdate="20200521T070158Z">
+        <seg>クライアントがこの応答を(失敗ではなく)受け取ったなら, 署名を検証する必要がある. そして known_hosts ファイルを, 以前存在しなかった鍵を追加しサーバホストがもう提供していない鍵を削除して, 更新してもよい. </seg>
       </tuv>
     </tu>
     <tu>
@@ -47290,6 +48422,56 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>connection: Channel write close extension "eow@openssh.com"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T050319Z" creationid="haruyama" creationdate="20200520T050319Z">
+        <seg>コネクション: チャンネル書き込みクローズ拡張 "eow@openssh.com"</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>connection: SIGINFO support for "signal" channel request</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T071836Z" creationid="haruyama" creationdate="20200521T071836Z">
+        <seg>コネクション: "signal" チャンネル要求での SIGINFO サポート</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>connection: Tunnel forward extension "tun@openssh.com"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T062046Z" creationid="haruyama" creationdate="20200520T062046Z">
+        <seg>コネクション: トンネル転送拡張 "tun@openssh.com"</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>connection: Unix domain socket forwarding</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T061433Z" creationid="haruyama" creationdate="20200521T061433Z">
+        <seg>コネクション: Unix ドメインソケット転送</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>connection: disallow additional sessions extension
+     "no-more-sessions@openssh.com"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T053532Z" creationid="haruyama" creationdate="20200520T053532Z">
+        <seg>コネクション: 追加のセッションを許可しない拡張 no-more-sessions@openssh.com"</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>connection: hostkey update and rotation "hostkeys-00@openssh.com"
+and "hostkeys-prove-00@openssh.com"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T062953Z" creationid="haruyama" creationdate="20200521T062953Z">
+        <seg>コネクション: ホスト鍵の更新とローテーション "hostkeys-00@openssh.com" と "hostkeys-prove-00@openssh.com"</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>control processing needs to be performed by a notification originator
    before notifications are actually sent, and this processing is done
    using the configured securityName.</seg>
@@ -47315,6 +48497,26 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160618T032715Z">
         <seg>は, 次のようにエンコードされる ('\n' はラインフィード文字の可視表現として用いる):</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>due to certain broken SSH implementations aborting upon receipt
+of this message (in contravention of RFC4254 section 5.4), this
+message is only sent to OpenSSH peers (identified by banner).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T053331Z" creationid="haruyama" creationdate="20200520T053331Z">
+        <seg>ある壊れたSSHの実装が (RFC4254 の 5.4 節に反して) このメッセージの受け取りで中断したため,  このメッセージは (バナーで識別された) OpenSSH の相手方のみに送信される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>due to certain broken SSH implementations aborting upon receipt
+of this message, the no-more-sessions request is only sent to OpenSSH
+servers (identified by banner).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200520T060359Z" creationid="haruyama" creationdate="20200520T060359Z">
+        <seg>ある壊れたSSHの実装が (RFC4254 の 5.4 節に反して) このメッセージの受け取りで中断したため,  この no-more-sessions 要求は (バナーで識別された) OpenSSH のサーバにのみに送信される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -48772,6 +49974,55 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>sftp: Extension request "fsync@openssh.com"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T151029Z" creationid="haruyama" creationdate="20200521T151029Z">
+        <seg>sftp: 拡張要求 "fsync@openssh.com"</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>sftp: Extension request "hardlink@openssh.com"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T150853Z" creationid="haruyama" creationdate="20200521T150853Z">
+        <seg>sftp: 拡張要求 "hardlink@openssh.com"</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>sftp: Extension request "posix-rename@openssh.com"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T150008Z" creationid="haruyama" creationdate="20200521T150008Z">
+        <seg>sftp: 拡張要求 "posix-rename@openssh.com"</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>sftp: Extension requests "statvfs@openssh.com" and
+         "fstatvfs@openssh.com"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T150443Z" creationid="haruyama" creationdate="20200521T150443Z">
+        <seg>sftp: 拡張要求 "statvfs@openssh.com" と "fstatvfs@openssh.com"</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>sftp: Reversal of arguments to SSH_FXP_SYMLINK</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T072726Z" creationid="haruyama" creationdate="20200521T072726Z">
+        <seg>sftp: SSH_FXP_SYMLINK への引数の逆転</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>sftp: Server extension announcement in SSH_FXP_VERSION</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200521T073041Z" creationid="haruyama" creationdate="20200521T073041Z">
+        <seg>sftp: SSH_FXP_VERSION でのサーバ拡張の通知</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>signature algorithm and ECDH is used as the key exchange method, if
    curves of different sizes are used, then it is possible that
    different hash functions from the SHA2 family could be used.</seg>
@@ -49245,6 +50496,46 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>transport: Elliptic Curve cryptography</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T070838Z" creationid="haruyama" creationdate="20200519T070838Z">
+        <seg>トランスポート: 楕円曲線暗号</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>transport: New public key algorithms "ssh-rsa-cert-v01@openssh.com",
+     "ssh-dsa-cert-v01@openssh.com",
+     "ecdsa-sha2-nistp256-cert-v01@openssh.com",
+     "ecdsa-sha2-nistp384-cert-v01@openssh.com" and
+     "ecdsa-sha2-nistp521-cert-v01@openssh.com"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T064630Z" creationid="haruyama" creationdate="20200519T064630Z">
+        <seg>トランスポート: 新しい公開鍵アルゴリズム "ssh-rsa-cert-v01@openssh.com" と
+     "ssh-dsa-cert-v01@openssh.com",
+     "ecdsa-sha2-nistp256-cert-v01@openssh.com",
+     "ecdsa-sha2-nistp384-cert-v01@openssh.com",
+     "ecdsa-sha2-nistp521-cert-v01@openssh.com"</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>transport: Protocol 2 MAC algorithm "umac-64@openssh.com"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T064100Z" creationid="haruyama" creationdate="20200519T064100Z">
+        <seg>トランスポート: プロトコル 2 の MAC アルゴリズム "umac-64@openssh.com"</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>transport: Protocol 2 compression algorithm "zlib@openssh.com"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T064208Z" creationid="haruyama" creationdate="20200519T064208Z">
+        <seg>トランスポート: プロトコル 2 の 圧縮アルゴリズム "zlib@openssh.com"</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>type-specific data follows</seg>
       </tuv>
       <tuv lang="JA">
@@ -49314,6 +50605,15 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>where "packet_length" is encoded as a uint32 and "encrypted_packet"
+contains:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200519T072308Z" creationid="haruyama" creationdate="20200519T072308Z">
+        <seg>ここで "packet_length" は uint32 としてエンコードされる. "encrypted_packet" は次を含む:</seg>
       </tuv>
     </tu>
     <tu>
