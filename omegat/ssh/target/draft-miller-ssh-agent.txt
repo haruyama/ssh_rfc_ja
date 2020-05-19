@@ -153,7 +153,7 @@ Internet-Draft              Abbreviated Title                   May 2016
 
    SSH_AGENTC_ADD_IDENTITY ないし SSH_AGENTC_ADD_ID_CONSTRAINED メッセージを用いて, エージェントに鍵は追加される.  後者は, 鍵の利用における任意の制約付きで鍵を追加できる.
 
-   SSH_AGENTC_ADD_IDENTITY メッセージの一般的な形式は以下だ:
+   SSH_AGENTC_ADD_IDENTITY メッセージの一般的な形式は次だ:
 
        byte                    SSH_AGENTC_ADD_IDENTITY
        string                  key type
@@ -351,7 +351,7 @@ Internet-Draft              Abbreviated Title                   May 2016
 
    エージェントは, 鍵を削除したら SSH_AGENT_SUCCESS で応答する必要がある. 鍵が見つからなかったら SSH_AGENT_FAILURE で応答する必要がある.
 
-   スマートカードの鍵は, 以下で削除される:
+   スマートカードの鍵は, 次で削除される:
 
 
 
@@ -399,7 +399,7 @@ Internet-Draft              Abbreviated Title                   May 2016
        string                  data
        uint32                  flags
 
-   "key blob" は署名を実行するよう要求する鍵で, "data" は 署名されるデータ. "flags" は (以下で説明する) 0以上の署名フラグのビット単位での OR を含むビットフィールドだ.
+   "key blob" は署名するよう要求する鍵で, "data" は 署名されるデータ. "flags" は (後で説明する) 0以上の署名フラグのビット単位での OR を含むビットフィールドだ.
 
 
 
@@ -412,7 +412,7 @@ Internet-Draft              Abbreviated Title                   May 2016
 
    エージェントが署名を作成できない/したくない(たとえば指定された鍵がなかったり, 制約付きの鍵でユーザが確認を拒否した)場合, エージェントは SSH_AGENT_FAILURE で応答しなければならない.
 
-   成功したら, エージェントは以下を返す:
+   成功したら, エージェントは次を返す:
 
        byte                    SSH_AGENT_SIGN_RESPONSE
        string                  signature
@@ -452,7 +452,7 @@ Internet-Draft              Abbreviated Title                   May 2016
 
 4.7.  拡張メカニズム
 
-   このエージェントプロトコルは, プロトコルで送られるベンダ特有のメッセージや実験的なメッセージを許すオプションの拡張メカニズムを含んでいる.  クライアントからの拡張の要求は以下で構成される:
+   このエージェントプロトコルは, プロトコルで送られるベンダ特有のメッセージや実験的なメッセージを許すオプションの拡張メカニズムを含んでいる.  クライアントからの拡張の要求は次で構成される:
 
        byte                    SSH_AGENTC_EXTENSION
        string                  extension type

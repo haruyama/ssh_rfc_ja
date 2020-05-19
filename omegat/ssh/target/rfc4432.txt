@@ -70,7 +70,7 @@ RFC 4432                  SSH RSA Key Exchange                March 2006
 
    この方法は次のメッセージを用いる.
 
-   サーバは最初に以下を送信する:
+   サーバは最初に次を送信する:
 
        byte      SSH_MSG_KEXRSA_PUBKEY
        string    server public host key and certificates (K_S)
@@ -88,11 +88,11 @@ RFC 4432                  SSH RSA Key Exchange                March 2006
 
    鍵 K_T は, [RFC4253]の 6.6 節で記述されている "ssh-rsa" 方式に従ってエンコードされる.  注意: "ssh-rsa" ホスト鍵と異なり, K_T は暗号化のみに利用される. 署名には利用されない.  K_T のモジュラスは, 少なくとも MINKLEN ビットの長さでなければならない.
 
-   クライアントは乱数 K を生成する. K は次の範囲の数だ: 0 <= K < 2^(KLEN-2*HLEN-49). KLEN は K_Tのモジュラスのビットでの長さだ.  そしてクライアントはK_Tを以下を暗号化するのに用いる.
+   クライアントは乱数 K を生成する. K は次の範囲の数だ: 0 <= K < 2^(KLEN-2*HLEN-49). KLEN は K_Tのモジュラスのビットでの長さだ.  そしてクライアントはK_Tを次を暗号化するのに用いる.
 
        mpint     K, the shared secret
 
-   [RFC3447]の (mask generation function として MGF1-with-HASH を, ハッシュとして HASH を そして空のラベルを用いる) RSAES-OAEP 方式(に従って暗号化は実行されるK のエンコーディングが暗号化する上で常に十分短い長さになることの証明が付録 A にある.  暗号化を行なったら, クライアントは以下を送る:
+   [RFC3447]の (mask generation function として MGF1-with-HASH を, ハッシュとして HASH を そして空のラベルを用いる) RSAES-OAEP 方式(に従って暗号化は実行されるK のエンコーディングが暗号化する上で常に十分短い長さになることの証明が付録 A にある.  暗号化を行なったら, クライアントは次のメッセージを送る:
 
        byte      SSH_MSG_KEXRSA_SECRET
        string    RSAES-OAEP-ENCRYPT(K_T, K)
@@ -100,7 +100,7 @@ RFC 4432                  SSH RSA Key Exchange                March 2006
    注意: RSAES-OAEP-ENCRYPT の最終段階は, [RFC3447] の I2OSP プリミティブを用いてオクテット文字列として整数をエンコードする.
    これをSSHの "string" としてエンコードすると, SSHの "mpint" エンコーディングをこの整数に適用するのと似ているが異なる結果を生成する.  [RFC4253] の "ssh-rsa" 署名で用いられているのと同じエンコーディングだ.
 
-   サーバは K を復号する. 復号エラーが起きたら, サーバは reason code が SSH_DISCONNECT_KEY_EXCHANGE_FAILED の SSH_MESSAGE_DISCONNECT を送る必要があり, 接続を切断しなければならない.  そうでなければ, サーバは以下で応答する:
+   サーバは K を復号する. 復号エラーが起きたら, サーバは reason code が SSH_DISCONNECT_KEY_EXCHANGE_FAILED の SSH_MESSAGE_DISCONNECT を送る必要があり, 接続を切断しなければならない.  そうでなければ, サーバは次で応答する:
 
        byte      SSH_MSG_KEXRSA_DONE
        string    signature of H with host key

@@ -229,7 +229,7 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
 
 4.3.  証明書の列挙
 
-   クライアントが既知の証明書の一覧を取得したい場合, クライアントは以下を送る:
+   クライアントが既知の証明書の一覧を取得したい場合, クライアントは次を送る:
 
         string    "list-certificates"
 
@@ -260,7 +260,7 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
 
 4.4.  名前空間の列挙
 
-   クライアントがサーバ上に存在する名前空間を知りたい場合, 以下を送る:
+   クライアントがサーバ上に存在する名前空間を知りたい場合, 次を送る:
 
         string    "list-namespaces"
 
@@ -304,7 +304,7 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
 
 5.1.  公開鍵の追加
 
-   クライアントが公開鍵を追加したい場合, クライアントは以下を送る:
+   クライアントが公開鍵を追加したい場合, クライアントは次を送る:
 
         string    "add"
         string    public key algorithm name
@@ -316,14 +316,14 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
          bool      critical
         repeated attribute-count times
 
-   この要求は, クライアントが特定の名前空間に公開鍵を保存できるように 1つの "namespace" 属性を含んでいてもよい.  同じユーザに対して複数の名前空間に同じ鍵を保存することは可能だ. その場合は, 複数の追加要求が必要だ.
+   この要求は, クライアントが特定の名前空間に公開鍵を保存できるように 1つの "namespace" 属性を含んでいてもよい.  同じユーザに対して複数の名前空間に同じ鍵を保存できる. その場合は, 複数の追加要求が必要だ.
 
    公開鍵の追加要求に現れる名前空間がまだサーバに存在しない場合, この操作によって作られる.
    しかし, ユーザに名前空間を作る権限がない場合, SSH_PUBLICKEY_CANNOT_CREATE_NAMESPACE をサーバは返さなければならない.
 
 5.2.  公開鍵の削除
 
-   クライアントが公開鍵を削除したい場合, クライアントは以下を送る:
+   クライアントが公開鍵を削除したい場合, クライアントは次を送る:
 
         string    "remove"
         string    public key algorithm name
@@ -349,7 +349,7 @@ RFC 7076         P6R's Secure Shell Public Key Subsystem   November 2013
 
 5.3.  公開鍵の列挙
 
-   クライアントが既知の公開鍵の列挙をしたい場合, クライアントは以下を送る:
+   クライアントが既知の公開鍵の列挙をしたい場合, クライアントは次を送る:
 
         string    "list"
         uint32    attribute-count

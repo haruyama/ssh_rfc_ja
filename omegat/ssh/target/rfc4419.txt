@@ -73,7 +73,7 @@ Friedl, et al.              Standards Track                     [Page 2]
 RFC 4419                 SSH DH Group Exchange                March 2006
 
 
-   4.  S は 0 < y < (p-1)/2 な乱数 y を生成し f = g^y mod p を計算する.  S は "e" を受信する.  K = e^y mod p と H = hash(V_C || V_S || I_C || I_S || K_S || min || n || max || p || g || e || f || K) (これらの要素はタイプに従ってエンコードされている. 以下を参照) を計算し, ホスト秘密鍵で H に署名し s を得る.  S は "K_S || f || s"  を C に送る. 署名の操作は2つめのハッシュ操作を伴なうかもしれない.
+   4.  S は 0 < y < (p-1)/2 な乱数 y を生成し f = g^y mod p を計算する.  S は "e" を受信する.  K = e^y mod p と H = hash(V_C || V_S || I_C || I_S || K_S || min || n || max || p || g || e || f || K) (これらの要素はタイプに従ってエンコードされている. 次を参照) を計算し, ホスト秘密鍵で H に署名し s を得る.  S は "K_S || f || s"  を C に送る. 署名の操作は2つめのハッシュ操作を伴なうかもしれない.
 
    5.  C は, K_S が本当に S のホスト鍵かを検証する(たとえば, 証明書や公開鍵を得られるローカルなデータベースを用いて).  C は, 鍵を検証無しで受け入れることもできる; しかし, そうするとプロトコルを能動的な攻撃に対して安全ではなくしてしまう (しかし, 多くの環境で短い期間実際的な理由から望まれている).  そして C は K = f^x mod p と H = hash(V_C || V_S || I_C || I_S || K_S || e || f || K)を計算し H に対する署名 s を検証する.
 
@@ -85,7 +85,7 @@ RFC 4419                 SSH DH Group Exchange                March 2006
 
    これは, 次のメッセージ群で実装される.  交換ハッシュを計算するハッシュ関数は, 方法の名前で定義される. これを HASH と呼ぶ.  署名に用いる公開鍵アルゴリズムは, KEXINIT メッセージで取り決める.
 
-   まず, クライアントは以下を送る:
+   まず, クライアントは次を送る:
 
      byte    SSH_MSG_KEY_DH_GEX_REQUEST
      uint32  min, minimal size in bits of an acceptable group
@@ -104,18 +104,18 @@ Friedl, et al.              Standards Track                     [Page 3]
 RFC 4419                 SSH DH Group Exchange                March 2006
 
 
-   サーバは以下で応答する:
+   サーバは次で応答する:
 
      byte    SSH_MSG_KEX_DH_GEX_GROUP
      mpint   p, safe prime
      mpint   g, generator for subgroup in GF(p)
 
-   クライアントは以下で応答する:
+   クライアントは次で応答する:
 
      byte    SSH_MSG_KEX_DH_GEX_INIT
      mpint   e
 
-   サーバは以下で応答する.
+   サーバは次で応答する.
 
      byte    SSH_MSG_KEX_DH_GEX_REPLY
      string  server public host key and certificates (K_S)

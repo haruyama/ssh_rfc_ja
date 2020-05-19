@@ -154,7 +154,7 @@ RFC 6239              Suite B Crypto Suites for SSH             May 2011
 
 2.1.  セキュリティ最小レベル (minLOS)
 
-   Suite B は 2つのレベルの暗号学的セキュリティを提供する. すなわち, 128-bit セキュリティ最小レベル (minLOS_128) と 192-bit セキュリティ最小レベル (minLOS_192) だ.  以下で見るように, ECDSA-256/384 署名アルゴリズムと対応する X.509v3 証明書は, 署名以外のプリミティブ(セキュアシェルの用語では, 鍵交換アルゴリズム, 暗号化アルゴリズム, メッセージ認証コード (MAC) アルゴリズム) とはいくぶん異なった取り扱いをされる.
+   Suite B は 2つのレベルの暗号学的セキュリティを提供する. すなわち, 128-bit セキュリティ最小レベル (minLOS_128) と 192-bit セキュリティ最小レベル (minLOS_192) だ.  以降で見るように, ECDSA-256/384 署名アルゴリズムと対応する X.509v3 証明書は, 署名以外のプリミティブ(セキュアシェルの用語では, 鍵交換アルゴリズム, 暗号化アルゴリズム, メッセージ認証コード (MAC) アルゴリズム) とはいくぶん異なった取り扱いをされる.
 
 2.2.  電子署名と証明書
 
@@ -346,7 +346,7 @@ RFC 6239              Suite B Crypto Suites for SSH             May 2011
 
       ecdh-sha2-nistp384      SHA-384 を用いる nistp384 の一時-一時楕円曲線 Diffie-Hellman
 
-   また, SSH_MSG_KEXECDH_INIT メッセージの形式は以下だ:
+   また, SSH_MSG_KEXECDH_INIT メッセージの形式は次だ:
 
       byte      SSH_MSG_KEXDH_INIT
 
@@ -358,7 +358,7 @@ RFC 6239              Suite B Crypto Suites for SSH             May 2011
 
    SSH_MSG_KEXECDH_REPLY は, ECDH に対するサーバの contribution や サーバの公開署名鍵,  新しく確立した共有秘密値から導出される交換ハッシュに対する ECDSA 署名が含まれる.  3.1 節で述べたように, SecSh-B では, サーバのホスト鍵アルゴリズムは, x509v3-ecdsa-sha2-nistp256 か x509v3-ecdsa-sha2-nistp384 でなければならない.
 
-   SSH_MSG_KEXECDH_REPLY の形式は以下だ:
+   SSH_MSG_KEXECDH_REPLY の形式は次だ:
 
       byte      SSH_MSG_KEXECDH_REPLY
 

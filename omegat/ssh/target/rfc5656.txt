@@ -288,7 +288,7 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
       byte     SSH_MSG_KEX_ECDH_INIT
       string   Q_C, client's ephemeral public key octet string
 
-   サーバは以下で応答する.
+   サーバは次で応答する.
 
       byte     SSH_MSG_KEX_ECDH_REPLY
       string   K_S, server's public host key
@@ -391,7 +391,7 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
       byte     SSH_MSG_ECMQV_INIT
       string   Q_C, client's ephemeral public key octet string
 
-   サーバは以下を送る:
+   サーバは次のメッセージを送る:
 
       byte     SSH_MSG_ECMQV_REPLY
       string   K_S, server's public host key
@@ -415,7 +415,7 @@ RFC 5656             SSH ECC Algorithm Integration         December 2009
 
 6.1.  楕円曲線ドメインパラメータ識別子
 
-   この節では, 指定された楕円曲線ドメインパラメータをエンコードする識別子を指定する.  これらの識別子は, この文書で以下を識別するために用いられている: SSH 楕円曲線公開鍵フォーマットや, ECDSA署名blob, ECDHの方法名だ.
+   この節では, 指定された楕円曲線ドメインパラメータをエンコードする識別子を指定する.  これらの識別子は, この文書で次を識別するために用いられている: SSH 楕円曲線公開鍵フォーマットや, ECDSA署名blob, ECDHの方法名だ.
 
    必須の楕円曲線として, nistp256 と nistp384, nistp521 がある. 楕円曲線ドメインパラメータの識別子は, 文字列 "nistp256" と  "nistp384", "nistp521" だ.
 

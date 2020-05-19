@@ -127,7 +127,7 @@ RFC 6242                    NETCONF over SSH                   June 2011
 
    [RFC6241] で述べられているように, NETCONF クライアントも NETCONF サーバに NETCONF クライアントの機能を示すために <hello> 要素を含む XML 文書を送らなければならない.  <hello> 要素を含む文書は, NETCONF セッションが確立したあとに NETCONF クライアントが送る最初の XML 文書でなければならない.
 
-   以下で機能の交換の例を示す.  NETCONF クライアントから送られるメッセージには "C:" を, NETCONF サーバから送られるメッセージには "S:" を付けている.
+   以降で機能の交換の例を示す.  NETCONF クライアントから送られるメッセージには "C:" を, NETCONF サーバから送られるメッセージには "S:" を付けている.
 
    S: <?xml version="1.0" encoding="UTF-8"?>
    S: <hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
@@ -299,7 +299,7 @@ RFC 6242                    NETCONF over SSH                   June 2011
    NETCONF の終了は, <close-session> 操作を用いて行なわれる.
    NETCONF サーバは,  NETCONF クライアントからのメッセージを受け取った順に処理する.  NETCONF サーバが <close-session> 操作を処理する場合は, NETCONF サーバは応答し SSH のセッションチャンネルを終了することになる.  NETCONF サーバは, <close-session> 操作の後で受け取ったすべての NETCONF メッセージを処理してはならない.
 
-   4.2 節で利用した例に続いて, 既存の NETCONF サブシステムを終了する例は以下だ:
+   4.2 節で利用した例に続いて, 既存の NETCONF サブシステムを終了する例を挙げる:
 
    C: \n#140\n
    C: <?xml version="1.0" encoding="UTF-8"?>\n
