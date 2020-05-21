@@ -1,0 +1,351 @@
+公開されている SSH のプロトコルに対する OpenSSH の逸脱と拡張をここに記述する.
+
+OpenSSH の sftp と sftp-server は 次に記述された SSH filexfer プロトコルのバージョン 3 を実装していることに注意:
+
+https://www.openssh.com/txt/draft-ietf-secsh-filexfer-02.txt
+
+以降で記述する拡張としていくつかの特徴は独立に実装されているが, このドラフトのより新しいバージョンはサポートされないだろう.
+
+OpenSSH の ssh-agent で利用しているプロトコルは ファイル PROTOCOL.agent で記述されている.
+
+1トランスポートプロトコルの変更
+
+1.1. トランスポート: プロトコル 2 の MAC アルゴリズム "umac-64@openssh.com"
+
+これは UMAC アルゴリズム (rfc4418) を用いる新しいトランスポート層 MAC だ. この方法は, 次に文書化されている "umac-64" と同一だ:
+
+https://www.openssh.com/txt/draft-miller-secsh-umac-01.txt
+
+1.2. トランスポート: プロトコル 2 の 圧縮アルゴリズム "zlib@openssh.com"
+
+このトランスポート層圧縮アルゴリズムは, (rfc4253 の "zlib" と同一の) zlib 圧縮アルゴリズムを用いているが, 圧縮の開始を認証が完了した後に遅らせている. 認証されていないユーザからの攻撃に対して圧縮コードを公開をするのを避けることができる.
+
+この方法は次で文書化している:
+
+https://www.openssh.com/txt/draft-miller-secsh-compression-delayed-00.txt
+
+1.3. トランスポート: 新しい公開鍵アルゴリズム "ssh-rsa-cert-v01@openssh.com" と
+     "ssh-dsa-cert-v01@openssh.com",
+     "ecdsa-sha2-nistp256-cert-v01@openssh.com",
+     "ecdsa-sha2-nistp384-cert-v01@openssh.com",
+     "ecdsa-sha2-nistp521-cert-v01@openssh.com"
+
+OpenSSH はユーザとホスト鍵に証明書認証をサポートする新しい公開鍵アルゴリズムを導入している. この方法は ファイル PROTOCOL.certkeys で文書化している.
+
+1.4. トランスポート: 楕円曲線暗号
+
+OpenSSH は RFC5656 で指定された ECC 鍵交換と公開鍵認証をサポートしている. GF(p) 上の ecdsa-sha2-nistp256 と ecdsa-sha2-nistp384, ecdsa-sha2-nistp521 curves over GF(p) のみがサポートされている. 点の圧縮を用いてエンコードされる楕円曲線の点は受け入れられもしないし, 生成されもしない.
+
+1.5 トランスポート: プロトコル2 の暗号化後にMACするMAC アルゴリズム
+
+OpenSSH は RFC 4253 で定義された順番とは異なる順番で計算する, 名前に "-etm" を含む MAC アルゴリズムをサポートする. これらの変種は, いわゆる"暗号化後MAC" の順番を用いて, 平文ではなくパケットの暗号文に対して MAC を計算する. この順番は, 認証されていない暗号文の復号が "復号オラクル" を提供して 暗号の欠陥と組み合わされて セッションの平文を公開してしまう, SSH トランスポート層のセキュリティの欠陥を塞ぐ.
+
+具体的には, "-etm" MAC アルゴリズムは, パケットの暗号文に対して MAC を計算し暗号化されていないパケット長を送ることでトランスポート層を変更する. これは, トランスポートが, 認証されていないデータを復号することなしに検証できるようにパケットの長さとMAC タグの位置を知るのに必要だ.
+
+次のように MAC は計算される:
+
+      mac = MAC(key, sequence_number || packet_length || encrypted_packet)
+
+ここで "packet_length" は uint32 としてエンコードされる. "encrypted_packet" は次を含む:
+
+      byte      padding_length
+      byte[n1]  payload; n1 = packet_length - padding_length - 1
+      byte[n2]  random padding; n2 = padding_length
+
+1.6トランスポート: AES-GCM
+
+OpenSSH は RFC 5647 で指定された AES-GCM アルゴリズムをサポートしている.
+鍵交換の仕様での問題のために, OpenSSH の振舞いは RFC と次のように異なっている.
+
+AES-GCM は暗号アルゴリズム "aes128-gcm@openssh.com" ないし "aes256-gcm@openssh.com" として交渉され, MAC アルゴリズムとしては交渉されない. さらに, AES-GCM が暗号として選択されたら, 交渉で交換された MAC アルゴリズムは無視され MAC が一致する必要はない.
+
+1.7 トランスポート: chacha20-poly1305@openssh.com 認証付き暗号化
+
+OpenSSH は, PROTOCOL.chacha20poly1305 に記述している ChaCha20 と Poly1305 を用いる認証付き暗号化をサポートしている.
+
+1.8 トランスポート: curve25519-sha256@libssh.org 鍵交換アルゴリズム
+
+OpenSSH は 次で記述されている 鍵交換のための Curve25519 での ECDH の利用をサポートしている:
+http://git.libssh.org/users/aris/libssh.git/plain/doc/curve25519-sha256@libssh.org.txt?h=curve25519
+
+2. コネクションプロトコルの変更
+
+2.1. コネクション: チャンネル書き込みクローズ拡張 "eow@openssh.com"
+
+SSH コネクションプロトコル (rfc4252) は, エンドポイントがチャンネルを通してこれ以上のデータを送らないことを相手側に伝える SSH_MSG_CHANNEL_EOF メッセージを提供している. 残念ながら, 相手方にデータを送るチャンネルをエンドポイントが開いたままで相手方がエンドポイントにデータを送らないように要求する対称となる方法はエンドポイントに提供されていない.
+
+もし提供されていれば, 破棄するデータの転送を抑制し, また たとえば関連するファイルデスクリプタを閉じることで, 相手方のエンドポイントが対応する状態にあるローカルのプロセスにシグナルを送ることができるので, 提供されているのが望ましい.
+
+OpenSSHはこの合図を送信するチェンネル拡張メッセージを実装する: "eow@openssh.com" (End Of Write). このメッセージはセッションチャンネルのローカルの出力が閉じられているか書き込みエラーが発生している場合に, エンドポイントから送られる. このメッセージの形式は次のとおり:
+
+	byte		SSH_MSG_CHANNEL_REQUEST
+	uint32		recipient channel
+	string		"eow@openssh.com"
+	boolean		FALSE
+
+このメッセージを受け取ったなら, 相手方はチャンネルのデータの送信をやめる必要がある. また相手方はチャンネルのデータを生成しているプロセスに (たとえばファイルデスクリプタを閉じることで) プロセスにシグナルを送ってもよい.
+
+対称となる SSH_MSG_CHANNEL_EOF メッセージと同様に, チャンネルは "eow@openssh.com" の送信後もチャンネルは開かれた状態で残り, 逆の方向でさらなるデータが送られるかもしれない. このメッセージは, window space を消費しない. window space が残っていない場合にも送ることができる.
+
+注意. ある壊れたSSHの実装が (RFC4254 の 5.4 節に反して) このメッセージの受け取りで中断したため,  このメッセージは (バナーで識別された) OpenSSH の相手方のみに送信される.
+他の SSH 実装については要求があったら, このメッセージを受けとるホワイトリストに載るかもしれない.
+
+2.2. コネクション: 追加のセッションを許可しない拡張 no-more-sessions@openssh.com"
+
+SSH の接続の大半は, 単一のセッションのみを要求するが, 攻撃者が実行中の SSH クライアントを乱用しこっそり追加のセッションを開こうとする可能性がある. OpenSSH はこの攻撃を緩和するグローバルな要求 "no-more-sessions@openssh.com" を提供する. 
+
+OpenSSH のクライアントは, 自分がさらなるセッションを決して開かないと期待する (すなわち, 接続の多重化を無効にして接続を始めた) 場合, 次のグローバル要求を送信する:
+
+	byte		SSH_MSG_GLOBAL_REQUEST
+	string		"no-more-sessions@openssh.com"
+	char		want-reply
+
+このメッセージを受け取ると, OpenSSH サーバは, 将来の "session" タイプのチャンネルの開放を拒否し代わりに直ちに接続を中断する.
+
+侵害されたクライアントに対する一般的な防御策ではなく(それは不可能), 単純な攻撃を阻むものであることに注意.
+
+注意. ある壊れたSSHの実装が (RFC4254 の 5.4 節に反して) このメッセージの受け取りで中断したため,  この no-more-sessions 要求は (バナーで識別された) OpenSSH のサーバにのみに送信される. 他の SSH 実装については要求があったら, このメッセージを受けとるホワイトリストに載るかもしれない.
+
+2.3. コネクション: トンネル転送拡張 "tun@openssh.com"
+
+OpenSSH は "tun@openssh.com" チャンネルタイプによるレイヤ 2 とレイヤ 3 のトンネリングをサポートしている. このチャンネルタイプは, BSD tun(4) デバイスのようなインタフェイスを備えたエンドポイント間で, データ境界がそのままのネットワークパケットの転送をサポートする. トンネル転送チャンネルは, 次のパケットでクライアントから要求される:
+
+	byte		SSH_MSG_CHANNEL_OPEN
+	string		"tun@openssh.com"
+	uint32		sender channel
+	uint32		initial window size
+	uint32		maximum packet size
+	uint32		tunnel mode
+	uint32		remote unit number
+
+"tunnel mode" パラメータは トンネルがレイヤ 2 のフレームかレイヤ 3 のパケットのどちらを転送するかを指定する. 次の値のうち1つを取る:
+
+	SSH_TUNMODE_POINTOPOINT  1		/* layer 3 packets */
+	SSH_TUNMODE_ETHERNET     2		/* layer 2 frames */
+
+"tunnel unit number" はリモートのインタフェイスの番号を指定する. もしくは, サーバに自動的なインタフェイスの選択を許す 0x7fffffff を指定する. サーバがクライアントの指定したユニットの開放をしたくないならば  SSH_MSG_CHANNEL_OPEN_FAILURE エラーで要求を拒否する必要がある. 開放に成功したら, サーバは SSH_MSG_CHANNEL_OPEN_SUCCESS で応答する必要がある.
+
+一度確立したら, クライアントとサーバはパケットかフレームを, SSH プロトコル文字列でそれらをカプセル化しチャンネルデータとして送信することで, 交換できる. これにより, パケットの境界がそのままに保たれることを保証する. 具体的に, パケットは 通常の SSH_MSG_CHANNEL_DATA パケットによって転送される:
+
+	byte		SSH_MSG_CHANNEL_DATA
+	uint32		recipient channel
+	string		data
+
+レイヤ 3 パケットでの  "data" フィールドの内容は:
+
+	uint32			packet length
+	uint32			address family
+	byte[packet length - 4]	packet data
+
+"address family" フィールドはメッセージ中のパケットのタイプを識別する.
+次のうちの1つだ:
+
+	SSH_TUN_AF_INET		2		/* IPv4 */
+	SSH_TUN_AF_INET6	24		/* IPv6 */
+
+"packet data" フィールドは, リンクレイヤのヘッダなしの IPv4/IPv6 データグラム自体で構成される.
+
+レイヤ 2 パケットでの  "data" フィールドの内容は:
+
+	uint32			packet length
+	byte[packet length]	frame
+
+"frame" フィールドはヘッダを含む IEEE 802.3 イーサネットフレームを含む.
+
+2.4. コネクション: Unix ドメインソケット転送
+
+OpenSSH は "streamlocal" 拡張を用いた ローカル/リモートの Unix ドメインソケット転送をサポートしている.  転送は TCP ソケットと同様に開始されるが, ホストとポートではなく単一のパスを利用する.
+
+direct-tcp と同様に, direct-streamlocal は サーバが Unix ドメイントソケットに接続するよう要求するためにクライアントから送られる.
+
+	byte		SSH_MSG_CHANNEL_OPEN
+	string		"direct-streamlocal@openssh.com"
+	uint32		sender channel
+	uint32		initial window size
+	uint32		maximum packet size
+	string		socket path
+	string		reserved
+	uint32		reserved
+
+forwarded-tcpip と同様に, forwarded-streamlocal  はクライアントがその前にサーバに streamlocal-forward GLOBAL_REQUEST を送った場合にサーバから送られる.
+
+	byte		SSH_MSG_CHANNEL_OPEN
+	string		"forwarded-streamlocal@openssh.com"
+	uint32		sender channel
+	uint32		initial window size
+	uint32		maximum packet size
+	string		socket path
+	string		reserved for future use
+
+reserved なフィールドは現在定義されておらず, リモートの側で無視される.  将来 ソケットファイルの, オーナーやモードのような, 情報を送るのに使うことを意図している.
+クライアントは現在このフィールドに空の文字列を送る.
+
+tcpip-forward と同様に, streamlocal-forward は Unix ドメインソケットのリモート転送を要求するためにクライアントから送られる.
+
+	byte		SSH2_MSG_GLOBAL_REQUEST
+	string		"streamlocal-forward@openssh.com"
+	boolean		TRUE
+	string		socket path
+
+cancel-tcpip-forwardと同様に, cancel-streamlocal-forward は Unix ドメインソケットの転送をキャンセルするクライアントから送られる.
+
+	byte		SSH2_MSG_GLOBAL_REQUEST
+	string		"cancel-streamlocal-forward@openssh.com"
+	boolean		FALSE
+	string		socket path
+
+2.5. コネクション: ホスト鍵の更新とローテーション "hostkeys-00@openssh.com" と "hostkeys-prove-00@openssh.com"
+
+OpenSSH は ユーザ認証が完了した後ですべての プロトコル 2 ホスト鍵をクライアントにサーバから通知できるプロトコル拡張をサポートしている.
+
+	byte		SSH_MSG_GLOBAL_REQUEST
+	string		"hostkeys-00@openssh.com"
+	string[]	hostkeys
+
+このメッセージを受け取ったなら, クライアントは提供されたホスト鍵が known_hosts に存在するかチェックする必要がある.
+
+クライアントがサポートしていない鍵タイプをサーバが送ってくるかもしれないことに注意. クライアンントはそのような鍵を受け取ったなら無視する必要がある.
+
+クライアントがホストに対してなんらかの鍵が (known_hosts) に存在しないことを識別したら,"hostkeys-prove@openssh.com" (訳注: 原文で 00 が抜けている) メッセージを送信してサーバがその鍵の秘密鍵の所有を証明するように要求する必要がある.
+
+	byte		SSH_MSG_GLOBAL_REQUEST
+	string		"hostkeys-prove-00@openssh.com"
+	char		1 /* want-reply */
+	string[]	hostkeys
+
+サーバはこのメッセージを受け取ったならば, 要求された鍵それぞれについて次のように署名を生成する必要がある.
+
+	string		"hostkeys-prove-00@openssh.com"
+	string		session identifier
+	string		hostkey
+
+これらの署名は, リクエスト中のホスト鍵の順番に一致する順番でこの応答に含まれる (訳注: 2020/05 での OpenSSH のサーバ側の実装は複数のホスト鍵に対応していないようにみえる).
+
+	byte		SSH_MSG_REQUEST_SUCCESS
+	string[]	signatures
+
+クライアントがこの応答を(失敗ではなく)受け取ったなら, 署名を検証する必要がある. そして known_hosts ファイルを, 以前存在しなかった鍵を追加しサーバホストがもう提供していない鍵を削除して, 更新してもよい. 
+
+これらの拡張は, クライアントにこれまでに遭遇しなかった鍵タイプを学習でき, それにより, より弱い鍵アルゴリズムからよりよいものにアップグレードできる. また, 慈悲深い鍵ローテーションもサポートする: サーバは, 提供する鍵グループから廃止する鍵を削除する前に一定期間同じタイプの複数の鍵を提供できる (クライアントにこの拡張を利用して学習する機会を与える).
+
+2.6. コネクション: "signal" チャンネル要求での SIGINFO サポート
+
+SSH チャンネルプロトコル (RFC4254 6.9 節) はチャンネルにアタッチされたセッションにシグナルを送るのをサポートしている. OpenSSH は BSD派生のシステムで SIGINFO を送ることができる 拡張シグナル "INFO@openssh.com" をサポートしている.
+
+3. SFTP プロトコルの変更
+
+3.1. sftp: SSH_FXP_SYMLINK への引数の逆転
+
+OpenSSH の sftp-server が実装された際, SSH_FXP_SYMLINK の引数の順番をうっかり逆にしてしまった. 残念なことに, この逆転はサーバが広く配置されるまで気付かれなかった. 仕様に従う修正は非互換を引き起こしてしまうので, 現在の順番が保たれている. 正しい操作のために, クライアントは SSH_FXP_SYMLINK を次のように送る必要がある.
+
+	uint32		id
+	string		targetpath
+	string		linkpath
+
+3.2. sftp: SSH_FXP_VERSION でのサーバ拡張の通知
+
+OpenSSH の sftp-server は SSH_FXP_VERSION サーバハローパケットでの標準拡張通知メカニズムを用いてサポートしている拡張を列挙する.
+
+	uint32		3		/* protocol version */
+	string		ext1-name
+	string		ext1-version
+	string		ext2-name
+	string		ext2-version
+	...
+	string		extN-name
+	string		extN-version
+
+それぞれの拡張は, ASCII でエンコードされた文字列, たとえば "1" , で その整数バージョン番号をレポートする. 拡張が非互換な形で変更されたら, バージョンは上がる. サーバは (通常はないことだが) 同じ拡張を複数のバージョンで通知してもよい. クライアントは, 拡張を利用する前にバージョン番号を検査しなければならない.
+
+3.3. sftp: 拡張要求 "posix-rename@openssh.com"
+
+この操作は, POSIX の挙動でのリネーム操作を提供する. draft-ietf-secsh-filexfer-02.txt の 標準の SSH_FXP_RENAME で提要されるものとは異なっている. この要求は 次の形式の SSH_FXP_EXTENDED 要求として実装されている:
+
+	uint32		id
+	string		"posix-rename@openssh.com"
+	string		oldpath
+	string		newpath
+
+この要求を受け取ると, サーバは POSIX の操作 rename(oldpath, newpath) を実施し, SSH_FXP_STATUS メッセージで応答する.
+この拡張は SSH_FXP_VERSION ハローでバージョン "1" として広告される.
+
+3.4. sftp: 拡張要求 "statvfs@openssh.com" と "fstatvfs@openssh.com"
+
+これらの要求は statvfs と fstatvfs POSIX システムインタフェイスに関連している. "statvfs@openssh.com" 要求は明示的な pathname について操作をし, 次のような形式だ:
+
+	uint32		id
+	string		"statvfs@openssh.com"
+	string		path
+
+"fstatvfs@openssh.com" は, 利用中のファイルハンドルを操作する:
+
+	uint32		id
+	string		"fstatvfs@openssh.com"
+	string		handle
+
+失敗時には これらの要求は SSH_FXP_STATUS 応答を返す. 成功時は, 次の SSH_FXP_EXTENDED_REPLY 応答を返す:
+
+	uint32		id
+	uint64		f_bsize		/* file system block size */
+	uint64		f_frsize	/* fundamental fs block size */
+	uint64		f_blocks	/* number of blocks (unit f_frsize) */
+	uint64		f_bfree		/* free blocks in file system */
+	uint64		f_bavail	/* free blocks for non-root */
+	uint64		f_files		/* total file inodes */
+	uint64		f_ffree		/* free file inodes */
+	uint64		f_favail	/* free file inodes for to non-root */
+	uint64		f_fsid		/* file system id */
+	uint64		f_flag		/* bit mask of f_flag values */
+	uint64		f_namemax	/* maximum filename length */
+
+f_flag ビットマスクの値は次だ:
+
+	#define SSH_FXE_STATVFS_ST_RDONLY	0x1	/* read-only */
+	#define SSH_FXE_STATVFS_ST_NOSUID	0x2	/* no setuid */
+
+"statvfs@openssh.com" と "fstatvfs@openssh.com" 拡張は SSH_FXP_VERSION ハローでバージョン "2" として広告される.
+
+3.5. sftp: 拡張要求 "hardlink@openssh.com"
+
+この要求は通常のファイルへのハードリンクを作成するためのものだ. この要求は 次の形式の SSH_FXP_EXTENDED 要求として実装される:
+
+	uint32		id
+	string		"hardlink@openssh.com"
+	string		oldpath
+	string		newpath
+
+この要求を受け取ったとき, サーバは link(oldpath, newpath) 操作を実行し, SSH_FXP_STATUS メッセージで応答する.
+この拡張は SSH_FXP_VERSION ハローでバージョン "1" として広告される.
+
+3.6. sftp: 拡張要求 "fsync@openssh.com"
+
+この要求は, 利用中のファイルハンドルに fsync(2) を呼ぶようにサーバに要求する.
+
+	uint32		id
+	string		"fsync@openssh.com"
+	string		handle
+
+この要求を受信すると, サーバは fsync(handle_fd) を呼び出し, SSH_FXP_STATUS メッセージで応答する.
+
+この拡張は SSH_FXP_VERSION ハローでバージョン "1" として広告される.
+
+4. 雑多な変更
+
+4.1 公開鍵の形式
+
+OpenSSH 公開鍵は, ssh-keygen(1) で生成され authorized_keys ファイルに現れるように, 公開鍵アルゴリズム名の後に base64 エンコードされた鍵 blob が続く 1行のテキストで形式化されている.
+(base64 エンコーディング前の) 公開鍵 blob は, 通信で送る公開鍵のエンコーディングで利用されるものと同じ形式だ. RSA と DSA 鍵については RFC4253 6.6 節で, ECDSA 鍵については RFC5656 の 3.1 節で, OpenSSH 証明書形式については PROTOCOL.certkeys の "New public key formats" で定義されている.
+
+4.2 秘密鍵の形式
+
+OpenSSH の秘密鍵は, ssh-keygen(1) によって生成されるように, デフォルトでは PROTOCOL.key に記述されている形式を利用する. レガシーな選択肢として, PEM 形式 (RFC7468) 秘密鍵も ,RSA と DSA, ECDSA 鍵でサポートされている. OpenSSH 7.8 以前ではデフォルトの形式だった.
+
+4.3 KRL format
+
+OpenSSH は,  鍵失効リスト (KRLs) の簡潔な形式をサポートしている. この形式は  PROTOCOL.krl ファイルに記述されている.
+
+4.4 接続の多重化
+
+OpenSSH の接続の多重化は, マスターインスタンスとより後のクライアントの間での通信を Unix ドメインソケット上で行なう PROTOCOL.mux に記述されているメッセージを利用する.
+
+$OpenBSD: PROTOCOL,v 1.37 2020/02/21 00:04:43 dtucker Exp $
