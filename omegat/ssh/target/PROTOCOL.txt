@@ -18,7 +18,7 @@ https://www.openssh.com/txt/draft-miller-secsh-umac-01.txt
 
 1.2. トランスポート: プロトコル 2 の 圧縮アルゴリズム "zlib@openssh.com"
 
-このトランスポート層圧縮アルゴリズムは, (rfc4253 の "zlib" と同一の) zlib 圧縮アルゴリズムを用いているが, 圧縮の開始を認証が完了した後に遅らせている. 認証されていないユーザからの攻撃に対して圧縮コードを公開をするのを避けることができる.
+このトランスポート層圧縮アルゴリズムは, (rfc4253 の "zlib" と同一の) zlib 圧縮アルゴリズムを用いているが, 圧縮の開始を認証が完了したあとに遅らせている. 認証されていないユーザからの攻撃に対して圧縮コードを公開をするのを避けることができる.
 
 この方法は次で文書化している:
 
@@ -196,7 +196,7 @@ cancel-tcpip-forwardと同様に, cancel-streamlocal-forward は Unix ドメイ�
 
 2.5. コネクション: ホスト鍵の更新とローテーション "hostkeys-00@openssh.com" と "hostkeys-prove-00@openssh.com"
 
-OpenSSH は ユーザ認証が完了した後ですべての プロトコル 2 ホスト鍵をクライアントにサーバから通知できるプロトコル拡張をサポートしている.
+OpenSSH は ユーザ認証が完了したあとですべての プロトコル 2 ホスト鍵をクライアントにサーバから通知できるプロトコル拡張をサポートしている.
 
 	byte		SSH_MSG_GLOBAL_REQUEST
 	string		"hostkeys-00@openssh.com"
