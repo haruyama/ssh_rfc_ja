@@ -1,0 +1,207 @@
+この文書は, SSH で利用するための単純な公開鍵証明書認証システムについて記述する.
+
+背景
+----------
+
+SSH は現在単純な公開鍵認証メカニズムをサポートしている. 他の公開鍵実装とは違い, SSH は X.509 証明書の利用を避け, 生の鍵を利用している. このやり方は設定の単純さと攻撃を受ける可能性の最小化について利益があるが, 中央管理でパスワードなし認証, 中央で認証されたホスト鍵を用いる重要なユースケースをサポートしていない.
+
+SSH の既存の単純な公開鍵認証システム上に作られるこのプロトコル拡張は, 証明書ベースの認証を可能とする. 利用される証明書は, たくさんのオプションと複雑なエンコーディング規則を持つ伝統的な X.509 証明書ではない. より最小化されたものだ: 鍵といくつかの識別情報, 他の信頼された鍵で署名される利用オプションからなる.
+
+sshd サーバは, 既存の ~/.ssh/authorized_keys メカニズムを拡張して生のユーザ鍵に加えて証明書認証鍵の仕様を許すことで, 認証された鍵での認証を許可するよう設定できる. ssh クライアントは, ~/.ssh/known_hosts に CA 鍵を指定する同様の機能を追加することで, 認証されたホスト鍵の受け取りの自動的な検証をサポートする.
+
+すべての証明書のタイプは, チャレンジに署名するのに利用される公開鍵に付随する認証情報を含んでいる. OpenSSH では, ssh-keygen が CA 署名操作をする.
+
+認証された鍵は新しい鍵タイプを用いて表現される:
+
+    ssh-rsa-cert-v01@openssh.com
+    ssh-dss-cert-v01@openssh.com
+    ecdsa-sha2-nistp256-cert-v01@openssh.com
+    ecdsa-sha2-nistp384-cert-v01@openssh.com
+    ecdsa-sha2-nistp521-cert-v01@openssh.com
+    ssh-ed25519-cert-v01@openssh.com
+
+RSA 証明書にSHA-2 署名 (それぞれ SHA-256 と SHA-512) の利用を強制する 2つの追加のタイプもある.
+
+    rsa-sha2-256-cert-v01@openssh.com
+    rsa-sha2-512-cert-v01@openssh.com
+
+これらの RSA/SHA-2 タイプは, 鍵(ファイル)の中に現われたり通信で転送されてはならない. しかし, SSH_MSG_KEXINIT のホスト鍵アルゴリズムのフィールドや   "publickey" SSH_USERAUTH_REQUEST の "public key algorithm name"  フィールドで署名が指定されたアルゴリズムを利用していることを示すのに用いられる.
+
+プロトコル拡張
+-------------------
+
+SSH ワイヤプロトコルはいくつかの拡張可能なメカニズムを含んでいる.
+これらの変更は, プロトコルを破壊することなしに証明書認証のサポートを追加するために名前空間付きの公開鍵アルゴリズム名を利用する必要がある -  拡張をサポートしていない実装はこれらを単に無視する.
+
+これから記述する新しい鍵形式を利用する認証は, RFC4252 7 節で既出された既存の SSH "publickey" 認証法を用いて進行する.
+
+新しい公開鍵形式
+----------------------
+
+証明書鍵タイプは, 同様のハイレベルな形式を取る (注意: データタイプとエンコーディングは RFC4251 5節に従う). これらの証明書のシリアライズされた通信エンコーディングは, ディスク上にこれらを保存する際にも使われる.
+
+#define SSH_CERT_TYPE_USER    1
+#define SSH_CERT_TYPE_HOST    2
+
+RSA 証明書
+
+    string    "ssh-rsa-cert-v01@openssh.com"
+    string    nonce
+    mpint     e
+    mpint     n
+    uint64    serial
+    uint32    type
+    string    key id
+    string    valid principals
+    uint64    valid after
+    uint64    valid before
+    string    critical options
+    string    extensions
+    string    reserved
+    string    signature key
+    string    signature
+
+DSA 証明書
+
+    string    "ssh-dss-cert-v01@openssh.com"
+    string    nonce
+    mpint     p
+    mpint     q
+    mpint     g
+    mpint     y
+    uint64    serial
+    uint32    type
+    string    key id
+    string    valid principals
+    uint64    valid after
+    uint64    valid before
+    string    critical options
+    string    extensions
+    string    reserved
+    string    signature key
+    string    signature
+
+ECDSA 証明書
+
+    string    "ecdsa-sha2-nistp256-cert-v01@openssh.com" |
+              "ecdsa-sha2-nistp384-cert-v01@openssh.com" |
+              "ecdsa-sha2-nistp521-cert-v01@openssh.com"
+    string    nonce
+    string    curve
+    string    public_key
+    uint64    serial
+    uint32    type
+    string    key id
+    string    valid principals
+    uint64    valid after
+    uint64    valid before
+    string    critical options
+    string    extensions
+    string    reserved
+    string    signature key
+    string    signature
+
+ED25519 証明書
+
+    string    "ssh-ed25519-cert-v01@openssh.com"
+    string    nonce
+    string    pk
+    uint64    serial
+    uint32    type
+    string    key id
+    string    valid principals
+    uint64    valid after
+    uint64    valid before
+    string    critical options
+    string    extensions
+    string    reserved
+    string    signature key
+    string    signature
+
+nonce フィールドは, 任意の長さ (ただし典型的には 16 か 32 バイト)の CA が提供するランダムなビット文字列で, 署名のハッシュの衝突を起こすことに依存する攻撃を実現できないようにするために含まれている. 
+
+e と n は, それぞれ RSA の exponent と公開 mudulus だ.
+
+p, q, g, y は FIPS-186-2 に記述された DSA のパラメータだ.
+
+curve と public key は それぞれ RFC5656 3.1 節で定義された ECDSA の"[identifier]" と "Q" だ.
+
+pk は draft-josefsson-eddsa-ed25519-03 で定義されたエンコードされた Ed25519 公開鍵だ.
+
+serial は CA で設定されるオプションの証明書シリアル番号で, 証明書を CA から参照する際の簡潔な方法を提供する.
+CA が 証明書に番号を振りたくない場合はこのフィールドは 0 に設定されなければならない.
+
+type は  SSH_CERT_TYPE_... の値を用いて この証明書がユーザの識別かホストの識別のどちらのためのものかを指定する.
+
+key id は署名時に CA によって埋められる自由形式テキストのフィールドだ; このフィールドの内容は, ログメッセージ上で識別プリンシパルを識別するために用意されている.
+
+"valid principals" は, その内部にパックされた文字列としての 0 以上のプリンシパルを含む文字列だ. これらのプリンシパルは, この証明書が有効となる名前を列挙する. SSH_CERT_TYPE_HOST 証明書ならばホスト名, SSH_CERT_TYPE_USER 証明書ならばユーザ名だ. 特別な場合として, 0 サイズの "valid principals" フィールドは, 指定されたタイプのどのプリンシパルにも証明書が有効なことを意味する.
+
+"valid after" と "valid before" は証明書の有効期限を指定する. それぞれ, 1970-01-01 00:00:00 からの秒数で時間を表現する. 証明書は次の場合有効と考えられる:
+
+    valid after <= current time < valid before
+
+critical オプションは, 次のようにエンコードされる 0 以上の鍵オプションの集合だ. これらすべてのオプションは, 認識されないオプションを持つ鍵の認証を実装が拒否しなければならないという意味で "重要"だ.
+
+extensions は 0以上の選択可能な拡張の集合だ. これらの拡張は重要ではなく, 認識できない拡張に遭遇した実装は安全に無視できる.
+
+一般に, critical はアクセスを制限する特徴の制御に利用され, extensions はアクセスを許可する特徴を有効にするのに利用される.
+これにより, 証明書の後方互換性を壊すことなく, 拡張によって有効にされた新しいプロトコルの特徴を許容する際に未知の制限を含む証明書がうっかりアクセスを許可しないことを保証する.
+
+reserved フィールドは現在未使用でこのバージョンのプロトコルでは無視される.
+
+signature key フィールドは, 証明書の署名に利用された CA 鍵が含まれる. CA 鍵に有効な鍵タイプは ssh-rsa, ssh-dss, ssh-ed25519 と ECDSA タイプ ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, ecdsa-sha2-nistp521 だ. 署名鍵タイプが証明書タイプそのものな, "Chained" 証明書はサポートされていない.
+RSA 証明書鍵に対して Ed25519 や ECDSA CA 鍵で署名されることは可能だし, 逆も可能なことに注意.
+
+署名は, 最初の文字列から署名鍵までのすべての先行するフィールドに対して計算される. CA の公開鍵アルゴリズムに対して定義された規則 (ssh-rsa と ssh-dss では RFC4253 の 6.6 節, ECDSA では RFC5656, Ed25519 では  draft-josefsson-eddsa-ed25519-03) に従って計算されエンコードされる.
+
+Critical オプション
+----------------
+
+証明書の critical オプション節は, 証明書の正当性に関する 0 以上のオプションを指定する. このフィールドの形式は, 0 以上のタプルの列からなる.
+
+    string       name
+    string       data
+
+オプションは, 列上に現われる際に "name" で辞書的に順序付けられていなければならない. オプションの名前は, 証明書中に (0 か) 1度だけ出現する.
+
+name フィールドは, オプションを識別し, data フィールドは オプション特有の情報(以降を参照) をエンコードする. すべてのオプションは "重要" で, 実装がオプションを認識できないなら 検証する側はその証明書の受け入れを拒否する必要がある.
+
+カスタムオプションは, 作成した作者ないし団体のドメイン名をオプション名に追加する必要がある. たとえば "my-option@example.com".
+
+現在ホスト証明書に対しては critical オプションは定義されていない. ユーザ証明書でサポートされるオプションと内容, それらの data フィールドの構造は次だ.
+
+Name                    Format        Description
+-----------------------------------------------------------------------------
+force-command           string        この鍵が認証に使われた際いつも実行されるコマンドを指定する (ユーザが ssh コマンドラインで指定したどのコマンドも置換する)
+
+source-address          string        認証のために証明書を受け入れることができるソースアドレスのコンマ区切りリストアドレスは CIDR 形式 (nn.nn.nn.nn/nn ないし hhhh::hhhh/nn) で指定される.
+                                      このオプションがなければ, 証明書はどのソースアドレスからも利用できる.
+
+Extensions
+----------
+
+証明書の extensions 節は, 0 以上の重要でない 証明書拡張を指定する. このフィールドの拡張のエンコーディングと順番は, critical オプションのものと同様で, それぞれの名前は 1度切りしか出てきてはならない要求も同様だ.
+as is the requirement that each name appear only once.
+
+実装が extension を認識できなければ, 無視する必要がある.
+
+カスタムオプションは, 作成した作者ないし団体のドメイン名をオプション名に追加する必要がある. たとえば "my-option@example.com".
+
+現在ホスト証明書に対しては extensions は定義されていない. ユーザ証明書でサポートされる extension と内容, それらの data フィールドの構造は次だ.
+
+Name                    Format        Description
+-----------------------------------------------------------------------------
+no-presence-required    empty         この証明書で作成された署名がユーザの存在を主張する必要がないことを示すフラグこのオプションは, これらの署名形式でこの特徴をサポートする U2F/FIDO セキュリティキータイプに対してのみ意味を持つ.
+
+permit-X11-forwarding   empty         X11 転送が許可される必要があることを示すフラグ. このオプションがなければ X11 転送は拒否される.
+
+permit-agent-forwarding empty         エージェント転送が許可される必要があることを示すフラグ. このオプションがなければ, エージェント転送は許可されない.
+
+permit-port-forwarding  empty         ポート転送が許可される必要があることを示すフラグ. このオプションが存在しなければ, ポート転送は許可されない.
+
+permit-pty              empty         PTY 割り当てが許可される必要があることを示すフラグ. このオプションがなければ PTY 割り当ては無効となる.
+
+permit-user-rc          empty         ~/.ssh/rc の実行が許可される必要があることを示すフラグ. このオプションが存在しなければ, このスクリプトの実行は許可されない.
+
+$OpenBSD: PROTOCOL.certkeys,v 1.17 2019/11/25 00:57:51 djm Exp $
