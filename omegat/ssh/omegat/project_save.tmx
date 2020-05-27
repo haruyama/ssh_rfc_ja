@@ -2120,6 +2120,16 @@ the request with a SSH_MSG_CHANNEL_OPEN_FAILURE error.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A per-packet Poly1305 key is generated as described
+above and the MAC tag calculated using Poly1305 with this key over the
+ciphertext of the packet length and the payload together.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T062126Z" creationid="haruyama" creationdate="20200527T062126Z">
+        <seg>パケットごとの Poly1305 鍵を前述のように生成し, 暗号文のパケット長とペイロードを一緒にしたものに対してこの鍵を使い Poly1305 を用いて MAC タグを計算する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A port forwarding can be canceled with the following message.</seg>
       </tuv>
       <tuv lang="JA">
@@ -5147,6 +5157,14 @@ any principal of the specified type.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>As such, no separate MAC is required.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T054629Z" creationid="haruyama" creationdate="20200527T054629Z">
+        <seg>このため, 分離された MAC は必要ない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>As such, security considerations are discussed throughout.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110715T061444Z">
@@ -6230,6 +6248,17 @@ advertised in the SSH_FXP_VERSION hello with version "2".</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>By using an independently-keyed cipher instance to encrypt the
+length, an active attacker seeking to exploit the packet input handling
+as a decryption oracle can learn nothing about the payload contents or
+its MAC (assuming key derivation, ChaCha20 and Poly1305 are secure).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T060021Z" creationid="haruyama" creationdate="20200527T060021Z">
+        <seg>長さを暗号化する独立した鍵のインスタンスを用いることで, (鍵の導出や ChaCha20, Poly1305 が安全だと仮定すると), 復号オラクルとしてパケットの入力処理を利用しようと探す能動的な攻撃者にペイロードの内容やその MAC についての情報を与えない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>C calls GSS_Init_sec_context(), using the most recent reply token
        received from S during this exchange, if any.</seg>
       </tuv>
@@ -6506,6 +6535,24 @@ advertised in the SSH_FXP_VERSION hello with version "2".</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200525T054549Z" creationid="haruyama" creationdate="20200525T054549Z">
         <seg>認証された鍵は新しい鍵タイプを用いて表現される:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>ChaCha20 is a stream cipher designed by Daniel Bernstein and described
+in [1].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T053759Z" creationid="haruyama" creationdate="20200527T053759Z">
+        <seg>ChaCha20 は Daniel Bernstein によって設計されたストリーム暗号で [1] で記述された.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>ChaCha20 must never reuse a {key, nonce} for encryption nor may it be
+used to encrypt more than 2^70 bytes under the same {key, nonce}.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T062850Z" creationid="haruyama" creationdate="20200527T062850Z">
+        <seg>ChaCha20 は 決して暗号化のために {key, nonce} を再利用したり 同じ {key, nonce} で 2^70 バイトより多く暗号化してはならない. </seg>
       </tuv>
     </tu>
     <tu>
@@ -8331,6 +8378,16 @@ domain name to the option name, e.g. "my-option@example.com".</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Detailed Construction
+---------------------</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T054913Z" creationid="haruyama" creationdate="20200527T054913Z">
+        <seg>詳細な構成
+---------------------</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Details</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110725T083708Z">
@@ -9649,6 +9706,15 @@ generated.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Encrypt the packet payload (using K_2) and append it to the
+encrypted length.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T062433Z" creationid="haruyama" creationdate="20200527T062433Z">
+        <seg>(K_2 を用いて) パケットのペイロードを暗号化し, 暗号化されたパケット長の後に追加する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Encryption</seg>
       </tuv>
       <tuv lang="JA">
@@ -10476,6 +10542,14 @@ generated.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110829T035610Z">
         <seg>図 4: SSH AES-GCM への AES の入力の構造</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Finally, calculate a MAC tag and append it.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T062659Z" creationid="haruyama" creationdate="20200527T062659Z">
+        <seg>最後に MAC タグを計算し追加する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14781,6 +14855,17 @@ ignore it.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If the
+chacha20-poly1305@openssh.com cipher is selected in key exchange,
+the offered MAC algorithms are ignored and no MAC is required to be
+negotiated.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T054705Z" creationid="haruyama" creationdate="20200527T054705Z">
+        <seg>chacha20-poly1305@openssh.com 暗号が鍵交換で選択されたら, 提供された MAC アルゴリズムは無視され, MAC についての交渉は必要がない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If the "null" host key algorithm described in
    Section 5 of [RFC4462] is used, this message MUST NOT be sent.</seg>
       </tuv>
@@ -16196,6 +16281,16 @@ server prove ownership of the private half of the key.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200525T072155Z" creationid="haruyama" creationdate="20200525T072155Z">
         <seg>このオプションがなければ, 証明書はどのソースアドレスからも利用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If this recommendation
+is followed, then chacha20-poly1305@openssh.com requires no special
+handling in this area.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T063028Z" creationid="haruyama" creationdate="20200527T063028Z">
+        <seg>この推奨に従っていれば chacha20-poly1305@openssh.com はこの領域での特別な処理は必要がない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20404,6 +20499,15 @@ information about the socket file, such as ownership and mode.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It operates by permuting 128 fixed bits, 128 or 256 bits of key,
+a 64 bit nonce and a 64 bit counter into 64 bytes of output.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T054125Z" creationid="haruyama" creationdate="20200527T054125Z">
+        <seg>128 ビットの固定ビットと128 ないし 256 ビットの鍵, 64 ビットのナンス, 64ビットのカウンターを 64 ビットの出力に変換することで動作する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It performs server host authentication,
    key exchange, encryption, and integrity protection.</seg>
       </tuv>
@@ -22423,6 +22527,16 @@ no-presence-required    empty         この証明書で作成された署名が
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Negotiation
+-----------</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T054602Z" creationid="haruyama" creationdate="20200527T054602Z">
+        <seg>ネゴシエーション
+-----------</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Negotiation and initialization of a Suite B Secure Shell connection
    involves the following Secure Shell messages (where C-&gt;S denotes a
    message from the client to the server, and S-&gt;C denotes a server-to-
@@ -23957,6 +24071,15 @@ and sending them as channel data.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Once the entire packet has been received, the MAC MUST be checked
+before decryption.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T062009Z" creationid="haruyama" creationdate="20200527T062009Z">
+        <seg>全体のパケットを受け取ったら 1度 MAC を復号前に検査しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Once the mechanism OID has been selected, the client will then
    initiate an exchange of one or more pairs of
    SSH_MSG_USERAUTH_GSSAPI_TOKEN packets.</seg>
@@ -24967,6 +25090,16 @@ upon request.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Packet Handling
+---------------</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T060557Z" creationid="haruyama" creationdate="20200527T060557Z">
+        <seg>パケットの処理
+---------------</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Packet Size and Overhead</seg>
       </tuv>
       <tuv lang="JA">
@@ -25174,6 +25307,16 @@ upon request.</seg>
       <tuv lang="JA">
         <seg>ポリシーの問題 ..............................................6
       4.4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Poly1305[2], also by Daniel Bernstein, is a one-time Carter-Wegman MAC
+that computes a 128 bit integrity tag given a message and a single-use
+256 bit secret key.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T054409Z" creationid="haruyama" creationdate="20200527T054409Z">
+        <seg>Poly1305[2] は, こちらも Daniel Bernstein によるもので, メッセージと使い捨ての 256 ビット秘密鍵から 126 ビットの完全性タグを計算する, 1回限りの Carter-Wegman MAC だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26320,6 +26463,16 @@ upon request.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>References
+----------</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T063040Z" creationid="haruyama" creationdate="20200527T063040Z">
+        <seg>リファレンス
+----------</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>References  .</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20180124T070527Z" creationid="haruyama" creationdate="20180124T070527Z">
@@ -26378,6 +26531,16 @@ upon request.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110530T070611Z">
         <seg>鍵の再生成</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Rekeying
+--------</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T062707Z" creationid="haruyama" creationdate="20200527T062707Z">
+        <seg>鍵の再生成
+--------</seg>
       </tuv>
     </tu>
     <tu>
@@ -31270,6 +31433,16 @@ length unencrypted.</seg>
     <tu>
       <tuv lang="EN-US">
         <seg>The
+SSH Transport protocol (RFC4253) recommends a far more conservative
+rekeying every 1GB of data sent or received.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T062959Z" creationid="haruyama" creationdate="20200527T062959Z">
+        <seg>SSH トランスポートプロトコル (RFC4253) は,  もっと保守的な 1GB のデータの送信ないし受信ごとの鍵の再生成を推奨している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
 certificates used are not traditional X.509 certificates, with numerous
 options and complex encoding rules, but something rather more minimal: a
 key, some identity information and usage options that have been signed
@@ -32191,6 +32364,18 @@ be 0x7fffffff to allow the server to automatically choose an interface.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The AEAD is constructed as follows: for each packet, generate a Poly1305
+key by taking the first 256 bits of ChaCha20 stream output generated
+using K_2, an IV consisting of the packet sequence number encoded as an
+uint64 under the SSH wire encoding rules and a ChaCha20 block counter of
+zero.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T060449Z" creationid="haruyama" creationdate="20200527T060431Z">
+        <seg>AEAD は次のように構成される: それぞれのパケットに対して, K_2 を用いて生成された ChaCha20 ストリーム出力の 最初の 256 ビットを取って Poly1305 鍵を作成し, SSH ワイヤエンコーディングルールの uint64 でエンコードされたパケットシーケンス番号と 0 の ChaCha20 のブロックカウンターから IV が生成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Arcfour cipher is believed to be compatible with the
    |  RC4 cipher [SCHNEIER].</seg>
       </tuv>
@@ -32737,6 +32922,16 @@ be 0x7fffffff to allow the server to automatically choose an interface.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110628T022815Z">
         <seg>IESG はこのすべての鍵交換法のオーナーと見なされる． これは， IESG が基底の GSS-API メカニズムのオーナーであることを意味しないことに注意．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The K_2 ChaCha20 block counter is then set to the little-endian
+encoding of 1 (i.e. {1, 0, 0, 0, 0, 0, 0, 0}) and this instance is used
+for encryption of the packet payload.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T060550Z" creationid="haruyama" creationdate="20200527T060446Z">
+        <seg>そして K_2 ChaCha20 のブロックカウンターは, リトルエンディアンエンコーディングの1 (すなわち {1, 0, 0, 0, 0, 0, 0, 0}) に設定され, このインスタンスがパケットのペイロードの暗号化に用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34598,6 +34793,18 @@ mechanism.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The calculated
+MAC is then compared in constant time with the one appended to the
+packet and the packet decrypted using ChaCha20 as described above (with
+K_2, the packet sequence number as nonce and a starting block counter of
+1).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T062314Z" creationid="haruyama" creationdate="20200527T062314Z">
+        <seg>計算された MAC をパケットに追加されたものと定数時間で比較し,  (K_2, ナンスとしてのパケットシーケンス番号と 1で始まるブロックカウンターを用いて) 前述のように ChaCha20 を用いてパケットを復号する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The calling code should release the
    associated tmStateReference.</seg>
       </tuv>
@@ -34630,6 +34837,33 @@ types and encoding are as per RFC4251 section 5).</seg>
       </tuv>
       <tuv lang="JA">
         <seg>承認の提供が利用できるように, 証明書のシーケンスが, certificate blob に含まれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The chacha20-poly1305@openssh.com cipher requires 512 bits of key
+material as output from the SSH key exchange.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T054946Z" creationid="haruyama" creationdate="20200527T054946Z">
+        <seg>chacha20-poly1305@openssh.com 暗号は SSH 鍵交換からの出力として 512 ビットの鍵の素材を必要とする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The chacha20-poly1305@openssh.com combines these two primitives into an
+authenticated encryption mode.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T054436Z" creationid="haruyama" creationdate="20200527T054436Z">
+        <seg>chacha20-poly1305@openssh.com は この2つを組合せて認証付き暗号モードとする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The chacha20-poly1305@openssh.com offers both encryption and
+authentication.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T054617Z" creationid="haruyama" creationdate="20200527T054617Z">
+        <seg>chacha20-poly1305@openssh.com は暗号化と認証の両方を提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35270,6 +35504,17 @@ types and encoding are as per RFC4251 section 5).</seg>
       </tuv>
       <tuv lang="JA">
         <seg>この場合でも接続は受動的な盗聴に対する保護を提供するが, 能動的な中間者攻撃に対しては脆弱になる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The construction used is based on that
+proposed for TLS by Adam Langley in [3], but differs in the layout of
+data passed to the MAC and in the addition of encryption of the packet
+lengths.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T054555Z" creationid="haruyama" creationdate="20200527T054555Z">
+        <seg>この構成は [3] で Adam Langely が TLS 向けに提案したものを基にしている. しかし, MAC に渡すデータのレイアウトとパケット長の暗号化を追加している点が異なる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -36003,6 +36248,15 @@ non-critical certificate extensions.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110614T025549Z">
         <seg>暗号から生成される鍵ストリームの最初の1536バイトは破棄されなければならない. 最初の暗号化されたパケットの最初のバイトは, 鍵ストリームの1537番目のバイトで暗号化されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The first 256 bits constitute K_2 and the second 256 bits become
+K_1.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T055113Z" creationid="haruyama" creationdate="20200527T055113Z">
+        <seg>最初の 256 ビットが K_2 を構成し, 次の 256 ビットが K_1 となる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37214,6 +37468,15 @@ is a sequence of zero or more tuples:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110719T025416Z">
         <seg>アルゴリズムへの入力は, [RFC4253] で指定された公開鍵データだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The instance keyed by K_1 is a stream cipher that is used only
+to encrypt the 4 byte packet length field.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T055151Z" creationid="haruyama" creationdate="20200527T055151Z">
+        <seg>K_1 を鍵に使うインスタンスは, 4バイトの packet length フィールドの暗号化にのみ用いるストリーム暗号だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -39296,6 +39559,17 @@ remote end.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>2つ目の例は, 標準的なパスワード認証だ. この場合ユーザのパスワードの期限が切れている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The second instance,
+keyed by K_2, is used in conjunction with poly1305 to build an AEAD
+(Authenticated Encryption with Associated Data) that is used to encrypt
+and authenticate the entire packet.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T055321Z" creationid="haruyama" creationdate="20200527T055321Z">
+        <seg>K_2 を鍵に用いる 2番目のインスタンスは poly1305 と一緒に利用され,  パケット全体を暗号化し認証するために使われる AEAD (Authenticated Encryption with Associated Data) を構成する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -43308,6 +43582,15 @@ system for use by SSH.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document describes the chacha20-poly1305@openssh.com authenticated
+encryption cipher supported by OpenSSH.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T053718Z" creationid="haruyama" creationdate="20200527T053718Z">
+        <seg>この文書は OpenSSH でサポートされる  chacha20-poly1305@openssh.com 認証付き暗号について記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document describes the following new methods:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110531T073327Z">
@@ -44081,6 +44364,15 @@ implemented by OpenSSH.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110924T123641Z">
         <seg>[RFC4253] の 6.6 節の ssh-rsa 署名と, このフォーマットは同一だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This forms two 256 bit
+keys (K_1 and K_2), used by two separate instances of chacha20.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T055045Z" creationid="haruyama" creationdate="20200527T055004Z">
+        <seg>これは 2つ の 256 ビット鍵  (K_1 と K_2) を構成し, chacha20 の 2 つの別のインスタンスで使われる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -45245,6 +45537,15 @@ session plaintext.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200519T072341Z" creationid="haruyama" creationdate="20200519T071702Z">
         <seg>この順番は, 認証されていない暗号文の復号が "復号オラクル" を提供して 暗号の欠陥と組み合わされて セッションの平文を公開してしまう, SSH トランスポート層のセキュリティの欠陥を塞ぐ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This output
+is used as a keystream, with any unused bytes simply discarded.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T054210Z" creationid="haruyama" creationdate="20200527T054210Z">
+        <seg>この出力は鍵ストリームとして利用され, 利用していないバイト列は単に捨てられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -46560,6 +46861,15 @@ start of compression until after authentication has completed.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>To send a packet, first encode the 4 byte length and encrypt it using
+K_1.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T062352Z" creationid="haruyama" creationdate="20200527T062352Z">
+        <seg>パケットを送信する際, 最初に 4バイトの長さをエンコードし K_1 を用いて暗号化する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>To send notifications over SSHTM,
    the internetworking device will need to be configured as an SSH
    client.</seg>
@@ -46754,6 +47064,17 @@ SHA-2 signatures (SHA-256 and SHA-512 respectively):</seg>
       </tuv>
       <tuv lang="JA">
         <seg>この件で情報を提供してくれる2つの文献が [SCHNEIER] と [KAUFMAN] だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Two separate cipher instances are used here so as to keep the packet
+lengths confidential but not create an oracle for the packet payload
+cipher by decrypting and using the packet length prior to checking
+the MAC.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T055708Z" creationid="haruyama" creationdate="20200527T055332Z">
+        <seg>2つの別々の暗号インスタンスを使うことで, パケット長を秘密に保つが, MAC をチェックする前にパケット長を復号し用いてパケットのペイロードの暗号に対するオラクルを作らないようにする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -47750,6 +48071,18 @@ supplied host keys are present in known_hosts.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>When 4
+bytes of ciphertext length have been received, they may be decrypted
+using the K_1 key, a nonce consisting of the packet sequence number
+encoded as a uint64 under the usual SSH wire encoding and a zero block
+counter to obtain the plaintext length.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T061940Z" creationid="haruyama" creationdate="20200527T061940Z">
+        <seg>4バイトの暗号文を受け取ったら, 平文の長さを取得するために,  K_1 鍵と  SSH ワイヤエンコーディングルールの uint64 でエンコードされたパケットのシーケンス番号と 0 ブロックカウンターを用いて, 暗号文を復号する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>When Ethernet headers are considered, the increase is less than 10
       percent.</seg>
       </tuv>
@@ -48080,6 +48413,14 @@ will send the following global request:</seg>
       </tuv>
       <tuv lang="JA">
         <seg>現在, これらのメッセージは典型的にはエラーやデバッグ情報, その他の外部で設定されるデータに関連している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When receiving a packet, the length must be decrypted first.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200527T061707Z" creationid="haruyama" creationdate="20200527T061707Z">
+        <seg>パケットを受け取ったら, 長さを最初に復号しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
