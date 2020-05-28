@@ -967,6 +967,14 @@ strings packed inside it.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>2.1 Certificate serial list section</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T062836Z" creationid="haruyama" creationdate="20200528T062836Z">
+        <seg>2.1 証明書直列リスト節</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>2048-Bit DH Group</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20180925T112512Z" creationid="haruyama" creationdate="20180925T112512Z">
@@ -1703,6 +1711,15 @@ the request with a SSH_MSG_CHANNEL_OPEN_FAILURE error.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110802T022235Z">
         <seg>トランスポートモデルは, SNMP アーキテクチャの中の トランスポートサブシステム [RFC5590] の構成要素だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A bit set at index N in the bitmap corresponds to revocation of a keys with
+serial number (serial_offset + N).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T064946Z" creationid="haruyama" creationdate="20200528T064946Z">
+        <seg>ビットマップ中のインデックス N でセットされたビットは, シリアル番号 (serial_offset + N) の鍵の失効と対応する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3480,6 +3497,15 @@ public key that is used to sign challenges.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>All certificates in the range serial_min &lt;= serial &lt;= serial_max are
+revoked.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T064802Z" creationid="haruyama" creationdate="20200528T064802Z">
+        <seg>serial_min &lt;= serial &lt;= serial_max の範囲のすべての証明書が失効される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>All channel-specific requests use the following format.</seg>
       </tuv>
       <tuv lang="JA">
@@ -3925,6 +3951,16 @@ must refuse to authorise a key that has an unrecognised option.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Alternately, "ca_key" may be an empty string to indicate
+the certificate section applies to all CAs (this is most useful when
+revoking key IDs).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T062656Z" creationid="haruyama" creationdate="20200528T062651Z">
+        <seg>もしくは, "ca_key" は空文字列の場合もあり, 証明書の節がすべての CA に適用されることを示す (鍵 ID を失効する場合に便利だ).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Alternative implementations of these
    functions SHOULD abort when either the client or the server input
    forces the shared secret to one of a small set of values, as
@@ -4327,6 +4363,16 @@ must refuse to authorise a key that has an unrecognised option.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110722T061453Z">
         <seg>"compulsory" 属性の利用の例として, ユーザのシェルアクセスを拒否する指定が設定ファイルにあるサーバを挙げる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An exception
+to this is the KRL_SECTION_SIGNATURE section, that has a slightly different
+format (see below).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T062102Z" creationid="haruyama" creationdate="20200528T062102Z">
+        <seg>この例外に KRL_SECTION_SIGNATURE があり, すこし異なった形式を持っている(後述).</seg>
       </tuv>
     </tu>
     <tu>
@@ -6067,6 +6113,15 @@ hold the same value.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Bitmap sections use type KRL_SECTION_CERT_SERIAL_BITMAP and revoke keys
+by listing their serial number in a bitmap.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T064850Z" creationid="haruyama" creationdate="20200528T064850Z">
+        <seg>ビットマップ節はタイプ KRL_SECTION_CERT_SERIAL_BITMAP を用い, ビットマップ中に列挙されたシリアル番号の鍵を失効する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Block Counter: A 32-bit integer, set to one at the start of each
       new SSH binary packet and incremented as each 16-octet block of
       data is processed.</seg>
@@ -6520,6 +6575,30 @@ its MAC (assuming key derivation, ChaCha20 and Poly1305 are secure).</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110902T042412Z">
         <seg>証明書の拡張で, X.509v3 証明書の公開鍵に関連する追加の属性を指定できる ([RFC5280] の 4.2 節を参照).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Certificate section</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T062229Z" creationid="haruyama" creationdate="20200528T062229Z">
+        <seg>証明書の節</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Certificate serial bitmap section</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T064814Z" creationid="haruyama" creationdate="20200528T064814Z">
+        <seg>証明書直接ビットマップ節</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Certificate serial range section</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T063006Z" creationid="haruyama" creationdate="20200528T063006Z">
+        <seg>証明書直列範囲節</seg>
       </tuv>
     </tu>
     <tu>
@@ -10251,6 +10330,14 @@ encrypted length.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Explicit key sections</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T065704Z" creationid="haruyama" creationdate="20200528T065704Z">
+        <seg>明示的な鍵の節</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Extended Channel Data Transfer
    'data_type_code' values in that range are left for PRIVATE USE, as
    described in [RFC2434].</seg>
@@ -10689,6 +10776,14 @@ encrypted length.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Followed by one or more sections:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T062739Z" creationid="haruyama" creationdate="20200528T062730Z">
+        <seg>1つ以上の(証明書サブ)節が続く:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Following
    the practice of [RFC8268], only SHA-256 and SHA-512 hashes are used
    for DH groups.</seg>
@@ -10704,6 +10799,14 @@ encrypted length.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160530T103233Z" creationid="haruyama" creationdate="20160530T103233Z">
         <seg>この前置きに, 0個以上の鍵が続く. それぞれ次のようにエンコードされる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Following the header are zero or more sections, each consisting of:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T062008Z" creationid="haruyama" creationdate="20200528T062008Z">
+        <seg>ヘッダの後に 0 以上の節が続き, それぞれ次からなる:</seg>
       </tuv>
     </tu>
     <tu>
@@ -12499,6 +12602,15 @@ access where extensions are used to enable features that grant access.</seg>
         <seg>HASH     交換ハッシュなどを計算するハッシュアルゴリズム.
        HLEN     ビットでのハッシュの出力の長さ
        MINKLEN  ビットでの一時RSAモジュラスの長さの最小値</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Hashes in this section must appear in numeric order, treating each hash
+as a big-endian integer.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T070200Z" creationid="haruyama" creationdate="20200528T070200Z">
+        <seg>この節のハッシュは, ビッグエンディアン整数として扱われ, 数値順に出現しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14687,6 +14799,15 @@ ignore it.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If multiple signature sections
+appear, they must appear consecutively at the end of the KRL file.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T070942Z" creationid="haruyama" creationdate="20200528T070942Z">
+        <seg>複数の署名節があるなら, それらが KRL ファイルの最後に連続して出現しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If no "command-override"
    attribute is specified, all "exec" and "shell" requests should be
    permitted (as long as they satisfy other security or authorization
@@ -16869,6 +16990,15 @@ handling in this area.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>示唆した BREAK時間の制限を行なわなず BREAK length パラメータのまま解釈する実装は, 非常に長い BREAK 信号を受けて , 接続したデバイスからサービス不能や予期しない結果になるかもしれない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Implementations that retrieve KRLs over untrusted channels must verify
+signatures.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T071006Z" creationid="haruyama" creationdate="20200528T071006Z">
+        <seg>信用できないチャンネルから KRL を取得した実装は, 署名を検証しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20619,6 +20749,15 @@ a 64 bit nonce and a 64 bit counter into 64 bytes of output.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It revokes
+certificates by listing their serial numbers.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T062922Z" creationid="haruyama" creationdate="20200528T062922Z">
+        <seg>そのシリアル番号で列挙された証明書を失効する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It runs over the Transport
       Layer Protocol.</seg>
       </tuv>
@@ -20781,6 +20920,16 @@ a 64 bit nonce and a 64 bit counter into 64 bytes of output.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Its format is slightly different to the previously-described sections:
+in order to simplify the signature generation, it includes as a "body"
+two string components instead of one.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T070510Z" creationid="haruyama" creationdate="20200528T070436Z">
+        <seg>その形式は, 前述の節とは少し違う: 署名の生成を単純にするため,  "body" に 1 つではなく 2 つの 文字列コンポーネントを含む:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Its initial
    state should consist of the following numbers and reservations.</seg>
       </tuv>
@@ -20812,6 +20961,23 @@ a 64 bit nonce and a 64 bit counter into 64 bytes of output.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200528T060241Z" creationid="haruyama" creationdate="20200528T060241Z">
         <seg>kdfname "bcrypt" に対する KDF オプション</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>KRL signature sections</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T070211Z" creationid="haruyama" creationdate="20200528T070211Z">
+        <seg>KRL 署名の節</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>KRL_SECTION_CERT_KEY_ID sections revoke particular certificate "key
+ID" strings.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T065504Z" creationid="haruyama" creationdate="20200528T065504Z">
+        <seg>KRL_SECTION_CERT_KEY_ID 節は, 特定の"key ID" 文字列の証明書を失効する. </seg>
       </tuv>
     </tu>
     <tu>
@@ -22891,6 +23057,14 @@ are individually implemented as extensions described below.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200519T063806Z" creationid="haruyama" creationdate="20200519T063806Z">
         <seg>以降で記述する拡張としていくつかの特徴は独立に実装されているが, このドラフトのより新しいバージョンはサポートされないだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>No "flags" are currently defined.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T061945Z" creationid="haruyama" creationdate="20200528T061945Z">
+        <seg>"flags" は現在定義されていない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27269,6 +27443,14 @@ that computes a 128 bit integrity tag given a message and a single-use
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Revoked key ID sections</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T065417Z" creationid="haruyama" creationdate="20200528T065417Z">
+        <seg>失効される鍵 ID 節</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Rights to manage keys and certificates in a particular namespace are
    specific and limited to the authorized user and are defined as part
    of the server's implementation.</seg>
@@ -27457,6 +27639,14 @@ that computes a 128 bit integrity tag given a message and a single-use
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200515T064758Z" creationid="haruyama" creationdate="20200515T064758Z">
         <seg>SHA-256 は当面十分な強さを持つと考えられる. 暗号学と暗号分析の将来の発展の予測は, この文書の範囲を越える.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SHA1/SHA256 fingerprint sections</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T065849Z" creationid="haruyama" creationdate="20200528T065849Z">
+        <seg>SHA1/SHA256 指紋の節</seg>
       </tuv>
     </tu>
     <tu>
@@ -29238,6 +29428,15 @@ that computes a 128 bit integrity tag given a message and a single-use
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160526T115042Z" creationid="haruyama" creationdate="20160526T115042Z">
         <seg>署名フラグ .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Signature sections are optional for KRLs distributed by
+trusted means.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T071030Z" creationid="haruyama" creationdate="20200528T071030Z">
+        <seg>署名の節は信用できる方法で配布される KRL に対しては選択可能だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32979,6 +33178,24 @@ the cipher) from the passphrase.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The KRL consists of a header and zero or more sections.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T061633Z" creationid="haruyama" creationdate="20200528T061633Z">
+        <seg>KRL はヘッダと0以上の節からなる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The KRL_SECTION_SIGNATURE section serves a different purpose to the
+preceding ones: to provide cryptographic authentication of a KRL that
+is retrieved over a channel that does not provide integrity protection.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T070321Z" creationid="haruyama" creationdate="20200528T070321Z">
+        <seg>KRL_SECTION_SIGNATURE 節はこれまで述べた節とは異なる目的を提供する: 完全性の保護を提供していないチャンネルで取得された KRL に暗号学的認証を与えるためだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The K_2 ChaCha20 block counter is then set to the little-endian
 encoding of 1 (i.e. {1, 0, 0, 0, 0, 0, 0, 0}) and this instance is used
 for encryption of the packet payload.</seg>
@@ -34767,6 +34984,14 @@ mechanism.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The available section types are:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T062117Z" creationid="haruyama" creationdate="20200528T062117Z">
+        <seg>利用可能な section type は次の通り:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The available types and
    their interpretation depend on the type of channel.</seg>
       </tuv>
@@ -34781,6 +35006,15 @@ mechanism.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110819T070508Z">
         <seg>このアドレス指定の最初に, '@' (US-ASCII 文字 0x40) が後に続くユーザ名を含めることができる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The blob
+must be a raw key (i.e. not a certificate).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T065937Z" creationid="haruyama" creationdate="20200528T065840Z">
+        <seg>blob は 生の鍵 （すなわち証明書ではない) でなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34867,6 +35101,15 @@ K_2, the packet sequence number as nonce and a starting block counter of
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The cert_section_data in this
+case contains:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T062940Z" creationid="haruyama" creationdate="20200528T062940Z">
+        <seg>この場合は cert_section_data は次を含む:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The certificate key types take a similar high-level format (note: data
 types and encoding are as per RFC4251 section 5).</seg>
       </tuv>
@@ -34881,6 +35124,14 @@ types and encoding are as per RFC4251 section 5).</seg>
       </tuv>
       <tuv lang="JA">
         <seg>certificate の部分は 長さ0の string の場合ががある. 一方 public key は必須だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The certificate section types are:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T062814Z" creationid="haruyama" creationdate="20200528T062814Z">
+        <seg>cert_section_type の候補は次の通り:</seg>
       </tuv>
     </tu>
     <tu>
@@ -35557,6 +35808,16 @@ authentication.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>この場合でも接続は受動的な盗聴に対する保護を提供するが, 能動的な中間者攻撃に対しては脆弱になる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The consist of the CA key that issued the
+certificates to be revoked and a reserved field whose contents is currently
+ignored.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T064715Z" creationid="haruyama" creationdate="20200528T062456Z">
+        <seg>まず, 失効される証明書を発行した CA の鍵と現在は内容が無視される reserved フィールドからなる</seg>
       </tuv>
     </tu>
     <tu>
@@ -37238,6 +37499,15 @@ is a sequence of zero or more tuples:</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The hash blob
+is obtained by taking the SHA1 or SHA256 hash of the public key blob.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T070037Z" creationid="haruyama" creationdate="20200528T070037Z">
+        <seg>ハッシュ blob は, 公開鍵の blob の SHA1 ないし SHA256 ハッシュから得られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The hashing
    algorithm is defined in the method name to allow room for other
    algorithms to be defined in future documents.</seg>
@@ -37281,6 +37551,14 @@ is a sequence of zero or more tuples:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110719T030853Z">
         <seg>このファイル形式で利用できるヘッダのデータは, 情報の範囲の制限がない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The header is:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T061641Z" creationid="haruyama" creationdate="20200528T061641Z">
+        <seg>ヘッダは:</seg>
       </tuv>
     </tu>
     <tu>
@@ -40555,6 +40833,16 @@ extension with multiple versions (though this is unlikely).</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The signature is calculated over the entire KRL from the KRL_MAGIC
+to this subsection's "signature_key", including both and using the
+signature generation rules appropriate for the type of "signature_key".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T070843Z" creationid="haruyama" creationdate="20200528T070843Z">
+        <seg>KRL_MAGIC からこのサブ節の signature_key までの全体の KRL に対して署名は計算される. "signature_key" のタイプに対して適切な署名生成ルールを用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The signature is sent using the following packet:</seg>
       </tuv>
       <tuv lang="JA">
@@ -42272,6 +42560,43 @@ interfaces.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>These sections use type KRL_SECTION_CERTIFICATES to revoke certificates by
+serial number or key ID.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T064708Z" creationid="haruyama" creationdate="20200528T062301Z">
+        <seg>この節はタイプ KRL_SECTION_CERTIFICATES を用い, シリアル番号か鍵 ID で証明書を失効するのに用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These sections use type KRL_SECTION_CERT_SERIAL_RANGE and hold
+a range of serial numbers of certificates:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T064744Z" creationid="haruyama" creationdate="20200528T064655Z">
+        <seg>この節は タイプ KRL_SECTION_CERT_SERIAL_RANGE を用い, 証明書のシリアル番号の範囲を持つ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These sections, identified as KRL_SECTION_EXPLICIT_KEY, revoke keys
+(not certificates).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T065733Z" creationid="haruyama" creationdate="20200528T065733Z">
+        <seg>KRL_SECTION_EXPLICIT_KEY によって識別される節は, (証明書ではなく) 鍵を失効する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These sections, identified as KRL_SECTION_FINGERPRINT_SHA1 and
+KRL_SECTION_FINGERPRINT_SHA256, revoke plain keys (i.e. not
+certificates) by listing their hashes:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T065953Z" creationid="haruyama" creationdate="20200528T065932Z">
+        <seg>KRL_SECTION_FINGERPRINT_SHA1 や KRL_SECTION_FINGERPRINT_SHA256 で識別される節は, 生の鍵 (すなわち証明書ではない) をそれらのハッシュを列挙することで失効する</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>These signature schemes are defined in
    [I-D.ietf-curdle-rsa-sha2].</seg>
       </tuv>
@@ -42389,6 +42714,15 @@ plaintext.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110620T032906Z">
         <seg>これらはこの文書で閉じた名前空間の中にあり, IANAによって割り当てられていない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>They are less space efficient than serial numbers,
+but are able to revoke plain keys.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T065802Z" creationid="haruyama" creationdate="20200528T065802Z">
+        <seg>シリアル番号よりも空間効率は悪いが生の鍵を失効できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -43133,6 +43467,14 @@ interfaces like the BSD tun(4) device.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200515T043901Z" creationid="haruyama" creationdate="20200515T043901Z">
         <seg>このデータは [NIST80057] の推奨を元にしている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This describes the key/certificate revocation list format for OpenSSH.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T061618Z" creationid="haruyama" creationdate="20200528T061554Z">
+        <seg>ここでは OpenSSH の鍵/証明書失効リストの形式について記述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -45073,6 +45415,15 @@ verified without decrypting unauthenticated data.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This may be useful in revoking all certificates
+associated with a particular identity, e.g. a host or a user.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T065610Z" creationid="haruyama" creationdate="20200528T065610Z">
+        <seg>これは, 特定の身元, たとえばホストやユーザ, に紐づくすべての証明書を失効するの便利だろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This means
    that short-lived sessions become computationally expensive compared
    to USM, which does not have a notion of a session key.</seg>
@@ -46246,6 +46597,14 @@ SSH_FXP_EXTENDED request with the following format:</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This section is identified as KRL_SECTION_CERT_SERIAL_LIST.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T062900Z" creationid="haruyama" creationdate="20200528T062900Z">
+        <seg>この節は, KRL_SECTION_CERT_SERIAL_LIST で識別される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This section lists major changes between this document and RFC 4742.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20111001T044911Z">
@@ -46258,6 +46617,55 @@ SSH_FXP_EXTENDED request with the following format:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110530T071020Z">
         <seg>この節は, 2つの推奨からなる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This section may appear
+multiple times.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T065638Z" creationid="haruyama" creationdate="20200528T065638Z">
+        <seg>この節は複数回出現する場合がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This section may appear multiple times.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T062954Z" creationid="haruyama" creationdate="20200528T062954Z">
+        <seg>この節は複数回出現する場合がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This section must appear last in the KRL.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T070856Z" creationid="haruyama" creationdate="20200528T070856Z">
+        <seg>この節は KRL の最後に出現しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This section must contain at least one "key_id".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T065633Z" creationid="haruyama" creationdate="20200528T065633Z">
+        <seg>この節は最低 1 つの "key_id" を含まなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This section must contain at least one "public_key_blob".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T065820Z" creationid="haruyama" creationdate="20200528T065820Z">
+        <seg>この節は最低 1 つの "public_key_blob" を含まなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This section must contain at least one "public_key_hash".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T070002Z" creationid="haruyama" creationdate="20200528T070002Z">
+        <seg>この節は最低 1 つの "public_key_hash" を含まなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -48833,6 +49241,15 @@ are no longer offered.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Where "ca_key" is the standard SSH wire serialisation of the CA's
+public key.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T062528Z" creationid="haruyama" creationdate="20200528T062528Z">
+        <seg>"ca_key" は CA 公開鍵の標準 SSH ワイヤ直列化だ. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Where "key blob" is the key requested to perform the signature,
    "data" is the data to be signed and "flags" is a bitfield containing
    the bitwise OR of zero or more signature flags (see below).</seg>
@@ -48861,6 +49278,17 @@ are no longer offered.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Where "krl_version" is a version number that increases each time the KRL
+is modified, "generated_date" is the time in seconds since 1970-01-01
+00:00:00 UTC that the KRL was generated, "comment" is an optional comment
+and "reserved" an extension field whose contents are currently ignored.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T061931Z" creationid="haruyama" creationdate="20200528T061931Z">
+        <seg>ここで, "krl_version" は, KRL を変更した時にいつも増加するバージョン番号, "generated_date" は KRL が生成された 1970-01-01 00:00:00 UTC からの秒数, "comment" は, オプションのコメント, "reserved" は現在は内容が無視される拡張フィールドだ. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Where "nkeys" indicates the number of keys to follow.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160530T103153Z" creationid="haruyama" creationdate="20160530T103153Z">
@@ -48874,6 +49302,14 @@ are no longer offered.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160530T081318Z" creationid="haruyama" creationdate="20160530T081318Z">
         <seg>"reader id" はスマートカードリーダの内部識別子で, "PIN" はオプションのパスワードないしPIN(一般的には利用されない)だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Where "section_type" indicates the type of the "section_data".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T062027Z" creationid="haruyama" creationdate="20200528T062027Z">
+        <seg>"section_type" は "section_data" のタイプを指定する.</seg>
       </tuv>
     </tu>
     <tu>
