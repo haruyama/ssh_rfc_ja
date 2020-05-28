@@ -1,0 +1,135 @@
+ここでは OpenSSH の鍵/証明書失効リストの形式について記述する.
+
+1全体の形式
+
+KRL はヘッダと0以上の節からなる. ヘッダは:
+
+#define KRL_MAGIC		0x5353484b524c0a00ULL  /* "SSHKRL\n\0" */
+#define KRL_FORMAT_VERSION	1
+
+	uint64	KRL_MAGIC
+	uint32	KRL_FORMAT_VERSION
+	uint64	krl_version
+	uint64	generated_date
+	uint64	flags
+	string	reserved
+	string	comment
+
+ここで, "krl_version" は, KRL を変更した時にいつも増加するバージョン番号, "generated_date" は KRL が生成された 1970-01-01 00:00:00 UTC からの秒数, "comment" は, オプションのコメント, "reserved" は現在は内容が無視される拡張フィールドだ. 
+"flags" は現在定義されていない.
+
+ヘッダの後に 0 以上の節が続き, それぞれ次からなる:
+
+	byte	section_type
+	string	section_data
+
+"section_type" は "section_data" のタイプを指定する. この例外に KRL_SECTION_SIGNATURE があり, すこし異なった形式を持っている(後述).
+
+利用可能な section type は次の通り:
+
+#define KRL_SECTION_CERTIFICATES		1
+#define KRL_SECTION_EXPLICIT_KEY		2
+#define KRL_SECTION_FINGERPRINT_SHA1		3
+#define KRL_SECTION_SIGNATURE			4
+#define KRL_SECTION_FINGERPRINT_SHA256		5
+
+2. 証明書の節
+
+この節はタイプ KRL_SECTION_CERTIFICATES を用い, シリアル番号か鍵 ID で証明書を失効するのに用いる. まず, 失効される証明書を発行した CA の鍵と現在は内容が無視される reserved フィールドからなる
+
+	string ca_key
+	string reserved
+
+"ca_key" は CA 公開鍵の標準 SSH ワイヤ直列化だ. もしくは, "ca_key" は空文字列の場合もあり, 証明書の節がすべての CA に適用されることを示す (鍵 ID を失効する場合に便利だ).
+
+1つ以上の(証明書サブ)節が続く:
+
+	byte	cert_section_type
+	string	cert_section_data
+
+cert_section_type の候補は次の通り:
+
+#define KRL_SECTION_CERT_SERIAL_LIST	0x20
+#define KRL_SECTION_CERT_SERIAL_RANGE	0x21
+#define KRL_SECTION_CERT_SERIAL_BITMAP	0x22
+#define KRL_SECTION_CERT_KEY_ID		0x23
+
+2.1 証明書直列リスト節
+
+この節は, KRL_SECTION_CERT_SERIAL_LIST で識別される. そのシリアル番号で列挙された証明書を失効する. この場合は cert_section_data は次を含む:
+
+	uint64	revoked_cert_serial
+	uint64	...
+
+この節は複数回出現する場合がある.
+
+2.2. 証明書直列範囲節
+
+この節は タイプ KRL_SECTION_CERT_SERIAL_RANGE を用い, 証明書のシリアル番号の範囲を持つ:
+
+	uint64	serial_min
+	uint64	serial_max
+
+serial_min <= serial <= serial_max の範囲のすべての証明書が失効される.
+
+この節は複数回出現する場合がある.
+
+2.3. 証明書直接ビットマップ節
+
+ビットマップ節はタイプ KRL_SECTION_CERT_SERIAL_BITMAP を用い, ビットマップ中に列挙されたシリアル番号の鍵を失効する.
+
+	uint64	serial_offset
+	mpint	revoked_keys_bitmap
+
+ビットマップ中のインデックス N でセットされたビットは, シリアル番号 (serial_offset + N) の鍵の失効と対応する.
+
+この節は複数回出現する場合がある.
+
+2.4. 失効される鍵 ID 節
+
+KRL_SECTION_CERT_KEY_ID 節は, 特定の"key ID" 文字列の証明書を失効する. これは, 特定の身元, たとえばホストやユーザ, に紐づくすべての証明書を失効するの便利だろう.
+
+	string	key_id[0]
+	...
+
+この節は最低 1 つの "key_id" を含まなければならない. この節は複数回出現する場合がある.
+
+3. 明示的な鍵の節
+
+KRL_SECTION_EXPLICIT_KEY によって識別される節は, (証明書ではなく) 鍵を失効する. シリアル番号よりも空間効率は悪いが生の鍵を失効できる.
+
+	string	public_key_blob[0]
+	....
+
+この節は最低 1 つの "public_key_blob" を含まなければならない. blob は 生の鍵 （すなわち証明書ではない) でなければならない.
+
+この節は複数回出現する場合がある.
+
+4. SHA1/SHA256 指紋の節
+
+KRL_SECTION_FINGERPRINT_SHA1 や KRL_SECTION_FINGERPRINT_SHA256 で識別される節は, 生の鍵 (すなわち証明書ではない) をそれらのハッシュを列挙することで失効する
+
+	string	public_key_hash[0]
+	....
+
+この節は最低 1 つの "public_key_hash" を含まなければならない. ハッシュ blob は, 公開鍵の blob の SHA1 ないし SHA256 ハッシュから得られる.
+この節のハッシュは, ビッグエンディアン整数として扱われ, 数値順に出現しなければならない.
+
+この節は複数回出現する場合がある.
+
+5. KRL 署名の節
+
+KRL_SECTION_SIGNATURE 節はこれまで述べた節とは異なる目的を提供する: 完全性の保護を提供していないチャンネルで取得された KRL に暗号学的認証を与えるためだ.
+その形式は, 前述の節とは少し違う: 署名の生成を単純にするため,  "body" に 1 つではなく 2 つの 文字列コンポーネントを含む:
+
+	byte	KRL_SECTION_SIGNATURE
+	string	signature_key
+	string	signature
+
+KRL_MAGIC からこのサブ節の signature_key までの全体の KRL に対して署名は計算される. "signature_key" のタイプに対して適切な署名生成ルールを用いる.
+
+この節は KRL の最後に出現しなければならない. 複数の署名節があるなら, それらが KRL ファイルの最後に連続して出現しなければならない.
+
+信用できないチャンネルから KRL を取得した実装は, 署名を検証しなければならない. 署名の節は信用できる方法で配布される KRL に対しては選択可能だ.
+
+$OpenBSD: PROTOCOL.krl,v 1.5 2018/09/12 01:21:34 djm Exp $
