@@ -5951,6 +5951,17 @@ the behaviour of OpenSSH differs from the RFC as follows:</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Before the key is encrypted, a random integer is assigned
+to both checkint fields so successful decryption can be
+quickly checked by verifying that both checkint fields
+hold the same value.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T060716Z" creationid="haruyama" creationdate="20200528T060716Z">
+        <seg>鍵を暗号化する前に, 1つのランダムな整数が両方の checkint フィールドに割り当てられる. 復号が成功したかどうかを両方の checkint フィールドに同じ値が保持されているかを見所うすることで簡単にチェックできる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Before this extension, some applications would simply not implement
    SSH flow control, sending an initial channel window size of 2^32 - 1.</seg>
       </tuv>
@@ -11614,6 +11625,15 @@ SSH_FXP_SYMLINK as follows:</seg>
       </tuv>
       <tuv lang="JA">
         <seg>興味のある者のために紹介しておくと, 1.x プロトコルについての唯一の文書は, ソースコード [ssh-1.2.30] と共にリリースされた README ファイルに含まれている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For unencrypted keys the cipher "none" and the KDF "none"
+are used with empty passphrases.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T060931Z" creationid="haruyama" creationdate="20200528T060931Z">
+        <seg>暗号化なしの鍵のため, cipher "none" と KDF "none" が, 空のパスフレーズと一緒に用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20704,6 +20724,14 @@ a 64 bit nonce and a 64 bit counter into 64 bytes of output.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>KDF options for kdfname "bcrypt"</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T060241Z" creationid="haruyama" creationdate="20200528T060241Z">
+        <seg>kdfname "bcrypt" に対する KDF オプション</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Key Constraints</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160530T065658Z" creationid="haruyama" creationdate="20160530T065658Z">
@@ -22826,6 +22854,14 @@ are individually implemented as extensions described below.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>No encryption</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T060851Z" creationid="haruyama" creationdate="20200528T060851Z">
+        <seg>暗号化なし</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>No explicit response is sent to this message.</seg>
       </tuv>
       <tuv lang="JA">
@@ -24862,6 +24898,14 @@ upon request.</seg>
         <seg>Outputs:
             octet_string  CT;   // 暗号文
             octet_string  AT;   // 認証タグ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Overall format</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T055738Z" creationid="haruyama" creationdate="20200528T055738Z">
+        <seg>全体の形式</seg>
       </tuv>
     </tu>
     <tu>
@@ -32825,6 +32869,15 @@ zero.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The KDF is used to derive a key, IV (and other values required by
+the cipher) from the passphrase.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T060752Z" creationid="haruyama" creationdate="20200528T060752Z">
+        <seg>KDF はパスフレーズから鍵と IV (と暗号の要求する他の値)を導出するのに用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The K_2 ChaCha20 block counter is then set to the little-endian
 encoding of 1 (i.e. {1, 0, 0, 0, 0, 0, 0, 0}) and this instance is used
 for encryption of the packet payload.</seg>
@@ -37466,6 +37519,15 @@ to encrypt the 4 byte packet length field.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The key consists of a header, a list of public keys, and
+an encrypted list of matching private keys.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T060215Z" creationid="haruyama" creationdate="20200528T060215Z">
+        <seg>鍵は, ヘッダと公開鍵のリスト, 対応する秘密鍵の暗号化されたリストから成る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The key exchange is
    combined with a signature with the host key to provide host
    authentication.</seg>
@@ -37813,6 +37875,16 @@ to encrypt the 4 byte packet length field.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110721T045933Z">
         <seg>length フィールドは name フィールドと request/response-specific data の長さを表す. length フィールド自体の長さは含まない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The list of privatekey/comment pairs is padded with the
+bytes 1, 2, 3, ... until the total length is a multiple
+of the cipher block size.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T060825Z" creationid="haruyama" creationdate="20200528T060429Z">
+        <seg>暗号化されていない秘密鍵/コメントのペアのリストは, 全体の長さが暗号のブロックサイズの倍数となるまで, バイト列 1, 2, 3, ... によってパディングされる</seg>
       </tuv>
     </tu>
     <tu>
@@ -38542,6 +38614,23 @@ inducing collisions in the signature hash infeasible.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110825T041345Z">
         <seg>SnmpSSHAddress のテキスト規約のオプションの "user@" プレフィックス部分は, SSH サーバに提示される SSH のユーザ名と異なる securityName と接続を関連付けることを クライアントのSNMP スタックができるようにする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The options if the KDF "none"
+are the empty string.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T060948Z" creationid="haruyama" creationdate="20200528T060948Z">
+        <seg>KDF "none" の場合のオプションは空文字列だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The options:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T060256Z" creationid="haruyama" creationdate="20200528T060256Z">
+        <seg>オプション:</seg>
       </tuv>
     </tu>
     <tu>
@@ -39527,8 +39616,8 @@ and authenticate the entire packet.</seg>
       <tuv lang="EN-US">
         <seg>The security considerations of [RFC4254] apply.</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20180916T045213Z" creationid="haruyama" creationdate="20180916T045213Z">
-        <seg>[RFC4254] のセキュリティの考察が適用される.＼</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T055708Z" creationid="haruyama" creationdate="20180916T045213Z">
+        <seg>[RFC4254] のセキュリティの考察が適用される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -42077,6 +42166,15 @@ the hostkeys in the request:</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>These values are then used to
+encrypt the unencrypted list of private keys.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T060842Z" creationid="haruyama" creationdate="20200528T060807Z">
+        <seg>これらの値は秘密鍵の暗号化されていないリストの暗号化に利用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>These variants use the so-called "encrypt then MAC" ordering,
 calculating the MAC over the packet ciphertext rather than the
 plaintext.</seg>
@@ -43339,8 +43437,8 @@ system for use by SSH.</seg>
       <tuv lang="EN-US">
         <seg>This document describes authentication and key-exchange protocols.</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20110715T061221Z">
-        <seg>この文書は認証と鍵交換プロトコルを記述している.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T055656Z">
+        <seg>この文書は認証と鍵交換プロトコルを記述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -43450,6 +43548,14 @@ encryption cipher supported by OpenSSH.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110621T013054Z">
         <seg>この文書は, GSS-APIを用いてセキュアシェルプロトコルで鍵交換とユーザ認証を行なう方法を記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This document describes the private key format for OpenSSH.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T055636Z" creationid="haruyama" creationdate="20200528T055636Z">
+        <seg>この文書は OpenSSH の秘密鍵の形式について記述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -46944,6 +47050,14 @@ the MAC.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Unencrypted list of N private keys</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T060816Z" creationid="haruyama" creationdate="20200528T060401Z">
+        <seg>N 個の秘密鍵の暗号化されていないリスト</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Unfortunately,
 the reversal was not noticed until the server was widely deployed.</seg>
       </tuv>
@@ -49277,6 +49391,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="JA">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>are concatenated and represented as a string.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200528T060346Z" creationid="haruyama" creationdate="20200528T060346Z">
+        <seg>は文字列として連結され表現される.</seg>
       </tuv>
     </tu>
     <tu>
