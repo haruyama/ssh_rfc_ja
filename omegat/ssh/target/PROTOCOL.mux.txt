@@ -1,0 +1,244 @@
+この文書は, ssh(1) の ControlMaster 接続共有で用いる多重化プロトコルについて記述する.
+
+多重化は, 多重化マスターとして振る舞うよう設定された ssh(1) によって開始される. これにより ssh(1) が クライアントからの要求を Unix ドメイントソケットで listen するようになる. クライアントは単純なパケット化されたプロトコルを用いてこのソケット上で通信する. それぞれのメッセージには, SSH uint32 ワイヤ形式の 長さとメッセージタイプが先行する
+
+    uint32  packet length
+    uint32  packet type
+    ...     packet body
+
+クライアントからサーバへのメッセージの多くには "request id" フィールドが含まれる. このフィールドは, 応答と要求の一致を容易にするために, "client request id" として応答の中で返される.
+
+多重化 (mux) クライアントの多くの要求は, mux プロセスからの即座に応答を得る; 転送の要求や生存確認の実施, マスター地震の終了の要求はこのカテゴリに該当する.
+
+しかし, もっとも一般的な多重化の利用は, 複数の同時セッションの維持だ. これらは 2 つの別々のモードによってサポートされている:
+
+"Passenger" クライアントは, 新しいセッションを MUX_C_NEW_SESSION メッセージで要求し stdio ファイルデスクリプタを Unix ドメインコントロールソケットへ渡すことで開始する. そして passenger クライアントは シグナルが送られるか mux サーバがセッションをクローズするかまで待つ. このモードは, クライアントが待機している間に mux サーバがすべての運転を行なうのでそう名付けられている. 
+
+(MUX_C_NEW_STDIO_FWD を用いて要求された) stdio の転送は , passenger モードの別の例だ; クライアントは stdio ファイルデスクリプタを渡し, 受動的になにか起こるまで待つ.
+
+MUX_C_PROXY を使って要求する "Proxy" クライアントは, まったく違う動作をする. このモードでは, mux クライアント/サーバの接続ソケットは多重化プロトコルでやりとりするのを止め, クライアントとサーバの間で SSH 接続プロトコルメッセージのプロキシを始める. このため, クライアントは SSH プロトコルの重要なサブセットを話す必要がある. その代わり, 接続プロトコルの特徴の全機能に基本的にはアクセスできるようになる.
+さらに, ファイルデスクリプタの転送が必要ではないので, 必要があればプロキシクライアントをサポートする接続自体を別のホストに転送したりリレーしたりできる.
+
+1接続のセットアップ
+
+クライアント ssh(1) から ControlMaster として動作する ssh(1) に多重化接続を作る場合, (マスター/スレイブ)それぞれの最初の行動は相手方にハローメッセージを送信する.
+
+	uint32	MUX_MSG_HELLO
+	uint32  protocol version
+	string  extension name [optional]
+	string  extension value [optional]
+	...
+
+mux プロトコルの現在のバージョンは 4 だ. クライアントはサポートしていないプロトコルバージョンを話すマスターへの接続を拒否する必要がある.
+
+バージョン識別子のあとに name/value ペアとして表現された 0 以上の拡張が続く. 現在定義されている拡張はない.
+
+2. passenger モードセッションの開始
+
+passenger モードで新しい多重化セッションを開始するには, クライアントが次の要求を送る:
+
+	uint32	MUX_C_NEW_SESSION
+	uint32  request id
+	string	reserved
+	bool	want tty flag
+	bool	want X11 forwarding flag
+	bool	want agent flag
+	bool	subsystem flag
+	uint32	escape char
+	string	terminal type
+	string	command
+	string	environment string 0 [optional]
+	...
+
+エスケープ文字の利用を無効にするに, "escape char" を 0xffffffff に設定する. "terminal type" は一般的に $TERM の値が設定される. コマンドに続いて 0以上の環境文字列が続く.
+
+そしてクライアントは Unix ドメインソケットコントロールメッセージを使って標準入力, 標準出力, 標準エラー出力のファイルデスクリプタを(この順で)送る.
+
+"reserved" の内容は現在無視される.
+
+成功したら, サーバは MUX_S_SESSION_OPENED で応答する.
+
+	uint32	MUX_S_SESSION_OPENED
+	uint32	client request id
+	uint32	session id
+
+もしくはエラーで応答する: MUX_S_PERMISSION_DENIED か MUX_S_FAILURE を使う.
+
+サーバが一旦ファイルデスクリプタを受け取ったら, セッションが立ち上がったことを示すため MUX_S_OK で応答する. クライアントはセッションが終わるのを待つ. セッションが終わったら, サーバは終了ステータスメッセージを送る:
+
+	uint32	MUX_S_EXIT_MESSAGE
+	uint32	session id
+	uint32	exit value
+
+クライアントは, 多重化されていない ssh(1) の接続の振舞いを真似て, この値と共に終了する必要がある. クライアントが対処しなければならない 2 つの追加の場合がある. クライアントが自身へのシグナルを受信した場合と, 終了メッセージの送信なしにサーバが切断した場合だ.
+
+マスターは, リモートの TTY 確保が失敗した場合にMUX_S_EXIT_MESSAGE より前に MUX_S_TTY_ALLOC_FAIL を送ってもよい. クライアントは,  これを用いてそのローカルの tty を "cooked" モードに戻せる.
+
+	uint32	MUX_S_TTY_ALLOC_FAIL
+	uint32	session id
+
+3. passenger モードの標準入力転送の要求
+
+クライアントは標準入力転送の確立をマスターに要求できる:
+
+	uint32	MUX_C_NEW_STDIO_FWD
+	uint32	request id
+	string	reserved
+	string	connect host
+	string	connect port
+
+そしてクライアントは Unix ドメインソケットコントロールメッセージを用いて標準入力と標準出力のファイルデスクリプタを(この順で)送る.
+
+"reserved" の内容は現在無視される.
+
+サーバは, MUX_S_SESSION_OPENED か MUX_S_PERMISSION_DENIED, MUX_S_FAILURE を用いて応答する.
+
+4. ヘルスチェック
+
+クライアントは, サーバからのヘルスチェック/PID レポートを要求できる:
+
+	uint32	MUX_C_ALIVE_CHECK
+	uint32	request id
+
+サーバは次で応答する:
+
+	uint32	MUX_S_ALIVE
+	uint32	client request id
+	uint32	server pid
+
+5. マスターのリモートからの終了
+
+クライアントはマスターを即時に終了するよう要求できる:
+
+	uint32	MUX_C_TERMINATE
+	uint32	request id
+
+サーバは, MUX_S_OK か MUX_S_PERMISSION_DENIED のどちらかで応答する.
+
+6. ポート転送の確立の要求
+
+クライアントはポート転送の確立をマスターに要求できる:
+
+	uint32	MUX_C_OPEN_FWD
+	uint32	request id
+	uint32	forwarding type
+	string	listen host
+	uint32	listen port
+	string	connect host
+	uint32	connect port
+
+forwarding type は MUX_FWD_LOCAL か MUX_FWD_REMOTE, MUX_FWD_DYNAMIC だ.
+
+listen port が (unsigned int) -2 なら, listen host はユニックスソケットのパス名として扱われる.
+
+connect port が (unsigned int) -2, なら connect host はユニックスソケットのパス名として扱われる.
+
+サーバは MUX_S_OK, か MUX_S_REMOTE_PORT, MUX_S_PERMISSION_DENIED, MUX_S_FAILURE で応答する.
+
+動的に確保される listen port の場合, サーバは次で応答する.
+
+	uint32	MUX_S_REMOTE_PORT
+	uint32	client request id
+	uint32	allocated remote listen port
+
+7. ポート転送の終了の要求
+
+ちゅうい: 現在未実装 (サーバは常に MUX_S_FAILURE で応答する).
+
+クライアントはポート転送の終了をマスターに要求できる:
+
+	uint32	MUX_C_CLOSE_FWD
+	uint32	request id
+	uint32	forwarding type
+	string	listen host
+	uint32	listen port
+	string	connect host
+	uint32	connect port
+
+サーバは MUX_S_OK, か MUX_S_PERMISSION_DENIED, MUX_S_FAILURE で応答する.
+
+8. mux リスナーのシャットダウンの要求
+
+クライアントはマスターに新しい多重化リスケストの受付をやめその listener sokcet を削除するよう要求できる.
+
+	uint32	MUX_C_STOP_LISTENING
+	uint32	request id
+
+サーバは MUX_S_OK, か MUX_S_PERMISSION_DENIED, MUX_S_FAILURE で応答する.
+
+9. proxy モードの要求
+
+クライアントはコントロール接続を proxy モードにするよう要求できる:
+
+	uint32	MUX_C_PROXY
+	uint32	request id
+
+mux マスターはこのメッセージを受け取ったら確認を応答する:
+
+	uint32	MUX_S_PROXY
+	uint32	request id
+
+そして proxy モードに移行する. 接続の後続のすべてのデータは, 暗号化されておらずパディングもされていない SSH トランスポートメッセージとしてフォーマットされる.
+
+	uint32	packet length
+	byte	0 (padding length)
+	byte	packet type
+	byte[packet length - 2] ...
+
+mux マスターはほとんどの接続メッセージとグローバル要求を受け付け, proxy クライアントがグローバルにユニークなチャンネル番号を持つよう保証するため channel 識別子を翻訳する (つまり proxy クライアントは他のクライアントとの衝突を気にする必要がない).
+
+10. 状態メッセージ
+
+MUX_S_OK は (client request id 以外) 空だ.
+
+	uint32	MUX_S_OK
+	uint32	client request id
+
+MUX_S_PERMISSION_DENIED と MUX_S_FAILURE  は reason を含む:
+
+	uint32	MUX_S_PERMISSION_DENIED
+	uint32	client request id
+	string	reason
+
+	uint32	MUX_S_FAILURE
+	uint32	client request id
+	string	reason
+
+11. プロトコルの番号
+
+#define MUX_MSG_HELLO		0x00000001
+#define MUX_C_NEW_SESSION	0x10000002
+#define MUX_C_ALIVE_CHECK	0x10000004
+#define MUX_C_TERMINATE		0x10000005
+#define MUX_C_OPEN_FWD		0x10000006
+#define MUX_C_CLOSE_FWD		0x10000007
+#define MUX_C_NEW_STDIO_FWD	0x10000008
+#define MUX_C_STOP_LISTENING	0x10000009
+#define MUX_S_OK		0x80000001
+#define MUX_S_PERMISSION_DENIED	0x80000002
+#define MUX_S_FAILURE		0x80000003
+#define MUX_S_EXIT_MESSAGE	0x80000004
+#define MUX_S_ALIVE		0x80000005
+#define MUX_S_SESSION_OPENED	0x80000006
+#define MUX_S_REMOTE_PORT	0x80000007
+#define MUX_S_TTY_ALLOC_FAIL	0x80000008
+
+#define MUX_FWD_LOCAL	1
+#define MUX_FWD_REMOTE	2
+#define MUX_FWD_DYNAMIC	3
+
+XXX TODO
+XXX extended status (e.g. report open channels / forwards)
+XXX lock (maybe)
+XXX watch in/out traffic (pre/post crypto)
+XXX inject packet (what about replies)
+XXX server->client error/warning notifications
+XXX send signals via mux
+XXX ^Z support in passengers
+XXX extensions for multi-agent
+XXX extensions for multi-X11
+XXX session inspection via master
+XXX signals via mux request
+XXX list active connections via mux
+
+$OpenBSD: PROTOCOL.mux,v 1.12 2020/03/13 03:17:07 djm Exp $
