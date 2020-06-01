@@ -43,6 +43,24 @@ the signature key type is a certificate type itself are NOT supported.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>"Passenger" clients start by requesting a new session with a
+MUX_C_NEW_SESSION message and passing stdio file descriptors over the
+Unix domain control socket.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200529T071656Z" creationid="haruyama" creationdate="20200529T071656Z">
+        <seg>"Passenger" クライアントは, 新しいセッションを MUX_C_NEW_SESSION メッセージで要求し stdio ファイルデスクリプタを Unix ドメインコントロールソケットへ渡すことで開始する. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>"Proxy" clients, requested using MUX_C_PROXY, work quite differently.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T062430Z" creationid="haruyama" creationdate="20200601T062430Z">
+        <seg>MUX_C_PROXY を使って要求する "Proxy" クライアントは, まったく違う動作をする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>"Transport Subsystem for the Simple
    Network Management Protocol" [RFC5590] defines general requirements
    for caches and references.</seg>
@@ -204,6 +222,15 @@ the signature key type is a certificate type itself are NOT supported.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110722T054647Z">
         <seg>"subsystem" は, この鍵を利用する場合に ("subsystem" 要求を用いて) 開始できる サブシステムのカンマ区切りリストを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>"terminal type" is generally set to the value of
+$TERM. zero or more environment strings may follow the command.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T074821Z" creationid="haruyama" creationdate="20200601T074821Z">
+        <seg>"terminal type" は一般的に $TERM の値が設定される. コマンドに続いて 0以上の環境文字列が続く.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1776,10 +1803,27 @@ serial number (serial_offset + N).</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A client may request that a master terminate immediately:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T082315Z" creationid="haruyama" creationdate="20200601T082315Z">
+        <seg>クライアントはマスターを即時に終了するよう要求できる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A client may request that an agent remove all keys that it stores:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160530T080907Z" creationid="haruyama" creationdate="20160530T080907Z">
         <seg>クライアントは, エージェントが保持しているすべての鍵をエージェントから削除するよう要求できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A client may request that the the control connection be placed in proxy
+mode:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T083440Z" creationid="haruyama" creationdate="20200601T083440Z">
+        <seg>クライアントはコントロール接続を proxy モードにするよう要求できる:</seg>
       </tuv>
     </tu>
     <tu>
@@ -1789,6 +1833,39 @@ serial number (serial_offset + N).</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160530T103421Z" creationid="haruyama" creationdate="20160530T103421Z">
         <seg>クライアントは次のメッセージを用いて秘密鍵の署名操作をエージェントに要求する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A client may request the master to close a port forward:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T083201Z" creationid="haruyama" creationdate="20200601T083201Z">
+        <seg>クライアントはポート転送の終了をマスターに要求できる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A client may request the master to establish a port forward:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T082413Z" creationid="haruyama" creationdate="20200601T082413Z">
+        <seg>クライアントはポート転送の確立をマスターに要求できる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A client may request the master to establish a stdio forwarding:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T081710Z" creationid="haruyama" creationdate="20200601T081710Z">
+        <seg>クライアントは標準入力転送の確立をマスターに要求できる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A client may request the master to stop accepting new multiplexing requests
+and remove its listener socket.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T083310Z" creationid="haruyama" creationdate="20200601T083310Z">
+        <seg>クライアントはマスターに新しい多重化リスケストの受付をやめその listener sokcet を削除するよう要求できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -1818,6 +1895,15 @@ serial number (serial_offset + N).</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181217T112119Z" creationid="haruyama" creationdate="20181217T112119Z">
         <seg>クライアントが "y"  送信するのは, クライアントがセッションが elevated されているのを好んでいることを示す. "d" は サーバの規定の動作を用いることを示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A client should refuse
+to connect to a master that speaks an unsupported protocol version.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T063116Z" creationid="haruyama" creationdate="20200601T063116Z">
+        <seg>クライアントはサポートしていないプロトコルバージョンを話すマスターへの接続を拒否する必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2017,6 +2103,15 @@ serial number (serial_offset + N).</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20180927T110449Z" creationid="haruyama" creationdate="20180927T110449Z">
         <seg>悪意のあるクライアントは, 2048 ビット未満の接続を意図的に複数作ることでサービスの不能を引き起そうとするかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A master may also send a MUX_S_TTY_ALLOC_FAIL before MUX_S_EXIT_MESSAGE
+if remote TTY allocation was unsuccessful.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T080558Z" creationid="haruyama" creationdate="20200601T080558Z">
+        <seg>マスターは, リモートの TTY 確保が失敗した場合にMUX_S_EXIT_MESSAGE より前に MUX_S_TTY_ALLOC_FAIL を送ってもよい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -2321,6 +2416,33 @@ ciphertext of the packet length and the payload together.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200514T071204Z" creationid="haruyama" creationdate="20200514T071204Z">
         <seg>サーバは, 証明書に含まれる (固定の) Diffle-Hellman パラメータを利用できるし, 同様に クライアントも証明書を用いて同様にできる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A server may reply with a MUX_S_OK, a MUX_S_PERMISSION_DENIED or a
+MUX_S_FAILURE.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T083213Z" creationid="haruyama" creationdate="20200601T083213Z">
+        <seg>サーバは MUX_S_OK, か MUX_S_PERMISSION_DENIED, MUX_S_FAILURE で応答する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A server may reply with a MUX_S_OK, a MUX_S_REMOTE_PORT, a
+MUX_S_PERMISSION_DENIED or a MUX_S_FAILURE.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T082616Z" creationid="haruyama" creationdate="20200601T082616Z">
+        <seg>サーバは MUX_S_OK, か MUX_S_REMOTE_PORT, MUX_S_PERMISSION_DENIED, MUX_S_FAILURE で応答する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A server may reply with a MUX_S_SESSION_OPENED, a MUX_S_PERMISSION_DENIED
+or a MUX_S_FAILURE.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T081828Z" creationid="haruyama" creationdate="20200601T081828Z">
+        <seg>サーバは, MUX_S_SESSION_OPENED か MUX_S_PERMISSION_DENIED, MUX_S_FAILURE を用いて応答する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3782,6 +3904,15 @@ then the validating party should refuse to accept the certificate.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>All subsequent data over the connection will
+be formatted as unencrypted, unpadded, SSH transport messages:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T083610Z" creationid="haruyama" creationdate="20200601T083610Z">
+        <seg>接続の後続のすべてのデータは, 暗号化されておらずパディングもされていない SSH トランスポートメッセージとしてフォーマットされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>All such messages depend on the authentication 'method
    name' used, and the client MAY at any time continue with a new
    SSH_MSG_USERAUTH_REQUEST message, in which case the server MUST
@@ -4429,6 +4560,14 @@ format (see below).</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200519T055759Z">
         <seg>認証付きの暗号化をする AES GCM の実行は, 次の入力と出力を持つ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>And go into proxy mode.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T083527Z" creationid="haruyama" creationdate="20200601T083527Z">
+        <seg>そして proxy モードに移行する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7014,6 +7153,16 @@ check the version number before attempting to use the extension.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Clients communicate over this socket using a
+simple packetised protocol, where each message is proceeded with
+a length and message type in SSH uint32 wire format:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200529T070519Z" creationid="haruyama" creationdate="20200529T070519Z">
+        <seg>クライアントは単純なパケット化されたプロトコルを用いてこのソケット上で通信する. それぞれのメッセージには, SSH uint32 ワイヤ形式の 長さとメッセージタイプが先行する</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Clients receiving this message MAY log the error details and/or
    report them to the user.</seg>
       </tuv>
@@ -7559,6 +7708,14 @@ check the version number before attempting to use the extension.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>コネクション プロトコル:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Connection setup</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T062836Z" creationid="haruyama" creationdate="20200601T062836Z">
+        <seg>接続のセットアップ</seg>
       </tuv>
     </tu>
     <tu>
@@ -10847,6 +11004,15 @@ encrypted length.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Following the version identifier are zero or more extensions represented
+as a name/value pair.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T063209Z" creationid="haruyama" creationdate="20200601T063209Z">
+        <seg>バージョン識別子のあとに name/value ペアとして表現された 0 以上の拡張が続く.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For
       example: the value 699921578 (0x29b7f4aa) is stored as 29 b7 f4
       aa.</seg>
@@ -11121,6 +11287,14 @@ SSH_FXP_SYMLINK as follows:</seg>
       </tuv>
       <tuv lang="JA">
         <seg>通常表示されるデータに対して, 転送されるメッセージの代りに地域化されたメッセージを数値コードを用いて取得できるようにする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For dynamically allocated listen port the server replies with</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T082638Z" creationid="haruyama" creationdate="20200601T082638Z">
+        <seg>動的に確保される listen port の場合, サーバは次で応答する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12646,6 +12820,14 @@ as a big-endian integer.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110718T035059Z">
         <seg>"x-" で始まる header-tag を持つヘッダは私的利用のために予約されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Health checks</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T082010Z" creationid="haruyama" creationdate="20200601T082010Z">
+        <seg>ヘルスチェック</seg>
       </tuv>
     </tu>
     <tu>
@@ -14686,6 +14868,15 @@ ignore it.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If connect port is (unsigned int) -2, then the connect host is treated
+as a unix socket path name.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T082540Z" creationid="haruyama" creationdate="20200601T082540Z">
+        <seg>connect port が (unsigned int) -2, なら connect host はユニックスソケットのパス名として扱われる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If either of these features is
    not supported by a particular GSS-API mechanism, or by a particular
    implementation of a GSS-API mechanism, then the key exchange is not
@@ -14766,6 +14957,15 @@ ignore it.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181103T134624Z" creationid="haruyama" creationdate="20181103T134425Z">
         <seg>このメッセージがより後に送られたなら, 第2の SSH_MSG_EXT_INFO の情報を認証後すぐに必要とするクライアントが, このメッセージが送られるかどうかを確実に知る方法がない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If listen port is (unsigned int) -2, then the listen host is treated as
+a unix socket path name.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T082517Z" creationid="haruyama" creationdate="20200601T082517Z">
+        <seg>listen port が (unsigned int) -2 なら, listen host はユニックスソケットのパス名として扱われる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14938,6 +15138,14 @@ appear, they must appear consecutively at the end of the KRL file.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>ダイアログウィンドウで prompt が表示される際, クライアントはそれぞれのpromptを別のwindowで表示しないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If successful, the server will reply with MUX_S_SESSION_OPENED</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T080118Z" creationid="haruyama" creationdate="20200601T080118Z">
+        <seg>成功したら, サーバは MUX_S_SESSION_OPENED で応答する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17313,6 +17521,17 @@ signatures.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160618T033919Z">
         <seg>このとき, [SSH-TRANSPORT] によって 接続を終了する前に必要に応じて相手にエラー情報を伝えるいくつかのメカニズムが提供されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In
+this mode, the mux client/server connection socket will stop speaking
+the multiplexing protocol and start proxying SSH connection protocol
+messages between the client and server.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T062552Z" creationid="haruyama" creationdate="20200601T062552Z">
+        <seg>このモードでは, mux クライアント/サーバの接続ソケットは多重化プロトコルでやりとりするのを止め, クライアントとサーバの間で SSH 接続プロトコルメッセージのプロキシを始める.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21906,6 +22125,16 @@ ID" strings.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Many muliplexing (mux) client requests yield immediate responses from
+the mux process; requesting a forwarding, performing an alive check or
+requesting the master terminate itself fall in to this category.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T061515Z" creationid="haruyama" creationdate="20200529T070906Z">
+        <seg>多重化 (mux) クライアントの多くの要求は, mux プロセスからの即座に応答を得る; 転送の要求や生存確認の実施, マスター地震の終了の要求はこのカテゴリに該当する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Many of these issues may involve traversing or
       bypassing firewalls, and are interrelated with the local security
       policy.</seg>
@@ -22269,6 +22498,16 @@ ID" strings.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Moreover, as no file descriptor passing is required, the connection
+supporting a proxy client may itself be forwarded or relayed to another
+host if necessary.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T062826Z" creationid="haruyama" creationdate="20200601T062826Z">
+        <seg>さらに, ファイルデスクリプタの転送が必要ではないので, 必要があればプロキシクライアントをサポートする接続自体を別のホストに転送したりリレーしたりできる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Moreover, the agent
    implements a simple protocol and presents a smaller attack surface
    than a key loaded into a full SSH server or client.</seg>
@@ -22305,6 +22544,15 @@ additional sessions under their control.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160618T033254Z">
         <seg>ほとんどの鍵交換アルゴリズムは, SSHサーバの識別情報をクライアントに認証できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Most messages from the client to the server contain a "request id"
+field.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200529T070544Z" creationid="haruyama" creationdate="20200529T070544Z">
+        <seg>クライアントからサーバへのメッセージの多くには "request id" フィールドが含まれる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -22404,6 +22652,15 @@ additional sessions under their control.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>複数のセッションが同時に有効になりうる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Multiplexing starts with a ssh(1) configured to act as a multiplexing
+master.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200529T070304Z" creationid="haruyama" creationdate="20200529T070304Z">
+        <seg>多重化は, 多重化マスターとして振る舞うよう設定された ssh(1) によって開始される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23124,6 +23381,14 @@ are individually implemented as extensions described below.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>このメッセージに明示的な返答は送られない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>No extensions are currently defined.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T063225Z" creationid="haruyama" creationdate="20200601T063225Z">
+        <seg>現在定義されている拡張はない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23894,6 +24159,14 @@ support.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Note: currently unimplemented (server will always reply with MUX_S_FAILURE).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T083136Z" creationid="haruyama" creationdate="20200601T083136Z">
+        <seg>ちゅうい: 現在未実装 (サーバは常に MUX_S_FAILURE で応答する).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Note: in [RFC5116], the IV is called the nonce.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110828T033748Z">
@@ -24296,6 +24569,15 @@ before decryption.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110701T023119Z">
         <seg>メカニズムのOIDが選択されたら， SSH_MSG_USERAUTH_GSSAPI_TOKEN パケットの1つないしそれ以上のペアをクライアントは交換しはじめる．</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Once the server has received the fds, it will respond with MUX_S_OK
+indicating that the session is up.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T080301Z" creationid="haruyama" creationdate="20200601T080301Z">
+        <seg>サーバが一旦ファイルデスクリプタを受け取ったら, セッションが立ち上がったことを示すため MUX_S_OK で応答する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24811,6 +25093,14 @@ hello packet:</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Opening a passenger mode session</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T074614Z" creationid="haruyama" creationdate="20200601T074614Z">
+        <seg>passenger モードセッションの開始</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Opening the Public Key Subsystem</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110721T030912Z">
@@ -24981,6 +25271,15 @@ upon request.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110723T014222Z">
         <seg>他の用語とシンボルは, [RFC4253]のものと同じ意味を持つ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Otherwise it will reply with an error: MUX_S_PERMISSION_DENIED or
+MUX_S_FAILURE.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T080150Z" creationid="haruyama" creationdate="20200601T080150Z">
+        <seg>もしくはエラーで応答する: MUX_S_PERMISSION_DENIED か MUX_S_FAILURE を使う.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26831,6 +27130,14 @@ that computes a 128 bit integrity tag given a message and a single-use
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Remotely terminating a master</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T082255Z" creationid="haruyama" creationdate="20200601T082255Z">
+        <seg>マスターのリモートからの終了</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Removing a Certificate</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20180827T112824Z" creationid="haruyama" creationdate="20180827T112824Z">
@@ -27011,11 +27318,51 @@ that computes a 128 bit integrity tag given a message and a single-use
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Requesting closure of port forwards</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T083116Z" creationid="haruyama" creationdate="20200601T083116Z">
+        <seg>ポート転送の終了の要求</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Requesting deletion of smartcard-hosted keys will cause the agent to
    remove all keys loaded from that smartcard.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160530T081507Z" creationid="haruyama" creationdate="20160530T081507Z">
         <seg>スマートカードに保持されている鍵の削除の要求で, スマートカードからロードされたすべての鍵をエージェントは削除する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Requesting establishment of port forwards</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T082357Z" creationid="haruyama" creationdate="20200601T082357Z">
+        <seg>ポート転送の確立の要求</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Requesting passenger-mode stdio forwarding</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T081639Z" creationid="haruyama" creationdate="20200601T081639Z">
+        <seg>passenger モードの標準入力転送の要求</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Requesting proxy mode</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T083323Z" creationid="haruyama" creationdate="20200601T083323Z">
+        <seg>proxy モードの要求</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Requesting shutdown of mux listener</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T083231Z" creationid="haruyama" creationdate="20200601T083231Z">
+        <seg>mux リスナーのシャットダウンの要求</seg>
       </tuv>
     </tu>
     <tu>
@@ -30346,6 +30693,14 @@ length unencrypted.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Status messages</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T083856Z" creationid="haruyama" creationdate="20200601T083856Z">
+        <seg>状態メッセージ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Status of This Memo</seg>
       </tuv>
       <tuv lang="JA">
@@ -30358,6 +30713,16 @@ length unencrypted.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110722T064013Z">
         <seg>状態の応答は 0から255までの状態コードを持つ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Stdio forwarding (requested using MUX_C_NEW_STDIO_FWD) is another
+example of passenger mode; the client passes the stdio file descriptors
+and passively waits for something to happen.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200529T072031Z" creationid="haruyama" creationdate="20200529T072031Z">
+        <seg>(MUX_C_NEW_STDIO_FWD を用いて要求された) stdio の転送は , passenger モードの別の例だ; クライアントは stdio ファイルデスクリプタを渡し, 受動的になにか起こるまで待つ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33262,6 +33627,22 @@ for encryption of the packet payload.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The MUX_S_OK message is empty:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T083917Z" creationid="haruyama" creationdate="20200601T083917Z">
+        <seg>MUX_S_OK は (client request id 以外) 空だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The MUX_S_PERMISSION_DENIED and MUX_S_FAILURE include a reason:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T083936Z" creationid="haruyama" creationdate="20200601T083936Z">
+        <seg>MUX_S_PERMISSION_DENIED と MUX_S_FAILURE  は reason を含む:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The Message Number is a byte value that describes the payload of a
    packet.</seg>
       </tuv>
@@ -35534,11 +35915,37 @@ authentication.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client may request a health check/PID report from a server:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T082048Z" creationid="haruyama" creationdate="20200601T082048Z">
+        <seg>クライアントは, サーバからのヘルスチェック/PID レポートを要求できる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The client may use this to
+return its local tty to "cooked" mode.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T080656Z" creationid="haruyama" creationdate="20200601T080656Z">
+        <seg>クライアントは,  これを用いてそのローカルの tty を "cooked" モードに戻せる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client must also send an XML document containing a &lt;hello&gt;
    element to indicate the client's capabilities to the server.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110728T093551Z">
         <seg>クライアントも サーバにクライアントの機能を示すために &lt;hello&gt; 要素を含む XML 文書を送らなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The client now waits for the
+session to end.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T080321Z" creationid="haruyama" creationdate="20200601T080321Z">
+        <seg>クライアントはセッションが終わるのを待つ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35633,6 +36040,15 @@ authentication.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client should exit with this value to mimic the behaviour of a
+non-multiplexed ssh(1) connection.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T080416Z" creationid="haruyama" creationdate="20200601T080416Z">
+        <seg>クライアントは, 多重化されていない ssh(1) の接続の振舞いを真似て, この値と共に終了する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client should invoke the "ssh-connection" service (also known
        as the SSH connection protocol [RFC4254]), and request a channel
        of type "session".</seg>
@@ -35652,10 +36068,38 @@ authentication.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The client then sends its standard input and output file descriptors
+(in that order) using Unix domain socket control messages.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T081802Z" creationid="haruyama" creationdate="20200601T081802Z">
+        <seg>そしてクライアントは Unix ドメインソケットコントロールメッセージを用いて標準入力と標準出力のファイルデスクリプタを(この順で)送る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The client then sends its standard input, output and error file
+descriptors (in that order) using Unix domain socket control messages.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T075205Z" creationid="haruyama" creationdate="20200601T075205Z">
+        <seg>そしてクライアントは Unix ドメインソケットコントロールメッセージを使って標準入力, 標準出力, 標準エラー出力のファイルデスクリプタを(この順で)送る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The client then uses K_T to encrypt:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200519T053011Z">
         <seg>そしてクライアントはK_Tを次を暗号化するのに用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The client therefore must
+speak a significant subset of the SSH protocol, but in return is able
+to access basically the full suite of connection protocol features.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T062726Z" creationid="haruyama" creationdate="20200601T062726Z">
+        <seg>このため, クライアントは SSH プロトコルの重要なサブセットを話す必要がある. その代わり, 接続プロトコルの特徴の全機能に基本的にはアクセスできるようになる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35842,6 +36286,14 @@ lengths.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The contents of "reserved" are currently ignored.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T075229Z" creationid="haruyama" creationdate="20200601T075229Z">
+        <seg>"reserved" の内容は現在無視される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The contents of each binary packet and portions of the header are
    encrypted, and each packet is authenticated with its own message
    authentication code.</seg>
@@ -35984,6 +36436,14 @@ options on the certificates validity.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181110T002804Z" creationid="haruyama" creationdate="20181110T002804Z">
         <seg>SSH_MEG_EXT_INFO メッセージの累積あいずハ， [RFC4253] に従って実装が適用する最大パケット長によってのみ制限される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The current version of the mux protocol is 4.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T063039Z" creationid="haruyama" creationdate="20200601T063039Z">
+        <seg>mux プロトコルの現在のバージョンは 4 だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37910,8 +38370,8 @@ to encrypt the 4 byte packet length field.</seg>
         <seg>The key consists of a header, a list of public keys, and
 an encrypted list of matching private keys.</seg>
       </tuv>
-      <tuv lang="JA" changeid="haruyama" changedate="20200528T060215Z" creationid="haruyama" creationdate="20200528T060215Z">
-        <seg>鍵は, ヘッダと公開鍵のリスト, 対応する秘密鍵の暗号化されたリストから成る.</seg>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T084015Z" creationid="haruyama" creationdate="20200528T060215Z">
+        <seg>鍵は, ヘッダと公開鍵のリスト, 対応する秘密鍵の暗号化されたリストからなる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -38666,6 +39126,15 @@ of the cipher block size.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The most common use of multiplexing however is to maintain multiple
+concurrent sessions.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200529T071004Z" creationid="haruyama" creationdate="20200529T070914Z">
+        <seg>しかし, もっとも一般的な多重化の利用は, 複数の同時セッションの維持だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The most-preferred method is the first in the list.</seg>
       </tuv>
       <tuv lang="JA">
@@ -38713,6 +39182,17 @@ of the cipher block size.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110725T100746Z">
         <seg>K の mpint エンコーディングは, 最初の0のビット(訳注: mpintの表現では正の数は最上位ビットが0)と バイト単位にするためのパディング, 4バイトの長さのフィールドが必要だ. バイトでの最大長は, B = (KLEN-2*HLEN-49+1+7)/8 + 4 = (KLEN-2*HLEN-9)/8 ("/" は, 切り捨てを行なう整数の除算) となる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The mux master will accept most connection messages and global requests,
+and will translate channel identifiers to ensure that the proxy client has
+globally unique channel numbers (i.e. a proxy client need not worry about
+collisions with other clients).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T083847Z" creationid="haruyama" creationdate="20200601T083847Z">
+        <seg>mux マスターはほとんどの接続メッセージとグローバル要求を受け付け, proxy クライアントがグローバルにユニークなチャンネル番号を持つよう保証するため channel 識別子を翻訳する (つまり proxy クライアントは他のクライアントとの衝突を気にする必要がない).</seg>
       </tuv>
     </tu>
     <tu>
@@ -39210,6 +39690,15 @@ are the empty string.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200518T054406Z" creationid="haruyama" creationdate="20200518T054406Z">
         <seg>[SEC1v2] の 3.2.1節に従って パーティはそれぞれ一時鍵ペアを生成する..</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The passenger client then waits until it is
+signaled or the mux server closes the session.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200529T071806Z" creationid="haruyama" creationdate="20200529T071806Z">
+        <seg>そして passenger クライアントは シグナルが送られるか mux サーバがセッションをクローズするかまで待つ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40630,6 +41119,14 @@ extension with multiple versions (though this is unlikely).</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The server replies with:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T082056Z" creationid="haruyama" creationdate="20200601T082056Z">
+        <seg>サーバは次で応答する:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The server responds to the SSH_MSG_USERAUTH_REQUEST with either an
    SSH_MSG_USERAUTH_FAILURE if none of the mechanisms are supported or
    with an SSH_MSG_USERAUTH_GSSAPI_RESPONSE as follows:</seg>
@@ -40725,6 +41222,14 @@ extension with multiple versions (though this is unlikely).</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200518T060406Z" creationid="haruyama" creationdate="20200518T060406Z">
         <seg>サーバは, Message Integrity Code (MIC) を生成するために, ペイロードとして H を用いて GSS_GetMIC() 呼び出しを用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The server will reply with one of MUX_S_OK or MUX_S_PERMISSION_DENIED.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T082335Z" creationid="haruyama" creationdate="20200601T082335Z">
+        <seg>サーバは, MUX_S_OK か MUX_S_PERMISSION_DENIED のどちらかで応答する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -42222,6 +42727,14 @@ specified algorithm.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200519T053446Z">
         <seg>これらは後で詳細に議論する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These are supported via two separate modes:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200529T071813Z" creationid="haruyama" creationdate="20200529T071517Z">
+        <seg>これらは 2 つの別々のモードによってサポートされている:</seg>
       </tuv>
     </tu>
     <tu>
@@ -44057,6 +44570,15 @@ encryption cipher supported by OpenSSH.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This document describes the multiplexing protocol used by ssh(1)'s
+ControlMaster connection-sharing.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200529T070225Z" creationid="haruyama" creationdate="20200529T070225Z">
+        <seg>この文書は, ssh(1) の ControlMaster 接続共有で用いる多重化プロトコルについて記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This document describes the private key format for OpenSSH.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200528T055636Z" creationid="haruyama" creationdate="20200528T055636Z">
@@ -44750,6 +45272,15 @@ are kept intact.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181110T002454Z" creationid="haruyama" creationdate="20181110T002454Z">
         <seg>このフィールドは, その拡張が許可するなら空でもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This field is returned in replies as "client request id" to
+facilitate matching of responses to requests.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200529T070705Z" creationid="haruyama" creationdate="20200529T070705Z">
+        <seg>このフィールドは, 応答と要求の一致を容易にするために, "client request id" として応答の中で返される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -45920,6 +46451,15 @@ in:</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This mode is so named as
+the client waits around while the mux server does all the driving.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200529T071918Z" creationid="haruyama" creationdate="20200529T071918Z">
+        <seg>このモードは, クライアントが待機している間に mux サーバがすべての運転を行なうのでそう名付けられている. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This modularity of specification is not meant to be interpreted as
    imposing any specific requirements on implementation.</seg>
       </tuv>
@@ -46870,6 +47410,15 @@ start of compression until after authentication has completed.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This will cause ssh(1) to listen on a Unix domain socket for
+requests from clients.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200529T070336Z" creationid="haruyama" creationdate="20200529T070336Z">
+        <seg>これにより ssh(1) が クライアントからの要求を Unix ドメイントソケットで listen するようになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This would help prevent an attacker
    from injecting a DNS search path into the local resolver and forcing
    the client to connect to a different host.</seg>
@@ -47216,6 +47765,15 @@ start of compression until after authentication has completed.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>To disable the use of an escape character, "escape char" may be set
+to 0xffffffff.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T074737Z" creationid="haruyama" creationdate="20200601T074737Z">
+        <seg>エスケープ文字の利用を無効にするに, "escape char" を 0xffffffff に設定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>To do this, it defines a family of key exchange methods, two user
    authentication methods, and a new host key algorithm.</seg>
       </tuv>
@@ -47302,6 +47860,15 @@ start of compression until after authentication has completed.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>要求を開始した側がどの要求を参照してるかを識別するのを可能にするために,SSH_MSG_GLOBAL_REQUESTS の返答は, 関連する要求のメッセージと同じ順番で送られなければならないことが要求されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To open a new multiplexed session in passenger mode, a client sends the
+following request:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T074636Z" creationid="haruyama" creationdate="20200601T074636Z">
+        <seg>passenger モードで新しい多重化セッションを開始するには, クライアントが次の要求を送る:</seg>
       </tuv>
     </tu>
     <tu>
@@ -47543,6 +48110,16 @@ requested by the client with the following packet:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110825T051417Z">
         <seg>ポート番号レジストリの 2つの TCP ポート番号が, この文書で定義された SNMP オーバー SSH トランスポートモデルとこの文書で定義された通知のSNMP オーバー SSH トランスポートモデルのデフォルトのポートとなる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Two additional cases that the
+client must cope with are it receiving a signal itself and the
+server disconnecting without sending an exit message.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T080514Z" creationid="haruyama" creationdate="20200601T080514Z">
+        <seg>クライアントが対処しなければならない 2 つの追加の場合がある. クライアントが自身へのシグナルを受信した場合と, 終了メッセージの送信なしにサーバが切断した場合だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -48693,6 +49270,25 @@ to the SSH_FXP_SYMLINK method was inadvertently reversed.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>When a multiplexing connection is made to a ssh(1) operating as a
+ControlMaster from a client ssh(1), the first action of each is send
+a hello messages to its peer:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T063026Z" creationid="haruyama" creationdate="20200601T063026Z">
+        <seg>クライアント ssh(1) から ControlMaster として動作する ssh(1) に多重化接続を作る場合, (マスター/スレイブ)それぞれの最初の行動は相手方にハローメッセージを送信する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When a mux master receives this message, it will reply with a
+confirmation:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T083508Z" creationid="haruyama" creationdate="20200601T083508Z">
+        <seg>mux マスターはこのメッセージを受け取ったら確認を応答する:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>When a party will no longer send more data to a channel, it SHOULD
    send SSH_MSG_CHANNEL_EOF.</seg>
       </tuv>
@@ -48865,6 +49461,15 @@ will send the following global request:</seg>
       </tuv>
       <tuv lang="JA">
         <seg>フロー制御が許されているなら, ユーザのリクエストに対する応答をスピードアップするためにクライアントの側でフロー制御をすることが望ましい場合がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>When it does, the server will send an exit status
+message:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T080338Z" creationid="haruyama" creationdate="20200601T080338Z">
+        <seg>セッションが終わったら, サーバは終了ステータスメッセージを送る:</seg>
       </tuv>
     </tu>
     <tu>
@@ -50400,6 +51005,14 @@ servers (identified by banner).</seg>
       </tuv>
       <tuv lang="JA">
         <seg>認証の状態を消去できない場合に, 'user_name' か 'service_name' が変更されたらサーバの実装は切断しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>forwarding type may be MUX_FWD_LOCAL, MUX_FWD_REMOTE, MUX_FWD_DYNAMIC.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200601T082427Z" creationid="haruyama" creationdate="20200601T082427Z">
+        <seg>forwarding type は MUX_FWD_LOCAL か MUX_FWD_REMOTE, MUX_FWD_DYNAMIC だ.</seg>
       </tuv>
     </tu>
     <tu>
