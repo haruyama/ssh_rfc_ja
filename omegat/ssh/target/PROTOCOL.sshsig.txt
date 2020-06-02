@@ -1,0 +1,72 @@
+この文書は SSH 鍵とワイヤ形式と互換性のある軽量な SSH 署名形式を記述する.
+
+現在 detached (訳注: armored になっていない, ヘッダフッタがなく base64 エンコードされていない, blob そのもの) と armored 署名のみがサポートされている.
+
+1Armored 形式
+
+Armored SSH 署名は, ヘッダ, base64 でエンコードされた blob, フッタからなる.
+
+ヘッダは文字列 "-----BEGIN SSH SIGNATURE-----" で改行が続く. フッタは, 改行直後の文字列 "-----END SSH SIGNATURE-----" だ.
+
+ヘッダはすべての署名の最初になければならない.
+署名を含むファイルはヘッダで始まらなければならない.
+どうように, フッタはすべての署名の末尾になければならない.
+
+base64 でエンコードされた blob は 76文字ごとに改行で分割されている必要がある.
+
+例:
+
+-----BEGIN SSH SIGNATURE-----
+U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgJKxoLBJBivUPNTUJUSslQTt2hD
+jozKvHarKeN8uYFqgAAAADZm9vAAAAAAAAAFMAAAALc3NoLWVkMjU1MTkAAABAKNC4IEbt
+Tq0Fb56xhtuE1/lK9H9RZJfON4o6hE9R4ZGFX98gy0+fFJ/1d2/RxnZky0Y7GojwrZkrHT
+FgCqVWAQ==
+-----END SSH SIGNATURE-----
+
+2. Blob の形式
+
+#define MAGIC_PREAMBLE "SSHSIG"
+#define SIG_VERSION    0x01
+
+        byte[6]   MAGIC_PREAMBLE
+        uint32    SIG_VERSION
+        string    publickey
+        string    namespace
+        string    reserved
+        string    hash_algorithm
+        string    signature
+
+publickey フィールドは通常の SSH エンコーディングルール, すなわち RFC4253 や RFC5656, draft-ietf-curdle-ssh-ed25519-ed448 などを用いた署名を作成するのに使われた公開鍵のシリアライゼーション文字列を含む.
+
+検証者は, サポートしているものより大きなバージョンを用いる署名を拒否しなければならない.
+
+namespace の値の目的は, 署名の明白な相互運用のドメイン, たとえばファイルの署名, を指定することだ.
+ある意図されたドメインで意図された署名が別のドメインで受け入れられることによる プロトコルをまたいだ攻撃を防止する.
+namespace の値は空文字列であってはならない.
+
+reserved の値は署名へのさらない情報 (例: タグ) をエンコードするためにある. 実装は, 空でない reserved フィールドを無視しなければならない.
+
+署名されるデータは, 指定された hash_algorithm で最初にハッシュ化される.
+署名の操作で提示されるデータ量を制限するために, これは行なわれる. データ量は, 署名する鍵が制限されたり遅いハードウェアにある場合やリモートの ssh-agent にある場合に懸念となりうる. サポートされているハッシュアルゴリズムは "sha256" と "sha512" だ.
+
+signature 自体は SSH 署名アルゴリズムと選択された鍵タイプに対するエンコーディングルールを用いて作成される. RSA の署名ならば, 署名アルゴリズムは "rsa-sha2-512" ないし "rsa-sha2-256" でなければならない (つまり レガシーな RSA-SHA1 "ssh-rsa" ではない).
+
+この blob は RFC4243(訳注: 4253 の間違いか)のエンコーディングルールを用いて文字列としてエンコーディングされ, armored 署名の中間部分となるため base64 エンコードされる.
+
+
+3. 前述の blob の signature に入る 署名されるデータ
+
+#define MAGIC_PREAMBLE "SSHSIG"
+
+        byte[6]   MAGIC_PREAMBLE
+        string    namespace
+        string    reserved
+        string    hash_algorithm
+        string    H(message)
+
+前置きは 6 バイトのシーケンス "SSHSIG" だ. SSH のユーザないしホスト認証で署名されるすべてのメッセージでと手動の署名との混同が決してないことを保証するために含まれている.
+
+reserved の値は署名へのさらない情報 (例: タグ) をエンコードするためにある. 実装は, 空でない reserved フィールドを無視しなければならない.
+
+データは連結され SSH の署名関数に渡される.
+
