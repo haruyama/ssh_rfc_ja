@@ -1,0 +1,268 @@
+この文書は U2F/FIDO セキュリティ鍵に対する OpenSSH のサポートについて記述する.
+
+背景
+----------
+
+U2F はウェブサイトのユーザ認証に広く用いられている, 2要素認証ハードウェアのオープンな標準だ. U2F トークンはユビキタスで, 多くの製造者から入手可能で, ハードウェアに保存された認証情報ストレージをユーザが使うための現在のところもっとも安価な方法だ.
+
+しかし, U2F プロトコルは, 署名操作への入力や結果の署名が SSH のために指定されたものとはどちらも異なるように, SSH プロトコル鍵タイプとして用いるのは簡単にはできない. 同様の理由から, U2F デバイスの統合は PKCS#11 API によっては達成できない.
+
+U2F は SSH 認証のコンテキストで魅力的な特徴も多数提供している. それらは, それぞれの署名操作で "ユーザの存在" を示すよう要求するように設定できる (典型的には, ユーザが鍵にタッチする必要があることで達成される). さらにそれらは,  鍵の登録時に, 与えられた鍵がハードウェアに保存されたものかどうか証明するために用いることができる認証メカニズムも提供している. さいご に, 署名形式には単調な署名カウンタが含まれていて, ハードウェアから抜き取られたであろう 秘密鍵の同時利用を検出するのに(規模に応じて)利用できる.
+
+U2F 秘密鍵は登録操作を通して生成され, このときにアプリケーション ID と (通常ランダムに生成される) チャレンジ文字列を取る. アプリケーション ID は URL のような文字列で, この場合通常は "ssh:" だ. ただし, ウェブ認証の場合には HTTP オリジンとなる登録操作は公開鍵と鍵ハンドル, いくつかのフラグ, 署名された証明情報を返す. 鍵ハンドルはハードウェアに保存された秘密鍵を呼び出すのに必要だ.署名された証明情報は特定のハードウェアインスタンスにホストされた秘密鍵かどうかの検証に利用できる. 
+
+鍵ハンドルとハードウェア固有なデバイスごとの小さな秘密から秘密鍵を導出するのは U2F ハードウェアで一般的で, それゆえサポートされる鍵は実質的に無制限でデバイス上のストレージはほとんど必要としない. これにより鍵ハンドルは署名操作のたびごとに提供される必要がある. U2F トークンは主に NIST-P256 フィールドの ECDSA 署名を用いる. 一方 FIDO2 標準は Ed25519 ベースのものを含む追加の鍵タイプを指定している.
+
+U2F セキュリティ鍵の利用は, 自動的に多要素認証となることを意味しない. sshd の視点からは, セキュリティキーは, たとえ PIN や生体認証で保護されていても, 単一要素の認証を構成する.  ssh で多要素認証を有効にするには, sshd_config(5) の AuthenticationMethods を参照してほしい.
+
+
+SSH U2F 鍵形式
+-------------------
+
+OpenSSH は U2F と 新しい鍵と対応する証明書のタイプで統合する:
+
+	sk-ecdsa-sha2-nistp256@openssh.com
+	sk-ecdsa-sha2-nistp256-cert-v01@openssh.com
+	sk-ssh-ed25519@openssh.com
+	sk-ssh-ed25519-cert-v01@openssh.com
+
+ecdsa-sha256-nistp256 を基底の署名プリミティブとして用いているタイプは, 鍵は公開鍵と秘密鍵, 署名オブジェクト自体の中にさらなる情報を必要とする. このため既存の ecdsa-sha2-nistp* 鍵タイプとは互換できない.
+
+sk-ecdsa-sha2-nistp256@openssh.com 公開鍵の形式は:
+
+	string		"sk-ecdsa-sha2-nistp256@openssh.com"
+	string		curve name
+	ec_point	Q
+	string		application (user-specified, but typically "ssh:")
+
+対応する秘密鍵は次を含む:
+
+	string		"sk-ecdsa-sha2-nistp256@openssh.com"
+	string		curve name
+	ec_point	Q
+	string		application (user-specified, but typically "ssh:")
+	uint8		flags
+	string		key_handle
+	string		reserved
+
+sk-ssh-ed25519@openssh.com 公開鍵の形式は:
+
+	string		"sk-ssh-ed25519@openssh.com"
+	string		public key
+	string		application (user-specified, but typically "ssh:")
+
+秘密鍵の側は次で構成される:
+
+	string		"sk-ssh-ed25519@openssh.com"
+	string		public key
+	string		application (user-specified, but typically "ssh:")
+	uint8		flags
+	string		key_handle
+	string		reserved
+
+SSH U2F 鍵のための証明書の形式は, 通常の証明書の情報を公開鍵に追加する:
+
+	string		"sk-ecdsa-sha2-nistp256-cert-v01@openssh.com"
+	string		nonce
+	string		curve name
+	ec_point	Q
+	string		application
+	uint64		serial
+	uint32		type
+	string		key id
+	string		valid principals
+	uint64		valid after
+	uint64		valid before
+	string		critical options
+	string		extensions
+	string		reserved
+	string		signature key
+	string		signature
+
+セキュリティ鍵 ed25519 の証明書の場合は:
+
+	string		"sk-ssh-ed25519-cert-v01@openssh.com"
+	string		nonce
+	string		public key
+	string		application
+	uint64		serial
+	uint32		type
+	string		key id
+	string		valid principals
+	uint64		valid after
+	uint64		valid before
+	string		critical options
+	string		extensions
+	string		reserved
+	string		signature key
+	string		signature
+
+どちらのセキュリティ鍵証明書も秘密鍵に対して次のエンコーディングを用いる:
+
+	string		type (e.g. "sk-ssh-ed25519-cert-v01@openssh.com")
+	string		pubkey (the above key/cert structure)
+	string		application
+	uint8		flags
+	string		key_handle
+	string		reserved
+
+鍵生成の際, 与えられた鍵がハードウェアに保持されているかを暗号学的に証明するのに利用できる証明情報もハードウェアは返す. 残念なことに, この証明に必要なプロトコルはプライバシー保護されておらず, すくなくとも 製造者とバッチ番号の粒度で U2F トークンを識別するのに利用できてしまう. このため, 我々はデフォルトでは公開鍵にこの情報は含めないし保存しないこととする.
+
+証明情報は帯域外の鍵と証明書登録のワークフローでは有効だ. たとえば, CA の鍵が信頼できるハードウェアに保存されているかを CA鍵で証明書を発行する前に証明する場合など. この場合をサポートするため, OpenSSH は鍵生成時に証明情報を保持することを選択できるようにする. 次の形式を取る:
+
+	string		"ssh-sk-attest-v00"
+	string		attestation certificate
+	string		enrollment signature
+	uint32		reserved flags
+	string		reserved string
+
+OpenSSH は attestation certificate と  enrollment signature は中身が不明なオブジェクトとして取り扱いそれら自体を解釈しない.
+
+SSH U2F 署名
+------------------
+
+署名されるメッセージに加えて U2F 署名操作は鍵ハンドルといくつかの追加のパラメータを必要とする.In addition to the message to be signed, the U2F signature operation
+requires the key handle and a few additional parameters. 署名は次からなる blob に対して署名されたものだ:
+
+	byte[32]	SHA256(application)
+	byte		flags (including "user present", extensions present)
+	uint32		counter
+	byte[]		extensions
+	byte[32]	SHA256(message)
+
+SSH での利用のためには拡張はまだ定義されていない. 将来定義されたら, "flags" の値の内容からその存在を推論できるだろう.
+
+U2F ハードウェアから返る署名は次の形式を取る:
+
+	byte		flags (including "user present")
+	uint32		counter
+	byte[]		ecdsa_signature (in X9.62 format).
+
+SSH プロトコルの利用では, 認証前の攻撃サーフェスでの ASN.1 形式データのサーバサイドでのパースを避けたい. このため, SSH2_USERAUTH_REQUEST パケットの通信で利用する署名形式が既存の署名エンコーディングとより一致するよう再形式化される.
+
+	string		"sk-ecdsa-sha2-nistp256@openssh.com"
+	string		ecdsa_signature
+	byte		flags
+	uint32		counter
+
+"ecdsa_signature" フィールドは RFC5656 ECDSA 署名エンコーディングに従う:
+
+	mpint		r
+	mpint		s
+
+Ed25519 鍵では署名は次のようにエンコーディングされる:
+
+	string		"sk-ssh-ed25519@openssh.com"
+	string		signature
+	byte		flags
+	uint32		counter
+
+ssh-agent プロトコル拡張
+-----------------------------
+
+ssh-agent は U2F 鍵のサポートのためにプロトコル拡張を必要とする. 現在, ssh-agent でのセキュリティ鍵にもっとも近いアナロジーは, 鍵を保持するデバイスと通信するのにミドルウェアライブラリが必要な点において, PKCS#11 トークンだ. しかし, ssh-agent に PKCS#11 鍵を追加するのに使われるプロトルメッセージは, U2F 鍵が必要とするエージェントに鍵ハンドルを送る方法を含んでいない.
+
+エージェントプロトコルに完全に新しいメッセージを追加する必要なしにこれを避けるため, 鍵のためのミドルウェアライブラリにパスをエンコードする 新しい鍵制約拡張をと一緒に既存の SSH2_AGENTC_ADD_ID_CONSTRAINED メッセージを使う. この制約拡張の形式は:
+
+	byte		SSH_AGENT_CONSTRAIN_EXTENSION
+	string		sk-provider@openssh.com
+	string		middleware path
+
+この制約ベースのアプローチは現在互換性の問題がない.
+
+OpenSSH と統合
+-------------------
+
+U2F トークンは USB と NFC を含むさまざまな方法で取り付けられる.
+USB インタフェイスは HID プロトコルの上で標準化されている. しかし我々は, 回帰テストのためのダミーの実装ど同様に他のトランスポートもサポートできるようにしたい. このため, OpenSSH はセキュリティ鍵と通信するためのミドルウェアライブラリの動的なロードをサポートする. しかし, 内部で USB HID セキュリティ鍵の一般的な場合のサポートを提供する.
+
+ミドルウェアライブラリは次の一握りの関数を露出させるだけでよい:
+
+	#define SSH_SK_VERSION_MAJOR		0x00050000 /* API version */
+	#define SSH_SK_VERSION_MAJOR_MASK	0xffff0000
+
+	/* Flags */
+	#define SSH_SK_USER_PRESENCE_REQD	0x01
+	#define SSH_SK_USER_VERIFICATION_REQD	0x04
+	#define SSH_SK_RESIDENT_KEY		0x20
+
+	/* Algs */
+	#define SSH_SK_ECDSA                   0x00
+	#define SSH_SK_ED25519                 0x01
+
+	/* Error codes */
+	#define SSH_SK_ERR_GENERAL		-1
+	#define SSH_SK_ERR_UNSUPPORTED		-2
+	#define SSH_SK_ERR_PIN_REQUIRED		-3
+	#define SSH_SK_ERR_DEVICE_NOT_FOUND	-4
+
+	struct sk_enroll_response {
+		uint8_t *public_key;
+		size_t public_key_len;
+		uint8_t *key_handle;
+		size_t key_handle_len;
+		uint8_t *signature;
+		size_t signature_len;
+		uint8_t *attestation_cert;
+		size_t attestation_cert_len;
+	};
+
+	struct sk_sign_response {
+		uint8_t flags;
+		uint32_t counter;
+		uint8_t *sig_r;
+		size_t sig_r_len;
+		uint8_t *sig_s;
+		size_t sig_s_len;
+	};
+
+	struct sk_resident_key {
+		uint32_t alg;
+		size_t slot;
+		char *application;
+		struct sk_enroll_response key;
+	};
+
+	struct sk_option {
+		char *name;
+		char *value;
+		uint8_t important;
+	};
+
+	/* Return the version of the middleware API */
+	uint32_t sk_api_version(void);
+
+	/* Enroll a U2F key (private key generation) */
+	int sk_enroll(uint32_t alg,
+	    const uint8_t *challenge, size_t challenge_len,
+	    const char *application, uint8_t flags, const char *pin,
+	    struct sk_option **options,
+	    struct sk_enroll_response **enroll_response);
+
+	/* Sign a challenge */
+	int sk_sign(uint32_t alg, const uint8_t *message, size_t message_len,
+	    const char *application,
+	    const uint8_t *key_handle, size_t key_handle_len,
+	    uint8_t flags, const char *pin, struct sk_option **options,
+	    struct sk_sign_response **sign_response);
+
+	/* Enumerate all resident keys */
+	int sk_load_resident_keys(const char *pin, struct sk_option **options,
+	    struct sk_resident_key ***rks, size_t *nrks);
+
+The SSH_SK_VERSION_MAJOR は非互換な API の変更のたびに増加させる必要がある.
+
+options はstruct sk_option へのポインタの NULL 終端配列として, ミドルウェアにさまざまなオプションを渡すのに利用できる. ミドルウェアはサポートしていなかったり知らないオプションは無視できる. ただし, サポートしていないオプションに "important" フラグが設定されていたら, 失敗を返さなければならない.
+
+現在次のオプション名がサポートされている:
+
+	"device"
+
+	操作を実行する FIDO デバイスを特定する. このフィールドの値は, ミドルウェアによって解釈される. 一般的には 問題のデバイスヘノ /dev ノードのパスを指定する.
+
+	"user"
+
+	鍵を発行した再の FIDO2 ユーザ名を指定する. OpenSSH のデフォルは すべて 0 のユーザを使うが, これを上書きする.
+
+OpenSSH では, ssh-agent からミドルウェアのアドレス-空間の隔離を提供するために ssh-pkcs11-helper と同様のメカニズムを用いて, ミドルウェアを起動させる.(訳注: ssh-sk-helper)
+
