@@ -4917,6 +4917,14 @@ format (see below).</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Armored format</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T055614Z" creationid="haruyama" creationdate="20200602T055614Z">
+        <seg>Armored 形式</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>As
    many bytes as needed are taken from the beginning of the hash value.</seg>
       </tuv>
@@ -5569,6 +5577,14 @@ still be sent in the other direction.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>At present, only detached and armored signatures are supported.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T063110Z" creationid="haruyama" creationdate="20200602T055608Z">
+        <seg>現在 detached (訳注: armored になっていない, ヘッダフッタがなく base64 エンコードされていない, blob そのもの) と armored 署名のみがサポートされている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>At present, the best known algorithm is the
    Pollard-rho method.</seg>
       </tuv>
@@ -6215,6 +6231,14 @@ by listing their serial number in a bitmap.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200528T064850Z" creationid="haruyama" creationdate="20200528T064850Z">
         <seg>ビットマップ節はタイプ KRL_SECTION_CERT_SERIAL_BITMAP を用い, ビットマップ中に列挙されたシリアル番号の鍵を失効する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Blob format</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T055950Z" creationid="haruyama" creationdate="20200602T055950Z">
+        <seg>Blob の形式</seg>
       </tuv>
     </tu>
     <tu>
@@ -8442,6 +8466,14 @@ domain name to the option name, e.g. "my-option@example.com".</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Data to be signed is first hashed with the specified hash_algorithm.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T060839Z" creationid="haruyama" creationdate="20200602T060839Z">
+        <seg>署名されるデータは, 指定された hash_algorithm で最初にハッシュ化される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Data transfer for a session is done using SSH_MSG_CHANNEL_DATA and
    SSH_MSG_CHANNEL_EXTENDED_DATA packets and the window mechanism.</seg>
       </tuv>
@@ -10281,6 +10313,14 @@ encrypted length.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Example:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T055931Z" creationid="haruyama" creationdate="20200602T055931Z">
+        <seg>例:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Examples</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110718T040346Z">
@@ -10717,6 +10757,14 @@ encrypted length.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Files containing the signature MUST start with the header.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T055843Z" creationid="haruyama" creationdate="20200602T055843Z">
+        <seg>署名を含むファイルはヘッダで始まらなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Finally, calculate a MAC tag and append it.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200527T062659Z" creationid="haruyama" creationdate="20200527T062659Z">
@@ -11063,6 +11111,16 @@ as a name/value pair.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200518T050726Z" creationid="haruyama" creationdate="20200518T050726Z">
         <seg>NIST の曲線に対しては,  [RFC5656] で用いられたものと同じ曲線-ハッシュのアルゴリズムペアが, 一貫性のために採用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>For RSA signatures, the
+signature algorithm must be "rsa-sha2-512" or "rsa-sha2-256" (i.e.
+not the legacy RSA-SHA1 "ssh-rsa").</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T061346Z" creationid="haruyama" creationdate="20200602T061346Z">
+        <seg>RSA の署名ならば, 署名アルゴリズムは "rsa-sha2-512" ないし "rsa-sha2-256" でなければならない (つまり レガシーな RSA-SHA1 "ssh-rsa" ではない).</seg>
       </tuv>
     </tu>
     <tu>
@@ -17078,6 +17136,15 @@ handling in this area.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Implementations should ignore
+the reserved field if it is not empty.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T060744Z" creationid="haruyama" creationdate="20200602T060744Z">
+        <seg>実装は, 空でない reserved フィールドを無視しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Implementations should only allow forwarding privileged ports if the
    user has been authenticated as a privileged user.</seg>
       </tuv>
@@ -20311,6 +20378,16 @@ draft that is available from:</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>It is included to
+ensure that manual signatures can never be confused with any message
+signed during SSH user or host authentication.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T062822Z" creationid="haruyama" creationdate="20200602T062822Z">
+        <seg>SSH のユーザないしホスト認証で署名されるすべてのメッセージでと手動の署名との混同が決してないことを保証するために含まれている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>It is intended only
    to create the initial state of the IANA databases for the SSH
    protocol and also contains instructions for future assignments.</seg>
@@ -21602,6 +21679,15 @@ ID" strings.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110725T092718Z">
         <seg>すべての鍵交換メカニズムと同様, この方法も, クライアントとサーバが生成する秘密のランダム性(乱数K と 一時RSA秘密鍵) にそのセキュリティを依存している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Likewise, the footer MUST be present at the end of every
+signature.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T055904Z" creationid="haruyama" creationdate="20200602T055904Z">
+        <seg>どうように, フッタはすべての署名の末尾になければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -29715,6 +29801,14 @@ types), and draft-josefsson-eddsa-ed25519-03 for Ed25519.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Signed Data, of which the signature goes into the blob above</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T062613Z" creationid="haruyama" creationdate="20200602T062153Z">
+        <seg>前述の blob の signature に入る 署名されるデータ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Signing and verifying is done using the Elliptic Curve Digital
    Signature Algorithm (ECDSA).</seg>
       </tuv>
@@ -32910,6 +33004,15 @@ zero.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The Armored SSH signatures consist of a header, a base64
+encoded blob, and a footer.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T055642Z" creationid="haruyama" creationdate="20200602T055642Z">
+        <seg>Armored SSH 署名は, ヘッダ, base64 でエンコードされた blob, フッタからなる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The Authentication Method Name is used to describe an authentication
    method for the "ssh-userauth" service [SSH-USERAUTH].</seg>
       </tuv>
@@ -35272,6 +35375,15 @@ mechanism.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The base64 encoded blob SHOULD be broken up by newlines
+every 76 characters.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T055924Z" creationid="haruyama" creationdate="20200602T055924Z">
+        <seg>base64 でエンコードされた blob は 76文字ごとに改行で分割されている必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The beginning of the address specification may contain a
          user name followed by an '@' (US-ASCII character 0x40).</seg>
       </tuv>
@@ -36384,6 +36496,15 @@ options on the certificates validity.</seg>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200514T030237Z" creationid="haruyama" creationdate="20200514T030237Z">
         <seg>この曲線は, 次の素数 p の整数剰余を元にする:
       p = 2^(521)-1</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The data is concatenated and passed to the SSH signing
+function.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T062843Z" creationid="haruyama" creationdate="20200602T062843Z">
+        <seg>データは連結され SSH の署名関数に渡される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37578,6 +37699,15 @@ K_1.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The footer is the string
+"-----END SSH SIGNATURE-----" immediately after a newline.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T055814Z" creationid="haruyama" creationdate="20200602T055814Z">
+        <seg>フッタは, 改行直後の文字列 "-----END SSH SIGNATURE-----" だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The format of names and procedures for
    defining new names are defined in [SSH-ARCH] and [SSH-NUMBERS].</seg>
       </tuv>
@@ -37896,11 +38026,28 @@ is obtained by taking the SHA1 or SHA256 hash of the public key blob.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The header MUST be present at the start of every signature.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T055827Z" creationid="haruyama" creationdate="20200602T055827Z">
+        <seg>ヘッダはすべての署名の最初になければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The header data allowed by this file format could contain an
    unlimited range of information.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110719T030853Z">
         <seg>このファイル形式で利用できるヘッダのデータは, 情報の範囲の制限がない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The header is the string "-----BEGIN SSH SIGNATURE-----"
+followed by a newline.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T055749Z" creationid="haruyama" creationdate="20200602T055749Z">
+        <seg>ヘッダは文字列 "-----BEGIN SSH SIGNATURE-----" で改行が続く.</seg>
       </tuv>
     </tu>
     <tu>
@@ -39158,6 +39305,14 @@ option-specific information (see below).</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The namespace value MUST NOT be the empty string.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T060647Z" creationid="haruyama" creationdate="20200602T060647Z">
+        <seg>namespace の値は空文字列であってはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The naming of opcode values mostly follows the POSIX terminal mode
    flags.</seg>
       </tuv>
@@ -39613,6 +39768,14 @@ signaled or the mux server closes the session.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The preamble is the six-byte sequence "SSHSIG".</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T062704Z" creationid="haruyama" creationdate="20200602T062704Z">
+        <seg>前置きは 6 バイトのシーケンス "SSHSIG" だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The presence and use of this header data
    SHOULD be reviewed by sites that deploy this file format.</seg>
       </tuv>
@@ -39870,6 +40033,17 @@ OpenSSH certificate formats.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The publickey field MUST contain the serialisation of the
+public key used to make the signature using the usual SSH
+encoding rules, i.e RFC4253, RFC5656,
+draft-ietf-curdle-ssh-ed25519-ed448, etc.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T060214Z" creationid="haruyama" creationdate="20200602T060214Z">
+        <seg>publickey フィールドは通常の SSH エンコーディングルール, すなわち RFC4253 や RFC5656, draft-ietf-curdle-ssh-ed25519-ed448 などを用いた署名を作成するのに使われた公開鍵のシリアライゼーション文字列を含む.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The purpose of SSH_MSG_NEWCOMPRESS is to avoid a race condition where
    the server cannot reliably know whether a message sent by the client
    was sent before or after receiving the server's
@@ -39877,6 +40051,15 @@ OpenSSH certificate formats.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20181201T084021Z" creationid="haruyama" creationdate="20181201T084021Z">
         <seg>SSH_MSG_NEWCOMPRESS の目的は, クライアントから送られるメッセージがサーバの SSH_MSG_USERAUTH_SUCCESS の受信前か後かを確信できない競合状態を避けるためだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The purpose of the namespace value is to specify a unambiguous
+interpretation domain for the signature, e.g. file signing.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T060448Z" creationid="haruyama" creationdate="20200602T060400Z">
+        <seg>namespace の値の目的は, 署名の明白な相互運用のドメイン, たとえばファイルの署名, を指定することだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40185,6 +40368,15 @@ remote end.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200521T061935Z" creationid="haruyama" creationdate="20200521T061935Z">
         <seg>reserved なフィールドは現在定義されておらず, リモートの側で無視される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The reserved value is present to encode future information
+(e.g. tags) into the signature.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T060722Z" creationid="haruyama" creationdate="20200602T060722Z">
+        <seg>reserved の値は署名へのさらない情報 (例: タグ) をエンコードするためにある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -41210,6 +41402,15 @@ signature generation rules appropriate for the type of "signature_key".</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The signature itself is made using the SSH signature algorithm and
+encoding rules for the chosen key type.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T061154Z" creationid="haruyama" creationdate="20200602T061154Z">
+        <seg>signature 自体は SSH 署名アルゴリズムと選択された鍵タイプに対するエンコーディングルールを用いて作成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The signature key field contains the CA key used to sign the
 certificate.</seg>
       </tuv>
@@ -41372,6 +41573,15 @@ specify CA keys in ~/.ssh/known_hosts.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110720T131923Z">
         <seg>このプロトコルで用いられるサブシステム名は "publickey" だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The supported hash algorithms
+are "sha256" and "sha512".</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T061106Z" creationid="haruyama" creationdate="20200602T061106Z">
+        <seg>サポートされているハッシュアルゴリズムは "sha256" と "sha512" だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -43724,6 +43934,16 @@ managed, passwordless authentication and centrally certified host keys.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This blob is encoded as a string using the RFC4243 encoding
+rules and base64 encoded to form the middle part of the
+armored signature.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T061654Z" creationid="haruyama" creationdate="20200602T061654Z">
+        <seg>この blob は RFC4243(訳注: 4253 の間違いか)のエンコーディングルールを用いて文字列としてエンコーディングされ, armored 署名の中間部分となるため base64 エンコードされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This call is made exactly as described above.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160618T033421Z">
@@ -44180,6 +44400,15 @@ interfaces like the BSD tun(4) device.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>この文書は, SSH認証プロトコルのための汎用の認証法を記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document describes a lightweight SSH Signature format
+that is compatible with SSH keys and wire formats.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T055535Z" creationid="haruyama" creationdate="20200602T055535Z">
+        <seg>この文書は SSH 鍵とワイヤ形式と互換性のある軽量な SSH 署名形式を記述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -45386,6 +45615,16 @@ descriptor.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This is done to limit the amount of data presented to the signature
+operation, which may be of concern if the signing key is held in limited
+or slow hardware or on a remote ssh-agent.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T061043Z" creationid="haruyama" creationdate="20200602T061037Z">
+        <seg>署名の操作で提示されるデータ量を制限するために, これは行なわれる. データ量は, 署名する鍵が制限されたり遅いハードウェアにある場合やリモートの ssh-agent にある場合に懸念となりうる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This is due
    to the use of implicit server authentication in this key exchange
    method.</seg>
@@ -46430,6 +46669,15 @@ is used as a keystream, with any unused bytes simply discarded.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>これは, ([SSH-USERAUTH] で定義されている) "password"  方式のような他の方法に対して非常に有利である. 新しい(おそらくより強固な)方法が "思いのままに" 追加できるので, システムのセキュリティは透過的に強化できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This prevents cross-protocol attacks caused by signatures
+intended for one intended domain being accepted in another.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T060631Z" creationid="haruyama" creationdate="20200602T060631Z">
+        <seg>ある意図されたドメインで意図された署名が別のドメインで受け入れられることによる プロトコルをまたいだ攻撃を防止する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -48797,6 +49045,15 @@ supplied host keys are present in known_hosts.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20190120T103947Z" creationid="haruyama" creationdate="20190120T103947Z">
         <seg>検証者は, 代わりに RSASSA-PKCS1-v1_5 パディングを期待されるハッシュに適用し, RSA の操作による出力とエンコードされたバイト列を比較する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Verifiers MUST reject signatures with versions greater than those
+they support.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T060252Z" creationid="haruyama" creationdate="20200602T060252Z">
+        <seg>検証者は, サポートしているものより大きなバージョンを用いる署名を拒否しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
