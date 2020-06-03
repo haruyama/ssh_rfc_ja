@@ -5331,6 +5331,15 @@ any principal of the specified type.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>As such they cannot be made compatible with
+the existing ecdsa-sha2-nistp* key types.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T075525Z" creationid="haruyama" creationdate="20200602T075525Z">
+        <seg>このため既存の ecdsa-sha2-nistp* 鍵タイプとは互換できない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>As such, an example of a valid identification string is</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200519T052803Z">
@@ -5558,6 +5567,17 @@ still be sent in the other direction.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>At
+present the closest analogue to Security Keys in ssh-agent are PKCS#11
+tokens, insofar as they require a middleware library to communicate with
+the device that holds the keys.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T051204Z" creationid="haruyama" creationdate="20200603T051204Z">
+        <seg>現在, ssh-agent でのセキュリティ鍵にもっとも近いアナロジーは, 鍵を保持するデバイスと通信するのにミドルウェアライブラリが必要な点において, PKCS#11 トークンだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>At minLOS 128, either one of
    these methods may be used, but at minLOS 192,
    x509v3-ecdsa-sha2-nistp384 MUST be used.</seg>
@@ -5573,6 +5593,14 @@ still be sent in the other direction.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160527T000658Z" creationid="haruyama" creationdate="20160527T000658Z">
         <seg>クライアントの要求に対する応答以外に, サーバがメッセージを送信することは決してない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>At present the following options names are supported:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T053916Z" creationid="haruyama" creationdate="20200603T053916Z">
+        <seg>現在次のオプション名がサポートされている:</seg>
       </tuv>
     </tu>
     <tu>
@@ -5679,6 +5707,16 @@ still be sent in the other direction.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200514T072247Z" creationid="haruyama" creationdate="20200514T072247Z">
         <seg>現時点で, 楕円曲線 Diffle-Hellman の SSH での利用について記述された RFC はない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Attestation information is useful for out-of-band key and certificate
+registration workflows, e.g. proving to a CA that a key is backed
+by trusted hardware before it will issue a certificate.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T061122Z" creationid="haruyama" creationdate="20200602T081021Z">
+        <seg>証明情報は帯域外の鍵と証明書登録のワークフローでは有効だ. たとえば, CA の鍵が信頼できるハードウェアに保存されているかを CA鍵で証明書を発行する前に証明する場合など.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6325,6 +6363,14 @@ by listing their serial number in a bitmap.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>どちらの側も次のメッセージで window を調整できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Both security key certificates use the following encoding for private keys:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T075812Z" creationid="haruyama" creationdate="20200602T075812Z">
+        <seg>どちらのセキュリティ鍵証明書も秘密鍵に対して次のエンコーディングを用いる:</seg>
       </tuv>
     </tu>
     <tu>
@@ -9023,6 +9069,16 @@ domain name to the option name, e.g. "my-option@example.com".</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>During key generation, the hardware also returns attestation information
+that may be used to cryptographically prove that a given key is
+hardware-backed.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T080554Z" creationid="haruyama" creationdate="20200602T080554Z">
+        <seg>鍵生成の際, 与えられた鍵がハードウェアに保持されているかを暗号学的に証明するのに利用できる証明情報もハードウェアは返す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>During the transition period, it is important to be able to work in a</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -10765,6 +10821,16 @@ encrypted length.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Finally the signature format includes
+a monotonic signature counter that can be used (at scale) to detect
+concurrent use of a private key, should it be extracted from hardware.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T070821Z" creationid="haruyama" creationdate="20200602T070821Z">
+        <seg>さいご に, 署名形式には単調な署名カウンタが含まれていて, ハードウェアから抜き取られたであろう 秘密鍵の同時利用を検出するのに(規模に応じて)利用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Finally, calculate a MAC tag and append it.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200527T062659Z" creationid="haruyama" creationdate="20200527T062659Z">
@@ -11082,6 +11148,14 @@ as a name/value pair.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200511T131238Z" creationid="haruyama" creationdate="20200511T131238Z">
         <seg>SHA-256 [RFC6234][SHS] を利用する Curve25519 について, 記述されるアルゴリズムは,  私的に定義されたアルゴリズム "curve25519-sha256@libssh.org" と同等だ. この文書の発行の時点で, libssh [libssh] と OpenSSH [OpenSSH] によって実装され広く配置されている</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>For Ed25519 keys the signature is encoded as:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T082518Z" creationid="haruyama" creationdate="20200602T082518Z">
+        <seg>Ed25519 鍵では署名は次のようにエンコーディングされる:</seg>
       </tuv>
     </tu>
     <tu>
@@ -11703,6 +11777,15 @@ SSH_FXP_SYMLINK as follows:</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>For similar reasons,
+integration of U2F devices cannot be achieved via the PKCS#11 API.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T070055Z" creationid="haruyama" creationdate="20200602T070055Z">
+        <seg>同様の理由から, U2F デバイスの統合は PKCS#11 API によっては達成できない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>For the
    most part, the security considerations involved in using the Secure
    Shell protocol apply, since all of the public key algorithms
@@ -11914,6 +11997,16 @@ SSH_FXP_SYMLINK as follows:</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>For this reason, OpenSSH shall support a dynamically-
+loaded middleware libraries to communicate with security keys, but offer
+support for the common case of USB HID security keys internally.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T053404Z" creationid="haruyama" creationdate="20200603T053404Z">
+        <seg>このため, OpenSSH はセキュリティ鍵と通信するためのミドルウェアライブラリの動的なロードをサポートする. しかし, 内部で USB HID セキュリティ鍵の一般的な場合のサポートを提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>For this reason, a client MAY send a user authentication
    request using a public key algorithm not included in "server-sig-
    algs".</seg>
@@ -11944,6 +12037,16 @@ SSH_FXP_SYMLINK as follows:</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>For this reason, we
+choose not to include this information in the public key or save it by
+default.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T080758Z" creationid="haruyama" creationdate="20200602T080758Z">
+        <seg>このため, 我々はデフォルトでは公開鍵にこの情報は含めないし保存しないこととする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>For this to be
    possible, the client must have a priori knowledge of the server's
    public host key.</seg>
@@ -11969,6 +12072,15 @@ are used with empty passphrases.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200528T060931Z" creationid="haruyama" creationdate="20200528T060931Z">
         <seg>暗号化なしの鍵のため, cipher "none" と KDF "none" が, 空のパスフレーズと一緒に用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>For use in the SSH protocol, we wish to avoid server-side parsing of ASN.1
+format data in the pre-authentication attack surface.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T082143Z" creationid="haruyama" creationdate="20200602T082143Z">
+        <seg>SSH プロトコルの利用では, 認証前の攻撃サーフェスでの ASN.1 形式データのサーバサイドでのパースを避けたい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12053,6 +12165,16 @@ TCP sockets but with a single path instead of a host and port.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>国際化の立場から, パスワード認証が行なわれるときに, ユーザの使うOSやクライアントのソフトウェアに依らずに認証が行なわれることが望ましい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>From sshd's perspective, a security key constitutes a
+single factor of authentication, even if protected by a PIN or biometric
+authentication.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T074731Z" creationid="haruyama" creationdate="20200602T074731Z">
+        <seg>sshd の視点からは, セキュリティキーは, たとえ PIN や生体認証で保護されていても, 単一要素の認証を構成する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14770,6 +14892,16 @@ ignore it.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200518T060505Z" creationid="haruyama" creationdate="20200518T060505Z">
         <seg>GSS_Init_sec_context() や GSS_Accept_sec_context() の呼び出しで GSS_S_COMPLETE か GSS_S_CONTINUE_NEEDED 以外の major_status コードが返ったり, 他の GSS-APIの呼び出しで GSS_S_COMPLETE 以外の major_status コードが返ったら, 鍵交換は失敗しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If any are defined in the future,
+it will be possible to infer their presence from the contents of the "flags"
+value.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T081948Z" creationid="haruyama" creationdate="20200602T081948Z">
+        <seg>将来定義されたら, "flags" の値の内容からその存在を推論できるだろう.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17546,6 +17678,16 @@ performs the CA signing operation.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>In OpenSSH, the middleware will be invoked by using a similar mechanism to
+ssh-pkcs11-helper to provide address-space containment of the
+middleware from ssh-agent.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T061012Z" creationid="haruyama" creationdate="20200603T060659Z">
+        <seg>OpenSSH では, ssh-agent からミドルウェアのアドレス-空間の隔離を提供するために ssh-pkcs11-helper と同様のメカニズムを用いて, ミドルウェアを起動させる.(訳注: ssh-sk-helper)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>In SSH, the key exchange
    is signed with the host key to provide host authentication.</seg>
       </tuv>
@@ -17677,6 +17819,16 @@ performs the CA signing operation.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110722T060108Z">
         <seg>クライアントで指定された属性に加えて特定の属性を強制するための, 管理者用の方法をサーバは提供してもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>In addition to the message to be signed, the U2F signature operation
+requires the key handle and a few additional parameters.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T081804Z" creationid="haruyama" creationdate="20200602T081804Z">
+        <seg>署名されるメッセージに加えて U2F 署名操作は鍵ハンドルといくつかの追加のパラメータを必要とする.In addition to the message to be signed, the U2F signature operation
+requires the key handle and a few additional parameters.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20296,6 +20448,17 @@ draft that is available from:</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>It is common for U2F hardware to derive private keys from the key handle
+in conjunction with a small per-device secret that is unique to the
+hardware, thus requiring little on-device storage for an effectively
+unlimited number of supported keys.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T074457Z" creationid="haruyama" creationdate="20200602T074457Z">
+        <seg>鍵ハンドルとハードウェア固有なデバイスごとの小さな秘密から秘密鍵を導出するのは U2F ハードウェアで一般的で, それゆえサポートされる鍵は実質的に無制限でデバイス上のストレージはほとんど必要としない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>It is desirable to use mechanisms that could unify the approach for
    administrative security for SNMPv3 and command line interfaces (CLI)
    and other management interfaces.</seg>
@@ -21078,6 +21241,14 @@ certificates by listing their serial numbers.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110723T013121Z">
         <seg>コアプロトコルの一部として指定されている Diffie-Hellman アルゴリズムよりもクライアントのCPU時間の消費がかなり小さいので, 遅いクライアントのシステムに特に適している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>It will take the following format:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T081108Z" creationid="haruyama" creationdate="20200602T081108Z">
+        <seg>次の形式を取る:</seg>
       </tuv>
     </tu>
     <tu>
@@ -23403,6 +23574,14 @@ are individually implemented as extensions described below.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>No extensions are yet defined for SSH use.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T081848Z" creationid="haruyama" creationdate="20200602T081848Z">
+        <seg>SSH での利用のためには拡張はまだ定義されていない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>No further validation is required beyond what is
    described in [RFC7748].</seg>
       </tuv>
@@ -24929,6 +25108,24 @@ signalling: "eow@openssh.com" (End Of Write).</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>OpenSSH integrates U2F as new key and corresponding certificate types:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T075123Z" creationid="haruyama" creationdate="20200602T075123Z">
+        <seg>OpenSSH は U2F と 新しい鍵と対応する証明書のタイプで統合する:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>OpenSSH integration
+-------------------</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T051846Z" creationid="haruyama" creationdate="20200603T051846Z">
+        <seg>OpenSSH と統合
+-------------------</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>OpenSSH introduces new public key algorithms to support certificate
 authentication for users and host keys.</seg>
       </tuv>
@@ -25055,6 +25252,15 @@ http://git.libssh.org/users/aris/libssh.git/plain/doc/curve25519-sha256@libssh.o
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200519T073137Z" creationid="haruyama" creationdate="20200519T073137Z">
         <seg>OpenSSH は 次で記述されている 鍵交換のための Curve25519 での ECDH の利用をサポートしている:
 http://git.libssh.org/users/aris/libssh.git/plain/doc/curve25519-sha256@libssh.org.txt?h=curve25519</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>OpenSSH treats the attestation certificate and enrollment signatures as
+opaque objects and does no interpretation of them itself.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T081213Z" creationid="haruyama" creationdate="20200602T081213Z">
+        <seg>OpenSSH は attestation certificate と  enrollment signature は中身が不明なオブジェクトとして取り扱いそれら自体を解釈しない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28098,6 +28304,26 @@ that computes a 128 bit integrity tag given a message and a single-use
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>SSH U2F Key formats
+-------------------</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T075100Z" creationid="haruyama" creationdate="20200602T075100Z">
+        <seg>SSH U2F 鍵形式
+-------------------</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>SSH U2F signatures
+------------------</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T081722Z" creationid="haruyama" creationdate="20200602T081722Z">
+        <seg>SSH U2F 署名
+------------------</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>SSH User and Key Selection</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110825T040215Z">
@@ -30613,6 +30839,24 @@ length unencrypted.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110409T092939Z">
         <seg>SSH_MSG_KEX_ECDH_INIT と SSH_MSG_KEX_ECDH_REPLY のメッセージ番号の定義は, 7節にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Specifies a specific FIDO device on which to perform the
+	operation.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T053938Z" creationid="haruyama" creationdate="20200603T053938Z">
+        <seg>操作を実行する FIDO デバイスを特定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Specifies the FIDO2 username used when enrolling a key,
+	overriding OpenSSH's default of using an all-zero username.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T054123Z" creationid="haruyama" creationdate="20200603T054123Z">
+        <seg>鍵を発行した再の FIDO2 ユーザ名を指定する. OpenSSH のデフォルは すべて 0 のユーザを使うが, これを上書きする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34617,6 +34861,15 @@ mechanism.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The SSH_SK_VERSION_MAJOR should be incremented for each incompatible
+API change.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T053510Z" creationid="haruyama" creationdate="20200603T053510Z">
+        <seg>The SSH_SK_VERSION_MAJOR は非互換な API の変更のたびに増加させる必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The Secure
    Shell Transport Model uses some of these conceptual data flows when
    communicating between subsystems.</seg>
@@ -34957,6 +35210,26 @@ mechanism.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110729T034608Z">
         <seg>このメモで指定するトランスポートモデルは, セキュアシェルトランスポートモデル (SSHTM) と呼ばれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The U2F protocol however cannot be trivially used as an SSH protocol key
+type as both the inputs to the signature operation and the resultant
+signature differ from those specified for SSH.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T070031Z" creationid="haruyama" creationdate="20200602T070031Z">
+        <seg>しかし, U2F プロトコルは, 署名操作への入力や結果の署名が SSH のために指定されたものとはどちらも異なるように, SSH プロトコル鍵タイプとして用いるのは簡単にはできない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The USB interface is standardised around a HID protocol, but we want to
+be able to support other transports as well as dummy implementations for
+regress testing.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T053258Z" creationid="haruyama" creationdate="20200603T053258Z">
+        <seg>USB インタフェイスは HID プロトコルの上で標準化されている. しかし我々は, 回帰テストのためのダミーの実装ど同様に他のトランスポートもサポートできるようにしたい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35489,6 +35762,15 @@ case contains:</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200528T062940Z" creationid="haruyama" creationdate="20200528T062940Z">
         <seg>この場合は cert_section_data は次を含む:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The certificate form for SSH U2F keys appends the usual certificate
+information to the public key:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T075721Z" creationid="haruyama" creationdate="20200602T075721Z">
+        <seg>SSH U2F 鍵のための証明書の形式は, 通常の証明書の情報を公開鍵に追加する:</seg>
       </tuv>
     </tu>
     <tu>
@@ -36405,6 +36687,14 @@ lengths.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The corresponding private key contains:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T075604Z" creationid="haruyama" creationdate="20200602T075604Z">
+        <seg>対応する秘密鍵は次を含む:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The counter X is then incremented, and the
    process is repeated for each subsequent block in order to generate</seg>
       </tuv>
@@ -36810,6 +37100,18 @@ as is the requirement that each name appear only once.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110725T085430Z">
         <seg>[RFC3447]の (mask generation function として MGF1-with-HASH を, ハッシュとして HASH を そして空のラベルを用いる) RSAES-OAEP 方式(に従って暗号化は実行される</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The enrollment
+operation returns a public key, a key handle that must be used to invoke
+the hardware-backed private key, some flags and signed attestation
+information that may be used to verify that a private key is hosted on a
+particular hardware instance.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T071454Z" creationid="haruyama" creationdate="20200602T071454Z">
+        <seg>登録操作は公開鍵と鍵ハンドル, いくつかのフラグ, 署名された証明情報を返す. 鍵ハンドルはハードウェアに保存された秘密鍵を呼び出すのに必要だ.署名された証明情報は特定のハードウェアインスタンスにホストされた秘密鍵かどうかの検証に利用できる. </seg>
       </tuv>
     </tu>
     <tu>
@@ -37708,6 +38010,22 @@ K_1.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The format of a sk-ecdsa-sha2-nistp256@openssh.com public key is:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T075542Z" creationid="haruyama" creationdate="20200602T075542Z">
+        <seg>sk-ecdsa-sha2-nistp256@openssh.com 公開鍵の形式は:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The format of a sk-ssh-ed25519@openssh.com public key is:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T075617Z" creationid="haruyama" creationdate="20200602T075617Z">
+        <seg>sk-ssh-ed25519@openssh.com 公開鍵の形式は:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The format of names and procedures for
    defining new names are defined in [SSH-ARCH] and [SSH-NUMBERS].</seg>
       </tuv>
@@ -37790,6 +38108,14 @@ K_1.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180821T044935Z" creationid="haruyama" creationdate="20180821T044844Z">
         <seg>公開鍵と証明書ブロブの形式は SSH トランスポートプロトコル文書 [3] の6.6 節 "公開鍵アルゴリズム" で詳述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The format of this constraint extension would be:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T051729Z" creationid="haruyama" creationdate="20200603T051703Z">
+        <seg>この制約拡張の形式は:</seg>
       </tuv>
     </tu>
     <tu>
@@ -39136,6 +39462,25 @@ of the cipher block size.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The middleware
+may ignore unsupported or unknown options unless the "important" flag is
+set, in which case it should return failure if an unsupported option is
+requested.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T053858Z" creationid="haruyama" creationdate="20200603T053858Z">
+        <seg>ミドルウェアはサポートしていなかったり知らないオプションは無視できる. ただし, サポートしていないオプションに "important" フラグが設定されていたら, 失敗を返さなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The middleware library need only expose a handful of functions:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T053444Z" creationid="haruyama" creationdate="20200603T053444Z">
+        <seg>ミドルウェアライブラリは次の一握りの関数を露出させるだけでよい:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The minimum size of a packet is 16 (or the cipher block size,
    whichever is larger) bytes (plus 'mac').</seg>
       </tuv>
@@ -39536,6 +39881,15 @@ are the empty string.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200528T060948Z" creationid="haruyama" creationdate="20200528T060948Z">
         <seg>KDF "none" の場合のオプションは空文字列だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The options may be used to pass miscellaneous options to the middleware
+as a NULL-terminated array of pointers to struct sk_option.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T053603Z" creationid="haruyama" creationdate="20200603T053603Z">
+        <seg>options はstruct sk_option へのポインタの NULL 終端配列として, ミドルウェアにさまざまなオプションを渡すのに利用できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -41355,6 +41709,15 @@ extension with multiple versions (though this is unlikely).</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The signature
+is signed over a blob that consists of:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T081824Z" creationid="haruyama" creationdate="20200602T081824Z">
+        <seg>署名は次からなる blob に対して署名されたものだ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The signature algorithm MUST be applied over H, not the original
    data.</seg>
       </tuv>
@@ -41416,6 +41779,14 @@ certificate.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200525T065226Z" creationid="haruyama" creationdate="20200525T065226Z">
         <seg>signature key フィールドは, 証明書の署名に利用された CA 鍵が含まれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The signature returned from U2F hardware takes the following format:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T082049Z" creationid="haruyama" creationdate="20200602T082049Z">
+        <seg>U2F ハードウェアから返る署名は次の形式を取る:</seg>
       </tuv>
     </tu>
     <tu>
@@ -42132,6 +42503,16 @@ ecdsa-sha2-nistp384, ecdsa-sha2-nistp521.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The value in this field is interpreted by the
+	middleware but it would be typical to specify a path to
+	a /dev node for the device in question.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T054018Z" creationid="haruyama" creationdate="20200603T054018Z">
+        <seg>このフィールドの値は, ミドルウェアによって解釈される. 一般的には 問題のデバイスヘノ /dev ノードのパスを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The value in tmStateReference MUST uniquely
           identify the session over which the message was received.</seg>
       </tuv>
@@ -42614,6 +42995,16 @@ ever changed in an incompatible way.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180927T110539Z" creationid="haruyama" creationdate="20180927T110539Z">
         <seg>それゆえ, オペレーティングシステムは, 2048ビット未満の DH 群についてログを出さないほうがよい. それにより追加の攻撃面ができるかもしれないからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Therefore, the
+signature format used on the wire in SSH2_USERAUTH_REQUEST packets will
+be reformatted to better match the existing signature encoding:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T082242Z" creationid="haruyama" creationdate="20200602T082242Z">
+        <seg>このため, SSH2_USERAUTH_REQUEST パケットの通信で利用する署名形式が既存の署名エンコーディングとより一致するよう再形式化される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -43259,6 +43650,16 @@ plaintext.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>They also offer an attestation
+mechanism at key enrollment time that can be used to prove that a
+given key is backed by hardware.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T070631Z" creationid="haruyama" creationdate="20200602T070430Z">
+        <seg>さらにそれらは,  鍵の登録時に, 与えられた鍵がハードウェアに保存されたものかどうか証明するために用いることができる認証メカニズムも提供している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>They are based on
    "Determining Strengths For Public Keys Used For Exchanging Symmetric
    Keys" [RFC3766].</seg>
@@ -43293,6 +43694,16 @@ but are able to revoke plain keys.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110707T074417Z">
         <seg>stringは, その長さ(値のbyte数)のuint32とその値のbyte列で格納される. 空のstringの場合は, 値がない</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>They can be configured to require indication
+of "user presence" for each signature operation (typically achieved
+by requiring the user touch the key).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T070358Z" creationid="haruyama" creationdate="20200602T070358Z">
+        <seg>それらは, それぞれの署名操作で "ユーザの存在" を示すよう要求するように設定できる (典型的には, ユーザが鍵にタッチする必要があることで達成される).</seg>
       </tuv>
     </tu>
     <tu>
@@ -44023,6 +44434,15 @@ interfaces like the BSD tun(4) device.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This constraint-based approach does not present any compatibility
+problems.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T051755Z" creationid="haruyama" creationdate="20200603T051755Z">
+        <seg>この制約ベースのアプローチは現在互換性の問題がない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This could be done manually between the
    administrators or automatically using secure DNS dynamic update [11]
    between the SSH server and the nameserver.</seg>
@@ -44391,6 +44811,14 @@ interfaces like the BSD tun(4) device.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T062137Z" creationid="haruyama" creationdate="20200513T062137Z">
         <seg>この文書は セキュアシェル (SSH) での RC4 を非推奨とする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This document describes OpenSSH's support for U2F/FIDO security keys.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T065453Z" creationid="haruyama" creationdate="20200602T065453Z">
+        <seg>この文書は U2F/FIDO セキュリティ鍵に対する OpenSSH のサポートについて記述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -45164,6 +45592,15 @@ protocol.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200519T063548Z" creationid="haruyama" creationdate="20200519T063548Z">
         <seg>公開されている SSH のプロトコルに対する OpenSSH の逸脱と拡張をここに記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This drives the requirement that
+the key handle be supplied for each signature operation.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T074521Z" creationid="haruyama" creationdate="20200602T074521Z">
+        <seg>これにより鍵ハンドルは署名操作のたびごとに提供される必要がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -47793,6 +48230,17 @@ requests from clients.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>To avoid this, without having to add wholly new messages to the agent
+protocol, we will use the existing SSH2_AGENTC_ADD_ID_CONSTRAINED message
+with a new key constraint extension to encode a path to the middleware
+library for the key.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T051719Z" creationid="haruyama" creationdate="20200603T051643Z">
+        <seg>エージェントプロトコルに完全に新しいメッセージを追加する必要なしにこれを避けるため, 鍵のためのミドルウェアライブラリにパスをエンコードする 新しい鍵制約拡張をと一緒に既存の SSH2_AGENTC_ADD_ID_CONSTRAINED メッセージを使う. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>To avoid trial and error as well as
    authentication penalties, a client must be able to discover public
    key algorithms a server accepts.</seg>
@@ -47864,6 +48312,15 @@ to 0xffffffff.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110621T013128Z">
         <seg>このために, 鍵交換法のファミリと2つのユーザ認証法, 新しいホスト鍵アルゴリズムを定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>To enable multi-factor authentication in ssh, please
+refer to the AuthenticationMethods option in sshd_config(5).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T074802Z" creationid="haruyama" creationdate="20200602T074740Z">
+        <seg>ssh で多要素認証を有効にするには, sshd_config(5) の AuthenticationMethods を参照してほしい.</seg>
       </tuv>
     </tu>
     <tu>
@@ -48051,6 +48508,16 @@ K_1.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110811T105119Z">
         <seg>手順の要素を単純にするため, 状態情報の開放は常に明示的に指定されていない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>To support this
+case, OpenSSH optionally allows retaining the attestation information
+at the time of key generation.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T081100Z" creationid="haruyama" creationdate="20200602T081100Z">
+        <seg>この場合をサポートするため, OpenSSH は鍵生成時に証明情報を保持することを選択できるようにする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -48266,6 +48733,63 @@ the MAC.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>U2F also offers a number of features that are attractive in the context
+of SSH authentication.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T070144Z" creationid="haruyama" creationdate="20200602T070144Z">
+        <seg>U2F は SSH 認証のコンテキストで魅力的な特徴も多数提供している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>U2F is an open standard for two-factor authentication hardware, widely
+used for user authentication to websites.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T065559Z" creationid="haruyama" creationdate="20200602T065559Z">
+        <seg>U2F はウェブサイトのユーザ認証に広く用いられている, 2要素認証ハードウェアのオープンな標準だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>U2F private keys are generated through an enrollment operation,
+which takes an application ID - a URL-like string, typically "ssh:"
+in this case, but a HTTP origin for the case of web authentication,
+and a challenge string (typically randomly generated).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T071237Z" creationid="haruyama" creationdate="20200602T071237Z">
+        <seg>U2F 秘密鍵は登録操作を通して生成され, このときにアプリケーション ID と (通常ランダムに生成される) チャレンジ文字列を取る. アプリケーション ID は URL のような文字列で, この場合通常は "ssh:" だ. ただし, ウェブ認証の場合には HTTP オリジンとなる</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>U2F tokens
+primarily use ECDSA signatures in the NIST-P256 field, though the FIDO2
+standard specifies additional key types, including one based on Ed25519.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T074609Z" creationid="haruyama" creationdate="20200602T074609Z">
+        <seg>U2F トークンは主に NIST-P256 フィールドの ECDSA 署名を用いる. 一方 FIDO2 標準は Ed25519 ベースのものを含む追加の鍵タイプを指定している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>U2F tokens are ubiquitous,
+available from a number of manufacturers and are currently by far the
+cheapest way for users to achieve hardware-backed credential storage.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T070438Z" creationid="haruyama" creationdate="20200602T065813Z">
+        <seg>U2F トークンはユビキタスで, 多くの製造者から入手可能で, ハードウェアに保存された認証情報ストレージをユーザが使うための現在のところもっとも安価な方法だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>U2F tokens may be attached via a number of means, including USB and NFC.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T053159Z" creationid="haruyama" creationdate="20200603T053159Z">
+        <seg>U2F トークンは USB と NFC を含むさまざまな方法で取り付けられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Uncontrolled setting of environment variables in a
    privileged process can be a security hazard.</seg>
       </tuv>
@@ -48296,6 +48820,26 @@ the reversal was not noticed until the server was widely deployed.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200521T072851Z" creationid="haruyama" creationdate="20200521T072851Z">
         <seg>残念なことに, この逆転はサーバが広く配置されるまで気付かれなかった.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Unfortunately, the protocol message used
+to add PKCS#11 keys to ssh-agent does not include any way to send the
+key handle to the agent as U2F keys require.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T051253Z" creationid="haruyama" creationdate="20200603T051253Z">
+        <seg>しかし, ssh-agent に PKCS#11 鍵を追加するのに使われるプロトルメッセージは, U2F 鍵が必要とするエージェントに鍵ハンドルを送る方法を含んでいない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Unfortunately, the protocol required for this proof is
+not privacy-preserving and may be used to identify U2F tokens with at
+least manufacturer and batch number granularity.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T080730Z" creationid="haruyama" creationdate="20200602T080725Z">
+        <seg>残念なことに, この証明に必要なプロトコルはプライバシー保護されておらず, すくなくとも 製造者とバッチ番号の粒度で U2F トークンを識別するのに利用できてしまう.</seg>
       </tuv>
     </tu>
     <tu>
@@ -48634,6 +49178,15 @@ supplied host keys are present in known_hosts.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20181227T102152Z" creationid="haruyama" creationdate="20181227T102152Z">
         <seg>Secure Shell (SSH) プロトコルでの SHA-256 と SHA-512 を用いたRSA鍵の利用</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Use of U2F security keys does not automatically imply multi-factor
+authentication.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T074637Z" creationid="haruyama" creationdate="20200602T074637Z">
+        <seg>U2F セキュリティ鍵の利用は, 自動的に多要素認証となることを意味しない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -50046,6 +50599,15 @@ and "reserved" an extension field whose contents are currently ignored.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Where the "ecdsa_signature" field follows the RFC5656 ECDSA signature
+encoding:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T082439Z" creationid="haruyama" creationdate="20200602T082439Z">
+        <seg>"ecdsa_signature" フィールドは RFC5656 ECDSA 署名エンコーディングに従う:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>While SSH does support turning off confidentiality and
    integrity, they MUST NOT be turned off when used with the SSH
    Transport Model.</seg>
@@ -50062,6 +50624,16 @@ and "reserved" an extension field whose contents are currently ignored.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160602T033110Z" creationid="haruyama" creationdate="20160602T033110Z">
         <seg>サイドチャンネル攻撃に対する完全な対処は, この仕様の範囲外だ. しかし, エージェントはサイドチャンネル攻撃に耐性がある暗号学的な実装を使う必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>While each uses ecdsa-sha256-nistp256 as the underlying signature primitive,
+keys require extra information in the public and private keys, and in
+the signature object itself.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T075452Z" creationid="haruyama" creationdate="20200602T075452Z">
+        <seg>ecdsa-sha256-nistp256 を基底の署名プリミティブとして用いているタイプは, 鍵は公開鍵と秘密鍵, 署名オブジェクト自体の中にさらなる情報を必要とする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -50209,6 +50781,14 @@ and "reserved" an extension field whose contents are currently ignored.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110829T035254Z">
         <seg>AES-GCM では, 12-オクテットの IVが2つのフィールドに分けられる: 4-octet の固定のフィールドと, 8-octet の呼び出しカウンタフィールドだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>With a private half consisting of:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T075645Z" creationid="haruyama" creationdate="20200602T075645Z">
+        <seg>秘密鍵の側は次で構成される:</seg>
       </tuv>
     </tu>
     <tu>
@@ -50672,6 +51252,14 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110829T123444Z">
         <seg>この文書は, AES-GCM で packet length フィールドを暗号化せず変わりに追加の認証データとして処理することで要求することで, このジレンマを解決する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>and for security key ed25519 certificates:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T075743Z" creationid="haruyama" creationdate="20200602T075743Z">
+        <seg>セキュリティ鍵 ed25519 の証明書の場合は:</seg>
       </tuv>
     </tu>
     <tu>
@@ -52756,6 +53344,24 @@ up to, and including the signature key.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200525T072011Z" creationid="haruyama" creationdate="20200525T072011Z">
         <seg>source-address          string        認証のために証明書を受け入れることができるソースアドレスのコンマ区切りリスト</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>ssh-agent protocol extensions
+-----------------------------</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T050954Z" creationid="haruyama" creationdate="20200603T050954Z">
+        <seg>ssh-agent プロトコル拡張
+-----------------------------</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>ssh-agent requires a protocol extension to support U2F keys.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200603T051014Z" creationid="haruyama" creationdate="20200603T051014Z">
+        <seg>ssh-agent は U2F 鍵のサポートのためにプロトコル拡張を必要とする.</seg>
       </tuv>
     </tu>
     <tu>
