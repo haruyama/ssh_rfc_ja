@@ -213,13 +213,13 @@ OpenSSH は ユーザ認証が完了したあとですべての プロトコル 
 	char		1 /* want-reply */
 	string[]	hostkeys
 
-サーバはこのメッセージを受け取ったならば, 要求された鍵それぞれについて次のように署名を生成する必要がある.
+サーバはこのメッセージを受け取ったならば, 要求された鍵それぞれについて次に対する署名を生成する必要がある.
 
 	string		"hostkeys-prove-00@openssh.com"
 	string		session identifier
 	string		hostkey
 
-これらの署名は, リクエスト中のホスト鍵の順番に一致する順番でこの応答に含まれる (訳注: 2020/05 での OpenSSH のサーバ側の実装は複数のホスト鍵に対応していないようにみえる).
+これらの署名は, リクエスト中のホスト鍵の順番に一致する順番で次の応答に含まれる.
 
 	byte		SSH_MSG_REQUEST_SUCCESS
 	string[]	signatures
