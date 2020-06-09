@@ -1,0 +1,1251 @@
+
+
+Network Working Group                                          T. Ylonen
+Internet-Draft                                               S. Lehtinen
+Expires: April 1, 2002                  SSH Communications Security Corp
+                                                            October 2001
+
+
+                       SSH ファイル転送プロトコル
+                    draft-ietf-secsh-filexfer-02.txt
+
+このメモの位置づけ
+
+   この文書は, Internet-Draft で RFC2026 の 10節のすべての条文に完全に準拠する.
+
+   Internet-Draft は Internet Engineering Task Force (IETF) とその分野, そのワーキンググループの作業文書だ.  他のグループも Internet-Draft として作業文書を配布するかもしれないことに注意.
+
+   Internet-Drafts は, 最大で6か月有効な草稿で, いつでも他の文書によって更新, 置換, 廃止されうる.  Internet Draft を参考仕様としたり "進行中" 以外ので引用は不適切だ.
+
+   現在の Internet-Draft のリストは http://www.ietf.org/ietf/1id-abstracts.txt でアクセスできる.
+
+   Internet-Draft Shadow Directories のリストは http://www.ietf.org/shadow.html でアクセスできる.
+
+   この Internet-Draft は 2002/04/01 に期限切れとなる.
+
+著作権情報
+
+   Copyright (C) The Internet Society (2001).  All Rights Reserved.
+
+概要
+
+   SSH ファイル転送プロトコルは, なんらかの信頼できるデータストリーム上での安全なファイル転送機能を提供する.  これは, SSH2 プロトコルで利用するための標準ファイル転送プロトコルだ.  この文書はこのファイル演奏プロトコルと SSH2 プロトコルスートへのプロトコルのインタフェイスについて記述する.
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                 [Page 1]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+目次
+
+   1導入 . . . . . . . . . . . . . . . . . . . . . . . .   3
+   2.   SSH コネクションプロトコルでの利用 . . . . . . . . . . . .   4
+   3.   一般パケット形式  . . . . . . . . . . . . . . . . . . .   5
+   4.   プロトコルの初期化  . . . . . . . . . . . . . . . . . .   7
+   5.   ファイルの属性  . . . . . . . . . . . . . . . . . . . . . .   8
+   6.   クライアントからサーバへの要求 . . . . . . . . . . .  10
+   6.1  要求の同期と並び変え . . . . . . . . . . .  10
+   6.2  ファイル名 . . . . . . . . . . . . . . . . . . . . . . . . .  11
+   6.3  ファイルのオープン, 作成, クローズ . . . . . . . . . . . .  11
+   6.4  読み書き  . . . . . . . . . . . . . . . . . . . .  13
+   6.5  ファイルの削除とリネーム  . . . . . . . . . . . . . . . .  14
+   6.6   ディレクトリの作成と削除  . . . . . . . . . . . . .  15
+   6.7 ディレクトリのスキャン . . . . . . . . . . . . . . . . . . . .  15
+   6.8  ファイル属性の取得 . . . . . . . . . . . . . . . . .  16
+   6.9  ファイル属性の設定  . . . . . . . . . . . . . . . . . .  17
+   6.10 シンボリックリンクの取り扱い  . . . . . . . . . . . . . . . .  18
+   6.11 サーバサイドのパス名の正規化 . . . . . . . . . .  18
+   7.   サーバからクライアントへの応答  . . . . . . . . . .  20
+   8.   ベンダー特有の拡張 . . . . . . . . . . . . . . . . .  24
+   9.   セキュリティの考察  . . . . . . . . . . . . . . . . . .  25
+   10.  以前のプロトコルバージョンからの変更点  . . . . . . . . . .  26
+   10.1 バージョン  3 と 2 の間の変更点 . . . . . . . . . . . . . .  26
+   10.2 バージョン 2 と 1 の間の変更点 . . . . . . . . . . . . . .  26
+   10.3 バージョン 1 と 0 の間の変更点 . . . . . . . . . . . . . .  26
+   11.  商標の問題 . . . . . . . . . . . . . . . . . . . . . .  27
+        References . . . . . . . . . . . . . . . . . . . . . . . . .  28
+        Authors' Addresses . . . . . . . . . . . . . . . . . . . . .  28
+        Full Copyright Statement . . . . . . . . . . . . . . . . . .  29
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                 [Page 2]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+1イントロダクション
+
+   このプロトコルは, SSH2 プロトコル[3] のチャンネルのような, 信頼できるデータストリーム上のファイル転送 (さらに一般的にはファイルシステムアクセス) 機能を提供する.
+
+   このプロトコルは, 安全なリモートファイルシステムサービスと安全なファイル転送サービスを実装するのに利用できるよう設計されている.
+
+   このプロトコルは, 安全なチャンネル上っで動作し, サーバはすでにクライアント側のユーザを認証済みで, クライアントユーザの識別はサーバの実装で外部から利用可能であることを仮定している.
+
+   一般的に, このプロトコルは単純は要求-応答モデルに従っている.
+   それぞれの要求と応答はシーケンス番号を含み, 複数の要求は同時に保留される場合がある.  要求メッセージの数は比較的多く, 可能な応答メッセージの数は少ない.  それぞれの要求は結果として1つ以上の応答メッセージを得る (たとえば, 読み取りはデータを返すかエラー状態をレポートする)
+
+   この仕様でのパケット形式の記述は, secsh アーキテクチャドラフト [3] で提示された表記法を利用する.
+
+   このプロトコルは SSH2 プロトコルのコンテキストで記述されているが, このプロトコルは一般的で SSH2 プロトコルスートの他の部分とは独立している.  TLS RFC2246[1] 上での安全なファイル転送や VPN アプリケーションでの管理情報の転送など, 多数の異なるアプリケーションで利用可能だ.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                 [Page 3]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+2. SSH コネクションプロトコルでの利用
+
+   SSH2 プロトコルスートで利用する場合, このプロトコルは SSH 接続プロトコル [5] から ( ``Starting a Shell or a Command'' 節で記述されているように) サブシステムとして利用されることを意図している.  このプロトコルで用いるサブシステム名は "sftp" だ.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                 [Page 4]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+3. 一般パケット形式
+
+    安全な接続上で転送されるすべてのパケットは次の形式だ:
+
+   	uint32             length
+   	byte               type
+   	byte[length - 1]   data payload
+
+   データの前に 32 ビットの length と 8 ビットの type フィールドがある.  `length' は data エリアの長さで,  `length' フィールド自体の長さは含まない.  data エリアの形式と解釈はパケットの type に依存する.
+
+   後述するすべてのパケットの記述は, パケットの type と data フィールドに入るデータのみを指定している.  それゆえ `length' と `type' フィールドが前置されている必要がある.
+
+   パケットの最大サイズは, 実際にはクライアントによって決定される (クライアントが送る読み書きの要求の最大サイズ, 足すことの少しのバイトのパケットのオーバヘッド)すべてのサーバは, 少なくとも 34000 バイトのパケットをサポートする必要がある (パケットサイズは 前述のヘッダを含む完全な長さを意味する).  これにより, せいぜい 32768 バイトの読み書きは可能となる..
+
+   クライアントがサーバに送ることができる未解決 (未確認)の要求数に制限はない.  実際には, データストリーム上で利用可能なバッファリングやサーバが実行するキューイングによって制限される.  サーバのキューがつまってしまったら, ストリームからさらなるデータが読みとりなくなり, フロー制御がクライアントにさらなる要求の送信を差し止めるだろう.  しかし, プロトコルレベルでの制限はないが, クライアントの API はクライアントが送信する要求の無限のキューイングを防ぐための制限を提供してもよいことに注意.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                 [Page 5]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+   次の値がパケットの type として定義されている.
+
+   	#define SSH_FXP_INIT                1
+   	#define SSH_FXP_VERSION             2
+   	#define SSH_FXP_OPEN                3
+   	#define SSH_FXP_CLOSE               4
+   	#define SSH_FXP_READ                5
+   	#define SSH_FXP_WRITE               6
+   	#define SSH_FXP_LSTAT               7
+   	#define SSH_FXP_FSTAT               8
+   	#define SSH_FXP_SETSTAT             9
+   	#define SSH_FXP_FSETSTAT           10
+   	#define SSH_FXP_OPENDIR            11
+   	#define SSH_FXP_READDIR            12
+   	#define SSH_FXP_REMOVE             13
+   	#define SSH_FXP_MKDIR              14
+   	#define SSH_FXP_RMDIR              15
+   	#define SSH_FXP_REALPATH           16
+   	#define SSH_FXP_STAT               17
+   	#define SSH_FXP_RENAME             18
+   	#define SSH_FXP_READLINK           19
+   	#define SSH_FXP_SYMLINK            20
+   	#define SSH_FXP_STATUS            101
+   	#define SSH_FXP_HANDLE            102
+   	#define SSH_FXP_DATA              103
+   	#define SSH_FXP_NAME              104
+   	#define SSH_FXP_ATTRS             105
+   	#define SSH_FXP_EXTENDED          200
+   	#define SSH_FXP_EXTENDED_REPLY    201
+
+   追加のパケット type は, プロトコルバージョン番号(``プロトコルの初期化" 節を参照) が増加した場合にのみ定義され, その利用はバージョン番号を使った交渉がされなければならない.  SSH_FXP_EXTENDED と SSH_FXP_EXTENDED_REPLY パケットは, ベンダー特有の拡張の実装に利用できる.  さらなる詳細は ``ベンダ特有の拡張'' を参照.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                 [Page 6]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+4. プロトコルの初期化
+
+   ファイル転送プロトコルを開始する際, (クライアントは) SSH_FXP_INIT パケットを (バージョン番号付きで) まず送る.  サーバは SSH_FXP_VERSION パケットで応答し, 自身とクライアントのバージョン番号の最小値を提供する.  どちらの側その時点からプロトコルの特定のバージョンを遵守する必要がある.
+
+   (クライアントからサーバへの) SSH_FXP_INIT パケットは次の data を持つ:
+
+   	'uint32 version
+   	<extension data>
+
+    (サーバからクライアントへの) SSH_FXP_VERSION パケットは次の data を持つ:
+
+   	'uint32 version
+   	<extension data>
+
+   この文書で指定するプロトコルのバージョン番号は 3 だ.
+   バージョン番号は, プロトコルに非互換な変更があるたびに増加される必要がある.
+
+    前述のパケットの拡張データは空か, 次のペアのシーケンスである
+
+   	string extension_name
+   	string extension_data
+
+   (ペアがあるならどちらの文字列も常に存在しなければならないが, `extension_data' 文字列は 長さ 0 であってもよい.  ペアがあるなら, これらの文字列はベースラインのプロトコルへの拡張を表わしている.  `extension_name'  フィールドは拡張の名前を識別する.  この名前は "name@domain" 形式である必要がある. domain は 拡張を定義する組織の DNS ドメイン名だ.  この形式でない追加の名前が, IETF によって後で定義されるかもしれない.
+   実装は, 名前を認識できないすべての拡張を静かに無視しなければならない.
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                 [Page 7]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+5. ファイルの属性
+
+   ファイルの属性をエンコードするために新しい合成データタイプが定義される.  これは基本的には基本のタイプの組合せだが, フィールドの典型的ではない記述のためと保守性を保証するために一度定義する.
+
+   サーバからファイル属性を返す場合とサーバにファイル属性を送る場合の両方で同じエンコーディングが用いられる.  サーバに送る場合,  flags フィールドはどの属性を含んでいるかを指定し, サーバは残りの属性についてデフォルト値を用いる (もしくは, 残りの属性の値は変更しない).  サーバから属性を受け取る場合, flags は返却するデータに含まれている属性を指定する.  サーバは通常知っているすべての属性を返却する.
+
+   	uint32   flags
+   	uint64   size           present only if flag SSH_FILEXFER_ATTR_SIZE
+   	uint32   uid            present only if flag SSH_FILEXFER_ATTR_UIDGID
+   	uint32   gid            present only if flag SSH_FILEXFER_ATTR_UIDGID
+   	uint32   permissions    present only if flag SSH_FILEXFER_ATTR_PERMISSIONS
+   	uint32   atime          present only if flag SSH_FILEXFER_ACMODTIME
+   	uint32   mtime          present only if flag SSH_FILEXFER_ACMODTIME
+   	uint32   extended_count present only if flag SSH_FILEXFER_ATTR_EXTENDED
+   	string   extended_type
+   	string   extended_data
+   	...      more extended data (extended_type - extended_data pairs),
+   		   so that number of pairs equals extended_count
+
+   `flags' はどのフィールドが存在するか指定する.  対応するフラグが設定されていないフィールドは存在しない (パケットに含まれない).  新しいフラグは, プロトコルバージョン番号が増加する場合にのみ (もしくは, 後述する拡張メカニズムを利用して) 追加される.
+
+   `size' フィールドはバイトでのファイルのサイズを指定する.
+
+   `uid' と `gid' フィールドは, それぞれ数値の Unix 的な ユーザとグループ識別子を含む.
+
+   `permissions' フィールドは posix [1] で定義されたファイルパーミッションのビットマスクを含む.
+
+   `atime' と `mtime' はそれぞれファイルのアクセス時刻と編集時刻を含む.  UTC での 1970/01/01 からの秒数で表現される.
+
+   The SSH_FILEXFER_ATTR_EXTENDED flag provides a general extension
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                 [Page 8]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+   mechanism for vendor-specific extensions.  flag が指定されていたら, `extended_count' フィールドが存在する.  後に続く extended_type-extended_data ペアのカズを指定する.  これらのペアは, 拡張された属性を指定する.  属性のそれぞれについて, extended_type フィールドは "name@domain"という形式の文字列である必要がある. "domain" は有効で登録されたドメイン名で, "name" は方法を識別する.  IETF が ( "@" 文字を含まない) この形式から逸脱した名前を後で標準化するかもしれない.  `extended_data' の解釈は type に依存する.  実装は, 理解できない extended data フィールドは無視する必要がある.
+
+   追加のフィールドは, その存在を示すための flags フィールドに追加のビットを定義するかそのために拡張された属性を定義するかによって追加できる.  拡張された属性のメカニズムのほうが多くの目的で推奨される. 追加の flags ビットは, プロトコルバージョン番号も増加する IETF 標準の行動によってのみ定義される必要がある.  このような新しいフィールドの利用は, プロトコルの交換でのバージョン番号で交渉されなければならない.
+   サポートしていないプロトコルビットを含むパケットを受け取ったら, プロトコルエラーだ.
+
+    flags ビットは 次の値を持つよう定義されている.
+
+   	#define SSH_FILEXFER_ATTR_SIZE          0x00000001
+   	#define SSH_FILEXFER_ATTR_UIDGID        0x00000002
+   	#define SSH_FILEXFER_ATTR_PERMISSIONS   0x00000004
+   	#define SSH_FILEXFER_ATTR_ACMODTIME     0x00000008
+   	#define SSH_FILEXFER_ATTR_EXTENDED      0x80000000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                 [Page 9]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+6. クライアントからサーバへの要求
+
+   クライアントからサーバへの要求は, いろいろなファイルシステム操作を表現する.  それぞれの要求は `id' フィールドで始まる. これは (クライアントによって選択される) 要求を識別する 32 ビット識別子だ.
+   同じ識別子が, 要求に対する応答で返される.
+   可能な実装の1つは, (2^32 の法で) 単調に増加する要求シーケンス番号だ.
+
+   プロトコルの多くの操作はオープンしたファイルを操作する.  SSH_FXP_OPEN 要求は後でファイルにアクセスする (たとえば 読み込み操作) のに用いるために使う (クライアントからは不明瞭な可変長の文字列の) ファイルハンドルを返す.  クライアントは, 偽や閉じられたハンドルでサーバに要求を送ってはならない.  しかし, サーバは偽造されたハンドルのためのセキュリティリスクを避けるためハンドルに適切な検査をしなければならない.
+
+   この設計は, ステートフルなサーバの実装もステートレスなものもどちらも可能とする. 実装はリクエスト間で状態をキャッシュしてもよいし, フラッシュしてもよい.  ファイルハンドル文字列の内容はサーバとその設計に完全に依存する.  クライアントはファイルハンドル文字列を変更したり解釈しようとしたりするべきではない.
+
+   ファイルハンドル文字列は, 256文字より長くてはならない.
+
+6.1 要求の同期と並び変え
+
+   プロトコルと実装は同じファイルに関連する要求を到着順に処理しなければなない.  いいかえれば, アプリケーションがサーバに複数の要求を送る際, 応答中の結果は, 要求が1度に1つずつ送られてその度に応答を待った場合と同じとなる.  たとえば, サーバは同じファイルに対するファイル中の場所が重ならない読み書きの要求を並列に処理できるが, 場所の重なる読み書きは並び変えたり並列にはできない.  ただし, 2 つの異なるファイル転送接続からの要求の処理についてはサーバになんの順番の制限はない.  サーバは意のままにかわるがわる処理したり並列に処理したりしてよい.
+
+   未解決の要求に対する応答をクライアントに送信する順序には制限がない. ただし, クラアイントが他の要求を送信して常に未解決の要求が存在している場合でさえ, 処理が無期限に遅らされている要求がないという意味でサーバは公平さを保証しなければならない, という点を除いては.
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 10]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+6.2 ファイル名
+
+   このプロトコルはファイル名を文字列として表わす.  ファイル名は スラッシュ ('/') 文字とディレクトリセパレーターとして使うことを想定している.
+
+   スラッシュから始まるファイル名は "絶対" で, ファイルシステムのルートからの相対だ.  他のどんな文字から始まる名前は, ユーザのデフォルトディレクトリ (ホームディレクトリ) からの相対だ.  ユーザの識別はこのプロトコルの外部で行なわれると仮定していることに注意.
+
+   サーバは, パス名の構成要素 ".." を親ディレクトリへの参照, "." を現在のディレクトリの参照と解釈する必要がある.
+   サーバ実装がファイルシステムの特定の部分へのアクセスを制限したい場合, この制限を実施するためにファイル名のパースには特に注意しなければならない.  パス中の ".." により意図した範囲外のアクセスを許してしまうセキュリティの問題が多数報告されている.
+
+   空のパス名も有効で, ユーザのデフォルトのディレクトリ (通常ユーザのホームディレクトリ)を指す.
+
+   これら以外には, この仕様でファイル名についての構文は定義されいない.
+   クライアントはそれ以外の仮定をするべきではない; ただし, SSH_FXP_READDIR と共に返されたパス名の構成要素は スラッシュをセパレーターとして使って接合でき, それは期待通りに動くはずだ.
+
+   ファイル名についてのよく定義されたセマンティックスが欠けていると, クライアントとサーバ間で根本的に異なる OS が使われている時に相互運用の問題が起きることがあるのが理解されている.  しかし, このアプローチはほとんどのシステムで問題なく動作するのが知られている. ファイル名を構造化された構成要素のシーケンスとして扱うような, 代替のアプローチはどても複雑になる.
+
+6.3 ファイルのオープン, 作成, クローズ
+
+    ファイルは SSH_FXP_OPEN メッセージによりオープンされ作成される. data パートの全体は次の通り:
+
+   	uint32        id
+   	string        filename
+   	uint32        pflags
+   	ATTRS         attrs
+
+   `id' フィールドはすべての要求に関する要求識別子だ.
+
+   `filename' フィールドはファイル名を指定する.  さらなる情報は ``File Names'' 節を参照. 
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 11]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+    `pflags' フィールドはビットマスクだ.  次のビットが定義されている.
+
+   	#define SSH_FXF_READ            0x00000001
+   	#define SSH_FXF_WRITE           0x00000002
+   	#define SSH_FXF_APPEND          0x00000004
+   	#define SSH_FXF_CREAT           0x00000008
+   	#define SSH_FXF_TRUNC           0x00000010
+   	#define SSH_FXF_EXCL            0x00000020
+
+   これらは次の意味を持つ:
+
+   SSH_FXF_READ
+      ファイルを読み込みのために開く
+
+   SSH_FXF_WRITE
+      ファイルを書き込みのために開くSSH_FXF_WRITE と SSH_FXF_READ が共に指定されたら, ファイルは読み書き両方のために開かれる.
+
+   SSH_FXF_APPEND
+      すべての書き込みをファイル終端へのデータの追加に強制する.
+
+   SSH_FXF_CREAT
+      このフラグが指定されたら, 同じ名前のファイルが存在していない場合に新しいファイルが作成される (O_TRUNC が指定されていたら, すでに存在していたとしても新しいファイルは 0 の長さにトランケートされる)
+
+   SSH_FXF_TRUNC
+      SSH_FXF_CREAT で指定されたファイルを作成する場合に, 同じ名前の既存のファイルを 0 の長さにトランケートするよう強制する.
+      このフラグが使われる際 SSH_FXF_CREAT も指定されていなければならない.
+
+   SSH_FXF_EXCL
+      同じ名前のファイルがすでに存在する場合要求を失敗させる.
+      このフラグが使われる際 SSH_FXF_CREAT も指定されていなければならない.
+
+   `attrs' フィールドはファイルの初期属性を指定する.
+   指定されていない属性についてはデフォルト値が用いられる.  さらなる情報は ``File Attributes'' 節を参照.
+
+   サーバの OS にかかわらず, ファイルは常に "binary" モードで開かれる (すなわち, 異なるキャラクターセットや改行エンコーディングの変換はない).
+
+   このメッセージに対する応答は, (操作に成功した場合) SSH_FXP_HANDLE か (操作に失敗した場合) SSH_FXP_STATUS のどちらかだ.
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 12]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+    SSH_FXP_CLOSE 要求を用いてファイルはクローズされる.  この data フィールドは次の形式を持つ:
+
+   	uint32     id
+   	string     handle
+
+   `id' は要求識別子で, `handle' は SSH_FXP_OPEN か SSH_FXP_OPENDIR の応答で以前に返されたハンドルだ.  このハンドルは, この要求が送られたらすみやかに無効となる.
+
+   この要求に対する応答は SSH_FXP_STATUS メッセージだ.  いくつかのサーバプラットフォームでは, クローズすら失敗する可能性があることに注意.
+   たとえばサーバの OS が書き込みをキャッシュしクローズ時にキャッシュされた書き込みのフラッシュに失敗してエラーが発生した場合などに起きる.
+
+6.4 読み書き
+
+    一度ファイルが開かれたら, 次の形式の SSH_FXP_READ メッセージを用いて読み込める.
+
+   	uint32     id
+   	string     handle
+   	uint64     offset
+   	uint32     len
+
+   `id' は要求識別子で,  `handle'  は SSH_FXP_OPEN で返ったオープンしているファイルハンドル, `offset' は読み込みを開始するファイルの開始からの (バイトでの) オフセット, `len' は 読み込む最大バイト数だ.識別子
+
+   この要求に対する応答で, サーバはファイルから ( `len' まで) 可能な限りのバイトを読み込み,  SSH_FXP_DATA メッセージで返す.  データを読む前にエラーが起きたり EOF にあったら, サーバは SSH_FXP_STATUS で応答する.  通常のディスクのファイルでは, 特定のバイト数かファイルの最後までの読み込みが保証されている.  たとえばデバイスファイルの場合, 要求したものよりも少ないバイトを返すかもしれない.
+
+    ファイルへの書き込みは 次の形式の SSH_FXP_WRITE メッセージを用いて成される:
+
+   	uint32     id
+   	string     handle
+   	uint64     offset
+   	string     data
+
+    
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 13]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+   `id' は要求識別子で,  `handle'  は SSH_FXP_OPEN で返ったファイルハンドル, `offset' は書き込みを開始するファイルの開始からの (バイトでの) オフセット, `data' は 書き込まれるデータだ.
+
+   書き込みがファイルの終端を越えても, 書き込みはファイルを延長する.
+   ファイルの終端を越えて書き込みをするのは合法だ; このセマンティクスではファイル終端から指定された offset まで 0 を書き込み, そのあとで data を書き込む.  ほとんどの OS で, このような書き込みは ディクスの空間を割り当てず, 代わりにファイル中に "穴" を残す.
+
+   書き込み要求に対しサーバは SSH_FXP_STATUS メッセージで応答する.
+
+6.5 ファイルの削除とリネーム
+
+    SSH_FXP_REMOVE を用いてファイルは削除される.  これは次の形式を持つ:
+
+   	uint32     id
+   	string     filename
+
+   `id' は要求識別子で `filename' は削除されるファイル名だ.  さらなる情報は ``File Names'' 節を参照.  この要求はディレクトリの削除には利用できない.
+
+   この要求に対してサーバは SSH_FXP_STATUS メッセージで応答する.
+
+    ファイル (とディレクトリ)は, SSH_FXP_RENAME メッセージを使ってリネームできる.  この data は次の通り:
+
+   	uint32     id
+   	string     oldpath
+   	string     newpath
+
+   `id' は要求識別子で, `oldpath' はファイルかディレクトリの現在の名前, `newpath' はファイルかディレクトリの新しい名前だ. newpath で指定された名前にファイルがすでに存在したらエラーとなる.  たとえば `oldpath' と`newpath' がサーバ上の異なるファイルシステム上を指している場合などの他の状況でも, サーバはリネーム要求に失敗するかもしれない.
+
+   この要求に対してサーバは SSH_FXP_STATUS メッセージで応答する.
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 14]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+6.6 ディレクトリの作成と削除
+
+    SSH_FXP_MKDIR 要求を用いて新しいディレクトリを作れる.  次の形式を持つ:
+
+   	uint32     id
+   	string     path
+   	ATTRS      attrs
+
+   `id' は要求識別子, `path' と`attrs' は作成されるディレクトリの名前と属性を指定する.  ファイル名についてのさらなる情報は ``File Names'' 節を参照.  属性についてのより詳しい議論は ``File Attributes'' 節を参照.   (原文の編集ミスあり)指定されたパスにファイルかディレクトリがすでに存在すると, エラーが返される.  サーバは  SSH_FXP_STATUS メッセージでこの要求に応答する.
+
+    SSH_FXP_RMDIR 要求を用いてディレクトリは削除できる. これは次の形式を持つ:
+
+   	uint32     id
+   	string     path
+
+   `id' は要求識別子で, `path'  は削除するディレクトリを指定する.  ファイル名についてのさらなる情報は ``File Names'' 節を参照.  指定した path にディレクトリが存在しなかったり, 指定したディレクトリが空でなかったり, path がディレクトリでないファイルシステムオブジェクトを指定している場合にエラーが返される.  この要求に対してサーバは SSH_FXP_STATUS メッセージで応答する.
+
+6.7 ディレクトリのスキャン
+
+   SSH_FXP_OPENDIR と SSH_FXP_READDIR 要求を用いてディレクトリ中のファイルは列挙される.  それぞれの SSH_FXP_READDIR 要求で, ファイルの属性すべて付きで 1つ以上のファイル名が返される.  クライアントは, 探しているファイルが見つかるまで, もしくは, サーバが エラーを示す SSH_FXP_STATUS メッセージで応答するまで (ディレクトリにもうファイルがない場合 通常 SSH_FX_EOF)  SSH_FXP_READDIR を繰り返し呼ぶ必要がある.  そしてクライアントは SSH_FXP_CLOSE 要求を用いてハンドルをクローズする必要がある. 
+
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 15]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+    SSH_FXP_OPENDIR は読み込みのためにファイルを開く.  これは次の形式を持つ:
+
+   	uint32     id
+   	string     path
+
+   `id' は要求識別子で `path' は (末尾のスラッシュなしの) 列挙されるディレクトリのパス名だ.  ファイル名についてのさらなる情報は ``File Names'' 節を参照.  path が ディレクトリを指定していなかったり, ディレクトリが読み込み不能の場合, エラーが返る.  サーバはこの要求に SSH_FXP_HANDLE か SSH_FXP_STATUS メッセージのどちらかで応答する.
+
+    一度ディレクトリのオープンに成功したら, そこに含まれるファイル (とディレクトリ) は SSH_FXP_READDIR 要求を用いて列挙できる.  次の形式を持つ
+
+   	uint32     id
+   	string     handle
+
+   `id'  は要求識別子で`handle' は  SSH_FXP_OPENDIR で返されたハンドルだ.  (SSH_FXP_OPEN で返された通常のファイルハンドルを利用しようとするのはプロトコルエラーだ.)
+
+   サーバはこの要求に SSH_FXP_NAME か SSH_FXP_STATUS メッセージのどちらかで応答する.  1つ以上の名前が一度に返される場合がある.
+   典型的なディレクトリ列挙のスピードアップのため, それぞれの名前について完全な状態情報が返される.
+
+   クライアントはディレクトリから名前を読む意思がもうなくなったら, SSH_FXP_CLOSE をハンドルに対して呼ぶ必要がある.  エラーが起きても起きなくても関係なく, ハンドルはクローズされる必要がある.
+
+6.8 ファイル属性の取得
+
+   しばしば, ファイル属性は SSH_FXP_READDIR によって自動的に返される.  しかし, 時々ファイルの属性を特別に取得する必要もある.  SSH_FXP_STAT や SSH_FXP_LSTAT, SSH_FXP_FSTAT 要求を用いて行なえる.
+
+    SSH_FXP_STAT と SSH_FXP_LSTAT は, SSH_FXP_STAT がサーバ上のシンボリックリンクをフォローするが, SSH_FXP_LSTAT はシンボリックリンクをフォローしないのだけが違う.  両者は同じ形式を持つ:
+
+   	uint32     id
+   	string     path
+
+   `id' は要求識別子で `path' は状態が返されるファイルシステムオブジェクトを指定する.
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 16]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+   system object for which status is to be returned.  サーバはこの要求に SSH_FXP_ATTRS か SSH_FXP_STATUS のどちらかで応答する.
+
+    SSH_FXP_FSTAT は, (ファイルハンドルで識別する) オープン済みのファイルの状態情報を返す点で他と異なる.  この形式は次のとおり:
+
+   	uint32     id
+   	string     handle
+
+   `id' は要求識別子で, `handle'  SSH_FXP_OPEN で返されたファイルハンドルだ.  サーバはこの要求に SSH_FXP_ATTRS か SSH_FXP_STATUS のどちらかで応答する.
+
+6.9 ファイル属性の設定
+
+   SSH_FXP_SETSTAT と SSH_FXP_FSETSTAT 要求を用いてファイル属性を変更できる.  これらの要求は, 所有権やパーミッション, アクセス時間, ファイルの切り捨てといった操作のために使われる.
+
+    SSH_FXP_SETSTAT 要求は次の形式だ:
+
+   	uint32     id
+   	string     path
+   	ATTRS      attrs
+
+   `id' は要求識別子,  `path' は (ファイルやディレクトリのような) 属性を変更したいファイルシステムオブジェクトを指定する.  `attrs' はその属性の変更を指定する.  属性についてのより詳しい議論は ``File Attributes'' 節を参照.
+
+   指定されたファイルシステムオブジェクトが存在していなかったり,指定された属性を変更するのに十分な権限をユーザが持っていない場合, エラーが返る.  この要求に対してサーバは SSH_FXP_STATUS メッセージで応答する.
+
+    SSH_FXP_FSETSTAT 要求はすでにオープンされたファイルの属性を変更する.  次の形式を持つ:
+
+   	uint32     id
+   	string     handle
+   	ATTRS      attrs
+
+   `id' は要求識別子,  `handle'  (SSH_FXP_OPEN によって返されていなければならない) その属性を変更しようとするファイルを識別する.  `attrs' はその属性の変更を指定する.
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 17]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+    属性についてのより詳しい議論は ``File Attributes'' 節を参照.  この要求に対してサーバは SSH_FXP_STATUS メッセージで応答する.
+
+6.10 シンボリックリンクの取り扱い
+
+    SSH_FXP_READLINK 要求はシンボリックリンクのターゲットを読むのに利用される.  次のような data パートを持つ:
+
+   	uint32     id
+   	string     path
+
+   `id' は要求識別子で,  `path' は読まれるシンボリックリンクのパス名を指定する.
+
+   サーバは, ただ 1つの名前とダミーな属性値を含む SSH_FXP_NAME パケットで応答する.  返されるパケット中の名前は, リンクのターゲットを含む.  エラーが起きたら, サーバは SSH_FXP_STATUS で応答する.
+
+    SSH_FXP_SYMLINK 要求はサーバ上にシンボリックリンクを作成する.  次の形式を持つ:
+
+   	uint32     id
+   	string     linkpath
+   	string     targetpath
+
+   `id' は要求識別子で, `linkpath' は作られるシンボリックリンクのパス名, `targetpath' はシンボリックリンクのターゲットを指定する.  サーバは,  成功 (SSH_FX_OK) かエラー状況を示す SSH_FXP_STATUS で応答する.
+
+6.11 サーバサイドのパス名の正規化
+
+    SSH_FXP_REALPATH 要求は任意のパス名を絶対パスにサーバに正規化してもらうために用いられる.  ".." 部分を含んでいるパス名や最初のスラッシュがない相対パス名を絶対パスに変換するのに便利だ.  この要求の形式は次の通り:
+
+   	uint32     id
+   	string     path
+
+   `id' は要求識別子で, `path' は正規化されるパス名を指定する.  サーバは, ただ 1つの名前とダミーな属性値を含む SSH_FXP_NAME パケットで応答する.  返されるパケット中の名前が正規化された形式となる.
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 18]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+   If an error occurs, the server may also respond with SSH_FXP_STATUS.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 19]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+7. サーバからクライアントへの応答
+
+   サーバはクライアントにいくつかの応答パケットのうちの 1 つを用いて応答する.  すべての要求は, 失敗時に SSH_FXP_STATUS 応答が返る場合がある.  操作が成功したら, (操作に応じて) 応答のうち任意のものが返される.  クライアントにデータを返す必要がない場合,  SSH_FX_OK ステータスの SSH_FXP_STATUS 応答が適当だ.  そうでない場合は,SSH_FXP_HANDLE メッセージは (SSH_FXP_OPEN と SSH_FXP_OPENDIR 要求に対して)ファイルハンドルを返すのに使われる. SSH_FXP_DATA は SSH_FXP_READ に対してデータを返すのに使われる. SSH_FXP_NAME は SSH_FXP_READDIR か SSH_FXP_REALPATH要求に対して 1 つ以上のファイル名を返すのに使われる. SSH_FXP_ATTRS は SSH_FXP_STAT や SSH_FXP_LSTAT, SSH_FXP_FSTAT 要求からファイル属性を返すのに使われる.
+
+   それぞれの要求に対して正確に 1 つ の応答が返る.  それぞれの応答パケットは, それぞれの応答と対応する要求をマッチさせるのに利用できる要求識別子を含む.  複数の要求が同時に未解決なのは合法で, サーバは要求が送られた順番とは異なる順番で要求に応答を送ることが許されていることに注意 (しかし, その実行の結果は要求が送られた順番に 1 つずつ処理された場合と同じことを保証する必要がある).
+
+   応答パケットは, 要求パケットと同じ一般形式を持つ.
+   それぞれの応答パケットは要求識別子で始まる.
+
+    SSH_FXP_STATUS 応答の data 部の形式は次の通り
+
+   	uint32     id
+   	uint32     error/status code
+   	string     error message (ISO-10646 UTF-8 [RFC-2279])
+   	string     language tag (as defined in [RFC-1766])
+
+   `id' は要求識別子で,  `error/status code' は要求された操作の結果を示す.  SSH_FX_OK は成功を示し, 他のすべての値は失敗を示す.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 20]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+    現在, 次の値が定義されている (このプロトコルの未来のバージョンで他の値が定義されるかもしれない):
+
+   	#define SSH_FX_OK                            0
+   	#define SSH_FX_EOF                           1
+   	#define SSH_FX_NO_SUCH_FILE                  2
+   	#define SSH_FX_PERMISSION_DENIED             3
+   	#define SSH_FX_FAILURE                       4
+   	#define SSH_FX_BAD_MESSAGE                   5
+   	#define SSH_FX_NO_CONNECTION                 6
+   	#define SSH_FX_CONNECTION_LOST               7
+   	#define SSH_FX_OP_UNSUPPORTED                8
+
+   SSH_FX_OK
+      操作が成功で終了したことを示す.
+
+   SSH_FX_EOF
+      end-of-file 状態を示す. SSH_FX_READ に対しては, ファイルにそれ以上のデータがないことを意味する. SSH_FX_READDIR に対しては, ディレクトリにそれ以上のファイルがないことを示す.
+
+   SSH_FX_NO_SUCH_FILE
+      存在するはずなのに存在しないファイルへの参照が行なわれた場合に返る.
+
+   SSH_FX_PERMISSION_DENIED
+      認証されたユーザが操作するのに十分なパーミッションを持たない場合に返る.
+
+   SSH_FX_FAILURE
+      一般的な包括エラーメッセージだ. 特定のエラーコードが定義されていないエラーが起きた場合に返される必要がある.
+
+   SSH_FX_BAD_MESSAGE
+      おかしな形式のパケットやプロトコルの非互換を検出した場合に返される.
+
+   SSH_FX_NO_CONNECTION
+      クライアントがサーバへの接続がないこと示す疑エラー (クライアントでローカルに生成される場合があるが, サーバから返してはならない).
+
+   SSH_FX_CONNECTION_LOST
+      サーバへの接続が失なわれたことを示す疑エラー (クライアントでローカルに生成される場合があるが, サーバから返してはならない).
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 21]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+   SSH_FX_OP_UNSUPPORTED
+      実行しようとした操作がサーバでサポートされていない場合を示す (クライアントによってローカルに生成される場合がある. たとえば, バージョン番号交換で要求した特徴がサーバでサートしていない場合. また, サーバが操作を実装していない場合にサーバから返る場合もある)
+
+   SSH_FXP_HANDLE 応答は次の形式を持つ:
+
+   	uint32     id
+   	string     handle
+
+   `id' は要求識別子で , `handle' はサーバ上のオープンされたファイルやディレクトリを示す任意の文字列だ.  handle はクライアントにとっては不明瞭だ. クライアントはどのような方法でも handle を解釈したり変更したりしようとしてはならない.  handle 文字列の長さは 256 データバイトを越えてはならない.
+
+    SSH_FXP_DATA  応答は次の形式を持つ:
+
+   	uint32     id
+   	string     data
+
+   `id' は要求識別子で, `data' は要求されたデータを含む任意のバイト文字列だ.  data 文字列はせいぜい SSH_FXP_READ 要求で要求されたバイト数までで, ファイルの終端に到達した場合や通常ファイルではないファイルからの読み込みの場合にはより短かくなる場合がある.
+
+    SSH_FXP_NAME 応答は次の形式を持つ:
+
+   	uint32     id
+   	uint32     count
+   	repeats count times:
+   		string     filename
+   		string     longname
+   		ATTRS      attrs
+
+   `id' は要求識別子, `count' はこの応答で返る名前の数で残りのフィールドは `count' 回繰替えされる (つまり 3 つすべてのフィールドがまず最初のファイルのために含まれ, そして 2番目のファイルのために 3 つのフィールド, という具合).  繰り返しの部分では,`filename' は返されるファイル名 (SSH_FXP_READDIR では ディレクトリ中の相対名でパス部分がない. SSH_FXP_REALPATH では絶対パス名), 'longname' はファイル名の展開された形式で, Unix システムで "ls -l" で返されるものに似ている. 'attrs' は  ``File Attributes''. 節で記述されたファイルの属性だ.
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 22]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+    
+
+   'longname' フィールドの形式はこのプロトコルでは指定していない.
+   ディレクトリ列挙コマンドでの出力での利用に適していなければならない (実際, ディレクトリ列挙コマンドの推奨される操作はこのデータを単純に表示することだ).  さらに, クライアントは longname フィールドをファイル属性のためにパースしないほうがよい. 代わりに attrs フィールドを使う必要がある.
+
+    longname フィールドの推奨される形式は次の通り:
+
+   	-rwxr-xr-x   1 mjos     staff      348911 Mar 25 14:29 t-filexfer
+   	1234567890 123 12345678 12345678 12345678 123456789012
+
+   ここで, 最初の行はサンプルの出力で, 2行目は, 1行目のフィールドの幅を示している.  フィールドはスペースで区切られる.  最初のフィールドはユーザ, グループ, その他のファイルパーミッションを列挙している. 2番目のフィールドはリンクカウント. 3番目はファイルを所有するユーザ名. 4番目はファイルを所有するグループ名, 5番目はバイトでのファイルサイズ. 6番目のフィールド(実際にはスペースを含む, ただし12文字で固定されている)は ファイル変更時刻, 7番目のフィールドはファイル名だ.  それぞれのフィールドは, (前述の2行目で示した) 文字の位置の最小値が示されちるが, データが指定された長さにフィットしない場合はより長くなる場合がある.
+
+    SSH_FXP_ATTRS 嘔吐うは次の形式を持つ.
+
+   	uint32     id
+   	ATTRS      attrs
+
+   `id' は要求識別子で,  `attrs'  は ``File Attributes'' 節で記述された返却されるファイルの属性だ.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 23]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+8. ベンダー特有の拡張
+
+    SSH_FXP_EXTENDED 要求はベンダー特有のコマンドを追加する一般的な拡張メカニズムを提供する.  この要求は次の形式を持つ:
+
+   	uint32     id
+   	string     extended-request
+   	... any request-specific data ...
+
+   `id' は要求識別子で, `extended-request' は "name@domain" 形式の文字列で, domain は要求を定義するベンダーのインターネットドメイン名だ.  要求の残りは完全にベンダー特有で, サーバは `extended-request' 名を理解できる場合にのみこれを解釈しようとする必要がある.
+
+   サーバは``Responses from the Server to the Client'' 節で定義されたどのレスポンスを使ってこのような要求に応答してもよい.  さらに, サーバは後述する SSH_FXP_EXTENDED_REPLY パケットで応答してもよい.  サーバが `extended-request' 名を理解できなかったら, サーバは, error/status に SSH_FX_OP_UNSUPPORTED  を設定した SSH_FXP_STATUS で応答しなければならない.
+
+    SSH_FXP_EXTENDED_REPLY  パケットはサーバからクライアントに任意の拡張特有のデータを運ぶのに使うことができる.  これは次の形式だ:
+
+   	uint32     id
+   	... any request-specific data ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 24]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+9. セキュリティの考察
+
+   このプロトコルは, 安全なチャンネル上で動作することとそのチャンネルの末端が認証されていることを前提としている.  つまり, このプロトコルは, ネットワークレベルの攻撃からは非常に保護されていることを前提としている.
+
+   このプロコルは (サーバの実装によってのみ制限される) サーバ上の任意のファイルへのファイルシステムアクセスを提供する.  特定のユーザ (典型的には SSH ユーザ認証プロトコル [6] を用いてこのプロトコルの外部で認証されたユーザ) に許可されたアクセスを制限するのに必要なアクセス制御を実施するのはサーバの責任だ .
+
+   サーバの実装で, 受け取ったファイルハンドル文字列の有効性の検査に注意をしなければならない.  サーバは, 直接信用してはならない. 信用する前にそれぞれのハンドルの有効性を検査しなければならない.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 25]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+10. 以前のプロトコルバージョンからの変更点
+
+   SSH ファイル転送プロトコルは, その標準化の前に時間の経過とともに変更している.  バージョン間の非互換な変更について後述する.
+
+10.1 バージョン  3 と 2 の間の変更点 
+
+   o  SSH_FXP_READLINK と SSH_FXP_SYMLINK メッセージが追加された.
+
+   o  SSH_FXP_EXTENDED と SSH_FXP_EXTENDED_REPLY メッセージが追加された.
+
+   o  SSH_FXP_STATUS が変更され, 'error message' と 'language tag' フィールドを含むようになった.
+
+
+10.2 バージョン 2 と 1 の間の変更点
+
+   o  SSH_FXP_RENAME メッセージが追加された.
+
+
+10.3 バージョン 1 と 0 の間の変更点
+
+   o  実装の変更で, プロトコル上の変更はなし.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 26]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+11. Trademark Issues
+
+   "ssh" is a registered trademark of SSH Communications Security Corp
+   in the United States and/or other countries.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 27]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+References
+
+   [1]  Dierks, T., Allen, C., Treese, W., Karlton, P., Freier, A. and
+        P. Kocher, "The TLS Protocol Version 1.0", RFC 2246, January
+        1999.
+
+   [2]  Institute of Electrical and Electronics Engineers, "Information
+        Technology - Portable Operating System Interface (POSIX) - Part
+        1: System Application Program Interface (API) [C Language]",
+        IEEE Standard 1003.2, 1996.
+
+   [3]  Rinne, T., Ylonen, T., Kivinen, T., Saarinen, M. and S.
+        Lehtinen, "SSH Protocol Architecture", draft-ietf-secsh-
+        architecture-09 (work in progress), July 2001.
+
+   [4]  Rinne, T., Ylonen, T., Kivinen, T., Saarinen, M. and S.
+        Lehtinen, "SSH Protocol Transport Protocol", draft-ietf-secsh-
+        architecture-09 (work in progress), July 2001.
+
+   [5]  Rinne, T., Ylonen, T., Kivinen, T., Saarinen, M. and S.
+        Lehtinen, "SSH Connection Protocol", draft-ietf-secsh-connect-11
+        (work in progress), July 2001.
+
+   [6]  Rinne, T., Ylonen, T., Kivinen, T., Saarinen, M. and S.
+        Lehtinen, "SSH Authentication Protocol", draft-ietf-secsh-
+        userauth-11 (work in progress), July 2001.
+
+
+Authors' Addresses
+
+   Tatu Ylonen
+   SSH Communications Security Corp
+   Fredrikinkatu 42
+   HELSINKI  FIN-00100
+   Finland
+
+   EMail: ylo@ssh.com
+
+
+   Sami Lehtinen
+   SSH Communications Security Corp
+   Fredrikinkatu 42
+   HELSINKI  FIN-00100
+   Finland
+
+   EMail: sjl@ssh.com
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 28]
+
+Internet-Draft         SSH File Transfer Protocol           October 2001
+
+
+Full Copyright Statement
+
+   Copyright (C) The Internet Society (2001).  All Rights Reserved.
+
+   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works.  However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.
+
+   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assigns.
+
+   This document and the information contained herein is provided on an
+   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+Acknowledgement
+
+   Funding for the RFC Editor function is currently provided by the
+   Internet Society.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ylonen & Lehtinen         Expires April 1, 2002                [Page 29]
+
+
+
