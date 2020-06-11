@@ -4581,6 +4581,15 @@ revoking key IDs).</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Among the security properties that SSH
+   offers is integrity of communication against active adversaries.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T062507Z" creationid="haruyama" creationdate="20200611T062507Z">
+        <seg>SSH が提供する安全な特性の中に, アクティブな敵対者に対する通信の完全性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>An
    agent SHOULD take countermeasures against brute-force guessing
    attacks against the pass-phrase.</seg>
@@ -5621,6 +5630,16 @@ any principal of the specified type.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181201T085137Z" creationid="haruyama" creationdate="20181201T085137Z">
         <seg>すべての拡張について, 明記されていない限り, サーバは SSH_MSG_USERAUTH_SUCCESS の前に 2つ目の SSH_MSG_EXT_INFO を送るまで この拡張を含めるのを送らせてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>As mentioned above, it is imperative that implementations perform a
+   re-keying operation before reusing a packet sequence number as a UMAC
+   nonce.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T070821Z" creationid="haruyama" creationdate="20200611T070821Z">
+        <seg>前述したように, パケットシーケンス番号が UMAC ナンスとして再利用される前に実装は鍵の再交換を実施しなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6908,6 +6927,17 @@ advertised in the SSH_FXP_VERSION hello with version "2".</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>By submitting this Internet-Draft, each author represents that any
+   applicable patent or other IPR claims of which he or she is aware
+   have been or will be disclosed, and any of which he or she becomes
+   aware will be disclosed, in accordance with Section 6 of BCP 79.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T062129Z" creationid="haruyama" creationdate="20200611T062129Z">
+        <seg>この Internet-Draft を提出することで, 各著者は, BCP 79 の 6節に従い,  認識しているもしくは認識することになる該当する特許や他の知的財産権の請求項が開示されているか将来開示されることを表明する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>By using an independently-keyed cipher instance to encrypt the
 length, an active attacker seeking to exploit the packet input handling
 as a decryption oracle can learn nothing about the payload contents or
@@ -7056,6 +7086,42 @@ its MAC (assuming key derivation, ChaCha20 and Poly1305 are secure).</seg>
       <tuv lang="JA" changeid="haruyama" changedate="20110810T061359Z">
         <seg>キャッシュされる情報とリファレンス ..............................13
       4.1.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Calculate message authentication tags using the UMAC-128 algorithm
+   specified in [RFC4418], section 4.2.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T070401Z" creationid="haruyama" creationdate="20200611T070401Z">
+        <seg>[RFC4418] の 4.2 節で指定された UMAC-128 アルゴリズムを用いてメッセージ認証タグを計算する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Calculate message authentication tags using the UMAC-32 algorithm
+   specified in [RFC4418], section 4.2.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T070338Z" creationid="haruyama" creationdate="20200611T070338Z">
+        <seg>[RFC4418] の 4.2 節で指定された UMAC-32 アルゴリズムを用いてメッセージ認証タグを計算する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Calculate message authentication tags using the UMAC-64 algorithm
+   specified in [RFC4418], section 4.2.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T070344Z" creationid="haruyama" creationdate="20200611T070344Z">
+        <seg>[RFC4418] の 4.2 節で指定された UMAC-64 アルゴリズムを用いてメッセージ認証タグを計算する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Calculate message authentication tags using the UMAC-96 algorithm
+   specified in [RFC4418], section 4.2.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T070352Z" creationid="haruyama" creationdate="20200611T070352Z">
+        <seg>[RFC4418] の 4.2 節で指定された UMAC-96 アルゴリズムを用いてメッセージ認証タグを計算する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12989,6 +13055,17 @@ authentication.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Furthermore, UMAC represents a different cryptographic approach to
+   message authentication to that of HMAC, and its use in SSH would
+   provide a diversity that may be of benefit if HMAC or one of its
+   underlying hash algorithms is found to be vulnerable to a new attack.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T062847Z" creationid="haruyama" creationdate="20200611T062847Z">
+        <seg>さらに, UMAC は HMAC のものとは異なるメッセージ認証への暗号学的アプローチを表現しているので, SSH での UMAC の利用は, HMAC やその基底のハッシュアルゴリズムの 1 つに新しい攻撃による脆弱性が見つかった場合に利益となる多様性を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Furthermore, additional mechanisms mapping host names to
    certificates MAY be used and are left as implementation and
    configuration issues for implementers and system administrators.</seg>
@@ -13918,6 +13995,15 @@ as a big-endian integer.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181107T123137Z" creationid="haruyama" creationdate="20181107T123137Z">
         <seg>しかし, 他の規則が指定されてもよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>However, UMAC accepts a nonce as an explicit input to MAC
+   calculation.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T065439Z" creationid="haruyama" creationdate="20200611T065439Z">
+        <seg>しかし, UMAC は, MAC の計算の明示的な入力としてナンスを受け付ける.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14999,6 +15085,15 @@ as a big-endian integer.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160618T032715Z">
         <seg>IANA は, [RFC4250] で定義された SSH Service Name として, 次のように "netconf" を割り当てるよう要求された. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>IANA must assign the MAC Algorithm Names "umac-32", "umac-64",
+   "umac-96" and "umac-128".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T070934Z" creationid="haruyama" creationdate="20200611T070934Z">
+        <seg>IANA は MAC Algorithm Names に "umac-32" と "umac-64", "umac-96" and "umac-128" を割り当てなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18109,6 +18204,15 @@ handling in this area.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Implementations conforming to [RFC4251] are already required
+   to do this.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T070855Z" creationid="haruyama" creationdate="20200611T070855Z">
+        <seg>[RFC4251] に従う実装は, これをすでにする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Implementations may also allow configuring more such
    mechanisms.</seg>
       </tuv>
@@ -19022,6 +19126,15 @@ requires the key handle and a few additional parameters.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In order for the security proofs that accompany UMAC to
+   apply, this nonce must never be repeated under a given key.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T065545Z" creationid="haruyama" creationdate="20200611T065545Z">
+        <seg>UMAC に付随するセキュリティの保証が適用されるためには, このナンスは与えられた鍵に対して決して繰り返し利用されてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In order to allow NETCONF traffic to be easily identified and
    filtered by firewalls and other network devices, NETCONF servers MUST
    default to providing access to the "netconf" SSH subsystem only when
@@ -19467,6 +19580,16 @@ requires the key handle and a few additional parameters.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>このダイアログウィンドウで, instruction フィールドはテキストのメッセージで, prompt はテキストエントリフィールドのラベルとなるだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In the
+   context of the SSH protocol, this may be achieved by using the packet
+   sequence number as the nonce.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T065634Z" creationid="haruyama" creationdate="20200611T065607Z">
+        <seg>SSH プロトコルのコンテキストでは, パケットシーケンス番号をナンスとして用いるとこれを達成できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23248,6 +23371,22 @@ signature.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>MAC calculation</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T065312Z" creationid="haruyama" creationdate="20200611T065312Z">
+        <seg>MAC の計算</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>MAC calculation .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T062253Z" creationid="haruyama" creationdate="20200611T062253Z">
+        <seg>MAC の計算 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>MAC that has its own internal counter.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110610T071014Z">
@@ -23624,6 +23763,16 @@ requesting the master terminate itself fall in to this category.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110802T031437Z">
         <seg>メッセージストリームの改竄 - SSH は, シーケンス番号と完全性の検査により 単一の SSH セッションでの悪意のあるメッセージの並び換えや再送に対する保護を行なう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Message authentication tags in the SSH transport protocol are
+   specified to be calculated over the packet sequence number followed
+   by the entire unencrypted packet:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T065410Z" creationid="haruyama" creationdate="20200611T065410Z">
+        <seg>SSH トランスポートプロトコルのメッセージ認証タグは, パケットのシーケンス番号とそれに続く暗号化されていない全パケットに対して計算される:</seg>
       </tuv>
     </tu>
     <tu>
@@ -24521,6 +24670,22 @@ Category: Standards Track                                     W. Griffin
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20180908T014350Z" creationid="haruyama" creationdate="20180908T014350Z">
         <seg>端末モードエンコーディングのための新しい IUTF8 オペコード</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>New MAC methods</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T070058Z" creationid="haruyama" creationdate="20200611T070058Z">
+        <seg>新しい MAC の方法</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>New MAC methods .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T062325Z" creationid="haruyama" creationdate="20200611T062325Z">
+        <seg>新しい MAC の方法 .</seg>
       </tuv>
     </tu>
     <tu>
@@ -26991,6 +27156,14 @@ MUX_S_FAILURE.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Overview  .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T062241Z" creationid="haruyama" creationdate="20200611T062241Z">
+        <seg>概要  .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Overview and Rationale</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110615T053356Z">
@@ -29214,6 +29387,22 @@ that computes a 128 bit integrity tag given a message and a single-use
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Requirements notation</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T062339Z" creationid="haruyama" creationdate="20200611T062339Z">
+        <seg>要件に関する表記</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Requirements notation .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T062229Z" creationid="haruyama" creationdate="20200611T062229Z">
+        <seg>要件に関する表記 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Researchers
    ([DAI,BKN1,BKN2]) have, however, identified several security problems
    with the symmetric portion of the SSH Transport Protocol, as
@@ -29729,6 +29918,15 @@ that computes a 128 bit integrity tag given a message and a single-use
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110825T040226Z">
         <seg>SSH のユーザと鍵の選択 ................................31</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>SSH [RFC4251] is a popular protocol for secure remote login and data
+   transfer on the Internet.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T062407Z" creationid="haruyama" creationdate="20200611T062407Z">
+        <seg>SSH [RFC4251] はインターネット上の安全なリモートログインとデータ転送のための著名なプロトコルだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -41283,6 +41481,15 @@ an encrypted list of matching private keys.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The list of current Internet-Drafts can be accessed at
+   http://www.ietf.org/ietf/1id-abstracts.txt.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T062138Z" creationid="haruyama" creationdate="20200611T062138Z">
+        <seg>現在の Internet-Draft のリストは http://www.ietf.org/ietf/1id-abstracts.txt でアクセスできる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The list of current Internet-Drafts can be accessed at http://
    www.ietf.org/ietf/1id-abstracts.txt.</seg>
       </tuv>
@@ -43372,6 +43579,17 @@ and authenticate the entire packet.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110802T022646Z">
         <seg>送信トランスポートモデルは, ディスパッチャから SSH に暗号化していないメッセージを送って暗号化させ, 受信トランスポートモデルは, SSH を用いて復号した受信メッセージを受け取りディスパッチャに渡す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The sequence number is guaranteed to
+   be unique over the life of the MAC key by the requirement that
+   implementations perform a key re-exchange before the sequence number
+   wraps (section 9.3.3 of [RFC4251]).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T065758Z" creationid="haruyama" creationdate="20200611T065758Z">
+        <seg>シーケンス番号は, 実装がシーケンス番号が繰り返すより前に鍵の再交換を実施する要求により, MAC の鍵が有効な間ユニークなことが保証されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -45873,6 +46091,16 @@ key algorithms to better ones.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>These four tag sizes are represented in the new MAC methods
+   introduced in this memo: "umac-32", "umac-64", "umac-96" and "umac-
+   128".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T063154Z" creationid="haruyama" creationdate="20200611T063154Z">
+        <seg>これらの 4 つ のタグサイズは, このメモで導入する新しい MAC の方法で表現される:  "umac-32" と "umac-64", "umac-96", "umac-128".</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>These groups
    complement others already documented for the IETF, including the
    "Oakley" groups defined in RFC 2409 [RFC2409] for use with IKEv1, and
@@ -46649,6 +46877,14 @@ following format:</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This Internet-Draft will expire on March 6, 2008.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T062154Z" creationid="haruyama" creationdate="20200611T062154Z">
+        <seg>この Internet-Draft は 2008/03/06 に期限切れとなる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This MIB module also references [RFC1033], [RFC4252], [RFC3490], and
    [RFC3986].</seg>
       </tuv>
@@ -46881,6 +47117,15 @@ following format:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110802T030600Z">
         <seg>これにより, 認証されたもののみが機密の可能性のあるデータへのアクセスをすることを SNMP アクセス制御サブシステムが保証できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This allows users to trade between fast, compact tags and
+   longer tags that are slower to generate but offer better security.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T063102Z" creationid="haruyama" creationdate="20200611T063102Z">
+        <seg>これにより, 早くコンパクトなタグか, 生成がより遅いがよりよいセキュリティを提供するより長いタグを利用するかの選択をユーザに提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -48593,6 +48838,15 @@ keys (K_1 and K_2), used by two separate instances of chacha20.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This integrity is provided in the SSH transport protocol [RFC4253]
+   through the use of a per-packet Message Authentication Code (MAC).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T062555Z" creationid="haruyama" creationdate="20200611T062555Z">
+        <seg>この完全性は, パケット単位のメッセージ認証コード (MAC) の利用を通じて, SSH トランスポートプロトコル [RFC4253] で提供される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This is
    consistent with the IESG decision to not require the SNMPv3
    terminology be modified to match the usage of other non-SNMP
@@ -49340,10 +49594,29 @@ associated with a particular identity, e.g. a host or a user.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This memo describes the use of the UMAC Message Authentication Code
+   [RFC4418] in the SSH transport protocol.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T062622Z" creationid="haruyama" creationdate="20200611T062622Z">
+        <seg>このメモは, SSH トランスポートプロトコルの UMAC メッセージ認証コード [RFC4418] の利用について記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This memo documents an Internet Best Current Practice.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200513T062228Z" creationid="haruyama" creationdate="20200513T062216Z">
         <seg>このメモは,  Internet Best Current Practice を文書化する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This memo introduces four new MAC methods, one for each UMAC
+   authentication tag length specified in [RFC4418]: "umac-32",
+   "umac-64", "umac-96" and "umac-128".</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T070310Z" creationid="haruyama" creationdate="20200611T070310Z">
+        <seg>このメモは, [RFC4418] で指定された UMAC 認証タグ長の 1 つごとに,  4 つの新しい MAC の方法を導入する: "umac-32" と "umac-64", "umac-96", "umac-128".</seg>
       </tuv>
     </tu>
     <tu>
@@ -51286,6 +51559,17 @@ at the time of key generation.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>To use the sequence number as the MAC nonce, it is encoded into a SSH
+   protocol uint64 (as described in section 5 of [RFC4251]) and it is
+   supplied to the UMAC algorithm instead of prepending it to the packet
+   to be authenticated:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T065941Z" creationid="haruyama" creationdate="20200611T065941Z">
+        <seg>MAC のナンスとしてシーエンス番号を用いるために, ナンスは ([RFC4251] の5 節に記述されているように) SSH プロトコルの uint64 にエンコードされ, 認証されるパケットの前に追加される形式ではなく, UMAC アルゴリズムに供給される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>To use this algorithm for client authentication, the SSH client sends
    an SSH_MSG_USERAUTH_REQUEST message [RFC4252] encoding the
    "publickey" method and encoding the string field "public key
@@ -51558,6 +51842,24 @@ cheapest way for users to achieve hardware-backed credential storage.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200603T053159Z" creationid="haruyama" creationdate="20200603T053159Z">
         <seg>U2F トークンは USB と NFC を含むさまざまな方法で取り付けられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>UMAC offers a choice of four authentication tag sizes: 32, 64, 96 and
+   128 bits.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T062925Z" creationid="haruyama" creationdate="20200611T062925Z">
+        <seg>UMAC は 4 つの認証タグサイズの選択肢を提供する: 32 と 64, 96, 128 ビット.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>UMAC offers improved
+   performance over the current HMAC-based MACs supported by SSH.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T062709Z" creationid="haruyama" creationdate="20200611T062709Z">
+        <seg>UMAC は SSH でサポートされている現状の HMAC-ベースの MAC に比べて改善されたパフォーマンスを提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -53424,6 +53726,16 @@ and "reserved" an extension field whose contents are currently ignored.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200528T062027Z" creationid="haruyama" creationdate="20200528T062027Z">
         <seg>"section_type" は "section_data" のタイプを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Where UMAC is one of the UMAC-32, UMAC-64, UMAC-96 or UMAC-128
+   algorithms specified in [RFC4418], section 4.2, using the default
+   underlying block cipher of AES-128.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200611T070053Z" creationid="haruyama" creationdate="20200611T070053Z">
+        <seg>UMAC は [RFC4418] 4.2 節で指定された, AES-128 をデフォルトの基底のブロック暗号に用いるUMAC-32 か UMAC-64, UMAC-96, UMAC-128 のうちの 1 つだ.</seg>
       </tuv>
     </tu>
     <tu>
