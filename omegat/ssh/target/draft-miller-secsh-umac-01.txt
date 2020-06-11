@@ -1,0 +1,289 @@
+
+
+
+Network Working Group                                          D. Miller
+Internet-Draft                                                P. Valchev
+Intended status: Standards Track                                 OpenSSH
+Expires: March 6, 2008                                 September 3, 2007
+
+
+          The use of UMAC in the SSH Transport Layer Protocol
+                     draft-miller-secsh-umac-01.txt
+
+このメモの位置づけ
+
+   この Internet-Draft を提出することで, 各著者は, BCP 79 の 6節に従い,  認識しているもしくは認識することになる該当する特許や他の知的財産権の請求項が開示されているか将来開示されることを表明する.
+
+   Internet-Draft は Internet Engineering Task Force (IETF) とその分野, そのワーキンググループの作業文書だ.  他のグループも Internet-Draft として作業文書を配布するかもしれないことに注意.
+
+   Internet-Drafts は, 最大で6か月有効な草稿で, いつでも他の文書によって更新, 置換, 廃止されうる.  Internet Draft を参考仕様としたり "進行中" 以外ので引用は不適切だ.
+
+   現在の Internet-Draft のリストは http://www.ietf.org/ietf/1id-abstracts.txt でアクセスできる.
+
+   Internet-Draft Shadow Directories のリストは http://www.ietf.org/shadow.html でアクセスできる.
+
+   この Internet-Draft は 2008/03/06 に期限切れとなる.
+
+著作権情報
+
+   Copyright (C) The IETF Trust (2007).
+
+概要
+
+   This memo describes the use of the UMAC Message Authentication Code
+   in the SSH transport protocol.
+
+
+
+
+
+
+
+
+
+Miller & Valchev          Expires March 6, 2008                 [Page 1]
+
+Internet-Draft     UMAC message authentication for SSH    September 2007
+
+
+目次
+
+   1要件に関する表記 . . . . . . . . . . . . . . . . . . . . . 3
+   2.  概要  . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+   3.  MAC の計算 . . . . . . . . . . . . . . . . . . . . . . . . 3
+   4.  新しい MAC の方法 . . . . . . . . . . . . . . . . . . . . . . . . 4
+     4.1.  umac-32 . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+     4.2.  umac-64 . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+     4.3.  umac-96 . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+     4.4.  umac-128  . . . . . . . . . . . . . . . . . . . . . . . . . 4
+   5.  セキュリティの考察 . . . . . . . . . . . . . . . . . . . . 4
+   6.  IANA の考察 . . . . . . . . . . . . . . . . . . . . . . 5
+   7.  標準のリファレンス  . . . . . . . . . . . . . . . . . . . . . 5
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . . . 5
+   Intellectual Property and Copyright Statements  . . . . . . . . . . 6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Miller & Valchev          Expires March 6, 2008                 [Page 2]
+
+Internet-Draft     UMAC message authentication for SSH    September 2007
+
+
+1要件に関する表記
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, [RFC-2119] で記述されているように解釈される. 
+
+
+2.  概説
+
+   SSH [RFC4251] はインターネット上の安全なリモートログインとデータ転送のための著名なプロトコルだ.  SSH が提供する安全な特性の中に, アクティブな敵対者に対する通信の完全性がある.
+   この完全性は, パケット単位のメッセージ認証コード (MAC) の利用を通じて, SSH トランスポートプロトコル [RFC4253] で提供される.
+
+   このメモは, SSH トランスポートプロトコルの UMAC メッセージ認証コード [RFC4418] の利用について記述する.  UMAC は SSH でサポートされている現状の HMAC-ベースの MAC に比べて改善されたパフォーマンスを提供する.
+   さらに, UMAC は HMAC のものとは異なるメッセージ認証への暗号学的アプローチを表現しているので, SSH での UMAC の利用は, HMAC やその基底のハッシュアルゴリズムの 1 つに新しい攻撃による脆弱性が見つかった場合に利益となる多様性を提供する.
+
+   UMAC は 4 つの認証タグサイズの選択肢を提供する: 32 と 64, 96, 128 ビット.  これにより, 早くコンパクトなタグか, 生成がより遅いがよりよいセキュリティを提供するより長いタグを利用するかの選択をユーザに提供する.
+   これらの 4 つ のタグサイズは, このメモで導入する新しい MAC の方法で表現される:  "umac-32" と "umac-64", "umac-96", "umac-128".
+
+
+3.  MAC の計算
+
+   SSH トランスポートプロトコルのメッセージ認証タグは, パケットのシーケンス番号とそれに続く暗号化されていない全パケットに対して計算される:
+
+           mac = MAC(key, sequence_number || unencrypted_packet)
+
+   しかし, UMAC は, MAC の計算の明示的な入力としてナンスを受け付ける.  UMAC に付随するセキュリティの保証が適用されるためには, このナンスは与えられた鍵に対して決して繰り返し利用されてはならない.  SSH プロトコルのコンテキストでは, パケットシーケンス番号をナンスとして用いるとこれを達成できる.  シーケンス番号は, 実装がシーケンス番号が繰り返すより前に鍵の再交換を実施する要求により, MAC の鍵が有効な間ユニークなことが保証されている.
+
+
+
+
+Miller & Valchev          Expires March 6, 2008                 [Page 3]
+
+Internet-Draft     UMAC message authentication for SSH    September 2007
+
+
+   MAC のナンスとしてシーエンス番号を用いるために, ナンスは ([RFC4251] の5 節に記述されているように) SSH プロトコルの uint64 にエンコードされ, 認証されるパケットの前に追加される形式ではなく, UMAC アルゴリズムに供給される.
+
+           mac = UMAC(key, sequence_number, unencrypted_packet)
+
+   UMAC は [RFC4418] 4.2 節で指定された, AES-128 をデフォルトの基底のブロック暗号に用いるUMAC-32 か UMAC-64, UMAC-96, UMAC-128 のうちの 1 つだ.
+
+
+4.  新しい MAC の方法
+
+   このメモは, [RFC4418] で指定された UMAC 認証タグ長の 1 つごとに,  4 つの新しい MAC の方法を導入する: "umac-32" と "umac-64", "umac-96", "umac-128".
+
+4.1.  umac-32
+
+   [RFC4418] の 4.2 節で指定された UMAC-32 アルゴリズムを用いてメッセージ認証タグを計算する.
+
+4.2.  umac-64
+
+   [RFC4418] の 4.2 節で指定された UMAC-64 アルゴリズムを用いてメッセージ認証タグを計算する.
+
+4.3.  umac-96
+
+   [RFC4418] の 4.2 節で指定された UMAC-96 アルゴリズムを用いてメッセージ認証タグを計算する.
+
+4.4.  umac-128
+
+   [RFC4418] の 4.2 節で指定された UMAC-128 アルゴリズムを用いてメッセージ認証タグを計算する.
+
+
+5.  セキュリティの考察
+
+   前述したように, パケットシーケンス番号が UMAC ナンスとして再利用される前に実装は鍵の再交換を実施しなければならない.  [RFC4251] に従う実装は, これをすでにする必要がある.
+
+
+
+
+
+
+Miller & Valchev          Expires March 6, 2008                 [Page 4]
+
+Internet-Draft     UMAC message authentication for SSH    September 2007
+
+
+6.  IANA の考慮
+
+   IANA は MAC Algorithm Names に "umac-32" と "umac-64", "umac-96" and "umac-128" を割り当てなければならない.
+
+
+7.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC4251]  Ylonen, T. and C. Lonvick, "The Secure Shell (SSH)
+              Protocol Architecture", RFC 4251, January 2006.
+
+   [RFC4253]  Ylonen, T. and C. Lonvick, "The Secure Shell (SSH)
+              Transport Layer Protocol", RFC 4253, January 2006.
+
+   [RFC4418]  Krovetz, T., "UMAC: Message Authentication Code using
+              Universal Hashing", RFC 4418, March 2006.
+
+
+Authors' Addresses
+
+   Damien Miller
+   OpenSSH
+
+   Email: djm@openssh.com
+
+
+   Peter Valchev
+   OpenSSH
+
+   Email: pvalchev@openssh.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Miller & Valchev          Expires March 6, 2008                 [Page 5]
+
+Internet-Draft     UMAC message authentication for SSH    September 2007
+
+
+Full Copyright Statement
+
+   Copyright (C) The IETF Trust (2007).
+
+   This document is subject to the rights, licenses and restrictions
+   contained in BCP 78, and except as set forth therein, the authors
+   retain all their rights.
+
+   This document and the information contained herein are provided on an
+   "AS IS" basis and THE CONTRIBUTOR, THE ORGANIZATION HE/SHE REPRESENTS
+   OR IS SPONSORED BY (IF ANY), THE INTERNET SOCIETY, THE IETF TRUST AND
+   THE INTERNET ENGINEERING TASK FORCE DISCLAIM ALL WARRANTIES, EXPRESS
+   OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF
+   THE INFORMATION HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED
+   WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+
+Intellectual Property
+
+   The IETF takes no position regarding the validity or scope of any
+   Intellectual Property Rights or other rights that might be claimed to
+   pertain to the implementation or use of the technology described in
+   this document or the extent to which any license under such rights
+   might or might not be available; nor does it represent that it has
+   made any independent effort to identify any such rights.  Information
+   on the procedures with respect to rights in RFC documents can be
+   found in BCP 78 and BCP 79.
+
+   Copies of IPR disclosures made to the IETF Secretariat and any
+   assurances of licenses to be made available, or the result of an
+   attempt made to obtain a general license or permission for the use of
+   such proprietary rights by implementers or users of this
+   specification can be obtained from the IETF on-line IPR repository at
+   http://www.ietf.org/ipr.
+
+   The IETF invites any interested party to bring to its attention any
+   copyrights, patents or patent applications, or other proprietary
+   rights that may cover technology that may be required to implement
+   this standard.  Please address the information to the IETF at
+   ietf-ipr@ietf.org.
+
+
+Acknowledgment
+
+   Funding for the RFC Editor function is provided by the IETF
+   Administrative Support Activity (IASA).
+
+
+
+
+
+Miller & Valchev          Expires March 6, 2008                 [Page 6]
+
+
