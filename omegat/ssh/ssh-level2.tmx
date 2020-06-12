@@ -4937,6 +4937,16 @@ format (see below).</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>An implementation of this method should be careful to ensure that
+   compression is enabled by subsequent re-keying exchanges after
+   authentication.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T055829Z" creationid="haruyama" creationdate="20200612T055829Z">
+        <seg>この方法の実装は, 認証後の次の鍵の再交換で圧縮にできることを保証するように注意する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>An important characteristic of
    this is that authorization is done prior to determining if the
    connection can succeed.</seg>
@@ -9133,6 +9143,30 @@ domain name to the option name, e.g. "my-option@example.com".</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200605T052221Z" creationid="haruyama" creationdate="20200605T052221Z">
         <seg>指定されていない属性についてはデフォルト値が用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Delayed Compression</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T055842Z" creationid="haruyama" creationdate="20200612T055322Z">
+        <seg>圧縮の遅延</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Delayed Compression .</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T055850Z" creationid="haruyama" creationdate="20200612T054545Z">
+        <seg>圧縮の遅延 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Delaying compression until after authentication may reveal slightly</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T060023Z" creationid="haruyama" creationdate="20200612T055834Z">
+        <seg>認証後までの圧縮の遅延は, 認証データの長さについてわずかだがより正確な情報を漏らしてしまうかもしれない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18269,6 +18303,15 @@ handling in this area.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Implementations should be taking steps to
+   obscure the exact length of authentication secrets anyway.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T060255Z" creationid="haruyama" creationdate="20200612T060255Z">
+        <seg>実装は, どちらにしても認証の秘密の正確な長さを不明瞭にする手段を取る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Implementations should ignore
 the reserved field if it is not empty.</seg>
       </tuv>
@@ -20076,6 +20119,16 @@ requires the key handle and a few additional parameters.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Included in the protocol is the ability to
+   compress data between the client and the server, offering throughput
+   improvements and traffic savings when used on compressible data.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T054657Z" creationid="haruyama" creationdate="20200612T054657Z">
+        <seg>このプロトコルには, クライアントサーバ間のデータ圧縮機能がある. 圧縮されたデータを用いることで, スループットの向上とトラフィックの削減を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Incoming messages for
        the session MUST be associated with this tmSecurityName value.</seg>
       </tuv>
@@ -20885,6 +20938,17 @@ requires the key handle and a few additional parameters.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200604T080527Z" creationid="haruyama" creationdate="20200604T080527Z">
         <seg>これは基本的には基本のタイプの組合せだが, フィールドの典型的ではない記述のためと保守性を保証するために一度定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>It
+   is doubtful that this would assist an attacker; the compressed length
+   of an authentication secret is of similar interest to an attacker as
+   its uncompressed length.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T060206Z" creationid="haruyama" creationdate="20200612T060206Z">
+        <seg>これが攻撃者を助けるかは疑わしい, 認証の秘密の圧縮された長さと圧縮されていない長さとは, 興味深さの点で攻撃者にとって似ている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -32692,6 +32756,16 @@ length unencrypted.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Specifically, this means that a server selecting this method MUST
+   compress the first packet after SSH_MSG_USERAUTH_SUCCESS and all
+   subsequent packets.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T055602Z" creationid="haruyama" creationdate="20200612T055602Z">
+        <seg>特に, この方法を選んだサーバは, SSSH_MSG_USERAUTH_SUCCESS より後の最初のパケットとその後のすべてのパケットを圧縮しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Specification of the message numbers SSH_MSG_KEX_ECDH_INIT and
    SSH_MSG_KEX_ECDH_REPLY is found in Section 7.</seg>
       </tuv>
@@ -34871,10 +34945,32 @@ be 0x7fffffff to allow the server to automatically choose an interface.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The "zlib" compression in method defined in [RFC4253] for the SSH
+   protocol uses ZLIB (LZ77) compression (as described in [RFC1950] and
+   [RFC1951]).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T054822Z" creationid="haruyama" creationdate="20200612T054822Z">
+        <seg>SSH プロトコルのために [RFC4253] で定義された "zlib" 圧縮法は, ([RFC1950] と [RFC1951] で定義されたように) ZLIB (LZ77) 圧縮を用いる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The "zlib" compression is described in [RFC1950] and in [RFC1951].</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg> "zlib" 圧縮は, [RFC1950] と [RFC1951] に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The "zlib@openssh.com" method operates identically to the "zlib"
+   method described in [RFC4252] except that packet compression does not
+   start until the server sends a SSH_MSG_USERAUTH_SUCCESS packet,
+   replacing the "zlib" method's start of compression when the server
+   sends SSH_MSG_NEWKEYS.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T055459Z" creationid="haruyama" creationdate="20200612T055459Z">
+        <seg>"zlib@openssh.com" 法は [RFC4252] に記述された "zlib" 法と同様に作用するが, サーバが SSH_MSG_USERAUTH_SUCCESS パケットを送るまでパケットの圧縮を開始しない. "zlib" 法ではサーバが SSH_MSG_NEWKEYS を送ると圧縮が開始される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -38262,6 +38358,15 @@ authentication.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200605T043356Z" creationid="haruyama" creationdate="20200605T043356Z">
         <seg>クライアントは, 偽や閉じられたハンドルでサーバに要求を送ってはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The client MUST compress all packets it sends
+   after the time that it receives SSH_MSG_USERAUTH_SUCCESS.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T055648Z" creationid="haruyama" creationdate="20200612T055648Z">
+        <seg>クライアントは SSH_MSG_USERAUTH_SUCCESS を受け取った後に送るすべてのパケットを圧縮しなければならない. </seg>
       </tuv>
     </tu>
     <tu>
@@ -43355,6 +43460,15 @@ and authenticate the entire packet.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The security considerations in [RFC4251] also apply to this
+   compression method.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T060315Z" creationid="haruyama" creationdate="20200612T060315Z">
+        <seg>[RFC4251] のセキュリティの考察もこの圧縮法に適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The security considerations in [RFC4251] also apply to this key
    exchange method.</seg>
       </tuv>
@@ -46717,6 +46831,16 @@ by requiring the user touch the key).</seg>
     <tu>
       <tuv xml:lang="EN-US">
         <seg>This
+   eliminates the risk of a bug in compression libraries resulting in a
+   pre-authentication compromise of an SSH server.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T055312Z" creationid="haruyama" creationdate="20200612T054526Z">
+        <seg>これにより, SSH サーバが認証前に危殆化を起こす圧縮アルゴリズムのバグの危険を無くす.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This
    grants the attacker an almost ideal oracle for side-channel attacks.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160602T032929Z" creationid="haruyama" creationdate="20160602T032929Z">
@@ -46881,6 +47005,14 @@ following format:</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200611T062154Z" creationid="haruyama" creationdate="20200611T062154Z">
         <seg>この Internet-Draft は 2008/03/06 に期限切れとなる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This Internet-Draft will expire on May 27, 2007.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T054303Z" creationid="haruyama" creationdate="20200612T054303Z">
+        <seg>この Internet-Draft は 2007/05/27 に期限切れとなる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -49554,6 +49686,14 @@ associated with a particular identity, e.g. a host or a user.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This memo describes a new compression method for the SSH protocol.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T054329Z" creationid="haruyama" creationdate="20200612T054329Z">
+        <seg>このメモは, SSH プロトコルのための新しい圧縮法について記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This memo describes a new key exchange method for the Secure Shell
    (SSH) protocol.</seg>
       </tuv>
@@ -49815,6 +49955,16 @@ experiences a write error.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This method activates compression after the completion
+   of the key exchange algorithm, upon the receipt of the
+   SSH_MSG_NEWKEYS message.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T054903Z" creationid="haruyama" creationdate="20200612T054903Z">
+        <seg>この方法は, 鍵交換の完了後, SSH_MSG_NEWKEYS メッセージの到着から圧縮を有効化する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This method indicates that the key is an RSA-key.</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -49930,6 +50080,26 @@ the client waits around while the mux server does all the driving.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110614T025357Z">
         <seg>しかし, 5節で記述する Arcfour の既知のセキュリティの問題によって釣り合いがとれている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This new compression method "zlib@openssh.com" addresses this risk by
+   delaying the start of compression until the completion of the user
+   authentication exchange.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T055226Z" creationid="haruyama" creationdate="20200612T055226Z">
+        <seg>この新しい圧縮法 "zlib@openssh.com" は, ユーザ認証の交換が完了するまで圧縮に開始を遅らせることで, この危険に対処する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This new method uses the same zlib compression algorithm as the
+   existing method described in the core SSH drafts but delays the start
+   of compression until after user authentication has completed.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T054426Z" creationid="haruyama" creationdate="20200612T054426Z">
+        <seg>この新しい方法は, コア SSH ドラフトに記述している既存の方法と同じ zlib 圧縮アルゴリズムを用いるが, ユーザの認証が完了するまで圧縮の開始を遅らせる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -50804,6 +50974,16 @@ multiple times.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110623T034505Z">
         <seg>(1) サーバの最後の GSS_Accept_sec_context() 呼び出しが, クライアントに送られる0でない最終応答トークンを生成し, (2) クライアントの GSS_Init_sec_context() のそれまでの呼び出しが major_status が GSS_S_COMPLETE である結果を生成しなかった場合にのみ, このステップは実行される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This step occurs before user authentication
+   [RFC4252] completes, so a bug in the underlying compression code
+   could be exposed to unauthenticated users.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T055109Z" creationid="haruyama" creationdate="20200612T055109Z">
+        <seg>ユーザ認証 [RFC4252] が完了する前にこのステップは起きるので, 基底の圧縮コードのバグが認証されていないユーザに晒される場合がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -54970,6 +55150,14 @@ identify the identity principal in log messages.</seg>
    of clients known to have valid users.</seg>
       </tuv>
       <tuv xml:lang="JA">
+        <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>more exact information about the length of authentication data.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T055955Z" creationid="haruyama" creationdate="20200612T055955Z">
         <seg> </seg>
       </tuv>
     </tu>
