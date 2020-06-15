@@ -4,12 +4,12 @@
 
 Internet Engineering Task Force                                D. Miller
 Internet-Draft                                                   OpenSSH
-Intended status: Informational                              May 24, 2016
-Expires: November 25, 2016
+Intended status: Informational                        September 30, 2017
+Expires: April 3, 2018
 
 
                            SSH Agent Protocol
-                       draft-miller-ssh-agent-00
+                       draft-miller-ssh-agent-02
 
 概要
 
@@ -19,20 +19,21 @@ Expires: November 25, 2016
 
    この Internet-Draft  は BCP 78 と BCP 79 の規定に完全に準拠して提出される.
 
-   Internet-Draft は Internet Engineering Task Force (IETF) の作業文書だ.  他のグループも Internet-Draft として作業文書を配布するかもしれないことに注意.  現在の Internet-Draft のリストは http://www.ietf.org/ietf/1id-abstracts.txt にある.
+   Internet-Draft は Internet Engineering Task Force (IETF) の作業文書だ.  他のグループも Internet-Draft として作業文書を配布するかもしれないことに注意.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
 
    Internet-Drafts は, 最大で6か月有効な草稿で, いつでも他の文書によって更新, 置換, 廃止されうる.  Internet Draft を参考仕様としたり "進行中" 以外ので引用は不適切だ.
 
-   この Internet-Draft は 2016/11/25 に期限切れとなる.
+   This Internet-Draft will expire on April 3, 2018.
 
 著作権情報
 
-   Copyright (c) 2016 IETF Trust and the persons identified as the
+   Copyright (c) 2017 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
-   (http://trustee.ietf.org/license-info) in effect on the date of
+   (https://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
    to this document.  Code Components extracted from this document must
@@ -45,9 +46,9 @@ Expires: November 25, 2016
 
 
 
-Miller                  Expires November 25, 2016               [Page 1]
+Miller                    Expires April 3, 2018                 [Page 1]
 
-Internet-Draft              Abbreviated Title                   May 2016
+Internet-Draft                  SSH Agent                 September 2017
 
 
 目次
@@ -95,9 +96,9 @@ Internet-Draft              Abbreviated Title                   May 2016
 
 
 
-Miller                  Expires November 25, 2016               [Page 2]
+Miller                    Expires April 3, 2018                 [Page 2]
 
-Internet-Draft              Abbreviated Title                   May 2016
+Internet-Draft                  SSH Agent                 September 2017
 
 
    エージェントに保持された鍵は, 利用の度にそれらをロードし開封する利便性とセキュリティの利点を提供する.  さらに, エージェントはシンプルなプロトコルを実装し, フルな SSH サーバやクライアントにロードされた鍵よりも攻撃を受ける箇所が小さい.
@@ -113,10 +114,12 @@ Internet-Draft              Abbreviated Title                   May 2016
 
    エージェントプロトコルは, クライアントからのみ起動される, パケット化された要求-応答プロトコルだ.  クライアントからサーバに送られるいくつかのリクエストと応答中で送られる返信メッセージの集合で構成される.  クライアントの要求に対する応答以外に, サーバがメッセージを送信することは決してない.  返信は順番を守って送られる.
 
-   エージェントプロトコルのすべての値は, [RFC4251] で指定された SSH 通信表現を用いてエンコードされる.  メッセージはメッセージ長と内容から構成される.  内容の最初のバイトは, 常にメッセージのタイプを指す.
+   エージェントプロトコルのすべての値は, [RFC4251] で指定された SSH 通信表現を用いてエンコードされる.  Messages consist of a
+   length, type and contents.
 
-      uint32                   メッセージ長
-      byte[message length]     メッセージの内容
+      uint32                    message length
+      byte                      message type
+      byte[message length - 1]  message contents
 
 4.  プロトコルのメッセージ
 
@@ -134,9 +137,9 @@ Internet-Draft              Abbreviated Title                   May 2016
 
 
 
-Miller                  Expires November 25, 2016               [Page 3]
+Miller                    Expires April 3, 2018                 [Page 3]
 
-Internet-Draft              Abbreviated Title                   May 2016
+Internet-Draft                  SSH Agent                 September 2017
 
 
    SSH_AGENT_FAILURE は, 未知の種類の要求に対する応答としても送られる.
@@ -177,9 +180,9 @@ Internet-Draft              Abbreviated Title                   May 2016
 
 
 
-Miller                  Expires November 25, 2016               [Page 4]
+Miller                    Expires April 3, 2018                 [Page 4]
 
-Internet-Draft              Abbreviated Title                   May 2016
+Internet-Draft                  SSH Agent                 September 2017
 
 
        byte                    SSH_AGENTC_ADD_IDENTITY or
@@ -224,9 +227,9 @@ Internet-Draft              Abbreviated Title                   May 2016
 
 
 
-Miller                  Expires November 25, 2016               [Page 5]
+Miller                    Expires April 3, 2018                 [Page 5]
 
-Internet-Draft              Abbreviated Title                   May 2016
+Internet-Draft                  SSH Agent                 September 2017
 
 
    最初の値は, 32 byte の Ed25519 公開鍵 "ENC(A)" だ.  次の値は, 32 byte の秘密鍵 "k" と 32 byte の公開鍵 "ENC(A)" を連接したものだ.  "ENC(A)" と "k" の値の内容と解釈は, [I-D.irtf-cfrg-eddsa] で定義されている.
@@ -264,9 +267,9 @@ Internet-Draft              Abbreviated Title                   May 2016
 
 
 
-Miller                  Expires November 25, 2016               [Page 6]
+Miller                    Expires April 3, 2018                 [Page 6]
 
-Internet-Draft              Abbreviated Title                   May 2016
+Internet-Draft                  SSH Agent                 September 2017
 
 
    典型的には, ハードウェアトークン上でサポートされる任意の鍵の公開の部分のみが, エージェントにロードされる. 厳密に言うと, このメッセージは, ハードウェアトークンに今後の秘密鍵の操作を移譲するよう準備する.
@@ -305,9 +308,9 @@ Internet-Draft              Abbreviated Title                   May 2016
 
 
 
-Miller                  Expires November 25, 2016               [Page 7]
+Miller                    Expires April 3, 2018                 [Page 7]
 
-Internet-Draft              Abbreviated Title                   May 2016
+Internet-Draft                  SSH Agent                 September 2017
 
 
 4.2.6.2.  鍵の確認の制約
@@ -350,9 +353,9 @@ Internet-Draft              Abbreviated Title                   May 2016
 
 
 
-Miller                  Expires November 25, 2016               [Page 8]
+Miller                    Expires April 3, 2018                 [Page 8]
 
-Internet-Draft              Abbreviated Title                   May 2016
+Internet-Draft                  SSH Agent                 September 2017
 
 
        byte                    SSH_AGENTC_REMOVE_SMARTCARD_KEY
@@ -397,12 +400,15 @@ Internet-Draft              Abbreviated Title                   May 2016
 
 
 
-Miller                  Expires November 25, 2016               [Page 9]
+Miller                    Expires April 3, 2018                 [Page 9]
 
-Internet-Draft              Abbreviated Title                   May 2016
+Internet-Draft                  SSH Agent                 September 2017
 
 
-   エージェントが署名を作成できない/したくない(たとえば指定された鍵がなかったり, 制約付きの鍵でユーザが確認を拒否した)場合, エージェントは SSH_AGENT_FAILURE で応答しなければならない.
+   If the agent does not support the requested flags, or is otherwise
+   unable or unwilling to generate the signature (e.g. because it
+   doesn't have the specified key, or the user refused confirmation of a
+   constrained key), it must reply with a SSH_AGENT_FAILURE message.
 
    成功したら, エージェントは次を返す:
 
@@ -413,7 +419,10 @@ Internet-Draft              Abbreviated Title                   May 2016
 
 4.5.1.  署名フラグ
 
-   署名要求のメッセージで2つのフラグが現在定義されている.: SSH_AGENT_RSA_SHA2_256 と SSH_AGENT_RSA_SHA2_512.  これらの2つのフラグは, "ssh-rsa" 鍵でのみ有効だ. これらは, それぞれ "rsa-sha2-256" か "rsa-sha2-515" の署名方式を用いてエージェントが署名を返すように要求する.  これらの署名方式は [I-D.ietf-curdle-rsa-sha2] で定義されている..
+   署名要求のメッセージで2つのフラグが現在定義されている.: SSH_AGENT_RSA_SHA2_256 と SSH_AGENT_RSA_SHA2_512.  These two flags
+   are only valid for "ssh-rsa" keys and request that the agent return a
+   signature using the "rsa-sha2-256" or "rsa-sha2-512" signature
+   methods respectively.  これらの署名方式は [I-D.ietf-curdle-rsa-sha2] で定義されている..
 
 4.6.  エージェントのロックとアンロック
 
@@ -435,9 +444,9 @@ Internet-Draft              Abbreviated Title                   May 2016
 
 
 
-Miller                  Expires November 25, 2016              [Page 10]
+Miller                    Expires April 3, 2018                [Page 10]
 
-Internet-Draft              Abbreviated Title                   May 2016
+Internet-Draft                  SSH Agent                 September 2017
 
 
     エージェントは, パスフレーズに対するブルートフォース推測攻撃の対策を講じる必要がある.
@@ -475,9 +484,9 @@ Internet-Draft              Abbreviated Title                   May 2016
 
 
 
-Miller                  Expires November 25, 2016              [Page 11]
+Miller                    Expires April 3, 2018                [Page 11]
 
-Internet-Draft              Abbreviated Title                   May 2016
+Internet-Draft                  SSH Agent                 September 2017
 
 
 5.1.  メッセージ番号
@@ -524,9 +533,9 @@ Internet-Draft              Abbreviated Title                   May 2016
 
 
 
-Miller                  Expires November 25, 2016              [Page 12]
+Miller                    Expires April 3, 2018                [Page 12]
 
-Internet-Draft              Abbreviated Title                   May 2016
+Internet-Draft                  SSH Agent                 September 2017
 
 
 5.3.  署名フラグ
@@ -571,9 +580,9 @@ Internet-Draft              Abbreviated Title                   May 2016
 
 
 
-Miller                  Expires November 25, 2016              [Page 13]
+Miller                    Expires April 3, 2018                [Page 13]
 
-Internet-Draft              Abbreviated Title                   May 2016
+Internet-Draft                  SSH Agent                 September 2017
 
 
         Number Identifier                               Reference
@@ -623,9 +632,9 @@ Internet-Draft              Abbreviated Title                   May 2016
 
 
 
-Miller                  Expires November 25, 2016              [Page 14]
+Miller                    Expires April 3, 2018                [Page 14]
 
-Internet-Draft              Abbreviated Title                   May 2016
+Internet-Draft                  SSH Agent                 September 2017
 
 
 7.3.  新しいレジストリ: SSH agent signature flags
@@ -656,9 +665,9 @@ Internet-Draft              Abbreviated Title                   May 2016
 
 
 
-Miller                  Expires November 25, 2016              [Page 15]
+Miller                    Expires April 3, 2018                [Page 15]
 
-Internet-Draft              Abbreviated Title                   May 2016
+Internet-Draft                  SSH Agent                 September 2017
 
 
     ローカルな攻撃者がいてエージェントが制約のない鍵を保持している場合, 攻撃者が観測しうる秘密鍵の操作の回数の制限だけが, 署名を実施するCPUの利用率だ.(訳注: 原文が変?)これは, サイドチャンネル攻撃のほぼ理想的な神託を攻撃者に与えます.
@@ -672,49 +681,49 @@ Internet-Draft              Abbreviated Title                   May 2016
 
    [I-D.ietf-curdle-rsa-sha2]
               bider, d., "Use of RSA Keys with SHA-2 256 and 512 in
-              Secure Shell (SSH)", draft-ietf-curdle-rsa-sha2-00 (work
-              in progress), March 2016.
+              Secure Shell (SSH)", draft-ietf-curdle-rsa-sha2-10 (work
+              in progress), August 2017.
 
    [I-D.ietf-curdle-ssh-ed25519]
-              Harris, B., "Ed25519 public key algorithm for the Secure
-              Shell (SSH) protocol", draft-ietf-curdle-ssh-ed25519-00
-              (work in progress), May 2016.
+              Harris, B. and L. Velvindron, "Ed25519 public key
+              algorithm for the Secure Shell (SSH) protocol", draft-
+              ietf-curdle-ssh-ed25519-01 (work in progress), August
+              2017.
 
    [I-D.irtf-cfrg-eddsa]
               Josefsson, S. and I. Liusvaara, "Edwards-curve Digital
-              Signature Algorithm (EdDSA)", draft-irtf-cfrg-eddsa-05
-              (work in progress), March 2016.
+              Signature Algorithm (EdDSA)", draft-irtf-cfrg-eddsa-08
+              (work in progress), August 2016.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119, DOI 10.17487/
-              RFC2119, March 1997,
-              <http://www.rfc-editor.org/info/rfc2119>.
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
 
    [RFC4251]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
               Protocol Architecture", RFC 4251, DOI 10.17487/RFC4251,
-              January 2006, <http://www.rfc-editor.org/info/rfc4251>.
+              January 2006, <https://www.rfc-editor.org/info/rfc4251>.
 
    [RFC4253]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
               Transport Layer Protocol", RFC 4253, DOI 10.17487/RFC4253,
-              January 2006, <http://www.rfc-editor.org/info/rfc4253>.
+              January 2006, <https://www.rfc-editor.org/info/rfc4253>.
 
    [RFC5226]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
-              IANA Considerations Section in RFCs", BCP 26, RFC 5226,
+              IANA Considerations Section in RFCs", RFC 5226,
               DOI 10.17487/RFC5226, May 2008,
-              <http://www.rfc-editor.org/info/rfc5226>.
+              <https://www.rfc-editor.org/info/rfc5226>.
 
 
 
-
-Miller                  Expires November 25, 2016              [Page 16]
+Miller                    Expires April 3, 2018                [Page 16]
 
-Internet-Draft              Abbreviated Title                   May 2016
+Internet-Draft                  SSH Agent                 September 2017
 
 
    [RFC5656]  Stebila, D. and J. Green, "Elliptic Curve Algorithm
-              Integration in the Secure Shell Transport Layer", RFC
-              5656, DOI 10.17487/RFC5656, December 2009,
-              <http://www.rfc-editor.org/info/rfc5656>.
+              Integration in the Secure Shell Transport Layer",
+              RFC 5656, DOI 10.17487/RFC5656, December 2009,
+              <https://www.rfc-editor.org/info/rfc5656>.
 
 Author's Address
 
@@ -762,4 +771,4 @@ Author's Address
 
 
 
-Miller                  Expires November 25, 2016              [Page 17]
+Miller                    Expires April 3, 2018                [Page 17]
