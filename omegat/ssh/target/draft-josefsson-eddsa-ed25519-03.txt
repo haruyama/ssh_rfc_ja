@@ -1,0 +1,1198 @@
+
+
+
+
+Network Working Group                                       S. Josefsson
+Internet-Draft                                                    SJD AB
+Intended status: Informational                                N. Moeller
+Expires: November 13, 2015
+                                                            May 12, 2015
+
+
+                           EdDSA and Ed25519
+                    draft-josefsson-eddsa-ed25519-03
+
+概要
+
+   楕円曲線署名スキーム EdDSA と Ed25519 と呼ばれるその1つのインスタンスについて記述する.  実装例とテストベクターを提供する.
+
+このメモの位置づけ
+
+   この Internet-Draft  は BCP 78 と BCP 79 の規定に完全に準拠して提出される.
+
+   Internet-Draft は Internet Engineering Task Force (IETF) の作業文書だ.  他のグループも Internet-Draft として作業文書を配布するかもしれないことに注意.  現在の Internet-Draft のリストは http://www.ietf.org/ietf/1id-abstracts.txt にある.
+
+   Internet-Drafts は, 最大で6か月有効な草稿で, いつでも他の文書によって更新, 置換, 廃止されうる.  Internet Draft を参考仕様としたり "進行中" 以外ので引用は不適切だ.
+
+   この Internet-Draft は 2015/11/13 に期限切れとなる.
+
+著作権情報
+
+   Copyright (c) 2015 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+Josefsson & Moeller     Expires November 13, 2015               [Page 1]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+目次
+
+   1イントロダクション  . . . . . . . . . . . . . . . . . . . . . . . .   2
+   2.  表記法  . . . . . . . . . . . . . . . . . . . . . . . . . .   3
+   3.  背景  . . . . . . . . . . . . . . . . . . . . . . . . .   3
+   4.  EdDSA . . . . . . . . . . . . . . . . . . . . . . . . . . . .   4
+     4.1.  エンコーディング  . . . . . . . . . . . . . . . . . . . . . . . .   4
+     4.2.  鍵  . . . . . . . . . . . . . . . . . . . . . . . . . .   5
+     4.3.  署名  . . . . . . . . . . . . . . . . . . . . . . . . . .   5
+     4.4.  検証  . . . . . . . . . . . . . . . . . . . . . . . . .   5
+   5.  Ed25519 . . . . . . . . . . . . . . . . . . . . . . . . . . .   5
+     5.1.  モジュラー演算  . . . . . . . . . . . . . . . . . . .   6
+     5.2.  エンコーディング  . . . . . . . . . . . . . . . . . . . . . . . .   6
+     5.3.  デコーディング  . . . . . . . . . . . . . . . . . . . . . . . .   6
+     5.4.  点の加算  . . . . . . . . . . . . . . . . . . . . .   7
+     5.5.  鍵の生成  . . . . . . . . . . . . . . . . . . . . .   8
+     5.6.  署名  . . . . . . . . . . . . . . . . . . . . . . . . . .   8
+     5.7.  検証  . . . . . . . . . . . . . . . . . . . . . . . . .   9
+     5.8.  Python の例 . . . . . . . . . . . . . . . . . . .   9
+   6.   Ed25519 のテストベクター  . . . . . . . . . . . . . . . . . .  14
+   7.  謝辞  . . . . . . . . . . . . . . . . . . . . . .  17
+   8.  IANA の考察 . . . . . . . . . . . . . . . . . . . . .  18
+   9.  セキュリティの考察 . . . . . . . . . . . . . . . . . . .  18
+     9.1.  サイドチャンネルの漏洩  . . . . . . . . . . . . . . . . . . .  18
+   10. リファレンス  . . . . . . . . . . . . . . . . . . . . . . . . .  18
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .  18
+     10.2.  Informative References . . . . . . . . . . . . . . . . .  18
+   Appendix A.  Ed25519 Python Library . . . . . . . . . . . . . . .  19
+   Appendix B.  Library driver . . . . . . . . . . . . . . . . . . .  23
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  24
+
+1イントロダクション
+
+   Edwards-curve Digital Signature Algorithm (EdDSA) は Twisted Edwards 曲線を用いる Schnorr  署名システムの変種だ.  EdDSA は特定のパラメータでインスタンス化する必要がある. この文書は, Ed25519 - GF(2^255-19) 上の曲線での EdDSA をインスタンス化 について記述する. Ed25519 のインターネットコミュニティでの採用を容易にするため, この文書は実装志向な方法で署名スキームを記述し, サンプルコードとテストベクターを提供する.
+
+   EdDSA と Ed25519 の利点は:
+
+   1いろいろなプラットフォームでの高いパフォーマンス.
+
+   2.  それぞれの署名にユニークな乱数の利用を要求しない.
+
+
+
+
+Josefsson & Moeller     Expires November 13, 2015               [Page 2]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+   3.  サイドチャンネル攻撃に対してより強い耐性を持つ.
+
+   4.  小さな公開鍵 (32 bytes) と署名 (64 bytes).
+
+   5.  式が "強く統一されている" . すなわち, 例外なくすべての曲線上の点で有効だ.  これにより, EdDSA が信頼できない公開の値にコストの高い点の検証を行なわなくて済む.
+
+   6.  衝突に耐性がある. つまり, ハッシュ関数の衝突でこのシステムは破壊されない.
+
+   さらなる背景については, オリジナルの EdDSA の論文 [EDDSA] を参照.
+
+   TODO: Support SHA-3-512?
+
+2.  表記法
+
+   この文書を通じて次の表記法を用いる.
+
+   GF(p) p 要素を持つ有限フィールド
+
+   x^y x の y 乗
+
+   B グループないしサブグループのジェネレータ
+
+   n B B の n 倍
+
+   h_i  h の i 番目のビット
+
+   a || b (ビット)文字列 a と (ビット)文字列 b の連結
+
+3.  背景
+
+   EdDSA は次の形式の GF(p) 上の楕円曲線を用いて定義される
+
+   -x^2 + y^2 = 1 + d x^2 y^2
+
+   一般に p は素数の乗数でよいが, 通常は素数が選択される.  p = 1 modulo 4 (square modulo p が -1 であることを意味する) と d が non-square modulo p なことが要求される. Ed25519 では, 用いられる曲線は座標変換の元で Curve25519 [CURVE25519] と同等で, 離散対数問題の難易度は Curve25519 と同じであることを意味する.
+
+   この曲線上の点は, 次の式で加法群を形成する (x3, y3) = (x1, y1) + (x2, y2). 
+
+
+
+
+Josefsson & Moeller     Expires November 13, 2015               [Page 3]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+           x1 y2 + x2 y1              y1 y2 + x1 x2
+   x3 = -------------------,  y3 = -------------------
+         1 + d x1 x2 y1 y2          1 - d x1 x2 y1 y2
+
+   群の単位元は (0, 1) だ.
+
+   暗号アプリケーションで用いられる他の多くの群と異なり, これらの式は "強く統一されている": 例外なくすべての曲線上の点で有効だ.  特に, すべての入力の点に対して分母は 0 以外となる.
+
+   強く統一されているが, コストの高い p モジュラ逆数計算を避けるために homogeneous coordinate を用いるより効率的な式がある.  [Faster-ECC] と [Edwards-revisited] を参照.
+
+4.  EdDSA
+
+   EdDSA はいくつかのパラメータを持つ電子署名システムだ.  一般の EdDSA 電子署名システムは, 通常直接実装されない. かわりに (Ed25519 のような) EdDSA の特定のインスタンスが実装される.  一般の EdDSA の正確な説明は, 実装者にとって特に有用ではないが, 背景と完全性のために, 一般の EdDSA アルゴリズムの簡潔な説明をここで与える.
+
+   EdDSA は 7 つのパラメータを持つ:
+
+   1整数 b >= 10.
+
+   2.  2b ビットの出力を生成する暗号学的ハッシュ関数
+
+   3.  素数の乗数 p.  p = 1 modulo 4
+
+   4.  有限フィールド GF(p) の 要素の (b-1) ビットエンコーディング.
+
+   5.  GF(p) の non-square な要素 d
+
+   6.  集合 E = { GF(p) x GF(p) のメンバ (x,y) } の要素 B (ただし != (0, 1)). GF(p) は たとえば  -x^2 + y^2 = 1 + dx^2y^2.
+
+   7.  b-3 ビットの素数 q, ここで qB = (0, 1) すなわち, q は B の 位数(order) かその倍数.
+
+4.1.  エンコーディング
+
+   E の要素 (x,y) of E は ENC(x, y) と呼ばれる b ビットの文字列にエンコードされる. ENC(x, y) は x が負の場合は 1, x が非負の場合は 0 の 1 ビットが連結された y の (b-1) ビットエンコーディングだ.   
+
+
+
+Josefsson & Moeller     Expires November 13, 2015               [Page 4]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+   GF(q) の負の要素は,  x の (b-1) ビットエンコーディングが -x の (b-1) よりも辞書順に大きい x だ.
+
+4.2.  鍵
+
+   EdDSA の秘密鍵は b ビットの文字列 k だ.  ハッシュ H(k) = (h_0, h_1, ..., h_(2b-1)) は, 2^(b-2) と 3 以上かつ b-3 以下のすべての i に対する m = 2^i * h_i (つまり m は 集合 { 2^(b-2), 2^(b-2) +  8, ..., 2^(b-1) - 8 }のメンバー) の和の整数を決定する.  EdDSA の公開鍵は ENC(A) = ENC(aB) だ.
+   ビット h_b, ..., h_(2b-1) は後述する署名で用いられる.
+
+4.3.  署名
+
+   秘密鍵 k での メッセージ M の署名は, 2b ビットの文字列 ENC(R) || ENC'(S) で, ENC'(S) は S の b-ビットリトルエンディアンエンコーディングとして定義される. R と S は次のように導出される.  まず, r = H(h_b, ... h_(2b-1)), M) を {0, 1, ..., 2^(2b)-1} の整数のようなリトルエンディアン形式の 2b-bit 文字列として解釈して定義する.  そして R=rB,  S=(r+H(ENC(R) || ENC(A) || M)a) mod q だ.
+
+4.4.  検証
+
+    公開鍵 ENC(A) でのメッセージ M の 署名 ENC(R) || ENC'(S)の検証は次のように行なう. A と R は E の要素として, S は 集合 {0, 1, ..., l-1 } のメンバーとして, 入力をパースする.
+   H' = H(ENC(R) || ENC(A) || M) を計算し 群方程式 8SB = 8R + 8H'A in E を検証する. パースが失敗したり群方程式が成立しなければ検証は拒否される.
+
+5.  Ed25519
+
+   理論的に Ed25519 は EdDSA を b=256, H は SHA-512 [RFC4634], p は素数 2^255-19, GF(2^255-19) の 255 ビットエンコーディングは {0, 1, ... 2^255-20} のリトルエンディアンエンコーディング,  q は素数 2^252 + 0x14def9dea2f79cd65812631a5cf5d3ed, d = -121665/121666 (GF(p) のメンバー), and B は x が "正" ののとき E のユニークな点 (x, 4/5) ("正" とは利用しているエンコーディングで x の最下位ビットが 0 であることを単に意味している) を用いてインスタンス化された EdDSA だ.
+   曲線 p, 素数 q, d や B は [I-D.irtf-cfrg-curves] に従う.
+
+   明示的に書くと  B は点 (15112221349535400772501151409588531511454012693041857206046113283949847762202, 46316835694926478169428394003475163141307993866256225615783033603165251855960) だ.
+
+
+
+
+
+
+
+Josefsson & Moeller     Expires November 13, 2015               [Page 5]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+5.1.  モジュラー演算
+
+   モジュロ p = 2^255 - 1 の演算を効率的かつ安全に実装するためのアドバイスは, Curve25519 [CURVE25519] を参照.  モジュラ逆数 p のために , 恒等式 x^-1 = x^(p-2) (mod p) を用いるのが推奨される.
+
+   ポイントのデコーディングや "decompression, 伸長" のために, モジュロ p の平方根が必要だ.  これは Tonelli-Shanks algorithm を用いるか p = 5 (mod 8) の特別な場合に計算できる..  a の平方根を探すために, まず根の候補  x = a^((p+3)/8) (mod p) を計算する.  次に3つの場合がある.
+
+      x^2 = a (mod p).  ならば x は平方根.
+
+      x^2 = -a (mod p).  ならば 2^((p-1)/4) x が平方根.
+
+      a は モジュロ p の平方ではない.
+
+5.2.  エンコーディング
+
+   すべての値は オクテット文字列としてコード化され,  整数はリトルエンディアンでコード化される.  すなわち, 32-オクテット文字列 h h[0],...h[31] は 整数 h[0] + 2^8 h[1] + ... + 2^248 h[31] を表わす.
+
+   曲線の点 (x,y), 座標の範囲 0 <= x,y < p は次のようにコード化される.  まず, y 座標を 32 オクテットのリトルエンディアン文字列としてエンコードする.  最後のオクテットの最上位ビットは常に 0 だ.  この点のエンコーディングを構成するために, x 座標の最下位ビットを最後のオクテットの最上位ビットにコピーする.
+
+5.3.  デコーディング
+
+   32 オクテット文字列が与えられた点のデコーディングは少しより複雑だ.
+
+   1まず, リトルエンディアン表現での整数として文字列を解釈する.  この数の 255 ビットは, x 座標の最下位ビットで, 値 x_0 を意味する.  このビットをクリアして y 座標は回復される.  結果の値が p 以上ならば, デコーディングは失敗している.
+
+   2.  x 座標の回復のため, 曲線の方程式 x^2 = (y^2 - 1) / (d y^2 + 1) (mod p) を必要とする.  d は non-square で -1 は square なので,  分子と (d y^2 + 1) は modulo p で常に逆にできる.  u = y^2 - 1 ,  v = d y^2 + 1 とする.  (u/v) の平方根を求めるため, 最初の手順として根の候補 x = (u/v)^((p+3)/8) を計算する.
+
+
+
+Josefsson & Moeller     Expires November 13, 2015               [Page 6]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+        次のトリックを用いることで, v の逆数と平方根の両方のために単なるモジュラの累乗を用いる:
+
+                      (p+3)/8      3        (p-5)/8
+             x = (u/v)        = u v  (u v^7)         (mod p)
+
+   3.  再び 3つの場合がある:
+
+       1v x^2 = u (mod p) なら x は平方根.
+
+       2.  v x^2 = -u (mod p) ならば x <-- x 2^((p-1)/4) とし, これが平方根.
+
+       3.  その他の場合は, モジュロ p の平方根はなくデコーディングは失敗だ.
+
+   4.  最後に, x_0 ビット を正しい平方根を選択するのに使う.  x = 0 で x_0 = 1 なら, デコーディングは失敗だ.  その他の場合,  x_0 != x mod 2, x <-- p - x とする.  デコードされた点 (x, y) を返す.
+
+5.4.  点の加算
+
+   点の加算には次の方法が推奨される.  点 (x,y) は x = X/Z, y = Y/Z, x y = T/Z とする拡張同次座標で表わされる.
+
+   2つの点を足す次の式, (x3,y3) = (x1,y1)+(x2,y2) は [Edwards-revisited] 3.1 節に記述されている.
+   これらは強く統一されている. つまり, 有効な入力の点のどの組についても機能する.
+
+           A = (Y1-X1)*(Y2-X2)
+           B = (Y1+X1)*(Y2+X2)
+           C = T1*2*d*T2
+           D = Z1*2*Z2
+           E = B-A
+           F = D-C
+           G = D+C
+           H = B+A
+           X3 = E*F
+           Y3 = G*H
+           T3 = E*H
+           Z3 = F*G
+
+
+
+
+
+
+
+Josefsson & Moeller     Expires November 13, 2015               [Page 7]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+5.5.  鍵の生成
+
+   秘密鍵は,  32 オクテット (256 ビット, b に対応) の暗号学的に安全なランダムなデータだ.  ランダムについての議論は [RFC4086] を参照.
+
+   32 バイトの公開鍵が次の手順で生成される.
+
+   1SHA-512 を用いて 32 バイトの秘密鍵をハッシュ化し, 64 オクテットの大きなバッファにダイジェストを格納し, h とする.  下位の 32 バイトのみが公開鍵の生成に用いられる.
+
+   2.  バッファを剪定する.  C で書くと:
+
+             h[0] &= ~0x07;
+             h[31] &= 0x7F;
+             h[31] |= 0x40;
+
+   3.  バッファをリトルエンディアンの整数として解釈し, 秘密のスカラ a とする.  既知の基本の点スカラー乗算 a B を実施する.
+
+   4.  公開鍵 A は 点 aB のエンコーディングだ.  まず, (0<= y < p の範囲の) y 座標を 32 オクテットのリトルエンディアン文字列としてエンコードする.  最後のオクテットの最上位ビットは常に 0 だ.  点 aB のエンコーディングのために, x 座標の最下位ビットを最後のオクテットの最上位ビットにコピーする.  結果が公開鍵だ.
+
+5.6.  署名
+
+   署名手続きの入力は, 32 オクテット文字列の秘密鍵と, 任意のサイズのメッセージ M だ.
+
+   1SHA-512 を用いて 32 オクテットの秘密鍵をハッシュ化する.  h を結果のダイジェストとする.  前の節で記述したように, ダイジェストの前半から秘密スカラ a と対応する公開鍵を構築する.  ハッシュダイジェストの後半 h[32],...,h[63] を prefix とする.
+
+   2.  SHA-512(prefix || M) を計算する. M は署名するメッセージ.  64 オクテットのダイジェストをリトルエンディアンの整数 r として解釈する.
+
+   3.  点 rB を計算する.  効率のため, 最初に r module q (q は B の群位数) を減らして計算する. この点のエンコーディングを文字列 R とする.
+
+
+
+
+Josefsson & Moeller     Expires November 13, 2015               [Page 8]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+   4.  SHA512(R || A || M) を計算し, 64 オクテットのダイジェストをリトルエンディアン整数 k として解釈する.
+
+   5.   s = (r + k a) mod q を計算する.  再び効率のため, まず k modulo q を減らす.
+
+   6.  R (32 オクテット) と s のリトルエンディアンエンコーディング (32 オクテット, 最後のオクテットの 上位ビット 3 つは常に0) を連結して署名とする.
+
+5.7.  検証
+
+   1メッセージ M の署名を検証するには,まず署名を 2 つの 32 オクテットに分割する.  前半を点 R としてデコードし, 後半を 0 <= s < q な整数 s としてデコードする. デコーディングに失敗したら, 署名は無効だ.
+
+   2.  SHA512(R || A || M) を計算し, 64 オクテットのダイジェストをリトルエンディアン整数 k として解釈する.
+
+   3.  群方程式 8s B = 8 R + 8k A を検査する. 代わりに B = R + kA を検査すれば十分だが, 必須ではない.
+
+5.8.  Python の例
+
+   この節の残りでは, 説明のため Python (バージョン 3.2 以降) で Ed25519 をどのように実装するかを記述する.  付録 A に完全な実装, 付録 B にテスト実施者のためにいくつかのテストベクターで動かしたものがあるので参照.
+
+   最初にいくつかの準備が必要だ.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Josefsson & Moeller     Expires November 13, 2015               [Page 9]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+   import hashlib
+
+   def sha512(s):
+       return hashlib.sha512(s).digest()
+
+   # Base field Z_p
+   p = 2**255 - 19
+
+   def modp_inv(x):
+       return pow(x, p-2, p)
+
+   # Curve constant
+   d = -121665 * modp_inv(121666) % p
+
+   # Group order
+   q = 2**252 + 27742317777372353535851937790883648493
+
+   def sha512_modq(s):
+       return int.from_bytes(sha512(s), "little") % q
+
+   次の関数群で点の計算を実行する.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Josefsson & Moeller     Expires November 13, 2015              [Page 10]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+# Points are represented as tuples (X, Y, Z, T) of extended coordinates,
+# with x = X/Z, y = Y/Z, x*y = T/Z
+
+def point_add(P, Q):
+    A = (P[1]-P[0])*(Q[1]-Q[0]) % p
+    B = (P[1]+P[0])*(Q[1]+Q[0]) % p
+    C = 2 * P[3] * Q[3] * d % p
+    D = 2 * P[2] * Q[2] % p
+    E = B-A
+    F = D-C
+    G = D+C
+    H = B+A
+    return (E*F, G*H, F*G, E*H)
+
+# Computes Q = s * Q
+def point_mul(s, P):
+    Q = (0, 1, 1, 0)  # Neutral element
+    while s > 0:
+        # Is there any bit-set predicate?
+        if s & 1:
+            Q = point_add(Q, P)
+        P = point_add(P, P)
+        s >>= 1
+    return Q
+
+def point_equal(P, Q):
+    # x1 / z1 == x2 / z2  <==>  x1 * z2 == x2 * z1
+    if (P[0] * Q[2] - Q[0] * P[2]) % p != 0:
+        return False
+    if (P[1] * Q[2] - Q[1] * P[2]) % p != 0:
+        return False
+    return True
+
+   点の圧縮のために次の関数群がある.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Josefsson & Moeller     Expires November 13, 2015              [Page 11]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+# Square root of -1
+modp_sqrt_m1 = pow(2, (p-1) // 4, p)
+
+# Compute corresponding x coordinate, with low bit corresponding to sign,
+# or return None on failure
+def recover_x(y, sign):
+    x2 = (y*y-1) * modp_inv(d*y*y+1)
+    if x2 == 0:
+        if sign:
+            return None
+        else:
+            return 0
+
+    # Compute square root of x2
+    x = pow(x2, (p+3) // 8, p)
+    if (x*x - x2) % p != 0:
+        x = x * modp_sqrt_m1 % p
+    if (x*x - x2) % p != 0:
+        return None
+
+    if (x & 1) != sign:
+        x = p - x
+    return x
+
+# Base point
+g_y = 4 * modp_inv(5) % p
+g_x = recover_x(g_y, 0)
+G = (g_x, g_y, 1, g_x * g_y % p)
+
+def point_compress(P):
+    zinv = modp_inv(P[2])
+    x = P[0] * zinv % p
+    y = P[1] * zinv % p
+    return int.to_bytes(y | ((x & 1) << 255), 32, "little")
+
+def point_decompress(s):
+    if len(s) != 32:
+        raise Exception("Invalid input length for decompression")
+    y = int.from_bytes(s, "little")
+    sign = y >> 255
+    y &= (1 << 255) - 1
+
+    x = recover_x(y, sign)
+    if x is None:
+        return None
+    else:
+        return (x, y, 1, x*y % p)
+
+
+
+
+Josefsson & Moeller     Expires November 13, 2015              [Page 12]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+   秘密鍵の操作のための関数群.
+
+   def secret_expand(secret):
+       if len(secret) != 32:
+           raise Exception("Bad size of private key")
+       h = sha512(secret)
+       a = int.from_bytes(h[:32], "little")
+       a &= (1 << 254) - 8
+       a |= (1 << 254)
+       return (a, h[32:])
+
+   def secret_to_public(secret):
+       (a, dummy) = secret_expand(secret)
+       return point_compress(point_mul(a, G))
+
+   署名関数は次だ.
+
+   def sign(secret, msg):
+       a, prefix = secret_expand(secret)
+       A = point_compress(point_mul(a, G))
+       r = sha512_modq(prefix + msg)
+       R = point_mul(r, G)
+       Rs = point_compress(R)
+       h = sha512_modq(Rs + A + msg)
+       s = (r + h * a) % q
+       return Rs + int.to_bytes(s, 32, "little")
+
+   最後に検証関数.
+
+   def verify(public, msg, signature):
+       if len(public) != 32:
+           raise Exception("Bad public-key length")
+       if len(signature) != 64:
+           Exception("Bad signature length")
+       A = point_decompress(public)
+       if not A:
+           return False
+       Rs = signature[:32]
+       R = point_decompress(Rs)
+       if not R:
+           return False
+       s = int.from_bytes(signature[32:], "little")
+       h = sha512_modq(Rs + public + msg)
+       sB = point_mul(s, G)
+       hA = point_mul(h, A)
+       return point_equal(sB, point_add(R, hA))
+
+
+
+
+
+Josefsson & Moeller     Expires November 13, 2015              [Page 13]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+6.   Ed25519 のテストベクター
+
+   Ed25519 署名アルゴリズムのテストベクターのオクテットの列挙する.  オクテットは 16進でエンコードされ, 空白は読み易さのために挿入されている.  秘密鍵は 64 バイト, 公開鍵は 32 バイト, メッセージは任意の長さ, 署名は 64 バイトだ.  テストベクターは [ED25519-TEST-VECTORS] (ただし, 秘密鍵の末尾から公開鍵は除いている, また署名からメッセージを除いている) と [ED25519-LIBGCRYPT-TEST-VECTORS] から取った.
+
+   -----TEST 1
+   SECRET KEY:
+   9d61b19deffd5a60ba844af492ec2cc4
+   4449c5697b326919703bac031cae7f60
+
+   PUBLIC KEY:
+   d75a980182b10ab7d54bfed3c964073a
+   0ee172f3daa62325af021a68f707511a
+
+   MESSAGE (length 0 bytes):
+
+   SIGNATURE:
+   e5564300c360ac729086e2cc806e828a
+   84877f1eb8e5d974d873e06522490155
+   5fb8821590a33bacc61e39701cf9b46b
+   d25bf5f0595bbe24655141438e7a100b
+
+   -----TEST 2
+   SECRET KEY:
+   4ccd089b28ff96da9db6c346ec114e0f
+   5b8a319f35aba624da8cf6ed4fb8a6fb
+
+   PUBLIC KEY:
+   3d4017c3e843895a92b70aa74d1b7ebc
+   9c982ccf2ec4968cc0cd55f12af4660c
+
+   MESSAGE (length 1 byte):
+   72
+
+   SIGNATURE:
+   92a009a9f0d4cab8720e820b5f642540
+   a2b27b5416503f8fb3762223ebdb69da
+   085ac1e43e15996e458f3613d0f11d8c
+   387b2eaeb4302aeeb00d291612bb0c00
+
+   -----TEST 3
+   SECRET KEY:
+   c5aa8df43f9f837bedb7442f31dcb7b1
+
+
+
+Josefsson & Moeller     Expires November 13, 2015              [Page 14]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+   66d38535076f094b85ce3a2e0b4458f7
+
+   PUBLIC KEY:
+   fc51cd8e6218a1a38da47ed00230f058
+   0816ed13ba3303ac5deb911548908025
+
+   MESSAGE (length 2 bytes):
+   af82
+
+   SIGNATURE:
+   6291d657deec24024827e69c3abe01a3
+   0ce548a284743a445e3680d7db5ac3ac
+   18ff9b538d16f290ae67f760984dc659
+   4a7c15e9716ed28dc027beceea1ec40a
+
+   -----TEST 1024
+   SECRET KEY:
+   f5e5767cf153319517630f226876b86c
+   8160cc583bc013744c6bf255f5cc0ee5
+
+   PUBLIC KEY:
+   278117fc144c72340f67d0f2316e8386
+   ceffbf2b2428c9c51fef7c597f1d426e
+
+   MESSAGE (length 1023 bytes):
+   08b8b2b733424243760fe426a4b54908
+   632110a66c2f6591eabd3345e3e4eb98
+   fa6e264bf09efe12ee50f8f54e9f77b1
+   e355f6c50544e23fb1433ddf73be84d8
+   79de7c0046dc4996d9e773f4bc9efe57
+   38829adb26c81b37c93a1b270b20329d
+   658675fc6ea534e0810a4432826bf58c
+   941efb65d57a338bbd2e26640f89ffbc
+   1a858efcb8550ee3a5e1998bd177e93a
+   7363c344fe6b199ee5d02e82d522c4fe
+   ba15452f80288a821a579116ec6dad2b
+   3b310da903401aa62100ab5d1a36553e
+   06203b33890cc9b832f79ef80560ccb9
+   a39ce767967ed628c6ad573cb116dbef
+   efd75499da96bd68a8a97b928a8bbc10
+   3b6621fcde2beca1231d206be6cd9ec7
+   aff6f6c94fcd7204ed3455c68c83f4a4
+   1da4af2b74ef5c53f1d8ac70bdcb7ed1
+   85ce81bd84359d44254d95629e9855a9
+   4a7c1958d1f8ada5d0532ed8a5aa3fb2
+   d17ba70eb6248e594e1a2297acbbb39d
+   502f1a8c6eb6f1ce22b3de1a1f40cc24
+   554119a831a9aad6079cad88425de6bd
+
+
+
+Josefsson & Moeller     Expires November 13, 2015              [Page 15]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+   e1a9187ebb6092cf67bf2b13fd65f270
+   88d78b7e883c8759d2c4f5c65adb7553
+   878ad575f9fad878e80a0c9ba63bcbcc
+   2732e69485bbc9c90bfbd62481d9089b
+   eccf80cfe2df16a2cf65bd92dd597b07
+   07e0917af48bbb75fed413d238f5555a
+   7a569d80c3414a8d0859dc65a46128ba
+   b27af87a71314f318c782b23ebfe808b
+   82b0ce26401d2e22f04d83d1255dc51a
+   ddd3b75a2b1ae0784504df543af8969b
+   e3ea7082ff7fc9888c144da2af58429e
+   c96031dbcad3dad9af0dcbaaaf268cb8
+   fcffead94f3c7ca495e056a9b47acdb7
+   51fb73e666c6c655ade8297297d07ad1
+   ba5e43f1bca32301651339e22904cc8c
+   42f58c30c04aafdb038dda0847dd988d
+   cda6f3bfd15c4b4c4525004aa06eeff8
+   ca61783aacec57fb3d1f92b0fe2fd1a8
+   5f6724517b65e614ad6808d6f6ee34df
+   f7310fdc82aebfd904b01e1dc54b2927
+   094b2db68d6f903b68401adebf5a7e08
+   d78ff4ef5d63653a65040cf9bfd4aca7
+   984a74d37145986780fc0b16ac451649
+   de6188a7dbdf191f64b5fc5e2ab47b57
+   f7f7276cd419c17a3ca8e1b939ae49e4
+   88acba6b965610b5480109c8b17b80e1
+   b7b750dfc7598d5d5011fd2dcc5600a3
+   2ef5b52a1ecc820e308aa342721aac09
+   43bf6686b64b2579376504ccc493d97e
+   6aed3fb0f9cd71a43dd497f01f17c0e2
+   cb3797aa2a2f256656168e6c496afc5f
+   b93246f6b1116398a346f1a641f3b041
+   e989f7914f90cc2c7fff357876e506b5
+   0d334ba77c225bc307ba537152f3f161
+   0e4eafe595f6d9d90d11faa933a15ef1
+   369546868a7f3a45a96768d40fd9d034
+   12c091c6315cf4fde7cb68606937380d
+   b2eaaa707b4c4185c32eddcdd306705e
+   4dc1ffc872eeee475a64dfac86aba41c
+   0618983f8741c5ef68d3a101e8a3b8ca
+   c60c905c15fc910840b94c00a0b9d0
+
+   SIGNATURE:
+   0aab4c900501b3e24d7cdf4663326a3a
+   87df5e4843b2cbdb67cbf6e460fec350
+   aa5371b1508f9f4528ecea23c436d94b
+   5e8fcd4f681e30a6ac00a9704a188a03
+
+
+
+
+Josefsson & Moeller     Expires November 13, 2015              [Page 16]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+   -----TEST 1A
+   -----An additional test with the data from test 1 but using an
+   -----uncompressed public key.
+   SECRET KEY:
+   9d61b19deffd5a60ba844af492ec2cc4
+   4449c5697b326919703bac031cae7f60
+
+   PUBLIC KEY:
+   0455d0e09a2b9d34292297e08d60d0f6
+   20c513d47253187c24b12786bd777645
+   ce1a5107f7681a02af2523a6daf372e1
+   0e3a0764c9d3fe4bd5b70ab18201985a
+   d7
+
+   MSG (length 0 bytes):
+
+   SIGNATURE:
+   e5564300c360ac729086e2cc806e828a
+   84877f1eb8e5d974d873e06522490155
+   5fb8821590a33bacc61e39701cf9b46b
+   d25bf5f0595bbe24655141438e7a100b
+
+   -----TEST 1B
+   -----An additional test with the data from test 1 but using an
+   -----compressed prefix.
+   SECRET KEY:
+   9d61b19deffd5a60ba844af492ec2cc4
+   4449c5697b326919703bac031cae7f60
+
+   PUBLIC KEY:
+   40d75a980182b10ab7d54bfed3c96407
+   3a0ee172f3daa62325af021a68f70751
+   1a
+
+   MESSAGE (length 0 bytes):
+
+   SIGNATURE:
+   e5564300c360ac729086e2cc806e828a
+   84877f1eb8e5d974d873e06522490155
+   5fb8821590a33bacc61e39701cf9b46b
+   d25bf5f0595bbe24655141438e7a100b
+   -----
+
+7.  謝辞
+
+   Feedback on this document was received from Werner Koch, Damien
+   Miller, Bob Bradley, and Franck Rondepierre.  The test vectors were
+   double checked by Bob Bradley using 3 separate implementations (one
+
+
+
+Josefsson & Moeller     Expires November 13, 2015              [Page 17]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+   based on TweetNaCl and 2 different implementations based on code from
+   SUPERCOP).
+
+8.  IANA の考慮
+
+   None.
+
+9.  セキュリティの考察
+
+9.1.  サイドチャンネルの漏洩
+
+   署名を生成する実装にとって, 鍵の機密性は重要だ.  秘密鍵のどのような値に対しても, 実装がまったく同じ命令列を実行しまったく同じメモリアクセスをすることを保証して, いくつかのサイドチャンネル攻撃から保護することが可能だ.
+
+   この方法でサイドチャンネルに対して実装に耐性を持たせるには, モジュラー p 代数が, たとえば 繰り上げの伝播に依存する, データ依存の分岐を消っして利用しないようにしなければならない.  統一された式のために, サイドチャンネル耐性のある点の加算は簡単だ.
+
+   スカラー倍 (点に整数倍)は, サイドチャンネル耐性有りで実装のために追加の努力が必要となる.  1つの単純な方針は, サイドチャンネル耐性の条件代入を実装し, バイナリアルゴリズムと併用して1度に1ビットずつ検査する.
+
+   この文書中の実装例は, サイトチャンネル耐性を得ようとしていないことに注意.
+
+10.  References
+
+10.1.  Normative References
+
+   [RFC4634]  Eastlake, D. and T. Hansen, "US Secure Hash Algorithms
+              (SHA and HMAC-SHA)", RFC 4634, July 2006.
+
+   [I-D.irtf-cfrg-curves]
+              Langley, A., Salz, R., and S. Turner, "Elliptic Curves for
+              Security", draft-irtf-cfrg-curves-01 (work in progress),
+              January 2015.
+
+10.2.  Informative References
+
+   [RFC4086]  Eastlake, D., Schiller, J., and S. Crocker, "Randomness
+              Requirements for Security", BCP 106, RFC 4086, June 2005.
+
+
+
+
+Josefsson & Moeller     Expires November 13, 2015              [Page 18]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+   [EDDSA]    Bernstein, D., Duif, N., Lange, T., Schwabe, P., and B.
+              Yang, "High-speed high-security signatures", WWW
+              http://ed25519.cr.yp.to/ed25519-20110926.pdf, September
+              2011.
+
+   [Faster-ECC]
+              Bernstein, D. and T. Lange, "Faster addition and doubling
+              on elliptic curves", WWW http://eprint.iacr.org/2007/286,
+              July 2007.
+
+   [Edwards-revisited]
+              Hisil, H., Wong, K., Carter, G., and E. Dawson, "Twisted
+              Edwards Curves Revisited", WWW
+              http://eprint.iacr.org/2008/522, December 2008.
+
+   [CURVE25519]
+              Bernstein, D., "Curve25519: new Diffie-Hellman speed
+              records", WWW http://cr.yp.to/ecdh.html, February 2006.
+
+   [ED25519-TEST-VECTORS]
+              Bernstein, D., Duif, N., Lange, T., Schwabe, P., and B.
+              Yang, "Ed25519 test vectors", WWW
+              http://ed25519.cr.yp.to/python/sign.input, July 2011.
+
+   [ED25519-LIBGCRYPT-TEST-VECTORS]
+              Koch, W., "Ed25519 Libgcrypt test vectors", WWW
+              http://git.gnupg.org/cgi-
+              bin/gitweb.cgi?p=libgcrypt.git;a=blob;f=tests/t-ed25519.in
+              p;h=e13566f826321eece65e02c593bc7d885b3dbe23;hb=refs/
+              heads/master, July 2014.
+
+Appendix A.  Ed25519 Python Library
+
+   Below is an example implementation of Ed25519 written in Python,
+   version 3.2 or higher is required.
+
+# Loosely based on the public domain code at
+# http://ed25519.cr.yp.to/software.html
+#
+# Needs python-3.2
+
+import hashlib
+
+
+def sha512(s):
+    return hashlib.sha512(s).digest()
+
+# Base field Z_p
+
+
+
+Josefsson & Moeller     Expires November 13, 2015              [Page 19]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+p = 2**255 - 19
+
+
+def modp_inv(x):
+    return pow(x, p-2, p)
+
+# Curve constant
+d = -121665 * modp_inv(121666) % p
+
+# Group order
+q = 2**252 + 27742317777372353535851937790883648493
+
+
+def sha512_modq(s):
+    return int.from_bytes(sha512(s), "little") % q
+
+# Points are represented as tuples (X, Y, Z, T) of extended coordinates,
+# with x = X/Z, y = Y/Z, x*y = T/Z
+
+
+def point_add(P, Q):
+    A = (P[1]-P[0])*(Q[1]-Q[0]) % p
+    B = (P[1]+P[0])*(Q[1]+Q[0]) % p
+    C = 2 * P[3] * Q[3] * d % p
+    D = 2 * P[2] * Q[2] % p
+    E = B-A
+    F = D-C
+    G = D+C
+    H = B+A
+    return (E*F, G*H, F*G, E*H)
+
+
+# Computes Q = s * Q
+def point_mul(s, P):
+    Q = (0, 1, 1, 0)  # Neutral element
+    while s > 0:
+        # Is there any bit-set predicate?
+        if s & 1:
+            Q = point_add(Q, P)
+        P = point_add(P, P)
+        s >>= 1
+    return Q
+
+
+def point_equal(P, Q):
+    # x1 / z1 == x2 / z2  <==>  x1 * z2 == x2 * z1
+    if (P[0] * Q[2] - Q[0] * P[2]) % p != 0:
+        return False
+
+
+
+Josefsson & Moeller     Expires November 13, 2015              [Page 20]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+    if (P[1] * Q[2] - Q[1] * P[2]) % p != 0:
+        return False
+    return True
+
+# Square root of -1
+modp_sqrt_m1 = pow(2, (p-1) // 4, p)
+
+
+# Compute corresponding x coordinate, with low bit corresponding to sign,
+# or return None on failure
+def recover_x(y, sign):
+    x2 = (y*y-1) * modp_inv(d*y*y+1)
+    if x2 == 0:
+        if sign:
+            return None
+        else:
+            return 0
+
+    # Compute square root of x2
+    x = pow(x2, (p+3) // 8, p)
+    if (x*x - x2) % p != 0:
+        x = x * modp_sqrt_m1 % p
+    if (x*x - x2) % p != 0:
+        return None
+
+    if (x & 1) != sign:
+        x = p - x
+    return x
+
+# Base point
+g_y = 4 * modp_inv(5) % p
+g_x = recover_x(g_y, 0)
+G = (g_x, g_y, 1, g_x * g_y % p)
+
+
+def point_compress(P):
+    zinv = modp_inv(P[2])
+    x = P[0] * zinv % p
+    y = P[1] * zinv % p
+    return int.to_bytes(y | ((x & 1) << 255), 32, "little")
+
+
+def point_decompress(s):
+    if len(s) != 32:
+        raise Exception("Invalid input length for decompression")
+    y = int.from_bytes(s, "little")
+    sign = y >> 255
+    y &= (1 << 255) - 1
+
+
+
+Josefsson & Moeller     Expires November 13, 2015              [Page 21]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+    x = recover_x(y, sign)
+    if x is None:
+        return None
+    else:
+        return (x, y, 1, x*y % p)
+
+
+def secret_expand(secret):
+    if len(secret) != 32:
+        raise Exception("Bad size of private key")
+    h = sha512(secret)
+    a = int.from_bytes(h[:32], "little")
+    a &= (1 << 254) - 8
+    a |= (1 << 254)
+    return (a, h[32:])
+
+
+def secret_to_public(secret):
+    (a, dummy) = secret_expand(secret)
+    return point_compress(point_mul(a, G))
+
+
+def sign(secret, msg):
+    a, prefix = secret_expand(secret)
+    A = point_compress(point_mul(a, G))
+    r = sha512_modq(prefix + msg)
+    R = point_mul(r, G)
+    Rs = point_compress(R)
+    h = sha512_modq(Rs + A + msg)
+    s = (r + h * a) % q
+    return Rs + int.to_bytes(s, 32, "little")
+
+
+def verify(public, msg, signature):
+    if len(public) != 32:
+        raise Exception("Bad public-key length")
+    if len(signature) != 64:
+        Exception("Bad signature length")
+    A = point_decompress(public)
+    if not A:
+        return False
+    Rs = signature[:32]
+    R = point_decompress(Rs)
+    if not R:
+        return False
+    s = int.from_bytes(signature[32:], "little")
+    h = sha512_modq(Rs + public + msg)
+    sB = point_mul(s, G)
+
+
+
+Josefsson & Moeller     Expires November 13, 2015              [Page 22]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+    hA = point_mul(h, A)
+    return point_equal(sB, point_add(R, hA))
+
+Appendix B.  Library driver
+
+   Below is a command-line tool that uses the library above to perform
+   computations, for interactive use or for self-checking.
+
+   import sys
+   import binascii
+
+   from ed25519 import *
+
+   def point_valid(P):
+       zinv = modp_inv(P[2])
+       x = P[0] * zinv % p
+       y = P[1] * zinv % p
+       assert (x*y - P[3]*zinv) % p == 0
+       return (-x*x + y*y - 1 - d*x*x*y*y) % p == 0
+
+   assert point_valid(G)
+   Z = (0, 1, 1, 0)
+   assert point_valid(Z)
+
+   assert point_equal(Z, point_add(Z, Z))
+   assert point_equal(G, point_add(Z, G))
+   assert point_equal(Z, point_mul(0, G))
+   assert point_equal(G, point_mul(1, G))
+   assert point_equal(point_add(G, G), point_mul(2, G))
+   for i in range(0, 100):
+       assert point_valid(point_mul(i, G))
+   assert point_equal(Z, point_mul(q, G))
+
+   def munge_string(s, pos, change):
+       return (s[:pos] +
+               int.to_bytes(s[pos] ^ change, 1, "little") +
+               s[pos+1:])
+
+   # Read a file in the format of
+   # http://ed25519.cr.yp.to/python/sign.input
+   lineno = 0
+   while True:
+       line = sys.stdin.readline()
+       if not line:
+           break
+       lineno = lineno + 1
+       print(lineno)
+       fields = line.split(":")
+
+
+
+Josefsson & Moeller     Expires November 13, 2015              [Page 23]
+
+Internet-Draft               EdDSA & Ed25519                    May 2015
+
+
+       secret = (binascii.unhexlify(fields[0]))[:32]
+       public = binascii.unhexlify(fields[1])
+       msg = binascii.unhexlify(fields[2])
+       signature = binascii.unhexlify(fields[3])[:64]
+
+       assert public == secret_to_public(secret)
+       assert signature == sign(secret, msg)
+       assert verify(public, msg, signature)
+       if len(msg) == 0:
+           bad_msg = b"x"
+       else:
+           bad_msg = munge_string(msg, len(msg) // 3, 4)
+       assert not verify(public, bad_msg, signature)
+       bad_signature = munge_string(signature, 20, 8)
+       assert not verify(public, msg, bad_signature)
+       bad_signature = munge_string(signature, 40, 16)
+       assert not verify(public, msg, bad_signature)
+
+Authors' Addresses
+
+   Simon Josefsson
+   SJD AB
+
+   Email: simon@josefsson.org
+   URI:   http://josefsson.org/
+
+
+   Niels Moeller
+
+   Email: nisse@lysator.liu.se
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Josefsson & Moeller     Expires November 13, 2015              [Page 24]
