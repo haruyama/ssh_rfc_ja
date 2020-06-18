@@ -2221,6 +2221,15 @@ to connect to a master that speaks an unsupported protocol version.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A curve point (x,y), with coordinates in the range 0 &lt;= x,y &lt; p, is
+   coded as follows.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T065645Z" creationid="haruyama" creationdate="20200616T065645Z">
+        <seg>曲線の点 (x,y), 座標の範囲 0 &lt;= x,y &lt; p は次のようにコード化される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A description of these curves can be found in [NIST] or [SEC2].</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110929T010613Z">
@@ -2519,10 +2528,31 @@ ciphertext of the packet length and the payload together.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>A point
+   (x,y) is represented in extended homogeneous coordinates (X, Y, Z,
+   T), with x = X/Z, y = Y/Z, x y = T/Z.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T035433Z" creationid="haruyama" creationdate="20200618T035433Z">
+        <seg>点 (x,y) は x = X/Z, y = Y/Z, x y = T/Z とする拡張同次座標で表わされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>A port forwarding can be canceled with the following message.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>ポート転送は次のメッセージでキャンセルできる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>A precise explanation of the generic EdDSA is thus
+   not particularly useful for implementers, but for background and
+   completeness, a succinct description of the generic EdDSA algorithm
+   is given here.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T072849Z" creationid="haruyama" creationdate="20200615T072849Z">
+        <seg>一般の EdDSA の正確な説明は, 実装者にとって特に有用ではないが, 背景と完全性のために, 一般の EdDSA アルゴリズムの簡潔な説明をここで与える.</seg>
       </tuv>
     </tu>
     <tu>
@@ -3703,6 +3733,14 @@ a matching MAC.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Again, there are three cases:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T071537Z" creationid="haruyama" creationdate="20200616T071537Z">
+        <seg>再び 3つの場合がある:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Again, this depends on the context in which the list
       is used.</seg>
       </tuv>
@@ -4322,6 +4360,15 @@ must refuse to authorise a key that has an unrecognised option.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>All values are coded as octet strings, and integers are coded using
+   little endian convention.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T065454Z" creationid="haruyama" creationdate="20200616T065454Z">
+        <seg>すべての値は オクテット文字列としてコード化され,  整数はリトルエンディアンでコード化される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>All values in the agent protocol are encoded using the SSH wire
    representations specified by [RFC4251].</seg>
       </tuv>
@@ -4620,6 +4667,14 @@ revoking key IDs).</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>An EdDSA secret key is a b-bit string k.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T060033Z" creationid="haruyama" creationdate="20200616T060033Z">
+        <seg>EdDSA の秘密鍵は b ビットの文字列 k だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>An IPv4 address must be in dotted decimal format followed
          by a colon ':' (US-ASCII character 0x3A) and a decimal port
          number in US-ASCII.</seg>
@@ -4766,6 +4821,16 @@ revoking key IDs).</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>An element (x,y) of E is encoded as a b-bit string called ENC(x,y)
+   which is the (b-1)-bit encoding of y concatenated with one bit that
+   is 1 if x is negative and 0 if x is not negative.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T055743Z" creationid="haruyama" creationdate="20200616T055508Z">
+        <seg>E の要素 (x,y) of E は ENC(x, y) と呼ばれる b ビットの文字列にエンコードされる. ENC(x, y) は x が負の場合は 1, x が非負の場合は 0 の 1 ビットが連結された y の (b-1) ビットエンコーディングだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>An empty path name is valid, and it refers to the user's default
    directory (usually the user's home directory).</seg>
       </tuv>
@@ -4819,6 +4884,15 @@ revoking key IDs).</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200608T061036Z" creationid="haruyama" creationdate="20200608T061036Z">
         <seg>指定されたファイルシステムオブジェクトが存在していなかったり,指定された属性を変更するのに十分な権限をユーザが持っていない場合, エラーが返る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>An example implementation and test
+   vectors are provided.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T060949Z" creationid="haruyama" creationdate="20200615T060949Z">
+        <seg>実装例とテストベクターを提供する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4971,6 +5045,14 @@ format (see below).</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200519T055759Z">
         <seg>認証付きの暗号化をする AES GCM の実行は, 次の入力と出力を持つ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>And finally the verification function.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T050553Z" creationid="haruyama" creationdate="20200618T050553Z">
+        <seg>最後に検証関数.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6438,6 +6520,14 @@ in RFC4252 section 7.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>B generator of the group or subgroup of interest</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T063225Z" creationid="haruyama" creationdate="20200615T062851Z">
+        <seg>B グループないしサブグループのジェネレータ</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>BK (Block Cipher Key)
         The appropriate Encryption Key formed during the Key Exchange.</seg>
       </tuv>
@@ -6448,12 +6538,28 @@ in RFC4252 section 7.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Background</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T063250Z" creationid="haruyama" creationdate="20200615T063250Z">
+        <seg>背景</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Background
 ----------</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200525T051342Z" creationid="haruyama" creationdate="20200525T051342Z">
         <seg>背景
 ----------</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Background  .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061030Z" creationid="haruyama" creationdate="20200615T061030Z">
+        <seg>背景  .</seg>
       </tuv>
     </tu>
     <tu>
@@ -6709,6 +6815,15 @@ hold the same value.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Below is a sequence of octets with test vectors for the the Ed25519
+   signature algorithm.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T051012Z" creationid="haruyama" creationdate="20200618T051012Z">
+        <seg>Ed25519 署名アルゴリズムのテストベクターのオクテットの列挙する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Binary Packet Protocol</seg>
       </tuv>
       <tuv lang="JA">
@@ -6741,6 +6856,15 @@ hold the same value.</seg>
       <tuv lang="JA" changeid="haruyama" changedate="20110621T012528Z">
         <seg>暗号鍵の束縛 ...................................16
       3.6.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Bit 255 of this number is the least significant
+       bit of the x-coordinate, and denote this value x_0.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T070540Z" creationid="haruyama" creationdate="20200616T070540Z">
+        <seg>この数の 255 ビットは, x 座標の最下位ビットで, 値 x_0 を意味する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7479,6 +7603,15 @@ used to encrypt more than 2^70 bytes under the same {key, nonce}.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Check the group equation 8s B = 8 R + 8k A.  It's sufficient, but
+       not required, to instead check s B = R + k A.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T050022Z" creationid="haruyama" creationdate="20200618T050022Z">
+        <seg>群方程式 8s B = 8 R + 8k A を検査する. 代わりに B = R + kA を検査すれば十分だが, 必須ではない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Checking the Peer's DH Public Key</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20180127T061145Z" creationid="haruyama" creationdate="20180127T061145Z">
@@ -7835,6 +7968,15 @@ a length and message type in SSH uint32 wire format:</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Collision resilience, meaning that hash-function collisions do
+       not break this system.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T062548Z" creationid="haruyama" creationdate="20200615T062548Z">
+        <seg>衝突に耐性がある. つまり, ハッシュ関数の衝突でこのシステムは破壊されない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Command generators are frequently operated
    by a human, but notification originators are usually unmanned
    automated processes.</seg>
@@ -8050,6 +8192,34 @@ a length and message type in SSH uint32 wire format:</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Compute H' = H(ENC(R) || ENC(A) || M) and check the group equation
+   8SB = 8R + 8H'A in E.  Verification is rejected if parsing fails or
+   the group equation does not hold.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T062858Z" creationid="haruyama" creationdate="20200616T062858Z">
+        <seg>H' = H(ENC(R) || ENC(A) || M) を計算し 群方程式 8SB = 8R + 8H'A in E を検証する. パースが失敗したり群方程式が成立しなければ検証は拒否される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Compute SHA-512(prefix || M), where M is the message to be
+       signed.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T043807Z" creationid="haruyama" creationdate="20200618T043807Z">
+        <seg>SHA-512(prefix || M) を計算する. M は署名するメッセージ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Compute SHA512(R || A || M), and interpret the 64-octet digest as
+       a little-endian integer k.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T044347Z" creationid="haruyama" creationdate="20200618T044347Z">
+        <seg>SHA512(R || A || M) を計算し, 64 オクテットのダイジェストをリトルエンディアン整数 k として解釈する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Compute p := 2q + 1, and test whether p is prime (using,
            e.g., trial division and the Rabin-Miller test).</seg>
       </tuv>
@@ -8059,10 +8229,26 @@ a length and message type in SSH uint32 wire format:</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Compute s = (r + k a) mod q.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T044359Z" creationid="haruyama" creationdate="20200618T044359Z">
+        <seg> s = (r + k a) mod q を計算する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Compute shared secret.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110409T093639Z">
         <seg>共有の秘密の計算</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Compute the point rB.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T043846Z" creationid="haruyama" creationdate="20200618T043846Z">
+        <seg>点 rB を計算する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -8430,6 +8616,16 @@ a length and message type in SSH uint32 wire format:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160527T110400Z" creationid="haruyama" creationdate="20160527T110400Z">
         <seg>Constraints は, 鍵の有効性や利用に関する制限を配置するのに用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Construct the secret scalar a from the first
+       half of the digest, and the corresponding public key A, as
+       described in the previous section.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T043705Z" creationid="haruyama" creationdate="20200618T043705Z">
+        <seg>前の節で記述したように, ダイジェストの前半から秘密スカラ a と対応する公開鍵を構築する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9197,6 +9393,40 @@ domain name to the option name, e.g. "my-option@example.com".</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Decode the first half as a point R,
+       and the second half as an integer s, in the range 0 &lt;= s &lt; q.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T045827Z" creationid="haruyama" creationdate="20200618T045827Z">
+        <seg>前半を点 R としてデコードし, 後半を 0 &lt;= s &lt; q な整数 s としてデコードする. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Decoding</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T070400Z" creationid="haruyama" creationdate="20200616T070400Z">
+        <seg>デコーディング</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Decoding  .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061132Z" creationid="haruyama" creationdate="20200615T061132Z">
+        <seg>デコーディング  .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Decoding a point, given as a 32-octet string, is a little more
+   complicated.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T070427Z" creationid="haruyama" creationdate="20200616T070427Z">
+        <seg>32 オクテット文字列が与えられた点のデコーディングは少しより複雑だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Default values will be used for those attributes that are not
    specified.</seg>
       </tuv>
@@ -9607,6 +9837,15 @@ domain name to the option name, e.g. "my-option@example.com".</seg>
       <tuv lang="JA" changeid="haruyama" changedate="20200518T050743Z" creationid="haruyama" creationdate="20200518T044410Z">
         <seg>文書の規約
    4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Does not require the use of a unique random number for each
+       signature.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061936Z" creationid="haruyama" creationdate="20200615T061936Z">
+        <seg>それぞれの署名にユニークな乱数の利用を要求しない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10545,6 +10784,40 @@ string, e.g. "1".</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>EdDSA has seven parameters:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T072938Z" creationid="haruyama" creationdate="20200615T072938Z">
+        <seg>EdDSA は 7 つのパラメータを持つ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>EdDSA is a digital signature system with several parameters.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T072610Z" creationid="haruyama" creationdate="20200615T072610Z">
+        <seg>EdDSA はいくつかのパラメータを持つ電子署名システムだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>EdDSA is defined using an elliptic curve over GF(p) of the form</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T064020Z" creationid="haruyama" creationdate="20200615T064020Z">
+        <seg>EdDSA は次の形式の GF(p) 上の楕円曲線を用いて定義される</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>EdDSA needs
+   to be instantiated with certain parameters and this document describe
+   Ed25519 - an instantiation of EdDSA in a curve over GF(2^255-19).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061648Z" creationid="haruyama" creationdate="20200615T061648Z">
+        <seg>EdDSA は特定のパラメータでインスタンス化する必要がある. この文書は, Ed25519 - GF(2^255-19) 上の曲線での EdDSA をインスタンス化 について記述する. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Either SNMP entity may act as
    client or as server, as discussed further below.</seg>
       </tuv>
@@ -10693,6 +10966,22 @@ generated.</seg>
       <tuv lang="JA" changeid="haruyama" changedate="20180930T082545Z" creationid="haruyama" creationdate="20180930T082545Z">
         <seg>有効化基準 ..........................................4
       2.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Encoding</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T055326Z" creationid="haruyama" creationdate="20200616T055326Z">
+        <seg>エンコーディング</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Encoding  .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061039Z" creationid="haruyama" creationdate="20200615T061039Z">
+        <seg>エンコーディング  .</seg>
       </tuv>
     </tu>
     <tu>
@@ -11682,6 +11971,14 @@ concurrent use of a private key, should it be extracted from hardware.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Finally, use the x_0 bit to select the right square root.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T071656Z" creationid="haruyama" creationdate="20200616T071656Z">
+        <seg>最後に, x_0 ビット を正しい平方根を選択するのに使う.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Fingerprint</seg>
       </tuv>
       <tuv lang="JA">
@@ -11736,6 +12033,16 @@ concurrent use of a private key, should it be extracted from hardware.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>First
+   define r = H(h_b, ... h_(2b-1)), M) interpreting 2b-bit strings in
+   little-endian form as integers in {0, 1, ..., 2^(2b)-1}.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T062536Z" creationid="haruyama" creationdate="20200616T061838Z">
+        <seg>まず, r = H(h_b, ... h_(2b-1)), M) を {0, 1, ..., 2^(2b)-1} の整数のようなリトルエンディアン形式の 2b-bit 文字列として解釈して定義する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>First Rekeying Recommendation</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110531T064231Z">
@@ -11768,6 +12075,42 @@ concurrent use of a private key, should it be extracted from hardware.</seg>
       <tuv lang="JA" changeid="haruyama" changedate="20110929T005252Z">
         <seg>最初の SSH_MSG_USERAUTH_REQUEST メッセージ ....................10
       5.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>First encode
+       the y coordinate (in the range 0 &lt;= y &lt; p) as a little-endian
+       string of 32 octets.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T043107Z" creationid="haruyama" creationdate="20200618T043107Z">
+        <seg>まず, (0&lt;= y &lt; p の範囲の) y 座標を 32 オクテットのリトルエンディアン文字列としてエンコードする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>First encode the y-coordinate as a little-endian
+   string of 32 octets.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T065715Z" creationid="haruyama" creationdate="20200616T065715Z">
+        <seg>まず, y 座標を 32 オクテットのリトルエンディアン文字列としてエンコードする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>First interpret the string as an integer in little-endian
+       representation.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T070447Z" creationid="haruyama" creationdate="20200616T070447Z">
+        <seg>まず, リトルエンディアン表現での整数として文字列を解釈する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>First some preliminaries that will be needed.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T050225Z" creationid="haruyama" creationdate="20200618T050225Z">
+        <seg>最初にいくつかの準備が必要だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -11902,6 +12245,17 @@ as a name/value pair.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20190106T055414Z" creationid="haruyama" creationdate="20190106T055414Z">
         <seg>既存のエントリには,"Public Key Format" カラムには "Public Key Algorithm Name" と同じ値を割り当てる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For
+   Ed25519, the curve used is equivalent to Curve25519 [CURVE25519],
+   under a change of coordinates, which means that the difficulty of the
+   discrete logarithm problem is the same as for Curve25519.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T070306Z" creationid="haruyama" creationdate="20200615T070306Z">
+        <seg>Ed25519 では, 用いられる曲線は座標変換の元で Curve25519 [CURVE25519] と同等で, 離散対数問題の難易度は Curve25519 と同じであることを意味する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12082,6 +12436,15 @@ not the legacy RSA-SHA1 "ssh-rsa").</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For advise on how to implement arithmetic modulo p = 2^255 - 1
+   efficiently and securely, see Curve25519 [CURVE25519].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T064217Z" creationid="haruyama" creationdate="20200616T064142Z">
+        <seg>モジュロ p = 2^255 - 1 の演算を効率的かつ安全に実装するためのアドバイスは, Curve25519 [CURVE25519] を参照.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For all of the public key algorithms specified in this document, the
    key format consists of a sequence of one or more X.509v3 certificates
    followed by a sequence of 0 or more Online Certificate Status
@@ -12236,6 +12599,25 @@ SSH_FXP_SYMLINK as follows:</seg>
       </tuv>
       <tuv lang="JA">
         <seg>それぞれのpromptで, 対応する echo フィールドは, ユーザの入力を入力された文字でエコーするかどうかを指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For efficiency, again reduce k
+       modulo q first.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T044426Z" creationid="haruyama" creationdate="20200618T044426Z">
+        <seg>再び効率のため, まず k modulo q を減らす.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For efficiency, do this by first reducing
+       r modulo q, the group order of B.  Let the string R be the
+       encoding of this point.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T044311Z" creationid="haruyama" creationdate="20200618T044311Z">
+        <seg>効率のため, 最初に r module q (q は B の群位数) を減らして計算する. この点のエンコーディングを文字列 R とする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12578,6 +12960,23 @@ SSH_FXP_SYMLINK as follows:</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>For further background, see the original EdDSA paper [EDDSA].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T062617Z" creationid="haruyama" creationdate="20200615T062617Z">
+        <seg>さらなる背景については, オリジナルの EdDSA の論文 [EDDSA] を参照.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For implementations performing signatures, secrecy of the key is
+   fundamental.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T052012Z" creationid="haruyama" creationdate="20200618T052012Z">
+        <seg>署名を生成する実装にとって, 鍵の機密性は重要だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>For incoming messages, SSH-specific security parameters are
    translated by the Transport Model into security parameters
    independent of the Transport and Security Models.</seg>
@@ -12593,6 +12992,16 @@ SSH_FXP_SYMLINK as follows:</seg>
       </tuv>
       <tuv lang="JA">
         <seg>相互運用性のため, 予約される指紋のタイプは可能な限り少なくする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For inversion
+   modulo p, it is recommended to use the identity x^-1 = x^(p-2) (mod
+   p).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T064340Z" creationid="haruyama" creationdate="20200616T064340Z">
+        <seg>モジュラ逆数 p のために , 恒等式 x^-1 = x^(p-2) (mod p) を用いるのが推奨される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12649,6 +13058,23 @@ SSH_FXP_SYMLINK as follows:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110809T081052Z">
         <seg>送信メッセージに対して, トランスポートモデルは, sendMessage() ASI で Dispatcher が提供する入力を取得する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For point addition, the following method is recommended.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T035232Z" creationid="haruyama" creationdate="20200618T035232Z">
+        <seg>点の加算には次の方法が推奨される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>For point decoding or "decompression", square roots modulo p are
+   needed.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T064448Z" creationid="haruyama" creationdate="20200616T064448Z">
+        <seg>ポイントのデコーディングや "decompression, 伸長" のために, モジュロ p の平方根が必要だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12965,6 +13391,16 @@ format data in the pre-authentication attack surface.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200602T082143Z" creationid="haruyama" creationdate="20200602T082143Z">
         <seg>SSH プロトコルの利用では, 認証前の攻撃サーフェスでの ASN.1 形式データのサーバサイドでのパースを避けたい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Form the signature of the concatenation of R (32 octets) and the
+       little-endian encoding of s (32 octets, three most significant
+       bits of the final octets always zero).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T044537Z" creationid="haruyama" creationdate="20200618T044537Z">
+        <seg>R (32 オクテット) と s のリトルエンディアンエンコーディング (32 オクテット, 最後のオクテットの 上位ビット 3 つは常に0) を連結して署名とする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -13386,6 +13822,14 @@ authentication.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>GF(p) finite field with p elements</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T062722Z" creationid="haruyama" creationdate="20200615T062722Z">
+        <seg>GF(p) p 要素を持つ有限フィールド</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>GSS-API Authentication Overview</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110630T021406Z">
@@ -13796,6 +14240,23 @@ access where extensions are used to enable features that grant access.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Hash the 32-byte secret using SHA-512, storing the digest in a
+       64-octet large buffer, denoted h.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T043340Z" creationid="haruyama" creationdate="20200618T040058Z">
+        <seg>SHA-512 を用いて 32 バイトの秘密鍵をハッシュ化し, 64 オクテットの大きなバッファにダイジェストを格納し, h とする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Hash the secret key, 32-octets, using SHA-512.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T043429Z" creationid="haruyama" creationdate="20200618T043429Z">
+        <seg>SHA-512 を用いて 32 オクテットの秘密鍵をハッシュ化する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Hashes in this section must appear in numeric order, treating each hash
 as a big-endian integer.</seg>
       </tuv>
@@ -13940,6 +14401,14 @@ as a big-endian integer.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>ここで, これを HASH とする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>High-performance on a variety of platforms.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061915Z" creationid="haruyama" creationdate="20200615T061915Z">
+        <seg>いろいろなプラットフォームでの高いパフォーマンス.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14767,6 +15236,15 @@ as a big-endian integer.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>I.e., a 32-octet string h h[0],...h[31]
+   represents the integer h[0] + 2^8 h[1] + ... + 2^248 h[31].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T065530Z" creationid="haruyama" creationdate="20200616T065530Z">
+        <seg>すなわち, 32-オクテット文字列 h h[0],...h[31] は 整数 h[0] + 2^8 h[1] + ... + 2^248 h[31] を表わす.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>IANA Considerations</seg>
       </tuv>
       <tuv lang="JA">
@@ -15273,6 +15751,15 @@ as a big-endian integer.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>推測が正しければ, 鍵交換は推測されたパケットを用いて続けられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If
+       the decoding fails, the signature is invalid.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T045839Z" creationid="haruyama" creationdate="20200618T045839Z">
+        <seg>デコーディングに失敗したら, 署名は無効だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -16315,6 +16802,15 @@ appear, they must appear consecutively at the end of the KRL file.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>相手側の推測が間違っていてこのフィールドがTRUEなら, 次のパケットは静かに無視されなければならない. そして, 両方の側は取り決められた鍵交換法によって決められた行動をしなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If the
+       resulting value is &gt;= p, decoding fails.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T070616Z" creationid="haruyama" creationdate="20200616T070616Z">
+        <seg>結果の値が p 以上ならば, デコーディングは失敗している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -17906,6 +18402,23 @@ handling in this area.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>If v x^2 = -u (mod p), set x &lt;-- x 2^((p-1)/4), which is a
+           square root.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T071614Z" creationid="haruyama" creationdate="20200616T071614Z">
+        <seg>v x^2 = -u (mod p) ならば x &lt;-- x 2^((p-1)/4) とし, これが平方根.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If v x^2 = u (mod p), x is a square root.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T071550Z" creationid="haruyama" creationdate="20200616T071550Z">
+        <seg>v x^2 = u (mod p) なら x は平方根.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>If want reply is TRUE, the server MUST respond with
    SSH_MSG_CHANNEL_SUCCESS if the Public Key Subsystem was successfully
    started, or SSH_MSG_CHANNEL_FAILURE if the server failed to start or
@@ -17924,6 +18437,15 @@ handling in this area.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110607T075341Z">
         <seg>基底の部分(AESやHMAC-SHA1のような)が安全だという合理的な仮定ができる場合, SSHプロトコルの対称部分への攻撃はほぼ成功しないだろう(さもなければ矛盾となる).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>If x =
+       0, and x_0 = 1, decoding fails.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T071716Z" creationid="haruyama" creationdate="20200616T071716Z">
+        <seg>x = 0 で x_0 = 1 なら, デコーディングは失敗だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -18788,6 +19310,14 @@ messages between the client and server.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In C terminology:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T040354Z" creationid="haruyama" creationdate="20200618T040354Z">
+        <seg>C で書くと:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In CBC mode that is
    the output of the encryption of the previous block.</seg>
       </tuv>
@@ -19164,6 +19694,15 @@ requires the key handle and a few additional parameters.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>In general, p could be a prime power, but it is usually chosen as a
+   prime number.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T064052Z" creationid="haruyama" creationdate="20200615T064052Z">
+        <seg>一般に p は素数の乗数でよいが, 通常は素数が選択される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>In general, parties SHOULD NOT start key re-exchange before
    successful user authentication but MAY tolerate it if not using this
    extension.</seg>
@@ -19488,6 +20027,15 @@ requires the key handle and a few additional parameters.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110306T084118Z">
         <seg>特に, 楕円曲線 Diffie-Hellman (ECDH) 鍵交換(鍵同意) と  楕円曲線 Menezes-Qu-Vanstone (ECMQV) 鍵交換(鍵同意), 楕円曲線 Digital Signature Algorithm (ECDSA) を SSHトランスポート層プロトコルで利用するために仕様を定める.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>In particular, the denominators are non-
+   zero for all input points.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T070615Z" creationid="haruyama" creationdate="20200615T070615Z">
+        <seg>特に, すべての入力の点に対して分母は 0 以外となる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -20822,6 +21370,24 @@ requires the key handle and a few additional parameters.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Interpret the 64-octet digest as a little-endian integer
+       r.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T043834Z" creationid="haruyama" creationdate="20200618T043834Z">
+        <seg>64 オクテットのダイジェストをリトルエンディアンの整数 r として解釈する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Interpret the buffer as the little-endian integer, forming a
+       secret scalar a.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T040427Z" creationid="haruyama" creationdate="20200618T040427Z">
+        <seg>バッファをリトルエンディアンの整数として解釈し, 秘密のスカラ a とする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Interpretation of Extension Names and Values</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181107T122353Z" creationid="haruyama" creationdate="20181107T122323Z">
@@ -22093,6 +22659,17 @@ information about the socket file, such as ownership and mode.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>It is possible to protect against some side-channel
+   attacks by ensuring that the implementation executes exactly the same
+   sequence of instructions and performs exactly the same memory
+   accesses, for any value of the secret key.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T052218Z" creationid="haruyama" creationdate="20200618T052218Z">
+        <seg>秘密鍵のどのような値に対しても, 実装がまったく同じ命令列を実行しまったく同じメモリアクセスをすることを保証して, いくつかのサイドチャンネル攻撃から保護することが可能だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>It is prudent to follow this advice also outside of US government
    use.</seg>
       </tuv>
@@ -22128,6 +22705,15 @@ information about the socket file, such as ownership and mode.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110620T033920Z">
         <seg>2と生成器として利用するのが推奨される. 乗算のパフォーマンスが良いからだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>It is required that p = 1 modulo 4 (which implies that
+   -1 is a square modulo p) and that d is a non-square modulo p.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T064738Z" creationid="haruyama" creationdate="20200615T064738Z">
+        <seg>p = 1 modulo 4 (square modulo p が -1 であることを意味する) と d が non-square modulo p なことが要求される. </seg>
       </tuv>
     </tu>
     <tu>
@@ -22994,6 +23580,22 @@ ID" strings.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Key Generation</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T035555Z" creationid="haruyama" creationdate="20200618T035555Z">
+        <seg>鍵の生成</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Key Generation  .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061150Z" creationid="haruyama" creationdate="20200615T061150Z">
+        <seg>鍵の生成  .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Key Re-Exchange</seg>
       </tuv>
       <tuv lang="JA">
@@ -23186,6 +23788,22 @@ ID" strings.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Keys</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T060015Z" creationid="haruyama" creationdate="20200616T060015Z">
+        <seg>鍵</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Keys  .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061045Z" creationid="haruyama" creationdate="20200615T061045Z">
+        <seg>鍵  .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Keys are verified upon receipt by the
    parties according to Section 3.2.3.1 of [SEC1v2].</seg>
       </tuv>
@@ -23273,6 +23891,53 @@ ID" strings.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160618T032849Z">
         <seg>L をSSHの暗号法でのブロック暗号の(ビットでの)ブロック長とする (たとえばAESでは128).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Let R=rB
+   and S=(r+H(ENC(R) || ENC(A) || M)a) mod q.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T061855Z" creationid="haruyama" creationdate="20200616T061855Z">
+        <seg>そして R=rB,  S=(r+H(ENC(R) || ENC(A) || M)a) mod q だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Let h denote the
+       resulting digest.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T043448Z" creationid="haruyama" creationdate="20200618T043448Z">
+        <seg>h を結果のダイジェストとする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Let prefix denote the second
+       half of the hash digest, h[32],...,h[63].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T043747Z" creationid="haruyama" creationdate="20200618T043734Z">
+        <seg>ハッシュダイジェストの後半 h[32],...,h[63] を prefix とする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Let the hash H(k) = (h_0,
+   h_1, ..., h_(2b-1)) determine an integer a which is 2^(b-2) plus the
+   sum of m = 2^i * h_i for all i equal or larger than 3 and equal to or
+   less than b-3 such that m is a member of the set { 2^(b-2), 2^(b-2) +
+   8, ..., 2^(b-1) - 8 }.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T060611Z" creationid="haruyama" creationdate="20200616T060611Z">
+        <seg>ハッシュ H(k) = (h_0, h_1, ..., h_(2b-1)) は, 2^(b-2) と 3 以上かつ b-3 以下のすべての i に対する m = 2^i * h_i (つまり m は 集合 { 2^(b-2), 2^(b-2) +  8, ..., 2^(b-1) - 8 }のメンバー) の和の整数を決定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Let u = y^2 - 1 and v = d y^2 + 1.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T071143Z" creationid="haruyama" creationdate="20200616T071143Z">
+        <seg>u = y^2 - 1 ,  v = d y^2 + 1 とする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24082,6 +24747,22 @@ requesting the master terminate itself fall in to this category.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Modular arithmetic</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T064124Z" creationid="haruyama" creationdate="20200616T064124Z">
+        <seg>モジュラー演算</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Modular arithmetic  .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061116Z" creationid="haruyama" creationdate="20200615T061116Z">
+        <seg>モジュラー演算  .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Modularity</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110801T103316Z">
@@ -24134,6 +24815,14 @@ requesting the master terminate itself fall in to this category.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110411T132909Z">
         <seg>認証法の名前とHMACについてのさらなる情報は, 6.4節にある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>More resilient to side-channel attacks.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T062024Z" creationid="haruyama" creationdate="20200615T062024Z">
+        <seg>サイドチャンネル攻撃に対してより強い耐性を持つ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -24613,6 +25302,14 @@ no-presence-required    empty         この証明書で作成された署名が
       </tuv>
       <tuv lang="JA">
         <seg>もちろん, サーバが提案された 'channel type' を理解できない場合は, それがローカルに定義された 'channel type' であっても, 'reason code' は 前述した0x00000003 でなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Negative elements</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T055750Z" creationid="haruyama" creationdate="20200616T055750Z">
+        <seg> </seg>
       </tuv>
     </tu>
     <tu>
@@ -25294,6 +25991,22 @@ are individually implemented as extensions described below.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Notation</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T062626Z" creationid="haruyama" creationdate="20200615T062626Z">
+        <seg>表記法</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Notation  .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061023Z" creationid="haruyama" creationdate="20200615T061023Z">
+        <seg>表記法  .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Notation ........................................................4
    3.</seg>
       </tuv>
@@ -25663,6 +26376,15 @@ Ed25519 or ECDSA CA key and vice-versa.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Note that the example implementation in this document does not
+   attempt to be side-channel silent.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T052757Z" creationid="haruyama" creationdate="20200618T052757Z">
+        <seg>この文書中の実装例は, サイトチャンネル耐性を得ようとしていないことに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Note that the hash used in key exchange (in this case, SHA-256) must
    also be used in the key derivation pseudo-random function (PRF), as
    per the requirement in the "Output from Key Exchange" section in
@@ -25969,6 +26691,14 @@ support.</seg>
       <tuv lang="JA" changeid="haruyama" changedate="20110729T033919Z">
         <seg>通知とプロキシ ...................................12
    4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Now follows functions for point compression.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T050356Z" creationid="haruyama" creationdate="20200618T050356Z">
+        <seg>点の圧縮のために次の関数群がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26427,6 +27157,17 @@ indicating that the session is up.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>One
+   simple approach is to implement a side-channel silent conditional
+   assignment, and use together with the binary algorithm to examine one
+   bit of the integer at a time.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T053438Z" creationid="haruyama" creationdate="20200618T052727Z">
+        <seg>1つの単純な方針は, サイドチャンネル耐性のある条件代入を実装し, バイナリアルゴリズムと併用して1度に1ビットずつ検査する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>One alternative to recommendation (1) would be to make the SSH
    Transport Protocol's sequence number more than 32 bits long.</seg>
       </tuv>
@@ -26645,6 +27386,15 @@ and ecdsa-sha2-nistp521 curves over GF(p) are supported.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>最初のいくつかのフィールドだけが定義されている; 残りのフィールドは認証法に依存する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Only the lower 32 bytes are
+       used for generating the public key.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T040219Z" creationid="haruyama" creationdate="20200618T040219Z">
+        <seg>下位の 32 バイトのみが公開鍵の生成に用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27145,11 +27895,29 @@ MUX_S_FAILURE.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Otherwise, if x_0 != x mod 2,
+       set x &lt;-- p - x.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T071744Z" creationid="haruyama" creationdate="20200616T071744Z">
+        <seg>その他の場合,  x_0 != x mod 2, x &lt;-- p - x とする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Otherwise, it SHOULD NOT be displayed unless
    debugging information has been explicitly requested by the user.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>しかし, ユーザが明示的にデバッグ情報の表示を求めていない場合には表示しないほうがよい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Otherwise, no square root exists modulo p, and decoding
+           fails.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T071637Z" creationid="haruyama" creationdate="20200616T071637Z">
+        <seg>その他の場合は, モジュロ p の平方根はなくデコーディングは失敗だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27490,6 +28258,15 @@ MUX_S_FAILURE.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Parse the inputs so that A and R is
+   an element of E, and S is a member of the set {0, 1, ..., l-1 }.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T053114Z" creationid="haruyama" creationdate="20200616T062710Z">
+        <seg>A と R は E の要素として, S は 集合 {0, 1, ..., l-1 } のメンバーとして, 入力をパースする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Parties MAY disconnect
    if they receive a different extension value.</seg>
       </tuv>
@@ -27593,6 +28370,15 @@ MUX_S_FAILURE.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Perform a known-base-point scalar
+       multiplication a B.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T040546Z" creationid="haruyama" creationdate="20200618T040546Z">
+        <seg>既知の基本の点スカラー乗算 a B を実施する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Pixel dimensions refer
    to the drawable area of the window.</seg>
       </tuv>
@@ -27661,6 +28447,31 @@ MUX_S_FAILURE.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200515T064346Z" creationid="haruyama" creationdate="20200515T064346Z">
         <seg>SSHFP リソースレコードのために [RFC4255] の, ECDSA のために [RFC5656] のセキュリティの考察を参照してほしい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Point addition</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T035222Z" creationid="haruyama" creationdate="20200618T035222Z">
+        <seg>点の加算</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Point addition  .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061143Z" creationid="haruyama" creationdate="20200615T061143Z">
+        <seg>点の加算  .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Points on this curve form a group under addition, (x3, y3) = (x1, y1)
+   + (x2, y2), with the formulas</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T070423Z" creationid="haruyama" creationdate="20200615T070423Z">
+        <seg>この曲線上の点は, 次の式で加法群を形成する (x3, y3) = (x1, y1) + (x2, y2). </seg>
       </tuv>
     </tu>
     <tu>
@@ -27795,6 +28606,15 @@ that computes a 128 bit integrity tag given a message and a single-use
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160618T032849Z" creationid="haruyama" creationdate="20160602T032401Z">
         <seg>秘密鍵の操作は, タイミングの違いや電力の利用量, エージェントを走らせるホストのメモリサブシテム(たとえばCPUキャッシュ) の副作用によって鍵の内容を漏らす可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Private keys are 64 bytes, public keys 32
+   bytes, message of arbitrary length, and signatures are 64 bytes.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T051119Z" creationid="haruyama" creationdate="20200618T051119Z">
+        <seg>秘密鍵は 64 バイト, 公開鍵は 32 バイト, メッセージは任意の長さ, 署名は 64 バイトだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28136,6 +28956,14 @@ that computes a 128 bit integrity tag given a message and a single-use
       <tuv lang="JA">
         <seg>ポート転送 ...................................24
            9.5.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Prune the buffer.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T040341Z" creationid="haruyama" creationdate="20200618T040341Z">
+        <seg>バッファを剪定する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28542,6 +29370,22 @@ that computes a 128 bit integrity tag given a message and a single-use
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200514T025136Z" creationid="haruyama" creationdate="20200514T021430Z">
         <seg>これらの群と関連するテストデータの公開は, この後に述べるプロトコルのすべてで鍵同意のために Diffie-Hellman と楕円曲線 Diffie-Hellman をどのように用いるかを記述するのと同様に, 相互可能な実装の開発を促進し, これらの群を利用する実装の Federal Information Processing Standard (FIPS) 検証をサポートするだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Python illustration</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T050029Z" creationid="haruyama" creationdate="20200618T050029Z">
+        <seg>Python の例</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Python illustration .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061203Z" creationid="haruyama" creationdate="20200615T061203Z">
+        <seg>Python の例 .</seg>
       </tuv>
     </tu>
     <tu>
@@ -29692,6 +30536,14 @@ that computes a 128 bit integrity tag given a message and a single-use
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Return the decoded point (x,y).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T071757Z" creationid="haruyama" creationdate="20200616T071757Z">
+        <seg>デコードされた点 (x, y) を返す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Returning Exit Status</seg>
       </tuv>
       <tuv lang="JA">
@@ -30822,6 +31674,15 @@ that computes a 128 bit integrity tag given a message and a single-use
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Scalar multiplication, multiplying a point by an integer, needs some
+   additional effort to implement in a side-channel silent manner.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T052539Z" creationid="haruyama" creationdate="20200618T052539Z">
+        <seg>スカラー倍 (点に整数倍)は, サイドチャンネル耐性有りで実装のために追加の努力が必要となる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>SecSh-B uses ECDH to establish a shared secret value between the
    client and the server.</seg>
       </tuv>
@@ -31606,6 +32467,23 @@ that computes a 128 bit integrity tag given a message and a single-use
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>See [Faster-ECC] and [Edwards-revisited].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T070847Z" creationid="haruyama" creationdate="20200615T070847Z">
+        <seg>[Faster-ECC] と [Edwards-revisited] を参照.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>See [RFC4086] for a discussion
+   about randomness.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T040035Z" creationid="haruyama" creationdate="20200618T040035Z">
+        <seg>ランダムについての議論は [RFC4086] を参照.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>See [RFC4086] for recommendations on random number
    generation.</seg>
       </tuv>
@@ -31620,6 +32498,16 @@ that computes a 128 bit integrity tag given a message and a single-use
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20181114T135914Z" creationid="haruyama" creationdate="20181114T135904Z">
         <seg>詳細は [RFC4251] を参照.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>See appendix A for
+   the complete implementation and appendix B for a test-driver to run
+   it through some test vectors.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T050209Z" creationid="haruyama" creationdate="20200618T050209Z">
+        <seg>付録 A に完全な実装, 付録 B にテスト実施者のためにいくつかのテストベクターで動かしたものがあるので参照.</seg>
       </tuv>
     </tu>
     <tu>
@@ -31913,6 +32801,47 @@ that computes a 128 bit integrity tag given a message and a single-use
       <tuv lang="JA" changeid="haruyama" changedate="20200511T130326Z" creationid="haruyama" creationdate="20200511T130326Z">
         <seg>共有の秘密のエンコーディング
    4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Side channel-silent point addition is
+   straight-forward, thanks to the unified formulas.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T052424Z" creationid="haruyama" creationdate="20200618T052424Z">
+        <seg>統一された式のために, サイドチャンネル耐性のある点の加算は簡単だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Side-channel leaks</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T051405Z" creationid="haruyama" creationdate="20200618T051405Z">
+        <seg>サイドチャンネルの漏洩</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Side-channel leaks  .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061324Z" creationid="haruyama" creationdate="20200615T061324Z">
+        <seg>サイドチャンネルの漏洩  .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Sign</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T061533Z" creationid="haruyama" creationdate="20200616T061533Z">
+        <seg>署名</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Sign  .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061052Z" creationid="haruyama" creationdate="20200615T061052Z">
+        <seg>署名  .</seg>
       </tuv>
     </tu>
     <tu>
@@ -32351,6 +33280,16 @@ current order was retained.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Since d is a non-square and -1
+       is a square, the numerator, (d y^2 + 1), is always invertible
+       modulo p.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T071130Z" creationid="haruyama" creationdate="20200616T071130Z">
+        <seg>d は non-square で -1 は square なので,  分子と (d y^2 + 1) は modulo p で常に逆にできる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Since public keys tend to be very large, it is
    difficult for a human to verify an entire host key.</seg>
       </tuv>
@@ -32571,6 +33510,14 @@ current order was retained.</seg>
       <tuv lang="JA" changeid="haruyama" changedate="20110729T034245Z">
         <seg>公開鍵検証のスキップ ..........................31
       9.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Small public keys (32 bytes) and signatures (64 bytes).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T062040Z" creationid="haruyama" creationdate="20200615T062040Z">
+        <seg>小さな公開鍵 (32 bytes) と署名 (64 bytes).</seg>
       </tuv>
     </tu>
     <tu>
@@ -33713,6 +34660,22 @@ and passively waits for something to happen.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Test Vectors for Ed25519</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T050601Z" creationid="haruyama" creationdate="20200618T050601Z">
+        <seg> Ed25519 のテストベクター</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Test Vectors for Ed25519  .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061215Z" creationid="haruyama" creationdate="20200615T061215Z">
+        <seg> Ed25519 のテストベクター  .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Test data for each group is
    provided in Appendix A.</seg>
       </tuv>
@@ -33797,6 +34760,15 @@ and passively waits for something to happen.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>パディングは, ランダムなbyteで構成される必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+       y-coordinate is recovered simply by clearing this bit.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T070602Z" creationid="haruyama" creationdate="20200616T070602Z">
+        <seg>このビットをクリアして y 座標は回復される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -34119,6 +35091,17 @@ and passively waits for something to happen.</seg>
     <tu>
       <tuv lang="EN-US">
         <seg>The
+   generic EdDSA digital signature system is normally not implemented
+   directly, but instead a particular instance of EdDSA (like Ed25519)
+   is implemented.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T072709Z" creationid="haruyama" creationdate="20200615T072709Z">
+        <seg>一般の EdDSA 電子署名システムは, 通常直接実装されない. かわりに (Ed25519 のような) EdDSA の特定のインスタンスが実装される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
    handle is opaque to the client; the client MUST NOT attempt to
    interpret or modify it in any way.</seg>
       </tuv>
@@ -34396,6 +35379,17 @@ and passively waits for something to happen.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200604T070718Z" creationid="haruyama" creationdate="20200604T070718Z">
         <seg>このプロトコルで用いるサブシステム名は "sftp" だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The
+   test vectors are taken from [ED25519-TEST-VECTORS] (but we removed
+   the public key as a suffix of the secret key, and removed the message
+   from the signature) and [ED25519-LIBGCRYPT-TEST-VECTORS].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T051325Z" creationid="haruyama" creationdate="20200618T051325Z">
+        <seg>テストベクターは [ED25519-TEST-VECTORS] (ただし, 秘密鍵の末尾から公開鍵は除いている, また署名からメッセージを除いている) と [ED25519-LIBGCRYPT-TEST-VECTORS] から取った.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35385,6 +36379,14 @@ be 0x7fffffff to allow the server to automatically choose an interface.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The 32-byte public key is generated by the following steps.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T040104Z" creationid="haruyama" creationdate="20200618T040051Z">
+        <seg>32 バイトの公開鍵が次の手順で生成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The &lt;hello&gt; message MUST be followed by the character sequence
    ]]&gt;]]&gt;.</seg>
       </tuv>
@@ -35672,6 +36674,23 @@ encoded blob, and a footer.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200511T060431Z" creationid="haruyama" creationdate="20200511T060431Z">
         <seg>Ed25519 署名アルゴリズムは OpenSSH で実装されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The EdDSA public key is ENC(A) = ENC(aB).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T060636Z" creationid="haruyama" creationdate="20200616T060636Z">
+        <seg>EdDSA の公開鍵は ENC(A) = ENC(aB) だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The Edwards-curve Digital Signature Algorithm (EdDSA) is a variant of
+   Schnorr's signature system with Twisted Edwards curves.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061504Z" creationid="haruyama" creationdate="20200615T061504Z">
+        <seg>Edwards-curve Digital Signature Algorithm (EdDSA) は Twisted Edwards 曲線を用いる Schnorr  署名システムの変種だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37763,6 +38782,14 @@ regress testing.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The advantages with EdDSA and Ed25519 include:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061859Z" creationid="haruyama" creationdate="20200615T061859Z">
+        <seg>EdDSA と Ed25519 の利点は:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The agent MUST NOT process any RPC commands received on the current
    session after the &lt;close-session&gt; command.</seg>
       </tuv>
@@ -38088,6 +39115,14 @@ every 76 characters.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110819T070508Z">
         <seg>このアドレス指定の最初に, '@' (US-ASCII 文字 0x40) が後に続くユーザ名を含めることができる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The bits h_b, ..., h_(2b-1) is used below during signing.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T060656Z" creationid="haruyama" creationdate="20200616T060656Z">
+        <seg>ビット h_b, ..., h_(2b-1) は後述する署名で用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -39252,6 +40287,14 @@ options on the certificates validity.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The curve p, prime q, d and B follows from [I-D.irtf-cfrg-curves].</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T063921Z" creationid="haruyama" creationdate="20200616T063921Z">
+        <seg>曲線 p, 素数 q, d や B は [I-D.irtf-cfrg-curves] に従う.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The data is concatenated and passed to the SSH signing
 function.</seg>
       </tuv>
@@ -39486,6 +40529,15 @@ function.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110409T092509Z">
         <seg>転送される楕円曲線公開鍵(点)は, 転送前に8bit文字列にエンコードする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The elliptic curve signature scheme EdDSA and one instance of it
+   called Ed25519 is described.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T060926Z" creationid="haruyama" creationdate="20200615T060926Z">
+        <seg>楕円曲線署名スキーム EdDSA と Ed25519 と呼ばれるその1つのインスタンスについて記述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40108,6 +41160,15 @@ K_1.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The following formulas for adding two points, (x3,y3) =
+   (x1,y1)+(x2,y2) are described in [Edwards-revisited], section 3.1.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T035512Z" creationid="haruyama" creationdate="20200618T035512Z">
+        <seg>2つの点を足す次の式, (x3,y3) = (x1,y1)+(x2,y2) は [Edwards-revisited] 3.1 節に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The following generic messages may be sent by the server in response
    to requests from the client.</seg>
       </tuv>
@@ -40258,6 +41319,14 @@ K_1.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20190101T112143Z" creationid="haruyama" creationdate="20190101T112143Z">
         <seg>次の新しい公開鍵アルゴリズムが定義される:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The following notation is used throughout the document:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T062650Z" creationid="haruyama" creationdate="20200615T062650Z">
+        <seg>この文書を通じて次の表記法を用いる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40731,6 +41800,15 @@ is a sequence of zero or more tuples:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110924T123546Z">
         <seg>この文字列のフォーマットは, [RFC5656] の 6.1 節で指定されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The formulas are "strongly unified", i.e., they are valid for all
+       points on the curve, with no exceptions.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T062238Z" creationid="haruyama" creationdate="20200615T062238Z">
+        <seg>式が "強く統一されている" . すなわち, 例外なくすべての曲線上の点で有効だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -41219,6 +42297,15 @@ followed by a newline.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110719T025416Z">
         <seg>アルゴリズムへの入力は, [RFC4253] で指定された公開鍵データだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The inputs to the signing procedure is the secret key, a 32-octet
+   string, and a message M of arbitrary size.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T043317Z" creationid="haruyama" creationdate="20200618T043317Z">
+        <seg>署名手続きの入力は, 32 オクテット文字列の秘密鍵と, 任意のサイズのメッセージ M だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -42178,6 +43265,24 @@ concurrent sessions.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The most significant bit of the final octet
+       is always zero.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T043127Z" creationid="haruyama" creationdate="20200618T043127Z">
+        <seg>最後のオクテットの最上位ビットは常に 0 だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The most significant bit of the final octet is
+   always zero.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T065734Z" creationid="haruyama" creationdate="20200616T065734Z">
+        <seg>最後のオクテットの最上位ビットは常に 0 だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The most-preferred method is the first in the list.</seg>
       </tuv>
       <tuv lang="JA">
@@ -42354,6 +43459,14 @@ option-specific information (see below).</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The neutral element in the group is (0, 1).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T070455Z" creationid="haruyama" creationdate="20200615T070455Z">
+        <seg>群の単位元は (0, 1) だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The new opcode describes the widely used IUTF8
    terminal mode bit, which indicates that terminal I/O uses UTF-8
    character encoding.</seg>
@@ -42475,6 +43588,15 @@ inducing collisions in the signature hash infeasible.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110714T052455Z">
         <seg>60-79 の範囲の数はユーザ認証特有のもので, 他の鍵交換法で再定義できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The octets are hex encoded and whitespace is
+   inserted for readability.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T051046Z" creationid="haruyama" creationdate="20200618T051046Z">
+        <seg>オクテットは 16進でエンコードされ, 空白は読み易さのために挿入されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -43030,6 +44152,14 @@ PROTOCOL.agent</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The public key A is the encoding of the point aB.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T040606Z" creationid="haruyama" creationdate="20200618T040606Z">
+        <seg>公開鍵 A は 点 aB のエンコーディングだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The public key algorithm and the SSHFP algorithm number MUST
       match.</seg>
       </tuv>
@@ -43511,6 +44641,23 @@ remote end.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The rest of this section describes how Ed25519 can be implemented in
+   Python (version 3.2 or later) for illustration.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T050103Z" creationid="haruyama" creationdate="20200618T050103Z">
+        <seg>この節の残りでは, 説明のため Python (バージョン 3.2 以降) で Ed25519 をどのように実装するかを記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The result is the public key.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T043222Z" creationid="haruyama" creationdate="20200618T043222Z">
+        <seg>結果が公開鍵だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The resulting
    channels are independent of the session, and closing the session
    channel does not close the forwarded X11 channels.</seg>
@@ -43620,6 +44767,15 @@ and authenticate the entire packet.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200527T055321Z" creationid="haruyama" creationdate="20200527T055321Z">
         <seg>K_2 を鍵に用いる 2番目のインスタンスは poly1305 と一緒に利用され,  パケット全体を暗号化し認証するために使われる AEAD (Authenticated Encryption with Associated Data) を構成する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The secret is 32 octets (256 bits, corresponding to b) of
+   cryptographically-secure random data.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T043332Z" creationid="haruyama" creationdate="20200618T040017Z">
+        <seg>秘密鍵は,  32 オクテット (256 ビット, b に対応) の暗号学的に安全なランダムなデータだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -44737,6 +45893,14 @@ is signed over a blob that consists of:</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>The signature function works as below.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T050544Z" creationid="haruyama" creationdate="20200618T050544Z">
+        <seg>署名関数は次だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>The signature is calculated over the entire KRL from the KRL_MAGIC
 to this subsection's "signature_key", including both and using the
 signature generation rules appropriate for the type of "signature_key".</seg>
@@ -44769,6 +45933,16 @@ certificate.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200525T065226Z" creationid="haruyama" creationdate="20200525T065226Z">
         <seg>signature key フィールドは, 証明書の署名に利用された CA 鍵が含まれる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>The signature of a message M under a secret key k is the 2b-bit
+   string ENC(R) || ENC'(S), where ENC'(S) is defined as the b-bit
+   little-endian encoding of S.  R and S are derived as follows.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T061640Z" creationid="haruyama" creationdate="20200616T061640Z">
+        <seg>秘密鍵 k での メッセージ M の署名は, 2b ビットの文字列 ENC(R) || ENC'(S) で, ENC'(S) は S の b-ビットリトルエンディアンエンコーディングとして定義される. R と S は次のように導出される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -45793,11 +46967,44 @@ ever changed in an incompatible way.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Then 2^((p-1)/4) x is a square root.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T064628Z" creationid="haruyama" creationdate="20200616T064628Z">
+        <seg>ならば 2^((p-1)/4) x が平方根.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Then follows functions to perform point operations.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T050258Z" creationid="haruyama" creationdate="20200618T050258Z">
+        <seg>次の関数群で点の計算を実行する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>Then the Transport Model passes the message to the Dispatcher using
    the following ASI:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110812T073113Z">
         <seg>そして, トランスポートモデルは, 次のASI を用いて Dispatcher にメッセージを渡す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Then there
+   are three cases:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T064606Z" creationid="haruyama" creationdate="20200616T064606Z">
+        <seg>次に3つの場合がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Then x is a square root.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T064616Z" creationid="haruyama" creationdate="20200616T064616Z">
+        <seg>ならば x は平方根.</seg>
       </tuv>
     </tu>
     <tu>
@@ -45808,6 +47015,20 @@ ever changed in an incompatible way.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>そして, 順番にそれぞれのpromptについて, クライアントは promptを表示しユーザの入力を読み取る必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Theoretically, Ed25519 is EdDSA instantiated with b=256, H being
+   SHA-512 [RFC4634], p is the prime 2^255-19, the 255-bit encoding of
+   GF(2^255-19) being the little-endian encoding of {0, 1, ...,
+   2^255-20}, q is the prime 2^252 + 0x14def9dea2f79cd65812631a5cf5d3ed,
+   d = -121665/121666 which is a member of GF(p), and B is the unique
+   point (x, 4/5) in E for which x is "positive", which with the
+   encoding used simply means that the least significant bit of x is 0.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T052942Z" creationid="haruyama" creationdate="20200616T063548Z">
+        <seg>理論的に Ed25519 は EdDSA を b=256, H は SHA-512 [RFC4634], p は素数 2^255-19, GF(2^255-19) の 255 ビットエンコーディングは {0, 1, ... 2^255-20} のリトルエンディアンエンコーディング,  q は素数 2^252 + 0x14def9dea2f79cd65812631a5cf5d3ed, d = -121665/121666 (GF(p) のメンバー), and B は x が "正" ののとき E のユニークな点 (x, 4/5) ("正" とは利用しているエンコーディングで x の最下位ビットが 0 であることを単に意味している) を用いてインスタンス化された EdDSA だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -45893,6 +47114,16 @@ ever changed in an incompatible way.</seg>
       </tuv>
       <tuv lang="JA">
         <seg>最大のパケットサイズに関連する問題もある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>There are more efficient formulas, which are still strongly unified,
+   which use homogeneous coordinates to avoid the expensive modulo p
+   inversions.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T070835Z" creationid="haruyama" creationdate="20200615T070835Z">
+        <seg>強く統一されているが, コストの高い p モジュラ逆数計算を避けるために homogeneous coordinate を用いるより効率的な式がある.</seg>
       </tuv>
     </tu>
     <tu>
@@ -46257,6 +47488,14 @@ specified algorithm.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200519T053446Z">
         <seg>これらは後で詳細に議論する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>These are functions for manipulating the secret.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T050531Z" creationid="haruyama" creationdate="20200618T050531Z">
+        <seg>秘密鍵の操作のための関数群.</seg>
       </tuv>
     </tu>
     <tu>
@@ -46835,6 +48074,24 @@ but are able to revoke plain keys.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>They are strongly unified, i.e., they work for any pair of valid
+   input points.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T035541Z" creationid="haruyama" creationdate="20200618T035541Z">
+        <seg>これらは強く統一されている. つまり, 有効な入力の点のどの組についても機能する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>They can be computed using the Tonelli-Shanks algorithm, or
+   the special case for p = 5 (mod 8).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T064523Z" creationid="haruyama" creationdate="20200616T064523Z">
+        <seg>これは Tonelli-Shanks algorithm を用いるか p = 5 (mod 8) の特別な場合に計算できる..</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>They can be configured to require indication
 of "user presence" for each signature operation (typically achieved
 by requiring the user touch the key).</seg>
@@ -47216,6 +48473,14 @@ following format:</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This Internet-Draft will expire on November 13, 2015.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061011Z" creationid="haruyama" creationdate="20200615T061011Z">
+        <seg>この Internet-Draft は 2015/11/13 に期限切れとなる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This Internet-Draft will expire on November 25, 2016.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200615T054946Z" creationid="haruyama" creationdate="20200615T054946Z">
@@ -47575,6 +48840,16 @@ armored signature.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200608T055636Z" creationid="haruyama" creationdate="20200608T055636Z">
         <seg>SSH_FXP_STAT や SSH_FXP_LSTAT, SSH_FXP_FSTAT 要求を用いて行なえる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>This can be done using the following
+       trick, to use a single modular powering for both the inversion of
+       v and the square root:</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T071317Z" creationid="haruyama" creationdate="20200616T071317Z">
+        <seg>次のトリックを用いることで, v の逆数と平方根の両方のために単なるモジュラの累乗を用いる:</seg>
       </tuv>
     </tu>
     <tu>
@@ -50350,6 +51625,16 @@ the client waits around while the mux server does all the driving.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>This obviates the need
+       for EdDSA to perform expensive point validation on untrusted
+       public values.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T062515Z" creationid="haruyama" creationdate="20200615T062515Z">
+        <seg>これにより, EdDSA が信頼できない公開の値にコストの高い点の検証を行なわなくて済む.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>This operation SHOULD be supported by any general purpose SSH client.</seg>
       </tuv>
       <tuv lang="JA">
@@ -51645,6 +52930,17 @@ requests from clients.</seg>
     <tu>
       <tuv lang="EN-US">
         <seg>To
+   facilitate adoption in the Internet community of Ed25519, this
+   document describe the signature scheme in an implementation-oriented
+   way, and we provide sample code and test vectors.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061840Z" creationid="haruyama" creationdate="20200615T061840Z">
+        <seg>Ed25519 のインターネットコミュニティでの採用を容易にするため, この文書は実装志向な方法で署名スキームを記述し, サンプルコードとテストベクターを提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To
    minimize delays in screen updates, one does not want excessively
    large packets for interactive sessions.</seg>
       </tuv>
@@ -51700,6 +52996,15 @@ library for the key.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20160618T032715Z">
         <seg>不必要な処理とユーザとの対話を避けるため, "publickey" 認証法を用いた認証が受け入れられるかどうかを尋ねるために, 次のメッセージが提供されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To compute the
+       square root of (u/v), the first step is to compute the candidate</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T071214Z" creationid="haruyama" creationdate="20200616T071214Z">
+        <seg>(u/v) の平方根を求めるため, 最初の手順として根の候補 x = (u/v)^((p+3)/8) を計算する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -51790,6 +53095,35 @@ refer to the AuthenticationMethods option in sshd_config(5).</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>To find a square root of a,
+   first compute the candidate root x = a^((p+3)/8) (mod p).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T064558Z" creationid="haruyama" creationdate="20200616T064558Z">
+        <seg>a の平方根を探すために, まず根の候補  x = a^((p+3)/8) (mod p) を計算する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To form the encoding of the point aB, copy the
+       least significant bit of the x coordinate to the most significant
+       bit of the final octet.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T043207Z" creationid="haruyama" creationdate="20200618T043207Z">
+        <seg>点 aB のエンコーディングのために, x 座標の最下位ビットを最後のオクテットの最上位ビットにコピーする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To form the encoding of the point, copy the least
+   significant bit of the x-coordinate to the most significant bit of
+   the final octet.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T065815Z" creationid="haruyama" creationdate="20200616T065815Z">
+        <seg>この点のエンコーディングを構成するために, x 座標の最下位ビットを最後のオクテットの最上位ビットにコピーする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>To have SNMP properly utilize the security services provided by SSH,
    the SSH Transport Model MUST be used with a Security Model that knows
    how to process a tmStateReference, such as the Transport Security
@@ -51834,6 +53168,16 @@ refer to the AuthenticationMethods option in sshd_config(5).</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110820T041404Z">
         <seg>SSH 接続を開始するには, エンティティが, SSH のクライアント資格情報とサーバを認証する情報を持って設定されていなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To make an implementation side-channel silent in this way, the modulo
+   p arithmetic must not use any data-dependent branches, e.g., related
+   to carry propagation.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T052956Z" creationid="haruyama" creationdate="20200618T052338Z">
+        <seg>この方法でサイドチャンネルに対して実装に耐性を持たせるには, モジュラー p 代数が, たとえば 繰り上げの伝播に依存する, データ依存の分岐を消っして利用しないようにしなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -51902,6 +53246,15 @@ following request:</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110704T030343Z">
         <seg>これを防ぐため, クライアントは認証が完了した事を示す最後のメッセージを送る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To recover the x coordinate, the curve equation implies x^2 =
+       (y^2 - 1) / (d y^2 + 1) (mod p).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T070839Z" creationid="haruyama" creationdate="20200616T070819Z">
+        <seg>x 座標の回復のため, 曲線の方程式 x^2 = (y^2 - 1) / (d y^2 + 1) (mod p) を必要とする.</seg>
       </tuv>
     </tu>
     <tu>
@@ -51983,6 +53336,24 @@ at the time of key generation.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20190104T073155Z" creationid="haruyama" creationdate="20190104T073155Z">
         <seg>このアルゴリズムをクライアント認証で利用するには, SSH のクライアントは "rsa-sha2-256" ないし "rsa-sha2-512 の値で "pubkey" メソッドと "public key algorithm name" をエンコードした SSH_MSG_USERAUTH_REQUEST メッセージ [RFC4252] を送る .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To verify a signature ENC(R) || ENC'(S) on a message M under a public
+   key ENC(A), proceed as follows.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T062625Z" creationid="haruyama" creationdate="20200616T062625Z">
+        <seg> 公開鍵 ENC(A) でのメッセージ M の 署名 ENC(R) || ENC'(S)の検証は次のように行なう. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>To verify a signature on a message M, first split the signature
+       into two 32-octet halves.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T045736Z" creationid="haruyama" creationdate="20200618T045736Z">
+        <seg>メッセージ M の署名を検証するには,まず署名を 2 つの 32 オクテットに分割する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -52340,6 +53711,16 @@ the peer.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110825T040738Z">
         <seg>USM と違い, SSH の接続の両側で暗号鍵が異なる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Unlike many other curves used for cryptographic applications, these
+   formulas are "strongly unified": they are valid for all points on the
+   curve, with no exceptions.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T070549Z" creationid="haruyama" creationdate="20200615T070544Z">
+        <seg>暗号アプリケーションで用いられる他の多くの群と異なり, これらの式は "強く統一されている": 例外なくすべての曲線上の点で有効だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -53136,6 +54517,22 @@ they support.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200518T060650Z" creationid="haruyama" creationdate="20200518T060650Z">
         <seg>受け取った鍵を検証する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Verify</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T062543Z" creationid="haruyama" creationdate="20200616T062543Z">
+        <seg>検証</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>Verify  .</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T061058Z" creationid="haruyama" creationdate="20200615T061058Z">
+        <seg>検証  .</seg>
       </tuv>
     </tu>
     <tu>
@@ -54470,6 +55867,16 @@ the signature object itself.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>Written out explicitly, B is the point (15112221349535400772501151409
+   588531511454012693041857206046113283949847762202, 4631683569492647816
+   9428394003475163141307993866256225615783033603165251855960).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T063955Z" creationid="haruyama" creationdate="20200616T063955Z">
+        <seg>明示的に書くと  B は点 (15112221349535400772501151409588531511454012693041857206046113283949847762202, 46316835694926478169428394003475163141307993866256225615783033603165251855960) だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>X.509 Certificates</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200514T030322Z" creationid="haruyama" creationdate="20200514T030322Z">
@@ -54866,6 +56273,63 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>a (b-1)-bit encoding of elements of the finite field GF(p).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T073201Z" creationid="haruyama" creationdate="20200615T073201Z">
+        <seg>有限フィールド GF(p) の 要素の (b-1) ビットエンコーディング.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>a cryptographic hash function H producing 2b-bit outputs.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T073014Z" creationid="haruyama" creationdate="20200615T073014Z">
+        <seg>2b ビットの出力を生成する暗号学的ハッシュ関数</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>a is not a square modulo p.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T064639Z" creationid="haruyama" creationdate="20200616T064639Z">
+        <seg>a は モジュロ p の平方ではない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>a non-square element d of GF(p)</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T073213Z" creationid="haruyama" creationdate="20200615T073213Z">
+        <seg>GF(p) の non-square な要素 d</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>a prime power p congruent to 1 modulo 4.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T073121Z" creationid="haruyama" creationdate="20200615T073121Z">
+        <seg>素数の乗数 p.  p = 1 modulo 4</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>a prime q, of size b-3 bits, such that qB = (0, 1), i.e., q is
+       the order of B or a multiple thereof.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T073631Z" creationid="haruyama" creationdate="20200615T073631Z">
+        <seg>b-3 ビットの素数 q, ここで qB = (0, 1) すなわち, q は B の 位数(order) かその倍数.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>a || b (bit-)string a concatenated with (bit-)string b</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T063244Z" creationid="haruyama" creationdate="20200615T063244Z">
+        <seg>a || b (ビット)文字列 a と (ビット)文字列 b の連結</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>additional call to GSS_Init_sec_context() to process the final
        reply token.</seg>
       </tuv>
@@ -54881,6 +56345,23 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20110829T123444Z">
         <seg>この文書は, AES-GCM で packet length フィールドを暗号化せず変わりに追加の認証データとして処理することで要求することで, このジレンマを解決する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>an element B != (0,1) of the set E = { (x,y) is a member of GF(p)
+       x GF(p) such that -x^2 + y^2 = 1 + dx^2y^2 }.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200618T052837Z" creationid="haruyama" creationdate="20200615T073325Z">
+        <seg>集合 E = { GF(p) x GF(p) のメンバ (x,y) } の要素 B (ただし != (0, 1)). GF(p) は たとえば  -x^2 + y^2 = 1 + dx^2y^2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>an integer b &gt;= 10.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T072946Z" creationid="haruyama" creationdate="20200615T072946Z">
+        <seg>整数 b &gt;= 10.</seg>
       </tuv>
     </tu>
     <tu>
@@ -55305,6 +56786,14 @@ servers (identified by banner).</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>h_i the i'th bit of h</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T062940Z" creationid="haruyama" creationdate="20200615T062940Z">
+        <seg>h_i  h の i 番目のビット</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>impose additional constraints before considering a matching
    successful.</seg>
       </tuv>
@@ -55416,6 +56905,14 @@ identify the identity principal in log messages.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200612T055955Z" creationid="haruyama" creationdate="20200612T055955Z">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>n B B added to itself n times.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T062924Z" creationid="haruyama" creationdate="20200615T062924Z">
+        <seg>n B B の n 倍</seg>
       </tuv>
     </tu>
     <tu>
@@ -56556,6 +58053,15 @@ identify the identity principal in log messages.</seg>
     </tu>
     <tu>
       <tuv lang="EN-US">
+        <seg>of GF(q) are those x which the (b-1)-bit encoding of x is
+   lexicographically larger than the (b-1)-bit encoding of -x.</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T060009Z" creationid="haruyama" creationdate="20200616T060009Z">
+        <seg>GF(q) の負の要素は,  x の (b-1) ビットエンコーディングが -x の (b-1) よりも辞書順に大きい x だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
         <seg>of the file as described in Section ``File Attributes''.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200609T065519Z" creationid="haruyama" creationdate="20200609T065519Z">
@@ -56795,6 +58301,14 @@ draft-josefsson-eddsa-ed25519-03.</seg>
       </tuv>
       <tuv lang="JA" changeid="haruyama" changedate="20200605T060018Z" creationid="haruyama" creationdate="20200605T055920Z">
         <seg>`id' は要求識別子で,  `handle'  は SSH_FXP_OPEN で返ったファイルハンドル, `offset' は書き込みを開始するファイルの開始からの (バイトでの) オフセット, `data' は 書き込まれるデータだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>root x = (u/v)^((p+3)/8).</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200616T071220Z" creationid="haruyama" creationdate="20200616T071220Z">
+        <seg> </seg>
       </tuv>
     </tu>
     <tu>
@@ -57782,6 +59296,14 @@ contains:</seg>
       </tuv>
       <tuv lang="JA">
         <seg>後者の場合, 管理者は要件に添うようにデフォルトのパラメータを能動的に変更しなければならないだろう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="EN-US">
+        <seg>x^y x multiplied by itself y times</seg>
+      </tuv>
+      <tuv lang="JA" changeid="haruyama" changedate="20200615T062751Z" creationid="haruyama" creationdate="20200615T062751Z">
+        <seg>x^y x の y 乗</seg>
       </tuv>
     </tu>
     <tu>
