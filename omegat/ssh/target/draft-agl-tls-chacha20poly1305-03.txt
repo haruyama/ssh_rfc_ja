@@ -1,0 +1,833 @@
+
+
+
+Network Working Group                                         A. Langley
+Internet-Draft                                                  W. Chang
+Expires: May 5, 2014                                          Google Inc
+                                                                Nov 2013
+
+
+           ChaCha20 and Poly1305 based Cipher Suites for TLS
+                   draft-agl-tls-chacha20poly1305-03
+
+概要
+
+   このメモは,  Transport Layer Security (TLS) での Poly1305 認証コード付きの ChaCha20 の利用について記述する.
+
+このメモの位置づけ
+
+   この Internet-Draft  は BCP 78 と BCP 79 の規定に完全に準拠して提出される.
+
+   Internet-Draft は Internet Engineering Task Force (IETF) の作業文書だ.  他のグループも Internet-Draft として作業文書を配布するかもしれないことに注意.  現在の Internet-Draft のリストは http://www.ietf.org/ietf/1id-abstracts.txt にある.
+
+   Internet-Drafts は, 最大で6か月有効な草稿で, いつでも他の文書によって更新, 置換, 廃止されうる.  Internet Draft を参考仕様としたり "進行中" 以外ので引用は不適切だ.
+
+   この Internet-Draft は 2014/05/05 に期限切れとなる.
+
+著作権情報
+
+   Copyright (c) 2013 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+
+
+Langley & Chang            Expires May 5, 2014                  [Page 1]
+
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013
+
+
+目次
+
+   1導入 . . . . . . . . . . . . . . . . . . . . . . . . .  3
+   2.  要件に関する表記 . . . . . . . . . . . . . . . . . . . .  4
+   3.  ChaCha20 . . . . . . . . . . . . . . . . . . . . . . . . . . .  5
+   4.  Poly1305 . . . . . . . . . . . . . . . . . . . . . . . . . . .  7
+   5.  AEAD の構成  . . . . . . . . . . . . . . . . . . . . . .  8
+   6.  暗号スート  . . . . . . . . . . . . . . . . . . . . . . . . 10
+   7.  テストベクター . . . . . . . . . . . . . . . . . . . . . . . . . 11
+   8.  セキュリティの考察  . . . . . . . . . . . . . . . . . . . 14
+   9.  IANA の考察  . . . . . . . . . . . . . . . . . . . . . 15
+   10. References . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+     10.1.  標準のリファレンス  . . . . . . . . . . . . . . . . . . 16
+     10.2.  情報のリファレンス . . . . . . . . . . . . . . . . . 16
+   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 17
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Langley & Chang            Expires May 5, 2014                  [Page 2]
+
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013
+
+
+1イントロダクション
+
+   既存の TLS [RFC5246] 暗号スートは, 暗号の弱体化 (RC4) や, 主な実装における思わぬ危険 (CBC モードのブロック暗号) に悩まされていて, またソフトウェアでの効率的で安全な実装の難しい (AES-GCM). ソフトウェアでの TLS の実装の状態を改善するために, このメモは鍵の軽快さを犠牲にすることなくソフトウェアで実装する際に速く安全にできる暗号スートを指定する.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Langley & Chang            Expires May 5, 2014                  [Page 3]
+
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013
+
+
+2.  要件に関する表記
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, RFC 2119 [RFC2119] で記述されているように解釈される. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Langley & Chang            Expires May 5, 2014                  [Page 4]
+
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013
+
+
+3.  ChaCha20
+
+   ChaCha20 [chacha] は D. J. Bernstein によって開発されたストリーム暗
+   Salsa20 の改良版で,  SHA-3 ファイナリストの BLAKE のコアとして用いられた.
+
+   ChaCha20 は 16 個の 32 ビットの入力ワードを 16 個の 32 ビットの出力ワードに変換する.  慣例では,  入力ワード 8 つで 256-bit の鍵を成し, 4 つが定数, 残りの 4 つがナンスとブロックカウンターだ.  出力ワードは, バイトに変換され, 平文と XOR して暗号文が生成される.  平文全体と XOR するのに十分な出力バイトを生成するため, ブロックカウンターは増加されつつ  2^70 バイトの出力まで ChaCha20 は必要な回数だけ再び動く.
+
+   ChaCha20 入力ワードによって初期化された 16, 32 ビットのワードの状態を操作する.  最初の 4 つの入力ワードは定数だ: (0x61707865, 0x3320646e, 0x79622d32, 0x6b206574).  4-11 の入力ワードは, 4 バイトチャンクのリトルエンディアンオーダーのバイトとして読み出される 256 ビットの鍵から取られる.  12, 13 の入力ワードはブロックカウンターで, 12 がオーバーフローしたら 13 に入る.
+   最後に 14, 15 のワードは, 8 バイトのナンスから取られる. やはり 4 バイトチャンクのリトルエンディアンオーダーのバイトとして読み出される.  ブロックカウンターのワードは最初は 0 だ.
+
+   ChaCha20 は 20 ラウンドから構成され, "column" ラウンドと "diagonal" ラウンドを交互に繰替えす.  それぞれの ラウンドは,  次の "quarter-round" 関数を それぞれ異なるワードの集合で 4 回適用する.
+   quarter-round 関数は 4 個の 32 ビットワード (a, b, c, d) 次のように更新する. <<<  はビットワイズの左回転操作だ:
+
+   a += b; d ^= a; d <<<= 16;
+   c += d; b ^= c; b <<<= 12;
+   a += b; d ^= a; d <<<= 8;
+   c += d; b ^= c; b <<<= 7;
+
+   16 ワードは, 概念的には 4 x 4 の グリッドに配置される. 最初のワードが 左上の位置で, 4つめのワードが 右上の位置だ.  "column" ラウンドは  quarter-round 関数を 4つの列に 左から右へ適用する.  "diagonal" ラウンドは quarter-round を 左上から右下の対角線に適用する. そして パターンを 1つ 右にずらしてさらに 3回 quarter-round を適用する.
+
+   具体的には, quarter-round 関数が適用される column は次のインデックスとなる: (0, 4, 8, 12), (1, 5, 9, 13), (2, 6, 10, 14), (3, 7, 11, 15).  diagonal ラウンドでは次のインデックスに適用される: (0, 5, 10, 15), (1, 6, 11, 12), (2, 7, 8, 13), (3, 4, 9, 14).
+
+
+
+Langley & Chang            Expires May 5, 2014                  [Page 5]
+
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013
+
+
+   前述の処理を 20 ラウンド行なったあとで, 元の 16 入力ワードを 16 ワードに加算して, 16 出力ワードを形成する.
+
+   16 出力ワードをリトルエンディアンオーダーに直列化し結果を連結して, 64 出力バイトを生成する.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Langley & Chang            Expires May 5, 2014                  [Page 6]
+
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013
+
+
+4.  Poly1305
+
+   Poly1305 [poly1305] は D. J. Bernstein が設計した  Wegman-Carter ワンタイム認証気あ.  Poly1305 は 32 バイトのワンタイム鍵とメッセージを取り, 16 バイトのタグを生成する. 攻撃者がごまかしたいメッセージから有効なタグを生成する機会は無視できるので, このタグでメッセージを認証できる.
+
+   ワンタイム鍵の最初の 16 バイトは, 整数 _r_ を次のように形成する: インデックス 3, 7, 11, 15 のバイトの上位 4 ビットはクリアされる. インデックス 4, 8, 12 の下位 2 ビットはクリアされる. そして 16 バイトはリトルエンディアンの値として扱われる.
+
+   アキュムレーターは 0 に設定される.  入力メッセージの 16 バイトごとに, 値 1 をバイトとして追加し, 17 バイトはリトルエンディアンの数として扱われる.  最後のチャンクが16 バイトに満たない場合は, 1 のバイトを追加した後で 17 byte になるまで 0 のバイトが追加される.  値はアキュムレーターに追加され, アキュムレーターに _r_ を乗算し, mod 2^130 - 5 を取る.
+
+   最後に ワンタイム鍵の 残り 16バイトをリトルエンディアンの数として扱いアキュムレーターに加算し, mod 2^128 を取る.  結果はリトルエンディアンの数として直列化され, 16 バイトのタグを生成する.  (Poly1305 の元々の仕様では, カウンターのナンスから多項式の定数項を生成するために AES を用いていたここで行なわれているような, ブロック暗号の利用を避けるより最近の取り扱いについては NaCl の仕様 [naclcrypto] の 9節を参照.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Langley & Chang            Expires May 5, 2014                  [Page 7]
+
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013
+
+
+5.  AEAD の構成 
+
+   ChaCha20 と Poly1305 を組み合わせて AEAD アルゴリズム [RFC5116], AEAD_CHACHA20_POLY1305 を構成する. これは 32 バイトの鍵と 8 バイトのナンスを次のように取る.
+
+   ChaCha20 は与えられた鍵とナンス, 2 つのカウンターワードは 0 に設定されて動く.  64 バイトの出力の最初の 32 バイトが Poly 1305 のワンタイム鍵となるため保存される.  出力の残りは捨てられる.  最初のカウンター入力ワードは 1 に設定され, 平文は  必要なだけのChaCha20 関数の実行の出力と XOR されて暗号化される. それぞれのブロックごとに 最初のカウンターワードは加算し, オバーフローしたら 2つ目のが加算される.
+   (TLS の場合, 平文のサイズの制限があるので, 実際には最初のカウンターワードのオーバーフローは発生しないだろう.)
+
+   ハンドシェイクからの鍵素材を使わずにこのように Poly1305 鍵を生成する理由は, ハンドシェイクの鍵素材はセッションごとで, 多項式 MAC にはユニークで秘密の鍵がレコードごとに必要だからだ.
+
+   Poly1305 の鍵は次の入力に対してタグを計算するのに使われる: 追加のデータ, 追加のデータのバイト数, 暗号文, 暗号文のバイト数を連結したもの.  数は 8バイトのリトルエンディアンの値として表現される.
+   結果のタグは暗号文に追記され, AEAD 操作の出力となる.
+
+   認証付きの復号は, おおまかにいって暗号プロセスの逆となる: Chacha20 の鍵ストリームの 1 つのブロックを生成し, 最初の 32 バイトを Poly1305 鍵として使う.  Poly1305 に追加のデータと暗号文を前述の末尾のパディングをして供給する.  計算された Poly1305 認証器は入力の最後の 16 バイトと一致するかを定数時間で検証する.  一致しなければ, 入力はすぐに拒否される.  そうでなければ, カウンターの値を 1 から始めて 暗号文を復号するために ChaCha20 を実行する.
+
+   TLS で使う際, "record_iv_length" は  0 で ナンスは 8バイトでビッグエンディアンの数でのレコードのシーケンス番号だ. 追加のデータはseq_num + TLSCompressed.type + TLSCompressed.version + TLSCompressed.length で + は連結を示す.
+
+   ( DTLS では シーケンス番号は 48 ビットしかない.  このため, DTLS で利用する際は AEAD_CHACHA20_POLY1305 ベースの暗号スートは, TLS の 64 ビットのシーケンス番号の代替として 16 ビットの epoch と 48 ビットのシーケンス番号を連結して用いる.)
+
+
+
+
+Langley & Chang            Expires May 5, 2014                  [Page 8]
+
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013
+
+
+   RFC5116  [RFC5116] の 4 節に従い, AEAD アルゴリズムの定数は次のようになる: K_LEN は 32 バイト, N_MIN と N_MAX は 8 バイト, P_MAX と A_MAX は 2^64, C_MAX は 2^64+16. AEAD_CHACHA20_POLY1305 の暗号文は対応する平文よりちょうど 16 オクテット長い.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Langley & Chang            Expires May 5, 2014                  [Page 9]
+
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013
+
+
+6.  暗号スート
+
+   AEAD_CHACHA20_POLY1305 アルゴリズムを用いる次の暗号スートが定義されている:
+
+   TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256   = {0xcc, 0x13}
+   TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 = {0xcc, 0x14}
+   TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256 =     {0xcc, 0x15}
+
+   これらの暗号スートは, ハッシュ関数として SHA-256 を使うTLS PRF [RFC5246] を用いる.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Langley & Chang            Expires May 5, 2014                 [Page 10]
+
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013
+
+
+7.  テストベクター
+
+   次のブロックは ChaCha20 のテストベクターだ.  最初の行は 256 ビットの鍵で, 2番目が 64 ビットのナンス, 最後の行は 結果の ChaCha20 鍵ストリームの先頭だ.
+
+   KEY:       00000000000000000000000000000000000000000000000000000000
+              00000000
+   NONCE:     0000000000000000
+   KEYSTREAM: 76b8e0ada0f13d90405d6ae55386bd28bdd219b8a08ded1aa836efcc
+              8b770dc7da41597c5157488d7724e03fb8d84a376a43b8f41518a11c
+              c387b6699b2ee658
+
+
+   KEY:       00000000000000000000000000000000000000000000000000000000
+              00000001
+   NONCE:     0000000000000000
+   KEYSTREAM: 4540f05a9f1fb296d7736e7b208e3c96eb4fe1834688d2604f450952
+              ed432d41bbe2a0b6ea7566d2a5d1e7e20d42af2c53d792b1c43fea81
+              7e9ad275ae546963
+
+
+   KEY:       00000000000000000000000000000000000000000000000000000000
+              00000000
+   NONCE:     0000000000000001
+   KEYSTREAM: de9cba7bf3d69ef5e786dc63973f653a0b49e015adbff7134fcb7df1
+              37821031e85a050278a7084527214f73efc7fa5b5277062eb7a0433e
+              445f41e3
+
+
+   KEY:       00000000000000000000000000000000000000000000000000000000
+              00000000
+   NONCE:     0100000000000000
+   KEYSTREAM: ef3fdfd6c61578fbf5cf35bd3dd33b8009631634d21e42ac33960bd1
+              38e50d32111e4caf237ee53ca8ad6426194a88545ddc497a0b466e7d
+              6bbdb0041b2f586b
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Langley & Chang            Expires May 5, 2014                 [Page 11]
+
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013
+
+
+   KEY:       000102030405060708090a0b0c0d0e0f101112131415161718191a1b
+              1c1d1e1f
+   NONCE:     0001020304050607
+   KEYSTREAM: f798a189f195e66982105ffb640bb7757f579da31602fc93ec01ac56
+              f85ac3c134a4547b733b46413042c9440049176905d3be59ea1c53f1
+              5916155c2be8241a38008b9a26bc35941e2444177c8ade6689de9526
+              4986d95889fb60e84629c9bd9a5acb1cc118be563eb9b3a4a472f82e
+              09a7e778492b562ef7130e88dfe031c79db9d4f7c7a899151b9a4750
+              32b63fc385245fe054e3dd5a97a5f576fe064025d3ce042c566ab2c5
+              07b138db853e3d6959660996546cc9c4a6eafdc777c040d70eaf46f7
+              6dad3979e5c5360c3317166a1c894c94a371876a94df7628fe4eaaf2
+              ccb27d5aaae0ad7ad0f9d4b6ad3b54098746d4524d38407a6deb3ab7
+              8fab78c9
+
+   次のブロックは Poly1305 のテストベクターだ.  最初の行は, 可変長の入力だ.  2番目は 256 ビット鍵で, 最後は結果の 128 ビットのタグだ.
+
+   INPUT: 000000000000000000000000000000000000000000000000000000000000
+          0000
+   KEY:   746869732069732033322d62797465206b657920666f7220506f6c793133
+          3035
+   TAG:   49ec78090e481ec6c26b33b91ccc0307
+
+
+   INPUT: 48656c6c6f20776f726c6421
+   KEY:   746869732069732033322d62797465206b657920666f7220506f6c793133
+          3035
+   TAG:   a6f745008f81c916a20dcc74eef2b2f0
+
+   次のブロックは  AEAD_CHACHA20_POLY1305 アルゴリズムのテストベクターだ.  最初の 4 行は AEAD アルゴリズムへの標準的な入力で, 最後の行は暗号化/認証の結果だ.
+
+   KEY:    4290bcb154173531f314af57f3be3b5006da371ece272afa1b5dbdd110
+           0a1007
+   INPUT:  86d09974840bded2a5ca
+   NONCE:  cd7cf67be39c794a
+   AD:     87e229d4500845a079c0
+   OUTPUT: e3e446f7ede9a19b62a4677dabf4e3d24b876bb284753896e1d6
+
+   実装を助けるため, 次のブロックでは AEAD_CHACHA20_POLY1305 アルゴリズムの中間の値をいくつか示す.  最初の行は導出された Poly1305 鍵で2番目は Poly1035 で認証される生のバイトだ.
+
+
+
+
+
+'Langley & Chang            Expires May 5, 2014                 [Page 12]
+ 
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013
+
+
+   KEY:   9052a6335505b6d507341169783dccac0e26f84ea84906b1558c05bf4815
+          0fbe
+   INPUT: 87e229d4500845a079c00a00000000000000e3e446f7ede9a19b62a40a00
+          000000000000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Langley & Chang            Expires May 5, 2014                 [Page 13]
+
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013
+
+
+8.  セキュリティの考察
+
+   ChaCha20 は 256 ビットのセキュリティレベルを提供するよう設計されている.  Poly1305 は, 2^64 の正当なメッセージを送信した後でも, 16 * n バイトのメッセージに対して確率1-(n/2^102) で加工されたメッセージを拒否することを保証するよう設計されている. 
+
+   AEAD_CHACHA20_POLY1305 アルゴリズムは, プライバシーと確実性の標準的な考えに合致するよう設計されている.  さらなる定義については Authenticated Encryption [AE] を参照.
+
+   これらの暗号スートは, 同じ鍵に対してナンスを繰替えさないことを要求する.  これは 単に TLS シーケンス番号を使うことで達成される.
+
+   前方安全でない高いセキュリティの暗号スートを定義するのは不適当なので, 前方安全な暗号スートのみが定義されている.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Langley & Chang            Expires May 5, 2014                 [Page 14]
+
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013
+
+
+9.  IANA の考慮
+
+   IANA は TLS レジストリからこの文書で定義される暗号スートの値を割り当てるよう要求される.
+
+   IANA は AEAD アルゴリズムのレジストリに AEAD_CHACHA20_POLY1305 の値を割り当てるよう要求される.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Langley & Chang            Expires May 5, 2014                 [Page 15]
+
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013
+
+
+10.  References
+
+10.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC5246]  Dierks, T. and E. Rescorla, "The Transport Layer Security
+              (TLS) Protocol Version 1.2", RFC 5246, August 2008.
+
+   [RFC5116]  McGrew, D., "An Interface and Algorithms for Authenticated
+              Encryption", RFC 5116, January 2008.
+
+   [chacha]   Bernstein, D., "ChaCha, a variant of Salsa20.", Jan 2008,
+              <http://cr.yp.to/chacha/chacha-20080128.pdf>.
+
+   [poly1305]
+              Bernstein, D., "The Poly1305-AES message-authentication
+              code.", March 2005,
+              <http://cr.yp.to/mac/poly1305-20050329.pdf>.
+
+10.2.  Informative References
+
+   [AE]       Bellare, M. and C. Namprempre, "Authenticated Encryption:
+              Relations among notions and analysis of the generic
+              composition paradigm",
+              <http://cseweb.ucsd.edu/~mihir/papers/oem.html>.
+
+   [naclcrypto]
+              Bernstein, D.,
+              "http://cr.yp.to/highspeed/naclcrypto-20090310.pdf",
+              March 2009,
+              <http://cr.yp.to/highspeed/naclcrypto-20090310.pdf>.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Langley & Chang            Expires May 5, 2014                 [Page 16]
+
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013
+
+
+Authors' Addresses
+
+   Adam Langley
+   Google Inc
+
+   Email: agl@google.com
+
+
+   Wan-Teh Chang
+   Google Inc
+
+   Email: wtc@google.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Langley & Chang            Expires May 5, 2014                 [Page 17]
+

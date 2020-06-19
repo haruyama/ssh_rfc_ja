@@ -364,6 +364,23 @@ strings packed inside it.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>(In DTLS, the sequence number is only 48 bits.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T080102Z" creationid="haruyama" creationdate="20200619T080102Z">
+        <seg>( DTLS では シーケンス番号は 48 ビットしかない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>(In the case of the TLS, limits on the plaintext size mean that the
+   first counter word will never overflow in practice.)</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T074236Z" creationid="haruyama" creationdate="20200619T074236Z">
+        <seg>(TLS の場合, 平文のサイズの制限があるので, 実際には最初のカウンターワードのオーバーフローは発生しないだろう.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>(It is a protocol error to attempt to
    use an ordinary file handle returned by SSH_FXP_OPEN.)</seg>
       </tuv>
@@ -447,6 +464,15 @@ strings packed inside it.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200514T024436Z" creationid="haruyama" creationdate="20200514T024436Z">
         <seg>(後者は, 指定された群のテストデータを提供ないし参照していない).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>(The original specification of Poly1305 used AES to generate
+   the constant term of the polynomial from a counter nonce.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T072607Z" creationid="haruyama" creationdate="20200619T072607Z">
+        <seg>(Poly1305 の元々の仕様では, カウンターのナンスから多項式の定数項を生成するために AES を用いていた</seg>
       </tuv>
     </tu>
     <tu>
@@ -2248,6 +2274,15 @@ to connect to a master that speaks an unsupported protocol version.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>A diagonal round applies it to these indexes: (0, 5,
+   10, 15), (1, 6, 11, 12), (2, 7, 8, 13), (3, 4, 9, 14).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T065619Z" creationid="haruyama" creationdate="20200619T065619Z">
+        <seg>diagonal ラウンドでは次のインデックスに適用される: (0, 5, 10, 15), (1, 6, 11, 12), (2, 7, 8, 13), (3, 4, 9, 14).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>A different approach to solve the DNS search path issue would be for
    clients to use a trusted DNS search path, i.e., one not acquired
    through DHCP or other autoconfiguration mechanisms.</seg>
@@ -2858,6 +2893,22 @@ raw user keys.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>ゼロの 'exit_status' は, 通常コマンドが正常終了したことを意味する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>AEAD construction</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T073613Z" creationid="haruyama" creationdate="20200619T073613Z">
+        <seg>AEAD の構成 </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>AEAD construction  .</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200618T061854Z" creationid="haruyama" creationdate="20200618T061854Z">
+        <seg>AEAD の構成  .</seg>
       </tuv>
     </tu>
     <tu>
@@ -3576,6 +3627,15 @@ a matching MAC.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20181207T111329Z" creationid="haruyama" creationdate="20181207T111329Z">
         <seg>影響を受けるバージョンがこの拡張を実装していないので, 省略にはなんの害もない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>After 20 rounds of the above processing, the original 16 input words
+   are added to the 16 words to form the 16 output words.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T070100Z" creationid="haruyama" creationdate="20200619T065922Z">
+        <seg>前述の処理を 20 ラウンド行なったあとで, 元の 16 入力ワードを 16 ワードに加算して, 16 出力ワードを形成する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -4638,6 +4698,16 @@ revoking key IDs).</seg>
     <tu>
       <tuv xml:lang="EN-US">
         <seg>An
+   AEAD_CHACHA20_POLY1305 ciphertext is exactly 16 octets longer than
+   its corresponding plaintext.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T080443Z" creationid="haruyama" creationdate="20200619T080443Z">
+        <seg>AEAD_CHACHA20_POLY1305 の暗号文は対応する平文よりちょうど 16 オクテット長い.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>An
    agent SHOULD take countermeasures against brute-force guessing
    attacks against the pass-phrase.</seg>
       </tuv>
@@ -4750,6 +4820,14 @@ revoking key IDs).</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200513T050306Z" creationid="haruyama" creationdate="20200513T050306Z">
         <seg>これらの目的での中止は, セッションの切断 (SSH_MSG_DISCONNECT) で定義され, メッセージに対して理由 SSH_DISCONNECT_KEY_EXCHANGE_FAILED を用いる必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>An accumulator is set to zero.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T071855Z" creationid="haruyama" creationdate="20200619T071442Z">
+        <seg>アキュムレーターは 0 に設定される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6260,6 +6338,16 @@ by trusted hardware before it will issue a certificate.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Authenticated decryption is largely the reverse of the encryption
+   process: generate one block of ChaCha20 keystream and use the first
+   32 bytes as a Poly1305 key.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T074924Z" creationid="haruyama" creationdate="20200619T074924Z">
+        <seg>認証付きの復号は, おおまかにいって暗号プロセスの逆となる: Chacha20 の鍵ストリームの 1 つのブロックを生成し, 最初の 32 バイトを Poly1305 鍵として使う.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Authentication</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -7030,6 +7118,16 @@ advertised in the SSH_FXP_VERSION hello with version "2".</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>By
+   convention, 8 of the input words consist of a 256-bit key, 4 are
+   constants and the remaining four are an nonce and block counter.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T060540Z" creationid="haruyama" creationdate="20200619T060540Z">
+        <seg>慣例では,  入力ワード 8 つで 256-bit の鍵を成し, 4 つが定数, 残りの 4 つがナンスとブロックカウンターだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>By combining the specification of all eight
    groups with test data and instructions for use in a variety of
    protocols, this document serves as a resource for implementers who
@@ -7424,6 +7522,23 @@ its MAC (assuming key derivation, ChaCha20 and Poly1305 are secure).</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>ChaCha20 [chacha] is a stream cipher developed by D. J. Bernstein.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T070733Z" creationid="haruyama" creationdate="20200619T060250Z">
+        <seg>ChaCha20 [chacha] は D. J. Bernstein によって開発されたストリーム暗</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>ChaCha20 consists of 20 rounds, alternating between "column" rounds
+   and "diagonal" rounds.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T061843Z" creationid="haruyama" creationdate="20200619T061843Z">
+        <seg>ChaCha20 は 20 ラウンドから構成され, "column" ラウンドと "diagonal" ラウンドを交互に繰替えす.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>ChaCha20 is a stream cipher designed by Daniel Bernstein and described
 in [1].</seg>
       </tuv>
@@ -7433,11 +7548,45 @@ in [1].</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>ChaCha20 is designed to provide a 256-bit security level.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T081401Z" creationid="haruyama" creationdate="20200619T081228Z">
+        <seg>ChaCha20 は 256 ビットのセキュリティレベルを提供するよう設計されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>ChaCha20 is run with the given key and nonce and with the two counter
+   words set to zero.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T073852Z" creationid="haruyama" creationdate="20200619T073852Z">
+        <seg>ChaCha20 は与えられた鍵とナンス, 2 つのカウンターワードは 0 に設定されて動く.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>ChaCha20 maps 16, 32-bit input words to 16, 32-bit output words.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T062036Z" creationid="haruyama" creationdate="20200619T060404Z">
+        <seg>ChaCha20 は 16 個の 32 ビットの入力ワードを 16 個の 32 ビットの出力ワードに変換する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>ChaCha20 must never reuse a {key, nonce} for encryption nor may it be
 used to encrypt more than 2^70 bytes under the same {key, nonce}.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200527T062850Z" creationid="haruyama" creationdate="20200527T062850Z">
         <seg>ChaCha20 は 決して暗号化のために {key, nonce} を再利用したり 同じ {key, nonce} で 2^70 バイトより多く暗号化してはならない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>ChaCha20 operates on a state of 16, 32-bit words which are
+   initialised from the input words.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T061410Z" creationid="haruyama" creationdate="20200619T061410Z">
+        <seg>ChaCha20 入力ワードによって初期化された 16, 32 ビットのワードの状態を操作する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -7607,6 +7756,22 @@ used to encrypt more than 2^70 bytes under the same {key, nonce}.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20111001T032816Z">
         <seg>チャンクされたフレーミングメカニズム .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Cipher suites</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T080452Z" creationid="haruyama" creationdate="20200619T080452Z">
+        <seg>暗号スート</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Cipher suites  .</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200618T061902Z" creationid="haruyama" creationdate="20200618T061902Z">
+        <seg>暗号スート  .</seg>
       </tuv>
     </tu>
     <tu>
@@ -10556,6 +10721,15 @@ string, e.g. "1".</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Each round applies the following "quarter-
+   round" function four times, to a different set of words each time.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T061930Z" creationid="haruyama" creationdate="20200619T061930Z">
+        <seg>それぞれの ラウンドは,  次の "quarter-round" 関数を それぞれ異なるワードの集合で 4 回適用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Each server host SHOULD have a host key.</seg>
       </tuv>
       <tuv xml:lang="JA">
@@ -11436,6 +11610,17 @@ encrypted length.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Existing TLS [RFC5246] cipher suites either suffer from cryptographic
+   weaknesses (RC4), major implementation pitfalls (CBC mode block
+   ciphers) or are difficult to efficiently and securely implement in
+   software (AES-GCM).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200618T062158Z" creationid="haruyama" creationdate="20200618T062158Z">
+        <seg>既存の TLS [RFC5246] 暗号スートは, 暗号の弱体化 (RC4) や, 主な実装における思わぬ危険 (CBC モードのブロック暗号) に悩まされていて, またソフトウェアでの効率的で安全な実装の難しい (AES-GCM). </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Exiting NETCONF is accomplished using the &lt;close-session&gt; operation.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110728T100730Z">
@@ -11752,6 +11937,15 @@ encrypted length.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Feed Poly1305 the additional data and
+   ciphertext, with the length suffixing as described above.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T075322Z" creationid="haruyama" creationdate="20200619T075322Z">
+        <seg>Poly1305 に追加のデータと暗号文を前述の末尾のパディングをして供給する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Fields are separated by spaces.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200609T065915Z" creationid="haruyama" creationdate="20200609T065915Z">
@@ -11865,6 +12059,15 @@ encrypted length.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200602T055843Z" creationid="haruyama" creationdate="20200602T055843Z">
         <seg>署名を含むファイルはヘッダで始まらなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Finally the last 16 bytes of the one-time key are treated as a
+   little-endian number and added to the accumulator, mod 2^128.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T071943Z" creationid="haruyama" creationdate="20200619T071808Z">
+        <seg>最後に ワンタイム鍵の 残り 16バイトをリトルエンディアンの数として扱いアキュムレーターに加算し, mod 2^128 を取る.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12352,6 +12555,17 @@ not the legacy RSA-SHA1 "ssh-rsa").</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>For a more
+   recent treatment that avoids the use of a block cipher in this
+   fashion, as is done here, see section 9 of the NaCl specification
+   [naclcrypto].)</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T072823Z" creationid="haruyama" creationdate="20200619T072823Z">
+        <seg>ここで行なわれているような, ブロック暗号の利用を避けるより最近の取り扱いについては NaCl の仕様 [naclcrypto] の 9節を参照.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>For advise on how to implement arithmetic modulo p = 2^255 - 1
    efficiently and securely, see Curve25519 [CURVE25519].</seg>
       </tuv>
@@ -12485,6 +12699,16 @@ SSH_FXP_SYMLINK as follows:</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200605T055816Z" creationid="haruyama" creationdate="20200605T055816Z">
         <seg>たとえばデバイスファイルの場合, 要求したものよりも少ないバイトを返すかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>For each chunk of 16 bytes from the
+   input message, a byte with value 1 is appended and the 17 bytes are
+   treated as a little-endian number.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T071544Z" creationid="haruyama" creationdate="20200619T071544Z">
+        <seg>入力メッセージの 16 バイトごとに, 値 1 をバイトとして追加し, 17 バイトはリトルエンディアンの数として扱われる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12872,6 +13096,15 @@ SSH_FXP_SYMLINK as follows:</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>例: US-ASCIIのstring "testing" は 00 00 00 07 t e s t i n g として表現される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>For formal definitions see
+   Authenticated Encryption [AE].</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T081508Z" creationid="haruyama" creationdate="20200619T081508Z">
+        <seg>さらなる定義については Authenticated Encryption [AE] を参照.</seg>
       </tuv>
     </tu>
     <tu>
@@ -15601,6 +15834,24 @@ as a big-endian integer.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>IANA is requested to assign a value for AEAD_CHACHA20_POLY1305 in the
+   registry of AEAD algorithms.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T081936Z" creationid="haruyama" creationdate="20200619T081936Z">
+        <seg>IANA は AEAD アルゴリズムのレジストリに AEAD_CHACHA20_POLY1305 の値を割り当てるよう要求される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>IANA is requested to assign the values for the cipher suites defined
+   in this document from the TLS registry.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T081910Z" creationid="haruyama" creationdate="20200619T081910Z">
+        <seg>IANA は TLS レジストリからこの文書で定義される暗号スートの値を割り当てるよう要求される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>IANA must assign the MAC Algorithm Names "umac-32", "umac-64",
    "umac-96" and "umac-128".</seg>
       </tuv>
@@ -16654,6 +16905,15 @@ appear, they must appear consecutively at the end of the KRL file.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>If not, the input can be rejected
+   immediately.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T075440Z" creationid="haruyama" creationdate="20200619T075440Z">
+        <seg>一致しなければ, 入力はすぐに拒否される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>If not, the key exchange MUST fail.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200518T055504Z" creationid="haruyama" creationdate="20200518T055504Z">
@@ -17279,6 +17539,16 @@ server prove ownership of the private half of the key.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>もし, language tag が空の文字列でなかったら, サーバは, このプロトコルの一部としてクライアントへ送るすべてのメッセージに指定された言語を用いる必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>If the last chunk has less than
+   16 bytes then zero bytes are appended after the 1 byte is appended
+   until there are 17 bytes.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T071636Z" creationid="haruyama" creationdate="20200619T071636Z">
+        <seg>最後のチャンクが16 バイトに満たない場合は, 1 のバイトを追加した後で 17 byte になるまで 0 のバイトが追加される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -19359,6 +19629,16 @@ middleware from ssh-agent.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>In accordance with section 4 of RFC 5116 [RFC5116], the constants for
+   this AEAD algorithm are as follows: K_LEN is 32 bytes, N_MIN and
+   N_MAX are 8 bytes, P_MAX and A_MAX are 2^64, C_MAX is 2^64+16.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T080417Z" creationid="haruyama" creationdate="20200619T080417Z">
+        <seg>RFC5116  [RFC5116] の 4 節に従い, AEAD アルゴリズムの定数は次のようになる: K_LEN は 32 バイト, N_MIN と N_MAX は 8 バイト, P_MAX と A_MAX は 2^64, C_MAX は 2^64+16. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>In addition to adding new operations, this document describes
    extensions to the operations defined in RFC 4819.</seg>
       </tuv>
@@ -19783,12 +20063,34 @@ requires the key handle and a few additional parameters.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>In order to generate sufficient output bytes to
+   XOR with the whole plaintext, the block counter is incremented and
+   ChaCha20 is run again, as many times as needed, for up to 2^70 bytes
+   of output.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T061344Z" creationid="haruyama" creationdate="20200619T061344Z">
+        <seg>平文全体と XOR するのに十分な出力バイトを生成するため, ブロックカウンターは増加されつつ  2^70 バイトの出力まで ChaCha20 は必要な回数だけ再び動く.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>In order to implement public key authentication, SSH implementations
    must share public key files between the client and the server in
    order to interoperate.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110718T031653Z">
         <seg>公開鍵認証の実装で, SSHの実装は相互運用のために公開鍵ファイルをクライアントとサーバで共有しなければならない. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>In order to improve the state of software TLS
+   implementations, this memo specifies cipher suites that can be fast
+   and secure when implemented in software without sacrificing key
+   agility.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200618T062425Z" creationid="haruyama" creationdate="20200618T062425Z">
+        <seg>ソフトウェアでの TLS の実装の状態を改善するために, このメモは鍵の軽快さを犠牲にすることなくソフトウェアで実装する際に速く安全にできる暗号スートを指定する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -21141,6 +21443,25 @@ requires the key handle and a few additional parameters.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Input
+   words 4 through 11 are taken from the 256-bit key by reading the
+   bytes in little-endian order, in 4-byte chunks.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T061744Z" creationid="haruyama" creationdate="20200619T061529Z">
+        <seg>4-11 の入力ワードは, 4 バイトチャンクのリトルエンディアンオーダーのバイトとして読み出される 256 ビットの鍵から取られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Input words 12 and
+   13 are a block counter, with word 12 overflowing into word 13.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T061557Z" creationid="haruyama" creationdate="20200619T061557Z">
+        <seg>12, 13 の入力ワードはブロックカウンターで, 12 がオーバーフローしたら 13 に入る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Inputs:
             octet_string CT ;   // Cipher text, to be both
                                 //    authenticated and decrypted
@@ -22150,6 +22471,15 @@ draft that is available from:</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200604T082425Z" creationid="haruyama" creationdate="20200604T082425Z">
         <seg>サポートしていないプロトコルビットを含むパケットを受け取ったら, プロトコルエラーだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>It is a refinement of Salsa20 and was used as the core of the SHA-3
+   finalist, BLAKE.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T060333Z" creationid="haruyama" creationdate="20200619T060333Z">
+        <seg>Salsa20 の改良版で,  SHA-3 ファイナリストの BLAKE のコアとして用いられた.</seg>
       </tuv>
     </tu>
     <tu>
@@ -23757,6 +24087,18 @@ ID" strings.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Langley &amp; Chang            Expires May 5, 2014                 [Page 12]
+ 
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T081155Z" creationid="haruyama" creationdate="20200619T081155Z">
+        <seg>'Langley &amp; Chang            Expires May 5, 2014                 [Page 12]
+ 
+Internet-Draft          ChaCha20Poly1305 for TLS                Nov 2013</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Language tags SHOULD NOT
          be present unless they are known to be needed by the sending
          party.</seg>
@@ -23771,6 +24113,15 @@ ID" strings.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110625T005255Z">
         <seg>language タグは [LANGTAG] に記述されているものだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Lastly, words 14 and 15 are taken from an 8-byte nonce, again by
+   reading the bytes in little-endian order, in 4-byte chunks.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T061749Z" creationid="haruyama" creationdate="20200619T061701Z">
+        <seg>最後に 14, 15 のワードは, 8 バイトのナンスから取られる. やはり 4 バイトチャンクのリトルエンディアンオーダーのバイトとして読み出される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -26637,6 +26988,14 @@ support.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Numbers are represented as 8-byte, little-endian values.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T074754Z" creationid="haruyama" creationdate="20200619T074754Z">
+        <seg>数は 8バイトのリトルエンディアンの値として表現される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Objects in the MIB are defined using the mechanisms defined in the
    Structure of Management Information (SMI).</seg>
       </tuv>
@@ -27078,8 +27437,8 @@ indicating that the session is up.</seg>
    assignment, and use together with the binary algorithm to examine one
    bit of the integer at a time.</seg>
       </tuv>
-      <tuv xml:lang="JA" changeid="haruyama" changedate="20200618T052727Z" creationid="haruyama" creationdate="20200618T052727Z">
-        <seg>1つの単純な方針は, サイドチャンネル耐性の条件代入を実装し, バイナリアルゴリズムと併用して1度に1ビットずつ検査する.</seg>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200618T053438Z" creationid="haruyama" creationdate="20200618T052727Z">
+        <seg>1つの単純な方針は, サイドチャンネル耐性のある条件代入を実装し, バイナリアルゴリズムと併用して1度に1ビットずつ検査する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27248,6 +27607,15 @@ respond with a SSH_FXP_STATUS message.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20180827T113403Z" creationid="haruyama" creationdate="20180827T113403Z">
         <seg>1つの証明書列挙要求には, 1つだけの namespace 属性が利用できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Only forward secure cipher suites are defined as it's incongruous to
+   define a high-security cipher suite without forward security.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T081840Z" creationid="haruyama" creationdate="20200619T081840Z">
+        <seg>前方安全でない高いセキュリティの暗号スートを定義するのは不適当なので, 前方安全な暗号スートのみが定義されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27846,6 +28214,15 @@ MUX_S_FAILURE.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Otherwise, run ChaCha20, starting with a counter value
+   of one, to decrypt the ciphertext.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T075522Z" creationid="haruyama" creationdate="20200619T075522Z">
+        <seg>そうでなければ, カウンターの値を 1 から始めて 暗号文を復号するために ChaCha20 を実行する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Otherwise, the SSH_FXP_HANDLE message is used
    to return a file handle (for SSH_FXP_OPEN and SSH_FXP_OPENDIR
    requests), SSH_FXP_DATA is used to return data from SSH_FXP_READ,
@@ -28406,6 +28783,37 @@ MUX_S_FAILURE.</seg>
       <tuv xml:lang="JA">
         <seg>ポリシーの問題 ..............................................6
       4.4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Poly1305
+   is designed to ensure that forged messages are rejected with a
+   probability of 1-(n/2^102) for a 16*n byte message, even after
+   sending 2^64 legitimate messages.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T081356Z" creationid="haruyama" creationdate="20200619T081356Z">
+        <seg>Poly1305 は, 2^64 の正当なメッセージを送信した後でも, 16 * n バイトのメッセージに対して確率1-(n/2^102) で加工されたメッセージを拒否することを保証するよう設計されている. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Poly1305 [poly1305] is a Wegman-Carter, one-time authenticator
+   designed by D. J. Bernstein.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T070749Z" creationid="haruyama" creationdate="20200619T070718Z">
+        <seg>Poly1305 [poly1305] は D. J. Bernstein が設計した  Wegman-Carter ワンタイム認証気あ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Poly1305 takes a 32-byte, one-time key
+   and a message and produces a 16-byte tag that authenticates the
+   message such that an attacker has a negligible chance of producing a
+   valid tag for an inauthentic message.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T071009Z" creationid="haruyama" creationdate="20200619T071009Z">
+        <seg>Poly1305 は 32 バイトのワンタイム鍵とメッセージを取り, 16 バイトのタグを生成する. 攻撃者がごまかしたいメッセージから有効なタグを生成する機会は無視できるので, このタグでメッセージを認証できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30265,6 +30673,22 @@ that computes a 128 bit integrity tag given a message and a single-use
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200515T051749Z" creationid="haruyama" creationdate="20200515T051749Z">
         <seg>要件に関する用語 ...........................................4
    3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Requirements Notation</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200618T062430Z" creationid="haruyama" creationdate="20200618T062430Z">
+        <seg>要件に関する表記</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Requirements Notation  .</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200618T061839Z" creationid="haruyama" creationdate="20200618T061839Z">
+        <seg>要件に関する表記 .</seg>
       </tuv>
     </tu>
     <tu>
@@ -33684,6 +34108,16 @@ current order was retained.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Specifically, a column round applies the quarter-round function to
+   the following indexes: (0, 4, 8, 12), (1, 5, 9, 13), (2, 6, 10, 14),
+   (3, 7, 11, 15).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T065557Z" creationid="haruyama" creationdate="20200619T065557Z">
+        <seg>具体的には, quarter-round 関数が適用される column は次のインデックスとなる: (0, 4, 8, 12), (1, 5, 9, 13), (2, 6, 10, 14), (3, 7, 11, 15).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Specifically, for the case of the
    Authentication Protocol, the client may form a session to a man-in-</seg>
       </tuv>
@@ -34584,6 +35018,22 @@ and passively waits for something to happen.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Test vectors</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T080724Z" creationid="haruyama" creationdate="20200619T080724Z">
+        <seg>テストベクター</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>Test vectors .</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200618T061913Z" creationid="haruyama" creationdate="20200618T061913Z">
+        <seg>テストベクター .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Test vectors for use of HMAC with SHA-2 are provided in [RFC4231].</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20131203T025826Z" creationid="haruyama" creationdate="20131203T025826Z">
@@ -34804,6 +35254,17 @@ and passively waits for something to happen.</seg>
     <tu>
       <tuv xml:lang="EN-US">
         <seg>The
+   additional data is seq_num + TLSCompressed.type +
+   TLSCompressed.version + TLSCompressed.length, where "+" denotes
+   concatenation.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T080039Z" creationid="haruyama" creationdate="20200619T080039Z">
+        <seg>追加のデータはseq_num + TLSCompressed.type + TLSCompressed.version + TLSCompressed.length で + は連結を示す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The
    appropriate security considerations of that document apply.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110425T074944Z">
@@ -34839,6 +35300,15 @@ and passively waits for something to happen.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110829T040513Z">
         <seg>バイナリパケットは, 4オクテットの 4-octet packet_length と cipher text (CT, 暗号テキスト), 16-オクテットの authentication tag (AT, 認証タグ) を連結したものだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The
+   block counter words are initially zero.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T061804Z" creationid="haruyama" creationdate="20200619T061804Z">
+        <seg>ブロックカウンターのワードは最初は 0 だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35143,6 +35613,16 @@ and passively waits for something to happen.</seg>
     <tu>
       <tuv xml:lang="EN-US">
         <seg>The
+   output words are converted to bytes and XORed with the plaintext to
+   produce ciphertext.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T060631Z" creationid="haruyama" creationdate="20200619T060631Z">
+        <seg>出力ワードは, バイトに変換され, 平文と XOR して暗号文が生成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The
    part following the at-sign MUST be a valid, fully qualified internet
    domain name [RFC1034] controlled by the person or organization
    defining the name.</seg>
@@ -35187,6 +35667,16 @@ and passively waits for something to happen.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110719T030058Z">
         <seg>このレジストリは, それぞれの header-tag を ヘッダを定義しているリファレンスにマップしている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The
+   result is serialised as a little-endian number, producing the 16 byte
+   tag.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T072010Z" creationid="haruyama" creationdate="20200619T072010Z">
+        <seg>結果はリトルエンディアンの数として直列化され, 16 バイトのタグを生成する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -35542,6 +36032,15 @@ their data fields are:</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The "column" rounds then apply the quarter-round
+   function to the four columns, from left to right.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T065359Z" creationid="haruyama" creationdate="20200619T065359Z">
+        <seg>"column" ラウンドは  quarter-round 関数を 4つの列に 左から右へ適用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The "compulsory" field indicates whether this attribute will be
    compulsorily applied to any added keys (irrespective of whether the
    attribute has been specified by the client) due to administrative
@@ -35558,6 +36057,17 @@ their data fields are:</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160529T111455Z" creationid="haruyama" creationdate="20160529T111455Z">
         <seg>"constraints" フィールドは SSH_AGENTC_ADD_ID_CONSTRAINED のみに存在する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The "diagonal"
+   rounds apply the quarter-round to the top-left, bottom-right
+   diagonal, followed by the pattern shifted one place to the right, for
+   three more quarter-rounds.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T065501Z" creationid="haruyama" creationdate="20200619T065501Z">
+        <seg>"diagonal" ラウンドは quarter-round を 左上から右下の対角線に適用する. そして パターンを 1つ 右にずらしてさらに 3回 quarter-round を適用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -36268,6 +36778,16 @@ be 0x7fffffff to allow the server to automatically choose an interface.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The 16 words are conceptually arranged in a four by four grid with
+   the first word in the top-left position and the fourth word in the
+   top-right position.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T065323Z" creationid="haruyama" creationdate="20200619T065323Z">
+        <seg>16 ワードは, 概念的には 4 x 4 の グリッドに配置される. 最初のワードが 左上の位置で, 4つめのワードが 右上の位置だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The 32 or 56 bytes of X are
    converted into K by interpreting the octets as an unsigned fixed-
    length integer encoded in network byte order.</seg>
@@ -36282,6 +36802,16 @@ be 0x7fffffff to allow the server to automatically choose an interface.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200618T040104Z" creationid="haruyama" creationdate="20200618T040051Z">
         <seg>32 バイトの公開鍵が次の手順で生成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The 64 output bytes are generated from the 16 output words by
+   serialising them in little-endian order and concatenating the
+   results.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T070250Z" creationid="haruyama" creationdate="20200619T070250Z">
+        <seg>16 出力ワードをリトルエンディアンオーダーに直列化し結果を連結して, 64 出力バイトを生成する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -36303,6 +36833,15 @@ zero.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200527T060449Z" creationid="haruyama" creationdate="20200527T060431Z">
         <seg>AEAD は次のように構成される: それぞれのパケットに対して, K_2 を用いて生成された ChaCha20 ストリーム出力の 最初の 256 ビットを取って Poly1305 鍵を作成し, SSH ワイヤエンコーディングルールの uint64 でエンコードされたパケットシーケンス番号と 0 の ChaCha20 のブロックカウンターから IV が生成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The AEAD_CHACHA20_POLY1305 algorithm is designed to meet the standard
+   notions of privacy and authenticity.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T081445Z" creationid="haruyama" creationdate="20200619T081445Z">
+        <seg>AEAD_CHACHA20_POLY1305 アルゴリズムは, プライバシーと確実性の標準的な考えに合致するよう設計されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -36384,6 +36923,16 @@ encoded blob, and a footer.</seg>
       <tuv xml:lang="JA">
         <seg>Break 要求 ...............................................3
    4.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The ChaCha20 and Poly1305 primitives are built into an AEAD algorithm
+   [RFC5116], AEAD_CHACHA20_POLY1305, that takes a 32 byte key and 8
+   byte nonce as follows:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T073801Z" creationid="haruyama" creationdate="20200619T073801Z">
+        <seg>ChaCha20 と Poly1305 を組み合わせて AEAD アルゴリズム [RFC5116], AEAD_CHACHA20_POLY1305 を構成する. これは 32 バイトの鍵と 8 バイトのナンスを次のように取る.</seg>
       </tuv>
     </tu>
     <tu>
@@ -37095,6 +37644,17 @@ for encryption of the packet payload.</seg>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20190113T124220Z" creationid="haruyama" creationdate="20190113T124220Z">
         <seg>National Institute of Standards and Technology (NIST) Special
    Publication 800-131A, Revision 1 [NIST.800-131A] は, アメリカ政府向けの用途には 2048 ビットよりも小さい RSA と DSA 鍵を許可していない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The Poly1305 key is used to calculate a tag for the following input:
+   the concatenation of the additional data, the number of bytes of
+   additional data, the ciphertext and the number of bytes of
+   ciphertext.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T074730Z" creationid="haruyama" creationdate="20200619T074730Z">
+        <seg>Poly1305 の鍵は次の入力に対してタグを計算するのに使われる: 追加のデータ, 追加のデータのバイト数, 暗号文, 暗号文のバイト数を連結したもの.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40780,6 +41340,25 @@ non-critical certificate extensions.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The first
+   line contains a variable length input.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T080923Z" creationid="haruyama" creationdate="20200619T080923Z">
+        <seg>最初の行は, 可変長の入力だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The first
+   line contains the 256-bit key, the second the 64-bit nonce and the
+   last line contains a prefix of the resulting ChaCha20 key-stream.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T080826Z" creationid="haruyama" creationdate="20200619T080751Z">
+        <seg>最初の行は 256 ビットの鍵で, 2番目が 64 ビットのナンス, 最後の行は 結果の ChaCha20 鍵ストリームの先頭だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The first 1536 bytes of keystream
    generated by the cipher MUST be discarded, and the first byte of the
    first encrypted packet MUST be encrypted using the 1537th byte of
@@ -40791,11 +41370,31 @@ non-critical certificate extensions.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The first 16 bytes of the one-time key form an integer, _r_, as
+   follows: the top four bits of the bytes at indexes 3, 7, 11 and 15
+   are cleared, the bottom 2 bits of the bytes at indexes 4, 8 and 12
+   are cleared and the 16 bytes are taken as a little-endian value.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T071423Z" creationid="haruyama" creationdate="20200619T071423Z">
+        <seg>ワンタイム鍵の最初の 16 バイトは, 整数 _r_ を次のように形成する: インデックス 3, 7, 11, 15 のバイトの上位 4 ビットはクリアされる. インデックス 4, 8, 12 の下位 2 ビットはクリアされる. そして 16 バイトはリトルエンディアンの値として扱われる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The first 256 bits constitute K_2 and the second 256 bits become
 K_1.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200527T055113Z" creationid="haruyama" creationdate="20200527T055113Z">
         <seg>最初の 256 ビットが K_2 を構成し, 次の 256 ビットが K_1 となる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The first 32 bytes of the 64 byte output are
+   saved to become the one-time key for Poly1305.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T073928Z" creationid="haruyama" creationdate="20200619T073928Z">
+        <seg>64 バイトの出力の最初の 32 バイトが Poly 1305 のワンタイム鍵となるため保存される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40824,6 +41423,46 @@ K_1.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160527T001007Z" creationid="haruyama" creationdate="20160527T001007Z">
         <seg>内容の最初のバイトは, 常にメッセージのタイプを指す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The first counter input word is set to one and
+   the plaintext is encrypted by XORing it with the output of
+   invocations of the ChaCha20 function as needed, incrementing the
+   first counter word after each block and overflowing into the second.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T074138Z" creationid="haruyama" creationdate="20200619T074138Z">
+        <seg>最初のカウンター入力ワードは 1 に設定され, 平文は  必要なだけのChaCha20 関数の実行の出力と XOR されて暗号化される. それぞれのブロックごとに 最初のカウンターワードは加算し, オバーフローしたら 2つ目のが加算される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The first four input words are
+   constants: (0x61707865, 0x3320646e, 0x79622d32, 0x6b206574).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T061424Z" creationid="haruyama" creationdate="20200619T061424Z">
+        <seg>最初の 4 つの入力ワードは定数だ: (0x61707865, 0x3320646e, 0x79622d32, 0x6b206574).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The first four lines consist of
+   the standard inputs to an AEAD algorithm and the last line contains
+   the encrypted and authenticated result.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T081034Z" creationid="haruyama" creationdate="20200619T081034Z">
+        <seg>最初の 4 行は AEAD アルゴリズムへの標準的な入力で, 最後の行は暗号化/認証の結果だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The first line
+   contains the Poly1305 key that is derived and the second contains the
+   raw bytes that are authenticated by Poly1305.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T081211Z" creationid="haruyama" creationdate="20200619T081122Z">
+        <seg>最初の行は導出された Poly1305 鍵で2番目は Poly1035 で認証される生のバイトだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40943,6 +41582,31 @@ K_1.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The following block contains a test vector for the
+   AEAD_CHACHA20_POLY1305 algorithm.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T081000Z" creationid="haruyama" creationdate="20200619T081000Z">
+        <seg>次のブロックは  AEAD_CHACHA20_POLY1305 アルゴリズムのテストベクターだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The following blocks contain test vectors for ChaCha20.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T080755Z" creationid="haruyama" creationdate="20200619T080740Z">
+        <seg>次のブロックは ChaCha20 のテストベクターだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The following blocks contain test vectors for Poly1305.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T080908Z" creationid="haruyama" creationdate="20200619T080908Z">
+        <seg>次のブロックは Poly1305 のテストベクターだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The following body of the public key file was used as input to
    generate the above fingerprint:</seg>
       </tuv>
@@ -40958,6 +41622,15 @@ K_1.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>次のチャンネル特有のリクエストが, リモートホストで BREAK 操作を行なう要求のために ([4] で記述されている) セッションチャンネル上で送られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The following cipher suites are defined which use the
+   AEAD_CHACHA20_POLY1305 algorithm:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T080514Z" creationid="haruyama" creationdate="20200619T080514Z">
+        <seg>AEAD_CHACHA20_POLY1305 アルゴリズムを用いる次の暗号スートが定義されている:</seg>
       </tuv>
     </tu>
     <tu>
@@ -44224,6 +44897,15 @@ interpretation domain for the signature, e.g. file signing.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The quarter-round function updates 4, 32-bit words (a, b, c, d) as
+   follows, where &lt;&lt;&lt; is a bitwise, left rotation:</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T062137Z" creationid="haruyama" creationdate="20200619T062007Z">
+        <seg>quarter-round 関数は 4 個の 32 ビットワード (a, b, c, d) 次のように更新する. &lt;&lt;&lt;  はビットワイズの左回転操作だ:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The reader is directed to the security considerations sections of
    [RFC5280] for the use of X.509v3 certificates, [RFC2560] for the use
    of OCSP response, [RFC4253] for server authentication, and [RFC4252]
@@ -44282,6 +44964,17 @@ interpretation domain for the signature, e.g. file signing.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20111001T031607Z">
         <seg>[SSH-GCM] で指定されているように, 認証タグの 16 オクテットすべてが SSH バイナリパケットの SSH データ完全性の値として用いられなければならないことを Suite B が要求することに注意すること.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The reason for generating the Poly1305 key like this rather than
+   using key material from the handshake is that handshake key material
+   is per-session, but for a polynomial MAC, a unique, secret key is
+   needed per-record.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T074351Z" creationid="haruyama" creationdate="20200619T074351Z">
+        <seg>ハンドシェイクからの鍵素材を使わずにこのように Poly1305 鍵を生成する理由は, ハンドシェイクの鍵素材はセッションごとで, 多項式 MAC にはユニークで秘密の鍵がレコードごとに必要だからだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -44372,6 +45065,15 @@ interpretation domain for the signature, e.g. file signing.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20181107T123224Z" creationid="haruyama" creationdate="20181107T123224Z">
         <seg>SSH_MSG_EXT_INFO メッセージ内に現われる拡張の相対的な順番は, 無視されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The remainder of the
+   output is discarded.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T073938Z" creationid="haruyama" creationdate="20200619T073938Z">
+        <seg>出力の残りは捨てられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -44539,6 +45241,15 @@ remote end.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The resulting tag is appended to the ciphertext, resulting in the
+   output of the AEAD operation.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T074820Z" creationid="haruyama" creationdate="20200619T074820Z">
+        <seg>結果のタグは暗号文に追記され, AEAD 操作の出力となる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The runtime of general attacks depends on
    the algorithm used.</seg>
       </tuv>
@@ -44610,6 +45321,15 @@ remote end.</seg>
       </tuv>
       <tuv xml:lang="JA">
         <seg>考慮すべきケースの2つ目は, 接続時に起こる1つ目の場合と似ている. この場合は, サーバ公開鍵の安全な配布の必要に目を向けさせる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>The second contains the 256-
+   bit key and the last contains the resulting, 128-bit tag.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T080941Z" creationid="haruyama" creationdate="20200619T080941Z">
+        <seg>2番目は 256 ビット鍵で, 最後は結果の 128 ビットのタグだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -46558,6 +47278,15 @@ ecdsa-sha2-nistp384, ecdsa-sha2-nistp521.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>The value is added to the accumulator and
+   then the accumulator is multiplied by _r_, all mod 2^130 - 5.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T071925Z" creationid="haruyama" creationdate="20200619T071730Z">
+        <seg>値はアキュムレーターに追加され, アキュムレーターに _r_ を乗算し, mod 2^130 - 5 を取る.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>The value of 'mac' resulting from the MAC algorithm MUST be
    transmitted without encryption as the last part of the packet.</seg>
       </tuv>
@@ -47375,6 +48104,24 @@ specified algorithm.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200519T053339Z">
         <seg>このバイト列は常に次に示すものになる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>These cipher suites require that an nonce never be repeated for the
+   same key.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T081532Z" creationid="haruyama" creationdate="20200619T081532Z">
+        <seg>これらの暗号スートは, 同じ鍵に対してナンスを繰替えさないことを要求する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>These cipher suites use the TLS PRF [RFC5246] with SHA-256 as the
+   hash function.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T080720Z" creationid="haruyama" creationdate="20200619T080720Z">
+        <seg>これらの暗号スートは, ハッシュ関数として SHA-256 を使うTLS PRF [RFC5246] を用いる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -48306,6 +49053,14 @@ following format:</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20200612T054303Z" creationid="haruyama" creationdate="20200612T054303Z">
         <seg>この Internet-Draft は 2007/05/27 に期限切れとなる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This Internet-Draft will expire on May 5, 2014.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200618T061827Z" creationid="haruyama" creationdate="20200618T061827Z">
+        <seg>この Internet-Draft は 2014/05/05 に期限切れとなる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -50344,6 +51099,14 @@ keys (K_1 and K_2), used by two separate instances of chacha20.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>This is achieved by simply using the TLS sequence number.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T081548Z" creationid="haruyama" creationdate="20200619T081548Z">
+        <seg>これは 単に TLS シーケンス番号を使うことで達成される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>This is all the
    more true when specifying larger hash function outputs and DH
    parameters.</seg>
@@ -51058,6 +51821,15 @@ associated with a particular identity, e.g. a host or a user.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20110801T103827Z">
         <seg>このメモは, SNMP のためのセキュアシェルトランスポートモデル, すなわち, SNMPメッセージの認証や暗号化,完全性検査を提供する SNMP トランスポートサブシステムの中で利用されるSNMPトランスポートモデルについて記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>This memo describes the use of the ChaCha20 cipher with a Poly1305
+   authenticator in Transport Layer Security (TLS).</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200618T061814Z" creationid="haruyama" creationdate="20200618T061814Z">
+        <seg>このメモは,  Transport Layer Security (TLS) での Poly1305 認証コード付きの ChaCha20 の利用について記述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -52756,6 +53528,17 @@ requests from clients.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Thus, when used in
+   DTLS, AEAD_CHACHA20_POLY1305 based cipher suites use the
+   concatenation of the 16-bit epoch with the 48-bit sequence number as
+   a replacement for TLS's 64-bit sequence number.)</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T080247Z" creationid="haruyama" creationdate="20200619T080247Z">
+        <seg>このため, DTLS で利用する際は AEAD_CHACHA20_POLY1305 ベースの暗号スートは, TLS の 64 ビットのシーケンス番号の代替として 16 ビットの epoch と 48 ビットのシーケンス番号を連結して用いる.)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>To
    facilitate adoption in the Internet community of Ed25519, this
    document describe the signature scheme in an implementation-oriented
@@ -52782,6 +53565,15 @@ requests from clients.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20181217T111845Z" creationid="haruyama" creationdate="20181217T111845Z">
         <seg>そのようなセッションを "elevate" するとは, 完全な管理者権限を持つセキュリティコンテキストを有効にすることだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>To aid implementations, the next block contains some intermediate
+   values in the AEAD_CHACHA20_POLY1305 algorithm.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T081126Z" creationid="haruyama" creationdate="20200619T081107Z">
+        <seg>実装を助けるため, 次のブロックでは AEAD_CHACHA20_POLY1305 アルゴリズムの中間の値をいくつか示す.</seg>
       </tuv>
     </tu>
     <tu>
@@ -54379,6 +55171,16 @@ they support.</seg>
     </tu>
     <tu>
       <tuv xml:lang="EN-US">
+        <seg>Verify, in
+   constant time, that the calculated Poly1305 authenticator matches the
+   final 16 bytes of the input.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T075425Z" creationid="haruyama" creationdate="20200619T075425Z">
+        <seg>計算された Poly1305 認証器は入力の最後の 16 バイトと一致するかを定数時間で検証する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
         <seg>Version 1 was
    used by an early draft of this document.</seg>
       </tuv>
@@ -55218,6 +56020,15 @@ are no longer offered.</seg>
       </tuv>
       <tuv xml:lang="JA" changeid="haruyama" changedate="20160618T032849Z">
         <seg>tmSameSecurity が設定されている場合, 記録された tmSessionID は, 関連する送信メッセージを送信するに利用可能な SSH のセッションが, 受信メッセージ (たとえば要求への応答)を受信する際に用いられたのと同じセッションかどうかを判定するのに用いることができる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="EN-US">
+        <seg>When used in TLS, the "record_iv_length" is zero and the nonce is the
+   sequence number for the record, as an 8-byte, big-endian number.</seg>
+      </tuv>
+      <tuv xml:lang="JA" changeid="haruyama" changedate="20200619T075615Z" creationid="haruyama" creationdate="20200619T075615Z">
+        <seg>TLS で使う際, "record_iv_length" は  0 で ナンスは 8バイトでビッグエンディアンの数でのレコードのシーケンス番号だ. </seg>
       </tuv>
     </tu>
     <tu>
