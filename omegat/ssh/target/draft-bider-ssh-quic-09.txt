@@ -1,0 +1,1423 @@
+
+
+
+
+Internet Engineering Task Force                                 d. bider
+Internet-Draft                                           Bitvise Limited
+Intended status: Informational                           2 December 2020
+Expires: 5 June 2021
+
+
+            QUIC-based UDP Transport for Secure Shell (SSH)
+                        draft-bider-ssh-quic-09
+
+概要
+
+   セキュアシェルプロトコル (SSH) [RFC4251] は, 安全なリモート管理や SFTP と SCP でのファイル転送, TCP 接続の暗号化されたトンネリングを含む目的のために広く用いられている.  TCP を基としているので, HTTP プロトコルが UDP ベースの QUIC [QUIC} へ移行する動機と同様の問題を抱えている.  次が含まれる: 認証されていないネットワークの中間者が SSH のセッションを簡単に切断できる; モバイルクライアントが IP アドレスを変更すると SSH 接続が失なわれる; OS ベースの TCP スタックのパソーマンスの制限; 接続の確立のためのたくさんの通信の往復; チャンネルと接続のレベルのフロー制御の重複.  このメモは, UDP 上での SSH 鍵交換を指定し, UDP ベースのトランスポートを提供するために QUIC を活用する.
+
+このメモの位置づけ
+
+   この Internet-Draft  は BCP 78 と BCP 79 の規定に完全に準拠して提出される.
+
+   Internet-Draft は Internet Engineering Task Force (IETF) の作業文書だ.  他のグループも Internet-Draft として作業文書を配布するかもしれないことに注意.  現在の Internet-Draft のリストは https://datatracker.ietf.org/drafts/current/ にある.
+
+   Internet-Drafts は, 最大で6か月有効な草稿で, いつでも他の文書によって更新, 置換, 廃止されうる.  Internet Draft を参考仕様としたり "進行中" 以外ので引用は不適切だ.
+
+   この Internet-Draft は 2021/06/05 に期限切れとなる.
+
+著作権情報
+
+   Copyright (c) 2020 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+
+
+
+bider                      Expires 5 June 2021                  [Page 1]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Simplified BSD License text
+   as described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Simplified BSD License.
+
+目次
+
+   1イントロダクション  . . . . . . . . . . . . . . . . . . . . . . . .   3
+     1.1.  要件に関する用語 . . . . . . . . . . . . . . . .   3
+   2.  SSH/QUIC 鍵交換 . . . . . . . . . . . . . . . . . . . .   3
+     2.1.  QUIC データグラムからの SSH 鍵交換の識別 . . .   3
+     2.2.  通信のエンコーディング . . . . . . . . . . . . . . . . . . . . . .   4
+     2.3.  難読化されたエンベロープ . . . . . . . . . . . . . . . . . . .   4
+       2.3.1.  難読化キーワード . . . . . . . . . . . . . . . . .   5
+     2.4.  パケットサイズの制限  . . . . . . . . . . . . . . . . . . .   6
+     2.5.  必要とされる QUIC のバージョンと TLS 暗号スート  . . . . . .   6
+     2.6.  ランダムな要素 . . . . . . . . . . . . . . . . . . . . .   6
+     2.7.  鍵交換でのエラー  . . . . . . . . . . . . . . . . .   8
+       2.7.1.  "disc-reason" 拡張ペア  . . . . . . . . . . . .   8
+       2.7.2.  "err-desc" 拡張ペア . . . . . . . . . . . . . .   9
+     2.8.  SSH_QUIC_INIT . . . . . . . . . . . . . . . . . . . . . .   9
+       2.8.1.  拡張性 . . . . . . . . . . . . . . . . . . . .  13
+     2.9.  SSH_QUIC_REPLY  . . . . . . . . . . . . . . . . . . . . .  14
+       2.9.1.  Error Reply . . . . . . . . . . . . . . . . . . . . .  17
+       2.9.2.  拡張性 . . . . . . . . . . . . . . . . . . . .  17
+     2.10. SSH_QUIC_CANCEL . . . . . . . . . . . . . . . . . . . . .  19
+       2.10.1.  拡張性  . . . . . . . . . . . . . . . . . . .  19
+   3.  鍵交換法  . . . . . . . . . . . . . . . . . . . .  20
+     3.1.  必須の鍵交換法 . . . . . . . . . . . . . .  21
+     3.2.  例 1: "curve25519-sha256"  . . . . . . . . . . . . .  22
+     3.3.  例 2: "diffie-hellman-group14-sha256"  . . . . . . .  22
+   4.  SSH_MSG_EXT_INFO と SSH バージョン文字列 . . . . . . . . .  23
+     4.1.  "ssh-version" . . . . . . . . . . . . . . . . . . . . . .  24
+     4.2.  "no-flow-control" . . . . . . . . . . . . . . . . . . . .  24
+     4.3.  "delay-compression" . . . . . . . . . . . . . . . . . . .  24
+   5.  QUIC セッションの設定 . . . . . . . . . . . . . . . . . . . . .  25
+     5.1.  共有の秘密  . . . . . . . . . . . . . . . . . . . . .  25
+   6.  QUIC ストリームへの SSH の適応 . . . . . . . . . . . . . .  26
+     6.1.  SSH/QUIC パケット形式  . . . . . . . . . . . . . . . . .  26
+       6.1.1.  圧縮 . . . . . . . . . . . . . . . . . . . . .  26
+     6.2.  QUIC ストリームの利用 . . . . . . . . . . . . . . . . . . .  27
+     6.3.  パケットシーケンス番号 . . . . . . . . . . . . . . . . .  27
+     6.4.  チャンネル ID . . . . . . . . . . . . . . . . . . . . . . .  27
+     6.5.  切断 . . . . . . . . . . . . . . . . . . . . . .  28
+     6.6.  禁止される SSH のパケット  . . . . . . . . . . . . . . . . .  28
+     6.7.  グローバル SSH パケット  . . . . . . . . . . . . . . . . . . .  28
+     6.8.  SSH チャンネルパケット . . . . . . . . . . . . . . . . . . .  29
+
+
+
+bider                      Expires 5 June 2021                  [Page 2]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+     6.9.  チャンネルの終了 . . . . . . . . . . . . . . . . . . . .  31
+   7.  謝辞  . . . . . . . . . . . . . . . . . . . . . .  31
+   8.  IANA の考察 . . . . . . . . . . . . . . . . . . . . .  32
+   9.  セキュリティの考察 . . . . . . . . . . . . . . . . . . .  32
+   10. リファレンス  . . . . . . . . . . . . . . . . . . . . . . . . .  32
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .  32
+     10.2.  Informative References . . . . . . . . . . . . . . . . .  33
+   Appendix A.  ランダムな長さの生成  . . . . . . . . . . . . .  34
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  34
+
+1イントロダクション
+
+   THIS DOCUMENT IS AN EARLY VERSION AND IS A WORK IN PROGRESS.
+
+   NON-LATEST DRAFT VERSIONS MUST BE DISREGARDED.
+
+   IMPLEMENTATION AT THIS STAGE IS EXPERIMENTAL.
+
+   CONTACT THE AUTHOR IF YOU INTEND TO IMPLEMENT.
+
+   このメモは, UDP 上での SSH 鍵交換を指定し, SSH のために UDP ベースのトランスポートを提供するために QUIC を活用する.  QUIC の TLS ハンドシェイクの利用は, 1 往復の SSH/QUIC 鍵交換で置き換えられる.
+   そして SSH 認証プロトコル [RFC4252] は, QUIC ストリーム 0 上で行なわれ, SSH 接続プロトコル [RFC4254] は QUIC のストリームを利用するように変更される. 
+
+1.1.  要件に関する用語
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, ここで示しているようにすべて大文字で出現した場合のみ, BCP 16 [RFC2119] [RFC8174] で記述されているように解釈される. 
+
+2.  SSH/QUIC 鍵交換 .
+
+2.1.  QUIC データグラムからの SSH 鍵交換の識別
+
+   SSH/QUIC 鍵交換を構成する UDP データグラムは, QUIC のデータグラムとして同じクライアントとサーバの IPアドレスとポート間で送信される.
+   それゆえ, クライアントとサーバは, QUIC データグラムから SSH 鍵交換データグラムを識別する必要がある.
+
+   (訳注: 鍵交換以外で) SSH/QUIC は QUIC Short Header パケットの送信のみを必要とすることで, 区別ができる. したがって, 最初のバイトで最上位ビットが立っているすべての UDP データグラムは, SSH/QUIC 鍵交換の一部として扱われなければならない.
+
+
+
+bider                      Expires 5 June 2021                  [Page 3]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+2.2.  通信のエンコーディング
+
+   この文書での通信エンコーディングのタイプ "byte", "uint32", "uint64", "mpint", "string" は [RFC4251] に記述されている意味を持つ.
+
+   このメモは, 次の新しい通信エンコーディングタイプを定義する.
+
+   "short-str" は "string" のより短いバージョンで, 次のようにエンコードされる.
+
+     byte        n = short-str-len (unsigned, 0..255)
+     byte[n]     short-str-value
+
+                                  Figure 1
+
+2.3.  難読化されたエンベロープ
+
+   SSH サーバはリモートの管理に一般に利用されているので, パスワードの推測攻撃に対する高い価値がある標的となっている.  SSH サーバ管理者のもっとも共通の苦情のうちの 1 つが, ランダムなクライアントからのパスワード推測接続が高い頻度で行なわれることだ.
+
+   難読化キーワードで SSH プロトコルを難読化することがパスワード推測を妨害するのに役立つ手段なのが, 経験から示されている.  難読化は狭義の標的型攻撃は妨害しなくても, これによって SSH エコシステムの実際上のセキュリティを向上する.  同様に, ガラス窓と低いフェンスは,  入りこめない障壁ではなくても, 一般的に有用だ.  これらは,  注目するべき脅威の数を減らし, 実際の脅威により大きな注意を払えるようにする.
+
+   すべての SSH/QUIC 接続は, 難読化キーワードでパラメータ化される.
+   難読化キーワードは 2.3.1 節に従って処理される.
+
+   難読化キーワードは, サーバとクライアント間で共有される共通の秘密だ.  TCP や UDP のポート番号のような 特性を持つが, 取りうる値に制限はない.  サーバの管理者によって難読化キーワードは選択される.  接続を成功させたいクライアントは, サーバのアドレスとポート番号を知る必要があるように, 難読化キーワードを教えてもらう必要がある.  クライアントが難読化キーワードを通知されていないなら, デフォルトのもっとも良く使われるポートを仮定できるように, 空のキーワードを仮定できる.
+
+   SSH/QUIC サーバは, サーバが SSH/QUIC 接続を受け付けているインターフェイスとポートごとに難読化キーワードを管理者が設定できるようにする必要がある.  SSH/QUIC クライアントは, サーバのアドレスとポートごとの接続ごとに別々の難読化キーワードをユーザが設定できるようにしなければならない.
+
+
+
+
+bider                      Expires 5 June 2021                  [Page 4]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   難読化キーワードをユーザが設定するのは選択可能でなければならない.  ユーザが設定しないのなら, 難読化キーワードが空の文字列だとして難読化されたエンベロープが適用される.
+
+   すべての SSH/QUIC 鍵交換パケットは, 次の難読化エンベロープの UDP データグラムとして送られる.
+
+     byte[16]  obfs-nonce - 最初のバイトの最上位ビットは設定されていなければならない
+     byte[]    obfs-payload
+     byte[16]  obfs-tag
+
+                                  Figure 2
+
+   フィールド "obfs-nonce" は UDP データグラムの送信者が生成するランダムなバイトを含む.  "obfs-nonce" の最初のバイトの最上位ビットは, QUIC データグラムのパケットと区別するため設定されていなければならない.  2.1 節を参照.
+
+   フィールド "obfs-payload"は, AEAD_AES_256_GCM [RFC5116] を用いて暗号化された SSH/QUIC 鍵交換パケットを含む.  AEAD は次のように起動される:
+
+   *  秘密鍵 K は, 2.3.1 節に従って処理された, 難読化キーワードの SHA-256 ダイジェスト.
+
+   *  ナンス N はフィールド "obfs-nonce".
+
+   *  平文 P は暗号化されていないパケット payload.
+
+   *  関連データ A は空.
+
+   *  暗号文 C は "obfs-payload" に格納.
+
+   暗号化された "obfs-payload" の長さは, UDP データグラムの長さから推測され, "obfs-nonce" と "obfs-tag" の固定長を引くことで計算される.
+
+   フィールド "obfs-tag" は GCM タグを格納する. 受信者は, タグをチェックしなければならない. また, GCM タグが不正な場合データグラムを無視しなければならない.
+
+2.3.1.  難読化キーワード
+
+   難読化キーワードは, ユーザによって入力されるユニコードコードポイントの列だ.  アプリケーションは, [RFC8264] で定義された FreeformClass 文字列クラスで許可された任意のユニコード文字列をユーザが入力するのを認めなければならない.
+
+
+
+
+
+bider                      Expires 5 June 2021                  [Page 5]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   難読化キーワードのダイジェストを計算する前に, アプリケーションは次のように難読化キーワードを処理しなければならない.
+
+   1[RFC8265] で定義された OpaqueString プロファイルに従って入力を処理する.
+
+   2.  文字 CHARACTER TABULATION (U+0009) と LINE FEED (U+000A), CARRIAGE RETURN (U+000D) かつ/ないし SPACE (U+0020) のみで構成される先頭と末尾の列を削除する.  これは, ユーザのコピーアンドペーストの間違いを最小化する. ユーザは難読化キーワードの一部ではない先頭と末尾の空白をコピーしがちだ.  前の手順の OpaqueString プロファイルがすでに ASCII ではない空白をすべて SPACE (U+0020) 変換済みなことに注意.
+
+   3.  UTF-8 を用いたバイト列として結果をエンコードする.
+
+2.4.  パケットサイズの制限
+
+   クライアントとサーバは暗号化されていない"obfs-payload" のサイズが少なくとも 32768 バイトまでの  SSH_QUIC_INIT と SSH_QUIC_REPLY, SSH_QUIC_CANCEL パケットを受け入れなければならない.  これは [RFC4253] の 6.1 節に従って実装がサポートしなければならない SSH のパケットサイズの最小の制限に対応している.
+
+2.5.  必要とされる QUIC のバージョンと TLS 暗号スート
+
+   クライアントとサーバは, [QUIC] と [QUIC-TLS] で標準化されている QUIC プロトコルバージョン 1 を実装することを要求されている.
+
+   クライアントとサーバは, TLS 暗号スート TLS_AES_128_GCM_SHA256 と TLS_AES_256_GCM_SHA384 [RFC8446] を実装することを要求されている.  その他の暗号スートは選択可能だ.
+
+   特定の QUIC プロトコルバージョンや TLS 暗号スートを実装する要件は, このメモの発行から 5 年で期限切れとなる.  実装の時点で, 実装者は新しい標準文書が利用可能であればそれを参照したり, 実装のガイダンスのための SSH/QUIC の実際的な利用法を調査委する必要がある.
+
+2.6.  ランダムな要素
+
+   TCP 上の SSH と異なり, パケット SSH_QUIC_INIT と SSH_QUIC_REPLY はランダムなデータのための "cookie" フィールドを提供しない.  代わりに, クライアントとサーバは, SSH の鍵交換パケットそれぞれについて記述されている拡張メカニズムを用いてランダムなデータを挿入しなければならない.
+
+
+
+
+
+bider                      Expires 5 June 2021                  [Page 6]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   最低限, クライアントとサーバは, SSH_QUIC_INIT (2.8.1 節) と SSH_QUIC_REPLY (2.9.2 節) で記述されている場所に少なくとも 16 Random Bytes か 少なくとも 1つの Random Name を挿入しなければならない.
+   可能であれば, ランダムデータは暗号学的に強い乱数源から取らなければならない.  この要求を達成できない実装も, 可能な限り予測できないように最低限の量のランダムデータを挿入しなければならない.  この要求への違反は, そのような SSH_QUIC_INIT と SSH_QUIC_REPLY に基づいて作成されたセッションのセキュリティを低下させる.
+
+   Random Names と Random Bytes の長さは, 範囲の短いほうの長さが有意に確率が高くなるようにランダムに選択される必要がある. ただし, 長い長さのほうが選択される.  Appendix A を参照.
+
+Random Bytes
+
+   Random Bytes は特定の利用コンテキストで指定された長さの範囲で 0..255 の値で生成される.
+
+Random Name
+
+   Random Name 2 つの形式: Assigned Form ないし Private Form のうち 1 つで生成される.  2つの形式のうちの 1 つはランダムに選ばれ, より短い Assigned Form のほうが確率が高い.  Random Name の最大長は 64 バイトだ.
+
+Assigned Form
+
+   Assigned Form での Random Name は @ と コンマ(",") を除くASCII 値 33.126 (境界を含む) のランダムな文字列として生成される. 他の文字は含まれてはならない.  ランダムな UUID と同様に実際上の衝突を避けるために, 完全な文字セットを利用する場合 Assigned Form での Random Name は少なくとも 20 のランダムな文字を含まなければならない.  そして Assigned Form での Random Name は 20..64 バイトの長さとならなければならない.
+
+   実装は, 最小の長さを増すことなしに 85..91 の文字をを削減して文字セットから 7文字削除してもよい.  さらに 69..84 の文字を削除する場合は, 実装は代わりに少なくとも 21 のランダムな文字を生成しなければならない.
+
+   Assigned Form の Random Name の例:
+
+      d`kbi>AGrj~r{3lo_Q4r
+      wNT)=/8C<(DB1|tr:>1f[xq>9bG
+      u7^dE'\EE_}N}^"J5syI?/8jIxup#s7BM:]>{IT_p3Z~<KLa]bIW643XYh07jqZu
+
+
+
+
+bider                      Expires 5 June 2021                  [Page 7]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+                                  Figure 3
+
+Private Form
+
+   実装は, 最初に Assigned Form での Random Name を生成してから, 実装者が制御するドメイン名の接尾辞を追加することで Private Form での Random Name を生成してもよい.  この方法で生成される Random Name は 64 バイトを越えてはならない.  Private Form での Random Name の例:
+
+      (qKR8W%&zJu;$RQkWa[b@bitvise.com
+      BDPhhC_vI?+8$e_CGty->wJDYIBX.4zzQ$@denisbider.com
+      ?`z4bb/}</P[pRJ=SvcCV<k0eUPDIHid#e1giY>&Wuf6O7CE?cA`$j"@bider.us
+
+                                  Figure 4
+
+   加えて, 実装は "(local)@(domain).example.com" 形式の Anonymous Form の Random Name を生成してもよい.  この場合, "(local)" と "(domain)" が A..Z, a..z, 0..9 の集合からのランダムな ASCII 文字で置換される.  これは, 接尾辞が有効なドメイン名シンタックスを持つことを保証する.
+
+   ランダムな UUID と同様に実際上の衝突を避けるために,  Anonymous Form での Random Name は少なくとも 22 のランダムな文字を含まなければならない.  これにより Anonymous Form の Random Name は 35..64 バイトの長さとなる.
+
+2.7.  鍵交換でのエラー
+
+   ユーザを援助するため, クラアイントとサーバは, 鍵交換でのエラーを次のように報告する必要がある.
+
+   1サーバが成功の SSH_QUIC_REPLY を送ることができない場合, サーバは Error Reply を送る必要がある.  2.9.1 節を参照.
+
+   2.  クライアントが不正な SSH_QUIC_REPLY を受け取った場合,  SSH_QUIC_CANCEL を送る必要がある..  2.10 節を参照.
+
+   どちらのパケットのタイプも, 次の拡張ペアを利用する.
+
+2.7.1.  "disc-reason" 拡張ペア
+
+   "ext-pair-name" は "disc-reason" だ.
+
+   "ext-pair-data" は SSH 切断理由コードの uint32 をエンコードしたものだ.
+   IANA のレジストリ "Secure Shell (SSH) Protocol Parameters" [IANA-SSH] の "Disconnect Messages Reason Codes and Descriptions" テーブルで理由コードは定義されている.
+
+
+
+
+bider                      Expires 5 June 2021                  [Page 8]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+2.7.2.  "err-desc" 拡張ペア
+
+   "ext-pair-name" は "err-desc" だ.
+
+   "ext-pair-data" は UTF-8 でエンコードされたユーザに関連することを意図した任意の言語での人間が読むことができるエラーの説明だ.
+
+   エラーの説明を処理する受信者は, 説明が正当な UTF-8 か検査しなければならない.  説明が長い場合, 受信者は処理される文脈に依存して適当な長さに切り詰める必要がある.  たとえば, デバッグ用のログファイルが  32 kB のエラーの説明を完全に記録できる一方で, 本番用のログファイルはそれよりもかなり短い長さに切り詰める必要がある.
+
+2.8.  SSH_QUIC_INIT
+
+   クライアントは, SSH_QUIC_INIT の 1 つ以上のコピーを送って SSH/QUIC のセッションを開始する.  複数のコピーが送られる場合, 同じ接続を意図したコピーは同一でなければならない.  クライアントが正当な SSH_QUIC_REPLY を受けとるかタイムアウトするまで, 1つのコピーを 50-500 ms ごとに送るのが合理的な戦略だ.  サーバは, 最近受け取った SSH_QUIC_INIT パケットを記録して 同一の SSH_QUIC_REPLY を送らなければらない.  同じクライアントの IP アドレスから異なる SSH_QUIC_INIT パケットを受信した場合, それらが同じ "client-connection-id" を指定していたとしても, サーバはそれらは別々の接続を開始することを意図していると仮定しなければならない.  サーバは, IPアドレスやその他の要素で, 受け入れる接続数の調整を実装するかもしれない. その際は超過した SSH_QUIC_INIT パケットは無視される.  クライアントが SSH_QUIC_REPLY を処理したことを確認する QUIC データをサーバが一度受信したら, サーバは, 少なくともその SSH_QUIC_INIT で開始された SSH/QUIC セッションが終了するまでは, 同じ SSH_QUIC_INIT のそれ以上の同一のコピーは無視しなければなない. 
+
+   SSH_QUIC_INIT は難読化されたデータグラム (Section 2.3) で, "obfs-payload" は次のように暗号化される.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+bider                      Expires 5 June 2021                  [Page 9]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+     byte        SSH_QUIC_INIT = 1        (拡張性を参照)
+     short-str   client-connection-id     (空でもよい)
+     short-str   server-name-indication   (空でもよい)
+
+     byte        v = nr-quic-versions     (0 であってはならない)
+     uint32[v]   client-quic-versions
+     string      client-quic-trnsp-params
+
+     string      client-sig-algs          (空であってはならない)
+
+     byte f = nr-trusted-fingerprints     (0 でもよい)
+    次の 1 フィールドを f 回繰り返す:
+        short-str   trusted-fingerprint   (空であってはならない
+
+     byte k = nr-client-kex-algs          (0 であってはならない)
+     次の 2 フィールドを k 回繰り返す:
+        short-str   client-kex-alg-name   (空であってはならない)
+        string      client-kex-alg-data   (空であってはならない)
+
+     byte c = nr-cipher-suites            (0 であってはならない)
+     次の 1 フィールドを c 回繰り返す:
+        short-str   quic-tls-cipher-suite
+
+     byte e = nr-ext-pairs                (拡張性を参照)
+     次の 2 フィールドを e 回繰り返す:
+        short-str   ext-pair-name         (空であってはならない)
+        string      ext-pair-data         (空でもよい)
+
+     byte[0..] パディング: すべて 0xFF で最小限の obfs-payload のサイズ 1200 まで
+
+                                  Figure 5
+
+   SSH_QUIC_INIT は SSH の バージョン文字列や圧縮の交渉は含まない.  かわりに, クライアントはこれらの目的のために SSH_MSG_EXT_INFO を使わなければならない.  4 節を参照.
+
+   SSH_QUIC_INIT はランダムなデータのための "cookie" フィールドを含まない.
+   クライアントはパケットの拡張メカニズムを用いてランダムなデータを挿入しなければならない.  2.8.1 節と 2.6 節を参照.
+
+   "client-connection-id" は長さ 0..20 バイトの QUIC Connection ID を含む. サーバはこれを クライアントに送る QUIC パケットでの QUIC Destination Connection ID として用いる.  クライアントは, 接続のルーティングに別の方法を用いるなら, 空の Connection ID を送ってもよい.
+
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 10]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   フィールド "server-name-indication" は, ユーザが接続の設定時にDNS 名を入力した場合にサーバの DNS 名を含む必要がある.  これはホスティング環境では有用だ. サーバが同じネットワークアドレスとポート上に複数の異なるアイデンティティをクライアントに公開できる.  空でない場合, このフィールドは印字可能な US-ASCII 文字で構成される文字列でユーザが入力した DNS 名をエンコードしなければならない.  国際化されたドメイン名は その US-ASCII エンコーディングで表現されなければならない.  ユーザが直接 IP アドレスで接続する場合はこのフィールドは空でなければならない.  これにより, ポート転送された接続の場合に, 秘密の情報が公開されるのを避ける.
+   空でない値の例:
+
+     localhost
+     server.example.com
+     xn--bcher-kva.example
+
+                                  Figure 6
+
+   フィールド "client-quic-versions" はクライアントがサポートしている QUIC プロトコルのバージョンを列挙する.  クライアントは少なくとも 1 つのバージョンを送らなければならない.
+   クライアントはサーバでそれらを利用したい順にサポートされているバージョンを送らなければならない.
+
+   フィールド "client-quic-trnsp-params" は [QUIC] で定義されているクライアントの QUIC Transport Parameters をエンコードする.
+
+   フィールド "client-sig-algs" はサーバ認証のためにクライアントがサポートしている 少なくとも 1つの署名アルゴリズムを含まなければならない.  これらは, SSH_MSG_KEXINIT ([RFC4253], 7.1節)  のフィールド "server_host_key_algorithms" で利用されているものと同じアルゴリズムだ.  クライアントは, サーバでそれらを利用したい順に署名アルゴリズムを送らなければならない.
+
+   クライアントは "client-sig-algs" でアルゴリズムを次のように含める必要がある:
+
+   *  クライアントがサーバのホスト鍵をまだ信用していないなら, "client-sig-algs" は任意のサーバに対して利用できるクライアントでサポートされて有効なアルゴリズムをすべて含める必要がある.
+
+   *  そうでない場合, クライアントはサーバのいくつかのホスト鍵をすでに信用している.  この場合に, クライアントが いくつかの "trusted-fingerprint" フィールドを送るなら "client-sig-algs" は任意のサーバに対して利用できるクライアントでサポートされて有効なアルゴリズムをすべて含める必要がある.
+
+
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 11]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   *  そうでない場合，クライアントはサーバのいくつかのホスト鍵をすでに信用しているが, "trusted-fingerprint" フィールドを送らない.  この場合,  "client-sig-algs" は このサーバに対してクライアントがすでに信用しているホスト鍵に関連する唯一の署名アルゴリズムを含めなければならない.
+
+   "trusted-fingerprint" フィールドは 0 以上あればよい.  それぞれの "trusted-fingerprint" はクライアントによるこの接続で信用されるホスト鍵の バイナリのfingerprint を含む.  fingerprint のアルゴリズムは未指定のままだ.  サーバは, 提供された fingerprint のサイズを生成するサポートするすべてのアルゴリズムを用いて fingerprint が一致するか試す必要がある.  現在の推奨される fingerprint のアルゴリズムは SHA-256 で fingerprint のサイズは 32 バイトだ.  サーバは, あらゆるサイズの認識できない fingerprint の存在を許容しなければならない.  信用された fingerprint の優先順位は,  "client-sig-algs" のアルゴリズムの優先順位に支配される.
+
+   パケットは, "client-kex-alg-name" と"client-kex-alg-data" フィールドのペアによってエンコードされた, 少なくとも 1 つの SSH 鍵交換アルゴリズムを含んでいなければならない. Tフィールド "client-kex-alg-name" は, [RFC4253] 7.1 節の SSH_MSG_KEXINIT の "kex_algorithms" フィールドで正当となる鍵交換法を指定しなければならない.  加えて, 鍵交換法は 3節での基準に合致しなければならない.
+
+   クライアントが特定の鍵交換アルゴリズムについてそのサポートを単に広告したいと望むが, この接続での利用は好まない場合, そのアルゴリズムを空の "client-kex-alg-data" と伴に列挙してもよい.  そうでなく, クライアントがアルゴリズムが利用されることを望むなら, 空でない "client-kex-alg-data" を含めなければならない.  この場合,"client-kex-alg-data" は 3 節で指定する鍵交換入力のクライアントの部分を含む.  クライアントは, 空でない "client-kex-alg-data" を持つ複数の鍵交換法を送ってもよい.  クライアントは, サーバでそれらを利用したい順にこれらのアルゴリズムを送らなければならない.
+
+   少なくとも 1つ の "quic-tls-cipher-suite" フィールドがなければならない.  これらのそれぞれが , クライアントでサポートされているTLS 暗号スート([RFC8446], Appendix B.4) を指定する. クライアントでサポートされた  QUIC ([QUIC], [QUIC-TLS]) のバージョンと共に利用できる. クライアントは, サーバでそれらを利用したい順にサポートされている暗号スートを列挙しなければならない.
+
+   クライアントは  "ext-pair-name" and "ext-pair-data" フィールドのペアのエンコードにより, 任意の数の拡張を送ってもよい.  このメモは SSH_QUIC_INIT の拡張をなにも定義していないが, 2.8,1 節を参照のこと.
+
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 12]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   "padding" フィールドは, すべて 0xFF のバイトで, SSH_QUIC_INIT の暗号化されていない "obfs-payload" が少なくとも 1200 バイト長になることを保証する.; サーバは, より小さい SSH_QUIC_INIT パケットを無視しなければならない.  これは, Amplified Reflection DDoS のための SSH_QUIC_INIT の乱用を防止するために要求されている.  "obfs-payload" の暗号化されていないサイズがすでに 1200 バイト以上なら, padding は省略されてもよい.
+
+2.8.1.  拡張性
+
+   実装は, 次のマナーで SSH_QUIC_INT の将来の拡張のための余地を許さなければならない.
+
+   1最初のバイトでの異なるパケットタイプの利用, つまり SSH_QUIC_INIT での 1 以外の値.  サーバは, ブロックされた IP アドレスや大量のデータグラムなどクライアントを罰する他の理由がない限り, 未知のパケットタイプを送ったクライアントに罰を与えてはならない.
+
+   2.  "client-sig-algs" 中のサーバが知らなかったりサポートされていないアルゴリズムの含有.  サーバはそのようなアルゴリズムの存在を許容しなければならない.
+
+   3.  "trusted-fingerprints" 中のサーバが知らなかったりサポートしていないアルゴリズムや長さの fingerprint の含有.  サーバは, このような fingerprint の存在を許容しなければならない.
+
+   4.  アルゴリズムのデータの形式がサーバが知らなかったりサポートしていない, サーバが知らなかったりサポートしていない SSH 鍵交換アルゴリズムの含有.  サーバはそのようなアルゴリズムとそのデータの存在を許容しなければならない.
+
+   5.  サーバが知らなかったりサポートしていない QUIC TLS 暗号スートの含有.  サーバはそのような暗号スートの存在を許容しなければならない.
+
+   6.  拡張のデータの形式がサーバが知らなかったりサポートしていない, サーバが知らなかったりサポートしていない拡張の含有.  サーバは そのような拡張とそのデータの存在を許容しなければならない.
+
+   経験上, アクティブに利用されない拡張性は, 期待を不正にロックダウンする拡張によって失なわれる.  このため, すべてのクライアントは すべての SSH_QUIC_INIT パケットにランダムに, 次に列挙するもののうちの少なくとも 1 つを行なわなければならない.
+
+   1フィールド"client-sig-algs" に少なくとも 1 つの Random Name (2.6 節) をランダムな位置に含める.
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 13]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   2.  フィールド "client-quic-versions" に 形式 0x0A?A?A?A  (? は ランダムな 4 ビット) のバージョン番号をランダムな位置に含める.
+        [QUIC] の "Versions" 節を参照.  サーバの SSH_QUIC_REPLY のランダムバージョンパターンとの違いに注意.  このルールで提供されるエントロピーの最小量のために, これは, パケットに入るランダム性の唯一の挿入となってはならない.
+
+   3.  16..255 の Random Byte (2.6 節) からなるホスト鍵 fingerprint を少なくとも 1つ ランダムな位置に含める.
+
+   4.  フィールド ”client-kex-alg-name" に Random Name を, フィールド "client-kex-alg-data" に 0..1000 Random Byte を持つ SSH 鍵交換アルゴリズムを少なくとも 1つ ランダムな位置に含める.
+
+   5.  フィールド "quic-tls-cipher-suite" に,  16..255 の Random Byte からなるエントリを少なくとも 1つ ランダムな位置に含める.
+
+   6.  拡張ペアで, フィールド "ext-pair-name" に Random Name を, フィールド "ext-pair-value" に 0..1000 Random Byte を持つ拡張を少なくとも 1 つ ランダムな位置に含める.
+
+2.9.  SSH_QUIC_REPLY
+
+   実装は,  Amplified Reflection DDoS 攻撃のための SSH/QUIC 鍵交換の乱用を防止するのに注意しなければならない.  つまり:
+
+   1サーバは, 個々の SSH_QUIC_INIT に対する応答として 1 つより多い SSH_QUIC_REPLY を送ってはならない.
+
+   2.  サーバは, 1200 バイトより小さな暗号化されていない "obfs-payload" を持つ SSH_QUIC_INIT に対して応答してはならない.
+
+   3.  SSH_QUIC_REPLY を送信する前に, サーバは返信する対象の SSH_QUIC_INIT パケットよりも応答のほうが小さいことを検証しなければならない.  こうでない場合, サーバはエラー応答 (2.9.1 節)を返さなければならない.  このような Error Reply は, SSH_QUIC_INIT パケットよりも小さくなければならない.
+
+   SSH_QUIC_REPLY は難読化されたデータグラム (Section 2.3) で, "obfs-payload" は次のように暗号化される.
+
+
+
+
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 14]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+     byte        SSH_QUIC_REPLY = 2
+     short-str   client-connection-id
+     short-str   server-connection-id   (エラーの場合以外は空ではない)
+
+     byte        v = nr-quic-versions   (0 であってはならない)
+     uint32[v]   server-quic-versions
+     string      server-quic-trnsp-params
+
+     string      server-sig-algs        (空であってはならない)
+     string      server-kex-algs        (空であってはならない)
+
+     byte c = nr-cipher-suites          (0 であってはならない)
+     次の 1 フィールドを c 回繰り返す:
+        short-str   quic-tls-cipher-suite
+
+     byte e = nr-ext-pairs              (拡張性を参照)
+     次の 2 フィールドを e 回繰り返す:
+        short-str   ext-pair-name       (空であってはならない)
+        string      ext-pair-data       (空でもよい)
+
+     string      server-kex-alg-data    (エラー時以外空ではない)
+
+                                  Figure 7
+
+   SSH_QUIC_REPLY は SSH のバージョン文字列や圧縮の交渉を含まない.  変わりに, サーバはこれらの目的のために SSH_MSG_EXT_INFO を用いなければならない.  4 節を参照.
+
+   SSH_QUIC_REPLY はランダムなデータのための "cookie" フィールドを含まない.
+   サーバは, パケットの拡張性メカニズムを用いてランダムなデータを挿入しなければならない.  2.9.2 節と 2.6 節を参照.
+
+   "client-connection-id" フィールドは, SSH_QUIC_INIT でクライアントが送信した "client-connection-id" を符号化する.
+
+   "server-connection-id" フィールドは, 1..20 バイトの長さの QUIC Connection ID を含む.  クライアントはこれをサーバに送る QUIC パケットの QUIC Destination Connection ID として用いる.  Error Reply (2.9.1 節)を送る場合, このフィールドは空でなければならず, そうでない場合空であってはならない.
+
+   "server-quic-versions" フィールドにはサーバがサポートしている QUIC プロトコルのバージョンを列挙する.  サーバは少なくとも 1 つのバージョンを送らなければならない.
+   接続に用いる QUIC のバージョンは,  "server-quic-versions" に存在するものの中で "client-quic-versions" に最初に挙げられたバージョンとなる.  そのようなバージョンがない場合は, 2.9.1 節を参照.
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 15]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   フィールド "server-quic-trnsp-params" は [QUIC] で定義されているサーバの QUIC Transport Parameters をエンコードする.
+
+   フィールド "server-sig-algs" はサーバがサポートしている 少なくとも 1つの署名アルゴリズムを含まなければならない.  サーバは, 保持しているホスト鍵が利用しているすべての署名アルゴリズムを列挙する必要がある.  これらは, SSH_MSG_KEXINIT ([RFC4253], 7.1節)  のフィールド "server_host_key_algorithms" で利用されているものと同じアルゴリズムだ.  SSH/QUIC 鍵交換で, サーバは所持しているホスト鍵のうち (1) SSH_QUIC_INIT の "trusted-fingerprint" フィールドに列挙されている fingerprint と一致し (2) "client-sig-algs" で列挙されている署名アルゴリズムの中で利用可能なうちで最優先のものを利用しなければならない.  そのような複数のホスト鍵が存在するならば, "client-sig-algs" のクライアントの優先順位が, "trusted-fingerprint" の優先順位より優先される.
+   そのようなホスト鍵がない場合, サーバは "client-sig-algs"に列挙されている利用可能なうちで最優先のアルゴリズムを利用できるホスト鍵のどれかを用いなければならない.  そのような鍵もない場合は, 2.9.1 節を参照.
+
+   "server-kex-algs" フィールドは, サーバでサポートしている少なくとも 1つの SSH 鍵交換アルゴリズムを含まなければならない.  接続で用いられる鍵交換アルゴリズムは, クライアントの SSH_QUIC_INIT で送られた (1) "client-kex-alg-data" フィールドが空ではなく (2) "server-kex-algs" にも存在する最初のアルゴリズムだ.  そのような鍵交換アルゴリズムが存在しない場合は, 2.9.1 節を参照.
+
+   少なくとも 1つ の "quic-tls-cipher-suite" フィールドがなければならない.  これらのそれぞれが , サーバでサポートされているTLS 暗号スート([RFC8446], Appendix B.4) を指定する. サーバでサポートされた  QUIC ([QUIC], [QUIC-TLS]) のバージョンと共に利用できる. 接続で用いられる TLS 暗号スートは, クラアイアントの SSH_QUIC_INIT で送られた (1) 交渉された QUIC のプロトコルバージョンでサポートされていて (2) サーバの SSH_QUIC_REPLY に存在する最初の暗号スートだ.  そのような暗号スートがない場合, 2.9.1 節を参照.
+
+   サーバは, 任意の数の, "ext-pair-name" と "ext-pair-data" フィールドの組でエンコードされた, 拡張を送ってもよい. いくつかの拡張が Error Reply (2.9.1 節を参照) で利用するために定義されている.  他の確証が将来定義されてもよい; 2.9.2 節を参照.
+
+   "server-kex-alg-data" フィールドは, パケットが Error Reply の場合 空でなければならない.  その以外の場合, このフィールドは SSH 鍵交換法のための情報を含む: 3 節を参照.  一般に, このフィールドは, 鍵交換入力のサーバの部分とサーバのホスト鍵, 計算された交換ハッシュのサーバの署名が含まれる.
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 16]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+2.9.1.  Error Reply
+
+   サーバがクライアントに伝えることが有用で適切なエラーに遭遇したなら, サーバは SSH_QUIC_REPLY の "Error Reply" バージョンを送ってもよい.  このような応答は次にように作成される:
+
+   *  サーバは通常の SSH_QUIC_REPLY のすべてのフィールドを含める. ただし, "server-connection-id" と "server-kex-alg-data" フィールドは空にしなければならない. 
+
+   *  拡張ペアフィールドの中で "disc-reason" 拡張ペアが含まれなければならない.  "err-desc" 拡張ペアも含まれてもよい.
+      2.7 節を参照.
+
+   *  2.9.2 節での SSH_QUIC_REPLY の拡張の考察が Error Reply にも適用される.
+
+   サーバがクライアントが列挙した QUIC のバージョンのすべてをサポートしていない場合, SSH_DISCONNECT_PROTOCOL_VERSION_NOT_SUPPORTED 切断理由コード を持つ Error Reply をサーバは送る必要がある.
+
+   次のような状況では, サーバは SSH_DISCONNECT_KEY_EXCHANGE_FAILED を持つ Error Reply を送る必要がある.
+
+   *   (対応する) SSH_QUIC_INIT が最低限の長さ以上であったとしても, サーバは 成功の SSH_QUIC_REPLY を送ることができるが,  それがクライアントの SSH_QUIC_INIT よりも大きくなってしまう.
+
+   *  サーバが, クライアントの SSH_QUIC_INIT に列挙された署名アルゴリズムが利用できるサーバホスト鍵を所持していない.
+
+   *  サーバが, クライアントが送った SSH_QUIC_INIT の "client-kex-alg-data" のうちで一致する鍵交換アルゴリズムを 1 つもサポートしていない.
+
+   *  サーバが, クライアントの SSH_QUIC_INIT で列挙された TLS 暗号スートをサポートしていない. 
+
+   "disc-reason" だけでなく,  "err-desc" 拡張ペアも特有のエラーを記述するものを含める必要がある.
+
+2.9.2.  拡張性
+
+   実装は, 次のマナーで SSH_QUIC_REPLY の将来の拡張のための余地を許さなければならない.
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 17]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   1"server-sig-algs" 中のクライアントが知らなかったりサポートされていないアルゴリズムの含有.  クライアントはそのようなアルゴリズムの存在を許容しなければならない.
+
+   2.  アルゴリズムのデータの形式がクライアントが知らなかったりサポートしていない, クライアントが知らなかったりサポートしていない SSH 鍵交換アルゴリズムの含有.  クライアントはそのようなアルゴリズムとそのデータの存在を許容しなければならない.
+
+   3.  クライアントが知らなかったりサポートしていない QUIC TLS 暗号スートの含有.  クライアントはそのような暗号スートの存在を許容しなければならない.
+
+   4.  拡張のデータの形式がクライアントが知らなかったりサポートしていない, クライアントが知らなかったりサポートしていない拡張の含有.  クライアントは そのような拡張とそのデータの存在を許容しなければならない.
+
+   経験上, アクティブに利用されない拡張性は, 期待を不正にロックダウンする拡張によって失なわれる.  このため, すべてのサーバは すべての SSH_QUIC_REPLY パケットにランダムに, 次に列挙するもののうちの少なくとも 1 つを行なわなければならない.
+
+   1フィールド "server-quic-versions" に 形式 0x0A?A?A?A  (? は ランダムな 4 ビット) のバージョン番号をランダムな位置に含める.
+        [QUIC] の "Versions" 節を参照.  クライアントの SSH_QUIC_INIT のランダムバージョンパターンとの違いに注意.  このルールで提供されるエントロピーの最小量のために, これは, パケットに入るランダム性の唯一の挿入となってはならない.
+
+   2.  フィールド"server-sig-algs" に 1 つの Random Name (2.6 節) をランダムな位置に含める.
+
+   3.  フィールド"server-kex-algs" に 1 つの Random Name (2.6 節) をランダムな位置に含める.
+
+   4.  フィールド "quic-tls-cipher-suite" に,  16..64 の Random Byte からなるエントリを 1つ ランダムな位置に含める.
+
+   5.  拡張ペアで, フィールド "ext-pair-name" に Random Name を, フィールド "ext-pair-value" に 0..100 Random Byte を持つ拡張を  1 つ ランダムな位置に含める.
+
+
+
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 18]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+2.10.  SSH_QUIC_CANCEL
+
+   クライアントが, サーバの成功した SSH_QUIC_REPLY を処理できない場合, クライアントは SSH_QUIC_CANCEL を用いてエラーをサーバに報告する必要がある.
+
+   クライアントは, Error Reply となっている SSH_QUIC_REPLY の応答として SSH_QUIC_CANCEL を送ってはならない.  クライアントは, そのような接続はすでにサーバによってキャンセルされていることを想定しなければならない.
+
+   クラアイアントは, 配達の成功する蓋然性を上げるために, 1 秒の 何分の 1 かの間隔をあけて, 2 つ以上の SSH_QUIC_CANCEL を送る必要がある.  サーバは, SSH_QUIC_CANCEL に対して通知を送らない.  サーバが SSH_QUIC_CANCEL を受け取った後は, 同じ接続に対する SSH_QUIC_CANCEL のその後のコピーは無視しなければならない.
+
+   SSH_QUIC_CANCEL は難読化されたデータグラム (Section 2.3) で, "obfs-payload" は次のように暗号化される.
+
+     byte        SSH_QUIC_CANCEL = 3
+     short-str   server-connection-id
+
+     byte e = nr-ext-pairs                (拡張性を参照)
+     次の 2 フィールドを e 回繰り返す:
+        short-str   ext-pair-name         (空であってはならない)
+        string      ext-pair-data         (空でもよい)
+
+                                  Figure 8
+
+   "server-connection-id" フィールドは サーバの SSH_QUIC_REPLY の  "server-connection-id"フィールドと同一でなければならない.
+
+   *  拡張ペアフィールドの中で "disc-reason" 拡張ペアが含まれなければならない.  "err-desc" 拡張ペアも含まれてもよい.  2.7 節を参照.
+
+2.10.1.  拡張性
+
+   拡張性の考察は SSH_QUIC_CANCEL にも適用される:
+
+   *  クライアントは, サーバが知らなかったりサポートしていない形式の拡張データを持つ, サーバが知らなかったりサポートしていない拡張を含めてもよい.
+
+   *  サーバは, そのような拡張はデータの存在を許容しなければならない.
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 19]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   *  クライアントは, "ext-pair-name" に Random Name を, "ext-pair-value" に 0..300 Random Byte を持つ少なくとも 1 つの拡張ペアをランダムな位置に含める必要がある.
+
+3.  鍵交換法
+
+   クライアントとサーバは, 次の基準にすべて合致する限り, 割り当てられたもので私的なものでも, TCP 上の SSH のために定義された任意の鍵交換法を利用してもよい.
+
+   1たとえば SSH_MSG_KEX_ECDH_INIT のような, クライアントからサーバのただ 1 つのみのメッセージをアルゴリズムが要求する.  我々はこのメッセージを KEXMSG_CLIENT と呼ぶ.
+
+   2.  たとえば SSH_MSG_KEX_ECDH_REPLY のような, サーバからクライアントへのただ 1 つのメッセージのみをアルゴリズムが要求する.  我々はこのメッセージを KEXMSG_SERVER と呼ぶ.
+
+   3.  たとえば SHA-256 や SHA-384, SHA-512 のような, ハッシュ関数 HASH をアルゴリズムが明示する.
+
+   4.  エンコードされたフィールドの連結に HASH を適用する交換ハッシュの計算をアルゴリズムが明示する.
+
+   5.  H に署名するのにサーバのホスト鍵をアルゴリズムは利用する.
+
+   6.  サーバからクライアントへの KEXMSG_SERVER メッセージにサーバの公開ホスト鍵と H の署名をアルゴリズムが含める.
+
+   7.  署名された (正ないし負の) 多倍精度整数として表現される, 共有の秘密 K をアルゴリズムが生成する.
+
+   QUIC 上の SSH での利用のために, このようなアルゴリズムはすべて次のように変更される.:
+
+   1SSH_QUIC_INIT のフィールド "client-kex-alg-data" は同じフィールドに同じ順序で, SSH のパケットタイプのための先行バイトを含む形で, KEXMSG_CLIENT としてエンコードされる. 
+
+   2.  SSH_QUIC_REPLY のフィールド "server-kex-alg-data" は同じフィールドに同じ順序で, SSH のパケットタイプのための先行バイトを含む形で, KEXMSG_SERVER としてエンコードされる. 
+
+   3.  アルゴリズムによって指定された H の計算は行なわれない.
+       代わりに, H は次の連結に対するハッシュ関数 HASH の適用によって計算される.
+
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 20]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+     byte[8]  "SSH/QUIC"
+
+     string   SSH_QUIC_INIT の暗号化されていない "obfs-payload" の内容.
+
+     string   "server-kex-alg-data" のフィールド全体を除く, SSH_QUIC_REPLY の暗号化されていない "obfs-payload" の内容.
+
+     署名のフィールドを除く, "server-kex-alg-data"フィールド
+
+     mpint    K
+
+                                  Figure 9
+
+   前述のようにフィールドが除かれる際, そのフィールドの全体のエンコーディング, 内容のエンコーディングと長さのエンコーディングの両方, が省略される.
+
+   SSH のパケットタイプバイトは含まれる:
+
+   *  エンコードされる内容に少なくとも 2 つのフィールドがあることを保証する.
+      これにより, 外部文字列 ("client-kex-alg-data"フィールド) が (KEXMSG_CLIENT からの) 単純な内部文字列を含んでしまう場合を避けることができる.  これは, 単純な文字列のみを間違ってエンコードするように実装者に混乱させるかもしれない.
+
+   *  将来の一貫性のため.  パケットタイブバイトは, たとえば GSS-API [RFC4462] で利用されているような複数回往復する鍵交換法に対しても有用かもしれない.  そのような鍵交換法は SSH/QUIC では現在定義されていないが, 可能である.
+
+3.1.  必須の鍵交換法
+
+   クライアントとサーバは, 鍵交換法 "curve25519-sha256" [RFC8731] の実装が要求されている.  他のすべての鍵交換法は選択できる.
+
+   クライアントとサーバは, ユーザが必須の鍵交換法を無効にするのを許可してもよい.  ただし, 必須の方法はデフォルトでは有効でなければならない.
+
+   特定の鍵交換法を実装する要件は, このメモの公開から 5 年で期限切れとなる.  実装の時点で, 実装者は新しい標準文書が利用可能であればそれを参照したり, 実装のガイダンスのための SSH/QUIC の実際的な利用法を調査委する必要がある.
+
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 21]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+3.2.  例 1: "curve25519-sha256"
+
+   SSH 鍵交換法 "curve25519-sha256" を用いる際,  SSH_QUIC_INIT のフィールド "client-kex-alg-data" は SSH_MSG_KEX_ECDH_INIT ([RFC5656], 4 節) から得られ, 次の内容を含む:
+
+     byte     SSH_MSG_KEX_ECDH_INIT = 30
+     string   Q_C, クライアントの一時公開鍵のオクテット文字列
+
+                                 Figure 10
+
+   SSH_QUIC_REPLY のフィールド "server-kex-alg-data" は SSH_MSG_KEX_ECDH_REPLY から得られ, 次の内容を持つ:
+
+     byte     SSH_MSG_KEX_ECDH_REPLY = 31
+     string   K_S, サーバの公開ホスト鍵
+     string   Q_S, サーバの一時公開鍵のオクテット文字列
+     string   交換ハッシュに対する署名
+
+                                 Figure 11
+
+   共有の秘密 K は [RFC8731] のように計算される.  そして交換ハッシュ H は 次の連結に対する SHA-256 の適用により計算される.
+
+     string   SSH_QUIC_INIT の内容
+     string   "server-kex-alg-data" を除く SSH_QUIC_REPLY の内容
+     byte     SSH_MSG_KEX_ECDH_REPLY = 31
+     string   K_S, サーバの公開ホスト鍵
+     string   Q_S, サーバの一時公開鍵のオクテット文字列
+     mpint    K
+
+                                 Figure 12
+
+3.3.  例 2: "diffie-hellman-group14-sha256"
+
+   SSH 鍵交換法 "diffie-hellman-group14-sha256"を用いる際,  SSH_QUIC_INIT のフィールド "client-kex-alg-data" は SSH_MSG_KEX_KEXDH_INIT ([RFC4253], 4 節) から得られ, 次の内容を含む:
+
+     byte     SSH_MSG_KEXDH_INIT = 30
+     mpint    e
+
+                                 Figure 13
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 22]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   SSH_QUIC_REPLY のフィールド "server-kex-alg-data" は SSH_MSG_KEX_KEXDH_REPLY から得られ, 次の内容を持つ:
+
+     byte     SSH_MSG_KEXDH_REPLY = 31
+     string   サーバの公開ホスト鍵と証明書 (K_S)
+     mpint    f
+     string   H の署名
+
+                                 Figure 14
+
+   共有の秘密 K は [RFC4253] のように計算される.  そして交換ハッシュ H は 次の連結に対する SHA-256 の適用により計算される.
+
+     string   SSH_QUIC_INIT の内容
+     string   "server-kex-alg-data" を除く SSH_QUIC_REPLY の内容
+     byte     SSH_MSG_KEXDH_REPLY = 31
+     string   サーバの公開ホスト鍵と証明書 (K_S)
+     mpint    f
+     mpint    K
+
+                                 Figure 15
+
+4.  SSH_MSG_EXT_INFO と SSH バージョン文字列
+
+   SSH アプリケーションの作者に対するよくあるユーザの不満は, TCP 上の SSH は平文でアプリケーションバージョンを送ることだ.  アプリケーションバージョンは省略できない. そうしないと, 他のソフトウェアバージョンが不正確に実装した多くの動作を実装がサポートできない.
+
+   際立った例が, SFTP 要求 SSH_FXP_SYMLINK の引数の順番だ.  望む効果を得る要求を送るためには, クライアントは, サーバが標準のフィールドの順序を用いているかOpenSSH で用いられる逆の順序を用いているかを知るためにサーババージョン文字列を考慮する必要がある.
+
+   QUIC 上の SSH では, SSH 鍵交換からバージョン文字列を除く.
+   代わりに, すべてのクライアントとサーバは, SSH_MSG_EXT_INFO [RFC8308] を送受信し, また RFC で定義されている "ssh-version" を含めることを要求されている.
+
+   クライアントは, QUIC ストリーム 0 上の最初のパケットで, SSH_MSG_EXT_INFO を送らなければならない.  クライアントはこの SSH_MSG_EXT_INFO に "ssh-version" 拡張を含めなければならない.
+
+   サーバも  SSH_MSG_EXT_INFO を送信しなければならない:
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 23]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   1QUIC ストリーム 0 上の最初ののパケットとして, かつ/ないし
+
+   2.  サーバの SSH_MSG_USERAUTH_SUCCESS の直前に.
+
+   サーバは, この SSH_MSG_EXT_INFO の少なくとも 1 つに "ssh-version" 拡張を含めなければならない.  もしサーバが両方の機会に SSH_MSG_EXT_INFO を送るなら, サーバは最初の機会では "ssh-version" を省略してもよい. ただし 2回目の機会に "ssh-version" を送信する場合だけだ.  サーバから送られる 2回目の SSH_MSG_EXT_INFO は, より特有の詳細を含むために前に送った "ssh-version" 拡張の値からサーバは変更してもよい.  たとえば, クライアントが認証された時により正確なサーバのソフトウェアバージョンをサーバが送ってもよい.  クライアントは, サーバから受信した最新の "ssh-version" の値を使わなければならない.
+
+4.1.  "ssh-version"
+
+   "ssh-version" 拡張は SSH_MSG_EXT_INFO 中で次のようにエンコードされる.
+
+     string "ssh-version"
+     string ssh-version-string
+
+                                 Figure 16
+
+   拡張の値 "ssh-version-string" は TCP 上の SSH ([RFC4253], 4.2 節) の最初に送られる SSH バージョン文字列と同じだが, "SSH-2.0-" プレフィックスは除かれている.  実際に利用されているバージョン文字列に触発された例:
+
+     GenericSoftware
+     Product_1.2.00
+     0.12 Library: Application 1.23p1
+
+                                 Figure 17
+
+4.2.  "no-flow-control"
+
+   拡張 "no-flow-control" は SSH/QUIC においては効果がない.  SSH/QUIC では送らないほうがよいし, クライアントでもサーバでも無視されなければならない.
+
+4.3.  "delay-compression"
+
+   "delay-compression" 拡張の意味は, 6.1.1 節のように変更される.
+
+
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 24]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+5.  QUIC セッションの設定
+
+   サーバがその SSH_QUIC_REPLY を送りクライアントが受け取ったら, それぞれが QUIC セッション [QUIC] [QUIC-TLS] を次のように初期化する:
+
+   *  QUIC プロトコルバージョンを, サーバの SSH_QUIC_REPLY に存在するもののうちクライアントの SSH_QUIC_INIT で最初に告知されたバージョンに設定される.
+
+   *  TLS ハンドシェイクがちょうど完了したようにセッションの状態が設定される.
+
+   *  TLS 暗号スートを, SSH_QUIC_REPLYに存在するもののうち SSH_QUIC_INIT で最初に告知された TLS 暗号スートに設定される.
+
+   *  QUIC 鍵フェーズビットを 0 に設定される.
+
+   *  TLS ハンドシェイクから得られるはずの共有の秘密は, 代わりに SSH 鍵交換から生成される (5.1 節).
+
+   クライアントとサーバは, QUIC Short Header Packet を用いてすぐに開始しなければならない.  SSH/QUIC 鍵交換との混同が起こりえるので, 実装は QUIC Long Header Packet を送ってはならない.
+
+5.1.  共有の秘密 
+
+   QUIC-TLS [QUIC-TLS] はクライアントの秘密とサーバの秘密を用いて, 通信の方向ごとに AEAD 鍵, IV, ヘッダ保護鍵を生成する.
+
+   SSH の鍵交換手順は, SSH の多倍精度整数として表現される共有の秘密 K と バイナリデータとして表現される交換ダイジェスト H を生成する[RFC4253].  SSH の鍵交換は我々が HASH と呼んでいるハッシュ関数でパラメータ化されている.  HASH は, 交渉された TLS 暗号スートで用いられたハッシュ関数とは異なるハッシュ長を生成する異なるハッシュ関数でもよいことに注意.
+
+   最初の QUIC クライアント/サーバの秘密の計算のため, クライアントとサーバは, 我々が "secret_data" と呼ぶ次のバイナリデータをエンコードする:
+
+     mpint    K
+     string   H
+
+                                 Figure 18
+
+   クライアントとサーバの秘密は次のように計算される:
+
+
+
+bider                      Expires 5 June 2021                 [Page 25]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+     client_secret = HMAC-HASH("ssh/quic client", secret_data)
+     server_secret = HMAC-HASH("ssh/quic server", secret_data)
+
+                                 Figure 19
+
+   HMAC の構成は [RFC2104] で指定されており, SSH の鍵交換ハッシュ関数 HASH を用いて具象化される.
+
+   QUIC の鍵や IV は 通常の QUIC-TLS 鍵導出プロセス [QUIC-TLS] を用いてこれらの秘密から生成される.  これらの秘密から生成される鍵は, 1-RTT 鍵とみなされる.
+
+   クライアントとサーバは, QUIC-TLS の最小鍵交換頻度を尊重する, 通常の QUIC-TLS 鍵更新プロセスを用いた QUIC 鍵の更新を実装しなければならない.
+
+6.  QUIC ストリームへの SSH の適応
+
+6.1.  SSH/QUIC パケット形式
+
+   どちらの側も QUIC 上で送られる SSH パケットを次のようにシリアライズする:
+
+     uint32    n = payload-len, 圧縮時には最高位ビットをセット
+     byte[n]   payload (圧縮ないし非圧縮)
+
+                                 Figure 20
+
+   QUIC-TLS [QUIC-TLS] によってセキュリティが提供されるので, このステージでは MAC とランダムなパディングは省略される.
+
+   "payload" フィールドが圧縮される場合 "payload-len" の最高位ビットが設定される.  See Section 6.1.1.
+
+   [RFC4253] で定義された Binary Packet Protocol の "payload" フィールドと同様に, "payload" フィールドはパケットの情報を含む.
+
+6.1.1.  圧縮
+
+   [RFC8308] の "delay-compression" 拡張を用いて圧縮が交渉されてもよい.  "delay-compression" が交渉されたら:
+
+   *  サーバ -> クライアントの方向で圧縮が有効ならば, サーバは, SSH_MSG_USERAUTH_SUCCESS を送った後の任意のストリームでパケットを圧縮してもよい.
+
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 26]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   *  クライアント -> サーバの方向で圧縮が有効ならば, クライアントは SSH_MSG_USERAUTH_SUCCESS を受け取ったあとの任意のストリームでパケットを圧縮してもよい.
+
+   SSH/QUIC には複数のストリームがあるので,  パケット SSH_MSG_NEWCOMPRESS は圧縮の開始を知らせる有効なアルゴリズムではなく, 送ってはならない.  "payload-len" の最高位ビットで代替される.
+
+6.2.  QUIC ストリームの利用
+
+   SSH over TCP でのパフォーマンスと複雑性に影響を与えるフロー制御の不必要な層を避けるため, SSH/QUIC は SSH のチャンネルのためにQUIC ストリームを利用し, SSH チャンネルレベルでのフロー制御をなしにしている.  これは TCP 上の SSH を実装しないかもしれない SSH/QUIC の実装を簡単にする.
+
+   QUIC ストリーム上で SSH チャンネルを管理するには,  SSH 接続プロトコル [RFC4254] の変更が必要となる.  次の節でこれらの変更を記述する.
+
+6.3.  パケットシーケンス番号
+
+   TCP 上の SSH では, すべての SSH パケットは送信の方向 (サーバへとクライアントへ)に対してユニークな暗黙のシーケンス番号を持つ.  パケットタイプ SSH_MSG_UNIMPLEMENTED はこのシーケンス番号を参照する.
+
+   SSH/QUIC では, それぞれの QUIC ストリームとそれぞれの送信方向に対してシーケンス番号が分散している.  これは,  SSH_MSG_UNIMPLEMENTED の変更を要求するこのパケットタイプは次のように変更される:
+
+     byte      SSH_MSG_UNIMPLEMENTED
+     uint64    パケットを受信した QUIC ストリーム ID
+     uint32    ストリームでのパケットシーケンス番号, 最初のパケットが 0
+
+                                 Figure 21
+
+6.4.  チャンネル ID
+
+   TCP 上の SSH は 32 ビットのチャンネル ID を利用する. これは, 同じセッション内で再利用される可能性があり順番に使われる必要はない.  チャンネル ID の衝突は, 2 つの別々のチャンネル ID でそれぞれのチャンネルを識別することで回避される: 1 つは送信者が指定したもの, もう 1 つは受信者が指定したもの.
+   [RFC4254]
+
+
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 27]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   QUIC ストリームは 62 ビットのチャンネル ID を利用する. これは再利用不可能で順番に利用されなければならない.Q両方の側が同じストリーム ID を利用する.  ストリーム ID の衝突は, ストリームがクライアント/サーバのどちらで開かれたかを識別する最下位ビットを用いて回避される.  [QUIC]
+
+   SSH/QUIC は QUIC ストリーム ID を利用する.  これは SSH のチャンネル関係のパケットの変更を必要とする.  6.8 節を参照.
+
+6.5.  切断
+
+   SSH のパケットタイプ SSH_MSG_DISCONNECT は タイプ 0x1d の QUIC フレーム CONNECTION_CLOSE で置き換えられる.  CONNECTION_CLOSE 中の "Error Code"フィールドは, SSH_MSG_DISCONNECT の "reason code" で送られるはずの値が含まれる.  CONNECTION_CLOSE 中の "Reason Phrase"フィールドは, SSH_MSG_DISCONNECT の "description" で送られるはずの値が含まれる.  SSH_MSG_DISCONNECT の "language tag" フィールドは送られない.
+
+6.6.  禁止される SSH のパケット」
+
+   SSH/QUIC では次の SSH パケットタイプは送られてはならない:
+
+     SSH_MSG_DISCONNECT               1
+     SSH_MSG_NEWCOMPRESS              8
+
+     SSH_MSG_KEXINIT                  20
+     SSH_MSG_NEWKEYS                  21
+     key exchange packets             30-49
+
+     SSH_MSG_CHANNEL_WINDOW_ADJUST    93
+     SSH_MSG_CHANNEL_CLOSE            97
+
+                                 Figure 22
+
+   これらのタイプのパケットを受信したら, クライアントとサーバは SSH_DISCONNECT_PROTOCOL_ERROR (6.5 節) で切断してもよい.
+   もしくは, 受信者は SSH_MSG_UNIMPLEMENTED (6.3 節) を送信してもよい.
+
+6.7.  グローバル SSH パケット
+
+   SSH/QUIC では, 次の SSH パケットタイプは QUIC ストリーム 0 で送られなければならない.  SSH_MSG_UNIMPLEMENTED (6.3 節) を除いて, これらのパケットは TCP 上の SSH と同じエンコードされた形式を利用する.
+
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 28]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+     SSH_MSG_IGNORE                   2
+     SSH_MSG_UNIMPLEMENTED            3   (形式が変更されている!)
+     SSH_MSG_DEBUG                    4
+     SSH_MSG_SERVICE_REQUEST          5
+     SSH_MSG_SERVICE_ACCEPT           6
+     SSH_MSG_EXT_INFO                 7
+
+     SSH_MSG_USERAUTH_REQUEST         50
+     SSH_MSG_USERAUTH_FAILURE         51
+     SSH_MSG_USERAUTH_SUCCESS         52
+     SSH_MSG_USERAUTH_BANNER          53
+     SSH_MSG_USERAUTH_INFO_REQUEST    60
+     SSH_MSG_USERAUTH_INFO_RESPONSE   61
+
+     SSH_MSG_GLOBAL_REQUEST           80
+     SSH_MSG_REQUEST_SUCCESS          81
+     SSH_MSG_REQUEST_FAILURE          82
+
+                                 Figure 23
+
+6.8.  SSH チャンネルパケット
+
+   すべての SSH/QUIC チャンネルは双方向の QUIC ストリームとして開かれる.
+   これは, 最下位の2ビットが 10 か 11 である QUIC ストリーム ID を SSH/QUIC では利用してはならないことを意味している.  そのようなストリーム ID を受信した実装は, SSH_DISCONNECT_PROTOCOL_ERROR (6.5 節) で切断しなければならない.
+
+   クライアントは, サーバが SSH_MSG_USERAUTH_SUCCESS を送る前に 0 でない QUIC ストリームを開いてはならない.  クライアントがそうしたら, サーバは SSH_DISCONNECT_PROTOCOL_ERROR で切断しなければならない.
+
+   サーバは, 自身が SSH_MSG_USERAUTH_SUCCESS を送る前に 0 でない QUIC ストリームを開いてはならない.  しかし, ネットワークの遅延により, SSH_MSG_USERAUTH_SUCCESS より前にサーバが開いたストリームがクライアントによって受信される可能性があるので, クライアントはこの可能性に対して準備されていなければならない.
+   それゆえ, SSH_MSG_USERAUTH_SUCCESS の前にサーバが開始したストリームをクライアントが受信したら, サーバが SSH_MSG_USERAUTH_SUCCESS も送ったとクライアントは仮定しなければならない.  もしクライアントがこの仮定を無効にしる QUIC stream 0 でのパケットを受信したら, クライアントは SSH_DISCONNECT_PROTOCOL_ERROR で切断しなければならない.
+
+
+
+
+
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 29]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   0 でない QUIC ストリームの開始者は, 最初のパケットとして  SSH_MSG_CHANNEL_OPEN を送らなければならない.  受信者がチャンネルを拒絶するなら, SSH_MSG_CHANNEL_OPEN_FAILURE で応答する.  どちらの側も 6.9 節のように QUIC ストリームを閉じなければならないこの場合, QUIC ストリームが開かれていても, SSH のチャンネルは開いていない.
+   それゆえ他の SSH_MSG_CHANNEL_xxxx パケットを送ってはならない.  これには SSH_MSG_CHANNEL_EOF も含まれる.
+
+   受信者がチャンネルを受付けるなら,  SSH_MSG_CHANNEL_OPEN_CONFIRMATION で応答する.  そしてどちらの側からもタイプ SSH_MSG_CHANNEL_xxxx の SSH パケットを送信する..  SSH/QUIC ではこれらのパケットは次の形式を持つ:
+
+     byte      SSH_MSG_CHANNEL_OPEN
+     string    US-ASCII のみでのチャンネルタイプ
+     uint32    最大パケットサイズチャンネルタイプ固有のデータが続く
+
+                                 Figure 24
+
+     byte      SSH_MSG_CHANNEL_OPEN_CONFIRMATION
+     uint32    最大パケットサイズ
+     ....      チャンネルタイプ固有のデータが続く
+
+                                 Figure 25
+
+     byte      SSH_MSG_CHANNEL_OPEN_FAILURE
+     uint32    reason code
+     string    UTF-8 での詳細
+     string    language tag
+
+                                 Figure 26
+
+     byte      SSH_MSG_CHANNEL_DATA
+     string    data
+
+                                 Figure 27
+
+     byte      SSH_MSG_CHANNEL_EXTENDED_DATA
+     uint32    data_type_code
+     string    data
+
+                                 Figure 28
+
+     byte      SSH_MSG_CHANNEL_EOF
+
+                                 Figure 29
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 30]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+     byte      SSH_MSG_CHANNEL_REQUEST
+     string    US-ASCII 文字のみでのリクエストタイプ
+     boolean   want reply
+     ....      タイプに特有のデータが続く.
+
+                                 Figure 30
+
+     byte      SSH_MSG_CHANNEL_SUCCESS
+
+                                 Figure 31
+
+     byte      SSH_MSG_CHANNEL_FAILURE
+
+                                 Figure 32
+
+6.9.  チャンネルの終了
+
+   SSH のパケットタイプ SSH_MSG_CHANNEL_CLOSE は, QUIC stream state transitions [QUIC] で置き換えられる.  QUIC ストリームが terminal sending state と terminal receiving state の両方の状態にある場合にどちらの側もチャンネルが閉じているとみなす.  つまり:
+
+   *  QUIC sending stream state が "Data Recvd" か "Reset Recvd" になった.
+
+   *  The QUIC receiving stream state が "Data Read" or "Reset  Read" になった.
+
+   SSH パケットタイプ SSH_MSG_CHANNEL_EOF は引き続き利用される.  このパケットはしばしばその方向のストリームの終わりに対応していない.  TCP 上の SSH では, SSH チャンネルリクエストが SSH_MSG_CHANNEL_EOF の後で送られてもよく, 受信者によって自費深く取り扱われなければならない.  一般的な例が リクエスト "exit-status" で, これは SSH クライアントにプロセスの終了コードを伝えるためにサーバから送られ, 通常出力の終了より後に送られる.
+
+7.  謝辞
+
+   Paul Ebermann for first review and the encouragement to use QUIC
+   streams.
+
+   Ilari Liusvaara for "server-name-indication" and value 1200 for
+   SSH_QUIC_INIT padding target.
+
+   Benjamin Kaduk for idea of additional cross-protocol protection in
+   the calculation of H.
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 31]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   Stephane Bortzmeyer for the PRECIS Framework to handle the
+   obfuscation keyword.
+
+   Yuki Goto for the QUIC Transport Parameters.
+
+8.  IANA の考慮
+
+   この文書は IANA レジストリに変更を要求しない.
+
+9.  セキュリティの考察
+
+   クライアントとサーバは, SSH_QUIC_INIT と SSH_QUIC_REPLY に 「ランダムな要素」節で指定したような暗号学的なランダムなデータを少なくとも最小限含まなければならない.  この要求への違反は, そのような SSH_QUIC_INIT ないし SSH_QUIC_REPLY に基づいて作成されたセッションのセキュリティを低下させる.
+
+10.  References
+
+10.1.  Normative References
+
+   [QUIC]     Iyengar, J. and M. Thomson, "QUIC: A UDP-Based Multiplexed
+              and Secure Transport", 2020, <https://tools.ietf.org/html/
+              draft-ietf-quic-transport-29>.
+
+   [QUIC-TLS] Thomson, M. and S. Turner, "Using TLS to Secure QUIC",
+              2020,
+              <https://tools.ietf.org/html/draft-ietf-quic-tls-29>.
+
+   [RFC2104]  Krawczyk, H., Bellare, M., and R. Canetti, "HMAC: Keyed-
+              Hashing for Message Authentication", RFC 2104,
+              DOI 10.17487/RFC2104, February 1997,
+              <https://www.rfc-editor.org/info/rfc2104>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC4251]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Architecture", RFC 4251, DOI 10.17487/RFC4251,
+              January 2006, <https://www.rfc-editor.org/info/rfc4251>.
+
+   [RFC4253]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Transport Layer Protocol", RFC 4253, DOI 10.17487/RFC4253,
+              January 2006, <https://www.rfc-editor.org/info/rfc4253>.
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 32]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   [RFC5116]  McGrew, D., "An Interface and Algorithms for Authenticated
+              Encryption", RFC 5116, DOI 10.17487/RFC5116, January 2008,
+              <https://www.rfc-editor.org/info/rfc5116>.
+
+   [RFC5656]  Stebila, D. and J. Green, "Elliptic Curve Algorithm
+              Integration in the Secure Shell Transport Layer",
+              RFC 5656, DOI 10.17487/RFC5656, December 2009,
+              <https://www.rfc-editor.org/info/rfc5656>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+   [RFC8264]  Saint-Andre, P. and M. Blanchet, "PRECIS Framework:
+              Preparation, Enforcement, and Comparison of
+              Internationalized Strings in Application Protocols",
+              RFC 8264, DOI 10.17487/RFC8264, October 2017,
+              <https://www.rfc-editor.org/info/rfc8264>.
+
+   [RFC8265]  Saint-Andre, P. and A. Melnikov, "Preparation,
+              Enforcement, and Comparison of Internationalized Strings
+              Representing Usernames and Passwords", RFC 8265,
+              DOI 10.17487/RFC8265, October 2017,
+              <https://www.rfc-editor.org/info/rfc8265>.
+
+   [RFC8308]  Bider, D., "Extension Negotiation in the Secure Shell
+              (SSH) Protocol", RFC 8308, DOI 10.17487/RFC8308, March
+              2018, <https://www.rfc-editor.org/info/rfc8308>.
+
+   [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
+              Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
+              <https://www.rfc-editor.org/info/rfc8446>.
+
+   [RFC8731]  Adamantiadis, A., Josefsson, S., and M. Baushke, "Secure
+              Shell (SSH) Key Exchange Method Using Curve25519 and
+              Curve448", RFC 8731, DOI 10.17487/RFC8731, February 2020,
+              <https://www.rfc-editor.org/info/rfc8731>.
+
+10.2.  Informative References
+
+   [IANA-SSH] IANA, "Secure Shell (SSH) Protocol Parameters",
+              <https://www.iana.org/assignments/ssh-parameters/>.
+
+   [RFC4250]  Lehtinen, S. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Assigned Numbers", RFC 4250,
+              DOI 10.17487/RFC4250, January 2006,
+              <https://www.rfc-editor.org/info/rfc4250>.
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 33]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   [RFC4252]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Authentication Protocol", RFC 4252, DOI 10.17487/RFC4252,
+              January 2006, <https://www.rfc-editor.org/info/rfc4252>.
+
+   [RFC4254]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Connection Protocol", RFC 4254, DOI 10.17487/RFC4254,
+              January 2006, <https://www.rfc-editor.org/info/rfc4254>.
+
+   [RFC4462]  Hutzelman, J., Salowey, J., Galbraith, J., and V. Welch,
+              "Generic Security Service Application Program Interface
+              (GSS-API) Authentication and Key Exchange for the Secure
+              Shell (SSH) Protocol", RFC 4462, DOI 10.17487/RFC4462, May
+              2006, <https://www.rfc-editor.org/info/rfc4462>.
+
+   [RFC8268]  Baushke, M., "More Modular Exponentiation (MODP) Diffie-
+              Hellman (DH) Key Exchange (KEX) Groups for Secure Shell
+              (SSH)", RFC 8268, DOI 10.17487/RFC8268, December 2017,
+              <https://www.rfc-editor.org/info/rfc8268>.
+
+33
+   Appendix A.  ランダムな長さの生成
+
+   SSH/QUIC 拡張メカニズムは範囲中の短い値のほうが有意に確率が高いが長い値も選択されるランダムな長さを生成することを求めている.
+   次の C の例でより短い長さを好む簡単な 2 段階のプロセスを示す.
+
+    int RandomIntBetweenZeroAnd(int maxValueInclusive);
+
+    int RandomLen_PreferShort(int minLen, int maxLen)
+    {
+        int const SPAN_THRESHOLD = 7;
+        int lenSpan = maxLen - minLen;
+
+        if (lenSpan <= 0)
+            return minLen;
+
+        if (lenSpan > SPAN_THRESHOLD)
+            if (0 != RandomIntBetweenZeroAnd(3))
+                return minLen + RandomIntBetweenZeroAnd(SPAN_THRESHOLD);
+
+        return minLen + RandomIntBetweenZeroAnd(lenSpan);
+    }
+
+                              Figure 33
+
+Author's Address
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 34]
+
+Internet-Draft                  SSH/QUIC                   December 2020
+
+
+   denis bider
+   Bitvise Limited
+   4105 Lombardy Ct
+   Colleyville, TX 76034
+   United States
+
+   Email: ietf-draft@denisbider.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+bider                      Expires 5 June 2021                 [Page 35]
