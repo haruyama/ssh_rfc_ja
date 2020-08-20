@@ -102,7 +102,7 @@ RFC 8268             More MODP DH KEX Groups for SSH       December 2017
 
    o  2048-bit 鍵を用いる Diffie-Hellman (SSH では, [RFC4253] "diffie-hellman-group1-sha1" と "diffie-hellman-group14-sha1", この文書で追加される "diffie-hellman-group14-sha256" を避けることを示唆する.)
 
-   このよくある質問は, 最小の必要なサイズに準拠しているよく確立され検証されたパラメータセットをベースにした DH 群を NSS のユーザは選択する必要があると記述している.  具体的な例を挙げると:
+   このよくある質問は, 最小の必要なサイズに準拠しているよく確立され検証されたパラメーターセットをベースにした DH 群を NSS のユーザは選択する必要があると記述している.  具体的な例を挙げると:
 
    o  楕円曲線は, NIST と 国家情報保障パートナーシップ(NIAP) 標準に従って ECDH と ECDSA に対してのみ NIST P-384 グループに現在限定されている.  (SSH では, [RFC5656] "ecdh-sha2-nistp384" を鍵交換に "ecdsa-sha2-nistp384" を公開鍵アルゴリズムに利用することを意味する.)
 
@@ -206,9 +206,9 @@ RFC 8268             More MODP DH KEX Groups for SSH       December 2017
 
    [RFC4253] のセキュリティの考察がこの文書に適用される.
 
-   [RFC3526] のセキュリティの考察は, MODP group14 からgroup18 は 110 bits から 310 bits の範囲のセキュリティの強度を持つと示唆している.  "Determining Strengths For Public Keys Used For Exchanging Symmetric Keys" [RFC3766] をこの示唆はベースにしている.  選択した鍵交換と暗号の本当のセキュリティ強度を最大化するには, 十分なエントリピーの利用 と/もしくは 決定論的な乱数生成器 (DRBG) を利用することに注意を払う必要がある.
+   [RFC3526] のセキュリティの考察は, MODP group14 からgroup18 は 110 bits から 310 bits の範囲のセキュリティの強度を持つと示唆している.  "Determining Strengths For Public Keys Used For Exchanging Symmetric Keys" [RFC3766] をこの示唆はベースにしている.  選択した鍵交換と暗号の本当のセキュリティ強度を最大化するには, 十分なエントロピーの利用 と/もしくは 決定論的な乱数生成器 (DRBG) を利用することに注意を払う必要がある.
 
-   Diffie-Hellman パラメータの固定のセットの利用は, 事前計算によりパラメータを最重要目標とする.  利用する素数の追加のセットの生成やより大きな値の利用がこの問題を軽減する.
+   Diffie-Hellman パラメーターの固定のセットの利用は, 事前計算によりパラメーターを最重要目標とする.  利用する素数の追加のセットの生成やより大きな値の利用がこの問題を軽減する.
 
 7.  References
 

@@ -173,7 +173,7 @@ RFC 6187              X.509v3 Certificates for SSH            March 2011
      uint32  ocsp-response-count
      string  ocsp-response[0..ocsp-response-count]
 
-   上の図で, 文字列 [identifier] は, 楕円曲線ドメインパラメータの識別子だ.  この文字列のフォーマットは, [RFC5656] の 6.1 節で指定されている.  このアルゴリズムと共に用いる楕円曲線ドメインパラメータの要求されている集合と推奨される集合の情報は, [RFC5656] の 10節にある.
+   上の図で, 文字列 [identifier] は, 楕円曲線ドメインパラメーターの識別子だ.  この文字列のフォーマットは, [RFC5656] の 6.1 節で指定されている.  このアルゴリズムと共に用いる楕円曲線ドメインパラメーターの要求されている集合と推奨される集合の情報は, [RFC5656] の 10節にある.
 
    それぞれの certificate と ocsp-response は,  Abstract Syntax Notation One (ASN.1) [ASN1] の Distinguished Encoding Rules(DER) エンコーディングを用いてオクテット文字列としてエンコードされなければならない.  これらの公開鍵アルゴリズムの1つでSSHの鍵交換をする例を, 付録Aで示す.
 
@@ -321,7 +321,7 @@ RFC 6187              X.509v3 Certificates for SSH            March 2011
      string  "ecdsa-sha2-[identifier]"
      string  ecdsa_signature_blob
 
-   文字列 [identifier] は, 楕円曲線のドメインパラメータの識別子だ.  この文字列のフォーマットは, [RFC5656] の 6.1 節で指定されている.
+   文字列 [identifier] は, 楕円曲線のドメインパラメーターの識別子だ.  この文字列のフォーマットは, [RFC5656] の 6.1 節で指定されている.
 
 
 

@@ -30,7 +30,7 @@ Expires: August 5, 2006                                      S. Suehring
 
 概要
 
-   この文書は, Secure File Transfer Protocol (SFTP) と Secure Shell (SSH) プロトコルのためのリソースの場所を示すのに使える Uniform Resource Identifier を記述する. この文書は, URI 定義に関する一般的なシンタックスとそれぞれのプロトコル特有の定義を記述する.  それぞれの特有の定義は, ユーザ名のようなユーザの認証情報やホスト鍵の指紋のような他のパラメータを含むことがある.  加えて, セキュリティの考察と例もこの文書で提供される.
+   この文書は, Secure File Transfer Protocol (SFTP) と Secure Shell (SSH) プロトコルのためのリソースの場所を示すのに使える Uniform Resource Identifier を記述する. この文書は, URI 定義に関する一般的なシンタックスとそれぞれのプロトコル特有の定義を記述する.  それぞれの特有の定義は, ユーザ名のようなユーザの認証情報やホスト鍵の指紋のような他のパラメーターを含むことがある.  加えて, セキュリティの考察と例もこの文書で提供される.
 
 
 
@@ -63,9 +63,9 @@ Internet-Draft         URI Scheme for SSH and SFTP         February 2006
      4.6  この URI スキームを用いるプロトコル  . . . . . . . . . . . . .   6
      4.7  セキュリティの考察  . . . . . . . . . . . . . . . . .   6
      4.8  連絡先  . . . . . . . . . . . . . . . . . . . . . . . . .   7
-   5.   パラメータ . . . . . . . . . . . . . . . . . . . . . . . . .   7
+   5.   パラメーター . . . . . . . . . . . . . . . . . . . . . . . . .   7
      5.1  SSH connection parameters . . . . . . . . . . . . . . . .   7
-     5.2  SFTP パラメータ  . . . . . . . . . . . . . . . . . . . . .   7
+     5.2  SFTP パラメーター  . . . . . . . . . . . . . . . . . . . . .   7
    6.   例 . . . . . . . . . . . . . . . . . . . . . . . . . .   8
    7.   IANA の考察  . . . . . . . . . . . . . . . . . . . .   8
    8.   セキュリティの考察  . . . . . . . . . . . . . . . . . .   9
@@ -150,9 +150,9 @@ Internet-Draft         URI Scheme for SSH and SFTP         February 2006
    userinfo か connection parameters が存在するならば, URI の authority 節の前に at-sign "@" がある必要がある.  オプションで, authority 節は, 先にコロン ":" 付きで port を含めてもよい.
    host は空文字列でない必要がある. port が含まれないなら, デフォルトのポートが仮定される.
 
-   URI の ssh-info 部分は, ユーザ名とオプションのパラメータが続いて構成される認証情報を含むかもしれない.  [RFC3986] に従い, ユーザ名とパスワードを ":" で区切って URI に含める関数は推奨されず廃止された.
+   URI の ssh-info 部分は, ユーザ名とオプションのパラメーターが続いて構成される認証情報を含むかもしれない.  [RFC3986] に従い, ユーザ名とパスワードを ":" で区切って URI に含める関数は推奨されず廃止された.
 
-   1つ以上の connection parameters (c-param) が URI の userinfo 節に指定されるかもしれない.  これらの conn-parameter は userinfo と セミコロン ";" で分離される.  この文書で定義される唯一の connection parameter は 5.1 節で記述されるホスト鍵の指紋だ.  将来追加のパラメータが定義される可能性はある.  理解できない connection parameter は無視されなければならない.
+   1つ以上の connection parameters (c-param) が URI の userinfo 節に指定されるかもしれない.  これらの conn-parameter は userinfo と セミコロン ";" で分離される.  この文書で定義される唯一の connection parameter は 5.1 節で記述されるホスト鍵の指紋だ.  将来追加のパラメーターが定義される可能性はある.  理解できない connection parameter は無視されなければならない.
 
    SSH URI は空でない path 要素の利用について定義しない.  SSH URI に空でない path 要素が含まれる場合, それは無視される必要がある.
 
@@ -229,7 +229,7 @@ Internet-Draft         URI Scheme for SSH and SFTP         February 2006
    SFTP URL の authority 部分は, 3.4 節で定義した SSH URL と同じだ.  SFTP の URI は, path を構成する各要素が,   '/' で区切られた path の要素によって構成される階層的 URI だ.  この形式は [I-D.ietf-secsh-filexfer] の 5節にあるように path の情報を表現するためのものだ.  SFTP 実装は, URI の path のルートがどこか決定する.
    path が ファイルシステムのルートからの絶対パスとして解釈されるのが推奨される.  実装は, path 中の最初の path 要としてチルダ ("~") 文字をユーザのホームディレクトリからの相対パスを指すために使うようにしてもよい.  "." and ".." は, URI パス階層の中でのみ解釈され, [RFC3986] で定義された URL 解決プロセスの部分の一部として取り除かれることに注意.
 
-   path に続いて追加の sftp 特有のパラメータが指定できる.  これらは 5.2 節で記述される.  将来追加のパラメータが定義される可能性はある.  理解できない sftp parameter は無視されなければならない.
+   path に続いて追加の sftp 特有のパラメーターが指定できる.  これらは 5.2 節で記述される.  将来追加のパラメーターが定義される可能性はある.  理解できない sftp parameter は無視されなければならない.
 
 4.5  エンコーディングの考察
 
@@ -260,15 +260,15 @@ Internet-Draft         URI Scheme for SSH and SFTP         February 2006
 
 5.1   SSH connection parameters
 
-   次のパラメータが SSH 接続に関連し, SSH と SFTP に適用できる.  すべてのパラメータはオプショナルで, 設定されたデフォルトを上書きしてはならない.  個々のパラメータは コンマ (",") で分離される.
+   次のパラメーターが SSH 接続に関連し, SSH と SFTP に適用できる.  すべてのパラメーターはオプショナルで, 設定されたデフォルトを上書きしてはならない.  個々のパラメーターは コンマ (",") で分離される.
 
    fingerprint
 
-       fingerprint パラメータは, URL で指定されたホストのホスト鍵の指紋を含む.  指紋は host-key-alg-fingerprint のようにエンコードされる.  host-key-alg は [RFC4253] で定義されたホスト公開鍵アルゴリズムで, fingerprint の形式は [I-D.ietf-secsh-publickeyfile] だ.  URI での利用のため, fingerprint は [I-D.ietf-secsh-publickeyfile] で記述されたコロン ":" の代わりに シングルダッシュ "-" を分離記号として用いる必要がある.  このパラメータは, ホストにすでに設定された鍵を上書きしてはならない.  URI が完全性の保護がある認証されたソースから得られた場合, この fingerprint をホスト鍵の真正性の検証に利用してもよい.  このパラメータが含まれていなかったら, ホスト鍵は別の方法で検証される.  追加の考察についてはセキュリティの考察節を参照.  URL 中に ただ 1つのみの fingerprint パラメータが存在しなければならない
+       fingerprint パラメーターは, URL で指定されたホストのホスト鍵の指紋を含む.  指紋は host-key-alg-fingerprint のようにエンコードされる.  host-key-alg は [RFC4253] で定義されたホスト公開鍵アルゴリズムで, fingerprint の形式は [I-D.ietf-secsh-publickeyfile] だ.  URI での利用のため, fingerprint は [I-D.ietf-secsh-publickeyfile] で記述されたコロン ":" の代わりに シングルダッシュ "-" を分離記号として用いる必要がある.  このパラメーターは, ホストにすでに設定された鍵を上書きしてはならない.  URI が完全性の保護がある認証されたソースから得られた場合, この fingerprint をホスト鍵の真正性の検証に利用してもよい.  このパラメーターが含まれていなかったら, ホスト鍵は別の方法で検証される.  追加の考察についてはセキュリティの考察節を参照.  URL 中に ただ 1つのみの fingerprint パラメーターが存在しなければならない
 
-5.2  SFTP パラメータ
+5.2  SFTP パラメーター
 
-   SFTP パラメータはファイル転送での文字変換をどう扱うかを決定する.  追加のパラメータが利用されてもよい.
+   SFTP パラメーターはファイル転送での文字変換をどう扱うかを決定する.  追加のパラメーターが利用されてもよい.
 
    typecode
 

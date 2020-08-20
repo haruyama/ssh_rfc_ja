@@ -77,7 +77,7 @@ RFC 5114            Additional Diffie-Hellman Groups        January 2008
 
 1イントロダクション
 
-   この文書は, いくつかの Diffie-Hellman (D-H) 群のパラメータとテストデータを提供する. これらの群は, たとえば IKE や TLS, SSH, SMIME といった,  D-H 鍵を用いるインターネットプロトコルや (D-H 鍵を運ぶ証明書のための)  Public Key Infrastructure for X.509 Certificates (PKIX) のような IETF 標準と利用できる.  これらの群は, IKEv1 と用いるために [RFC2409] で定義された "Oakley" 群やたとえば [RFC3526] や [RFC4492] で後で定義されたいくつかの追加の群を含む, IETF ですでに文書された群を補完する.  
+   この文書は, いくつかの Diffie-Hellman (D-H) 群のパラメーターとテストデータを提供する. これらの群は, たとえば IKE や TLS, SSH, SMIME といった,  D-H 鍵を用いるインターネットプロトコルや (D-H 鍵を運ぶ証明書のための)  Public Key Infrastructure for X.509 Certificates (PKIX) のような IETF 標準と利用できる.  これらの群は, IKEv1 と用いるために [RFC2409] で定義された "Oakley" 群やたとえば [RFC3526] や [RFC4492] で後で定義されたいくつかの追加の群を含む, IETF ですでに文書された群を補完する.  
 
 
 
@@ -94,7 +94,7 @@ RFC 5114            Additional Diffie-Hellman Groups        January 2008
    RFC 2409 は 5つの標準 Oakley 群を定義した: 3つの羃剰余群と 2つの GF[2^N] 上の楕円曲線群だ.
    1つの羃剰余群 (768 bits - Oakley Group 1) が すべての IKEv1 実装でのサポートが義務づけられ, 残りの4つは選択可能と宣言された.  IKEv1 と利用するために 16 の追加の群が後で定義され IANA に登録された, このうち 8つは IKEv2 の利用のためにも登録された.  これらの追加の群はすべて IKE の文脈では選択可能だ.  IKE と利用するためにこれで 21 の群が定義された. そのうち, 8 つが MODP (羃剰余) 群, 10 が EC2N (GF[2^N] 上の楕円曲線) 群,  3つが ECP (GF[P] 上の楕円曲線) 群だ.
 
-   この文書の目的は, 8 つの 追加の群のパラメータとテストデータを, 既存の RFC と整合性のある形式で, SMIME や SSH, TLS, IKE といった IETF のプロトコルでこれらの群をどのように用いることができるかの指示と共に提供することだ.  これらの群のうち 3 つは, IKEとの利用のためにすでに定義されており [RFC4753], 5つは TLS との利用のためにすでに定義されている [RFC4492].
+   この文書の目的は, 8 つの 追加の群のパラメーターとテストデータを, 既存の RFC と整合性のある形式で, SMIME や SSH, TLS, IKE といった IETF のプロトコルでこれらの群をどのように用いることができるかの指示と共に提供することだ.  これらの群のうち 3 つは, IKEとの利用のためにすでに定義されており [RFC4753], 5つは TLS との利用のためにすでに定義されている [RFC4492].
    (後者は, 指定された群のテストデータを提供ないし参照していない).  テストデータと様々なプロトコルでの利用するための指示と共に 8つの群の仕様を組合せて, この文書は, 複数の IETF プロトロルで 利用するための同じ Diffie-Hellman 群を提供したい望んでいる実装者のためのリソースを提供する.
 
    これらの群はすべて, Diffie-Hellman 鍵交換のための 適用可能な ISO [ISO-14888-3] や ANSI [X9.62],  NIST [NIST80056A] 標準と互換している.  これらの群と関連するテストデータは, NIST によってウェブサイト [EX80056A] で定義されているが, (この文書の執筆時点では)まだ 公式の NIST 文書として公開されていない.  関連するテストデータ付きのこれらの群を RFC として公開することは, 相互運用可能な実装の発展を促進し, これらの群を用いる実装の FIPS 検証をサポートだろう.
@@ -433,7 +433,7 @@ RFC 5114            Additional Diffie-Hellman Groups        January 2008
 
 3.1.  X.509 証明書
 
-   MODP と 楕円曲線 Diffie-Hellman 公開鍵 (と関連するパラメータ) の X. 509 証明書での表現は, [RFC3279] で定義されている.  前に定義した MODP 群は, 前述の RFC の 2.3.3 節の構文によって表現されなければならない. 楕円曲線群は 2.3.5 節の構文によって表現されなければならない.
+   MODP と 楕円曲線 Diffie-Hellman 公開鍵 (と関連するパラメーター) の X. 509 証明書での表現は, [RFC3279] で定義されている.  前に定義した MODP 群は, 前述の RFC の 2.3.3 節の構文によって表現されなければならない. 楕円曲線群は 2.3.5 節の構文によって表現されなければならない.
 
 
 
@@ -480,7 +480,7 @@ Lepinski & Kent              Informational                     [Page 10]
 RFC 5114            Additional Diffie-Hellman Groups        January 2008
 
 
-   サーバは, 証明書に含まれる (固定の) Diffle-Hellman パラメータを利用できるし, 同様に クライアントも証明書を用いて同様にできる.  それゆえ 関連する PKIX RFC (3.1 節) も適用される.  代わりに, サーバは サーバの鍵交換メッセージ中に一時的な Diffle-Hellman パラメータを送信してもよい. メッセージの署名は RSA か DSS で署名されたサーバの証明書を用いて検証される.  MODP Diffle-Hellman 群でこれを達成する詳細は [RFC2246] で提供されている.
+   サーバは, 証明書に含まれる (固定の) Diffle-Hellman パラメーターを利用できるし, 同様に クライアントも証明書を用いて同様にできる.  それゆえ 関連する PKIX RFC (3.1 節) も適用される.  代わりに, サーバは サーバの鍵交換メッセージ中に一時的な Diffle-Hellman パラメーターを送信してもよい. メッセージの署名は RSA か DSS で署名されたサーバの証明書を用いて検証される.  MODP Diffle-Hellman 群でこれを達成する詳細は [RFC2246] で提供されている.
 
    TLS 1.1 (と 1.0) での楕円曲線 Diffle-Hellman の利用は [RFC4492] で定義されている.  この文書の楕円曲線は,  IANA EC Named Curve Registry [IANA-TLS] に現われているが, このレジストリの名前は Standards for Efficient Cryptography Group (SECG) specification [SECG] から取ったもので, NIST の刊行物での名前と異なる.  次のテーブルで それぞれの楕円曲線について NIST での名前と SECG での名前付きで EC Named Curve ID を提供する.
    name and the SECG name for the curve.
@@ -496,12 +496,12 @@ RFC 5114            Additional Diffie-Hellman Groups        January 2008
 3.4.  SSH
 
    SSH での DIffle-Hellman の利用は 最初に [RFC4253] で定義された.
-   この RFC は 2 つの MODP Diffle-Hellman 群を定義しており, IANA レジストリによって 追加の群の登録が呼びかけられてた.  しかし, [RFC4419] は元のモデルを拡張し, MODP Diffie-Hellman パラメータを鍵交換メッセージの一部として転送できるようにした.
+   この RFC は 2 つの MODP Diffle-Hellman 群を定義しており, IANA レジストリによって 追加の群の登録が呼びかけられてた.  しかし, [RFC4419] は元のモデルを拡張し, MODP Diffie-Hellman パラメーターを鍵交換メッセージの一部として転送できるようにした.
    このため, RFC4419 を用いると  この文書で定義された MODP 群の利用について 追加の仕様(や IANA レジストリへのアクション)は必要ない.  現時点で, 楕円曲線 Diffle-Hellman の SSH での利用について記述された RFC はない.  しかし, [SSH-ECC] は SSH で 楕円曲線 Diffle-Hellman をどう仕様するかの記述を提供している. 
 
 3.5.  SMIME
 
-   SMIME での Diffie-Helman の利用は, Cryptographic Message Syntax (CMS) enveloped data [RFC3852] の議論によって定義されている.  MODP Diffle-Hellman の適切なリファレンスは [RFC2631].  この仕様は, 受信者の証明書から Diffle-Hellman (MOD) パラメータを抜き出すよう送信者に求めるので, Diffle-Hellman パラメータサーフェスの表現のために PKIX 仕様も必要となる.  送信者はその公開鍵を OringinatorIdentifierKey フィールドで転送するか, 送信者の証明書の参照を転送する.
+   SMIME での Diffie-Helman の利用は, Cryptographic Message Syntax (CMS) enveloped data [RFC3852] の議論によって定義されている.  MODP Diffle-Hellman の適切なリファレンスは [RFC2631].  この仕様は, 受信者の証明書から Diffle-Hellman (MOD) パラメーターを抜き出すよう送信者に求めるので, Diffle-Hellman パラメーターサーフェスの表現のために PKIX 仕様も必要となる.  送信者はその公開鍵を OringinatorIdentifierKey フィールドで転送するか, 送信者の証明書の参照を転送する.
 
 
 
@@ -514,7 +514,7 @@ RFC 5114            Additional Diffie-Hellman Groups        January 2008
    certificate.
 
    CMS での 楕円曲線 Diffie-Hellman の利用は [RFC3278] で定義されている.
-   CMS 文脈での MODP Diffle-Hellman の利用のように, 送信者は, 受信者の公開鍵を得て証明書からパラメータを取得することが仮定されている.  送信者は, KeyAgreeRecipientInfo originator フィールドに その楕円曲線 Diffle-Hellman 公開鍵を含める.  ( ECC-CMS-SharedInfo の詳細は RFC3278 の 8.2 節を参照).
+   CMS 文脈での MODP Diffle-Hellman の利用のように, 送信者は, 受信者の公開鍵を得て証明書からパラメーターを取得することが仮定されている.  送信者は, KeyAgreeRecipientInfo originator フィールドに その楕円曲線 Diffle-Hellman 公開鍵を含める.  ( ECC-CMS-SharedInfo の詳細は RFC3278 の 8.2 節を参照).
 
 4.  セキュリティの考察
 
