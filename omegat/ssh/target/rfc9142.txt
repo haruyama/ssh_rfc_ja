@@ -1,0 +1,697 @@
+
+
+
+
+Internet Engineering Task Force (IETF)                        M. Baushke
+Request for Comments: 9142                                  January 2022
+Updates: 4250, 4253, 4432, 4462                                         
+Category: Standards Track                                               
+ISSN: 2070-1721
+
+
+ セキュアシェル (SSH) のための鍵交換 (KEX) 法の更新と推奨
+
+概要
+
+   この文書は, より強いセキュリティの進展する需要に合うセキュアシェル (SSH) プロトコル内で用いられる鍵交換法の推奨セットを更新する.  この文書は RFC 4250 と 4253, 4432, 4462 を更新する.
+
+このメモの位置づけ
+
+   これは, インターネット標準化課程文書だ.
+
+   この文書は, Internet Engineering Task Force (IETF) の成果物だ.  IETF コミュニティの合意を表わしている.  公開のレビューを受けており, Internet Engineering Steering Group (IESG) によって発行が認められた.  インターネット標準についてさらなる情報は RFC 7841 の 2節にある.
+
+   この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc9142 で得られる.
+
+著作権情報
+
+   Copyright (c) 2022 IETF Trust and the persons identified as the
+   document authors. 訳者: 春山征吾 <haruyama@unixuser.org>All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Revised BSD License text as described in Section 4.e of the
+   Trust Legal Provisions and are provided without warranty as described
+   in the Revised BSD License.
+
+目次
+
+   1概要と原理
+     1.1.  適切なハッシュアルゴリズムの選択
+     1.2.  適切な公開鍵アルゴリズムの選択
+       1.2.1.  楕円曲線暗号 (ECC)
+       1.2.2.  有限フィールド暗号  (FFC)
+       1.2.3.  整数因数分解暗号 (IFC)
+   2.  要件に関する用語
+   3.  鍵交換法
+     3.1.  楕円曲線暗号 (ECC)
+       3.1.1.  curve25519-sha256 and gss-curve25519-sha256-*
+       3.1.2.  curve448-sha512 and gss-curve448-sha512-*
+       3.1.3.  ecdh-*, ecmqv-sha2, and gss-nistp*
+     3.2.  有限フィールド暗号 (FFC)
+       3.2.1.  生成された MODP 群を用いる FFC Diffie-Hellman名前付きの MODP 群を用いる FFC Diffie-Hellman
+     3.3.  整数因数分解暗号 (IFC)
+     3.4.  KDFs と完全ハッシュ
+     3.5.  セキュアシェル拡張ネゴシエーション
+   4.  鍵交換方式名の実装に対する概要ガイダンス
+   5.  セキュリティの考察
+   6.  IANA の考察
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
+   Acknowledgements
+   Author's Address
+
+1概要と原理
+
+   セキュア シェル (SSH) は, インターネットでの安全な通信のための一般的なプロトコルだ.  [RFC4253] で, SSH は元々 実装すべき 2 つの鍵交換 (KEX) 法名を定義している.  時間が経ち, かつて安全だと考えられていたこれらはもはや安全だと考えられていない.  この RFC の目的は, いくつかの公開鍵交換を非推奨ないし非許可とし また いくつかの公開鍵交換を採用する必要があり 1 つを採用しなければらないものとするよう 推薦することだ.
+
+   この文書は  [RFC4250] と [RFC4253], [RFC4432], [RFC4462] を, いくつかの鍵交換メカニズムの要求レベルを変更する ("MUST" を "SHOULD" に, "MAY" を "SHOULD NOT" に, "MAY" を "MUST" や "SHOULD", "SHOULD NOT", "MUST NOT" に) ことで, 更新する.  いくつかの推奨は変更されないが, 完全性のために記載される.
+
+   [RFC4253] の 7.2 節は次のように述べている:
+
+   > 鍵交換は2つの値を生成する: 共有の秘密 K と 交換ハッシュ H だ. 暗号化と認証の鍵はこれらから導出される.  > 最初の鍵交換からの交換ハッシュ H は, 接続の唯一の識別子として, セッション識別子(session_id)としても使われる.  > これは, 認証法の中で, 秘密鍵の所有を証明するために署名されるデータの一部として使われる.  > 一度計算されたら, セッション識別子は変更されない. たとえ, あとで鍵を再交換してもだ.
+
+   公開鍵交換アルゴリズムと鍵導出関数 (KDF) で利用されるハッシュのセキュリティ強度はどちらも 用いられる共有の秘密 K のセキュリティに影響する.
+
+   この文書で記述される鍵交換法で利用されるハッシュアルゴリズムは: sha1 と sha256, sha384, sha512 だ.  多くの場合, ハッシュの名前は公開鍵交換アルゴリズムの名前に明示的に付加されている.  しかし, そのうちのいくつかは暗黙的で, 鍵交換名を定義する RFC 中で定義されている.
+
+   いくつかの RFC はハッシュ関数や暗号化関数の名前に異なるスペルや大文字小文字の利用を用いている.  この文書のために, 次は同じ名前とする: sha1 と SHA1, SHA-1; sha256 と SHA256, SHA-256 SHA2-256; sha384 と SHA384, SHA-384, SHA2-384; sha512とSHA512, SHA-512, SHA2-512.
+
+   この文書のために, 次は同等とする: aes128 と AES128, AES-128; aes192 と AES192,  AES-192; aes256 と AES256, AES-256.
+
+   公開鍵交換アルゴリズムのセキュリティ強度と共通鍵暗号のセキュリティ強度を一致させようと試みるのはよい.
+
+   複数のモードを利用できる利用可能な共通鍵暗号はたくさんある.  Table 1 のリストは, 大半の SSH 実装で利用できると思われる共通鍵暗号の代表例として意図したものだ.  セキュリティ強度の見積は triple-DES では [RFC4086] で AES では同様に [NIST.SP.800-57pt1r5] の 5.6.1.1 節で一般的に利用できる.
+
+         +========================+=============================+
+         | Cipher Name (modes)    | 見積りセキュリティ強度 |
+         +========================+=============================+
+         | 3des (cbc)             | 112 bits                    |
+         +------------------------+-----------------------------+
+         | aes128 (cbc, ctr, gcm) | 128 bits                    |
+         +------------------------+-----------------------------+
+         | aes192 (cbc, ctr, gcm) | 192 bits                    |
+         +------------------------+-----------------------------+
+         | aes256 (cbc, ctr, gcm) | 256 bits                    |
+         +------------------------+-----------------------------+
+
+               Table 1: 共通鍵暗号のセキュリティ強度
+
+   次のサブ節で鍵交換のそれぞれの部分をどのように選択するかを記述する.
+
+1.1.  適切なハッシュアルゴリズムの選択
+
+   SHA-1 ハッシュは多くの理由で非推奨となっている途中だ.
+
+   SHA-1 に対する攻撃があり, SSH のセキュリティ供給を満す強さをもはや持っていない.  それゆえ, 攻撃がより深刻になる前に利用をしなくなるのが望ましい.
+
+   SHA-1 はセキュリティの強度としておおよそ 80 bit を提供する.  これは, 利用される共有鍵のセキュリティ強度が最大でも 80 bit であるということで, 多くのユーザにとって十分ではないだろう.
+
+   鍵交換のためには, SHA-1 に対する攻撃は 原像攻撃よりも人間の手助けに通常頼る衝突攻撃になる.  SHA-1 ハッシュの 第 2 原像攻撃に対する耐性はまだ 160 bit だが, SSH は 第 2 原像攻撃への耐性ではなく 選択 プレフィックス衝突耐性に依存する.
+
+   Transcript Collision attack は [TRANSCRIPTION] に文書化されている.  この論文は, 経路上の攻撃者が Diffie-Hellman の値を操作せず, 接続鍵を知る必要がないことを示している.  この攻撃は, ([RFC4253] の 7.3 節で定義された I_C と I_S を操作するための用いることができ, 交渉されたアルゴリズムを攻撃者が破り方を知っている弱い暗号アルゴリズムへダウングレードすることが潜在的にできる.
+
+   これらの攻撃は計算量的にはまだ実行するのが非常に難しいが, SHA-1 を用いる鍵交換は可能な限り廃止するのが望ましい.
+   as soon as possible.
+
+   鍵交換での SHA-1 での利用を互換性のために必要とするなら, 鍵交換の優先リストの最後に列挙するのが望ましいだろう.
+
+   [RFC6234] の SHA-2 ハッシュファミリの利用が SHA-1 ハッシュよりも強く推奨される.
+
+   安全なハッシュ関数 SHA-2 ファミリには 128 ビットのセキュリティ強度を持つ SHA2-256 と 192 ビットのセキュリティ強度を持つ SHA2-384, 256 ビットのセキュリティ強度を持つ SHA2-512 がある.
+   これは, 鍵交換法で用いられる最小限の安全を提供するハッシュ関数は, 128 ビットのセキュリティ強度の SHA2-256 である必要があることを示唆している.  同じセキュリティ強度のビットを持つ他のハッシュ関数も存在するが, SSH の鍵交換法での利用ではどの RFC にもまだ定義されていない.
+
+   鍵交換法の名前の組み合わせ爆発を避けるため, 新しい鍵交換法は一般に  *-sha256 と *-sha512 に制限される.  例外として [RFC6234] で定義された SHA2-384 (SHA-384 としても知られる) をハッシュアルゴリズムとして利用するよう定義された ecdh-sha2-nistp384 と gss-nistp384-sha384-* がある.
+
+   Table 2 は衝突耐性についてのハッシュ関数のセキュリティ強度の概要だ.  ハッシュアルゴリズムのセキュリティ強度についてのさらなる情報は [NIST.SP.800-107r1] で調べられる.
+
+                +===========+=============================+
+                | Hash Name | 見積りセキュリティ強度 |
+                +===========+=============================+
+                | sha1      | 80 bits (攻撃以前)    |
+                +-----------+-----------------------------+
+                | sha256    | 128 bits                    |
+                +-----------+-----------------------------+
+                | sha384    | 192 bits                    |
+                +-----------+-----------------------------+
+                | sha512    | 256 bits                    |
+                +-----------+-----------------------------+
+
+                     Table 2: ハッシュ関数のセキュリティ強度
+
+1.2.  適切な公開鍵アルゴリズムの選択
+
+   SSH は鍵交換をするために数学的に困難な問題を利用する:
+
+   *  楕円曲線暗号 (ECC) には SSH の鍵交換法のための曲線のファミリーがある.  NIST の名前付き素数曲線や他の曲線が [RFC5656] を介して楕円曲線 Diffie-Hellman (ECDH) でオブジェクト識別子 (OID) を用いて利用できる.  Curve25519 と curve448 鍵交換が[RFC8731] を介して ECDH で利用できる.
+
+   *  有限体暗号 (FFC) は Diffie-Hellman (DH) 鍵交換で [RFC3526] の指定されたリストからか [RFC8270] で更新された [RFC4419] を介した動的な生成から得られる "安全な素数" と共に用いられる.
+
+   *  RSA アルゴリズムで用いられる整数素因数分解暗号 (IFC) は  [RFC4432] の中で提供されている.
+
+   選択される鍵交換のセキュリティ強度は, SSH のハンドシェイクの他の要素のセキュリティ強度と同等なことな望ましい.  攻撃者は, SSH ハンドシェイクのもっとも弱い要素を標的とするだろう.
+
+   セキュリティ強度として最低 112 bit が選択されるのが, 利用可能な対称暗号の最弱のもの (3des-cbc) と一致するので望ましい.  実装者のセキュリティの要求に基づいて, より強い最低強度が望まれる場合もある.
+
+   Modular Exponentiation (MODP) 群や  ECC 曲線のサイズ, RSA の鍵サイズがより大きくなれば, 鍵交換の実施により計算能力が必要となる.
+
+1.2.1.  楕円曲線暗号 (ECC)
+
+   ECC では 名前付きのすべての曲線について最弱のセキュリティ強度はおおよそ 128 bit だ.  [RFC5656] の名前付き曲線を使う鍵交換は, 一致するセキュリティ強度のハッシュ関数を用いる.  同様に [RFC8731] の鍵交換も曲線よりもセキュリティ強度が強いハッシュ関数を用いる.  最弱のセキュリティ強度は, 曲線の強度となる.  Table 3 は曲線名での ECC セキュリティ強度の分析だ; 利用されるハッシュ関数も含まれている.  curve25519 と curve488 セキュリティレベルは [RFC7748] にある.  nistp256 と nistp384, nistp521 (NIST prime curves) は [RFC5656] で提供されている.
+   個々の曲線で用いられるよう指定されたハッシュアルゴリズムは, 名前付き曲線のセキュリティとおおよそ同じビット数を持っている.
+
+               +============+=============================+
+               | Curve Name | Estimated Security Strength |
+               +============+=============================+
+               | nistp256   | 128 bits                    |
+               +------------+-----------------------------+
+               | nistp384   | 192 bits                    |
+               +------------+-----------------------------+
+               | nistp521   | 512 bits                    |
+               +------------+-----------------------------+
+               | curve25519 | 128 bits                    |
+               +------------+-----------------------------+
+               | curve448   | 224 bits                    |
+               +------------+-----------------------------+
+
+                     Table 3: ECC セキィリティ強度
+
+1.2.2.  有限フィールド暗号 (FFC)
+
+   FFC 対しては, 最低 2048 ビットのモジュラス (おおよそ 112 ビットのセキュリティ強度)を 少なくとも FFC と同じビットのセキュリティを持つハッシュと共に用いるのを推奨する.  FFC とハッシュを合わせたセキュリティ強度は, この 2 つの値のうちの最小のものとなる.  これは, 3des-cbc 暗号に対して一貫したセキュリティ強度を提供するのに十分だ.  [RFC3526] の 1 節は より強い強度とより強い群を必要とする Advanced Encryption Standard (AES) 暗号について記載している.  128 ビットの AESには, おおよそ 3200 ビットの群が必要だ192 と 256 ビットの鍵は, それぞれおおよそ 8000 と 15400 ビットの群を必要とする.  Table 4 は MODP 群のセキュリティ強度を提供する.  ハッシュアルゴリズムと共に用いる場合, セキュリティ強度は 2 つのアルゴリズムの最小のものとなる.
+
+      +==================+=============================+============+
+      | Prime Field Size | Estimated Security Strength | Example    |
+      |                  |                             | MODP Group |
+      +==================+=============================+============+
+      | 2048-bit         | 112 bits                    | group14    |
+      +------------------+-----------------------------+------------+
+      | 3072-bit         | 128 bits                    | group15    |
+      +------------------+-----------------------------+------------+
+      | 4096-bit         | 152 bits                    | group16    |
+      +------------------+-----------------------------+------------+
+      | 6144-bit         | 176 bits                    | group17    |
+      +------------------+-----------------------------+------------+
+      | 8192-bit         | 200 bits                    | group18    |
+      +------------------+-----------------------------+------------+
+
+                    Table 4: FFC MODP のセキュリティ強度
+
+   最低の MODP 群は 2048 ビット MODP group14 だ.  SHA-1 ハッシュと共に用いると, この群はおおよそ 80 bit のセキュリティを提供する.
+   SHA2-256 ハッシュと共に用いると, この群はおおよそ 112 bit のセキュリティを提供する.  3des-cbc e暗号自体がたかだか 112 ビットのセキュリティを提供するので, group14-sha256 key  鍵交換は 112 ビットのセキュリティの 3dec-cbc 鍵のすべてを保持するのに十分だ.
+
+   SHA2-256 ハッシュと共に利用される 3072 ビットの MODP 群はおおよそ 128 ビットのセキュリティを提供する.  おおよそ 128 ビットのセキュリティを提供する aes128 や chacha20-poly1305 のような暗号を用いるときに望ましい.
+
+    sha512 と共に用いられる 8192 ビット の group18 MODP 群はおおよそ 200 ビットのセキュリティを提供するので, 192 ビットのセキュリティを持つ aes192 を保護するのに十分だ.
+
+1.2.3.  整数因数分解暗号 (IFC)
+
+   鍵交換での唯一の IFC アルゴリズムは [RFC4432] で規定されたRSA アルゴリズムだ.  RSA 1024 ビット鍵はおおよそ 80 ビットのセキュリティ強度を持つ.  RSA 2048 ビット鍵はおおよそ 112 ビットのセキュリティ強度を持つ.  IFC タイプの鍵交換は, FFC や ECC が提供する 前方秘匿性を提供しないことを注記しておく.
+
+   3 des-cbc に必要な 112 ビットのセキュリティ強度には, RSA 2048 鍵が一致する.  RSA 2048 ビット鍵と SHA-2 ファミリーのハッシュの利用は, 3des-cbc 対称暗号に一致する十分なセキュリティを持つ.  rsa1024-sha1 鍵交換は おおよそ 80 ビットのセキュリティ強度を持つので, 望ましくない.
+
+   Table 5 はハッシュアルゴリズムの強度を含まないこれらの鍵交換法のセキュリティ強度のまとめだ.  これらの強度のガイダンスは [NIST.SP.800-57pt1r5] の 5.6.1.1 節にある.
+
+           +=====================+=============================+
+           | Key Exchange Method | Estimated Security Strength |
+           +=====================+=============================+
+           | rsa1024-sha1        | 80 bits                     |
+           +---------------------+-----------------------------+
+           | rsa2048-sha256      | 112 bits                    |
+           +---------------------+-----------------------------+
+
+                      Table 5: IFC Security Strengths
+
+2.  要件に関する用語
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, ここで示しているようにすべて大文字で出現した場合のみ, BCP 16 [RFC2119] [RFC8174] で記述されているように解釈される. 
+
+3.  鍵交換法
+
+   この文書は,  データ鍵交換の利用を SSH の中でどのように表明するかを指定するのに, [RFC4253] スタイルと命名規則を採用する.
+
+   この RFC は 様々な既存の RFC ([RFC4253] と [RFC4419], [RFC4432], [RFC4462], [RFC5656], [RFC8268], [RFC8308], [RFC8731], [RFC8732]) の鍵交換法名を収集し, MUST, MAY, SHOULD NOT, MUST NOT で実装に対して推奨される適正を提供する.  明示的に列挙されていない方法は, 実装されてもよい.
+
+   [RFC4253] の 7.2 節で 共有の秘密 K (実際の KDF の出力) と交換キーハッシュ H の生成を定義している. それぞれの鍵交換法は, 鍵交換と鍵導出で同一でなければならない, 指定された HASH 関数を用いる.  H は 1 度だけ計算され, SSH のセッションを通して鍵交換の完全性のために用いられる.  [RFC4253] の 7.2 節に次のようにある:
+
+   | このプロセスは, Kのエントロピー量がHASHの内部状態のサイズよりも大きい場合, エントロピーを失なう.
+
+   このため, 利用する鍵交換アルゴリズムに対してハッシュアルゴリズムを ("妥当に") 選択することに注意しなければならない.
+
+   この文書は, 新しかったり更新される SSH の実装に対してどのような鍵交換アルゴリズムが考慮されるべきかの指針を提供する.
+
+   一般に 「弱い」と考えられている鍵交換法は, 非推奨 ("SHOULD NOT") ないし 禁止 ("MUST NOT") のどちらかに移動されている.
+   より新しかったりより強いと考えられている方式で多くの管理者および/また開発者が必要とするよりも通常より多くのデバイスのリソースを必要とするものは, 許可 ("MAY") となります.  (最終的には, これらの方式のいくつかは, 相互運用性とセキュリティを高めるために, 同意のもとで "SHOULD" に移動される.) 「弱く」なく実装の同意が得られている方式は推奨 ("SHOULD") となる.  少なくとも 1 つの同意がある方式は, 実装必須 (MTI) の状態に昇格する必要がある.  これにより, 今や禁止された MTI 方式の1つが失なわれても,  継続的な相互運用性を提供することを助ける.
+
+   この文書では, 112 ビットのセキュリティ強度を最小値としている.  おおよそ 80 ビットのセキュリティの SHA-1 と RSA 1024 ビットの一方ないし両方の利用は, この最小値を下回るので, SSH の設定された配置では可能な限り早く非推奨とし禁止に以降すべきだ.  この最小値は時間とともに増加する可能性があるので, 著者と管理者はより強いセキュリティを提供するアルゴリズムへの切り替えに備えることが望ましい.
+
+3.1.  楕円曲線暗号 (ECC)
+
+   SSH で利用される楕円曲線 (EC) 鍵交換アルゴリズムは, ECDH と EC Menezes-Qu-Vanstone (ECMQV) がある.
+
+   前述の鍵交換アルゴリズムで定義された ECC 曲線は次のものだ: curve25519, curve448, NIST prive curve (nistp256, nistp384, nistp521), [RFC5656] の 6 節で認められている他の曲線.  "gas-" というプレフィックス付きでこれらの曲線が同様に用いられる, Generic Security Service Application Program Interface (GSS-API) に基づく鍵交換メカニズムも存在する.
+
+3.1.1.  curve25519-sha256 と gss-curve25519-sha256-*
+
+   Curve25519 は, [RFC5656] で記述されているように用いる一般に公開されている NIST が購入した特許取得済みの楕円曲線パラメータと比較して, より高いパフォーマンスの実装を可能にする特徴を持ち幅広いアーキテクチャの上で効率的だ.  対応する鍵交換方式は, [RFC6234] で定義されている SHA2-256 (SHA-256 としても知られる) を用いる.  SHA2-256 は, KDF とセションの完全性のどちらでも利用できる妥当なハッシュだ.  curve25519 鍵交換法の gas と 非 gas での利用はどちらも妥当だ.  これらの鍵交換法は  [RFC8731] と [RFC8732] に記述されていて, [RFC8031] に記述されている IKEv2 鍵合意に似ている.  curve25519-sha256 key 鍵交換方式は複数の実装があり, 実装される必要がある (SHOULD).  gss-curve25519-sha256-* 鍵交換法も, curve25519-sha256 と同じパフォーマンスとセキュリティの特徴を持つので, 実装される必要がある (SHOULD).
+
+   Table 6 は curve25519 ベースの鍵交換についての推奨をまとめたものだ.
+
+                  +==========================+==========+
+                  | Key Exchange Method Name | Guidance |
+                  +==========================+==========+
+                  | curve25519-sha256        | SHOULD   |
+                  +--------------------------+----------+
+                  | gss-curve25519-sha256-*  | SHOULD   |
+                  +--------------------------+----------+
+
+                     Table 6: Curve25519 実装ガイダンス
+
+3.1.2.  curve448-sha512 と gss-curve448-sha512-*
+
+   curve448 は高い計算量と帯域幅のコストで curve25519 よりも高いセキュリティを提供する.  対応する鍵交換方式は, [RFC6234] で定義された SHA2-512 (SHA-512 としても知られる) を用いる.
+   SHA2-512 は, KDF とセションの完全性のどちらでも利用できる妥当なハッシュだ.  curve448 鍵交換法の gas と 非 gas での利用はどちらも妥当だ.  これらの鍵交換法は  [RFC8731] と [RFC8732] に記述されていて, [RFC8031] に記述されている IKEv2 鍵合意に似ている.  curve448-sha512 鍵交換方式は実装されてもよい(MAY).  gss-curve448-sha512-* 鍵交換法も, curve448-sha512 と同じパフォーマンスとセキュリティの特徴を持つので, 実装されてもよい (MAY).
+
+   Table 7 は curve448 ベースの鍵交換についての推奨をまとめたものだ.
+
+                  +==========================+==========+
+                  | Key Exchange Method Name | Guidance |
+                  +==========================+==========+
+                  | curve448-sha512          | MAY      |
+                  +--------------------------+----------+
+                  | gss-curve448-sha512-*    | MAY      |
+                  +--------------------------+----------+
+
+                      Table 7: Curve448 実装ガイダンス
+
+3.1.3.  ecdh-*  と ecmqv-sha2, gss-nistp*
+
+   ecdh-sha2-* 名前空間は, NIST の 素数曲線 (nistp256 と nistp384, nistp521) と同様に他の曲線も ECDH 鍵交換のために定義できる.  執筆時点で, この名前空間には 3 つの名前付き曲線がサポートされる必要がある (SHOULD).  これらは [RFC5656] の 10 節に記載されている.  実装された場合, この名前付きの曲線は, ローカルのセキュリティポリシーによって明示的に無効にされていない限り, 常に有効となっている必要がある (SHOULD).  [RFC5656] の 6.1 節に, OID を用いる他の ECDH 曲線に名前をつける方法が規定されている.  これらの他の曲線は実装されてもよい (MAY).
+
+   GSS-API の gss-nistp*-sha* の名前空間は,  ecdh-sha2-* の名前で用いられるアルゴリズムを反映している.  これらは, [RFC8732] に記述されている.
+
+   ECDH は FFC DH と比較して, 同様のセキュリティ強度で鍵交換の帯域幅を削減できる.
+
+   Table 8 は実装がより効率的であったり広く配置されるアルゴリズムを "SHOULD" として列挙している.  Table 8 で "MAY" で列挙されている項目はより効率的でない可能性がある.
+
+                  +==========================+==========+
+                  | Key Exchange Method Name | Guidance |
+                  +==========================+==========+
+                  | ecdh-sha2-*              | MAY      |
+                  +--------------------------+----------+
+                  | ecdh-sha2-nistp256       | SHOULD   |
+                  +--------------------------+----------+
+                  | gss-nistp256-sha256-*    | SHOULD   |
+                  +--------------------------+----------+
+                  | ecdh-sha2-nistp384       | SHOULD   |
+                  +--------------------------+----------+
+                  | gss-nistp384-sha384-*    | SHOULD   |
+                  +--------------------------+----------+
+                  | ecdh-sha2-nistp521       | SHOULD   |
+                  +--------------------------+----------+
+                  | gss-nistp521-sha512-*    | SHOULD   |
+                  +--------------------------+----------+
+                  | ecmqv-sha2               | MAY      |
+                  +--------------------------+----------+
+
+                   Table 8: ECDH 実装ガイダンス
+
+   Elliptic Curve Digital Signature Algorithm (ECDSA) と ECDH のアルゴリズムは, 接続中で同じセキュリティ強度を維持するために, 双方で同じ曲線を利用することが推奨される.
+
+3.2.  有限フィールド暗号 (FFC)
+
+
+3.2.1.  生成された MODP 群を用いる FFC Diffie-Hel
+
+   [RFC4419] は 鍵交換のために 事前に生成された moduli の集合からランダムに選択する 2 つの鍵交換法を定義している:   diffie-hellman-group-exchange-sha1 method と   diffie-hellman-group-exchange-sha256 method. だ[RFC8270] に従い, 実装は modulus のサイズに 2048 ビット以上を用いる MODP 群を使う必要がある.  2048 ビット未満の modulus のサイズを持つ MODP 群は弱く, 利用されてはならない.
+
+   diffie-hellman-group-exchange-sha1鍵交換法は利用しないほうがよい （SHOULD NOT).  この方式は非推奨となっている SHA-1 を利用している.
+
+   diffie-hellman-group-exchange-sha256 鍵交換法は利用してもよい.  この方式は SHA2-256, を利用していて, 4096 ビット未満の MODP 群には妥当だ.
+
+   生成器が P の Q-ordered なサブ群を提供する moduli P と 生成器 G の事前生成に注意する必要がある. そうでない場合, パラメータセットは共有の秘密の 1 ビットを漏らす可能性がある.
+
+   Table 9 はこれらの交換についてのガイダンスの概要を提供する.
+
+           +======================================+============+
+           | Key Exchange Method Name             | Guidance   |
+           +======================================+============+
+           | diffie-hellman-group-exchange-sha1   | SHOULD NOT |
+           +--------------------------------------+------------+
+           | diffie-hellman-group-exchange-sha256 | MAY        |
+           +--------------------------------------+------------+
+
+              Table 9: 生成された MODP を用いる FFC の実装ガイダンス
+
+3.2.2.  名前付きの MODP 群を用いる FFC Diffie-Hellman
+
+   diffie-hellman-group14-sha256 鍵交換法は [RFC8268] で定義されており, 3des-cbc 対称暗号のセキュリティ強度と一致するおおよそ 112 ビットのエキュリティ強度を持つ鍵交換を表している.  これは, SHA-1 から SHA-2 への妥当で単純な移行で, diffie-hellman-group14-sha1 と diffie-hellman-group14-sha256 は MODP 群を共有するが, KDF と完全性に利用するハッシュ関数のみが異なる. diffie-hellman-group14-sha1 の実装から diffie-hellman-group14-sha256 の実装も相応に単純な移行となる.  diffie-hellman-group14-sha1 が実装必須 (MTI) 状態から除かれているので, diffie-hellman-group14-sha256 は実装されなければならない (MUST).  [RFC8268] からの残りの FFC MODP 群は, 大きなセキュリティ bit を持ち, 同様のセキュリティ bit を持つ対称暗号に適している.
+
+   Table 10 は名前による明示的なガイダンスを提供する.
+
+               +===============================+==========+
+               | Key Exchange Method Name      | Guidance |
+               +===============================+==========+
+               | diffie-hellman-group14-sha256 | MUST     |
+               +-------------------------------+----------+
+               | gss-group14-sha256-*          | SHOULD   |
+               +-------------------------------+----------+
+               | diffie-hellman-group15-sha512 | MAY      |
+               +-------------------------------+----------+
+               | gss-group15-sha512-*          | MAY      |
+               +-------------------------------+----------+
+               | diffie-hellman-group16-sha512 | SHOULD   |
+               +-------------------------------+----------+
+               | gss-group16-sha512-*          | MAY      |
+               +-------------------------------+----------+
+               | diffie-hellman-group17-sha512 | MAY      |
+               +-------------------------------+----------+
+               | gss-group17-sha512-*          | MAY      |
+               +-------------------------------+----------+
+               | diffie-hellman-group18-sha512 | MAY      |
+               +-------------------------------+----------+
+               | gss-group18-sha512-*          | MAY      |
+               +-------------------------------+----------+
+
+                 Table 10: FFC 名前付き群実装のガイダンス
+
+3.3.  整数因数分解暗号 (IFC)
+
+   rsa1024-sha1 鍵交換法は [RFC4432] で定義され, RSA 1024 ビットモジュラスと SHA-1 ハッシュを用いる.  この鍵交換法はセキュリティ要件を満していない (NOT).  この方法は実装してはならない (MUST NOT).
+
+   rsa2048-sha256 鍵交換法は [RFC4432] で定義され, RSA 2048 ビットモジュラスと SHA2-256 ハッシュを用いる.  この鍵交換,法は 112 ビットの最低限のセキュリティ強度を満たす.  この方法は実装されてもよい (MAY).
+
+   Table 11 は IFC 鍵交換のガイダンスの概要を提供する.
+
+                  +==========================+==========+
+                  | Key Exchange Method Name | Guidance |
+                  +==========================+==========+
+                  | rsa1024-sha1             | MUST NOT |
+                  +--------------------------+----------+
+                  | rsa2048-sha256           | MAY      |
+                  +--------------------------+----------+
+
+                   Table 11: IFC 実装ガイダンス
+
+3.4.  KDFs と完全ハッシュ
+
+   SHA-1 と SHA-2 系列のハッシュアルゴリズムは, FFC と ECC, IFC のアルゴリズムと組合せて鍵交換法名を構成する.
+
+   選択されたハッシュアルゴリズムは, KDF 中と応答の完全性のために用いられる.
+
+   SHA-1 を用いるすべての鍵交換法は, [RFC6194] で記述されているように, SHA-1 に対するセキュリティの懸念から, 非推奨とし段階的に廃止される必要がある.
+
+   あらゆる場所で無条件に SHA-1 を非推奨および/または禁止することが, SHA-1 が実装から完全に除かれる日を早めるだろう.  部分的に請われたアルゴリズムを放置することは, よいことではない.
+
+   SHA-2 系列のハッシュ [RFC6234] は SHA-1 よりも安全だ.  これらは, 現在定義されている鍵交換の多くで SSH での利用のために標準化されている.
+
+   現時点では, SHA-3 系列の安全ハッシュ関数や Extendable-Output Functions [NIST.FIPS.202] を利用する SSH のための鍵交換法は存在しないことに注意..
+
+   この文書による更新の前は, diffie-hellman-group1-sha1 と diffie-hellman-group14-sha1 は MTI であった.  diffie-hellman-group14-sha1 のほうが強い.  Group14 (2048 ビット MODP 群) は [RFC3526] の 3 節で定義されている.  SSH group1 は, [RFC2409] の 6.2 節で提供されている Oakley Group 2 (1024 bit MODP 群) を用いると  [RFC4253] の 8.1 節で定義されている.  この おおよそ 80 ビットのセキュリティを持つ group1 MODP 群は, 維持するのに弱すぎる.  しかし, MTI 状態から一気に禁止にするのではなく, 多くの実装者がまず非推奨に以降してその後に禁止にすることを提案した.
+   KDF に SHA-1 ハッシュを利用する group14 MODP 群は, group1 MODP 群ほど弱くない.  セッションのタイムアウトが起きる前により大きな MODP 群を用いるのに十分でない計算やメモリリソースを持たない 小さなハードウェアの IOT デバイスのように, 管理者に価値を提供できるレガシーな状況も存在する.  将来非推奨ないし禁止となることを想定していた上で, MTI から継続な利用を提供する要件状態へ以降することで同意が得られた.
+   それゆえ, レガシーな実装との相互運用性のため, diffie-hellman-group14-sha1 交換を維持することが合理的と考えられる.  diffie-hellman-group14-sha1 鍵交換は実装してもよい (MAY) が, 交渉される鍵交換のリストの末尾に置かれるべきだ.
+
+   diffie-hellman-group1-sha1 と diffie-hellman-group-exchange-sha1 は実装しないほうがよい (SHOULD NOT).  gss-group1-sha1-* と gss-group14-sha1-*, gss-gex-sha1-* 鍵交換は [RFC8732] によって実装しないほうがよい (SHOULD NOT) とすでに指定されている.
+
+3.5.  セキュアシェル拡張ネゴシエーション
+
+   [RFC8308] で 2 つの方式 ext-info-c と ext-info-s が定義されている.  これらは, 他の Secure Shell との交渉をサポートするメカニズムを提供する.  機能拡張が可能であることは望ましい.  ext-info-c と ext-info-s  は両方実装される必要がある (SHOULD).
+
+4.  鍵交換方式名の実装に対する概要ガイダンス
+
+   Table 12 はローマンアルファベット順に列挙された既存の鍵交換方式名を提供する. Implement 欄は この RFC での現在の状況が含まれる.
+
+    +=======================+============+================+===========+
+    | Key Exchange Method   | Reference  | Previous       | RFC 9142  |
+    | Name                  |            | Recommendation | Implement |
+    +=======================+============+================+===========+
+    | curve25519-sha256     | [RFC8731]  | none           | SHOULD    |
+    +-----------------------+------------+----------------+-----------+
+    | curve448-sha512       | [RFC8731]  | none           | MAY       |
+    +-----------------------+------------+----------------+-----------+
+    | diffie-hellman-group- | [RFC4419], | none           | SHOULD    |
+    | exchange-sha1         | [RFC8270]  |                | NOT       |
+    +-----------------------+------------+----------------+-----------+
+    | diffie-hellman-group- | [RFC4419], | none           | MAY       |
+    | exchange-sha256       | [RFC8270]  |                |           |
+    +-----------------------+------------+----------------+-----------+
+    | diffie-hellman-       | [RFC4253]  | MUST           | SHOULD    |
+    | group1-sha1           |            |                | NOT       |
+    +-----------------------+------------+----------------+-----------+
+    | diffie-hellman-       | [RFC4253]  | MUST           | MAY       |
+    | group14-sha1          |            |                |           |
+    +-----------------------+------------+----------------+-----------+
+    | diffie-hellman-       | [RFC8268]  | none           | MUST      |
+    | group14-sha256        |            |                |           |
+    +-----------------------+------------+----------------+-----------+
+    | diffie-hellman-       | [RFC8268]  | none           | MAY       |
+    | group15-sha512        |            |                |           |
+    +-----------------------+------------+----------------+-----------+
+    | diffie-hellman-       | [RFC8268]  | none           | SHOULD    |
+    | group16-sha512        |            |                |           |
+    +-----------------------+------------+----------------+-----------+
+    | diffie-hellman-       | [RFC8268]  | none           | MAY       |
+    | group17-sha512        |            |                |           |
+    +-----------------------+------------+----------------+-----------+
+    | diffie-hellman-       | [RFC8268]  | none           | MAY       |
+    | group18-sha512        |            |                |           |
+    +-----------------------+------------+----------------+-----------+
+    | ecdh-sha2-*           | [RFC5656]  | MAY            | MAY       |
+    +-----------------------+------------+----------------+-----------+
+    | ecdh-sha2-nistp256    | [RFC5656]  | MUST           | SHOULD    |
+    +-----------------------+------------+----------------+-----------+
+    | ecdh-sha2-nistp384    | [RFC5656]  | MUST           | SHOULD    |
+    +-----------------------+------------+----------------+-----------+
+    | ecdh-sha2-nistp521    | [RFC5656]  | MUST           | SHOULD    |
+    +-----------------------+------------+----------------+-----------+
+    | ecmqv-sha2            | [RFC5656]  | MAY            | MAY       |
+    +-----------------------+------------+----------------+-----------+
+    | ext-info-c            | [RFC8308]  | SHOULD         | SHOULD    |
+    +-----------------------+------------+----------------+-----------+
+    | ext-info-s            | [RFC8308]  | SHOULD         | SHOULD    |
+    +-----------------------+------------+----------------+-----------+
+    | gss-                  | [RFC4462]  | reserved       | reserved  |
+    +-----------------------+------------+----------------+-----------+
+    | gss-                  | [RFC8732]  | SHOULD         | SHOULD    |
+    | curve25519-sha256-*   |            |                |           |
+    +-----------------------+------------+----------------+-----------+
+    | gss-curve448-sha512-* | [RFC8732]  | MAY            | MAY       |
+    +-----------------------+------------+----------------+-----------+
+    | gss-gex-sha1-*        | [RFC4462], | SHOULD NOT     | SHOULD    |
+    |                       | [RFC8732]  |                | NOT       |
+    +-----------------------+------------+----------------+-----------+
+    | gss-group1-sha1-*     | [RFC4462], | SHOULD NOT     | SHOULD    |
+    |                       | [RFC8732]  |                | NOT       |
+    +-----------------------+------------+----------------+-----------+
+    | gss-group14-sha1-*    | [RFC4462], | SHOULD NOT     | SHOULD    |
+    |                       | [RFC8732]  |                | NOT       |
+    +-----------------------+------------+----------------+-----------+
+    | gss-group14-sha256-*  | [RFC8732]  | SHOULD         | SHOULD    |
+    +-----------------------+------------+----------------+-----------+
+    | gss-group15-sha512-*  | [RFC8732]  | MAY            | MAY       |
+    +-----------------------+------------+----------------+-----------+
+    | gss-group16-sha512-*  | [RFC8732]  | SHOULD         | MAY       |
+    +-----------------------+------------+----------------+-----------+
+    | gss-group17-sha512-*  | [RFC8732]  | MAY            | MAY       |
+    +-----------------------+------------+----------------+-----------+
+    | gss-group18-sha512-*  | [RFC8732]  | MAY            | MAY       |
+    +-----------------------+------------+----------------+-----------+
+    | gss-nistp256-sha256-* | [RFC8732]  | SHOULD         | SHOULD    |
+    +-----------------------+------------+----------------+-----------+
+    | gss-nistp384-sha384-* | [RFC8732]  | MAY            | SHOULD    |
+    +-----------------------+------------+----------------+-----------+
+    | gss-nistp521-sha512-* | [RFC8732]  | MAY            | SHOULD    |
+    +-----------------------+------------+----------------+-----------+
+    | rsa1024-sha1          | [RFC4432]  | MAY            | MUST NOT  |
+    +-----------------------+------------+----------------+-----------+
+    | rsa2048-sha256        | [RFC4432]  | MAY            | MAY       |
+    +-----------------------+------------+----------------+-----------+
+
+         Table 12: 鍵交換方式名の実装に対する IANA のガイダンス
+
+   この文書で言及されていない公式の  [IANA-SSH] "Key Exchange Method Names" のフルセットについては実装されてもよい (MAY). 
+
+5.  セキュリティの考察
+
+   この SSH プロトコルは, 安全でないネットワーク上で安全な暗号化されたチャンネルを提供する.  サーバの認証, 鍵の交換, 暗号化, 完全性の検査を行なう.  さらに, より上位のプロトコルで利用される, ユニークなセッションidを導出する.  この鍵交換自体は共有の秘密を生成し, KDF と完全性の両方のためにハッシュ関数を用いる.
+
+   このプロトコルのセキュリティについての考慮は [RFC4251] で提供されており, 引き続き適用される.  加えて, [RFC4432] で提供されているセキュリティの考慮も適用される.  rsa1024-sha1 と rsa2048-sha256 鍵交換では前方秘匿性は利用できないことに注意.
+
+   弱いと見なされている非推奨ないし禁止の鍵交換法は, 破られた際に積極的に運用されてないのが望ましい.
+
+   鍵交換方式が弱いとされるのは, セキュリティの強度が対称暗号に対して不十分か, アルゴリズムが破られている場合だ.
+
+   diffie-hellman-group1-sha1 で用いられる 1024 ビット MODP 群は SSH で利用iされる対称暗号に対して小さすぎる.
+
+   2048 ビット未満の modulus サイズを持つ MODP 群は SSH で用いられる対称暗号に対しては小さすぎる.  diffie-hellman-group-exchange-sha256 ないし diffie-hellman-group-exchange-sha1 鍵交換を利用する場合, MODP 群で用いられる modulus のサイズは少なくとも 2048 ビットである必要がある.
+
+   現時点で rsa1024-sha1 鍵交換は SSH で利用される対称暗号に対して小さすぎる.
+
+   どの鍵交換と共に SHA-1 を利用することは まだ完全には壊れていないかもしれないが, 可能な限り早くこのアルゴリズムの利用を引退させる時期になっている.
+
+   diffie-hellman-group14-sha1 アルゴリズムはまだ完全に非推奨ではない.  これは, MTI アルゴリズムから新しいものへの実用的な移行を提供するためだ.  しかし, 鍵交換の交渉の最後の手段としてのみ利用するのが最善だろう.  SHA-1 ハッシュを利用するすべての鍵交換法は非推奨と見なされる.
+
+6.  IANA の考慮
+
+   IANA は "Key Exchange Method Names" レジルトリ [IANA-SSH] に見出しが "OK to implement" の新しい列を追加し, そのエントリにこの文書の 4 節の "Summary Guidance for Implementation of Key Exchange Method Names" で提供される実装ガイダンスの項目を注釈した.  IANA は ecdh-sha2-nistp256 と cdh-sha2-nistp384, ecdh-sha2-nistp521 のエントリを追加し, gss-gex-sha1-*と gss-roup1-sha1-*, gss-group14-sha1-*, diffie-hellman-group-exchange-sha1,  diffie-hellman-group-exchange-sha256 に対する [RFC4462] と [RFC8732] への参照も追加した..  概要は 4 節の Table 12 にある.  IANA は本文書の 4 節で提供される推奨される実装ガイダンスへの追加のレジストリ参照として本文書を含め, 次に示す注釈を追加した:
+
+   |  [RFC9142] より前に登録された OK to Implement ガイダンス項目は [RFC9142] の 4 節の Table 12 にある.
+
+   "MUST NOT" の注釈がついたレジストリの項目は禁止されていると見なされる.
+   "SHOULD NOT" の注釈がついたレジストリの項目は非推奨で将来禁止される可能性がある.
+
+7.  References
+
+7.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC4250]  Lehtinen, S. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Assigned Numbers", RFC 4250,
+              DOI 10.17487/RFC4250, January 2006,
+              <https://www.rfc-editor.org/info/rfc4250>.
+
+   [RFC4253]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Transport Layer Protocol", RFC 4253, DOI 10.17487/RFC4253,
+              January 2006, <https://www.rfc-editor.org/info/rfc4253>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+   [RFC8268]  Baushke, M., "More Modular Exponentiation (MODP) Diffie-
+              Hellman (DH) Key Exchange (KEX) Groups for Secure Shell
+              (SSH)", RFC 8268, DOI 10.17487/RFC8268, December 2017,
+              <https://www.rfc-editor.org/info/rfc8268>.
+
+   [RFC8270]  Velvindron, L. and M. Baushke, "Increase the Secure Shell
+              Minimum Recommended Diffie-Hellman Modulus Size to 2048
+              Bits", RFC 8270, DOI 10.17487/RFC8270, December 2017,
+              <https://www.rfc-editor.org/info/rfc8270>.
+
+   [RFC8308]  Bider, D., "Extension Negotiation in the Secure Shell
+              (SSH) Protocol", RFC 8308, DOI 10.17487/RFC8308, March
+              2018, <https://www.rfc-editor.org/info/rfc8308>.
+
+   [RFC8731]  Adamantiadis, A., Josefsson, S., and M. Baushke, "Secure
+              Shell (SSH) Key Exchange Method Using Curve25519 and
+              Curve448", RFC 8731, DOI 10.17487/RFC8731, February 2020,
+              <https://www.rfc-editor.org/info/rfc8731>.
+
+7.2.  Informative References
+
+   [IANA-SSH] IANA, "Secure Shell (SSH) Protocol Parameters",
+              <https://www.iana.org/assignments/ssh-parameters/>.
+
+   [NIST.FIPS.202]
+              National Institute of Standards and Technology, "SHA-3
+              Standard: Permutation-Based Hash and Extendable-Output
+              Functions", FIPS PUB 202, DOI 10.6028/NIST.FIPS.202,
+              August 2015, <https://doi.org/10.6028/NIST.FIPS.202>.
+
+   [NIST.SP.800-107r1]
+              Dang, Q., "Recommendation for applications using approved
+              hash algorithms", DOI 10.6028/NIST.SP.800-107r1, August
+              2012, <https://doi.org/10.6028/NIST.SP.800-107r1>.
+
+   [NIST.SP.800-57pt1r5]
+              Barker, E., "Recommendation for Key Management: Part 1 -
+              General", DOI 10.6028/NIST.SP.800-57pt1r5, May 2020,
+              <https://doi.org/10.6028/NIST.SP.800-57pt1r5>.
+
+   [RFC2409]  Harkins, D. and D. Carrel, "The Internet Key Exchange
+              (IKE)", RFC 2409, DOI 10.17487/RFC2409, November 1998,
+              <https://www.rfc-editor.org/info/rfc2409>.
+
+   [RFC3526]  Kivinen, T. and M. Kojo, "More Modular Exponential (MODP)
+              Diffie-Hellman groups for Internet Key Exchange (IKE)",
+              RFC 3526, DOI 10.17487/RFC3526, May 2003,
+              <https://www.rfc-editor.org/info/rfc3526>.
+
+   [RFC4086]  Eastlake 3rd, D., Schiller, J., and S. Crocker,
+              "Randomness Requirements for Security", BCP 106, RFC 4086,
+              DOI 10.17487/RFC4086, June 2005,
+              <https://www.rfc-editor.org/info/rfc4086>.
+
+   [RFC4251]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Architecture", RFC 4251, DOI 10.17487/RFC4251,
+              January 2006, <https://www.rfc-editor.org/info/rfc4251>.
+
+   [RFC4419]  Friedl, M., Provos, N., and W. Simpson, "Diffie-Hellman
+              Group Exchange for the Secure Shell (SSH) Transport Layer
+              Protocol", RFC 4419, DOI 10.17487/RFC4419, March 2006,
+              <https://www.rfc-editor.org/info/rfc4419>.
+
+   [RFC4432]  Harris, B., "RSA Key Exchange for the Secure Shell (SSH)
+              Transport Layer Protocol", RFC 4432, DOI 10.17487/RFC4432,
+              March 2006, <https://www.rfc-editor.org/info/rfc4432>.
+
+   [RFC4462]  Hutzelman, J., Salowey, J., Galbraith, J., and V. Welch,
+              "Generic Security Service Application Program Interface
+              (GSS-API) Authentication and Key Exchange for the Secure
+              Shell (SSH) Protocol", RFC 4462, DOI 10.17487/RFC4462, May
+              2006, <https://www.rfc-editor.org/info/rfc4462>.
+
+   [RFC5656]  Stebila, D. and J. Green, "Elliptic Curve Algorithm
+              Integration in the Secure Shell Transport Layer",
+              RFC 5656, DOI 10.17487/RFC5656, December 2009,
+              <https://www.rfc-editor.org/info/rfc5656>.
+
+   [RFC6194]  Polk, T., Chen, L., Turner, S., and P. Hoffman, "Security
+              Considerations for the SHA-0 and SHA-1 Message-Digest
+              Algorithms", RFC 6194, DOI 10.17487/RFC6194, March 2011,
+              <https://www.rfc-editor.org/info/rfc6194>.
+
+   [RFC6234]  Eastlake 3rd, D. and T. Hansen, "US Secure Hash Algorithms
+              (SHA and SHA-based HMAC and HKDF)", RFC 6234,
+              DOI 10.17487/RFC6234, May 2011,
+              <https://www.rfc-editor.org/info/rfc6234>.
+
+   [RFC7748]  Langley, A., Hamburg, M., and S. Turner, "Elliptic Curves
+              for Security", RFC 7748, DOI 10.17487/RFC7748, January
+              2016, <https://www.rfc-editor.org/info/rfc7748>.
+
+   [RFC8031]  Nir, Y. and S. Josefsson, "Curve25519 and Curve448 for the
+              Internet Key Exchange Protocol Version 2 (IKEv2) Key
+              Agreement", RFC 8031, DOI 10.17487/RFC8031, December 2016,
+              <https://www.rfc-editor.org/info/rfc8031>.
+
+   [RFC8732]  Sorce, S. and H. Kario, "Generic Security Service
+              Application Program Interface (GSS-API) Key Exchange with
+              SHA-2", RFC 8732, DOI 10.17487/RFC8732, February 2020,
+              <https://www.rfc-editor.org/info/rfc8732>.
+
+   [TRANSCRIPTION]
+              Bhargavan, K. and G. Leurent, "Transcript Collision
+              Attacks: Breaking Authentication in TLS, IKE, and SSH",
+              Network and Distributed System Security Symposium (NDSS),
+              DOI 10.14722/ndss.2016.23418, February 2016,
+              <https://doi.org/10.14722/ndss.2016.23418>.
+
+謝辞
+
+   Thanks to the following people for review and comments: Denis Bider,
+   Peter Gutmann, Damien Miller, Niels Moeller, Matt Johnston, Iwamoto
+   Kouichi, Simon Josefsson, Dave Dugal, Daniel Migault, Anna Johnston,
+   Tero Kivinen, and Travis Finkenauer.
+
+   Thanks to the following people for code to implement interoperable
+   exchanges using some of these groups as found in this document:
+   Darren Tucker for OpenSSH and Matt Johnston for Dropbear.  And thanks
+   to Iwamoto Kouichi for information about RLogin, Tera Term (ttssh),
+   and Poderosa implementations also adopting new Diffie-Hellman groups
+   based on this document.
+
+Author's Address
+
+   Mark D. Baushke
+
+   Email: mbaushke.ietf@gmail.com
