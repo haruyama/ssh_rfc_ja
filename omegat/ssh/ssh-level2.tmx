@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tmx SYSTEM "tmx14.dtd">
 <tmx version="1.4">
-  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="5.8.0_0_86775c3d3" segtype="sentence" srclang="en-US"/>
+  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="5.8.0_0_f3b2dae03" segtype="sentence" srclang="en-US"/>
   <body>
 <!-- Default translations -->
     <tu>
@@ -3293,6 +3293,16 @@ to connect to a master that speaks an unsupported protocol version.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>A compliant system MUST NOT allow the reuse of ephemeral/exchange
+   values in a key exchange algorithm due to security concerns related
+   to this practice.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220504T065004Z" creationid="haruyama" creationdate="20220504T064152Z">
+        <seg>準拠するシステムは, 一時的/交換の値の再利用を, この実行に関係するセキュリティへの懸念のため, 許可してはならない (MUST NOT).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>A curve point (x,y), with coordinates in the range 0 &lt;= x,y &lt; p, is
    coded as follows.</seg>
       </tuv>
@@ -4083,6 +4093,16 @@ or a MUX_S_FAILURE.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>A signature on the exchange hash value derived from the newly
+   established shared secret value is used to authenticate the server to
+   the client.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220506T081325Z" creationid="haruyama" creationdate="20220506T081325Z">
+        <seg>新しく確立した共有秘密値から導出される交換ハッシュに対する署名が, クライアントに対してサーバを認証するのに用いられる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>A signature system
    is secure if, even in this setting, the attacker cannot produce a new
    message/signature pair of his choosing such that the verification
@@ -4687,6 +4707,15 @@ an MAC algorithm.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20200604T082227Z" creationid="haruyama" creationdate="20200604T082227Z">
         <seg>追加のフィールドは, その存在を示すための flags フィールドに追加のビットを定義するかそのために拡張された属性を定義するかによって追加できる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Additional guidelines are provided
+   in [SP80063].</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T055650Z" creationid="haruyama" creationdate="20220507T055650Z">
+        <seg>追加のガイドラインは [SP80063] で提供される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -5465,6 +5494,16 @@ a matching MAC.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Algorithms specified in this document may be different from
+   mandatory-to-implement algorithms; where this occurs, the latter will
+   be present but not used.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220425T005342Z" creationid="haruyama" creationdate="20220425T005342Z">
+        <seg>この文書で指定されたアルゴリズムは, 実装が義務づけられているアルゴリズムと異なる場合がある. この場合, 後者は存在するが利用されない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Algorithms", of the SSH Transport Protocol document [3], where X.509
    certificates are to be encoded using a DER format [6] [7] in a
    certificate blob.</seg>
@@ -6051,6 +6090,15 @@ must refuse to authorise a key that has an unrecognised option.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20180124T124347Z" creationid="haruyama" creationdate="20180124T124347Z">
         <seg>すべて, SHA512 ハッシュアルゴリズムを利用する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>All users MUST be authenticated, MUST follow [RFC4252],
+   and SHOULD be authenticated using a public key method.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T054017Z" creationid="haruyama" creationdate="20220507T054017Z">
+        <seg>すべてのユーザは認証されなければならず (MUST). {RFC4252] に従わなければならない (MUST). また, 公開鍵方式を用いて認証される必要がある (SHOULD).</seg>
       </tuv>
     </tu>
     <tu>
@@ -7064,6 +7112,15 @@ format (see below).</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>An implementation must be validated by the appropriate
+   authority before such usage is permitted.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220425T005550Z" creationid="haruyama" creationdate="20220425T005550Z">
+        <seg>このような利用を許可する前に, 実装は適切な権威によって検証されなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>An implementation of
    SecSh-B must be validated by the appropriate authority before such
    usage is permitted.</seg>
@@ -7208,6 +7265,15 @@ format (see below).</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20110712T024237Z">
         <seg>鍵の再生成目的での鍵交換で確立したコンテキストは, この方法に利用してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Any hash algorithm other
+   than SHA-384 or SHA-512 MUST NOT be used.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220421T003329Z" creationid="haruyama" creationdate="20220421T003329Z">
+        <seg>SHA-384 と SHA-512 以外のあらゆるアルゴリズムは, 利用されてはならない (MUST NOT).</seg>
       </tuv>
     </tu>
     <tu>
@@ -7785,6 +7851,17 @@ any principal of the specified type.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>As described in Section 7.1 of [RFC4253], the exchange of
+   SSH_MSG_KEXINIT between the server and the client establishes which
+   key agreement algorithm, MAC algorithm, host key algorithm (server
+   authentication algorithm), and encryption algorithm are to be used.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220502T053013Z" creationid="haruyama" creationdate="20220502T053013Z">
+        <seg>[RFC4253] の 7.1 節で記述されているように, サーバとクライアント間での SSH_MSG_KEXINIT の交換が, 鍵合意アルゴリズムや, MAC アルゴリズム, ホスト鍵アルゴリズム (サーバ認証アルゴリズム), 暗号化アルゴリズムのそれぞれで何が用いられるかを確立する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>As described in Section 7.2 of [RFC4253], a hash-based key derivation
    function (KDF) is applied to the shared secret value K to generate
    the required symmetric keys.</seg>
@@ -7990,6 +8067,16 @@ any principal of the specified type.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20180915T013949Z" creationid="haruyama" creationdate="20180915T013949Z">
         <seg>[RFC4254] の 8 節で指定されているように, 1〜159の範囲のすべてのオペコードは単一のuint32引数を持つ. したがって, IUTF8 オペコードの後に 1つの uint32 引数が続く.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>As specified in [RFC5647], all 16 octets of the authentication tag
+   MUST be used as the SSH data integrity value of the SSH binary
+   packet.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T060515Z" creationid="haruyama" creationdate="20220507T060515Z">
+        <seg>[RFC5647] で指定されているように, 認証タグの 16 オクテットすべてが, SSH バイナリパケットの SSH データ完全性の値として用いられなければならない (MUST). </seg>
       </tuv>
     </tu>
     <tu>
@@ -8591,6 +8678,16 @@ by trusted hardware before it will issue a certificate.</seg>
       </tuv>
       <tuv xml:lang="ja">
         <seg>認証</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Authentication
+     7.1.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090342Z" creationid="haruyama" creationdate="20220402T090342Z">
+        <seg>認証
+     7.1.</seg>
       </tuv>
     </tu>
     <tu>
@@ -9842,6 +9939,54 @@ its MAC (assuming key derivation, ChaCha20 and Poly1305 are secure).</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>CNSA
+   implementations MUST ensure the counter never repeats and is properly
+   incremented after processing a binary packet:</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220421T003908Z" creationid="haruyama" creationdate="20220421T003908Z">
+        <seg>CNSA の実装はバイナリパケットの処理の後でカウンタが繰替えさず適切にインクリメントすることを保証しなければならない (MUST).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>CNSA and Secure Shell</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220403T072133Z" creationid="haruyama" creationdate="20220403T072133Z">
+        <seg>CNSA とセキュアシェル</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>CNSA and Secure Shell
+   5.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090255Z" creationid="haruyama" creationdate="20220402T090255Z">
+        <seg>CNSA とセキュアシェル
+   5.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>CNSA-
+   complaint SSH implementations MUST support AES-GCM (negotiated as
+   AEAD_AES_GCM_256 or aes256-gcm@openssh; see Section 5) to provide
+   confidentiality and ensure data integrity.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T060304Z" creationid="haruyama" creationdate="20220507T060304Z">
+        <seg>CNSA 準拠の SSH 実装は, 機密性の提供とデータ完全性の保証のために AES-GCM (AEAD_AES_GCM_256 ないし aes256-gcm@openssh として交渉される; 5 節参照) を実装しなければならない (MUST).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>CNSA-compliant
+   systems MUST follow these mandates.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220504T064745Z" creationid="haruyama" creationdate="20220504T064745Z">
+        <seg>CNSA 準拠のシステムはこれらの義務にしたがわなければならない (MUST).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Cached Information and References</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20110810T061351Z">
@@ -10852,6 +10997,15 @@ a length and message type in SSH uint32 wire format:</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Commercial National Security Algorithm (CNSA) Suite Cryptography for
+                           Secure Shell (SSH)</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T085640Z" creationid="haruyama" creationdate="20220402T085417Z">
+        <seg>セキュアシェル (SSH) のための Commercial National Security Algorithm (CNSA) スート暗号</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Common
    practice is to authenticate once with password authentication and
    transfer the public key to the server.</seg>
@@ -11234,6 +11388,16 @@ a length and message type in SSH uint32 wire format:</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20111001T025437Z">
         <seg>SSH バイナリパケットの機密性とデータ完全性</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Confidentiality and Data Integrity of SSH Binary Packets
+     8.1.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090416Z" creationid="haruyama" creationdate="20220402T090416Z">
+        <seg>SSH バイナリパケットの機密性とデータ完全性
+     8.1.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12071,6 +12235,24 @@ domain name to the option name, e.g. "my-option@example.com".</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>DH Key Exchange</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220504T065354Z" creationid="haruyama" creationdate="20220504T065354Z">
+        <seg>DH 鍵交換</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>DH Key Exchange
+   7.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090338Z" creationid="haruyama" creationdate="20220402T090338Z">
+        <seg>DH 鍵交換
+   7.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>DH Public Key values MUST be checked and both conditions:</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20180129T130332Z" creationid="haruyama" creationdate="20180127T062129Z">
@@ -12188,6 +12370,16 @@ domain name to the option name, e.g. "my-option@example.com".</seg>
       </tuv>
       <tuv xml:lang="ja">
         <seg>データの完全性</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Data Integrity
+   9.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090434Z" creationid="haruyama" creationdate="20220402T090434Z">
+        <seg>データの完全性
+   9.</seg>
       </tuv>
     </tu>
     <tu>
@@ -12911,6 +13103,16 @@ domain name to the option name, e.g. "my-option@example.com".</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Documents approved for publication by
+   the RFC Editor are not candidates for any level of Internet Standard;
+   see Section 2 of RFC 7841.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090221Z" creationid="haruyama" creationdate="20220402T090221Z">
+        <seg>この RFC 編集者によって出版を許可された文書は, インターネット標準のいかなるレベルの候補ではない. RFC 7841 の 2節を参照.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Does not require the use of a unique random number for each
        signature.</seg>
       </tuv>
@@ -13037,6 +13239,16 @@ domain name to the option name, e.g. "my-option@example.com".</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>During
+   authentication, the password MUST be protected in the established
+   encrypted communications channel.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T055629Z" creationid="haruyama" creationdate="20220507T055629Z">
+        <seg>認証中, パスワードは, 確立された暗号化された通信チャンネルで保護されなければならない (MUST).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>During GSS context establishment, multiple tokens may be exchanged by
    the client and the server.</seg>
       </tuv>
@@ -13124,6 +13336,16 @@ hardware-backed.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20110409T090014Z">
         <seg>ECDH 鍵交換</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>ECDH Key Exchange
+     6.2.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090334Z" creationid="haruyama" creationdate="20220402T090334Z">
+        <seg>ECDH 鍵交換
+     6.2.</seg>
       </tuv>
     </tu>
     <tu>
@@ -14067,6 +14289,16 @@ string, e.g. "1".</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Either Elliptic
+   Curve Diffie-Hellman (ECDH) or Diffie-Hellman (DH) MUST be used to
+   establish a shared secret value between the client and the server.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220504T064124Z" creationid="haruyama" creationdate="20220504T064124Z">
+        <seg>Elliptic Curve Diffie-Hellman (ECDH) か Diffie-Hellman (DH) のどちらかが, クライアントとサーバの間で共有の秘密の値を確立するために用いられなればならない (MUST).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Either SNMP entity may act as
    client or as server, as discussed further below.</seg>
       </tuv>
@@ -14099,6 +14331,16 @@ string, e.g. "1".</seg>
       </tuv>
       <tuv xml:lang="ja">
         <seg>パスワードの変更がサポートされていないか, 古いパスワードが間違っている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Either set MAY be used for each
+   direction (i.e., client_to_server or server_to_client), but the
+   result must be the same (i.e., use of AEAD_AES_256_GCM).</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220502T053710Z" creationid="haruyama" creationdate="20220502T053710Z">
+        <seg>それぞれの方向 (すなわち client_to_server と server_to_client) に対してどちらのセットを利用してもよい (MAY) が, 結果は一緒でなければならない (たとえば AEAD_AES_256_GCM を利用する).</seg>
       </tuv>
     </tu>
     <tu>
@@ -18115,6 +18357,16 @@ authentication.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Galois/Counter Mode
+     8.2.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090420Z" creationid="haruyama" creationdate="20220402T090420Z">
+        <seg>Galois/Counter モード
+     8.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Galois/Counter Mode .......................................12
       6.2.</seg>
       </tuv>
@@ -19766,6 +20018,16 @@ as a big-endian integer.</seg>
     <tu>
       <tuv xml:lang="en-US">
         <seg>IANA Considerations
+   12.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090454Z" creationid="haruyama" creationdate="20220402T090454Z">
+        <seg>IANA の考察
+   12.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>IANA Considerations
    4.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20200513T062348Z" creationid="haruyama" creationdate="20200513T062348Z">
@@ -21202,6 +21464,25 @@ value.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>If authenticating by passwords, it is essential that passwords have
+   sufficient entropy to protect against dictionary attacks.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T055554Z" creationid="haruyama" creationdate="20220507T055554Z">
+        <seg>パスワードで認証する場合, 辞書攻撃から保護するためにパスワードが十分なエントロピーを持つことが不可欠だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>If authenticating with RSA, the client's public key modulus MUST be
+   3072 or 4096 bits in size, and the server MUST NOT accept signatures
+   from an RSA public key modulus of any other size.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T055103Z" creationid="haruyama" creationdate="20220507T055103Z">
+        <seg>RSA で認証する場合, クライアントの公開鍵モジュラスは 3072 か 4096 ビットのサイズでなければならない (MUST). サーバはその他のサイズの公開鍵モジュラスからの署名を受けつけてはならない (MUST NOT).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>If both checks succeed, this method is successful.</seg>
       </tuv>
       <tuv xml:lang="ja">
@@ -21587,6 +21868,23 @@ appear, they must appear consecutively at the end of the KRL file.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20110720T132114Z">
         <seg>パスワード認証が使える場合, 最初の公開鍵が追加された後でパスワード認証の利用を無効にする設定項目をサーバは提供する必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>If possible, validation SHOULD be done using
+   certificates.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T054217Z" creationid="haruyama" creationdate="20220507T054217Z">
+        <seg>可能ならば, 検証は証明書を用いて行なわれる必要がある (SHOULD).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>If possible, validation SHOULD be done using certificates.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220506T081901Z" creationid="haruyama" creationdate="20220506T081901Z">
+        <seg>可能ならば, 検証は証明書を用いて行なわれる必要がある (SHOULD).</seg>
       </tuv>
     </tu>
     <tu>
@@ -23762,6 +24060,17 @@ handling in this area.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Implementations MUST
+   NOT employ a "Trust on First Use (TOFU)" security model where a
+   client accepts the first public host key presented to it from a not-
+   yet-verified server.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220506T082128Z" creationid="haruyama" creationdate="20220506T082128Z">
+        <seg>実装は, まだ検証されていないサーバから提示された最初の公開ホスト鍵をクライアントが受け付ける "Trust on First Use (TOFU)" セキュリティモデルを採用してはならない (MUST NOT).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Implementations MUST NOT send QUIC Long Header Packets,
    since they could be confused with the SSH/QUIC key exchange.</seg>
       </tuv>
@@ -24860,6 +25169,15 @@ requires the key handle and a few additional parameters.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>In addition, [RFC5647] fails to specify
+   that the AES-GCM invocation counter is incremented mod 2^64.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220421T003814Z" creationid="haruyama" creationdate="20220421T003814Z">
+        <seg>加えて, [RFC5647] では, AES-GCM の呼び出しカウンタが 2^64 の剰余でインクリメントすることを明記していない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>In addition, a reverse proxy forwarding functionality is available,
    which, again, can be used to bypass firewall controls.</seg>
       </tuv>
@@ -25808,6 +26126,17 @@ requires the key handle and a few additional parameters.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20160618T033857Z">
         <seg>このとき, 内部の名前には US-ASCIIが利用される. また, ISO-10646 UTF-8 がユーザに表示される可能性のあるテキストとして利用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>In that case, in the SSH_MSG_KEXINIT, the
+   client SHALL include the indicator ext-info-c to the kex_algorithms
+   field, and the server SHOULD respond with an SSH_MSG_EXT_INFO message
+   containing the server-sig-algs extension.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T055416Z" creationid="haruyama" creationdate="20220507T055416Z">
+        <seg>この場合,  SSH_MSG_KEXINIT で クライアントは  kex_algorithms フィールドに ext-info-c 指標を含めることになり (SHALL), サーバは, server-sig-algs 拡張を含む SSH_MSG_EXT_INFO メッセージで応答する必要がある (SHOULD).</seg>
       </tuv>
     </tu>
     <tu>
@@ -26793,6 +27122,16 @@ requires the key handle and a few additional parameters.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20220121T100226Z" creationid="haruyama" creationdate="20220121T100226Z">
         <seg>この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc9142 で得られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc9212.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090025Z" creationid="haruyama" creationdate="20220402T090025Z">
+        <seg>この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc9212 で得られる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -27797,6 +28136,16 @@ RFC 8391                          XMSS                          May 201</seg>
     <tu>
       <tuv xml:lang="en-US">
         <seg>It
+   is made publicly available for use by developers and operators of
+   these and any other system deployments.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T085959Z" creationid="haruyama" creationdate="20220402T085959Z">
+        <seg>これらのシステム及び他のシステムの配置での開発者/運用者の利用のために公開されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>It
    is up to the server to decide how to map user names to accepted user
    names.</seg>
       </tuv>
@@ -28023,6 +28372,28 @@ removing the deprecated key from those offered.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20200630T053328Z" creationid="haruyama" creationdate="20200630T053328Z">
         <seg>最上位ビットの 1 ワードの layer address に始まり, 2 ワードの tree address が続く.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>It applies to the capabilities,
+   configuration, and operation of all components of US National
+   Security Systems (described in NIST Special Publication 800-59
+   [SP80059]) that employ SSH.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220403T063029Z" creationid="haruyama" creationdate="20220403T062824Z">
+        <seg>これは, セキュアシェル (SSH) を採用する (NIST Special Publication 800-59 [SP80059] に記載されている) アメリカ合州国の国家安全保障システムのすべての構成要素の機能や設定, 運用に適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>It applies to the capabilities,
+   configuration, and operation of all components of US National
+   Security Systems (described in NIST Special Publication 800-59) that
+   employ Secure Shell (SSH).</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220403T063042Z" creationid="haruyama" creationdate="20220402T085820Z">
+        <seg>これは, セキュアシェル (SSH) を採用する (NIST Special Publication 800-59 に記載されている) アメリカ合州国の国家安全保障システムのすべての構成要素の機能や設定, 運用に適用される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -28929,6 +29300,15 @@ information about the socket file, such as ownership and mode.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20200605T060237Z" creationid="haruyama" creationdate="20200605T060237Z">
         <seg>ファイルの終端を越えて書き込みをするのは合法だ; このセマンティクスではファイル終端から指定された offset まで 0 を書き込み, そのあとで data を書き込む.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>It is made publicly available for use by developers and operators of
+   these and any other system deployments.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220403T062836Z" creationid="haruyama" creationdate="20220403T062836Z">
+        <seg>これらのシステム及び他のシステムの配置での開発者/運用者の利用のために公開されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -30071,6 +30451,16 @@ ID" strings.</seg>
       </tuv>
       <tuv xml:lang="ja">
         <seg>鍵交換</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Key Exchange
+     6.1.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090329Z" creationid="haruyama" creationdate="20220402T090329Z">
+        <seg>鍵交換
+     6.1.</seg>
       </tuv>
     </tu>
     <tu>
@@ -33745,6 +34135,18 @@ support.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Note that, while compliant Secure Shell
+   implementations MUST follow the guidance in this document, that
+   requirement does not in and of itself imply that a given
+   implementation of Secure Shell is suitable for use national security
+   systems.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220425T005517Z" creationid="haruyama" creationdate="20220425T005517Z">
+        <seg>準拠セキュアシェル実装はこの文書のガイダンスに従わなければらならい (MUST) が, その要件は特定のセキュアシェル実装が, 国家のセキュリティシステムでの利用に適さないことを意味しないことに注意.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Note, however, that during a key re-exchange, after sending a
    SSH_MSG_KEXINIT message, each party MUST be prepared to process an
    arbitrary number of messages that may be in-flight before receiving a
@@ -34463,6 +34865,23 @@ indicating that the session is up.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20110614T024039Z">
         <seg>基底のプロトコルで指定されたアルゴリズムの1つが "arcfour" で, 高速なストリーム暗号である Arcfour (RC4としても知られる) を利用するよう指定されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>One of the following public key algorithms MUST be used:</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220502T053745Z" creationid="haruyama" creationdate="20220502T053745Z">
+        <seg>次の公開鍵アルゴリズムのうちの 1 つ が利用されなければならない (MUST):</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>One of the following sets MUST be used for the encryption_algorithms
+   and mac_algorithms name-lists.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220502T053539Z" creationid="haruyama" creationdate="20220502T053539Z">
+        <seg>次の集合のうちの 1つをencryption_algorithms と mac_algorithms の name-list に用いなければらならない (MUST). </seg>
       </tuv>
     </tu>
     <tu>
@@ -35219,6 +35638,15 @@ upon request.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Other methods of authentication MUST
+   not be used, including "none".</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T054113Z" creationid="haruyama" creationdate="20220507T054113Z">
+        <seg>他の認証法は "none" を含めて利用してはならない (MUST).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Other methods that could be defined in the future
    might include storing fingerprints in LDAP or other databases.</seg>
       </tuv>
@@ -35364,6 +35792,15 @@ MUX_S_FAILURE.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Otherwise, the client MUST validate the presented public key through
+   some other secure, possibly off-line mechanism.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220506T082019Z" creationid="haruyama" creationdate="20220506T082019Z">
+        <seg>そうでなければ, クライアントは, 他の安全な, もしかしたらオフラインのメカニズムを通じて提示された公開鍵を検証しなければならない (MUST).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Otherwise, the following algorithm MUST be used to choose a key
          exchange method: Iterate over client's kex algorithms, one at a
          time.</seg>
@@ -35427,6 +35864,15 @@ MUX_S_FAILURE.</seg>
       </tuv>
       <tuv xml:lang="ja">
         <seg>さもなければ, サーバは, SSH_MSG_USERAUTH_FAILURE を返さなければならない. また, サーバは, 認証を続行する 'authentications that can continue' の値のリストに "none" を含めてもよい. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Otherwise, the server must validate the public key
+   through another secure, possibly off-line mechanism.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T054246Z" creationid="haruyama" creationdate="20220507T054246Z">
+        <seg>そうでなければ, サーバは, 他の安全な, もしかしたらオフラインのメカニズムを通じて公開鍵を検証しなければならない (MUST).</seg>
       </tuv>
     </tu>
     <tu>
@@ -37665,6 +38111,16 @@ that computes a 128 bit integrity tag given a message and a single-use
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Recently, cryptographic transition plans have become overshadowed by
+   the prospect of the development of a cryptographically relevant
+   quantum computer.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220403T063727Z" creationid="haruyama" creationdate="20220403T063727Z">
+        <seg>近年, 暗号の移行計画は暗号に関連する量子コンピュータの開発に見通しによって影が薄くなってきている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Recommendation (1) states that SSH implementations should rekey at
    least once every 2**32 packets.</seg>
       </tuv>
@@ -37834,6 +38290,16 @@ that computes a 128 bit integrity tag given a message and a single-use
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20110530T070611Z">
         <seg>鍵の再生成</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Rekeying
+   10.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090443Z" creationid="haruyama" creationdate="20220402T090443Z">
+        <seg>鍵の再生成
+   10.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40225,6 +40691,25 @@ that computes a 128 bit integrity tag given a message and a single-use
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Section 5.6.3.3 of [SP80056A] states that an
+   ephemeral private key shall be used in exactly one key establishment
+   transaction and shall be destroyed (zeroized) as soon as possible.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220504T065010Z" creationid="haruyama" creationdate="20220504T064641Z">
+        <seg>[SP80056A] の 5.6.3.3 節で, 一時的な秘密鍵は正確に1つの鍵確立トランザクションで利用し可能な限り早く破壊される(ゼロ化される)必要があると述べられている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Section 5.8 of [SP80056A] states that such shared secrets shall be
+   destroyed (zeroized) immediately after its use.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220504T064724Z" creationid="haruyama" creationdate="20220504T064724Z">
+        <seg>[SP80056A] の 5.8 節で, このような共有の秘密は利用後に直ちに破壊される(ゼロ化される)必要があると述べられている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Section 6
    describes the rationale behind choices in this note.</seg>
       </tuv>
@@ -40294,6 +40779,17 @@ that computes a 128 bit integrity tag given a message and a single-use
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20180127T061451Z" creationid="haruyama" creationdate="20180127T061451Z">
         <seg>[RFC4253] の 8節には, ポイント 3 に小さな誤りが含まれている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Section 9 of [RFC4253] allows either the server or the client to
+   initiate a "key re-exchange ... by sending an SSH_MSG_KEXINIT packet"
+   and to "change some or all of the [cipher] algorithms during the re-
+   exchange".</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T060803Z" creationid="haruyama" creationdate="20220507T060758Z">
+        <seg> [RFC4253]  の 9 節では, サーバないしクライアントのどちらかが,  「SSH_MSG_KEXINIT パケットを送信することで ... 鍵の再交換」を開始し「再交換中に一部またはすべての[暗号] アルゴリズムを変更」することを認めている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40805,6 +41301,16 @@ that computes a 128 bit integrity tag given a message and a single-use
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Security Mechanism Negotiation and Initialization
+   6.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090324Z" creationid="haruyama" creationdate="20220402T090324Z">
+        <seg>セキュリティメカニズムの交渉と初期化
+   6.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Security Mechanism Negotiation and Initialization ...............6
       3.1.</seg>
       </tuv>
@@ -41268,6 +41774,24 @@ that computes a 128 bit integrity tag given a message and a single-use
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Server Authentication</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220506T081250Z" creationid="haruyama" creationdate="20220506T081250Z">
+        <seg>サーバ認証</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Server Authentication
+     7.2.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090351Z" creationid="haruyama" creationdate="20220402T090351Z">
+        <seg>サーバ認証
+     7.2.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Server administrators are
    encouraged to make host key fingerprints available for checking by
    some means whose security does not rely on the integrity of the
@@ -41331,6 +41855,14 @@ that computes a 128 bit integrity tag given a message and a single-use
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20110714T051526Z">
         <seg>"null" ホスト鍵アルゴリズムがクライアントに告知する唯一のアルゴリズムでなければ, このアルゴリズムをサーバは告知してはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Servers MUST be authenticated using digital signatures.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220506T081348Z" creationid="haruyama" creationdate="20220506T081348Z">
+        <seg>サーバは電子署名を用いて認証されなければならない (MUST).</seg>
       </tuv>
     </tu>
     <tu>
@@ -41583,6 +42115,15 @@ that computes a 128 bit integrity tag given a message and a single-use
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20200709T045118Z" creationid="haruyama" creationdate="20200709T045118Z">
         <seg>この間に, 時間とストレージのトレードオフが異なる, いくつかのアルゴリズムがある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Several RFCs have documented how each of the CNSA components are to
+   be integrated into Secure Shell (SSH):</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220417T135356Z" creationid="haruyama" creationdate="20220417T135356Z">
+        <seg>いくつかの RFC で CNSA のコンポーネントのそれぞれを Secure Shell (SSH)にどのように統合するかについて文書化されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -43838,6 +44379,16 @@ and passively waits for something to happen.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Terminology
+   3.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090237Z" creationid="haruyama" creationdate="20220402T090237Z">
+        <seg>用語
+   3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Terminology  .</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20110720T125428Z">
@@ -43945,6 +44496,15 @@ and passively waits for something to happen.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20200625T053755Z" creationid="haruyama" creationdate="20200625T053755Z">
         <seg>文書の更新により時間とともにこのガイダンスは変更されるかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>That is,
+   after processing a binary packet:</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T060350Z" creationid="haruyama" creationdate="20220507T060350Z">
+        <seg>つまり, バイナリパケットを処理した後だ:</seg>
       </tuv>
     </tu>
     <tu>
@@ -44599,6 +45159,19 @@ and passively waits for something to happen.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20110615T053218Z">
         <seg>この提案された群は固定される必要はなく時間とともに変化できます.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The
+   purpose behind this flexibility is to avoid vendors and customers
+   making two major transitions (i.e., to elliptic curve cryptography
+   and then to post-quantum cryptography) in a relatively short
+   timeframe, as we anticipate a need to shift to quantum-resistant
+   cryptography in the near future.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220403T064050Z" creationid="haruyama" creationdate="20220403T064050Z">
+        <seg>この柔軟性の背景には, 近い将来に耐量子暗号への移行が予想される中で, ベンダーと顧客が 2 つの大きな移行 (すなわち, 楕円曲線暗号へとポスト量子暗号への) を行なうことを避けるためだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -46012,6 +46585,14 @@ zero.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>The AES-GCM invocation counter is incremented mod 2^64.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T060333Z" creationid="haruyama" creationdate="20220507T060333Z">
+        <seg>AES-GCM の呼び出しカウンタは 2^64 の剰余でインクリメントされる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>The API MUST be able to handle
    a secret key state; in particular, this means that the API MUST allow
    to return an updated secret key state.</seg>
@@ -46117,6 +46698,24 @@ encoded blob, and a footer.</seg>
       </tuv>
       <tuv xml:lang="ja">
         <seg>チャンネル接続失敗の 'reason code' は uint32 の値だ. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The Commercial National Security Algorithm Suite</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220403T062842Z" creationid="haruyama" creationdate="20220403T062842Z">
+        <seg>Commercial National Security Algorithm スート</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The Commercial National Security Algorithm Suite
+   4.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090246Z" creationid="haruyama" creationdate="20220402T090246Z">
+        <seg>Commercial National Security Algorithm スート
+   4.</seg>
       </tuv>
     </tu>
     <tu>
@@ -46859,6 +47458,37 @@ for encryption of the packet payload.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>The NSA has established the Commercial National
+   Security Algorithm (CNSA) Suite to provide vendors and IT users near-
+   term flexibility in meeting their information assurance
+   interoperability requirements using current cryptography.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220403T063917Z" creationid="haruyama" creationdate="20220403T063917Z">
+        <seg>NSA は 現行の暗号を利用する情報保証の相互運用の要件を満たす短期的な柔軟性をベンダーと IT のユーザに提供するために, Commercial National Security Algorithm スートを設立した.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The NSA is authoring a set of RFCs, including this one, to provide
+   updated guidance concerning the use of certain commonly available
+   commercial algorithms in IETF protocols.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220403T071930Z" creationid="haruyama" creationdate="20220403T071930Z">
+        <seg>NSA は IETF のプロトコルで一般に利用可能な特定の商用アルゴリズムの利用に関する更新されたガイダンスを提供するために, この文書を含む RFC の集合を執筆している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The NSA profiles commercial cryptographic algorithms and protocols as
+   part of its mission to support secure, interoperable communications
+   for US Government National Security Systems.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220403T063356Z" creationid="haruyama" creationdate="20220403T062947Z">
+        <seg>NSA は アメリカ合州国の国家安全保障システムのための安全で相互運用可能な通信をサポートするという指名の一部として, 商用の暗号アルゴリズムとプロトコルを集め分析している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>The Nagle algorithm + TCP retransmits mean that the two records
       get coalesced into a single TCP segment.</seg>
       </tuv>
@@ -47072,6 +47702,16 @@ for encryption of the packet payload.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>The RFC Editor has chosen to publish this document at
+   its discretion and makes no statement about its value for
+   implementation or deployment.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090148Z" creationid="haruyama" creationdate="20220402T090148Z">
+        <seg>RFC 編集者はその裁量でこの文書を公開することを選択し, 実装や配置のための価値について何ら表明するものではない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>The RR type code for the SSHFP RR is 44.</seg>
       </tuv>
       <tuv xml:lang="ja">
@@ -47092,6 +47732,16 @@ for encryption of the packet payload.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20200820T032429Z">
         <seg>RSA 鍵交換法は, 次のパラメーターを持つ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The RSA public key modulus MUST be 3072 or 4096 bits
+   in size; clients MUST NOT accept RSA signatures from a public key
+   modulus of any other size.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220506T081533Z" creationid="haruyama" creationdate="20220506T081533Z">
+        <seg>RSA の公開鍵モジュラスは 3072 か 4096 ビットのサイズでなければならない (MUST). クライアントはその他のサイズの公開鍵モジュラスからの RSA 署名を受けつけてはならない (MUST NOT).</seg>
       </tuv>
     </tu>
     <tu>
@@ -48582,6 +49232,17 @@ regress testing.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>The United States Government has published the National Security
+   Agency (NSA) Commercial National Security Algorithm (CNSA) Suite,
+   which defines cryptographic algorithm policy for national security
+   applications.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220403T063038Z" creationid="haruyama" creationdate="20220402T085537Z">
+        <seg>アメリカ合州国政府は, National Security Agency (NSA) の Commercial National Security Algorithm (CNSA) スートを発表した. これは国家安全保障に対する暗号アルゴリズムポリシーを定義している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>The United States Information Assurance Directorate (IAD) at the
    National Security Agency (NSA) has published "Commercial National
    Security Algorithm Suite and Quantum Computing Frequently Asked
@@ -49678,6 +50339,15 @@ authentication.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>The choice of all but the user authentication methods is determined
+   by the exchange of SSH_MSG_KEXINIT between the client and the server.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220502T053146Z" creationid="haruyama" creationdate="20220502T053146Z">
+        <seg>ユーザ認証法をのぞくすべての(アルゴリズムの)選択は, クライアントとサーバ間での SSH_MSG_KEXINIT の交換で決定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>The choice of hash function
    from the SHA2 hash function family is based on the key size of the
    ECDSA key as specified in Section 6.2.1 of [RFC5656].</seg>
@@ -49985,6 +50655,15 @@ authentication.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20210301T055731Z" creationid="haruyama" creationdate="20210301T055731Z">
         <seg>クライアントは, サーバから受信した最新の "ssh-version" の値を使わなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The client MUST verify that the presented key is a valid
+   authenticator for the server before verifying the server signature.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220506T081906Z" creationid="haruyama" creationdate="20220506T081840Z">
+        <seg>サーバは, サーバの署名を検証する前に提示された鍵がサーバの有効な認証情報かどうかを検証しなければならない (MUST).</seg>
       </tuv>
     </tu>
     <tu>
@@ -52524,6 +53203,14 @@ K_1.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>The following public key algorithms MUST be used:</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220506T081548Z" creationid="haruyama" creationdate="20220506T081548Z">
+        <seg>次の公開鍵アルゴリズムが利用されなければならない (MUST):</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>The following public key and/or certificate formats are currently
    defined:</seg>
       </tuv>
@@ -53821,11 +54508,48 @@ to encrypt the 4 byte packet length field.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>The invocation counter MUST NOT repeat a counter value.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T060411Z" creationid="haruyama" creationdate="20220507T060411Z">
+        <seg>呼び出しカウンタは, カウンタの値を繰り返してはならない (MUST NOT).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>The items listed as "MAY" in
    Table 8 are potentially less efficient.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20220316T125759Z" creationid="haruyama" creationdate="20220316T125759Z">
         <seg>Table 8 で "MAY" で列挙されている項目はより効率的でない可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The kex algorithm MUST be ecdh-sha2-nistp384, and the public
+   key algorithm MUST be either ecdsa-sha2-nistp384 or rsa-sha2-512.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220504T065345Z" creationid="haruyama" creationdate="20220504T065345Z">
+        <seg>鍵交換のアルゴリズムは ecdh-sha2-nistp384 でなければらならない (MUST). 公開鍵アルゴリズムは ecdsa-sha2-nistp384 か rsa-sha2-512 でなければならない (MUST)..</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The kex algorithm MUST be one of diffie-hellman-group15-sha512 or
+   diffie-hellman-group16-sha512, and the public key algorithm MUST be
+   either ecdsa-sha2-nistp384 or rsa-sha2-512.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220504T065608Z" creationid="haruyama" creationdate="20220504T065608Z">
+        <seg>鍵交換のアルゴリズムは diffie-hellman-group15-sha512 か diffie-hellman-group16-sha512 でなければならない (MUST). 公開鍵アルゴリズムは ecdsa-sha2-nistp384  か rsa-sha2-512 でなければならない (MUST).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The kex_algorithms name-list is used to negotiate a single key
+   agreement algorithm between the server and client in accordance with
+   the guidance given in Section 4.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220502T053243Z" creationid="haruyama" creationdate="20220502T053243Z">
+        <seg>kex_algorithms name-list  は 4 節で与えられたガイダンスに従ってサーバとクライアントの間で単一の鍵合意アルゴリズムを交渉するのに用いられる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -53903,6 +54627,26 @@ an encrypted list of matching private keys.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20210123T062346Z" creationid="haruyama" creationdate="20210123T062346Z">
         <seg>接続で用いられる鍵交換アルゴリズムは, クライアントの SSH_QUIC_INIT で送られた (1) "client-kex-alg-data" フィールドが空ではなく (2) "server-kex-algs" にも存在する最初のアルゴリズムだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The key exchange begins with the SSH_MSG_KEXDH_INIT message that
+   contains the client's DH exchange value used to generate a shared
+   secret value.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220504T065405Z" creationid="haruyama" creationdate="20220504T065405Z">
+        <seg>この鍵交換は, 共有の秘密の値を生成するのに用いられたクライアントの一時的公開鍵を含む SSH_MSG_KEXDH_INIT メッセージによって開始される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The key exchange begins with the SSH_MSG_KEXECDH_INIT message that
+   contains the client's ephemeral public key used to generate a shared
+   secret value.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220504T065110Z" creationid="haruyama" creationdate="20220504T064943Z">
+        <seg>この鍵交換は, 共有の秘密の値を生成するのに用いられたクライアントの一時的公開鍵を含む SSH_MSG_KEXECDH_INIT メッセージによって開始される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -53999,6 +54743,15 @@ an encrypted list of matching private keys.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20110930T144716Z">
         <seg>セキュアシェルで用いられる鍵交換は, SSH_MSG_KEXINIT パケットで交換される name-list で決定される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The key exchange to be used is determined by the name-lists exchanged
+   in the SSH_MSG_KEXINIT packets, as described above.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220504T064038Z" creationid="haruyama" creationdate="20220504T064038Z">
+        <seg>前述したように, 利用される鍵交換は SSH_MSG_KEXINIT パケットで交換される name-list で決定される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -55984,6 +56737,15 @@ signaled or the mux server closes the session.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>The procedures for applying the negotiated algorithms are given in
+   the following sections.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220502T053815Z" creationid="haruyama" creationdate="20220502T053815Z">
+        <seg>交渉されたアルゴリズムを適用する手続きはこれからの節で示される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>The program can be a shell, an application program, or a
    subsystem with a host-independent name.</seg>
       </tuv>
@@ -56194,6 +56956,15 @@ PROTOCOL.agent</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>The public key algorithm implemented MUST be ecdsa-sha2-nistp384 or
+   rsa-sha2-512.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220506T081433Z" creationid="haruyama" creationdate="20220506T081433Z">
+        <seg>実装される公開鍵アルゴリズムは ecdsa-sha2-nistp384 か  rsa-sha2-512 でなければならない (MUST).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>The public key algorithms and encodings defined in this document
    SHOULD be accepted any place in the Secure Shell protocol suite where
    public keys are used, including, but not limited to, the following
@@ -56325,6 +57096,16 @@ interpretation domain for the signature, e.g. file signing.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20160526T120548Z" creationid="haruyama" creationdate="20160526T120548Z">
         <seg>この文書の目的は, 実装されているプロトコルを記述することだ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The purpose of this document is to draw upon all of these documents
+   to provide guidance for CNSA-compliant implementations of Secure
+   Shell.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220425T005302Z" creationid="haruyama" creationdate="20220425T005302Z">
+        <seg>この文書の目的は, これらの文書のすべてを利用して, セキュアシェルの CNSA 準拠実装に対するガイダンスを提供することだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -56797,6 +57578,15 @@ remote end.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>The result MUST be one of the following kex_algorithms, or the
+   connection MUST be terminated:</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220502T053444Z" creationid="haruyama" creationdate="20220502T053444Z">
+        <seg>その結果として, kex_algorithms は次のうちの 1 つでなければならず (MUST), そうでなければ接続は切断されなければならない (MUST).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>The result is the public key.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20200618T043222Z" creationid="haruyama" creationdate="20200618T043222Z">
@@ -57161,6 +57951,15 @@ and authenticate the entire packet.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20181222T083731Z" creationid="haruyama" creationdate="20181222T083731Z">
         <seg>[RFC4251] のセキュリティの考察が適用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The security considerations of [RFC4251], [RFC4252], [RFC4253],
+   [RFC5647], and [RFC5656] apply.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T060934Z" creationid="haruyama" creationdate="20220507T060934Z">
+        <seg>[RFC4251] と [RFC4252], [RFC4253], [RFC5647], [RFC5656] のセキュリティの考察が適用される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -57584,6 +58383,16 @@ extension with multiple versions (though this is unlikely).</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>The server MUST list only
+   ecdsa-sha2-nistp384 and/or rsa-sha2-512 as the acceptable public key
+   algorithms in this response.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T055511Z" creationid="haruyama" creationdate="20220507T055511Z">
+        <seg>サーバは, この応答で受け付け可能な公開鍵アルゴリズムとして  ecdsa-sha2-nistp384 と/ないし rsa-sha2-512 のみを列挙しなければならない (MUST).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>The server MUST process each
    request completely and acknowledge any failed requests with a
    SSH_MSG_USERAUTH_FAILURE message before processing the next request.</seg>
@@ -57648,6 +58457,15 @@ extension with multiple versions (though this is unlikely).</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20200519T052718Z">
         <seg>サーバは, 次のことを検証しなければならない. ホスト鍵が本当にメッセージ中のクライアントホストに属している, クライアントホストのユーザがログインを許可されているか, 'siggnature' の値が, ホスト鍵に対して正当かどうか.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The server MUST verify that the public key is a valid authenticator
+   for the user.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T054209Z" creationid="haruyama" creationdate="20220507T054209Z">
+        <seg>サーバは公開鍵がユーザの正答な認証情報かを検証しなければならない (MUST).</seg>
       </tuv>
     </tu>
     <tu>
@@ -57929,6 +58747,29 @@ extension with multiple versions (though this is unlikely).</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20200605T060402Z" creationid="haruyama" creationdate="20200605T060356Z">
         <seg>書き込み要求に対しサーバは SSH_FXP_STATUS メッセージで応答する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The server responds to an SSH_MSG_KEXDH_INIT message with an
+   SSH_MSG_KEXDH_REPLY message that contains the server's DH exchange
+   value, the server's public host key, and a signature of the exchange
+   hash value formed from the newly established shared secret value.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220504T065449Z" creationid="haruyama" creationdate="20220504T065449Z">
+        <seg>サーバは SSH_MSG_KEXDH_INIT メッセージに対して SSH_MSG_KEXDH_REPLAY メッセージで応答する. サーバの DH の交換の値とサーバの公開ホスト鍵,  新しく確立した共有の秘密の値から形成された交換ハッシュの値の署名を含む.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>The server responds to an SSH_MSG_KEXECDH_INIT message with an
+   SSH_MSG_KEXECDH_REPLY message that contains the server's ephemeral
+   public key, the server's public host key, and a signature of the
+   exchange hash value formed from the newly established shared secret
+   value.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220504T065244Z" creationid="haruyama" creationdate="20220504T065244Z">
+        <seg>サーバは SSH_MSG_KEXECDH_INIT メッセージに対して SSH_MSG_KEXECDH_REPLAY メッセージで応答する. サーバの一時的公開鍵とサーバの公開ホスト鍵,  新しく確立した共有の秘密の値から形成された交換ハッシュの値の署名を含む.</seg>
       </tuv>
     </tu>
     <tu>
@@ -60192,6 +61033,15 @@ be reformatted to better match the existing signature encoding:</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Therefore, the SHA-384-based kex and public key algorithms SHOULD be
+   used; SHA-512-based algorithms MAY be used.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220421T003257Z" creationid="haruyama" creationdate="20220421T003257Z">
+        <seg>それゆえ, SHA-384 ベースの鍵交換アルゴリズムは利用する必要がある (SHOULD). SHA-512 ベースのアルゴリズムは利用されてもよい (MAY).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Therefore, this
    document formally moves RFC 4345 to Historic status.</seg>
       </tuv>
@@ -60301,6 +61151,17 @@ be reformatted to better match the existing signature encoding:</seg>
       </tuv>
       <tuv xml:lang="ja">
         <seg>この番号は次のように割当てられる:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>These RFCs can be used in
+   conjunction with other RFCs and cryptographic guidance (e.g., NIST
+   Special Publications) to properly protect Internet traffic and data-
+   at-rest for US Government National Security Systems.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220403T072129Z" creationid="haruyama" creationdate="20220403T072129Z">
+        <seg>これらの RFC は, アメリカ合州国政府の安全保障システムのためにインターネットトラフィックと静止データを適切に保護するため, 他の RFC や暗号ガイダンス (例: NIST Special Publications) と組合せて利用できる. </seg>
       </tuv>
     </tu>
     <tu>
@@ -63166,6 +64027,14 @@ ControlMaster connection-sharing.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>This document has no IANA actions.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T060955Z" creationid="haruyama" creationdate="20220507T060955Z">
+        <seg>この文書には IANA の行動はない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>This document instantiates the
    recommendations described in [BKN1,BKN2].</seg>
       </tuv>
@@ -63197,6 +64066,24 @@ ControlMaster connection-sharing.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20200622T083550Z" creationid="haruyama" creationdate="20200622T083550Z">
         <seg>この文書は SSH ワーキンググループの成果物だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>This document is also appropriate for
+   all other US Government systems that process high-value information.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220403T062833Z" creationid="haruyama" creationdate="20220403T062833Z">
+        <seg>この文書は, 高い価値の情報を扱う他のすべてのアメリカ合州国政府のシステムにも適している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>This document is also appropriate for all
+   other US Government systems that process high-value information.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T085911Z" creationid="haruyama" creationdate="20220402T085911Z">
+        <seg>この文書は, 高い価値の情報を扱う他のすべてのアメリカ合州国政府のシステムにも適している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -63470,6 +64357,17 @@ ControlMaster connection-sharing.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>This document specifies conventions for using the United States
+   National Security Agency's CNSA Suite algorithms [CNSA] with the
+   Secure Shell Transport Layer Protocol [RFC4253] and the Secure Shell
+   Authentication Protocol [RFC4252].</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220403T062757Z" creationid="haruyama" creationdate="20220403T062757Z">
+        <seg>この文書は, アメリカ合州国の National Security Agency の CNSA スートアルゴリズムをセキュアシェルのトランスポート層プロトコル [RFC4253] と認証プロトコル [RFC4252] と共に利用するための規約を規定する. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>This document specifies how to use X.509 version 3 public
    key certificates in public key algorithms in the Secure Shell
    protocol.</seg>
@@ -63495,6 +64393,17 @@ ControlMaster connection-sharing.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20110614T023647Z">
         <seg>この文書は, セキュア シェル (SSH) プロトコルで Arcfour 暗号を利用する方法を指定する. この方法はArcfourの鍵スケジュールアルゴリズムの弱点を軽減する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>This document specifies the conventions for using the
+   United States National Security Agency's CNSA Suite algorithms with
+   the Secure Shell Transport Layer Protocol and the Secure Shell
+   Authentication Protocol.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T085712Z" creationid="haruyama" creationdate="20220402T085635Z">
+        <seg>この文書は, アメリカ合州国の National Security Agency の CNSA スートアルゴリズムをセキュアシェルのトランスポート層プロトコルと認証プロトコルと共に利用するための規約を規定する. </seg>
       </tuv>
     </tu>
     <tu>
@@ -64060,6 +64969,15 @@ keys (K_1 and K_2), used by two separate instances of chacha20.</seg>
       </tuv>
       <tuv xml:lang="ja">
         <seg>これは, 8byteブロックのブロック暗号だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>This is a contribution to the RFC Series, independently of any other
+   RFC stream.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090059Z" creationid="haruyama" creationdate="20220402T090059Z">
+        <seg>この文書は, 他の RFC の流れとは独立に, RFC シリーズに貢献する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -66388,6 +67306,16 @@ multiple times.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>This section specifies the use of CNSA components in the Secure Shell
+   algorithm negotiation, key agreement, server authentication, and user
+   authentication.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220502T053134Z" creationid="haruyama" creationdate="20220502T053134Z">
+        <seg>この節は, セキュアシェルのアルゴリズム交渉や鍵合意, サーバ認証, ユーザ認証で CNSA のコンポーネントの利用を記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>This section starts with an explanation of parameters.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20200820T032952Z" creationid="haruyama" creationdate="20200702T053516Z">
@@ -66482,6 +67410,16 @@ multiple times.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20200622T080505Z" creationid="haruyama" creationdate="20200622T080505Z">
         <seg>この仕様では [RFC3986] から定義 "port", "host", "scheme", "userinfo", "path-empty", "path-abempty", "authority"  を用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>This specification requires the same cipher suite to be
+   employed when rekeying; that is, the cipher algorithms MUST NOT be
+   changed when a rekey occurs.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T060907Z" creationid="haruyama" creationdate="20220507T060907Z">
+        <seg>この仕様は, 鍵を再生成する際に同じ暗号スートを採用することを要求する. つまり, 暗号アルゴリズムは鍵の再生成時に変更されてはならない (MUST NOT).</seg>
       </tuv>
     </tu>
     <tu>
@@ -67318,6 +68256,16 @@ refer to the AuthenticationMethods option in sshd_config(5).</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>To facilitate client authentication with RSA using SHA-512, clients
+   and servers SHOULD implement the server-sig-algs extension, as
+   specified in [RFC8308].</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T055206Z" creationid="haruyama" creationdate="20220507T055206Z">
+        <seg>SHA-512 を用いる RSA でクライアント認証を促進するために, クライアントとサーバは, [RFC8308] で指定されているように, server-sig-algs 拡張を実装する必要がある (SHOULD).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>To find a square root of a,
    first compute the candidate root x = a^((p+3)/8) (mod p).</seg>
       </tuv>
@@ -67689,6 +68637,18 @@ at the time of key generation.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20200602T081100Z" creationid="haruyama" creationdate="20200602T081100Z">
         <seg>この場合をサポートするため, OpenSSH は鍵生成時に証明情報を保持することを選択できるようにする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>To this end, it
+   publishes guidance both to assist with the US Government's transition
+   to new algorithms and to provide vendors -- and the Internet
+   community in general -- with information concerning their proper use
+   and configuration.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220403T063640Z" creationid="haruyama" creationdate="20220403T063443Z">
+        <seg>この目的のために, アメリカ合州国政府による新しいアルゴリズムへの移行を支援するのともにベンダーや一般のインターネットコミュニティにその適切な利用と設定に関する情報を提供するために, ガイダンスを発行している.</seg>
       </tuv>
     </tu>
     <tu>
@@ -68463,6 +69423,25 @@ supplied host keys are present in known_hosts.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Use of AES-GCM in SSH should be done as
+   described in [RFC5647], with the exception that AES-GCM need not be
+   listed as the MAC algorithm when its use is implicit (such as done in
+   aes256-gcm@openssh.com).</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220421T003725Z" creationid="haruyama" creationdate="20220421T003725Z">
+        <seg>SSH での AES-GCM の利用は [RFC5647] で記述されている通りに行なわれる必要がある. ただし, (aes256-gcm@openssh.com で行なわれているように) AES_GCM の利用が暗黙的ならば, AES-GCM を MAC アルゴリズムとして列挙する必要はない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Use of AES-GCM in Secure Shell is described in [RFC5647].</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T060143Z" creationid="haruyama" creationdate="20220507T060143Z">
+        <seg>セキュアシェルでの AES-GCM の利用は [RFC5647] に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Use of Diffie-Hellman in SMIME is defined via a discussion of
    Cryptographic Message Syntax (CMS) enveloped data [RFC3852].</seg>
       </tuv>
@@ -68548,6 +69527,15 @@ authentication.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Use of a TOFU model would allow an intermediate
+   adversary to present itself to the client as the server.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220506T082235Z" creationid="haruyama" creationdate="20220506T082235Z">
+        <seg>TOFU モデルの利用は, 中間の攻撃者が自身をクライアントに対してサーバとして提示することを許してしまう.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Use of that
    configuration option without corresponding changes to firewall or
    network device configuration may unintentionally result in the
@@ -68556,6 +69544,18 @@ authentication.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20110728T103800Z">
         <seg>ファイアウォールやネットワークデバイスの設定を対応して変更することなしにこの設定項目を利用すると, "netconf" SSH サブシステムへのアクセスを得ようとする ファイアウォールや他の管理境界の外にあるノードの接続に意図しない影響を与える可能性がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Use of the Advanced Encryption Standard in Galois/Counter Mode (AES-
+   GCM) shall meet the requirements set forth in [SP800-38D], with the
+   additional requirements that all 16 octets of the authentication tag
+   MUST be used as the SSH data integrity value and that AES is used
+   with a 256-bit key.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220421T003536Z" creationid="haruyama" creationdate="20220421T003536Z">
+        <seg>Advanced Encryption Standard in Galois/Counter Mode (AES-GCM) の利用は, [SP800-38D] で規定された要件を満たすとともに, 認証タグの 16 オクテットが SSH のデータ完全性値として利用されなければならない (MUST) と AES は 256 ビット鍵で利用されなければならないという追加の要件も満たさなければならない.</seg>
       </tuv>
     </tu>
     <tu>
@@ -68657,6 +69657,16 @@ authentication.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>User Authentication
+   8.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220402T090358Z" creationid="haruyama" creationdate="20220402T090358Z">
+        <seg>ユーザ認証
+   8.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>User Authentication ............................................10
       5.1.</seg>
       </tuv>
@@ -68697,6 +69707,15 @@ authentication.</seg>
       </tuv>
       <tuv xml:lang="ja">
         <seg>ユーザ認証プロトコル:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>Users MAY
+   authenticate using passwords.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T054033Z" creationid="haruyama" creationdate="20220507T054033Z">
+        <seg>ユーザはパスワードを用いて認証してもよい (MAY).</seg>
       </tuv>
     </tu>
     <tu>
@@ -69869,6 +70888,15 @@ will send the following global request:</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>When authenticating with public key, the following public key
+   algorithms MUST be used:</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220507T054137Z" creationid="haruyama" creationdate="20220507T054137Z">
+        <seg>公開鍵を用いて認証する場合, 次の公開鍵アルゴリズムが使われなければならない:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>When both
    peers implement base:1.1 capability, a proper framing protocol
    (chunked framing mechanism; see Section 4.2) is used for the rest of
@@ -70558,6 +71586,15 @@ and "reserved" an extension field whose contents are currently ignored.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>Where X.509 v3 Certificates are used, their use MUST comply with
+   [RFC8603].</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220506T082318Z" creationid="haruyama" creationdate="20220506T082318Z">
+        <seg>X.509 v3 証明書を利用する場合は, その利用を [RFC8603] に従わなければならない (MUST).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>Where clients do
    not support this extension, servers must elevate sessions to allow
    full access by administrative users always.</seg>
@@ -70615,6 +71652,16 @@ encoding:</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20110822T031619Z">
         <seg>SSH は機密性と完全性を無効にすることをサポートしているが, SSHトランスポートモデルで利用する場合はこれらを無効にしてはならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>While [RFC9142] establishes general
+   guidance on the capabilities of SSH implementations and requires
+   support for "diffie-hellman-group14-sha256", it MUST NOT be used.</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220502T053352Z" creationid="haruyama" creationdate="20220502T053352Z">
+        <seg>[RFC9142] は SSH の実装の能力に対する一般的なガイダンスを確立しており "diffie-hellman-group14-sha256" のサポートを要求しているが, これは利用してはならない (MUST NOT).</seg>
       </tuv>
     </tu>
     <tu>
@@ -70706,6 +71753,17 @@ the signature object itself.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20110729T072639Z">
         <seg>SSH と USM の仕様は頻繁にユーザという用語を参照するが, [RFC3411] とこのメモで好む用語は "principal" だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>While the approved CNSA hash function for all purposes is SHA-384, as
+   defined in [FIPS180], commercial products are more likely to
+   incorporate the kex algorithms and public key algorithms based on
+   SHA-512 (sha2-512), which are defined in [RFC8268] and [RFC8332].</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220421T003209Z" creationid="haruyama" creationdate="20220421T003209Z">
+        <seg>あらゆる目的のための承認された CNSA ハッシュ関数である [FIPS180] で定義された SHA-384 だが, 商用製品では [RFC8268] と [RFC8332]で定義された SHA-512 (sha2-512) に基づく鍵交換アルゴリズムや公開鍵アルゴリズムが組込まれることが多いようだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -72596,6 +73654,14 @@ servers (identified by banner).</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>encryption algorithms (both client_to_server and server_to_client):</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220417T135528Z" creationid="haruyama" creationdate="20220417T135451Z">
+        <seg>暗号化アルゴリズム(クライアントからサーバとサーバからクライアントの両方):</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>encryption_algorithms
          A name-list of acceptable symmetric encryption algorithms (also
          known as ciphers) in order of preference.</seg>
@@ -72781,6 +73847,14 @@ servers (identified by banner).</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>kex algorithms:</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220417T135420Z" creationid="haruyama" creationdate="20220417T135420Z">
+        <seg>鍵交換アルゴリズム:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>kex_algorithms
          Key exchange algorithms were defined above.</seg>
       </tuv>
@@ -72862,6 +73936,15 @@ identify the identity principal in log messages.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20200710T022631Z" creationid="haruyama" creationdate="20200710T022631Z">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>message authentication code (MAC) algorithms (both client_to_server
+   and server_to_client):</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220417T135600Z" creationid="haruyama" creationdate="20220417T135600Z">
+        <seg>メッセージ認証コード (MAC) (クライアントからサーバとサーバからクライアントの両方)</seg>
       </tuv>
     </tu>
     <tu>
@@ -74235,6 +75318,14 @@ identify the identity principal in log messages.</seg>
     </tu>
     <tu>
       <tuv xml:lang="en-US">
+        <seg>or</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220502T053721Z" creationid="haruyama" creationdate="20220502T053716Z">
+        <seg>ないし</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
         <seg>or a request-specific success message.</seg>
       </tuv>
       <tuv xml:lang="ja" changeid="haruyama" changedate="20160527T105156Z" creationid="haruyama" creationdate="20160527T105156Z">
@@ -74379,6 +75470,14 @@ draft-josefsson-eddsa-ed25519-03.</seg>
         <seg>秘密/公開鍵ペアを生成し検証するのに用いられる手続き
    B.  公開鍵を符号化するのに用いられる形式
    C.  署名を計算し符号化し検証するのに用いられる手続き</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>public key algorithms:</seg>
+      </tuv>
+      <tuv xml:lang="ja" changeid="haruyama" changedate="20220417T135443Z" creationid="haruyama" creationdate="20220417T135443Z">
+        <seg>公開鍵アルゴリズム:</seg>
       </tuv>
     </tu>
     <tu>
