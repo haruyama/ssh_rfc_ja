@@ -1038,7 +1038,7 @@ Internet-Draft                  SSH/QUIC                   December 2020
 
    SSH のパケットタイプ SSH_MSG_DISCONNECT は タイプ 0x1d の QUIC フレーム CONNECTION_CLOSE で置き換えられる.  CONNECTION_CLOSE 中の "Error Code"フィールドは, SSH_MSG_DISCONNECT の "reason code" で送られるはずの値が含まれる.  CONNECTION_CLOSE 中の "Reason Phrase"フィールドは, SSH_MSG_DISCONNECT の "description" で送られるはずの値が含まれる.  SSH_MSG_DISCONNECT の "language tag" フィールドは送られない.
 
-6.6.  禁止される SSH のパケット」
+6.6.  禁止される SSH のパケット
 
    SSH/QUIC では次の SSH パケットタイプは送られてはならない:
 
@@ -1072,7 +1072,7 @@ Internet-Draft                  SSH/QUIC                   December 2020
 
 
      SSH_MSG_IGNORE                   2
-     SSH_MSG_UNIMPLEMENTED            3   (形式が変更されている!)
+     SSH_MSG_UNIMPLEMENTED            3   (形式が変更されている！)
      SSH_MSG_DEBUG                    4
      SSH_MSG_SERVICE_REQUEST          5
      SSH_MSG_SERVICE_ACCEPT           6

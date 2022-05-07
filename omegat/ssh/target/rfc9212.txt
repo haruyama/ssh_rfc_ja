@@ -1,0 +1,346 @@
+
+
+
+
+Independent Submission                                      N. Gajcowski
+Request for Comments: 9212                                    M. Jenkins
+Category: Informational                                              NSA
+ISSN: 2070-1721                                               March 2022
+
+
+  セキュアシェル (SSH) のための Commercial National Security Algorithm (CNSA) スート暗号
+
+概要
+
+   アメリカ合州国政府は, National Security Agency (NSA) の Commercial National Security Algorithm (CNSA) スートを発表した. これは国家安全保障に対する暗号アルゴリズムポリシーを定義している.  この文書は, アメリカ合州国の National Security Agency の CNSA スートアルゴリズムをセキュアシェルのトランスポート層プロトコルと認証プロトコルと共に利用するための規約を規定する. これは, セキュアシェル (SSH) を採用する (NIST Special Publication 800-59 に記載されている) アメリカ合州国の国家安全保障システムのすべての構成要素の機能や設定, 運用に適用される.  この文書は, 高い価値の情報を扱う他のすべてのアメリカ合州国政府のシステムにも適している.  これらのシステム及び他のシステムの配置での開発者/運用者の利用のために公開されている.
+
+このメモの位置づけ
+
+   この文書は, インターネット標準課程仕様ではない. 情報共有目的で発行される.
+
+   この文書は, 他の RFC の流れとは独立に, RFC シリーズに貢献する.  RFC 編集者はその裁量でこの文書を公開することを選択し, 実装や配置のための価値について何ら表明するものではない.  この RFC 編集者によって出版を許可された文書は, インターネット標準のいかなるレベルの候補ではない. RFC 7841 の 2節を参照.
+
+   この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc9212 で得られる.
+
+著作権情報
+
+   Copyright (c) 2022 IETF Trust and the persons identified as the
+   document authors. 訳者: 春山征吾 <haruyama@unixuser.org>All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.
+
+目次
+
+   1イントロダクション
+   2.  用語
+   3.  Commercial National Security Algorithm スート
+   4.  CNSA とセキュアシェル
+   5.  セキュリティメカニズムの交渉と初期化
+   6.  鍵交換
+     6.1.  ECDH 鍵交換
+     6.2.  DH 鍵交換
+   7.  認証
+     7.1.  サーバ認証
+     7.2.  ユーザ認証
+   8.  SSH バイナリパケットの機密性とデータ完全性
+     8.1.  Galois/Counter モード
+     8.2.  データの完全性
+   9.  鍵の再生成
+   10. セキュリティの考察
+   11. IANA の考察
+   12. References
+     12.1.  Normative References
+     12.2.  Informative References
+   Authors' Addresses
+
+1イントロダクション
+
+   この文書は, アメリカ合州国の National Security Agency の CNSA スートアルゴリズムをセキュアシェルのトランスポート層プロトコル [RFC4253] と認証プロトコル [RFC4252] と共に利用するための規約を規定する. これは, セキュアシェル (SSH) を採用する (NIST Special Publication 800-59 [SP80059] に記載されている) アメリカ合州国の国家安全保障システムのすべての構成要素の機能や設定, 運用に適用される.  この文書は, 高い価値の情報を扱う他のすべてのアメリカ合州国政府のシステムにも適している.
+   これらのシステム及び他のシステムの配置での開発者/運用者の利用のために公開されている.
+
+2.  用語
+
+   この文書でのキーワード "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",  "OPTIONAL" は, ここで示しているようにすべて大文字で出現した場合のみ, BCP 16 [RFC2119] [RFC8174] で記述されているように解釈される. 
+
+3.  Commercial National Security Algorithm スート
+
+   NSA は アメリカ合州国の国家安全保障システムのための安全で相互運用可能な通信をサポートするという指名の一部として, 商用の暗号アルゴリズムとプロトコルを集め分析している.  この目的のために, アメリカ合州国政府による新しいアルゴリズムへの移行を支援するのともにベンダーや一般のインターネットコミュニティにその適切な利用と設定に関する情報を提供するために, ガイダンスを発行している.
+
+   近年, 暗号の移行計画は暗号に関連する量子コンピュータの開発に見通しによって影が薄くなってきている.  NSA は 現行の暗号を利用する情報保証の相互運用の要件を満たす短期的な柔軟性をベンダーと IT のユーザに提供するために, Commercial National Security Algorithm スートを設立した.  この柔軟性の背景には, 近い将来に耐量子暗号への移行が予想される中で, ベンダーと顧客が 2 つの大きな移行 (すなわち, 楕円曲線暗号へとポスト量子暗号への) を行なうことを避けるためだ.
+
+   NSA は IETF のプロトコルで一般に利用可能な特定の商用アルゴリズムの利用に関する更新されたガイダンスを提供するために, この文書を含む RFC の集合を執筆している.  これらの RFC は, アメリカ合州国政府の安全保障システムのためにインターネットトラフィックと静止データを適切に保護するため, 他の RFC や暗号ガイダンス (例: NIST Special Publications) と組合せて利用できる. 
+
+4.  CNSA とセキュアシェル
+
+   いくつかの RFC で CNSA のコンポーネントのそれぞれを Secure Shell (SSH)にどのように統合するかについて文書化されている.
+
+   鍵交換アルゴリズム:
+
+   *  ecdh-sha2-nistp384 [RFC5656]
+
+   *  diffie-hellman-group15-sha512 [RFC8268]
+
+   *  diffie-hellman-group16-sha512 [RFC8268]
+
+   公開鍵アルゴリズム:
+
+   *  ecdsa-sha2-nistp384 [RFC5656]
+
+   *  rsa-sha2-512 [RFC8332]
+
+   暗号化アルゴリズム(クライアントからサーバとサーバからクライアントの両方):
+
+   *  AEAD_AES_256_GCM [RFC5647]
+
+   メッセージ認証コード (MAC) (クライアントからサーバとサーバからクライアントの両方)
+
+   *  AEAD_AES_256_GCM [RFC5647]
+
+   あらゆる目的のための承認された CNSA ハッシュ関数である [FIPS180] で定義された SHA-384 だが, 商用製品では [RFC8268] と [RFC8332]で定義された SHA-512 (sha2-512) に基づく鍵交換アルゴリズムや公開鍵アルゴリズムが組込まれることが多いようだ.
+   それゆえ, SHA-384 ベースの鍵交換アルゴリズムは利用する必要がある (SHOULD). SHA-512 ベースのアルゴリズムは利用されてもよい (MAY).  SHA-384 と SHA-512 以外のあらゆるアルゴリズムは, 利用されてはならない (MUST NOT).
+
+   Advanced Encryption Standard in Galois/Counter Mode (AES-GCM) の利用は, [SP800-38D] で規定された要件を満たすとともに, 認証タグの 16 オクテットが SSH のデータ完全性値として利用されなければならない (MUST) と AES は 256 ビット鍵で利用されなければならないという追加の要件も満たさなければならない.  SSH での AES-GCM の利用は [RFC5647] で記述されている通りに行なわれる必要がある. ただし, (aes256-gcm@openssh.com で行なわれているように) AES_GCM の利用が暗黙的ならば, AES-GCM を MAC アルゴリズムとして列挙する必要はない.  加えて, [RFC5647] では, AES-GCM の呼び出しカウンタが 2^64 の剰余でインクリメントすることを明記していない.  CNSA の実装はバイナリパケットの処理の後でカウンタが繰替えさず適切にインクリメントすることを保証しなければならない (MUST).
+
+      invocation_counter = invocation_counter + 1 mod 2^64.
+
+   この文書の目的は, これらの文書のすべてを利用して, セキュアシェルの CNSA 準拠実装に対するガイダンスを提供することだ.  この文書で指定されたアルゴリズムは, 実装が義務づけられているアルゴリズムと異なる場合がある. この場合, 後者は存在するが利用されない.  準拠セキュアシェル実装はこの文書のガイダンスに従わなければらならい (MUST) が, その要件は特定のセキュアシェル実装が, 国家のセキュリティシステムでの利用に適さないことを意味しないことに注意.  このような利用を許可する前に, 実装は適切な権威によって検証されなければならない.
+
+5.  セキュリティメカニズムの交渉と初期化
+
+   [RFC4253] の 7.1 節で記述されているように, サーバとクライアント間での SSH_MSG_KEXINIT の交換が, 鍵合意アルゴリズムや, MAC アルゴリズム, ホスト鍵アルゴリズム (サーバ認証アルゴリズム), 暗号化アルゴリズムのそれぞれで何が用いられるかを確立する.
+   この節は, セキュアシェルのアルゴリズム交渉や鍵合意, サーバ認証, ユーザ認証で CNSA のコンポーネントの利用を記述する.
+
+   ユーザ認証法をのぞくすべての(アルゴリズムの)選択は, クライアントとサーバ間での SSH_MSG_KEXINIT の交換で決定される.
+
+   kex_algorithms name-list  は 4 節で与えられたガイダンスに従ってサーバとクライアントの間で単一の鍵合意アルゴリズムを交渉するのに用いられる.  [RFC9142] は SSH の実装の能力に対する一般的なガイダンスを確立しており "diffie-hellman-group14-sha256" のサポートを要求しているが, これは利用してはならない (MUST NOT).
+   その結果として, kex_algorithms は次のうちの 1 つでなければならず (MUST), そうでなければ接続は切断されなければならない (MUST).
+
+   *  ecdh-sha2-nistp384 [RFC5656]
+
+   *  diffie-hellman-group15-sha512 [RFC8268]
+
+   *  diffie-hellman-group16-sha512 [RFC8268]
+
+   次の集合のうちの 1つをencryption_algorithms と mac_algorithms の name-list に用いなければらならない (MUST). それぞれの方向 (すなわち client_to_server と server_to_client) に対してどちらのセットを利用してもよい (MAY) が, 結果は一緒でなければならない (たとえば AEAD_AES_256_GCM を利用する).
+
+      encryption_algorithm_name_list := { AEAD_AES_256_GCM }
+
+      mac_algorithm_name_list := { AEAD_AES_256_GCM }
+
+   ないし
+
+      encryption_algorithm_name_list := { aes256-gcm@openssh.com }
+
+      mac_algorithm_name_list := {}
+
+   次の公開鍵アルゴリズムのうちの 1 つ が利用されなければならない (MUST):
+
+   *  rsa-sha2-512 [RFC8332]
+
+   *  ecdsa-sha2-nistp384 [RFC5656]
+
+   交渉されたアルゴリズムを適用する手続きはこれからの節で示される.
+
+6.  鍵交換
+
+   前述したように, 利用される鍵交換は SSH_MSG_KEXINIT パケットで交換される name-list で決定される.  Elliptic Curve Diffie-Hellman (ECDH) か Diffie-Hellman (DH) のどちらかが, クライアントとサーバの間で共有の秘密の値を確立するために用いられなればならない (MUST).
+
+   準拠するシステムは, 一時的/交換の値の再利用を, この実行に関係するセキュリティへの懸念のため, 許可してはならない (MUST NOT).  [SP80056A] の 5.6.3.3 節で, 一時的な秘密鍵は正確に1つの鍵確立トランザクションで利用し可能な限り早く破壊される(ゼロ化される)必要があると述べられている.
+   [SP80056A] の 5.8 節で, このような共有の秘密は利用後に直ちに破壊される(ゼロ化される)必要があると述べられている.  CNSA 準拠のシステムはこれらの義務にしたがわなければならない (MUST).
+
+6.1.  ECDH 鍵交換
+
+   この鍵交換は, 共有の秘密の値を生成するのに用いられたクライアントの一時的公開鍵を含む SSH_MSG_KEXECDH_INIT メッセージによって開始される.
+
+   サーバは SSH_MSG_KEXECDH_INIT メッセージに対して SSH_MSG_KEXECDH_REPLAY メッセージで応答する. サーバの一時的公開鍵とサーバの公開ホスト鍵,  新しく確立した共有の秘密の値から形成された交換ハッシュの値の署名を含む.  鍵交換のアルゴリズムは ecdh-sha2-nistp384 でなければらならない (MUST). 公開鍵アルゴリズムは ecdsa-sha2-nistp384 か rsa-sha2-512 でなければならない (MUST)..
+
+6.2.  DH 鍵交換
+
+   この鍵交換は, 共有の秘密の値を生成するのに用いられたクライアントの一時的公開鍵を含む SSH_MSG_KEXDH_INIT メッセージによって開始される.
+
+   サーバは SSH_MSG_KEXDH_INIT メッセージに対して SSH_MSG_KEXDH_REPLAY メッセージで応答する. サーバの DH の交換の値とサーバの公開ホスト鍵,  新しく確立した共有の秘密の値から形成された交換ハッシュの値の署名を含む.
+   鍵交換のアルゴリズムは diffie-hellman-group15-sha512 か diffie-hellman-group16-sha512 でなければならない (MUST). 公開鍵アルゴリズムは ecdsa-sha2-nistp384  か rsa-sha2-512 でなければならない (MUST).
+
+7.  認証
+
+7.1.  サーバ認証
+
+   新しく確立した共有秘密値から導出される交換ハッシュに対する署名が, クライアントに対してサーバを認証するのに用いられる.  サーバは電子署名を用いて認証されなければならない (MUST).
+   実装される公開鍵アルゴリズムは ecdsa-sha2-nistp384 か  rsa-sha2-512 でなければならない (MUST).  RSA の公開鍵モジュラスは 3072 か 4096 ビットのサイズでなければならない (MUST). クライアントはその他のサイズの公開鍵モジュラスからの RSA 署名を受けつけてはならない (MUST NOT).
+
+   次の公開鍵アルゴリズムが利用されなければならない (MUST):
+
+   *  ecdsa-sha2-nistp384 [RFC5656]
+
+   *  rsa-sha2-512 [RFC8332]
+
+   サーバは, サーバの署名を検証する前に提示された鍵がサーバの有効な認証情報かどうかを検証しなければならない (MUST).
+   可能ならば, 検証は証明書を用いて行なわれる必要がある (SHOULD).
+   そうでなければ, クライアントは, 他の安全な, もしかしたらオフラインのメカニズムを通じて提示された公開鍵を検証しなければならない (MUST).  実装は, まだ検証されていないサーバから提示された最初の公開ホスト鍵をクライアントが受け付ける "Trust on First Use (TOFU)" セキュリティモデルを採用してはならない (MUST NOT).  TOFU モデルの利用は, 中間の攻撃者が自身をクライアントに対してサーバとして提示することを許してしまう.
+
+   X.509 v3 証明書を利用する場合は, その利用を [RFC8603] に従わなければならない (MUST).
+
+7.2.  ユーザ認証
+
+   セキュアシェルトランスポート層プロトコルはサーバをホストに認証するが, ユーザ(ないしユーザのホスト)をサーバに認証しない.  すべてのユーザは認証されなければならず (MUST). {RFC4252] に従わなければならない (MUST). また, 公開鍵方式を用いて認証される必要がある (SHOULD).  ユーザはパスワードを用いて認証してもよい (MAY).  他の認証法は "none" を含めて利用してはならない (MUST).
+
+   公開鍵を用いて認証する場合, 次の公開鍵アルゴリズムが使われなければならない:
+
+   *  ecdsa-sha2-nistp384 [RFC5656]
+
+   *  rsa-sha2-512 [RFC8332]
+
+   サーバは公開鍵がユーザの正答な認証情報かを検証しなければならない (MUST).  可能ならば, 検証は証明書を用いて行なわれる必要がある (SHOULD).  そうでなければ, サーバは, 他の安全な, もしかしたらオフラインのメカニズムを通じて公開鍵を検証しなければならない (MUST).
+
+   X.509 v3 証明書を利用する場合は, その利用を [RFC8603] に従わなければならない (MUST).
+
+   RSA で認証する場合, クライアントの公開鍵モジュラスは 3072 か 4096 ビットのサイズでなければならない (MUST). サーバはその他のサイズの公開鍵モジュラスからの署名を受けつけてはならない (MUST NOT).
+
+   SHA-512 を用いる RSA でクライアント認証を促進するために, クライアントとサーバは, [RFC8308] で指定されているように, server-sig-algs 拡張を実装する必要がある (SHOULD).  この場合,  SSH_MSG_KEXINIT で クライアントは  kex_algorithms フィールドに ext-info-c 指標を含めることになり (SHALL), サーバは, server-sig-algs 拡張を含む SSH_MSG_EXT_INFO メッセージで応答する必要がある (SHOULD).  サーバは, この応答で受け付け可能な公開鍵アルゴリズムとして  ecdsa-sha2-nistp384 と/ないし rsa-sha2-512 のみを列挙しなければならない (MUST).
+
+   パスワードで認証する場合, 辞書攻撃から保護するためにパスワードが十分なエントロピーを持つことが不可欠だ.  認証中, パスワードは, 確立された暗号化された通信チャンネルで保護されなければならない (MUST).  追加のガイドラインは [SP80063] で提供される.
+
+8.  SSH バイナリパケットの機密性とデータ完全性
+
+   セキュアシェルは, 独自のバイナリパケット構造を用いてクライアントとサーバの間でデータを転送する.  SSH バイナリパケット構造は, 基底のデータチャンネルのパケットの構造から独立だ.
+   各バイナリパケットの内容とそのヘッダの一部は暗号化され, それぞれのパケットは独自のメッセージ認証コードで認証される.  Use of AES-GCM will both encrypt the packet and
+   form a 16-octet authentication tag to ensure data integrity.
+
+8.1.  Galois(ガロア)/カウンタモード
+
+   セキュアシェルでの AES-GCM の利用は [RFC5647] に記述されている.  CNSA 準拠の SSH 実装は, 機密性の提供とデータ完全性の保証のために AES-GCM (AEAD_AES_GCM_256 ないし aes256-gcm@openssh として交渉される; 5 節参照) を実装しなければならない (MUST).  他の機密性やデータ完全性アルゴリズムは許可されない.
+
+   AES-GCM の呼び出しカウンタは 2^64 の剰余でインクリメントされる.  つまり, バイナリパケットを処理した後だ:
+
+      invocation_counter = invocation_counter + 1 mod 2^64
+
+   呼び出しカウンタは, カウンタの値を繰り返してはならない (MUST NOT).
+
+8.2.  データの完全性
+
+   [RFC5647] で指定されているように, 認証タグの 16 オクテットすべてが, SSH バイナリパケットの SSH データ完全性の値として用いられなければならない (MUST). 
+
+9.  鍵の再生成
+
+    [RFC4253]  の 9 節では, サーバないしクライアントのどちらかが,  「SSH_MSG_KEXINIT パケットを送信することで ... 鍵の再交換」を開始し「再交換中に一部またはすべての[暗号] アルゴリズムを変更」することを認めている.  この仕様は, 鍵を再生成する際に同じ暗号スートを採用することを要求する. つまり, 暗号アルゴリズムは鍵の再生成時に変更されてはならない (MUST NOT).
+
+10.  セキュリティの考察
+
+   [RFC4251] と [RFC4252], [RFC4253], [RFC5647], [RFC5656] のセキュリティの考察が適用される.
+
+11.  IANA の考慮
+
+   この文書には IANA の行動はない.
+
+12.  References
+
+12.1.  Normative References
+
+   [CNSA]     Committee for National Security Systems, "Use of Public
+              Standards for Secure Information Sharing", CNSSP 15,
+              October 2016,
+              <https://www.cnss.gov/CNSS/Issuances/Policies.cfm>.
+
+   [FIPS180]  National Institute of Standards and Technology, "Secure
+              Hash Standard (SHS)", FIPS PUB 180-4,
+              DOI 10.6028/NIST.FIPS.180-4, August 2015,
+              <https://doi.org/10.6028/NIST.FIPS.180-4>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC4251]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Protocol Architecture", RFC 4251, DOI 10.17487/RFC4251,
+              January 2006, <https://www.rfc-editor.org/info/rfc4251>.
+
+   [RFC4252]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Authentication Protocol", RFC 4252, DOI 10.17487/RFC4252,
+              January 2006, <https://www.rfc-editor.org/info/rfc4252>.
+
+   [RFC4253]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Transport Layer Protocol", RFC 4253, DOI 10.17487/RFC4253,
+              January 2006, <https://www.rfc-editor.org/info/rfc4253>.
+
+   [RFC5647]  Igoe, K. and J. Solinas, "AES Galois Counter Mode for the
+              Secure Shell Transport Layer Protocol", RFC 5647,
+              DOI 10.17487/RFC5647, August 2009,
+              <https://www.rfc-editor.org/info/rfc5647>.
+
+   [RFC5656]  Stebila, D. and J. Green, "Elliptic Curve Algorithm
+              Integration in the Secure Shell Transport Layer",
+              RFC 5656, DOI 10.17487/RFC5656, December 2009,
+              <https://www.rfc-editor.org/info/rfc5656>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+   [RFC8268]  Baushke, M., "More Modular Exponentiation (MODP) Diffie-
+              Hellman (DH) Key Exchange (KEX) Groups for Secure Shell
+              (SSH)", RFC 8268, DOI 10.17487/RFC8268, December 2017,
+              <https://www.rfc-editor.org/info/rfc8268>.
+
+   [RFC8308]  Bider, D., "Extension Negotiation in the Secure Shell
+              (SSH) Protocol", RFC 8308, DOI 10.17487/RFC8308, March
+              2018, <https://www.rfc-editor.org/info/rfc8308>.
+
+   [RFC8332]  Bider, D., "Use of RSA Keys with SHA-256 and SHA-512 in
+              the Secure Shell (SSH) Protocol", RFC 8332,
+              DOI 10.17487/RFC8332, March 2018,
+              <https://www.rfc-editor.org/info/rfc8332>.
+
+   [RFC8603]  Jenkins, M. and L. Zieglar, "Commercial National Security
+              Algorithm (CNSA) Suite Certificate and Certificate
+              Revocation List (CRL) Profile", RFC 8603,
+              DOI 10.17487/RFC8603, May 2019,
+              <https://www.rfc-editor.org/info/rfc8603>.
+
+12.2.  Informative References
+
+   [RFC9142]  Baushke, M., "Key Exchange (KEX) Method Updates and
+              Recommendations for Secure Shell (SSH)", RFC 9142,
+              DOI 10.17487/RFC9142, January 2022,
+              <https://www.rfc-editor.org/info/rfc9142>.
+
+   [SP800-38D]
+              National Institute of Standards and Technology,
+              "Recommendation for Block Cipher Modes of Operation:
+              Galois/Counter Mode (GCM) and GMAC", NIST Special
+              Publication 800-38D, DOI 10.6028/NIST.SP.800-38D, November
+              2007, <https://doi.org/10.6028/NIST.SP.800-38D>.
+
+   [SP80056A] National Institute of Standards and Technology,
+              "Recommendation for Pair-Wise Key Establishment Schemes
+              Using Discrete Logarithm Cryptography", Revision 3, NIST
+              Special Publication 800-56A,
+              DOI 10.6028/NIST.SP.800-56Ar3, April 2018,
+              <https://doi.org/10.6028/NIST.SP.800-56Ar3>.
+
+   [SP80059]  National Institute of Standards and Technology, "Guideline
+              for Identifying an Information System as a National
+              Security System", NIST Special Publication 800-59,
+              DOI 10.6028/NIST.SP.800-59, August 2003,
+              <https://doi.org/10.6028/NIST.SP.800-59>.
+
+   [SP80063]  National Institute of Standards and Technology, "Digital
+              Identity Guidelines", NIST Special Publication 800-63-3,
+              DOI 10.6028/NIST.SP.800-63-3, June 2017,
+              <https://doi.org/10.6028/NIST.SP.800-63-3>.
+
+Authors' Addresses
+
+   Nicholas Gajcowski
+   National Security Agency
+   Email: nhgajco@uwe.nsa.gov
+
+
+   Michael Jenkins
+   National Security Agency
+   Email: mjjenki@cyber.nsa.gov
