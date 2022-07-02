@@ -1,3 +1,57 @@
-このファイルは OpenSSH で実装されている SSH agent プロトコルの記述を含むのに使われていた. 次で利用可能なインターネットドラフトですでに置き換えられている:
+SSH エージェントプロトコルは  https://tools.ietf.org/html/draft-miller-ssh-agent-04 に記述されている.
 
-https://tools.ietf.org/html/draft-miller-ssh-agent-02
+このファイルはエージェントプロトコルに対する OpenSSH の拡張を文書化したものだ.
+
+1session-bind@openssh.com 拡張
+
+この拡張は, (RFC4253 の 7.2 節による) 最初の鍵交換から導出される特定の SSH session identifier とこの交換で用いられるホスト鍵にエージェントの接続を ssh のクライアントに束縛できるようにする. この束縛はホスト鍵から作られる最初の KEX  署名を含むエージェントで検証可能だ.
+
+メッセージの形式は次の通り:
+
+	byte		SSH_AGENTC_EXTENSION (0x1b)
+	string		session-bind@openssh.com
+	string		hostkey
+	string		session identifier
+	string		signature
+	bool		is_forwarding
+
+ここで, 'hostkey' は符号化されたサーバホスト公開鍵, 'session identifier' は最初の鍵交換で導出された交換ハッシュ, 'signature' は, 最初の鍵交換の最後の SSH2_MSG_KEXDH_REPLY/SSH2_MSG_KEXECDH_REPLY メッセージによって送られる,  秘密ホスト鍵を用いた session identifire のサーバの署名だ. 'is_forwarding'  はこの接続がユーザの認証と転送のどちらかで束縛されるかを示すフラグだ.
+
+エージェントがこのメッセージを受信すると, 署名を検証しこの内容の一貫性を検査する. この検査には重複した session identifier の受け取りや認証のために以前束縛した接続の試みの拒否が含まれる. そして, 鍵ごとの接続先制限のテストに後で利用するため接続の有効期間中束縛を記録する.
+
+2. restrict-destination-v00@openssh.com 鍵制約拡張
+
+この鍵制約拡張は, 接続先と転送されるパスが制限された鍵をサポートする. 鍵やスマートカードの鍵がエージェントに追加される際に, 制約として付けることができる.
+
+	byte		SSH_AGENT_CONSTRAIN_EXTENSION (0xff)
+	string		restrict-destination-v00@openssh.com
+	constraint[]	constraints
+
+ここで constraint は次のように構成される.
+
+	string		from_username (空でなければならない)
+	string		from_hostname
+	keyspec[]	from_hostkeys
+	string		to_username
+	string		to_hostname
+	keyspec[]	to_hostkeys
+
+keyspec は次のように構成される. 
+
+	string		keyblob
+	bool		is_ca
+
+エージェントはこのメッセージを受信したら, 'from_username' フィールドが空なことと  'to_hostname' と 'to_hostkeys' が提供されていることを確認する. (空の 'from_hostname' と 'from_hostkeys' は有効で, ssh-agent が実行されているホストからの最初のホップを意味する). そしてエージェントは鍵に対する制約を記録する.
+
+鍵の追加/削除/要求や, 特に署名の要求を含むこの鍵に対する追加の操作では, エージェントの接続に対して受信し記録された session-bind@openssh.com 束縛に対して鍵の制約を検査する.
+
+3. SSH_AGENT_CONSTRAIN_MAXSIGN 鍵制約
+
+この鍵制約は, XMSS 鍵で作成できる署名の最大数をエージェントに伝達できる. この制約の形式は次の通り:
+
+	\byte		SSH_AGENT_CONSTRAIN_MAXSIGN (0x03)
+	uint32		max_signatures
+
+このオプションは XMSS 鍵に対してのみ有効だ.
+
+$OpenBSD: PROTOCOL.agent,v 1.16 2022/01/01 01:55:30 jsg Exp $

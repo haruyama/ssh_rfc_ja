@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tmx SYSTEM "tmx11.dtd">
 <tmx version="1.1">
-  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="5.8.0_0_f3b2dae03" segtype="sentence" srclang="en-US"/>
+  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="5.8.0_0_9315b6b0c" segtype="sentence" srclang="en-US"/>
   <body>
 <!-- Default translations -->
     <tu>
@@ -349,6 +349,15 @@ strings packed inside it.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200630T045341Z" creationid="haruyama" creationdate="20200630T045341Z">
         <seg>% : a % b は b による整数除算の非 0 の剰余を表す.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>'is_forwarding' is a flag indicating whether this connection
+should be bound for user authentication or forwarding.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220612T052024Z" creationid="haruyama" creationdate="20220612T052024Z">
+        <seg>'is_forwarding'  はこの接続がユーザの認証と転送のどちらかで束縛されるかを示すフラグだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -6776,6 +6785,14 @@ revoking key IDs).</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200714T023026Z" creationid="haruyama" creationdate="20200714T023026Z">
         <seg>XMSS^MT 署名 Sig_MT は 長さ (ceil(h / 8) + n + (h + d * len) * n) のバイト文字列だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>An a keyspec consists of:</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220702T024444Z" creationid="haruyama" creationdate="20220702T024444Z">
+        <seg>keyspec は次のように構成される. </seg>
       </tuv>
     </tu>
     <tu>
@@ -28659,15 +28676,6 @@ removing the deprecated key from those offered.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
-        <seg>It has since been superseded by an Internet-
-draft that is available from:</seg>
-      </tuv>
-      <tuv lang="ja" changeid="haruyama" changedate="20200525T051204Z" creationid="haruyama" creationdate="20200525T051204Z">
-        <seg>次で利用可能なインターネットドラフトですでに置き換えられている:</seg>
-      </tuv>
-    </tu>
-    <tu>
-      <tuv lang="en-US">
         <seg>It has the
    following format:</seg>
       </tuv>
@@ -29844,6 +29852,15 @@ information about the socket file, such as ownership and mode.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>It may be attached as a constraint when keys or
+smartcard keys are added to an agent.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220702T024348Z" creationid="haruyama" creationdate="20220702T024348Z">
+        <seg>鍵やスマートカードの鍵がエージェントに追加される際に, 制約として付けることができる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>It may be one of:</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200520T063007Z" creationid="haruyama" creationdate="20200520T063007Z">
@@ -30254,6 +30271,16 @@ certificates by listing their serial numbers.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200602T081108Z" creationid="haruyama" creationdate="20200602T081108Z">
         <seg>次の形式を取る:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>It will then then record the
+binding for the life of the connection for use later in testing per-key
+destination constraints.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220612T052333Z" creationid="haruyama" creationdate="20220612T052333Z">
+        <seg>そして, 鍵ごとの接続先制限のテストに後で利用するため接続の有効期間中束縛を記録する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40059,6 +40086,14 @@ that computes a 128 bit integrity tag given a message and a single-use
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>SSH_AGENT_CONSTRAIN_MAXSIGN key constraint</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220702T031032Z" creationid="haruyama" creationdate="20220702T031032Z">
+        <seg>SSH_AGENT_CONSTRAIN_MAXSIGN 鍵制約</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>SSH_AGENT_FAILURE messages are also sent in reply to requests with
    unknown types.</seg>
       </tuv>
@@ -43555,6 +43590,17 @@ and passively waits for something to happen.</seg>
       <tuv lang="ja" changeid="haruyama" changedate="20181003T095511Z" creationid="haruyama" creationdate="20181003T095511Z">
         <seg>次の再交換 ..............................9
            3.2.3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>Subsequent operations on this key including add/remove/request
+identities and, in particular, signature requests will check the key
+constraints against the session-bind@openssh.com bindings recorded for
+the agent connection over which they were received.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220702T030920Z" creationid="haruyama" creationdate="20220702T030334Z">
+        <seg>鍵の追加/削除/要求や, 特に署名の要求を含むこの鍵に対する追加の操作では, エージェントの接続に対して受信し記録された session-bind@openssh.com 束縛に対して鍵の制約を検査する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -48173,6 +48219,15 @@ for encryption of the packet payload.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>The SSH agent protocol is described in
+https://tools.ietf.org/html/draft-miller-ssh-agent-04</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220509T072028Z" creationid="haruyama" creationdate="20220509T072028Z">
+        <seg>SSH エージェントプロトコルは  https://tools.ietf.org/html/draft-miller-ssh-agent-04 に記述されている.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>The SSH authentication protocol [SSH-USERAUTH] is a general-purpose
    user authentication protocol.</seg>
       </tuv>
@@ -49543,6 +49598,15 @@ regress testing.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200615T061859Z" creationid="haruyama" creationdate="20200615T061859Z">
         <seg>EdDSA と Ed25519 の利点は:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>The agent
+will then record the constraint against the key.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220702T025517Z" creationid="haruyama" creationdate="20220702T025517Z">
+        <seg>そしてエージェントは鍵に対する制約を記録する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -53530,6 +53594,15 @@ K_1.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>The format of
+the constraint is:</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220702T031126Z" creationid="haruyama" creationdate="20220702T031126Z">
+        <seg>この制約の形式は次の通り:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>The format of a sk-ecdsa-sha2-nistp256@openssh.com public key is:</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200602T075542Z" creationid="haruyama" creationdate="20200602T075542Z">
@@ -54609,6 +54682,15 @@ an encrypted list of matching private keys.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>The key constraint extension supports destination- and forwarding path-
+restricted keys.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220702T024312Z" creationid="haruyama" creationdate="20220702T024312Z">
+        <seg>この鍵制約拡張は, 接続先と転送されるパスが制限された鍵をサポートする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>The key exchange
    algorithm which is used in the connection is the first algorithm sent
    in client's SSH_QUIC_INIT where: (1) the field "client-kex-alg-data"
@@ -55469,6 +55551,14 @@ of the cipher block size.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200714T025902Z" creationid="haruyama" creationdate="20200714T025902Z">
         <seg>最下層の絶対インデックス idx の WOTS+ 鍵ペアを用いて, メッセージダイジェストが署名される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>The message format is:</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220612T051739Z" creationid="haruyama" creationdate="20220612T051739Z">
+        <seg>メッセージの形式は次の通り:</seg>
       </tuv>
     </tu>
     <tu>
@@ -62998,6 +63088,15 @@ managed, passwordless authentication and centrally certified host keys.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>This binding is verifiable at the agent by including the
+initial KEX signature made by the host key.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220612T051717Z" creationid="haruyama" creationdate="20220612T051646Z">
+        <seg>この束縛はホスト鍵から作られる最初の KEX  署名を含むエージェントで検証可能だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>This blob is encoded as a string using the RFC4253 encoding
 rules and base64 encoded to form the middle part of the
 armored signature.</seg>
@@ -64636,6 +64735,17 @@ are kept intact.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>This extension allows a ssh client to bind an agent connection to a
+particular SSH session identifier as derived from the initial key
+exchange (as per RFC4253 section 7.2) and the host key used for that
+exchange.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220612T052128Z" creationid="haruyama" creationdate="20220612T051612Z">
+        <seg>この拡張は, (RFC4253 の 7.2 節による) 最初の鍵交換から導出される特定の SSH session identifier とこの交換で用いられるホスト鍵にエージェントの接続を ssh のクライアントに束縛できるようにする.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>This extension allows attributes to be added to a list request.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20180904T113754Z" creationid="haruyama" creationdate="20180904T113644Z">
@@ -64763,11 +64873,10 @@ facilitate matching of responses to requests.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
-        <seg>This file used to contain a description of the SSH agent protocol
-implemented by OpenSSH.</seg>
+        <seg>This file documents OpenSSH's extensions to the agent protocol.</seg>
       </tuv>
-      <tuv lang="ja" changeid="haruyama" changedate="20200525T051122Z" creationid="haruyama" creationdate="20200525T051122Z">
-        <seg>このファイルは OpenSSH で実装されている SSH agent プロトコルの記述を含むのに使われていた.</seg>
+      <tuv lang="ja" changeid="haruyama" changedate="20220509T091041Z" creationid="haruyama" creationdate="20220509T091041Z">
+        <seg>このファイルはエージェントプロトコルに対する OpenSSH の拡張を文書化したものだ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -65370,6 +65479,15 @@ verified without decrypting unauthenticated data.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200518T055137Z" creationid="haruyama" creationdate="20200518T055137Z">
         <seg>この鍵交換のプロセスは, コンテキストが確立されたら一度だけ単一のメッセージトークンのみを交換する; それゆえ, replay_det_req_flag とsequence_req_flag は "false" に設定される必要がある. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>This key constraint allows communication to an agent of the maximum
+number of signatures that may be made with an XMSS key.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220702T031141Z" creationid="haruyama" creationdate="20220702T031114Z">
+        <seg>この鍵制約は, XMSS 鍵で作成できる署名の最大数をエージェントに伝達できる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -66410,6 +66528,14 @@ draft-ietf-secsh-filexfer-02.txt.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200630T045228Z" creationid="haruyama" creationdate="20200630T045228Z">
         <seg>この演算子は, 通常の数学の表記法のように, 曖昧さがない場合に省略される場合がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>This option is only valid for XMSS keys.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220702T031151Z" creationid="haruyama" creationdate="20220702T031137Z">
+        <seg>このオプションは XMSS 鍵に対してのみ有効だ.</seg>
       </tuv>
     </tu>
     <tu>
@@ -70841,6 +70967,17 @@ will send the following global request:</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>When an agent received this message, it will verify the signature and
+check the consistency of its contents, including refusing to accept
+a duplicate session identifier, or any attempt to bind a connection
+previously bound for authentication.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220702T025552Z" creationid="haruyama" creationdate="20220612T052118Z">
+        <seg>エージェントがこのメッセージを受信すると, 署名を検証しこの内容の一貫性を検査する. この検査には重複した session identifier の受け取りや認証のために以前束縛した接続の試みの拒否が含まれる. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>When an x509v3-ecdsa-sha2-* user
    authentication method is being used, the structure of the
    SSH_MSG_USERAUTH_REQUEST message should be:</seg>
@@ -71080,6 +71217,17 @@ message:</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200604T080821Z" creationid="haruyama" creationdate="20200604T080821Z">
         <seg>サーバから属性を受け取る場合, flags は返却するデータに含まれている属性を指定する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>When receiving this message, the agent will ensure that the
+'from_username' field is empty, and that 'to_hostname' and 'to_hostkeys'
+have been supplied (empty 'from_hostname' and 'from_hostkeys' are valid
+and signify the initial hop from the host running ssh-agent).</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220702T025433Z" creationid="haruyama" creationdate="20220702T025433Z">
+        <seg>エージェントはこのメッセージを受信したら, 'from_username' フィールドが空なことと  'to_hostname' と 'to_hostkeys' が提供されていることを確認する. (空の 'from_hostname' と 'from_hostkeys' は有効で, ssh-agent が実行されているホストからの最初のホップを意味する).</seg>
       </tuv>
     </tu>
     <tu>
@@ -71566,6 +71714,19 @@ and "reserved" an extension field whose contents are currently ignored.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>Where 'hostkey' is the encoded server host public key, 'session
+identifier' is the exchange hash derived from the initial key
+exchange, 'signature' is the server's signature of the session
+identifier using the private hostkey, as sent in the final
+SSH2_MSG_KEXDH_REPLY/SSH2_MSG_KEXECDH_REPLY message of the initial key
+exchange.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220612T051954Z" creationid="haruyama" creationdate="20220612T051954Z">
+        <seg>ここで, 'hostkey' は符号化されたサーバホスト公開鍵, 'session identifier' は最初の鍵交換で導出された交換ハッシュ, 'signature' は, 最初の鍵交換の最後の SSH2_MSG_KEXDH_REPLY/SSH2_MSG_KEXECDH_REPLY メッセージによって送られる,  秘密ホスト鍵を用いた session identifire のサーバの署名だ.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>Where UMAC is one of the UMAC-32, UMAC-64, UMAC-96 or UMAC-128
    algorithms specified in [RFC4418], section 4.2, using the default
    underlying block cipher of AES-128.</seg>
@@ -71581,6 +71742,14 @@ and "reserved" an extension field whose contents are currently ignored.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20220506T082318Z" creationid="haruyama" creationdate="20220506T082318Z">
         <seg>X.509 v3 証明書を利用する場合は, その利用を [RFC8603] に従わなければならない (MUST).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>Where a constraint consists of:</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220702T024407Z" creationid="haruyama" creationdate="20220702T024407Z">
+        <seg>ここで constraint は次のように構成される.</seg>
       </tuv>
     </tu>
     <tu>
@@ -73055,6 +73224,16 @@ RFC 4253              SSH Transport Layer Protocol          January 2006</seg>
       </tuv>
       <tuv lang="ja">
         <seg> </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>byte		SSH_AGENT_CONSTRAIN_MAXSIGN (0x03)
+	uint32		max_signatures</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220702T031127Z" creationid="haruyama" creationdate="20220702T031127Z">
+        <seg>\byte		SSH_AGENT_CONSTRAIN_MAXSIGN (0x03)
+	uint32		max_signatures</seg>
       </tuv>
     </tu>
     <tu>
@@ -75512,6 +75691,14 @@ draft-josefsson-eddsa-ed25519-03.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>restrict-destination-v00@openssh.com key constraint extension</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220625T035334Z" creationid="haruyama" creationdate="20220625T035334Z">
+        <seg>restrict-destination-v00@openssh.com 鍵制約拡張</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>returned by SSH_FXP_OPEN, `offset' is the offset (in bytes) from the
    beginning of the file where to start writing, and `data' is the data
    to be written.</seg>
@@ -75558,6 +75745,14 @@ provide an abbreviated way to refer to certificates from that CA.</seg>
       <tuv lang="ja">
         <seg>server_host_key_algorithms
          サポートするサーバホスト鍵のアルゴリズムの名前リスト.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>session-bind@openssh.com extension</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220509T091049Z" creationid="haruyama" creationdate="20220509T091049Z">
+        <seg>session-bind@openssh.com 拡張</seg>
       </tuv>
     </tu>
     <tu>
@@ -75901,6 +76096,24 @@ up to, and including the signature key.</seg>
    IN   outgoingMessageLength         -- その長さ
    IN   tmStateReference              -- (NEW) トランスポートの情報
    )</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>string		from_username (must be empty)
+	string		from_hostname
+	keyspec[]	from_hostkeys
+	string		to_username
+	string		to_hostname
+	keyspec[]	to_hostkeys</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20220702T024417Z" creationid="haruyama" creationdate="20220702T024417Z">
+        <seg>string		from_username (空でなければならない)
+	string		from_hostname
+	keyspec[]	from_hostkeys
+	string		to_username
+	string		to_hostname
+	keyspec[]	to_hostkeys</seg>
       </tuv>
     </tu>
     <tu>
