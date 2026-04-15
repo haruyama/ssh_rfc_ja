@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tmx SYSTEM "tmx11.dtd">
 <tmx version="1.1">
-  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="5.8.0_0_9315b6b0c" segtype="sentence" srclang="en-US"/>
+  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="6.0.1_0_42ef0143" segtype="sentence" srclang="en-US"/>
   <body>
 <!-- Default translations -->
     <tu>
@@ -6797,6 +6797,18 @@ revoking key IDs).</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>An abort for these
+   purposes is defined as a disconnect (SSH_MSG_DISCONNECT) of the
+   session and SHOULD use the SSH_DISCONNECT_KEY_EXCHANGE_FAILED reason
+   for the message; see Section 11.1 ("Disconnection Message") of
+   [RFC4253].</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T102047Z" creationid="haruyama" creationdate="20260415T102014Z">
+        <seg>ここでの中断とは, セッションの切断 (SSH_MSG_DISCONNECT) として定義されており, メッセージには SSH_DISCONNECT_KEY_EXCHANGE_FAILED の理由を用いる必要がある (SHOULD). [RFC4253] の Section 11.1 ("Disconnection Message") を参照されたい.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>An abort for these purposes is defined as a
    disconnect (SSH_MSG_DISCONNECT) of the session and SHOULD use the
    SSH_DISCONNECT_KEY_EXCHANGE_FAILED reason for the message
@@ -7926,6 +7938,17 @@ any principal of the specified type.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20110829T123336Z">
         <seg>7.3 節で議論したように, 認証タグが検証されるまで平文を返さない GCM の要件と, packet length が暗号化され認証タグの位置を知るために packet length フィールドを復号する必要のあるセキュアシェルの要件は, 互換していない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>As discussed in the security considerations of [RFC8731], the X25519
+   shared secret K is bignum-encoded in that document, and this raises
+   the potential for a side-channel attack that could leak one bit of
+   the secret due to the different length of the bignum sign pad.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T102618Z" creationid="haruyama" creationdate="20260415T102618Z">
+        <seg>[RFC8731] のセキュリティ上の考慮事項で議論されているように, X25519 の共有秘密 K は当該文書において bignum エンコードされており, これは bignum の符号パディングの長さが異なることによって秘密の 1 ビットを漏らす可能性のあるサイドチャネル攻撃の潜在的なリスクを生じさせる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -10855,6 +10878,15 @@ check the version number before attempting to use the extension.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200513T050145Z" creationid="haruyama" creationdate="20200513T050145Z">
         <seg>クライアントとサーバは, 受信した公開鍵の長さが期待した長さでない場合も中止しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>Clients and servers MUST abort if the length of the received public
+   keys Q_C or Q_S are not the expected lengths.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T101926Z" creationid="haruyama" creationdate="20260415T101926Z">
+        <seg>クライアントとサーバーは, 受信した公開鍵 Q_C または Q_S の長さが期待される長さでない場合, 中断しなければならない (MUST).</seg>
       </tuv>
     </tu>
     <tu>
@@ -16640,6 +16672,15 @@ not the legacy RSA-SHA1 "ssh-rsa").</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>For consistency with [RFC5656], which defines the packet
+   syntax, we use those names in the rest of this document.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T101453Z" creationid="haruyama" creationdate="20260415T101453Z">
+        <seg>パケット構文を定義している [RFC5656] との一貫性のため, この文書の残りの部分ではそれらの名称を用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>For convenience, this document defines a default option for
    XMSS (XMSS_SHA2_20_256) and XMSS^MT (XMSSMT-SHA2_60/3_256).</seg>
       </tuv>
@@ -19810,6 +19851,17 @@ as a big-endian integer.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>However, new cryptographic primitives should be
+   introduced and trusted conservatively, and new research findings may
+   be published at any time that may warrant implementation
+   reconsideration.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T102445Z" creationid="haruyama" creationdate="20260415T102445Z">
+        <seg>しかし, 新しい暗号プリミティブは保守的に導入および信頼されるべきであり, 実装の再考を正当化するような新しい研究結果がいつ発表されてもおかしくない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>However, other algorithms MAY be
       used.</seg>
       </tuv>
@@ -20466,6 +20518,16 @@ as a big-endian integer.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200511T055119Z" creationid="haruyama" creationdate="20200511T055045Z">
         <seg>IANA は"DNS SSHFP Resource Record Parameters" レジストリ [IANA-SSHFP] の"SSHFP RR Types for public key algorithms"  に次のエントリを追加した: </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>IANA has added the following entry to the "Key Exchange Method Names"
+   registry within the "Secure Shell (SSH) Protocol Parameters" registry
+   group [IANA-KEX]:</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T102754Z" creationid="haruyama" creationdate="20260415T102754Z">
+        <seg>IANA は "Secure Shell (SSH) Protocol Parameters" レジストリグループ [IANA-KEX] 内の "Key Exchange Method Names" レジストリに以下のエントリを追加した:</seg>
       </tuv>
     </tu>
     <tu>
@@ -24161,6 +24223,17 @@ handling in this area.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>Implementations MAY use the name SSH_MSG_KEX_HYBRID_INIT where
+   SSH_MSG_KEX_ECDH_INIT is used and the name SSH_MSG_KEX_HYBRID_REPLY
+   where SSH_MSG_KEX_ECDH_REPLY is used, as long as the encoding on the
+   wire is identical.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T101022Z" creationid="haruyama" creationdate="20260415T101022Z">
+        <seg>実装は, 通信上のエンコーディングが同一である限り, SSH_MSG_KEX_ECDH_INIT が使用される箇所で SSH_MSG_KEX_HYBRID_INIT という名称を, SSH_MSG_KEX_ECDH_REPLY が使用される箇所で SSH_MSG_KEX_HYBRID_REPLY という名称を使ってもよい (MAY). これらの記号的な名称はワイヤ上には現れない. それらは単に特定のバイト値を参照するために仕様書で使われるだけである. パケット構文を定義している [RFC5656] との一貫性のため, この文書の残りの部分ではそれらの名称を用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>Implementations MUST
    NOT employ a "Trust on First Use (TOFU)" security model where a
    client accepts the first public host key presented to it from a not-
@@ -27237,6 +27310,16 @@ requires the key handle and a few additional parameters.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   https://www.rfc-editor.org/info/rfc9941.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T100304Z" creationid="haruyama" creationdate="20260415T100304Z">
+        <seg>この文書の現在の状態についての情報, 訂正情報, フィードバックを提供する方法は, http://www.rfc-editor.org/info/rfc9941 で得られる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>Information in this
    section is only relevant for implementations supporting compatibility
    with SSH versions 1.x.</seg>
@@ -27742,6 +27825,16 @@ RFC 8391                          XMSS                          May 201</seg>
             octet_string AAD;   // 追加の認証されるデータ. 認証されるが暗号化されない
             octet_string IV;    // 初期化ベクトル
             octet_string BK;    // ブロック暗号の鍵</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>Instead of
+   encoding the shared secret K as "mpint", it MUST be encoded as
+   "string".</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T102122Z" creationid="haruyama" creationdate="20260415T102122Z">
+        <seg>共有秘密 K を "mpint" としてエンコードする代わりに, "string" としてエンコードしなければならない (MUST).</seg>
       </tuv>
     </tu>
     <tu>
@@ -30666,6 +30759,22 @@ ID" strings.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>Key Exchange Method: sntrup761x25519-sha512</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20230514T052713Z" creationid="haruyama" creationdate="20230514T052713Z">
+        <seg>鍵交換法: sntrup761x25519-sha512</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>Key Exchange Method: sntrup761x25519-sha512 .</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20230514T051752Z" creationid="haruyama" creationdate="20230514T051752Z">
+        <seg>鍵交換法: sntrup761x25519-sha512 .</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>Key Exchange Methods</seg>
       </tuv>
       <tuv lang="ja">
@@ -33312,6 +33421,15 @@ are individually implemented as extensions described below.</seg>
     <tu>
       <tuv lang="en-US">
         <seg>No further validation is required beyond what is
+   described in [RFC7748], [RFC8731], and [NTRUPrimePQCS].</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T102043Z" creationid="haruyama" creationdate="20260415T102043Z">
+        <seg>[RFC7748], [RFC8731], [NTRUPrimePQCS] に記述されているもの以外に追加の検証は要求されない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>No further validation is required beyond what is
    described in [RFC7748].</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200513T050327Z" creationid="haruyama" creationdate="20200513T050327Z">
@@ -33491,6 +33609,16 @@ are individually implemented as extensions described below.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200511T060759Z" creationid="haruyama" creationdate="20200511T060759Z">
         <seg>IESG が認めたすべての文書が, インターネット標準のなんらかの水準の候補というわけではない. RFC5741 の 2節を参照.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>Not all documents
+   approved by the IESG are candidates for any level of Internet
+   Standard; see Section 2 of RFC 7841.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T100256Z" creationid="haruyama" creationdate="20260415T100256Z">
+        <seg>IESG が認めたすべての文書が, インターネット標準のなんらかの水準の候補というわけではない. RFC7841 の 2節を参照.</seg>
       </tuv>
     </tu>
     <tu>
@@ -40995,6 +41123,26 @@ that computes a 128 bit integrity tag given a message and a single-use
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>Secure Shell (SSH) Key Exchange Method Using Hybrid Streamlined NTRU
+    Prime sntrup761 and X25519 with SHA-512: sntrup761x25519-sha512</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T100120Z" creationid="haruyama" creationdate="20260415T100120Z">
+        <seg>ハイブリッドな Streamlined NTRU Prime sntrup761 と X25519 と SHA-512 を使ったセキュアシェル (SSH) 鍵交換法: sntrup761x25519-sha512</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>Secure Shell (SSH) Key Exchange Method Using Hybrid Streamlined NTRU
+    Prime sntrup761 and X25519 with SHA-512: sntrup761x25519-sha512
+                    draft-josefsson-ntruprime-ssh-00</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20230514T051642Z" creationid="haruyama" creationdate="20230514T051546Z">
+        <seg>Streamlined NTRU Prime sntrup761 と SHA-512 を用いる X25519 を組合せて用いるセキュアシェル(SSH) 鍵交換法: sntrup761x25519-sha512
+                    draft-josefsson-ntruprime-ssh-00</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>Secure Shell (SSH) [RFC4251] is a secure remote login protocol.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200511T130347Z" creationid="haruyama" creationdate="20200511T130347Z">
@@ -42845,6 +42993,18 @@ current order was retained.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>Since sntrup761x25519-sha512 is expected to offer no reduction of
+   security compared to curve25519-sha256, it is recommended that it is
+   used and preferred whenever curve25519-sha256 is used today, if the
+   extra communication size and computational requirements are
+   acceptable.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T102554Z" creationid="haruyama" creationdate="20260415T102554Z">
+        <seg>sntrup761x25519-sha512 は curve25519-sha256 と比較してセキュリティを低下させないと期待されているため,  追加の通信量と計算要件が許容できる場合は, 今日 curve25519-sha256 が使用されているあらゆる場所で使用および優先することを推奨する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>Since the
    host key is used in the generation of the shared secret, allowing for
    implicit server authentication, the domain parameters associated with
@@ -43173,6 +43333,18 @@ current order was retained.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200710T024612Z" creationid="haruyama" creationdate="20200710T024612Z">
         <seg>いくつかのアプリケーションは, 部分秘密鍵や秘密鍵のコピーと共に動作する必要があるかもしれない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>Some earlier implementations may implement this protocol only through
+   the name sntrup761x25519-sha512@openssh.com; therefore, it is
+   RECOMMENDED to announce and accept that name as an alias of this
+   protocol to increase chances for successfully negotiating the
+   protocol.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T102231Z" creationid="haruyama" creationdate="20260415T102231Z">
+        <seg>早期の実装の中には, このプロトコルを sntrup761x25519-sha512@openssh.com という名称でのみ実装しているものがあるかもしれない. したがって, プロトコルのネゴシエーションが成功する可能性を高めるため, その名称をこのプロトコルのエイリアスとして広告および受理することが推奨される (RECOMMENDED). </seg>
       </tuv>
     </tu>
     <tu>
@@ -43602,6 +43774,36 @@ and passively waits for something to happen.</seg>
       </tuv>
       <tuv lang="ja">
         <seg>ストレートなビット単位のバイナリの比較が推奨される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>Streamlined NTRU Prime [NTRUPrimePQCS] [NTRUPrime] [NTRUPrimeWeb]
+   provides post-quantum small lattice-based key-encapsulation
+   mechanisms.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T100353Z" creationid="haruyama" creationdate="20260415T100353Z">
+        <seg>Streamlined NTRU Prime [NTRUPrime] [NTRUPrimePQCS] は量子以後の小さい格子ベースの鍵カプセル化機構を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>Streamlined NTRU Prime [NTRUPrime] [NTRUPrimePQCS] provides post-
+   quantum small lattice-based key-encapsulation mechanisms.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20230514T052118Z" creationid="haruyama" creationdate="20230514T052118Z">
+        <seg>Streamlined NTRU Prime [NTRUPrime] [NTRUPrimePQCS] は量子以後の小さい格子ベースの鍵カプセル化機構を提供する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>Streamlined NTRU Prime sntrup761 aims for the standard goal of IND-
+   CCA2 security, is widely implemented with good performance on a wide
+   range of architectures, and has been studied by researchers for
+   several years.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T102427Z" creationid="haruyama" creationdate="20260415T102427Z">
+        <seg>Streamlined NTRU Prime sntrup761 は IND-CCA2 安全性という標準的な目標を目指しており, 幅広いアーキテクチャ上で良好な性能で広く実装されており, 数年間にわたって研究者たちによって検討されてきた.</seg>
       </tuv>
     </tu>
     <tu>
@@ -45559,6 +45761,15 @@ the agent connection over which they were received.</seg>
       </tuv>
       <tuv lang="ja">
         <seg>下層にあるトランスポートは, 転送エラーに対する保護をする必要がある. そのようなエラーはSSHのコネクションを終了させる原因となる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>The
+   variant sntrup761 instance has been implemented widely.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20230514T052152Z" creationid="haruyama" creationdate="20230514T052152Z">
+        <seg>さまざまな sntrup761 のインスタンスが広く実装されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -47765,6 +47976,22 @@ for encryption of the packet payload.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>The Q_C value is thus 1190 bytes.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T101724Z" creationid="haruyama" creationdate="20260415T101724Z">
+        <seg>したがって Q_S 値は 1071 バイトである.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>The Q_S value is thus 1071 bytes.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T101854Z" creationid="haruyama" creationdate="20260415T101854Z">
+        <seg>したがって Q_S 値は 1071 バイトである。</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>The RDATA for a SSHFP RR consists of an algorithm number, fingerprint
    type and the fingerprint of the public host key.</seg>
       </tuv>
@@ -48922,6 +49149,39 @@ mechanism.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>The SSH_MSG_KEX_ECDH_INIT's value Q_C that holds the client's
+   ephemeral public key MUST be constructed by concatenating the
+   1158-byte public key output from the key generator of sntrup761 with
+   the 32-byte K_A = X25519(a, 9) as described in [NTRUPrimePQCS] and
+   [RFC8731].</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T101810Z" creationid="haruyama" creationdate="20260415T101539Z">
+        <seg>クライアントの一時公開鍵を保持する SSH_MSG_KEX_ECDH_INIT の値 Q_C は, [NTRUPrimePQCS] と [RFC8731] に記述されているように, sntrup761 の鍵生成器からの 1158 バイトの公開鍵出力を, 32 バイトの K_A = X25519(a, 9) と連結することによって構築しなければならない (MUST).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>The SSH_MSG_KEX_ECDH_REPLY's signature value is computed as described
+   in ECC for SSH [RFC5656] with the following changes.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T102106Z" creationid="haruyama" creationdate="20260415T102106Z">
+        <seg>TSSH_MSG_KEX_ECDH_REPLY の署名値は, 以下の変更を加えて ECC for SSH [RFC5656] に記述されているとおりに計算する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>The SSH_MSG_KEX_ECDH_REPLY's value Q_S that holds the server's
+   ephemeral public key MUST be constructed by concatenating the
+   1039-byte ciphertext output from the key encapsulation mechanism of
+   sntrup761 with the 32-byte K_B = X25519(b, 9) as described in
+   [NTRUPrimePQCS] and [RFC8731].</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T101805Z" creationid="haruyama" creationdate="20260415T101805Z">
+        <seg>サーバーの一時公開鍵を保持する SSH_MSG_KEX_ECDH_REPLY の値 Q_S は, [NTRUPrimePQCS] と [RFC8731] に記述されているように, sntrup761 の鍵カプセル化機構からの 1039 バイトの暗号文出力を, 32 バイトの K_B = X25519(b, 9) と連結することによって構築しなければならない (MUST).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>The SSH_MSG_USERAUTH_INFO_REQUEST message is defined as follows:</seg>
       </tuv>
       <tuv lang="ja">
@@ -49899,6 +50159,16 @@ will then record the constraint against the key.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20210210T071937Z" creationid="haruyama" creationdate="20210210T071937Z">
         <seg>サーバからクライアントへの KEXMSG_SERVER メッセージにサーバの公開ホスト鍵と H の署名をアルゴリズムが含める.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>The algorithm is equivalent to the privately defined algorithm
+   "sntrup761x25519-sha512@openssh.com", which is implemented and widely
+   deployed in OpenSSH [OpenSSH] and TinySSH [TinySSH].</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20230514T052702Z" creationid="haruyama" creationdate="20230514T052657Z">
+        <seg>このアルゴリズムは, 私的に定義された "sntrup761x25519-sha512@openssh.com" と同等で, これらは OpenSSH [OpenSSH] と TinySSH [TinySSH] で実装され広く配置されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -54427,6 +54697,17 @@ followed by a newline.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>The increase in communication size and computational requirements may
+   be a concern for restricted computational devices, which would then
+   not be able to take advantage of the improved security properties
+   offered by this work.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T102525Z" creationid="haruyama" creationdate="20260415T102525Z">
+        <seg>通信量と計算要件の増加は, 制約された計算デバイスにとって懸念となる可能性があり, そのようなデバイスはこの成果が提供する向上したセキュリティ特性の恩恵を受けられないことになる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>The increase is negligible for large
    packets, but very significant for one-byte packets (telnet-type
    sessions).</seg>
@@ -54784,6 +55065,16 @@ to encrypt the 4 byte packet length field.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>The key agreement is done by the X25519 Diffie-Hellman protocol as
+   described in Section 3 ("Key Exchange Methods") of [RFC8731] and by
+   the key encapsulation method described in [NTRUPrimePQCS].</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T100904Z" creationid="haruyama" creationdate="20260415T100829Z">
+        <seg>鍵合意は, [RFC8731] の Section 3 ("Key Exchange Methods") に記述されている X25519 Diffie-Hellman プロトコルと, [NTRUPrimePQCS] に記述されている鍵カプセル化法によって行われる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>The key blobs in this protocol MAY contain
       certificates in addition to keys.</seg>
       </tuv>
@@ -54925,6 +55216,16 @@ restricted keys.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200513T044958Z" creationid="haruyama" creationdate="20200513T044958Z">
         <seg>この鍵交換手順は, [RFC5656] の 4節で記述された ECDH 法と似ている. ただし, 公開の値と最後の共有秘密では異なる wire encoding が利用される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>The key exchange procedure reuses the ECDH key exchange defined in
+   Sections 4 ("ECDH Key Exchange") and 7.1 ("ECDH Message Numbers") of
+   [RFC5656].</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T100855Z" creationid="haruyama" creationdate="20260415T100855Z">
+        <seg>鍵交換の手順は, [RFC5656] の Section 4 ("ECDH Key Exchange") と Section 7.1 ("ECDH Message Numbers") で定義された ECDH 鍵交換を再利用する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -55753,6 +56054,16 @@ of the cipher block size.</seg>
       </tuv>
       <tuv lang="ja">
         <seg>ここに記述する方法は, DNS[1][2]でサーバの指紋を検索しその検索を DNSSEC [5] で保証する, SSHの通信の外側での検証を提供する. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>The method described here to combine Curve25519
+   with sntrup761 (i.e., SHA-512 hashing the concatenated outputs) is
+   also available for the same kind of cryptographic scrutiny.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T102504Z" creationid="haruyama" creationdate="20260415T102504Z">
+        <seg>ここに記述された Curve25519 と sntrup761 とを組み合わせる方式 (すなわち, 連結された出力を SHA-512 でハッシュする) も同種の暗号学的な精査の対象となる.</seg>
       </tuv>
     </tu>
     <tu>
@@ -57076,6 +57387,17 @@ signaled or the mux server closes the session.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>The protocol flow and the SSH_MSG_KEX_ECDH_INIT and
+   SSH_MSG_KEX_ECDH_REPLY messages are identical, except that we use
+   different ephemeral public values Q_C and Q_S and shared secret K as
+   described below.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T100932Z" creationid="haruyama" creationdate="20260415T100932Z">
+        <seg>プロトコルの流れと SSH_MSG_KEX_ECDH_INIT および SSH_MSG_KEX_ECDH_REPLY メッセージは, 以下で記述するように異なる一時公開値 Q_C と Q_S と共有秘密 K を用いる点を除き, 同一である.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>The protocol flow, the SSH_MSG_KEX_ECDH_INIT and
    SSH_MSG_KEX_ECDH_REPLY messages, and the structure of the exchange
    hash are identical to Section 4 of [RFC5656].</seg>
@@ -58146,6 +58468,15 @@ and authenticate the entire packet.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>The security considerations in [RFC4251], [RFC5656], [RFC7748], and
+   [RFC8731] are inherited.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T102307Z" creationid="haruyama" creationdate="20260415T102307Z">
+        <seg>[RFC4251] と [RFC5656] ,  [RFC7748], [RFC8731] のセキュリティの考察は継承される.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>The security considerations in [RFC8032], Section 8 and [RFC7479],
    Section 3 apply to all uses of Ed25519 and Ed448, including those in
    SSH.</seg>
@@ -58275,6 +58606,17 @@ and authenticate the entire packet.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200707T022610Z" creationid="haruyama" creationdate="20200707T022610Z">
         <seg>利用される方法のセキュリティは少なくとも XMSS インスタンスのセキュリティと一致しなければならない.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>The security properties of the protocol in this document, SSH itself,
+   and the cryptographic algorithms used (including Streamlined NTRU
+   Prime) depend on the availability and proper use of cryptographically
+   secure random data.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T102650Z" creationid="haruyama" creationdate="20260415T102650Z">
+        <seg>この文書のプロトコル, SSH 自体, および (Streamlined NTRU Prime を含む) 使用される暗号アルゴリズムのセキュリティ特性は, 暗号学的にセキュアな乱数データが利用可能であることとそれが適切に用いられることに依存する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -59337,6 +59679,18 @@ extension with multiple versions (though this is unlikely).</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>The shared secret K value MUST be the 64-byte output octet
+   string of the SHA-512 hash computed with the input as the 32-byte
+   octet string key output from the key encapsulation mechanism of
+   sntrup761 concatenated with the 32-byte octet string of X25519(a,
+   X25519(b, 9)) = X25519(b, X25519(a, 9)).</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T102154Z" creationid="haruyama" creationdate="20260415T102154Z">
+        <seg>共有秘密 K の値は, sntrup761 の鍵カプセル化機構から出力される 32 バイトのオクテット列の鍵を, X25519(a, X25519(b, 9)) = X25519(b, X25519(a, 9)) の 32 バイトのオクテット列と連結したものを入力として計算した SHA-512 ハッシュの 64 バイトの出力オクテット列でなければならない (MUST).</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>The shared secret value K, the exchange
    hash H, and all the above symmetric keys will be updated.</seg>
       </tuv>
@@ -59506,6 +59860,14 @@ certificate.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20110725T094754Z">
         <seg>利用される一時鍵のサイズは, 鍵交換法によって生成される暗号化と完全性保護の鍵を保護するのに十分な必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>The sntrup761 instance has been implemented widely.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T100406Z" creationid="haruyama" creationdate="20260415T100406Z">
+        <seg>sntrup761 のインスタンスは広く実装されている.</seg>
       </tuv>
     </tu>
     <tu>
@@ -62088,6 +62450,16 @@ the hostkeys in the request:</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>These symbolic names do not appear on the wire;
+   they are merely used in specifications to refer to particular byte
+   values.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T101423Z" creationid="haruyama" creationdate="20260415T101423Z">
+        <seg>これらの記号的な名称は通信上には現れない. それらは単に特定のバイト値を参照するために仕様書で使われるだけである.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>These terms are used as guidance for designers of
    proposed IETF models to make the designs compatible with RFC 3411
    subsystems and Abstract Service Interfaces (ASIs).</seg>
@@ -62530,6 +62902,16 @@ by requiring the user touch the key).</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20180925T113403Z" creationid="haruyama" creationdate="20180925T113003Z">
         <seg>この文書は次の推奨事項を提供する: SSH のサーバとクライアントは, [RFC4419] に記述された SSH_MSG_KEY_DH_GEX_REQUEST クライアントメッセージの "min" の値として 2048 ビットを最小の受け入れ可能な群のサイズとする群をサポートする必要がある.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>This
+   document resolves that problem by using string encoding instead of
+   bignum encoding.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T102631Z" creationid="haruyama" creationdate="20260415T102631Z">
+        <seg>この文書は bignum エンコーディングの代わりに string エンコーディングを用いることでその問題を解決する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -63694,6 +64076,16 @@ problems.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>This document also describes how to implement key exchange based on a
+   hybrid between Streamlined NTRU Prime sntrup761 and X25519 with
+   SHA-512 [RFC6234] in SSH.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T100654Z" creationid="haruyama" creationdate="20260415T100654Z">
+        <seg>この文書はまた, SSH において Streamlined NTRU Prime sntrup761 と X25519 と SHA-512 [RFC6234] のハイブリッドに基づく鍵交換の実装方法についても説明する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>This document also describes some of the client interaction with the
    user in obtaining the authentication information.</seg>
       </tuv>
@@ -64016,6 +64408,16 @@ system for use by SSH.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>This document describes a widely deployed hybrid key exchange method
+   in the Secure Shell (SSH) protocol that is based on Streamlined NTRU
+   Prime sntrup761 and X25519 with SHA-512.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T100518Z" creationid="haruyama" creationdate="20260415T100152Z">
+        <seg>この文書は、Streamlined NTRU Prime sntrup761 と X25519 と SHA-512 に基づく、セキュアシェル (SSH) プロトコルにおいて広く普及しているハイブリッドな鍵交換法について説明する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>This document describes additional encryption methods and
    recommendations for the SSH Transport Protocol [RFC4253].</seg>
       </tuv>
@@ -64058,6 +64460,16 @@ system for use by SSH.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20200511T131030Z" creationid="haruyama" creationdate="20200511T131030Z">
         <seg>この文書は，Curve25519 と Curve448 [RFC7748] に基づく鍵交換法を SSH でどのように実装するかを記述する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>This document describes how to implement key exchange based on a
+   hybrid between Streamlined NTRU Prime sntrup761 and X25519 with
+   SHA-512 [RFC6234] in SSH.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20230514T052554Z" creationid="haruyama" creationdate="20230514T052518Z">
+        <seg>この文書は SSH で Streamlined NTRU Prime sntrup761 と SHA-512 を用いる X25519 [RFC6234] を組合せた鍵交換をどのように実装するかを記述する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -64611,6 +65023,17 @@ ControlMaster connection-sharing.</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>This document specifies a hybrid construction using both sntrup761
+   and X25519, in the intention that a hybrid would be secure if either
+   algorithms is secure.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T100507Z" creationid="haruyama" creationdate="20260415T100507Z">
+        <seg>This document specifies a hybrid construction using both sntrup761
+この文書は, sntrup761 と X25519 の両方を用いるハイブリッドな構成を仕様化する. これはどちらか一方のアルゴリズムが安全であればハイブリッドは安全である, という意図に基づく.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>This document specifies a new opcode in the Secure Shell terminal
    modes encoding.</seg>
       </tuv>
@@ -64820,6 +65243,15 @@ ControlMaster connection-sharing.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20181231T035040Z" creationid="haruyama" creationdate="20181231T035040Z">
         <seg>この文書では, A と B だけを識別するために用語 "public key format" を用いる.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>This document was derived from SSH KEX Using Curve25519 and Curve448
+   [RFC8731].</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T100708Z" creationid="haruyama" creationdate="20260415T100708Z">
+        <seg>この文書は SSH KEX Using Curve25519 and Curve448 [RFC8731] から派生したものである.</seg>
       </tuv>
     </tu>
     <tu>
@@ -68706,6 +69138,16 @@ refer to the AuthenticationMethods option in sshd_config(5).</seg>
     </tu>
     <tu>
       <tuv lang="en-US">
+        <seg>To hedge against attacks on either of sntrup761 or X25519 a hybrid
+   construction may be used, with the intention that the hybrid would be
+   secure if either of the involved algorithms are flawed.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20230514T052400Z" creationid="haruyama" creationdate="20230514T052400Z">
+        <seg>sntrup761 と X25519 のどちらかへの攻撃に対して耐性を付けるため, ハイブリッドな構築が利用できる.これはどちらかの関係するアルゴリズムに欠陥があっても, ハイブリッドにしたものは安全となることを意図している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
         <seg>To help determine what namespaces already exist on a server, a
    new operation "list-namespaces" is defined in Section 4.</seg>
       </tuv>
@@ -70755,6 +71197,16 @@ they support.</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20110929T084358Z">
         <seg>署名以外のアルゴリズムを表1に示すように2つのファミリに分割する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>We document a widely deployed hybrid key exchange methods in the
+   Secure Shell (SSH) protocol that is based on Streamlined NTRU Prime
+   sntrup761 and X25519 with SHA-512.</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20230514T051735Z" creationid="haruyama" creationdate="20230514T051632Z">
+        <seg>Streamlined NTRU Prime sntrup761 と SHA-512 を用いる X25519 をベースにする 広く配置されているハイブリッドな鍵交換法について記載する.</seg>
       </tuv>
     </tu>
     <tu>
@@ -73221,6 +73673,28 @@ RFC 4251               SSH Protocol Architecture            January 2006</seg>
       </tuv>
       <tuv lang="ja" changeid="haruyama" changedate="20180129T130614Z">
         <seg>[RFC5480] と [RFC5758] は, 楕円曲線デジタル署名アルゴリズム （ECDSA) 公開鍵で利用する X.509v3 証明書の構造を記述している.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>[RFC5656] defines how elliptic curves are integrated
+   into the extensible SSH framework, and [RFC8731] adds
+   curve25519-sha256 to support the pre-quantum Elliptic Curve Diffie-
+   Hellman (ECDH) X25519 function [RFC7748].</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20260415T100329Z" creationid="haruyama" creationdate="20260415T100329Z">
+        <seg>[RFC5656] は拡張可能な SSH のフレームワークに楕円曲線をどのように統合するかを定義する. そして [RFC8731] は量子以前の楕円曲線 Diffie-Hellman X25519 関数 [RFC7748] をサポートする  curve25519-sha256 を追加する.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-US">
+        <seg>[RFC5656] defines how elliptic curves are integrated
+   into this extensible SSH framework, and [RFC8731] adds
+   curve25519-sha256 to support the pre-quantum elliptic-curve Diffie-
+   Hellman X25519 function [RFC7748].</seg>
+      </tuv>
+      <tuv lang="ja" changeid="haruyama" changedate="20230514T052048Z" creationid="haruyama" creationdate="20230514T052048Z">
+        <seg>[RFC5656] は拡張可能な SSH のフレームワークに楕円曲線をどのように統合するかを定義する. そして [RFC8731] は量子以前の楕円曲線 Diffie-Hellman X25519 関数 [RFC7748] をサポートする  curve25519-sha256 を追加する.</seg>
       </tuv>
     </tu>
     <tu>
